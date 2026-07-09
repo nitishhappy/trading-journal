@@ -1,0 +1,2 @@
+1. Time for observations should be in IST, Today tomorrow will be on IST time fram.
+2. Google drive images should be fifo based on imaGE NAME TIMESTAMP ELSE SHOULD BE ALPHABATICALLY/NUMERICALLY

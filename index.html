@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A0E17" id="meta-theme-color" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="TradeLog" />
+  <meta name="application-name" content="TradeLog" />
+  <title>Trade Journal</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================== AUTH SCREEN ===================== -->
+  <div id="auth-screen" class="screen">
+    <div class="auth-box">
+      <div class="logo">
+        <span class="logo-mark">▲</span>
+        <h1>Trade Journal</h1>
+      </div>
+      <p class="auth-sub">Sign in to your private log</p>
+
+      <form id="auth-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" required autocomplete="username" />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required autocomplete="current-password" />
+
+        <div id="auth-error" class="error-text"></div>
+
+        <button type="submit" id="login-btn" class="btn-primary">Sign in</button>
+        <button type="button" id="signup-btn" class="btn-secondary">Create account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== APP SHELL ===================== -->
+  <div id="app-screen" class="screen hidden">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="topbar-title">
+        <span class="logo-mark small">▲</span>
+        <span id="current-folder-label">Dashboard</span>
+        <span id="streak-badge" class="streak-badge hidden" title="Consecutive days with at least one observation"></span>
+        <span id="offline-badge" class="offline-badge hidden" title="No connection — changes are saved locally and will sync automatically">📡 Offline</span>
+      </div>
+      <button id="theme-toggle-btn" class="icon-btn" title="Toggle light/dark" aria-label="Toggle theme">🌙</button>
+      <button id="settings-gear-btn" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+      <button id="fullscreen-btn" class="icon-btn" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button>
+    </header>
+
+    <!-- Main section tabs -->
+    <nav class="main-tabs" id="main-tabs">
+      <button class="main-tab active" data-view="dashboard">Dashboard</button>
+      <button class="main-tab" data-view="revision">Revision</button>
+      <button class="main-tab" data-view="aicoach">AI Coach</button>
+      <button class="main-tab" data-view="tradelog">Trade Log</button>
+    </nav>
+
+    <!-- Daily backup reminder (shown once per day on first open) -->
+    <div id="backup-reminder-banner" class="backup-reminder-banner hidden">
+      <span id="backup-reminder-text" class="backup-reminder-text">💾 Don't forget to back up your data today</span>
+      <div class="backup-reminder-actions">
+        <button id="backup-reminder-export-btn" class="btn-small btn-small-primary">Export now</button>
+        <button id="backup-reminder-dismiss-btn" class="icon-btn" aria-label="Dismiss">✕</button>
+      </div>
+    </div>
+
+    <!-- ===== DASHBOARD VIEW ===== -->
+    <div id="view-dashboard" class="view">
+
+      <!-- Observation counts: today / this week / this month / this year -->
+      <div class="dash-stats-row" id="dash-stats-row">
+        <div class="dash-stat">
+          <span class="dash-stat-value" id="dash-stat-today">0</span>
+          <span class="dash-stat-label">Today</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-value" id="dash-stat-week">0</span>
+          <span class="dash-stat-label">Week</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-value" id="dash-stat-month">0</span>
+          <span class="dash-stat-label">Month</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-value" id="dash-stat-year">0</span>
+          <span class="dash-stat-label">Year</span>
+        </div>
+      </div>
+
+      <!-- Folder tabs -->
+      <nav class="folder-tabs" id="folder-tabs">
+        <button class="tab active" data-folder="all">All</button>
+        <button class="tab" data-folder="Behaviour">Behaviour</button>
+        <button class="tab" data-folder="Technical">Technical</button>
+        <button class="tab" data-folder="To Do">To Do</button>
+        <button class="tab tab-add" id="add-folder-tab" title="Add folder">+</button>
+      </nav>
+
+      <!-- Search / filter row -->
+      <div class="filter-row">
+        <input type="text" id="search-input" placeholder="Search text or tags…" />
+        <select id="group-select" title="Group observations">
+          <option value="date">Group: Date</option>
+          <option value="priority">Group: Priority</option>
+          <option value="tags">Group: Tags</option>
+        </select>
+      </div>
+      <div class="filter-row filter-row-secondary">
+        <button id="active-tag-filter" class="active-filter-chip hidden"></button>
+        <button id="image-pending-toggle" class="toggle-chip" title="Show only observations with image pending">📷 Pending</button>
+        <button id="archive-toggle" class="toggle-chip" title="Show archived observations">🗄 Archived</button>
+      </div>
+
+      <!-- Observation feed -->
+      <main id="feed" class="feed">
+        <!-- Date groups injected here -->
+      </main>
+
+      <div id="empty-state" class="empty-state hidden">
+        <p class="empty-mark">◇</p>
+        <p>No observations yet.</p>
+        <p class="empty-sub">Tap + to log your first one.</p>
+      </div>
+
+      <!-- Floating add button -->
+      <button id="fab-add" class="fab" aria-label="Add observation">+</button>
+      <!-- Pre-trade checklist button -->
+      <button id="checklist-fab" class="fab fab-secondary" aria-label="Run pre-trade checklist" title="Pre-Trade Checklist">✓</button>
+    </div>
+
+    <!-- ===== REVISION VIEW ===== -->
+    <div id="view-revision" class="view hidden">
+      <div class="revision-header">
+        <div class="revision-progress">
+          <span id="revision-progress-text">0 / 0</span>
+          <div class="revision-progress-track">
+            <div id="revision-progress-fill" class="revision-progress-fill"></div>
+          </div>
+        </div>
+        <select id="revision-folder-filter" class="revision-folder-select" title="Filter by folder">
+          <option value="all">All folders</option>
+        </select>
+        <button id="revision-starred-toggle" class="btn-small revision-starred-toggle" title="Toggle starred only">☆ All</button>
+        <button id="revision-reset-btn" class="btn-small" title="Reset today's reviewed list">↺ Reset</button>
+      </div>
+
+      <div id="revision-stage" class="revision-stage">
+        <!-- Cards injected here -->
+      </div>
+
+      <div id="revision-empty-state" class="empty-state hidden">
+        <p class="empty-mark">◇</p>
+        <p id="revision-empty-text">All caught up for today.</p>
+        <p class="empty-sub">Tap Reset to review again, or come back tomorrow.</p>
+      </div>
+    </div>
+
+    <!-- ===== AI COACH VIEW ===== -->
+    <div id="view-aicoach" class="view hidden">
+
+      <!-- Controls: period selector + generate button -->
+      <div class="coach-controls">
+        <div class="seg-group">
+          <button class="seg-btn active" data-coach-period="weekly">Weekly</button>
+          <button class="seg-btn" data-coach-period="monthly">Monthly</button>
+        </div>
+        <button id="coach-generate-btn" class="btn-small btn-small-primary">
+          ✦ Generate now
+        </button>
+      </div>
+
+      <!-- Generating state -->
+      <div id="coach-generating" class="coach-generating hidden">
+        <div class="coach-spinner"></div>
+        <p>Updating your trading knowledge document…</p>
+        <p class="coach-generating-sub">Powered by Llama 3.3 70B via Groq. This is a detailed document, so it may take 30–60 seconds.</p>
+      </div>
+
+      <!-- Empty state -->
+      <div id="coach-empty" class="empty-state hidden">
+        <p class="empty-mark">◇</p>
+        <p>No AI Coach summaries yet.</p>
+        <p class="empty-sub">Tap "Generate now" to get your first psychology review.</p>
+      </div>
+
+      <!-- Summaries feed -->
+      <div id="coach-feed" class="coach-feed"></div>
+    </div>
+
+    <!-- ===== TRADE LOG VIEW ===== -->
+    <div id="view-tradelog" class="view hidden">
+
+      <!-- Passcode overlay (shown when trade log is locked) -->
+      <div id="trade-lock-overlay" class="trade-lock-overlay">
+        <div class="trade-lock-box">
+          <span class="trade-lock-icon">🔒</span>
+          <h3 class="trade-lock-title">Trade Log Locked</h3>
+          <p class="trade-lock-sub" id="trade-lock-sub">Enter your 4-digit passcode to access the trade log.</p>
+          <div class="trade-lock-input-row">
+            <input type="password" id="trade-lock-input" class="trade-lock-input" inputmode="numeric" maxlength="4" pattern="[0-9]*" autocomplete="off" />
+          </div>
+          <p id="trade-lock-error" class="trade-lock-error hidden">Incorrect passcode. Try again.</p>
+          <div class="trade-lock-actions">
+            <button id="trade-lock-unlock-btn" class="btn-primary" style="margin-top:0;">Unlock</button>
+          </div>
+          <p class="trade-lock-setup-hint hidden" id="trade-lock-setup-hint">No passcode set yet. Set one up in Settings → Trade Log Passcode.</p>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <input type="text" id="trade-search-input" placeholder="Search comments…" />
+        <button id="trade-export-btn" class="btn-small">Export CSV</button>
+      </div>
+      <div class="filter-row trade-date-filter-row">
+        <label class="trade-date-label">From</label>
+        <input type="date" id="trade-filter-from" class="trade-date-input" />
+        <label class="trade-date-label">To</label>
+        <input type="date" id="trade-filter-to" class="trade-date-input" />
+        <button id="trade-filter-clear" class="btn-small">Clear</button>
+      </div>
+
+      <div id="trade-analytics" class="trade-analytics">
+        <!-- analytics cards injected here -->
+      </div>
+
+      <div class="table-scroll">
+        <table id="trade-table" class="trade-table">
+          <thead>
+            <tr id="trade-table-head">
+              <!-- headers injected here -->
+            </tr>
+          </thead>
+          <tbody id="trade-table-body">
+            <!-- rows injected here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="trade-empty-state" class="empty-state hidden">
+        <p class="empty-mark">◇</p>
+        <p>No trade logs yet.</p>
+        <p class="empty-sub">Tap + to log today's trading.</p>
+      </div>
+
+      <button id="fab-add-trade" class="fab" aria-label="Add trade log">+</button>
+    </div>
+
+    <!-- ===== SETTINGS VIEW ===== -->
+    <div id="view-settings" class="view">
+      <div class="settings-topbar">
+        <button id="settings-close-btn" class="icon-btn" aria-label="Close settings">←</button>
+        <span class="settings-topbar-title">Settings</span>
+      </div>
+      <div class="settings-section">
+        <h3>Appearance</h3>
+        <div class="theme-switch-row">
+          <span class="theme-switch-label">🌙 Dark</span>
+          <button id="settings-theme-toggle" class="theme-switch" aria-label="Toggle theme">
+            <span class="theme-switch-knob"></span>
+          </button>
+          <span class="theme-switch-label">☀️ Light</span>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h3>Export Data</h3>
+        <p class="settings-hint">Export your observations and trade log to a file you can keep, share, or open in Excel.</p>
+        <button id="export-open-btn" class="btn-primary" style="margin-top:4px;">Export…</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>Tag Cleanup</h3>
+        <p class="settings-hint">New tags are always saved lowercase. If you have older entries with mixed-case tags (e.g. "FOMO" and "fomo" as separate tags), run this once to merge them.</p>
+        <button id="normalize-tags-btn" class="btn-secondary" style="margin-top:4px;">Normalize tags now</button>
+        <p class="settings-hint" id="normalize-tags-status"></p>
+      </div>
+
+      <div class="settings-section">
+        <h3>Dashboard</h3>
+        <label for="default-sort-select">Default grouping</label>
+        <select id="default-sort-select">
+          <option value="date">Date (newest first, priority within day)</option>
+          <option value="priority">Priority (high first)</option>
+          <option value="tags">Tags</option>
+        </select>
+        <p class="settings-hint">Used when the app loads. You can still switch grouping from the Dashboard.</p>
+      </div>
+
+      <div class="settings-section">
+        <h3>Categorization</h3>
+        <p class="settings-hint">New observations are scanned for keywords and suggested a category/folder. You can accept or dismiss each suggestion from the Dashboard.</p>
+      </div>
+
+      <div class="settings-section">
+        <h3>Pre-Trade Checklists</h3>
+        <p class="settings-hint">Create checklists to run before executing any trade. A "Default" checklist is always available.</p>
+
+        <!-- Checklist selector -->
+        <div class="cl-manage-row">
+          <select id="cl-manage-select" style="flex:1"></select>
+          <button id="cl-new-btn" class="btn-small btn-small-primary">+ New</button>
+          <button id="cl-delete-cl-btn" class="btn-small" style="color:var(--high)">Delete</button>
+        </div>
+
+        <!-- Checklist name editor (hidden unless new/rename) -->
+        <div id="cl-name-row" class="cl-name-row hidden">
+          <input type="text" id="cl-name-input" placeholder="Checklist name (e.g. Long Setup)" />
+          <button id="cl-name-save-btn" class="btn-small btn-small-primary">Save name</button>
+        </div>
+
+        <!-- Items editor -->
+        <div id="cl-items-editor" class="cl-items-editor">
+          <!-- items injected here -->
+        </div>
+        <div class="cl-add-item-row">
+          <input type="text" id="cl-new-item-input" placeholder="Add a checklist item…" />
+          <button id="cl-add-item-btn" class="btn-small btn-small-primary">Add</button>
+        </div>
+      </div>
+      <div class="settings-section">
+        <h3>AI Coach — Groq API Key</h3>
+        <p class="settings-hint">Free forever, no credit card. Get your key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> (sign up with Google, takes 1 minute).</p>
+        <label for="gemini-key-input">Groq API Key</label>
+        <div class="api-key-row">
+          <input type="password" id="gemini-key-input" placeholder="gsk_..." autocomplete="off" />
+          <button id="gemini-key-toggle" class="icon-btn" title="Show/hide key">👁</button>
+        </div>
+        <div id="gemini-key-status" class="settings-hint"></div>
+        <button id="gemini-key-save-btn" class="btn-primary" style="margin-top:10px;">Save key</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>Google Drive Folder — Google API Key</h3>
+        <p class="settings-hint">100% free, no credit card required. Used to list images inside shared Google Drive folders.</p>
+        <label for="google-key-input">Google API Key</label>
+        <div class="api-key-row">
+          <input type="password" id="google-key-input" placeholder="AIzaSy..." autocomplete="off" />
+          <button id="google-key-toggle" class="icon-btn" title="Show/hide key">👁</button>
+        </div>
+        <div id="google-key-status" class="settings-hint"></div>
+        <button id="google-key-save-btn" class="btn-primary" style="margin-top:10px;">Save key</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>Trade Log Passcode</h3>
+        <p class="settings-hint">Set a 4-digit passcode to lock the Trade Log tab. The lock resets each time you navigate away from the tab — re-enter the passcode to view it again.</p>
+        <label for="trade-passcode-input">Passcode</label>
+        <div class="api-key-row">
+          <input type="password" id="trade-passcode-input" class="trade-passcode-input" inputmode="numeric" maxlength="4" pattern="[0-9]*" placeholder="4 digits (e.g. 1234)" autocomplete="off" />
+          <button id="trade-passcode-toggle" class="icon-btn" title="Show/hide passcode">👁</button>
+        </div>
+        <div id="trade-passcode-status" class="settings-hint"></div>
+        <button id="trade-passcode-save-btn" class="btn-primary" style="margin-top:10px;">Save passcode</button>
+        <button id="trade-passcode-remove-btn" class="btn-secondary" style="margin-top:6px;">Remove passcode</button>
+      </div>
+
+      <div class="settings-section settings-section-signout">
+        <button id="settings-logout-btn" class="btn-secondary">Sign out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBSERVATION MODAL (Create/Edit) ===================== -->
+  <div id="obs-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="obs-modal-title">New Observation</h2>
+        <button class="icon-btn" id="obs-modal-close" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body" id="obs-modal-body">
+        <!-- One or more .obs-entry blocks injected here -->
+      </div>
+
+      <div class="modal-footer">
+        <button id="obs-delete-btn" class="btn-danger hidden">Delete</button>
+        <button id="obs-archive-btn" class="btn-secondary hidden">Archive</button>
+        <div class="modal-footer-right">
+          <button id="obs-add-another-btn" class="btn-secondary hidden">+ Add another</button>
+          <button id="obs-cancel-btn" class="btn-secondary">Cancel</button>
+          <button id="obs-save-btn" class="btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tag autosuggest datalist (populated from all existing tags) -->
+
+  <!-- Template for a single observation entry within the modal -->
+  <template id="obs-entry-template">
+    <div class="obs-entry">
+      <div class="obs-entry-header hidden">
+        <span class="obs-entry-title"></span>
+        <button type="button" class="obs-entry-remove icon-btn" aria-label="Remove this observation">✕</button>
+      </div>
+
+      <div class="suggestion-banner hidden">
+        <span class="suggestion-text"></span>
+        <div class="suggestion-actions">
+          <button type="button" class="suggestion-accept btn-small btn-small-primary">Accept</button>
+          <button type="button" class="suggestion-dismiss btn-small">Dismiss</button>
+        </div>
+      </div>
+
+      <label>Observation</label>
+      <textarea class="obs-text" rows="5" placeholder="What did you notice today?"></textarea>
+
+      <label>Web links (optional, multiple allowed)</label>
+      <div class="obs-links-add-row">
+        <input type="url" class="obs-link-input" placeholder="https://..." />
+        <button type="button" class="btn-small btn-small-primary obs-link-add-btn">Add</button>
+      </div>
+      <div class="obs-links-list"></div>
+      <p class="paste-hint">📁 Public Google Drive or TradingView snapshot links will show the image automatically</p>
+
+      <label>Images (optional, multiple allowed)</label>
+      <div class="il-image-zone obs-image-zone">
+        <input type="file" class="obs-image-file" accept="image/*" multiple />
+        <p class="il-image-hint">Tap to select, drag & drop, or paste (Ctrl+V)</p>
+      </div>
+      <div class="il-image-grid obs-image-grid"></div>
+      <label class="checkbox-row">
+        <input type="checkbox" class="obs-image-pending" />
+        <span>Add image later (mark as pending)</span>
+      </label>
+
+      <label>Tags (comma separated)</label>
+      <input type="text" class="obs-tags" placeholder="e.g. fomo, breakout, discipline" autocomplete="off" />
+
+      <label>Folder</label>
+      <select class="obs-folder"></select>
+
+      <label>Priority</label>
+      <select class="obs-priority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+  </template>
+
+  <!-- ===================== PRE-TRADE CHECKLIST POPUP ===================== -->
+  <div id="checklist-modal" class="modal-overlay hidden">
+    <div class="modal checklist-modal">
+      <div class="modal-header">
+        <div class="checklist-header-left">
+          <h2 id="checklist-modal-title">Pre-Trade Check</h2>
+          <select id="checklist-picker" class="checklist-picker"></select>
+        </div>
+        <button class="icon-btn" id="checklist-modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="checklist-items-body">
+        <!-- items injected dynamically -->
+      </div>
+      <div class="checklist-score-bar" id="checklist-score-bar">
+        <div class="checklist-score-fill-wrap">
+          <div class="checklist-score-fill" id="checklist-score-fill"></div>
+        </div>
+        <span id="checklist-score-text">0 / 0 passed</span>
+      </div>
+      <div class="modal-footer">
+        <button id="checklist-reset-btn" class="btn-secondary">Reset</button>
+        <div class="modal-footer-right">
+          <button id="checklist-log-btn" class="btn-primary">Log result</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== CHECKLIST RESULT / LOG MODAL ===================== -->
+  <div id="checklist-result-modal" class="modal-overlay hidden">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2>Log Checklist Run</h2>
+        <button class="icon-btn" id="cl-result-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="cl-result-summary" class="cl-result-summary"></div>
+
+        <label for="cl-outcome">Trade Outcome</label>
+        <select id="cl-outcome">
+          <option value="">— Select outcome —</option>
+          <option value="W">W — Win</option>
+          <option value="L">L — Loss</option>
+          <option value="CTC">CTC — Cut to Cost</option>
+        </select>
+
+        <div class="cl-analysis-grid">
+          <div>
+            <label for="cl-pre-trade">Pre-Trade Analysis</label>
+            <textarea id="cl-pre-trade" rows="4" placeholder="Setup, reasoning, plan before entering…"></textarea>
+          </div>
+          <div>
+            <label for="cl-post-trade">Post-Trade Analysis</label>
+            <textarea id="cl-post-trade" rows="4" placeholder="What happened, what you learned…"></textarea>
+          </div>
+        </div>
+
+        <label>Chart Image (optional)</label>
+        <div class="image-input-row">
+          <input type="file" id="cl-chart-image" accept="image/*" />
+          <p class="paste-hint">📋 Tip: paste an image here with Ctrl+V</p>
+          <div id="cl-chart-preview" class="image-preview hidden">
+            <img id="cl-chart-preview-img" alt="Chart" />
+            <button type="button" id="cl-chart-remove" class="img-remove-btn">✕</button>
+          </div>
+        </div>
+
+        <label for="cl-link-trade">Link to Trade Log entry (optional)</label>
+        <select id="cl-link-trade">
+          <option value="">— Not linked —</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-right">
+          <button id="cl-result-dismiss" class="btn-secondary">Dismiss</button>
+          <button id="cl-result-save" class="btn-primary">Save log</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== COPY-TO-FOLDER MODAL ===================== -->
+  <div id="copy-modal" class="modal-overlay hidden">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2>Copy to folder</h2>
+        <button class="icon-btn" id="copy-modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label for="copy-folder-select">Folder</label>
+        <select id="copy-folder-select"></select>
+
+        <label for="copy-priority-select">Priority in this folder</label>
+        <select id="copy-priority-select">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-right">
+          <button id="copy-cancel-btn" class="btn-secondary">Cancel</button>
+          <button id="copy-confirm-btn" class="btn-primary">Add to folder</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== NEW FOLDER MODAL ===================== -->
+  <div id="folder-modal" class="modal-overlay hidden">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2>New folder</h2>
+        <button class="icon-btn" id="folder-modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label for="new-folder-name">Folder name</label>
+        <input type="text" id="new-folder-name" placeholder="e.g. Risk Management" />
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-right">
+          <button id="folder-cancel-btn" class="btn-secondary">Cancel</button>
+          <button id="folder-confirm-btn" class="btn-primary">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TRADE LOG MODAL ===================== -->
+  <div id="trade-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="trade-modal-title">New Trade Log</h2>
+        <button class="icon-btn" id="trade-modal-close" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <label for="trade-date">Date</label>
+        <input type="date" id="trade-date" />
+
+        <label for="trade-capital">Capital</label>
+        <input type="number" id="trade-capital" inputmode="decimal" placeholder="e.g. 100000" />
+
+        <label for="trade-num">No. of Trades</label>
+        <input type="number" id="trade-num" inputmode="numeric" placeholder="e.g. 5" />
+
+        <label for="trade-gross">Gross P/L</label>
+        <input type="number" id="trade-gross" inputmode="decimal" placeholder="e.g. 1500" />
+
+        <label for="trade-net">Net P/L</label>
+        <input type="number" id="trade-net" inputmode="decimal" placeholder="e.g. 1280" />
+
+        <label for="trade-duration">Duration (e.g. 2h 30m)</label>
+        <input type="text" id="trade-duration" placeholder="e.g. 2h 30m" />
+
+        <label for="trade-comments">Comments</label>
+        <textarea id="trade-comments" rows="3" placeholder="Notes for the day…"></textarea>
+
+        <!-- Linked checklists — shown when editing an existing trade -->
+        <div id="trade-linked-checklists" class="trade-linked-checklists hidden">
+          <div class="trade-linked-checklists-header">
+            <span class="trade-linked-checklists-title">Linked Checklists</span>
+          </div>
+          <div id="trade-cl-list"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="trade-delete-btn" class="btn-danger hidden">Delete</button>
+        <div class="modal-footer-right">
+          <button id="trade-cancel-btn" class="btn-secondary">Cancel</button>
+          <button id="trade-save-btn" class="btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== EXPORT MODAL ===================== -->
+  <div id="export-modal" class="modal-overlay hidden">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2>Export Data</h2>
+        <button class="icon-btn" id="export-modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>Format</label>
+        <select id="export-format-select">
+          <option value="csv">CSV (spreadsheet)</option>
+          <option value="pdf">PDF (printable / shareable)</option>
+          <option value="json">JSON (full backup)</option>
+        </select>
+        <p class="settings-hint" id="export-format-hint"></p>
+
+        <label>Date range</label>
+        <select id="export-range-select">
+          <option value="all">All time</option>
+          <option value="month">This month</option>
+          <option value="week">This week</option>
+          <option value="custom">Custom range…</option>
+        </select>
+
+        <div id="export-custom-range-row" class="export-custom-range hidden">
+          <div>
+            <label for="export-start-date">From</label>
+            <input type="date" id="export-start-date" />
+          </div>
+          <div>
+            <label for="export-end-date">To</label>
+            <input type="date" id="export-end-date" />
+          </div>
+        </div>
+
+        <label>Include</label>
+        <div class="export-checkbox-row">
+          <label class="checkbox-row"><input type="checkbox" id="export-include-obs" checked /><span>Observations</span></label>
+          <label class="checkbox-row"><input type="checkbox" id="export-include-trades" checked /><span>Trade Log</span></label>
+        </div>
+
+        <p class="settings-hint" id="export-preview-count"></p>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-right">
+          <button id="export-cancel-btn" class="btn-secondary">Cancel</button>
+          <button id="export-confirm-btn" class="btn-primary">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== IMAGE LIGHTBOX ===================== -->
+  <div id="lightbox" class="modal-overlay hidden">
+    <div class="lightbox-content">
+      <button class="icon-btn lightbox-nav lightbox-prev hidden" id="lightbox-prev" aria-label="Previous image">‹</button>
+      <img id="lightbox-img" alt="Full size" />
+      <button class="icon-btn lightbox-nav lightbox-next hidden" id="lightbox-next" aria-label="Next image">›</button>
+      <span id="lightbox-counter" class="lightbox-counter hidden"></span>
+      <button class="icon-btn lightbox-rotate" id="lightbox-rotate" aria-label="Rotate image" title="Rotate 90°">⟳</button>
+      <button class="icon-btn lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script type="module" src="app.js"></script>
+  <script type="module" src="trade-security.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then(reg => console.log('SW registered, scope:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

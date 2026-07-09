@@ -1,0 +1,7 @@
+Link to this app: https://trade-journal-4271e.web.app/
+
+Changes can be seen first at local run at: http://localhost:8080/
+Local run can be enabled by running below command in powershell: npx http-server C:\Nitish\ClaudeApps\trading-journal
+This will run the local server in this folder and we can see our app at http://localhost:8080/. Keep this powershell window open to keep running the server.
+Once changes are confirmed, they can be deployed by running the command in powershell in directory: C:\Nitish\ClaudeApps\trading-journal : firebase deploy --only hosting
+Any powershell run can be ended by typing: CTRL+C
