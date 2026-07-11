@@ -1,7 +1,6 @@
 import { state } from '../state.js';
 import { formatTime } from './date.js';
 import { loadGoogleApiKey } from '../services/ai.js';
-import { openLightbox } from '../ui/common.js';
 
 export function escapeHtml(str) {
   if (str === null || str === undefined) return "";
@@ -104,85 +103,50 @@ export function tryNext(urls, index, imgEl, onLoaded, onFail) {
   imgEl.onerror = () => tryNext(urls, index + 1, imgEl, onLoaded, onFail);
 }
 
-export function buildDriveVideoEmbed(fileId, container, apiKey) {
+export function buildDriveVideoEmbed(fileId, container) {
   container.innerHTML = "";
   container.classList.add("drive-preview-wrap", "drive-video-wrap");
   container.addEventListener("pointerdown", (e) => e.stopPropagation());
   container.addEventListener("click", (e) => e.stopPropagation());
 
-  // Try the official Drive API streaming endpoint first (supports range
-  // requests properly for video), then fall back to the legacy sharing
-  // URL trick, before finally giving up and showing an "open in Drive" link.
-  const sources = [];
-  if (apiKey) {
-    sources.push(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`);
-  }
-  sources.push(`https://drive.google.com/uc?export=download&id=${fileId}`);
+  const iframe = document.createElement("iframe");
+  iframe.className = "drive-video-embed";
+  iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+  iframe.setAttribute("frameborder", "0");
+  iframe.setAttribute("allow", "autoplay; encrypted-media; fullscreen");
+  iframe.setAttribute("allowfullscreen", "true");
+  iframe.setAttribute("loading", "lazy");
+  // Inline sizing so no extra CSS file changes are required
+  iframe.style.width = "100%";
+  iframe.style.aspectRatio = "16 / 9";
+  iframe.style.minHeight = "220px";
+  iframe.style.border = "none";
+  iframe.style.borderRadius = "8px";
+  iframe.style.display = "block";
+  iframe.addEventListener("pointerdown", (e) => e.stopPropagation());
+  iframe.addEventListener("click", (e) => e.stopPropagation());
 
-  const video = document.createElement("video");
-  video.className = "drive-video-player";
-  video.controls = true;
-  video.preload = "metadata";
-  video.playsInline = true;
-  video.style.width = "100%";
-  video.style.maxHeight = "360px";
-  video.style.display = "block";
-  video.style.background = "#000";
-  video.style.borderRadius = "8px";
-  video.addEventListener("pointerdown", (e) => e.stopPropagation());
-  video.addEventListener("click", (e) => e.stopPropagation());
-
-  let srcIndex = 0;
-  function tryNextSource() {
-    if (srcIndex >= sources.length) {
-      // All sources failed — fall back to a plain link instead of a broken player.
-      container.innerHTML = "";
-      const openLink = document.createElement("a");
-      openLink.href = `https://drive.google.com/file/d/${fileId}/view`;
-      openLink.target = "_blank";
-      openLink.rel = "noopener noreferrer";
-      openLink.className = "drive-video-open-link";
-      openLink.textContent = "▶ Open video in Google Drive";
-      openLink.addEventListener("click", (e) => e.stopPropagation());
-      container.appendChild(openLink);
-      return;
-    }
-    video.src = sources[srcIndex];
-  }
-
-  video.addEventListener("error", () => {
-    srcIndex++;
-    tryNextSource();
-  });
-
-  container.appendChild(video);
-  tryNextSource();
+  container.appendChild(iframe);
 }
 
 export async function buildDriveFilePreview(fileId, container, onFail) {
-  let isVideo = false;
-  let apiKey = null;
+  const apiKey = await loadGoogleApiKey();
 
-  try {
-    apiKey = await loadGoogleApiKey();
-    if (apiKey) {
+  if (apiKey) {
+    try {
       const res = await fetch(
         `https://www.googleapis.com/drive/v3/files/${fileId}?key=${apiKey}&fields=mimeType`
       );
       if (res.ok) {
         const data = await res.json();
         if (data.mimeType && data.mimeType.startsWith("video/")) {
-          isVideo = true;
+          buildDriveVideoEmbed(fileId, container);
+          return;
         }
       }
+    } catch (err) {
+      console.warn("Could not check Drive file type, falling back to image preview", err);
     }
-  } catch (err) {
-    console.warn("Could not check Drive file type, falling back to image preview", err);
-  }
-
-  if (isVideo) {
-    buildDriveVideoEmbed(fileId, container, apiKey);
-    return;
   }
 
   // No API key set, mimeType check failed, or it's not a video — behave as before.
@@ -192,16 +156,7 @@ export async function buildDriveFilePreview(fileId, container, onFail) {
     `https://lh3.googleusercontent.com/d/${fileId}=s1000`,
     `https://drive.google.com/uc?export=view&id=${fileId}`,
     `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`
-  ], container, (finalSrc) => {
-    const imgEl = container.querySelector(".drive-link-preview");
-    if (imgEl) {
-      imgEl.style.cursor = "zoom-in";
-      imgEl.addEventListener("click", (e) => {
-        e.stopPropagation();
-        openLightbox([finalSrc], 0);
-      });
-    }
-  }, onFail);
+  ], container, null, onFail);
 }
 
 export async function buildDriveFolderPreview(folderId, container, onFail) {
@@ -220,18 +175,13 @@ export async function buildDriveFolderPreview(folderId, container, onFail) {
   }
 
   const query = encodeURIComponent(`'${folderId}' in parents and trashed = false and mimeType contains 'image/'`);
-  const api = `https://www.googleapis.com/drive/v3/files?q=${query}&key=${apiKey}&fields=files(id,name)&pageSize=50&orderBy=name_natural`;
+  const api = `https://www.googleapis.com/drive/v3/files?q=${query}&key=${apiKey}&fields=files(id,name)&pageSize=50`;
 
   try {
     const res = await fetch(api);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const files = data.files || [];
-    // Safety net: even though the API is asked to return name_natural order,
-    // sort client-side too. localeCompare with numeric:true treats embedded
-    // digits (e.g. timestamps in filenames) as numbers, so "IMG_2" sorts
-    // before "IMG_10" instead of doing a plain character-by-character sort.
-    files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
 
     if (files.length === 0) {
       container.innerHTML = `<div class="drive-folder-empty">Folder has no images</div>`;
@@ -252,24 +202,7 @@ export async function buildDriveFolderPreview(folderId, container, onFail) {
         `https://lh3.googleusercontent.com/d/${file.id}=s1000`,
         `https://drive.google.com/uc?export=view&id=${file.id}`,
         `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`
-      ], cell, (finalSrc) => {
-        // Attached directly on the image itself (not delegated from a
-        // parent) because the cell's own click listener above already
-        // calls stopPropagation() — that would block any listener relying
-        // on this click bubbling up to the grid or beyond.
-        const imgEl = cell.querySelector(".drive-link-preview");
-        if (imgEl) {
-          imgEl.style.cursor = "zoom-in";
-          imgEl.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const loadedImgs = Array.from(grid.querySelectorAll(".drive-link-preview"))
-              .filter((im) => !im.classList.contains("hidden") && im.src);
-            const idx = loadedImgs.indexOf(imgEl);
-            const srcs = loadedImgs.map((im) => im.src);
-            if (srcs.length > 0) openLightbox(srcs, Math.max(idx, 0));
-          });
-        }
-      }, null);
+      ], cell, null, null);
       grid.appendChild(cell);
     });
 

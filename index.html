@@ -29,11 +29,11 @@
   <!-- ===================== AUTH SCREEN ===================== -->
   <div id="auth-screen" class="screen">
     <div class="auth-box">
-      <div class="logo">
-        <span class="logo-mark">▲</span>
-        <h1>Trade Journal</h1>
+      <div class="logo logo-brand">
+        <img src="icons/patient-wolf-logo-dark.png" alt="Patient Wolf Trader" class="brand-logo brand-logo-dark" />
+        <img src="icons/patient-wolf-logo-light.png" alt="Patient Wolf Trader" class="brand-logo brand-logo-light" />
       </div>
-      <p class="auth-sub">Sign in to your private log</p>
+      <p class="auth-sub">Sign in to your private journal</p>
 
       <form id="auth-form">
         <label for="email">Email</label>
@@ -45,8 +45,9 @@
         <div id="auth-error" class="error-text"></div>
 
         <button type="submit" id="login-btn" class="btn-primary">Sign in</button>
-        <button type="button" id="signup-btn" class="btn-secondary">Create account</button>
       </form>
+
+      <p class="auth-tagline">Discipline Today, Freedom Tomorrow</p>
     </div>
   </div>
 
@@ -56,7 +57,10 @@
     <!-- Top bar -->
     <header class="topbar">
       <div class="topbar-title">
-        <span class="logo-mark small">▲</span>
+        <span class="logo-mark small">
+          <img src="icons/patient-wolf-logo-dark.png" alt="Patient Wolf Trader" class="header-logo header-logo-dark" />
+          <img src="icons/patient-wolf-logo-light.png" alt="Patient Wolf Trader" class="header-logo header-logo-light" />
+        </span>
         <span id="current-folder-label">Dashboard</span>
         <span id="streak-badge" class="streak-badge hidden" title="Consecutive days with at least one observation"></span>
         <span id="offline-badge" class="offline-badge hidden" title="No connection — changes are saved locally and will sync automatically">📡 Offline</span>

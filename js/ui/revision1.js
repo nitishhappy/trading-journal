@@ -12,12 +12,6 @@ import {
 } from '../dom.js';
 
 // ===================== Event Listeners =====================
-
-// Tracks which revision card (by observation id) is currently expanded to
-// show its full content. Kept local to this module (not in global state)
-// so it doesn't interfere with the dashboard tile's own expand tracking.
-let expandedRevisionId = null;
-
 window.addEventListener('observations-updated', () => {
   if (state.activeView === "revision") renderRevisionStage();
 });
@@ -207,8 +201,7 @@ async function toggleObsStar(obs) {
 
 function buildRevisionCardFromWorkingBackup(obs, isTop) {
   const card = document.createElement("div");
-  const isExpanded = expandedRevisionId === obs.id;
-  card.className = `revision-card priority-${escapeHtml(obs.priority || "medium")}${isExpanded ? " expanded" : ""}`;
+  card.className = `revision-card priority-${escapeHtml(obs.priority || "medium")}`;
   card.dataset.id = obs.id;
 
   if (!isTop) {
@@ -258,42 +251,18 @@ function buildRevisionCardFromWorkingBackup(obs, isTop) {
   prioritySpan.className = `priority-badge badge-${obs.priority || "medium"}`;
   prioritySpan.textContent = (obs.priority || "medium").toUpperCase();
   meta.appendChild(prioritySpan);
-
-  // Expand/collapse toggle — button so it's automatically excluded from
-  // the swipe/long-press pointer handlers below.
-  const expandBtn = document.createElement("button");
-  expandBtn.className = "revision-card-expand-btn";
-  expandBtn.textContent = isExpanded ? "▴" : "▾";
-  expandBtn.title = isExpanded ? "Collapse" : "Expand to see everything";
-  expandBtn.setAttribute("aria-label", isExpanded ? "Collapse card" : "Expand card");
-  expandBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    expandedRevisionId = isExpanded ? null : obs.id;
-    renderRevisionStage();
-  });
-  meta.appendChild(expandBtn);
-
   card.appendChild(meta);
 
   if (hasImage) {
     const imageWrap = document.createElement("div");
-    // Collapsed: capped preview grid (max 4 + "+N more" badge), same as dashboard tiles.
-    // Expanded: every image, full size, no cap — same as the dashboard tile's expanded state.
-    imageWrap.innerHTML = buildImageGrid(obsImages, obs.id, !isExpanded);
+    imageWrap.innerHTML = buildImageGrid(obsImages, obs.id, true);
     while (imageWrap.firstChild) card.appendChild(imageWrap.firstChild);
   }
 
   const textEl = document.createElement("div");
-  textEl.className = "revision-card-text" + (isExpanded ? "" : " revision-card-text-clamped");
+  textEl.className = "revision-card-text";
   textEl.textContent = obs.text || "(no text)";
   if (!obs.text) textEl.style.color = "var(--text-dim)";
-  if (!isExpanded) {
-    // Inline clamp so long notes don't blow out card height in the stack view.
-    textEl.style.display = "-webkit-box";
-    textEl.style.webkitBoxOrient = "vertical";
-    textEl.style.webkitLineClamp = "4";
-    textEl.style.overflow = "hidden";
-  }
   card.appendChild(textEl);
 
   if (hasLink) {
@@ -313,13 +282,6 @@ function buildRevisionCardFromWorkingBackup(obs, isTop) {
       tagsEl.appendChild(chip);
     });
     card.appendChild(tagsEl);
-  }
-
-  if (isExpanded) {
-    const expandedMeta = document.createElement("div");
-    expandedMeta.className = "revision-card-expanded-meta";
-    expandedMeta.textContent = `Logged: ${createdTime.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}`;
-    card.appendChild(expandedMeta);
   }
 
   const hintRight = document.createElement("div");
