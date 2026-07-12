@@ -33,31 +33,75 @@ export function isInstagramUrl(url) {
   return !!url && /instagram\.com\/(reel|reels|p)\/([a-zA-Z0-9_-]+)/i.test(url);
 }
 
+// Instagram's official embed widget (the same script instagram.com itself
+// hands out for "Embed" on a post) needs to be loaded once per page. It
+// exposes window.instgrm.Embeds.process(), which scans for
+// <blockquote class="instagram-media"> elements and swaps each one for a
+// properly-sized iframe, then keeps that iframe's height in sync with the
+// real content via postMessage. Cached as a module-level promise so
+// multiple embeds on the page (and re-renders) all await the same load
+// instead of injecting the <script> tag more than once.
+let instagramEmbedScriptPromise = null;
+function loadInstagramEmbedScript() {
+  if (window.instgrm && window.instgrm.Embeds) return Promise.resolve();
+  if (instagramEmbedScriptPromise) return instagramEmbedScriptPromise;
+
+  instagramEmbedScriptPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector('script[src="https://www.instagram.com/embed.js"]');
+    if (existing) {
+      if (window.instgrm && window.instgrm.Embeds) {
+        resolve();
+      } else {
+        existing.addEventListener("load", resolve, { once: true });
+        existing.addEventListener("error", reject, { once: true });
+      }
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://www.instagram.com/embed.js";
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.body.appendChild(script);
+  });
+
+  return instagramEmbedScriptPromise;
+}
+
 export function buildInstagramEmbed(url) {
   const match = url.match(/instagram\.com\/(reel|reels|p)\/([a-zA-Z0-9_-]+)/i);
   if (!match) return null;
   const type = match[1].toLowerCase();
   const code = match[2];
+  const permalink = `https://www.instagram.com/${type === "p" ? "p" : "reel"}/${code}/`;
 
   const wrap = document.createElement("div");
   wrap.className = "instagram-preview-wrap";
   wrap.addEventListener("pointerdown", (e) => e.stopPropagation());
   wrap.addEventListener("click", (e) => e.stopPropagation());
 
-  const iframe = document.createElement("iframe");
-  iframe.className = "instagram-embed";
-  iframe.src = `https://www.instagram.com/${type === "p" ? "p" : "reel"}/${code}/embed/`;
-  iframe.setAttribute("frameborder", "0");
-  iframe.setAttribute("scrolling", "no");
-  iframe.setAttribute("allowtransparency", "true");
-  iframe.setAttribute("allow", "encrypted-media");
-  iframe.setAttribute("loading", "lazy");
-  iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-  iframe.style.pointerEvents = "auto";
-  iframe.addEventListener("pointerdown", (e) => e.stopPropagation());
-  iframe.addEventListener("click", (e) => e.stopPropagation());
+  // Placeholder blockquote — Instagram's script replaces this with its own
+  // iframe once it runs. This is the same markup instagram.com's own
+  // "Embed" button generates, which is what gets the real full-height
+  // aspect ratio instead of the cropped/letterboxed look of a raw
+  // /embed/ iframe src.
+  const blockquote = document.createElement("blockquote");
+  blockquote.className = "instagram-media";
+  blockquote.setAttribute("data-instgrm-permalink", permalink);
+  blockquote.setAttribute("data-instgrm-version", "14");
+  wrap.appendChild(blockquote);
 
-  wrap.appendChild(iframe);
+  loadInstagramEmbedScript()
+    .then(() => {
+      // Scoped to `wrap` rather than calling process() with no argument —
+      // otherwise every embed already on the page gets re-scanned and
+      // re-processed each time a new one is added.
+      if (window.instgrm && window.instgrm.Embeds) {
+        window.instgrm.Embeds.process(wrap);
+      }
+    })
+    .catch((err) => console.error("Instagram embed script failed to load", err));
+
   return wrap;
 }
 

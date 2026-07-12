@@ -6,8 +6,7 @@ export let tradeUnsubscribe = null;
 
 export function subscribeTrades() {
   const ref = db.collection("users").doc(state.currentUser.uid).collection("trades")
-    .orderBy("date", "desc")
-    .orderBy("createdAt", "desc");
+   .orderBy("createdAt", "desc");
   tradeUnsubscribe = ref.onSnapshot((snap) => {
     state.trades = [];
     snap.forEach((doc) => state.trades.push({ id: doc.id, ...doc.data() }));

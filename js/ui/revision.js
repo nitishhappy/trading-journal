@@ -112,11 +112,11 @@ export function buildRevisionQueue() {
     return true;
   });
 
-  // Oldest first for chronological review order
+  // Newest first — most recently created observation shows up first in the stack
   return pool.sort((a, b) => {
     const da = a.createdAt ? (a.createdAt.toDate ? a.createdAt.toDate() : new Date(a.createdAt)) : new Date(0);
     const db = b.createdAt ? (b.createdAt.toDate ? b.createdAt.toDate() : new Date(b.createdAt)) : new Date(0);
-    return da - db;
+    return db - da;
   });
 }
 
@@ -153,9 +153,8 @@ export async function renderRevisionStage() {
   state.revisionQueue = buildRevisionQueue();
   updateRevisionProgress();
 
-  revisionStage.innerHTML = "";
-
   if (state.revisionQueue.length === 0) {
+    revisionStage.innerHTML = "";
     revisionStage.classList.add("hidden");
     revisionEmptyState.classList.remove("hidden");
     const total = getRevisionTotalCount();
@@ -170,18 +169,107 @@ export async function renderRevisionStage() {
   revisionStage.classList.remove("hidden");
   revisionEmptyState.classList.add("hidden");
 
-  // Render top 3 cards in stack for clean layout preview
   const showCount = Math.min(state.revisionQueue.length, 3);
-  for (let i = showCount - 1; i >= 0; i--) {
-    const obs = state.revisionQueue[i];
-    const isTop = i === 0;
-    const card = buildRevisionCardFromWorkingBackup(obs, isTop);
-    
-    // Position/scale stack effect
-    card.style.transform = `translateY(${i * 12}px) scale(${1 - i * 0.04})`;
-    card.style.zIndex = 100 - i;
-    
-    revisionStage.appendChild(card);
+  const targetObs = state.revisionQueue.slice(0, showCount);
+  const targetIds = targetObs.map(o => o.id);
+
+  // Get current DOM card elements
+  const currentCards = Array.from(revisionStage.querySelectorAll(".revision-card"));
+  const currentIds = currentCards.map(c => c.dataset.id);
+
+  // We perform an incremental update if:
+  // 1. There are target observations.
+  // 2. The top card (currentIds[0]) was removed/swiped, and the rest match targetIds at the start.
+  // 3. The card expansion states of the remaining cards haven't changed.
+  let isIncremental = false;
+  if (currentIds.length > 0 && targetIds.length > 0) {
+    const expectedRemaining = currentIds.slice(1);
+    const actualRemaining = targetIds.slice(0, expectedRemaining.length);
+    const matchesRemaining = expectedRemaining.length > 0 &&
+      expectedRemaining.every((id, idx) => id === actualRemaining[idx]);
+
+    if (matchesRemaining) {
+      let expansionMatch = true;
+      for (const id of expectedRemaining) {
+        const cardEl = currentCards.find(c => c.dataset.id === id);
+        if (cardEl) {
+          const isCardExpandedInDom = cardEl.classList.contains("expanded");
+          const isCardTargetExpanded = (expandedRevisionId === id);
+          if (isCardExpandedInDom !== isCardTargetExpanded) {
+            expansionMatch = false;
+            break;
+          }
+        }
+      }
+      if (expansionMatch) {
+        isIncremental = true;
+      }
+    }
+  }
+
+  if (isIncremental) {
+    // 1. Remove cards that are no longer in targetIds (e.g. Card A which was swiped)
+    currentCards.forEach(card => {
+      if (!targetIds.includes(card.dataset.id)) {
+        card.remove();
+      }
+    });
+
+    // 2. Update remaining cards in DOM to their correct position and properties
+    const remainingCards = Array.from(revisionStage.querySelectorAll(".revision-card"));
+    remainingCards.forEach((card) => {
+      const id = card.dataset.id;
+      const targetIdx = targetIds.indexOf(id);
+      if (targetIdx !== -1) {
+        const isTop = targetIdx === 0;
+        card.style.zIndex = 100 - targetIdx;
+        card.style.transform = `translateY(${targetIdx * 12}px) scale(${1 - targetIdx * 0.04})`;
+        
+        if (isTop) {
+          card.classList.add("revision-card-top", "top-card");
+          card.style.pointerEvents = "";
+          card.style.opacity = "";
+        } else {
+          card.classList.remove("revision-card-top", "top-card");
+          card.style.pointerEvents = "none";
+          card.style.opacity = "";
+        }
+      }
+    });
+
+    // 3. Append cards from targets that are not in the DOM yet
+    const existingIds = remainingCards.map(c => c.dataset.id);
+    for (let i = 0; i < showCount; i++) {
+      const obs = targetObs[i];
+      if (!existingIds.includes(obs.id)) {
+        const card = buildRevisionCardFromWorkingBackup(obs, i === 0);
+        card.style.transition = "none";
+        card.style.transform = `translateY(${i * 12}px) scale(${1 - i * 0.04})`;
+        card.style.zIndex = 100 - i;
+        revisionStage.appendChild(card);
+        requestAnimationFrame(() => {
+          card.style.transition = "";
+        });
+      }
+    }
+  } else {
+    // Rebuild full stage
+    revisionStage.innerHTML = "";
+    for (let i = showCount - 1; i >= 0; i--) {
+      const obs = targetObs[i];
+      const isTop = i === 0;
+      const card = buildRevisionCardFromWorkingBackup(obs, isTop);
+
+      card.style.transition = "none";
+      card.style.transform = `translateY(${i * 12}px) scale(${1 - i * 0.04})`;
+      card.style.zIndex = 100 - i;
+
+      revisionStage.appendChild(card);
+
+      requestAnimationFrame(() => {
+        card.style.transition = "";
+      });
+    }
   }
 }
 
@@ -213,7 +301,6 @@ function buildRevisionCardFromWorkingBackup(obs, isTop) {
 
   if (!isTop) {
     card.style.transform = "scale(0.97) translateY(8px)";
-    card.style.opacity = "0.6";
     card.style.zIndex = "1";
     card.style.pointerEvents = "none";
   } else {
@@ -276,11 +363,48 @@ function buildRevisionCardFromWorkingBackup(obs, isTop) {
   card.appendChild(meta);
 
   if (hasImage) {
-    const imageWrap = document.createElement("div");
-    // Collapsed: capped preview grid (max 4 + "+N more" badge), same as dashboard tiles.
-    // Expanded: every image, full size, no cap — same as the dashboard tile's expanded state.
-    imageWrap.innerHTML = buildImageGrid(obsImages, obs.id, !isExpanded);
-    while (imageWrap.firstChild) card.appendChild(imageWrap.firstChild);
+    if (isExpanded) {
+      obsImages.forEach((imgSrc, idx) => {
+        const imageContainer = document.createElement("div");
+        imageContainer.className = "revision-card-image-container expanded";
+        
+        const img = document.createElement("img");
+        img.className = "revision-card-image";
+        img.src = imgSrc;
+        img.loading = "lazy";
+        img.alt = `Observation image ${idx + 1}`;
+        imageContainer.appendChild(img);
+        
+        imageContainer.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openLightbox(obsImages, idx);
+        });
+        card.appendChild(imageContainer);
+      });
+    } else {
+      const imageContainer = document.createElement("div");
+      imageContainer.className = "revision-card-image-container";
+      
+      const img = document.createElement("img");
+      img.className = "revision-card-image";
+      img.src = obsImages[0];
+      img.loading = "lazy";
+      img.alt = "Observation preview";
+      imageContainer.appendChild(img);
+      
+      if (obsImages.length > 1) {
+        const badge = document.createElement("div");
+        badge.className = "revision-card-image-badge";
+        badge.textContent = `+${obsImages.length - 1} images`;
+        imageContainer.appendChild(badge);
+      }
+      
+      imageContainer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openLightbox(obsImages, 0);
+      });
+      card.appendChild(imageContainer);
+    }
   }
 
   const textEl = document.createElement("div");
@@ -340,7 +464,7 @@ function buildRevisionCardFromWorkingBackup(obs, isTop) {
     });
   });
 
-  if (isTop) attachSwipeHandlers(card, obs);
+  attachSwipeHandlers(card, obs);
   return card;
 }
 
@@ -487,12 +611,54 @@ function attachSwipeHandlers(card, obs) {
   let startX = 0;
   let startY = 0;
   let currentX = 0;
+  let currentY = 0;
   let dragging = false;
   let horizontalIntent = null;
   let longPressTimer = null;
   let longPressFired = false;
   const LONG_PRESS_MS = 500;
   const LONG_PRESS_MOVE_TOLERANCE = 10;
+
+  // rAF batching: pointermove can fire far more often than the screen repaints
+  // (many devices report 90-120+ events/sec). Writing to card.style.transform
+  // directly inside the handler means every one of those events forces a style
+  // recalc, and on a card with images that competes with the browser's own
+  // paint work — that's what reads as "not smooth" on a real phone even though
+  // it looks fine on a fast dev machine. We just record the latest pointer
+  // position here and let a single rAF callback apply it once per frame.
+  let rafId = null;
+
+  function scheduleFrame() {
+    if (rafId !== null) return;
+    rafId = requestAnimationFrame(() => {
+      rafId = null;
+      applyDragTransform();
+    });
+  }
+
+  function cancelScheduledFrame() {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  function applyDragTransform() {
+    const rotate = currentX / 18;
+    card.style.transform = `translate(${currentX}px, ${currentY * 0.1}px) rotate(${rotate}deg)`;
+
+    const threshold = 60;
+    if (currentX > threshold) {
+      if (hintRight) hintRight.style.opacity = Math.min(1, (currentX - threshold) / 60);
+      if (hintLeft) hintLeft.style.opacity = 0;
+    } else if (currentX < -threshold) {
+      if (hintLeft) hintLeft.style.opacity = Math.min(1, (-currentX - threshold) / 60);
+      if (hintRight) hintRight.style.opacity = 0;
+    } else {
+      if (hintRight) hintRight.style.opacity = 0;
+      if (hintLeft) hintLeft.style.opacity = 0;
+    }
+  }
 
   function clearLongPressTimer() {
     if (longPressTimer) {
@@ -502,6 +668,7 @@ function attachSwipeHandlers(card, obs) {
   }
 
   function onPointerDown(e) {
+    if (!card.classList.contains("top-card")) return;
     if (e.target.closest("a") || e.target.closest("button") || e.target.closest("iframe")) return;
     const startedOnImage = !!e.target.closest("img, .il-img-more, .drive-link-preview, .instagram-preview-wrap");
 
@@ -510,9 +677,22 @@ function attachSwipeHandlers(card, obs) {
     startX = e.clientX;
     startY = e.clientY;
     currentX = 0;
+    currentY = 0;
     longPressFired = false;
-    card._pointerId = e.pointerId;
     card.classList.add("dragging");
+
+    // Capture the pointer up front so move/up events keep arriving even once
+    // the finger strays outside the card's bounds mid-drag. This also means
+    // we only need ONE set of listeners, attached to the card itself — the
+    // previous version additionally attached a parallel set to `document` to
+    // cover that same case, but a captured pointer event still bubbles from
+    // the card up to `document`, so both listeners fired for every single
+    // pointermove/pointerup. That doubled every style write during the drag,
+    // which is exactly the kind of thing that turns into visible stutter on
+    // a real device.
+    if (card.setPointerCapture) {
+      try { card.setPointerCapture(e.pointerId); } catch (err) { /* no-op */ }
+    }
 
     if (startedOnImage) return;
 
@@ -521,6 +701,7 @@ function attachSwipeHandlers(card, obs) {
       if (dragging && horizontalIntent !== true) {
         longPressFired = true;
         card.classList.remove("dragging");
+        cancelScheduledFrame();
         card.style.transform = "";
         if (hintRight) hintRight.style.opacity = 0;
         if (hintLeft) hintLeft.style.opacity = 0;
@@ -541,36 +722,25 @@ function attachSwipeHandlers(card, obs) {
 
     if (horizontalIntent === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
       horizontalIntent = Math.abs(dx) > Math.abs(dy);
+      // Hint the browser to promote the card to its own compositor layer for
+      // the duration of the drag, rather than leaving will-change on all the
+      // time (which just wastes memory on cards that are never dragged).
+      if (horizontalIntent === true) card.classList.add("swipe-active");
     }
     if (horizontalIntent === false) return;
 
-    if (horizontalIntent === true && card._pointerId !== undefined) {
-      card.setPointerCapture && card.setPointerCapture(card._pointerId);
-    }
-
     e.preventDefault();
     currentX = dx;
-    const rotate = currentX / 18;
-    card.style.transform = `translate(${currentX}px, ${dy * 0.1}px) rotate(${rotate}deg)`;
-
-    const threshold = 60;
-    if (currentX > threshold) {
-      if (hintRight) hintRight.style.opacity = Math.min(1, (currentX - threshold) / 60);
-      if (hintLeft) hintLeft.style.opacity = 0;
-    } else if (currentX < -threshold) {
-      if (hintLeft) hintLeft.style.opacity = Math.min(1, (-currentX - threshold) / 60);
-      if (hintRight) hintRight.style.opacity = 0;
-    } else {
-      if (hintRight) hintRight.style.opacity = 0;
-      if (hintLeft) hintLeft.style.opacity = 0;
-    }
+    currentY = dy;
+    scheduleFrame();
   }
 
   function onPointerUp() {
     clearLongPressTimer();
     if (!dragging) return;
     dragging = false;
-    card.classList.remove("dragging");
+    card.classList.remove("dragging", "swipe-active");
+    cancelScheduledFrame();
 
     if (longPressFired) {
       horizontalIntent = null;
@@ -594,49 +764,92 @@ function attachSwipeHandlers(card, obs) {
     horizontalIntent = null;
   }
 
-  function onDocPointerMove(e) {
-    if (dragging) onPointerMove(e);
-  }
-
-  function onDocPointerUp(e) {
-    if (dragging) {
-      onPointerUp(e);
-      document.removeEventListener("pointermove", onDocPointerMove);
-      document.removeEventListener("pointerup", onDocPointerUp);
-    }
-  }
-
-  card.addEventListener("pointerdown", (e) => {
-    onPointerDown(e);
-    document.addEventListener("pointermove", onDocPointerMove);
-    document.addEventListener("pointerup", onDocPointerUp);
-  });
+  card.addEventListener("pointerdown", onPointerDown);
   card.addEventListener("pointermove", onPointerMove);
   card.addEventListener("pointerup", onPointerUp);
   card.addEventListener("pointercancel", onPointerUp);
 }
 
-async function completeSwipe(card, direction) {
-  const id = card.dataset.id;
-  card.classList.add(direction === "right" ? "swipe-right" : "swipe-left");
-  await handleSwipeDecision(id, direction === "right" ? "reviewed" : "flagged");
+function waitForTransitionEnd(el, propertyName, timeoutMs) {
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      el.removeEventListener("transitionend", onTransitionEnd);
+      resolve();
+    };
+    const onTransitionEnd = (e) => {
+      if (e.target === el && e.propertyName === propertyName) finish();
+    };
+    el.addEventListener("transitionend", onTransitionEnd);
+    // Fallback in case transitionend doesn't fire (e.g. tab backgrounded)
+    setTimeout(finish, timeoutMs);
+  });
 }
 
-async function handleSwipeDecision(id, decision) {
+async function completeSwipe(card, direction) {
+  const id = card.dataset.id;
+  const decision = direction === "right" ? "reviewed" : "flagged";
+
+  // Update local queue membership and fire the toast immediately — these are
+  // synchronous/local, no reason to wait on anything for them.
   if (decision === "reviewed") {
     state.revisionReviewedIds.push(id);
     showToast("Reviewed");
-  } else if (decision === "flagged") {
+  } else {
     state.revisionFlaggedIds.push(id);
     showToast("Flagged for Attention");
   }
 
-  await saveRevisionState();
-  
-  // Re-render session queue
-  setTimeout(() => {
-    renderRevisionStage();
-  }, 200);
+  // card.classList.remove("dragging") just happened synchronously in
+  // onPointerUp, right before this function was called. If we add the
+  // swipe class in the very same tick, some browsers never get a chance
+  // to paint the "transition re-enabled" frame in between — they collapse
+  // both style changes into one and skip the transition entirely, so the
+  // card just jumps to its final state with no visible animation (and
+  // transitionend never fires). Forcing a synchronous layout read here
+  // flushes that intermediate frame first, guaranteeing the swipe-out
+  // actually animates.
+  void card.offsetWidth;
+  card.classList.add(direction === "right" ? "swipe-right" : "swipe-left");
+
+  // state.revisionQueue still holds the pre-swipe order at this point —
+  // buildRevisionQueue() only re-runs inside the eventual renderRevisionStage()
+  // call below, so we can safely use it to find the two cards currently
+  // stacked underneath the one being swiped.
+  const oldQueue = state.revisionQueue;
+  const shiftPromises = [];
+  for (let i = 1; i < Math.min(oldQueue.length, 3); i++) {
+    const obs = oldQueue[i];
+    const el = revisionStage.querySelector(`[data-id="${obs.id}"]`);
+    if (!el) continue;
+    const newIndex = i - 1;
+    el.style.transform = `translateY(${newIndex * 12}px) scale(${1 - newIndex * 0.04})`;
+    el.style.zIndex = 100 - newIndex;
+    shiftPromises.push(waitForTransitionEnd(el, "transform", 380));
+  }
+
+  const swipeOutDone = waitForTransitionEnd(card, "transform", 380);
+
+  // The Firestore write is a network round trip with genuinely unpredictable
+  // latency — anywhere from ~50ms on wifi to well over a second on a flaky
+  // mobile connection. The previous version put this in the same Promise.all
+  // the on-screen animation was waiting on, which meant renderRevisionStage()
+  // (and therefore the next card becoming interactive) was gated on that
+  // network call. The card would visibly finish its swipe-out animation and
+  // then the whole stage would just sit there, unresponsive, for however
+  // long the save took — an inconsistent stall that reads as "janky" even
+  // though the animation itself is fine. The save no longer blocks the
+  // re-render; it just runs alongside it, and only surfaces a toast if it
+  // actually fails.
+  saveRevisionState().catch((err) => {
+    console.error("saveRevisionState error", err);
+    showToast("Could not save — try again");
+  });
+
+  await Promise.all([swipeOutDone, ...shiftPromises]);
+  renderRevisionStage();
 }
 
 // Bind to window for compatibility
