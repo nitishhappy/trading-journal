@@ -407,8 +407,6 @@
     </div>
   </div>
 
-  <!-- Tag autosuggest datalist (populated from all existing tags) -->
-
   <!-- Template for a single observation entry within the modal -->
   <template id="obs-entry-template">
     <div class="obs-entry">
@@ -448,7 +446,10 @@
       </label>
 
       <label>Tags (comma separated)</label>
-      <input type="text" class="obs-tags" placeholder="e.g. fomo, breakout, discipline" autocomplete="off" />
+      <div class="tag-autocomplete-wrapper">
+        <input type="text" class="obs-tags" placeholder="e.g. fomo, breakout, discipline" autocomplete="off" />
+        <div class="tag-autocomplete-dropdown hidden"></div>
+      </div>
 
       <label>Folder</label>
       <select class="obs-folder"></select>

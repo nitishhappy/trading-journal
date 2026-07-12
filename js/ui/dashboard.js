@@ -1480,9 +1480,132 @@ function createObsEntry() {
     }
   });
 
+  attachTagAutocomplete(entry);
+
   entry.querySelector(".obs-entry-remove").addEventListener("click", () => entry.remove());
 
   return entry;
+}
+
+// ===================== Tag autocomplete (comma-separated, per-tag) =====================
+// Finds the tag segment the caret is currently sitting inside — i.e. the
+// text between the surrounding commas — so suggestions/replacement only
+// ever touch the tag actively being typed, not the whole field.
+function getTagSegmentAtCursor(input) {
+  const value = input.value;
+  const pos = input.selectionStart ?? value.length;
+  const before = value.lastIndexOf(",", pos - 1);
+  const afterRel = value.slice(pos).indexOf(",");
+  const start = before === -1 ? 0 : before + 1;
+  const end = afterRel === -1 ? value.length : pos + afterRel;
+  return { start, end, text: value.slice(start, end) };
+}
+
+// Replaces the tag segment under the caret with the chosen suggestion,
+// normalizes it to "tag, " and leaves the caret right after it so typing
+// continues straight into the next tag.
+function applyTagSuggestion(input, tag) {
+  const value = input.value;
+  const seg = getTagSegmentAtCursor(input);
+  const before = value.slice(0, seg.start).replace(/\s+$/, "");
+  const after = value.slice(seg.end).replace(/^[\s,]+/, "");
+  const prefix = before ? before + ", " : "";
+  const insertion = tag + ", ";
+  input.value = prefix + insertion + after;
+  const caret = prefix.length + insertion.length;
+  input.focus();
+  input.setSelectionRange(caret, caret);
+}
+
+function attachTagAutocomplete(entry) {
+  const input = entry.querySelector(".obs-tags");
+  const dropdown = entry.querySelector(".tag-autocomplete-dropdown");
+  if (!input || !dropdown) return;
+
+  let items = [];
+  let activeIndex = -1;
+
+  const hide = () => {
+    dropdown.classList.add("hidden");
+    dropdown.innerHTML = "";
+    items = [];
+    activeIndex = -1;
+  };
+
+  const setActive = (idx) => {
+    [...dropdown.children].forEach((c) => c.classList.remove("active"));
+    activeIndex = idx;
+    if (idx >= 0 && dropdown.children[idx]) {
+      dropdown.children[idx].classList.add("active");
+      dropdown.children[idx].scrollIntoView({ block: "nearest" });
+    }
+  };
+
+  const renderMatches = (matches) => {
+    dropdown.innerHTML = "";
+    items = matches;
+    activeIndex = -1;
+    if (matches.length === 0) {
+      hide();
+      return;
+    }
+    matches.forEach((tag) => {
+      const item = document.createElement("div");
+      item.className = "tag-autocomplete-item";
+      item.textContent = tag;
+      // mousedown fires before the input's blur handler, so the click
+      // registers before we hide the dropdown on blur
+      item.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        applyTagSuggestion(input, tag);
+        hide();
+      });
+      dropdown.appendChild(item);
+    });
+    dropdown.classList.remove("hidden");
+  };
+
+  const updateSuggestions = () => {
+    const word = getTagSegmentAtCursor(input).text.trim().toLowerCase();
+    if (!word) {
+      hide();
+      return;
+    }
+    const alreadyUsed = new Set(
+      input.value.split(",").map((t) => t.trim().toLowerCase()).filter(Boolean)
+    );
+    const matches = (state.allTags || [])
+      .filter((tag) => tag.includes(word) && !alreadyUsed.has(tag))
+      .sort((a, b) => {
+        const aStarts = a.startsWith(word) ? 0 : 1;
+        const bStarts = b.startsWith(word) ? 0 : 1;
+        return aStarts !== bStarts ? aStarts - bStarts : a.localeCompare(b);
+      })
+      .slice(0, 8);
+    renderMatches(matches);
+  };
+
+  input.addEventListener("input", updateSuggestions);
+  input.addEventListener("click", updateSuggestions);
+  input.addEventListener("blur", () => setTimeout(hide, 100));
+  input.addEventListener("keydown", (e) => {
+    if (dropdown.classList.contains("hidden") || items.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive(Math.min(activeIndex + 1, items.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive(Math.max(activeIndex - 1, 0));
+    } else if (e.key === "Enter") {
+      if (activeIndex >= 0) {
+        e.preventDefault();
+        applyTagSuggestion(input, items[activeIndex]);
+        hide();
+      }
+    } else if (e.key === "Escape") {
+      hide();
+    }
+  });
 }
 
 function getEntryLinks(container) {
