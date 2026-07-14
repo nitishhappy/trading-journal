@@ -41,6 +41,11 @@ export function saveChecklistLog(id, logData) {
   }
 }
 
+export function deleteChecklistLog(id) {
+  const ref = db.collection("users").doc(state.currentUser.uid).collection("checklistLogs");
+  return ref.doc(id).delete();
+}
+
 export function saveChecklist(id, data) {
   return checklistRef().doc(id).set(data);
 }

@@ -3,7 +3,8 @@ import { db } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 import { resizeImageToBase64, attachImagePaste } from '../utils/image.js';
 import {
-  checklistRef, saveChecklist, deleteChecklist, CHECKLIST_DEFAULT_ID
+  checklistRef, saveChecklist, deleteChecklist, CHECKLIST_DEFAULT_ID,
+  saveChecklistLog, deleteChecklistLog
 } from '../services/checklists.js';
 import { updateExportHintAndPreview, exportToCSV, exportToPDF, normalizeForJsonExport, downloadBlob } from '../utils/export.js';
 
@@ -344,9 +345,23 @@ export function renderLinkedChecklists(tradeId) {
       <span class="trade-cl-score ${pct === 100 ? "all-pass" : pct >= 70 ? "partial" : "low-pass"}">${log.passed}/${log.total} (${pct}%)</span>
       ${log.outcome ? `<span class="trade-cl-outcome outcome-${log.outcome}">${log.outcome}</span>` : ""}
       <button class="btn-small trade-cl-edit-btn" data-id="${log.id}">Edit</button>
+      <button class="btn-small trade-cl-delete-btn" style="background:rgba(232,60,56,0.1); color:var(--high); border:1px solid rgba(232,60,56,0.3);" data-id="${log.id}">Delete</button>
     `;
     row.querySelector(".trade-cl-edit-btn").addEventListener("click", () => {
       openChecklistLogEditor(log);
+    });
+    row.querySelector(".trade-cl-delete-btn").addEventListener("click", async () => {
+      if (confirm("Delete this checklist log?")) {
+        try {
+          await deleteChecklistLog(log.id);
+          showToast("Checklist log deleted");
+          // Re-render
+          renderLinkedChecklists(tradeId);
+        } catch (e) {
+          console.error(e);
+          showToast("Failed to delete log");
+        }
+      }
     });
     container.appendChild(row);
   });

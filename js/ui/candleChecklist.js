@@ -1,8 +1,14 @@
 import { state } from '../state.js';
 import { showToast } from '../utils/toast.js';
 import { resizeImageToBase64, attachImagePaste } from '../utils/image.js';
-import { saveCandleTemplate, deleteCandleTemplate, saveCandleRun } from '../services/candleChecklist.js';
+import { saveCandleTemplate, deleteCandleTemplate, saveCandleRun, deleteCandleRun } from '../services/candleChecklist.js';
 import { openChecklistModal } from './checklists.js';
+
+// Helper for safe HTML rendering
+function escHtml(str) {
+  if (!str) return "";
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
 // Global variables for active tracking
 let activeTemplateId = null;
@@ -674,13 +680,26 @@ function renderLastRuns() {
       ${run.note ? `<div style="font-size:12px; color:var(--text); background:var(--bg); padding:6px 8px; border-radius:6px; border:1px solid var(--border); margin-top:4px;"><strong>Note:</strong> ${escHtml(run.note)}</div>` : ""}
       ${tradeText}
       ${imageTag}
-      <div style="display:flex; justify-content:flex-end; margin-top:4px;">
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:4px;">
         <button class="btn-small btn-secondary edit-run-btn" style="padding: 4px 8px; font-size:11px;">Edit Run</button>
+        <button class="btn-small delete-run-btn" style="padding: 4px 8px; font-size:11px; background:rgba(232,60,56,0.1); color:var(--high); border:1px solid rgba(232,60,56,0.3);">Delete</button>
       </div>
     `;
 
     card.querySelector(".edit-run-btn").addEventListener("click", () => {
       loadRunForEditing(run);
+    });
+
+    card.querySelector(".delete-run-btn").addEventListener("click", async () => {
+      if (confirm("Are you sure you want to delete this candle checklist run?")) {
+        try {
+          await deleteCandleRun(run.id);
+          showToast("Candle checklist run deleted");
+        } catch (e) {
+          console.error(e);
+          showToast("Failed to delete run");
+        }
+      }
     });
 
     lastRunsList.appendChild(card);
