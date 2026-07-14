@@ -411,14 +411,10 @@
                       <option value="">— Not linked —</option>
                     </select>
                   </div>
-                  <div style="flex:1;">
-                    <label for="candle-run-outcome" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Outcome (Optional)</label>
-                    <select id="candle-run-outcome">
-                      <option value="">— No outcome —</option>
-                      <option value="W">W — Win</option>
-                      <option value="L">L — Loss</option>
-                      <option value="CTC">CTC — Cut to Cost</option>
-                    </select>
+                  <div style="flex:1; display:flex; align-items:center; justify-content:flex-end;">
+                    <label class="checkbox-label" style="font-size:12px; font-weight:500; cursor:pointer;">
+                      <input type="checkbox" id="candle-consider-flag"> To be considered
+                    </label>
                   </div>
                 </div>
                 
@@ -431,6 +427,11 @@
                       <button type="button" id="candle-chart-remove" class="img-remove-btn" style="position:absolute; top: -8px; right:-8px; background:var(--high); color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; cursor:pointer;">✕</button>
                     </div>
                   </div>
+                </div>
+
+                <div>
+                  <label for="candle-run-note" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Note (Optional)</label>
+                  <textarea id="candle-run-note" rows="2" placeholder="Add analysis note here..." style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-family:inherit; resize:vertical;"></textarea>
                 </div>
 
                 <div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-2); padding:10px 14px; border-radius:8px; border:1px solid var(--border); margin-top: 4px;">

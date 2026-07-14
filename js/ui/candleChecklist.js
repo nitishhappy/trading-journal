@@ -40,7 +40,8 @@ const selectedCount = document.getElementById("candle-selected-count");
 const unselectedCount = document.getElementById("candle-unselected-count");
 
 const linkTradeSelect = document.getElementById("candle-link-trade-select");
-const runOutcomeSelect = document.getElementById("candle-run-outcome");
+const considerFlagInput = document.getElementById("candle-consider-flag");
+const runNoteInput = document.getElementById("candle-run-note");
 const chartImageFile = document.getElementById("candle-chart-image");
 const chartPreview = document.getElementById("candle-chart-preview");
 const chartPreviewImg = document.getElementById("candle-chart-preview-img");
@@ -337,7 +338,8 @@ function setupEventListeners() {
         observatory: unselectedObs,
         decision: unselectedDec
       },
-      outcome: runOutcomeSelect ? runOutcomeSelect.value : "",
+      consider: considerFlagInput ? considerFlagInput.checked : false,
+      note: runNoteInput ? runNoteInput.value.trim() : "",
       linkedTradeId: linkTradeSelect ? linkTradeSelect.value : "",
       chartImage: runImageBase64
     };
@@ -352,7 +354,8 @@ function setupEventListeners() {
       activeSelections.clear();
       currentRunId = null;
       resetImage();
-      if (runOutcomeSelect) runOutcomeSelect.value = "";
+      if (considerFlagInput) considerFlagInput.checked = false;
+      if (runNoteInput) runNoteInput.value = "";
       if (linkTradeSelect) linkTradeSelect.value = "";
       updateIstField(new Date());
       renderChecklist();
@@ -614,7 +617,7 @@ function renderLastRuns() {
   if (!activeTemplateId) return;
 
   const runs = state.candleChecklistRuns
-    .filter(r => r.templateId === activeTemplateId);
+    .filter(r => r.templateId === activeTemplateId && r.consider === true);
 
   if (runs.length === 0) {
     lastRunsList.innerHTML = `<p style="color:var(--text-dim); font-size:13px; text-align:center;">No previous runs for this template yet.</p>`;
@@ -655,7 +658,7 @@ function renderLastRuns() {
     card.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span style="font-weight:600; font-size:14px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
-        ${run.outcome ? `<span class="trade-cl-outcome outcome-${run.outcome}" style="margin:0; font-size:10px;">${run.outcome}</span>` : ""}
+        ${run.consider ? `<span class="trade-cl-outcome outcome-W" style="margin:0; font-size:10px;">Considered</span>` : ""}
       </div>
       <div style="font-size:12px; color:var(--text-dim);">
         Passed: <span style="color:var(--low); font-weight:600;">${totalSelected}</span> / ${total}
@@ -668,6 +671,7 @@ function renderLastRuns() {
           <strong>Selected Decision:</strong> ${(run.selected?.decision || []).join(", ") || "None"}
         </div>
       </div>
+      ${run.note ? `<div style="font-size:12px; color:var(--text); background:var(--bg); padding:6px 8px; border-radius:6px; border:1px solid var(--border); margin-top:4px;"><strong>Note:</strong> ${escHtml(run.note)}</div>` : ""}
       ${tradeText}
       ${imageTag}
       <div style="display:flex; justify-content:flex-end; margin-top:4px;">
@@ -687,7 +691,8 @@ function loadRunForEditing(run) {
   currentRunId = run.id;
   runTimeInput.value = run.loggingTime || "";
   
-  if (runOutcomeSelect) runOutcomeSelect.value = run.outcome || "";
+  if (considerFlagInput) considerFlagInput.checked = !!run.consider;
+  if (runNoteInput) runNoteInput.value = run.note || "";
   if (linkTradeSelect) linkTradeSelect.value = run.linkedTradeId || "";
   
   if (run.chartImage) {

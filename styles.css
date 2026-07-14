@@ -3245,14 +3245,14 @@ textarea { resize: vertical; }
 /* ===================== Candle Checklist Styles ===================== */
 .candle-checklist-layout {
   padding: 16px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
 }
 
 .candle-checklist-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.2fr 1fr;
   gap: 20px;
 }
 
