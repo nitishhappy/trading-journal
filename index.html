@@ -331,16 +331,25 @@
             <button id="candle-template-save-btn" class="btn-small btn-small-primary">Save Template</button>
             <button id="candle-template-cancel-btn" class="btn-small btn-secondary">Cancel</button>
           </div>
-          <div class="template-builder-sections" style="display: flex; gap: 16px; width: 100%;">
-            <div style="flex: 1; background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);">
+          <div class="template-builder-sections" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+            <!-- Top row: Positive and Negative Decisions -->
+            <div style="display: flex; gap: 16px; width: 100%;">
+              <div style="flex: 1; background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid rgba(54,199,90,0.3);">
+                <h4 style="color:var(--low);">Positive Decisions (Choose)</h4>
+                <div id="builder-dec-pos-items" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;"></div>
+                <button id="builder-add-dec-pos-btn" class="btn-small btn-secondary" style="width: 100%;">+ Add Positive Check</button>
+              </div>
+              <div style="flex: 1; background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid rgba(232,60,56,0.3);">
+                <h4 style="color:var(--high);">Negative Decisions (Reject)</h4>
+                <div id="builder-dec-neg-items" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;"></div>
+                <button id="builder-add-dec-neg-btn" class="btn-small btn-secondary" style="width: 100%;">+ Add Negative Check</button>
+              </div>
+            </div>
+            <!-- Bottom row: Observatory -->
+            <div style="width: 100%; background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);">
               <h4>Observatory Checks</h4>
               <div id="builder-obs-items" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;"></div>
-              <button id="builder-add-obs-btn" class="btn-small btn-secondary" style="width: 100%;">+ Add Check</button>
-            </div>
-            <div style="flex: 1; background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);">
-              <h4>Decision Checks</h4>
-              <div id="builder-dec-items" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;"></div>
-              <button id="builder-add-dec-btn" class="btn-small btn-secondary" style="width: 100%;">+ Add Check</button>
+              <button id="builder-add-obs-btn" class="btn-small btn-secondary" style="width: 100%;">+ Add Observatory Check</button>
             </div>
           </div>
         </div>
@@ -373,12 +382,16 @@
                   
                   <div style="display:flex; flex-direction:column; gap:12px;">
                     <div>
-                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
-                      <div id="candle-selected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Positive Decisions</h5>
+                      <div id="candle-selected-dec-pos-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
                     </div>
                     <div>
-                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Decision</h5>
-                      <div id="candle-selected-dec-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Negative Decisions</h5>
+                      <div id="candle-selected-dec-neg-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    </div>
+                    <div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
+                      <div id="candle-selected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
                     </div>
                   </div>
                 </div>
@@ -392,12 +405,16 @@
                   
                   <div style="display:flex; flex-direction:column; gap:12px;">
                     <div>
-                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
-                      <div id="candle-unselected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Positive Decisions</h5>
+                      <div id="candle-unselected-dec-pos-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
                     </div>
                     <div>
-                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Decision</h5>
-                      <div id="candle-unselected-dec-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Negative Decisions</h5>
+                      <div id="candle-unselected-dec-neg-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    </div>
+                    <div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
+                      <div id="candle-unselected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
                     </div>
                   </div>
                 </div>

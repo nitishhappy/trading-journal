@@ -28,9 +28,11 @@ const saveTemplateBtn = document.getElementById("candle-template-save-btn");
 const cancelTemplateBtn = document.getElementById("candle-template-cancel-btn");
 
 const builderObsItems = document.getElementById("builder-obs-items");
-const builderDecItems = document.getElementById("builder-dec-items");
+const builderDecPosItems = document.getElementById("builder-dec-pos-items");
+const builderDecNegItems = document.getElementById("builder-dec-neg-items");
 const builderAddObsBtn = document.getElementById("builder-add-obs-btn");
-const builderAddDecBtn = document.getElementById("builder-add-dec-btn");
+const builderAddDecPosBtn = document.getElementById("builder-add-dec-pos-btn");
+const builderAddDecNegBtn = document.getElementById("builder-add-dec-neg-btn");
 
 const mainChecklistArea = document.getElementById("candle-checklist-main");
 const emptyChecklistArea = document.getElementById("candle-checklist-empty");
@@ -39,9 +41,11 @@ const runTimeInput = document.getElementById("candle-run-time");
 const timeWindowHint = document.getElementById("candle-time-window-hint");
 
 const selectedObsList = document.getElementById("candle-selected-obs-list");
-const selectedDecList = document.getElementById("candle-selected-dec-list");
+const selectedDecPosList = document.getElementById("candle-selected-dec-pos-list");
+const selectedDecNegList = document.getElementById("candle-selected-dec-neg-list");
 const unselectedObsList = document.getElementById("candle-unselected-obs-list");
-const unselectedDecList = document.getElementById("candle-unselected-dec-list");
+const unselectedDecPosList = document.getElementById("candle-unselected-dec-pos-list");
+const unselectedDecNegList = document.getElementById("candle-unselected-dec-neg-list");
 
 const selectedCount = document.getElementById("candle-selected-count");
 const unselectedCount = document.getElementById("candle-unselected-count");
@@ -262,8 +266,12 @@ function setupEventListeners() {
     addBuilderItemRow(builderObsItems, "");
   });
 
-  builderAddDecBtn.addEventListener("click", () => {
-    addBuilderItemRow(builderDecItems, "");
+  builderAddDecPosBtn.addEventListener("click", () => {
+    addBuilderItemRow(builderDecPosItems, "");
+  });
+
+  builderAddDecNegBtn.addEventListener("click", () => {
+    addBuilderItemRow(builderDecNegItems, "");
   });
 
   // Save template definition
@@ -277,17 +285,25 @@ function setupEventListeners() {
     const observatory = Array.from(builderObsItems.querySelectorAll("input"))
       .map(i => i.value.trim())
       .filter(Boolean);
-    const decision = Array.from(builderDecItems.querySelectorAll("input"))
+    const decisionPositive = Array.from(builderDecPosItems.querySelectorAll("input"))
+      .map(i => i.value.trim())
+      .filter(Boolean);
+    const decisionNegative = Array.from(builderDecNegItems.querySelectorAll("input"))
       .map(i => i.value.trim())
       .filter(Boolean);
 
-    if (observatory.length === 0 && decision.length === 0) {
+    if (observatory.length === 0 && decisionPositive.length === 0 && decisionNegative.length === 0) {
       showToast("Please add at least one check");
       return;
     }
 
     const templateId = templateEditorRow.dataset.id || null;
-    const templateData = { name, observatory, decision };
+    const templateData = { 
+      name, 
+      observatory, 
+      decisionPositive, 
+      decisionNegative 
+    };
 
     try {
       saveTemplateBtn.disabled = true;
@@ -341,18 +357,28 @@ function setupEventListeners() {
 
     // Prepare lists of selected / unselected
     const selectedObs = [];
-    const selectedDec = [];
     const unselectedObs = [];
-    const unselectedDec = [];
+    const selectedDecPos = [];
+    const unselectedDecPos = [];
+    const selectedDecNeg = [];
+    const unselectedDecNeg = [];
+
+    const decPos = template.decisionPositive || template.decision || [];
+    const decNeg = template.decisionNegative || [];
 
     (template.observatory || []).forEach((item, idx) => {
       if (activeSelections.has(`obs:${idx}`)) selectedObs.push(item);
       else unselectedObs.push(item);
     });
 
-    (template.decision || []).forEach((item, idx) => {
-      if (activeSelections.has(`dec:${idx}`)) selectedDec.push(item);
-      else unselectedDec.push(item);
+    decPos.forEach((item, idx) => {
+      if (activeSelections.has(`decPos:${idx}`)) selectedDecPos.push(item);
+      else unselectedDecPos.push(item);
+    });
+
+    decNeg.forEach((item, idx) => {
+      if (activeSelections.has(`decNeg:${idx}`)) selectedDecNeg.push(item);
+      else unselectedDecNeg.push(item);
     });
 
     const runData = {
@@ -361,11 +387,13 @@ function setupEventListeners() {
       loggingTime: time,
       selected: {
         observatory: selectedObs,
-        decision: selectedDec
+        decisionPositive: selectedDecPos,
+        decisionNegative: selectedDecNeg
       },
       unselected: {
         observatory: unselectedObs,
-        decision: unselectedDec
+        decisionPositive: unselectedDecPos,
+        decisionNegative: unselectedDecNeg
       },
       consider: considerFlagInput ? considerFlagInput.checked : false,
       note: runNoteInput ? runNoteInput.value.trim() : "",
@@ -502,7 +530,8 @@ function autoLoadDefaultTemplate() {
 function openTemplateEditor(templateId) {
   templateEditorRow.classList.remove("hidden");
   builderObsItems.innerHTML = "";
-  builderDecItems.innerHTML = "";
+  builderDecPosItems.innerHTML = "";
+  builderDecNegItems.innerHTML = "";
 
   if (templateId) {
     const t = state.candleChecklistTemplates.find(x => x.id === templateId);
@@ -510,12 +539,19 @@ function openTemplateEditor(templateId) {
     templateEditorRow.dataset.id = templateId;
     templateNameInput.value = t.name || "";
     (t.observatory || []).forEach(item => addBuilderItemRow(builderObsItems, item));
-    (t.decision || []).forEach(item => addBuilderItemRow(builderDecItems, item));
+    
+    // Legacy support: if t.decision exists but decisionPositive doesn't, load decision into decisionPositive
+    const decPos = t.decisionPositive || t.decision || [];
+    const decNeg = t.decisionNegative || [];
+    
+    decPos.forEach(item => addBuilderItemRow(builderDecPosItems, item));
+    decNeg.forEach(item => addBuilderItemRow(builderDecNegItems, item));
   } else {
     delete templateEditorRow.dataset.id;
     templateNameInput.value = "";
     addBuilderItemRow(builderObsItems, "");
-    addBuilderItemRow(builderDecItems, "");
+    addBuilderItemRow(builderDecPosItems, "");
+    addBuilderItemRow(builderDecNegItems, "");
   }
   
   templateNameInput.focus();
@@ -543,12 +579,43 @@ function renderChecklist() {
   if (!template) return;
 
   selectedObsList.innerHTML = "";
-  selectedDecList.innerHTML = "";
+  selectedDecPosList.innerHTML = "";
+  selectedDecNegList.innerHTML = "";
   unselectedObsList.innerHTML = "";
-  unselectedDecList.innerHTML = "";
+  unselectedDecPosList.innerHTML = "";
+  unselectedDecNegList.innerHTML = "";
 
   let selectedCountVal = 0;
   let unselectedCountVal = 0;
+
+  const decPos = template.decisionPositive || template.decision || [];
+  const decNeg = template.decisionNegative || [];
+
+  // Render Positive Decisions
+  decPos.forEach((item, index) => {
+    const isSelected = activeSelections.has(`decPos:${index}`);
+    const el = createCheckItemElement(item, `decPos:${index}`, isSelected);
+    if (isSelected) {
+      selectedDecPosList.appendChild(el);
+      selectedCountVal++;
+    } else {
+      unselectedDecPosList.appendChild(el);
+      unselectedCountVal++;
+    }
+  });
+
+  // Render Negative Decisions
+  decNeg.forEach((item, index) => {
+    const isSelected = activeSelections.has(`decNeg:${index}`);
+    const el = createCheckItemElement(item, `decNeg:${index}`, isSelected);
+    if (isSelected) {
+      selectedDecNegList.appendChild(el);
+      selectedCountVal++;
+    } else {
+      unselectedDecNegList.appendChild(el);
+      unselectedCountVal++;
+    }
+  });
 
   // Render Observatory
   (template.observatory || []).forEach((item, index) => {
@@ -559,19 +626,6 @@ function renderChecklist() {
       selectedCountVal++;
     } else {
       unselectedObsList.appendChild(el);
-      unselectedCountVal++;
-    }
-  });
-
-  // Render Decision
-  (template.decision || []).forEach((item, index) => {
-    const isSelected = activeSelections.has(`dec:${index}`);
-    const el = createCheckItemElement(item, `dec:${index}`, isSelected);
-    if (isSelected) {
-      selectedDecList.appendChild(el);
-      selectedCountVal++;
-    } else {
-      unselectedDecList.appendChild(el);
       unselectedCountVal++;
     }
   });
@@ -663,9 +717,16 @@ function renderLastRuns() {
     card.style.flexDirection = "column";
     card.style.gap = "8px";
 
-    const totalSelected = (run.selected?.observatory || []).length + (run.selected?.decision || []).length;
-    const totalUnselected = (run.unselected?.observatory || []).length + (run.unselected?.decision || []).length;
-    const total = totalSelected + totalUnselected;
+    const selectedDecPos = run.selected?.decisionPositive || run.selected?.decision || [];
+    const selectedDecNeg = run.selected?.decisionNegative || [];
+    const selectedObs = run.selected?.observatory || [];
+
+    const unselectedDecPos = run.unselected?.decisionPositive || run.unselected?.decision || [];
+    const unselectedDecNeg = run.unselected?.decisionNegative || [];
+    const unselectedObs = run.unselected?.observatory || [];
+
+    const totalSelected = selectedObs.length + selectedDecPos.length + selectedDecNeg.length;
+    const total = totalSelected + unselectedObs.length + unselectedDecPos.length + unselectedDecNeg.length;
 
     let imageTag = "";
     if (run.chartImage) {
@@ -684,6 +745,16 @@ function renderLastRuns() {
       }
     }
 
+    // Helper to format category list item
+    const renderRow = (label, items) => {
+      if (items.length === 0) return "";
+      return `
+        <div style="font-size:11px; color:var(--text-dim); max-height: 48px; overflow-y: auto;">
+          <strong>${label}:</strong> ${items.join(", ")}
+        </div>
+      `;
+    };
+
     card.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span style="font-weight:600; font-size:14px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
@@ -693,12 +764,9 @@ function renderLastRuns() {
         Passed: <span style="color:var(--low); font-weight:600;">${totalSelected}</span> / ${total}
       </div>
       <div style="display:flex; flex-direction:column; gap:4px;">
-        <div style="font-size:11px; color:var(--text-dim); max-height: 48px; overflow-y: auto;">
-          <strong>Selected Observatory:</strong> ${(run.selected?.observatory || []).join(", ") || "None"}
-        </div>
-        <div style="font-size:11px; color:var(--text-dim); max-height: 48px; overflow-y: auto;">
-          <strong>Selected Decision:</strong> ${(run.selected?.decision || []).join(", ") || "None"}
-        </div>
+        ${renderRow("Positive Decisions", selectedDecPos)}
+        ${renderRow("Negative Decisions", selectedDecNeg)}
+        ${renderRow("Observatory", selectedObs)}
       </div>
       ${run.note ? `<div style="font-size:12px; color:var(--text); background:var(--bg); padding:6px 8px; border-radius:6px; border:1px solid var(--border); margin-top:4px;"><strong>Note:</strong> ${escHtml(run.note)}</div>` : ""}
       ${tradeText}
@@ -749,15 +817,25 @@ function loadRunForEditing(run) {
   activeSelections.clear();
   const template = state.candleChecklistTemplates.find(t => t.id === activeTemplateId);
   if (template) {
+    const decPos = template.decisionPositive || template.decision || [];
+    const decNeg = template.decisionNegative || [];
+
     (template.observatory || []).forEach((item, idx) => {
       if ((run.selected?.observatory || []).includes(item)) {
         activeSelections.add(`obs:${idx}`);
       }
     });
 
-    (template.decision || []).forEach((item, idx) => {
-      if ((run.selected?.decision || []).includes(item)) {
-        activeSelections.add(`dec:${idx}`);
+    decPos.forEach((item, idx) => {
+      const selectedList = run.selected?.decisionPositive || run.selected?.decision || [];
+      if (selectedList.includes(item)) {
+        activeSelections.add(`decPos:${idx}`);
+      }
+    });
+
+    decNeg.forEach((item, idx) => {
+      if ((run.selected?.decisionNegative || []).includes(item)) {
+        activeSelections.add(`decNeg:${idx}`);
       }
     });
   }
@@ -798,9 +876,15 @@ export function renderLinkedCandleRuns(tradeId) {
     const template = (state.candleChecklistTemplates || []).find(t => t.id === run.templateId);
     const templateName = run.templateName || template?.name || 'Candle Checklist';
     const selObs = (run.selected?.observatory || []).length;
-    const selDec = (run.selected?.decision   || []).length;
+    const selDecPos = (run.selected?.decisionPositive || run.selected?.decision || []).length;
+    const selDecNeg = (run.selected?.decisionNegative || []).length;
+    const selDec = selDecPos + selDecNeg;
+    
     const totObs = selObs + (run.unselected?.observatory || []).length;
-    const totDec = selDec + (run.unselected?.decision   || []).length;
+    const totDecPos = selDecPos + (run.unselected?.decisionPositive || run.unselected?.decision || []).length;
+    const totDecNeg = selDecNeg + (run.unselected?.decisionNegative || []).length;
+    const totDec = totDecPos + totDecNeg;
+    
     const total  = totObs + totDec;
     const passed = selObs + selDec;
     const pct    = total > 0 ? Math.round((passed / total) * 100) : 0;
