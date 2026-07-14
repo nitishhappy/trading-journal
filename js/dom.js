@@ -43,6 +43,7 @@ export const viewRevision = document.getElementById("view-revision");
 export const viewAiCoach = document.getElementById("view-aicoach");
 export const viewTradelog = document.getElementById("view-tradelog");
 export const viewCandleChecklist = document.getElementById("view-candleChecklist");
+export const viewTvNotifications = document.getElementById("view-tvNotifications");
 export const viewSettings = document.getElementById("view-settings");
 export const settingsGearBtn = document.getElementById("settings-gear-btn");
 export const settingsCloseBtn = document.getElementById("settings-close-btn");

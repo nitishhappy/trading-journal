@@ -1,6 +1,6 @@
 import { state } from '../state.js';
 import {
-  mainTabs, viewDashboard, viewRevision, viewAiCoach, viewTradelog, viewCandleChecklist, currentFolderLabel,
+  mainTabs, viewDashboard, viewRevision, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, currentFolderLabel,
   fullscreenBtn, lightbox, lightboxImg, lightboxClose
 } from '../dom.js';
 
@@ -13,7 +13,7 @@ mainTabs.addEventListener("click", (e) => {
   document.querySelectorAll(".main-tab").forEach((t) => t.classList.remove("active"));
   tab.classList.add("active");
 
-  [viewDashboard, viewRevision, viewAiCoach, viewTradelog, viewCandleChecklist].forEach((v) => {
+  [viewDashboard, viewRevision, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications].forEach((v) => {
     if (v) v.classList.add("hidden");
   });
 
@@ -33,6 +33,9 @@ mainTabs.addEventListener("click", (e) => {
   } else if (state.activeView === "candleChecklist") {
     if (viewCandleChecklist) viewCandleChecklist.classList.remove("hidden");
     currentFolderLabel.textContent = "Candle Checklist";
+  } else if (state.activeView === "tvNotifications") {
+    if (viewTvNotifications) viewTvNotifications.classList.remove("hidden");
+    currentFolderLabel.textContent = "TV Notifications";
   }
 
   // Dispatch custom event when view changes
