@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
     raw,
     symbol: symbol || null,
     action: action || null,
-    price: price !== null ? price : null,
+    price: price !== undefined && price !== null ? price : null,
     strategy: strategy || null,
     interval: interval || null,
     read: false,
