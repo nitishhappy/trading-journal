@@ -1,8 +1,14 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // User data — only accessible by the owning user
     match /users/{userId}/{document=**} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
+    // Webhook token reverse-lookup — only the Cloud Function (admin SDK) touches this
+    match /webhookTokens/{token} {
+      allow read, write: if false;
+    }
   }
 }
+

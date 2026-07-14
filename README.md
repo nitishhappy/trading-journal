@@ -359,3 +359,35 @@ node generate-version.js
 firebase deploy --only hosting
 ```
 
+### v1.7 — TradingView Webhooks
+
+A new **TV Notifications** tab to receive real-time alerts from TradingView webhooks.
+
+#### What it does
+- **Webhook Integration** — Generates a unique secure URL to paste into TradingView alerts.
+- **Real-time Feed** — Alerts arrive instantly in the TV Notifications tab and as in-app toast popups when the app is open.
+- **Auto Cleanup** — Alerts older than 2 days are automatically deleted by the Cloud Function to save space.
+- **Filtering** — Filter alerts by Buy, Sell, Exit, or All.
+
+#### New data model
+```
+users/{uid}/tvNotifications/{id}
+  - raw: string
+  - symbol: string
+  - action: string
+  - price: number
+  - strategy: string
+  - interval: string
+  - read: boolean
+  - receivedAt: timestamp
+
+webhookTokens/{token}
+  - uid: string
+  - createdAt: timestamp
+```
+
+#### Setup required for this update
+Because this update adds new Cloud Functions, you must deploy the updated functions and Firestore rules:
+```bash
+firebase deploy --only firestore:rules,functions,hosting
+```

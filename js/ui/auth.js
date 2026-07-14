@@ -9,6 +9,7 @@ import { subscribeTrades, unsubscribeTrades } from '../services/trades.js';
 import { subscribeAiSummaries, unsubscribeAiSummaries } from '../services/ai.js';
 import { subscribeChecklistLogs, unsubscribeChecklists } from '../services/checklists.js';
 import { subscribeCandleChecklists, unsubscribeCandleChecklists } from '../services/candleChecklist.js';
+import { subscribeTvNotifications, unsubscribeTvNotifications } from '../services/tvNotifications.js';
 import { loadSettings, checkBackupReminder, loadTradePasscodeStatus } from './settings.js';
 import { loadThemePreference } from '../utils/theme.js';
 
@@ -71,6 +72,7 @@ auth.onAuthStateChanged((user) => {
     migrateInstaLearningToObservations();
     subscribeChecklistLogs();
     subscribeCandleChecklists();
+    subscribeTvNotifications();
     checkBackupReminder();
     setTimeout(() => loadTradePasscodeStatus(), 50);
     
@@ -96,6 +98,7 @@ auth.onAuthStateChanged((user) => {
     unsubscribeAiSummaries();
     unsubscribeChecklists();
     unsubscribeCandleChecklists();
+    unsubscribeTvNotifications();
     
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { loggedIn: false } }));
   }

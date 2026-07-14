@@ -17,6 +17,13 @@
   <link rel="icon" href="./icons/icon-192.png" />
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
 
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/checklist.css">
+  <link rel="stylesheet" href="css/aicoach.css">
+  <link rel="stylesheet" href="css/tv-notifications.css">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -77,6 +84,7 @@
       <button class="main-tab" data-view="candleChecklist">Candle Checklist</button>
       <button class="main-tab" data-view="aicoach">AI Coach</button>
       <button class="main-tab" data-view="tradelog">Trade Log</button>
+      <button class="main-tab" data-view="tvNotifications">TV Notifications</button>
     </nav>
 
     <!-- Daily backup reminder (shown once per day on first open) -->
@@ -267,6 +275,32 @@
       </div>
 
       <button id="fab-add-trade" class="fab" aria-label="Add trade log">+</button>
+    </div>
+
+    <!-- ===== TRADINGVIEW NOTIFICATIONS VIEW ===== -->
+    <div id="view-tvNotifications" class="view hidden">
+      <div class="tv-layout">
+        <!-- Top bar/controls -->
+        <div class="tv-controls">
+          <div class="tv-filters">
+            <button class="btn-small tv-filter-btn active" data-filter="ALL">All Alerts</button>
+            <button class="btn-small tv-filter-btn" data-filter="BUY">Buy</button>
+            <button class="btn-small tv-filter-btn" data-filter="SELL">Sell</button>
+            <button class="btn-small tv-filter-btn" data-filter="CLOSE">Exit</button>
+          </div>
+          <button id="tv-clear-all-btn" class="btn-small btn-secondary">Clear All</button>
+        </div>
+
+        <!-- Feed Container -->
+        <div id="tv-notif-feed" class="tv-feed"></div>
+
+        <!-- Empty State -->
+        <div id="tv-notif-empty" class="empty-state hidden">
+          <div class="empty-icon">📡</div>
+          <p>No TradingView alerts yet.</p>
+          <span class="settings-hint">Set up your webhook URL in Settings to receive alerts here.</span>
+        </div>
+      </div>
     </div>
 
     <!-- ===== CANDLE CHECKLIST VIEW ===== -->
@@ -553,6 +587,29 @@
         <div id="trade-passcode-status" class="settings-hint"></div>
         <button id="trade-passcode-save-btn" class="btn-primary" style="margin-top:10px;">Save passcode</button>
         <button id="trade-passcode-remove-btn" class="btn-secondary" style="margin-top:6px;">Remove passcode</button>
+      </div>
+
+      <div class="settings-section">
+        <h3>📡 TradingView Webhook</h3>
+        <p class="settings-hint">Receive TradingView alerts directly in your journal.</p>
+        
+        <!-- State 1: No token -->
+        <div id="tv-token-setup" class="hidden">
+          <button id="tv-generate-token-btn" class="btn-primary">Set Up Webhook</button>
+        </div>
+        
+        <!-- State 2: Token active -->
+        <div id="tv-token-active" class="hidden">
+          <label>Webhook URL (paste into TradingView alert)</label>
+          <div class="tv-url-box" id="tv-webhook-url-box" style="display:flex;align-items:center;background:var(--surface-3);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:8px 0;font-family:monospace;font-size:13px;word-break:break-all;">
+            <span id="tv-webhook-url-text" style="flex:1;"></span>
+            <button id="tv-token-reveal-btn" class="btn-small btn-secondary" style="margin-left:8px;">Reveal</button>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <button id="tv-copy-url-btn" class="btn-primary">Copy URL</button>
+            <button id="tv-regenerate-token-btn" class="btn-secondary">Regenerate Token</button>
+          </div>
+        </div>
       </div>
 
       <div class="settings-section settings-section-signout">

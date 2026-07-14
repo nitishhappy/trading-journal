@@ -34,3 +34,4 @@ import './js/ui/aicoach.js';      // AI Coach feed + Groq key management
 import './js/ui/tradelog.js';     // trade log table + modal
 import './js/ui/checklists.js';   // pre-trade checklist modal + log editor
 import './js/ui/candleChecklist.js'; // candle checklist tab UI module
+import './js/ui/tvNotifications.js'; // TradingView notifications UI module
