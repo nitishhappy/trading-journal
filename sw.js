@@ -1,4 +1,10 @@
-const CACHE_NAME = "trade-journal-v11";
+const CACHE_NAME = "trade-journal-c08f5e3429";
+// Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
+// Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
+// worker update (see activate handler) — an image cached last month should
+// still be viewable offline after you've deployed ten unrelated code changes.
+const IMAGE_CACHE_NAME = "trade-journal-images-v1";
+const MAX_IMAGE_CACHE_ENTRIES = 300;
 const ASSETS = [
   "./",
   "./index.html",
@@ -70,7 +76,11 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+      Promise.all(
+        keys
+          .filter((k) => k !== CACHE_NAME && k !== IMAGE_CACHE_NAME)
+          .map((k) => caches.delete(k))
+      )
     )
   );
   self.clients.claim();
@@ -78,6 +88,21 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const url = event.request.url;
+
+  // Any image or video load from a different origin (Drive file content,
+  // Drive thumbnails, TradingView snapshots, etc.) — cache it so it's
+  // viewable offline later. Checking request.destination instead of
+  // matching specific domains means this works for whatever CDN a given
+  // link happens to resolve to, without needing to keep a domain list
+  // in sync as new link types get added.
+  const isCrossOriginMedia =
+    (event.request.destination === "image" || event.request.destination === "video") &&
+    new URL(url, self.location.href).origin !== self.location.origin;
+
+  if (isCrossOriginMedia) {
+    event.respondWith(handleImageRequest(event.request));
+    return;
+  }
 
   // Never intercept Firebase, Google APIs, Groq, or Instagram — always go to network
   if (
@@ -126,3 +151,54 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
+// Stale-while-revalidate for cross-origin images/videos: serve the cached
+// copy instantly if we have one (so it works offline and loads fast even
+// online), while a background fetch quietly refreshes the cache for next
+// time. If there's no cached copy yet, wait for the network — that's the
+// normal "first time viewing this image" case.
+async function handleImageRequest(request) {
+  const cache = await caches.open(IMAGE_CACHE_NAME);
+  const cached = await cache.match(request);
+
+  const networkFetch = fetch(request)
+    .then((response) => {
+      // Cross-origin no-cors requests come back "opaque" (status 0, body
+      // unreadable) — that's expected and still perfectly cacheable/
+      // servable for an <img>/<video> tag, just not inspectable by us.
+      if (response && (response.status === 200 || response.type === "opaque")) {
+        cache.put(request, response.clone());
+        trimImageCache(cache);
+      }
+      return response;
+    })
+    .catch(() => null);
+
+  if (cached) {
+    // Don't await it — let it refresh in the background.
+    event_safeIgnore(networkFetch);
+    return cached;
+  }
+
+  const fresh = await networkFetch;
+  return fresh || new Response("", { status: 504, statusText: "Offline and not yet cached" });
+}
+
+// Prevents an unhandled-rejection warning for the fire-and-forget background
+// refresh above without changing its behavior.
+function event_safeIgnore(promise) {
+  if (promise && typeof promise.catch === "function") promise.catch(() => {});
+}
+
+// Keep the image cache from growing forever over months of use. The Cache
+// API preserves insertion order in practice, so deleting from the front
+// approximates least-recently-added eviction — good enough for a personal
+// app's storage housekeeping.
+async function trimImageCache(cache) {
+  const keys = await cache.keys();
+  if (keys.length <= MAX_IMAGE_CACHE_ENTRIES) return;
+  const excess = keys.length - MAX_IMAGE_CACHE_ENTRIES;
+  for (let i = 0; i < excess; i++) {
+    await cache.delete(keys[i]);
+  }
+}

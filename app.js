@@ -22,6 +22,8 @@ import './js/services/trades.js';
 import './js/services/checklists.js';
 import './js/services/ai.js';
 
+import './js/utils/error-tracking.js';
+
 // 5. UI modules — each registers its own DOM event listeners on load
 import './js/ui/common.js';       // main tab nav, lightbox, fullscreen
 import './js/ui/auth.js';         // Firebase auth state listener + login/signup

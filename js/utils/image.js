@@ -342,7 +342,16 @@ export function buildLinkPreviewIfApplicable(url, container, onFail) {
   if (isTradingViewUrl(url)) {
     const candidates = extractTradingViewSnapshotUrls(url);
     if (candidates.length === 0) return false;
-    buildLiveImagePreview(candidates, container, null, onFail);
+    buildLiveImagePreview(candidates, container, (finalSrc) => {
+      const imgEl = container.querySelector(".drive-link-preview");
+      if (imgEl) {
+        imgEl.style.cursor = "zoom-in";
+        imgEl.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openLightbox([finalSrc], 0);
+        });
+      }
+    }, onFail);
     return true;
   }
 

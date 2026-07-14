@@ -1183,7 +1183,7 @@ function attachFeedTileListeners() {
 
   document.querySelectorAll(".tile .tile-body").forEach((body) => {
     body.addEventListener("click", (e) => {
-      if (e.target.closest("a") || e.target.closest("button") || e.target.closest(".il-img") || e.target.closest("iframe")) return;
+      if (e.target.closest("a") || e.target.closest("button") || e.target.closest(".il-img") || e.target.closest("iframe") || e.target.closest(".link-preview-mount")) return;
       const tile = body.closest(".tile");
       state.expandedTileId = state.expandedTileId === tile.dataset.id ? null : tile.dataset.id;
       renderFeed();
