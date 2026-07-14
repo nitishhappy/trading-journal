@@ -21,6 +21,7 @@ let istTimer = null;
 const templateSelect = document.getElementById("candle-template-select");
 const createTemplateBtn = document.getElementById("candle-template-new-btn");
 const editTemplateBtn = document.getElementById("candle-template-edit-btn");
+const deleteTemplateBtn = document.getElementById("candle-template-delete-btn");
 const templateEditorRow = document.getElementById("candle-template-editor-row");
 const templateNameInput = document.getElementById("candle-template-name-input");
 const saveTemplateBtn = document.getElementById("candle-template-save-btn");
@@ -206,12 +207,14 @@ function setupEventListeners() {
     
     if (activeTemplateId) {
       editTemplateBtn.classList.remove("hidden");
+      deleteTemplateBtn.classList.remove("hidden");
       mainChecklistArea.classList.remove("hidden");
       emptyChecklistArea.classList.add("hidden");
       renderChecklist();
       renderLastRuns();
     } else {
       editTemplateBtn.classList.add("hidden");
+      deleteTemplateBtn.classList.add("hidden");
       mainChecklistArea.classList.add("hidden");
       emptyChecklistArea.classList.remove("hidden");
     }
@@ -226,6 +229,26 @@ function setupEventListeners() {
   editTemplateBtn.addEventListener("click", () => {
     if (activeTemplateId) {
       openTemplateEditor(activeTemplateId);
+    }
+  });
+
+  // Delete Template Button click
+  deleteTemplateBtn.addEventListener("click", async () => {
+    if (!activeTemplateId) return;
+    const template = state.candleChecklistTemplates.find(t => t.id === activeTemplateId);
+    if (!template) return;
+    
+    if (confirm(`Are you sure you want to delete the template "${template.name}"? This cannot be undone.`)) {
+      try {
+        await deleteCandleTemplate(activeTemplateId);
+        showToast("Template deleted successfully");
+        activeTemplateId = null;
+        templateSelect.value = "";
+        templateSelect.dispatchEvent(new Event("change"));
+      } catch (err) {
+        console.error(err);
+        showToast("Failed to delete template: " + err.message);
+      }
     }
   });
 
