@@ -1,4 +1,4 @@
-﻿import { state } from '../state.js';
+import { state } from '../state.js';
 import { db } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 import { resizeImageToBase64, attachImagePaste } from '../utils/image.js';
@@ -116,7 +116,7 @@ async function deleteChecklistLocal(id) {
 // ===================== Checklist Run Modal =====================
 if (checklistFab) checklistFab.addEventListener("click", () => openChecklistModal());
 
-function openChecklistModal() {
+export function openChecklistModal() {
   renderChecklistPicker();
   const firstId = Object.keys(checklists)[0] || CHECKLIST_DEFAULT_ID;
   activeChecklistId = checklistPicker ? (checklistPicker.value || firstId) : firstId;

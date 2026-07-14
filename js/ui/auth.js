@@ -8,6 +8,7 @@ import { loadFolders, subscribeObservations, migrateInstaLearningToObservations,
 import { subscribeTrades, unsubscribeTrades } from '../services/trades.js';
 import { subscribeAiSummaries, unsubscribeAiSummaries } from '../services/ai.js';
 import { subscribeChecklistLogs, unsubscribeChecklists } from '../services/checklists.js';
+import { subscribeCandleChecklists, unsubscribeCandleChecklists } from '../services/candleChecklist.js';
 import { loadSettings, checkBackupReminder, loadTradePasscodeStatus } from './settings.js';
 import { loadThemePreference } from '../utils/theme.js';
 
@@ -69,6 +70,7 @@ auth.onAuthStateChanged((user) => {
     subscribeAiSummaries();
     migrateInstaLearningToObservations();
     subscribeChecklistLogs();
+    subscribeCandleChecklists();
     checkBackupReminder();
     setTimeout(() => loadTradePasscodeStatus(), 50);
     
@@ -81,6 +83,8 @@ auth.onAuthStateChanged((user) => {
     state.observations = [];
     state.trades = [];
     state.checklistLogs = [];
+    state.candleChecklistTemplates = [];
+    state.candleChecklistRuns = [];
     state.cachedGeminiKey = null;
     state.cachedGoogleApiKey = null;
     state.tradePasscode = null;
@@ -91,6 +95,7 @@ auth.onAuthStateChanged((user) => {
     unsubscribeTrades();
     unsubscribeAiSummaries();
     unsubscribeChecklists();
+    unsubscribeCandleChecklists();
     
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { loggedIn: false } }));
   }

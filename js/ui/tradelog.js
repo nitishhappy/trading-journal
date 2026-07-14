@@ -12,6 +12,7 @@ import {
 import { exportToCSV, exportToPDF, normalizeForJsonExport, downloadBlob, updateExportHintAndPreview } from '../utils/export.js';
 import { escapeHtml } from '../utils/image.js';
 import { renderLinkedChecklists } from './checklists.js';
+import { renderLinkedCandleRuns } from './candleChecklist.js';
 
 // ===================== Event Listeners =====================
 
@@ -412,6 +413,7 @@ export function openTradeModal(id = null) {
       
       // Populate and link checklists
       renderLinkedChecklists(t.checklistLogId);
+      renderLinkedCandleRuns(t.id);
     }
   } else {
     tradeModalTitle.textContent = "Add Trade Entry";
@@ -427,6 +429,7 @@ export function openTradeModal(id = null) {
     tradeComments.value = "";
 
     renderLinkedChecklists(null);
+    renderLinkedCandleRuns(null);
   }
 
   tradeModal.classList.remove("hidden");

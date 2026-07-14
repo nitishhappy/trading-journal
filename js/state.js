@@ -32,6 +32,8 @@ export const state = {
   tradePasscodeDocRef: null,
   aiSummaries: [],
   coachPeriod: "weekly",
+  candleChecklistTemplates: [],
+  candleChecklistRuns: [],
 };
 
 // Bind to window for backward compatibility with trade-security.js and legacy code

@@ -1,4 +1,4 @@
-﻿// ===================== app.js — Entry Point (ES Module) =====================
+// ===================== app.js — Entry Point (ES Module) =====================
 // This file is the single entry point loaded by index.html as type="module".
 // It imports all sub-modules which register their own event listeners and
 // side-effects when imported. Order matters where there are dependencies.
@@ -33,3 +33,4 @@ import './js/ui/revision.js';     // revision mode card swipe UI
 import './js/ui/aicoach.js';      // AI Coach feed + Groq key management
 import './js/ui/tradelog.js';     // trade log table + modal
 import './js/ui/checklists.js';   // pre-trade checklist modal + log editor
+import './js/ui/candleChecklist.js'; // candle checklist tab UI module

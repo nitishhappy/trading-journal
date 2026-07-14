@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-c08f5e3429";
+const CACHE_NAME = "trade-journal-7f3671590d";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -27,6 +27,7 @@ const ASSETS = [
   "./js/services/trades.js",
   "./js/services/checklists.js",
   "./js/services/ai.js",
+  "./js/services/candleChecklist.js",
   "./js/ui/common.js",
   "./js/ui/auth.js",
   "./js/ui/settings.js",
@@ -35,6 +36,7 @@ const ASSETS = [
   "./js/ui/aicoach.js",
   "./js/ui/tradelog.js",
   "./js/ui/checklists.js",
+  "./js/ui/candleChecklist.js",
   // Firebase SDK scripts — precached so the app can boot fully offline
   // even on a visit where the network never responds in time.
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js",
@@ -52,9 +54,10 @@ const NETWORK_FIRST_FILES = [
   "js/utils/image.js", "js/utils/export.js",
   "js/services/observations.js", "js/services/trades.js",
   "js/services/checklists.js", "js/services/ai.js",
+  "js/services/candleChecklist.js",
   "js/ui/common.js", "js/ui/auth.js", "js/ui/settings.js",
   "js/ui/dashboard.js", "js/ui/revision.js", "js/ui/aicoach.js",
-  "js/ui/tradelog.js", "js/ui/checklists.js",
+  "js/ui/tradelog.js", "js/ui/checklists.js", "js/ui/candleChecklist.js",
 ];
 
 self.addEventListener("install", (event) => {

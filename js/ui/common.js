@@ -1,6 +1,6 @@
 import { state } from '../state.js';
 import {
-  mainTabs, viewDashboard, viewRevision, viewAiCoach, viewTradelog, currentFolderLabel,
+  mainTabs, viewDashboard, viewRevision, viewAiCoach, viewTradelog, viewCandleChecklist, currentFolderLabel,
   fullscreenBtn, lightbox, lightboxImg, lightboxClose
 } from '../dom.js';
 
@@ -13,7 +13,9 @@ mainTabs.addEventListener("click", (e) => {
   document.querySelectorAll(".main-tab").forEach((t) => t.classList.remove("active"));
   tab.classList.add("active");
 
-  [viewDashboard, viewRevision, viewAiCoach, viewTradelog].forEach((v) => v.classList.add("hidden"));
+  [viewDashboard, viewRevision, viewAiCoach, viewTradelog, viewCandleChecklist].forEach((v) => {
+    if (v) v.classList.add("hidden");
+  });
 
   // Update current title label
   if (state.activeView === "dashboard") {
@@ -28,10 +30,21 @@ mainTabs.addEventListener("click", (e) => {
   } else if (state.activeView === "tradelog") {
     viewTradelog.classList.remove("hidden");
     currentFolderLabel.textContent = "Trade Log";
+  } else if (state.activeView === "candleChecklist") {
+    if (viewCandleChecklist) viewCandleChecklist.classList.remove("hidden");
+    currentFolderLabel.textContent = "Candle Checklist";
   }
 
   // Dispatch custom event when view changes
   window.dispatchEvent(new CustomEvent('view-changed', { detail: { view: state.activeView } }));
+
+  // Toggle FAB visibility: dashboard FAB only on dashboard, candle FAB only on candleChecklist
+  const dashboardFab = document.getElementById('checklistFab');
+  const candleFab = document.getElementById('candle-checklist-fab');
+  const isCandle = state.activeView === 'candleChecklist';
+  if (dashboardFab) dashboardFab.classList.toggle('hidden', isCandle);
+  if (candleFab)    candleFab.classList.toggle('hidden', !isCandle);
+
 });
 
 // Fullscreen toggle

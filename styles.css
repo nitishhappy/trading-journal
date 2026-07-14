@@ -3241,3 +3241,140 @@ textarea { resize: vertical; }
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+
+/* ===================== Candle Checklist Styles ===================== */
+.candle-checklist-layout {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.candle-checklist-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .candle-checklist-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.parallel-checklists-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .parallel-checklists-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checklist-column {
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.selected-col {
+  background: rgba(54, 199, 90, 0.04);
+  border: 1px solid rgba(54, 199, 90, 0.4);
+}
+
+.unselected-col {
+  background: rgba(232, 60, 56, 0.04);
+  border: 1px solid rgba(232, 60, 56, 0.4);
+}
+
+[data-theme="light"] .selected-col {
+  background: rgba(30, 158, 66, 0.03);
+  border: 1px solid rgba(30, 158, 66, 0.3);
+}
+
+[data-theme="light"] .unselected-col {
+  background: rgba(204, 40, 34, 0.03);
+  border: 1px solid rgba(204, 40, 34, 0.3);
+}
+
+.candle-check-item {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: opacity 0.15s, transform 0.15s, background-color 0.15s, border-color 0.15s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.candle-check-item:hover {
+  transform: translateY(-1px);
+}
+
+.candle-check-item:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.template-builder-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .template-builder-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+.candle-checklist-run-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.candle-checklist-last-runs-panel {
+  background: var(--surface);
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 800px;
+  height: fit-content;
+}
+
+#candle-last-runs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Customize scrollbar for premium aesthetic */
+#candle-last-runs-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+#candle-last-runs-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#candle-last-runs-list::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 3px;
+}
+
+#candle-last-runs-list::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}

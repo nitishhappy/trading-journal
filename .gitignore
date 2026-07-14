@@ -67,3 +67,8 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Playwright outputs
+smoke-tests/test-results/
+smoke-tests/playwright-report/
+smoke-tests/.last-run.json

@@ -46,6 +46,7 @@ const FILES_TO_HASH = [
   "js/services/trades.js",
   "js/services/checklists.js",
   "js/services/ai.js",
+  "js/services/candleChecklist.js",
   "js/ui/common.js",
   "js/ui/auth.js",
   "js/ui/settings.js",
@@ -54,6 +55,7 @@ const FILES_TO_HASH = [
   "js/ui/aicoach.js",
   "js/ui/tradelog.js",
   "js/ui/checklists.js",
+  "js/ui/candleChecklist.js",
 ];
 
 function computeHash() {

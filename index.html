@@ -76,6 +76,7 @@
       <button class="main-tab" data-view="revision">Revision</button>
       <button class="main-tab" data-view="aicoach">AI Coach</button>
       <button class="main-tab" data-view="tradelog">Trade Log</button>
+      <button class="main-tab" data-view="candleChecklist">Candle Checklist</button>
     </nav>
 
     <!-- Daily backup reminder (shown once per day on first open) -->
@@ -266,6 +267,167 @@
       </div>
 
       <button id="fab-add-trade" class="fab" aria-label="Add trade log">+</button>
+    </div>
+
+    <!-- ===== CANDLE CHECKLIST VIEW ===== -->
+    <div id="view-candleChecklist" class="view hidden">
+      <!-- We will inject the layout here dynamically, but let's provide a skeleton structure matching standard layout -->
+      <div class="candle-checklist-layout">
+        <!-- Top bar/controls -->
+        <div class="cl-manage-row" style="margin-bottom: 16px;">
+          <select id="candle-template-select" style="flex:1;">
+            <option value="">— Select Candle Checklist Template —</option>
+          </select>
+          <button id="candle-template-new-btn" class="btn-small btn-small-primary">+ Create Template</button>
+          <button id="candle-template-edit-btn" class="btn-small btn-secondary hidden">Edit Template</button>
+        </div>
+
+        <!-- Template Name Editor (hidden by default) -->
+        <div id="candle-template-editor-row" class="cl-name-row hidden" style="margin-bottom: 16px; flex-direction: column; gap: 8px;">
+          <div style="display: flex; gap: 8px; width: 100%;">
+            <input type="text" id="candle-template-name-input" placeholder="Template name (e.g., Nifty 5m checks)" />
+            <button id="candle-template-save-btn" class="btn-small btn-small-primary">Save Template</button>
+            <button id="candle-template-cancel-btn" class="btn-small btn-secondary">Cancel</button>
+          </div>
+          <div class="template-builder-sections" style="display: flex; gap: 16px; width: 100%;">
+            <div style="flex: 1; background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);">
+              <h4>Observatory Checks</h4>
+              <div id="builder-obs-items" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;"></div>
+              <button id="builder-add-obs-btn" class="btn-small btn-secondary" style="width: 100%;">+ Add Check</button>
+            </div>
+            <div style="flex: 1; background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);">
+              <h4>Decision Checks</h4>
+              <div id="builder-dec-items" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;"></div>
+              <button id="builder-add-dec-btn" class="btn-small btn-secondary" style="width: 100%;">+ Add Check</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Checklist Area (three-panel grid: Running Checklist, Columns, and Previous Runs) -->
+        <div id="candle-checklist-main" class="candle-checklist-grid hidden">
+          
+          <!-- Running checklist (left/middle panel, grows to fill) -->
+          <div class="candle-checklist-run-panel">
+            <div style="background: var(--surface); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 style="margin:0;">Active Run</h3>
+                <div style="display:flex; align-items:center; gap: 8px;">
+                  <label for="candle-run-time" style="font-size:12px; color:var(--text-dim); text-transform:uppercase; font-family:var(--font-mono);">IST Logging Time:</label>
+                  <input type="text" id="candle-run-time" style="width:120px; padding: 6px 8px; font-size:14px; text-align:center; font-family:var(--font-mono);" />
+                </div>
+              </div>
+              <div style="font-size:12px; color:var(--text-dim); margin-bottom: 16px; font-family:var(--font-mono);" id="candle-time-window-hint">
+                Window: 11:29:30 AM to 11:33:30 AM for 11:30 AM
+              </div>
+
+              <!-- Two Parallel Sections: Selected (Green) vs Not Selected (Red) -->
+              <div class="parallel-checklists-columns" style="display:flex; gap:16px;">
+                <!-- Selected (Green) Column -->
+                <div class="checklist-column selected-col" style="flex: 1; min-width: 150px; background: rgba(54,199,90,0.06); border: 1px solid var(--low); border-radius: var(--radius); padding: 12px;">
+                  <h4 style="color:var(--low); margin-top:0; border-bottom: 1px solid var(--low); padding-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">
+                    <span>Selected</span>
+                    <span id="candle-selected-count" style="font-size:12px; font-family:var(--font-mono); background:var(--low-glow); padding:2px 6px; border-radius:4px;">0</span>
+                  </h4>
+                  
+                  <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
+                      <div id="candle-selected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    </div>
+                    <div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Decision</h5>
+                      <div id="candle-selected-dec-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Not Selected (Red) Column -->
+                <div class="checklist-column unselected-col" style="flex: 1; min-width: 150px; background: rgba(232,60,56,0.06); border: 1px solid var(--high); border-radius: var(--radius); padding: 12px;">
+                  <h4 style="color:var(--high); margin-top:0; border-bottom: 1px solid var(--high); padding-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">
+                    <span>Not Selected</span>
+                    <span id="candle-unselected-count" style="font-size:12px; font-family:var(--font-mono); background:var(--high-glow); padding:2px 6px; border-radius:4px;">0</span>
+                  </h4>
+                  
+                  <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
+                      <div id="candle-unselected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    </div>
+                    <div>
+                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Decision</h5>
+                      <div id="candle-unselected-dec-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Controls to save/extend the run -->
+              <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px; border-top:1px solid var(--border); padding-top:16px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <div style="flex:1;">
+                    <label for="candle-link-trade-select" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Link to Trade Log (Optional)</label>
+                    <select id="candle-link-trade-select">
+                      <option value="">— Not linked —</option>
+                    </select>
+                  </div>
+                  <div style="flex:1;">
+                    <label for="candle-run-outcome" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Outcome (Optional)</label>
+                    <select id="candle-run-outcome">
+                      <option value="">— No outcome —</option>
+                      <option value="W">W — Win</option>
+                      <option value="L">L — Loss</option>
+                      <option value="CTC">CTC — Cut to Cost</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div>
+                  <label style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Chart Screenshot (Optional)</label>
+                  <div class="image-input-row" style="margin-top:0;">
+                    <input type="file" id="candle-chart-image" accept="image/*" />
+                    <div id="candle-chart-preview" class="image-preview hidden" style="margin-top:8px; position:relative; width:fit-content;">
+                      <img id="candle-chart-preview-img" alt="Chart preview" style="max-height:120px; border-radius: var(--radius); border: 1px solid var(--border);" />
+                      <button type="button" id="candle-chart-remove" class="img-remove-btn" style="position:absolute; top: -8px; right:-8px; background:var(--high); color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; cursor:pointer;">✕</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-2); padding:10px 14px; border-radius:8px; border:1px solid var(--border); margin-top: 4px;">
+                  <span style="font-size:13px; font-weight:500; color:var(--text-dim);">Taking the trade?</span>
+                  <div class="seg-group" style="margin:0; display:flex; gap:6px;">
+                    <button type="button" class="seg-btn active" id="taking-trade-no" style="padding: 4px 14px; font-size:12px; border-radius:6px; font-family:var(--font-body); font-weight:500;">No</button>
+                    <button type="button" class="seg-btn" id="taking-trade-yes" style="padding: 4px 14px; font-size:12px; border-radius:6px; font-family:var(--font-body); font-weight:500;">Yes</button>
+                  </div>
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; gap:8px;">
+                  <button id="candle-run-reset-btn" class="btn-secondary">Reset</button>
+                  <button id="candle-run-save-btn" class="btn-primary">Save Run</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Previous Runs (right panel) -->
+          <div class="candle-checklist-last-runs-panel">
+            <h3 style="margin-top:0;">Previous Runs</h3>
+            <div id="candle-last-runs-list">
+              <!-- Cards for previous runs will be injected here -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- No template selected empty state -->
+        <div id="candle-checklist-empty" class="empty-state">
+          <p class="empty-mark">📋</p>
+          <p>Select or create a template to begin checking candles.</p>
+        </div>
+
+      </div>
+
+      <!-- Pre-trade checklist button (reused from dashboard) -->
+      <button id="candle-checklist-fab" class="fab fab-secondary hidden" aria-label="Run pre-trade checklist" title="Pre-Trade Checklist">✓</button>
     </div>
 
     <!-- ===== SETTINGS VIEW ===== -->
@@ -627,6 +789,14 @@
             <span class="trade-linked-checklists-title">Linked Checklists</span>
           </div>
           <div id="trade-cl-list"></div>
+        </div>
+
+        <!-- Linked Candle Checklist runs — shown when editing an existing trade -->
+        <div id="trade-linked-candle-runs" class="trade-linked-checklists hidden">
+          <div class="trade-linked-checklists-header">
+            <span class="trade-linked-checklists-title">📈 Candle Checklist Runs</span>
+          </div>
+          <div id="trade-candle-run-list"></div>
         </div>
       </div>
 

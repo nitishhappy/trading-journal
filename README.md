@@ -217,3 +217,145 @@ Google changed its Gemini API key format in mid-2026. All new keys generated in 
 firebase functions:secrets:set GEMINI_API_KEY
 # paste your AQ.xxx key when prompted
 ```
+
+### v1.5 — Bug fixes, offline images, and app health tools
+
+This update covers one working session's worth of fixes and additions — mostly things that were broken plus a few tools to catch the next problem faster.
+
+#### What was actually broken, and is now fixed
+
+1. **Adding a new observation was completely broken.** Tapping **+** crashed the app instantly with no visible error. This happened because the "New Observation" popup had been redesigned to support multiple entries, but the code behind the **+** button was never updated to match — it was still looking for old field names that no longer existed. Rewritten so the popup and the code behind it agree with each other again.
+2. **Light mode header was unreadable.** Switching to light theme (the sun icon) left the top bar (where it says "Dashboard") almost invisible — dark text on a dark background that never switched to light. Fixed.
+3. **Revision (swipe review) mode had a stuck/glitchy animation.** Swiping a card away could leave things looking frozen or show the wrong card flashing in briefly. Root cause: when a card had a link preview (e.g. a Google Drive image/video), the app didn't reserve space for that preview while it was loading, so the card's size jumped around and briefly showed the card behind it. Fixed by reserving the space up front, regardless of how long the image takes to load.
+4. **Revision cards now show newest-first** instead of oldest-first.
+5. **Trade Log wasn't loading**, showing a Firestore "index required" error. This wasn't a bug in the app's logic — Firestore just needed a one-time index for the trade-sorting query, which is now set up.
+6. **Dashboard tiles looked scattered/out of order** on wider screens (tablet/desktop width), with gaps and tiles appearing out of date order. This was a side effect of the "smart-fill" grid layout trying to pack tiles tightly and reordering them to do it. Switched to a layout that fills top-to-bottom in the correct order, like a Pinterest-style layout, with no reordering. Also bumped up the note text size slightly for readability.
+
+#### New capability: offline images
+
+Previously, images (from Google Drive/TradingView links) only ever loaded fresh from the internet — no internet meant no images, even for observations you'd already opened before.
+
+Now, any image or video you've successfully viewed at least once while online gets quietly saved on your device. If you open the app later with no signal (e.g. on the train, in a basement), those previously-viewed images will still show up. New images you've never opened before still need an internet connection the first time.
+
+**Nothing to set up for this — it works automatically** once the updated `sw.js` file is deployed.
+
+#### New tools (for catching problems faster next time)
+
+These don't change how the app looks or behaves day-to-day — they're safety nets for future development.
+
+1. **Error notifications.** If something breaks while you're using the app, you'll now see a small toast message ("Something went wrong — check console for details") instead of the app just silently failing with no feedback. This makes it possible to notice a bug immediately instead of days later.
+2. **Automatic cache-version bumping.** Every deploy, the app needs to tell your phone's browser "hey, I've changed, fetch the new version." This used to require manually editing a version number in `sw.js` and remembering to do it every time — easy to forget, which causes the classic "I fixed it but the app still shows the old broken version" problem. There's now a script (`generate-version.js`) that does this automatically based on what actually changed, so it can't be forgotten.
+3. **Automated "smoke test."** A script that opens the app, logs in, clicks through every tab, and adds a test observation — the exact same flow that broke in bug #1 above — and reports failure the moment anything goes wrong, instead of only being noticed when actually used. Optional to run, but useful before deploying a change to double check nothing obvious broke.
+
+#### Setup steps for this update
+
+**For the offline images and error notifications (steps 1–2, required):**
+1. Replace these files in your project with the updated versions: `styles.css`, `sw.js`, `js/ui/dashboard.js`, `js/ui/revision.js`.
+2. Add the new file `js/utils/error-tracking.js`.
+3. Open your real `app.js` (the short one that just has a list of `import` lines near the top) and add this one line near the other early imports, before the UI modules:
+   ```js
+   import './js/utils/error-tracking.js';
+   ```
+4. Deploy Firestore indexes so the Trade Log works again:
+   ```bash
+   firebase deploy --only firestore:indexes
+   ```
+   (merge the provided `firestore.indexes.json` into your existing one if you already have one, rather than replacing it wholesale)
+5. Deploy as usual:
+   ```bash
+   firebase deploy --only hosting
+   ```
+
+**For the new dev tools (steps 3, optional, no impact on the live app if skipped):**
+1. Put `generate-version.js` in your project's root folder (same level as `index.html`). From now on, run `node generate-version.js` once, right before every `firebase deploy --only hosting`.
+2. The smoke test lives in its own separate `smoke-tests` folder so it doesn't interfere with your existing Cloud Functions setup. See the setup instructions provided separately in chat for installing and running it — it needs a one-time `npm install` and a dedicated test login (not your real account) before first use.
+
+### v1.6 — Candle Checklist tab
+
+A completely new **Candle Checklist** tab for structured, repeatable analysis of Nifty 5-minute candles at key times during the trading session.
+
+#### What it does
+
+- **Templates** — Create and edit named checklist templates with two categories of checks:
+  - **Observatory**: what you observed in the candle (e.g. "Body > 60%", "Wick rejection high")
+  - **Decision**: your decision criteria (e.g. "Risk defined", "Not in consolidation zone")
+  - Templates are saved to Firestore and available across sessions.
+
+- **Live candle runner** — When a template is selected, the full checklist renders as two columns:
+  - ✅ **Selected (green)** — items you've confirmed as true
+  - ❌ **Not Selected (red)** — items you have not confirmed
+  - Tap any item to toggle it between columns with a smooth animation.
+
+- **IST candle time auto-guide** — A live clock calculates the correct 5-minute Nifty candle reference time based on IST. Accounts for the standard T−30s to T+3m30s logging window. Updates every second while the tab is active; pauses if you manually edit the field.
+
+- **Run logging** — Each checklist run captures:
+  - Logging time (IST)
+  - All selected and unselected checks per category
+  - Optional: link to a Trade Log entry (dropdown, newest-first)
+  - Optional: outcome (W / L / CTC)
+  - Optional: chart screenshot (file upload or paste from clipboard with Ctrl+V)
+
+- **Previous runs panel** — The right-hand panel shows all saved runs for the active template in **LIFO order** (newest first). The panel fills all available vertical space and has a custom smooth scrollbar for older entries. Any run can be reloaded into the runner for editing by clicking **Edit Run**.
+
+- **"Taking the trade?" toggle** — A `No / Yes` toggle at the bottom of the runner. Clicking **Yes** immediately opens the pre-trade checklist popup (the same modal accessible from the dashboard FAB).
+
+- **Pre-trade checklist FAB** — A `✓` floating button appears in the bottom-right corner while on the Candle Checklist tab, giving instant access to the pre-trade checklist popup. The dashboard `+` FAB hides while on this tab (and vice versa) so they never overlap.
+
+- **Trade Log integration** — When you open any trade entry in the Trade Log tab, a new **📈 Candle Checklist Runs** section appears in the modal showing all candle checklist runs that were linked to that trade. Each row shows template name, candle time, pass score (x/y, %), and outcome badge. A **View** button closes the trade modal, switches to the Candle Checklist tab, and reloads that run for editing.
+
+#### New Firestore data model
+
+```
+users/{uid}/candleChecklistTemplates/{templateId}
+  - name: string
+  - observatory: string[]      // list of observatory check labels
+  - decision: string[]         // list of decision check labels
+  - createdAt: timestamp
+  - updatedAt: timestamp
+
+users/{uid}/candleChecklistRuns/{runId}
+  - templateId: string
+  - templateName: string
+  - loggingTime: string        // IST time string e.g. "11:30 AM"
+  - selected:
+      observatory: string[]    // items the user selected (ticked green)
+      decision: string[]
+  - unselected:
+      observatory: string[]    // items not selected (red)
+      decision: string[]
+  - outcome: "W" | "L" | "CTC" | ""
+  - linkedTradeId: string | null   // Firestore ID of a linked trade log entry
+  - chartImage: string | null      // base64 encoded, resized to ≤1024px
+  - createdAt: timestamp
+  - updatedAt: timestamp
+```
+
+#### New files added
+
+| File | Purpose |
+|---|---|
+| `js/ui/candleChecklist.js` | Full UI controller: template selector, runner, IST timer, image paste, run save/load, FAB wiring, trade modal integration |
+| `js/services/candleChecklist.js` | Firestore listeners and CRUD for templates and runs |
+
+#### Files modified
+
+| File | Change |
+|---|---|
+| `index.html` | New `Candle Checklist` nav tab + full view HTML (runner, columns, previous runs panel, FAB) |
+| `styles.css` | Grid layout, green/red column theming, custom scrollbar, FAB-secondary style, "Taking the trade" toggle |
+| `js/state.js` | Added `candleChecklistTemplates` and `candleChecklistRuns` arrays |
+| `js/dom.js` | Exported `viewCandleChecklist` DOM reference |
+| `js/ui/auth.js` | Subscribe/unsubscribe candle Firestore listeners on login/logout |
+| `js/ui/common.js` | Tab switching logic for Candle Checklist view + FAB visibility toggle |
+| `js/ui/checklists.js` | Exported `openChecklistModal` so candle tab can open the pre-trade popup |
+| `js/ui/tradelog.js` | Calls `renderLinkedCandleRuns(tradeId)` when opening a trade entry |
+| `app.js` | Imports `js/ui/candleChecklist.js` |
+| `sw.js` / `generate-version.js` | Both new files added to precache manifest |
+
+#### Deploy steps
+
+```bash
+node generate-version.js
+firebase deploy --only hosting
+```
+
