@@ -8,16 +8,17 @@ setGlobalOptions({ maxInstances: 10 });
 admin.initializeApp();
 const db = admin.firestore();
 
+const cors = require('cors')({ origin: true });
+
 // ===================== Token Registration =====================
 // Called by the client (with Firebase ID token) to register or rotate a webhook token.
 // POST /tvRegisterToken
 // Headers: Authorization: Bearer <idToken>
 // Body: { newToken: "...", deleteToken: "..." (optional) }
 exports.tvRegisterToken = onRequest(async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Headers", "Authorization, Content-Type");
-  if (req.method === "OPTIONS") return res.status(204).send("");
-  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+  return cors(req, res, async () => {
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
 
   // Verify Firebase ID token
   const auth = req.headers.authorization;
@@ -51,6 +52,7 @@ exports.tvRegisterToken = onRequest(async (req, res) => {
   await batch.commit();
   logger.info("tvRegisterToken: updated token for uid", uid);
   return res.status(200).json({ ok: true });
+  });
 });
 
 
