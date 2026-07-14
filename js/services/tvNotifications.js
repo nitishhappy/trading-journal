@@ -1,8 +1,9 @@
 import { db, auth } from '../firebase-init.js';
 import { state } from '../state.js';
 
-const REGISTER_FN = 'https://us-central1-trade-journal-4271e.cloudfunctions.net/tvRegisterToken';
-const WEBHOOK_BASE = 'https://us-central1-trade-journal-4271e.cloudfunctions.net/tvWebhook';
+const REGISTER_FN = '/api/tvRegisterToken';
+const WEBHOOK_BASE = window.location.origin + '/api/tvWebhook';
+
 
 let unsubscribe = null;
 

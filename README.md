@@ -387,7 +387,9 @@ webhookTokens/{token}
 ```
 
 #### Setup required for this update
-Because this update adds new Cloud Functions, you must deploy the updated functions and Firestore rules:
-```bash
-firebase deploy --only firestore:rules,functions,hosting
-```
+Because we avoided a paid Firebase plan, the webhook is built for **Vercel Serverless Functions**.
+1. Import this repository into Vercel.
+2. In your Vercel project settings, add an Environment Variable named `FIREBASE_SERVICE_ACCOUNT`.
+3. Generate a new Private Key in Firebase Console > Project Settings > Service Accounts.
+4. Copy the entire JSON file contents and paste it as the value for `FIREBASE_SERVICE_ACCOUNT` in Vercel.
+5. Deploy to Vercel. Your frontend and API will automatically work.
