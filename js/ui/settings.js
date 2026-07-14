@@ -6,6 +6,7 @@ import {
   currentFolderLabel, viewSettings, settingsGearBtn, settingsCloseBtn,
   defaultSortSelect, settingsLogoutBtn
 } from '../dom.js';
+import { populateDefaultTemplateSelect } from './candleChecklist.js';
 
 // Cache elements for passcode lock/unlock
 const tradeLockOverlay = document.getElementById("trade-lock-overlay");
@@ -30,6 +31,23 @@ if (settingsGearBtn) {
     // Dispatch custom event so checklists, keys, and passcodes can refresh
     window.dispatchEvent(new CustomEvent('settings-opened'));
     setTimeout(() => loadTradePasscodeStatus(), 50);
+
+    // Populate default candle template dropdown
+    populateDefaultTemplateSelect();
+  });
+}
+
+// Save default candle template when changed in settings
+const defaultCandleTemplateSel = document.getElementById('default-candle-template-select');
+if (defaultCandleTemplateSel) {
+  defaultCandleTemplateSel.addEventListener('change', () => {
+    const val = defaultCandleTemplateSel.value;
+    if (val) {
+      localStorage.setItem('candleDefaultTemplateId', val);
+    } else {
+      localStorage.removeItem('candleDefaultTemplateId');
+    }
+    showToast(val ? 'Default candle template saved' : 'Default template cleared');
   });
 }
 

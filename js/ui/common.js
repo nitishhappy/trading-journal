@@ -45,6 +45,12 @@ mainTabs.addEventListener("click", (e) => {
   if (dashboardFab) dashboardFab.classList.toggle('hidden', isCandle);
   if (candleFab)    candleFab.classList.toggle('hidden', !isCandle);
 
+  // Hide back-to-tradelog banner when manually switching away from candle checklist
+  if (!isCandle) {
+    const backBanner = document.getElementById('candle-back-banner');
+    if (backBanner) backBanner.classList.add('hidden');
+  }
+
 });
 
 // Fullscreen toggle

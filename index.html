@@ -74,9 +74,9 @@
     <nav class="main-tabs" id="main-tabs">
       <button class="main-tab active" data-view="dashboard">Dashboard</button>
       <button class="main-tab" data-view="revision">Revision</button>
+      <button class="main-tab" data-view="candleChecklist">Candle Checklist</button>
       <button class="main-tab" data-view="aicoach">AI Coach</button>
       <button class="main-tab" data-view="tradelog">Trade Log</button>
-      <button class="main-tab" data-view="candleChecklist">Candle Checklist</button>
     </nav>
 
     <!-- Daily backup reminder (shown once per day on first open) -->
@@ -271,6 +271,13 @@
 
     <!-- ===== CANDLE CHECKLIST VIEW ===== -->
     <div id="view-candleChecklist" class="view hidden">
+
+      <!-- Back-to-Trade-Log banner (only shown when navigated from trade modal) -->
+      <div id="candle-back-banner" class="hidden" style="display:flex; align-items:center; gap:10px; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:8px 14px; margin-bottom:12px; font-size:13px;">
+        <button id="candle-back-to-tradelog" class="btn-small" style="display:flex;align-items:center;gap:6px;">← Back to Trade Log</button>
+        <span style="color:var(--text-dim);">Viewing linked candle checklist run</span>
+      </div>
+
       <!-- We will inject the layout here dynamically, but let's provide a skeleton structure matching standard layout -->
       <div class="candle-checklist-layout">
         <!-- Top bar/controls -->
@@ -469,6 +476,15 @@
           <option value="tags">Tags</option>
         </select>
         <p class="settings-hint">Used when the app loads. You can still switch grouping from the Dashboard.</p>
+      </div>
+
+      <div class="settings-section">
+        <h3>📈 Candle Checklist</h3>
+        <label for="default-candle-template-select">Default template (auto-loaded on tab open)</label>
+        <select id="default-candle-template-select">
+          <option value="">— None (pick manually) —</option>
+        </select>
+        <p class="settings-hint">When you switch to the Candle Checklist tab, this template will be selected automatically.</p>
       </div>
 
       <div class="settings-section">

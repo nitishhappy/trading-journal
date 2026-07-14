@@ -54,6 +54,11 @@ const lastRunsList = document.getElementById("candle-last-runs-list");
 const takingTradeYesBtn = document.getElementById("taking-trade-yes");
 const takingTradeNoBtn = document.getElementById("taking-trade-no");
 const candleChecklistFab = document.getElementById("candle-checklist-fab");
+const candleBackBanner = document.getElementById("candle-back-banner");
+const candleBackBtn = document.getElementById("candle-back-to-tradelog");
+
+// Tracks the trade ID we came from when clicking "View" from Trade Log
+let pendingBackTradeId = null;
 
 // Initialize Candle Checklist View
 export function initCandleChecklistUI() {
@@ -72,8 +77,29 @@ export function initCandleChecklistUI() {
       renderTemplateSelect();
       renderLastRuns();
       updateIstField(new Date());
+      // Auto-load default template if nothing is selected
+      autoLoadDefaultTemplate();
     }
   });
+
+  // Wire back-to-tradelog banner button
+  if (candleBackBtn) {
+    candleBackBtn.addEventListener('click', () => {
+      // Hide the banner
+      if (candleBackBanner) candleBackBanner.classList.add('hidden');
+      const tradeId = pendingBackTradeId;
+      pendingBackTradeId = null;
+      // Switch to trade log tab
+      const tab = document.querySelector('[data-view="tradelog"]');
+      if (tab) tab.click();
+      // Re-open the trade modal after tab renders
+      setTimeout(() => {
+        if (tradeId && typeof window.openTradeModal === 'function') {
+          window.openTradeModal(tradeId);
+        }
+      }, 150);
+    });
+  }
 
   // Attach paste handler for screenshot
   if (mainChecklistArea) {
@@ -395,6 +421,49 @@ function renderTemplateSelect() {
     mainChecklistArea.classList.add("hidden");
     emptyChecklistArea.classList.remove("hidden");
   }
+
+  // Keep the settings default-template dropdown in sync
+  populateDefaultTemplateSelect();
+}
+
+/**
+ * Populate the Settings → Candle Checklist default template dropdown.
+ * Called whenever templates change and on settings-opened.
+ */
+export function populateDefaultTemplateSelect() {
+  const sel = document.getElementById('default-candle-template-select');
+  if (!sel) return;
+  const current = sel.value;
+  sel.innerHTML = '<option value="">— None (pick manually) —</option>';
+  state.candleChecklistTemplates.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t.id;
+    opt.textContent = t.name;
+    sel.appendChild(opt);
+  });
+  // Restore saved default
+  const saved = localStorage.getItem('candleDefaultTemplateId') || '';
+  sel.value = saved && state.candleChecklistTemplates.some(t => t.id === saved) ? saved : current;
+}
+
+/** Auto-select the user's default template when the tab opens (if nothing already selected). */
+function autoLoadDefaultTemplate() {
+  const defaultId = localStorage.getItem('candleDefaultTemplateId');
+  if (!defaultId) return;
+  if (activeTemplateId) return; // already have something selected
+  if (!state.candleChecklistTemplates.some(t => t.id === defaultId)) return;
+
+  templateSelect.value = defaultId;
+  // Trigger the same logic as manual select
+  activeTemplateId = defaultId;
+  currentRunId = null;
+  activeSelections.clear();
+  resetImage();
+  editTemplateBtn.classList.remove('hidden');
+  mainChecklistArea.classList.remove('hidden');
+  emptyChecklistArea.classList.add('hidden');
+  renderChecklist();
+  renderLastRuns();
 }
 
 // Open Template Builder editor
@@ -707,6 +776,9 @@ export function renderLinkedCandleRuns(tradeId) {
 
     // "View" button — switch to candle checklist tab and load this run
     row.querySelector('.trade-cl-edit-btn').addEventListener('click', () => {
+      // Store the originating trade so back-banner can return
+      pendingBackTradeId = tradeId;
+
       // Close trade modal
       const tradeModal = document.getElementById('trade-modal');
       if (tradeModal) tradeModal.classList.add('hidden');
@@ -715,9 +787,10 @@ export function renderLinkedCandleRuns(tradeId) {
       const tab = document.querySelector('[data-view="candleChecklist"]');
       if (tab) tab.click();
 
-      // After tab renders, load the run
+      // After tab renders, load the run and show back banner
       setTimeout(() => {
         loadRunForEditing(run);
+        if (candleBackBanner) candleBackBanner.classList.remove('hidden');
       }, 150);
     });
 
