@@ -393,3 +393,12 @@ Because we avoided a paid Firebase plan, the webhook is built for **Vercel Serve
 3. Generate a new Private Key in Firebase Console > Project Settings > Service Accounts.
 4. Copy the entire JSON file contents and paste it as the value for `FIREBASE_SERVICE_ACCOUNT` in Vercel.
 5. Deploy to Vercel. Your frontend and API will automatically work.
+
+### v2.0+ Updates (Checklists & Logging)
+
+1. **Pre-trade Checklists**: Access your custom checklist templates from the settings or the FAB.
+2. **Candle Checklists**: A specialized checklist format for reviewing individual candles.
+    - **Templates**: Define checklists with *Observatory* and *Decision* checks. Now supports template deletion directly from the view.
+    - **Runs (Logs)**: Log whether you "Considered" taking the trade, along with any chart image, linked trade, and your textual **Note/Analysis**.
+    - **Management**: You can easily delete any previous Pre-trade or Candle Checklist run if needed (just tap "Delete" next to the "Edit" button).
+3. **Delete capability across logs**: Both pre-trade checklist logs (linked to trades) and candle checklist runs can now be freely edited or deleted.
