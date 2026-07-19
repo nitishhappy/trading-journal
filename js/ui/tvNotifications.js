@@ -202,46 +202,62 @@ function updateUnreadBadge() {
 async function initTokenSettingsUI() {
   if (!tokenSetupSection) return;
 
-  storedToken = await loadWebhookToken();
+  const loadPrefsFromDB = async (uid) => {
+    if (!uid) return;
+    try {
+      storedToken = await loadWebhookToken();
+      if (storedToken) {
+        tokenSetupSection.classList.add('hidden');
+        tokenActiveSection?.classList.remove('hidden');
+        renderMaskedUrl(storedToken);
+      } else {
+        tokenSetupSection.classList.remove('hidden');
+        tokenActiveSection?.classList.add('hidden');
+      }
 
-  if (storedToken) {
-    tokenSetupSection.classList.add('hidden');
-    tokenActiveSection?.classList.remove('hidden');
-    renderMaskedUrl(storedToken);
-  } else {
-    tokenSetupSection.classList.remove('hidden');
-    tokenActiveSection?.classList.add('hidden');
-  }
-
-  // Load existing Telegram Config + Sequence Timeout
-  const uid = state.currentUser?.uid;
-  if (uid) {
-    db.collection('users').doc(uid)
-      .collection('settings').doc('preferences')
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          const tgToken = document.getElementById('settings-tg-token');
-          const tgChat  = document.getElementById('settings-tg-chatid');
-          const seqMult = document.getElementById('settings-seq-multiplier');
-          
-          if (tgToken && data.telegram?.botToken) tgToken.value = data.telegram.botToken;
-          if (tgChat && data.telegram?.chatId) tgChat.value = data.telegram.chatId;
-          if (seqMult && data.sequenceTimeoutMultiplier !== undefined) {
-            seqMult.value = data.sequenceTimeoutMultiplier;
-          }
+      const doc = await db.collection('users').doc(uid)
+        .collection('settings').doc('preferences').get();
+      if (doc.exists) {
+        const data = doc.data();
+        const tgToken = document.getElementById('settings-tg-token');
+        const tgChat  = document.getElementById('settings-tg-chatid');
+        const seqMult = document.getElementById('settings-seq-multiplier');
+        
+        if (tgToken) tgToken.value = data.telegram?.botToken || '';
+        if (tgChat) tgChat.value = data.telegram?.chatId || '';
+        if (seqMult && data.sequenceTimeoutMultiplier !== undefined) {
+          seqMult.value = data.sequenceTimeoutMultiplier;
         }
-      }).catch(err => console.error('Error loading settings detail', err));
+      }
+    } catch (err) {
+      console.error('Error loading settings details', err);
+    }
+  };
+
+  // Bind on startup if user is logged in
+  if (state.currentUser?.uid) {
+    loadPrefsFromDB(state.currentUser.uid);
   }
+
+  // Reload when auth state changes (crucial for refresh/login loading)
+  window.addEventListener('auth-changed', (e) => {
+    if (e.detail.loggedIn && e.detail.user?.uid) {
+      loadPrefsFromDB(e.detail.user.uid);
+    }
+  });
 
   // Telegram Config Save
   const tgSaveBtn = document.getElementById('settings-tg-save-btn');
   if (tgSaveBtn) {
     tgSaveBtn.onclick = async () => {
+      console.log('tgSaveBtn clicked');
+      const uid = state.currentUser?.uid;
+      if (!uid) {
+        showToast('Please login first');
+        return;
+      }
       const tgToken = document.getElementById('settings-tg-token').value.trim();
       const tgChat  = document.getElementById('settings-tg-chatid').value.trim();
-      if (!uid) return;
       tgSaveBtn.disabled = true;
       try {
         await db.collection('users').doc(uid)
@@ -265,6 +281,7 @@ async function initTokenSettingsUI() {
   const tgTestBtn = document.getElementById('settings-tg-test-btn');
   if (tgTestBtn) {
     tgTestBtn.onclick = async () => {
+      console.log('tgTestBtn clicked');
       const tgToken = document.getElementById('settings-tg-token').value.trim();
       const tgChat  = document.getElementById('settings-tg-chatid').value.trim();
       if (!tgToken || !tgChat) {
@@ -300,6 +317,12 @@ async function initTokenSettingsUI() {
   const seqSaveBtn = document.getElementById('settings-seq-save-btn');
   if (seqSaveBtn) {
     seqSaveBtn.onclick = async () => {
+      console.log('seqSaveBtn clicked');
+      const uid = state.currentUser?.uid;
+      if (!uid) {
+        showToast('Please login first');
+        return;
+      }
       const mult = parseInt(document.getElementById('settings-seq-multiplier').value, 10);
       if (isNaN(mult) || mult < 1) {
         showToast('Please enter a valid multiplier >= 1');
