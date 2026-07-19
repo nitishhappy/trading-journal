@@ -280,8 +280,8 @@ async function handleSaveRule() {
     })
     .filter(Boolean);
 
-  if (steps.length < 2) {
-    showToast('Provide at least 2 sequence steps');
+  if (steps.length < 1) {
+    showToast('Provide at least 1 sequence step');
     return;
   }
 
