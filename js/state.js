@@ -34,6 +34,8 @@ export const state = {
   coachPeriod: "weekly",
   candleChecklistTemplates: [],
   candleChecklistRuns: [],
+  sequenceRules: [],
+  sequenceTriggerLogs: [],
 };
 
 // Bind to window for backward compatibility with trade-security.js and legacy code

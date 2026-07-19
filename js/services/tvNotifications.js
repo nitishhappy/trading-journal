@@ -12,6 +12,11 @@ export function subscribeTvNotifications() {
   const uid = state.currentUser?.uid;
   if (!uid) return;
 
+  // Request browser Notification permissions
+  if (typeof Notification !== 'undefined' && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+
   unsubscribe = db
     .collection('users').doc(uid)
     .collection('tvNotifications')
@@ -20,6 +25,24 @@ export function subscribeTvNotifications() {
       state.tvNotifications = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       window.dispatchEvent(new CustomEvent('tv-notifications-updated'));
     }, (err) => console.error('tvNotifications listen error', err));
+
+  // Also setup listener for sequence completions to display browser alerts
+  db.collection('users').doc(uid)
+    .collection('sequenceTriggerLogs')
+    .orderBy('triggeredAt', 'desc')
+    .limit(1)
+    .onSnapshot((snap) => {
+      if (snap.empty) return;
+      const newestLog = snap.docs[0].data();
+      const trigTime = newestLog.triggeredAt?.toDate ? newestLog.triggeredAt.toDate() : new Date();
+      if (Date.now() - trigTime.getTime() < 10000) { // Only notify if within 10s
+        if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+          new Notification(`🎯 Sequence Triggered: ${newestLog.ruleName}`, {
+            body: `${newestLog.symbol} · ${newestLog.timeframe || '—'} · Price: ₹${(newestLog.price || 0).toLocaleString('en-IN')}`
+          });
+        }
+      }
+    });
 }
 
 export function unsubscribeTvNotifications() {

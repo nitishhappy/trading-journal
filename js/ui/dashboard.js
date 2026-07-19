@@ -824,7 +824,7 @@ import { state } from '../state.js';
 import { db } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 import { getLocalDateKey, formatDateHeader, computeStreak } from '../utils/date.js';
-import { renderTile, escapeHtml, attachImagePaste, resizeImageToBase64, buildLinkPreviewIfApplicable } from '../utils/image.js';
+import { renderTile, escapeHtml, attachImagePaste, getImageFromClipboardEvent, resizeImageToBase64, buildLinkPreviewIfApplicable } from '../utils/image.js';
 import { saveObservation, deleteObservation, addCustomFolder, suggestCategory } from '../services/observations.js';
 import { openLightbox } from './common.js';
 
@@ -1468,7 +1468,7 @@ function createObsEntry() {
     imageZone.classList.remove("drag-over");
     addImageFiles(e.dataTransfer.files);
   });
-  attachImagePaste(textArea, async (file) => {
+  const handleImagePaste = async (file) => {
     try {
       showToast("Processing image from clipboard...");
       const base64 = await resizeImageToBase64(file);
@@ -1477,6 +1477,19 @@ function createObsEntry() {
     } catch (err) {
       console.error("Paste image error", err);
       showToast("Failed to process clipboard image");
+    }
+  };
+
+  // Attach paste to textarea (focused paste)
+  attachImagePaste(textArea, handleImagePaste);
+
+  // Also attach paste to the entire entry container so paste works
+  // even when focus is elsewhere (e.g. clicking the image zone or modal backdrop)
+  entry.addEventListener("paste", (e) => {
+    const file = getImageFromClipboardEvent(e);
+    if (file) {
+      e.preventDefault();
+      handleImagePaste(file);
     }
   });
 

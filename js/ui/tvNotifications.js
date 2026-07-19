@@ -11,9 +11,9 @@ import {
 } from '../services/tvNotifications.js';
 
 // ===================== DOM refs =====================
-const notifFeed    = document.getElementById('tv-notif-feed');
-const emptyState   = document.getElementById('tv-notif-empty');
-const filterBtns   = document.querySelectorAll('.tv-filter-btn');
+const notifFeed    = document.querySelector('.tv-pane-left #tv-notif-feed');
+const emptyState   = document.querySelector('.tv-pane-left #tv-notif-empty');
+const filterBtns   = document.querySelectorAll('.tv-pane-left .tv-filter-btn');
 const clearAllBtn  = document.getElementById('tv-clear-all-btn');
 const unreadBadge  = document.getElementById('tv-unread-badge');
 
@@ -211,6 +211,112 @@ async function initTokenSettingsUI() {
   } else {
     tokenSetupSection.classList.remove('hidden');
     tokenActiveSection?.classList.add('hidden');
+  }
+
+  // Load existing Telegram Config + Sequence Timeout
+  const uid = state.currentUser?.uid;
+  if (uid) {
+    db.collection('users').doc(uid)
+      .collection('settings').doc('preferences')
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          const tgToken = document.getElementById('settings-tg-token');
+          const tgChat  = document.getElementById('settings-tg-chatid');
+          const seqMult = document.getElementById('settings-seq-multiplier');
+          
+          if (tgToken && data.telegram?.botToken) tgToken.value = data.telegram.botToken;
+          if (tgChat && data.telegram?.chatId) tgChat.value = data.telegram.chatId;
+          if (seqMult && data.sequenceTimeoutMultiplier !== undefined) {
+            seqMult.value = data.sequenceTimeoutMultiplier;
+          }
+        }
+      }).catch(err => console.error('Error loading settings detail', err));
+  }
+
+  // Telegram Config Save
+  const tgSaveBtn = document.getElementById('settings-tg-save-btn');
+  if (tgSaveBtn) {
+    tgSaveBtn.onclick = async () => {
+      const tgToken = document.getElementById('settings-tg-token').value.trim();
+      const tgChat  = document.getElementById('settings-tg-chatid').value.trim();
+      if (!uid) return;
+      tgSaveBtn.disabled = true;
+      try {
+        await db.collection('users').doc(uid)
+          .collection('settings').doc('preferences')
+          .set({
+            telegram: {
+              botToken: tgToken || null,
+              chatId: tgChat || null
+            }
+          }, { merge: true });
+        showToast('Telegram configuration saved ✓');
+      } catch (err) {
+        showToast('Failed to save Telegram config');
+      } finally {
+        tgSaveBtn.disabled = false;
+      }
+    };
+  }
+
+  // Send Telegram Test Message
+  const tgTestBtn = document.getElementById('settings-tg-test-btn');
+  if (tgTestBtn) {
+    tgTestBtn.onclick = async () => {
+      const tgToken = document.getElementById('settings-tg-token').value.trim();
+      const tgChat  = document.getElementById('settings-tg-chatid').value.trim();
+      if (!tgToken || !tgChat) {
+        showToast('Please enter both token and chat ID first');
+        return;
+      }
+      tgTestBtn.disabled = true;
+      try {
+        const url = `https://api.telegram.org/bot${tgToken}/sendMessage`;
+        const resp = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: tgChat,
+            text: '📡 <b>Trading Journal</b>: This is a test message. Integration successful! 🎯',
+            parse_mode: 'HTML'
+          })
+        });
+        if (resp.ok) {
+          showToast('Test message sent successfully!');
+        } else {
+          showToast('Failed to send test. Verify token / chat ID');
+        }
+      } catch (err) {
+        showToast('Test failed: ' + err.message);
+      } finally {
+        tgTestBtn.disabled = false;
+      }
+    };
+  }
+
+  // Sequence Multiplier Save
+  const seqSaveBtn = document.getElementById('settings-seq-save-btn');
+  if (seqSaveBtn) {
+    seqSaveBtn.onclick = async () => {
+      const mult = parseInt(document.getElementById('settings-seq-multiplier').value, 10);
+      if (isNaN(mult) || mult < 1) {
+        showToast('Please enter a valid multiplier >= 1');
+        return;
+      }
+      seqSaveBtn.disabled = true;
+      try {
+        await db.collection('users').doc(uid)
+          .collection('settings').doc('preferences')
+          .set({ sequenceTimeoutMultiplier: mult }, { merge: true });
+        showToast('Sequence timeout updated ✓');
+      } catch (err) {
+        showToast('Failed to save timeout');
+      } finally {
+        seqSaveBtn.disabled = false;
+      }
+    };
   }
 
   // Generate first token

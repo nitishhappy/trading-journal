@@ -277,28 +277,87 @@
       <button id="fab-add-trade" class="fab" aria-label="Add trade log">+</button>
     </div>
 
-    <!-- ===== TRADINGVIEW NOTIFICATIONS VIEW ===== -->
     <div id="view-tvNotifications" class="view hidden">
-      <div class="tv-layout">
-        <!-- Top bar/controls -->
-        <div class="tv-controls">
-          <div class="tv-filters">
-            <button class="btn-small tv-filter-btn active" data-filter="ALL">All Alerts</button>
-            <button class="btn-small tv-filter-btn" data-filter="BUY">Buy</button>
-            <button class="btn-small tv-filter-btn" data-filter="SELL">Sell</button>
-            <button class="btn-small tv-filter-btn" data-filter="CLOSE">Exit</button>
+      <div class="tv-split-layout">
+        <!-- Left Pane: Notifications Feed -->
+        <div class="tv-pane-left">
+          <h2 class="pane-title">📡 Live TV Alerts</h2>
+          <div class="tv-controls">
+            <div class="tv-filters">
+              <button class="btn-small tv-filter-btn active" data-filter="ALL">All Alerts</button>
+              <button class="btn-small tv-filter-btn" data-filter="BUY">Buy</button>
+              <button class="btn-small tv-filter-btn" data-filter="SELL">Sell</button>
+              <button class="btn-small tv-filter-btn" data-filter="CLOSE">Exit</button>
+            </div>
+            <button id="tv-clear-all-btn" class="btn-small btn-secondary">Clear All</button>
           </div>
-          <button id="tv-clear-all-btn" class="btn-small btn-secondary">Clear All</button>
+
+          <div id="tv-notif-feed" class="tv-feed"></div>
+
+          <div id="tv-notif-empty" class="empty-state hidden">
+            <div class="empty-icon">📡</div>
+            <p>No TradingView alerts yet.</p>
+            <span class="settings-hint">Set up your webhook URL in Settings to receive alerts here.</span>
+          </div>
         </div>
 
-        <!-- Feed Container -->
-        <div id="tv-notif-feed" class="tv-feed"></div>
+        <!-- Right Pane: Sequence Settings & Logs -->
+        <div class="tv-pane-right">
+          <div class="pane-header-row">
+            <h2 class="pane-title">🎯 Sequential Triggers</h2>
+            <button id="seq-create-rule-btn" class="btn-small btn-small-primary">+ New Rule</button>
+          </div>
 
-        <!-- Empty State -->
-        <div id="tv-notif-empty" class="empty-state hidden">
-          <div class="empty-icon">📡</div>
-          <p>No TradingView alerts yet.</p>
-          <span class="settings-hint">Set up your webhook URL in Settings to receive alerts here.</span>
+          <!-- Rules List -->
+          <div class="seq-rules-section">
+            <h3>Active Rules</h3>
+            <div id="seq-rules-list" class="seq-rules-list"></div>
+          </div>
+
+          <!-- Trigger Logs -->
+          <div class="seq-logs-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <h3>Trigger Logs</h3>
+              <label class="checkbox-label" style="font-size:12px; margin:0;">
+                <input type="checkbox" id="seq-autoclean-toggle" checked /> Auto-clean (> 7 days)
+              </label>
+            </div>
+            <div id="seq-logs-list" class="seq-logs-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== SEQUENCE RULE MODAL ===================== -->
+    <div id="seq-rule-modal" class="modal-overlay hidden">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="seq-rule-modal-title">New Sequence Rule</h2>
+          <button class="icon-btn" id="seq-rule-modal-close" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="seq-rule-name">Rule Name</label>
+            <input type="text" id="seq-rule-name" placeholder="e.g. Go Short, Go Long" />
+          </div>
+          <div class="form-group">
+            <label>Sequence Steps (Max 5)</label>
+            <p class="settings-hint">Enter the signal keywords in matching order. (e.g. price_below_ema9)</p>
+            <div id="seq-steps-container" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;"></div>
+            <button id="seq-add-step-btn" class="btn-secondary" style="margin-top:8px; width:100%;">+ Add Step</button>
+          </div>
+          <div class="form-group" style="margin-top:16px;">
+            <label class="checkbox-label">
+              <input type="checkbox" id="seq-rule-enabled" checked /> Rule Enabled
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="seq-rule-delete-btn" class="btn-danger hidden">Delete Rule</button>
+          <div class="modal-footer-right">
+            <button id="seq-rule-cancel-btn" class="btn-secondary">Cancel</button>
+            <button id="seq-rule-save-btn" class="btn-primary">Save</button>
+          </div>
         </div>
       </div>
     </div>
