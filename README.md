@@ -403,3 +403,18 @@ Because we avoided a paid Firebase plan, the webhook is built for **Vercel Serve
     - **Management**: You can easily delete any previous Pre-trade or Candle Checklist run if needed (just tap "Delete" next to the "Edit" button).
 3. **Delete capability across logs**: Both pre-trade checklist logs (linked to trades) and candle checklist runs can now be freely edited or deleted.
 4. **Structured Decision Rules**: Split the Decision category into Positive (choose) and Negative (reject) triggers, ordering them above the Observatory sections for quick validation.
+
+### v1.2.0 — Sequential Signal Trigger System
+
+1. **Sequential Trigger Rules**: Define rules that trigger only when 2 to 5 specific messages arrive in an ordered sequence (e.g. M1 $\rightarrow$ M2 $\rightarrow$ M3).
+    - **Timeframe-based Expiry**: The tracking state automatically expires if the next step does not arrive within a configurable multiplier of the M1 chart timeframe (e.g. 1-minute chart alert has a 6-minute window by default).
+    - **Casing & Duplicate Handling**: Casing is automatically ignored during matching, and a new M1 alert restarts the tracking sequence, resetting previous in-progress states.
+2. **Split-Pane TV Notifications Dashboard**: The TV Notifications tab is now partitioned:
+    - **Left Pane**: Live stream of raw incoming alerts from TradingView.
+    - **Right Pane**: Setup panel for active rules, progress counters, and final trigger event logs.
+3. **Editable Logs & Outcome Filtering**: Completed triggers generate detailed logs capturing symbol, timeframe, date, and price. Outcomes (`Pending`, `Profit`, `Loss`) and custom notes can be edited inline. Logs are filterable by symbol name and outcome.
+4. **CSV Exporting**: Easily download filtered log records as a standardized, quoted CSV spreadsheet file.
+5. **Telegram Push Notifications**: Push triggers instantly to your Telegram group, private chat, or channel using a custom bot. Set up and test credentials directly in Settings.
+6. **Log Auto-Clean**: Auto-cleans logs older than 7 days automatically inside the backend webhook. Can be toggled on/off in the logs list header.
+7. **Serverless Execution Safety**: Awaits background promise completion in Vercel Serverless Functions to guarantee reliable Firestore writes and Telegram calls before Vercel freezes the execution thread.
+

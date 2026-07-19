@@ -10,6 +10,14 @@ import { subscribeAiSummaries, unsubscribeAiSummaries } from '../services/ai.js'
 import { subscribeChecklistLogs, unsubscribeChecklists } from '../services/checklists.js';
 import { subscribeCandleChecklists, unsubscribeCandleChecklists } from '../services/candleChecklist.js';
 import { subscribeTvNotifications, unsubscribeTvNotifications } from '../services/tvNotifications.js';
+import {
+  subscribeSequenceRules,
+  subscribeSequenceTriggerLogs,
+  subscribeSequenceStates,
+  unsubscribeSequenceRules,
+  unsubscribeSequenceTriggerLogs,
+  unsubscribeSequenceStates
+} from '../services/sequenceRules.js';
 import { loadSettings, checkBackupReminder, loadTradePasscodeStatus } from './settings.js';
 import { loadThemePreference } from '../utils/theme.js';
 
@@ -73,6 +81,9 @@ auth.onAuthStateChanged((user) => {
     subscribeChecklistLogs();
     subscribeCandleChecklists();
     subscribeTvNotifications();
+    subscribeSequenceRules();
+    subscribeSequenceTriggerLogs();
+    subscribeSequenceStates();
     checkBackupReminder();
     setTimeout(() => loadTradePasscodeStatus(), 50);
     
@@ -87,6 +98,9 @@ auth.onAuthStateChanged((user) => {
     state.checklistLogs = [];
     state.candleChecklistTemplates = [];
     state.candleChecklistRuns = [];
+    state.sequenceRules = [];
+    state.sequenceTriggerLogs = [];
+    state.sequenceStates = [];
     state.cachedGeminiKey = null;
     state.cachedGoogleApiKey = null;
     state.tradePasscode = null;
@@ -99,6 +113,9 @@ auth.onAuthStateChanged((user) => {
     unsubscribeChecklists();
     unsubscribeCandleChecklists();
     unsubscribeTvNotifications();
+    unsubscribeSequenceRules();
+    unsubscribeSequenceTriggerLogs();
+    unsubscribeSequenceStates();
     
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { loggedIn: false } }));
   }

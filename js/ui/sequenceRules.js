@@ -100,22 +100,20 @@ export function initSequenceRulesUI() {
   });
   window.addEventListener('sequence-logs-updated', () => {
     renderLogs();
+    // In-app Toast notification on new completed sequence trigger
+    const newest = state.sequenceTriggerLogs[0];
+    if (newest) {
+      const ts = newest.triggeredAt?.toDate ? newest.triggeredAt.toDate() : new Date(newest.triggeredAt);
+      const age = Date.now() - ts.getTime();
+      if (age < 5000) {
+        showToast(`🎯 Sequence Triggered: ${newest.ruleName} (${newest.symbol} @ ₹${(newest.price || 0).toLocaleString('en-IN')})`, 8000);
+      }
+    }
   });
   window.addEventListener('sequence-states-updated', () => {
     renderRules();
   });
 
-  window.addEventListener('view-changed', (e) => {
-    if (e.detail.view === 'tvNotifications') {
-      subscribeSequenceRules();
-      subscribeSequenceTriggerLogs();
-      subscribeSequenceStates();
-    } else {
-      unsubscribeSequenceRules();
-      unsubscribeSequenceTriggerLogs();
-      unsubscribeSequenceStates();
-    }
-  });
 }
 
 // ===================== Rule Modal Handlers =====================
