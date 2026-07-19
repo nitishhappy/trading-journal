@@ -322,6 +322,19 @@
                 <input type="checkbox" id="seq-autoclean-toggle" checked /> Auto-clean (> 7 days)
               </label>
             </div>
+            
+            <!-- Filters & Export Controls -->
+            <div class="seq-log-filters" style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
+              <input type="text" id="seq-filter-symbol" placeholder="Filter symbol (e.g. BTC)..." style="flex:2; padding:6px 10px; font-size:13px; border-radius:6px;" />
+              <select id="seq-filter-outcome" style="flex:1.5; padding:6px 10px; font-size:13px; border-radius:6px;">
+                <option value="ALL">All Outcomes</option>
+                <option value="PENDING">Pending</option>
+                <option value="PROFIT">Profit</option>
+                <option value="LOSS">Loss</option>
+              </select>
+              <button id="seq-export-csv-btn" class="btn-small btn-secondary" style="padding:8px 12px; font-size:12px; border-radius:6px; margin:0;">Export CSV</button>
+            </div>
+
             <div id="seq-logs-list" class="seq-logs-list"></div>
           </div>
         </div>

@@ -69,6 +69,25 @@ module.exports = async (req, res) => {
     console.error("tvWebhook: cleanup error", err);
   }
 
+  // Auto-clean sequence trigger logs (> 7 days) if enabled in user preferences
+  try {
+    const prefsDoc = await db.collection("users").doc(uid).collection("settings").doc("preferences").get();
+    const autoCleanEnabled = prefsDoc.exists ? (prefsDoc.data().triggerLogAutoClean !== false) : true;
+    if (autoCleanEnabled) {
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+      const oldLogsSnaps = await db.collection("users").doc(uid).collection("sequenceTriggerLogs")
+        .where("triggeredAt", "<", sevenDaysAgo)
+        .get();
+      if (!oldLogsSnaps.empty) {
+        const batch = db.batch();
+        oldLogsSnaps.docs.forEach(doc => batch.delete(doc.ref));
+        await batch.commit();
+      }
+    }
+  } catch (err) {
+    console.error("tvWebhook: trigger logs auto-clean error", err);
+  }
+
   // ── Run sequence engine (non-blocking — respond 200 first) ────────────────
   if (keyword) {
     runSequenceEngine(db, uid, keyword, symbol, resolvedTimeframe, price)

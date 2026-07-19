@@ -172,11 +172,13 @@ async function runSequenceEngine(db, uid, keyword, symbol, timeframe, price) {
     if (stateData) {
       const m1TfMs = timeframeToMs(stateData.m1Timeframe);
       if (m1TfMs) {
-        const lastMatchedAt = stateData.lastMatchedAt?.toDate
-          ? stateData.lastMatchedAt.toDate()
-          : new Date(stateData.lastMatchedAt);
+        // Read directly as a number, fallback to toDate() or Date parse if it was previously stored as a Timestamp/Date
+        const lastMatchedTime = typeof stateData.lastMatchedAt === 'number'
+          ? stateData.lastMatchedAt
+          : (stateData.lastMatchedAt?.toDate ? stateData.lastMatchedAt.toDate().getTime() : new Date(stateData.lastMatchedAt).getTime());
+        
         const expiryMs = m1TfMs * timeoutMultiplier;
-        if ((now.getTime() - lastMatchedAt.getTime()) > expiryMs) {
+        if ((now.getTime() - lastMatchedTime) > expiryMs) {
           // Expired — delete and treat as fresh
           try {
             await stateDocRef.delete();
@@ -210,7 +212,7 @@ async function runSequenceEngine(db, uid, keyword, symbol, timeframe, price) {
             stepIndex:         1,
             m1Timeframe:       timeframe || null,
             m1Price:           price     || null,
-            lastMatchedAt:     now,
+            lastMatchedAt:     now.getTime(),
             lastMatchedPrice:  price     || null,
             lastMatchedTF:     timeframe || null,
           });
@@ -276,7 +278,7 @@ async function runSequenceEngine(db, uid, keyword, symbol, timeframe, price) {
           stepIndex:        newStepIndex,
           m1Timeframe:      expectedStepIndex === 0 ? (timeframe || null) : (stateData?.m1Timeframe || null),
           m1Price:          expectedStepIndex === 0 ? (price     || null) : (stateData?.m1Price     || null),
-          lastMatchedAt:    now,
+          lastMatchedAt:    now.getTime(),
           lastMatchedPrice: price     || null,
           lastMatchedTF:    timeframe || null,
         });

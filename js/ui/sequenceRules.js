@@ -19,6 +19,9 @@ const seqCreateRuleBtn   = document.getElementById('seq-create-rule-btn');
 const seqRulesList       = document.getElementById('seq-rules-list');
 const seqLogsList        = document.getElementById('seq-logs-list');
 const seqAutocleanToggle = document.getElementById('seq-autoclean-toggle');
+const seqFilterSymbol    = document.getElementById('seq-filter-symbol');
+const seqFilterOutcome   = document.getElementById('seq-filter-outcome');
+const seqExportCsvBtn    = document.getElementById('seq-export-csv-btn');
 
 // Modal DOM refs
 const seqRuleModal       = document.getElementById('seq-rule-modal');
@@ -78,6 +81,17 @@ export function initSequenceRulesUI() {
         showToast('Could not save setting');
       }
     });
+  }
+
+  // Filter input listeners
+  if (seqFilterSymbol) {
+    seqFilterSymbol.addEventListener('input', () => renderLogs());
+  }
+  if (seqFilterOutcome) {
+    seqFilterOutcome.addEventListener('change', () => renderLogs());
+  }
+  if (seqExportCsvBtn) {
+    seqExportCsvBtn.addEventListener('click', handleExportCSV);
   }
 
   // Live updates
@@ -358,12 +372,72 @@ function renderRules() {
   });
 }
 
+function getFilteredLogs() {
+  let logs = state.sequenceTriggerLogs || [];
+  
+  if (seqFilterSymbol && seqFilterSymbol.value.trim()) {
+    const sym = seqFilterSymbol.value.trim().toUpperCase();
+    logs = logs.filter(log => (log.symbol || '').toUpperCase().includes(sym));
+  }
+
+  if (seqFilterOutcome && seqFilterOutcome.value !== 'ALL') {
+    const out = seqFilterOutcome.value;
+    logs = logs.filter(log => {
+      const outcome = log.outcome || 'PENDING';
+      return outcome === out;
+    });
+  }
+
+  return logs;
+}
+
+function handleExportCSV() {
+  const logs = getFilteredLogs();
+  if (logs.length === 0) {
+    showToast('No logs matching current filter to export');
+    return;
+  }
+
+  const headers = ['Triggered At (IST)', 'Rule Name', 'Symbol', 'Timeframe', 'Price', 'Outcome', 'Notes'];
+
+  const rows = logs.map(log => {
+    const ts = log.triggeredAt?.toDate ? log.triggeredAt.toDate() : new Date(log.triggeredAt);
+    const dateStr = ts.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }).replace(/,/g, '');
+    return [
+      dateStr,
+      log.ruleName || '',
+      log.symbol || '',
+      log.timeframe || '',
+      log.price || 0,
+      log.outcome || 'PENDING',
+      (log.notes || '').replace(/"/g, '""')
+    ];
+  });
+
+  const csvContent = [
+    headers.join(','),
+    ...rows.map(r => r.map(val => typeof val === 'string' ? `"${val}"` : val).join(','))
+  ].join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.setAttribute('href', url);
+  link.setAttribute('download', `sequence_triggers_${new Date().toISOString().split('T')[0]}.csv`);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  showToast('Trigger logs CSV exported successfully ✓');
+}
+
 function renderLogs() {
   if (!seqLogsList) return;
-  const logs = state.sequenceTriggerLogs || [];
+  const logs = getFilteredLogs();
 
   if (logs.length === 0) {
-    seqLogsList.innerHTML = '<p class="settings-hint">No trigger events captured yet.</p>';
+    seqLogsList.innerHTML = '<p class="settings-hint">No matching trigger events found.</p>';
     return;
   }
 

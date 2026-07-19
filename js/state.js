@@ -36,6 +36,7 @@ export const state = {
   candleChecklistRuns: [],
   sequenceRules: [],
   sequenceTriggerLogs: [],
+  sequenceStates: [],
 };
 
 // Bind to window for backward compatibility with trade-security.js and legacy code
