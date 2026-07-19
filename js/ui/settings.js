@@ -22,9 +22,39 @@ const tradePasscodeSaveBtn = document.getElementById("trade-passcode-save-btn");
 const tradePasscodeRemoveBtn = document.getElementById("trade-passcode-remove-btn");
 const tradePasscodeStatus = document.getElementById("trade-passcode-status");
 
-// Open settings
+// Open settings with passcode/password protection
 if (settingsGearBtn) {
-  settingsGearBtn.addEventListener("click", () => {
+  settingsGearBtn.addEventListener("click", async () => {
+    if (state.tradePasscode) {
+      const entered = prompt("Enter your 4-digit passcode to access settings:");
+      if (entered === null) return;
+      if (entered !== state.tradePasscode) {
+        showToast("Incorrect passcode! Access denied.");
+        return;
+      }
+    } else {
+      const entered = prompt("Enter your account password to access settings:");
+      if (entered === null) return;
+      if (!entered.trim()) {
+        showToast("Password cannot be empty.");
+        return;
+      }
+      try {
+        const email = auth.currentUser?.email;
+        if (!email) {
+          showToast("User not authenticated.");
+          return;
+        }
+        const credential = firebase.auth.EmailAuthProvider.credential(email, entered);
+        await auth.currentUser.reauthenticateWithCredential(credential);
+        showToast("Access granted ✓");
+      } catch (err) {
+        showToast("Incorrect password! Access denied.");
+        console.error(err);
+        return;
+      }
+    }
+
     viewSettings.classList.add("settings-open");
     currentFolderLabel.textContent = "Settings";
     
