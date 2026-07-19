@@ -696,10 +696,28 @@
             <span id="tv-webhook-url-text" style="flex:1;"></span>
             <button id="tv-token-reveal-btn" class="btn-small btn-secondary" style="margin-left:8px;">Reveal</button>
           </div>
-          <div style="display:flex;gap:8px;margin-top:12px;">
+          <div style="display:flex;gap:8px;margin-top:12px;margin-bottom:20px;">
             <button id="tv-copy-url-btn" class="btn-primary">Copy URL</button>
             <button id="tv-regenerate-token-btn" class="btn-secondary">Regenerate Token</button>
           </div>
+
+          <h4 style="margin-top:20px; margin-bottom:8px;">Telegram Push Integration</h4>
+          <p class="settings-hint">Sends push notifications directly to your Telegram chat or channel.</p>
+          <label for="settings-tg-token">Telegram Bot Token</label>
+          <input type="password" id="settings-tg-token" style="width:100%;margin-bottom:8px;" placeholder="e.g. 123456789:ABCdefGhI..." />
+          
+          <label for="settings-tg-chatid">Telegram Chat ID / Channel Username</label>
+          <input type="text" id="settings-tg-chatid" style="width:100%;margin-bottom:12px;" placeholder="e.g. -100123456789 or @mychannel" />
+          
+          <div style="display:flex;gap:8px;margin-bottom:20px;">
+            <button id="settings-tg-save-btn" class="btn-primary btn-small">Save Telegram Config</button>
+            <button id="settings-tg-test-btn" class="btn-secondary btn-small">Send Test Message</button>
+          </div>
+
+          <h4 style="margin-top:20px; margin-bottom:8px;">Sequence Tracking Settings</h4>
+          <label for="settings-seq-multiplier">Sequence Timeout Multiplier (times the timeframe)</label>
+          <input type="number" id="settings-seq-multiplier" min="1" max="100" style="width:100px;margin-bottom:12px;" value="6" />
+          <button id="settings-seq-save-btn" class="btn-primary btn-small" style="display:block;">Save Sequence Timeout</button>
         </div>
       </div>
 
