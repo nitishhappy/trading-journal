@@ -352,7 +352,7 @@ function renderRules() {
     }
 
     card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; padding-right: 60px;">
         <h4 style="margin:0; font-weight:600;">${rule.name}</h4>
         <span style="font-size:11px; color: ${rule.enabled ? 'var(--low)' : 'var(--text-dim)'};">${rule.enabled ? 'Enabled' : 'Disabled'}</span>
       </div>

@@ -136,11 +136,13 @@ async function runSequenceEngine(db, uid, keyword, symbol, timeframe, price) {
     console.error('sequenceEngine: failed to load prefs', err);
   }
 
-  // Load all enabled rules
+  // Load all rules and filter in-memory (treating missing enabled flag as true by default)
   let rules = [];
   try {
-    const snap = await rulesRef.where('enabled', '==', true).get();
-    rules = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const snap = await rulesRef.get();
+    rules = snap.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(r => r.enabled !== false);
   } catch (err) {
     console.error('sequenceEngine: failed to load rules', err);
     return;
