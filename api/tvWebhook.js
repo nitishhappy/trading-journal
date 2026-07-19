@@ -88,10 +88,13 @@ module.exports = async (req, res) => {
     console.error("tvWebhook: trigger logs auto-clean error", err);
   }
 
-  // ── Run sequence engine (non-blocking — respond 200 first) ────────────────
+  // ── Run sequence engine (awaited to prevent Vercel context termination) ──
   if (keyword) {
-    runSequenceEngine(db, uid, keyword, symbol, resolvedTimeframe, price)
-      .catch(err => console.error("tvWebhook: sequenceEngine error", err));
+    try {
+      await runSequenceEngine(db, uid, keyword, symbol, resolvedTimeframe, price);
+    } catch (err) {
+      console.error("tvWebhook: sequenceEngine error", err);
+    }
   }
 
   return res.status(200).send("OK");
