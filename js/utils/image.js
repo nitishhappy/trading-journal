@@ -73,35 +73,36 @@ export function buildInstagramEmbed(url) {
   if (!match) return null;
   const type = match[1].toLowerCase();
   const code = match[2];
-  const permalink = `https://www.instagram.com/${type === "p" ? "p" : "reel"}/${code}/`;
+  const embedUrl = `https://www.instagram.com/${type === "p" ? "p" : "reel"}/${code}/embed/`;
 
   const wrap = document.createElement("div");
   wrap.className = "instagram-preview-wrap";
+  wrap.style.position = "relative";
+  wrap.style.width = "100%";
+  wrap.style.maxWidth = "400px";
+  wrap.style.height = "450px";
+  wrap.style.margin = "8px 0";
+  wrap.style.borderRadius = "8px";
+  wrap.style.overflow = "hidden";
+  wrap.style.border = "1px solid var(--border)";
+  wrap.style.background = "var(--surface-2)";
+
   wrap.addEventListener("pointerdown", (e) => e.stopPropagation());
   wrap.addEventListener("click", (e) => e.stopPropagation());
 
-  // Placeholder blockquote — Instagram's script replaces this with its own
-  // iframe once it runs. This is the same markup instagram.com's own
-  // "Embed" button generates, which is what gets the real full-height
-  // aspect ratio instead of the cropped/letterboxed look of a raw
-  // /embed/ iframe src.
-  const blockquote = document.createElement("blockquote");
-  blockquote.className = "instagram-media";
-  blockquote.setAttribute("data-instgrm-permalink", permalink);
-  blockquote.setAttribute("data-instgrm-version", "14");
-  wrap.appendChild(blockquote);
-
-  loadInstagramEmbedScript()
-    .then(() => {
-      // Scoped to `wrap` rather than calling process() with no argument —
-      // otherwise every embed already on the page gets re-scanned and
-      // re-processed each time a new one is added.
-      if (window.instgrm && window.instgrm.Embeds) {
-        window.instgrm.Embeds.process(wrap);
-      }
-    })
-    .catch((err) => console.error("Instagram embed script failed to load", err));
-
+  const iframe = document.createElement("iframe");
+  iframe.src = embedUrl;
+  iframe.style.position = "absolute";
+  iframe.style.top = "0";
+  iframe.style.left = "0";
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "0";
+  iframe.scrolling = "no";
+  iframe.allowTransparency = "true";
+  iframe.loading = "lazy"; // load only when visible in viewport
+  
+  wrap.appendChild(iframe);
   return wrap;
 }
 
