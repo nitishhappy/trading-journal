@@ -8,7 +8,8 @@ import { openEditModal } from './dashboard.js';
 import { buildImageGrid, buildLinksSection, buildLinkPreviewIfApplicable, buildLinksFragment, getObservationLinks, escapeHtml } from '../utils/image.js';
 import {
   revisionStage, revisionEmptyState, revisionEmptyText, revisionProgressText,
-  revisionProgressFill, revisionResetBtn, revisionFolderSelect, revisionStarredToggle
+  revisionProgressFill, revisionResetBtn, revisionFolderSelect, revisionStarredToggle,
+  revisionTagInput, revisionTagClear, revisionTagDatalist
 } from '../dom.js';
 
 // ===================== Event Listeners =====================
@@ -24,9 +25,55 @@ window.addEventListener('observations-updated', () => {
 
 window.addEventListener('view-changed', (e) => {
   if (e.detail.view === "revision") {
+    populateTagDatalist();
     renderRevisionStage();
   }
 });
+
+// Update the list of options when observations change
+window.addEventListener('observations-updated', () => {
+  if (state.activeView === "revision") {
+    populateTagDatalist();
+    renderRevisionStage();
+  }
+});
+
+function populateTagDatalist() {
+  if (revisionTagDatalist && state.observations) {
+    const allTags = new Set();
+    state.observations.forEach(o => {
+      if (o.tags && Array.isArray(o.tags)) {
+        o.tags.forEach(t => allTags.add(t));
+      }
+    });
+    revisionTagDatalist.innerHTML = [...allTags].sort()
+      .map(t => `<option value="${t}">`).join("");
+  }
+}
+
+// ── Tag filter implementation ──────────────────────────────────────────────
+function applyTagFilter(raw) {
+  const val = raw.trim().replace(/^#/, "").toLowerCase();
+  state.revisionTagFilter = val || "all";
+  if (revisionTagClear) revisionTagClear.style.display = val ? "inline" : "none";
+  state.revisionReviewedIds = [];
+  state.revisionFlaggedIds = [];
+  if (state.activeView === "revision") renderRevisionStage();
+}
+
+if (revisionTagInput) {
+  // Fire on every keystroke for real-time filtering
+  revisionTagInput.addEventListener("input", () => applyTagFilter(revisionTagInput.value));
+  // Fire on select choice click
+  revisionTagInput.addEventListener("change", () => applyTagFilter(revisionTagInput.value));
+}
+
+if (revisionTagClear) {
+  revisionTagClear.addEventListener("click", () => {
+    if (revisionTagInput) revisionTagInput.value = "";
+    applyTagFilter("");
+  });
+}
 
 if (revisionFolderSelect) {
   revisionFolderSelect.addEventListener("change", () => {
@@ -109,6 +156,12 @@ export function buildRevisionQueue() {
     if (dailyDone.includes(o.id)) return false;
     if (state.revisionFolderFilter !== "all" && o.folder !== state.revisionFolderFilter) return false;
     if (state.revisionStarredOnly && !o.starred) return false;
+    
+    // Tag filter matching
+    if (state.revisionTagFilter && state.revisionTagFilter !== "all") {
+      const oTags = (o.tags || []).map(t => t.toLowerCase());
+      if (!oTags.includes(state.revisionTagFilter)) return false;
+    }
     return true;
   });
 
@@ -126,6 +179,11 @@ export function getRevisionTotalCount() {
     if (o.archived) return false;
     if (state.revisionFolderFilter !== "all" && o.folder !== state.revisionFolderFilter) return false;
     if (state.revisionStarredOnly && !o.starred) return false;
+    
+    if (state.revisionTagFilter && state.revisionTagFilter !== "all") {
+      const oTags = (o.tags || []).map(t => t.toLowerCase());
+      if (!oTags.includes(state.revisionTagFilter)) return false;
+    }
     return true;
   }).length;
 }
