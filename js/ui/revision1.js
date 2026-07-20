@@ -8,7 +8,8 @@ import { openEditModal } from './dashboard.js';
 import { buildImageGrid, buildLinksSection, buildLinkPreviewIfApplicable, buildLinksFragment, getObservationLinks, escapeHtml } from '../utils/image.js';
 import {
   revisionStage, revisionEmptyState, revisionEmptyText, revisionProgressText,
-  revisionProgressFill, revisionResetBtn, revisionFolderSelect, revisionStarredToggle
+  revisionProgressFill, revisionResetBtn, revisionFolderSelect, revisionStarredToggle,
+  revisionTagInput, revisionTagClear, revisionTagDatalist
 } from '../dom.js';
 
 // ===================== Event Listeners =====================
@@ -18,6 +19,13 @@ window.addEventListener('observations-updated', () => {
 
 window.addEventListener('view-changed', (e) => {
   if (e.detail.view === "revision") {
+    // Populate tag datalist with all unique tags across observations
+    if (revisionTagDatalist && state.observations) {
+      const allTags = new Set();
+      state.observations.forEach(o => (o.tags || []).forEach(t => allTags.add(t)));
+      revisionTagDatalist.innerHTML = [...allTags].sort()
+        .map(t => `<option value="${t}">`).join("");
+    }
     renderRevisionStage();
   }
 });
@@ -39,6 +47,30 @@ if (revisionStarredToggle) {
     state.revisionReviewedIds = [];
     state.revisionFlaggedIds = [];
     if (state.activeView === "revision") renderRevisionStage();
+  });
+}
+
+// ── Tag filter ──────────────────────────────────────────────────────────────
+function applyTagFilter(raw) {
+  const val = raw.trim().replace(/^#/, "").toLowerCase();
+  state.revisionTagFilter = val || "all";
+  if (revisionTagClear) revisionTagClear.style.display = val ? "inline" : "none";
+  state.revisionReviewedIds = [];
+  state.revisionFlaggedIds = [];
+  if (state.activeView === "revision") renderRevisionStage();
+}
+
+if (revisionTagInput) {
+  // Fire on every keystroke so live-filtering works
+  revisionTagInput.addEventListener("input", () => applyTagFilter(revisionTagInput.value));
+  // Also fire on datalist selection (change event)
+  revisionTagInput.addEventListener("change", () => applyTagFilter(revisionTagInput.value));
+}
+
+if (revisionTagClear) {
+  revisionTagClear.addEventListener("click", () => {
+    if (revisionTagInput) revisionTagInput.value = "";
+    applyTagFilter("");
   });
 }
 
@@ -103,6 +135,11 @@ export function buildRevisionQueue() {
     if (dailyDone.includes(o.id)) return false;
     if (state.revisionFolderFilter !== "all" && o.folder !== state.revisionFolderFilter) return false;
     if (state.revisionStarredOnly && !o.starred) return false;
+    // Tag filter: observation must contain the tag
+    if (state.revisionTagFilter !== "all") {
+      const oTags = (o.tags || []).map(t => t.toLowerCase());
+      if (!oTags.includes(state.revisionTagFilter)) return false;
+    }
     return true;
   });
 
@@ -120,6 +157,10 @@ export function getRevisionTotalCount() {
     if (o.archived) return false;
     if (state.revisionFolderFilter !== "all" && o.folder !== state.revisionFolderFilter) return false;
     if (state.revisionStarredOnly && !o.starred) return false;
+    if (state.revisionTagFilter !== "all") {
+      const oTags = (o.tags || []).map(t => t.toLowerCase());
+      if (!oTags.includes(state.revisionTagFilter)) return false;
+    }
     return true;
   }).length;
 }

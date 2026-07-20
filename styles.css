@@ -1837,6 +1837,56 @@ textarea { resize: vertical; }
   max-width: 130px;
 }
 
+/* Tag filter pill */
+.revision-tag-filter-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 80px;
+  max-width: 160px;
+}
+
+.revision-tag-input {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-bright);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 5px 24px 5px 8px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.revision-tag-input:focus {
+  border-color: var(--accent, #4ade80);
+}
+
+.revision-tag-input::placeholder {
+  color: var(--text-muted, #888);
+  opacity: 1;
+}
+
+.revision-tag-clear {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted, #888);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.revision-tag-clear:hover {
+  color: var(--text);
+}
+
 .revision-progress {
   flex: 1;
   display: flex;

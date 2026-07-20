@@ -35,6 +35,9 @@ export const revisionProgressFill = document.getElementById("revision-progress-f
 export const revisionResetBtn = document.getElementById("revision-reset-btn");
 export const revisionFolderSelect = document.getElementById("revision-folder-filter");
 export const revisionStarredToggle = document.getElementById("revision-starred-toggle");
+export const revisionTagInput      = document.getElementById("revision-tag-filter");
+export const revisionTagClear      = document.getElementById("revision-tag-clear");
+export const revisionTagDatalist   = document.getElementById("revision-tag-datalist");
 
 // Main tab navigation
 export const mainTabs = document.getElementById("main-tabs");

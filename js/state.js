@@ -19,6 +19,7 @@ export const state = {
   revisionReviewedIds: [],
   revisionFlaggedIds: [],
   revisionFolderFilter: "all",
+  revisionTagFilter: "all",
   revisionStarredOnly: false,
   revisionDragState: null,
   checklistLogs: [],

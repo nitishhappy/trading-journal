@@ -172,6 +172,11 @@
         <select id="revision-folder-filter" class="revision-folder-select" title="Filter by folder">
           <option value="all">All folders</option>
         </select>
+        <div class="revision-tag-filter-wrap" title="Filter by tag">
+          <input id="revision-tag-filter" class="revision-tag-input" type="text" placeholder="# tag filter" list="revision-tag-datalist" autocomplete="off" />
+          <datalist id="revision-tag-datalist"></datalist>
+          <button id="revision-tag-clear" class="revision-tag-clear" title="Clear tag filter" style="display:none">✕</button>
+        </div>
         <button id="revision-starred-toggle" class="btn-small revision-starred-toggle" title="Toggle starred only">☆ All</button>
         <button id="revision-reset-btn" class="btn-small" title="Reset today's reviewed list">↺ Reset</button>
       </div>
