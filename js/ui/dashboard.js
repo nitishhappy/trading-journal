@@ -1733,9 +1733,9 @@ async function saveModalObservation(addAnother) {
   // Parse comma separated tags
   const tags = tagsStr.split(",").map((t) => t.trim().toLowerCase()).filter(Boolean);
 
-  // Auto category suggestion
-  const bestCat = suggestCategory(text, tags);
-  const category = bestCat ? bestCat.category : null;
+  // Category tag = the folder the user explicitly selected (not auto-suggested from keywords)
+  // Previously suggestCategory() was overriding the user's choice with a keyword match.
+  const category = folder || null;
 
   const data = {
     text,
