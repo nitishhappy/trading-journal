@@ -1061,6 +1061,61 @@
     </div>
   </div>
 
+  <!-- ===================== KEYBOARD SHORTCUTS CHEATSHEET ===================== -->
+  <div id="shortcuts-modal" class="modal-overlay hidden">
+    <div class="modal small">
+      <div class="modal-header">
+        <h2>Keyboard Shortcuts</h2>
+        <button class="icon-btn" onclick="document.getElementById('shortcuts-modal').classList.add('hidden')" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" style="font-size:13px; line-height:1.6;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Open New Observation</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">N</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Go to Dashboard Tab</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">D</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Go to Revision Tab</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">R</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Go to Trade Log Tab</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">L</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Close Modals / Cancel</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">Esc</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Toggle Shortcuts Help</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">?</span>
+        </div>
+        
+        <div style="margin-top:14px; font-weight:bold; color:var(--accent);">Revision Mode Controls:</div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Swipe Right (Reviewed)</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">→ (Right Arrow)</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Swipe Left (Attention)</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">← (Left Arrow)</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+          <span><b>Toggle Star</b></span>
+          <span style="font-family:var(--font-mono); background:var(--surface-3); padding:2px 6px; border-radius:4px; font-weight:bold;">S</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-right">
+          <button class="btn-primary" onclick="document.getElementById('shortcuts-modal').classList.add('hidden')">Close Help</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div id="toast" class="toast hidden"></div>
 

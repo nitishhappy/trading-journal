@@ -35,6 +35,7 @@ import './js/ui/tradelog.js';     // trade log table + modal
 import './js/ui/checklists.js';   // pre-trade checklist modal + log editor
 import './js/ui/candleChecklist.js'; // candle checklist tab UI module
 import './js/ui/tvNotifications.js'; // TradingView notifications UI module
+import './js/utils/keyboard.js';      // keyboard shortcuts module
 
 // 6. Sequential trigger system modules
 import './js/services/sequenceRules.js';

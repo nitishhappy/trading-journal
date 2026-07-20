@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-e7721186ea";
+const CACHE_NAME = "trade-journal-e7721186ea-v3";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -23,6 +23,7 @@ const ASSETS = [
   "./js/utils/date.js",
   "./js/utils/image.js",
   "./js/utils/export.js",
+  "./js/utils/keyboard.js",
   "./js/services/observations.js",
   "./js/services/trades.js",
   "./js/services/checklists.js",
@@ -51,7 +52,7 @@ const NETWORK_FIRST_FILES = [
   "index.html", "styles.css", "app.js", "manifest.json", "trade-security.js",
   "js/state.js", "js/dom.js", "js/firebase-init.js",
   "js/utils/toast.js", "js/utils/theme.js", "js/utils/date.js",
-  "js/utils/image.js", "js/utils/export.js",
+  "js/utils/image.js", "js/utils/export.js", "js/utils/keyboard.js",
   "js/services/observations.js", "js/services/trades.js",
   "js/services/checklists.js", "js/services/ai.js",
   "js/services/candleChecklist.js",
