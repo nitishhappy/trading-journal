@@ -115,9 +115,34 @@ export function subscribeObservations() {
     
     // Dispatch custom event to notify dashboard / revision / etc.
     window.dispatchEvent(new CustomEvent('observations-updated'));
+
+    // Automatically trigger cache preloading for all images in background
+    preloadObservationImages();
   }, (err) => {
     console.error("observations load error", err);
     showToast("Failed to load observations");
+  });
+}
+
+function preloadObservationImages() {
+  if (!state.observations || state.observations.length === 0) return;
+  
+  // Extract all unique image URLs from observations
+  const imageUrls = new Set();
+  state.observations.forEach((o) => {
+    const obsImages = o.images && o.images.length > 0 ? o.images : (o.imageBase64 ? [o.imageBase64] : []);
+    obsImages.forEach(img => {
+      // Avoid data URIs (Base64 is already saved in Firestore document itself, no fetch needed)
+      if (img && img.startsWith("http")) {
+        imageUrls.add(img);
+      }
+    });
+  });
+
+  // Pre-fetch images quietly in the background
+  // Service Worker's fetch event will capture these and cache them in the IMAGE_CACHE
+  imageUrls.forEach(url => {
+    fetch(url, { mode: 'no-cors' }).catch(() => {});
   });
 }
 
