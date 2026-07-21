@@ -74,8 +74,13 @@ export function initTvNotificationsUI() {
           Notification.requestPermission();
         }
 
-        const notifRef = db.collection('users').doc(state.currentUser.uid).collection('tvNotifications').doc();
-        
+        // Get user's active webhook token
+        const token = await loadWebhookToken();
+        if (!token) {
+          showToast('Webhook token is not setup yet. Please generate one first.');
+          return;
+        }
+
         // Pick a matching rule if it exists to trigger sequential engine, else write a generic alert
         const activeRules = state.sequenceRules || [];
         const targetRule = activeRules.find(r => r.enabled && r.steps && r.steps.length > 0);
@@ -93,22 +98,23 @@ export function initTvNotificationsUI() {
         const sym = 'XAUUSD';
         const tf = '15';
         const price = 4044 + Math.random() * 10;
-        const msg = `${keyword}: ${action} signal for ${sym} in ${tf} at ${price.toFixed(3)}`;
+        const msgText = `${keyword}: ${action} signal for ${sym} in ${tf} at ${price.toFixed(3)}`;
 
-        await notifRef.set({
-          raw: msg,
-          symbol: sym,
-          action: action,
-          price: parseFloat(price.toFixed(3)),
-          strategy: null,
-          interval: tf,
-          keyword: keyword,
-          read: false,
-          receivedAt: firebase.firestore.FieldValue.serverTimestamp(),
-          source: 'tradingview_test'
+        // Send simulated webhook directly to the Vercel backend endpoint
+        const targetUrl = `/api/tvWebhook?token=${token}`;
+        const resp = await fetch(targetUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain'
+          },
+          body: msgText
         });
 
-        showToast(`Simulated Alert Sent: "${keyword}" for ${sym}`);
+        if (resp.ok) {
+          showToast(`Simulated Alert Dispatched: "${keyword}" for ${sym}`);
+        } else {
+          showToast(`Failed to dispatch alert: HTTP ${resp.status}`);
+        }
       } catch (err) {
         console.error('Alert test failed', err);
         showToast('Alert test failed: ' + err.message);
