@@ -56,7 +56,7 @@ export function initTvNotificationsUI() {
     });
   }
 
-  // Test Alert simulator trigger (support touch pointerdown & click events on mobile)
+  // Test Alert simulator trigger (support mobile touchstart and click)
   const testAlertBtn = document.getElementById('tv-test-alert-btn');
   if (testAlertBtn) {
     const handleTestAlert = async (e) => {
@@ -64,24 +64,30 @@ export function initTvNotificationsUI() {
         e.preventDefault();
         e.stopPropagation();
       }
+
       if (!state.currentUser) {
         showToast('You must be logged in to test notifications');
         return;
       }
+
+      // Request browser notification permissions immediately on user gesture
+      if (typeof Notification !== "undefined" && Notification.permission === "default") {
+        Notification.requestPermission();
+      }
+
       try {
-        // Request/prompt permissions immediately on tap gesture to ensure audio context / push is allowed
-        if ("Notification" in window && Notification.permission === "default") {
-          Notification.requestPermission();
+        // Fallback: read token from state preference if available, else load it
+        let token = state.tvWebhookToken || null;
+        if (!token) {
+          token = await loadWebhookToken();
         }
 
-        // Get user's active webhook token
-        const token = await loadWebhookToken();
         if (!token) {
-          showToast('Webhook token is not setup yet. Please generate one first.');
+          showToast('Webhook token is not setup yet. Generate one in settings first.');
           return;
         }
 
-        // Pick a matching rule if it exists to trigger sequential engine, else write a generic alert
+        // Pick active rule keyword to simulate
         const activeRules = state.sequenceRules || [];
         const targetRule = activeRules.find(r => r.enabled && r.steps && r.steps.length > 0);
         
@@ -100,7 +106,7 @@ export function initTvNotificationsUI() {
         const price = 4044 + Math.random() * 10;
         const msgText = `${keyword}: ${action} signal for ${sym} in ${tf} at ${price.toFixed(3)}`;
 
-        // Send simulated webhook directly to the Vercel backend endpoint
+        // Dispatch simulated alert directly to Vercel
         const targetUrl = `/api/tvWebhook?token=${token}`;
         const resp = await fetch(targetUrl, {
           method: 'POST',
@@ -111,9 +117,9 @@ export function initTvNotificationsUI() {
         });
 
         if (resp.ok) {
-          showToast(`Simulated Alert Dispatched: "${keyword}" for ${sym}`);
+          showToast(`Simulated Alert Dispatched: "${keyword}"`);
         } else {
-          showToast(`Failed to dispatch alert: HTTP ${resp.status}`);
+          showToast(`Dispatch failed: HTTP ${resp.status}`);
         }
       } catch (err) {
         console.error('Alert test failed', err);
@@ -121,13 +127,9 @@ export function initTvNotificationsUI() {
       }
     };
 
-    testAlertBtn.addEventListener('pointerdown', handleTestAlert);
-    testAlertBtn.addEventListener('click', (e) => {
-      // Prevents double triggers if browser fires both pointerdown and click
-      if (e.clientX !== 0 && e.clientY !== 0) {
-        e.preventDefault();
-      }
-    });
+    // Use touchstart for immediate response on iOS/Android, click as backup
+    testAlertBtn.addEventListener('touchstart', handleTestAlert, { passive: false });
+    testAlertBtn.addEventListener('click', handleTestAlert);
   }
 
   // Live updates
