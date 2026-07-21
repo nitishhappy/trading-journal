@@ -125,13 +125,98 @@
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.tv-feed {
-  flex: 1;
-  overflow-y: auto;
+/* Collapsible Symbol Groups */
+.tv-symbol-group {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-1);
+  overflow: hidden;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+
+.tv-symbol-group.has-new-alert {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(0, 149, 246, 0.15);
+}
+
+.tv-symbol-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.tv-symbol-header:hover {
+  background: var(--surface-3);
+}
+
+.tv-symbol-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tv-collapse-icon {
+  font-size: 10px;
+  color: var(--text-dim);
+  width: 14px;
+}
+
+.tv-symbol-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-color);
+  font-family: var(--font-mono);
+}
+
+.tv-symbol-count-badge {
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--surface-1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.tv-new-indicator {
+  font-size: 10px;
+  font-weight: 800;
+  color: #ff5252;
+  background: rgba(255, 82, 82, 0.15);
+  border: 1px solid rgba(255, 82, 82, 0.4);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.tv-symbol-header-right {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.tv-symbol-body {
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding-bottom: 24px;
+  gap: 10px;
+}
+
+.tv-symbol-body.collapsed {
+  display: none !important;
 }
 
 /* Cards */

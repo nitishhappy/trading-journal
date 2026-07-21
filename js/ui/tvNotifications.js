@@ -86,12 +86,15 @@ export function initTvNotificationsUI() {
 }
 
 // ===================== Feed Rendering =====================
+// Track collapsed state per symbol (default expanded)
+const collapsedSymbols = new Set();
+
 function renderFeed() {
   if (!notifFeed) return;
 
   let items = state.tvNotifications || [];
 
-  // Filter
+  // Filter by Action if selected
   if (currentFilter !== 'ALL') {
     items = items.filter(n => n.action === currentFilter);
   }
@@ -103,9 +106,73 @@ function renderFeed() {
   }
   if (emptyState) emptyState.classList.add('hidden');
 
-  notifFeed.innerHTML = '';
+  // Group notifications by symbol
+  const groups = {};
   items.forEach(notif => {
-    notifFeed.appendChild(buildCard(notif));
+    const sym = (notif.symbol || 'GENERAL').toUpperCase().trim();
+    if (!groups[sym]) groups[sym] = [];
+    groups[sym].push(notif);
+  });
+
+  notifFeed.innerHTML = '';
+
+  // Render each symbol pane
+  Object.keys(groups).forEach(symbol => {
+    const symbolItems = groups[symbol];
+    const hasUnread = symbolItems.some(n => !n.read);
+    const unreadCount = symbolItems.filter(n => !n.read).length;
+    const isCollapsed = collapsedSymbols.has(symbol);
+
+    const pane = document.createElement('div');
+    pane.className = `tv-symbol-group ${hasUnread ? 'has-new-alert' : ''}`;
+
+    pane.innerHTML = `
+      <div class="tv-symbol-header">
+        <div class="tv-symbol-header-left">
+          <span class="tv-collapse-icon">${isCollapsed ? '▶' : '▼'}</span>
+          <span class="tv-symbol-title">${symbol}</span>
+          <span class="tv-symbol-count-badge">${symbolItems.length} ${symbolItems.length === 1 ? 'alert' : 'alerts'}</span>
+          ${hasUnread ? `<span class="tv-new-indicator" title="${unreadCount} new alert(s)">🔴 ${unreadCount} NEW</span>` : ''}
+        </div>
+        <div class="tv-symbol-header-right">
+          <span class="tv-latest-time">${formatRelativeTime(symbolItems[0].receivedAt)}</span>
+        </div>
+      </div>
+      <div class="tv-symbol-body ${isCollapsed ? 'collapsed' : ''}">
+      </div>
+    `;
+
+    const bodyEl = pane.querySelector('.tv-symbol-body');
+    const headerEl = pane.querySelector('.tv-symbol-header');
+
+    // Build cards inside accordion body
+    symbolItems.forEach(notif => {
+      bodyEl.appendChild(buildCard(notif));
+    });
+
+    // Toggle collapse state on header click
+    headerEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (collapsedSymbols.has(symbol)) {
+        collapsedSymbols.delete(symbol);
+        bodyEl.classList.remove('collapsed');
+        pane.querySelector('.tv-collapse-icon').textContent = '▼';
+      } else {
+        collapsedSymbols.add(symbol);
+        bodyEl.classList.add('collapsed');
+        pane.querySelector('.tv-collapse-icon').textContent = '▶';
+      }
+    });
+
+    notifFeed.appendChild(pane);
+  });
+}
+
+function formatRelativeTime(receivedAt) {
+  if (!receivedAt) return '';
+  const ts = receivedAt.toDate ? receivedAt.toDate() : new Date(receivedAt);
+  return ts.toLocaleTimeString('en-IN', {
+    timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: true
   });
 }
 
