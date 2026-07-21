@@ -76,10 +76,11 @@ export function initTvNotificationsUI() {
       }
 
       try {
-        // Fallback: read token from state preference if available, else load it
-        let token = state.tvWebhookToken || null;
+        // Use module-cached token first (populated on settings load), else fetch from DB
+        let token = storedToken || null;
         if (!token) {
           token = await loadWebhookToken();
+          if (token) storedToken = token; // cache for future use
         }
 
         if (!token) {
@@ -128,8 +129,16 @@ export function initTvNotificationsUI() {
     };
 
     // Use touchstart for immediate response on iOS/Android, click as backup
-    testAlertBtn.addEventListener('touchstart', handleTestAlert, { passive: false });
-    testAlertBtn.addEventListener('click', handleTestAlert);
+    // Debounce guard to prevent double-fire (touchstart + click both trigger on Android)
+    let lastTestAlertTime = 0;
+    const guardedHandler = (e) => {
+      const now = Date.now();
+      if (now - lastTestAlertTime < 2000) return; // ignore if fired within 2s
+      lastTestAlertTime = now;
+      handleTestAlert(e);
+    };
+    testAlertBtn.addEventListener('touchstart', guardedHandler, { passive: false });
+    testAlertBtn.addEventListener('click', guardedHandler);
   }
 
   // Live updates

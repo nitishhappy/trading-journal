@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-e7721186ea-v3";
+const CACHE_NAME = "trade-journal-c4b09ad89f";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -29,6 +29,8 @@ const ASSETS = [
   "./js/services/checklists.js",
   "./js/services/ai.js",
   "./js/services/candleChecklist.js",
+  "./js/services/tvNotifications.js",
+  "./js/services/sequenceRules.js",
   "./js/ui/common.js",
   "./js/ui/auth.js",
   "./js/ui/settings.js",
@@ -38,6 +40,10 @@ const ASSETS = [
   "./js/ui/tradelog.js",
   "./js/ui/checklists.js",
   "./js/ui/candleChecklist.js",
+  "./js/ui/tvNotifications.js",
+  "./js/ui/sequenceRules.js",
+  "./js/utils/error-tracking.js",
+  "./css/tv-notifications.css",
   // Firebase SDK scripts — precached so the app can boot fully offline
   // even on a visit where the network never responds in time.
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js",
@@ -56,9 +62,12 @@ const NETWORK_FIRST_FILES = [
   "js/services/observations.js", "js/services/trades.js",
   "js/services/checklists.js", "js/services/ai.js",
   "js/services/candleChecklist.js",
+  "js/services/tvNotifications.js", "js/services/sequenceRules.js",
   "js/ui/common.js", "js/ui/auth.js", "js/ui/settings.js",
   "js/ui/dashboard.js", "js/ui/revision.js", "js/ui/aicoach.js",
   "js/ui/tradelog.js", "js/ui/checklists.js", "js/ui/candleChecklist.js",
+  "js/ui/tvNotifications.js", "js/ui/sequenceRules.js",
+  "js/utils/error-tracking.js", "css/tv-notifications.css",
 ];
 
 self.addEventListener("install", (event) => {
@@ -88,6 +97,24 @@ self.addEventListener("activate", (event) => {
     )
   );
   self.clients.claim();
+});
+
+// ─── Notification click handler ──────────────────────────────────────────────
+// When the user taps a push notification on Android, open or focus the app.
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
+      // If a window is already open, focus it
+      for (const client of clientList) {
+        if (client.url.includes(self.registration.scope) && "focus" in client) {
+          return client.focus();
+        }
+      }
+      // Otherwise open a new window
+      return self.clients.openWindow(self.registration.scope);
+    })
+  );
 });
 
 self.addEventListener("fetch", (event) => {
