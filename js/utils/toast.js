@@ -3,7 +3,11 @@ import { toastEl } from '../dom.js';
 let toastTimer = null;
 
 export function showToast(msg, duration = 2200) {
-  toastEl.textContent = msg;
+  if (typeof msg === "string" && msg.includes("<")) {
+    toastEl.innerHTML = msg;
+  } else {
+    toastEl.textContent = msg;
+  }
   toastEl.classList.remove("hidden");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toastEl.classList.add("hidden"), duration);

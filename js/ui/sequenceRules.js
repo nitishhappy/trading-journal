@@ -112,18 +112,39 @@ export function initSequenceRulesUI() {
       // If triggered within the last 60 seconds
       if (age < 60000) {
         lastNotifiedLogId = newest.id;
-        const alertMsg = `🎯 Sequence Triggered: ${newest.ruleName} (${newest.symbol || 'Alert'} @ ${newest.price ? '₹' + Number(newest.price).toLocaleString('en-IN') : 'Signal'})`;
         
-        // 1. Show persistent in-app Toast
-        showToast(alertMsg, 8000);
+        // Find rule definition to show full steps sequence
+        const matchingRule = (state.sequenceRules || []).find(r => r.id === newest.ruleId || r.name === newest.ruleName);
+        const stepsStr = matchingRule && matchingRule.steps ? matchingRule.steps.join(' → ') : '';
+
+        const formattedPrice = newest.price != null ? `₹${Number(newest.price).toLocaleString('en-IN')}` : 'Signal';
+        const formattedTime = ts.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+        const richToastHtml = `
+          <div style="display:flex; flex-direction:column; gap:6px; text-align:left;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+              <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                <span style="background:var(--accent,#0095f6); color:#fff; font-size:10px; font-weight:bold; padding:2px 6px; border-radius:4px; font-family:var(--font-mono);">SEQUENCE TRIGGERED</span>
+                <span style="background:var(--surface-3,#262626); color:var(--text,#fff); font-size:11px; font-weight:bold; padding:2px 8px; border-radius:4px; font-family:var(--font-mono); border:1px solid var(--border,#333);">${newest.symbol || 'ASSET'} · ${newest.timeframe || '15'}</span>
+              </div>
+              <span style="font-size:10px; color:var(--text-dim,#aaa); font-family:var(--font-mono);">${formattedTime}</span>
+            </div>
+            <div style="font-weight:600; font-size:13px; color:var(--text,#fff);">${newest.ruleName}</div>
+            ${stepsStr ? `<div style="font-size:11px; font-family:var(--font-mono); color:var(--text-dim,#aaa); border-top:1px solid rgba(255,255,255,0.1); padding-top:4px;">${stepsStr}</div>` : ''}
+            <div style="font-size:12px; font-weight:bold; color:var(--high,#00e676); align-self:flex-end;">Price: ${formattedPrice}</div>
+          </div>
+        `;
+        
+        // 1. Show persistent rich HTML Toast
+        showToast(richToastHtml, 9000);
 
         // 2. Play audio notification chime
         playAlertChime();
 
         // 3. System Push Notification (if permission granted)
         if ("Notification" in window && Notification.permission === "granted") {
-          new Notification("🎯 Sequence Triggered!", {
-            body: `${newest.ruleName}\nSymbol: ${newest.symbol || '—'} | Time: ${ts.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`,
+          new Notification(`🎯 ${newest.ruleName}`, {
+            body: `${newest.symbol || 'Asset'} (${newest.timeframe || '15'}) @ ${formattedPrice}\nSteps: ${stepsStr || 'Sequence Completed'}`,
             icon: "./icons/icon-192.png",
           });
         } else if ("Notification" in window && Notification.permission !== "denied") {
