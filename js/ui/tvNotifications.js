@@ -86,8 +86,8 @@ export function initTvNotificationsUI() {
 }
 
 // ===================== Feed Rendering =====================
-// Track collapsed state per symbol (default expanded)
-const collapsedSymbols = new Set();
+// Track expanded state per symbol (collapsed by default for a compact view)
+const expandedSymbols = new Set();
 
 function renderFeed() {
   if (!notifFeed) return;
@@ -121,7 +121,7 @@ function renderFeed() {
     const symbolItems = groups[symbol];
     const hasUnread = symbolItems.some(n => !n.read);
     const unreadCount = symbolItems.filter(n => !n.read).length;
-    const isCollapsed = collapsedSymbols.has(symbol);
+    const isExpanded = expandedSymbols.has(symbol);
 
     const pane = document.createElement('div');
     pane.className = `tv-symbol-group ${hasUnread ? 'has-new-alert' : ''}`;
@@ -129,7 +129,7 @@ function renderFeed() {
     pane.innerHTML = `
       <div class="tv-symbol-header">
         <div class="tv-symbol-header-left">
-          <span class="tv-collapse-icon">${isCollapsed ? '▶' : '▼'}</span>
+          <span class="tv-collapse-icon">${isExpanded ? '▼' : '▶'}</span>
           <span class="tv-symbol-title">${symbol}</span>
           <span class="tv-symbol-count-badge">${symbolItems.length} ${symbolItems.length === 1 ? 'alert' : 'alerts'}</span>
           ${hasUnread ? `<span class="tv-new-indicator" title="${unreadCount} new alert(s)">🔴 ${unreadCount} NEW</span>` : ''}
@@ -138,7 +138,7 @@ function renderFeed() {
           <span class="tv-latest-time">${formatRelativeTime(symbolItems[0].receivedAt)}</span>
         </div>
       </div>
-      <div class="tv-symbol-body ${isCollapsed ? 'collapsed' : ''}">
+      <div class="tv-symbol-body ${isExpanded ? '' : 'collapsed'}">
       </div>
     `;
 
@@ -150,17 +150,17 @@ function renderFeed() {
       bodyEl.appendChild(buildCard(notif));
     });
 
-    // Toggle collapse state on header click
+    // Toggle expand/collapse state on header click
     headerEl.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (collapsedSymbols.has(symbol)) {
-        collapsedSymbols.delete(symbol);
-        bodyEl.classList.remove('collapsed');
-        pane.querySelector('.tv-collapse-icon').textContent = '▼';
-      } else {
-        collapsedSymbols.add(symbol);
+      if (expandedSymbols.has(symbol)) {
+        expandedSymbols.delete(symbol);
         bodyEl.classList.add('collapsed');
         pane.querySelector('.tv-collapse-icon').textContent = '▶';
+      } else {
+        expandedSymbols.add(symbol);
+        bodyEl.classList.remove('collapsed');
+        pane.querySelector('.tv-collapse-icon').textContent = '▼';
       }
     });
 

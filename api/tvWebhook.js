@@ -101,6 +101,11 @@ module.exports = async (req, res) => {
 };
 
 // ─── Enhanced plain-text alert parser ────────────────────────────────────────
+const NON_SYMBOL_WORDS = new Set([
+  'BUY', 'SELL', 'CLOSE', 'EXIT', 'ALERT', 'SIGNAL', 'EQUAL', 'FAIR',
+  'NEW', 'BREAK', 'HIGH', 'LOW', 'H/L', 'LESS', 'THAN', 'MORE', 'ABOVE', 'BELOW'
+]);
+
 function parsePlainTextAlert(text) {
   let parsed = {};
   
@@ -118,40 +123,66 @@ function parsePlainTextAlert(text) {
   const rawTrimmed = text.trim();
   const parts = rawTrimmed.split(/\s+/);
 
-  // First token is always the signal keyword — strip trailing colon if present (e.g., "cemented_candle:")
+  // First token is signal keyword — strip trailing colon
   if (parts.length > 0) {
     parsed.keyword = parts[0].replace(/:$/, "").trim();
   }
 
-  // Symbol Extraction Strategy:
-  // Look for explicit symbol patterns in whole text first (e.g. XAUUSD, BTCUSDT, NIFTY, FOREXCOM:XAUUSD)
-  const symbolMatch = rawTrimmed.match(/(?:on|at|for|in|symbol:?)\s+([A-Z0-9_:-]+)/i) ||
-                      rawTrimmed.match(/\b([A-Z0-9_]+:[A-Z0-9_]+)\b/i) ||
-                      rawTrimmed.match(/\b([A-Z]{3,6}(?:USD|USDT|INR|EUR|GBP)?)\b/i);
-
-  if (symbolMatch && symbolMatch[1]) {
-    parsed.symbol = cleanSymbol(symbolMatch[1]);
-  } else if (parts.length > 1) {
-    parsed.symbol = cleanSymbol(parts[1]);
+  // 1. Explicit pattern match for "for {{ticker}} in {{time}} at {{close}}" format
+  // e.g. "cemented_candle: SELL signal for XAUUSD in 15 at 4044.770"
+  const templateMatch = rawTrimmed.match(/for\s+([A-Z0-9_:-]+)(?:\s+in\s+([A-Z0-9]+))?(?:\s+at\s+([0-9.]+))?/i);
+  
+  if (templateMatch) {
+    parsed.symbol = cleanSymbol(templateMatch[1]);
+    if (templateMatch[2]) {
+      parsed.timeframe = templateMatch[2].toUpperCase();
+      parsed.interval  = parsed.timeframe;
+    }
+    if (templateMatch[3]) {
+      parsed.price = parseFloat(templateMatch[3]);
+    }
   }
 
-  // Timeframe / Interval extraction (e.g. "(15)" or "15" or "1H")
-  const tfMatch = rawTrimmed.match(/\((\d+[mHhDdWw]?)\)/) || rawTrimmed.match(/\b(\d+[mHhDdWw]?)\b/);
-  if (tfMatch) {
-    parsed.timeframe = tfMatch[1].toUpperCase();
-    parsed.interval = parsed.timeframe;
-  } else if (parts.length > 2) {
-    parsed.timeframe = parts[2].toUpperCase();
-    parsed.interval = parsed.timeframe;
+  // 2. Fallback Symbol Extraction (ad-hoc messages like "NIFTY crossing 1234" or "price_below_ema9 XAUUSD 1H 65432")
+  if (!parsed.symbol) {
+    const symMatch = rawTrimmed.match(/(?:on|at|for|in|symbol:?)\s+([A-Z0-9_:-]+)/i) ||
+                     rawTrimmed.match(/\b([A-Z0-9_]+:[A-Z0-9_]+)\b/i) ||
+                     rawTrimmed.match(/\b([A-Z]{3,8}(?:USD|USDT|INR|EUR|GBP)?)\b/i);
+
+    if (symMatch && symMatch[1] && !NON_SYMBOL_WORDS.has(symMatch[1].toUpperCase())) {
+      parsed.symbol = cleanSymbol(symMatch[1]);
+    } else if (parts.length > 1 && !NON_SYMBOL_WORDS.has(parts[1].toUpperCase())) {
+      parsed.symbol = cleanSymbol(parts[1]);
+    }
   }
 
-  // Price extraction: look for "at <number>" or numeric tokens
-  const priceMatch = rawTrimmed.match(/(?:at|price:?)\s+([0-9.]+)/i);
-  if (priceMatch) {
-    parsed.price = parseFloat(priceMatch[1]);
-  } else if (parts.length > 3) {
-    const p = parseFloat(parts[3]);
-    if (!isNaN(p)) parsed.price = p;
+  // Ensure symbol is not a noisy keyword fallback
+  if (!parsed.symbol || NON_SYMBOL_WORDS.has(parsed.symbol)) {
+    parsed.symbol = "GENERAL";
+  }
+
+  // 3. Fallback Timeframe / Interval extraction if not parsed above
+  if (!parsed.timeframe) {
+    const tfMatch = rawTrimmed.match(/\((\d+[mHhDdWw]?)\)/) || rawTrimmed.match(/\b(\d+[mHhDdWw]?)\b/);
+    if (tfMatch) {
+      parsed.timeframe = tfMatch[1].toUpperCase();
+      parsed.interval  = parsed.timeframe;
+    } else if (parts.length > 2 && !isNaN(parseFloat(parts[2]))) {
+      parsed.timeframe = parts[2].toUpperCase();
+      parsed.interval  = parsed.timeframe;
+    }
+  }
+
+  // 4. Fallback Price extraction if not parsed above
+  if (parsed.price === undefined) {
+    const priceMatch = rawTrimmed.match(/(?:at|price:?)\s+([0-9.]+)/i) ||
+                       rawTrimmed.match(/\b(\d{3,6}(?:\.\d+)?)\b/);
+    if (priceMatch && priceMatch[1] && !isNaN(parseFloat(priceMatch[1]))) {
+      parsed.price = parseFloat(priceMatch[1]);
+    } else if (parts.length > 3) {
+      const p = parseFloat(parts[3]);
+      if (!isNaN(p)) parsed.price = p;
+    }
   }
 
   // Action detection
@@ -172,9 +203,11 @@ function parsePlainTextAlert(text) {
 
 function cleanSymbol(sym) {
   if (!sym) return "";
-  return String(sym)
+  const cleaned = String(sym)
     .replace(/[\(\),:]/g, " ")  // Remove parens, commas, colons
     .trim()
     .split(/\s+/)[0]            // Take first clean token
     .toUpperCase();
+  
+  return NON_SYMBOL_WORDS.has(cleaned) ? "GENERAL" : cleaned;
 }
