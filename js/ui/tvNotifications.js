@@ -56,6 +56,62 @@ export function initTvNotificationsUI() {
     });
   }
 
+  // Test Alert simulator trigger
+  const testAlertBtn = document.getElementById('tv-test-alert-btn');
+  if (testAlertBtn) {
+    testAlertBtn.addEventListener('click', async () => {
+      if (!state.currentUser) {
+        showToast('You must be logged in to test notifications');
+        return;
+      }
+      try {
+        const notifRef = db.collection('users').doc(state.currentUser.uid).collection('tvNotifications').doc();
+        
+        // Pick a matching rule if it exists to trigger sequential engine, else write a generic alert
+        const activeRules = state.sequenceRules || [];
+        const targetRule = activeRules.find(r => r.enabled && r.steps && r.steps.length > 0);
+        
+        let keyword = 'vix_fix_less_than_tolerance';
+        let action = 'SELL';
+        
+        if (targetRule) {
+          keyword = targetRule.steps[0];
+          if (keyword.toLowerCase().includes('buy') || keyword.toLowerCase().includes('long')) {
+            action = 'BUY';
+          }
+        }
+
+        const sym = 'XAUUSD';
+        const tf = '15';
+        const price = 4044 + Math.random() * 10;
+        const msg = `${keyword}: ${action} signal for ${sym} in ${tf} at ${price.toFixed(3)}`;
+
+        await notifRef.set({
+          raw: msg,
+          symbol: sym,
+          action: action,
+          price: parseFloat(price.toFixed(3)),
+          strategy: null,
+          interval: tf,
+          keyword: keyword,
+          read: false,
+          receivedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          source: 'tradingview_test'
+        });
+
+        // Prompt user to trigger push permissions
+        if ("Notification" in window && Notification.permission === "default") {
+          Notification.requestPermission();
+        }
+
+        showToast(`Simulated Alert Sent: "${keyword}" for ${sym}`);
+      } catch (err) {
+        console.error('Alert test failed', err);
+        showToast('Alert test failed: ' + err.message);
+      }
+    });
+  }
+
   // Live updates
   window.addEventListener('tv-notifications-updated', () => {
     renderFeed();

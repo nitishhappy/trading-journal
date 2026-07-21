@@ -165,10 +165,24 @@ export function initSequenceRulesUI() {
 
         // 3. System Push Notification (if permission granted)
         if ("Notification" in window && Notification.permission === "granted") {
-          new Notification(`🎯 ${newest.ruleName}`, {
+          const title = `🎯 ${newest.ruleName}`;
+          const options = {
             body: `${newest.symbol || 'Asset'} (${newest.timeframe || '15'}) @ ${formattedPrice}\nSteps: ${stepsStr || 'Sequence Completed'}`,
             icon: "./icons/icon-192.png",
-          });
+            badge: "./icons/icon-192.png",
+            vibrate: [200, 100, 200]
+          };
+
+          // Use service worker notification fallback if available (required for mobile/PWA background notifications)
+          if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.ready.then(reg => {
+              reg.showNotification(title, options);
+            }).catch(() => {
+              new Notification(title, options);
+            });
+          } else {
+            new Notification(title, options);
+          }
         } else if ("Notification" in window && Notification.permission !== "denied") {
           Notification.requestPermission();
         }
