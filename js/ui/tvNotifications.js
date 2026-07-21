@@ -70,25 +70,62 @@ export function initTvNotificationsUI() {
         return;
       }
 
-      // Request browser notification permissions immediately on user gesture
+      // Step 1: Request notification permission (must await on Android Chrome)
       if (typeof Notification !== "undefined" && Notification.permission === "default") {
-        Notification.requestPermission();
+        const result = await Notification.requestPermission();
+        if (result !== "granted") {
+          showToast('⚠️ Notification permission denied. Please enable in browser settings.');
+          return;
+        }
       }
 
+      if (typeof Notification !== "undefined" && Notification.permission === "denied") {
+        showToast('⚠️ Notifications are blocked. Go to browser Settings → Site Settings → Notifications to allow.');
+        return;
+      }
+
+      // Step 2: Fire a DIRECT system notification immediately as a test
       try {
-        // Use module-cached token first (populated on settings load), else fetch from DB
+        const testTitle = '🔔 Test Notification';
+        const testOptions = {
+          body: 'If you see this in your notification bar, push notifications are working!',
+          icon: './icons/icon-192.png',
+          badge: './icons/icon-192.png',
+          vibrate: [200, 100, 200],
+          tag: 'test-notification', // prevents duplicates
+          renotify: true
+        };
+
+        if (navigator.serviceWorker) {
+          const reg = await navigator.serviceWorker.getRegistration();
+          if (reg) {
+            await reg.showNotification(testTitle, testOptions);
+          } else {
+            new Notification(testTitle, testOptions);
+          }
+        } else {
+          new Notification(testTitle, testOptions);
+        }
+        showToast('✅ System notification sent! Check your notification bar.');
+      } catch (notifErr) {
+        console.error('Direct notification failed:', notifErr);
+        showToast('❌ Notification failed: ' + notifErr.message);
+        return;
+      }
+
+      // Step 3: Also dispatch a simulated webhook alert
+      try {
         let token = storedToken || null;
         if (!token) {
           token = await loadWebhookToken();
-          if (token) storedToken = token; // cache for future use
+          if (token) storedToken = token;
         }
 
         if (!token) {
-          showToast('Webhook token is not setup yet. Generate one in settings first.');
+          showToast('Webhook token not set up. Generate one in Settings first.');
           return;
         }
 
-        // Pick active rule keyword to simulate
         const activeRules = state.sequenceRules || [];
         const targetRule = activeRules.find(r => r.enabled && r.steps && r.steps.length > 0);
         
@@ -107,33 +144,22 @@ export function initTvNotificationsUI() {
         const price = 4044 + Math.random() * 10;
         const msgText = `${keyword}: ${action} signal for ${sym} in ${tf} at ${price.toFixed(3)}`;
 
-        // Dispatch simulated alert directly to Vercel
         const targetUrl = `/api/tvWebhook?token=${token}`;
-        const resp = await fetch(targetUrl, {
+        await fetch(targetUrl, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain'
-          },
+          headers: { 'Content-Type': 'text/plain' },
           body: msgText
         });
-
-        if (resp.ok) {
-          showToast(`Simulated Alert Dispatched: "${keyword}"`);
-        } else {
-          showToast(`Dispatch failed: HTTP ${resp.status}`);
-        }
       } catch (err) {
-        console.error('Alert test failed', err);
-        showToast('Alert test failed: ' + err.message);
+        console.error('Webhook dispatch failed:', err);
       }
     };
 
-    // Use touchstart for immediate response on iOS/Android, click as backup
     // Debounce guard to prevent double-fire (touchstart + click both trigger on Android)
     let lastTestAlertTime = 0;
     const guardedHandler = (e) => {
       const now = Date.now();
-      if (now - lastTestAlertTime < 2000) return; // ignore if fired within 2s
+      if (now - lastTestAlertTime < 2000) return;
       lastTestAlertTime = now;
       handleTestAlert(e);
     };
@@ -141,18 +167,40 @@ export function initTvNotificationsUI() {
     testAlertBtn.addEventListener('click', guardedHandler);
   }
 
-  // Live updates
+  // Live updates — show BOTH toast AND system notification for new incoming alerts
   window.addEventListener('tv-notifications-updated', () => {
     renderFeed();
     updateUnreadBadge();
-    // Toast when new unread arrives (app is open)
     const newest = state.tvNotifications[0];
     if (newest && !newest.read) {
       const ts = newest.receivedAt?.toDate ? newest.receivedAt.toDate() : new Date();
       const age = Date.now() - ts.getTime();
-      if (age < 5000) { // only toast if truly just received
+      if (age < 5000) {
         const label = [newest.symbol, newest.action, newest.strategy].filter(Boolean).join(' · ');
-        showToast(`📡 TradingView alert: ${label || newest.raw?.slice(0, 60) || 'New alert'}`, 6000);
+        const alertText = label || newest.raw?.slice(0, 60) || 'New alert';
+        
+        // In-app toast
+        showToast(`📡 TradingView alert: ${alertText}`, 6000);
+
+        // System notification (notification bar)
+        if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+          const title = `📡 ${newest.symbol || 'Alert'}`;
+          const options = {
+            body: `${newest.action || 'ALERT'} · ${alertText}`,
+            icon: './icons/icon-192.png',
+            badge: './icons/icon-192.png',
+            tag: `tv-alert-${newest.id}`,
+            vibrate: [100, 50, 100]
+          };
+          if (navigator.serviceWorker) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+              if (reg) reg.showNotification(title, options);
+              else new Notification(title, options);
+            }).catch(() => new Notification(title, options));
+          } else {
+            new Notification(title, options);
+          }
+        }
       }
     }
   });
