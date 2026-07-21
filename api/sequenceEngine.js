@@ -110,6 +110,10 @@ function formatIST(date) {
 async function runSequenceEngine(db, uid, keyword, symbol, timeframe, price) {
   if (!keyword || !uid) return;
 
+  // Normalize keyword (strip trailing colons) and symbol (clean off parens/timeframes)
+  keyword = String(keyword).replace(/:$/, "").trim();
+  symbol  = symbol ? String(symbol).replace(/[\(\),:]/g, " ").trim().split(/\s+/)[0].toUpperCase() : "GENERAL";
+
   const userRef  = db.collection('users').doc(uid);
   const rulesRef = userRef.collection(RULES_COLLECTION);
   const statesRef = userRef.collection(STATES_COLLECTION);

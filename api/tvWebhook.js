@@ -101,11 +101,6 @@ module.exports = async (req, res) => {
 };
 
 // ─── Enhanced plain-text alert parser ────────────────────────────────────────
-// TradingView alert format expected:
-//   <keyword> <SYMBOL> <TIMEFRAME> <PRICE>
-// e.g.: price_below_ema9 BTCUSDT 1H 65432.10
-//
-// Also handles legacy format and JSON payloads.
 function parsePlainTextAlert(text) {
   let parsed = {};
   
@@ -113,55 +108,73 @@ function parsePlainTextAlert(text) {
   try {
     if (text.trim().startsWith('{')) {
       const j = JSON.parse(text);
-      // Ensure keyword is populated for JSON payloads too
       if (!j.keyword && j.signal) j.keyword = j.signal;
+      if (j.keyword) j.keyword = j.keyword.replace(/:$/, "").trim();
+      if (j.symbol) j.symbol = cleanSymbol(j.symbol);
       return j;
     }
   } catch(e) {}
 
-  const parts = text.trim().split(/\s+/);
+  const rawTrimmed = text.trim();
+  const parts = rawTrimmed.split(/\s+/);
 
-  // First token is always the signal keyword
+  // First token is always the signal keyword — strip trailing colon if present (e.g., "cemented_candle:")
   if (parts.length > 0) {
-    parsed.keyword = parts[0];
+    parsed.keyword = parts[0].replace(/:$/, "").trim();
   }
 
-  // Second token: symbol
-  if (parts.length > 1) {
-    parsed.symbol = parts[1].toUpperCase();
+  // Symbol Extraction Strategy:
+  // Look for explicit symbol patterns in whole text first (e.g. XAUUSD, BTCUSDT, NIFTY, FOREXCOM:XAUUSD)
+  const symbolMatch = rawTrimmed.match(/(?:on|at|for|in|symbol:?)\s+([A-Z0-9_:-]+)/i) ||
+                      rawTrimmed.match(/\b([A-Z0-9_]+:[A-Z0-9_]+)\b/i) ||
+                      rawTrimmed.match(/\b([A-Z]{3,6}(?:USD|USDT|INR|EUR|GBP)?)\b/i);
+
+  if (symbolMatch && symbolMatch[1]) {
+    parsed.symbol = cleanSymbol(symbolMatch[1]);
+  } else if (parts.length > 1) {
+    parsed.symbol = cleanSymbol(parts[1]);
   }
 
-  // Third token: timeframe
-  if (parts.length > 2) {
+  // Timeframe / Interval extraction (e.g. "(15)" or "15" or "1H")
+  const tfMatch = rawTrimmed.match(/\((\d+[mHhDdWw]?)\)/) || rawTrimmed.match(/\b(\d+[mHhDdWw]?)\b/);
+  if (tfMatch) {
+    parsed.timeframe = tfMatch[1].toUpperCase();
+    parsed.interval = parsed.timeframe;
+  } else if (parts.length > 2) {
     parsed.timeframe = parts[2].toUpperCase();
-    parsed.interval  = parsed.timeframe; // keep interval for backward compat
+    parsed.interval = parsed.timeframe;
   }
 
-  // Fourth token: price
-  if (parts.length > 3) {
+  // Price extraction: look for "at <number>" or numeric tokens
+  const priceMatch = rawTrimmed.match(/(?:at|price:?)\s+([0-9.]+)/i);
+  if (priceMatch) {
+    parsed.price = parseFloat(priceMatch[1]);
+  } else if (parts.length > 3) {
     const p = parseFloat(parts[3]);
     if (!isNaN(p)) parsed.price = p;
   }
 
-  // Legacy action detection from keyword
+  // Action detection
   const kw = (parsed.keyword || '').toLowerCase();
   if (kw.includes("buy") || kw.includes("long"))        parsed.action = "BUY";
   else if (kw.includes("sell") || kw.includes("short")) parsed.action = "SELL";
   else if (kw.includes("exit") || kw.includes("close")) parsed.action = "CLOSE";
   else {
-    // Fall back to scanning whole text
-    const str = text.toUpperCase();
+    const str = rawTrimmed.toUpperCase();
     if (str.includes("BUY") || str.includes("LONG"))        parsed.action = "BUY";
     else if (str.includes("SELL") || str.includes("SHORT")) parsed.action = "SELL";
     else if (str.includes("EXIT") || str.includes("CLOSE")) parsed.action = "CLOSE";
     else parsed.action = "ALERT";
   }
 
-  // Legacy symbol extraction fallback if second token wasn't a symbol
-  if (!parsed.symbol) {
-    const symbolMatch = text.match(/[A-Z]+:[A-Z0-9_]+/i);
-    if (symbolMatch) parsed.symbol = symbolMatch[0];
-  }
-
   return parsed;
+}
+
+function cleanSymbol(sym) {
+  if (!sym) return "";
+  return String(sym)
+    .replace(/[\(\),:]/g, " ")  // Remove parens, commas, colons
+    .trim()
+    .split(/\s+/)[0]            // Take first clean token
+    .toUpperCase();
 }
