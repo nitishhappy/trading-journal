@@ -173,10 +173,14 @@ export function initSequenceRulesUI() {
             vibrate: [200, 100, 200]
           };
 
-          // Use service worker notification fallback if available (required for mobile/PWA background notifications)
-          if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-            navigator.serviceWorker.ready.then(reg => {
-              reg.showNotification(title, options);
+          // Safe check: try to display notification via Service Worker registration first
+          if (navigator.serviceWorker) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+              if (reg && typeof reg.showNotification === 'function') {
+                reg.showNotification(title, options);
+              } else {
+                new Notification(title, options);
+              }
             }).catch(() => {
               new Notification(title, options);
             });

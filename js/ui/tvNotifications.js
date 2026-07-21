@@ -56,15 +56,24 @@ export function initTvNotificationsUI() {
     });
   }
 
-  // Test Alert simulator trigger
+  // Test Alert simulator trigger (support touch pointerdown & click events on mobile)
   const testAlertBtn = document.getElementById('tv-test-alert-btn');
   if (testAlertBtn) {
-    testAlertBtn.addEventListener('click', async () => {
+    const handleTestAlert = async (e) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       if (!state.currentUser) {
         showToast('You must be logged in to test notifications');
         return;
       }
       try {
+        // Request/prompt permissions immediately on tap gesture to ensure audio context / push is allowed
+        if ("Notification" in window && Notification.permission === "default") {
+          Notification.requestPermission();
+        }
+
         const notifRef = db.collection('users').doc(state.currentUser.uid).collection('tvNotifications').doc();
         
         // Pick a matching rule if it exists to trigger sequential engine, else write a generic alert
@@ -99,15 +108,18 @@ export function initTvNotificationsUI() {
           source: 'tradingview_test'
         });
 
-        // Prompt user to trigger push permissions
-        if ("Notification" in window && Notification.permission === "default") {
-          Notification.requestPermission();
-        }
-
         showToast(`Simulated Alert Sent: "${keyword}" for ${sym}`);
       } catch (err) {
         console.error('Alert test failed', err);
         showToast('Alert test failed: ' + err.message);
+      }
+    };
+
+    testAlertBtn.addEventListener('pointerdown', handleTestAlert);
+    testAlertBtn.addEventListener('click', (e) => {
+      // Prevents double triggers if browser fires both pointerdown and click
+      if (e.clientX !== 0 && e.clientY !== 0) {
+        e.preventDefault();
       }
     });
   }
