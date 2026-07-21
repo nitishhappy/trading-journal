@@ -98,18 +98,45 @@ export function initSequenceRulesUI() {
   window.addEventListener('sequence-rules-updated', () => {
     renderRules();
   });
+  // Track last seen log ID to prevent duplicate alerts on page refresh
+  let lastNotifiedLogId = null;
+
   window.addEventListener('sequence-logs-updated', () => {
     renderLogs();
-    // In-app Toast notification on new completed sequence trigger
+    // In-app Toast + Sound + Browser Notification on new completed sequence trigger
     const newest = state.sequenceTriggerLogs[0];
-    if (newest) {
+    if (newest && newest.id !== lastNotifiedLogId) {
       const ts = newest.triggeredAt?.toDate ? newest.triggeredAt.toDate() : new Date(newest.triggeredAt);
       const age = Date.now() - ts.getTime();
-      if (age < 5000) {
-        showToast(`🎯 Sequence Triggered: ${newest.ruleName} (${newest.symbol} @ ₹${(newest.price || 0).toLocaleString('en-IN')})`, 8000);
+      
+      // If triggered within the last 60 seconds
+      if (age < 60000) {
+        lastNotifiedLogId = newest.id;
+        const alertMsg = `🎯 Sequence Triggered: ${newest.ruleName} (${newest.symbol || 'Alert'} @ ${newest.price ? '₹' + Number(newest.price).toLocaleString('en-IN') : 'Signal'})`;
+        
+        // 1. Show persistent in-app Toast
+        showToast(alertMsg, 8000);
+
+        // 2. Play audio notification chime
+        playAlertChime();
+
+        // 3. System Push Notification (if permission granted)
+        if ("Notification" in window && Notification.permission === "granted") {
+          new Notification("🎯 Sequence Triggered!", {
+            body: `${newest.ruleName}\nSymbol: ${newest.symbol || '—'} | Time: ${ts.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`,
+            icon: "./icons/icon-192.png",
+          });
+        } else if ("Notification" in window && Notification.permission !== "denied") {
+          Notification.requestPermission();
+        }
       }
     }
   });
+
+  // Request browser notification permissions automatically
+  if ("Notification" in window && Notification.permission === "default") {
+    Notification.requestPermission();
+  }
   window.addEventListener('sequence-states-updated', () => {
     renderRules();
   });
@@ -512,6 +539,34 @@ function renderLogs() {
 
     seqLogsList.appendChild(card);
   });
+}
+
+// Synthesize a pleasant dual-tone chime when sequence completes
+function playAlertChime() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+
+    const playNote = (freq, startTime, duration) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, startTime);
+      gain.gain.setValueAtTime(0.2, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    };
+
+    const now = ctx.currentTime;
+    playNote(587.33, now, 0.2);       // D5 note
+    playNote(880.00, now + 0.15, 0.4); // A5 note
+  } catch (err) {
+    console.warn("Could not play audio alert", err);
+  }
 }
 
 // Auto-init
