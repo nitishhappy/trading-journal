@@ -61,22 +61,49 @@ function timeframeToMs(tf) {
   return null;
 }
 
-// ─── Telegram notification ────────────────────────────────────────────────────
-async function sendTelegramNotification(botToken, chatId, text) {
-  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-  const resp = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+// ─── Telegram notification (using native https to be robust on Vercel) ────────
+const https = require('https');
+
+function sendTelegramNotification(botToken, chatId, text) {
+  return new Promise((resolve, reject) => {
+    const payload = JSON.stringify({
       chat_id: chatId,
-      text,
-      parse_mode: 'HTML',
-    }),
+      text: text,
+      parse_mode: 'HTML'
+    });
+
+    const options = {
+      hostname: 'api.telegram.org',
+      port: 443,
+      path: `/bot${botToken}/sendMessage`,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let body = '';
+      res.on('data', (chunk) => body += chunk);
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(body);
+        } else {
+          console.error('Telegram API error status:', res.statusCode, body);
+          reject(new Error(`Telegram error status ${res.statusCode}`));
+        }
+      });
+    });
+
+    req.on('error', (err) => {
+      console.error('Telegram network request error:', err);
+      reject(err);
+    });
+
+    req.write(payload);
+    req.end();
   });
-  if (!resp.ok) {
-    const body = await resp.text();
-    console.error('Telegram send failed:', resp.status, body);
-  }
 }
 
 // ─── Format price for display ─────────────────────────────────────────────────
