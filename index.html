@@ -308,43 +308,49 @@
 
         <!-- Right Pane: Sequence Settings & Logs -->
         <div class="tv-pane-right">
-          <!-- Trigger Logs (ON TOP NOW) -->
-          <div class="seq-logs-section">
-            <div class="pane-header-row" style="margin-bottom:10px;">
-              <h2 class="pane-title" style="margin:0;">🎯 Trigger Logs</h2>
+          <!-- 1. Trigger Logs Panel (Visually Distinct Card Container) -->
+          <div class="seq-panel seq-logs-panel">
+            <div class="seq-panel-header">
+              <div class="seq-panel-title">
+                <span class="seq-panel-icon">📊</span>
+                <h3>TRIGGER LOGS</h3>
+              </div>
               <label class="checkbox-label" style="font-size:11px; margin:0; font-weight:normal;">
                 <input type="checkbox" id="seq-autoclean-toggle" checked /> Auto-clean (> 7 days)
               </label>
             </div>
-            
-            <!-- Filters & Export Controls -->
-            <div class="seq-log-filters" style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
-              <input type="text" id="seq-filter-symbol" placeholder="Filter symbol..." style="flex:2; padding:6px 10px; font-size:13px; border-radius:6px;" />
-              <select id="seq-filter-outcome" style="flex:1.5; padding:6px 10px; font-size:13px; border-radius:6px;">
-                <option value="ALL">All Outcomes</option>
-                <option value="PENDING">Pending</option>
-                <option value="PROFIT">Profit</option>
-                <option value="LOSS">Loss</option>
-              </select>
-              <button id="seq-export-csv-btn" class="btn-small btn-secondary" style="padding:8px 12px; font-size:12px; border-radius:6px; margin:0;">Export CSV</button>
-            </div>
 
-            <div id="seq-logs-list" class="seq-logs-list"></div>
+            <div class="seq-panel-body">
+              <!-- Filters & Export Controls -->
+              <div class="seq-log-filters" style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
+                <input type="text" id="seq-filter-symbol" placeholder="Filter symbol..." style="flex:2; padding:6px 10px; font-size:13px; border-radius:6px;" />
+                <select id="seq-filter-outcome" style="flex:1.5; padding:6px 10px; font-size:13px; border-radius:6px;">
+                  <option value="ALL">All Outcomes</option>
+                  <option value="PENDING">Pending</option>
+                  <option value="PROFIT">Profit</option>
+                  <option value="LOSS">Loss</option>
+                </select>
+                <button id="seq-export-csv-btn" class="btn-small btn-secondary" style="padding:8px 12px; font-size:12px; border-radius:6px; margin:0;">Export CSV</button>
+              </div>
+
+              <div id="seq-logs-list" class="seq-logs-list"></div>
+            </div>
           </div>
 
-          <!-- Sequential Triggers Rules Section (COMPACT COLLAPSIBLE ACCORDION BY DEFAULT BELOW) -->
-          <div class="seq-rules-accordion tv-symbol-group" style="margin-top:16px;">
-            <div id="seq-rules-accordion-header" class="tv-symbol-header" style="cursor:pointer;">
-              <div class="tv-symbol-header-left">
+          <!-- 2. Rule Creation & Management Accordion Panel (Distinct Green Accent Theme) -->
+          <div class="seq-panel seq-rules-panel">
+            <div id="seq-rules-accordion-header" class="seq-panel-header seq-accordion-header">
+              <div class="seq-panel-title">
                 <span id="seq-rules-icon" class="tv-collapse-icon">▶</span>
-                <span class="tv-symbol-title">Sequential Rules & Creation</span>
-                <span id="seq-rules-count-badge" class="tv-symbol-count-badge">0 rules</span>
+                <span class="seq-panel-icon">⚙️</span>
+                <h3>RULE ENGINE & CONFIGURATION</h3>
+                <span id="seq-rules-count-badge" class="tv-symbol-count-badge" style="margin-left:6px;">0 rules</span>
               </div>
-              <button id="seq-create-rule-btn" class="btn-small btn-small-primary" style="padding:4px 10px; font-size:11px;">+ New Rule</button>
+              <button id="seq-create-rule-btn" class="btn-small btn-small-primary" style="padding:4px 12px; font-size:11px; margin:0;">+ New Rule</button>
             </div>
             
-            <div id="seq-rules-accordion-body" class="tv-symbol-body collapsed" style="padding:12px;">
-              <div class="seq-rules-section">
+            <div id="seq-rules-accordion-body" class="seq-panel-body collapsed">
+              <div class="seq-rules-section" style="padding-top:4px;">
                 <div id="seq-rules-list" class="seq-rules-list"></div>
               </div>
             </div>
