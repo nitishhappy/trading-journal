@@ -40,8 +40,30 @@ let editingRuleId = null;
 // ===================== Init =====================
 export function initSequenceRulesUI() {
   if (seqCreateRuleBtn) {
-    seqCreateRuleBtn.addEventListener('click', () => openRuleModal());
+    seqCreateRuleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openRuleModal();
+    });
   }
+
+  // Rules section accordion toggle (compact by default)
+  const rulesHeader = document.getElementById('seq-rules-accordion-header');
+  const rulesBody   = document.getElementById('seq-rules-accordion-body');
+  const rulesIcon   = document.getElementById('seq-rules-icon');
+
+  if (rulesHeader && rulesBody) {
+    rulesHeader.addEventListener('click', () => {
+      const isCollapsed = rulesBody.classList.contains('collapsed');
+      if (isCollapsed) {
+        rulesBody.classList.remove('collapsed');
+        if (rulesIcon) rulesIcon.textContent = '▼';
+      } else {
+        rulesBody.classList.add('collapsed');
+        if (rulesIcon) rulesIcon.textContent = '▶';
+      }
+    });
+  }
+
   if (seqRuleModalClose) {
     seqRuleModalClose.addEventListener('click', closeRuleModal);
   }
@@ -363,8 +385,13 @@ async function handleDeleteRule() {
 // ===================== Rendering =====================
 
 function renderRules() {
+  const rulesCountBadge = document.getElementById('seq-rules-count-badge');
   if (!seqRulesList) return;
   const rules = state.sequenceRules || [];
+
+  if (rulesCountBadge) {
+    rulesCountBadge.textContent = `${rules.length} ${rules.length === 1 ? 'rule' : 'rules'}`;
+  }
 
   if (rules.length === 0) {
     seqRulesList.innerHTML = '<p class="settings-hint">No rules configured. Click "+ New Rule" to create one.</p>';
