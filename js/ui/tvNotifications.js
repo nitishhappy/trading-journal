@@ -30,6 +30,7 @@ const tokenRevealBtn      = document.getElementById('tv-token-reveal-btn');
 let currentFilter = 'ALL';
 let tokenRevealed = false;
 let storedToken   = null;
+let alertNotifsEnabled = false; // Normal TV alert push notifications (off by default)
 
 // ===================== Init =====================
 export function initTvNotificationsUI() {
@@ -76,8 +77,8 @@ export function initTvNotificationsUI() {
         // In-app toast
         showToast(`📡 TradingView alert: ${alertText}`, 6000);
 
-        // System notification (notification bar)
-        if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+        // System notification (notification bar) — only if user enabled in settings
+        if (alertNotifsEnabled && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
           const title = `📡 ${newest.symbol || 'Alert'}`;
           const options = {
             body: `${newest.action || 'ALERT'} · ${alertText}`,
@@ -322,6 +323,11 @@ async function initTokenSettingsUI() {
         if (seqMult && data.sequenceTimeoutMultiplier !== undefined) {
           seqMult.value = data.sequenceTimeoutMultiplier;
         }
+
+        // Load alert notification toggle preference
+        const alertNotifToggle = document.getElementById('settings-alert-notif-toggle');
+        alertNotifsEnabled = data.alertNotificationsEnabled === true;
+        if (alertNotifToggle) alertNotifToggle.checked = alertNotifsEnabled;
       }
     } catch (err) {
       console.error('Error loading settings details', err);
@@ -434,6 +440,36 @@ async function initTokenSettingsUI() {
         seqSaveBtn.disabled = false;
       }
     };
+  }
+
+  // Alert Notification Toggle — auto-save on change
+  const alertNotifToggle = document.getElementById('settings-alert-notif-toggle');
+  if (alertNotifToggle) {
+    alertNotifToggle.addEventListener('change', async () => {
+      const uid = state.currentUser?.uid;
+      if (!uid) { showToast('Please login first'); return; }
+      alertNotifsEnabled = alertNotifToggle.checked;
+
+      // Request permission if enabling
+      if (alertNotifsEnabled && typeof Notification !== 'undefined' && Notification.permission === 'default') {
+        const result = await Notification.requestPermission();
+        if (result !== 'granted') {
+          alertNotifsEnabled = false;
+          alertNotifToggle.checked = false;
+          showToast('⚠️ Notification permission denied');
+          return;
+        }
+      }
+
+      try {
+        await db.collection('users').doc(uid)
+          .collection('settings').doc('preferences')
+          .set({ alertNotificationsEnabled: alertNotifsEnabled }, { merge: true });
+        showToast(alertNotifsEnabled ? 'Alert notifications enabled ✓' : 'Alert notifications disabled');
+      } catch (err) {
+        showToast('Failed to save preference');
+      }
+    });
   }
 
   // Generate first token

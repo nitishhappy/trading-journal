@@ -738,6 +738,16 @@
           <label for="settings-seq-multiplier">Sequence Timeout Multiplier (times the timeframe)</label>
           <input type="number" id="settings-seq-multiplier" min="1" max="100" style="width:100px;margin-bottom:12px;" value="6" />
           <button id="settings-seq-save-btn" class="btn-small" style="background:var(--grad-green); color:#04140A; border:none; display:block; width:100%; padding:10px 14px; margin-top:4px;">Save Sequence Timeout</button>
+
+          <h4 style="margin-top:20px; margin-bottom:8px;">Push Notification Preferences</h4>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <label class="toggle-switch" style="position:relative; width:44px; height:24px; flex-shrink:0;">
+              <input type="checkbox" id="settings-alert-notif-toggle" style="opacity:0; width:0; height:0;" />
+              <span style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:var(--surface-3,#333); border-radius:24px; transition:.3s;"></span>
+            </label>
+            <span style="font-size:13px; color:var(--text-dim,#aaa);">Enable system notifications for every incoming TradingView alert</span>
+          </div>
+          <p class="settings-hint" style="margin-top:0; font-size:11px;">When off, system notifications will only fire on sequence rule completions.</p>
         </div>
       </div>
 
