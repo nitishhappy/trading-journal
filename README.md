@@ -418,3 +418,13 @@ Because we avoided a paid Firebase plan, the webhook is built for **Vercel Serve
 6. **Log Auto-Clean**: Auto-cleans logs older than 7 days automatically inside the backend webhook. Can be toggled on/off in the logs list header.
 7. **Serverless Execution Safety**: Awaits background promise completion in Vercel Serverless Functions to guarantee reliable Firestore writes and Telegram calls before Vercel freezes the execution thread.
 
+### v2.1.0 — Sequence Rule Toggle, Push Preferences & TV Dashboard UX
+
+1. **Sequence Rule Enable/Disable Toggle**: Added an interactive toggle switch directly on the sequence rule cards in the right pane of the TV Notifications view. Users can easily enable/disable any sequence rule. Disabling a rule automatically clears any active in-progress states in Firestore and stops monitoring incoming TradingView alerts for that rule in the engine.
+2. **Push Notification Preferences**: Added a toggle switch under Settings to configure system-level push notifications for *every* incoming TradingView alert (disabled by default to prevent notification fatigue). Important sequence completion notifications remain always-enabled.
+3. **Collapsible Live Alerts Feed**: Incoming alerts in the TV Notifications left pane are now automatically grouped into collapsible symbol accordion panes with unread count badges.
+4. **Rich Notifications & Audio**: Sequence triggers now display persistent, rich HTML toast cards (showing symbol, timeframe, price, and steps) and play a synthetic dual-tone Web Audio chime.
+5. **Vercel Network Stability**: Rewrote the Telegram push engine using Node's native HTTPS module to ensure stable and guaranteed payload delivery before Vercel Serverless Functions freeze execution threads.
+6. **Layout Adjustments**: Reordered the TV Notifications right pane: the Trigger Logs panel is now positioned at the top, and the Sequential Rules panel is configured as a compact accordion by default.
+
+

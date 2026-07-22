@@ -4,6 +4,7 @@ import {
   createSequenceRule,
   updateSequenceRule,
   deleteSequenceRule,
+  toggleSequenceRule,
   updateTriggerLogOutcome,
   deleteTriggerLog,
   subscribeSequenceRules,
@@ -445,7 +446,14 @@ function renderRules() {
     card.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; padding-right: 60px;">
         <h4 style="margin:0; font-weight:600;">${rule.name}</h4>
-        <span style="font-size:11px; color: ${rule.enabled ? 'var(--low)' : 'var(--text-dim)'};">${rule.enabled ? 'Enabled' : 'Disabled'}</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <label class="toggle-switch-container" style="position:relative; width:34px; height:18px; flex-shrink:0; margin: 0; display: inline-block;">
+            <input type="checkbox" class="rule-toggle-checkbox" data-id="${rule.id}" ${rule.enabled !== false ? 'checked' : ''} style="opacity:0; width:0; height:0; margin:0; position:absolute;" />
+            <span class="slider" style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:${rule.enabled !== false ? 'var(--low, #00e676)' : 'var(--surface-3, #333)'}; border-radius:18px; transition:.2s; border: 1px solid var(--border-bright, #444);"></span>
+            <span class="knob" style="position:absolute; content:''; height:12px; width:12px; left:3px; bottom:2px; background-color:white; transition:.2s; border-radius:50%; transform:${rule.enabled !== false ? 'translateX(16px)' : 'translateX(0)'}; pointer-events:none;"></span>
+          </label>
+          <span class="rule-status-text" style="font-size:11px; color: ${rule.enabled !== false ? 'var(--low, #00e676)' : 'var(--text-dim)'}; min-width: 45px; user-select:none;">${rule.enabled !== false ? 'Enabled' : 'Disabled'}</span>
+        </div>
       </div>
       <div class="seq-steps-flow" style="display:flex; flex-wrap:wrap; gap:6px; font-size:12px; line-height: 1.8;">
         ${stepsFlowHtml}
@@ -453,6 +461,38 @@ function renderRules() {
       ${statesProgressHtml}
       <button class="btn-small btn-secondary edit-rule-btn">Edit</button>
     `;
+
+    // Toggle switch listener
+    const toggleCheckbox = card.querySelector('.rule-toggle-checkbox');
+    if (toggleCheckbox) {
+      toggleCheckbox.addEventListener('change', async (e) => {
+        e.stopPropagation();
+        const isEnabled = e.target.checked;
+        
+        // Immediate visual update
+        const statusText = card.querySelector('.rule-status-text');
+        const slider = card.querySelector('.slider');
+        const knob = card.querySelector('.knob');
+        
+        if (statusText) statusText.textContent = isEnabled ? 'Enabled' : 'Disabled';
+        if (statusText) statusText.style.color = isEnabled ? 'var(--low, #00e676)' : 'var(--text-dim)';
+        if (slider) slider.style.background = isEnabled ? 'var(--low, #00e676)' : 'var(--surface-3, #333)';
+        if (knob) knob.style.transform = isEnabled ? 'translateX(16px)' : 'translateX(0)';
+        if (isEnabled) {
+          card.classList.remove('disabled');
+        } else {
+          card.classList.add('disabled');
+        }
+        
+        try {
+          await toggleSequenceRule(rule.id, isEnabled);
+          showToast(`Rule "${rule.name}" ${isEnabled ? 'enabled' : 'disabled'}`);
+        } catch (err) {
+          showToast('Error updating rule: ' + err.message);
+          renderRules(); // Rollback
+        }
+      });
+    }
 
     card.querySelector('.edit-rule-btn').addEventListener('click', (e) => {
       e.stopPropagation();

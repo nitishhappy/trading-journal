@@ -75,6 +75,33 @@ export async function deleteSequenceRule(id) {
   await batch.commit();
 }
 
+export async function toggleSequenceRule(id, enabled) {
+  const uid = state.currentUser?.uid;
+  if (!uid) throw new Error('Not logged in');
+
+  const batch = db.batch();
+
+  // Update enabled status
+  const ruleRef = db.collection('users').doc(uid)
+    .collection('sequenceRules').doc(id);
+  batch.update(ruleRef, {
+    enabled,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  // If disabling, clean up any active states associated with this rule
+  if (!enabled) {
+    const statesSnap = await db.collection('users').doc(uid)
+      .collection('sequenceStates')
+      .where('ruleId', '==', id)
+      .get();
+    
+    statesSnap.docs.forEach(d => batch.delete(d.ref));
+  }
+
+  await batch.commit();
+}
+
 // ===================== Sequence Trigger Logs =====================
 
 export function subscribeSequenceTriggerLogs() {
