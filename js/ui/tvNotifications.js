@@ -74,26 +74,28 @@ export function initTvNotificationsUI() {
         const label = [newest.symbol, newest.action, newest.strategy].filter(Boolean).join(' · ');
         const alertText = label || newest.raw?.slice(0, 60) || 'New alert';
         
-        // In-app toast
-        showToast(`📡 TradingView alert: ${alertText}`, 6000);
+        // System and in-app notifications for normal alerts — only if enabled in settings
+        if (alertNotifsEnabled) {
+          // In-app toast
+          showToast(`📡 TradingView alert: ${alertText}`, 6000);
 
-        // System notification (notification bar) — only if user enabled in settings
-        if (alertNotifsEnabled && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-          const title = `📡 ${newest.symbol || 'Alert'}`;
-          const options = {
-            body: `${newest.action || 'ALERT'} · ${alertText}`,
-            icon: './icons/icon-192.png',
-            badge: './icons/icon-192.png',
-            tag: `tv-alert-${newest.id}`,
-            vibrate: [100, 50, 100]
-          };
-          if (navigator.serviceWorker) {
-            navigator.serviceWorker.getRegistration().then(reg => {
-              if (reg) reg.showNotification(title, options);
-              else new Notification(title, options);
-            }).catch(() => new Notification(title, options));
-          } else {
-            new Notification(title, options);
+          if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+            const title = `📡 ${newest.symbol || 'Alert'}`;
+            const options = {
+              body: `${newest.action || 'ALERT'} · ${alertText}`,
+              icon: './icons/icon-192.png',
+              badge: './icons/icon-192.png',
+              tag: `tv-alert-${newest.id}`,
+              vibrate: [100, 50, 100]
+            };
+            if (navigator.serviceWorker) {
+              navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg) reg.showNotification(title, options);
+                else new Notification(title, options);
+              }).catch(() => new Notification(title, options));
+            } else {
+              new Notification(title, options);
+            }
           }
         }
       }
