@@ -395,6 +395,28 @@
       </div>
     </div>
 
+    <!-- ===================== SETTINGS LOCK MODAL ===================== -->
+    <div id="settings-lock-modal" class="modal-overlay hidden">
+      <div class="modal" style="max-width: 340px;">
+        <div class="modal-header">
+          <h2 id="settings-lock-modal-title">Access Settings</h2>
+          <button class="icon-btn" id="settings-lock-modal-close" aria-label="Close">✕</button>
+        </div>
+        <div class="modal-body" style="text-align: center; padding-top: 10px;">
+          <span style="font-size: 32px; display: block; margin-bottom: 12px;">🔒</span>
+          <p id="settings-lock-prompt" class="settings-hint" style="margin-bottom: 16px; font-size: 13px;"></p>
+          <div class="form-group" style="margin-bottom: 0;">
+            <input type="password" id="settings-lock-input" placeholder="••••" style="width: 100%; text-align: center; font-size: 20px; letter-spacing: 4px; padding: 10px;" autocomplete="off" />
+          </div>
+          <p id="settings-lock-error" class="trade-lock-error hidden" style="margin-top: 8px; color: var(--high, #ff5252); font-size: 12px;"></p>
+        </div>
+        <div class="modal-footer" style="justify-content: center; gap: 12px;">
+          <button id="settings-lock-cancel-btn" class="btn-secondary" style="flex: 1; padding: 10px;">Cancel</button>
+          <button id="settings-lock-submit-btn" class="btn-primary" style="flex: 1; margin: 0; padding: 10px;">Access</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ===== CANDLE CHECKLIST VIEW ===== -->
     <div id="view-candleChecklist" class="view hidden">
 

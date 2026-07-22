@@ -23,37 +23,115 @@ const tradePasscodeRemoveBtn = document.getElementById("trade-passcode-remove-bt
 const tradePasscodeStatus = document.getElementById("trade-passcode-status");
 
 // Open settings with passcode/password protection
+function askSettingsAuthorization() {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("settings-lock-modal");
+    const title = document.getElementById("settings-lock-modal-title");
+    const promptText = document.getElementById("settings-lock-prompt");
+    const input = document.getElementById("settings-lock-input");
+    const errorEl = document.getElementById("settings-lock-error");
+    const closeBtn = document.getElementById("settings-lock-modal-close");
+    const cancelBtn = document.getElementById("settings-lock-cancel-btn");
+    const submitBtn = document.getElementById("settings-lock-submit-btn");
+
+    if (!modal || !input) {
+      resolve(false);
+      return;
+    }
+
+    const isPasscode = !!state.tradePasscode;
+    title.textContent = isPasscode ? "Enter Passcode" : "Enter Password";
+    promptText.textContent = isPasscode 
+      ? "Enter your 4-digit passcode to access settings:" 
+      : "Enter your account password to access settings:";
+    
+    input.value = "";
+    input.type = "password";
+    input.placeholder = isPasscode ? "••••" : "Password";
+    input.maxLength = isPasscode ? 4 : 50;
+    input.inputMode = isPasscode ? "numeric" : "text";
+    if (isPasscode) {
+      input.pattern = "[0-9]*";
+    } else {
+      input.removeAttribute("pattern");
+    }
+    
+    errorEl.textContent = "";
+    errorEl.classList.add("hidden");
+
+    modal.classList.remove("hidden");
+    input.focus();
+
+    const cleanup = () => {
+      modal.classList.add("hidden");
+      closeBtn.removeEventListener("click", onCancel);
+      cancelBtn.removeEventListener("click", onCancel);
+      submitBtn.removeEventListener("click", onSubmit);
+      input.removeEventListener("keydown", onKeydown);
+    };
+
+    const onCancel = () => {
+      cleanup();
+      resolve(false);
+    };
+
+    const onSubmit = async () => {
+      const value = input.value;
+      if (!value) {
+        errorEl.textContent = isPasscode ? "Passcode is required." : "Password is required.";
+        errorEl.classList.remove("hidden");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Verifying...";
+
+      try {
+        if (isPasscode) {
+          if (value === state.tradePasscode) {
+            cleanup();
+            resolve(true);
+          } else {
+            throw new Error("Incorrect passcode!");
+          }
+        } else {
+          const email = auth.currentUser?.email;
+          if (!email) throw new Error("User not authenticated.");
+          const credential = firebase.auth.EmailAuthProvider.credential(email, value);
+          await auth.currentUser.reauthenticateWithCredential(credential);
+          cleanup();
+          resolve(true);
+        }
+      } catch (err) {
+        errorEl.textContent = isPasscode ? "Incorrect passcode! Access denied." : "Incorrect password! Access denied.";
+        errorEl.classList.remove("hidden");
+        input.value = "";
+        input.focus();
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Access";
+      }
+    };
+
+    const onKeydown = (e) => {
+      if (e.key === "Enter") {
+        onSubmit();
+      } else if (e.key === "Escape") {
+        onCancel();
+      }
+    };
+
+    closeBtn.addEventListener("click", onCancel);
+    cancelBtn.addEventListener("click", onCancel);
+    submitBtn.addEventListener("click", onSubmit);
+    input.addEventListener("keydown", onKeydown);
+  });
+}
+
 if (settingsGearBtn) {
   settingsGearBtn.addEventListener("click", async () => {
-    if (state.tradePasscode) {
-      const entered = prompt("Enter your 4-digit passcode to access settings:");
-      if (entered === null) return;
-      if (entered !== state.tradePasscode) {
-        showToast("Incorrect passcode! Access denied.");
-        return;
-      }
-    } else {
-      const entered = prompt("Enter your account password to access settings:");
-      if (entered === null) return;
-      if (!entered.trim()) {
-        showToast("Password cannot be empty.");
-        return;
-      }
-      try {
-        const email = auth.currentUser?.email;
-        if (!email) {
-          showToast("User not authenticated.");
-          return;
-        }
-        const credential = firebase.auth.EmailAuthProvider.credential(email, entered);
-        await auth.currentUser.reauthenticateWithCredential(credential);
-        showToast("Access granted ✓");
-      } catch (err) {
-        showToast("Incorrect password! Access denied.");
-        console.error(err);
-        return;
-      }
-    }
+    const authorized = await askSettingsAuthorization();
+    if (!authorized) return;
 
     viewSettings.classList.add("settings-open");
     currentFolderLabel.textContent = "Settings";
