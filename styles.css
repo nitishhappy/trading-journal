@@ -1790,6 +1790,56 @@ textarea { resize: vertical; }
   background: #fff;
 }
 
+/* Custom Toggle Switch for Push Notifications */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-switch span {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--surface-3, #333);
+  border: 1px solid var(--border-bright, #444);
+  border-radius: 24px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.toggle-switch span::before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggle-switch input:checked + span {
+  background-color: var(--low, #00e676);
+  border-color: var(--low, #00e676);
+}
+
+.toggle-switch input:checked + span::before {
+  transform: translateX(20px);
+}
+
 /* ===================== Revision view ===================== */
 #view-revision {
   display: flex;
