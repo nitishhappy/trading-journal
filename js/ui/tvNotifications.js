@@ -297,6 +297,36 @@ function updateUnreadBadge() {
 async function initTokenSettingsUI() {
   if (!tokenSetupSection) return;
 
+  let unsubscribePrefs = null;
+  const subscribePrefsFromDB = (uid) => {
+    if (!uid) return;
+    if (unsubscribePrefs) unsubscribePrefs();
+    
+    unsubscribePrefs = db.collection('users').doc(uid)
+      .collection('settings').doc('preferences')
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          const tgToken = document.getElementById('settings-tg-token');
+          const tgChat  = document.getElementById('settings-tg-chatid');
+          const seqMult = document.getElementById('settings-seq-multiplier');
+          
+          if (tgToken) tgToken.value = data.telegram?.botToken || '';
+          if (tgChat) tgChat.value = data.telegram?.chatId || '';
+          if (seqMult && data.sequenceTimeoutMultiplier !== undefined) {
+            seqMult.value = data.sequenceTimeoutMultiplier;
+          }
+
+          // Load alert notification toggle preference
+          const alertNotifToggle = document.getElementById('settings-alert-notif-toggle');
+          alertNotifsEnabled = data.alertNotificationsEnabled === true;
+          if (alertNotifToggle) alertNotifToggle.checked = alertNotifsEnabled;
+        }
+      }, (err) => {
+        console.error('Error listening to preferences updates', err);
+      });
+  };
+
   const loadPrefsFromDB = async (uid) => {
     if (!uid) return;
     try {
@@ -309,40 +339,27 @@ async function initTokenSettingsUI() {
         tokenSetupSection.classList.remove('hidden');
         tokenActiveSection?.classList.add('hidden');
       }
-
-      const doc = await db.collection('users').doc(uid)
-        .collection('settings').doc('preferences').get();
-      if (doc.exists) {
-        const data = doc.data();
-        const tgToken = document.getElementById('settings-tg-token');
-        const tgChat  = document.getElementById('settings-tg-chatid');
-        const seqMult = document.getElementById('settings-seq-multiplier');
-        
-        if (tgToken) tgToken.value = data.telegram?.botToken || '';
-        if (tgChat) tgChat.value = data.telegram?.chatId || '';
-        if (seqMult && data.sequenceTimeoutMultiplier !== undefined) {
-          seqMult.value = data.sequenceTimeoutMultiplier;
-        }
-
-        // Load alert notification toggle preference
-        const alertNotifToggle = document.getElementById('settings-alert-notif-toggle');
-        alertNotifsEnabled = data.alertNotificationsEnabled === true;
-        if (alertNotifToggle) alertNotifToggle.checked = alertNotifsEnabled;
-      }
     } catch (err) {
-      console.error('Error loading settings details', err);
+      console.error('Error loading token details', err);
     }
   };
 
   // Bind on startup if user is logged in
   if (state.currentUser?.uid) {
     loadPrefsFromDB(state.currentUser.uid);
+    subscribePrefsFromDB(state.currentUser.uid);
   }
 
   // Reload when auth state changes (crucial for refresh/login loading)
   window.addEventListener('auth-changed', (e) => {
     if (e.detail.loggedIn && e.detail.user?.uid) {
       loadPrefsFromDB(e.detail.user.uid);
+      subscribePrefsFromDB(e.detail.user.uid);
+    } else {
+      if (unsubscribePrefs) {
+        unsubscribePrefs();
+        unsubscribePrefs = null;
+      }
     }
   });
 
