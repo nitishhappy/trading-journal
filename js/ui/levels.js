@@ -339,7 +339,10 @@ if (viewLevels) {
 
                 const ann = document.createElement('div');
                 ann.className = 'chart-annotation';
+                ann.style.border = '1px solid ' + cColor;
                 ann.style.borderLeft = '4px solid ' + cColor;
+                ann.style.background = `color-mix(in srgb, ${cColor} 8%, var(--surface-1))`;
+                ann.style.boxShadow = `0 4px 15px color-mix(in srgb, ${cColor} 10%, transparent)`;
                 
                 let rangeText = '';
                 if (lvl.isRange) {
