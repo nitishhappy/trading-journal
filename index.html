@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="css/checklist.css">
   <link rel="stylesheet" href="css/aicoach.css">
   <link rel="stylesheet" href="css/tv-notifications.css">
+  <link rel="stylesheet" href="css/levels.css">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -85,6 +86,7 @@
       <button class="main-tab" data-view="aicoach">AI Coach</button>
       <button class="main-tab" data-view="tradelog">Trade Log</button>
       <button class="main-tab" data-view="tvNotifications">TV Notifications</button>
+      <button class="main-tab" data-view="levels">Levels</button>
     </nav>
 
     <!-- Daily backup reminder (shown once per day on first open) -->
@@ -1096,6 +1098,101 @@
     </div>
   </div>
 
+    <!-- ===== LEVELS VIEW ===== -->
+    <div id="view-levels" class="view hidden">
+        <div class="layout-wrapper-levels">
+            <!-- LEFT COLUMN: Form and List -->
+            <div class="left-col">
+                <!-- INPUT PANEL -->
+                <div class="panel">
+                    <h2 class="collapsible-header" id="levels-form-header">
+                        <span>Plan a Trade</span>
+                        <span class="toggle-icon">▼</span>
+                    </h2>
+                    
+                    <div id="levels-form-body" class="collapsible-body">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Key Price Level / Zone</label>
+                                <input type="text" id="inp-level-price" placeholder="e.g. 24052 or 23891-24010">
+                                <div class="behavior-tags" style="margin-top: 0.2rem;">
+                                    <button class="tag-btn level-quick-btn" data-val="PDH">PDH</button>
+                                    <button class="tag-btn level-quick-btn" data-val="PDL">PDL</button>
+                                    <button class="tag-btn level-quick-btn" data-val="PDC">PDC</button>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Bias / Direction</label>
+                                <select id="inp-level-bias">
+                                    <option value="bullish">Bullish (Long)</option>
+                                    <option value="bearish">Bearish (Short)</option>
+                                    <option value="neutral">Neutral (Wait & See)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group" style="margin-bottom: 1.5rem;">
+                            <label>Expected Behavior at Level</label>
+                            <div class="behavior-tags" id="behavior-tags">
+                                <button class="tag-btn level-behavior-btn" data-val="Gap Up / Continuation">Gap Up / Cont.</button>
+                                <button class="tag-btn level-behavior-btn" data-val="Gap Down / Flush">Gap Down / Flush</button>
+                                <button class="tag-btn level-behavior-btn" data-val="Sweep & Reversal">Sweep & Reversal</button>
+                                <button class="tag-btn level-behavior-btn" data-val="Consolidation Box">Consolidate</button>
+                            </div>
+                            <input type="text" id="inp-level-behavior" placeholder="Type custom behavior description..." style="margin-top: 0.75rem;">
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Target (TP)</label>
+                                <input type="text" id="inp-level-tp" placeholder="e.g. T1:24200, T2:24350">
+                            </div>
+                            <div class="input-group">
+                                <label>Stop Loss (SL)</label>
+                                <input type="text" id="inp-level-sl" placeholder="e.g. PDC or 23940">
+                            </div>
+                        </div>
+
+                        <button id="btn-level-add" class="btn-add">+ Add Level to Plan</button>
+                    </div>
+                </div>
+
+                <!-- MAPPED LEVELS PANEL -->
+                <div class="panel">
+                    <h2 class="collapsible-header" id="levels-list-header">
+                        <span>Mapped Levels</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button id="btn-level-clear" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Clear All</button>
+                            <span id="level-count" style="font-size: 0.9rem; color: var(--text-dim); font-weight: normal;">0 Levels</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                    </h2>
+                    
+                    <div id="levels-list-body" class="collapsible-body">
+                        <div class="levels-container" id="levels-list">
+                            <div class="empty-state-levels" id="levels-empty-state">
+                                No levels mapped yet. Add a level above to build your trade plan.
+                            </div>
+                            <!-- Cards injected here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Visual Chart Map -->
+            <div class="right-col">
+                <div class="panel chart-wrapper">
+                    <h2 style="margin: 0; font-size: 1.15rem; font-weight: 600;">Visual Chart Map</h2>
+                    <p style="margin: 0.25rem 0 1.5rem 0; color: var(--text-dim); font-size: 0.85rem;">Levels automatically plot here in sequence.</p>
+                    
+                    <div id="visual-chart-area">
+                        <div class="empty-state-levels" id="chart-empty">Add numeric price levels to see the visual map.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
   <!-- ===================== IMAGE LIGHTBOX ===================== -->
   <div id="lightbox" class="modal-overlay hidden">
     <div class="lightbox-content">
