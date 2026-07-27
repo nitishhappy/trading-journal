@@ -1,4 +1,9 @@
 /* ===================== LEVELS TAB ===================== */
+:root {
+    --success: #10b981;
+    --danger:  #f43f5e;
+    --warning: #fbbf24;
+}
 
 .layout-wrapper-levels {
     display: flex;
@@ -286,9 +291,9 @@
 
 .chart-annotation {
     background: var(--surface-1);
-    padding: 0.8rem 1rem;
+    padding: 1rem;
     border-radius: 8px;
-    width: 260px;
+    width: 280px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     border: 1px solid var(--border);
     transition: border-color 0.2s ease, transform 0.2s ease;

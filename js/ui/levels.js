@@ -290,8 +290,9 @@ if (viewLevels) {
                 line.style.top = '20px';
                 line.style.left = '0';
                 line.style.right = '0';
-                line.style.height = '1px';
-                line.style.backgroundColor = lineBg;
+                line.style.height = '0';
+                line.style.borderTop = '1px dashed ' + mainColor;
+                line.style.opacity = '0.5';
                 row.appendChild(line);
             }
 
