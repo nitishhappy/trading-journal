@@ -426,5 +426,32 @@ Because we avoided a paid Firebase plan, the webhook is built for **Vercel Serve
 4. **Rich Notifications & Audio**: Sequence triggers now display persistent, rich HTML toast cards (showing symbol, timeframe, price, and steps) and play a synthetic dual-tone Web Audio chime.
 5. **Vercel Network Stability**: Rewrote the Telegram push engine using Node's native HTTPS module to ensure stable and guaranteed payload delivery before Vercel Serverless Functions freeze execution threads.
 6. **Layout Adjustments**: Reordered the TV Notifications right pane: the Trigger Logs panel is now positioned at the top, and the Sequential Rules panel is configured as a compact accordion by default.
+### v2.2.0 — Daily Levels Tab & Telegram Reliability Fix
 
+#### Daily Levels Tab
+A new **Levels** tab for pre-market trade planning, ported from a standalone prototype into the main app.
+
+- **Plan a Trade form**: Enter key price levels/zones, bias direction (Bullish/Bearish/Neutral), expected behavior (Gap Up, Sweep & Reversal, Consolidation, etc.), and TP/SL targets.
+- **Visual Chart Map**: All levels auto-plot on a vertical price axis with colored annotations — green for bullish, red for bearish, amber for neutral — with dashed connectors and glowing borders.
+- **Mapped Levels list**: Cards showing each planned level with inline-editable fields. Sorted by price (highest first).
+- **Collapsible panels**: Both the form and levels list collapse for a cleaner view.
+- **Clear All**: One-click button to wipe all levels at end of day. Data stored in browser `localStorage` (no Firestore needed).
+- **Responsive**: On narrow screens, the chart appears on top and the form below.
+
+#### New files
+| File | Purpose |
+|---|---|
+| `css/levels.css` | All styling for the Levels tab (layout, chart annotations, cards, responsive) |
+| `js/ui/levels.js` | Full UI controller: form handling, card injection, chart rendering, localStorage persistence |
+
+#### Files modified
+| File | Change |
+|---|---|
+| `index.html` | New `Levels` nav tab + full view HTML inside `app-screen` |
+| `js/dom.js` | Exported `viewLevels` DOM reference |
+| `js/ui/common.js` | Tab switching logic for Levels view |
+| `app.js` | Imports `js/ui/levels.js` |
+
+#### Telegram Notification Reliability Fix
+Fixed intermittent Telegram notification drops on Vercel. The `sendTelegramNotification()` call in `sequenceEngine.js` was fire-and-forget (`.catch()` only, not `await`ed). On Vercel serverless functions, this meant the function context could freeze/terminate before the Telegram HTTP request completed, silently dropping the notification. Now properly `await`ed so the Telegram API call always completes before the function exits.
 

@@ -295,8 +295,11 @@ async function runSequenceEngine(db, uid, keyword, symbol, timeframe, price) {
           `Steps: ${rule.steps.join(' → ')}`,
         ].join('\n');
 
-        sendTelegramNotification(telegramToken, telegramChatId, msg)
-          .catch(err => console.error('sequenceEngine: Telegram notify failed', err));
+        try {
+          await sendTelegramNotification(telegramToken, telegramChatId, msg);
+        } catch (err) {
+          console.error('sequenceEngine: Telegram notify failed', err);
+        }
       }
 
       console.log(`sequenceEngine: TRIGGERED rule "${rule.name}" for ${symbol} | log ${logId}`);
