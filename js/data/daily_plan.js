@@ -21,7 +21,7 @@ window.dailyPlanData = [
     "sl": "Just above the liquidity sweep wick"
   },
   {
-    "price": "24290 - 24200",
+    "price": "24400 - 24290",
     "bias": "neutral",
     "behavior": "Middle Zone: Non-Trading Zone. Absolutely no trading in this middle range. Wait patiently.",
     "tp": "",
