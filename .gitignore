@@ -72,3 +72,4 @@ node_modules/
 smoke-tests/test-results/
 smoke-tests/playwright-report/
 smoke-tests/.last-run.json
+js/data/daily_plan.js

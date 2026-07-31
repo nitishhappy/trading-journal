@@ -455,6 +455,10 @@ A new **Levels** tab for pre-market trade planning, ported from a standalone pro
 #### Telegram Notification Reliability Fix
 Fixed intermittent Telegram notification drops on Vercel. The `sendTelegramNotification()` call in `sequenceEngine.js` was fire-and-forget (`.catch()` only, not `await`ed). On Vercel serverless functions, this meant the function context could freeze/terminate before the Telegram HTTP request completed, silently dropping the notification. Now properly `await`ed so the Telegram API call always completes before the function exits.
 
+### v2.2.2 — 31 Jul 2026 — Automated Daily Plan Push
+- Added auto-loading logic to `levels.js` to automatically fetch daily trade plans injected from local AI scripts via `js/data/daily_plan.js`.
+- Ignored `daily_plan.js` in Git to keep data pushes strictly local and prevent version history pollution.
+
 ### v2.2.1 — 31 Jul 2026 — Alert Parser Fix & Trigger Log Grouping
 
 #### Smart Symbol Detection for TradingView Native Alerts

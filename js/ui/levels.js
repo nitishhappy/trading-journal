@@ -49,11 +49,19 @@ if (viewLevels) {
 
     // Initialize
     function initLevels() {
-        let loaded = localStorage.getItem('dailyTradePlanData');
-        if (loaded) {
-            const parsed = JSON.parse(loaded);
-            if(parsed.length > 0) {
-                parsed.forEach(l => injectLevelCard(l.id, l.rawPrice, l.bias, l.behavior, l.tp, l.sl, false));
+        if (window.dailyPlanData && Array.isArray(window.dailyPlanData) && window.dailyPlanData.length > 0) {
+            window.dailyPlanData.forEach((lvl, idx) => {
+                const levelId = 'lvl-auto-' + idx;
+                injectLevelCard(levelId, lvl.price || lvl.rawPrice || "", lvl.bias || "neutral", lvl.behavior || "", lvl.tp || "", lvl.sl || "", false);
+            });
+            saveLevelsData();
+        } else {
+            let loaded = localStorage.getItem('dailyTradePlanData');
+            if (loaded) {
+                const parsed = JSON.parse(loaded);
+                if(parsed.length > 0) {
+                    parsed.forEach(l => injectLevelCard(l.id, l.rawPrice, l.bias, l.behavior, l.tp, l.sl, false));
+                }
             }
         }
         renderChart();
