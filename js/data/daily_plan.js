@@ -14,16 +14,16 @@ window.dailyPlanData = [
     "sl": "Low of the first 15m bullish candle"
   },
   {
-    "price": "24400 - 24420",
+    "price": "24400 - 24290",
     "bias": "bearish",
-    "behavior": "Grey Resistance Zone: Flat open pushing up. Look for a fake breakout (liquidity grab) followed by a fall. Short from the top.",
-    "tp": "24290 - 24200",
-    "sl": "Just above the liquidity sweep wick"
+    "behavior": "Flat Open & Push Up: Wait and hold. If price pushes up into this zone but fails to hold (liquidity grab) and starts falling, short from the top.",
+    "tp": "Complete downward sweep (24200)",
+    "sl": "Above the liquidity sweep wick"
   },
   {
-    "price": "24400 - 24290",
+    "price": "24290 - 24200",
     "bias": "neutral",
-    "behavior": "Middle Zone: Non-Trading Zone. Absolutely no trading in this middle range. Wait patiently.",
+    "behavior": "Middle Zone: Non-Trading Zone. Absolutely no trading setup in this middle range. Wait patiently.",
     "tp": "",
     "sl": ""
   },
