@@ -455,3 +455,19 @@ A new **Levels** tab for pre-market trade planning, ported from a standalone pro
 #### Telegram Notification Reliability Fix
 Fixed intermittent Telegram notification drops on Vercel. The `sendTelegramNotification()` call in `sequenceEngine.js` was fire-and-forget (`.catch()` only, not `await`ed). On Vercel serverless functions, this meant the function context could freeze/terminate before the Telegram HTTP request completed, silently dropping the notification. Now properly `await`ed so the Telegram API call always completes before the function exits.
 
+### v2.2.1 — Alert Parser Fix & Trigger Log Grouping
+
+#### Smart Symbol Detection for TradingView Native Alerts
+TradingView's built-in crossing/price alerts use the format `XAUUSD, 5 Crossing Up price 4091.250 in 2026-07-30T13:35:00Z TF`. The old parser misidentified the ISO date string (`2026-07-30T13`) as the symbol because the `in` keyword in the fallback regex matched the datetime. Three fixes applied:
+- **New TradingView native format detector** — dedicated regex catches `SYMBOL, TF condition price PRICE in DATETIME` immediately
+- **ISO date guard** — `isIsoDateLike()` rejects any string starting with `YYYY-MM` from being treated as a symbol
+- **Keyword-as-symbol fallback** — if the first token looks like a symbol (e.g. `XAUUSD,`), strips the comma and uses it
+- Also strips trailing commas (not just colons) from the keyword token
+
+#### Trigger Logs Grouped by Date → Symbol
+The Trigger Logs section now groups entries by date (IST), then by symbol within each date:
+- **Today** is always expanded by default, with a blue accent border and "· Today" label
+- **Previous days** are collapsed — click to expand
+- **Symbol sub-headers** appear within each date when there are multiple symbols on the same day
+- Each card retains full functionality (outcome dropdown, notes, delete)
+
