@@ -155,6 +155,18 @@ if (viewLevels) {
         const newBehavior = card.querySelector('.card-behavior-title').innerText.trim();
         const newTp = card.querySelector('.val-tp').innerText.trim();
         const newSl = card.querySelector('.val-sl').innerText.trim();
+        
+        const badgeEl = card.querySelector('.badge');
+        const badgeText = badgeEl.innerText.trim().toLowerCase();
+        let newBias = 'neutral';
+        let displayBadge = 'Neutral';
+        if(badgeText === 'long' || badgeText === 'bullish') { newBias = 'bullish'; displayBadge = 'Long'; }
+        else if(badgeText === 'short' || badgeText === 'bearish') { newBias = 'bearish'; displayBadge = 'Short'; }
+        
+        // Update DOM classes for colors
+        card.className = `level-card ${newBias}`;
+        badgeEl.className = `badge ${newBias}`;
+        badgeEl.innerText = displayBadge;
 
         const idx = allLevels.findIndex(l => l.id === id);
         if(idx !== -1) {
@@ -162,6 +174,8 @@ if (viewLevels) {
             allLevels[idx].behavior = newBehavior;
             allLevels[idx].tp = newTp;
             allLevels[idx].sl = newSl;
+            allLevels[idx].bias = newBias;
+            allLevels[idx].biasBadge = displayBadge;
             
             const numbers = newPrice.match(/\d+(\.\d+)?/g);
             if(numbers && numbers.length > 0) {
@@ -222,7 +236,7 @@ if (viewLevels) {
         card.innerHTML = `
             <div class="card-price" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${price}</div>
             <div class="card-behavior">
-                <span class="badge ${bias}">${biasBadge}</span>
+                <span class="badge ${bias}" contenteditable="true" title="Edit bias (Long/Short/Neutral)" onblur="window.updateLevelCardData('${levelId}')">${biasBadge}</span>
                 <div class="card-behavior-title" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${behavior}</div>
             </div>
             <div class="card-metric">
