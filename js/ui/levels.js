@@ -31,7 +31,7 @@ if (viewLevels) {
     });
     
     document.getElementById('levels-list-header').addEventListener('click', function(e) {
-        if(e.target.id === 'btn-level-clear') return; // let clear handle itself
+        if(e.target.id === 'btn-level-clear' || e.target.id === 'btn-level-upload' || e.target.id === 'inp-level-upload') return; 
         togglePanel('levels-list-body', this);
     });
 
@@ -61,6 +61,49 @@ if (viewLevels) {
 
     function saveLevelsData() {
         localStorage.setItem('dailyTradePlanData', JSON.stringify(allLevels));
+    }
+
+    const inpUpload = document.getElementById('inp-level-upload');
+    const btnUpload = document.getElementById('btn-level-upload');
+
+    if (btnUpload && inpUpload) {
+        btnUpload.addEventListener('click', (e) => {
+            e.stopPropagation();
+            inpUpload.click();
+        });
+
+        inpUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    if (Array.isArray(data)) {
+                        data.forEach((lvl, idx) => {
+                            const levelId = 'lvl-' + Date.now() + '-' + idx;
+                            injectLevelCard(
+                                levelId, 
+                                lvl.price || lvl.rawPrice || "", 
+                                lvl.bias || "neutral", 
+                                lvl.behavior || "", 
+                                lvl.tp || "", 
+                                lvl.sl || "", 
+                                false
+                            );
+                        });
+                        saveLevelsData();
+                    } else {
+                        alert("Invalid JSON format. Expected an array of levels.");
+                    }
+                } catch (err) {
+                    alert("Error parsing JSON file: " + err.message);
+                }
+                inpUpload.value = ''; 
+            };
+            reader.readAsText(file);
+        });
     }
 
     document.getElementById('btn-level-clear').addEventListener('click', (e) => {
