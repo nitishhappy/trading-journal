@@ -426,7 +426,7 @@ Because we avoided a paid Firebase plan, the webhook is built for **Vercel Serve
 4. **Rich Notifications & Audio**: Sequence triggers now display persistent, rich HTML toast cards (showing symbol, timeframe, price, and steps) and play a synthetic dual-tone Web Audio chime.
 5. **Vercel Network Stability**: Rewrote the Telegram push engine using Node's native HTTPS module to ensure stable and guaranteed payload delivery before Vercel Serverless Functions freeze execution threads.
 6. **Layout Adjustments**: Reordered the TV Notifications right pane: the Trigger Logs panel is now positioned at the top, and the Sequential Rules panel is configured as a compact accordion by default.
-### v2.2.0 — Daily Levels Tab & Telegram Reliability Fix
+### v2.2.0 — 29 Jul 2026 — Daily Levels Tab & Telegram Reliability Fix
 
 #### Daily Levels Tab
 A new **Levels** tab for pre-market trade planning, ported from a standalone prototype into the main app.
@@ -455,7 +455,7 @@ A new **Levels** tab for pre-market trade planning, ported from a standalone pro
 #### Telegram Notification Reliability Fix
 Fixed intermittent Telegram notification drops on Vercel. The `sendTelegramNotification()` call in `sequenceEngine.js` was fire-and-forget (`.catch()` only, not `await`ed). On Vercel serverless functions, this meant the function context could freeze/terminate before the Telegram HTTP request completed, silently dropping the notification. Now properly `await`ed so the Telegram API call always completes before the function exits.
 
-### v2.2.1 — Alert Parser Fix & Trigger Log Grouping
+### v2.2.1 — 31 Jul 2026 — Alert Parser Fix & Trigger Log Grouping
 
 #### Smart Symbol Detection for TradingView Native Alerts
 TradingView's built-in crossing/price alerts use the format `XAUUSD, 5 Crossing Up price 4091.250 in 2026-07-30T13:35:00Z TF`. The old parser misidentified the ISO date string (`2026-07-30T13`) as the symbol because the `in` keyword in the fallback regex matched the datetime. Three fixes applied:
