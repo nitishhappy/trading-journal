@@ -573,78 +573,168 @@ function renderLogs() {
   }
 
   seqLogsList.innerHTML = '';
+
+  // ── Group by IST date ──────────────────────────────────────────────────────
+  const grouped = {};  // { "31 Jul 2026": { "XAUUSD": [log, log], "NIFTY": [log] }, ... }
+  const dateKeys = []; // ordered, newest first
+
   logs.forEach(log => {
-    const card = document.createElement('div');
-    card.className = 'seq-log-card';
-    card.style.background = 'var(--surface-2)';
-    card.style.border = '1px solid var(--border)';
-    card.style.borderRadius = '8px';
-    card.style.padding = '12px';
-    card.style.marginBottom = '8px';
-
     const ts = log.triggeredAt?.toDate ? log.triggeredAt.toDate() : new Date();
-    const dateStr = ts.toLocaleString('en-IN', {
-      timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true
+    const dateKey = ts.toLocaleDateString('en-IN', {
+      timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric'
     });
+    const sym = log.symbol || 'GENERAL';
 
-    const isPending = !log.outcome || log.outcome === 'PENDING';
-    const isProfit  = log.outcome === 'PROFIT';
-    const isLoss    = log.outcome === 'LOSS';
+    if (!grouped[dateKey]) {
+      grouped[dateKey] = {};
+      dateKeys.push(dateKey);
+    }
+    if (!grouped[dateKey][sym]) grouped[dateKey][sym] = [];
+    grouped[dateKey][sym].push(log);
+  });
 
-    card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
-        <div>
-          <span style="font-size:11px; text-transform:uppercase; font-family:var(--font-mono); color:var(--accent); font-weight:bold;">${log.ruleName || 'Sequence Alert'}</span>
-          <h4 style="margin:2px 0 0; font-weight:600;">${log.symbol} · ${log.timeframe || '—'}</h4>
-        </div>
-        <div style="text-align:right;">
-          <span style="font-size:11px; color:var(--text-dim);">${dateStr}</span>
-          <div style="font-size:13px; font-weight:bold; margin-top:2px;">₹${(log.price || 0).toLocaleString('en-IN')}</div>
-        </div>
-      </div>
-      <div style="display:flex; gap:8px; align-items:center; margin-top:10px;">
-        <select class="seq-log-outcome" style="padding:4px 8px; font-size:12px; border-radius:4px; border:1px solid var(--border);">
-          <option value="PENDING" ${isPending ? 'selected' : ''}>Pending</option>
-          <option value="PROFIT" ${isProfit ? 'selected' : ''}>Profit</option>
-          <option value="LOSS" ${isLoss ? 'selected' : ''}>Loss</option>
-        </select>
-        <input type="text" class="seq-log-notes" placeholder="Add trade notes..." value="${log.notes || ''}" style="flex:1; padding:4px 8px; font-size:12px; border-radius:4px; border:1px solid var(--border);" />
-        <button class="icon-btn delete-log-btn" title="Delete log">✕</button>
+  // Today's date key (IST)
+  const todayKey = new Date().toLocaleDateString('en-IN', {
+    timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric'
+  });
+
+  // ── Render each date group ─────────────────────────────────────────────────
+  dateKeys.forEach(dateKey => {
+    const isToday = dateKey === todayKey;
+    const symbolGroups = grouped[dateKey];
+    const totalLogs = Object.values(symbolGroups).reduce((s, arr) => s + arr.length, 0);
+    const symbolCount = Object.keys(symbolGroups).length;
+
+    // Date accordion header
+    const dateSection = document.createElement('div');
+    dateSection.style.marginBottom = '6px';
+
+    const dateHeader = document.createElement('div');
+    dateHeader.style.cssText = `
+      display:flex; align-items:center; justify-content:space-between; cursor:pointer;
+      padding:8px 10px; border-radius:6px; user-select:none;
+      background: ${isToday ? 'rgba(79,158,255,0.08)' : 'transparent'};
+      border: 1px solid ${isToday ? 'rgba(79,158,255,0.2)' : 'var(--border)'};
+      margin-bottom:4px;
+    `;
+    dateHeader.innerHTML = `
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="date-toggle-icon" style="font-size:10px; color:var(--text-dim); transition:transform 0.2s;">${isToday ? '▼' : '▶'}</span>
+        <span style="font-weight:700; font-size:13px; color:${isToday ? 'var(--accent)' : 'var(--text)'};">${dateKey}${isToday ? ' · Today' : ''}</span>
+        <span style="font-size:11px; color:var(--text-dim); font-weight:400;">${totalLogs} trigger${totalLogs !== 1 ? 's' : ''}</span>
       </div>
     `;
 
-    // Dropdown change listener
-    const outcomeSelect = card.querySelector('.seq-log-outcome');
-    const notesInput    = card.querySelector('.seq-log-notes');
+    const dateBody = document.createElement('div');
+    dateBody.style.display = isToday ? 'block' : 'none';
+    dateBody.style.paddingLeft = '4px';
 
-    const handleUpdate = async () => {
-      try {
-        await updateTriggerLogOutcome(log.id, outcomeSelect.value, notesInput.value.trim());
-      } catch (err) {
-        showToast('Failed to save log details');
-      }
-    };
-
-    outcomeSelect.addEventListener('change', handleUpdate);
-    notesInput.addEventListener('blur', handleUpdate);
-    notesInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        notesInput.blur();
-      }
+    dateHeader.addEventListener('click', () => {
+      const isOpen = dateBody.style.display !== 'none';
+      dateBody.style.display = isOpen ? 'none' : 'block';
+      dateHeader.querySelector('.date-toggle-icon').textContent = isOpen ? '▶' : '▼';
     });
 
-    card.querySelector('.delete-log-btn').addEventListener('click', async () => {
-      if (!confirm('Delete this trigger log?')) return;
-      try {
-        await deleteTriggerLog(log.id);
-        showToast('Trigger log deleted');
-      } catch (err) {
-        showToast('Failed to delete');
+    // ── Render symbol sub-groups inside each date ──────────────────────────
+    Object.keys(symbolGroups).forEach(sym => {
+      const symLogs = symbolGroups[sym];
+
+      if (symbolCount > 1) {
+        // Only show symbol sub-header if there are multiple symbols in this date
+        const symHeader = document.createElement('div');
+        symHeader.style.cssText = `
+          font-size:11px; font-weight:700; text-transform:uppercase;
+          color:var(--accent); font-family:var(--font-mono);
+          padding:6px 8px 2px; margin-top:4px;
+          letter-spacing:0.5px;
+        `;
+        symHeader.textContent = `${sym} · ${symLogs.length}`;
+        dateBody.appendChild(symHeader);
       }
+
+      symLogs.forEach(log => {
+        dateBody.appendChild(createLogCard(log));
+      });
     });
 
-    seqLogsList.appendChild(card);
+    dateSection.appendChild(dateHeader);
+    dateSection.appendChild(dateBody);
+    seqLogsList.appendChild(dateSection);
   });
+}
+
+// ── Extracted: build a single log card element ─────────────────────────────
+function createLogCard(log) {
+  const card = document.createElement('div');
+  card.className = 'seq-log-card';
+  card.style.background = 'var(--surface-2)';
+  card.style.border = '1px solid var(--border)';
+  card.style.borderRadius = '8px';
+  card.style.padding = '12px';
+  card.style.marginBottom = '8px';
+
+  const ts = log.triggeredAt?.toDate ? log.triggeredAt.toDate() : new Date();
+  const dateStr = ts.toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: true
+  });
+
+  const isPending = !log.outcome || log.outcome === 'PENDING';
+  const isProfit  = log.outcome === 'PROFIT';
+  const isLoss    = log.outcome === 'LOSS';
+
+  card.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+      <div>
+        <span style="font-size:11px; text-transform:uppercase; font-family:var(--font-mono); color:var(--accent); font-weight:bold;">${log.ruleName || 'Sequence Alert'}</span>
+        <h4 style="margin:2px 0 0; font-weight:600;">${log.symbol} · ${log.timeframe || '—'}</h4>
+      </div>
+      <div style="text-align:right;">
+        <span style="font-size:11px; color:var(--text-dim);">${dateStr}</span>
+        <div style="font-size:13px; font-weight:bold; margin-top:2px;">₹${(log.price || 0).toLocaleString('en-IN')}</div>
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center; margin-top:10px;">
+      <select class="seq-log-outcome" style="padding:4px 8px; font-size:12px; border-radius:4px; border:1px solid var(--border);">
+        <option value="PENDING" ${isPending ? 'selected' : ''}>Pending</option>
+        <option value="PROFIT" ${isProfit ? 'selected' : ''}>Profit</option>
+        <option value="LOSS" ${isLoss ? 'selected' : ''}>Loss</option>
+      </select>
+      <input type="text" class="seq-log-notes" placeholder="Add trade notes..." value="${log.notes || ''}" style="flex:1; padding:4px 8px; font-size:12px; border-radius:4px; border:1px solid var(--border);" />
+      <button class="icon-btn delete-log-btn" title="Delete log">✕</button>
+    </div>
+  `;
+
+  // Dropdown change listener
+  const outcomeSelect = card.querySelector('.seq-log-outcome');
+  const notesInput    = card.querySelector('.seq-log-notes');
+
+  const handleUpdate = async () => {
+    try {
+      await updateTriggerLogOutcome(log.id, outcomeSelect.value, notesInput.value.trim());
+    } catch (err) {
+      showToast('Failed to save log details');
+    }
+  };
+
+  outcomeSelect.addEventListener('change', handleUpdate);
+  notesInput.addEventListener('blur', handleUpdate);
+  notesInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      notesInput.blur();
+    }
+  });
+
+  card.querySelector('.delete-log-btn').addEventListener('click', async () => {
+    if (!confirm('Delete this trigger log?')) return;
+    try {
+      await deleteTriggerLog(log.id);
+      showToast('Trigger log deleted');
+    } catch (err) {
+      showToast('Failed to delete');
+    }
+  });
+
+  return card;
 }
 
 // Synthesize a pleasant dual-tone chime when sequence completes
