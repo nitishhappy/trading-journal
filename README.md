@@ -512,3 +512,4 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - **Header Structure Extraction:** Extracts the stock ticker from setup headers like "POSITIONAL RESEARCH" or "SWING TRADE".
   - **Cashtag Extraction:** Matches `$TICKER` or `#TICKER` format in messages containing trade setup keywords.
 - **Automated Sector Backfilling (`yfinance`)**: For dynamically discovered stocks, the scraper now automatically calls the Yahoo Finance API (via `yfinance`) to instantly fetch and map the official sector/industry into the database.
+  - **Advanced Text Extraction**: The parser smartly captures the full company phrase before the text "Looks Good" and handles extraction of parenthesized tickers (e.g. SML MAHINDRA (SMLMAH)) or strips spaces for split tickers (e.g. PNB Housing -> PNBHOUSING).
