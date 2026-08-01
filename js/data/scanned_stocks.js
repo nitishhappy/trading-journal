@@ -48,7 +48,7 @@ window.scannedStocksData = [
     "name": "Aequs",
     "ticker": "AEQUS",
     "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:AEQUS",
-    "summary": "Aequs finally rocket 🚀 Been 11-12 sessions of holding for me with patience",
+    "summary": "Aequs finally rocket \ud83d\ude80 Been 11-12 sessions of holding for me with patience",
     "dateOfRun": "2026-07-08",
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
@@ -59,7 +59,7 @@ window.scannedStocksData = [
     "name": "Ind Swift",
     "ticker": "INDSWFTLAB",
     "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:INDSWFTLAB",
-    "summary": "Ind swift 5% up Rocket start 🥳🥳 Back to back rocketry days",
+    "summary": "Ind swift 5% up Rocket start \ud83e\udd73\ud83e\udd73 Back to back rocketry days",
     "dateOfRun": "2026-07-08",
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
@@ -197,5 +197,17 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N"
+  },
+  {
+    "name": "Thangamalyil",
+    "ticker": "THANGAMAYL",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:THANGAMAYL",
+    "summary": "[2026-07-29] Trading into earnings is like trading with fireYou can get lucky with some wild moves on your side but you will hit more losses doing thatNever ris...",
+    "dateOfRun": "2026-07-29",
+    "source": "EquiAlpha_stocks",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
   }
 ];

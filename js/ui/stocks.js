@@ -94,8 +94,9 @@ function copyWatchlist(type) {
 
 // Auto-sync window.scannedStocksData into Firestore
 function runAutoSync() {
-  const existingKeys = new Set(state.stocks.map(s => `${s.ticker.toUpperCase()}_${s.dateOfRun}`));
+  const existingMap = new Map(state.stocks.map(s => [`${s.ticker.toUpperCase()}_${s.dateOfRun}`, s]));
   const toAdd = [];
+  const toUpdate = [];
 
   window.scannedStocksData.forEach(item => {
     const ticker = (item.ticker || "").toUpperCase().trim();
@@ -103,7 +104,7 @@ function runAutoSync() {
     if (!ticker || !dateOfRun) return;
 
     const key = `${ticker}_${dateOfRun}`;
-    if (!existingKeys.has(key)) {
+    if (!existingMap.has(key)) {
       toAdd.push({
         name: item.name || "",
         ticker: ticker,
@@ -113,14 +114,36 @@ function runAutoSync() {
         source: item.source || "Afzal",
         timeframe: item.timeframe || "Daily",
         myNotes: item.myNotes || "",
-        traded: item.traded || "N"
+        traded: item.traded || "N",
+        highlight: item.highlight || false
       });
+    } else {
+      // Sync updates if summary or highlight changed in the scan file
+      const existing = existingMap.get(key);
+      const newSummary = item.summary || "";
+      const newHighlight = item.highlight || false;
+      if (existing.summary !== newSummary || existing.highlight !== newHighlight) {
+        toUpdate.push({
+          id: existing.id,
+          data: {
+            summary: newSummary,
+            highlight: newHighlight
+          }
+        });
+      }
     }
   });
 
   if (toAdd.length > 0) {
     console.log(`Auto-syncing ${toAdd.length} new stocks to Firestore...`);
     addStocksBatch(toAdd);
+  }
+
+  if (toUpdate.length > 0) {
+    console.log(`Auto-syncing ${toUpdate.length} stock updates to Firestore...`);
+    toUpdate.forEach(upd => {
+      updateStock(upd.id, upd.data);
+    });
   }
 }
 
@@ -209,7 +232,16 @@ export function renderStocksTable() {
 function createStockRow(stock) {
   const tr = document.createElement("tr");
   tr.dataset.id = stock.id;
-  tr.className = "stocks-row";
+  tr.className = `stocks-row ${stock.highlight ? 'highlighted-row' : ''}`;
+
+  // Clear highlight on click
+  tr.addEventListener("click", () => {
+    if (stock.highlight) {
+      stock.highlight = false;
+      tr.classList.remove("highlighted-row");
+      updateStock(stock.id, { highlight: false });
+    }
+  });
 
   const isWeekly = stock.timeframe === 'Weekly';
   const isTraded = stock.traded === 'Y';

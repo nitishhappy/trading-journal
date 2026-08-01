@@ -3783,3 +3783,12 @@ textarea { resize: vertical; }
 .stocks-btn-copy:active {
   transform: translateY(0);
 }
+
+/* Highlighted Row for Updates */
+.stocks-row.highlighted-row td {
+  background: rgba(79, 158, 255, 0.08) !important;
+}
+
+.stocks-row.highlighted-row td:first-child {
+  border-left: 4px solid var(--accent);
+}
