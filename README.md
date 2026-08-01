@@ -505,3 +505,10 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
 - `C:\Nitish\ClaudeApps\Utilities\stock_scanner.py` — Local Python scraper (Canva & Telegram support).
 - `C:\Nitish\ClaudeApps\Utilities\run_scanner.bat` — Windows launcher batch file.
 
+
+### v2.3.1 - 1 Aug 2026 - Smart Dynamic Stock Extraction & automated Sectors
+- **Smart Telegram Parsing**: Completely removed the hardcoded `COMMON_TICKERS` list requirement for discovering stocks. The `stock_scanner.py` scraper now extracts stocks dynamically from *any* Telegram channel using three robust methods:
+  - **Hyperlink Extraction:** Extracts the stock ticker flawlessly from TradingView anchor tags.
+  - **Header Structure Extraction:** Extracts the stock ticker from setup headers like "POSITIONAL RESEARCH" or "SWING TRADE".
+  - **Cashtag Extraction:** Matches `$TICKER` or `#TICKER` format in messages containing trade setup keywords.
+- **Automated Sector Backfilling (`yfinance`)**: For dynamically discovered stocks, the scraper now automatically calls the Yahoo Finance API (via `yfinance`) to instantly fetch and map the official sector/industry into the database.

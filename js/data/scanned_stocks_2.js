@@ -10,8 +10,7 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true,
-    "sector": "Consumer Durables"
+    "highlight": true
   },
   {
     "name": "Solar Industries India",
@@ -22,8 +21,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Chemicals"
+    "traded": "N"
   },
   {
     "name": "Rain Industries",
@@ -34,8 +32,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Chemicals"
+    "traded": "N"
   },
   {
     "name": "Shaily Engineering Plastics",
@@ -46,8 +43,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Weekly",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Capital Goods"
+    "traded": "N"
   },
   {
     "name": "Krishna Phoschem",
@@ -58,8 +54,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Chemicals"
+    "traded": "N"
   },
   {
     "name": "Bosch",
@@ -70,8 +65,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Weekly",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Auto"
+    "traded": "N"
   },
   {
     "name": "SJS Enterprises",
@@ -82,8 +76,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Auto"
+    "traded": "N"
   },
   {
     "name": "SG Finserve",
@@ -94,8 +87,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Financial Services"
+    "traded": "N"
   },
   {
     "name": "Tourism Finance Corp. of India",
@@ -106,8 +98,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Financial Services"
+    "traded": "N"
   },
   {
     "name": "SG Mart",
@@ -118,8 +109,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Services"
+    "traded": "N"
   },
   {
     "name": "Azad Engineering",
@@ -143,8 +133,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Capital Goods"
+    "traded": "N"
   },
   {
     "name": "Cosmo First",
@@ -155,8 +144,7 @@ window.scannedStocksData = [
     "source": "Afzal",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Chemicals"
+    "traded": "N"
   },
   {
     "name": "Goodluck India",
@@ -336,8 +324,7 @@ window.scannedStocksData = [
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Capital Goods"
+    "traded": "N"
   },
   {
     "name": "Ind Swift",
@@ -348,8 +335,7 @@ window.scannedStocksData = [
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Pharma"
+    "traded": "N"
   },
   {
     "name": "Iolcp",
@@ -360,8 +346,7 @@ window.scannedStocksData = [
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Pharma"
+    "traded": "N"
   },
   {
     "name": "Suven",
@@ -372,8 +357,7 @@ window.scannedStocksData = [
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Pharma"
+    "traded": "N"
   },
   {
     "name": "Senores",
@@ -384,8 +368,7 @@ window.scannedStocksData = [
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Pharma"
+    "traded": "N"
   },
   {
     "name": "Kernex Microsystem",
@@ -396,33 +379,6 @@ window.scannedStocksData = [
     "source": "EquiAlpha_stocks",
     "timeframe": "Daily",
     "myNotes": "",
-    "traded": "N",
-    "sector": "Capital Goods"
-  },
-  {
-    "name": "PNB",
-    "ticker": "PNB",
-    "sector": "",
-    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:PNB",
-    "summary": "[2026-07-31] POSITIONAL RESEARCH  PNB Housing   Looks good above 1050  SL 1030  Targets 7-10-12-15-20-25-30 points from entry   Hold few days     Please consult...",
-    "dateOfRun": "2026-07-31",
-    "source": "stockpro_online",
-    "timeframe": "Daily",
-    "myNotes": "",
-    "traded": "N",
-    "highlight": true
-  },
-  {
-    "name": "Adf Foods",
-    "ticker": "ADFFOODS",
-    "sector": "FMCG",
-    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:ADFFOODS",
-    "summary": "[2026-07-29] Trading into earnings is like trading with fire  You can get lucky with some wild moves on your side but you will hit more losses doing that  Never...",
-    "dateOfRun": "2026-07-29",
-    "source": "EquiAlpha_stocks",
-    "timeframe": "Daily",
-    "myNotes": "",
-    "traded": "N",
-    "highlight": true
+    "traded": "N"
   }
 ];
