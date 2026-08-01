@@ -1,5 +1,6 @@
 import { state } from '../state.js';
 import { updateStock, deleteStock, addStocksBatch } from '../services/stocks.js';
+import { showToast } from '../utils/toast.js';
 
 let hasAutoSynced = false;
 
@@ -7,6 +8,8 @@ let hasAutoSynced = false;
 export function initStocksUI() {
   const groupSelect = document.getElementById("stocks-group-select");
   const sortSelect = document.getElementById("stocks-sort-select");
+  const copyDeltaBtn = document.getElementById("stocks-copy-delta-btn");
+  const copyFullBtn = document.getElementById("stocks-copy-full-btn");
 
   if (groupSelect) {
     groupSelect.value = "none";
@@ -18,6 +21,14 @@ export function initStocksUI() {
     sortSelect.addEventListener("change", () => renderStocksTable());
   }
 
+  if (copyDeltaBtn) {
+    copyDeltaBtn.addEventListener("click", () => copyWatchlist("delta"));
+  }
+
+  if (copyFullBtn) {
+    copyFullBtn.addEventListener("click", () => copyWatchlist("full"));
+  }
+
   // Listen to Firestore updates
   window.addEventListener("stocks-updated", () => {
     // Attempt auto-sync of scanned_stocks.js data exactly once after first DB load
@@ -27,6 +38,58 @@ export function initStocksUI() {
     }
     renderStocksTable();
   });
+}
+
+// Copy tickers formatted for TradingView watchlist to clipboard
+function copyWatchlist(type) {
+  if (!state.stocks || state.stocks.length === 0) {
+    showToast("No stocks to copy", "info");
+    return;
+  }
+
+  let targetStocks = [];
+
+  if (type === "delta") {
+    // Find the latest date of run
+    const dates = state.stocks
+      .map(s => s.dateOfRun)
+      .filter(Boolean)
+      .sort((a, b) => new Date(b) - new Date(a));
+    
+    if (dates.length === 0) {
+      showToast("No dates found to determine delta", "error");
+      return;
+    }
+    
+    const latestDate = dates[0];
+    targetStocks = state.stocks.filter(s => s.dateOfRun === latestDate);
+  } else {
+    targetStocks = state.stocks;
+  }
+
+  if (targetStocks.length === 0) {
+    showToast("No tickers found", "info");
+    return;
+  }
+
+  // Generate TV list: EXCH:TICKER, separated by commas
+  const tickers = targetStocks.map(stock => {
+    const symbolPrefix = stock.tvLink && stock.tvLink.includes("BSE:") ? "BSE:" : "NSE:";
+    return `${symbolPrefix}${stock.ticker}`;
+  });
+
+  // Remove duplicates
+  const uniqueTickers = [...new Set(tickers)];
+  const textToCopy = uniqueTickers.join(",");
+
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      showToast(`Copied ${uniqueTickers.length} tickers to clipboard!`, "success");
+    })
+    .catch(err => {
+      console.error("Clipboard copy failed:", err);
+      showToast("Failed to copy to clipboard", "error");
+    });
 }
 
 // Auto-sync window.scannedStocksData into Firestore
