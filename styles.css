@@ -3792,3 +3792,13 @@ textarea { resize: vertical; }
 .stocks-row.highlighted-row td:first-child {
   border-left: 4px solid var(--accent);
 }
+
+/* Sortable Headers Hover Effect */
+.sortable-header {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sortable-header:hover {
+  background-color: var(--surface-2) !important;
+  color: var(--text) !important;
+}

@@ -4,6 +4,22 @@ import { showToast } from '../utils/toast.js';
 
 let hasAutoSynced = false;
 
+// Sorting and grouping state
+let currentSortField = "name"; // "name" | "dateOfRun" | "source" | "timeframe" | "traded"
+let currentSortOrder = "asc"; // "asc" | "desc"
+let currentGroupField = "none"; // "none" | "source" | "date"
+
+// Helper to toggle sort states
+function toggleSort(field, defaultOrder = "asc") {
+  if (currentSortField === field) {
+    currentSortOrder = currentSortOrder === "asc" ? "desc" : "asc";
+  } else {
+    currentSortField = field;
+    currentSortOrder = defaultOrder;
+  }
+  renderStocksTable();
+}
+
 // Initialize Stocks view event listeners
 export function initStocksUI() {
   const groupSelect = document.getElementById("stocks-group-select");
@@ -11,14 +27,59 @@ export function initStocksUI() {
   const copyDeltaBtn = document.getElementById("stocks-copy-delta-btn");
   const copyFullBtn = document.getElementById("stocks-copy-full-btn");
 
+  // Sync selectors with state
   if (groupSelect) {
     groupSelect.value = "none";
-    groupSelect.addEventListener("change", () => renderStocksTable());
+    groupSelect.addEventListener("change", () => {
+      currentGroupField = groupSelect.value;
+      renderStocksTable();
+    });
   }
 
   if (sortSelect) {
     sortSelect.value = "name";
-    sortSelect.addEventListener("change", () => renderStocksTable());
+    sortSelect.addEventListener("change", () => {
+      currentSortField = sortSelect.value === "date" ? "dateOfRun" : "name";
+      currentSortOrder = sortSelect.value === "date" ? "desc" : "asc";
+      renderStocksTable();
+    });
+  }
+
+  // Header click listeners
+  const thName = document.getElementById("th-stock-name");
+  const thDate = document.getElementById("th-date");
+  const thSource = document.getElementById("th-source");
+  const thTf = document.getElementById("th-tf");
+  const thTraded = document.getElementById("th-traded");
+
+  if (thName) {
+    thName.addEventListener("click", () => {
+      toggleSort("name", "asc");
+      if (sortSelect) sortSelect.value = "name";
+    });
+  }
+  if (thDate) {
+    thDate.addEventListener("click", () => {
+      toggleSort("dateOfRun", "desc");
+      if (sortSelect) sortSelect.value = "date";
+    });
+  }
+  if (thSource) {
+    thSource.addEventListener("click", () => {
+      currentGroupField = currentGroupField === "source" ? "none" : "source";
+      if (groupSelect) groupSelect.value = currentGroupField;
+      renderStocksTable();
+    });
+  }
+  if (thTf) {
+    thTf.addEventListener("click", () => {
+      toggleSort("timeframe", "asc");
+    });
+  }
+  if (thTraded) {
+    thTraded.addEventListener("click", () => {
+      toggleSort("traded", "asc");
+    });
   }
 
   if (copyDeltaBtn) {
@@ -155,12 +216,6 @@ export function renderStocksTable() {
 
   if (!tableBody) return;
 
-  const groupSelect = document.getElementById("stocks-group-select");
-  const sortSelect = document.getElementById("stocks-sort-select");
-
-  const groupMode = groupSelect ? groupSelect.value : "none"; // "none" | "source" | "date"
-  const sortMode = sortSelect ? sortSelect.value : "name"; // "name" | "date"
-
   const stocks = [...state.stocks];
 
   // Update total count
@@ -175,22 +230,36 @@ export function renderStocksTable() {
 
   tableBody.innerHTML = "";
 
-  if (stocks.length === 0) return;
+  if (stocks.length === 0) {
+    updateHeaderIndicators();
+    return;
+  }
 
   // 1. Sort the stocks
   stocks.sort((a, b) => {
-    if (sortMode === "date") {
-      const dateA = a.dateOfRun || "";
-      const dateB = b.dateOfRun || "";
-      return dateB.localeCompare(dateA); // Newest first
+    let valA = a[currentSortField] || "";
+    let valB = b[currentSortField] || "";
+
+    if (currentSortField === "dateOfRun") {
+      // date comparison
+      const dateA = new Date(valA || "1970-01-01");
+      const dateB = new Date(valB || "1970-01-01");
+      return currentSortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    }
+
+    // text comparison
+    valA = valA.toString().toLowerCase();
+    valB = valB.toString().toLowerCase();
+
+    if (currentSortOrder === "asc") {
+      return valA.localeCompare(valB);
     } else {
-      const nameA = a.name || "";
-      const nameB = b.name || "";
-      return nameA.localeCompare(nameB); // Alphabetical
+      return valB.localeCompare(valA);
     }
   });
 
   // 2. Render (Grouped or Ungrouped)
+  const groupMode = currentGroupField;
   if (groupMode === "none") {
     stocks.forEach(stock => {
       tableBody.appendChild(createStockRow(stock));
@@ -226,6 +295,48 @@ export function renderStocksTable() {
       });
     });
   }
+
+  // Update header indicators
+  updateHeaderIndicators();
+}
+
+// Update direction arrows on headers based on active sort/group state
+function updateHeaderIndicators() {
+  const indicators = {
+    "name": { id: "th-stock-name" },
+    "dateOfRun": { id: "th-date" },
+    "source": { id: "th-source" },
+    "timeframe": { id: "th-tf" },
+    "traded": { id: "th-traded" }
+  };
+
+  Object.entries(indicators).forEach(([field, config]) => {
+    const el = document.getElementById(config.id);
+    if (!el) return;
+
+    const indicatorSpan = el.querySelector(".sort-indicator");
+    if (!indicatorSpan) return;
+
+    if (field === "source") {
+      // Source column manages grouping state
+      if (currentGroupField === "source") {
+        indicatorSpan.textContent = " 📁";
+        el.style.color = "var(--accent)";
+      } else {
+        indicatorSpan.textContent = " ⇅";
+        el.style.color = "";
+      }
+    } else {
+      // Standard sorting fields
+      if (currentSortField === field) {
+        indicatorSpan.textContent = currentSortOrder === "asc" ? " ▲" : " ▼";
+        el.style.color = "var(--accent)";
+      } else {
+        indicatorSpan.textContent = " ⇅";
+        el.style.color = "";
+      }
+    }
+  });
 }
 
 // Create a single stock table row element
