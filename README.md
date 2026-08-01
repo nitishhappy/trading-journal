@@ -487,7 +487,7 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - Clickable TradingView badges (`📊 TV` link button).
   - Timeframe status pills (blue for Daily, purple for Weekly).
   - Traded status indicator badges (glowing green for Yes, dim grey for No).
-- **Inline Editing** — Every field (Name, Ticker, Summary, Date, Source, TF, My Notes, Traded Status) is editable inline and updates Firestore immediately on blur/change.
+- **Inline Editing** — Every field is editable inline and updates Firestore immediately on blur/change. Ticker and Sector fields are now clean text hyperlinks that open TradingView; simply double-click them to enter edit mode.
 - **Sorting & Grouping** — Group entries dynamically by **Source** or **Date of Run**, and sort them alphabetically by **Stock Name** or by **Date of Run** (newest first).
 - **Interactive Table Headers** — Click directly on column headers (Stock Name, Date, TF, Traded) to toggle sort order, or click **Source** to toggle grouping. Active sorting/grouping shows directional arrow indicators (`▲`/`▼`/`📁`) highlighted in active blue.
 - **Watchlist Copying** — Added **Copy Delta** (latest run date) and **Copy Full** buttons to instantly copy formatted exchange-prefixed tickers (`NSE:TICKER` or `BSE:TICKER`) to your clipboard for bulk copy-pasting into TradingView.
