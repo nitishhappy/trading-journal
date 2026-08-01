@@ -489,6 +489,10 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - Traded status indicator badges (glowing green for Yes, dim grey for No).
 - **Inline Editing** — Every field (Name, Ticker, Summary, Date, Source, TF, My Notes, Traded Status) is editable inline and updates Firestore immediately on blur/change.
 - **Sorting & Grouping** — Group entries dynamically by **Source** or **Date of Run**, and sort them alphabetically by **Stock Name** or by **Date of Run** (newest first).
+- **Interactive Table Headers** — Click directly on column headers (Stock Name, Date, TF, Traded) to toggle sort order, or click **Source** to toggle grouping. Active sorting/grouping shows directional arrow indicators (`▲`/`▼`/`📁`) highlighted in active blue.
+- **Watchlist Copying** — Added **Copy Delta** (latest run date) and **Copy Full** buttons to instantly copy formatted exchange-prefixed tickers (`NSE:TICKER` or `BSE:TICKER`) to your clipboard for bulk copy-pasting into TradingView.
+- **Timeline Prepending & Highlighting** — Daily scanner runs prepend updates chronologically at the top of the summary text (e.g. `[Date] Update Text`). Updated stocks get a soft row highlight that automatically clears when clicked/viewed.
+- **Tab Layout & Overlap Fixes** — Prevented tab button overlap by shortening names (e.g., `Candle`, `TV Alerts`) and changing nav styling from `flex: 1` to `flex: 0 0 auto` with increased horizontal spacing to enable horizontal scrolling on small screens.
 - **Local Scanner Script** — Created `stock_scanner.py` and `run_scanner.bat` inside the `C:\Nitish\ClaudeApps\Utilities\` directory. Supports scanning both Canva presentation URLs and public Telegram channel preview widgets (`t.me/s/...`).
 - **Telegram Channel Source Mapping** — The scanner extracts the exact Telegram channel name from the URL (e.g., `EquiAlpha_stocks`) and assigns it directly to the stock's "Source" metadata field.
 - **SSL Bypass Support** — Configured unverified SSL contexts for the Python request engine to avoid Windows security cert verification halts on local networks.
