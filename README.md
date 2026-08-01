@@ -475,3 +475,26 @@ The Trigger Logs section now groups entries by date (IST), then by symbol within
 - **Symbol sub-headers** appear within each date when there are multiple symbols on the same day
 - Each card retains full functionality (outcome dropdown, notes, delete)
 
+### v2.3.0 — 1 Aug 2026 — Stocks Tab & Automated Canva Scanner
+
+A new **Stocks** tab to manage and track stock setups scanned from Canva reports.
+
+#### What it does
+- **Stocks Dashboard** — A premium, responsive layout showcasing stock names, tickers, summaries, date, source, and timeframe.
+- **Zero-Manual-Step Ingestion** — AI scans the Canva presentation and writes to `js/data/scanned_stocks.js`. When the app loads (locally or on Vercel), it automatically syncs any new entries directly into Firestore under `/users/{userId}/stocks`.
+- **Compound Database Keys** — Uses `TICKER_dateOfRun` (e.g. `SOLARINDS_2026-07-26`) as the document key to allow scanning the same stock on multiple dates while updating/merging data for the same day.
+- **Premium Table UI** — Built custom visual badges:
+  - Clickable TradingView badges (`📊 TV` link button).
+  - Timeframe status pills (blue for Daily, purple for Weekly).
+  - Traded status indicator badges (glowing green for Yes, dim grey for No).
+- **Inline Editing** — Every field (Name, Ticker, Summary, Date, Source, TF, My Notes, Traded Status) is editable inline and updates Firestore immediately on blur/change.
+- **Sorting & Grouping** — Group entries dynamically by **Source** or **Date of Run**, and sort them alphabetically by **Stock Name** or by **Date of Run** (newest first).
+- **Local Scanner Script** — Created `stock_scanner.py` and `run_scanner.bat` inside the `C:\Nitish\ClaudeApps\Utilities\` directory.
+
+#### New files added
+- `js/services/stocks.js` — Firestore operations (snapshot subscriptions, batch inserts, updates, deletions).
+- `js/ui/stocks.js` — Rendering, group/sort managers, and inline edit logic.
+- `js/data/scanned_stocks.js` — Scanned stocks JSON data structure.
+- `C:\Nitish\ClaudeApps\Utilities\stock_scanner.py` — Local Python scraper.
+- `C:\Nitish\ClaudeApps\Utilities\run_scanner.bat` — Windows launcher batch file.
+
