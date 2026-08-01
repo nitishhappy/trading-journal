@@ -171,6 +171,7 @@ function runAutoSync() {
         ticker: ticker,
         tvLink: item.tvLink || `https://www.tradingview.com/chart/?symbol=NSE:${ticker}`,
         summary: item.summary || "",
+        sector: item.sector || "",
         dateOfRun: dateOfRun,
         source: item.source || "Afzal",
         timeframe: item.timeframe || "Daily",
@@ -179,16 +180,18 @@ function runAutoSync() {
         highlight: item.highlight || false
       });
     } else {
-      // Sync updates if summary or highlight changed in the scan file
+      // Sync updates if summary, highlight, or sector changed in the scan file
       const existing = existingMap.get(key);
       const newSummary = item.summary || "";
       const newHighlight = item.highlight || false;
-      if (existing.summary !== newSummary || existing.highlight !== newHighlight) {
+      const newSector = item.sector || "";
+      if (existing.summary !== newSummary || existing.highlight !== newHighlight || existing.sector !== newSector) {
         toUpdate.push({
           id: existing.id,
           data: {
             summary: newSummary,
-            highlight: newHighlight
+            highlight: newHighlight,
+            sector: newSector
           }
         });
       }
@@ -304,6 +307,7 @@ export function renderStocksTable() {
 function updateHeaderIndicators() {
   const indicators = {
     "name": { id: "th-stock-name" },
+    "sector": { id: "th-sector" },
     "dateOfRun": { id: "th-date" },
     "source": { id: "th-source" },
     "timeframe": { id: "th-tf" },
@@ -368,6 +372,9 @@ function createStockRow(stock) {
           <span class="chart-mini-icon">📊</span> TV
         </a>
       </div>
+    </td>
+    <td>
+      <input type="text" class="stocks-inline-edit stock-sector-input" value="${escapeHtml(stock.sector || "")}" data-field="sector" placeholder="Sector">
     </td>
     <td>
       <textarea class="stocks-inline-edit stock-summary-input" data-field="summary" rows="1" placeholder="Add technical summary...">${escapeHtml(stock.summary)}</textarea>
