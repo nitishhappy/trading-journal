@@ -121,7 +121,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Capital Goods"
   },
   {
     "name": "Shankara Buildpro",
@@ -155,7 +156,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Metal"
   },
   {
     "name": "Jindal Saw",
@@ -167,7 +169,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Metal"
   },
   {
     "name": "Lloyds Enterprises",
@@ -179,7 +182,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Metal"
   },
   {
     "name": "Vijaya Diagnostic Centre",
@@ -191,7 +195,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Healthcare"
   },
   {
     "name": "Marksans Pharma",
@@ -203,7 +208,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Healthcare"
   },
   {
     "name": "Glenmark Pharmaceuticals",
@@ -215,7 +221,8 @@ window.scannedStocksData = [
     "timeframe": "Weekly",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Healthcare"
   },
   {
     "name": "Karnataka Bank",
@@ -227,7 +234,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Financial Services"
   },
   {
     "name": "Tamilnad Mercantile Bank",
@@ -239,7 +247,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Financial Services"
   },
   {
     "name": "Knowledge Marine & Engineering Works",
@@ -251,7 +260,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Services"
   },
   {
     "name": "Suryoday Small Finance Bank",
@@ -263,7 +273,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Financial Services"
   },
   {
     "name": "IFB Industries",
@@ -275,7 +286,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Consumer Durables"
   },
   {
     "name": "Sumitomo Chemical India",
@@ -287,7 +299,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Chemicals"
   },
   {
     "name": "Tips Music",
@@ -299,7 +312,8 @@ window.scannedStocksData = [
     "timeframe": "Daily",
     "myNotes": "",
     "traded": "N",
-    "highlight": true
+    "highlight": true,
+    "sector": "Media & Entertainment"
   },
   {
     "name": "Aequs",
