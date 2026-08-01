@@ -422,7 +422,7 @@ textarea { resize: vertical; }
 .main-tabs::-webkit-scrollbar { display: none; }
 
 .main-tab {
-  flex: 1;
+  flex: 0 0 auto;
   min-width: 72px;
   background: transparent;
   color: var(--text-dim);
@@ -431,7 +431,7 @@ textarea { resize: vertical; }
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 14px 4px;
+  padding: 14px 12px;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   transition: color 0.15s;
