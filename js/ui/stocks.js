@@ -371,21 +371,15 @@ function createStockRow(stock) {
       <input type="text" class="stocks-inline-edit stock-name-input" value="${escapeHtml(stock.name)}" data-field="name" placeholder="Enter stock name...">
     </td>
     <td>
-      <div class="ticker-badge-cell">
-        <input type="text" class="stocks-inline-edit stock-ticker-input" value="${escapeHtml(stock.ticker)}" data-field="ticker">
-        <a href="${escapeHtml(stock.tvLink)}" target="_blank" class="stocks-tv-badge stocks-tv-badge-ticker" title="Open TradingView Chart">
-          <span class="chart-mini-icon">📊</span> TV
-        </a>
+      <div class="double-click-edit-container">
+        <a href="${escapeHtml(stock.tvLink)}" target="_blank" class="stocks-hyperlink stocks-ticker-link" title="Double click to edit">${escapeHtml(stock.ticker)}</a>
+        <input type="text" class="stocks-inline-edit stock-ticker-input double-click-input" value="${escapeHtml(stock.ticker)}" data-field="ticker" style="display:none; width:100%;">
       </div>
     </td>
     <td>
-      <div class="ticker-badge-cell">
-        <input type="text" class="stocks-inline-edit stock-sector-input" value="${escapeHtml(stock.sector || "")}" data-field="sector" placeholder="Sector">
-        ${sectorTvLink ? `
-        <a href="${escapeHtml(sectorTvLink)}" target="_blank" class="stocks-tv-badge stocks-tv-badge-sector" title="Open Sector Chart">
-          <span class="chart-mini-icon">📊</span> TV
-        </a>
-        ` : ''}
+      <div class="double-click-edit-container">
+        <a ${sectorTvLink ? `href="${escapeHtml(sectorTvLink)}" target="_blank"` : ''} class="stocks-hyperlink stocks-sector-link" title="Double click to edit">${escapeHtml(stock.sector || "Sector")}</a>
+        <input type="text" class="stocks-inline-edit stock-sector-input double-click-input" value="${escapeHtml(stock.sector || "")}" data-field="sector" placeholder="Sector" style="display:none; width:100%;">
       </div>
     </td>
     <td>
@@ -431,9 +425,6 @@ function createStockRow(stock) {
       if (field === 'ticker') {
         val = val.toUpperCase().trim();
         input.value = val;
-        // Update TV link based on new ticker
-        const linkEl = tr.querySelector(".stocks-tv-badge-ticker");
-        if (linkEl) linkEl.href = `https://www.tradingview.com/chart/?symbol=NSE:${val}`;
       }
 
       // Handle dynamic styling classes on change
@@ -477,6 +468,48 @@ function createStockRow(stock) {
   tr.querySelector(".stocks-btn-delete").addEventListener("click", () => {
     if (confirm(`Are you sure you want to delete ${stock.name || 'this stock'}?`)) {
       deleteStock(stock.id);
+    }
+  });
+
+  // Handle double-click-to-edit links
+  const editContainers = tr.querySelectorAll('.double-click-edit-container');
+  editContainers.forEach(container => {
+    const linkEl = container.querySelector('.stocks-hyperlink');
+    const inputEl = container.querySelector('.double-click-input');
+    
+    if (linkEl && inputEl) {
+      linkEl.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        linkEl.style.display = 'none';
+        inputEl.style.display = 'block';
+        inputEl.focus();
+      });
+
+      inputEl.addEventListener('blur', () => {
+        inputEl.style.display = 'none';
+        linkEl.style.display = 'inline-block';
+        
+        const val = inputEl.value.trim();
+        linkEl.textContent = val || (inputEl.dataset.field === 'sector' ? 'Sector' : 'Ticker');
+        
+        if (inputEl.dataset.field === 'ticker') {
+          linkEl.href = `https://www.tradingview.com/chart/?symbol=NSE:${val.toUpperCase()}`;
+        } else if (inputEl.dataset.field === 'sector') {
+          if (window.sectorData && window.sectorData[val]) {
+            linkEl.href = `https://www.tradingview.com/chart/?symbol=${window.sectorData[val]}`;
+            linkEl.target = "_blank";
+          } else {
+            linkEl.removeAttribute('href');
+            linkEl.removeAttribute('target');
+          }
+        }
+      });
+      
+      inputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          inputEl.blur();
+        }
+      });
     }
   });
 
