@@ -45,6 +45,7 @@ export function addStocksBatch(stocksArray) {
     const payload = {
       name: stock.name || "",
       ticker: ticker,
+      sector: stock.sector || "",
       tvLink: stock.tvLink || "",
       summary: stock.summary || "",
       dateOfRun: dateOfRun,
