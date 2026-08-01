@@ -64,5 +64,31 @@ window.scannedStocksData = [
     "myNotes": "",
     "traded": "N",
     "highlight": true
+  },
+  {
+    "name": "Adf Foods",
+    "ticker": "ADFFOODS",
+    "sector": "FMCG",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:ADFFOODS",
+    "summary": "[2026-07-29] Trading into earnings is like trading with fire  You can get lucky with some wild moves on your side but you will hit more losses doing that  Never...",
+    "dateOfRun": "2026-07-29",
+    "source": "EquiAlpha_stocks",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Thangamayil",
+    "ticker": "THANGAMAYL",
+    "sector": "Consumer Durables",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:THANGAMAYL",
+    "summary": "[2026-07-29] Trading into earnings is like trading with fire  You can get lucky with some wild moves on your side but you will hit more losses doing that  Never...",
+    "dateOfRun": "2026-07-29",
+    "source": "EquiAlpha_stocks",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
   }
 ];
