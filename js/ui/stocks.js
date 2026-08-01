@@ -361,6 +361,11 @@ function createStockRow(stock) {
   const isWeekly = stock.timeframe === 'Weekly';
   const isTraded = stock.traded === 'Y';
 
+  let sectorTvLink = "";
+  if (stock.sector && window.sectorData && window.sectorData[stock.sector]) {
+    sectorTvLink = `https://www.tradingview.com/chart/?symbol=${window.sectorData[stock.sector]}`;
+  }
+
   tr.innerHTML = `
     <td>
       <input type="text" class="stocks-inline-edit stock-name-input" value="${escapeHtml(stock.name)}" data-field="name" placeholder="Enter stock name...">
@@ -368,13 +373,20 @@ function createStockRow(stock) {
     <td>
       <div class="ticker-badge-cell">
         <input type="text" class="stocks-inline-edit stock-ticker-input" value="${escapeHtml(stock.ticker)}" data-field="ticker">
-        <a href="${escapeHtml(stock.tvLink)}" target="_blank" class="stocks-tv-badge" title="Open TradingView Chart">
+        <a href="${escapeHtml(stock.tvLink)}" target="_blank" class="stocks-tv-badge stocks-tv-badge-ticker" title="Open TradingView Chart">
           <span class="chart-mini-icon">📊</span> TV
         </a>
       </div>
     </td>
     <td>
-      <input type="text" class="stocks-inline-edit stock-sector-input" value="${escapeHtml(stock.sector || "")}" data-field="sector" placeholder="Sector">
+      <div class="ticker-badge-cell">
+        <input type="text" class="stocks-inline-edit stock-sector-input" value="${escapeHtml(stock.sector || "")}" data-field="sector" placeholder="Sector">
+        ${sectorTvLink ? `
+        <a href="${escapeHtml(sectorTvLink)}" target="_blank" class="stocks-tv-badge stocks-tv-badge-sector" title="Open Sector Chart">
+          <span class="chart-mini-icon">📊</span> TV
+        </a>
+        ` : ''}
+      </div>
     </td>
     <td>
       <textarea class="stocks-inline-edit stock-summary-input" data-field="summary" rows="1" placeholder="Add technical summary...">${escapeHtml(stock.summary)}</textarea>
@@ -420,7 +432,7 @@ function createStockRow(stock) {
         val = val.toUpperCase().trim();
         input.value = val;
         // Update TV link based on new ticker
-        const linkEl = tr.querySelector(".stocks-tv-badge");
+        const linkEl = tr.querySelector(".stocks-tv-badge-ticker");
         if (linkEl) linkEl.href = `https://www.tradingview.com/chart/?symbol=NSE:${val}`;
       }
 
