@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-7766390fe2";
+const CACHE_NAME = "trade-journal-7065aedee2";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -31,6 +31,7 @@ const ASSETS = [
   "./js/services/candleChecklist.js",
   "./js/services/tvNotifications.js",
   "./js/services/sequenceRules.js",
+  "./js/services/stocks.js",
   "./js/ui/common.js",
   "./js/ui/auth.js",
   "./js/ui/settings.js",
@@ -42,6 +43,7 @@ const ASSETS = [
   "./js/ui/candleChecklist.js",
   "./js/ui/tvNotifications.js",
   "./js/ui/sequenceRules.js",
+  "./js/ui/stocks.js",
   "./js/utils/error-tracking.js",
   "./css/tv-notifications.css",
   // Firebase SDK scripts — precached so the app can boot fully offline
@@ -63,10 +65,12 @@ const NETWORK_FIRST_FILES = [
   "js/services/checklists.js", "js/services/ai.js",
   "js/services/candleChecklist.js",
   "js/services/tvNotifications.js", "js/services/sequenceRules.js",
+  "js/services/stocks.js",
   "js/ui/common.js", "js/ui/auth.js", "js/ui/settings.js",
   "js/ui/dashboard.js", "js/ui/revision.js", "js/ui/aicoach.js",
   "js/ui/tradelog.js", "js/ui/checklists.js", "js/ui/candleChecklist.js",
   "js/ui/tvNotifications.js", "js/ui/sequenceRules.js",
+  "js/ui/stocks.js",
   "js/utils/error-tracking.js", "css/tv-notifications.css",
 ];
 

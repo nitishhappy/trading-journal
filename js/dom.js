@@ -43,6 +43,7 @@ export const revisionTagDatalist   = document.getElementById("revision-tag-datal
 export const mainTabs = document.getElementById("main-tabs");
 export const viewDashboard = document.getElementById("view-dashboard");
 export const viewRevision = document.getElementById("view-revision");
+export const viewStocks = document.getElementById("view-stocks");
 export const viewAiCoach = document.getElementById("view-aicoach");
 export const viewTradelog = document.getElementById("view-tradelog");
 export const viewCandleChecklist = document.getElementById("view-candleChecklist");

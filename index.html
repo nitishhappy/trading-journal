@@ -83,6 +83,7 @@
       <button class="main-tab active" data-view="dashboard">Dashboard</button>
       <button class="main-tab" data-view="revision">Revision</button>
       <button class="main-tab" data-view="candleChecklist">Candle Checklist</button>
+      <button class="main-tab" data-view="stocks">Stocks</button>
       <button class="main-tab" data-view="aicoach">AI Coach</button>
       <button class="main-tab" data-view="tradelog">Trade Log</button>
       <button class="main-tab" data-view="tvNotifications">TV Notifications</button>
@@ -191,6 +192,58 @@
         <p class="empty-mark">◇</p>
         <p id="revision-empty-text">All caught up for today.</p>
         <p class="empty-sub">Tap Reset to review again, or come back tomorrow.</p>
+      </div>
+    </div>
+
+    <!-- ===== STOCKS VIEW ===== -->
+    <div id="view-stocks" class="view hidden">
+      <div class="stocks-action-bar">
+        <div class="stocks-controls">
+          <div class="select-wrapper">
+            <label for="stocks-group-select">Group By:</label>
+            <select id="stocks-group-select" class="select-small">
+              <option value="none">None</option>
+              <option value="source">Source</option>
+              <option value="date">Date</option>
+            </select>
+          </div>
+          <div class="select-wrapper">
+            <label for="stocks-sort-select">Sort By:</label>
+            <select id="stocks-sort-select" class="select-small">
+              <option value="name">Stock Name</option>
+              <option value="date">Date of Run</option>
+            </select>
+          </div>
+        </div>
+        <div class="stocks-stats">
+          <span id="stocks-total-count" class="badge-count">0 Stocks</span>
+        </div>
+      </div>
+
+      <div class="stocks-table-container">
+        <table class="stocks-table">
+          <thead>
+            <tr>
+              <th>Stock Name</th>
+              <th>Stock ID (TV)</th>
+              <th>Brief Summary</th>
+              <th>Date of Run</th>
+              <th>Source</th>
+              <th>TF</th>
+              <th>My Notes</th>
+              <th style="width: 80px; text-align: center;">Traded</th>
+              <th style="width: 60px; text-align: center;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="stocks-table-body">
+            <!-- Dynamic rows or groups will be loaded here -->
+          </tbody>
+        </table>
+        <div id="stocks-empty-state" class="empty-state hidden">
+          <p class="empty-mark">◇</p>
+          <p>No scanned stocks in database.</p>
+          <p class="empty-sub">Import stocks using the local scanner script to populate this list.</p>
+        </div>
       </div>
     </div>
 
@@ -1270,6 +1323,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="js/data/daily_plan.js"></script>
+  <script src="js/data/scanned_stocks.js"></script>
   <script type="module" src="app.js"></script>
   <script type="module" src="trade-security.js"></script>
   <script>

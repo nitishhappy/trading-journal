@@ -10,6 +10,7 @@ import { subscribeAiSummaries, unsubscribeAiSummaries } from '../services/ai.js'
 import { subscribeChecklistLogs, unsubscribeChecklists } from '../services/checklists.js';
 import { subscribeCandleChecklists, unsubscribeCandleChecklists } from '../services/candleChecklist.js';
 import { subscribeTvNotifications, unsubscribeTvNotifications } from '../services/tvNotifications.js';
+import { loadStocks, stocksUnsubscribe } from '../services/stocks.js';
 import {
   subscribeSequenceRules,
   subscribeSequenceTriggerLogs,
@@ -84,6 +85,7 @@ auth.onAuthStateChanged((user) => {
     subscribeSequenceRules();
     subscribeSequenceTriggerLogs();
     subscribeSequenceStates();
+    loadStocks();
     checkBackupReminder();
     setTimeout(() => loadTradePasscodeStatus(), 50);
     
@@ -101,6 +103,7 @@ auth.onAuthStateChanged((user) => {
     state.sequenceRules = [];
     state.sequenceTriggerLogs = [];
     state.sequenceStates = [];
+    state.stocks = [];
     state.cachedGeminiKey = null;
     state.cachedGoogleApiKey = null;
     state.tradePasscode = null;
@@ -116,6 +119,7 @@ auth.onAuthStateChanged((user) => {
     unsubscribeSequenceRules();
     unsubscribeSequenceTriggerLogs();
     unsubscribeSequenceStates();
+    if (stocksUnsubscribe) stocksUnsubscribe();
     
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { loggedIn: false } }));
   }

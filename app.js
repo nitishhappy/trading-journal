@@ -30,6 +30,7 @@ import './js/ui/auth.js';         // Firebase auth state listener + login/signup
 import './js/ui/settings.js';     // settings panel, passcode, backup reminder
 import './js/ui/dashboard.js';    // observation feed, folder tabs, modal
 import './js/ui/revision.js';     // revision mode card swipe UI
+import './js/ui/stocks.js';
 import './js/ui/aicoach.js';      // AI Coach feed + Groq key management
 import './js/ui/tradelog.js';     // trade log table + modal
 import './js/ui/checklists.js';   // pre-trade checklist modal + log editor

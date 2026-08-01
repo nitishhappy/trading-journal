@@ -38,6 +38,7 @@ export const state = {
   sequenceRules: [],
   sequenceTriggerLogs: [],
   sequenceStates: [],
+  stocks: [],
 };
 
 // Bind to window for backward compatibility with trade-security.js and legacy code
