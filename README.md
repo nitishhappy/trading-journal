@@ -489,12 +489,14 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - Traded status indicator badges (glowing green for Yes, dim grey for No).
 - **Inline Editing** — Every field (Name, Ticker, Summary, Date, Source, TF, My Notes, Traded Status) is editable inline and updates Firestore immediately on blur/change.
 - **Sorting & Grouping** — Group entries dynamically by **Source** or **Date of Run**, and sort them alphabetically by **Stock Name** or by **Date of Run** (newest first).
-- **Local Scanner Script** — Created `stock_scanner.py` and `run_scanner.bat` inside the `C:\Nitish\ClaudeApps\Utilities\` directory.
+- **Local Scanner Script** — Created `stock_scanner.py` and `run_scanner.bat` inside the `C:\Nitish\ClaudeApps\Utilities\` directory. Supports scanning both Canva presentation URLs and public Telegram channel preview widgets (`t.me/s/...`).
+- **Telegram Channel Source Mapping** — The scanner extracts the exact Telegram channel name from the URL (e.g., `EquiAlpha_stocks`) and assigns it directly to the stock's "Source" metadata field.
+- **SSL Bypass Support** — Configured unverified SSL contexts for the Python request engine to avoid Windows security cert verification halts on local networks.
 
 #### New files added
 - `js/services/stocks.js` — Firestore operations (snapshot subscriptions, batch inserts, updates, deletions).
 - `js/ui/stocks.js` — Rendering, group/sort managers, and inline edit logic.
 - `js/data/scanned_stocks.js` — Scanned stocks JSON data structure.
-- `C:\Nitish\ClaudeApps\Utilities\stock_scanner.py` — Local Python scraper.
+- `C:\Nitish\ClaudeApps\Utilities\stock_scanner.py` — Local Python scraper (Canva & Telegram support).
 - `C:\Nitish\ClaudeApps\Utilities\run_scanner.bat` — Windows launcher batch file.
 
