@@ -1,13 +1,28 @@
 import { state } from '../state.js';
-import { updateStock, deleteStock, addStocksBatch } from '../services/stocks.js';
+import { updateStock, deleteStock, addStocksBatch, deleteStocksBatch } from '../services/stocks.js';
 import { showToast } from '../utils/toast.js';
 
 let hasAutoSynced = false;
 
 // Sorting and grouping state
-let currentSortField = "name"; // "name" | "dateOfRun" | "source" | "timeframe" | "traded"
-let currentSortOrder = "asc"; // "asc" | "desc"
+let currentSortField = "dateOfRun"; // "name" | "dateOfRun" | "source" | "timeframe" | "traded"
+let currentSortOrder = "desc"; // "asc" | "desc"
 let currentGroupField = "none"; // "none" | "source" | "date"
+
+// Selection state
+let selectedStockIds = new Set();
+
+function updateDeleteButtonVisibility() {
+  const deleteBtn = document.getElementById("stocks-delete-selected-btn");
+  if (deleteBtn) {
+    if (selectedStockIds.size > 0) {
+      deleteBtn.style.display = "inline-block";
+      deleteBtn.textContent = `🗑 Delete (${selectedStockIds.size})`;
+    } else {
+      deleteBtn.style.display = "none";
+    }
+  }
+}
 
 // Helper to toggle sort states
 function toggleSort(field, defaultOrder = "asc") {
@@ -26,6 +41,8 @@ export function initStocksUI() {
   const sortSelect = document.getElementById("stocks-sort-select");
   const copyDeltaBtn = document.getElementById("stocks-copy-delta-btn");
   const copyFullBtn = document.getElementById("stocks-copy-full-btn");
+  const deleteBtn = document.getElementById("stocks-delete-selected-btn");
+  const selectAllCheckbox = document.getElementById("stocks-select-all");
 
   // Sync selectors with state
   if (groupSelect) {
@@ -37,7 +54,7 @@ export function initStocksUI() {
   }
 
   if (sortSelect) {
-    sortSelect.value = "name";
+    sortSelect.value = "date";
     sortSelect.addEventListener("change", () => {
       currentSortField = sortSelect.value === "date" ? "dateOfRun" : "name";
       currentSortOrder = sortSelect.value === "date" ? "desc" : "asc";
@@ -88,6 +105,34 @@ export function initStocksUI() {
 
   if (copyFullBtn) {
     copyFullBtn.addEventListener("click", () => copyWatchlist("full"));
+  }
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", () => {
+      if (selectedStockIds.size > 0 && confirm(`Are you sure you want to delete ${selectedStockIds.size} stock(s)?`)) {
+        deleteStocksBatch(Array.from(selectedStockIds)).then(() => {
+          selectedStockIds.clear();
+          updateDeleteButtonVisibility();
+          if (selectAllCheckbox) selectAllCheckbox.checked = false;
+        });
+      }
+    });
+  }
+
+  if (selectAllCheckbox) {
+    selectAllCheckbox.addEventListener("change", (e) => {
+      const isChecked = e.target.checked;
+      const rowCheckboxes = document.querySelectorAll(".stocks-row-checkbox");
+      rowCheckboxes.forEach(cb => {
+        cb.checked = isChecked;
+        if (isChecked) {
+          selectedStockIds.add(cb.dataset.id);
+        } else {
+          selectedStockIds.delete(cb.dataset.id);
+        }
+      });
+      updateDeleteButtonVisibility();
+    });
   }
 
   // Listen to Firestore updates
@@ -367,6 +412,9 @@ function createStockRow(stock) {
   }
 
   tr.innerHTML = `
+    <td style="text-align: center;">
+      <input type="checkbox" class="stocks-row-checkbox stocks-checkbox" data-id="${stock.id}">
+    </td>
     <td>
       <input type="text" class="stocks-inline-edit stock-name-input" value="${escapeHtml(stock.name)}" data-field="name" placeholder="Enter stock name...">
     </td>
@@ -512,6 +560,25 @@ function createStockRow(stock) {
       });
     }
   });
+
+  const rowCheckbox = tr.querySelector('.stocks-row-checkbox');
+  if (rowCheckbox) {
+    // Restore checked state if it was already selected
+    if (selectedStockIds.has(stock.id)) {
+      rowCheckbox.checked = true;
+    }
+    
+    rowCheckbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        selectedStockIds.add(stock.id);
+      } else {
+        selectedStockIds.delete(stock.id);
+        const selectAllCb = document.getElementById("stocks-select-all");
+        if (selectAllCb) selectAllCb.checked = false;
+      }
+      updateDeleteButtonVisibility();
+    });
+  }
 
   return tr;
 }

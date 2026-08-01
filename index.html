@@ -217,6 +217,7 @@
           <div class="select-wrapper" style="margin-left: 8px; gap: 8px;">
             <button id="stocks-copy-delta-btn" class="stocks-btn-copy" title="Copy tickers from the latest run date">📋 Copy Delta</button>
             <button id="stocks-copy-full-btn" class="stocks-btn-copy" title="Copy all tickers in list">📋 Copy Full</button>
+            <button id="stocks-delete-selected-btn" class="stocks-btn-copy" style="color: #e74c3c; border-color: #e74c3c; display: none;" title="Delete selected stocks">🗑 Delete</button>
           </div>
         </div>
         <div class="stocks-stats">
@@ -228,6 +229,7 @@
         <table class="stocks-table">
           <thead>
             <tr>
+              <th style="width: 40px; text-align: center;"><input type="checkbox" id="stocks-select-all" class="stocks-checkbox" title="Select All"></th>
               <th id="th-stock-name" class="sortable-header" style="cursor: pointer; user-select: none;">Stock Name <span class="sort-indicator">⇅</span></th>
               <th>Stock ID (TV)</th>
               <th id="th-sector" class="sortable-header" style="cursor: pointer; user-select: none;">Sector <span class="sort-indicator">⇅</span></th>

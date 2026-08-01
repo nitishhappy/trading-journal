@@ -488,7 +488,8 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - Timeframe status pills (blue for Daily, purple for Weekly).
   - Traded status indicator badges (glowing green for Yes, dim grey for No).
 - **Inline Editing** — Every field is editable inline and updates Firestore immediately on blur/change. Ticker and Sector fields are now clean text hyperlinks that open TradingView; simply double-click them to enter edit mode.
-- **Sorting & Grouping** — Group entries dynamically by **Source** or **Date of Run**, and sort them alphabetically by **Stock Name** or by **Date of Run** (newest first).
+- **Sorting & Grouping** — Group entries dynamically by **Source** or **Date of Run**, and sort them alphabetically by **Stock Name** or by **Date of Run** (newest first). **Defaults to Date of Run (Descending)**.
+- **Bulk Operations** — Select multiple rows via checkboxes and delete them instantly via the Delete Selected button.
 - **Interactive Table Headers** — Click directly on column headers (Stock Name, Date, TF, Traded) to toggle sort order, or click **Source** to toggle grouping. Active sorting/grouping shows directional arrow indicators (`▲`/`▼`/`📁`) highlighted in active blue.
 - **Watchlist Copying** — Added **Copy Delta** (latest run date) and **Copy Full** buttons to instantly copy formatted exchange-prefixed tickers (`NSE:TICKER` or `BSE:TICKER`) to your clipboard for bulk copy-pasting into TradingView.
 - **Timeline Prepending & Highlighting** — Daily scanner runs prepend updates chronologically at the top of the summary text (e.g. `[Date] Update Text`). Updated stocks get a soft row highlight that automatically clears when clicked/viewed.

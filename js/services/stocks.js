@@ -101,3 +101,25 @@ export function deleteStock(stockId) {
     showToast("Failed to delete stock");
   });
 }
+
+// Delete multiple stocks
+export function deleteStocksBatch(stockIds) {
+  if (!state.currentUser || !stockIds || stockIds.length === 0) return Promise.resolve();
+
+  const batch = db.batch();
+  const stocksCollection = db.collection("users")
+                             .doc(state.currentUser.uid)
+                             .collection("stocks");
+
+  stockIds.forEach((id) => {
+    batch.delete(stocksCollection.doc(id));
+  });
+
+  return batch.commit().then(() => {
+    showToast(`Successfully deleted ${stockIds.length} stock(s)`);
+  }).catch((err) => {
+    console.error("Batch delete stocks error:", err);
+    showToast("Failed to delete selected stocks");
+    throw err;
+  });
+}
