@@ -90,5 +90,31 @@ window.scannedStocksData = [
     "myNotes": "",
     "traded": "N",
     "highlight": true
+  },
+  {
+    "name": "Solar Industries India",
+    "ticker": "SOLARINDS",
+    "summary": "[2026-08-01] Showed good strength, gaining around 50%. After that, it formed a base, indicating a pause in the uptrend. Recent price action shows a small pullback to its 20 Simple Moving Average.",
+    "dateOfRun": "2026-08-01",
+    "source": "Canva_Report",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:SOLARINDS",
+    "sector": "Chemical Stocks",
+    "highlight": true
+  },
+  {
+    "name": "Rain Industries",
+    "ticker": "RAIN",
+    "summary": "[2026-08-01] Broke out of its base on Tuesday this week and has been holding well above its breakout level since then. It will be interesting to see if it can maintain this strength.",
+    "dateOfRun": "2026-08-01",
+    "source": "Canva_Report",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:RAIN",
+    "sector": "Chemical Stocks",
+    "highlight": true
   }
 ];
