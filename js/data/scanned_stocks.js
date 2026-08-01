@@ -1,6 +1,72 @@
 // Automatically generated stock scan data
 window.scannedStocksData = [
   {
+    "name": "Kernex Microsystem",
+    "ticker": "KERNEX",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:KERNEX",
+    "summary": "Mentioned as a setup in the research logs with a breakout chart.",
+    "dateOfRun": "2026-07-01",
+    "source": "Telegram",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N"
+  },
+  {
+    "name": "Suven",
+    "ticker": "SUVENPHAR",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:SUVENPHAR",
+    "summary": "Bazooka start in suven 5% up 294 >>> 312++",
+    "dateOfRun": "2026-07-03",
+    "source": "Telegram",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N"
+  },
+  {
+    "name": "Senores",
+    "ticker": "SENORES",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:SENORES",
+    "summary": "2nd Try in Senores after 1st hit SL few days back",
+    "dateOfRun": "2026-07-03",
+    "source": "Telegram",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N"
+  },
+  {
+    "name": "Iolcp",
+    "ticker": "IOLCP",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:IOLCP",
+    "summary": "Triggered entry today as per Swing DNA setup at 153.",
+    "dateOfRun": "2026-07-07",
+    "source": "Telegram",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N"
+  },
+  {
+    "name": "Aequs",
+    "ticker": "AEQUS",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:AEQUS",
+    "summary": "Aequs finally rocket 🚀 Been 11-12 sessions of holding for me with patience",
+    "dateOfRun": "2026-07-08",
+    "source": "Telegram",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N"
+  },
+  {
+    "name": "Ind Swift",
+    "ticker": "INDSWFTLAB",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:INDSWFTLAB",
+    "summary": "Ind swift 5% up Rocket start 🥳🥳 Back to back rocketry days",
+    "dateOfRun": "2026-07-08",
+    "source": "Telegram",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N"
+  },
+  {
     "name": "Solar Industries India",
     "ticker": "SOLARINDS",
     "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:SOLARINDS",
