@@ -148,38 +148,47 @@ function createStockRow(stock) {
   tr.dataset.id = stock.id;
   tr.className = "stocks-row";
 
+  const isWeekly = stock.timeframe === 'Weekly';
+  const isTraded = stock.traded === 'Y';
+
   tr.innerHTML = `
     <td>
-      <input type="text" class="stocks-inline-edit stock-name-input" value="${escapeHtml(stock.name)}" data-field="name">
+      <input type="text" class="stocks-inline-edit stock-name-input" value="${escapeHtml(stock.name)}" data-field="name" placeholder="Enter stock name...">
     </td>
     <td>
-      <div style="display:flex; align-items:center; gap:8px;">
-        <input type="text" class="stocks-inline-edit stock-ticker-input" value="${escapeHtml(stock.ticker)}" data-field="ticker" style="width: 80px;">
-        <a href="${escapeHtml(stock.tvLink)}" target="_blank" class="stocks-tv-link" title="Open TradingView Chart">📈</a>
+      <div class="ticker-badge-cell">
+        <input type="text" class="stocks-inline-edit stock-ticker-input" value="${escapeHtml(stock.ticker)}" data-field="ticker">
+        <a href="${escapeHtml(stock.tvLink)}" target="_blank" class="stocks-tv-badge" title="Open TradingView Chart">
+          <span class="chart-mini-icon">📊</span> TV
+        </a>
       </div>
     </td>
     <td>
-      <textarea class="stocks-inline-edit stock-summary-input" data-field="summary" rows="1">${escapeHtml(stock.summary)}</textarea>
+      <textarea class="stocks-inline-edit stock-summary-input" data-field="summary" rows="1" placeholder="Add technical summary...">${escapeHtml(stock.summary)}</textarea>
     </td>
     <td>
       <input type="date" class="stocks-inline-edit stock-date-input" value="${escapeHtml(stock.dateOfRun)}" data-field="dateOfRun">
     </td>
     <td>
-      <input type="text" class="stocks-inline-edit stock-source-input" value="${escapeHtml(stock.source)}" data-field="source" style="width: 80px;">
+      <div class="source-tag-wrapper">
+        <input type="text" class="stocks-inline-edit stock-source-input" value="${escapeHtml(stock.source)}" data-field="source">
+      </div>
     </td>
     <td>
-      <select class="stocks-inline-edit stock-tf-select" data-field="timeframe" style="width: 80px;">
-        <option value="Daily" ${stock.timeframe === 'Daily' ? 'selected' : ''}>Daily</option>
-        <option value="Weekly" ${stock.timeframe === 'Weekly' ? 'selected' : ''}>Weekly</option>
-      </select>
+      <div class="tf-badge-wrapper ${isWeekly ? 'tf-weekly' : 'tf-daily'}">
+        <select class="stocks-inline-edit stock-tf-select" data-field="timeframe">
+          <option value="Daily" ${stock.timeframe === 'Daily' ? 'selected' : ''}>Daily</option>
+          <option value="Weekly" ${isWeekly ? 'selected' : ''}>Weekly</option>
+        </select>
+      </div>
     </td>
     <td>
-      <textarea class="stocks-inline-edit stock-notes-input" data-field="myNotes" placeholder="Add notes..." rows="1">${escapeHtml(stock.myNotes || "")}</textarea>
+      <textarea class="stocks-inline-edit stock-notes-input" data-field="myNotes" placeholder="Write trade notes..." rows="1">${escapeHtml(stock.myNotes || "")}</textarea>
     </td>
     <td style="text-align: center;">
-      <select class="stock-traded-select" data-field="traded">
-        <option value="Y" ${stock.traded === 'Y' ? 'selected' : ''}>Y</option>
-        <option value="N" ${stock.traded === 'N' ? 'selected' : ''}>N</option>
+      <select class="stock-traded-select status-badge ${isTraded ? 'traded-yes' : 'traded-no'}" data-field="traded">
+        <option value="Y" ${isTraded ? 'selected' : ''}>Yes</option>
+        <option value="N" ${!isTraded ? 'selected' : ''}>No</option>
       </select>
     </td>
     <td style="text-align: center;">
@@ -198,8 +207,20 @@ function createStockRow(stock) {
         val = val.toUpperCase().trim();
         input.value = val;
         // Update TV link based on new ticker
-        const linkEl = tr.querySelector(".stocks-tv-link");
+        const linkEl = tr.querySelector(".stocks-tv-badge");
         if (linkEl) linkEl.href = `https://www.tradingview.com/chart/?symbol=NSE:${val}`;
+      }
+
+      // Handle dynamic styling classes on change
+      if (field === 'traded') {
+        input.className = `stock-traded-select status-badge ${val === 'Y' ? 'traded-yes' : 'traded-no'}`;
+      }
+      
+      if (field === 'timeframe') {
+        const wrapper = tr.querySelector(".tf-badge-wrapper");
+        if (wrapper) {
+          wrapper.className = `tf-badge-wrapper ${val === 'Weekly' ? 'tf-weekly' : 'tf-daily'}`;
+        }
       }
 
       if (stock[field] !== val) {
