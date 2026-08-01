@@ -45,16 +45,17 @@ export function addStocksBatch(stocksArray) {
     const payload = {
       name: stock.name || "",
       ticker: ticker,
-      sector: stock.sector || "",
       tvLink: stock.tvLink || "",
       summary: stock.summary || "",
       dateOfRun: dateOfRun,
       source: stock.source || "Afzal",
       timeframe: stock.timeframe || "Daily",
-      myNotes: stock.myNotes !== undefined ? stock.myNotes : "",
-      traded: stock.traded !== undefined ? stock.traded : "N",
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     };
+
+    if (stock.sector) payload.sector = stock.sector;
+    if (stock.myNotes !== undefined) payload.myNotes = stock.myNotes;
+    if (stock.traded !== undefined) payload.traded = stock.traded;
 
     batch.set(docRef, payload, { merge: true });
   });
