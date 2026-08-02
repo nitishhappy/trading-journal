@@ -22,8 +22,14 @@ If the user provides a Telegram URL (e.g., "Stock Scanner https://t.me/..."):
 
 ### 3. Canva URL Provided
 If the user provides a Canva URL:
-1. Execute `node C:\Nitish\ClaudeApps\Utilities\scrape_canva.js "[URL]"`
-2. Read the resulting `C:\Nitish\ClaudeApps\Utilities\extracted_slides.json` file.
-3. Automatically parse the JSON using your internal intelligence to extract the stock names, summaries, and timeframes.
-4. Programmatically inject these new stocks into `C:\Nitish\ClaudeApps\trading-journal\js\data\scanned_stocks.js` or write a Python script (like `update_canva.py`) to merge them, ensuring the "Sector" field is assigned based on the `COMMON_TICKERS` logic.
-5. Inform the user that the Canva report has been fully extracted and synced.
+1. Recommend to the user that uploading screenshots directly is significantly faster and more reliable due to Canva's dynamic canvas rendering.
+2. If forced to parse via URL, use the browser subagent to capture slide screenshots.
+
+### 4. Images Attached with "Stock Scanner"
+If the user provides one or more images/screenshots with the prompt "Stock Scanner" (or similar):
+1. Visually inspect each image/screenshot using vision capabilities to identify the stock names, tickers, chart timeframes, and write-ups/summaries.
+2. Formulate the clean JSON records for each stock setup, setting `"source": "Canva_Upload"` and determining the sector automatically using `yfinance` or standard classification.
+3. Automatically merge/append these stocks into `C:\Nitish\ClaudeApps\trading-journal\js\data\scanned_stocks.js`, prepending new dates to summaries and marking `highlight: true`.
+4. Update `README.md` if any structural changes were made.
+5. Commit and push the updated `js/data/scanned_stocks.js` to GitHub (`main`).
+6. Inform the user of the newly scanned stocks.
