@@ -389,5 +389,70 @@ window.scannedStocksData = [
     "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:CONFIPET",
     "sector": "Energy",
     "highlight": true
+  },
+  {
+    "name": "LTIMindtree",
+    "ticker": "LTIM",
+    "sector": "IT",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:LTIM",
+    "summary": "[2026-08-03] POSITIONAL TRADE    LTM Looks Good above 4515  SL 4460  TARGETS 20-40-60-80-100-150-200 points from entry   Hold few days   Please consult your fin...",
+    "dateOfRun": "2026-08-03",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "InterGlobe Aviation",
+    "ticker": "INDIGO",
+    "sector": "Services",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:INDIGO",
+    "summary": "[2026-08-03] POSITIONAL RESEARCH  INDIGO   Looks good above 5375-5380  SL 5300  Targets 25-50-75-100-125-150-175-200 points from entry   Hold few days     Pleas...",
+    "dateOfRun": "2026-08-03",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Sedemac Mechatronics",
+    "ticker": "SEDEMAC",
+    "sector": "Auto",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:SEDEMAC",
+    "summary": "[2026-08-03] POSITIONAL TRADE   SEDEMAC  Looks Good ABOVE 2877-2880    SL 2700   Targets 2950-300-3050-3100-3200-3300   Hold few weeks   Please consult your fin...",
+    "dateOfRun": "2026-08-03",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Craftsman Automation",
+    "ticker": "CRAFTSMAN",
+    "sector": "Auto",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:CRAFTSMAN",
+    "summary": "[2026-08-03] POSITIONAL RESEARCH  CRAFTS AUTOMATION   Looks good above 9385-9400  SL 9000  Targets 9600-9890-10000-10500-11000  Hold few weeks     Please consul...",
+    "dateOfRun": "2026-08-03",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Sona BLW Precision Forgings",
+    "ticker": "SONACOMS",
+    "sector": "Auto",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:SONACOMS",
+    "summary": "[2026-08-03] POSITIONAL RESEARCH  SONA BLW (SONACOMS)  Looks good above 691  SL 686  Targets 2-4-6-8-10-12 points from entry   Hold few days     Please consult ...",
+    "dateOfRun": "2026-08-03",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
   }
 ];
