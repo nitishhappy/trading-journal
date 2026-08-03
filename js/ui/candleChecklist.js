@@ -336,8 +336,13 @@ function setupEventListeners() {
     activeSelections.clear();
     currentRunId = null;
     resetImage();
-    if (runOutcomeSelect) runOutcomeSelect.value = "";
+    if (runNoteInput) runNoteInput.value = "";
     if (linkTradeSelect) linkTradeSelect.value = "";
+    if (considerFlagInput) considerFlagInput.checked = false;
+    if (takingTradeNoBtn && takingTradeYesBtn) {
+      takingTradeNoBtn.classList.add('active');
+      takingTradeYesBtn.classList.remove('active');
+    }
     updateIstField(new Date());
     renderChecklist();
   });
@@ -381,6 +386,8 @@ function setupEventListeners() {
       else unselectedDecNeg.push(item);
     });
 
+    const isTakingTrade = takingTradeYesBtn ? takingTradeYesBtn.classList.contains('active') : false;
+
     const runData = {
       templateId: activeTemplateId,
       templateName: template.name,
@@ -396,6 +403,7 @@ function setupEventListeners() {
         decisionNegative: unselectedDecNeg
       },
       consider: considerFlagInput ? considerFlagInput.checked : false,
+      takingTrade: isTakingTrade || Boolean(linkTradeSelect && linkTradeSelect.value),
       note: runNoteInput ? runNoteInput.value.trim() : "",
       linkedTradeId: linkTradeSelect ? linkTradeSelect.value : "",
       chartImage: runImageBase64
@@ -414,6 +422,10 @@ function setupEventListeners() {
       if (considerFlagInput) considerFlagInput.checked = false;
       if (runNoteInput) runNoteInput.value = "";
       if (linkTradeSelect) linkTradeSelect.value = "";
+      if (takingTradeNoBtn && takingTradeYesBtn) {
+        takingTradeNoBtn.classList.add('active');
+        takingTradeYesBtn.classList.remove('active');
+      }
       updateIstField(new Date());
       renderChecklist();
     } catch (err) {
@@ -594,7 +606,7 @@ function renderChecklist() {
   // Render Positive Decisions
   decPos.forEach((item, index) => {
     const isSelected = activeSelections.has(`decPos:${index}`);
-    const el = createCheckItemElement(item, `decPos:${index}`, isSelected);
+    const el = createCheckItemElement(item, `decPos:${index}`, isSelected, 'pos');
     if (isSelected) {
       selectedDecPosList.appendChild(el);
       selectedCountVal++;
@@ -607,7 +619,7 @@ function renderChecklist() {
   // Render Negative Decisions
   decNeg.forEach((item, index) => {
     const isSelected = activeSelections.has(`decNeg:${index}`);
-    const el = createCheckItemElement(item, `decNeg:${index}`, isSelected);
+    const el = createCheckItemElement(item, `decNeg:${index}`, isSelected, 'neg');
     if (isSelected) {
       selectedDecNegList.appendChild(el);
       selectedCountVal++;
@@ -620,7 +632,7 @@ function renderChecklist() {
   // Render Observatory
   (template.observatory || []).forEach((item, index) => {
     const isSelected = activeSelections.has(`obs:${index}`);
-    const el = createCheckItemElement(item, `obs:${index}`, isSelected);
+    const el = createCheckItemElement(item, `obs:${index}`, isSelected, 'obs');
     if (isSelected) {
       selectedObsList.appendChild(el);
       selectedCountVal++;
@@ -634,30 +646,36 @@ function renderChecklist() {
   unselectedCount.textContent = unselectedCountVal;
 }
 
-function createCheckItemElement(text, key, isSelected) {
+function createCheckItemElement(text, key, isSelected, categoryType = 'pos') {
   const div = document.createElement("div");
-  div.className = "candle-check-item";
+  div.className = `candle-check-item item-${categoryType} ${isSelected ? 'is-selected' : 'is-unselected'}`;
   div.style.padding = "8px 12px";
   div.style.borderRadius = "8px";
-  div.style.background = isSelected ? "var(--low-glow)" : "var(--high-glow)";
-  div.style.border = `1px solid ${isSelected ? "var(--low)" : "var(--high)"}`;
-  div.style.color = "var(--text)";
   div.style.cursor = "pointer";
   div.style.fontSize = "13px";
   div.style.display = "flex";
   div.style.justifyContent = "space-between";
   div.style.alignItems = "center";
-  div.style.transition = "opacity 0.2s, transform 0.2s";
+  div.style.transition = "opacity 0.15s, transform 0.15s, background-color 0.15s, border-color 0.15s";
   
+  let checkIcon = "✕";
+  let checkColor = "var(--text-dim)";
+  if (isSelected) {
+    checkIcon = "✔";
+    if (categoryType === 'pos') checkColor = "var(--low)";
+    else if (categoryType === 'neg') checkColor = "var(--high)";
+    else if (categoryType === 'obs') checkColor = "#EAB308";
+  }
+
   div.innerHTML = `
-    <span>${text}</span>
-    <span style="font-size:12px;">${isSelected ? "✔" : "✕"}</span>
+    <span>${escHtml(text)}</span>
+    <span style="font-size:12px; font-weight:700; color:${checkColor};">${checkIcon}</span>
   `;
 
   div.addEventListener("click", () => {
     // Dynamic transition visual feedback
     div.style.opacity = "0.5";
-    div.style.transform = "scale(0.95)";
+    div.style.transform = "scale(0.96)";
     
     setTimeout(() => {
       if (isSelected) {
@@ -666,7 +684,7 @@ function createCheckItemElement(text, key, isSelected) {
         activeSelections.add(key);
       }
       renderChecklist();
-    }, 150);
+    }, 120);
   });
 
   return div;
@@ -699,8 +717,8 @@ function renderLastRuns() {
 
   if (!activeTemplateId) return;
 
-  const runs = state.candleChecklistRuns
-    .filter(r => r.templateId === activeTemplateId && r.consider === true);
+  const runs = (state.candleChecklistRuns || [])
+    .filter(r => r.templateId === activeTemplateId);
 
   if (runs.length === 0) {
     lastRunsList.innerHTML = `<p style="color:var(--text-dim); font-size:13px; text-align:center;">No previous runs for this template yet.</p>`;
@@ -708,14 +726,11 @@ function renderLastRuns() {
   }
 
   runs.forEach(run => {
+    const isConsidered = Boolean(run.consider);
+    const isTradeTaken = Boolean(run.takingTrade || run.linkedTradeId);
+
     const card = document.createElement("div");
-    card.style.background = "var(--surface-2)";
-    card.style.border = "1px solid var(--border)";
-    card.style.borderRadius = "var(--radius)";
-    card.style.padding = "12px";
-    card.style.display = "flex";
-    card.style.flexDirection = "column";
-    card.style.gap = "8px";
+    card.className = "candle-run-card" + (isTradeTaken ? " trade-taken-glow" : "");
 
     const selectedDecPos = run.selected?.decisionPositive || run.selected?.decision || [];
     const selectedDecNeg = run.selected?.decisionNegative || [];
@@ -745,49 +760,101 @@ function renderLastRuns() {
       }
     }
 
-    // Helper to format category list item
-    const renderRow = (label, items) => {
-      if (items.length === 0) return "";
+    // Helper to format category list item with colored category tags
+    const renderRow = (label, items, tagColor) => {
+      if (!items || items.length === 0) return "";
       return `
-        <div style="font-size:11px; color:var(--text-dim); max-height: 48px; overflow-y: auto;">
-          <strong>${label}:</strong> ${items.join(", ")}
+        <div style="font-size:11px; color:var(--text); max-height: 48px; overflow-y: auto; line-height: 1.4;">
+          <strong style="color:${tagColor}; font-weight:700;">${label}:</strong> <span style="color:var(--text-dim);">${items.map(escHtml).join(", ")}</span>
         </div>
       `;
     };
 
-    card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-weight:600; font-size:14px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
-        ${run.consider ? `<span class="trade-cl-outcome outcome-W" style="margin:0; font-size:10px;">Considered</span>` : ""}
-      </div>
-      <div style="font-size:12px; color:var(--text-dim);">
-        Passed: <span style="color:var(--low); font-weight:600;">${totalSelected}</span> / ${total}
-      </div>
-      <div style="display:flex; flex-direction:column; gap:4px;">
-        ${renderRow("Positive Decisions", selectedDecPos)}
-        ${renderRow("Negative Decisions", selectedDecNeg)}
-        ${renderRow("Observatory", selectedObs)}
-      </div>
-      ${run.note ? `<div style="font-size:12px; color:var(--text); background:var(--bg); padding:6px 8px; border-radius:6px; border:1px solid var(--border); margin-top:4px;"><strong>Note:</strong> ${escHtml(run.note)}</div>` : ""}
-      ${tradeText}
-      ${imageTag}
-      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:4px;">
-        <button class="btn-small btn-secondary edit-run-btn" style="padding: 4px 8px; font-size:11px;">Edit Run</button>
-        <button class="btn-small delete-run-btn" style="padding: 4px 8px; font-size:11px; background:rgba(232,60,56,0.1); color:var(--high); border:1px solid rgba(232,60,56,0.3);">Delete</button>
-      </div>
-    `;
+    const tradeTakenBadge = isTradeTaken
+      ? `<span style="background:rgba(79,158,255,0.18); color:#4F9EFF; border:1px solid rgba(79,158,255,0.45); padding:2px 7px; border-radius:4px; font-size:10px; font-weight:700; font-family:var(--font-mono); letter-spacing:0.3px; display:inline-flex; align-items:center; gap:3px;">⚡ TRADE TAKEN</span>`
+      : '';
 
-    card.querySelector(".edit-run-btn").addEventListener("click", () => {
+    if (isConsidered) {
+      // Expanded full card for Considered runs
+      card.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-weight:600; font-size:14px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
+            ${tradeTakenBadge}
+          </div>
+          <span class="trade-cl-outcome outcome-W" style="margin:0; font-size:10px; font-weight:600;">Considered</span>
+        </div>
+        <div style="font-size:12px; color:var(--text-dim);">
+          Passed: <span style="color:var(--low); font-weight:600;">${totalSelected}</span> / ${total}
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          ${renderRow("Positive Decisions", selectedDecPos, "var(--low)")}
+          ${renderRow("Negative Decisions", selectedDecNeg, "var(--high)")}
+          ${renderRow("Observatory", selectedObs, "#EAB308")}
+        </div>
+        ${run.note ? `<div style="font-size:12px; color:var(--text); background:var(--bg); padding:6px 8px; border-radius:6px; border:1px solid var(--border); margin-top:4px;"><strong>Note:</strong> ${escHtml(run.note)}</div>` : ""}
+        ${tradeText}
+        ${imageTag}
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:4px;">
+          <button class="btn-small btn-secondary edit-run-btn" style="padding: 4px 8px; font-size:11px;">Edit Run</button>
+          <button class="btn-small delete-run-btn" style="padding: 4px 8px; font-size:11px; background:rgba(232,60,56,0.1); color:var(--high); border:1px solid rgba(232,60,56,0.3);">Delete</button>
+        </div>
+      `;
+    } else {
+      // Collapsed compact card for Not Considered runs
+      card.innerHTML = `
+        <div class="candle-run-collapsed-header" style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="candle-run-chevron">▶</span>
+            <span style="font-weight:600; font-size:13px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
+            <span style="font-size:11px; color:var(--text-dim);">(Passed: <strong style="color:var(--low);">${totalSelected}</strong>/${total})</span>
+            ${tradeTakenBadge}
+          </div>
+          <span style="font-size:10px; color:var(--text-dim); background:rgba(255,255,255,0.06); border:1px solid var(--border); padding:2px 6px; border-radius:4px;">Not Considered</span>
+        </div>
+        <div class="candle-run-details hidden" style="display:flex; flex-direction:column; gap:8px; margin-top:4px; padding-top:8px; border-top:1px dashed var(--border);">
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            ${renderRow("Positive Decisions", selectedDecPos, "var(--low)")}
+            ${renderRow("Negative Decisions", selectedDecNeg, "var(--high)")}
+            ${renderRow("Observatory", selectedObs, "#EAB308")}
+          </div>
+          ${run.note ? `<div style="font-size:12px; color:var(--text); background:var(--bg); padding:6px 8px; border-radius:6px; border:1px solid var(--border); margin-top:4px;"><strong>Note:</strong> ${escHtml(run.note)}</div>` : ""}
+          ${tradeText}
+          ${imageTag}
+          <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:4px;">
+            <button class="btn-small btn-secondary edit-run-btn" style="padding: 4px 8px; font-size:11px;">Edit Run</button>
+            <button class="btn-small delete-run-btn" style="padding: 4px 8px; font-size:11px; background:rgba(232,60,56,0.1); color:var(--high); border:1px solid rgba(232,60,56,0.3);">Delete</button>
+          </div>
+        </div>
+      `;
+
+      const header = card.querySelector(".candle-run-collapsed-header");
+      const details = card.querySelector(".candle-run-details");
+      const chevron = card.querySelector(".candle-run-chevron");
+      
+      header.addEventListener("click", () => {
+        const isHidden = details.classList.toggle("hidden");
+        if (isHidden) {
+          chevron.classList.remove("open");
+        } else {
+          chevron.classList.add("open");
+        }
+      });
+    }
+
+    card.querySelector(".edit-run-btn")?.addEventListener("click", (e) => {
+      e.stopPropagation();
       loadRunForEditing(run);
     });
 
-    card.querySelector(".delete-run-btn").addEventListener("click", async () => {
+    card.querySelector(".delete-run-btn")?.addEventListener("click", async (e) => {
+      e.stopPropagation();
       if (confirm("Are you sure you want to delete this candle checklist run?")) {
         try {
           await deleteCandleRun(run.id);
           showToast("Candle checklist run deleted");
-        } catch (e) {
-          console.error(e);
+        } catch (err) {
+          console.error(err);
           showToast("Failed to delete run");
         }
       }
@@ -804,6 +871,12 @@ function loadRunForEditing(run) {
   if (considerFlagInput) considerFlagInput.checked = !!run.consider;
   if (runNoteInput) runNoteInput.value = run.note || "";
   if (linkTradeSelect) linkTradeSelect.value = run.linkedTradeId || "";
+
+  const isTaking = Boolean(run.takingTrade || run.linkedTradeId);
+  if (takingTradeNoBtn && takingTradeYesBtn) {
+    takingTradeNoBtn.classList.toggle('active', !isTaking);
+    takingTradeYesBtn.classList.toggle('active', isTaking);
+  }
   
   if (run.chartImage) {
     runImageBase64 = run.chartImage;

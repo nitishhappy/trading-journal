@@ -513,3 +513,18 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - **Cashtag Extraction:** Matches `$TICKER` or `#TICKER` format in messages containing trade setup keywords.
 - **Automated Sector Backfilling (`yfinance`)**: For dynamically discovered stocks, the scraper now automatically calls the Yahoo Finance API (via `yfinance`) to instantly fetch and map the official sector/industry into the database.
   - **Advanced Text Extraction**: The parser smartly captures the full company phrase before the text "Looks Good" and handles extraction of parenthesized tickers (e.g. SML MAHINDRA (SMLMAH)) or strips spaces for split tickers (e.g. PNB Housing -> PNBHOUSING).
+
+### v2.3.2 — 4 Aug 2026 — Candle Checklist UI Enhancements & Run Folding
+- **Active Selection Color Coding**: Selected items in the active runner now reflect their category role:
+  - **Positive Decisions**: Rendered in green with green glow and checkmark (`✔`).
+  - **Negative Decisions**: Rendered in red with red glow and checkmark (`✔`).
+  - **Observatory**: Rendered in yellow/amber with amber glow and checkmark (`✔`).
+  - Column headers in the Selected column styled with matching colored accents.
+- **Previous Runs Category Tag Coloring**:
+  - In the "Previous Runs" sidebar cards, category prefix labels are color-coded: `<strong style="color:var(--low)">Positive Decisions:</strong>` in green, `<strong style="color:var(--high)">Negative Decisions:</strong>` in red, and `<strong style="color:#EAB308">Observatory:</strong>` in yellow.
+  - The checked item values remain clean in their standard text color for readability.
+- **Collapsed Format for Unconsidered Runs**:
+  - Previous runs marked as **Considered** (`consider = true`) remain expanded with the prominent green `Considered` badge.
+  - Runs marked as **Not Considered** (`consider = false`) now appear in a compact **collapsed format** with a clickable summary header showing the timestamp, passed score, and `Not Considered` tag. Clicking toggles full card details, notes, and actions.
+- **Trade Taken Highlight & Glow**:
+  - If a trade is executed on a candle (`Taking the trade? Yes` or linked to a trade log entry), the run card is highlighted with a vivid **illuminated cyan/blue glow**, gradient background, and a glowing **`⚡ TRADE TAKEN`** badge.

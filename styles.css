@@ -3414,6 +3414,97 @@ textarea { resize: vertical; }
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
+/* Category-specific selected styles */
+.candle-check-item.item-pos.is-selected {
+  background: rgba(54, 199, 90, 0.16);
+  border: 1px solid var(--low);
+  color: var(--text);
+}
+.candle-check-item.item-neg.is-selected {
+  background: rgba(232, 60, 56, 0.16);
+  border: 1px solid var(--high);
+  color: var(--text);
+}
+.candle-check-item.item-obs.is-selected {
+  background: rgba(234, 179, 8, 0.16);
+  border: 1px solid #EAB308;
+  color: var(--text);
+}
+
+.candle-check-item.is-unselected {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-dim);
+}
+.candle-check-item.is-unselected:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+}
+
+[data-theme="light"] .candle-check-item.item-pos.is-selected {
+  background: rgba(30, 158, 66, 0.12);
+  border: 1px solid var(--low);
+}
+[data-theme="light"] .candle-check-item.item-neg.is-selected {
+  background: rgba(204, 40, 34, 0.12);
+  border: 1px solid var(--high);
+}
+[data-theme="light"] .candle-check-item.item-obs.is-selected {
+  background: rgba(217, 119, 6, 0.12);
+  border: 1px solid #D97706;
+}
+[data-theme="light"] .candle-check-item.is-unselected {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-dim);
+}
+
+/* Previous Run Cards & Trade Taken Glow */
+.candle-run-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.candle-run-card.trade-taken-glow {
+  border: 1px solid #4F9EFF !important;
+  background: linear-gradient(135deg, rgba(79, 158, 255, 0.14) 0%, rgba(26, 34, 53, 0.95) 100%) !important;
+  box-shadow: 0 0 18px rgba(79, 158, 255, 0.38), inset 0 0 10px rgba(79, 158, 255, 0.12) !important;
+}
+
+[data-theme="light"] .candle-run-card.trade-taken-glow {
+  border: 1px solid #1A6FE8 !important;
+  background: linear-gradient(135deg, rgba(26, 111, 232, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%) !important;
+  box-shadow: 0 0 18px rgba(26, 111, 232, 0.25), inset 0 0 8px rgba(26, 111, 232, 0.08) !important;
+}
+
+.candle-run-collapsed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+.candle-run-collapsed-header:hover {
+  opacity: 0.92;
+}
+
+.candle-run-chevron {
+  transition: transform 0.2s ease;
+  display: inline-block;
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.candle-run-chevron.open {
+  transform: rotate(90deg);
+}
+
 .candle-check-item:hover {
   transform: translateY(-1px);
 }
