@@ -4,33 +4,28 @@
 
 let audioCtx = null;
 
-function getAudioContext() {
+export function getAudioContext() {
   if (!audioCtx) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (AudioContextClass) {
       audioCtx = new AudioContextClass();
     }
   }
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume().catch(() => {});
-  }
   return audioCtx;
 }
 
 // Unlock audio on first user touch/click interaction
+export function unlockAudioContext() {
+  const ctx = getAudioContext();
+  if (ctx && ctx.state === 'suspended') {
+    ctx.resume().catch(() => {});
+  }
+}
+
 if (typeof window !== 'undefined') {
-  const unlockAudio = () => {
-    const ctx = getAudioContext();
-    if (ctx && ctx.state === 'suspended') {
-      ctx.resume().catch(() => {});
-    }
-    window.removeEventListener('click', unlockAudio);
-    window.removeEventListener('keydown', unlockAudio);
-    window.removeEventListener('touchstart', unlockAudio);
-  };
-  window.addEventListener('click', unlockAudio, { once: true });
-  window.addEventListener('keydown', unlockAudio, { once: true });
-  window.addEventListener('touchstart', unlockAudio, { once: true });
+  window.addEventListener('click', unlockAudioContext, { once: false });
+  window.addEventListener('keydown', unlockAudioContext, { once: false });
+  window.addEventListener('touchstart', unlockAudioContext, { once: false });
 }
 
 /**
@@ -38,13 +33,21 @@ if (typeof window !== 'undefined') {
  * @param {string} type - 'chime' | 'radar' | 'bell' | 'beep' | 'special'
  * @param {number} volume - 0.0 to 1.0
  */
-export function playSynthesizedSound(type = 'chime', volume = 0.8) {
+export async function playSynthesizedSound(type = 'chime', volume = 0.8) {
   try {
     const ctx = getAudioContext();
     if (!ctx) return;
 
-    const clampedVol = Math.max(0, Math.min(1, Number(volume) || 0.8));
-    const now = ctx.currentTime;
+    if (ctx.state === 'suspended') {
+      try {
+        await ctx.resume();
+      } catch (e) {
+        console.warn("Could not resume audio context:", e);
+      }
+    }
+
+    const clampedVol = Math.max(0.05, Math.min(1.0, Number(volume) || 0.8));
+    const now = ctx.currentTime + 0.01;
 
     switch (type) {
       case 'chime': {
@@ -55,15 +58,15 @@ export function playSynthesizedSound(type = 'chime', volume = 0.8) {
           osc.type = 'sine';
           osc.frequency.setValueAtTime(freq, now + idx * 0.12);
 
-          gain.gain.setValueAtTime(0, now + idx * 0.12);
-          gain.gain.linearRampToValueAtTime(clampedVol * 0.45, now + idx * 0.12 + 0.02);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.6);
+          gain.gain.setValueAtTime(0.0001, now + idx * 0.12);
+          gain.gain.linearRampToValueAtTime(clampedVol * 0.5, now + idx * 0.12 + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.12 + 0.65);
 
           osc.connect(gain);
           gain.connect(ctx.destination);
 
           osc.start(now + idx * 0.12);
-          osc.stop(now + idx * 0.12 + 0.65);
+          osc.stop(now + idx * 0.12 + 0.7);
         });
         break;
       }
@@ -74,10 +77,10 @@ export function playSynthesizedSound(type = 'chime', volume = 0.8) {
         const gain = ctx.createGain();
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(880, now);
-        osc.frequency.exponentialRampToValueAtTime(440, now + 0.5);
+        osc.frequency.exponentialRampToValueAtTime(440, now + 0.45);
 
-        gain.gain.setValueAtTime(clampedVol * 0.5, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+        gain.gain.setValueAtTime(clampedVol * 0.55, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
@@ -96,14 +99,15 @@ export function playSynthesizedSound(type = 'chime', volume = 0.8) {
           osc.frequency.setValueAtTime(freq, now);
 
           const factor = 1 / (i + 1);
-          gain.gain.setValueAtTime(clampedVol * 0.35 * factor, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + (0.8 / (i * 0.5 + 1)));
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.linearRampToValueAtTime(clampedVol * 0.4 * factor, now + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + (0.85 / (i * 0.5 + 1)));
 
           osc.connect(gain);
           gain.connect(ctx.destination);
 
           osc.start(now);
-          osc.stop(now + 0.85);
+          osc.stop(now + 0.9);
         });
         break;
       }
@@ -116,14 +120,15 @@ export function playSynthesizedSound(type = 'chime', volume = 0.8) {
           osc.type = 'square';
           osc.frequency.setValueAtTime(987.77, now + offset); // B5
 
-          gain.gain.setValueAtTime(clampedVol * 0.18, now + offset);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.07);
+          gain.gain.setValueAtTime(0.0001, now + offset);
+          gain.gain.linearRampToValueAtTime(clampedVol * 0.22, now + offset + 0.01);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.08);
 
           osc.connect(gain);
           gain.connect(ctx.destination);
 
           osc.start(now + offset);
-          osc.stop(now + offset + 0.08);
+          osc.stop(now + offset + 0.09);
         });
         break;
       }
@@ -136,17 +141,17 @@ export function playSynthesizedSound(type = 'chime', volume = 0.8) {
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.14);
+          osc.frequency.setValueAtTime(freq, now + idx * 0.13);
 
-          gain.gain.setValueAtTime(0, now + idx * 0.14);
-          gain.gain.linearRampToValueAtTime(clampedVol * 0.5, now + idx * 0.14 + 0.03);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.14 + 0.8);
+          gain.gain.setValueAtTime(0.0001, now + idx * 0.13);
+          gain.gain.linearRampToValueAtTime(clampedVol * 0.5, now + idx * 0.13 + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.13 + 0.85);
 
           osc.connect(gain);
           gain.connect(ctx.destination);
 
-          osc.start(now + idx * 0.14);
-          osc.stop(now + idx * 0.14 + 0.85);
+          osc.start(now + idx * 0.13);
+          osc.stop(now + idx * 0.13 + 0.9);
         });
         break;
       }
@@ -155,3 +160,4 @@ export function playSynthesizedSound(type = 'chime', volume = 0.8) {
     console.warn("Audio play error:", err);
   }
 }
+

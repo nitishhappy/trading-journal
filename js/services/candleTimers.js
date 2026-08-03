@@ -20,31 +20,52 @@ export const DEFAULT_CANDLE_TIMER_SETTINGS = {
   specialMute: false
 };
 
+const LOCAL_STORAGE_KEY = 'candle_timer_settings_cache';
+
 /**
- * Fetch candle timer settings for the current logged-in user from Firestore
+ * Fetch candle timer settings from local cache and Firestore
  */
 export async function loadCandleTimerSettings() {
-  if (!state.currentUser) return { ...DEFAULT_CANDLE_TIMER_SETTINGS };
+  let cached = { ...DEFAULT_CANDLE_TIMER_SETTINGS };
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (raw) {
+      cached = { ...DEFAULT_CANDLE_TIMER_SETTINGS, ...JSON.parse(raw) };
+    }
+  } catch (e) {}
+
+  if (!state.currentUser) return cached;
 
   try {
     const docRef = db.collection("users").doc(state.currentUser.uid).collection("settings").doc("candleTimers");
     const doc = await docRef.get();
     if (doc.exists) {
-      return { ...DEFAULT_CANDLE_TIMER_SETTINGS, ...doc.data() };
+      const merged = { ...DEFAULT_CANDLE_TIMER_SETTINGS, ...cached, ...doc.data() };
+      try { localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(merged)); } catch (e) {}
+      return merged;
     }
   } catch (err) {
     console.warn("Failed to load candle timer settings from Firestore, using defaults:", err);
   }
-  return { ...DEFAULT_CANDLE_TIMER_SETTINGS };
+  return cached;
 }
 
 /**
- * Save candle timer settings for the current logged-in user to Firestore
+ * Save candle timer settings to local cache and Firestore
  * @param {Object} settings 
  */
 export async function saveCandleTimerSettings(settings) {
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(settings));
+  } catch (e) {}
+
   if (!state.currentUser) return;
 
-  const docRef = db.collection("users").doc(state.currentUser.uid).collection("settings").doc("candleTimers");
-  await docRef.set(settings, { merge: true });
+  try {
+    const docRef = db.collection("users").doc(state.currentUser.uid).collection("settings").doc("candleTimers");
+    await docRef.set(settings, { merge: true });
+  } catch (err) {
+    console.warn("Could not save timer settings to Firestore:", err);
+  }
 }
+

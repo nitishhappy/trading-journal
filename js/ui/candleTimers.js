@@ -213,94 +213,148 @@ function setupHUDEventListeners() {
 
 // ===================== Settings Panel Integration =====================
 
-export function initTimerSettingsUI() {
+let settingsListenersAttached = false;
+let activeDaysSet = new Set([1, 2, 3, 4, 5]);
+
+// Synchronize all form elements with current timerSettings
+export function populateTimerSettingsForm() {
   const container = document.getElementById("timer-settings-container");
   if (!container) return;
 
-  const daysPills = container.querySelectorAll(".day-toggle-pill");
   const fromTimeInput = document.getElementById("timer-setting-from-time");
   const toTimeInput = document.getElementById("timer-setting-to-time");
   const anchorTimeInput = document.getElementById("timer-setting-anchor-time");
 
   const sound5mSel = document.getElementById("timer-setting-sound-5m");
   const sound15mSel = document.getElementById("timer-setting-sound-15m");
-  const test5mBtn = document.getElementById("timer-test-sound-5m");
-  const test15mBtn = document.getElementById("timer-test-sound-15m");
-
-  const specialTimesList = document.getElementById("timer-special-times-list");
-  const addSpecialTimeInput = document.getElementById("timer-add-special-input");
-  const addSpecialTimeBtn = document.getElementById("timer-add-special-btn");
   const specialSoundSel = document.getElementById("timer-setting-sound-special");
-  const testSpecialBtn = document.getElementById("timer-test-sound-special");
 
-  const saveSettingsBtn = document.getElementById("timer-save-settings-btn");
-
-  // Populate values from timerSettings
+  // Inputs
   if (fromTimeInput) fromTimeInput.value = timerSettings.fromTime || "09:15";
   if (toTimeInput) toTimeInput.value = timerSettings.toTime || "15:30";
   if (anchorTimeInput) anchorTimeInput.value = timerSettings.anchorTime || "09:15";
 
+  // Dropdowns
   if (sound5mSel) sound5mSel.value = timerSettings.sound5m || "chime";
   if (sound15mSel) sound15mSel.value = timerSettings.sound15m || "radar";
   if (specialSoundSel) specialSoundSel.value = timerSettings.specialSound || "special";
 
-  // Update Day Pills
-  const activeDays = new Set(timerSettings.activeDays || [1, 2, 3, 4, 5]);
+  // Day Pills
+  activeDaysSet = new Set(timerSettings.activeDays || [1, 2, 3, 4, 5]);
+  const daysPills = container.querySelectorAll(".day-toggle-pill");
   daysPills.forEach(pill => {
     const dayVal = Number(pill.getAttribute("data-day"));
-    pill.classList.toggle("active", activeDays.has(dayVal));
-    pill.onclick = () => {
-      if (activeDays.has(dayVal)) {
-        activeDays.delete(dayVal);
+    pill.classList.toggle("active", activeDaysSet.has(dayVal));
+  });
+
+  // Render Special Times
+  renderSpecialTimes();
+}
+
+// Render Special Times Tag Pills
+function renderSpecialTimes() {
+  const specialTimesList = document.getElementById("timer-special-times-list");
+  if (!specialTimesList) return;
+  specialTimesList.innerHTML = "";
+  const list = timerSettings.specialTimes || [];
+  if (list.length === 0) {
+    specialTimesList.innerHTML = `<span style="font-size:12px; color:var(--text-dim);">No special times configured.</span>`;
+    return;
+  }
+  list.forEach((t, idx) => {
+    const [h, m] = t.split(":").map(Number);
+    const tag = document.createElement("span");
+    tag.className = "special-time-tag";
+    tag.innerHTML = `
+      <span>${format12Hour(h, m)} (${t})</span>
+      <button type="button" class="special-time-remove" data-idx="${idx}" title="Remove">×</button>
+    `;
+    tag.querySelector(".special-time-remove").addEventListener("click", () => {
+      timerSettings.specialTimes.splice(idx, 1);
+      renderSpecialTimes();
+    });
+    specialTimesList.appendChild(tag);
+  });
+}
+
+// Setup Event Listeners for the Timer Settings Panel (attached only once)
+export function initTimerSettingsUI() {
+  populateTimerSettingsForm();
+
+  if (settingsListenersAttached) return;
+  settingsListenersAttached = true;
+
+  const container = document.getElementById("timer-settings-container");
+  if (!container) return;
+
+  const sound5mSel = document.getElementById("timer-setting-sound-5m");
+  const sound15mSel = document.getElementById("timer-setting-sound-15m");
+  const specialSoundSel = document.getElementById("timer-setting-sound-special");
+
+  const test5mBtn = document.getElementById("timer-test-sound-5m");
+  const test15mBtn = document.getElementById("timer-test-sound-15m");
+  const testSpecialBtn = document.getElementById("timer-test-sound-special");
+
+  const addSpecialTimeInput = document.getElementById("timer-add-special-input");
+  const addSpecialTimeBtn = document.getElementById("timer-add-special-btn");
+  const saveSettingsBtn = document.getElementById("timer-save-settings-btn");
+
+  const fromTimeInput = document.getElementById("timer-setting-from-time");
+  const toTimeInput = document.getElementById("timer-setting-to-time");
+  const anchorTimeInput = document.getElementById("timer-setting-anchor-time");
+
+  // Day Toggle Pills
+  const daysPills = container.querySelectorAll(".day-toggle-pill");
+  daysPills.forEach(pill => {
+    const dayVal = Number(pill.getAttribute("data-day"));
+    pill.addEventListener("click", () => {
+      if (activeDaysSet.has(dayVal)) {
+        activeDaysSet.delete(dayVal);
       } else {
-        activeDays.add(dayVal);
+        activeDaysSet.add(dayVal);
       }
-      pill.classList.toggle("active", activeDays.has(dayVal));
-    };
+      pill.classList.toggle("active", activeDaysSet.has(dayVal));
+      timerSettings.activeDays = Array.from(activeDaysSet).sort();
+    });
+  });
+
+  // Dropdown Change Handlers (Instant sound preview + state update)
+  sound5mSel?.addEventListener("change", () => {
+    const selectedSound = sound5mSel.value;
+    timerSettings.sound5m = selectedSound;
+    playSynthesizedSound(selectedSound, timerSettings.volume5m ?? 0.8);
+    saveCandleTimerSettings(timerSettings);
+  });
+
+  sound15mSel?.addEventListener("change", () => {
+    const selectedSound = sound15mSel.value;
+    timerSettings.sound15m = selectedSound;
+    playSynthesizedSound(selectedSound, timerSettings.volume15m ?? 0.8);
+    saveCandleTimerSettings(timerSettings);
+  });
+
+  specialSoundSel?.addEventListener("change", () => {
+    const selectedSound = specialSoundSel.value;
+    timerSettings.specialSound = selectedSound;
+    playSynthesizedSound(selectedSound, timerSettings.specialVolume ?? 0.9);
+    saveCandleTimerSettings(timerSettings);
   });
 
   // Sound Test Buttons
   test5mBtn?.addEventListener("click", () => {
-    const snd = sound5mSel?.value || "chime";
+    const snd = sound5mSel?.value || timerSettings.sound5m || "chime";
     playSynthesizedSound(snd, timerSettings.volume5m ?? 0.8);
   });
 
   test15mBtn?.addEventListener("click", () => {
-    const snd = sound15mSel?.value || "radar";
+    const snd = sound15mSel?.value || timerSettings.sound15m || "radar";
     playSynthesizedSound(snd, timerSettings.volume15m ?? 0.8);
   });
 
   testSpecialBtn?.addEventListener("click", () => {
-    const snd = specialSoundSel?.value || "special";
+    const snd = specialSoundSel?.value || timerSettings.specialSound || "special";
     playSynthesizedSound(snd, timerSettings.specialVolume ?? 0.9);
   });
-
-  // Render Special Times Tag Pills
-  const renderSpecialTimes = () => {
-    if (!specialTimesList) return;
-    specialTimesList.innerHTML = "";
-    const list = timerSettings.specialTimes || [];
-    if (list.length === 0) {
-      specialTimesList.innerHTML = `<span style="font-size:12px; color:var(--text-dim);">No special times configured.</span>`;
-      return;
-    }
-    list.forEach((t, idx) => {
-      const [h, m] = t.split(":").map(Number);
-      const tag = document.createElement("span");
-      tag.className = "special-time-tag";
-      tag.innerHTML = `
-        <span>${format12Hour(h, m)} (${t})</span>
-        <button type="button" class="special-time-remove" data-idx="${idx}" title="Remove">×</button>
-      `;
-      tag.querySelector(".special-time-remove").addEventListener("click", () => {
-        timerSettings.specialTimes.splice(idx, 1);
-        renderSpecialTimes();
-      });
-      specialTimesList.appendChild(tag);
-    });
-  };
-
-  renderSpecialTimes();
 
   // Add Special Time Handler
   addSpecialTimeBtn?.addEventListener("click", () => {
@@ -322,7 +376,7 @@ export function initTimerSettingsUI() {
 
   // Save Settings Button
   saveSettingsBtn?.addEventListener("click", async () => {
-    timerSettings.activeDays = Array.from(activeDays).sort();
+    timerSettings.activeDays = Array.from(activeDaysSet).sort();
     timerSettings.fromTime = fromTimeInput?.value || "09:15";
     timerSettings.toTime = toTimeInput?.value || "15:30";
     timerSettings.anchorTime = anchorTimeInput?.value || "09:15";
@@ -351,21 +405,27 @@ export async function initCandleTimersUI() {
   setupHUDEventListeners();
   startCandleTimers();
 
-  // Load user settings from Firestore
+  // Load user settings from Firestore and local cache
   const loadUserTimers = async () => {
-    if (state.currentUser) {
-      timerSettings = await loadCandleTimerSettings();
-      updateMuteButtonsUI();
-      initTimerSettingsUI();
-      tick();
-    }
+    timerSettings = await loadCandleTimerSettings();
+    updateMuteButtonsUI();
+    initTimerSettingsUI();
+    tick();
   };
 
+  // Listen for auth state change
   window.addEventListener('auth-state-changed', loadUserTimers);
-  if (state.currentUser) {
-    loadUserTimers();
-  }
+
+  // Listen for settings view being opened
+  window.addEventListener('settings-opened', () => {
+    initTimerSettingsUI();
+    populateTimerSettingsForm();
+  });
+
+  // Initial load
+  loadUserTimers();
 }
 
 // Auto-init on script load
 initCandleTimersUI();
+

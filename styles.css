@@ -122,6 +122,18 @@ input, textarea, select {
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
+select option {
+  background-color: var(--surface-2);
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+[data-theme="light"] select option {
+  background-color: #ffffff;
+  color: #111827;
+}
+
 input:focus, textarea:focus, select:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-glow);
