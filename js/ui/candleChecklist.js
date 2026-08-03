@@ -1,6 +1,7 @@
 import { state } from '../state.js';
 import { showToast } from '../utils/toast.js';
 import { resizeImageToBase64, attachImagePaste } from '../utils/image.js';
+import { getLocalDateKey, todayKey } from '../utils/date.js';
 import { saveCandleTemplate, deleteCandleTemplate, saveCandleRun, deleteCandleRun } from '../services/candleChecklist.js';
 import { openChecklistModal } from './checklists.js';
 
@@ -14,6 +15,35 @@ function escHtml(str) {
 function isInterestingCandleCheckItem(str) {
   if (!str) return false;
   return /int[e|r]*st[i|n]*ng\s+candle|candle.*int[e|r]*st/i.test(str.trim());
+}
+
+// Helper to format run date and time for display
+function getRunDisplayDate(run) {
+  let dateObj = null;
+  if (run.runDate) {
+    dateObj = new Date(run.runDate + "T12:00:00Z");
+  } else if (run.createdAt) {
+    dateObj = run.createdAt.toDate ? run.createdAt.toDate() : new Date(run.createdAt);
+  }
+
+  const timeStr = run.loggingTime || "";
+  if (!dateObj || isNaN(dateObj.getTime())) {
+    return timeStr;
+  }
+
+  const runDateKey = getLocalDateKey(dateObj);
+  const todayKeyStr = todayKey();
+
+  if (runDateKey === todayKeyStr) {
+    return timeStr;
+  } else {
+    const dateFormatted = dateObj.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "short",
+      timeZone: "Asia/Kolkata"
+    });
+    return `${dateFormatted}, ${timeStr}`;
+  }
 }
 
 // Global variables for active tracking
@@ -50,8 +80,7 @@ const timeWindowHint = document.getElementById("candle-time-window-hint");
 const candleInterestingCard = document.getElementById("candle-interesting-card");
 const candleInterestingFlag = document.getElementById("candle-interesting-flag");
 const candleInterestingStatus = document.getElementById("candle-interesting-status");
-const parallelColsContainer = document.querySelector(".parallel-checklists-columns");
-const uninterestingPlaceholder = document.getElementById("candle-uninteresting-placeholder");
+const candleEvaluationSection = document.getElementById("candle-evaluation-section");
 
 const selectedObsList = document.getElementById("candle-selected-obs-list");
 const selectedDecPosList = document.getElementById("candle-selected-dec-pos-list");
@@ -85,16 +114,12 @@ const candleBackBtn = document.getElementById("candle-back-to-tradelog");
 // Tracks the trade ID we came from when clicking "View" from Trade Log
 let pendingBackTradeId = null;
 
-// Updates the visibility of the Parallel Selected/Unselected Columns
+// Updates the visibility of the Full Evaluation & Action Section
 function updateInterestingState(isInteresting) {
   if (candleInterestingFlag) candleInterestingFlag.checked = Boolean(isInteresting);
-  const cols = parallelColsContainer || document.querySelector(".parallel-checklists-columns");
-  const placeholder = uninterestingPlaceholder || document.getElementById("candle-uninteresting-placeholder");
-  if (cols) {
-    cols.style.display = isInteresting ? "flex" : "none";
-  }
-  if (placeholder) {
-    placeholder.style.display = isInteresting ? "none" : "block";
+  const evalSection = candleEvaluationSection || document.getElementById("candle-evaluation-section");
+  if (evalSection) {
+    evalSection.style.display = isInteresting ? "block" : "none";
   }
   if (candleInterestingCard) {
     candleInterestingCard.classList.toggle("is-active", Boolean(isInteresting));
@@ -447,6 +472,7 @@ function setupEventListeners() {
       templateId: activeTemplateId,
       templateName: template.name,
       loggingTime: time,
+      runDate: getLocalDateKey(new Date()),
       isInteresting: isInteresting,
       selected: {
         observatory: selectedObs,
@@ -811,14 +837,6 @@ function renderLastRuns() {
     const totalSelected = selectedObs.length + selectedDecPos.length + selectedDecNeg.length;
     const total = totalSelected + unselectedObs.length + unselectedDecPos.length + unselectedDecNeg.length;
 
-    const isRunInteresting = run.isInteresting !== undefined 
-      ? Boolean(run.isInteresting) 
-      : Boolean((run.selected && Object.values(run.selected).flat().some(isInterestingCandleCheckItem)) || totalSelected > 0);
-
-    const interestingBadge = isRunInteresting
-      ? `<span style="background:rgba(234,179,8,0.15); color:#EAB308; border:1px solid rgba(234,179,8,0.4); padding:2px 6px; border-radius:4px; font-size:10px; font-weight:600; font-family:var(--font-mono);">🔥 Interesting</span>`
-      : '';
-
     let imageTag = "";
     if (run.chartImage) {
       imageTag = `
@@ -850,13 +868,14 @@ function renderLastRuns() {
       ? `<span style="background:rgba(79,158,255,0.18); color:#4F9EFF; border:1px solid rgba(79,158,255,0.45); padding:2px 7px; border-radius:4px; font-size:10px; font-weight:700; font-family:var(--font-mono); letter-spacing:0.3px; display:inline-flex; align-items:center; gap:3px;">⚡ TRADE TAKEN</span>`
       : '';
 
+    const runDateDisplay = getRunDisplayDate(run);
+
     if (isConsidered) {
       // Expanded full card for Considered runs
       card.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <span style="font-weight:600; font-size:14px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
-            ${interestingBadge}
+            <span style="font-weight:600; font-size:14px; font-family:var(--font-mono); color:var(--text);">${runDateDisplay}</span>
             ${tradeTakenBadge}
           </div>
           <span class="trade-cl-outcome outcome-W" style="margin:0; font-size:10px; font-weight:600;">Considered</span>
@@ -883,8 +902,7 @@ function renderLastRuns() {
         <div class="candle-run-collapsed-header" style="display:flex; justify-content:space-between; align-items:center;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span class="candle-run-chevron">▶</span>
-            <span style="font-weight:600; font-size:13px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
-            ${interestingBadge}
+            <span style="font-weight:600; font-size:13px; font-family:var(--font-mono); color:var(--text);">${runDateDisplay}</span>
             <span style="font-size:11px; color:var(--text-dim);">(Passed: <strong style="color:var(--low);">${totalSelected}</strong>/${total})</span>
             ${tradeTakenBadge}
           </div>
@@ -1066,7 +1084,7 @@ export function renderLinkedCandleRuns(tradeId) {
     row.className = 'trade-cl-row';
     row.innerHTML = `
       <span class="trade-cl-name">${templateName}</span>
-      <span style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono);">${run.loggingTime || ''}</span>
+      <span style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono);">${getRunDisplayDate(run)}</span>
       <span class="trade-cl-score ${pctClass}">${passed}/${total} (${pct}%)</span>
       ${outcomeHtml}
       <button class="btn-small trade-cl-edit-btn" data-id="${run.id}">View</button>

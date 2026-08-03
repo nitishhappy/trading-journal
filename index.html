@@ -556,104 +556,101 @@
                 <span id="candle-interesting-status" style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono);">Check to evaluate</span>
               </div>
 
-              <!-- Placeholder when candle is not marked interesting -->
-              <div id="candle-uninteresting-placeholder" style="text-align: center; padding: 24px 16px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border); border-radius: var(--radius); color: var(--text-dim); font-size: 13px; margin-bottom: 14px;">
-                <span style="font-size: 22px; display: block; margin-bottom: 6px;">⏸️</span>
-                Candle not marked as interesting. Check <strong>"Is this an interesting candle?"</strong> above to evaluate positive / negative decisions and observatory criteria.
-              </div>
+              <!-- Full Evaluation & Action Section (Visible only when Master Check is checked) -->
+              <div id="candle-evaluation-section" style="display:none;">
+                <!-- Two Parallel Sections: Selected (Green) vs Not Selected (Red) -->
+                <div class="parallel-checklists-columns" style="display:flex; gap:16px;">
+                  <!-- Selected (Green) Column -->
+                  <div class="checklist-column selected-col" style="flex: 1; min-width: 150px; background: rgba(54,199,90,0.06); border: 1px solid var(--low); border-radius: var(--radius); padding: 12px;">
+                    <h4 style="color:var(--low); margin-top:0; border-bottom: 1px solid var(--low); padding-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">
+                      <span>Selected</span>
+                      <span id="candle-selected-count" style="font-size:12px; font-family:var(--font-mono); background:var(--low-glow); padding:2px 6px; border-radius:4px;">0</span>
+                    </h4>
+                    
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                      <div>
+                        <h5 style="margin: 0 0 6px; color: var(--low); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Positive Decisions</h5>
+                        <div id="candle-selected-dec-pos-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      </div>
+                      <div>
+                        <h5 style="margin: 0 0 6px; color: var(--high); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Negative Decisions</h5>
+                        <div id="candle-selected-dec-neg-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      </div>
+                      <div>
+                        <h5 style="margin: 0 0 6px; color: #EAB308; font-size: 11px; text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Observatory</h5>
+                        <div id="candle-selected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      </div>
+                    </div>
+                  </div>
 
-              <!-- Two Parallel Sections: Selected (Green) vs Not Selected (Red) -->
-              <div class="parallel-checklists-columns" style="display:none; gap:16px;">
-                <!-- Selected (Green) Column -->
-                <div class="checklist-column selected-col" style="flex: 1; min-width: 150px; background: rgba(54,199,90,0.06); border: 1px solid var(--low); border-radius: var(--radius); padding: 12px;">
-                  <h4 style="color:var(--low); margin-top:0; border-bottom: 1px solid var(--low); padding-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">
-                    <span>Selected</span>
-                    <span id="candle-selected-count" style="font-size:12px; font-family:var(--font-mono); background:var(--low-glow); padding:2px 6px; border-radius:4px;">0</span>
-                  </h4>
+                  <!-- Not Selected (Red) Column -->
+                  <div class="checklist-column unselected-col" style="flex: 1; min-width: 150px; background: rgba(232,60,56,0.06); border: 1px solid var(--high); border-radius: var(--radius); padding: 12px;">
+                    <h4 style="color:var(--high); margin-top:0; border-bottom: 1px solid var(--high); padding-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">
+                      <span>Not Selected</span>
+                      <span id="candle-unselected-count" style="font-size:12px; font-family:var(--font-mono); background:var(--high-glow); padding:2px 6px; border-radius:4px;">0</span>
+                    </h4>
+                    
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                      <div>
+                        <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Positive Decisions</h5>
+                        <div id="candle-unselected-dec-pos-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      </div>
+                      <div>
+                        <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Negative Decisions</h5>
+                        <div id="candle-unselected-dec-neg-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      </div>
+                      <div>
+                        <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
+                        <div id="candle-unselected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Controls to save/extend the run -->
+                <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px; border-top:1px solid var(--border); padding-top:16px;">
+                  <div style="display:flex; gap:12px; align-items:center;">
+                    <div style="flex:1;">
+                      <label for="candle-link-trade-select" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Link to Trade Log (Optional)</label>
+                      <select id="candle-link-trade-select">
+                        <option value="">— Not linked —</option>
+                      </select>
+                    </div>
+                    <div style="flex:1; display:flex; align-items:center; justify-content:flex-end;">
+                      <label class="checkbox-label" style="font-size:12px; font-weight:500; cursor:pointer;">
+                        <input type="checkbox" id="candle-consider-flag"> To be considered
+                      </label>
+                    </div>
+                  </div>
                   
-                  <div style="display:flex; flex-direction:column; gap:12px;">
-                    <div>
-                      <h5 style="margin: 0 0 6px; color: var(--low); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Positive Decisions</h5>
-                      <div id="candle-selected-dec-pos-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
-                    </div>
-                    <div>
-                      <h5 style="margin: 0 0 6px; color: var(--high); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Negative Decisions</h5>
-                      <div id="candle-selected-dec-neg-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
-                    </div>
-                    <div>
-                      <h5 style="margin: 0 0 6px; color: #EAB308; font-size: 11px; text-transform: uppercase; font-family: var(--font-mono); font-weight: 700;">Observatory</h5>
-                      <div id="candle-selected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                  <div>
+                    <label style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Chart Screenshot (Optional)</label>
+                    <div class="image-input-row" style="margin-top:0;">
+                      <input type="file" id="candle-chart-image" accept="image/*" />
+                      <div id="candle-chart-preview" class="image-preview hidden" style="margin-top:8px; position:relative; width:fit-content;">
+                        <img id="candle-chart-preview-img" alt="Chart preview" style="max-height:120px; border-radius: var(--radius); border: 1px solid var(--border);" />
+                        <button type="button" id="candle-chart-remove" class="img-remove-btn" style="position:absolute; top: -8px; right:-8px; background:var(--high); color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; cursor:pointer;">✕</button>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <!-- Not Selected (Red) Column -->
-                <div class="checklist-column unselected-col" style="flex: 1; min-width: 150px; background: rgba(232,60,56,0.06); border: 1px solid var(--high); border-radius: var(--radius); padding: 12px;">
-                  <h4 style="color:var(--high); margin-top:0; border-bottom: 1px solid var(--high); padding-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">
-                    <span>Not Selected</span>
-                    <span id="candle-unselected-count" style="font-size:12px; font-family:var(--font-mono); background:var(--high-glow); padding:2px 6px; border-radius:4px;">0</span>
-                  </h4>
-                  
-                  <div style="display:flex; flex-direction:column; gap:12px;">
-                    <div>
-                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Positive Decisions</h5>
-                      <div id="candle-unselected-dec-pos-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
-                    </div>
-                    <div>
-                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Negative Decisions</h5>
-                      <div id="candle-unselected-dec-neg-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
-                    </div>
-                    <div>
-                      <h5 style="margin: 0 0 6px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-family: var(--font-mono);">Observatory</h5>
-                      <div id="candle-unselected-obs-list" class="candle-check-list" style="display:flex; flex-direction:column; gap:6px;"></div>
+                  <div>
+                    <label for="candle-run-note" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Note (Optional)</label>
+                    <textarea id="candle-run-note" rows="2" placeholder="Add analysis note here..." style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-family:inherit; resize:vertical;"></textarea>
+                  </div>
+
+                  <div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-2); padding:10px 14px; border-radius:8px; border:1px solid var(--border); margin-top: 4px;">
+                    <span style="font-size:13px; font-weight:500; color:var(--text-dim);">Taking the trade?</span>
+                    <div class="seg-group" style="margin:0; display:flex; gap:6px;">
+                      <button type="button" class="seg-btn active" id="taking-trade-no" style="padding: 4px 14px; font-size:12px; border-radius:6px; font-family:var(--font-body); font-weight:500;">No</button>
+                      <button type="button" class="seg-btn" id="taking-trade-yes" style="padding: 4px 14px; font-size:12px; border-radius:6px; font-family:var(--font-body); font-weight:500;">Yes</button>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <!-- Controls to save/extend the run -->
-              <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px; border-top:1px solid var(--border); padding-top:16px;">
-                <div style="display:flex; gap:12px; align-items:center;">
-                  <div style="flex:1;">
-                    <label for="candle-link-trade-select" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Link to Trade Log (Optional)</label>
-                    <select id="candle-link-trade-select">
-                      <option value="">— Not linked —</option>
-                    </select>
+                  <div style="display:flex; justify-content:flex-end; gap:8px;">
+                    <button id="candle-run-reset-btn" class="btn-secondary">Reset</button>
+                    <button id="candle-run-save-btn" class="btn-primary">Save Run</button>
                   </div>
-                  <div style="flex:1; display:flex; align-items:center; justify-content:flex-end;">
-                    <label class="checkbox-label" style="font-size:12px; font-weight:500; cursor:pointer;">
-                      <input type="checkbox" id="candle-consider-flag"> To be considered
-                    </label>
-                  </div>
-                </div>
-                
-                <div>
-                  <label style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Chart Screenshot (Optional)</label>
-                  <div class="image-input-row" style="margin-top:0;">
-                    <input type="file" id="candle-chart-image" accept="image/*" />
-                    <div id="candle-chart-preview" class="image-preview hidden" style="margin-top:8px; position:relative; width:fit-content;">
-                      <img id="candle-chart-preview-img" alt="Chart preview" style="max-height:120px; border-radius: var(--radius); border: 1px solid var(--border);" />
-                      <button type="button" id="candle-chart-remove" class="img-remove-btn" style="position:absolute; top: -8px; right:-8px; background:var(--high); color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; cursor:pointer;">✕</button>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label for="candle-run-note" style="display:block; font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:4px; font-family:var(--font-mono);">Note (Optional)</label>
-                  <textarea id="candle-run-note" rows="2" placeholder="Add analysis note here..." style="width:100%; padding:8px; border-radius:6px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-family:inherit; resize:vertical;"></textarea>
-                </div>
-
-                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-2); padding:10px 14px; border-radius:8px; border:1px solid var(--border); margin-top: 4px;">
-                  <span style="font-size:13px; font-weight:500; color:var(--text-dim);">Taking the trade?</span>
-                  <div class="seg-group" style="margin:0; display:flex; gap:6px;">
-                    <button type="button" class="seg-btn active" id="taking-trade-no" style="padding: 4px 14px; font-size:12px; border-radius:6px; font-family:var(--font-body); font-weight:500;">No</button>
-                    <button type="button" class="seg-btn" id="taking-trade-yes" style="padding: 4px 14px; font-size:12px; border-radius:6px; font-family:var(--font-body); font-weight:500;">Yes</button>
-                  </div>
-                </div>
-
-                <div style="display:flex; justify-content:flex-end; gap:8px;">
-                  <button id="candle-run-reset-btn" class="btn-secondary">Reset</button>
-                  <button id="candle-run-save-btn" class="btn-primary">Save Run</button>
                 </div>
               </div>
             </div>

@@ -528,8 +528,10 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - Runs marked as **Not Considered** (`consider = false`) now appear in a compact **collapsed format** with a clickable summary header showing the timestamp, passed score, and `Not Considered` tag. Clicking toggles full card details, notes, and actions.
 - **Master "Interesting Candle" Gatekeeper Check**:
   - Pushed the `"Is this an interesting candle?"` evaluation check outside and directly to the top of the runner as a prominent master toggle card.
-  - When unchecked, the Selected / Not Selected parallel columns are cleanly gated/hidden, allowing quick logging without cluttering the screen.
-  - When checked, the parallel Selected and Not Selected columns instantly illuminate and reveal all category-specific evaluation items.
+  - When unchecked, the entire evaluation & action section (parallel columns, trade linking, screenshot upload, notes, and save controls) remains cleanly hidden for maximum focus.
+  - When checked, the evaluation form dynamically illuminates and reveals the parallel Selected / Not Selected columns and all logging controls.
   - Automatic template filtering ensures "interesting candle" checks in existing templates are cleanly routed to the master checkbox rather than appearing duplicated inside inner lists.
+- **Date Formatting for Older Runs**:
+  - In the "Previous Runs" sidebar cards and linked trade modal lists, older runs now clearly show their date alongside the time (e.g. `3 Aug, 6:35 PM`), while today's runs display the concise time (e.g. `6:35 PM`).
 - **Trade Taken Highlight & Glow**:
   - If a trade is executed on a candle (`Taking the trade? Yes` or linked to a trade log entry), the run card is highlighted with a vivid **illuminated cyan/blue glow**, gradient background, and a glowing **`⚡ TRADE TAKEN`** badge.
