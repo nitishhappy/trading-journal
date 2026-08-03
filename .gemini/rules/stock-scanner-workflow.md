@@ -13,6 +13,7 @@ When the user prompts "Stock Scanner" or provides a "Stock Scanner [URL]", you m
 If the user just says "Stock Scanner", immediately use the `run_command` tool to execute the python scraper for their default Telegram channels:
 1. `python C:\Nitish\ClaudeApps\Utilities\stock_scanner.py "https://t.me/s/EquiAlpha_stocks"`
 2. `python C:\Nitish\ClaudeApps\Utilities\stock_scanner.py "https://t.me/s/ALChampionsClub"`
+3. `python C:\Nitish\ClaudeApps\Utilities\stock_scanner.py "https://t.me/s/stockpro_online"`
 Once finished, inform the user that their journal has been updated with the latest Telegram stocks.
 
 ### 2. Telegram URL Provided
