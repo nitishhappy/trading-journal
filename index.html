@@ -547,8 +547,23 @@
                 Window: 11:29:30 AM to 11:33:30 AM for 11:30 AM
               </div>
 
+              <!-- Master Check: Is this an interesting candle? -->
+              <div id="candle-interesting-card" class="candle-master-check-card" style="margin-bottom: 14px;">
+                <label for="candle-interesting-flag" style="display:flex; align-items:center; gap:10px; cursor:pointer; font-size:14px; font-weight:600; color:var(--text); user-select:none; margin:0;">
+                  <input type="checkbox" id="candle-interesting-flag" style="width:18px; height:18px; accent-color:var(--accent); cursor:pointer;" />
+                  <span>🔥 Is this an interesting candle?</span>
+                </label>
+                <span id="candle-interesting-status" style="font-size:11px; color:var(--text-dim); font-family:var(--font-mono);">Check to evaluate</span>
+              </div>
+
+              <!-- Placeholder when candle is not marked interesting -->
+              <div id="candle-uninteresting-placeholder" style="text-align: center; padding: 24px 16px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border); border-radius: var(--radius); color: var(--text-dim); font-size: 13px; margin-bottom: 14px;">
+                <span style="font-size: 22px; display: block; margin-bottom: 6px;">⏸️</span>
+                Candle not marked as interesting. Check <strong>"Is this an interesting candle?"</strong> above to evaluate positive / negative decisions and observatory criteria.
+              </div>
+
               <!-- Two Parallel Sections: Selected (Green) vs Not Selected (Red) -->
-              <div class="parallel-checklists-columns" style="display:flex; gap:16px;">
+              <div class="parallel-checklists-columns" style="display:none; gap:16px;">
                 <!-- Selected (Green) Column -->
                 <div class="checklist-column selected-col" style="flex: 1; min-width: 150px; background: rgba(54,199,90,0.06); border: 1px solid var(--low); border-radius: var(--radius); padding: 12px;">
                   <h4 style="color:var(--low); margin-top:0; border-bottom: 1px solid var(--low); padding-bottom: 6px; display:flex; justify-content:space-between; align-items:center;">

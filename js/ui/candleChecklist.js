@@ -10,6 +10,12 @@ function escHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+// Helper to identify "interesting candle" item in templates
+function isInterestingCandleCheckItem(str) {
+  if (!str) return false;
+  return /int[e|r]*st[i|n]*ng\s+candle|candle.*int[e|r]*st/i.test(str.trim());
+}
+
 // Global variables for active tracking
 let activeTemplateId = null;
 let currentRunId = null; // Set when editing an existing run
@@ -39,6 +45,13 @@ const emptyChecklistArea = document.getElementById("candle-checklist-empty");
 
 const runTimeInput = document.getElementById("candle-run-time");
 const timeWindowHint = document.getElementById("candle-time-window-hint");
+
+// Master Interesting Checkbox elements
+const candleInterestingCard = document.getElementById("candle-interesting-card");
+const candleInterestingFlag = document.getElementById("candle-interesting-flag");
+const candleInterestingStatus = document.getElementById("candle-interesting-status");
+const parallelColsContainer = document.querySelector(".parallel-checklists-columns");
+const uninterestingPlaceholder = document.getElementById("candle-uninteresting-placeholder");
 
 const selectedObsList = document.getElementById("candle-selected-obs-list");
 const selectedDecPosList = document.getElementById("candle-selected-dec-pos-list");
@@ -71,6 +84,26 @@ const candleBackBtn = document.getElementById("candle-back-to-tradelog");
 
 // Tracks the trade ID we came from when clicking "View" from Trade Log
 let pendingBackTradeId = null;
+
+// Updates the visibility of the Parallel Selected/Unselected Columns
+function updateInterestingState(isInteresting) {
+  if (candleInterestingFlag) candleInterestingFlag.checked = Boolean(isInteresting);
+  const cols = parallelColsContainer || document.querySelector(".parallel-checklists-columns");
+  const placeholder = uninterestingPlaceholder || document.getElementById("candle-uninteresting-placeholder");
+  if (cols) {
+    cols.style.display = isInteresting ? "flex" : "none";
+  }
+  if (placeholder) {
+    placeholder.style.display = isInteresting ? "none" : "block";
+  }
+  if (candleInterestingCard) {
+    candleInterestingCard.classList.toggle("is-active", Boolean(isInteresting));
+  }
+  if (candleInterestingStatus) {
+    candleInterestingStatus.textContent = isInteresting ? "Active Evaluation" : "Check to evaluate";
+    candleInterestingStatus.style.color = isInteresting ? "var(--accent)" : "var(--text-dim)";
+  }
+}
 
 // Initialize Candle Checklist View
 export function initCandleChecklistUI() {
@@ -214,6 +247,7 @@ function setupEventListeners() {
       deleteTemplateBtn.classList.remove("hidden");
       mainChecklistArea.classList.remove("hidden");
       emptyChecklistArea.classList.add("hidden");
+      updateInterestingState(false);
       renderChecklist();
       renderLastRuns();
     } else {
@@ -320,6 +354,13 @@ function setupEventListeners() {
     }
   });
 
+  // Master Interesting Checkbox toggle
+  if (candleInterestingFlag) {
+    candleInterestingFlag.addEventListener("change", () => {
+      updateInterestingState(candleInterestingFlag.checked);
+    });
+  }
+
   // File selection for chart preview
   chartImageFile.addEventListener("change", (e) => {
     const file = e.target.files[0];
@@ -336,6 +377,7 @@ function setupEventListeners() {
     activeSelections.clear();
     currentRunId = null;
     resetImage();
+    updateInterestingState(false);
     if (runNoteInput) runNoteInput.value = "";
     if (linkTradeSelect) linkTradeSelect.value = "";
     if (considerFlagInput) considerFlagInput.checked = false;
@@ -360,7 +402,9 @@ function setupEventListeners() {
       return;
     }
 
-    // Prepare lists of selected / unselected
+    const isInteresting = candleInterestingFlag ? candleInterestingFlag.checked : false;
+
+    // Prepare lists of selected / unselected (filtering out any master item if present in template)
     const selectedObs = [];
     const unselectedObs = [];
     const selectedDecPos = [];
@@ -368,23 +412,34 @@ function setupEventListeners() {
     const selectedDecNeg = [];
     const unselectedDecNeg = [];
 
-    const decPos = template.decisionPositive || template.decision || [];
-    const decNeg = template.decisionNegative || [];
+    const decPos = (template.decisionPositive || template.decision || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const decNeg = (template.decisionNegative || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const obs = (template.observatory || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
 
-    (template.observatory || []).forEach((item, idx) => {
-      if (activeSelections.has(`obs:${idx}`)) selectedObs.push(item);
-      else unselectedObs.push(item);
-    });
+    if (isInteresting) {
+      obs.forEach((item, idx) => {
+        if (activeSelections.has(`obs:${idx}`)) selectedObs.push(item);
+        else unselectedObs.push(item);
+      });
 
-    decPos.forEach((item, idx) => {
-      if (activeSelections.has(`decPos:${idx}`)) selectedDecPos.push(item);
-      else unselectedDecPos.push(item);
-    });
+      decPos.forEach((item, idx) => {
+        if (activeSelections.has(`decPos:${idx}`)) selectedDecPos.push(item);
+        else unselectedDecPos.push(item);
+      });
 
-    decNeg.forEach((item, idx) => {
-      if (activeSelections.has(`decNeg:${idx}`)) selectedDecNeg.push(item);
-      else unselectedDecNeg.push(item);
-    });
+      decNeg.forEach((item, idx) => {
+        if (activeSelections.has(`decNeg:${idx}`)) selectedDecNeg.push(item);
+        else unselectedDecNeg.push(item);
+      });
+    } else {
+      // If not marked interesting, all remain unselected
+      unselectedObs.push(...obs);
+      unselectedDecPos.push(...decPos);
+      unselectedDecNeg.push(...decNeg);
+    }
 
     const isTakingTrade = takingTradeYesBtn ? takingTradeYesBtn.classList.contains('active') : false;
 
@@ -392,6 +447,7 @@ function setupEventListeners() {
       templateId: activeTemplateId,
       templateName: template.name,
       loggingTime: time,
+      isInteresting: isInteresting,
       selected: {
         observatory: selectedObs,
         decisionPositive: selectedDecPos,
@@ -419,6 +475,7 @@ function setupEventListeners() {
       activeSelections.clear();
       currentRunId = null;
       resetImage();
+      updateInterestingState(false);
       if (considerFlagInput) considerFlagInput.checked = false;
       if (runNoteInput) runNoteInput.value = "";
       if (linkTradeSelect) linkTradeSelect.value = "";
@@ -534,6 +591,7 @@ function autoLoadDefaultTemplate() {
   editTemplateBtn.classList.remove('hidden');
   mainChecklistArea.classList.remove('hidden');
   emptyChecklistArea.classList.add('hidden');
+  updateInterestingState(false);
   renderChecklist();
   renderLastRuns();
 }
@@ -600,8 +658,12 @@ function renderChecklist() {
   let selectedCountVal = 0;
   let unselectedCountVal = 0;
 
-  const decPos = template.decisionPositive || template.decision || [];
-  const decNeg = template.decisionNegative || [];
+  const decPos = (template.decisionPositive || template.decision || [])
+    .filter(item => !isInterestingCandleCheckItem(item));
+  const decNeg = (template.decisionNegative || [])
+    .filter(item => !isInterestingCandleCheckItem(item));
+  const obs = (template.observatory || [])
+    .filter(item => !isInterestingCandleCheckItem(item));
 
   // Render Positive Decisions
   decPos.forEach((item, index) => {
@@ -630,7 +692,7 @@ function renderChecklist() {
   });
 
   // Render Observatory
-  (template.observatory || []).forEach((item, index) => {
+  obs.forEach((item, index) => {
     const isSelected = activeSelections.has(`obs:${index}`);
     const el = createCheckItemElement(item, `obs:${index}`, isSelected, 'obs');
     if (isSelected) {
@@ -732,16 +794,30 @@ function renderLastRuns() {
     const card = document.createElement("div");
     card.className = "candle-run-card" + (isTradeTaken ? " trade-taken-glow" : "");
 
-    const selectedDecPos = run.selected?.decisionPositive || run.selected?.decision || [];
-    const selectedDecNeg = run.selected?.decisionNegative || [];
-    const selectedObs = run.selected?.observatory || [];
+    const selectedDecPos = (run.selected?.decisionPositive || run.selected?.decision || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const selectedDecNeg = (run.selected?.decisionNegative || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const selectedObs = (run.selected?.observatory || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
 
-    const unselectedDecPos = run.unselected?.decisionPositive || run.unselected?.decision || [];
-    const unselectedDecNeg = run.unselected?.decisionNegative || [];
-    const unselectedObs = run.unselected?.observatory || [];
+    const unselectedDecPos = (run.unselected?.decisionPositive || run.unselected?.decision || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const unselectedDecNeg = (run.unselected?.decisionNegative || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const unselectedObs = (run.unselected?.observatory || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
 
     const totalSelected = selectedObs.length + selectedDecPos.length + selectedDecNeg.length;
     const total = totalSelected + unselectedObs.length + unselectedDecPos.length + unselectedDecNeg.length;
+
+    const isRunInteresting = run.isInteresting !== undefined 
+      ? Boolean(run.isInteresting) 
+      : Boolean((run.selected && Object.values(run.selected).flat().some(isInterestingCandleCheckItem)) || totalSelected > 0);
+
+    const interestingBadge = isRunInteresting
+      ? `<span style="background:rgba(234,179,8,0.15); color:#EAB308; border:1px solid rgba(234,179,8,0.4); padding:2px 6px; border-radius:4px; font-size:10px; font-weight:600; font-family:var(--font-mono);">🔥 Interesting</span>`
+      : '';
 
     let imageTag = "";
     if (run.chartImage) {
@@ -780,6 +856,7 @@ function renderLastRuns() {
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <div style="display:flex; align-items:center; gap:8px;">
             <span style="font-weight:600; font-size:14px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
+            ${interestingBadge}
             ${tradeTakenBadge}
           </div>
           <span class="trade-cl-outcome outcome-W" style="margin:0; font-size:10px; font-weight:600;">Considered</span>
@@ -807,6 +884,7 @@ function renderLastRuns() {
           <div style="display:flex; align-items:center; gap:8px;">
             <span class="candle-run-chevron">▶</span>
             <span style="font-weight:600; font-size:13px; font-family:var(--font-mono); color:var(--text);">${run.loggingTime}</span>
+            ${interestingBadge}
             <span style="font-size:11px; color:var(--text-dim);">(Passed: <strong style="color:var(--low);">${totalSelected}</strong>/${total})</span>
             ${tradeTakenBadge}
           </div>
@@ -886,14 +964,30 @@ function loadRunForEditing(run) {
     resetImage();
   }
 
+  // Determine if run is interesting
+  const isInteresting = run.isInteresting !== undefined 
+    ? Boolean(run.isInteresting) 
+    : Boolean(
+        (run.selected?.observatory || []).length > 0 || 
+        (run.selected?.decisionPositive || []).length > 0 || 
+        (run.selected?.decisionNegative || []).length > 0 ||
+        (run.selected?.decision || []).length > 0 ||
+        (run.selected && Object.values(run.selected).flat().some(isInterestingCandleCheckItem))
+      );
+  updateInterestingState(isInteresting);
+
   // Load selections
   activeSelections.clear();
   const template = state.candleChecklistTemplates.find(t => t.id === activeTemplateId);
   if (template) {
-    const decPos = template.decisionPositive || template.decision || [];
-    const decNeg = template.decisionNegative || [];
+    const decPos = (template.decisionPositive || template.decision || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const decNeg = (template.decisionNegative || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
+    const obs = (template.observatory || [])
+      .filter(item => !isInterestingCandleCheckItem(item));
 
-    (template.observatory || []).forEach((item, idx) => {
+    obs.forEach((item, idx) => {
       if ((run.selected?.observatory || []).includes(item)) {
         activeSelections.add(`obs:${idx}`);
       }
