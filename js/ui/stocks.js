@@ -230,13 +230,13 @@ function runAutoSync() {
       const newSummary = item.summary || "";
       const newHighlight = item.highlight || false;
       const newSector = item.sector || "";
-      if (existing.summary !== newSummary || existing.highlight !== newHighlight || existing.sector !== newSector) {
+      if (existing.summary !== newSummary || existing.highlight !== newHighlight || (newSector && existing.sector !== newSector)) {
         toUpdate.push({
           id: existing.id,
           data: {
             summary: newSummary,
             highlight: newHighlight,
-            sector: newSector
+            sector: newSector || existing.sector || ""
           }
         });
       }
@@ -406,9 +406,21 @@ function createStockRow(stock) {
   const isWeekly = stock.timeframe === 'Weekly';
   const isTraded = stock.traded === 'Y';
 
+  let resolvedSector = stock.sector || "";
+  if (!resolvedSector && window.scannedStocksData) {
+    const found = window.scannedStocksData.find(s => (s.ticker || '').toUpperCase() === (stock.ticker || '').toUpperCase());
+    if (found && found.sector) {
+      resolvedSector = found.sector;
+      stock.sector = resolvedSector;
+    }
+  }
+
   let sectorTvLink = "";
-  if (stock.sector && window.sectorData && window.sectorData[stock.sector]) {
-    sectorTvLink = `https://www.tradingview.com/chart/?symbol=${window.sectorData[stock.sector]}`;
+  if (resolvedSector && window.sectorData) {
+    const matchedKey = Object.keys(window.sectorData).find(k => k.toLowerCase() === resolvedSector.trim().toLowerCase());
+    if (matchedKey) {
+      sectorTvLink = `https://www.tradingview.com/chart/?symbol=${window.sectorData[matchedKey]}`;
+    }
   }
 
   tr.innerHTML = `
@@ -426,8 +438,8 @@ function createStockRow(stock) {
     </td>
     <td>
       <div class="double-click-edit-container">
-        <a ${sectorTvLink ? `href="${escapeHtml(sectorTvLink)}" target="_blank"` : ''} class="stocks-hyperlink stocks-sector-link" title="Double click to edit">${escapeHtml(stock.sector || "Sector")}</a>
-        <input type="text" class="stocks-inline-edit stock-sector-input double-click-input" value="${escapeHtml(stock.sector || "")}" data-field="sector" placeholder="Sector" style="display:none; width:100%;">
+        <a ${sectorTvLink ? `href="${escapeHtml(sectorTvLink)}" target="_blank"` : ''} class="stocks-hyperlink stocks-sector-link" title="Double click to edit">${escapeHtml(resolvedSector || "Sector")}</a>
+        <input type="text" class="stocks-inline-edit stock-sector-input double-click-input" value="${escapeHtml(resolvedSector || "")}" data-field="sector" placeholder="Sector" style="display:none; width:100%;">
       </div>
     </td>
     <td>
@@ -543,8 +555,13 @@ function createStockRow(stock) {
         if (inputEl.dataset.field === 'ticker') {
           linkEl.href = `https://www.tradingview.com/chart/?symbol=NSE:${val.toUpperCase()}`;
         } else if (inputEl.dataset.field === 'sector') {
-          if (window.sectorData && window.sectorData[val]) {
-            linkEl.href = `https://www.tradingview.com/chart/?symbol=${window.sectorData[val]}`;
+          let foundTvSymbol = "";
+          if (val && window.sectorData) {
+            const matchedKey = Object.keys(window.sectorData).find(k => k.toLowerCase() === val.toLowerCase());
+            if (matchedKey) foundTvSymbol = window.sectorData[matchedKey];
+          }
+          if (foundTvSymbol) {
+            linkEl.href = `https://www.tradingview.com/chart/?symbol=${foundTvSymbol}`;
             linkEl.target = "_blank";
           } else {
             linkEl.removeAttribute('href');
