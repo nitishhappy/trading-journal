@@ -535,3 +535,28 @@ A new **Stocks** tab to manage and track stock setups scanned from Canva reports
   - In the "Previous Runs" sidebar cards and linked trade modal lists, older runs now clearly show their date alongside the time (e.g. `3 Aug, 6:35 PM`), while today's runs display the concise time (e.g. `6:35 PM`).
 - **Trade Taken Highlight & Glow**:
   - If a trade is executed on a candle (`Taking the trade? Yes` or linked to a trade log entry), the run card is highlighted with a vivid **illuminated cyan/blue glow**, gradient background, and a glowing **`⚡ TRADE TAKEN`** badge.
+
+### v2.3.3 — 4 Aug 2026 — Dual Repeat Candle Timers (5m & 15m) & Milestone Alarms
+
+A dedicated **Dual Candle Repeat Timer HUD** and **Audio Alarm Engine** for market sessions.
+
+#### What it does
+- **Top HUD Progress Bar**:
+  - Positioned prominently below the template selector on the Candle Checklist tab.
+  - Dual horizontal progress countdown boxes for **5-Minute** and **15-Minute** candle closes.
+  - Real-time IST countdown (`MM:SS`), next candle close target time, dynamic percentage fill bar, and in-bar quick mute buttons (`🔊`/`🔇`).
+- **Comprehensive Settings Panel** (inside Settings tab):
+  - **Active Days Selector**: Interactive day pills (Mon–Sun) to control operational market days.
+  - **Operating Session Hours**: Configurable `From Time` and `To Time` (default: `09:15` to `15:30` IST).
+  - **Anchor/Sync Time**: Synchronizes countdown calculations precisely with market open.
+  - **Custom Tone Synthesizer**: Choose distinct audio alerts (*Melodic Chime*, *Radar Sonar*, *Resonant Bell*, *Digital Beep*) with instant `▶ Test` previews.
+  - **⭐ Special Time Notifications**: Configure custom milestone timestamps (e.g. `09:15 AM`, `10:00 AM`, `03:00 PM`) with dedicated Grand Harmonic Chord sound alerts and dynamic add/remove tags.
+  - **Cloud Sync**: All timer settings, active days, sound preferences, and special times are persisted directly in Firebase Firestore.
+- **Synthesized Audio Engine**:
+  - Offline-capable Web Audio API synthesizer (`js/utils/audio.js`) requiring zero external audio file downloads.
+
+#### New files added
+- `js/services/candleTimers.js` — Firestore persistence layer for timer configurations.
+- `js/ui/candleTimers.js` — Countdown loop controller, HUD DOM binder, and Settings UI manager.
+- `js/utils/audio.js` — Web Audio API multi-frequency sound synthesizer.
+

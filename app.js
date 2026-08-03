@@ -20,6 +20,7 @@ import './js/utils/export.js';
 import './js/services/observations.js';
 import './js/services/trades.js';
 import './js/services/checklists.js';
+import './js/services/candleTimers.js';
 import './js/services/ai.js';
 
 import './js/utils/error-tracking.js';
@@ -35,6 +36,7 @@ import './js/ui/aicoach.js';      // AI Coach feed + Groq key management
 import './js/ui/tradelog.js';     // trade log table + modal
 import './js/ui/checklists.js';   // pre-trade checklist modal + log editor
 import './js/ui/candleChecklist.js'; // candle checklist tab UI module
+import './js/ui/candleTimers.js';    // dual repeat candle timers controller
 import './js/ui/tvNotifications.js'; // TradingView notifications UI module
 import './js/ui/levels.js';        // Daily Levels tab UI module
 import './js/utils/keyboard.js';      // keyboard shortcuts module
@@ -42,3 +44,4 @@ import './js/utils/keyboard.js';      // keyboard shortcuts module
 // 6. Sequential trigger system modules
 import './js/services/sequenceRules.js';
 import './js/ui/sequenceRules.js';
+

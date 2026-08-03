@@ -3900,7 +3900,7 @@ textarea { resize: vertical; }
 
 /* Highlighted Row for Updates */
 .stocks-row.highlighted-row td {
-  background: rgba(79, 158, 255, 0.08) !important;
+  background: rgba(79, 158, 255, 0.08);
 }
 
 .stocks-row.highlighted-row td:first-child {
@@ -3915,5 +3915,219 @@ textarea { resize: vertical; }
 .sortable-header:hover {
   background-color: var(--surface-2) !important;
   color: var(--text) !important;
-}. s t o c k s - h y p e r l i n k   {   c o l o r :   # 5 d a d e 2 ;   t e x t - d e c o r a t i o n :   n o n e ;   c u r s o r :   p o i n t e r ;   f o n t - w e i g h t :   b o l d ;   }   . s t o c k s - h y p e r l i n k : h o v e r   {   t e x t - d e c o r a t i o n :   u n d e r l i n e ;   c o l o r :   # 8 5 c 1 e 9 ;   }  
- 
+}
+
+.stocks-hyperlink {
+  color: #5dade2;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.stocks-hyperlink:hover {
+  text-decoration: underline;
+  color: #85c1e9;
+}
+
+/* ===================== Dual Candle Repeat Timers (Top Pane HUD) ===================== */
+.candle-timers-bar {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.candle-timer-box {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  transition: all 0.25s ease;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.candle-timer-box.timer-active-session {
+  border-color: rgba(79, 158, 255, 0.35);
+}
+
+.candle-timer-box.timer-standby {
+  opacity: 0.75;
+}
+
+.candle-timer-box:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.candle-timer-box-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.candle-timer-box-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.timer-dot.dot-5m {
+  background: #00e5ff;
+  box-shadow: 0 0 8px #00e5ff;
+}
+
+.timer-dot.dot-15m {
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+}
+
+.candle-timer-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.candle-timer-digits {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+.candle-timer-box-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.candle-timer-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.candle-timer-mute-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  line-height: 1;
+}
+
+.candle-timer-mute-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.candle-timer-mute-btn.is-muted {
+  opacity: 0.5;
+}
+
+.candle-timer-progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.candle-timer-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.timer-fill-5m {
+  background: linear-gradient(90deg, #00b4d8, #00e5ff);
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.5);
+}
+
+.timer-fill-15m {
+  background: linear-gradient(90deg, #7928ca, #a855f7);
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+}
+
+/* Day Toggle Pills in Settings */
+.day-toggle-pill {
+  background: var(--surface-2);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.day-toggle-pill:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.day-toggle-pill.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+
+/* Special Time Tags */
+.special-time-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-bright);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+}
+
+.special-time-remove {
+  background: transparent;
+  border: none;
+  color: var(--high);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.special-time-remove:hover {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .candle-timers-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .timer-settings-grid,
+  .timer-sounds-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

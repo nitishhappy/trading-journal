@@ -500,6 +500,45 @@
           <button id="candle-template-delete-btn" class="btn-small hidden" style="background:rgba(232,60,56,0.1); color:var(--high); border:1px solid rgba(232,60,56,0.3);">Delete</button>
         </div>
 
+        <!-- Dual Repeat Candle Timers (Horizontal HUD Bar) -->
+        <div id="candle-timers-bar" class="candle-timers-bar">
+          <!-- 5-Min Timer Box -->
+          <div class="candle-timer-box" id="candle-timer-5m-card">
+            <div class="candle-timer-box-top">
+              <div class="candle-timer-box-title">
+                <span class="timer-dot dot-5m"></span>
+                <span class="candle-timer-label">5m Timer:</span>
+                <span class="candle-timer-digits" id="candle-timer-5m-digits">05:00</span>
+              </div>
+              <div class="candle-timer-box-actions">
+                <span class="candle-timer-status" id="candle-timer-5m-status">Next: --:--</span>
+                <button type="button" class="candle-timer-mute-btn" id="candle-timer-5m-mute" title="Toggle 5m Sound">🔊</button>
+              </div>
+            </div>
+            <div class="candle-timer-progress-track">
+              <div class="candle-timer-progress-fill timer-fill-5m" id="candle-timer-5m-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- 15-Min Timer Box -->
+          <div class="candle-timer-box" id="candle-timer-15m-card">
+            <div class="candle-timer-box-top">
+              <div class="candle-timer-box-title">
+                <span class="timer-dot dot-15m"></span>
+                <span class="candle-timer-label">15m Timer:</span>
+                <span class="candle-timer-digits" id="candle-timer-15m-digits">15:00</span>
+              </div>
+              <div class="candle-timer-box-actions">
+                <span class="candle-timer-status" id="candle-timer-15m-status">Next: --:--</span>
+                <button type="button" class="candle-timer-mute-btn" id="candle-timer-15m-mute" title="Toggle 15m Sound">🔊</button>
+              </div>
+            </div>
+            <div class="candle-timer-progress-track">
+              <div class="candle-timer-progress-fill timer-fill-15m" id="candle-timer-15m-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- Template Name Editor (hidden by default) -->
         <div id="candle-template-editor-row" class="cl-name-row hidden" style="margin-bottom: 16px; flex-direction: column; gap: 8px;">
           <div style="display: flex; gap: 8px; width: 100%;">
@@ -726,6 +765,96 @@
           <option value="">— None (pick manually) —</option>
         </select>
         <p class="settings-hint">When you switch to the Candle Checklist tab, this template will be selected automatically.</p>
+      </div>
+
+      <div class="settings-section" id="timer-settings-container">
+        <h3>⏱️ Candle Repeat Timers & Alarms</h3>
+        <p class="settings-hint">Configure repeat 5m & 15m candle close timer notifications, active days, operating session hours, and special milestone alerts.</p>
+        
+        <!-- Active Days -->
+        <label style="margin-top:12px; margin-bottom:6px; display:block; font-size:13px; font-weight:600;">Active Days of the Week</label>
+        <div class="days-toggle-group" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;">
+          <button type="button" class="day-toggle-pill active" data-day="1">Mon</button>
+          <button type="button" class="day-toggle-pill active" data-day="2">Tue</button>
+          <button type="button" class="day-toggle-pill active" data-day="3">Wed</button>
+          <button type="button" class="day-toggle-pill active" data-day="4">Thu</button>
+          <button type="button" class="day-toggle-pill active" data-day="5">Fri</button>
+          <button type="button" class="day-toggle-pill" data-day="6">Sat</button>
+          <button type="button" class="day-toggle-pill" data-day="0">Sun</button>
+        </div>
+
+        <!-- Session Hours & Anchor -->
+        <div class="timer-settings-grid" style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; margin-bottom:14px;">
+          <div>
+            <label for="timer-setting-from-time" style="margin-top:0;">From Time</label>
+            <input type="time" id="timer-setting-from-time" value="09:15" style="width:100%; padding:6px 8px; font-family:var(--font-mono);" />
+          </div>
+          <div>
+            <label for="timer-setting-to-time" style="margin-top:0;">To Time</label>
+            <input type="time" id="timer-setting-to-time" value="15:30" style="width:100%; padding:6px 8px; font-family:var(--font-mono);" />
+          </div>
+          <div>
+            <label for="timer-setting-anchor-time" style="margin-top:0;">Anchor / Sync Time</label>
+            <input type="time" id="timer-setting-anchor-time" value="09:15" style="width:100%; padding:6px 8px; font-family:var(--font-mono);" />
+          </div>
+        </div>
+
+        <!-- Sound selections -->
+        <div class="timer-sounds-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:14px;">
+          <div>
+            <label for="timer-setting-sound-5m" style="margin-top:0;">5-Min Timer Sound</label>
+            <div style="display:flex; gap:6px;">
+              <select id="timer-setting-sound-5m" style="flex:1;">
+                <option value="chime">Melodic Chime</option>
+                <option value="radar">Radar Sonar</option>
+                <option value="bell">Resonant Bell</option>
+                <option value="beep">Digital Beep</option>
+              </select>
+              <button type="button" id="timer-test-sound-5m" class="btn-small btn-secondary" title="Test Sound">▶ Test</button>
+            </div>
+          </div>
+          <div>
+            <label for="timer-setting-sound-15m" style="margin-top:0;">15-Min Timer Sound</label>
+            <div style="display:flex; gap:6px;">
+              <select id="timer-setting-sound-15m" style="flex:1;">
+                <option value="radar">Radar Sonar</option>
+                <option value="chime">Melodic Chime</option>
+                <option value="bell">Resonant Bell</option>
+                <option value="beep">Digital Beep</option>
+              </select>
+              <button type="button" id="timer-test-sound-15m" class="btn-small btn-secondary" title="Test Sound">▶ Test</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Special Time Notifications -->
+        <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:12px; margin-bottom:14px;">
+          <h4 style="margin:0 0 6px; font-size:13px; color:var(--accent);">⭐ Special Time Notifications</h4>
+          <p class="settings-hint" style="margin-bottom:8px;">Add specific times (e.g. 09:15, 10:00, 15:00) to play a dedicated milestone sound alert.</p>
+          
+          <div id="timer-special-times-list" style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+            <!-- Special time tags injected here -->
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:10px; flex-wrap:wrap;">
+            <input type="time" id="timer-add-special-input" style="padding:6px 8px; font-family:var(--font-mono);" />
+            <button type="button" id="timer-add-special-btn" class="btn-small btn-small-primary">+ Add Special Time</button>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center;">
+            <label for="timer-setting-sound-special" style="margin:0; font-size:12px; white-space:nowrap;">Special Sound:</label>
+            <select id="timer-setting-sound-special" style="flex:1;">
+              <option value="special">Grand Harmonic Chord</option>
+              <option value="bell">Resonant Bell</option>
+              <option value="chime">Melodic Chime</option>
+              <option value="radar">Radar Sonar</option>
+              <option value="beep">Digital Beep</option>
+            </select>
+            <button type="button" id="timer-test-sound-special" class="btn-small btn-secondary" title="Test Special Sound">▶ Test</button>
+          </div>
+        </div>
+
+        <button type="button" id="timer-save-settings-btn" class="btn-primary" style="width:100%; margin-top:6px;">Save Timer Settings</button>
       </div>
 
       <div class="settings-section">
