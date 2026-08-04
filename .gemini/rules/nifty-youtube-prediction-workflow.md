@@ -40,9 +40,16 @@ python "C:\Nitish\ClaudeApps\Utilities\Nifty Predictions\fetch_youtube_data.py" 
    - **Bullish / Bearish Scenarios**: Target points (TP), stop loss levels (SL), and actionable trading behavior.
    - **Bank Nifty Levels**: If covered in the video, extract relevant key zones.
 
-### 3. Update Daily Trade Plan (Append & Merge)
-1. **CRITICAL:** **NEVER wipe out or overwrite existing analysis in `daily_plan.js`**. Always read existing `window.dailyPlanData` entries first and append the new video's levels to the list.
-2. Structure the extracted levels into clean JSON objects following the `window.dailyPlanData` schema:
+### 3. Trading Day Lifecycle & Plan Persistence (3:30 PM to 3:30 PM)
+1. **Trading Day Cycle Definition:**
+   - A **Trading Day** spans from **3:30 PM on Day T (post-market close)** to **3:30 PM on Day T+1 (market close of that session)**.
+   - All prediction/analysis videos processed within this 24-hour window apply to the same trading day session.
+2. **Accumulation & Persistence Rules:**
+   - **Within the active trading day cycle (3:30 PM to next day 3:30 PM):** All levels, scenarios, and tactical rules extracted from any number of videos **MUST persist and accumulate (append & merge)** into `daily_plan.js`.
+   - **CRITICAL:** **NEVER wipe out or overwrite analysis from other videos processed within the same 3:30 PM - 3:30 PM cycle**. Always read existing `window.dailyPlanData` entries first and append the new video's levels.
+   - **Cycle Reset:** Only when the clock passes **3:30 PM on Day T+1** does a new trading day cycle begin for the next market day.
+3. **Daily Trade Plan Schema:**
+   - Structure extracted levels into clean JSON objects following the `window.dailyPlanData` schema:
    ```javascript
    {
      "price": "24650 - 24700",
@@ -52,8 +59,8 @@ python "C:\Nitish\ClaudeApps\Utilities\Nifty Predictions\fetch_youtube_data.py" 
      "sl": "Stop loss or invalidation condition"
    }
    ```
-3. Write the combined data directly to `C:\Nitish\ClaudeApps\trading-journal\js\data\daily_plan.js`.
-4. Check and update `README.md` if necessary to follow the `update-readme-before-push` rule.
+4. Write the combined data directly to `C:\Nitish\ClaudeApps\trading-journal\js\data\daily_plan.js`.
+5. Check and update `README.md` if necessary to follow the `update-readme-before-push` rule.
 
 ### 4. Commit and Push
 Execute:
