@@ -446,8 +446,8 @@ textarea { resize: vertical; }
 .main-tabs::-webkit-scrollbar { display: none; }
 
 .tabs-nav-btn {
-  flex: 0 0 32px;
-  width: 32px;
+  flex: 0 0 36px;
+  width: 36px;
   height: 44px;
   display: flex;
   align-items: center;
@@ -458,9 +458,10 @@ textarea { resize: vertical; }
   cursor: pointer;
   padding: 0;
   transition: color 0.15s ease, background-color 0.15s ease, opacity 0.2s ease, transform 0.1s ease;
-  z-index: 2;
+  z-index: 10;
   user-select: none;
   -webkit-user-select: none;
+  pointer-events: auto !important;
 }
 
 .tabs-nav-btn svg {
@@ -468,25 +469,22 @@ textarea { resize: vertical; }
   pointer-events: none;
 }
 
-.tabs-nav-btn:hover:not(:disabled) {
+.tabs-nav-btn:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="light"] .tabs-nav-btn:hover:not(:disabled) {
-  background: rgba(0, 0, 0, 0.05);
+[data-theme="light"] .tabs-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
 }
 
-.tabs-nav-btn:active:not(:disabled) {
-  transform: scale(0.9);
+.tabs-nav-btn:active {
+  transform: scale(0.88);
   color: var(--low);
 }
 
-.tabs-nav-btn:disabled,
-.tabs-nav-btn.disabled {
-  opacity: 0.18;
-  cursor: default;
-  pointer-events: none;
+.tabs-nav-btn.at-edge {
+  opacity: 0.35;
 }
 
 /* Edge shadow fades when tabs are scrollable */

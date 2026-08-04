@@ -5,28 +5,44 @@ import {
   fullscreenBtn, lightbox, lightboxImg, lightboxClose
 } from '../dom.js';
 
+// Scroll main-tabs horizontally
+export function scrollMainTabs(amount) {
+  const tabs = mainTabs || document.getElementById('main-tabs');
+  if (!tabs) return;
+  tabs.scrollBy({ left: amount, behavior: 'smooth' });
+}
+
 // Update scroll buttons and edge fade indicators based on main-tabs scroll position
 export function updateTabsScrollButtons() {
-  if (!mainTabs) return;
+  const tabs = mainTabs || document.getElementById('main-tabs');
+  if (!tabs) return;
   const leftBtn = tabsScrollLeftBtn || document.getElementById('tabs-scroll-left');
   const rightBtn = tabsScrollRightBtn || document.getElementById('tabs-scroll-right');
   const wrapper = mainTabsWrapper || document.getElementById('main-tabs-wrapper');
-  if (!leftBtn || !rightBtn) return;
 
-  const scrollLeft = Math.ceil(mainTabs.scrollLeft);
-  const scrollWidth = mainTabs.scrollWidth;
-  const clientWidth = mainTabs.clientWidth;
+  const scrollLeft = Math.ceil(tabs.scrollLeft);
+  const scrollWidth = tabs.scrollWidth;
+  const clientWidth = tabs.clientWidth;
+
+  // If container is hidden or not rendered yet, keep buttons active
+  if (clientWidth === 0) {
+    if (leftBtn) leftBtn.classList.remove('at-edge');
+    if (rightBtn) rightBtn.classList.remove('at-edge');
+    return;
+  }
+
   const maxScrollLeft = scrollWidth - clientWidth;
-
   const hasOverflow = scrollWidth > clientWidth + 2;
   const canScrollLeft = hasOverflow && scrollLeft > 2;
   const canScrollRight = hasOverflow && scrollLeft < maxScrollLeft - 2;
 
-  leftBtn.disabled = !canScrollLeft;
-  leftBtn.classList.toggle('disabled', !canScrollLeft);
+  if (leftBtn) {
+    leftBtn.classList.toggle('at-edge', !canScrollLeft);
+  }
 
-  rightBtn.disabled = !canScrollRight;
-  rightBtn.classList.toggle('disabled', !canScrollRight);
+  if (rightBtn) {
+    rightBtn.classList.toggle('at-edge', !canScrollRight);
+  }
 
   if (wrapper) {
     wrapper.classList.toggle('can-scroll-left', canScrollLeft);
@@ -35,24 +51,24 @@ export function updateTabsScrollButtons() {
   }
 }
 
-// Arrow button click handlers
-const scrollLeftBtn = tabsScrollLeftBtn || document.getElementById('tabs-scroll-left');
-if (scrollLeftBtn) {
-  scrollLeftBtn.addEventListener('click', () => {
-    if (mainTabs) {
-      mainTabs.scrollBy({ left: -180, behavior: 'smooth' });
-    }
-  });
-}
+// Bulletproof click delegation for scroll buttons
+document.addEventListener('click', (e) => {
+  const leftBtn = e.target.closest('#tabs-scroll-left, .tabs-nav-left');
+  if (leftBtn) {
+    e.preventDefault();
+    e.stopPropagation();
+    scrollMainTabs(-180);
+    return;
+  }
 
-const scrollRightBtn = tabsScrollRightBtn || document.getElementById('tabs-scroll-right');
-if (scrollRightBtn) {
-  scrollRightBtn.addEventListener('click', () => {
-    if (mainTabs) {
-      mainTabs.scrollBy({ left: 180, behavior: 'smooth' });
-    }
-  });
-}
+  const rightBtn = e.target.closest('#tabs-scroll-right, .tabs-nav-right');
+  if (rightBtn) {
+    e.preventDefault();
+    e.stopPropagation();
+    scrollMainTabs(180);
+    return;
+  }
+});
 
 // Mouse wheel horizontal scroll on tabs bar
 if (mainTabs) {
@@ -65,11 +81,26 @@ if (mainTabs) {
 
   mainTabs.addEventListener('scroll', updateTabsScrollButtons, { passive: true });
   window.addEventListener('resize', updateTabsScrollButtons);
+}
 
-  // Initial check once DOM and styles settle
+// Listen to app lifecycle events to ensure button states update when views become visible
+window.addEventListener('auth-changed', () => {
   setTimeout(updateTabsScrollButtons, 50);
   setTimeout(updateTabsScrollButtons, 300);
+});
+
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(() => {
+    updateTabsScrollButtons();
+  });
+  if (mainTabs) ro.observe(mainTabs);
+  if (mainTabsWrapper) ro.observe(mainTabsWrapper);
 }
+
+// Initial checks
+setTimeout(updateTabsScrollButtons, 50);
+setTimeout(updateTabsScrollButtons, 300);
+setTimeout(updateTabsScrollButtons, 1000);
 
 // Setup Main tab navigation
 mainTabs.addEventListener("click", (e) => {
