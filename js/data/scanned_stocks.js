@@ -519,5 +519,83 @@ window.scannedStocksData = [
     "myNotes": "",
     "traded": "N",
     "highlight": true
+  },
+  {
+    "name": "Hindalco Industries",
+    "ticker": "HINDALCO",
+    "sector": "Metals",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:HINDALCO",
+    "summary": "[2026-08-04] POSITIONAL RESEARCH  HINDALCO  Looks good above 1010  SL 995  Targets 5-10-15-20-25-30 points from entry  Hold few days  Stock is ready to cross past barriers with good volumes.",
+    "dateOfRun": "2026-08-04",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Godfrey Phillips India",
+    "ticker": "GODFRYPHLP",
+    "sector": "FMCG",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:GODFRYPHLP",
+    "summary": "[2026-08-04] POSITIONAL RESEARCH  GODFREY PHILLIPS  Looks good above 2410  SL 2375  Targets 15-20-25-30-35-40-45-50 points from entry  Hold few days  Stock is ready to cross past barriers with good volumes.",
+    "dateOfRun": "2026-08-04",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "One97 Communications (Paytm)",
+    "ticker": "PAYTM",
+    "sector": "Financial Services",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:PAYTM",
+    "summary": "[2026-08-04] POSITIONAL RESEARCH  PAYTM  Looks good above 1437  SL 1415  Targets 7-15-20-25-30-35 points from entry  Hold few days  Stock is ready to cross past barriers with good volumes.",
+    "dateOfRun": "2026-08-04",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Polycab India",
+    "ticker": "POLYCAB",
+    "sector": "Capital Goods",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:POLYCAB",
+    "summary": "[2026-08-04] POSITIONAL RESEARCH  POLYCAB  Looks good above 9220  SL 9170  Targets 25-50-75-100-125-150-175-200-250-300 points from entry  Hold few days  Stock is ready to cross past barriers with good volumes.",
+    "dateOfRun": "2026-08-04",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Kirloskar Oil Engines",
+    "ticker": "KIRLOSENG",
+    "sector": "Capital Goods",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:KIRLOSENG",
+    "summary": "[2026-08-04] POSITIONAL TRADE  KIRLOSKAR OIL  Looks Good above 2375  SL 2250  Targets 2325-2375-2425-2500  Hold few weeks  Stock is ready to cross past barriers with good volumes.",
+    "dateOfRun": "2026-08-04",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "Oracle Financial Services",
+    "ticker": "OFSS",
+    "sector": "IT",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:OFSS",
+    "summary": "[2026-08-04] POSITIONAL RESEARCH  OFSS  Looks good above 11560  SL 11460  Targets 100-125-150-175-200-250-300-400-500 points from entry  Hold few days  Stock is ready to cross past barriers with good volumes.",
+    "dateOfRun": "2026-08-04",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
   }
 ];
