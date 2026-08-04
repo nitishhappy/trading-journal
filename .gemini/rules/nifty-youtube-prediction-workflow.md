@@ -40,8 +40,9 @@ python "C:\Nitish\ClaudeApps\Utilities\Nifty Predictions\fetch_youtube_data.py" 
    - **Bullish / Bearish Scenarios**: Target points (TP), stop loss levels (SL), and actionable trading behavior.
    - **Bank Nifty Levels**: If covered in the video, extract relevant key zones.
 
-### 3. Update Daily Trade Plan
-1. Structure the extracted levels into clean JSON objects following the `window.dailyPlanData` schema:
+### 3. Update Daily Trade Plan (Append & Merge)
+1. **CRITICAL:** **NEVER wipe out or overwrite existing analysis in `daily_plan.js`**. Always read existing `window.dailyPlanData` entries first and append the new video's levels to the list.
+2. Structure the extracted levels into clean JSON objects following the `window.dailyPlanData` schema:
    ```javascript
    {
      "price": "24650 - 24700",
@@ -51,8 +52,8 @@ python "C:\Nitish\ClaudeApps\Utilities\Nifty Predictions\fetch_youtube_data.py" 
      "sl": "Stop loss or invalidation condition"
    }
    ```
-2. Write the updated data directly to `C:\Nitish\ClaudeApps\trading-journal\js\data\daily_plan.js`.
-3. Check and update `README.md` if necessary to follow the `update-readme-before-push` rule.
+3. Write the combined data directly to `C:\Nitish\ClaudeApps\trading-journal\js\data\daily_plan.js`.
+4. Check and update `README.md` if necessary to follow the `update-readme-before-push` rule.
 
 ### 4. Commit and Push
 Execute:
