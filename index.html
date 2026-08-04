@@ -79,16 +79,28 @@
     </header>
 
     <!-- Main section tabs -->
-    <nav class="main-tabs" id="main-tabs">
-      <button class="main-tab active" data-view="dashboard">Dashboard</button>
-      <button class="main-tab" data-view="revision">Revision</button>
-      <button class="main-tab" data-view="candleChecklist">Candle</button>
-      <button class="main-tab" data-view="stocks">Stocks</button>
-      <button class="main-tab" data-view="aicoach">AI Coach</button>
-      <button class="main-tab" data-view="tradelog">Trade Log</button>
-      <button class="main-tab" data-view="tvNotifications">TV Alerts</button>
-      <button class="main-tab" data-view="levels">Levels</button>
-    </nav>
+    <div class="main-tabs-wrapper" id="main-tabs-wrapper">
+      <button class="tabs-nav-btn tabs-nav-left" id="tabs-scroll-left" aria-label="Scroll tabs left" title="Scroll left">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <nav class="main-tabs" id="main-tabs">
+        <button class="main-tab active" data-view="dashboard">Dashboard</button>
+        <button class="main-tab" data-view="revision">Revision</button>
+        <button class="main-tab" data-view="candleChecklist">Candle</button>
+        <button class="main-tab" data-view="stocks">Stocks</button>
+        <button class="main-tab" data-view="aicoach">AI Coach</button>
+        <button class="main-tab" data-view="tradelog">Trade Log</button>
+        <button class="main-tab" data-view="tvNotifications">TV Alerts</button>
+        <button class="main-tab" data-view="levels">Levels</button>
+      </nav>
+      <button class="tabs-nav-btn tabs-nav-right" id="tabs-scroll-right" aria-label="Scroll tabs right" title="Scroll right">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
 
     <!-- Daily backup reminder (shown once per day on first open) -->
     <div id="backup-reminder-banner" class="backup-reminder-banner hidden">

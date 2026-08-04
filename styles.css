@@ -417,21 +417,109 @@ textarea { resize: vertical; }
 }
 
 /* ===================== Main tabs ===================== */
-.main-tabs {
+.main-tabs-wrapper {
   display: flex;
-  border-bottom: 1px solid var(--border);
+  align-items: center;
   position: sticky;
   top: 0;
   background: var(--overlay-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 9;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  width: 100%;
+}
+
+.main-tabs {
+  display: flex;
+  flex: 1;
+  min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   padding: 0 4px;
+  background: transparent;
 }
 
 .main-tabs::-webkit-scrollbar { display: none; }
+
+.tabs-nav-btn {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-dim);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease, background-color 0.15s ease, opacity 0.2s ease, transform 0.1s ease;
+  z-index: 2;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.tabs-nav-btn svg {
+  display: block;
+  pointer-events: none;
+}
+
+.tabs-nav-btn:hover:not(:disabled) {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="light"] .tabs-nav-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.tabs-nav-btn:active:not(:disabled) {
+  transform: scale(0.9);
+  color: var(--low);
+}
+
+.tabs-nav-btn:disabled,
+.tabs-nav-btn.disabled {
+  opacity: 0.18;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Edge shadow fades when tabs are scrollable */
+.main-tabs-wrapper::before,
+.main-tabs-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.main-tabs-wrapper::before {
+  left: 32px;
+  background: linear-gradient(to right, var(--overlay-bg), transparent);
+}
+
+.main-tabs-wrapper::after {
+  right: 32px;
+  background: linear-gradient(to left, var(--overlay-bg), transparent);
+}
+
+.main-tabs-wrapper.can-scroll-left::before {
+  opacity: 1;
+}
+
+.main-tabs-wrapper.can-scroll-right::after {
+  opacity: 1;
+}
 
 .main-tab {
   flex: 0 0 auto;

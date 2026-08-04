@@ -40,7 +40,10 @@ export const revisionTagClear      = document.getElementById("revision-tag-clear
 export const revisionTagDatalist   = document.getElementById("revision-tag-datalist");
 
 // Main tab navigation
+export const mainTabsWrapper = document.getElementById("main-tabs-wrapper");
 export const mainTabs = document.getElementById("main-tabs");
+export const tabsScrollLeftBtn = document.getElementById("tabs-scroll-left");
+export const tabsScrollRightBtn = document.getElementById("tabs-scroll-right");
 export const viewDashboard = document.getElementById("view-dashboard");
 export const viewRevision = document.getElementById("view-revision");
 export const viewStocks = document.getElementById("view-stocks");

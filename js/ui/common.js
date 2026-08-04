@@ -1,8 +1,75 @@
 import { state } from '../state.js';
 import {
-  mainTabs, viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, currentFolderLabel,
+  mainTabs, mainTabsWrapper, tabsScrollLeftBtn, tabsScrollRightBtn,
+  viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, currentFolderLabel,
   fullscreenBtn, lightbox, lightboxImg, lightboxClose
 } from '../dom.js';
+
+// Update scroll buttons and edge fade indicators based on main-tabs scroll position
+export function updateTabsScrollButtons() {
+  if (!mainTabs) return;
+  const leftBtn = tabsScrollLeftBtn || document.getElementById('tabs-scroll-left');
+  const rightBtn = tabsScrollRightBtn || document.getElementById('tabs-scroll-right');
+  const wrapper = mainTabsWrapper || document.getElementById('main-tabs-wrapper');
+  if (!leftBtn || !rightBtn) return;
+
+  const scrollLeft = Math.ceil(mainTabs.scrollLeft);
+  const scrollWidth = mainTabs.scrollWidth;
+  const clientWidth = mainTabs.clientWidth;
+  const maxScrollLeft = scrollWidth - clientWidth;
+
+  const hasOverflow = scrollWidth > clientWidth + 2;
+  const canScrollLeft = hasOverflow && scrollLeft > 2;
+  const canScrollRight = hasOverflow && scrollLeft < maxScrollLeft - 2;
+
+  leftBtn.disabled = !canScrollLeft;
+  leftBtn.classList.toggle('disabled', !canScrollLeft);
+
+  rightBtn.disabled = !canScrollRight;
+  rightBtn.classList.toggle('disabled', !canScrollRight);
+
+  if (wrapper) {
+    wrapper.classList.toggle('can-scroll-left', canScrollLeft);
+    wrapper.classList.toggle('can-scroll-right', canScrollRight);
+    wrapper.classList.toggle('has-overflow', hasOverflow);
+  }
+}
+
+// Arrow button click handlers
+const scrollLeftBtn = tabsScrollLeftBtn || document.getElementById('tabs-scroll-left');
+if (scrollLeftBtn) {
+  scrollLeftBtn.addEventListener('click', () => {
+    if (mainTabs) {
+      mainTabs.scrollBy({ left: -180, behavior: 'smooth' });
+    }
+  });
+}
+
+const scrollRightBtn = tabsScrollRightBtn || document.getElementById('tabs-scroll-right');
+if (scrollRightBtn) {
+  scrollRightBtn.addEventListener('click', () => {
+    if (mainTabs) {
+      mainTabs.scrollBy({ left: 180, behavior: 'smooth' });
+    }
+  });
+}
+
+// Mouse wheel horizontal scroll on tabs bar
+if (mainTabs) {
+  mainTabs.addEventListener('wheel', (e) => {
+    if (e.deltaY !== 0 && mainTabs.scrollWidth > mainTabs.clientWidth) {
+      e.preventDefault();
+      mainTabs.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
+
+  mainTabs.addEventListener('scroll', updateTabsScrollButtons, { passive: true });
+  window.addEventListener('resize', updateTabsScrollButtons);
+
+  // Initial check once DOM and styles settle
+  setTimeout(updateTabsScrollButtons, 50);
+  setTimeout(updateTabsScrollButtons, 300);
+}
 
 // Setup Main tab navigation
 mainTabs.addEventListener("click", (e) => {
@@ -12,6 +79,9 @@ mainTabs.addEventListener("click", (e) => {
   state.activeView = tab.dataset.view;
   document.querySelectorAll(".main-tab").forEach((t) => t.classList.remove("active"));
   tab.classList.add("active");
+
+  // Center active tab in scrollable container
+  tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
   [viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels].forEach((v) => {
     if (v) v.classList.add("hidden");
@@ -46,6 +116,7 @@ mainTabs.addEventListener("click", (e) => {
 
   // Dispatch custom event when view changes
   window.dispatchEvent(new CustomEvent('view-changed', { detail: { view: state.activeView } }));
+  setTimeout(updateTabsScrollButtons, 100);
 
   // Toggle FAB visibility: dashboard FAB only on dashboard, candle FAB only on candleChecklist
   const dashboardFab = document.getElementById('checklistFab');
