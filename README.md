@@ -560,3 +560,22 @@ A dedicated **Dual Candle Repeat Timer HUD** and **Audio Alarm Engine** for mark
 - `js/ui/candleTimers.js` — Countdown loop controller, HUD DOM binder, and Settings UI manager.
 - `js/utils/audio.js` — Web Audio API multi-frequency sound synthesizer.
 
+### v2.3.4 — 4 Aug 2026 — Scrollable Navigation Tabs & Arrow Controls
+
+A responsive, scrollable navigation bar with interactive chevron buttons for navigating across all 8 views seamlessly on mobile and smaller screens.
+
+#### What it does
+- **Sleek Arrow Controls (`<` / `>`)**:
+  - Integrated left (`#tabs-scroll-left`) and right (`#tabs-scroll-right`) chevron navigation buttons flanking the main tab bar.
+  - Smooth step-scrolling (`180px` per click) across views.
+- **Dynamic Edge Detection & Indicator Shadows**:
+  - Automatically enables/disables arrow buttons and adjusts opacity based on current scroll position (`scrollLeft`).
+  - Soft gradient edge shadows dynamically fade in/out on the left and right edges when additional tab content is scrollable in that direction.
+- **Auto Active Tab Centering**:
+  - Selecting any tab automatically smooth-scrolls and centers it within the visible view area (`scrollIntoView({ inline: 'center' })`).
+- **Mouse Wheel & Touch Swipe Support**:
+  - Full horizontal wheel scrolling on desktop and native touch-scrolling on mobile devices.
+- **Theme-Integrated Design**:
+  - Styled with semi-transparent frosted glass backdrop blur matching the top header in both dark and light modes.
+
+
