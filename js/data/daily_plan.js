@@ -78,5 +78,42 @@ window.dailyPlanData = [
     "behavior": "CAS Anomaly & Indicator Rules: Do NOT use Spot chart for RSI, Moving Averages, or SuperTrend (distorted by 3:28 PM auction). Use Futures chart for indicators; use Spot exclusively for Time Cycles. Avoid naked short straddles on expiry day; trade next-week expiry spreads.",
     "tp": "N/A",
     "sl": "N/A"
+  },
+
+  // --- Appended Analysis: Video SuGgXxb9XMs (Stock Marketed - 2026-08-04) ---
+  {
+    "price": "24700",
+    "bias": "bullish",
+    "behavior": "Daily Bearish Engulfing Invalidation & Bullish Trigger: Futures formed a daily bearish engulfing candle. Sustainable bullish swing positions trigger only on a decisive close and retest above 24,700 on Futures chart.",
+    "tp": "24850 - 24990",
+    "sl": "Below 24650"
+  },
+  {
+    "price": "24568",
+    "bias": "bearish",
+    "behavior": "Intraday Resistance & Gap-Up Shorting Pivot: If market opens gap-up towards 24,568 but fails to close above it and shows rejection wicks, initiate intraday shorts. If 15m candle closes above 24,568, consider high-risk scalp long towards 24,700.",
+    "tp": "24478 / 24429",
+    "sl": "Above 24575"
+  },
+  {
+    "price": "24429",
+    "bias": "bearish",
+    "behavior": "Intraday Double Bottom Breakdown Level: 15m candle close below 24,429 confirms breakdown of the local double bottom. Wait for shallow retest to short aggressively.",
+    "tp": "24327 (Scale max here) / 24251",
+    "sl": "Reclaim of 24480"
+  },
+  {
+    "price": "57658 - 57700 (Bank Nifty)",
+    "bias": "neutral",
+    "behavior": "Bank Nifty Key Decision Zone: Decisive close above 57,700 targets 57,900 and 58,227. Rejection without close above 57,658 opens short setups targeting 57,400 and 57,200.",
+    "tp": "57900 / 58227 (Bullish) | 57400 / 57200 (Bearish)",
+    "sl": "Reversal bar high/low"
+  },
+  {
+    "price": "TACTICAL RULE: 3:14 PM Spike & Derivative Positioning",
+    "bias": "bearish",
+    "behavior": "FII Put Buying Surge (485k contracts) & PRO Desk Call Writing confirm upside capping. Closing auction spike strategy (3:14 PM) only functions on same-day expiring contracts (e.g. Tuesday FinNifty); avoid holding overnight naked calls.",
+    "tp": "N/A",
+    "sl": "N/A"
   }
 ];
