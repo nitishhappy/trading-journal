@@ -4,19 +4,30 @@ import { viewLevels } from '../dom.js';
 if (viewLevels) {
     let allLevels = [];
     
+    const inpSource = document.getElementById('inp-level-source');
     const inpPrice = document.getElementById('inp-level-price');
     const inpBias = document.getElementById('inp-level-bias');
     const inpBehavior = document.getElementById('inp-level-behavior');
     const inpTp = document.getElementById('inp-level-tp');
     const inpSl = document.getElementById('inp-level-sl');
     
-    // Quick buttons
+    // Quick Source buttons
+    document.querySelectorAll('.level-source-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.level-source-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            if (inpSource) inpSource.value = e.target.dataset.val;
+        });
+    });
+
+    // Quick Price buttons
     document.querySelectorAll('.level-quick-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             inpPrice.value = e.target.dataset.val;
         });
     });
 
+    // Quick Behavior buttons
     document.querySelectorAll('.level-behavior-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             document.querySelectorAll('.level-behavior-btn').forEach(b => b.classList.remove('active'));
@@ -49,22 +60,52 @@ if (viewLevels) {
 
     // Initialize
     function initLevels() {
+        let loaded = localStorage.getItem('dailyTradePlanData');
+        if (loaded) {
+            try {
+                const parsed = JSON.parse(loaded);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    parsed.forEach(l => {
+                        injectLevelCard(
+                            l.id || ('lvl-' + Math.random().toString(36).substr(2, 9)),
+                            l.rawPrice || l.price || "",
+                            l.bias || "neutral",
+                            l.behavior || "",
+                            l.tp || "",
+                            l.sl || "",
+                            l.source || "BT",
+                            l.status || "na",
+                            false
+                        );
+                    });
+                    renderChart();
+                    renderScorecard();
+                    return;
+                }
+            } catch (e) {
+                console.warn("Could not parse saved dailyTradePlanData:", e);
+            }
+        }
+
         if (window.dailyPlanData && Array.isArray(window.dailyPlanData) && window.dailyPlanData.length > 0) {
             window.dailyPlanData.forEach((lvl, idx) => {
                 const levelId = 'lvl-auto-' + idx;
-                injectLevelCard(levelId, lvl.price || lvl.rawPrice || "", lvl.bias || "neutral", lvl.behavior || "", lvl.tp || "", lvl.sl || "", false);
+                injectLevelCard(
+                    levelId, 
+                    lvl.price || lvl.rawPrice || "", 
+                    lvl.bias || "neutral", 
+                    lvl.behavior || "", 
+                    lvl.tp || "", 
+                    lvl.sl || "", 
+                    lvl.source || "BT",
+                    lvl.status || "na",
+                    false
+                );
             });
             saveLevelsData();
-        } else {
-            let loaded = localStorage.getItem('dailyTradePlanData');
-            if (loaded) {
-                const parsed = JSON.parse(loaded);
-                if(parsed.length > 0) {
-                    parsed.forEach(l => injectLevelCard(l.id, l.rawPrice, l.bias, l.behavior, l.tp, l.sl, false));
-                }
-            }
         }
         renderChart();
+        renderScorecard();
     }
 
     function saveLevelsData() {
@@ -98,10 +139,13 @@ if (viewLevels) {
                                 lvl.behavior || "", 
                                 lvl.tp || "", 
                                 lvl.sl || "", 
+                                lvl.source || "BT",
+                                lvl.status || "na",
                                 false
                             );
                         });
                         saveLevelsData();
+                        renderScorecard();
                     } else {
                         alert("Invalid JSON format. Expected an array of levels.");
                     }
@@ -122,10 +166,12 @@ if (viewLevels) {
             saveLevelsData();
             updateCount();
             renderChart();
+            renderScorecard();
         }
     });
 
     document.getElementById('btn-level-add').addEventListener('click', () => {
+        const source = (inpSource ? inpSource.value.trim() : '') || 'BT';
         const price = inpPrice.value.trim();
         const bias = inpBias.value;
         const behavior = inpBehavior.value.trim();
@@ -136,7 +182,7 @@ if (viewLevels) {
         if (!behavior) { alert("Please describe the expected behavior."); return; }
 
         const levelId = 'lvl-' + Date.now();
-        injectLevelCard(levelId, price, bias, behavior, tp, sl, true);
+        injectLevelCard(levelId, price, bias, behavior, tp, sl, source, 'na', true);
 
         inpPrice.value = '';
         inpBehavior.value = '';
@@ -147,10 +193,41 @@ if (viewLevels) {
         inpPrice.focus();
     });
 
+    // Make outcome status toggle globally accessible
+    window.setLevelStatus = function(id, newStatus) {
+        const idx = allLevels.findIndex(l => l.id === id);
+        if (idx !== -1) {
+            allLevels[idx].status = newStatus;
+        }
+
+        const card = document.getElementById(id);
+        if (card) {
+            card.classList.remove('is-worked', 'is-failed', 'is-na');
+            card.classList.add(`is-${newStatus}`);
+            const btns = card.querySelectorAll('.card-status-review .status-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            const targetBtn = card.querySelector(`.card-status-review .status-${newStatus}`);
+            if (targetBtn) targetBtn.classList.add('active');
+        }
+
+        // Sync in reaction modal if open
+        const modalBtns = document.querySelectorAll(`.reaction-status-${id}`);
+        modalBtns.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.status === newStatus) {
+                btn.classList.add('active');
+            }
+        });
+
+        saveLevelsData();
+        renderScorecard();
+    };
+
     // Make edit functions available globally for inline onblur
     window.updateLevelCardData = function(id) {
         const card = document.getElementById(id);
         if(!card) return;
+        const newSource = (card.querySelector('.source-badge')?.innerText.trim().toUpperCase()) || 'BT';
         const newPrice = card.querySelector('.card-price').innerText.trim();
         const newBehavior = card.querySelector('.card-behavior-title').innerText.trim();
         const newTp = card.querySelector('.val-tp').innerText.trim();
@@ -164,12 +241,12 @@ if (viewLevels) {
         else if(badgeText === 'short' || badgeText === 'bearish') { newBias = 'bearish'; displayBadge = 'Short'; }
         
         // Update DOM classes for colors
-        card.className = `level-card ${newBias}`;
         badgeEl.className = `badge ${newBias}`;
         badgeEl.innerText = displayBadge;
 
         const idx = allLevels.findIndex(l => l.id === id);
         if(idx !== -1) {
+            allLevels[idx].source = newSource;
             allLevels[idx].rawPrice = newPrice;
             allLevels[idx].behavior = newBehavior;
             allLevels[idx].tp = newTp;
@@ -194,18 +271,21 @@ if (viewLevels) {
             }
         }
         renderChart();
+        renderScorecard();
         saveLevelsData();
     };
 
     window.removeLevelCard = function(id) {
-        document.getElementById(id).remove();
+        const el = document.getElementById(id);
+        if (el) el.remove();
         allLevels = allLevels.filter(l => l.id !== id);
         updateCount();
         renderChart();
+        renderScorecard();
         saveLevelsData();
     };
 
-    function injectLevelCard(levelId, price, bias, behavior, tp, sl, shouldSave) {
+    function injectLevelCard(levelId, price, bias, behavior, tp, sl, source, status, shouldSave) {
         const list = document.getElementById('levels-list');
         const empty = document.getElementById('levels-empty-state');
         if (empty) empty.style.display = 'none';
@@ -225,8 +305,11 @@ if (viewLevels) {
             }
         }
 
+        const normSource = (source || 'BT').toUpperCase();
+        const normStatus = status || 'na';
+
         const card = document.createElement('div');
-        card.className = `level-card ${bias}`;
+        card.className = `level-card ${bias} is-${normStatus}`;
         card.id = levelId;
         
         let biasBadge = "Short";
@@ -234,21 +317,33 @@ if (viewLevels) {
         if (bias === 'neutral') biasBadge = "Neutral";
 
         card.innerHTML = `
-            <div class="card-price" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${price}</div>
+            <div class="card-header-bar">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="source-badge" contenteditable="true" title="Edit source abbreviation (e.g. BT, AK, SM)" onblur="window.updateLevelCardData('${levelId}')">${normSource}</span>
+                    <div class="card-price" contenteditable="true" title="Click to edit price" onblur="window.updateLevelCardData('${levelId}')">${price}</div>
+                    <span class="badge ${bias}" contenteditable="true" title="Edit bias (Long/Short/Neutral)" onblur="window.updateLevelCardData('${levelId}')">${biasBadge}</span>
+                </div>
+                <div class="card-status-review">
+                    <button type="button" class="status-btn status-worked ${normStatus === 'worked' ? 'active' : ''}" onclick="window.setLevelStatus('${levelId}', 'worked')" title="Mark as Worked / Respected">✅ Worked</button>
+                    <button type="button" class="status-btn status-failed ${normStatus === 'failed' ? 'active' : ''}" onclick="window.setLevelStatus('${levelId}', 'failed')" title="Mark as Failed / Stop Loss">❌ Failed</button>
+                    <button type="button" class="status-btn status-na ${normStatus === 'na' ? 'active' : ''}" onclick="window.setLevelStatus('${levelId}', 'na')" title="Mark as NA / Untouched">⚪ NA</button>
+                </div>
+            </div>
             <div class="card-behavior">
-                <span class="badge ${bias}" contenteditable="true" title="Edit bias (Long/Short/Neutral)" onblur="window.updateLevelCardData('${levelId}')">${biasBadge}</span>
-                <div class="card-behavior-title" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${behavior}</div>
+                <div class="card-behavior-title" contenteditable="true" title="Click to edit behavior" onblur="window.updateLevelCardData('${levelId}')">${behavior}</div>
             </div>
-            <div class="card-metric">
-                <span class="card-metric-label">Target</span>
-                <span class="card-metric-val val-tp" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${tp ? tp : 'Open'}</span>
-            </div>
-            <div class="card-metric">
-                <span class="card-metric-label">Stop Loss</span>
-                <span class="card-metric-val val-sl" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${sl ? sl : 'Manual'}</span>
+            <div class="card-metric-row">
+                <div class="card-metric">
+                    <span class="card-metric-label">Target</span>
+                    <span class="card-metric-val val-tp" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${tp ? tp : 'Open'}</span>
+                </div>
+                <div class="card-metric">
+                    <span class="card-metric-label">Stop Loss</span>
+                    <span class="card-metric-val val-sl" contenteditable="true" title="Click to edit" onblur="window.updateLevelCardData('${levelId}')">${sl ? sl : 'Manual'}</span>
+                </div>
             </div>
             <button class="btn-delete" onclick="window.removeLevelCard('${levelId}')" title="Remove Level">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
             </button>
         `;
 
@@ -269,6 +364,8 @@ if (viewLevels) {
 
         allLevels.push({
             id: levelId,
+            source: normSource,
+            status: normStatus,
             rawPrice: price,
             pHigh: pHigh,
             pLow: pLow,
@@ -282,6 +379,7 @@ if (viewLevels) {
 
         updateCount();
         renderChart();
+        renderScorecard();
         if(shouldSave) saveLevelsData();
     }
 
@@ -291,6 +389,112 @@ if (viewLevels) {
         if (count === 0) {
             const empty = document.getElementById('levels-empty-state');
             if(empty) empty.style.display = 'block';
+        }
+    }
+
+    // ===================== EOD PERFORMANCE SCORECARD ===================== //
+    function renderScorecard() {
+        const tbody = document.getElementById('scorecard-tbody');
+        const totalRatioEl = document.getElementById('scorecard-overall-ratio');
+        const totalWinrateEl = document.getElementById('scorecard-overall-winrate');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+
+        if (allLevels.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-dim); padding:1rem;">No levels to review yet.</td></tr>`;
+            if (totalRatioEl) totalRatioEl.innerText = '0:0';
+            if (totalWinrateEl) {
+                totalWinrateEl.innerText = '0%';
+                totalWinrateEl.className = '';
+            }
+            return;
+        }
+
+        // Group stats by source
+        const sourceMap = {};
+        let grandWorked = 0;
+        let grandFailed = 0;
+        let grandNA = 0;
+
+        allLevels.forEach(lvl => {
+            const src = (lvl.source || 'BT').toUpperCase();
+            if (!sourceMap[src]) {
+                sourceMap[src] = { worked: 0, failed: 0, na: 0 };
+            }
+            const st = lvl.status || 'na';
+            if (st === 'worked') {
+                sourceMap[src].worked++;
+                grandWorked++;
+            } else if (st === 'failed') {
+                sourceMap[src].failed++;
+                grandFailed++;
+            } else {
+                sourceMap[src].na++;
+                grandNA++;
+            }
+        });
+
+        const sortedSources = Object.keys(sourceMap).sort();
+
+        sortedSources.forEach(src => {
+            const stat = sourceMap[src];
+            const w = stat.worked;
+            const f = stat.failed;
+            const na = stat.na;
+            const evaluated = w + f;
+            
+            let winRateStr = '--';
+            let winRateClass = 'stat-rate-na';
+            if (evaluated > 0) {
+                const wr = (w / evaluated) * 100;
+                winRateStr = wr.toFixed(1) + '%';
+                if (wr >= 60) winRateClass = 'stat-rate-high';
+                else if (wr >= 40) winRateClass = 'stat-rate-mid';
+                else winRateClass = 'stat-rate-low';
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><span class="source-badge" style="font-size:0.78rem;">${src}</span></td>
+                <td><b class="stat-num-worked">${w}</b></td>
+                <td><b class="stat-num-failed">${f}</b></td>
+                <td><span class="stat-ratio font-mono">${w} : ${f}</span></td>
+                <td><span class="stat-rate-pill ${winRateClass}">${winRateStr}</span></td>
+                <td class="stat-na-cell">${na}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // Grand Total Row
+        const grandEvaluated = grandWorked + grandFailed;
+        let grandWRStr = '--';
+        let grandWRClass = 'stat-rate-na';
+        if (grandEvaluated > 0) {
+            const gwr = (grandWorked / grandEvaluated) * 100;
+            grandWRStr = gwr.toFixed(1) + '%';
+            if (gwr >= 60) grandWRClass = 'stat-rate-high';
+            else if (gwr >= 40) grandWRClass = 'stat-rate-mid';
+            else grandWRClass = 'stat-rate-low';
+        }
+
+        const totalTr = document.createElement('tr');
+        totalTr.className = 'scorecard-total-row';
+        totalTr.innerHTML = `
+            <td><b>TOTAL / ALL</b></td>
+            <td><b class="stat-num-worked">${grandWorked}</b></td>
+            <td><b class="stat-num-failed">${grandFailed}</b></td>
+            <td><b class="stat-ratio font-mono" style="font-size:0.95rem;">${grandWorked} : ${grandFailed}</b></td>
+            <td><span class="stat-rate-pill ${grandWRClass}" style="font-size:0.85rem;">${grandWRStr}</span></td>
+            <td class="stat-na-cell">${grandNA}</td>
+        `;
+        tbody.appendChild(totalTr);
+
+        // Update header pill
+        if (totalRatioEl) totalRatioEl.innerText = `${grandWorked}:${grandFailed}`;
+        if (totalWinrateEl) {
+            totalWinrateEl.innerText = grandWRStr;
+            totalWinrateEl.style.color = grandWRClass === 'stat-rate-high' ? 'var(--success)' : grandWRClass === 'stat-rate-low' ? 'var(--danger)' : 'var(--warning)';
         }
     }
 
@@ -348,34 +552,38 @@ if (viewLevels) {
                 zone.style.backgroundColor = lineBg.replace('0.4', '0.1');
                 zone.style.borderTop = '1px dashed ' + mainColor;
                 zone.style.borderBottom = '1px dashed ' + mainColor;
+                zone.style.pointerEvents = 'none';
+                zone.style.zIndex = '1';
                 row.appendChild(zone);
             } else {
                 const line = document.createElement('div');
                 line.style.position = 'absolute';
-                line.style.top = '20px';
+                line.style.top = '16px'; 
                 line.style.left = '0';
                 line.style.right = '0';
-                line.style.height = '0';
-                line.style.borderTop = '1px dashed ' + mainColor;
-                line.style.opacity = '0.5';
+                line.style.height = '2px';
+                line.style.backgroundColor = lineBg;
+                line.style.boxShadow = `0 0 8px ${mainColor}`;
+                line.style.pointerEvents = 'none';
+                line.style.zIndex = '1';
                 row.appendChild(line);
             }
 
-            const axisLbl = document.createElement('div');
-            axisLbl.style.position = 'absolute';
-            axisLbl.style.top = '20px';
-            axisLbl.style.left = '-75px';
-            axisLbl.style.width = '65px';
-            axisLbl.style.textAlign = 'right';
-            axisLbl.style.transform = 'translateY(-50%)';
-            axisLbl.style.fontFamily = "'JetBrains Mono', monospace";
-            axisLbl.style.fontSize = '0.9rem';
-            axisLbl.style.fontWeight = '700';
-            axisLbl.style.color = mainColor;
-            axisLbl.innerText = price;
-            row.appendChild(axisLbl);
+            const axisLblHigh = document.createElement('div');
+            axisLblHigh.style.position = 'absolute';
+            axisLblHigh.style.top = '16px';
+            axisLblHigh.style.left = '-75px';
+            axisLblHigh.style.width = '65px';
+            axisLblHigh.style.textAlign = 'right';
+            axisLblHigh.style.transform = 'translateY(-50%)';
+            axisLblHigh.style.fontFamily = "'JetBrains Mono', monospace";
+            axisLblHigh.style.fontSize = '0.85rem';
+            axisLblHigh.style.fontWeight = 'bold';
+            axisLblHigh.style.color = mainColor;
+            axisLblHigh.innerText = price;
+            row.appendChild(axisLblHigh);
 
-            if (hasRange && pLow !== price) {
+            if(hasRange) {
                 const axisLblLow = document.createElement('div');
                 axisLblLow.style.position = 'absolute';
                 axisLblLow.style.top = '70px'; 
@@ -415,8 +623,16 @@ if (viewLevels) {
                     rangeText = ` <span style="color:var(--text-dim); font-size:0.8em; font-family:'JetBrains Mono', monospace;">(${lvl.pHigh} - ${lvl.pLow})</span>`;
                 }
 
+                const srcTag = lvl.source ? `<span class="source-badge" style="font-size:0.72rem; margin-right:4px;">${lvl.source}</span>` : '';
+
                 ann.innerHTML = `
-                    <div class="badge ${lvl.bias}" style="margin-bottom:0.5rem;">${lvl.biasBadge}${rangeText}</div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;">
+                        <div>
+                            ${srcTag}
+                            <span class="badge ${lvl.bias}">${lvl.biasBadge}${rangeText}</span>
+                        </div>
+                        <span class="stat-tag ${lvl.status === 'worked' ? 'worked' : lvl.status === 'failed' ? 'failed' : 'na'}" style="font-size:0.7rem;">${lvl.status === 'worked' ? '✅ Worked' : lvl.status === 'failed' ? '❌ Failed' : '⚪ NA'}</span>
+                    </div>
                     <div class="text" style="line-height:1.5; color:var(--text); font-size:0.95rem;">${lvl.behavior}</div>
                     <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--text-dim); display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace;">
                         <span>TP: <strong style="color:var(--success);">${lvl.tp||'Open'}</strong></span>
@@ -766,13 +982,24 @@ if (viewLevels) {
                 `;
             }
 
+            const srcTag = lvl.source ? `<span class="source-badge" style="font-size:0.75rem; margin-right:6px;">${lvl.source}</span>` : '';
+            const currStatus = lvl.status || 'na';
+
             card.innerHTML = `
                 <div class="reaction-card-top">
-                    <div class="reaction-level-info">
-                        <span class="reaction-price-title" style="color:${biasColor};">${priceDisplay}</span>
-                        <span class="badge ${lvl.bias}">${lvl.biasBadge || 'Level'}</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                        <div class="reaction-level-info">
+                            ${srcTag}
+                            <span class="reaction-price-title" style="color:${biasColor};">${priceDisplay}</span>
+                            <span class="badge ${lvl.bias}">${lvl.biasBadge || 'Level'}</span>
+                        </div>
+                        <div class="reaction-status-group" style="display:flex; gap:6px;">
+                            <button type="button" class="status-btn status-worked reaction-status-${lvl.id} ${currStatus === 'worked' ? 'active' : ''}" data-status="worked" onclick="window.setLevelStatus('${lvl.id}', 'worked')" title="Mark Worked">✅ Worked</button>
+                            <button type="button" class="status-btn status-failed reaction-status-${lvl.id} ${currStatus === 'failed' ? 'active' : ''}" data-status="failed" onclick="window.setLevelStatus('${lvl.id}', 'failed')" title="Mark Failed">❌ Failed</button>
+                            <button type="button" class="status-btn status-na reaction-status-${lvl.id} ${currStatus === 'na' ? 'active' : ''}" data-status="na" onclick="window.setLevelStatus('${lvl.id}', 'na')" title="Mark NA">⚪ NA</button>
+                        </div>
                     </div>
-                    <div class="reaction-plan-behavior">
+                    <div class="reaction-plan-behavior" style="margin-top:6px;">
                         <span class="plan-behavior-label">Planned Behavior:</span>
                         <span class="plan-behavior-text">${lvl.behavior || 'Key Reaction Area'}</span>
                     </div>

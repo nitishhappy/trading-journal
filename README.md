@@ -610,3 +610,30 @@ Added an automated intraday reaction checker to the **Levels Tab** that evaluate
 
 #### New files added
 - `api/niftyCandles.js` — Upstox 1m to 5m candle aggregation serverless API.
+
+### v2.3.7 — 5 Aug 2026 — Levels Tab: Channel Source Tags, EOD Outcome Reviewer & Performance Scorecard
+
+Added channel source tagging, end-of-day level performance reviewing, and a real-time Worked vs. Failed ratio scorecard table to the **Levels Tab**.
+
+#### What it does
+- **Channel / Source Tagging on Every Level Card**:
+  - Distinct short source pill (e.g. `BT` for Bengal Trader, `AK` for Ashish Kyal, `SM` for Stock Marketed, `PR` for Power of Stocks, `AT` for Art of Trading, `Self`).
+  - Quick channel tag pills in the "Plan a Trade" creation form.
+  - Fully editable inline by clicking the source badge on any level card.
+  - Highlighted on the Visual Chart Map and First Candle In/Out reaction modal.
+- **End-of-Day Outcome Review Mechanism**:
+  - Interactive 3-state toggle buttons on each level tile: `[ ✅ Worked ]`, `[ ❌ Failed ]`, `[ ⚪ NA ]`.
+  - Visual card states: glowing emerald border for *Worked*, rose red border for *Failed*, neutral for *NA*.
+  - Outcome buttons are also accessible directly inside the First Candle In/Out reaction modal for quick reviewing while inspecting price action.
+  - Automatically persisted in `localStorage` and synced with memory.
+- **Daily Forecast Performance Scorecard Table**:
+  - Positioned right below the mapped levels list.
+  - Groups performance metrics per channel source (`BT`, `AK`, `SM`, etc.) and calculates an **OVERALL / TOTAL** row.
+  - Displays:
+    - **Worked (W)** count.
+    - **Failed (F)** count.
+    - **W : F Ratio** (e.g. `3 : 1`, `5 : 0`).
+    - **Win Rate %** with color-coded pills (Green for ≥60%, Amber for 40-59%, Red for <40%).
+    - **NA / Ignored** count (untested/untouched levels excluded from win rate calculations).
+  - Updates in real-time as you mark predictions.
+

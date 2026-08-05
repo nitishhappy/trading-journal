@@ -1050,7 +1050,19 @@
                     </h2>
                     
                     <div id="levels-form-body" class="collapsible-body">
-                        <div class="form-grid">
+                        <div class="form-grid" style="grid-template-columns: 1fr 1.2fr 1fr;">
+                            <div class="input-group">
+                                <label>Source / Channel</label>
+                                <input type="text" id="inp-level-source" placeholder="e.g. BT, AK, SM" value="BT">
+                                <div class="behavior-tags" id="level-source-tags" style="margin-top: 0.2rem;">
+                                    <button class="tag-btn level-source-btn active" data-val="BT">BT</button>
+                                    <button class="tag-btn level-source-btn" data-val="AK">AK</button>
+                                    <button class="tag-btn level-source-btn" data-val="SM">SM</button>
+                                    <button class="tag-btn level-source-btn" data-val="PR">PR</button>
+                                    <button class="tag-btn level-source-btn" data-val="AT">AT</button>
+                                    <button class="tag-btn level-source-btn" data-val="Self">Self</button>
+                                </div>
+                            </div>
                             <div class="input-group">
                                 <label>Key Price Level / Zone</label>
                                 <input type="text" id="inp-level-price" placeholder="e.g. 24052 or 23891-24010">
@@ -1116,6 +1128,37 @@
                             </div>
                             <!-- Cards injected here -->
                         </div>
+
+                        <!-- EOD PERFORMANCE SCORECARD TABLE -->
+                        <div class="level-scorecard-panel" id="level-scorecard-panel">
+                            <div class="level-scorecard-header">
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <span style="font-size:1.15rem;">📊</span>
+                                    <h3 style="margin:0; font-size:1rem; font-weight:700;">EOD Forecast Scorecard (Worked : Failed)</h3>
+                                </div>
+                                <div class="scorecard-stats-pill" id="scorecard-total-pill">
+                                    Worked:Failed: <b id="scorecard-overall-ratio" style="color:var(--text); margin:0 4px;">0:0</b> (<span id="scorecard-overall-winrate" style="color:var(--success); font-weight:bold;">0%</span>)
+                                </div>
+                            </div>
+                            <div class="scorecard-table-wrap">
+                                <table class="scorecard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Source / Channel</th>
+                                            <th>Worked (W)</th>
+                                            <th>Failed (F)</th>
+                                            <th>W : F Ratio</th>
+                                            <th>Win Rate %</th>
+                                            <th class="th-muted">NA / Ignored</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="scorecard-tbody">
+                                        <!-- Dynamically generated rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

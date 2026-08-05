@@ -169,17 +169,39 @@
     gap: 1rem;
 }
 
+.source-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.25));
+    border: 1px solid rgba(168, 85, 247, 0.45);
+    color: #e0e7ff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
 .level-card {
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 80px 1fr 100px 100px 40px;
-    align-items: center;
-    gap: 1rem;
+    border-radius: 10px;
+    padding: 1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     position: relative;
     overflow: hidden;
+    transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.level-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
 }
 
 .level-card::before {
@@ -192,6 +214,24 @@
 .level-card.bearish::before { background: var(--danger); }
 .level-card.bullish::before { background: var(--success); }
 .level-card.neutral::before { background: var(--warning); }
+
+.level-card.is-worked {
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
+}
+.level-card.is-failed {
+    border-color: rgba(244, 63, 94, 0.4);
+    box-shadow: 0 4px 16px rgba(244, 63, 94, 0.08);
+}
+
+.card-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-right: 24px;
+}
 
 .card-price {
     font-family: 'JetBrains Mono', monospace;
@@ -208,21 +248,28 @@
 }
 
 .card-behavior-title {
-    font-weight: 500;
+    font-weight: 450;
     color: var(--text);
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.card-metric-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 0.25rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.06);
 }
 
 .card-metric {
     display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-    text-align: right;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .card-metric-label {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--text-dim);
     text-transform: uppercase;
     font-weight: 600;
@@ -231,31 +278,84 @@
 .card-metric-val {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
 }
 .val-tp { color: var(--success); }
 .val-sl { color: var(--danger); }
 
+/* Status Outcome Review Buttons */
+.card-status-review, .reaction-status-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.status-btn:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.status-btn.status-worked.active {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.6);
+    color: #6ee7b7;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+.status-btn.status-failed.active {
+    background: rgba(244, 63, 94, 0.2);
+    border-color: rgba(244, 63, 94, 0.6);
+    color: #fda4af;
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.25);
+}
+
+.status-btn.status-na.active {
+    background: rgba(148, 163, 184, 0.15);
+    border-color: rgba(148, 163, 184, 0.4);
+    color: #cbd5e1;
+}
+
 .btn-delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background: transparent;
     border: none;
     color: var(--text-dim);
     cursor: pointer;
-    padding: 0.4rem;
+    padding: 0.3rem;
     border-radius: 4px;
     transition: all 0.2s;
 }
 
 .btn-delete:hover {
     color: var(--danger);
-    background: rgba(244, 63, 94, 0.1);
+    background: rgba(244, 63, 94, 0.15);
 }
 
 .badge {
     display: inline-block;
-    padding: 0.2rem 0.4rem;
+    padding: 0.2rem 0.45rem;
     border-radius: 4px;
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -264,6 +364,152 @@
 .badge.bearish { background: rgba(244, 63, 94, 0.15); color: #fda4af; }
 .badge.bullish { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
 .badge.neutral { background: rgba(251, 191, 36, 0.15); color: #fcd34d; }
+
+/* Status tag in visual chart annotations */
+.stat-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.stat-tag.worked { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+.stat-tag.failed { background: rgba(244, 63, 94, 0.15); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.3); }
+.stat-tag.na { background: rgba(148, 163, 184, 0.1); color: var(--text-dim); border: 1px solid rgba(148, 163, 184, 0.2); }
+
+/* ===================== EOD SCORECARD PANEL ===================== */
+.level-scorecard-panel {
+    margin-top: 1.5rem;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+
+.level-scorecard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.scorecard-stats-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-dim);
+}
+
+.scorecard-table-wrap {
+    overflow-x: auto;
+}
+
+.scorecard-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+}
+
+.scorecard-table th {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.scorecard-table th.th-muted {
+    color: rgba(148, 163, 184, 0.5);
+}
+
+.scorecard-table td {
+    padding: 0.65rem 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    vertical-align: middle;
+}
+
+.scorecard-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.scorecard-total-row {
+    background: rgba(99, 102, 241, 0.08) !important;
+    border-top: 2px solid rgba(99, 102, 241, 0.3);
+    font-weight: 700;
+}
+
+.scorecard-total-row td {
+    border-bottom: none;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.stat-num-worked {
+    color: var(--success);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+}
+
+.stat-num-failed {
+    color: var(--danger);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+}
+
+.stat-ratio {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.stat-rate-pill {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.82rem;
+}
+
+.stat-rate-pill.stat-rate-high {
+    background: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.stat-rate-pill.stat-rate-mid {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fcd34d;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.stat-rate-pill.stat-rate-low {
+    background: rgba(244, 63, 94, 0.15);
+    color: #fda4af;
+    border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.stat-rate-pill.stat-rate-na {
+    background: rgba(148, 163, 184, 0.08);
+    color: var(--text-dim);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.stat-na-cell {
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}
 
 .empty-state-levels {
     text-align: center;
