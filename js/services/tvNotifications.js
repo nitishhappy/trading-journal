@@ -112,6 +112,19 @@ export async function deleteTvNotification(id) {
   await notifRef(id).delete();
 }
 
+export async function deleteTvNotificationsByIds(ids) {
+  if (!ids || ids.length === 0) return;
+  const uid = state.currentUser?.uid;
+  if (!uid) return;
+  // Firestore batches max 500
+  for (let i = 0; i < ids.length; i += 500) {
+    const chunk = ids.slice(i, i + 500);
+    const batch = db.batch();
+    chunk.forEach(id => batch.delete(notifRef(id)));
+    await batch.commit();
+  }
+}
+
 export async function clearAllTvNotifications() {
   const uid = state.currentUser?.uid;
   if (!uid) return;

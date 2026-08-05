@@ -3,6 +3,7 @@ import { showToast } from '../utils/toast.js';
 import {
   markTvNotificationRead,
   deleteTvNotification,
+  deleteTvNotificationsByIds,
   clearAllTvNotifications,
   generateToken,
   saveWebhookToken,
@@ -114,8 +115,26 @@ export function initTvNotificationsUI() {
 }
 
 // ===================== Feed Rendering =====================
-// Track expanded state per symbol (collapsed by default for a compact view)
+// Track expanded state per symbol AND per date
 const expandedSymbols = new Set();
+const expandedDates = new Set();
+
+// Helper: get IST date string from a notification timestamp
+function getISTDateKey(receivedAt) {
+  if (!receivedAt) return 'Unknown';
+  const ts = receivedAt.toDate ? receivedAt.toDate() : new Date(receivedAt);
+  return ts.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' }); // YYYY-MM-DD
+}
+
+function getISTDateLabel(dateKey) {
+  const todayIST = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  const yesterdayDate = new Date(Date.now() - 86400000).toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  const d = new Date(dateKey + 'T00:00:00+05:30');
+  const formatted = d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+  if (dateKey === todayIST) return `${formatted} · Today`;
+  if (dateKey === yesterdayDate) return `${formatted} · Yesterday`;
+  return formatted;
+}
 
 function renderFeed() {
   if (!notifFeed) return;
@@ -134,65 +153,136 @@ function renderFeed() {
   }
   if (emptyState) emptyState.classList.add('hidden');
 
-  // Group notifications by symbol
-  const groups = {};
+  // Group by date first, then by symbol within each date
+  const dateGroups = {};
   items.forEach(notif => {
+    const dateKey = getISTDateKey(notif.receivedAt);
+    if (!dateGroups[dateKey]) dateGroups[dateKey] = {};
     const sym = (notif.symbol || 'GENERAL').toUpperCase().trim();
-    if (!groups[sym]) groups[sym] = [];
-    groups[sym].push(notif);
+    if (!dateGroups[dateKey][sym]) dateGroups[dateKey][sym] = [];
+    dateGroups[dateKey][sym].push(notif);
   });
 
   notifFeed.innerHTML = '';
 
-  // Render each symbol pane
-  Object.keys(groups).forEach(symbol => {
-    const symbolItems = groups[symbol];
-    const hasUnread = symbolItems.some(n => !n.read);
-    const unreadCount = symbolItems.filter(n => !n.read).length;
-    const isExpanded = expandedSymbols.has(symbol);
+  // Sort dates descending (newest first)
+  const sortedDates = Object.keys(dateGroups).sort((a, b) => b.localeCompare(a));
 
-    const pane = document.createElement('div');
-    pane.className = `tv-symbol-group ${hasUnread ? 'has-new-alert' : ''}`;
+  // Auto-expand today
+  const todayIST = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  if (!expandedDates.has(todayIST) && sortedDates.includes(todayIST)) {
+    expandedDates.add(todayIST);
+  }
 
-    pane.innerHTML = `
-      <div class="tv-symbol-header">
-        <div class="tv-symbol-header-left">
-          <span class="tv-collapse-icon">${isExpanded ? '▼' : '▶'}</span>
-          <span class="tv-symbol-title">${symbol}</span>
-          <span class="tv-symbol-count-badge">${symbolItems.length} ${symbolItems.length === 1 ? 'alert' : 'alerts'}</span>
-          ${hasUnread ? `<span class="tv-new-indicator" title="${unreadCount} new alert(s)">🔴 ${unreadCount} NEW</span>` : ''}
-        </div>
-        <div class="tv-symbol-header-right">
-          <span class="tv-latest-time">${formatRelativeTime(symbolItems[0].receivedAt)}</span>
-        </div>
+  sortedDates.forEach(dateKey => {
+    const symbolGroups = dateGroups[dateKey];
+    const allDateNotifs = Object.values(symbolGroups).flat();
+    const dateUnread = allDateNotifs.filter(n => !n.read).length;
+    const isDateExpanded = expandedDates.has(dateKey);
+    const dateLabel = getISTDateLabel(dateKey);
+
+    // Date group container
+    const dateSection = document.createElement('div');
+    dateSection.className = 'tv-date-group';
+
+    const dateHeader = document.createElement('div');
+    dateHeader.className = `tv-date-header ${dateUnread > 0 ? 'has-unread' : ''}`;
+    dateHeader.innerHTML = `
+      <div class="tv-date-header-left">
+        <span class="tv-collapse-icon">${isDateExpanded ? '▼' : '▶'}</span>
+        <span class="tv-date-label">${dateLabel}</span>
+        <span class="tv-symbol-count-badge">${allDateNotifs.length} ${allDateNotifs.length === 1 ? 'alert' : 'alerts'}</span>
+        ${dateUnread > 0 ? `<span class="tv-new-indicator">🔴 ${dateUnread} NEW</span>` : ''}
       </div>
-      <div class="tv-symbol-body ${isExpanded ? '' : 'collapsed'}">
+      <div class="tv-date-header-right">
+        <button class="btn-small tv-date-clear-btn" title="Clear all alerts for ${dateLabel}">🗑️ Clear</button>
       </div>
     `;
 
-    const bodyEl = pane.querySelector('.tv-symbol-body');
-    const headerEl = pane.querySelector('.tv-symbol-header');
+    const dateBody = document.createElement('div');
+    dateBody.className = `tv-date-body ${isDateExpanded ? '' : 'collapsed'}`;
 
-    // Build cards inside accordion body
-    symbolItems.forEach(notif => {
-      bodyEl.appendChild(buildCard(notif));
-    });
-
-    // Toggle expand/collapse state on header click
-    headerEl.addEventListener('click', (e) => {
+    // Toggle date expand/collapse
+    dateHeader.querySelector('.tv-date-header-left').addEventListener('click', (e) => {
       e.stopPropagation();
-      if (expandedSymbols.has(symbol)) {
-        expandedSymbols.delete(symbol);
-        bodyEl.classList.add('collapsed');
-        pane.querySelector('.tv-collapse-icon').textContent = '▶';
+      if (expandedDates.has(dateKey)) {
+        expandedDates.delete(dateKey);
+        dateBody.classList.add('collapsed');
+        dateHeader.querySelector('.tv-collapse-icon').textContent = '▶';
       } else {
-        expandedSymbols.add(symbol);
-        bodyEl.classList.remove('collapsed');
-        pane.querySelector('.tv-collapse-icon').textContent = '▼';
+        expandedDates.add(dateKey);
+        dateBody.classList.remove('collapsed');
+        dateHeader.querySelector('.tv-collapse-icon').textContent = '▼';
       }
     });
 
-    notifFeed.appendChild(pane);
+    // Clear date group button
+    dateHeader.querySelector('.tv-date-clear-btn').addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const count = allDateNotifs.length;
+      if (!confirm(`Delete all ${count} alerts for ${dateLabel}?`)) return;
+      try {
+        const ids = allDateNotifs.map(n => n.id);
+        await deleteTvNotificationsByIds(ids);
+        showToast(`Cleared ${count} alerts for ${dateLabel}`);
+      } catch (err) {
+        showToast('Failed to clear: ' + err.message);
+      }
+    });
+
+    // Render symbol sub-groups within this date
+    Object.keys(symbolGroups).forEach(symbol => {
+      const symbolItems = symbolGroups[symbol];
+      const hasUnread = symbolItems.some(n => !n.read);
+      const unreadCount = symbolItems.filter(n => !n.read).length;
+      const symKey = dateKey + '::' + symbol;
+      const isExpanded = expandedSymbols.has(symKey);
+
+      const pane = document.createElement('div');
+      pane.className = `tv-symbol-group ${hasUnread ? 'has-new-alert' : ''}`;
+
+      pane.innerHTML = `
+        <div class="tv-symbol-header">
+          <div class="tv-symbol-header-left">
+            <span class="tv-collapse-icon">${isExpanded ? '▼' : '▶'}</span>
+            <span class="tv-symbol-title">${symbol}</span>
+            <span class="tv-symbol-count-badge">${symbolItems.length} ${symbolItems.length === 1 ? 'alert' : 'alerts'}</span>
+            ${hasUnread ? `<span class="tv-new-indicator" title="${unreadCount} new alert(s)">🔴 ${unreadCount} NEW</span>` : ''}
+          </div>
+          <div class="tv-symbol-header-right">
+            <span class="tv-latest-time">${formatRelativeTime(symbolItems[0].receivedAt)}</span>
+          </div>
+        </div>
+        <div class="tv-symbol-body ${isExpanded ? '' : 'collapsed'}">
+        </div>
+      `;
+
+      const bodyEl = pane.querySelector('.tv-symbol-body');
+      const headerEl = pane.querySelector('.tv-symbol-header');
+
+      symbolItems.forEach(notif => {
+        bodyEl.appendChild(buildCard(notif));
+      });
+
+      headerEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (expandedSymbols.has(symKey)) {
+          expandedSymbols.delete(symKey);
+          bodyEl.classList.add('collapsed');
+          pane.querySelector('.tv-collapse-icon').textContent = '▶';
+        } else {
+          expandedSymbols.add(symKey);
+          bodyEl.classList.remove('collapsed');
+          pane.querySelector('.tv-collapse-icon').textContent = '▼';
+        }
+      });
+
+      dateBody.appendChild(pane);
+    });
+
+    dateSection.appendChild(dateHeader);
+    dateSection.appendChild(dateBody);
+    notifFeed.appendChild(dateSection);
   });
 }
 
