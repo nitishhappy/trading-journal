@@ -227,15 +227,72 @@ function buildCard(notif) {
     ? `<span class="tv-symbol-badge">${notif.symbol}${notif.interval ? ' · ' + notif.interval : ''}</span>`
     : '';
 
-  const priceHtml = notif.price != null
-    ? `<span class="tv-price-pill">₹${Number(notif.price).toLocaleString('en-IN')}</span>`
+  const priceVal = notif.price ?? notif.extra?.price;
+  const priceHtml = priceVal != null
+    ? `<span class="tv-price-pill">${Number(priceVal).toLocaleString('en-IN')}</span>`
     : '';
 
   const strategyHtml = notif.strategy
     ? `<span class="tv-strategy-label">${notif.strategy}</span>`
     : '';
 
-  // Main message: use strategy or raw, truncated
+  // Extract Trade Levels (SL, TP, Summary)
+  const slVal = notif.sl ?? notif.extra?.sl;
+  const targetsVal = notif.targets ?? notif.extra?.targets;
+  const summaryText = notif.summary ?? notif.extra?.summary;
+  const imageSrc = notif.image || notif.imageUrl || notif.extra?.image || notif.extra?.imageUrl;
+
+  let levelsHtml = '';
+  if (slVal || targetsVal || priceVal != null) {
+    const tpStr = Array.isArray(targetsVal) ? targetsVal.join(', ') : (targetsVal || '—');
+    
+    // Calculate Risk:Reward if numbers exist
+    let rrHtml = '';
+    if (priceVal && slVal && targetsVal) {
+      const p = parseFloat(priceVal);
+      const s = parseFloat(slVal);
+      const t = Array.isArray(targetsVal) ? parseFloat(targetsVal[0]) : parseFloat(targetsVal);
+      if (!isNaN(p) && !isNaN(s) && !isNaN(t) && Math.abs(p - s) > 0) {
+        const risk = Math.abs(p - s);
+        const reward = Math.abs(t - p);
+        const rr = (reward / risk).toFixed(1);
+        rrHtml = `<span class="tv-level-pill tv-pill-rr" title="Risk to Reward Ratio">🎯 R:R 1:${rr}</span>`;
+      }
+    }
+
+    levelsHtml = `
+      <div class="tv-card-levels-grid">
+        ${priceVal != null ? `<span class="tv-level-pill tv-pill-entry">Entry: <strong>${priceVal}</strong></span>` : ''}
+        ${slVal ? `<span class="tv-level-pill tv-pill-sl">SL: <strong>${slVal}</strong></span>` : ''}
+        ${targetsVal ? `<span class="tv-level-pill tv-pill-tp">TP: <strong>${tpStr}</strong></span>` : ''}
+        ${rrHtml}
+      </div>
+    `;
+  }
+
+  // AI Summary / Insight HTML
+  let summaryHtml = '';
+  if (summaryText) {
+    summaryHtml = `
+      <div class="tv-card-insight-box">
+        <div class="tv-insight-header">💡 Setup Insight</div>
+        <div class="tv-insight-body">${escHtml(summaryText)}</div>
+      </div>
+    `;
+  }
+
+  // Chart Screenshot HTML
+  let imageHtml = '';
+  if (imageSrc) {
+    imageHtml = `
+      <div class="tv-card-chart-preview" title="Click to view full chart screenshot">
+        <div class="tv-chart-preview-header">📸 Telegram Chart Screenshot</div>
+        <img src="${imageSrc}" class="tv-chart-thumbnail" alt="Signal Chart" loading="lazy" />
+      </div>
+    `;
+  }
+
+  // Main message
   const mainMsg = notif.strategy || notif.raw?.slice(0, 120) || 'Alert received';
 
   card.innerHTML = `
@@ -253,6 +310,9 @@ function buildCard(notif) {
         </div>
       </div>
       <div class="tv-card-message">${mainMsg}</div>
+      ${levelsHtml}
+      ${summaryHtml}
+      ${imageHtml}
       ${strategyHtml}
       <details class="tv-raw-details">
         <summary>Raw message</summary>
@@ -264,10 +324,19 @@ function buildCard(notif) {
     </div>
   `;
 
-  // Mark read on expand or click
+  // Mark read on click
   card.addEventListener('click', () => {
     if (!notif.read) markTvNotificationRead(notif.id).catch(() => {});
   });
+
+  // Expand image in full popup on click
+  const imgEl = card.querySelector('.tv-chart-thumbnail');
+  if (imgEl) {
+    imgEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openImageModal(imageSrc, `${notif.symbol || 'Alert'} ${notif.action || ''} Chart`);
+    });
+  }
 
   card.querySelector('.tv-delete-btn').addEventListener('click', async (e) => {
     e.stopPropagation();
@@ -275,6 +344,34 @@ function buildCard(notif) {
   });
 
   return card;
+}
+
+function openImageModal(src, title) {
+  let modal = document.getElementById('tv-chart-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'tv-chart-modal';
+    modal.className = 'tv-chart-modal-overlay';
+    modal.innerHTML = `
+      <div class="tv-chart-modal-content">
+        <div class="tv-chart-modal-header">
+          <span id="tv-modal-title" style="font-weight:700; color:var(--text-color);"></span>
+          <button id="tv-modal-close" class="tv-modal-close-btn">&times;</button>
+        </div>
+        <div class="tv-chart-modal-body">
+          <img id="tv-modal-img" src="" alt="Full Chart" />
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    modal.querySelector('#tv-modal-close').addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  }
+  modal.querySelector('#tv-modal-title').textContent = title || 'Chart Screenshot';
+  modal.querySelector('#tv-modal-img').src = src;
+  modal.classList.add('active');
 }
 
 function escHtml(str) {

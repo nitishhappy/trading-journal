@@ -33,10 +33,11 @@ module.exports = async (req, res) => {
     data = { ...parsed };
   }
 
-  const { symbol, action, price, strategy, interval, keyword, timeframe, ...extra } = data;
+  const { symbol, action, price, strategy, interval, keyword, timeframe, image, imageUrl, sl, targets, summary, source, ...extra } = data;
 
   // Resolve timeframe: prefer parsed 'timeframe', fall back to 'interval'
   const resolvedTimeframe = timeframe || interval || null;
+  const resolvedImage = imageUrl || image || null;
 
   const notifRef = db.collection("users").doc(uid).collection("tvNotifications").doc();
   await notifRef.set({
@@ -47,10 +48,14 @@ module.exports = async (req, res) => {
     strategy:  strategy  || null,
     interval:  resolvedTimeframe,
     keyword:   keyword   || null,
+    image:     resolvedImage,
+    sl:        sl        || null,
+    targets:   targets   || null,
+    summary:   summary   || null,
     read:      false,
     receivedAt: admin.firestore.FieldValue.serverTimestamp(),
     extra,
-    source: "tradingview",
+    source:    source    || "tradingview",
   });
 
   // Garbage Collection (delete notifications > 2 days old)

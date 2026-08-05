@@ -483,3 +483,180 @@
   margin-top: 4px;
 }
 
+/* ==================== Levels Grid & Pills ==================== */
+.tv-card-levels-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 2px;
+  align-items: center;
+}
+
+.tv-level-pill {
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tv-pill-entry {
+  background: rgba(0, 149, 246, 0.12);
+  color: #64b5f6;
+  border: 1px solid rgba(0, 149, 246, 0.3);
+}
+
+.tv-pill-sl {
+  background: rgba(239, 83, 80, 0.12);
+  color: #ef5350;
+  border: 1px solid rgba(239, 83, 80, 0.3);
+}
+
+.tv-pill-tp {
+  background: rgba(38, 166, 154, 0.12);
+  color: #26a69a;
+  border: 1px solid rgba(38, 166, 154, 0.3);
+}
+
+.tv-pill-rr {
+  background: rgba(255, 179, 0, 0.12);
+  color: #ffb300;
+  border: 1px solid rgba(255, 179, 0, 0.3);
+  font-weight: 700;
+}
+
+/* ==================== AI Insight Box ==================== */
+.tv-card-insight-box {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid #ffb300;
+  border-radius: 4px 6px 6px 4px;
+  padding: 8px 10px;
+  margin: 6px 0;
+}
+
+.tv-insight-header {
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffb300;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.tv-insight-body {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-color, #e0e0e0);
+}
+
+/* ==================== Chart Screenshot Preview ==================== */
+.tv-card-chart-preview {
+  margin: 8px 0 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0d1117;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+  max-width: 320px;
+}
+
+.tv-card-chart-preview:hover {
+  border-color: var(--accent, #0095f6);
+  transform: translateY(-1px);
+}
+
+.tv-chart-preview-header {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dim, #8b949e);
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border);
+}
+
+.tv-chart-thumbnail {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* ==================== Image Modal Overlay ==================== */
+.tv-chart-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tv-chart-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tv-chart-modal-content {
+  background: var(--surface-1, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+
+.tv-chart-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border, #30363d);
+}
+
+.tv-modal-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim, #8b949e);
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.tv-modal-close-btn:hover {
+  color: #fff;
+}
+
+.tv-chart-modal-body {
+  padding: 8px;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tv-chart-modal-body img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+
