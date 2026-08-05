@@ -643,6 +643,201 @@ Decoupled the EOD Performance Scorecard from daily trade plan level clears, allo
 
 #### What it does
 - **Persistent Multi-Day Tracking**:
+| `js/dom.js` | Exported `viewLevels` DOM reference |
+| `js/ui/common.js` | Tab switching logic for Levels view |
+| `app.js` | Imports `js/ui/levels.js` |
+
+#### Telegram Notification Reliability Fix
+Fixed intermittent Telegram notification drops on Vercel. The `sendTelegramNotification()` call in `sequenceEngine.js` was fire-and-forget (`.catch()` only, not `await`ed). On Vercel serverless functions, this meant the function context could freeze/terminate before the Telegram HTTP request completed, silently dropping the notification. Now properly `await`ed so the Telegram API call always completes before the function exits.
+
+### v2.2.2 — 31 Jul 2026 — Automated Daily Plan Push
+- Added auto-loading logic to `levels.js` to automatically fetch daily trade plans injected from local AI scripts via `js/data/daily_plan.js`.
+- Ignored `daily_plan.js` in Git to keep data pushes strictly local and prevent version history pollution.
+
+### v2.2.1 — 31 Jul 2026 — Alert Parser Fix & Trigger Log Grouping
+
+#### Smart Symbol Detection for TradingView Native Alerts
+TradingView's built-in crossing/price alerts use the format `XAUUSD, 5 Crossing Up price 4091.250 in 2026-07-30T13:35:00Z TF`. The old parser misidentified the ISO date string (`2026-07-30T13`) as the symbol because the `in` keyword in the fallback regex matched the datetime. Three fixes applied:
+- **New TradingView native format detector** — dedicated regex catches `SYMBOL, TF condition price PRICE in DATETIME` immediately
+- **ISO date guard** — `isIsoDateLike()` rejects any string starting with `YYYY-MM` from being treated as a symbol
+- **Keyword-as-symbol fallback** — if the first token looks like a symbol (e.g. `XAUUSD,`), strips the comma and uses it
+- Also strips trailing commas (not just colons) from the keyword token
+
+#### Trigger Logs Grouped by Date → Symbol
+The Trigger Logs section now groups entries by date (IST), then by symbol within each date:
+- **Today** is always expanded by default, with a blue accent border and "· Today" label
+- **Previous days** are collapsed — click to expand
+- **Symbol sub-headers** appear within each date when there are multiple symbols on the same day
+- Each card retains full functionality (outcome dropdown, notes, delete)
+
+### v2.3.0 — 1 Aug 2026 — Stocks Tab & Automated Canva Scanner
+
+A new **Stocks** tab to manage and track stock setups scanned from Canva reports.
+
+#### What it does
+- **Stocks Dashboard** — A premium, responsive layout showcasing stock names, tickers, summaries, date, source, and timeframe.
+- **Zero-Manual-Step Ingestion** — AI scans the Canva presentation and writes to `js/data/scanned_stocks.js`. When the app loads (locally or on Vercel), it automatically syncs any new entries directly into Firestore under `/users/{userId}/stocks`.
+- **Compound Database Keys** — Uses `TICKER_dateOfRun` (e.g. `SOLARINDS_2026-07-26`) as the document key to allow scanning the same stock on multiple dates while updating/merging data for the same day.
+- **Premium Table UI** — Built custom visual badges:
+  - Clickable TradingView badges (`📊 TV` link button).
+  - Timeframe status pills (blue for Daily, purple for Weekly).
+  - Traded status indicator badges (glowing green for Yes, dim grey for No).
+- **Inline Editing** — Every field is editable inline and updates Firestore immediately on blur/change. Ticker and Sector fields are now clean text hyperlinks that open TradingView; simply double-click them to enter edit mode.
+- **Sorting & Grouping** — Group entries dynamically by **Source** or **Date of Run**, and sort them alphabetically by **Stock Name** or by **Date of Run** (newest first). **Defaults to Date of Run (Descending)**.
+- **Bulk Operations** — Select multiple rows via checkboxes and delete them instantly via the Delete Selected button.
+- **Interactive Table Headers** — Click directly on column headers (Stock Name, Date, TF, Traded) to toggle sort order, or click **Source** to toggle grouping. Active sorting/grouping shows directional arrow indicators (`▲`/`▼`/`📁`) highlighted in active blue.
+- **Watchlist Copying** — Added **Copy Delta** (latest run date) and **Copy Full** buttons to instantly copy formatted exchange-prefixed tickers (`NSE:TICKER` or `BSE:TICKER`) to your clipboard for bulk copy-pasting into TradingView.
+- **Timeline Prepending & Highlighting** — Daily scanner runs prepend updates chronologically at the top of the summary text (e.g. `[Date] Update Text`). Updated stocks get a soft row highlight that automatically clears when clicked/viewed.
+- **Tab Layout & Overlap Fixes** — Prevented tab button overlap by shortening names (e.g., `Candle`, `TV Alerts`) and changing nav styling from `flex: 1` to `flex: 0 0 auto` with increased horizontal spacing to enable horizontal scrolling on small screens.
+- **Local Scanner Script** — Created `stock_scanner.py` and `run_scanner.bat` inside the `C:\Nitish\ClaudeApps\Utilities\` directory. Supports scanning both Canva presentation URLs and public Telegram channel preview widgets (`t.me/s/...`).
+- **Telegram Channel Source Mapping** — The scanner extracts the exact Telegram channel name from the URL (e.g., `EquiAlpha_stocks`) and assigns it directly to the stock's "Source" metadata field.
+- **SSL Bypass Support** — Configured unverified SSL contexts for the Python request engine to avoid Windows security cert verification halts on local networks.
+
+#### New files added
+- `js/services/stocks.js` — Firestore operations (snapshot subscriptions, batch inserts, updates, deletions).
+- `js/ui/stocks.js` — Rendering, group/sort managers, and inline edit logic.
+- `js/data/scanned_stocks.js` — Scanned stocks JSON data structure.
+- `C:\Nitish\ClaudeApps\Utilities\stock_scanner.py` — Local Python scraper (Canva & Telegram support).
+- `C:\Nitish\ClaudeApps\Utilities\run_scanner.bat` — Windows launcher batch file.
+
+
+### v2.3.1 - 1 Aug 2026 - Smart Dynamic Stock Extraction & automated Sectors
+- **Smart Telegram Parsing**: Completely removed the hardcoded `COMMON_TICKERS` list requirement for discovering stocks. The `stock_scanner.py` scraper now extracts stocks dynamically from *any* Telegram channel using three robust methods:
+  - **Hyperlink Extraction:** Extracts the stock ticker flawlessly from TradingView anchor tags.
+  - **Header Structure Extraction:** Extracts the stock ticker from setup headers like "POSITIONAL RESEARCH" or "SWING TRADE".
+  - **Cashtag Extraction:** Matches `$TICKER` or `#TICKER` format in messages containing trade setup keywords.
+- **Automated Sector Backfilling (`yfinance`)**: For dynamically discovered stocks, the scraper now automatically calls the Yahoo Finance API (via `yfinance`) to instantly fetch and map the official sector/industry into the database.
+  - **Advanced Text Extraction**: The parser smartly captures the full company phrase before the text "Looks Good" and handles extraction of parenthesized tickers (e.g. SML MAHINDRA (SMLMAH)) or strips spaces for split tickers (e.g. PNB Housing -> PNBHOUSING).
+
+### v2.3.2 — 4 Aug 2026 — Candle Checklist UI Enhancements & Run Folding
+- **Active Selection Color Coding**: Selected items in the active runner now reflect their category role:
+  - **Positive Decisions**: Rendered in green with green glow and checkmark (`✔`).
+  - **Negative Decisions**: Rendered in red with red glow and checkmark (`✔`).
+  - **Observatory**: Rendered in yellow/amber with amber glow and checkmark (`✔`).
+  - Column headers in the Selected column styled with matching colored accents.
+- **Previous Runs Category Tag Coloring**:
+  - In the "Previous Runs" sidebar cards, category prefix labels are color-coded: `<strong style="color:var(--low)">Positive Decisions:</strong>` in green, `<strong style="color:var(--high)">Negative Decisions:</strong>` in red, and `<strong style="color:#EAB308">Observatory:</strong>` in yellow.
+  - The checked item values remain clean in their standard text color for readability.
+- **Collapsed Format for Unconsidered Runs**:
+  - Previous runs marked as **Considered** (`consider = true`) remain expanded with the prominent green `Considered` badge.
+  - Runs marked as **Not Considered** (`consider = false`) now appear in a compact **collapsed format** with a clickable summary header showing the timestamp, passed score, and `Not Considered` tag. Clicking toggles full card details, notes, and actions.
+- **Master "Interesting Candle" Gatekeeper Check**:
+  - Pushed the `"Is this an interesting candle?"` evaluation check outside and directly to the top of the runner as a prominent master toggle card.
+  - When unchecked, the entire evaluation & action section (parallel columns, trade linking, screenshot upload, notes, and save controls) remains cleanly hidden for maximum focus.
+  - When checked, the evaluation form dynamically illuminates and reveals the parallel Selected / Not Selected columns and all logging controls.
+  - Automatic template filtering ensures "interesting candle" checks in existing templates are cleanly routed to the master checkbox rather than appearing duplicated inside inner lists.
+- **Date Formatting for Older Runs**:
+  - In the "Previous Runs" sidebar cards and linked trade modal lists, older runs now clearly show their date alongside the time (e.g. `3 Aug, 6:35 PM`), while today's runs display the concise time (e.g. `6:35 PM`).
+- **Trade Taken Highlight & Glow**:
+  - If a trade is executed on a candle (`Taking the trade? Yes` or linked to a trade log entry), the run card is highlighted with a vivid **illuminated cyan/blue glow**, gradient background, and a glowing **`⚡ TRADE TAKEN`** badge.
+
+### v2.3.3 — 4 Aug 2026 — Dual Repeat Candle Timers (5m & 15m) & Milestone Alarms
+
+A dedicated **Dual Candle Repeat Timer HUD** and **Audio Alarm Engine** for market sessions.
+
+#### What it does
+- **Top HUD Progress Bar**:
+  - Positioned prominently below the template selector on the Candle Checklist tab.
+  - Dual horizontal progress countdown boxes for **5-Minute** and **15-Minute** candle closes.
+  - Real-time IST countdown (`MM:SS`), next candle close target time, dynamic percentage fill bar, and in-bar quick mute buttons (`🔊`/`🔇`).
+- **Comprehensive Settings Panel** (inside Settings tab):
+  - **Active Days Selector**: Interactive day pills (Mon–Sun) to control operational market days.
+  - **Operating Session Hours**: Configurable `From Time` and `To Time` (default: `09:15` to `15:30` IST).
+  - **Anchor/Sync Time**: Synchronizes countdown calculations precisely with market open.
+  - **Custom Tone Synthesizer**: Choose distinct audio alerts (*Melodic Chime*, *Radar Sonar*, *Resonant Bell*, *Digital Beep*) with instant `▶ Test` previews.
+  - **⭐ Special Time Notifications**: Configure custom milestone timestamps (e.g. `09:15 AM`, `10:00 AM`, `03:00 PM`) with dedicated Grand Harmonic Chord sound alerts and dynamic add/remove tags.
+  - **Cloud Sync**: All timer settings, active days, sound preferences, and special times are persisted directly in Firebase Firestore.
+- **Synthesized Audio Engine**:
+  - Offline-capable Web Audio API synthesizer (`js/utils/audio.js`) requiring zero external audio file downloads.
+
+#### New files added
+- `js/services/candleTimers.js` — Firestore persistence layer for timer configurations.
+- `js/ui/candleTimers.js` — Countdown loop controller, HUD DOM binder, and Settings UI manager.
+- `js/utils/audio.js` — Web Audio API multi-frequency sound synthesizer.
+
+### v2.3.5 — 5 Aug 2026 — Live Alerts: Chart Screenshot Previews, Vision AI Levels & Fullscreen Lightbox
+
+Enhanced **Live TV Alerts** webhook handler (`/api/tvWebhook`) and alert notification UI (`tvNotifications.js`) to support embedded chart screenshots, vision-extracted price levels, setup insights, and fullscreen zoom modals.
+
+#### What it does
+- **Embedded Chart Screenshot Previews**:
+  - Automatically captures and embeds compressed chart screenshots sent via webhooks/MTProto workers directly into alert notification cards.
+  - Interactive thumbnail preview with clean header tag.
+- **Fullscreen Image Lightbox**:
+  - Clicking any chart screenshot opens an overlay modal with high-res zoom view and close controls.
+- **Dynamic Trade Level Badges (Entry, SL, TP, R:R)**:
+  - **Entry Price**: Prominent blue pill badge.
+  - **Stop Loss (SL)**: Red risk pill.
+  - **Take Profit (TP / Targets)**: Green target pill.
+  - **Risk-to-Reward (R:R)**: Real-time calculated ratio badge (e.g. `🎯 R:R 1:1.8`).
+- **AI Setup Insight Box**:
+  - Highlighted golden insight card summarizing technical reasoning, direction, and trade parameters.
+- **Automatic 4:00 PM IST Previous Day Alert Cleanup**:
+  - Automatically purges all previous day alert notifications at 4:00 PM (16:00 IST) market wrap-up.
+  - Keeps the live alert feed focused on today's active trading session while maintaining background garbage collection on both client and webhook endpoints.
+- **Updated Cloud & Mobile Worker**:
+  - Added Google Gemini 2.0 Flash Vision and Groq 90B Vision fallback in `telegram_cloud_worker/worker.py` for reading TradingView mobile position tools automatically.
+
+### v2.3.6 — 5 Aug 2026 — Levels Tab: 5-Minute First Candle In / Out Reaction Analysis (Upstox Feed)
+
+Added an automated intraday reaction checker to the **Levels Tab** that evaluates 5-minute Nifty 50 candle interactions for any selected date against all marked price levels and zones.
+
+#### What it does
+- **Top Reaction Toolbar**:
+  - Quick Date Picker defaulting to today's date in IST.
+  - Action trigger: `🔍 Check First Candle In/Out`.
+- **Automated 5-Minute Candle Aggregation (`/api/niftyCandles`)**:
+  - Pulls public 1-minute historical/intraday candles from Upstox and aggregates them into 75 standard 5-minute candles (`09:15` to `15:30` IST).
+  - Works seamlessly with zero authentication requirement.
+- **Comprehensive Reaction Pop-up Modal**:
+  - **🟢 First Candle IN**:
+    - Exact timestamp (e.g. `09:50 AM IST`).
+    - Approach direction (*Pullback/Drop from Above* vs *Rally/Push from Below*).
+    - Touch classification (*Body Entry* vs *Wick Sweep / Pin*).
+    - Detailed 5m candle OHLC metrics.
+  - **🔴 First Candle OUT**:
+    - Exact resolution timestamp (e.g. `09:55 AM IST`).
+    - Exit direction (*Broke Out Above 🟢* or *Broke Down Below 🔴*).
+    - Exit candle Close & OHLC metrics.
+  - **💤 Untouched Status**:
+    - Clear indicator if price never entered or reached the marked level during the session, comparing with the day's high/low range.
+  - **Plan Context**: Displays planned bias badge, expected behavior, and configured TP/SL targets side-by-side.
+
+#### New files added
+- `api/niftyCandles.js` — Upstox 1m to 5m candle aggregation serverless API.
+
+### v2.3.7 — 5 Aug 2026 — Levels Tab: Channel Source Tags, EOD Outcome Reviewer & Performance Scorecard
+
+Added channel source tagging, end-of-day level performance reviewing, and a real-time Worked vs. Failed ratio scorecard table to the **Levels Tab**.
+
+#### What it does
+- **Channel / Source Tagging on Every Level Card**:
+  - Distinct short source pill (e.g. `BT` for Bengal Trader, `AK` for Ashish Kyal, `SM` for Stock Marketed, `PR` for Power of Stocks, `AT` for Art of Trading, `Self`).
+  - Quick channel tag pills in the "Plan a Trade" creation form.
+  - Fully editable inline by clicking the source badge on any level card.
+  - Highlighted on the Visual Chart Map and First Candle In/Out reaction modal.
+- **End-of-Day Outcome Review Mechanism**:
+  - Interactive 3-state toggle buttons on each level tile: `[ ✅ Worked ]`, `[ ❌ Failed ]`, `[ ⚪ NA ]`.
+  - Visual card states: glowing emerald border for *Worked*, rose red border for *Failed*, neutral for *NA*.
+  - Outcome buttons are also accessible directly inside the First Candle In/Out reaction modal for quick reviewing while inspecting price action.
+  - Automatically persisted in `localStorage` and synced with memory.
+- **Daily Forecast Performance Scorecard Table**:
+  - Positioned right below the mapped levels list.
+  - Groups performance metrics per channel source (`BT`, `AK`, `SM`, etc.) and calculates an **OVERALL / TOTAL** row.
+  - Displays:
+    - **Worked (W)** count.
+    - **Failed (F)** count.
+    - **W : F Ratio** (e.g. `3 : 1`, `5 : 0`).
+    - **Win Rate %** with color-coded pills (Green for ≥60%, Amber for 40-59%, Red for <40%).
+    - **NA / Ignored** count (untested/untouched levels excluded from win rate calculations).
+  - Updates in real-time as you mark predictions.
+
+### v2.3.8 — 5 Aug 2026 — Levels Tab: Multi-Day Persistent Scorecard History
+
+Decoupled the EOD Performance Scorecard from daily trade plan level clears, allowing historical channel win rates to accumulate across days while keeping individual daily plans cleanable.
+
+#### What it does
+- **Persistent Multi-Day Tracking**:
   - Scorecard stats persist across days in dedicated local storage (`levelsScorecardHistory` & `levelsLoggedReviews`).
   - Each source channel (`BT`, `AK`, `SM`, `PR`, etc.) maintains a single cumulative entry recording all past evaluated predictions.
 - **Independent "Clear All Levels" vs. "Reset Stats"**:
@@ -650,3 +845,25 @@ Decoupled the EOD Performance Scorecard from daily trade plan level clears, allo
   - Added a dedicated **Reset Stats** button in the Scorecard header for when you explicitly wish to start fresh with a clean slate across all channels.
 - **Smart Audit Log**:
   - Re-evaluating or modifying level sources automatically adjusts and recalculates source balances without duplicate counts.
+
+### v2.3.9 — 5 Aug 2026 — Interactive Visual Map & Live Candle Alerts Listener
+
+Re-architected the Levels visual chart to be fully interactive and implemented a real-time background listener to alert you on active market moves.
+
+#### What it does
+- **Live Background Listener for First Candle In/Out**:
+  - A new toggle switch `🔴 Live Alerts Off / 🟢 Live Alerts On` in the Intraday Reaction toolbar.
+  - Silently polls the Upstox Intraday API every 60 seconds while the market is open (09:15 - 15:30 IST) to fetch 1m/5m candles.
+  - Automatically evaluates the live price against your daily trade plan levels.
+  - Triggers HTML5 native push notifications (e.g., "🚨 Level Entry: Nifty entered Bank Nifty Support Zone") the exact minute the level is touched.
+  - Tracks `alertedLevels` state to prevent duplicate notification spam for the same level during the day.
+- **Interactive Chart Annotations**:
+  - The Visual Chart Map now features clickable interactive buttons directly on the chart labels for marking outcomes (`Worked`, `Failed`, `NA`).
+  - Bi-directional sync: Clicking an outcome on the visual chart instantly updates the corresponding level card in the list, recalibrates the Scorecard stats, and updates visual borders.
+- **Mobile Responsive Enhancements**:
+  - `max-width: calc(100vw - 140px)` constraints and horizontal `overflow-x: auto` scrolling added to the chart wrapper to ensure level annotations do not clip or misalign on narrow mobile screens.
+- **Always-Visible Standalone Scorecard**:
+  - Extracted the EOD Performance Scorecard outside of the collapsible wrapper, ensuring it remains permanently visible on the dashboard regardless of whether the form or level list is collapsed.
+- **TV Alerts Auto-Cleanup & Grouping**:
+  - Re-architected `tvNotifications.js` to group notifications by `Date` and then `Symbol` for easier management.
+  - Implemented batch delete capabilities (`🗑️ Clear` button) per date group.
