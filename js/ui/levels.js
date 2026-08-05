@@ -80,26 +80,19 @@ if (viewLevels) {
             levelReviewLog = {};
         }
 
-        // If no persistent history exists yet, populate from window.dailyPlanData or loaded levels
-        if (Object.keys(scorecardStats).length === 0) {
-            const initialList = (window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : allLevels;
-            if (Array.isArray(initialList) && initialList.length > 0) {
-                initialList.forEach((l, idx) => {
-                    const src = (l.source || 'BT').toUpperCase();
-                    const st = (l.status || 'na').toLowerCase();
-                    if (!scorecardStats[src]) {
-                        scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
-                    }
-                    if (st === 'worked') scorecardStats[src].worked++;
-                    else if (st === 'failed') scorecardStats[src].failed++;
-                    else scorecardStats[src].na++;
-
-                    const lid = l.id || ('lvl-init-' + idx);
-                    levelReviewLog[lid] = { source: src, status: st };
-                });
-                saveScorecardHistory();
-            }
+        // Ensure all sources from dailyPlanData exist in scorecardStats
+        const knownSources = new Set(['BT', 'SM', 'CETA']);
+        if (window.dailyPlanData && Array.isArray(window.dailyPlanData)) {
+            window.dailyPlanData.forEach(l => {
+                if (l.source) knownSources.add(l.source.toUpperCase());
+            });
         }
+        knownSources.forEach(src => {
+            if (!scorecardStats[src]) {
+                scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
+            }
+        });
+        saveScorecardHistory();
     }
 
     function saveScorecardHistory() {
@@ -146,60 +139,136 @@ if (viewLevels) {
         renderScorecard();
     }
 
-    // Initialize
-    function initLevels() {
+    // Initialize Levels with robust multi-channel sync
+    function initLevels(forceSync = false) {
         loadScorecardHistory();
 
-        let loaded = localStorage.getItem('dailyTradePlanData');
-        if (loaded) {
+        let loaded = [];
+        const saved = localStorage.getItem('dailyTradePlanData');
+        if (saved) {
             try {
-                const parsed = JSON.parse(loaded);
-                if (Array.isArray(parsed) && parsed.length > 0) {
-                    parsed.forEach(l => {
-                        injectLevelCard(
-                            l.id || ('lvl-' + Math.random().toString(36).substr(2, 9)),
-                            l.rawPrice || l.price || "",
-                            l.bias || "neutral",
-                            l.behavior || "",
-                            l.tp || "",
-                            l.sl || "",
-                            l.source || "BT",
-                            l.status || "na",
-                            false
-                        );
-                    });
-                    renderChart();
-                    renderScorecard();
-                    return;
-                }
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed)) loaded = parsed;
             } catch (e) {
                 console.warn("Could not parse saved dailyTradePlanData:", e);
             }
         }
 
-        if (window.dailyPlanData && Array.isArray(window.dailyPlanData) && window.dailyPlanData.length > 0) {
-            window.dailyPlanData.forEach((lvl, idx) => {
-                const levelId = 'lvl-auto-' + idx;
-                injectLevelCard(
-                    levelId, 
-                    lvl.price || lvl.rawPrice || "", 
-                    lvl.bias || "neutral", 
-                    lvl.behavior || "", 
-                    lvl.tp || "", 
-                    lvl.sl || "", 
-                    lvl.source || "BT",
-                    lvl.status || "na",
-                    false
-                );
+        // Map existing review statuses by signature (price + behavior) to preserve user selections
+        const userStatusMap = {};
+        let allWereBT = true;
+        loaded.forEach(l => {
+            const sig = ((l.rawPrice || l.price || '') + '__' + (l.behavior || '')).trim().toLowerCase();
+            if (l.status && l.status !== 'na') {
+                userStatusMap[sig] = l.status;
+            }
+            if (l.source && l.source.toUpperCase() !== 'BT') {
+                allWereBT = false;
+            }
+        });
+
+        // Determine if we should sync from window.dailyPlanData:
+        // Sync if forceSync is requested, or if loaded data has fewer levels, or if legacy bug marked all as BT
+        const planLevels = (window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : [];
+        const shouldSyncFromPlan = forceSync || loaded.length === 0 || (loaded.length < planLevels.length) || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'));
+
+        const finalLevels = [];
+        const seenSignatures = new Set();
+
+        if (shouldSyncFromPlan && planLevels.length > 0) {
+            planLevels.forEach((lvl, idx) => {
+                const src = (lvl.source || 'BT').toUpperCase();
+                const pr = lvl.price || lvl.rawPrice || '';
+                const beh = lvl.behavior || '';
+                const sig = (pr + '__' + beh).trim().toLowerCase();
+                seenSignatures.add(sig);
+
+                const restoredStatus = userStatusMap[sig] || lvl.status || 'na';
+                finalLevels.push({
+                    id: 'lvl-plan-' + idx + '-' + src.toLowerCase(),
+                    source: src,
+                    price: pr,
+                    bias: lvl.bias || 'neutral',
+                    behavior: beh,
+                    tp: lvl.tp || '',
+                    sl: lvl.sl || '',
+                    status: restoredStatus
+                });
             });
-            saveLevelsData();
+
+            // Preserve any user-added custom levels (marked as manual or uploaded)
+            loaded.forEach((l, idx) => {
+                const pr = l.rawPrice || l.price || '';
+                const beh = l.behavior || '';
+                const sig = (pr + '__' + beh).trim().toLowerCase();
+                if (!seenSignatures.has(sig) && l.id && (l.id.startsWith('lvl-manual-') || l.id.startsWith('lvl-upload-'))) {
+                    seenSignatures.add(sig);
+                    finalLevels.push({
+                        id: l.id,
+                        source: (l.source || 'CUSTOM').toUpperCase(),
+                        price: pr,
+                        bias: l.bias || 'neutral',
+                        behavior: beh,
+                        tp: l.tp || '',
+                        sl: l.sl || '',
+                        status: l.status || 'na'
+                    });
+                }
+            });
+        } else if (loaded.length > 0) {
+            loaded.forEach((l, idx) => {
+                finalLevels.push({
+                    id: l.id || ('lvl-' + idx),
+                    source: (l.source || 'BT').toUpperCase(),
+                    price: l.rawPrice || l.price || '',
+                    bias: l.bias || 'neutral',
+                    behavior: l.behavior || '',
+                    tp: l.tp || '',
+                    sl: l.sl || '',
+                    status: l.status || 'na'
+                });
+            });
         }
+
+        // Reset list DOM and internal array
+        allLevels = [];
+        const list = document.getElementById('levels-list');
+        if (list) {
+            list.innerHTML = `<div class="empty-state-levels" id="levels-empty-state" style="display:none;">No levels mapped yet. Add a level above to build your trade plan.</div>`;
+        }
+
+        finalLevels.forEach(lvl => {
+            injectLevelCard(
+                lvl.id,
+                lvl.price,
+                lvl.bias,
+                lvl.behavior,
+                lvl.tp,
+                lvl.sl,
+                lvl.source,
+                lvl.status,
+                false
+            );
+        });
+
+        saveLevelsData();
         renderChart();
         renderScorecard();
     }
 
     function saveLevelsData() {
         localStorage.setItem('dailyTradePlanData', JSON.stringify(allLevels));
+    }
+
+    // Sync Plan button
+    const btnSyncPlan = document.getElementById('btn-level-sync');
+    if (btnSyncPlan) {
+        btnSyncPlan.addEventListener('click', (e) => {
+            e.stopPropagation();
+            initLevels(true);
+            const count = allLevels.length;
+            alert(`✅ Synced ${count} levels from Bengal Trader (BT), Stock Marketed (SM), and Chartking Elliott Trading Academy (CETA).`);
+        });
     }
 
     const inpUpload = document.getElementById('inp-level-upload');
@@ -221,7 +290,7 @@ if (viewLevels) {
                     const data = JSON.parse(event.target.result);
                     if (Array.isArray(data)) {
                         data.forEach((lvl, idx) => {
-                            const levelId = 'lvl-' + Date.now() + '-' + idx;
+                            const levelId = 'lvl-upload-' + Date.now() + '-' + idx;
                             injectLevelCard(
                                 levelId, 
                                 lvl.price || lvl.rawPrice || "", 
@@ -516,13 +585,20 @@ if (viewLevels) {
         const totalWinrateEl = document.getElementById('scorecard-overall-winrate');
         if (!tbody) return;
 
-        tbody.innerHTML = '';
+        const sourceSet = new Set(Object.keys(scorecardStats));
+        allLevels.forEach(l => {
+            if (l.source) sourceSet.add(l.source.toUpperCase());
+        });
+        if (window.dailyPlanData && Array.isArray(window.dailyPlanData)) {
+            window.dailyPlanData.forEach(l => {
+                if (l.source) sourceSet.add(l.source.toUpperCase());
+            });
+        }
+        const sources = Array.from(sourceSet).filter(Boolean).sort();
 
-        const sources = Object.keys(scorecardStats).sort();
-
-        // If no sources exist in history
+        // If no sources exist
         if (sources.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-dim); padding:1rem;">No historical reviews yet. Mark levels as Worked / Failed to track source performance over time.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-dim); padding:1rem;">No sources available yet.</td></tr>`;
             if (totalRatioEl) totalRatioEl.innerText = '0:0';
             if (totalWinrateEl) {
                 totalWinrateEl.innerText = '0%';

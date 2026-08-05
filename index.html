@@ -1053,11 +1053,12 @@
                         <div class="form-grid" style="grid-template-columns: 1fr 1.2fr 1fr;">
                             <div class="input-group">
                                 <label>Source / Channel</label>
-                                <input type="text" id="inp-level-source" placeholder="e.g. BT, AK, SM" value="BT">
+                                <input type="text" id="inp-level-source" placeholder="e.g. BT, SM, CETA, AK" value="BT">
                                 <div class="behavior-tags" id="level-source-tags" style="margin-top: 0.2rem;">
                                     <button class="tag-btn level-source-btn active" data-val="BT">BT</button>
-                                    <button class="tag-btn level-source-btn" data-val="AK">AK</button>
                                     <button class="tag-btn level-source-btn" data-val="SM">SM</button>
+                                    <button class="tag-btn level-source-btn" data-val="CETA">CETA</button>
+                                    <button class="tag-btn level-source-btn" data-val="AK">AK</button>
                                     <button class="tag-btn level-source-btn" data-val="PR">PR</button>
                                     <button class="tag-btn level-source-btn" data-val="AT">AT</button>
                                     <button class="tag-btn level-source-btn" data-val="Self">Self</button>
@@ -1112,8 +1113,9 @@
                 <div class="panel">
                     <h2 class="collapsible-header" id="levels-list-header">
                         <span>Mapped Levels</span>
-                        <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                             <input type="file" id="inp-level-upload" accept=".json" style="display:none;">
+                            <button id="btn-level-sync" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;" title="Sync latest levels from daily plan">🔄 Sync Plan</button>
                             <button id="btn-level-upload" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Upload JSON</button>
                             <button id="btn-level-clear" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Clear All</button>
                             <span id="level-count" style="font-size: 0.9rem; color: var(--text-dim); font-weight: normal;">0 Levels</span>
