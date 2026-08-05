@@ -6,6 +6,44 @@ const WEBHOOK_BASE = window.location.origin + '/api/tvWebhook';
 
 
 let unsubscribe = null;
+let cleanupIntervalId = null;
+
+// ===================== 4:00 PM IST Daily Cleanup =====================
+export async function cleanPreviousDayTvNotifications() {
+  const uid = state.currentUser?.uid;
+  if (!uid) return;
+
+  try {
+    const now = new Date();
+    const istTimeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: false });
+    const istHour = parseInt(istTimeString.split(':')[0], 10);
+    const todayIstStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+    const todayIstMidnight = new Date(`${todayIstStr}T00:00:00+05:30`);
+
+    let cleanupCutoff;
+    if (istHour >= 16) {
+      // At or after 4:00 PM IST: purge all alerts received before today (00:00 IST)
+      cleanupCutoff = todayIstMidnight;
+    } else {
+      // Before 4:00 PM IST: purge alerts older than yesterday (00:00 IST)
+      cleanupCutoff = new Date(todayIstMidnight.getTime() - 24 * 60 * 60 * 1000);
+    }
+
+    const snap = await db.collection('users').doc(uid)
+      .collection('tvNotifications')
+      .where('receivedAt', '<', cleanupCutoff)
+      .get();
+
+    if (!snap.empty) {
+      const batch = db.batch();
+      snap.docs.forEach(d => batch.delete(d.ref));
+      await batch.commit();
+      console.log(`[Live Alerts 4 PM Cleanup] Purged ${snap.size} previous day alert(s).`);
+    }
+  } catch (err) {
+    console.error('cleanPreviousDayTvNotifications error:', err);
+  }
+}
 
 // ===================== Subscription =====================
 export function subscribeTvNotifications() {
@@ -16,6 +54,15 @@ export function subscribeTvNotifications() {
   if (typeof Notification !== 'undefined' && Notification.permission === 'default') {
     Notification.requestPermission();
   }
+
+  // Run cleanup check on startup
+  cleanPreviousDayTvNotifications();
+
+  // Run periodic check every 60 seconds to trigger immediately at 4:00 PM IST
+  if (cleanupIntervalId) clearInterval(cleanupIntervalId);
+  cleanupIntervalId = setInterval(() => {
+    cleanPreviousDayTvNotifications();
+  }, 60000);
 
   unsubscribe = db
     .collection('users').doc(uid)
@@ -47,6 +94,7 @@ export function subscribeTvNotifications() {
 
 export function unsubscribeTvNotifications() {
   if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+  if (cleanupIntervalId) { clearInterval(cleanupIntervalId); cleanupIntervalId = null; }
   state.tvNotifications = [];
 }
 

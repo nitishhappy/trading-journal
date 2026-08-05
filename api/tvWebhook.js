@@ -58,11 +58,25 @@ module.exports = async (req, res) => {
     source:    source    || "tradingview",
   });
 
-  // Garbage Collection (delete notifications > 2 days old)
+  // Garbage Collection & Daily 4:00 PM IST Cleanup
   try {
-    const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000);
+    const now = new Date();
+    const istTimeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: false });
+    const istHour = parseInt(istTimeString.split(':')[0], 10);
+    const todayIstStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+    const todayIstMidnight = new Date(`${todayIstStr}T00:00:00+05:30`);
+
+    let cleanupCutoff;
+    if (istHour >= 16) {
+      // At or after 4:00 PM IST: purge all alerts from previous days
+      cleanupCutoff = todayIstMidnight;
+    } else {
+      // Before 4:00 PM IST: purge alerts older than yesterday 00:00 IST
+      cleanupCutoff = new Date(todayIstMidnight.getTime() - 24 * 60 * 60 * 1000);
+    }
+
     const oldSnaps = await db.collection("users").doc(uid).collection("tvNotifications")
-      .where("receivedAt", "<", twoDaysAgo)
+      .where("receivedAt", "<", cleanupCutoff)
       .get();
     
     if (!oldSnaps.empty) {

@@ -577,8 +577,12 @@ Enhanced **Live TV Alerts** webhook handler (`/api/tvWebhook`) and alert notific
   - **Risk-to-Reward (R:R)**: Real-time calculated ratio badge (e.g. `🎯 R:R 1:1.8`).
 - **AI Setup Insight Box**:
   - Highlighted golden insight card summarizing technical reasoning, direction, and trade parameters.
+- **Automatic 4:00 PM IST Previous Day Alert Cleanup**:
+  - Automatically purges all previous day alert notifications at 4:00 PM (16:00 IST) market wrap-up.
+  - Keeps the live alert feed focused on today's active trading session while maintaining background garbage collection on both client and webhook endpoints.
 - **Updated Cloud & Mobile Worker**:
   - Added Google Gemini 2.0 Flash Vision and Groq 90B Vision fallback in `telegram_cloud_worker/worker.py` for reading TradingView mobile position tools automatically.
+
 
 
 
