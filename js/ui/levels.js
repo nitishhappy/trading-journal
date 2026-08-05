@@ -585,6 +585,8 @@ if (viewLevels) {
         const totalWinrateEl = document.getElementById('scorecard-overall-winrate');
         if (!tbody) return;
 
+        tbody.innerHTML = '';
+
         const sourceSet = new Set(Object.keys(scorecardStats));
         allLevels.forEach(l => {
             if (l.source) sourceSet.add(l.source.toUpperCase());
