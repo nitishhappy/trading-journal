@@ -3,8 +3,6 @@ import { viewLevels } from '../dom.js';
 
 if (viewLevels) {
     let allLevels = [];
-    let levelReviewLog = {}; // id -> { review: string, source: string, outcome: string }
-    let scorecardStats = {}; // source -> { w, f, na }
 
     // ===================== LIVE ALERTS STATE =====================
     let liveAlertsInterval = null;
