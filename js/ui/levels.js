@@ -3,7 +3,15 @@ import { viewLevels } from '../dom.js';
 
 if (viewLevels) {
     let allLevels = [];
-    
+    let levelReviewLog = {}; // id -> { review: string, source: string, outcome: string }
+    let scorecardStats = {}; // source -> { w, f, na }
+
+    // ===================== LIVE ALERTS STATE =====================
+    let liveAlertsInterval = null;
+    let alertedLevels = {}; // format: { 'lvl-id': { firstInAlerted: boolean, firstOutAlerted: boolean } }
+    let isLiveAlertsOn = false;
+
+    // DOM refs
     const inpSource = document.getElementById('inp-level-source');
     const inpPrice = document.getElementById('inp-level-price');
     const inpBias = document.getElementById('inp-level-bias');
@@ -1215,6 +1223,143 @@ if (viewLevels) {
 
         reactionResults.appendChild(fragment);
         reactionFooter.innerText = `Checked ${validLevels.length} marked level${validLevels.length > 1 ? 's' : ''} • ${touchedCount} active reaction${touchedCount !== 1 ? 's' : ''} detected on ${dateStr}`;
+    }
+
+    // ===================== LIVE ALERTS LOGIC =====================
+    const btnLiveAlerts = document.getElementById('btn-live-alerts');
+    
+    if (btnLiveAlerts) {
+        btnLiveAlerts.addEventListener('click', async () => {
+            if (isLiveAlertsOn) {
+                stopLiveAlerts();
+            } else {
+                if (typeof Notification !== 'undefined' && Notification.permission !== 'granted') {
+                    const p = await Notification.requestPermission();
+                    if (p !== 'granted') {
+                        import('../utils/toast.js').then(m => m.showToast("Push notifications blocked."));
+                        return;
+                    }
+                }
+                startLiveAlerts();
+            }
+        });
+    }
+
+    function startLiveAlerts() {
+        isLiveAlertsOn = true;
+        btnLiveAlerts.classList.remove('off');
+        btnLiveAlerts.classList.add('on');
+        btnLiveAlerts.innerHTML = `<span class="btn-icon">🟢</span> Live Alerts On`;
+        import('../utils/toast.js').then(m => m.showToast("Live background listener started (polling every 1 min)"));
+        
+        // Immediately run once
+        runSilentLiveEvaluation();
+        
+        // Setup polling every 60 seconds
+        liveAlertsInterval = setInterval(runSilentLiveEvaluation, 60000);
+    }
+
+    function stopLiveAlerts() {
+        isLiveAlertsOn = false;
+        btnLiveAlerts.classList.remove('on');
+        btnLiveAlerts.classList.add('off');
+        btnLiveAlerts.innerHTML = `<span class="btn-icon">🔴</span> Live Alerts Off`;
+        
+        if (liveAlertsInterval) clearInterval(liveAlertsInterval);
+        liveAlertsInterval = null;
+        import('../utils/toast.js').then(m => m.showToast("Live alerts paused"));
+    }
+
+    function isMarketOpen() {
+        const now = new Date();
+        // IST checks
+        const istTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+        const day = istTime.getDay();
+        if (day === 0 || day === 6) return false; // Weekend
+        const hours = istTime.getHours();
+        const mins = istTime.getMinutes();
+        const timeVal = hours * 100 + mins;
+        return timeVal >= 915 && timeVal <= 1530; // 09:15 to 15:30
+    }
+
+    async function runSilentLiveEvaluation() {
+        if (!isMarketOpen()) return;
+        
+        const validLevels = allLevels.filter(l => !isNaN(l.pHigh));
+        if (validLevels.length === 0) return;
+
+        const dateStr = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        const data = await fetch5mCandles(dateStr);
+        
+        if (!data || !data.success || !data.candles || data.candles.length === 0) return;
+        const candles = data.candles;
+
+        validLevels.forEach(lvl => {
+            const lHigh = lvl.pHigh;
+            const lLow = lvl.pLow;
+
+            let firstIn = null;
+            let firstOut = null;
+
+            for (let idx = 0; idx < candles.length; idx++) {
+                const c = candles[idx];
+
+                if (!firstIn) {
+                    if (c.low <= lHigh && c.high >= lLow) {
+                        firstIn = c;
+                    }
+                } else {
+                    if (!firstOut && idx > candles.indexOf(firstIn)) {
+                        if (c.close > lHigh) firstOut = { candle: c, dir: 'above' };
+                        else if (c.close < lLow) firstOut = { candle: c, dir: 'below' };
+                    }
+                }
+            }
+
+            // Initialize state for this level if missing
+            if (!alertedLevels[lvl.id]) {
+                alertedLevels[lvl.id] = { in: false, out: false };
+            }
+
+            const state = alertedLevels[lvl.id];
+
+            // Trigger IN alert
+            if (firstIn && !state.in) {
+                state.in = true;
+                const msg = `Nifty entered level: ${lvl.rawPrice} (${lvl.behavior || lvl.bias})`;
+                triggerSystemAlert(`Level Entry: ${lvl.source || 'BT'}`, msg);
+            }
+
+            // Trigger OUT alert
+            if (firstOut && !state.out) {
+                state.out = true;
+                const msg = `Nifty closed strictly ${firstOut.dir} level ${lvl.rawPrice}`;
+                triggerSystemAlert(`Level Exit: ${lvl.source || 'BT'}`, msg);
+            }
+        });
+    }
+
+    function triggerSystemAlert(title, body) {
+        // In-app toast
+        import('../utils/toast.js').then(m => m.showToast(`🚨 ${title}: ${body}`, 8000));
+        
+        // OS Notification
+        if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+            const options = {
+                body,
+                icon: './icons/icon-192.png',
+                badge: './icons/icon-192.png',
+                vibrate: [200, 100, 200]
+            };
+            if (navigator.serviceWorker) {
+                navigator.serviceWorker.getRegistration().then(reg => {
+                    if (reg) reg.showNotification(title, options);
+                    else new Notification(title, options);
+                }).catch(() => new Notification(title, options));
+            } else {
+                new Notification(title, options);
+            }
+        }
     }
 
     // Call init when module loads
