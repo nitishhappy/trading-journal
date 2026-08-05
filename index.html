@@ -990,6 +990,32 @@
         </div>
       </div>
 
+      <div class="settings-section" id="telegram-scanner-settings-container">
+        <h3>📱 Telegram Private Channel Scanner (MTProto)</h3>
+        <p class="settings-hint">Configure Telegram Client credentials to automatically scan private groups/channels for trade alerts (e.g. Gold Buy / Gold Sell signals).</p>
+        
+        <label for="settings-tg-appid">Telegram App ID (API ID)</label>
+        <input type="text" id="settings-tg-appid" style="width:100%;margin-bottom:8px;" placeholder="31443675" value="31443675" />
+        
+        <label for="settings-tg-apphash">Telegram App Hash</label>
+        <div class="api-key-row" style="margin-bottom:8px;">
+          <input type="password" id="settings-tg-apphash" style="width:100%;" placeholder="d09c1517cf4c59650ab49378c357f870" value="d09c1517cf4c59650ab49378c357f870" autocomplete="off" />
+          <button id="settings-tg-apphash-toggle" class="icon-btn" title="Show/hide hash">👁</button>
+        </div>
+
+        <label for="settings-tg-private-channel">Private Channel Link / Invite</label>
+        <input type="text" id="settings-tg-private-channel" style="width:100%;margin-bottom:8px;" placeholder="https://telegram.me/+FypcEpb4LTkyYzY1" value="https://telegram.me/+FypcEpb4LTkyYzY1" />
+
+        <label for="settings-tg-filter-keywords">Filter / Search Strings (Comma separated)</label>
+        <input type="text" id="settings-tg-filter-keywords" style="width:100%;margin-bottom:12px;" placeholder="Gold Buy, Gold Sell, BUY, SELL, XAUUSD" value="Gold Buy, Gold Sell, BUY, SELL, XAUUSD" />
+
+        <div id="settings-tg-scanner-status" class="settings-hint" style="margin-bottom:8px;"></div>
+
+        <div style="display:flex; gap:8px;">
+          <button id="settings-tg-scanner-save-btn" class="btn-primary" style="flex:1;">Save Telegram Scanner Settings</button>
+        </div>
+      </div>
+
       <div class="settings-section settings-section-signout">
         <button id="settings-logout-btn" class="btn-secondary">Sign out</button>
       </div>

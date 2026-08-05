@@ -205,9 +205,11 @@ export function loadSettings() {
     const groupSelect = document.getElementById("group-select");
     if (groupSelect) groupSelect.value = state.groupMode;
     
+    loadTelegramScannerSettings();
     window.dispatchEvent(new CustomEvent('settings-loaded'));
   }).catch((err) => {
     console.error("settings load error", err);
+    loadTelegramScannerSettings();
   });
 }
 
@@ -461,6 +463,94 @@ if (tradePasscodeRemoveBtn) {
   });
 }
 
+// ===================== Telegram Private Channel Scanner Settings =====================
+const tgAppIdInput = document.getElementById("settings-tg-appid");
+const tgAppHashInput = document.getElementById("settings-tg-apphash");
+const tgAppHashToggle = document.getElementById("settings-tg-apphash-toggle");
+const tgPrivateChannelInput = document.getElementById("settings-tg-private-channel");
+const tgFilterKeywordsInput = document.getElementById("settings-tg-filter-keywords");
+const tgScannerStatus = document.getElementById("settings-tg-scanner-status");
+const tgScannerSaveBtn = document.getElementById("settings-tg-scanner-save-btn");
+
+if (tgAppHashToggle && tgAppHashInput) {
+  tgAppHashToggle.addEventListener("click", () => {
+    const isPassword = tgAppHashInput.type === "password";
+    tgAppHashInput.type = isPassword ? "text" : "password";
+    tgAppHashToggle.textContent = isPassword ? "🙈" : "👁";
+  });
+}
+
+export async function loadTelegramScannerSettings() {
+  try {
+    if (!state.currentUser) return;
+    const ref = db.collection("users").doc(state.currentUser.uid).collection("settings").doc("telegramScanner");
+    const doc = await ref.get();
+    if (doc.exists) {
+      const data = doc.data();
+      if (tgAppIdInput && data.appId) tgAppIdInput.value = data.appId;
+      if (tgAppHashInput && data.appHash) tgAppHashInput.value = data.appHash;
+      if (tgPrivateChannelInput && data.channelLink) tgPrivateChannelInput.value = data.channelLink;
+      if (tgFilterKeywordsInput && data.filterKeywords) tgFilterKeywordsInput.value = data.filterKeywords;
+    }
+  } catch (err) {
+    console.warn("Could not load telegram scanner settings from Firestore:", err);
+    // LocalStorage fallback
+    const saved = localStorage.getItem("tg_scanner_config");
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        if (tgAppIdInput && data.appId) tgAppIdInput.value = data.appId;
+        if (tgAppHashInput && data.appHash) tgAppHashInput.value = data.appHash;
+        if (tgPrivateChannelInput && data.channelLink) tgPrivateChannelInput.value = data.channelLink;
+        if (tgFilterKeywordsInput && data.filterKeywords) tgFilterKeywordsInput.value = data.filterKeywords;
+      } catch (e) {}
+    }
+  }
+}
+
+if (tgScannerSaveBtn) {
+  tgScannerSaveBtn.addEventListener("click", async () => {
+    const appId = tgAppIdInput ? tgAppIdInput.value.trim() : "";
+    const appHash = tgAppHashInput ? tgAppHashInput.value.trim() : "";
+    const channelLink = tgPrivateChannelInput ? tgPrivateChannelInput.value.trim() : "";
+    const filterKeywords = tgFilterKeywordsInput ? tgFilterKeywordsInput.value.trim() : "";
+
+    const payload = {
+      appId: appId || "31443675",
+      appHash: appHash || "d09c1517cf4c59650ab49378c357f870",
+      channelLink: channelLink || "https://telegram.me/+FypcEpb4LTkyYzY1",
+      filterKeywords: filterKeywords || "Gold Buy, Gold Sell, BUY, SELL, XAUUSD",
+      updatedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("tg_scanner_config", JSON.stringify(payload));
+
+    if (tgScannerStatus) {
+      tgScannerStatus.textContent = "Saving settings...";
+      tgScannerStatus.style.color = "var(--text-dim)";
+    }
+
+    try {
+      if (state.currentUser) {
+        const ref = db.collection("users").doc(state.currentUser.uid).collection("settings").doc("telegramScanner");
+        await ref.set(payload, { merge: true });
+      }
+      if (tgScannerStatus) {
+        tgScannerStatus.textContent = "Telegram Scanner settings saved successfully!";
+        tgScannerStatus.style.color = "var(--low)";
+      }
+      showToast("Telegram Scanner settings saved");
+    } catch (err) {
+      console.error(err);
+      if (tgScannerStatus) {
+        tgScannerStatus.textContent = "Saved locally in browser.";
+        tgScannerStatus.style.color = "var(--accent)";
+      }
+      showToast("Saved locally in browser");
+    }
+  });
+}
+
 // Bind to window for compatibility with trade-security.js overrides
 window.loadTradePasscodeStatus = loadTradePasscodeStatus;
 window.resetTradeInactivityTimer = resetTradeInactivityTimer;
@@ -469,3 +559,4 @@ window.hideTradeLock = hideTradeLock;
 window.attemptUnlock = attemptUnlock;
 window.loadSettings = loadSettings;
 window.checkBackupReminder = checkBackupReminder;
+window.loadTelegramScannerSettings = loadTelegramScannerSettings;
