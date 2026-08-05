@@ -395,6 +395,15 @@ if (viewLevels) {
             }
         });
 
+        // Sync in Visual Chart Map annotations
+        const chartBtns = document.querySelectorAll(`.chart-status-${id}`);
+        chartBtns.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.status === newStatus) {
+                btn.classList.add('active');
+            }
+        });
+
         saveLevelsData();
         recordLevelOutcome(id, src, newStatus);
     };
@@ -807,12 +816,16 @@ if (viewLevels) {
                 const srcTag = lvl.source ? `<span class="source-badge" style="font-size:0.72rem; margin-right:4px;">${lvl.source}</span>` : '';
 
                 ann.innerHTML = `
-                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; flex-wrap:wrap; gap:6px;">
                         <div>
                             ${srcTag}
                             <span class="badge ${lvl.bias}">${lvl.biasBadge}${rangeText}</span>
                         </div>
-                        <span class="stat-tag ${lvl.status === 'worked' ? 'worked' : lvl.status === 'failed' ? 'failed' : 'na'}" style="font-size:0.7rem;">${lvl.status === 'worked' ? '✅ Worked' : lvl.status === 'failed' ? '❌ Failed' : '⚪ NA'}</span>
+                        <div class="chart-status-group" style="display:flex; gap:4px;">
+                            <button type="button" class="status-btn status-worked chart-status-${lvl.id} ${lvl.status === 'worked' ? 'active' : ''}" data-status="worked" onclick="window.setLevelStatus('${lvl.id}', 'worked')" style="font-size:0.7rem; padding:2px 6px;" title="Worked">✅</button>
+                            <button type="button" class="status-btn status-failed chart-status-${lvl.id} ${lvl.status === 'failed' ? 'active' : ''}" data-status="failed" onclick="window.setLevelStatus('${lvl.id}', 'failed')" style="font-size:0.7rem; padding:2px 6px;" title="Failed">❌</button>
+                            <button type="button" class="status-btn status-na chart-status-${lvl.id} ${lvl.status === 'na' ? 'active' : ''}" data-status="na" onclick="window.setLevelStatus('${lvl.id}', 'na')" style="font-size:0.7rem; padding:2px 6px;" title="NA">⚪</button>
+                        </div>
                     </div>
                     <div class="text" style="line-height:1.5; color:var(--text); font-size:0.95rem;">${lvl.behavior}</div>
                     <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--text-dim); display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace;">
