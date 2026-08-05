@@ -560,22 +560,25 @@ A dedicated **Dual Candle Repeat Timer HUD** and **Audio Alarm Engine** for mark
 - `js/ui/candleTimers.js` — Countdown loop controller, HUD DOM binder, and Settings UI manager.
 - `js/utils/audio.js` — Web Audio API multi-frequency sound synthesizer.
 
-### v2.3.4 — 4 Aug 2026 — Scrollable Navigation Tabs & Arrow Controls
+### v2.3.5 — 5 Aug 2026 — Live Alerts: Chart Screenshot Previews, Vision AI Levels & Fullscreen Lightbox
 
-A responsive, scrollable navigation bar with interactive chevron buttons for navigating across all 8 views seamlessly on mobile and smaller screens.
+Enhanced **Live TV Alerts** webhook handler (`/api/tvWebhook`) and alert notification UI (`tvNotifications.js`) to support embedded chart screenshots, vision-extracted price levels, setup insights, and fullscreen zoom modals.
 
 #### What it does
-- **Sleek Arrow Controls (`<` / `>`)**:
-  - Integrated left (`#tabs-scroll-left`) and right (`#tabs-scroll-right`) chevron navigation buttons flanking the main tab bar.
-  - Smooth step-scrolling (`180px` per click) across views.
-- **Dynamic Edge Detection & Indicator Shadows**:
-  - Automatically enables/disables arrow buttons and adjusts opacity based on current scroll position (`scrollLeft`).
-  - Soft gradient edge shadows dynamically fade in/out on the left and right edges when additional tab content is scrollable in that direction.
-- **Auto Active Tab Centering**:
-  - Selecting any tab automatically smooth-scrolls and centers it within the visible view area (`scrollIntoView({ inline: 'center' })`).
-- **Mouse Wheel & Touch Swipe Support**:
-  - Full horizontal wheel scrolling on desktop and native touch-scrolling on mobile devices.
-- **Theme-Integrated Design**:
-  - Styled with semi-transparent frosted glass backdrop blur matching the top header in both dark and light modes.
+- **Embedded Chart Screenshot Previews**:
+  - Automatically captures and embeds compressed chart screenshots sent via webhooks/MTProto workers directly into alert notification cards.
+  - Interactive thumbnail preview with clean header tag.
+- **Fullscreen Image Lightbox**:
+  - Clicking any chart screenshot opens an overlay modal with high-res zoom view and close controls.
+- **Dynamic Trade Level Badges (Entry, SL, TP, R:R)**:
+  - **Entry Price**: Prominent blue pill badge.
+  - **Stop Loss (SL)**: Red risk pill.
+  - **Take Profit (TP / Targets)**: Green target pill.
+  - **Risk-to-Reward (R:R)**: Real-time calculated ratio badge (e.g. `🎯 R:R 1:1.8`).
+- **AI Setup Insight Box**:
+  - Highlighted golden insight card summarizing technical reasoning, direction, and trade parameters.
+- **Updated Cloud & Mobile Worker**:
+  - Added Google Gemini 2.0 Flash Vision and Groq 90B Vision fallback in `telegram_cloud_worker/worker.py` for reading TradingView mobile position tools automatically.
+
 
 
