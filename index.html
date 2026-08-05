@@ -1130,40 +1130,41 @@
                             </div>
                             <!-- Cards injected here -->
                         </div>
+                    </div>
+                </div>
 
-                        <!-- EOD PERFORMANCE SCORECARD TABLE -->
-                        <div class="level-scorecard-panel" id="level-scorecard-panel">
-                            <div class="level-scorecard-header">
-                                <div style="display:flex; align-items:center; gap:8px;">
-                                    <span style="font-size:1.15rem;">📊</span>
-                                    <h3 style="margin:0; font-size:1rem; font-weight:700;">EOD Forecast Scorecard (Worked : Failed)</h3>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:10px;">
-                                    <button type="button" id="btn-scorecard-reset" class="btn-scorecard-reset" title="Reset all cumulative historical prediction stats">Reset Stats</button>
-                                    <div class="scorecard-stats-pill" id="scorecard-total-pill">
-                                        Worked:Failed: <b id="scorecard-overall-ratio" style="color:var(--text); margin:0 4px;">0:0</b> (<span id="scorecard-overall-winrate" style="color:var(--success); font-weight:bold;">0%</span>)
-                                    </div>
-                                </div>
+                <!-- EOD PERFORMANCE SCORECARD PANEL (Always visible) -->
+                <div class="panel">
+                    <div class="level-scorecard-panel" id="level-scorecard-panel" style="margin-top:0;">
+                        <div class="level-scorecard-header">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="font-size:1.15rem;">📊</span>
+                                <h3 style="margin:0; font-size:1rem; font-weight:700;">EOD Forecast Scorecard (Worked : Failed)</h3>
                             </div>
-                            <div class="scorecard-table-wrap">
-                                <table class="scorecard-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Source / Channel</th>
-                                            <th>Worked (W)</th>
-                                            <th>Failed (F)</th>
-                                            <th>W : F Ratio</th>
-                                            <th>Win Rate %</th>
-                                            <th class="th-muted">NA / Ignored</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="scorecard-tbody">
-                                        <!-- Dynamically generated rows -->
-                                    </tbody>
-                                </table>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <button type="button" id="btn-scorecard-reset" class="btn-scorecard-reset" title="Reset all cumulative historical prediction stats">Reset Stats</button>
+                                <div class="scorecard-stats-pill" id="scorecard-total-pill">
+                                    Worked:Failed: <b id="scorecard-overall-ratio" style="color:var(--text); margin:0 4px;">0:0</b> (<span id="scorecard-overall-winrate" style="color:var(--success); font-weight:bold;">0%</span>)
+                                </div>
                             </div>
                         </div>
-
+                        <div class="scorecard-table-wrap">
+                            <table class="scorecard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Source / Channel</th>
+                                        <th>Worked (W)</th>
+                                        <th>Failed (F)</th>
+                                        <th>W : F Ratio</th>
+                                        <th>Win Rate %</th>
+                                        <th class="th-muted">NA / Ignored</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scorecard-tbody">
+                                    <!-- Dynamically generated rows -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
