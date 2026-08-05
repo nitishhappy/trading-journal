@@ -58,8 +58,98 @@ if (viewLevels) {
         }
     }
 
+    // ===================== PERSISTENT SCORECARD STATE ===================== //
+    // Scorecard stats persist across days with a single entry per source and survive "Clear All"
+    let scorecardStats = {}; // { "BT": { worked: 0, failed: 0, na: 0 }, ... }
+    let levelReviewLog = {}; // { [levelId]: { source: "BT", status: "worked" | "failed" | "na" } }
+
+    function loadScorecardHistory() {
+        try {
+            const savedStats = localStorage.getItem('levelsScorecardHistory');
+            if (savedStats) scorecardStats = JSON.parse(savedStats);
+        } catch (e) {
+            console.error("Error loading levelsScorecardHistory:", e);
+            scorecardStats = {};
+        }
+
+        try {
+            const savedLog = localStorage.getItem('levelsLoggedReviews');
+            if (savedLog) levelReviewLog = JSON.parse(savedLog);
+        } catch (e) {
+            console.error("Error loading levelsLoggedReviews:", e);
+            levelReviewLog = {};
+        }
+
+        // If no persistent history exists yet, populate from window.dailyPlanData or loaded levels
+        if (Object.keys(scorecardStats).length === 0) {
+            const initialList = (window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : allLevels;
+            if (Array.isArray(initialList) && initialList.length > 0) {
+                initialList.forEach((l, idx) => {
+                    const src = (l.source || 'BT').toUpperCase();
+                    const st = (l.status || 'na').toLowerCase();
+                    if (!scorecardStats[src]) {
+                        scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
+                    }
+                    if (st === 'worked') scorecardStats[src].worked++;
+                    else if (st === 'failed') scorecardStats[src].failed++;
+                    else scorecardStats[src].na++;
+
+                    const lid = l.id || ('lvl-init-' + idx);
+                    levelReviewLog[lid] = { source: src, status: st };
+                });
+                saveScorecardHistory();
+            }
+        }
+    }
+
+    function saveScorecardHistory() {
+        try {
+            localStorage.setItem('levelsScorecardHistory', JSON.stringify(scorecardStats));
+            localStorage.setItem('levelsLoggedReviews', JSON.stringify(levelReviewLog));
+        } catch (e) {
+            console.error("Error saving levelsScorecardHistory:", e);
+        }
+    }
+
+    function recordLevelOutcome(levelId, newSource, newStatus) {
+        const src = (newSource || 'BT').toUpperCase();
+        const st = (newStatus || 'na').toLowerCase();
+
+        // Check if levelId was previously recorded
+        const prev = levelReviewLog[levelId];
+        if (prev) {
+            const prevSrc = (prev.source || 'BT').toUpperCase();
+            const prevSt = (prev.status || 'na').toLowerCase();
+
+            // Decrement previous status from prev source if exists
+            if (scorecardStats[prevSrc] && scorecardStats[prevSrc][prevSt] !== undefined) {
+                scorecardStats[prevSrc][prevSt] = Math.max(0, scorecardStats[prevSrc][prevSt] - 1);
+            }
+        }
+
+        // Ensure target source bucket exists
+        if (!scorecardStats[src]) {
+            scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
+        }
+
+        // Increment new status
+        if (scorecardStats[src][st] !== undefined) {
+            scorecardStats[src][st]++;
+        } else {
+            scorecardStats[src][st] = 1;
+        }
+
+        // Update review log
+        levelReviewLog[levelId] = { source: src, status: st, updatedAt: new Date().toISOString() };
+
+        saveScorecardHistory();
+        renderScorecard();
+    }
+
     // Initialize
     function initLevels() {
+        loadScorecardHistory();
+
         let loaded = localStorage.getItem('dailyTradePlanData');
         if (loaded) {
             try {
@@ -160,7 +250,7 @@ if (viewLevels) {
 
     document.getElementById('btn-level-clear').addEventListener('click', (e) => {
         e.stopPropagation();
-        if(confirm("Are you sure you want to clear all levels?")) {
+        if(confirm("Are you sure you want to clear today's mapped levels? (Scorecard statistics will be kept)")) {
             allLevels = [];
             document.getElementById('levels-list').innerHTML = `<div class="empty-state-levels" id="levels-empty-state">No levels mapped yet. Add a level above to build your trade plan.</div>`;
             saveLevelsData();
@@ -169,6 +259,19 @@ if (viewLevels) {
             renderScorecard();
         }
     });
+
+    const btnScorecardReset = document.getElementById('btn-scorecard-reset');
+    if (btnScorecardReset) {
+        btnScorecardReset.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm("Reset all historical source prediction statistics across all channels?")) {
+                scorecardStats = {};
+                levelReviewLog = {};
+                saveScorecardHistory();
+                renderScorecard();
+            }
+        });
+    }
 
     document.getElementById('btn-level-add').addEventListener('click', () => {
         const source = (inpSource ? inpSource.value.trim() : '') || 'BT';
@@ -196,8 +299,12 @@ if (viewLevels) {
     // Make outcome status toggle globally accessible
     window.setLevelStatus = function(id, newStatus) {
         const idx = allLevels.findIndex(l => l.id === id);
+        let src = 'BT';
         if (idx !== -1) {
             allLevels[idx].status = newStatus;
+            src = allLevels[idx].source || 'BT';
+        } else if (levelReviewLog[id]) {
+            src = levelReviewLog[id].source || 'BT';
         }
 
         const card = document.getElementById(id);
@@ -220,7 +327,7 @@ if (viewLevels) {
         });
 
         saveLevelsData();
-        renderScorecard();
+        recordLevelOutcome(id, src, newStatus);
     };
 
     // Make edit functions available globally for inline onblur
@@ -246,6 +353,7 @@ if (viewLevels) {
 
         const idx = allLevels.findIndex(l => l.id === id);
         if(idx !== -1) {
+            const oldSource = allLevels[idx].source;
             allLevels[idx].source = newSource;
             allLevels[idx].rawPrice = newPrice;
             allLevels[idx].behavior = newBehavior;
@@ -268,6 +376,10 @@ if (viewLevels) {
             } else {
                 allLevels[idx].pHigh = NaN;
                 allLevels[idx].pLow = NaN;
+            }
+
+            if (oldSource !== newSource) {
+                recordLevelOutcome(id, newSource, allLevels[idx].status || 'na');
             }
         }
         renderChart();
@@ -377,6 +489,11 @@ if (viewLevels) {
             sl: sl
         });
 
+        // If card loaded with non-NA status and not yet in persistent log, record it
+        if (normStatus !== 'na' && !levelReviewLog[levelId]) {
+            recordLevelOutcome(levelId, normSource, normStatus);
+        }
+
         updateCount();
         renderChart();
         renderScorecard();
@@ -401,47 +518,33 @@ if (viewLevels) {
 
         tbody.innerHTML = '';
 
-        if (allLevels.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-dim); padding:1rem;">No levels to review yet.</td></tr>`;
+        const sources = Object.keys(scorecardStats).sort();
+
+        // If no sources exist in history
+        if (sources.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-dim); padding:1rem;">No historical reviews yet. Mark levels as Worked / Failed to track source performance over time.</td></tr>`;
             if (totalRatioEl) totalRatioEl.innerText = '0:0';
             if (totalWinrateEl) {
                 totalWinrateEl.innerText = '0%';
-                totalWinrateEl.className = '';
+                totalWinrateEl.style.color = 'var(--text-dim)';
             }
             return;
         }
 
-        // Group stats by source
-        const sourceMap = {};
         let grandWorked = 0;
         let grandFailed = 0;
         let grandNA = 0;
 
-        allLevels.forEach(lvl => {
-            const src = (lvl.source || 'BT').toUpperCase();
-            if (!sourceMap[src]) {
-                sourceMap[src] = { worked: 0, failed: 0, na: 0 };
-            }
-            const st = lvl.status || 'na';
-            if (st === 'worked') {
-                sourceMap[src].worked++;
-                grandWorked++;
-            } else if (st === 'failed') {
-                sourceMap[src].failed++;
-                grandFailed++;
-            } else {
-                sourceMap[src].na++;
-                grandNA++;
-            }
-        });
+        sources.forEach(src => {
+            const stat = scorecardStats[src] || { worked: 0, failed: 0, na: 0 };
+            const w = stat.worked || 0;
+            const f = stat.failed || 0;
+            const na = stat.na || 0;
 
-        const sortedSources = Object.keys(sourceMap).sort();
+            grandWorked += w;
+            grandFailed += f;
+            grandNA += na;
 
-        sortedSources.forEach(src => {
-            const stat = sourceMap[src];
-            const w = stat.worked;
-            const f = stat.failed;
-            const na = stat.na;
             const evaluated = w + f;
             
             let winRateStr = '--';
@@ -481,7 +584,7 @@ if (viewLevels) {
         const totalTr = document.createElement('tr');
         totalTr.className = 'scorecard-total-row';
         totalTr.innerHTML = `
-            <td><b>TOTAL / ALL</b></td>
+            <td><b>TOTAL / ALL SOURCES</b></td>
             <td><b class="stat-num-worked">${grandWorked}</b></td>
             <td><b class="stat-num-failed">${grandFailed}</b></td>
             <td><b class="stat-ratio font-mono" style="font-size:0.95rem;">${grandWorked} : ${grandFailed}</b></td>

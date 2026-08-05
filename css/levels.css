@@ -397,6 +397,24 @@
     border-bottom: 1px solid var(--border);
 }
 
+.btn-scorecard-reset {
+    background: rgba(244, 63, 94, 0.08);
+    border: 1px solid rgba(244, 63, 94, 0.25);
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-scorecard-reset:hover {
+    background: rgba(244, 63, 94, 0.2);
+    color: #fda4af;
+    border-color: rgba(244, 63, 94, 0.5);
+}
+
 .scorecard-stats-pill {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.85rem;

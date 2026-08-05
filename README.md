@@ -637,3 +637,16 @@ Added channel source tagging, end-of-day level performance reviewing, and a real
     - **NA / Ignored** count (untested/untouched levels excluded from win rate calculations).
   - Updates in real-time as you mark predictions.
 
+### v2.3.8 — 5 Aug 2026 — Levels Tab: Multi-Day Persistent Scorecard History
+
+Decoupled the EOD Performance Scorecard from daily trade plan level clears, allowing historical channel win rates to accumulate across days while keeping individual daily plans cleanable.
+
+#### What it does
+- **Persistent Multi-Day Tracking**:
+  - Scorecard stats persist across days in dedicated local storage (`levelsScorecardHistory` & `levelsLoggedReviews`).
+  - Each source channel (`BT`, `AK`, `SM`, `PR`, etc.) maintains a single cumulative entry recording all past evaluated predictions.
+- **Independent "Clear All Levels" vs. "Reset Stats"**:
+  - Tapping **Clear All** on the Mapped Levels panel clears only the temporary daily plan cards without wiping historical source statistics.
+  - Added a dedicated **Reset Stats** button in the Scorecard header for when you explicitly wish to start fresh with a clean slate across all channels.
+- **Smart Audit Log**:
+  - Re-evaluating or modifying level sources automatically adjusts and recalculates source balances without duplicate counts.
