@@ -118,5 +118,43 @@ window.dailyPlanData = [
     "tp": "N/A",
     "sl": "N/A",
     "status": "na"
+  },
+
+  // --- Chartking Elliott Trading Academy (CETA) ---
+  {
+    "source": "CETA",
+    "price": "24560 - 24642",
+    "bias": "bearish",
+    "behavior": "Wave B Retracement & Tactical Shorting Zone: Zigzag Wave B corrective bounce spanning 38.2% - 81.2% retracement (24,560 / 24,601 / 24,642). Look for intraday rejection/shorting setups targeting Wave C decline.",
+    "tp": "24300 / 24132",
+    "sl": "Decisive close above 24740",
+    "status": "na"
+  },
+  {
+    "source": "CETA",
+    "price": "24132",
+    "bias": "bullish",
+    "behavior": "Wave C Downside Exhaustion & Macro Buying Floor: 75m 15-candle time cycle floor at 24,132. Maximum projected extent for Wave C. Extreme high-probability institutional demand zone for major upward swing.",
+    "tp": "24500 / 24800+",
+    "sl": "Below 24000",
+    "status": "na"
+  },
+  {
+    "source": "CETA",
+    "price": "24740",
+    "bias": "bullish",
+    "behavior": "Protective Invalidation Level: 100% Wave A top. A breakout and sustained trading above 24,740 immediately aborts the Wave B/C correction and triggers direct aggressive upside continuation.",
+    "tp": "24900 / 25000",
+    "sl": "Below 24650",
+    "status": "na"
+  },
+  {
+    "source": "CETA",
+    "price": "TACTICAL RULE: Zigzag Wave B vs Macro Bullish Trend",
+    "bias": "neutral",
+    "behavior": "Intraday sell-on-rise in 24,560-24,642 is purely a tactical corrective trade. Ultimate market trend is bullish; do not overstay short positions. Prepare for strong buying on dip into 24,132.",
+    "tp": "N/A",
+    "sl": "N/A",
+    "status": "na"
   }
 ];
