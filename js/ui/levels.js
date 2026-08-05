@@ -431,6 +431,372 @@ if (viewLevels) {
         });
     }
 
+    // ===================== 5M FIRST CANDLE IN / OUT ANALYSIS ===================== //
+    const inpAnalysisDate = document.getElementById('inp-level-date');
+    const btnAnalyze = document.getElementById('btn-level-analyze');
+    const modalReaction = document.getElementById('level-reaction-modal');
+    const modalReactionClose = document.getElementById('level-reaction-modal-close');
+    const btnReactionClose = document.getElementById('level-reaction-close-btn');
+    const reactionLoading = document.getElementById('level-reaction-loading');
+    const reactionError = document.getElementById('level-reaction-error');
+    const reactionResults = document.getElementById('level-reaction-results');
+    const reactionSubtitle = document.getElementById('level-reaction-subtitle');
+    const reactionFooter = document.getElementById('level-reaction-summary-footer');
+
+    // Initialize Date Input with today's date in IST
+    if (inpAnalysisDate) {
+        const todayIst = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        inpAnalysisDate.value = todayIst;
+    }
+
+    if (btnAnalyze) {
+        btnAnalyze.addEventListener('click', runLevelReactionAnalysis);
+    }
+
+    if (modalReactionClose) {
+        modalReactionClose.addEventListener('click', closeReactionModal);
+    }
+
+    if (btnReactionClose) {
+        btnReactionClose.addEventListener('click', closeReactionModal);
+    }
+
+    if (modalReaction) {
+        modalReaction.addEventListener('click', (e) => {
+            if (e.target === modalReaction) closeReactionModal();
+        });
+    }
+
+    function closeReactionModal() {
+        if (modalReaction) modalReaction.classList.add('hidden');
+    }
+
+    async function fetch5mCandles(dateStr) {
+        // 1. Try serverless backend route first
+        try {
+            const res = await fetch(`/api/niftyCandles?date=${encodeURIComponent(dateStr)}`);
+            if (res.ok) {
+                const data = await res.json();
+                if (data.success && Array.isArray(data.candles) && data.candles.length > 0) {
+                    return data;
+                }
+            }
+        } catch (e) {
+            console.warn("Backend /api/niftyCandles fetch failed, falling back to direct Upstox:", e);
+        }
+
+        // 2. Direct browser fallback using Upstox public API
+        try {
+            const encInst = "NSE_INDEX%7CNifty%2050";
+            const todayIst = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+            let rawCandles = [];
+
+            if (dateStr === todayIst) {
+                const intraRes = await fetch(`https://api.upstox.com/v2/historical-candle/intraday/${encInst}/1minute`);
+                if (intraRes.ok) {
+                    const data = await intraRes.json();
+                    rawCandles = data?.data?.candles || [];
+                }
+            }
+
+            if (!rawCandles || rawCandles.length === 0) {
+                const histRes = await fetch(`https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${dateStr}/${dateStr}`);
+                if (histRes.ok) {
+                    const data = await histRes.json();
+                    rawCandles = data?.data?.candles || [];
+                }
+            }
+
+            if (!rawCandles || rawCandles.length === 0) {
+                return { success: false, message: `No candle data found for ${dateStr}. Market may have been closed.` };
+            }
+
+            // Filter & sort chronological
+            const filtered1m = rawCandles
+                .filter(c => c[0] && c[0].startsWith(dateStr))
+                .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime());
+
+            if (filtered1m.length === 0) {
+                return { success: false, message: `No candle data for ${dateStr}.` };
+            }
+
+            // Aggregate into 5m
+            const candles5m = [];
+            for (const c of filtered1m) {
+                const dt = new Date(c[0]);
+                const minutes = dt.getMinutes();
+                const bucketMin = Math.floor(minutes / 5) * 5;
+                const bucketDt = new Date(dt);
+                bucketDt.setMinutes(bucketMin, 0, 0);
+
+                const timeStr = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: false });
+                const time12 = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true });
+
+                if (candles5m.length === 0 || candles5m[candles5m.length - 1].timeStr !== timeStr) {
+                    candles5m.push({
+                        timeStr,
+                        time12,
+                        timestamp: c[0],
+                        open: Number(c[1]),
+                        high: Number(c[2]),
+                        low: Number(c[3]),
+                        close: Number(c[4]),
+                        volume: Number(c[5] || 0)
+                    });
+                } else {
+                    const last = candles5m[candles5m.length - 1];
+                    last.high = Math.max(last.high, Number(c[2]));
+                    last.low = Math.min(last.low, Number(c[3]));
+                    last.close = Number(c[4]);
+                    last.volume += Number(c[5] || 0);
+                }
+            }
+
+            return {
+                success: true,
+                date: dateStr,
+                count: candles5m.length,
+                dayHigh: Math.max(...candles5m.map(c => c.high)),
+                dayLow: Math.min(...candles5m.map(c => c.low)),
+                candles: candles5m
+            };
+        } catch (err) {
+            console.error("Direct Upstox fetch error:", err);
+            return { success: false, message: "Network error fetching candles: " + err.message };
+        }
+    }
+
+    async function runLevelReactionAnalysis() {
+        if (!modalReaction) return;
+        
+        const validLevels = allLevels.filter(l => !isNaN(l.pHigh));
+        if (validLevels.length === 0) {
+            alert("No price levels marked! Add one or more levels to the plan first.");
+            return;
+        }
+
+        const dateStr = inpAnalysisDate ? inpAnalysisDate.value : new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        if (!dateStr) {
+            alert("Please select a valid date for analysis.");
+            return;
+        }
+
+        // Open modal & show loader
+        modalReaction.classList.remove('hidden');
+        reactionLoading.classList.remove('hidden');
+        reactionError.classList.add('hidden');
+        reactionResults.innerHTML = '';
+        reactionSubtitle.innerText = `Analyzing 5m Upstox candles for ${dateStr}...`;
+        reactionFooter.innerText = '';
+
+        const data = await fetch5mCandles(dateStr);
+        reactionLoading.classList.add('hidden');
+
+        if (!data || !data.success || !data.candles || data.candles.length === 0) {
+            reactionError.classList.remove('hidden');
+            reactionError.innerHTML = `
+                <div style="font-size:1.5rem; margin-bottom:0.5rem;">⚠️</div>
+                <div style="font-weight:600; margin-bottom:0.25rem;">Could not load 5m candle data for ${dateStr}</div>
+                <div style="font-size:0.85rem; color:var(--text-dim);">${data?.message || 'Market might have been closed on this date.'}</div>
+            `;
+            reactionSubtitle.innerText = `No candle data available for ${dateStr}`;
+            return;
+        }
+
+        const candles = data.candles;
+        reactionSubtitle.innerText = `Evaluated ${candles.length} (5m) candles on ${dateStr} | Day Range: ${data.dayLow?.toFixed(1)} - ${data.dayHigh?.toFixed(1)}`;
+
+        // Analyze each level
+        let touchedCount = 0;
+        const fragment = document.createDocumentFragment();
+
+        validLevels.forEach((lvl, lIdx) => {
+            const lHigh = lvl.pHigh;
+            const lLow = lvl.pLow;
+
+            let firstIn = null;
+            let firstOut = null;
+            let prevClose = null;
+
+            for (let idx = 0; idx < candles.length; idx++) {
+                const c = candles[idx];
+
+                // 1. Detect First Candle IN
+                if (!firstIn) {
+                    if (c.low <= lHigh && c.high >= lLow) {
+                        let approach = "Inside Level";
+                        let approachIcon = "↔️";
+                        if (prevClose !== null) {
+                            if (prevClose > lHigh) {
+                                approach = "From Above (Pullback / Drop)";
+                                approachIcon = "↓";
+                            } else if (prevClose < lLow) {
+                                approach = "From Below (Rally / Push Up)";
+                                approachIcon = "↑";
+                            }
+                        }
+
+                        // Touch Type: Body entry vs Wick sweep
+                        const bodyMin = Math.min(c.open, c.close);
+                        const bodyMax = Math.max(c.open, c.close);
+                        const isBody = (bodyMin <= lHigh && bodyMax >= lLow);
+                        const touchType = isBody ? "Body Entry" : "Wick Sweep / Pin";
+
+                        firstIn = {
+                            index: idx,
+                            time: c.time12,
+                            candle: c,
+                            approach,
+                            approachIcon,
+                            type: touchType,
+                            isBody
+                        };
+                    }
+                } else {
+                    // 2. Detect First Candle OUT (first candle strictly closing outside after entry)
+                    if (!firstOut && idx > firstIn.index) {
+                        if (c.close > lHigh) {
+                            firstOut = {
+                                time: c.time12,
+                                direction: "Broke Out Above 🟢",
+                                dirType: "bullish",
+                                candle: c
+                            };
+                        } else if (c.close < lLow) {
+                            firstOut = {
+                                time: c.time12,
+                                direction: "Broke Down Below 🔴",
+                                dirType: "bearish",
+                                candle: c
+                            };
+                        }
+                    }
+                }
+
+                prevClose = c.close;
+            }
+
+            if (firstIn) touchedCount++;
+
+            // Create Result Card
+            const card = document.createElement('div');
+            card.className = `level-reaction-card ${lvl.bias || 'neutral'} ${firstIn ? 'is-touched' : 'not-touched'}`;
+
+            let biasColor = 'var(--warning)';
+            if (lvl.bias === 'bullish') biasColor = 'var(--success)';
+            if (lvl.bias === 'bearish') biasColor = 'var(--danger)';
+
+            let priceDisplay = lvl.rawPrice;
+            if (lvl.isRange) {
+                priceDisplay = `${lvl.pHigh} – ${lvl.pLow}`;
+            }
+
+            let inContentHtml = '';
+            let outContentHtml = '';
+
+            if (firstIn) {
+                const c = firstIn.candle;
+                inContentHtml = `
+                    <div class="reaction-step-box in-box">
+                        <div class="reaction-step-header">
+                            <span class="reaction-step-tag tag-in">🟢 First Candle IN</span>
+                            <span class="reaction-time-badge">${firstIn.time}</span>
+                        </div>
+                        <div class="reaction-step-details">
+                            <div class="reaction-detail-row">
+                                <span class="detail-label">Touch Type:</span>
+                                <span class="detail-val type-pill ${firstIn.isBody ? 'body-pill' : 'wick-pill'}">${firstIn.type}</span>
+                            </div>
+                            <div class="reaction-detail-row">
+                                <span class="detail-label">Approach:</span>
+                                <span class="detail-val font-mono">${firstIn.approachIcon} ${firstIn.approach}</span>
+                            </div>
+                            <div class="reaction-ohlc-bar">
+                                <span>O: <b>${c.open.toFixed(1)}</b></span>
+                                <span>H: <b>${c.high.toFixed(1)}</b></span>
+                                <span>L: <b>${c.low.toFixed(1)}</b></span>
+                                <span>C: <b style="color:${c.close >= c.open ? 'var(--success)' : 'var(--danger)'};">${c.close.toFixed(1)}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if (firstOut) {
+                    const oc = firstOut.candle;
+                    outContentHtml = `
+                        <div class="reaction-step-box out-box">
+                            <div class="reaction-step-header">
+                                <span class="reaction-step-tag tag-out">🔴 First Candle OUT</span>
+                                <span class="reaction-time-badge">${firstOut.time}</span>
+                            </div>
+                            <div class="reaction-step-details">
+                                <div class="reaction-detail-row">
+                                    <span class="detail-label">Resolution:</span>
+                                    <span class="detail-val res-badge ${firstOut.dirType}">${firstOut.direction}</span>
+                                </div>
+                                <div class="reaction-ohlc-bar">
+                                    <span>O: <b>${oc.open.toFixed(1)}</b></span>
+                                    <span>H: <b>${oc.high.toFixed(1)}</b></span>
+                                    <span>L: <b>${oc.low.toFixed(1)}</b></span>
+                                    <span>Exit C: <b style="color:${oc.close >= oc.open ? 'var(--success)' : 'var(--danger)'};">${oc.close.toFixed(1)}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    outContentHtml = `
+                        <div class="reaction-step-box out-box neutral-out">
+                            <div class="reaction-step-header">
+                                <span class="reaction-step-tag tag-out-neutral">First Candle OUT</span>
+                                <span class="reaction-time-badge" style="color:var(--text-dim);">EOD</span>
+                            </div>
+                            <div class="reaction-step-details" style="color:var(--text-dim); font-size:0.85rem; padding:6px 0;">
+                                Price remained interacting inside / around level through market close.
+                            </div>
+                        </div>
+                    `;
+                }
+            } else {
+                inContentHtml = `
+                    <div class="reaction-untouched-box">
+                        <div class="untouched-icon">💤</div>
+                        <div class="untouched-title">Level Not Reached</div>
+                        <div class="untouched-desc">5m price action stayed outside this level all day (Day Range: ${data.dayLow?.toFixed(1)} – ${data.dayHigh?.toFixed(1)}).</div>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="reaction-card-top">
+                    <div class="reaction-level-info">
+                        <span class="reaction-price-title" style="color:${biasColor};">${priceDisplay}</span>
+                        <span class="badge ${lvl.bias}">${lvl.biasBadge || 'Level'}</span>
+                    </div>
+                    <div class="reaction-plan-behavior">
+                        <span class="plan-behavior-label">Planned Behavior:</span>
+                        <span class="plan-behavior-text">${lvl.behavior || 'Key Reaction Area'}</span>
+                    </div>
+                    ${lvl.tp || lvl.sl ? `
+                    <div class="reaction-targets-bar">
+                        ${lvl.tp ? `<span>TP: <b style="color:var(--success);">${lvl.tp}</b></span>` : ''}
+                        ${lvl.sl ? `<span>SL: <b style="color:var(--danger);">${lvl.sl}</b></span>` : ''}
+                    </div>` : ''}
+                </div>
+
+                <div class="reaction-card-body">
+                    ${inContentHtml}
+                    ${outContentHtml}
+                </div>
+            `;
+
+            fragment.appendChild(card);
+        });
+
+        reactionResults.appendChild(fragment);
+        reactionFooter.innerText = `Checked ${validLevels.length} marked level${validLevels.length > 1 ? 's' : ''} • ${touchedCount} active reaction${touchedCount !== 1 ? 's' : ''} detected on ${dateStr}`;
+    }
+
     // Call init when module loads
     initLevels();
 }
+

@@ -583,6 +583,30 @@ Enhanced **Live TV Alerts** webhook handler (`/api/tvWebhook`) and alert notific
 - **Updated Cloud & Mobile Worker**:
   - Added Google Gemini 2.0 Flash Vision and Groq 90B Vision fallback in `telegram_cloud_worker/worker.py` for reading TradingView mobile position tools automatically.
 
+### v2.3.6 — 5 Aug 2026 — Levels Tab: 5-Minute First Candle In / Out Reaction Analysis (Upstox Feed)
 
+Added an automated intraday reaction checker to the **Levels Tab** that evaluates 5-minute Nifty 50 candle interactions for any selected date against all marked price levels and zones.
 
+#### What it does
+- **Top Reaction Toolbar**:
+  - Quick Date Picker defaulting to today's date in IST.
+  - Action trigger: `🔍 Check First Candle In/Out`.
+- **Automated 5-Minute Candle Aggregation (`/api/niftyCandles`)**:
+  - Pulls public 1-minute historical/intraday candles from Upstox and aggregates them into 75 standard 5-minute candles (`09:15` to `15:30` IST).
+  - Works seamlessly with zero authentication requirement.
+- **Comprehensive Reaction Pop-up Modal**:
+  - **🟢 First Candle IN**:
+    - Exact timestamp (e.g. `09:50 AM IST`).
+    - Approach direction (*Pullback/Drop from Above* vs *Rally/Push from Below*).
+    - Touch classification (*Body Entry* vs *Wick Sweep / Pin*).
+    - Detailed 5m candle OHLC metrics.
+  - **🔴 First Candle OUT**:
+    - Exact resolution timestamp (e.g. `09:55 AM IST`).
+    - Exit direction (*Broke Out Above 🟢* or *Broke Down Below 🔴*).
+    - Exit candle Close & OHLC metrics.
+  - **💤 Untouched Status**:
+    - Clear indicator if price never entered or reached the marked level during the session, comparing with the day's high/low range.
+  - **Plan Context**: Displays planned bias badge, expected behavior, and configured TP/SL targets side-by-side.
 
+#### New files added
+- `api/niftyCandles.js` — Upstox 1m to 5m candle aggregation serverless API.
