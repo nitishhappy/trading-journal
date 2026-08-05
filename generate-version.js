@@ -62,6 +62,12 @@ const FILES_TO_HASH = [
   "js/ui/tvNotifications.js",
   "js/ui/sequenceRules.js",
   "js/ui/stocks.js",
+  "js/ui/levels.js",
+  "css/levels.css",
+  "css/tv-notifications.css",
+  "js/data/sectors.js",
+  "js/data/daily_plan.js",
+  "js/data/scanned_stocks.js",
 ];
 
 function computeHash() {
