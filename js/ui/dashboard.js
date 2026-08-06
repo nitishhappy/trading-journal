@@ -1454,8 +1454,8 @@ function createObsEntry() {
     if (e.target === imageFileInput) return;
     imageFileInput.click();
   });
-  imageFileInput.addEventListener("change", () => {
-    addImageFiles(imageFileInput.files);
+  imageFileInput.addEventListener("change", async () => {
+    await addImageFiles(imageFileInput.files);
     imageFileInput.value = "";
   });
   imageZone.addEventListener("dragover", (e) => {
