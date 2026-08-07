@@ -1356,6 +1356,41 @@ if (viewLevels) {
             floater.classList.remove('hidden');
         }
 
+        let insideLevels = [];
+        let aboveLevels = [];
+        let belowLevels = [];
+        const price = lastCandle.close;
+
+        validLevels.forEach(lvl => {
+            const margin = lvl.isRange ? 0 : 15;
+            const effectiveHigh = lvl.pHigh + margin;
+            const effectiveLow = lvl.pLow - margin;
+            
+            if (price <= effectiveHigh && price >= effectiveLow) {
+                insideLevels.push(lvl);
+            } else if (effectiveLow > price) {
+                aboveLevels.push(lvl);
+            } else if (effectiveHigh < price) {
+                belowLevels.push(lvl);
+            }
+        });
+
+        let levelsToHighlight = [];
+        if (insideLevels.length > 0) {
+            levelsToHighlight = insideLevels;
+        } else {
+            if (aboveLevels.length > 0) {
+                aboveLevels.sort((a, b) => a.pLow - b.pLow);
+                levelsToHighlight.push(aboveLevels[0]);
+            }
+            if (belowLevels.length > 0) {
+                belowLevels.sort((a, b) => b.pHigh - a.pHigh);
+                levelsToHighlight.push(belowLevels[0]);
+            }
+        }
+        
+        const highlightIds = new Set(levelsToHighlight.map(l => l.id));
+
         validLevels.forEach(lvl => {
             const lHigh = lvl.pHigh;
             const lLow = lvl.pLow;
@@ -1363,9 +1398,7 @@ if (viewLevels) {
             // Visual Highlight Logic
             const cardEl = document.getElementById(lvl.id);
             const chartCardEl = document.getElementById(`chart-card-${lvl.id}`);
-            
-            const margin = lvl.isRange ? 0 : 15;
-            const isHighlighted = lastCandle.close <= (lHigh + margin) && lastCandle.close >= (lLow - margin);
+            const isHighlighted = highlightIds.has(lvl.id);
             
             if (cardEl) {
                 if (isHighlighted) {
