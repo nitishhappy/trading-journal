@@ -224,10 +224,11 @@
     box-shadow: 0 4px 16px rgba(244, 63, 94, 0.08);
 }
 
-.level-card.active-level-highlight {
-    border-color: var(--accent);
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.35);
-    background: linear-gradient(145deg, var(--surface-2), var(--surface-1));
+.level-card.active-level-highlight,
+.chart-annotation.active-level-highlight {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5) !important;
+    background: linear-gradient(145deg, var(--surface-2), var(--surface-1)) !important;
     transform: scale(1.02);
     z-index: 10;
 }
