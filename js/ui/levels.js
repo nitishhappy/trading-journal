@@ -1358,6 +1358,17 @@ if (viewLevels) {
         validLevels.forEach(lvl => {
             const lHigh = lvl.pHigh;
             const lLow = lvl.pLow;
+            
+            // Visual Highlight Logic
+            const cardEl = document.getElementById(lvl.id);
+            if (cardEl) {
+                const margin = lvl.isRange ? 0 : 15;
+                if (lastCandle.close <= (lHigh + margin) && lastCandle.close >= (lLow - margin)) {
+                    cardEl.classList.add('active-level-highlight');
+                } else {
+                    cardEl.classList.remove('active-level-highlight');
+                }
+            }
 
             let firstIn = null;
             let firstOut = null;
