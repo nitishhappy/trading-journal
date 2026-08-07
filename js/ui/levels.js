@@ -1345,8 +1345,13 @@ if (viewLevels) {
         const lastCandle = candles[candles.length - 1];
         const floater = document.getElementById('level-price-floater');
         const floaterVal = document.getElementById('floater-price-val');
+        const floaterTitle = document.getElementById('floater-title-text');
+        
         if (floater && floaterVal && !floater.classList.contains('user-closed')) {
             floaterVal.innerText = lastCandle.close;
+            if (floaterTitle) {
+                floaterTitle.setAttribute('data-price', lastCandle.close);
+            }
             floater.classList.remove('hidden');
         }
 
@@ -1418,13 +1423,17 @@ if (viewLevels) {
         }
     }
 
-    const floaterCloseBtn = document.getElementById('btn-close-floater');
-    if (floaterCloseBtn) {
-        floaterCloseBtn.addEventListener('click', () => {
+    const floaterToggleBtn = document.getElementById('btn-toggle-floater');
+    if (floaterToggleBtn) {
+        floaterToggleBtn.addEventListener('click', () => {
             const floater = document.getElementById('level-price-floater');
             if (floater) {
-                floater.classList.add('hidden');
-                floater.classList.add('user-closed');
+                floater.classList.toggle('minimized');
+                if (floater.classList.contains('minimized')) {
+                    floaterToggleBtn.innerText = '+';
+                } else {
+                    floaterToggleBtn.innerText = '−';
+                }
             }
         });
     }

@@ -1048,3 +1048,35 @@
     font-family: var(--font-mono);
     color: var(--text);
 }
+
+#level-price-floater {
+    transition: all 0.3s ease;
+}
+
+#level-price-floater.minimized {
+    top: auto;
+    right: auto;
+    bottom: 80px;
+    left: 20px;
+    width: auto;
+    min-width: 120px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+#level-price-floater.minimized .floater-header {
+    border-bottom: none;
+    border-radius: 20px;
+    padding: 8px 14px;
+}
+
+#level-price-floater.minimized .floater-body {
+    display: none;
+}
+
+#level-price-floater.minimized .floater-title::after {
+    content: " : " attr(data-price);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
