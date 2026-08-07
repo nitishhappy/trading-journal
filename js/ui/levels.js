@@ -1424,18 +1424,73 @@ if (viewLevels) {
     }
 
     const floaterToggleBtn = document.getElementById('btn-toggle-floater');
-    if (floaterToggleBtn) {
+    const floater = document.getElementById('level-price-floater');
+    if (floaterToggleBtn && floater) {
         floaterToggleBtn.addEventListener('click', () => {
-            const floater = document.getElementById('level-price-floater');
-            if (floater) {
-                floater.classList.toggle('minimized');
-                if (floater.classList.contains('minimized')) {
-                    floaterToggleBtn.innerText = '+';
-                } else {
-                    floaterToggleBtn.innerText = '−';
-                }
+            floater.classList.toggle('minimized');
+            if (floater.classList.contains('minimized')) {
+                floaterToggleBtn.innerText = '+';
+            } else {
+                floaterToggleBtn.innerText = '−';
             }
         });
+    }
+
+    // Floater Drag Logic
+    const floaterHeader = floater ? floater.querySelector('.floater-header') : null;
+    if (floaterHeader && floater) {
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        const onMouseMove = (e) => {
+            if (!isDragging) return;
+            if (e.cancelable && e.type.includes('touch')) e.preventDefault(); // prevent scroll while dragging
+            const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+            
+            floater.style.right = 'auto';
+            floater.style.bottom = 'auto';
+            floater.style.left = `${initialLeft + dx}px`;
+            floater.style.top = `${initialTop + dy}px`;
+        };
+
+        const onMouseUp = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            floater.style.transition = '';
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('touchmove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            document.removeEventListener('touchend', onMouseUp);
+        };
+
+        const onMouseDown = (e) => {
+            if (e.target.closest('.btn-close-floater')) return;
+            isDragging = true;
+            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            
+            const rect = floater.getBoundingClientRect();
+            initialLeft = rect.left;
+            initialTop = rect.top;
+
+            floater.style.transition = 'none';
+            floater.style.right = 'auto';
+            floater.style.bottom = 'auto';
+            floater.style.left = `${initialLeft}px`;
+            floater.style.top = `${initialTop}px`;
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('touchmove', onMouseMove, { passive: false });
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('touchend', onMouseUp);
+        };
+        
+        floaterHeader.addEventListener('mousedown', onMouseDown);
+        floaterHeader.addEventListener('touchstart', onMouseDown, { passive: false });
     }
 
     // Call init when module loads
