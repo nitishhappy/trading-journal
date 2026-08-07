@@ -1342,6 +1342,14 @@ if (viewLevels) {
         if (!data || !data.success || !data.candles || data.candles.length === 0) return;
         const candles = data.candles;
 
+        const lastCandle = candles[candles.length - 1];
+        const floater = document.getElementById('level-price-floater');
+        const floaterVal = document.getElementById('floater-price-val');
+        if (floater && floaterVal && !floater.classList.contains('user-closed')) {
+            floaterVal.innerText = lastCandle.close;
+            floater.classList.remove('hidden');
+        }
+
         validLevels.forEach(lvl => {
             const lHigh = lvl.pHigh;
             const lLow = lvl.pLow;
@@ -1408,6 +1416,17 @@ if (viewLevels) {
                 new Notification(title, options);
             }
         }
+    }
+
+    const floaterCloseBtn = document.getElementById('btn-close-floater');
+    if (floaterCloseBtn) {
+        floaterCloseBtn.addEventListener('click', () => {
+            const floater = document.getElementById('level-price-floater');
+            if (floater) {
+                floater.classList.add('hidden');
+                floater.classList.add('user-closed');
+            }
+        });
     }
 
     // Call init when module loads
