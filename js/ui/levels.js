@@ -809,6 +809,7 @@ if (viewLevels) {
 
                 const ann = document.createElement('div');
                 ann.className = 'chart-annotation';
+                ann.id = `chart-card-${lvl.id}`;
                 ann.style.border = '1px solid ' + cColor;
                 ann.style.borderLeft = '4px solid ' + cColor;
                 ann.style.background = `color-mix(in srgb, ${cColor} 8%, var(--surface-1))`;
@@ -1361,12 +1362,23 @@ if (viewLevels) {
             
             // Visual Highlight Logic
             const cardEl = document.getElementById(lvl.id);
+            const chartCardEl = document.getElementById(`chart-card-${lvl.id}`);
+            
+            const margin = lvl.isRange ? 0 : 15;
+            const isHighlighted = lastCandle.close <= (lHigh + margin) && lastCandle.close >= (lLow - margin);
+            
             if (cardEl) {
-                const margin = lvl.isRange ? 0 : 15;
-                if (lastCandle.close <= (lHigh + margin) && lastCandle.close >= (lLow - margin)) {
+                if (isHighlighted) {
                     cardEl.classList.add('active-level-highlight');
                 } else {
                     cardEl.classList.remove('active-level-highlight');
+                }
+            }
+            if (chartCardEl) {
+                if (isHighlighted) {
+                    chartCardEl.classList.add('active-level-highlight');
+                } else {
+                    chartCardEl.classList.remove('active-level-highlight');
                 }
             }
 
