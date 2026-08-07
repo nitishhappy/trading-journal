@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-c3c99c0020";
+const CACHE_NAME = "trade-journal-06a7dd9b01";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -51,6 +51,7 @@ const ASSETS = [
   "./js/data/sectors.js",
   "./js/data/daily_plan.js",
   "./js/data/scanned_stocks.js",
+  "./js/workers/liveAlertWorker.js",
   // Firebase SDK scripts — precached so the app can boot fully offline
   // even on a visit where the network never responds in time.
   "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js",
@@ -80,6 +81,7 @@ const NETWORK_FIRST_FILES = [
   "css/levels.css",
   "js/data/sectors.js", "js/data/daily_plan.js", "js/data/scanned_stocks.js",
   "js/utils/error-tracking.js", "css/tv-notifications.css",
+  "js/workers/liveAlertWorker.js",
 ];
 
 self.addEventListener("install", (event) => {

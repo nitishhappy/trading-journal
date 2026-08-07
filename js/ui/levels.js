@@ -1225,7 +1225,18 @@ if (viewLevels) {
 
     // ===================== LIVE ALERTS LOGIC =====================
     const btnLiveAlerts = document.getElementById('btn-live-alerts');
+    let liveAlertWorker = null;
     
+    // Restore persisted state on load
+    if (localStorage.getItem('liveAlertsOn') === 'true') {
+        // Auto-resume on page load if it was on
+        setTimeout(async () => {
+            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                startLiveAlerts(true); // silent = true, no toast on auto-resume
+            }
+        }, 2000);
+    }
+
     if (btnLiveAlerts) {
         btnLiveAlerts.addEventListener('click', async () => {
             if (isLiveAlertsOn) {
@@ -1238,35 +1249,74 @@ if (viewLevels) {
                         return;
                     }
                 }
-                startLiveAlerts();
+                startLiveAlerts(false);
             }
         });
     }
 
-    function startLiveAlerts() {
+    function startLiveAlerts(silent) {
         isLiveAlertsOn = true;
-        btnLiveAlerts.classList.remove('off');
-        btnLiveAlerts.classList.add('on');
-        btnLiveAlerts.innerHTML = `<span class="btn-icon">🟢</span> Live Alerts On`;
-        import('../utils/toast.js').then(m => m.showToast("Live background listener started (polling every 1 min)"));
+        localStorage.setItem('liveAlertsOn', 'true');
+        if (btnLiveAlerts) {
+            btnLiveAlerts.classList.remove('off');
+            btnLiveAlerts.classList.add('on');
+            btnLiveAlerts.innerHTML = `<span class="btn-icon">🟢</span> Live Alerts On`;
+        }
+        if (!silent) {
+            import('../utils/toast.js').then(m => m.showToast("Live background listener started (polling every 1 min)"));
+        }
         
         // Immediately run once
         runSilentLiveEvaluation();
         
-        // Setup polling every 60 seconds
-        liveAlertsInterval = setInterval(runSilentLiveEvaluation, 60000);
+        // Use Web Worker for timer — mobile browsers don't throttle workers
+        // even when the tab is in the background
+        try {
+            if (liveAlertWorker) liveAlertWorker.terminate();
+            liveAlertWorker = new Worker('./js/workers/liveAlertWorker.js');
+            liveAlertWorker.addEventListener('message', (e) => {
+                if (e.data && e.data.type === 'tick') {
+                    runSilentLiveEvaluation();
+                }
+            });
+            liveAlertWorker.postMessage({ command: 'start', interval: 60000 });
+        } catch (workerErr) {
+            // Fallback to setInterval if Worker fails (e.g. file blocked)
+            console.warn('Web Worker unavailable, falling back to setInterval', workerErr);
+            if (liveAlertsInterval) clearInterval(liveAlertsInterval);
+            liveAlertsInterval = setInterval(runSilentLiveEvaluation, 60000);
+        }
     }
 
     function stopLiveAlerts() {
         isLiveAlertsOn = false;
-        btnLiveAlerts.classList.remove('on');
-        btnLiveAlerts.classList.add('off');
-        btnLiveAlerts.innerHTML = `<span class="btn-icon">🔴</span> Live Alerts Off`;
+        localStorage.setItem('liveAlertsOn', 'false');
+        if (btnLiveAlerts) {
+            btnLiveAlerts.classList.remove('on');
+            btnLiveAlerts.classList.add('off');
+            btnLiveAlerts.innerHTML = `<span class="btn-icon">🔴</span> Live Alerts Off`;
+        }
         
+        // Terminate worker
+        if (liveAlertWorker) {
+            liveAlertWorker.postMessage({ command: 'stop' });
+            liveAlertWorker.terminate();
+            liveAlertWorker = null;
+        }
+        // Clear fallback interval too
         if (liveAlertsInterval) clearInterval(liveAlertsInterval);
         liveAlertsInterval = null;
+        
         import('../utils/toast.js').then(m => m.showToast("Live alerts paused"));
     }
+
+    // Safety net: when user switches back to this tab, immediately re-evaluate
+    // in case the worker was somehow killed by the OS
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && isLiveAlertsOn) {
+            runSilentLiveEvaluation();
+        }
+    });
 
     function isMarketOpen() {
         const now = new Date();
