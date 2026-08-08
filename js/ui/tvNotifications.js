@@ -383,7 +383,14 @@ function buildCard(notif) {
   }
 
   // Main message
-  const mainMsg = notif.strategy || notif.raw?.slice(0, 120) || 'Alert received';
+  // For Telegram source alerts, show the original channel message as the main text
+  let mainMsg;
+  if (notif.source === 'telegram' && notif.raw) {
+    const dashIdx = notif.raw.indexOf(' - ');
+    mainMsg = dashIdx !== -1 ? notif.raw.slice(dashIdx + 3).trim() : notif.raw.slice(0, 160);
+  } else {
+    mainMsg = notif.strategy || notif.raw?.slice(0, 120) || 'Alert received';
+  }
 
   card.innerHTML = `
     <div class="tv-card-border-bar"></div>

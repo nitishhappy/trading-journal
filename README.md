@@ -867,3 +867,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 - **TV Alerts Auto-Cleanup & Grouping**:
   - Re-architected `tvNotifications.js` to group notifications by `Date` and then `Symbol` for easier management.
   - Implemented batch delete capabilities (`🗑️ Clear` button) per date group.
+
+### v2.3.10 — 8 Aug 2026 — Telegram Worker Fixes & Raw Message Display
+
+- **Raw Message Priority**: Updated `tvNotifications.js` so that for Telegram source alerts, the actual channel message text is extracted from the `raw` field and displayed as the main notification body instead of the generic strategy name.
+- **Telegram Cloud Worker Improvements**:
+  - Added an infinite auto-reconnect loop to `worker.py` to seamlessly recover from network drops and Telegram server disconnects.
+  - Removed restrictive message filters, allowing all text-only messages from the trusted channel to be forwarded even if they lack specific keywords.
+  - Fixed a `UnicodeEncodeError` that crashed the worker in Windows CMD by forcing UTF-8 stdout reconfiguration and replacing emoji characters in logs.
