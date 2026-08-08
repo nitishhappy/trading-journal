@@ -294,11 +294,28 @@ function formatRelativeTime(receivedAt) {
   });
 }
 
-function buildCard(notif) {
-  const card = document.createElement('div');
-  card.className = `tv-notif-card ${notif.read ? 'tv-notif-read' : 'tv-notif-unread'}`;
-  card.dataset.action = notif.action || 'ALERT';
+function formatMessageWithHighlights(text) {
+  if (!text) return '';
+  const escaped = escHtml(text);
+  return escaped.replace(/\b(gold\s+buy|gold\s+sell|gold\s+long|gold\s+short|buy|sell|long|short)\b/gi, (match) => {
+    const lower = match.toLowerCase();
+    if (lower.includes('gold') && (lower.includes('buy') || lower.includes('long'))) {
+      return `<span class="tv-kw-highlight tv-kw-gold-buy">${match}</span>`;
+    }
+    if (lower.includes('gold') && (lower.includes('sell') || lower.includes('short'))) {
+      return `<span class="tv-kw-highlight tv-kw-gold-sell">${match}</span>`;
+    }
+    if (lower.includes('buy') || lower.includes('long')) {
+      return `<span class="tv-kw-highlight tv-kw-buy">${match}</span>`;
+    }
+    if (lower.includes('sell') || lower.includes('short')) {
+      return `<span class="tv-kw-highlight tv-kw-sell">${match}</span>`;
+    }
+    return match;
+  });
+}
 
+function buildCard(notif) {
   const ts = notif.receivedAt?.toDate ? notif.receivedAt.toDate() : new Date();
   const timeStr = ts.toLocaleTimeString('en-IN', {
     timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
@@ -382,15 +399,58 @@ function buildCard(notif) {
     `;
   }
 
-  // Main message
-  // For Telegram source alerts, show the original channel message as the main text
-  let mainMsg;
-  if (notif.source === 'telegram' && notif.raw) {
-    const dashIdx = notif.raw.indexOf(' - ');
-    mainMsg = dashIdx !== -1 ? notif.raw.slice(dashIdx + 3).trim() : notif.raw.slice(0, 160);
-  } else {
-    mainMsg = notif.strategy || notif.raw?.slice(0, 120) || 'Alert received';
+  // Resolve raw text & cleanly extract main message
+  let rawText = notif.raw || '';
+  if (typeof rawText === 'string' && rawText.trim().startsWith('{')) {
+    try {
+      const parsedObj = JSON.parse(rawText);
+      if (parsedObj.raw) {
+        rawText = parsedObj.raw;
+      } else if (parsedObj.summary || parsedObj.keyword || parsedObj.message) {
+        rawText = parsedObj.summary || parsedObj.keyword || parsedObj.message || '';
+      }
+    } catch (e) {}
   }
+
+  // For Telegram source alerts, show the original channel message as the main text
+  let mainMsg = '';
+  if (notif.source === 'telegram') {
+    if (rawText) {
+      const dashIdx = rawText.indexOf(' - ');
+      mainMsg = dashIdx !== -1 ? rawText.slice(dashIdx + 3).trim() : rawText.trim();
+    }
+    if (!mainMsg) mainMsg = notif.strategy || 'Telegram Alert';
+  } else {
+    mainMsg = notif.strategy || (rawText ? rawText.slice(0, 120) : 'Alert received');
+  }
+
+  // Signal Classification for Highlighting
+  const symUpper = (notif.symbol || '').toUpperCase();
+  const actUpper = (notif.action || '').toUpperCase();
+  const msgLower = (mainMsg || '').toLowerCase();
+  
+  const isGold = symUpper.includes('GOLD') || symUpper.includes('XAU') || msgLower.includes('gold');
+  const isBuy = ['BUY', 'LONG'].includes(actUpper) || /\b(buy|long)\b/i.test(mainMsg);
+  const isSell = ['SELL', 'SHORT'].includes(actUpper) || /\b(sell|short)\b/i.test(mainMsg);
+
+  let signalClass = '';
+  let signalBadgeHtml = '';
+
+  if (isGold && isBuy) {
+    signalClass = 'tv-card-gold-buy';
+    signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-buy-badge">🟢 GOLD BUY</span>';
+  } else if (isGold && isSell) {
+    signalClass = 'tv-card-gold-sell';
+    signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-sell-badge">🔴 GOLD SELL</span>';
+  } else if (isBuy) {
+    signalClass = 'tv-card-signal-buy';
+  } else if (isSell) {
+    signalClass = 'tv-card-signal-sell';
+  }
+
+  const card = document.createElement('div');
+  card.className = `tv-notif-card ${notif.read ? 'tv-notif-read' : 'tv-notif-unread'} ${signalClass}`;
+  card.dataset.action = notif.action || 'ALERT';
 
   card.innerHTML = `
     <div class="tv-card-border-bar"></div>
@@ -398,6 +458,7 @@ function buildCard(notif) {
       <div class="tv-card-top-row">
         <div class="tv-card-badges">
           <span class="tv-action-badge ${actionClass}">${notif.action || 'ALERT'}</span>
+          ${signalBadgeHtml}
           ${symbolHtml}
           ${priceHtml}
         </div>
@@ -406,7 +467,7 @@ function buildCard(notif) {
           <span>${timeStr}</span>
         </div>
       </div>
-      <div class="tv-card-message">${mainMsg}</div>
+      <div class="tv-card-message ${signalClass ? 'tv-signal-message' : ''}">${formatMessageWithHighlights(mainMsg)}</div>
       ${levelsHtml}
       ${summaryHtml}
       ${imageHtml}

@@ -734,4 +734,94 @@
   border-radius: 6px;
 }
 
+/* ==================== Gold & Signal Highlights ==================== */
+.tv-notif-card.tv-card-gold-buy {
+  background: linear-gradient(135deg, rgba(38, 166, 154, 0.15) 0%, var(--surface-2) 65%) !important;
+  border: 1px solid rgba(38, 166, 154, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(38, 166, 154, 0.16);
+}
+.tv-notif-card.tv-card-gold-buy .tv-card-border-bar {
+  background: linear-gradient(180deg, #26a69a 0%, #00e676 100%) !important;
+  width: 5px !important;
+  box-shadow: 0 0 10px rgba(38, 166, 154, 0.8);
+}
+
+.tv-notif-card.tv-card-gold-sell {
+  background: linear-gradient(135deg, rgba(239, 83, 80, 0.15) 0%, var(--surface-2) 65%) !important;
+  border: 1px solid rgba(239, 83, 80, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(239, 83, 80, 0.16);
+}
+.tv-notif-card.tv-card-gold-sell .tv-card-border-bar {
+  background: linear-gradient(180deg, #ef5350 0%, #ff1744 100%) !important;
+  width: 5px !important;
+  box-shadow: 0 0 10px rgba(239, 83, 80, 0.8);
+}
+
+.tv-notif-card.tv-card-signal-buy {
+  border-left: 4px solid #26a69a !important;
+}
+.tv-notif-card.tv-card-signal-sell {
+  border-left: 4px solid #ef5350 !important;
+}
+
+/* Gold Signal Badges */
+.tv-gold-signal-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.tv-gold-buy-badge {
+  background: rgba(38, 166, 154, 0.22);
+  color: #26a69a;
+  border: 1px solid rgba(38, 166, 154, 0.5);
+  box-shadow: 0 0 10px rgba(38, 166, 154, 0.25);
+}
+.tv-gold-sell-badge {
+  background: rgba(239, 83, 80, 0.22);
+  color: #ef5350;
+  border: 1px solid rgba(239, 83, 80, 0.5);
+  box-shadow: 0 0 10px rgba(239, 83, 80, 0.25);
+}
+
+/* Signal Message Text */
+.tv-card-message.tv-signal-message {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Inline Keyword Highlights */
+.tv-kw-highlight {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.tv-kw-gold-buy {
+  background: rgba(38, 166, 154, 0.25);
+  color: #00e676;
+  border: 1px solid rgba(0, 230, 118, 0.4);
+  box-shadow: 0 0 8px rgba(38, 166, 154, 0.3);
+}
+.tv-kw-gold-sell {
+  background: rgba(239, 83, 80, 0.25);
+  color: #ff5252;
+  border: 1px solid rgba(255, 82, 82, 0.4);
+  box-shadow: 0 0 8px rgba(239, 83, 80, 0.3);
+}
+.tv-kw-buy {
+  background: rgba(38, 166, 154, 0.2);
+  color: #26a69a;
+}
+.tv-kw-sell {
+  background: rgba(239, 83, 80, 0.2);
+  color: #ef5350;
+}
+
 

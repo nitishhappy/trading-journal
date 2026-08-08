@@ -875,3 +875,13 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added an infinite auto-reconnect loop to `worker.py` to seamlessly recover from network drops and Telegram server disconnects.
   - Removed restrictive message filters, allowing all text-only messages from the trusted channel to be forwarded even if they lack specific keywords.
   - Fixed a `UnicodeEncodeError` that crashed the worker in Windows CMD by forcing UTF-8 stdout reconfiguration and replacing emoji characters in logs.
+
+### v2.3.11 — 8 Aug 2026 — Gold Buy/Sell Signal Highlighting & JSON Clean Parsing
+
+- **Gold Buy / Sell Visual Cards**:
+  - Automatically recognizes Gold Buy and Gold Sell signals from Telegram and TradingView.
+  - Emphasizes Gold Buy cards with luminous emerald gradients, glowing border bars, and a `🟢 GOLD BUY` badge.
+  - Emphasizes Gold Sell cards with luminous crimson gradients, glowing border bars, and a `🔴 GOLD SELL` badge.
+  - Highlights trade keywords (`Gold Buy`, `Gold Sell`, `Buy`, `Sell`, `Long`, `Short`) with vibrant glowing inline badges within the message text.
+- **Clean JSON Raw Message Parsing**:
+  - Fixed a bug where stringified JSON metadata (e.g. `","source":"telegram"}`) trailed in the main notification message. Telegram alerts now cleanly render only the original message text.
