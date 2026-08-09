@@ -87,6 +87,32 @@ export function updateStock(stockId, fields) {
   });
 }
 
+// Batch update stock fields (from auto-sync)
+export function updateStocksBatch(updatesArray) {
+  if (!state.currentUser || !updatesArray || updatesArray.length === 0) return Promise.resolve();
+
+  const batch = db.batch();
+  const stocksCollection = db.collection("users")
+                             .doc(state.currentUser.uid)
+                             .collection("stocks");
+
+  updatesArray.forEach((upd) => {
+    const docRef = stocksCollection.doc(upd.id);
+    batch.update(docRef, {
+      ...upd.data,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  });
+
+  return batch.commit().then(() => {
+    showToast(`Successfully synced ${updatesArray.length} stock updates to Firestore`);
+  }).catch((err) => {
+    console.error("Batch update stocks error:", err);
+    showToast("Failed to sync scanned stock updates");
+    throw err;
+  });
+}
+
 // Delete single stock entry
 export function deleteStock(stockId) {
   if (!state.currentUser) return Promise.resolve();

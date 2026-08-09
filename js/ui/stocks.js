@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { updateStock, deleteStock, addStocksBatch, deleteStocksBatch, loadStocksObservations, saveStocksObservations } from '../services/stocks.js';
+import { updateStock, deleteStock, addStocksBatch, deleteStocksBatch, loadStocksObservations, saveStocksObservations, updateStocksBatch } from '../services/stocks.js';
 import { showToast } from '../utils/toast.js';
 
 let hasAutoSynced = false;
@@ -506,9 +506,7 @@ function runAutoSync() {
 
   if (toUpdate.length > 0) {
     console.log(`Auto-syncing ${toUpdate.length} stock updates to Firestore...`);
-    toUpdate.forEach(upd => {
-      updateStock(upd.id, upd.data);
-    });
+    updateStocksBatch(toUpdate);
   }
 }
 

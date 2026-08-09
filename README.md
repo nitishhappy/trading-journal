@@ -922,4 +922,7 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 - **Bullet Observations Section**:
   - Added an interactive "Observations & Rules" bullet list card at the top of the Stocks view.
   - Supports adding, inline editing, and deleting observations with real-time sync to Firestore (`users/{uid}/settings/stocks_observations`).
+- **Auto-Sync Batch Update Fix**:
+  - Implemented `updateStocksBatch` to commit all auto-sync modifications in a single transaction, completely resolving layout loops, page flickering, and textareas auto-resizing glitches during auto-sync runs.
+
 
