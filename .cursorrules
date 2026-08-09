@@ -1,0 +1,16 @@
+# Development Workflow
+
+## MUST DO BEFORE GIT PUSH
+1. Update README.md with changelog entry
+2. Run `node generate-version.js`
+3. Commit and push to git
+
+## Architecture Constraints
+- Hosting: Vercel (NOT Firebase Hosting)
+- Database: Firebase Firestore ONLY
+- API: Vercel Serverless Functions (/api/)
+- Client: app.js is client entry point
+
+## Platform
+- Development: Windows (PowerShell)
+- Testing: Android (PWA standalone)

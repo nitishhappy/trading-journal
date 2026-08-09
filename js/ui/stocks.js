@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { updateStock, deleteStock, addStocksBatch, deleteStocksBatch } from '../services/stocks.js';
+import { updateStock, deleteStock, addStocksBatch, deleteStocksBatch, loadStocksObservations, saveStocksObservations } from '../services/stocks.js';
 import { showToast } from '../utils/toast.js';
 
 let hasAutoSynced = false;
@@ -22,6 +22,161 @@ function updateDeleteButtonVisibility() {
       deleteBtn.style.display = "none";
     }
   }
+}
+
+// Render observations at the top of Stocks page
+export function renderStocksObservations() {
+  const listEl = document.getElementById("stocks-observations-list");
+  if (!listEl) return;
+  listEl.innerHTML = "";
+
+  const bullets = state.stocksObservations || [];
+  if (bullets.length === 0) {
+    const emptyLi = document.createElement("li");
+    emptyLi.className = "observation-item empty-obs-item";
+    emptyLi.style.color = "var(--text-dim)";
+    emptyLi.style.fontStyle = "italic";
+    emptyLi.textContent = "No observations added yet. Click '+ Add Bullet' to add your first observation.";
+    listEl.appendChild(emptyLi);
+    return;
+  }
+
+  bullets.forEach((bulletText, index) => {
+    const li = document.createElement("li");
+    li.className = "observation-item";
+    li.dataset.index = index;
+
+    li.innerHTML = `
+      <span class="observation-bullet">•</span>
+      <span class="observation-text">${escapeHtml(bulletText)}</span>
+      <div class="observation-actions">
+        <button class="btn-obs-action btn-obs-edit" title="Edit Bullet">✏️</button>
+        <button class="btn-obs-action btn-obs-delete" title="Delete Bullet">🗑</button>
+      </div>
+    `;
+
+    const textEl = li.querySelector(".observation-text");
+    const editBtn = li.querySelector(".btn-obs-edit");
+    const deleteBtn = li.querySelector(".btn-obs-delete");
+
+    const enterEditMode = () => {
+      if (li.classList.contains("editing")) return;
+      li.classList.add("editing");
+
+      const currentText = bullets[index];
+      const textarea = document.createElement("textarea");
+      textarea.className = "observation-input";
+      textarea.value = currentText;
+      textarea.rows = 1;
+
+      textarea.addEventListener("input", () => {
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+      });
+
+      textEl.style.display = "none";
+      li.insertBefore(textarea, textEl);
+      textarea.focus();
+
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+
+      let saved = false;
+      const saveEdit = () => {
+        if (saved) return;
+        saved = true;
+
+        const newText = textarea.value.trim();
+        li.classList.remove("editing");
+        textarea.remove();
+        textEl.style.display = "";
+
+        if (newText === "") {
+          bullets.splice(index, 1);
+          saveStocksObservations(bullets);
+        } else if (newText !== currentText) {
+          bullets[index] = newText;
+          saveStocksObservations(bullets);
+        }
+      };
+
+      textarea.addEventListener("blur", saveEdit);
+      textarea.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          textarea.blur();
+        }
+      });
+    };
+
+    textEl.addEventListener("click", enterEditMode);
+    editBtn.addEventListener("click", enterEditMode);
+
+    deleteBtn.addEventListener("click", () => {
+      bullets.splice(index, 1);
+      saveStocksObservations(bullets);
+    });
+
+    listEl.appendChild(li);
+  });
+}
+
+// Column Visibility Persistence Helpers
+export function getColumnVisibilitySettings() {
+  const saved = localStorage.getItem("stocksColumnVisibility");
+  const defaults = {
+    name: true,
+    ticker: true,
+    sector: true,
+    summary: true,
+    date: true,
+    source: true,
+    tf: true,
+    notes: true,
+    traded: true,
+    analyzed: true
+  };
+  if (!saved) return defaults;
+  try {
+    return { ...defaults, ...JSON.parse(saved) };
+  } catch (e) {
+    return defaults;
+  }
+}
+
+export function applyColumnVisibility() {
+  const table = document.getElementById("stocks-table");
+  if (!table) return;
+
+  const visibility = getColumnVisibilitySettings();
+  Object.entries(visibility).forEach(([col, isVisible]) => {
+    table.classList.toggle(`hide-col-${col}`, !isVisible);
+
+    // Sync checkbox in dropdown
+    const checkbox = document.querySelector(`#stocks-cols-dropdown input[data-col="${col}"]`);
+    if (checkbox) {
+      checkbox.checked = isVisible;
+    }
+  });
+
+  renderStocksTable();
+}
+
+export function saveColumnVisibilitySetting(col, isVisible) {
+  const current = getColumnVisibilitySettings();
+  current[col] = isVisible;
+  localStorage.setItem("stocksColumnVisibility", JSON.stringify(current));
+  applyColumnVisibility();
+}
+
+export function getVisibleColsCount() {
+  const totalCols = 12; // checkbox, name, ticker, sector, summary, date, source, tf, notes, traded, analyzed, action
+  const visibility = getColumnVisibilitySettings();
+  let hiddenCount = 0;
+  Object.values(visibility).forEach(visible => {
+    if (!visible) hiddenCount++;
+  });
+  return totalCols - hiddenCount;
 }
 
 // Helper to toggle sort states
@@ -134,6 +289,107 @@ export function initStocksUI() {
       updateDeleteButtonVisibility();
     });
   }
+
+  // Handle "+ Add Bullet" button click
+  const addObsBtn = document.getElementById("add-stock-obs-btn");
+  if (addObsBtn) {
+    addObsBtn.addEventListener("click", () => {
+      const listEl = document.getElementById("stocks-observations-list");
+      if (!listEl) return;
+
+      const emptyItem = listEl.querySelector(".empty-obs-item");
+      if (emptyItem) emptyItem.remove();
+
+      const li = document.createElement("li");
+      li.className = "observation-item editing";
+      li.innerHTML = `
+        <span class="observation-bullet">•</span>
+        <textarea class="observation-input" placeholder="Type your observation and press Enter..." rows="1"></textarea>
+      `;
+
+      listEl.appendChild(li);
+      const textarea = li.querySelector(".observation-input");
+      textarea.focus();
+
+      let saved = false;
+      const saveNew = () => {
+        if (saved) return;
+        saved = true;
+        const text = textarea.value.trim();
+        li.remove();
+
+        if (text !== "") {
+          const bullets = state.stocksObservations || [];
+          bullets.push(text);
+          saveStocksObservations(bullets);
+        } else {
+          renderStocksObservations();
+        }
+      };
+
+      textarea.addEventListener("blur", saveNew);
+      textarea.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          textarea.blur();
+        }
+      });
+    });
+  }
+
+  // Column visibility triggers
+  const colsBtn = document.getElementById("stocks-cols-btn");
+  const colsDropdown = document.getElementById("stocks-cols-dropdown");
+  if (colsBtn && colsDropdown) {
+    colsBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      colsDropdown.classList.toggle("hidden");
+    });
+
+    colsDropdown.querySelectorAll("input[type='checkbox']").forEach(cb => {
+      cb.addEventListener("change", (e) => {
+        const col = e.target.dataset.col;
+        const isVisible = e.target.checked;
+        saveColumnVisibilitySetting(col, isVisible);
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      const wrapper = document.getElementById("stocks-cols-dropdown-wrapper");
+      if (wrapper && !wrapper.contains(e.target)) {
+        colsDropdown.classList.add("hidden");
+      }
+    });
+  }
+
+  // Hide analyzed toggle
+  const hideAnalyzedCheckbox = document.getElementById("stocks-hide-analyzed");
+  if (hideAnalyzedCheckbox) {
+    const saved = localStorage.getItem("stocksHideAnalyzed");
+    if (saved !== null) {
+      hideAnalyzedCheckbox.checked = saved === "true";
+    }
+    hideAnalyzedCheckbox.addEventListener("change", () => {
+      localStorage.setItem("stocksHideAnalyzed", hideAnalyzedCheckbox.checked);
+      renderStocksTable();
+    });
+  }
+
+  // Click handler for sorting by Analyzed status
+  const thAnalyzed = document.getElementById("th-analyzed");
+  if (thAnalyzed) {
+    thAnalyzed.addEventListener("click", () => {
+      toggleSort("analyzed", "desc");
+    });
+  }
+
+  // Listen to Stocks Observations updates
+  window.addEventListener("stocks-observations-updated", () => {
+    renderStocksObservations();
+  });
+
+  // Apply saved column visibility settings on startup
+  applyColumnVisibility();
 
   // Listen to Firestore updates
   window.addEventListener("stocks-updated", () => {
@@ -264,11 +520,17 @@ export function renderStocksTable() {
 
   if (!tableBody) return;
 
-  const stocks = [...state.stocks];
+  let stocks = [...state.stocks];
+
+  // Filter out analyzed stocks if the checkbox is checked
+  const hideAnalyzed = document.getElementById("stocks-hide-analyzed")?.checked ?? true;
+  if (hideAnalyzed) {
+    stocks = stocks.filter(stock => !stock.analyzed);
+  }
 
   // Update total count
   if (totalCountEl) {
-    totalCountEl.textContent = `${stocks.length} Stock${stocks.length === 1 ? '' : 's'}`;
+    totalCountEl.textContent = `${stocks.length} Stock${stocks.length === 1 ? '' : 's'} (${state.stocks.length} total)`;
   }
 
   // Toggle empty state
@@ -285,14 +547,20 @@ export function renderStocksTable() {
 
   // 1. Sort the stocks
   stocks.sort((a, b) => {
-    let valA = a[currentSortField] || "";
-    let valB = b[currentSortField] || "";
+    let valA = a[currentSortField] ?? "";
+    let valB = b[currentSortField] ?? "";
 
     if (currentSortField === "dateOfRun") {
       // date comparison
       const dateA = new Date(valA || "1970-01-01");
       const dateB = new Date(valB || "1970-01-01");
       return currentSortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    }
+
+    if (currentSortField === "analyzed") {
+      const numA = valA === true ? 1 : 0;
+      const numB = valB === true ? 1 : 0;
+      return currentSortOrder === "asc" ? numA - numB : numB - numA;
     }
 
     // text comparison
@@ -334,7 +602,7 @@ export function renderStocksTable() {
       // Inject group header row
       const headerRow = document.createElement("tr");
       headerRow.className = "stocks-group-header";
-      headerRow.innerHTML = `<td colspan="9"><strong>${groupName}</strong> (${groups[groupName].length} items)</td>`;
+      headerRow.innerHTML = `<td colspan="${getVisibleColsCount()}"><strong>${groupName}</strong> (${groups[groupName].length} items)</td>`;
       tableBody.appendChild(headerRow);
 
       // Inject members of group
@@ -356,7 +624,8 @@ function updateHeaderIndicators() {
     "dateOfRun": { id: "th-date" },
     "source": { id: "th-source" },
     "timeframe": { id: "th-tf" },
-    "traded": { id: "th-traded" }
+    "traded": { id: "th-traded" },
+    "analyzed": { id: "th-analyzed" }
   };
 
   Object.entries(indicators).forEach(([field, config]) => {
@@ -424,36 +693,36 @@ function createStockRow(stock) {
   }
 
   tr.innerHTML = `
-    <td style="text-align: center;">
+    <td class="col-checkbox" style="text-align: center;">
       <input type="checkbox" class="stocks-row-checkbox stocks-checkbox" data-id="${stock.id}">
     </td>
-    <td>
+    <td class="col-name">
       <input type="text" class="stocks-inline-edit stock-name-input" value="${escapeHtml(stock.name)}" data-field="name" placeholder="Enter stock name...">
     </td>
-    <td>
+    <td class="col-ticker">
       <div class="double-click-edit-container">
         <a href="${escapeHtml(stock.tvLink)}" target="_blank" class="stocks-hyperlink stocks-ticker-link" title="Double click to edit">${escapeHtml(stock.ticker)}</a>
         <input type="text" class="stocks-inline-edit stock-ticker-input double-click-input" value="${escapeHtml(stock.ticker)}" data-field="ticker" style="display:none; width:100%;">
       </div>
     </td>
-    <td>
+    <td class="col-sector">
       <div class="double-click-edit-container">
         <a ${sectorTvLink ? `href="${escapeHtml(sectorTvLink)}" target="_blank"` : ''} class="stocks-hyperlink stocks-sector-link" title="Double click to edit">${escapeHtml(resolvedSector || "Sector")}</a>
         <input type="text" class="stocks-inline-edit stock-sector-input double-click-input" value="${escapeHtml(resolvedSector || "")}" data-field="sector" placeholder="Sector" style="display:none; width:100%;">
       </div>
     </td>
-    <td>
+    <td class="col-summary">
       <textarea class="stocks-inline-edit stock-summary-input" data-field="summary" rows="1" placeholder="Add technical summary...">${escapeHtml(stock.summary)}</textarea>
     </td>
-    <td>
+    <td class="col-date">
       <input type="date" class="stocks-inline-edit stock-date-input" value="${escapeHtml(stock.dateOfRun)}" data-field="dateOfRun">
     </td>
-    <td>
+    <td class="col-source">
       <div class="source-tag-wrapper">
         <input type="text" class="stocks-inline-edit stock-source-input" value="${escapeHtml(stock.source)}" data-field="source">
       </div>
     </td>
-    <td>
+    <td class="col-tf">
       <div class="tf-badge-wrapper ${isWeekly ? 'tf-weekly' : 'tf-daily'}">
         <select class="stocks-inline-edit stock-tf-select" data-field="timeframe">
           <option value="Daily" ${stock.timeframe === 'Daily' ? 'selected' : ''}>Daily</option>
@@ -461,16 +730,19 @@ function createStockRow(stock) {
         </select>
       </div>
     </td>
-    <td>
+    <td class="col-notes">
       <textarea class="stocks-inline-edit stock-notes-input" data-field="myNotes" placeholder="Write trade notes..." rows="1">${escapeHtml(stock.myNotes || "")}</textarea>
     </td>
-    <td style="text-align: center;">
+    <td class="col-traded" style="text-align: center;">
       <select class="stock-traded-select status-badge ${isTraded ? 'traded-yes' : 'traded-no'}" data-field="traded">
         <option value="Y" ${isTraded ? 'selected' : ''}>Yes</option>
         <option value="N" ${!isTraded ? 'selected' : ''}>No</option>
       </select>
     </td>
-    <td style="text-align: center;">
+    <td class="col-analyzed" style="text-align: center;">
+      <input type="checkbox" class="stocks-inline-edit stock-analyzed-checkbox stocks-checkbox" data-field="analyzed" ${stock.analyzed ? 'checked' : ''} style="width: auto; margin: 0; transform: scale(1.1); cursor: pointer;">
+    </td>
+    <td class="col-action" style="text-align: center;">
       <button class="stocks-btn-delete" title="Delete Stock">✕</button>
     </td>
   `;
@@ -479,7 +751,7 @@ function createStockRow(stock) {
   tr.querySelectorAll(".stocks-inline-edit, .stock-traded-select").forEach(input => {
     const saveChanges = () => {
       const field = input.dataset.field;
-      let val = input.value;
+      let val = input.type === 'checkbox' ? input.checked : input.value;
 
       // Handle ticker casing/trimming
       if (field === 'ticker') {
@@ -501,11 +773,15 @@ function createStockRow(stock) {
 
       if (stock[field] !== val) {
         stock[field] = val; // optimistically update local state
-        updateStock(stock.id, { [field]: val });
+        updateStock(stock.id, { [field]: val }).then(() => {
+          if (field === 'analyzed' && document.getElementById("stocks-hide-analyzed")?.checked) {
+            renderStocksTable();
+          }
+        });
       }
     };
 
-    if (input.tagName === "SELECT") {
+    if (input.tagName === "SELECT" || input.type === "checkbox") {
       input.addEventListener("change", saveChanges);
     } else {
       input.addEventListener("blur", saveChanges);

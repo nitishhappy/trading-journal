@@ -10,7 +10,7 @@ import { subscribeAiSummaries, unsubscribeAiSummaries } from '../services/ai.js'
 import { subscribeChecklistLogs, unsubscribeChecklists } from '../services/checklists.js';
 import { subscribeCandleChecklists, unsubscribeCandleChecklists } from '../services/candleChecklist.js';
 import { subscribeTvNotifications, unsubscribeTvNotifications } from '../services/tvNotifications.js';
-import { loadStocks, stocksUnsubscribe } from '../services/stocks.js';
+import { loadStocks, stocksUnsubscribe, loadStocksObservations, stocksObsUnsubscribe } from '../services/stocks.js';
 import {
   subscribeSequenceRules,
   subscribeSequenceTriggerLogs,
@@ -86,6 +86,7 @@ auth.onAuthStateChanged((user) => {
     subscribeSequenceTriggerLogs();
     subscribeSequenceStates();
     loadStocks();
+    loadStocksObservations();
     checkBackupReminder();
     setTimeout(() => loadTradePasscodeStatus(), 50);
     
@@ -104,6 +105,7 @@ auth.onAuthStateChanged((user) => {
     state.sequenceTriggerLogs = [];
     state.sequenceStates = [];
     state.stocks = [];
+    state.stocksObservations = [];
     state.cachedGeminiKey = null;
     state.cachedGoogleApiKey = null;
     state.tradePasscode = null;
@@ -120,6 +122,7 @@ auth.onAuthStateChanged((user) => {
     unsubscribeSequenceTriggerLogs();
     unsubscribeSequenceStates();
     if (stocksUnsubscribe) stocksUnsubscribe();
+    if (stocksObsUnsubscribe) stocksObsUnsubscribe();
     
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { loggedIn: false } }));
   }

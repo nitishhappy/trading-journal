@@ -125,3 +125,44 @@ export function deleteStocksBatch(stockIds) {
     throw err;
   });
 }
+
+// Stocks observations service methods
+export let stocksObsUnsubscribe = null;
+
+export function loadStocksObservations() {
+  if (!state.currentUser) return;
+
+  const ref = db.collection("users")
+                .doc(state.currentUser.uid)
+                .collection("settings")
+                .doc("stocks_observations");
+
+  stocksObsUnsubscribe = ref.onSnapshot((doc) => {
+    if (doc.exists) {
+      state.stocksObservations = doc.data().bullets || [];
+    } else {
+      state.stocksObservations = [];
+    }
+    window.dispatchEvent(new CustomEvent('stocks-observations-updated'));
+  }, (err) => {
+    console.error("Stocks observations load error:", err);
+  });
+}
+
+export function saveStocksObservations(bullets) {
+  if (!state.currentUser) return Promise.resolve();
+
+  const ref = db.collection("users")
+                .doc(state.currentUser.uid)
+                .collection("settings")
+                .doc("stocks_observations");
+
+  return ref.set({
+    bullets: bullets,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge: true }).catch((err) => {
+    console.error("Save stocks observations error:", err);
+    showToast("Failed to save observations");
+  });
+}
+

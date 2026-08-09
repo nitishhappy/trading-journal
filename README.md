@@ -1,6 +1,29 @@
 # Trade Journal — README
 
-A private, installable (PWA) daily trading journal. Built with vanilla HTML/CSS/JS + Firebase (Auth + Firestore). Designed for Android, installable as a home-screen icon via Chrome's "Add to Home Screen."
+A private, installable (PWA) daily trading journal. Built with vanilla HTML/CSS/JS + Firebase (Firestore). Designed for Android, installable as a home-screen icon via Chrome's "Add to Home Screen."
+
+---
+
+## Hosting & Architecture
+
+| Component | Technology |
+|-----------|-----------|
+| **Hosting Platform** | Vercel |
+| **Database** | Firebase Firestore (no Firebase Hosting) |
+| **API Layer** | Vercel Serverless Functions (`/api/`) |
+| **Authentication** | Firebase Auth (optional) |
+
+### How It Works
+- **Static files** (HTML/CSS/JS) → Served by Vercel
+- **Firebase Auth** → User login (email/password, optional)
+- **Firestore** → Database for all app data
+- **Vercel API** (`/api/tvWebhook`) → Handles TradingView webhook alerts, writes to Firestore via Firebase Admin SDK
+
+### Key Files
+- `vercel.json` — Vercel routing configuration
+- `api/tvWebhook.js` — Vercel serverless function for TradingView webhooks
+- `api/firebase-admin.js` — Firebase Admin SDK initialization for Firestore writes
+- `app.js` — **Client-side entry point** (not a server file)
 
 ---
 
@@ -885,3 +908,18 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Highlights trade keywords (`Gold Buy`, `Gold Sell`, `Buy`, `Sell`, `Long`, `Short`) with vibrant glowing inline badges within the message text.
 - **Clean JSON Raw Message Parsing**:
   - Fixed a bug where stringified JSON metadata (e.g. `","source":"telegram"}`) trailed in the main notification message. Telegram alerts now cleanly render only the original message text.
+
+### v2.3.12 — 9 Aug 2026 — Stocks Tab Enhancements: Column Visibility, Hiding Analyzed, and Bullet Observations
+
+- **Analyzed Column & Toggle Filtering**:
+  - Added a new `Analyzed` checkbox column to the Stocks table.
+  - Added a `Hide Analyzed` toggle checkbox at the top filter bar (active by default). When a stock is marked as analyzed, it is immediately hidden from the table unless "Hide Analyzed" is unchecked.
+  - Clicking the `Analyzed` header sorts the stocks list by their analyzed status.
+- **Dynamic Column Visibility**:
+  - Added a "⚙ Columns" dropdown button in the action bar to toggle visibility of individual columns (`Stock Name`, `Stock ID`, `Sector`, `Brief Summary`, `Date of Run`, `Source`, `TF`, `My Notes`, `Traded`, `Analyzed`).
+  - Automatically calculates the correct `colspan` for grouping headers when columns are hidden.
+  - Persists column visibility choices in `localStorage` to retain preferences on refresh.
+- **Bullet Observations Section**:
+  - Added an interactive "Observations & Rules" bullet list card at the top of the Stocks view.
+  - Supports adding, inline editing, and deleting observations with real-time sync to Firestore (`users/{uid}/settings/stocks_observations`).
+

@@ -209,6 +209,17 @@
 
     <!-- ===== STOCKS VIEW ===== -->
     <div id="view-stocks" class="view hidden">
+      <!-- Stocks Observations Section -->
+      <div class="stocks-observations-section">
+        <div class="observations-header">
+          <div class="observations-title">💡 Stocks Observations & Rules</div>
+          <button id="add-stock-obs-btn" class="btn-obs-add">+ Add Bullet</button>
+        </div>
+        <ul id="stocks-observations-list" class="observations-list">
+          <!-- Dynamically populated -->
+        </ul>
+      </div>
+
       <div class="stocks-action-bar">
         <div class="stocks-controls">
           <div class="select-wrapper">
@@ -226,9 +237,31 @@
               <option value="date">Date of Run</option>
             </select>
           </div>
+          <div class="select-wrapper">
+            <label for="stocks-hide-analyzed" style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none;">
+              <input type="checkbox" id="stocks-hide-analyzed" class="stocks-checkbox" checked style="margin: 0; cursor: pointer;"> Hide Analyzed
+            </label>
+          </div>
           <div class="select-wrapper" style="margin-left: 8px; gap: 8px;">
             <button id="stocks-copy-delta-btn" class="stocks-btn-copy" title="Copy tickers from the latest run date">📋 Copy Delta</button>
             <button id="stocks-copy-full-btn" class="stocks-btn-copy" title="Copy all tickers in list">📋 Copy Full</button>
+            
+            <div class="dropdown-wrapper" id="stocks-cols-dropdown-wrapper">
+              <button id="stocks-cols-btn" class="stocks-btn-copy" title="Toggle Column Visibility">⚙ Columns</button>
+              <div id="stocks-cols-dropdown" class="dropdown-content hidden">
+                <label class="dropdown-item-label"><input type="checkbox" data-col="name" checked> Stock Name</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="ticker" checked> Stock ID (TV)</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="sector" checked> Sector</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="summary" checked> Brief Summary</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="date" checked> Date of Run</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="source" checked> Source</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="tf" checked> TF</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="notes" checked> My Notes</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="traded" checked> Traded</label>
+                <label class="dropdown-item-label"><input type="checkbox" data-col="analyzed" checked> Analyzed</label>
+              </div>
+            </div>
+
             <button id="stocks-delete-selected-btn" class="stocks-btn-copy" style="color: #e74c3c; border-color: #e74c3c; display: none;" title="Delete selected stocks">🗑 Delete</button>
           </div>
         </div>
@@ -238,20 +271,21 @@
       </div>
 
       <div class="stocks-table-container">
-        <table class="stocks-table">
+        <table class="stocks-table" id="stocks-table">
           <thead>
             <tr>
-              <th style="width: 40px; text-align: center;"><input type="checkbox" id="stocks-select-all" class="stocks-checkbox" title="Select All"></th>
-              <th id="th-stock-name" class="sortable-header" style="cursor: pointer; user-select: none;">Stock Name <span class="sort-indicator">⇅</span></th>
-              <th>Stock ID (TV)</th>
-              <th id="th-sector" class="sortable-header" style="cursor: pointer; user-select: none;">Sector <span class="sort-indicator">⇅</span></th>
-              <th>Brief Summary</th>
-              <th id="th-date" class="sortable-header" style="cursor: pointer; user-select: none;">Date of Run <span class="sort-indicator">⇅</span></th>
-              <th id="th-source" class="sortable-header" style="cursor: pointer; user-select: none;">Source <span class="sort-indicator">⇅</span></th>
-              <th id="th-tf" class="sortable-header" style="cursor: pointer; user-select: none;">TF <span class="sort-indicator">⇅</span></th>
-              <th>My Notes</th>
-              <th id="th-traded" class="sortable-header" style="cursor: pointer; user-select: none; text-align: center; width: 80px;">Traded <span class="sort-indicator">⇅</span></th>
-              <th style="width: 60px; text-align: center;">Action</th>
+              <th class="col-checkbox" style="width: 40px; text-align: center;"><input type="checkbox" id="stocks-select-all" class="stocks-checkbox" title="Select All"></th>
+              <th id="th-stock-name" class="sortable-header col-name" style="cursor: pointer; user-select: none;">Stock Name <span class="sort-indicator">⇅</span></th>
+              <th class="col-ticker">Stock ID (TV)</th>
+              <th id="th-sector" class="sortable-header col-sector" style="cursor: pointer; user-select: none;">Sector <span class="sort-indicator">⇅</span></th>
+              <th class="col-summary">Brief Summary</th>
+              <th id="th-date" class="sortable-header col-date" style="cursor: pointer; user-select: none;">Date of Run <span class="sort-indicator">⇅</span></th>
+              <th id="th-source" class="sortable-header col-source" style="cursor: pointer; user-select: none;">Source <span class="sort-indicator">⇅</span></th>
+              <th id="th-tf" class="sortable-header col-tf" style="cursor: pointer; user-select: none;">TF <span class="sort-indicator">⇅</span></th>
+              <th class="col-notes">My Notes</th>
+              <th id="th-traded" class="sortable-header col-traded" style="cursor: pointer; user-select: none; text-align: center; width: 80px;">Traded <span class="sort-indicator">⇅</span></th>
+              <th id="th-analyzed" class="sortable-header col-analyzed" style="cursor: pointer; user-select: none; text-align: center; width: 80px;">Analyzed <span class="sort-indicator">⇅</span></th>
+              <th class="col-action" style="width: 60px; text-align: center;">Action</th>
             </tr>
           </thead>
           <tbody id="stocks-table-body">
