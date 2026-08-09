@@ -8,6 +8,10 @@ export let stocksUnsubscribe = null;
 export function loadStocks() {
   if (!state.currentUser) return;
   
+  if (stocksUnsubscribe) {
+    stocksUnsubscribe();
+  }
+  
   const ref = db.collection("users")
                 .doc(state.currentUser.uid)
                 .collection("stocks");
@@ -157,6 +161,10 @@ export let stocksObsUnsubscribe = null;
 
 export function loadStocksObservations() {
   if (!state.currentUser) return;
+
+  if (stocksObsUnsubscribe) {
+    stocksObsUnsubscribe();
+  }
 
   const ref = db.collection("users")
                 .doc(state.currentUser.uid)

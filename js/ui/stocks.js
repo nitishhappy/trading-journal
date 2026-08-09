@@ -525,6 +525,10 @@ export function renderStocksTable() {
 
   if (!tableBody) return;
 
+  // Save scroll position to prevent layout shifts
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
+
   let stocks = [...state.stocks];
 
   // Filter out analyzed stocks if the checkbox is checked
@@ -644,8 +648,23 @@ export function renderStocksTable() {
     });
   }
 
+  // Now that all rows are in the DOM, adjust heights synchronously
+  adjustTextareaHeights();
+
   // Update header indicators
   updateHeaderIndicators();
+
+  // Restore scroll position
+  window.scrollTo(scrollX, scrollY);
+}
+
+// Helper to adjust all stock table textarea heights synchronously
+function adjustTextareaHeights() {
+  const textareas = document.querySelectorAll(".stocks-table .stock-summary-input, .stocks-table .stock-notes-input");
+  textareas.forEach(ta => {
+    ta.style.height = "auto";
+    ta.style.height = ta.scrollHeight + "px";
+  });
 }
 
 // Update direction arrows on headers based on active sort/group state
@@ -823,11 +842,6 @@ function createStockRow(stock) {
           input.style.height = "auto";
           input.style.height = input.scrollHeight + "px";
         });
-        // initial size trigger
-        setTimeout(() => {
-          input.style.height = "auto";
-          input.style.height = input.scrollHeight + "px";
-        }, 10);
       }
     }
   });
