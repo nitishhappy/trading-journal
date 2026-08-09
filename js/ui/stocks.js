@@ -488,8 +488,10 @@ function runAutoSync() {
         highlight: item.highlight || false
       });
     } else {
-      // Sync updates if summary, highlight, or sector changed in the scan file
       const existing = existingMap.get(key);
+      if (existing.deleted) return; // Skip updating or restoring soft-deleted stocks
+      
+      // Sync updates if summary, highlight, or sector changed in the scan file
       const newSummary = item.summary || "";
       const newHighlight = item.highlight || false;
       const newSector = item.sector || "";
@@ -531,6 +533,9 @@ export function renderStocksTable() {
 
   let stocks = [...state.stocks];
 
+  // Filter out soft-deleted stocks
+  stocks = stocks.filter(stock => !stock.deleted);
+
   // Filter out analyzed stocks if the checkbox is checked
   const hideAnalyzed = document.getElementById("stocks-hide-analyzed")?.checked ?? true;
   if (hideAnalyzed) {
@@ -539,7 +544,8 @@ export function renderStocksTable() {
 
   // Update total count
   if (totalCountEl) {
-    totalCountEl.textContent = `${stocks.length} Stock${stocks.length === 1 ? '' : 's'} (${state.stocks.length} total)`;
+    const activeStocksTotal = state.stocks.filter(s => !s.deleted).length;
+    totalCountEl.textContent = `${stocks.length} Stock${stocks.length === 1 ? '' : 's'} (${activeStocksTotal} total)`;
   }
 
   // Toggle empty state

@@ -126,7 +126,10 @@ export function deleteStock(stockId) {
                    .collection("stocks")
                    .doc(stockId);
 
-  return docRef.delete().then(() => {
+  return docRef.update({
+    deleted: true,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(() => {
     showToast("Stock deleted successfully");
   }).catch((err) => {
     console.error("Delete stock error:", err);
@@ -144,7 +147,10 @@ export function deleteStocksBatch(stockIds) {
                              .collection("stocks");
 
   stockIds.forEach((id) => {
-    batch.delete(stocksCollection.doc(id));
+    batch.update(stocksCollection.doc(id), {
+      deleted: true,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
   });
 
   return batch.commit().then(() => {

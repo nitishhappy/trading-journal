@@ -924,5 +924,9 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Supports adding, inline editing, and deleting observations with real-time sync to Firestore (`users/{uid}/settings/stocks_observations`).
 - **Auto-Sync Batch Update Fix**:
   - Implemented `updateStocksBatch` to commit all auto-sync modifications in a single transaction, completely resolving layout loops, page flickering, and textareas auto-resizing glitches during auto-sync runs.
+- **Permanent Deduplicated Soft-Delete**:
+  - Replaced hard-deletion logic in `deleteStock` and `deleteStocksBatch` with a soft-delete mechanism that flags items with `deleted: true` in Firestore.
+  - Ensures the auto-sync engine remembers deleted items and does not restore them from local scan data files (`scanned_stocks.js`) on the next page reload.
+
 
 
