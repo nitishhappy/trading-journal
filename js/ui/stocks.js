@@ -1,8 +1,10 @@
 import { state } from '../state.js';
-import { updateStock, deleteStock, addStocksBatch, deleteStocksBatch, loadStocksObservations, saveStocksObservations, updateStocksBatch } from '../services/stocks.js';
+import { updateStock, deleteStock, addStocksBatch, deleteStocksBatch, loadStocksObservations, saveStocksObservations, updateStocksBatch, cleanDuplicatesAndSources } from '../services/stocks.js';
 import { showToast } from '../utils/toast.js';
 
 let hasAutoSynced = false;
+let hasCleaned = false;
+
 
 // Sorting and grouping state
 let currentSortField = "dateOfRun"; // "name" | "dateOfRun" | "source" | "timeframe" | "traded"
@@ -393,6 +395,11 @@ export function initStocksUI() {
 
   // Listen to Firestore updates
   window.addEventListener("stocks-updated", () => {
+    // Run one-time deduplication and source normalization
+    if (!hasCleaned && state.stocks && state.stocks.length > 0) {
+      hasCleaned = true;
+      cleanDuplicatesAndSources();
+    }
     // Attempt auto-sync of scanned_stocks.js data exactly once after first DB load
     if (!hasAutoSynced && window.scannedStocksData && Array.isArray(window.scannedStocksData) && window.scannedStocksData.length > 0) {
       hasAutoSynced = true;
@@ -600,8 +607,35 @@ export function renderStocksTable() {
       // Inject group header row
       const headerRow = document.createElement("tr");
       headerRow.className = "stocks-group-header";
-      headerRow.innerHTML = `<td colspan="${getVisibleColsCount()}"><strong>${groupName}</strong> (${groups[groupName].length} items)</td>`;
+      
+      const visibleCols = getVisibleColsCount();
+      headerRow.innerHTML = `
+        <td colspan="${visibleCols}">
+          <div class="stocks-group-header-flex" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span><strong>${groupName}</strong> (${groups[groupName].length} items)</span>
+            <button class="btn-delete-group" data-group="${escapeHtml(groupName)}" style="background: rgba(232, 60, 56, 0.12); color: #ff5252; border: 1px solid rgba(232, 60, 56, 0.25); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-family: inherit; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: all 0.2s ease;" onmouseover="this.style.background='rgba(232, 60, 56, 0.2)'; this.style.borderColor='rgba(232, 60, 56, 0.4)'" onmouseout="this.style.background='rgba(232, 60, 56, 0.12)'; this.style.borderColor='rgba(232, 60, 56, 0.25)'" title="Delete all stocks in this group">
+              🗑 Delete Group
+            </button>
+          </div>
+        </td>
+      `;
       tableBody.appendChild(headerRow);
+
+      const deleteGroupBtn = headerRow.querySelector(".btn-delete-group");
+      if (deleteGroupBtn) {
+        deleteGroupBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const targetGroup = groups[groupName];
+          const stockIds = targetGroup.map(s => s.id);
+          
+          if (confirm(`Are you sure you want to delete all ${stockIds.length} stocks in "${groupName}"?`)) {
+            deleteStocksBatch(stockIds).then(() => {
+              stockIds.forEach(id => selectedStockIds.delete(id));
+              updateDeleteButtonVisibility();
+            });
+          }
+        });
+      }
 
       // Inject members of group
       groups[groupName].forEach(stock => {

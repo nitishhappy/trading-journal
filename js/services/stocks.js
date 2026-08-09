@@ -192,3 +192,116 @@ export function saveStocksObservations(bullets) {
   });
 }
 
+// One-time cleanup for duplicates and normalizing sources
+export function cleanDuplicatesAndSources() {
+  if (!state.currentUser || !state.stocks || state.stocks.length === 0) return Promise.resolve();
+
+  const stocks = state.stocks;
+  const toDeleteIds = [];
+  const toUpdate = [];
+  
+  // Track seen combinations of ticker + dateOfRun
+  // Key: TICKER_DATEOFRUN
+  const seen = new Map();
+
+  stocks.forEach(stock => {
+    const ticker = (stock.ticker || "").toUpperCase().trim();
+    const dateOfRun = (stock.dateOfRun || "").trim();
+    if (!ticker || !dateOfRun) return;
+    
+    const key = `${ticker}_${dateOfRun}`;
+    
+    // Normalize source name if it matches pattern
+    let newSource = stock.source || "";
+    const sourceUpper = newSource.toUpperCase();
+    if (
+      sourceUpper === "AFZAL_REPORT" ||
+      sourceUpper.startsWith("CANVA") ||
+      sourceUpper.startsWith("SECTRO") ||
+      sourceUpper.startsWith("SECTOR")
+    ) {
+      newSource = "Afzal";
+    }
+
+    if (!seen.has(key)) {
+      seen.set(key, { stock, newSource });
+    } else {
+      const existing = seen.get(key);
+      const existingStock = existing.stock;
+      
+      // Determine which one is better to keep (notes/traded/analyzed are preferred)
+      const existingScore = (existingStock.myNotes ? 2 : 0) + (existingStock.traded === 'Y' ? 1 : 0) + (existingStock.analyzed ? 1 : 0);
+      const currentScore = (stock.myNotes ? 2 : 0) + (stock.traded === 'Y' ? 1 : 0) + (stock.analyzed ? 1 : 0);
+      
+      const isCompoundId = stock.id === key;
+      const existingIsCompoundId = existingStock.id === key;
+      
+      let keepCurrent = false;
+      if (currentScore > existingScore) {
+        keepCurrent = true;
+      } else if (currentScore === existingScore) {
+        if (isCompoundId && !existingIsCompoundId) {
+          keepCurrent = true;
+        }
+      }
+      
+      if (keepCurrent) {
+        toDeleteIds.push(existingStock.id);
+        seen.set(key, { stock, newSource });
+      } else {
+        toDeleteIds.push(stock.id);
+      }
+    }
+  });
+
+  seen.forEach((value) => {
+    const { stock, newSource } = value;
+    if (stock.source !== newSource) {
+      toUpdate.push({
+        id: stock.id,
+        source: newSource
+      });
+    }
+  });
+
+  if (toDeleteIds.length === 0 && toUpdate.length === 0) {
+    return Promise.resolve();
+  }
+
+  console.log(`[Clean-up] Deleting ${toDeleteIds.length} duplicate(s) and updating ${toUpdate.length} source(s)...`);
+
+  const executeBatch = async () => {
+    const BATCH_LIMIT = 400;
+    
+    // Batch deletes
+    for (let i = 0; i < toDeleteIds.length; i += BATCH_LIMIT) {
+      const chunk = toDeleteIds.slice(i, i + BATCH_LIMIT);
+      const batch = db.batch();
+      const stocksCollection = db.collection("users").doc(state.currentUser.uid).collection("stocks");
+      chunk.forEach(id => {
+        batch.delete(stocksCollection.doc(id));
+      });
+      await batch.commit();
+    }
+    
+    // Batch updates
+    for (let i = 0; i < toUpdate.length; i += BATCH_LIMIT) {
+      const chunk = toUpdate.slice(i, i + BATCH_LIMIT);
+      const batch = db.batch();
+      const stocksCollection = db.collection("users").doc(state.currentUser.uid).collection("stocks");
+      chunk.forEach(upd => {
+        batch.update(stocksCollection.doc(upd.id), {
+          source: upd.source,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      });
+      await batch.commit();
+    }
+    
+    showToast(`Deduplicated ${toDeleteIds.length} stock(s) and normalized ${toUpdate.length} source name(s).`, "success");
+  };
+
+  return executeBatch();
+}
+
+
