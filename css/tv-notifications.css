@@ -429,7 +429,10 @@
 
 .tv-badge-buy { background: rgba(38, 166, 154, 0.15); color: #26a69a; border: 1px solid rgba(38, 166, 154, 0.3); }
 .tv-badge-sell { background: rgba(239, 83, 80, 0.15); color: #ef5350; border: 1px solid rgba(239, 83, 80, 0.3); }
-.tv-badge-close { background: rgba(255, 167, 38, 0.15); color: #ffa726; border: 1px solid rgba(255, 167, 38, 0.3); }
+.tv-badge-close, .tv-badge-exit { background: rgba(255, 167, 38, 0.15); color: #ffa726; border: 1px solid rgba(255, 167, 38, 0.3); }
+.tv-badge-ctc { background: rgba(41, 121, 255, 0.15); color: #2979ff; border: 1px solid rgba(41, 121, 255, 0.3); }
+.tv-badge-sl { background: rgba(244, 67, 54, 0.2); color: #ff5252; border: 1px solid rgba(244, 67, 54, 0.4); }
+.tv-badge-tp { background: rgba(0, 230, 118, 0.18); color: #00e676; border: 1px solid rgba(0, 230, 118, 0.4); }
 .tv-badge-alert { background: rgba(144, 202, 249, 0.15); color: #90caf9; border: 1px solid rgba(144, 202, 249, 0.3); }
 
 .tv-symbol-badge {
@@ -757,12 +760,56 @@
   box-shadow: 0 0 10px rgba(239, 83, 80, 0.8);
 }
 
-.tv-notif-card.tv-card-signal-buy {
-  border-left: 4px solid #26a69a !important;
+.tv-notif-card.tv-card-gold-exit {
+  background: linear-gradient(135deg, rgba(255, 167, 38, 0.15) 0%, var(--surface-2) 65%) !important;
+  border: 1px solid rgba(255, 167, 38, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(255, 167, 38, 0.16);
 }
-.tv-notif-card.tv-card-signal-sell {
-  border-left: 4px solid #ef5350 !important;
+.tv-notif-card.tv-card-gold-exit .tv-card-border-bar {
+  background: linear-gradient(180deg, #ffa726 0%, #ff9800 100%) !important;
+  width: 5px !important;
+  box-shadow: 0 0 10px rgba(255, 167, 38, 0.8);
 }
+
+.tv-notif-card.tv-card-gold-ctc {
+  background: linear-gradient(135deg, rgba(41, 121, 255, 0.15) 0%, var(--surface-2) 65%) !important;
+  border: 1px solid rgba(41, 121, 255, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(41, 121, 255, 0.16);
+}
+.tv-notif-card.tv-card-gold-ctc .tv-card-border-bar {
+  background: linear-gradient(180deg, #2979ff 0%, #00b0ff 100%) !important;
+  width: 5px !important;
+  box-shadow: 0 0 10px rgba(41, 121, 255, 0.8);
+}
+
+.tv-notif-card.tv-card-gold-sl {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.15) 0%, var(--surface-2) 65%) !important;
+  border: 1px solid rgba(244, 67, 54, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(244, 67, 54, 0.16);
+}
+.tv-notif-card.tv-card-gold-sl .tv-card-border-bar {
+  background: linear-gradient(180deg, #f44336 0%, #d32f2f 100%) !important;
+  width: 5px !important;
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.8);
+}
+
+.tv-notif-card.tv-card-gold-tp {
+  background: linear-gradient(135deg, rgba(0, 230, 118, 0.15) 0%, var(--surface-2) 65%) !important;
+  border: 1px solid rgba(0, 230, 118, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(0, 230, 118, 0.16);
+}
+.tv-notif-card.tv-card-gold-tp .tv-card-border-bar {
+  background: linear-gradient(180deg, #00e676 0%, #00c853 100%) !important;
+  width: 5px !important;
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.8);
+}
+
+.tv-notif-card.tv-card-signal-buy  { border-left: 4px solid #26a69a !important; }
+.tv-notif-card.tv-card-signal-sell { border-left: 4px solid #ef5350 !important; }
+.tv-notif-card.tv-card-signal-exit { border-left: 4px solid #ffa726 !important; }
+.tv-notif-card.tv-card-signal-ctc  { border-left: 4px solid #2979ff !important; }
+.tv-notif-card.tv-card-signal-sl   { border-left: 4px solid #f44336 !important; }
+.tv-notif-card.tv-card-signal-tp   { border-left: 4px solid #00e676 !important; }
 
 /* Gold Signal Badges */
 .tv-gold-signal-badge {
@@ -787,6 +834,30 @@
   color: #ef5350;
   border: 1px solid rgba(239, 83, 80, 0.5);
   box-shadow: 0 0 10px rgba(239, 83, 80, 0.25);
+}
+.tv-gold-exit-badge {
+  background: rgba(255, 167, 38, 0.22);
+  color: #ffa726;
+  border: 1px solid rgba(255, 167, 38, 0.5);
+  box-shadow: 0 0 10px rgba(255, 167, 38, 0.25);
+}
+.tv-gold-ctc-badge {
+  background: rgba(41, 121, 255, 0.22);
+  color: #2979ff;
+  border: 1px solid rgba(41, 121, 255, 0.5);
+  box-shadow: 0 0 10px rgba(41, 121, 255, 0.25);
+}
+.tv-gold-sl-badge {
+  background: rgba(244, 67, 54, 0.22);
+  color: #ff5252;
+  border: 1px solid rgba(244, 67, 54, 0.5);
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.25);
+}
+.tv-gold-tp-badge {
+  background: rgba(0, 230, 118, 0.22);
+  color: #00e676;
+  border: 1px solid rgba(0, 230, 118, 0.5);
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.25);
 }
 
 /* Signal Message Text */
@@ -815,14 +886,37 @@
   border: 1px solid rgba(255, 82, 82, 0.4);
   box-shadow: 0 0 8px rgba(239, 83, 80, 0.3);
 }
-.tv-kw-buy {
-  background: rgba(38, 166, 154, 0.2);
-  color: #26a69a;
+.tv-kw-gold-exit {
+  background: rgba(255, 167, 38, 0.25);
+  color: #ffb74d;
+  border: 1px solid rgba(255, 183, 77, 0.4);
+  box-shadow: 0 0 8px rgba(255, 167, 38, 0.3);
 }
-.tv-kw-sell {
-  background: rgba(239, 83, 80, 0.2);
-  color: #ef5350;
+.tv-kw-gold-ctc {
+  background: rgba(41, 121, 255, 0.25);
+  color: #448aff;
+  border: 1px solid rgba(68, 138, 255, 0.4);
+  box-shadow: 0 0 8px rgba(41, 121, 255, 0.3);
 }
+.tv-kw-gold-sl {
+  background: rgba(244, 67, 54, 0.25);
+  color: #ff5252;
+  border: 1px solid rgba(255, 82, 82, 0.4);
+  box-shadow: 0 0 8px rgba(244, 67, 54, 0.3);
+}
+.tv-kw-gold-tp {
+  background: rgba(0, 230, 118, 0.25);
+  color: #69f0ae;
+  border: 1px solid rgba(105, 240, 174, 0.4);
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.3);
+}
+
+.tv-kw-buy  { background: rgba(38, 166, 154, 0.2); color: #26a69a; }
+.tv-kw-sell { background: rgba(239, 83, 80, 0.2); color: #ef5350; }
+.tv-kw-exit { background: rgba(255, 167, 38, 0.2); color: #ffa726; }
+.tv-kw-ctc  { background: rgba(41, 121, 255, 0.2); color: #2979ff; }
+.tv-kw-sl   { background: rgba(244, 67, 54, 0.2); color: #ff5252; }
+.tv-kw-tp   { background: rgba(0, 230, 118, 0.2); color: #00e676; }
 
 /* Live Price Floater for TV Notifications */
 #tv-price-floater {

@@ -338,7 +338,16 @@ function renderFeed() {
 
   // Filter by Action if selected
   if (currentFilter !== 'ALL') {
-    items = items.filter(n => n.action === currentFilter);
+    items = items.filter(n => {
+      const act = (n.action || '').toUpperCase();
+      if (currentFilter === 'BUY') return ['BUY', 'LONG'].includes(act);
+      if (currentFilter === 'SELL') return ['SELL', 'SHORT'].includes(act);
+      if (currentFilter === 'EXIT' || currentFilter === 'CLOSE') return ['EXIT', 'CLOSE'].includes(act);
+      if (currentFilter === 'CTC') return ['CTC', 'BE', 'BREAKEVEN'].includes(act);
+      if (currentFilter === 'SL') return ['SL', 'STOPLOSS', 'STOP LOSS'].includes(act);
+      if (currentFilter === 'TP') return ['TP', 'TAKEPROFIT', 'TAKE PROFIT', 'TARGET'].includes(act);
+      return act === currentFilter;
+    });
   }
 
   if (items.length === 0) {
@@ -492,19 +501,45 @@ function formatRelativeTime(receivedAt) {
 function formatMessageWithHighlights(text) {
   if (!text) return '';
   const escaped = escHtml(text);
-  return escaped.replace(/\b(gold\s+buy|gold\s+sell|gold\s+long|gold\s+short|buy|sell|long|short)\b/gi, (match) => {
+  return escaped.replace(/\b(gold\s+buy|gold\s+sell|gold\s+exit|gold\s+ctc|gold\s+sl|gold\s+tp|gold\s+long|gold\s+short|buy|sell|exit|close|ctc|sl|tp|long|short)\b/gi, (match) => {
     const lower = match.toLowerCase();
-    if (lower.includes('gold') && (lower.includes('buy') || lower.includes('long'))) {
-      return `<span class="tv-kw-highlight tv-kw-gold-buy">${match}</span>`;
-    }
-    if (lower.includes('gold') && (lower.includes('sell') || lower.includes('short'))) {
-      return `<span class="tv-kw-highlight tv-kw-gold-sell">${match}</span>`;
+    if (lower.includes('gold')) {
+      if (lower.includes('buy') || lower.includes('long')) {
+        return `<span class="tv-kw-highlight tv-kw-gold-buy">${match}</span>`;
+      }
+      if (lower.includes('sell') || lower.includes('short')) {
+        return `<span class="tv-kw-highlight tv-kw-gold-sell">${match}</span>`;
+      }
+      if (lower.includes('exit') || lower.includes('close')) {
+        return `<span class="tv-kw-highlight tv-kw-gold-exit">${match}</span>`;
+      }
+      if (lower.includes('ctc')) {
+        return `<span class="tv-kw-highlight tv-kw-gold-ctc">${match}</span>`;
+      }
+      if (lower.includes('sl')) {
+        return `<span class="tv-kw-highlight tv-kw-gold-sl">${match}</span>`;
+      }
+      if (lower.includes('tp')) {
+        return `<span class="tv-kw-highlight tv-kw-gold-tp">${match}</span>`;
+      }
     }
     if (lower.includes('buy') || lower.includes('long')) {
       return `<span class="tv-kw-highlight tv-kw-buy">${match}</span>`;
     }
     if (lower.includes('sell') || lower.includes('short')) {
       return `<span class="tv-kw-highlight tv-kw-sell">${match}</span>`;
+    }
+    if (lower.includes('exit') || lower.includes('close')) {
+      return `<span class="tv-kw-highlight tv-kw-exit">${match}</span>`;
+    }
+    if (lower.includes('ctc')) {
+      return `<span class="tv-kw-highlight tv-kw-ctc">${match}</span>`;
+    }
+    if (lower.includes('sl')) {
+      return `<span class="tv-kw-highlight tv-kw-sl">${match}</span>`;
+    }
+    if (lower.includes('tp')) {
+      return `<span class="tv-kw-highlight tv-kw-tp">${match}</span>`;
     }
     return match;
   });
@@ -522,7 +557,10 @@ function buildCard(notif) {
   const actionClass = {
     BUY: 'tv-badge-buy', LONG: 'tv-badge-buy',
     SELL: 'tv-badge-sell', SHORT: 'tv-badge-sell',
-    CLOSE: 'tv-badge-close', EXIT: 'tv-badge-close',
+    CLOSE: 'tv-badge-close', EXIT: 'tv-badge-exit',
+    CTC: 'tv-badge-ctc', BE: 'tv-badge-ctc', BREAKEVEN: 'tv-badge-ctc',
+    SL: 'tv-badge-sl', STOPLOSS: 'tv-badge-sl',
+    TP: 'tv-badge-tp', TAKEPROFIT: 'tv-badge-tp', TARGET: 'tv-badge-tp',
   }[notif.action] || 'tv-badge-alert';
 
   const symbolHtml = notif.symbol
@@ -625,22 +663,50 @@ function buildCard(notif) {
   const msgLower = (mainMsg || '').toLowerCase();
   
   const isGold = symUpper.includes('GOLD') || symUpper.includes('XAU') || msgLower.includes('gold');
-  const isBuy = ['BUY', 'LONG'].includes(actUpper) || /\b(buy|long)\b/i.test(mainMsg);
+  const isBuy  = ['BUY', 'LONG'].includes(actUpper) || /\b(buy|long)\b/i.test(mainMsg);
   const isSell = ['SELL', 'SHORT'].includes(actUpper) || /\b(sell|short)\b/i.test(mainMsg);
+  const isExit = ['EXIT', 'CLOSE'].includes(actUpper) || /\b(exit|close)\b/i.test(mainMsg);
+  const isCtc  = ['CTC', 'BE', 'BREAKEVEN'].includes(actUpper) || /\b(ctc|cost to cost|breakeven)\b/i.test(mainMsg);
+  const isSl   = ['SL', 'STOPLOSS', 'STOP LOSS'].includes(actUpper) || /\b(sl|stop\s*loss|sl\s+triggered)\b/i.test(mainMsg);
+  const isTp   = ['TP', 'TAKEPROFIT', 'TAKE PROFIT', 'TARGET'].includes(actUpper) || /\b(tp|take\s*profit|tp\s*hit|target\s*hit)\b/i.test(mainMsg);
 
   let signalClass = '';
   let signalBadgeHtml = '';
 
-  if (isGold && isBuy) {
-    signalClass = 'tv-card-gold-buy';
-    signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-buy-badge">🟢 GOLD BUY</span>';
-  } else if (isGold && isSell) {
-    signalClass = 'tv-card-gold-sell';
-    signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-sell-badge">🔴 GOLD SELL</span>';
-  } else if (isBuy) {
-    signalClass = 'tv-card-signal-buy';
-  } else if (isSell) {
-    signalClass = 'tv-card-signal-sell';
+  if (isGold) {
+    if (isBuy) {
+      signalClass = 'tv-card-gold-buy';
+      signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-buy-badge">🟢 GOLD BUY</span>';
+    } else if (isSell) {
+      signalClass = 'tv-card-gold-sell';
+      signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-sell-badge">🔴 GOLD SELL</span>';
+    } else if (isExit) {
+      signalClass = 'tv-card-gold-exit';
+      signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-exit-badge">🚪 GOLD EXIT</span>';
+    } else if (isCtc) {
+      signalClass = 'tv-card-gold-ctc';
+      signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-ctc-badge">⚖️ GOLD CTC</span>';
+    } else if (isSl) {
+      signalClass = 'tv-card-gold-sl';
+      signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-sl-badge">🛑 GOLD SL</span>';
+    } else if (isTp) {
+      signalClass = 'tv-card-gold-tp';
+      signalBadgeHtml = '<span class="tv-gold-signal-badge tv-gold-tp-badge">🎯 GOLD TP</span>';
+    }
+  } else {
+    if (isBuy) {
+      signalClass = 'tv-card-signal-buy';
+    } else if (isSell) {
+      signalClass = 'tv-card-signal-sell';
+    } else if (isExit) {
+      signalClass = 'tv-card-signal-exit';
+    } else if (isCtc) {
+      signalClass = 'tv-card-signal-ctc';
+    } else if (isSl) {
+      signalClass = 'tv-card-signal-sl';
+    } else if (isTp) {
+      signalClass = 'tv-card-signal-tp';
+    }
   }
 
   const card = document.createElement('div');

@@ -961,7 +961,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Automatically saves the widget's screen position and minimized/maximized state to `localStorage` to preserve layout preferences across page reloads.
   - Minimized state dynamically aggregates prices into the header title (e.g. `N: 24,200 | X: 2,435`).
 
+### v2.3.16 — 11 Aug 2026 — Expanded Card Action Badges (EXIT, CTC, SL, TP)
 
-
-
-
+- **Comprehensive Action Badges & Gold Card Styling**:
+  - Expanded TradingView alert card signal classification and highlighting to fully support `EXIT`, `CTC` (Cost-to-Cost / Breakeven), `SL` (Stop Loss), and `TP` (Take Profit) actions alongside `BUY` and `SELL`.
+  - Added custom glowing signal badges for Gold alerts: `🚪 GOLD EXIT`, `⚖️ GOLD CTC`, `🛑 GOLD SL`, and `🎯 GOLD TP`.
+  - Implemented luminous background gradient cards and border bars for Gold signals across all action types (`tv-card-gold-exit`, `tv-card-gold-ctc`, `tv-card-gold-sl`, `tv-card-gold-tp`).
+  - Added action badges (`SL`, `TP`, `CTC`, `EXIT`) with distinct color themes for all trading alerts.
+- **Enhanced Action Filtering & Plain-Text Parser**:
+  - Added dedicated filter buttons (`EXIT`, `CTC`, `SL`, `TP`) to the TV Alerts pane header.
+  - Updated `/api/tvWebhook` plain-text alert parser to recognize `EXIT`, `CTC`, `SL`, and `TP` keywords.
+  - Enhanced inline keyword highlighting (`formatMessageWithHighlights`) to style trade action words within raw and formatted alert texts.

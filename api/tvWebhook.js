@@ -261,12 +261,18 @@ function parsePlainTextAlert(text) {
   const kw = (parsed.keyword || '').toLowerCase();
   if (kw.includes("buy") || kw.includes("long"))        parsed.action = "BUY";
   else if (kw.includes("sell") || kw.includes("short")) parsed.action = "SELL";
-  else if (kw.includes("exit") || kw.includes("close")) parsed.action = "CLOSE";
+  else if (kw.includes("exit") || kw.includes("close")) parsed.action = "EXIT";
+  else if (kw.includes("ctc") || kw.includes("breakeven")) parsed.action = "CTC";
+  else if (kw.includes("sl") || kw.includes("stop"))   parsed.action = "SL";
+  else if (kw.includes("tp") || kw.includes("target")) parsed.action = "TP";
   else {
     const str = rawTrimmed.toUpperCase();
     if (str.includes("BUY") || str.includes("LONG"))        parsed.action = "BUY";
     else if (str.includes("SELL") || str.includes("SHORT")) parsed.action = "SELL";
-    else if (str.includes("EXIT") || str.includes("CLOSE")) parsed.action = "CLOSE";
+    else if (str.includes("EXIT") || str.includes("CLOSE")) parsed.action = "EXIT";
+    else if (str.includes("CTC") || str.includes("COST TO COST") || str.includes("BREAKEVEN")) parsed.action = "CTC";
+    else if (/\b(SL|STOP\s*LOSS|STOPLOSS)\b/.test(str))     parsed.action = "SL";
+    else if (/\b(TP|TAKE\s*PROFIT|TAKEPROFIT|TARGET)\b/.test(str)) parsed.action = "TP";
     else parsed.action = "ALERT";
   }
 
