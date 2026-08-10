@@ -935,6 +935,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Mapped support, resistance, target levels, gaps, and daily close validation rules for each channel source.
   - Added specific Laxman Rekha breakouts and breakdown targets for Nifty, Bank Nifty, and six selected swing stocks (BEL, BSE, Canara Bank, Bank of India, Union Bank, Piramal Pharma).
 
+### v2.3.14 — 10 Aug 2026 — Notification Reliability: Fixed Duplicate Sequence Notifications
+
+- **Duplicate Notifications Resolution**:
+  - Removed redundant Firestore subscription to `sequenceTriggerLogs` inside `js/services/tvNotifications.js` which was triggering an unstyled default browser notification at the same time as the styled PWA notification.
+  - Retained the complete, styled system notification handled globally in `js/ui/sequenceRules.js` (which incorporates the application icon/badge, steps path, sound chime, in-app toast, and deduplication logic via `lastNotifiedLogId`).
+  - Resolved a potential Firestore snapshot listener memory leak on authentication changes.
+
+
 
 
 
