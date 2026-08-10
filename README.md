@@ -928,5 +928,13 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Replaced hard-deletion logic in `deleteStock` and `deleteStocksBatch` with a soft-delete mechanism that flags items with `deleted: true` in Firestore.
   - Ensures the auto-sync engine remembers deleted items and does not restore them from local scan data files (`scanned_stocks.js`) on the next page reload.
 
+### v2.3.13 — 10 Aug 2026 — Levels Tab: Synthesis of Latest Nifty & Bank Nifty Predictions
+
+- **Synthesized Prediction Levels (`daily_plan.js`)**:
+  - Integrated Nifty and Bank Nifty levels for the August 10 session from the newly downloaded analysis videos (CETA, SMU, and WAY2LA).
+  - Mapped support, resistance, target levels, gaps, and daily close validation rules for each channel source.
+  - Added specific Laxman Rekha breakouts and breakdown targets for Nifty, Bank Nifty, and six selected swing stocks (BEL, BSE, Canara Bank, Bank of India, Union Bank, Piramal Pharma).
+
+
 
 
