@@ -40,6 +40,7 @@ export const state = {
   sequenceStates: [],
   stocks: [],
   stocksObservations: [],
+  keepAppActiveMode: false,
 };
 
 // Bind to window for backward compatibility with trade-security.js and legacy code

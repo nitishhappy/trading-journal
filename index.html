@@ -798,6 +798,22 @@
       </div>
 
       <div class="settings-section">
+        <h3>⚡ Keep App Active (Android / Mobile)</h3>
+        <p class="settings-hint">Prevents screen sleep and preserves your exact app session state when backgrounding, switching apps, or locking your device.</p>
+        <div style="display:flex; align-items:center; gap:10px; margin-top:10px; margin-bottom:10px;">
+          <label class="toggle-switch">
+            <input type="checkbox" id="settings-keep-active-toggle" />
+            <span></span>
+          </label>
+          <span style="font-size:13px; font-weight:600;">Enable Keep App Active (Screen Wake Lock)</span>
+        </div>
+        <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:12px; margin-top:8px;">
+          <div style="font-size:12px; font-weight:bold; color:var(--accent); margin-bottom:4px;">💡 Recommended Android OS Setting:</div>
+          <p style="font-size:12px; color:var(--text-dim); margin:0; line-height:1.5;">To prevent Android OS from suspending TradeLog in the background, long-press the app icon on your home screen → <b>App Info (ⓘ)</b> → <b>Battery</b> → Select <b>Unrestricted</b>.</p>
+        </div>
+      </div>
+
+      <div class="settings-section">
         <h3>💾 Export Data</h3>
         <p class="settings-hint">Export your observations and trade log to a file you can keep, share, or open in Excel.</p>
         <button id="export-open-btn" class="btn-primary" style="margin-top:4px;">Export…</button>

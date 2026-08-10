@@ -7,6 +7,7 @@ import {
   defaultSortSelect, settingsLogoutBtn
 } from '../dom.js';
 import { populateDefaultTemplateSelect } from './candleChecklist.js';
+import { setKeepAppActive } from '../utils/lifecycle.js';
 
 // Cache elements for passcode lock/unlock
 const tradeLockOverlay = document.getElementById("trade-lock-overlay");
@@ -205,6 +206,12 @@ export function loadSettings() {
     const groupSelect = document.getElementById("group-select");
     if (groupSelect) groupSelect.value = state.groupMode;
     
+    const keepActiveToggle = document.getElementById("settings-keep-active-toggle");
+    if (keepActiveToggle) {
+      keepActiveToggle.checked = !!state.keepAppActiveMode;
+      keepActiveToggle.onchange = (e) => setKeepAppActive(e.target.checked, true);
+    }
+
     loadTelegramScannerSettings();
     window.dispatchEvent(new CustomEvent('settings-loaded'));
   }).catch((err) => {

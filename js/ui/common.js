@@ -1,4 +1,5 @@
 import { state } from '../state.js';
+import { saveSessionState } from '../utils/lifecycle.js';
 import {
   mainTabs, mainTabsWrapper, tabsScrollLeftBtn, tabsScrollRightBtn,
   viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, currentFolderLabel,
@@ -147,6 +148,7 @@ mainTabs.addEventListener("click", (e) => {
 
   // Dispatch custom event when view changes
   window.dispatchEvent(new CustomEvent('view-changed', { detail: { view: state.activeView } }));
+  saveSessionState();
   setTimeout(updateTabsScrollButtons, 100);
 
   // Toggle FAB visibility: dashboard FAB only on dashboard, candle FAB only on candleChecklist

@@ -15,6 +15,7 @@ import './js/utils/theme.js';
 import './js/utils/date.js';
 import './js/utils/image.js';
 import './js/utils/export.js';
+import './js/utils/lifecycle.js';
 
 // 4. Services (Firestore data layer — no side-effects beyond module-level var init)
 import './js/services/observations.js';

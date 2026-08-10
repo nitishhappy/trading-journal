@@ -21,6 +21,7 @@ import {
 } from '../services/sequenceRules.js';
 import { loadSettings, checkBackupReminder, loadTradePasscodeStatus } from './settings.js';
 import { loadThemePreference } from '../utils/theme.js';
+import { restoreSessionState } from '../utils/lifecycle.js';
 
 // Setup submit handler for login
 authForm.addEventListener("submit", (e) => {
@@ -89,6 +90,7 @@ auth.onAuthStateChanged((user) => {
     loadStocksObservations();
     checkBackupReminder();
     setTimeout(() => loadTradePasscodeStatus(), 50);
+    setTimeout(() => restoreSessionState(), 100);
     
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { loggedIn: true, user } }));
   } else {

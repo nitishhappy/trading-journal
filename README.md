@@ -120,6 +120,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.4 — Android Keep App Active & Seamless Session Persistence
+- **Keep App Active Mode**: Added a toggle in Settings to request Screen Wake Lock (`navigator.wakeLock.request('screen')`), keeping the screen active and reducing OS background suspension.
+- **Android Battery Setting Guidance**: Included clear instructions in Settings for configuring Android App Info → Battery → "Unrestricted" mode to prevent Android OS Low Memory Killer from suspending the app process.
+- **Automated Lifecycle State Persistence**: Volatile application state (`activeView` tab, `activeFolder`, tag filters, `groupMode`, scroll positions, open trade modal drafts) is automatically saved to `localStorage` on `visibilitychange` (`hidden`), `pagehide`, and `beforeunload`.
+- **Seamless Auto-Restoration**: When returning to the app after process termination/discard by Android OS, the app automatically restores the exact tab, filter selections, draft modal, and scroll position so no work or context is lost.
+
 ### v1.1 — Trade log, summary & smart categorization
 - Added **Trade Log** tab: per-day trade entries (capital, no. of trades, gross/net P/L, duration, comments), CSV export, and analytics (total P/L, win-day rate)
 - Added **Summary** tab: weekly/monthly overview with stats on observations, priority breakdown, folder breakdown, category breakdown, top tags, and trade performance
