@@ -391,6 +391,23 @@
     </div>
 
     <div id="view-tvNotifications" class="view hidden">
+        <!-- Floating Live Price Widget for Nifty & XAUUSD -->
+        <div id="tv-price-floater" class="hidden">
+            <div class="floater-header">
+                <span class="floater-title" id="tv-floater-title-text">Live Prices</span>
+                <button type="button" id="btn-tv-toggle-floater" class="btn-close-floater">−</button>
+            </div>
+            <div class="floater-body">
+                <div class="price-row">
+                    <span class="price-symbol">Nifty</span>
+                    <span id="tv-floater-nifty-val" class="price-val">--</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-symbol">XAUUSD</span>
+                    <span id="tv-floater-xau-val" class="price-val">--</span>
+                </div>
+            </div>
+        </div>
       <div class="tv-split-layout">
         <!-- Left Pane: Notifications Feed -->
         <div class="tv-pane-left">

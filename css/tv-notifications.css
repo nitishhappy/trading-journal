@@ -824,4 +824,128 @@
   color: #ef5350;
 }
 
+/* Live Price Floater for TV Notifications */
+#tv-price-floater {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 160px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#tv-price-floater.hidden {
+  display: none;
+}
+
+#tv-price-floater .floater-header {
+  background: var(--surface-2);
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#tv-price-floater .floater-header:active {
+  cursor: grabbing;
+}
+
+#tv-price-floater .floater-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#tv-price-floater .btn-close-floater {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+#tv-price-floater .btn-close-floater:hover {
+  color: var(--text);
+}
+
+#tv-price-floater .floater-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#tv-price-floater .price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+
+#tv-price-floater .price-symbol {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+#tv-price-floater .price-val {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+/* Green/Red flash animation for updates */
+#tv-price-floater .price-val.tick-up {
+  color: #26a69a !important;
+  text-shadow: 0 0 5px rgba(38, 166, 154, 0.4);
+}
+
+#tv-price-floater .price-val.tick-down {
+  color: #ef5350 !important;
+  text-shadow: 0 0 5px rgba(239, 83, 80, 0.4);
+}
+
+/* Minimized State */
+#tv-price-floater.minimized {
+  width: auto;
+  min-width: 140px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+}
+
+#tv-price-floater.minimized .floater-header {
+  border-bottom: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+}
+
+#tv-price-floater.minimized .floater-body {
+  display: none;
+}
+
+#tv-price-floater.minimized .floater-title::after {
+  content: " : " attr(data-prices);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: none;
+}
+
 

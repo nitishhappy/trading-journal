@@ -942,6 +942,19 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Retained the complete, styled system notification handled globally in `js/ui/sequenceRules.js` (which incorporates the application icon/badge, steps path, sound chime, in-app toast, and deduplication logic via `lastNotifiedLogId`).
   - Resolved a potential Firestore snapshot listener memory leak on authentication changes.
 
+### v2.3.15 — 10 Aug 2026 — TV Notifications: Live Prices Floater (Nifty & XAUUSD)
+
+- **Single Floating Price Widget**:
+  - Added a single draggable and minimizable live price floater for Nifty 50 and XAUUSD to the TradingView Notifications view.
+  - Implemented client-side smooth polling (every 10 seconds) that pauses automatically when the tab is in the background or the user switches to other tabs.
+- **Serverless Price Proxy**:
+  - Created `/api/livePrices` Vercel Serverless Function to fetch live spot prices of Nifty (via Upstox intraday and historical fallback APIs) and XAUUSD (via Swissquote BBO public quotes API).
+  - Eliminates browser CORS blocks and protects client privacy.
+- **Draggable & Persistent UI**:
+  - Implemented smooth touch/mouse drag-and-drop mechanics.
+  - Automatically saves the widget's screen position and minimized/maximized state to `localStorage` to preserve layout preferences across page reloads.
+  - Minimized state dynamically aggregates prices into the header title (e.g. `N: 24,200 | X: 2,435`).
+
 
 
 

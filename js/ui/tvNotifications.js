@@ -33,6 +33,81 @@ let tokenRevealed = false;
 let storedToken   = null;
 let alertNotifsEnabled = false; // Normal TV alert push notifications (off by default)
 
+// ===================== Live Price Floater Logic =====================
+let livePriceInterval = null;
+let isViewActive = false;
+
+async function updateLivePrices() {
+  const niftyValEl = document.getElementById('tv-floater-nifty-val');
+  const xauValEl = document.getElementById('tv-floater-xau-val');
+  const titleEl = document.getElementById('tv-floater-title-text');
+  const floater = document.getElementById('tv-price-floater');
+
+  if (!floater || floater.classList.contains('hidden')) return;
+
+  try {
+    const res = await fetch('/api/livePrices');
+    if (!res.ok) throw new Error('Failed to fetch prices');
+    const data = await res.json();
+    if (data && data.success) {
+      // Nifty
+      if (data.nifty !== null) {
+        const oldVal = parseFloat(niftyValEl.innerText.replace(/,/g, '')) || 0;
+        const newVal = data.nifty;
+        niftyValEl.innerText = newVal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        if (oldVal && newVal !== oldVal) {
+          const cls = newVal > oldVal ? 'tick-up' : 'tick-down';
+          niftyValEl.classList.add(cls);
+          setTimeout(() => niftyValEl.classList.remove(cls), 1000);
+        }
+      } else {
+        niftyValEl.innerText = '--';
+      }
+
+      // XAUUSD
+      if (data.xauusd !== null) {
+        const oldVal = parseFloat(xauValEl.innerText.replace(/,/g, '')) || 0;
+        const newVal = data.xauusd;
+        xauValEl.innerText = newVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        if (oldVal && newVal !== oldVal) {
+          const cls = newVal > oldVal ? 'tick-up' : 'tick-down';
+          xauValEl.classList.add(cls);
+          setTimeout(() => xauValEl.classList.remove(cls), 1000);
+        }
+      } else {
+        xauValEl.innerText = '--';
+      }
+
+      // Update minimized attribute
+      if (titleEl) {
+        const nText = data.nifty ? Math.round(data.nifty).toLocaleString('en-IN') : '--';
+        const xText = data.xauusd ? Math.round(data.xauusd).toLocaleString('en-US') : '--';
+        titleEl.setAttribute('data-prices', `N: ${nText} | X: ${xText}`);
+      }
+    }
+  } catch (err) {
+    console.error('Error fetching live prices:', err);
+  }
+}
+
+function startLivePrices() {
+  stopLivePrices();
+  const floater = document.getElementById('tv-price-floater');
+  if (floater) {
+    floater.classList.remove('hidden');
+  }
+  updateLivePrices();
+  // Poll every 10 seconds
+  livePriceInterval = setInterval(updateLivePrices, 10000);
+}
+
+function stopLivePrices() {
+  if (livePriceInterval) {
+    clearInterval(livePriceInterval);
+    livePriceInterval = null;
+  }
+}
+
 // ===================== Init =====================
 export function initTvNotificationsUI() {
   // Filter buttons
@@ -105,8 +180,128 @@ export function initTvNotificationsUI() {
     if (e.detail.view === 'tvNotifications') {
       renderFeed();
       updateUnreadBadge();
+      isViewActive = true;
+      startLivePrices();
+    } else {
+      isViewActive = false;
+      stopLivePrices();
+      const floater = document.getElementById('tv-price-floater');
+      if (floater) floater.classList.add('hidden');
     }
   });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && isViewActive) {
+      startLivePrices();
+    } else {
+      stopLivePrices();
+    }
+  });
+
+  // Initialize Floater Drag & Minimization
+  const floater = document.getElementById('tv-price-floater');
+  const floaterToggleBtn = document.getElementById('btn-tv-toggle-floater');
+
+  if (floater && floaterToggleBtn) {
+    // Restore minimized state
+    if (localStorage.getItem('tvFloaterMinimized') === 'true') {
+      floater.classList.add('minimized');
+      floaterToggleBtn.innerText = '+';
+    } else {
+      floaterToggleBtn.innerText = '−';
+    }
+
+    // Restore position
+    const savedLeft = localStorage.getItem('tvFloaterLeft');
+    const savedTop = localStorage.getItem('tvFloaterTop');
+    if (savedLeft && savedTop) {
+      floater.style.right = 'auto';
+      floater.style.bottom = 'auto';
+      floater.style.left = savedLeft;
+      floater.style.top = savedTop;
+    }
+
+    // Toggle minimize
+    floaterToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      floater.classList.toggle('minimized');
+      const isMin = floater.classList.contains('minimized');
+      floaterToggleBtn.innerText = isMin ? '+' : '−';
+      localStorage.setItem('tvFloaterMinimized', isMin ? 'true' : 'false');
+    });
+
+    // Drag-and-drop logic
+    const header = floater.querySelector('.floater-header');
+    if (header) {
+      let isDragging = false;
+      let startX, startY, initialLeft, initialTop;
+
+      const onMouseMove = (e) => {
+        if (!isDragging) return;
+        if (e.cancelable && e.type.includes('touch')) e.preventDefault();
+        const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+        const dx = clientX - startX;
+        const dy = clientY - startY;
+
+        const newLeft = `${initialLeft + dx}px`;
+        const newTop = `${initialTop + dy}px`;
+        
+        floater.style.right = 'auto';
+        floater.style.bottom = 'auto';
+        floater.style.left = newLeft;
+        floater.style.top = newTop;
+      };
+
+      const onMouseUp = () => {
+        if (!isDragging) return;
+        isDragging = false;
+        floater.style.transition = '';
+        
+        // Save final position
+        localStorage.setItem('tvFloaterLeft', floater.style.left);
+        localStorage.setItem('tvFloaterTop', floater.style.top);
+
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('touchmove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        document.removeEventListener('touchend', onMouseUp);
+      };
+
+      const onMouseDown = (e) => {
+        if (e.target.closest('.btn-close-floater')) return;
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+        startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+
+        const rect = floater.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        floater.style.transition = 'none';
+        floater.style.right = 'auto';
+        floater.style.bottom = 'auto';
+        floater.style.left = `${initialLeft}px`;
+        floater.style.top = `${initialTop}px`;
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('touchmove', onMouseMove, { passive: false });
+        document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener('touchend', onMouseUp);
+      };
+
+      header.addEventListener('mousedown', onMouseDown);
+      header.addEventListener('touchstart', onMouseDown, { passive: false });
+    }
+  }
+
+  // Active check on load
+  const activeView = document.querySelector('.view:not(.hidden)');
+  if (activeView && activeView.id === 'view-tvNotifications') {
+    isViewActive = true;
+    startLivePrices();
+  }
 
   // Settings tab token management
   window.addEventListener('settings-opened', () => {
