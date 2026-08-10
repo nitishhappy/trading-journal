@@ -1,6 +1,7 @@
 window.dailyPlanData = [
   // --- NIFTY BULLISH LEVELS ---
   { "source": "CETA", "price": "24417 - 24422", "bias": "bullish", "behavior": "Crucial daily close support for Wave 3 subordinate. As long as Nifty holds above 24417-24422 on a closing basis, the bullish impulse remains intact.", "tp": "25489", "sl": "24417", "status": "na" },
+  { "source": "LGT", "price": "24380 - 24400", "bias": "bullish", "behavior": "First support zone on dips. Look for potential buying reaction here.", "tp": "-", "sl": "-", "status": "na" },
   { "source": "WAY2LA", "price": "24547", "bias": "bullish", "behavior": "Crucial support level. Holding here maintains immediate bullish bias.", "tp": "-", "sl": "24547", "status": "na" },
   { "source": "SMU", "price": "24600 - 24620", "bias": "bullish", "behavior": "Call writers resistance zone. Decisive move above 24620 triggers short covering towards 24700-24750.", "tp": "24750", "sl": "24570", "status": "na" },
   { "source": "CETA", "price": "24780.55", "bias": "bullish", "behavior": "Pending Wave 3 127% projection level. Significant resistance and target.", "tp": "-", "sl": "-", "status": "na" },
@@ -15,10 +16,17 @@ window.dailyPlanData = [
   { "source": "SMU", "price": "24429", "bias": "bearish", "behavior": "Second downside target. Failure to hold opens room to 24300.", "tp": "24300", "sl": "-", "status": "na" },
   { "source": "CETA", "price": "24322 - 24357", "bias": "bearish", "behavior": "Deep downside correction targets (81.2% retracement of subordinate) if 24417 support is broken on daily closing.", "tp": "-", "sl": "-", "status": "na" },
   { "source": "WAY2LA", "price": "24347", "bias": "bearish", "behavior": "Secondary downside target zone if 24547 support is broken.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "LGT", "price": "24300", "bias": "bearish", "behavior": "Secondary strong support on dips / downside target if 24380 fails.", "tp": "-", "sl": "-", "status": "na" },
   { "source": "SMU", "price": "24300", "bias": "bearish", "behavior": "Positional downside target if 24429 breaks.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "LGT", "price": "24650", "bias": "neutral", "behavior": "Immediate minor resistance level (not considered highly significant).", "tp": "-", "sl": "-", "status": "na" },
   { "source": "WAY2LA", "price": "24770 - 24847", "bias": "bearish", "behavior": "Laxman Rekha Zone (Resistance). Short setup entry area with strict SL.", "tp": "24547", "sl": "24970", "status": "na" },
+  { "source": "LGT", "price": "24770 - 24850", "bias": "bearish", "behavior": "Major resistance and halt zone. Breakout opens room to 25200.", "tp": "25200", "sl": "-", "status": "na" },
+  { "source": "LGT", "price": "24980 - 25000", "bias": "bearish", "behavior": "Resistance and psychological target area.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "LGT", "price": "25200", "bias": "bearish", "behavior": "Positional upside target once major 24770-24850 resistance is cleared.", "tp": "-", "sl": "-", "status": "na" },
 
   // --- TACTICAL RULES & STRATEGIES ---
   { "source": "SMU", "price": "TACTICAL RULE: News Rejection", "bias": "neutral", "behavior": "FII & Prop carry bearish positions, while Retail is bullish. US Senate oil tariff bill is a negative trigger. Do not rush into long trades early; wait until 10:15 - 10:30 AM for OI stabilization.", "tp": "-", "sl": "-", "status": "na" },
-  { "source": "WAY2LA", "price": "TACTICAL RULE: Level Confirmation", "bias": "neutral", "behavior": "Do not blind trade. Let the price test and confirm the levels (support bounce or resistance rejection) before initiating trades.", "tp": "-", "sl": "-", "status": "na" }
+  { "source": "WAY2LA", "price": "TACTICAL RULE: Level Confirmation", "bias": "neutral", "behavior": "Do not blind trade. Let the price test and confirm the levels (support bounce or resistance rejection) before initiating trades.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "LGT", "price": "TACTICAL RULE: Gap Fade & Buy", "bias": "neutral", "behavior": "Mixed FII data. If a big gap up of 100-120 pts happens, do not chase. Wait for a full fade/dip to buy the rebound towards EOD.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "LGT", "price": "TACTICAL RULE: No Trade Day", "bias": "neutral", "behavior": "Protest action requested for August 12: Do not trade as a show of trader unity.", "tp": "-", "sl": "-", "status": "na" }
 ];
