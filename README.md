@@ -1175,3 +1175,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Preserved the default collapsed state of the "Mapped Levels" card list panel so it is never expanded or scrolled automatically.
 - **Refresh Jump Protection**:
   - Prevented viewport jumps on periodic 1-minute Nifty price re-evaluations, preserving user scrolling position.
+
+### v2.3.18 — 11 Aug 2026 — Daily Plan: Synthesized Nifty, Bank Nifty & Sensex Predictions
+
+- **Synthesized Prediction Levels (`daily_plan.js`)**:
+  - Integrated Nifty, Bank Nifty, and Sensex levels for the August 12 session from YouTube analysis videos (Chartking Elliott Trading Academy `CETA`, Stock Market Unlimited `SMU`, and Marketcrashguide2020 `MARKET`).
+  - Mapped key breakout buy levels (Nifty 24530, Bank Nifty 57450, Sensex 78384), invalidation resistance (Nifty 24630), breakdown short triggers (Nifty 24429, Bank Nifty 57159, Sensex 78000), and Wave C minimum targets (Nifty 24328).
+  - Added tactical rules: Avoid trading current expiry index options after 12:00 PM IST due to CS auction spikes/manipulation; wrap up early or switch to Crude Oil / Stock Options.
+
