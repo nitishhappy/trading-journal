@@ -48,7 +48,7 @@ if (viewLevels) {
     });
     
     document.getElementById('levels-list-header').addEventListener('click', function(e) {
-        if(e.target.id === 'btn-level-clear' || e.target.id === 'btn-level-upload' || e.target.id === 'inp-level-upload') return; 
+        if(e.target.id === 'btn-level-clear' || e.target.id === 'btn-level-upload' || e.target.id === 'inp-level-upload' || e.target.id === 'btn-focus-active-level') return; 
         togglePanel('levels-list-body', this);
     });
 
@@ -260,8 +260,7 @@ if (viewLevels) {
         saveLevelsData();
         renderChart();
         renderScorecard();
-        hasAutoScrolledOnLoad = false;
-        runSilentLiveEvaluation({ forceScroll: true });
+        runSilentLiveEvaluation();
     }
 
     function saveLevelsData() {
@@ -1335,6 +1334,23 @@ if (viewLevels) {
 
     let hasAutoScrolledOnLoad = false;
 
+    function scrollToActiveLevel() {
+        const highlighted = document.querySelector('.level-card.active-level-highlight');
+        if (!highlighted) return;
+
+        // Ensure Mapped Levels panel is expanded if collapsed
+        const listBody = document.getElementById('levels-list-body');
+        if (listBody && listBody.style.display === 'none') {
+            listBody.style.display = 'block';
+            const headerIcon = document.querySelector('#levels-list-header .toggle-icon');
+            if (headerIcon) headerIcon.innerText = '▼';
+        }
+
+        setTimeout(() => {
+            highlighted.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 150);
+    }
+
     async function runSilentLiveEvaluation(options = {}) {
         const { forceScroll = false } = options;
         
@@ -1462,25 +1478,10 @@ if (viewLevels) {
             }
         });
 
-        // Auto-scroll to highlighted card on load/refresh or forceScroll
-        if (levelsToHighlight.length > 0 && (!hasAutoScrolledOnLoad || forceScroll)) {
-            const targetId = levelsToHighlight[0].id;
-            const targetCard = document.getElementById(targetId);
-
-            // Ensure Mapped Levels panel is expanded if collapsed
-            const listBody = document.getElementById('levels-list-body');
-            if (listBody && listBody.style.display === 'none') {
-                listBody.style.display = 'block';
-                const headerIcon = document.querySelector('#levels-list-header .toggle-icon');
-                if (headerIcon) headerIcon.innerText = '▼';
-            }
-
-            if (targetCard) {
-                setTimeout(() => {
-                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 200);
-                hasAutoScrolledOnLoad = true;
-            }
+        // Auto-scroll to highlighted card ONLY on initial load once (never on routine 1m refreshes)
+        if (levelsToHighlight.length > 0 && !hasAutoScrolledOnLoad && forceScroll) {
+            scrollToActiveLevel();
+            hasAutoScrolledOnLoad = true;
         }
     }
 
@@ -1577,7 +1578,16 @@ if (viewLevels) {
         floaterHeader.addEventListener('touchstart', onMouseDown, { passive: false });
     }
 
-    // Listen for tab view changes to trigger auto-scroll when entering Daily Levels
+    // Focus Active button click listener
+    const btnFocusActive = document.getElementById('btn-focus-active-level');
+    if (btnFocusActive) {
+        btnFocusActive.addEventListener('click', (e) => {
+            e.stopPropagation();
+            scrollToActiveLevel();
+        });
+    }
+
+    // Listen for tab view changes to trigger auto-scroll when entering Daily Levels (only if not scrolled yet)
     window.addEventListener('view-changed', (e) => {
         if (e.detail && e.detail.view === 'levels') {
             if (!hasAutoScrolledOnLoad) {
