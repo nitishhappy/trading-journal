@@ -949,6 +949,201 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Resolved a potential Firestore snapshot listener memory leak on authentication changes.
 
 ### v2.3.15 — 10 Aug 2026 — TV Notifications: Live Prices Floater (Nifty & XAUUSD)
+- Automatic template filtering ensures "interesting candle" checks in existing templates are cleanly routed to the master checkbox rather than appearing duplicated inside inner lists.
+- **Date Formatting for Older Runs**:
+  - In the "Previous Runs" sidebar cards and linked trade modal lists, older runs now clearly show their date alongside the time (e.g. `3 Aug, 6:35 PM`), while today's runs display the concise time (e.g. `6:35 PM`).
+- **Trade Taken Highlight & Glow**:
+  - If a trade is executed on a candle (`Taking the trade? Yes` or linked to a trade log entry), the run card is highlighted with a vivid **illuminated cyan/blue glow**, gradient background, and a glowing **`⚡ TRADE TAKEN`** badge.
+
+### v2.3.3 — 4 Aug 2026 — Dual Repeat Candle Timers (5m & 15m) & Milestone Alarms
+
+A dedicated **Dual Candle Repeat Timer HUD** and **Audio Alarm Engine** for market sessions.
+
+#### What it does
+- **Top HUD Progress Bar**:
+  - Positioned prominently below the template selector on the Candle Checklist tab.
+  - Dual horizontal progress countdown boxes for **5-Minute** and **15-Minute** candle closes.
+  - Real-time IST countdown (`MM:SS`), next candle close target time, dynamic percentage fill bar, and in-bar quick mute buttons (`🔊`/`🔇`).
+- **Comprehensive Settings Panel** (inside Settings tab):
+  - **Active Days Selector**: Interactive day pills (Mon–Sun) to control operational market days.
+  - **Operating Session Hours**: Configurable `From Time` and `To Time` (default: `09:15` to `15:30` IST).
+  - **Anchor/Sync Time**: Synchronizes countdown calculations precisely with market open.
+  - **Custom Tone Synthesizer**: Choose distinct audio alerts (*Melodic Chime*, *Radar Sonar*, *Resonant Bell*, *Digital Beep*) with instant `▶ Test` previews.
+  - **⭐ Special Time Notifications**: Configure custom milestone timestamps (e.g. `09:15 AM`, `10:00 AM`, `03:00 PM`) with dedicated Grand Harmonic Chord sound alerts and dynamic add/remove tags.
+  - **Cloud Sync**: All timer settings, active days, sound preferences, and special times are persisted directly in Firebase Firestore.
+- **Synthesized Audio Engine**:
+  - Offline-capable Web Audio API synthesizer (`js/utils/audio.js`) requiring zero external audio file downloads.
+
+#### New files added
+- `js/services/candleTimers.js` — Firestore persistence layer for timer configurations.
+- `js/ui/candleTimers.js` — Countdown loop controller, HUD DOM binder, and Settings UI manager.
+- `js/utils/audio.js` — Web Audio API multi-frequency sound synthesizer.
+
+### v2.3.5 — 5 Aug 2026 — Live Alerts: Chart Screenshot Previews, Vision AI Levels & Fullscreen Lightbox
+
+Enhanced **Live TV Alerts** webhook handler (`/api/tvWebhook`) and alert notification UI (`tvNotifications.js`) to support embedded chart screenshots, vision-extracted price levels, setup insights, and fullscreen zoom modals.
+
+#### What it does
+- **Embedded Chart Screenshot Previews**:
+  - Automatically captures and embeds compressed chart screenshots sent via webhooks/MTProto workers directly into alert notification cards.
+  - Interactive thumbnail preview with clean header tag.
+- **Fullscreen Image Lightbox**:
+  - Clicking any chart screenshot opens an overlay modal with high-res zoom view and close controls.
+- **Dynamic Trade Level Badges (Entry, SL, TP, R:R)**:
+  - **Entry Price**: Prominent blue pill badge.
+  - **Stop Loss (SL)**: Red risk pill.
+  - **Take Profit (TP / Targets)**: Green target pill.
+  - **Risk-to-Reward (R:R)**: Real-time calculated ratio badge (e.g. `🎯 R:R 1:1.8`).
+- **AI Setup Insight Box**:
+  - Highlighted golden insight card summarizing technical reasoning, direction, and trade parameters.
+- **Automatic 4:00 PM IST Previous Day Alert Cleanup**:
+  - Automatically purges all previous day alert notifications at 4:00 PM (16:00 IST) market wrap-up.
+  - Keeps the live alert feed focused on today's active trading session while maintaining background garbage collection on both client and webhook endpoints.
+- **Updated Cloud & Mobile Worker**:
+  - Added Google Gemini 2.0 Flash Vision and Groq 90B Vision fallback in `telegram_cloud_worker/worker.py` for reading TradingView mobile position tools automatically.
+
+### v2.3.6 — 5 Aug 2026 — Levels Tab: 5-Minute First Candle In / Out Reaction Analysis (Upstox Feed)
+
+Added an automated intraday reaction checker to the **Levels Tab** that evaluates 5-minute Nifty 50 candle interactions for any selected date against all marked price levels and zones.
+
+#### What it does
+- **Top Reaction Toolbar**:
+  - Quick Date Picker defaulting to today's date in IST.
+  - Action trigger: `🔍 Check First Candle In/Out`.
+- **Automated 5-Minute Candle Aggregation (`/api/niftyCandles`)**:
+  - Pulls public 1-minute historical/intraday candles from Upstox and aggregates them into 75 standard 5-minute candles (`09:15` to `15:30` IST).
+  - Works seamlessly with zero authentication requirement.
+- **Comprehensive Reaction Pop-up Modal**:
+  - **🟢 First Candle IN**:
+    - Exact timestamp (e.g. `09:50 AM IST`).
+    - Approach direction (*Pullback/Drop from Above* vs *Rally/Push from Below*).
+    - Touch classification (*Body Entry* vs *Wick Sweep / Pin*).
+    - Detailed 5m candle OHLC metrics.
+  - **🔴 First Candle OUT**:
+    - Exact resolution timestamp (e.g. `09:55 AM IST`).
+    - Exit direction (*Broke Out Above 🟢* or *Broke Down Below 🔴*).
+    - Exit candle Close & OHLC metrics.
+  - **💤 Untouched Status**:
+    - Clear indicator if price never entered or reached the marked level during the session, comparing with the day's high/low range.
+  - **Plan Context**: Displays planned bias badge, expected behavior, and configured TP/SL targets side-by-side.
+
+#### New files added
+- `api/niftyCandles.js` — Upstox 1m to 5m candle aggregation serverless API.
+
+### v2.3.7 — 5 Aug 2026 — Levels Tab: Channel Source Tags, EOD Outcome Reviewer & Performance Scorecard
+
+Added channel source tagging, end-of-day level performance reviewing, and a real-time Worked vs. Failed ratio scorecard table to the **Levels Tab**.
+
+#### What it does
+- **Channel / Source Tagging on Every Level Card**:
+  - Distinct short source pill (e.g. `BT` for Bengal Trader, `AK` for Ashish Kyal, `SM` for Stock Marketed, `PR` for Power of Stocks, `AT` for Art of Trading, `Self`).
+  - Quick channel tag pills in the "Plan a Trade" creation form.
+  - Fully editable inline by clicking the source badge on any level card.
+  - Highlighted on the Visual Chart Map and First Candle In/Out reaction modal.
+- **End-of-Day Outcome Review Mechanism**:
+  - Interactive 3-state toggle buttons on each level tile: `[ ✅ Worked ]`, `[ ❌ Failed ]`, `[ ⚪ NA ]`.
+  - Visual card states: glowing emerald border for *Worked*, rose red border for *Failed*, neutral for *NA*.
+  - Outcome buttons are also accessible directly inside the First Candle In/Out reaction modal for quick reviewing while inspecting price action.
+  - Automatically persisted in `localStorage` and synced with memory.
+- **Daily Forecast Performance Scorecard Table**:
+  - Positioned right below the mapped levels list.
+  - Groups performance metrics per channel source (`BT`, `AK`, `SM`, etc.) and calculates an **OVERALL / TOTAL** row.
+  - Displays:
+    - **Worked (W)** count.
+    - **Failed (F)** count.
+    - **W : F Ratio** (e.g. `3 : 1`, `5 : 0`).
+    - **Win Rate %** with color-coded pills (Green for ≥60%, Amber for 40-59%, Red for <40%).
+    - **NA / Ignored** count (untested/untouched levels excluded from win rate calculations).
+  - Updates in real-time as you mark predictions.
+
+### v2.3.8 — 5 Aug 2026 — Levels Tab: Multi-Day Persistent Scorecard History
+
+Decoupled the EOD Performance Scorecard from daily trade plan level clears, allowing historical channel win rates to accumulate across days while keeping individual daily plans cleanable.
+
+#### What it does
+- **Persistent Multi-Day Tracking**:
+  - Scorecard stats persist across days in dedicated local storage (`levelsScorecardHistory` & `levelsLoggedReviews`).
+  - Each source channel (`BT`, `AK`, `SM`, `PR`, etc.) maintains a single cumulative entry recording all past evaluated predictions.
+- **Independent "Clear All Levels" vs. "Reset Stats"**:
+  - Tapping **Clear All** on the Mapped Levels panel clears only the temporary daily plan cards without wiping historical source statistics.
+  - Added a dedicated **Reset Stats** button in the Scorecard header for when you explicitly wish to start fresh with a clean slate across all channels.
+- **Smart Audit Log**:
+  - Re-evaluating or modifying level sources automatically adjusts and recalculates source balances without duplicate counts.
+
+### v2.3.9 — 5 Aug 2026 — Interactive Visual Map & Live Candle Alerts Listener
+
+Re-architected the Levels visual chart to be fully interactive and implemented a real-time background listener to alert you on active market moves.
+
+#### What it does
+- **Live Background Listener for First Candle In/Out**:
+  - A new toggle switch `🔴 Live Alerts Off / 🟢 Live Alerts On` in the Intraday Reaction toolbar.
+  - Silently polls the Upstox Intraday API every 60 seconds while the market is open (09:15 - 15:30 IST) to fetch 1m/5m candles.
+  - Automatically evaluates the live price against your daily trade plan levels.
+  - Triggers HTML5 native push notifications (e.g., "🚨 Level Entry: Nifty entered Bank Nifty Support Zone") the exact minute the level is touched.
+  - Tracks `alertedLevels` state to prevent duplicate notification spam for the same level during the day.
+- **Interactive Chart Annotations**:
+  - The Visual Chart Map now features clickable interactive buttons directly on the chart labels for marking outcomes (`Worked`, `Failed`, `NA`).
+  - Bi-directional sync: Clicking an outcome on the visual chart instantly updates the corresponding level card in the list, recalibrates the Scorecard stats, and updates visual borders.
+- **Mobile Responsive Enhancements**:
+  - `max-width: calc(100vw - 140px)` constraints and horizontal `overflow-x: auto` scrolling added to the chart wrapper to ensure level annotations do not clip or misalign on narrow mobile screens.
+- **Always-Visible Standalone Scorecard**:
+  - Extracted the EOD Performance Scorecard outside of the collapsible wrapper, ensuring it remains permanently visible on the dashboard regardless of whether the form or level list is collapsed.
+- **TV Alerts Auto-Cleanup & Grouping**:
+  - Re-architected `tvNotifications.js` to group notifications by `Date` and then `Symbol` for easier management.
+  - Implemented batch delete capabilities (`🗑️ Clear` button) per date group.
+
+### v2.3.10 — 8 Aug 2026 — Telegram Worker Fixes & Raw Message Display
+
+- **Raw Message Priority**: Updated `tvNotifications.js` so that for Telegram source alerts, the actual channel message text is extracted from the `raw` field and displayed as the main notification body instead of the generic strategy name.
+- **Telegram Cloud Worker Improvements**:
+  - Added an infinite auto-reconnect loop to `worker.py` to seamlessly recover from network drops and Telegram server disconnects.
+  - Removed restrictive message filters, allowing all text-only messages from the trusted channel to be forwarded even if they lack specific keywords.
+  - Fixed a `UnicodeEncodeError` that crashed the worker in Windows CMD by forcing UTF-8 stdout reconfiguration and replacing emoji characters in logs.
+
+### v2.3.11 — 8 Aug 2026 — Gold Buy/Sell Signal Highlighting & JSON Clean Parsing
+
+- **Gold Buy / Sell Visual Cards**:
+  - Automatically recognizes Gold Buy and Gold Sell signals from Telegram and TradingView.
+  - Emphasizes Gold Buy cards with luminous emerald gradients, glowing border bars, and a `🟢 GOLD BUY` badge.
+  - Emphasizes Gold Sell cards with luminous crimson gradients, glowing border bars, and a `🔴 GOLD SELL` badge.
+  - Highlights trade keywords (`Gold Buy`, `Gold Sell`, `Buy`, `Sell`, `Long`, `Short`) with vibrant glowing inline badges within the message text.
+- **Clean JSON Raw Message Parsing**:
+  - Fixed a bug where stringified JSON metadata (e.g. `","source":"telegram"}`) trailed in the main notification message. Telegram alerts now cleanly render only the original message text.
+
+### v2.3.12 — 9 Aug 2026 — Stocks Tab Enhancements: Column Visibility, Hiding Analyzed, and Bullet Observations
+
+- **Analyzed Column & Toggle Filtering**:
+  - Added a new `Analyzed` checkbox column to the Stocks table.
+  - Added a `Hide Analyzed` toggle checkbox at the top filter bar (active by default). When a stock is marked as analyzed, it is immediately hidden from the table unless "Hide Analyzed" is unchecked.
+  - Clicking the `Analyzed` header sorts the stocks list by their analyzed status.
+- **Dynamic Column Visibility**:
+  - Added a "⚙ Columns" dropdown button in the action bar to toggle visibility of individual columns (`Stock Name`, `Stock ID`, `Sector`, `Brief Summary`, `Date of Run`, `Source`, `TF`, `My Notes`, `Traded`, `Analyzed`).
+  - Automatically calculates the correct `colspan` for grouping headers when columns are hidden.
+  - Persists column visibility choices in `localStorage` to retain preferences on refresh.
+- **Bullet Observations Section**:
+  - Added an interactive "Observations & Rules" bullet list card at the top of the Stocks view.
+  - Supports adding, inline editing, and deleting observations with real-time sync to Firestore (`users/{uid}/settings/stocks_observations`).
+- **Auto-Sync Batch Update Fix**:
+  - Implemented `updateStocksBatch` to commit all auto-sync modifications in a single transaction, completely resolving layout loops, page flickering, and textareas auto-resizing glitches during auto-sync runs.
+- **Permanent Deduplicated Soft-Delete**:
+  - Replaced hard-deletion logic in `deleteStock` and `deleteStocksBatch` with a soft-delete mechanism that flags items with `deleted: true` in Firestore.
+  - Ensures the auto-sync engine remembers deleted items and does not restore them from local scan data files (`scanned_stocks.js`) on the next page reload.
+
+### v2.3.13 — 10 Aug 2026 — Levels Tab: Synthesis of Latest Nifty & Bank Nifty Predictions
+
+- **Synthesized Prediction Levels (`daily_plan.js`)**:
+  - Integrated Nifty and Bank Nifty levels for the August 10 session from the newly downloaded analysis videos (CETA, SMU, and WAY2LA).
+  - Mapped support, resistance, target levels, gaps, and daily close validation rules for each channel source.
+  - Added specific Laxman Rekha breakouts and breakdown targets for Nifty, Bank Nifty, and six selected swing stocks (BEL, BSE, Canara Bank, Bank of India, Union Bank, Piramal Pharma).
+
+### v2.3.14 — 10 Aug 2026 — Notification Reliability: Fixed Duplicate Sequence Notifications
+
+- **Duplicate Notifications Resolution**:
+  - Removed redundant Firestore subscription to `sequenceTriggerLogs` inside `js/services/tvNotifications.js` which was triggering an unstyled default browser notification at the same time as the styled PWA notification.
+  - Retained the complete, styled system notification handled globally in `js/ui/sequenceRules.js` (which incorporates the application icon/badge, steps path, sound chime, in-app toast, and deduplication logic via `lastNotifiedLogId`).
+  - Resolved a potential Firestore snapshot listener memory leak on authentication changes.
+
+### v2.3.15 — 10 Aug 2026 — TV Notifications: Live Prices Floater (Nifty & XAUUSD)
 
 - **Single Floating Price Widget**:
   - Added a single draggable and minimizable live price floater for Nifty 50 and XAUUSD to the TradingView Notifications view.
@@ -972,3 +1167,9 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added dedicated filter buttons (`EXIT`, `CTC`, `SL`, `TP`) to the TV Alerts pane header.
   - Updated `/api/tvWebhook` plain-text alert parser to recognize `EXIT`, `CTC`, `SL`, and `TP` keywords.
   - Enhanced inline keyword highlighting (`formatMessageWithHighlights`) to style trade action words within raw and formatted alert texts.
+
+### v2.3.17 — 11 Aug 2026 — Daily Levels: Default Auto-Scroll to Highlighted Cards
+
+- **Default Auto-Scroll to Highlighted Level Cards**:
+  - Automatically expands the "Mapped Levels" panel (if collapsed) and smoothly scrolls the viewport to center on the active highlighted level card(s) when the page is loaded/refreshed or when switching to the Daily Levels tab.
+  - Runs price evaluation on load to highlight levels and position the active card directly into view without manual scrolling.

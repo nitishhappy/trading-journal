@@ -260,6 +260,8 @@ if (viewLevels) {
         saveLevelsData();
         renderChart();
         renderScorecard();
+        hasAutoScrolledOnLoad = false;
+        runSilentLiveEvaluation({ forceScroll: true });
     }
 
     function saveLevelsData() {
@@ -1331,8 +1333,10 @@ if (viewLevels) {
         return timeVal >= 915 && timeVal <= 1530; // 09:15 to 15:30
     }
 
-    async function runSilentLiveEvaluation() {
-        if (!isMarketOpen()) return;
+    let hasAutoScrolledOnLoad = false;
+
+    async function runSilentLiveEvaluation(options = {}) {
+        const { forceScroll = false } = options;
         
         const validLevels = allLevels.filter(l => !isNaN(l.pHigh));
         if (validLevels.length === 0) return;
@@ -1415,45 +1419,69 @@ if (viewLevels) {
                 }
             }
 
-            let firstIn = null;
-            let firstOut = null;
+            // Only trigger push alerts during active market hours
+            if (isMarketOpen()) {
+                let firstIn = null;
+                let firstOut = null;
 
-            for (let idx = 0; idx < candles.length; idx++) {
-                const c = candles[idx];
+                for (let idx = 0; idx < candles.length; idx++) {
+                    const c = candles[idx];
 
-                if (!firstIn) {
-                    if (c.low <= lHigh && c.high >= lLow) {
-                        firstIn = c;
-                    }
-                } else {
-                    if (!firstOut && idx > candles.indexOf(firstIn)) {
-                        if (c.close > lHigh) firstOut = { candle: c, dir: 'above' };
-                        else if (c.close < lLow) firstOut = { candle: c, dir: 'below' };
+                    if (!firstIn) {
+                        if (c.low <= lHigh && c.high >= lLow) {
+                            firstIn = c;
+                        }
+                    } else {
+                        if (!firstOut && idx > candles.indexOf(firstIn)) {
+                            if (c.close > lHigh) firstOut = { candle: c, dir: 'above' };
+                            else if (c.close < lLow) firstOut = { candle: c, dir: 'below' };
+                        }
                     }
                 }
-            }
 
-            // Initialize state for this level if missing
-            if (!alertedLevels[lvl.id]) {
-                alertedLevels[lvl.id] = { in: false, out: false };
-            }
+                // Initialize state for this level if missing
+                if (!alertedLevels[lvl.id]) {
+                    alertedLevels[lvl.id] = { in: false, out: false };
+                }
 
-            const state = alertedLevels[lvl.id];
+                const state = alertedLevels[lvl.id];
 
-            // Trigger IN alert
-            if (firstIn && !state.in) {
-                state.in = true;
-                const msg = `Nifty entered level: ${lvl.rawPrice} (${lvl.behavior || lvl.bias})`;
-                triggerSystemAlert(`Level Entry: ${lvl.source || 'BT'}`, msg);
-            }
+                // Trigger IN alert
+                if (firstIn && !state.in) {
+                    state.in = true;
+                    const msg = `Nifty entered level: ${lvl.rawPrice} (${lvl.behavior || lvl.bias})`;
+                    triggerSystemAlert(`Level Entry: ${lvl.source || 'BT'}`, msg);
+                }
 
-            // Trigger OUT alert
-            if (firstOut && !state.out) {
-                state.out = true;
-                const msg = `Nifty closed strictly ${firstOut.dir} level ${lvl.rawPrice}`;
-                triggerSystemAlert(`Level Exit: ${lvl.source || 'BT'}`, msg);
+                // Trigger OUT alert
+                if (firstOut && !state.out) {
+                    state.out = true;
+                    const msg = `Nifty closed strictly ${firstOut.dir} level ${lvl.rawPrice}`;
+                    triggerSystemAlert(`Level Exit: ${lvl.source || 'BT'}`, msg);
+                }
             }
         });
+
+        // Auto-scroll to highlighted card on load/refresh or forceScroll
+        if (levelsToHighlight.length > 0 && (!hasAutoScrolledOnLoad || forceScroll)) {
+            const targetId = levelsToHighlight[0].id;
+            const targetCard = document.getElementById(targetId);
+
+            // Ensure Mapped Levels panel is expanded if collapsed
+            const listBody = document.getElementById('levels-list-body');
+            if (listBody && listBody.style.display === 'none') {
+                listBody.style.display = 'block';
+                const headerIcon = document.querySelector('#levels-list-header .toggle-icon');
+                if (headerIcon) headerIcon.innerText = '▼';
+            }
+
+            if (targetCard) {
+                setTimeout(() => {
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+                hasAutoScrolledOnLoad = true;
+            }
+        }
     }
 
     function triggerSystemAlert(title, body) {
@@ -1548,6 +1576,15 @@ if (viewLevels) {
         floaterHeader.addEventListener('mousedown', onMouseDown);
         floaterHeader.addEventListener('touchstart', onMouseDown, { passive: false });
     }
+
+    // Listen for tab view changes to trigger auto-scroll when entering Daily Levels
+    window.addEventListener('view-changed', (e) => {
+        if (e.detail && e.detail.view === 'levels') {
+            if (!hasAutoScrolledOnLoad) {
+                runSilentLiveEvaluation({ forceScroll: true });
+            }
+        }
+    });
 
     // Call init when module loads
     initLevels();
