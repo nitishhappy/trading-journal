@@ -48,7 +48,7 @@ if (viewLevels) {
     });
     
     document.getElementById('levels-list-header').addEventListener('click', function(e) {
-        if(e.target.id === 'btn-level-clear' || e.target.id === 'btn-level-upload' || e.target.id === 'inp-level-upload' || e.target.id === 'btn-focus-active-level') return; 
+        if(e.target.id === 'btn-level-clear' || e.target.id === 'btn-level-upload' || e.target.id === 'inp-level-upload') return; 
         togglePanel('levels-list-body', this);
     });
 
@@ -1334,20 +1334,12 @@ if (viewLevels) {
 
     let hasAutoScrolledOnLoad = false;
 
-    function scrollToActiveLevel() {
-        const highlighted = document.querySelector('.level-card.active-level-highlight');
-        if (!highlighted) return;
-
-        // Ensure Mapped Levels panel is expanded if collapsed
-        const listBody = document.getElementById('levels-list-body');
-        if (listBody && listBody.style.display === 'none') {
-            listBody.style.display = 'block';
-            const headerIcon = document.querySelector('#levels-list-header .toggle-icon');
-            if (headerIcon) headerIcon.innerText = '▼';
-        }
+    function scrollToActiveChartLevel() {
+        const highlightedChartAnn = document.querySelector('.chart-annotation.active-level-highlight');
+        if (!highlightedChartAnn) return;
 
         setTimeout(() => {
-            highlighted.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            highlightedChartAnn.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 150);
     }
 
@@ -1478,9 +1470,9 @@ if (viewLevels) {
             }
         });
 
-        // Auto-scroll to highlighted card ONLY on initial load once (never on routine 1m refreshes)
+        // Auto-scroll ONLY to active chart annotation on Visual Chart Map on initial load once (never touches Mapped Levels panel)
         if (levelsToHighlight.length > 0 && !hasAutoScrolledOnLoad && forceScroll) {
-            scrollToActiveLevel();
+            scrollToActiveChartLevel();
             hasAutoScrolledOnLoad = true;
         }
     }
@@ -1578,14 +1570,7 @@ if (viewLevels) {
         floaterHeader.addEventListener('touchstart', onMouseDown, { passive: false });
     }
 
-    // Focus Active button click listener
-    const btnFocusActive = document.getElementById('btn-focus-active-level');
-    if (btnFocusActive) {
-        btnFocusActive.addEventListener('click', (e) => {
-            e.stopPropagation();
-            scrollToActiveLevel();
-        });
-    }
+
 
     // Listen for tab view changes to trigger auto-scroll when entering Daily Levels (only if not scrolled yet)
     window.addEventListener('view-changed', (e) => {

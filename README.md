@@ -1168,10 +1168,10 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Updated `/api/tvWebhook` plain-text alert parser to recognize `EXIT`, `CTC`, `SL`, and `TP` keywords.
   - Enhanced inline keyword highlighting (`formatMessageWithHighlights`) to style trade action words within raw and formatted alert texts.
 
-### v2.3.17 — 11 Aug 2026 — Daily Levels: Focus Protection & Manual Focus Active Button
+### v2.3.17 — 11 Aug 2026 — Daily Levels: Visual Chart Map Active Annotation Focus
 
-- **Periodic Refresh Focus Protection**:
-  - Prevented automatic `scrollIntoView()` jumps on routine 1-minute background Nifty price evaluation refreshes, protecting user scroll position and preventing focus stealing while reading.
-- **Manual "🎯 Focus Active" Header Button**:
-  - Added a dedicated `🎯 Focus Active` button in the Mapped Levels header bar allowing the user to instantly expand and scroll to the highlighted level card whenever desired.
-  - Initial load auto-scroll runs strictly once per session without repeating on background price re-evaluations.
+- **Visual Chart Map Focus**:
+  - Auto-scroll on initial load focuses strictly on active highlighted annotations (`.chart-annotation.active-level-highlight`) within the **Visual Chart Map** at the top of the view.
+  - Preserved the default collapsed state of the "Mapped Levels" card list panel so it is never expanded or scrolled automatically.
+- **Refresh Jump Protection**:
+  - Prevented viewport jumps on periodic 1-minute Nifty price re-evaluations, preserving user scrolling position.
