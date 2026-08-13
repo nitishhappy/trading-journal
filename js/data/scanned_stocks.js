@@ -701,5 +701,44 @@ window.scannedStocksData = [
     "myNotes": "",
     "traded": "N",
     "highlight": true
+  },
+  {
+    "name": "CPPLUS",
+    "ticker": "CPPLUS",
+    "sector": "",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:CPPLUS",
+    "summary": "[2026-08-12] POSITIONAL TRADE   ADITYA INFOTECH (CPPLUS) Looks Good ABOVE 3900   SL 3700  Targets 4000-4250-4500-4750-5000   Hold few weeks   Please consult you...",
+    "dateOfRun": "2026-08-12",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "LICI",
+    "ticker": "LICI",
+    "sector": "",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:LICI",
+    "summary": "[2026-08-12] POSITIONAL RESEARCH  LICI  Looks good above 411  SL 405  Targets 3-5-7-9-12-15 points from entry   Hold few days     Please consult your financial ...",
+    "dateOfRun": "2026-08-12",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
+  },
+  {
+    "name": "VIJAYADIAGNOSTIC",
+    "ticker": "VIJAYADIAGNOSTIC",
+    "sector": "",
+    "tvLink": "https://www.tradingview.com/chart/?symbol=NSE:VIJAYADIAGNOSTIC",
+    "summary": "[2026-08-12] POSITIONAL TRADE   VIJAYA DIAGNOSTIC   Looks Good ABOVE 1495    SL 1375  1550-1600-1650-1700 Targets    Hold few weeks   Please consult your financ...",
+    "dateOfRun": "2026-08-12",
+    "source": "stockpro_online",
+    "timeframe": "Daily",
+    "myNotes": "",
+    "traded": "N",
+    "highlight": true
   }
 ];
