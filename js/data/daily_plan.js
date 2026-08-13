@@ -17,5 +17,10 @@ window.dailyPlanData = [
   { "source": "BT", "price": "24570 - 24580", "bias": "bearish", "behavior": "Gap up resistance zone. Look for first negative candle to short for profit booking.", "tp": "24500", "sl": "24620", "status": "na" },
   { "source": "BT", "price": "24500", "bias": "bullish", "behavior": "Key level. Don't buy immediately if market approaches 24500. Wait for price action.", "tp": "-", "sl": "-", "status": "na" },
   { "source": "BT", "price": "24350 - 24400", "bias": "bullish", "behavior": "Golden zone support. Wait for 15-min hammer or setup to buy.", "tp": "24500", "sl": "24300", "status": "na" },
-  { "source": "BT", "price": "78000 (Sensex)", "bias": "bullish", "behavior": "If market consolidates below 78000 in first half and breaks it in the second half, expect beautiful upside momentum.", "tp": "78300", "sl": "77800", "status": "na" }
+  { "source": "BT", "price": "78000 (Sensex)", "bias": "bullish", "behavior": "If market consolidates below 78000 in first half and breaks it in the second half, expect beautiful upside momentum.", "tp": "78300", "sl": "77800", "status": "na" },
+  { "source": "STL", "price": "24460", "bias": "bullish", "behavior": "Breakout entry level if Nifty bounces from dip and crosses 24460.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "STL", "price": "24510 - 24530", "bias": "bullish", "behavior": "Major trendline and 20 SMA breakout confirmation zone.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "STL", "price": "24360", "bias": "bullish", "behavior": "50% retracement of the bullish candle, good entry on dip if it holds on 5 min chart.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "STL", "price": "24350", "bias": "bullish", "behavior": "21 EMA support on a deeper dip. Wait for bounce before entering.", "tp": "-", "sl": "-", "status": "na" },
+  { "source": "STL", "price": "57760 (BankNifty)", "bias": "bullish", "behavior": "Bank Nifty support. Expecting a 100-150 point dip to catch it for a bounce.", "tp": "-", "sl": "-", "status": "na" }
 ];
