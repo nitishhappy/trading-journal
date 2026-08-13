@@ -143,16 +143,16 @@ function tick() {
   const triggerId15m = `15m-${next15mCloseSec}`;
 
   if (isSessionActive) {
-    // 5-minute candle trigger (10 seconds early -> remaining5 === 10)
-    if (remaining5 === 10 && lastTrigger5mMinute !== triggerId5m) {
+    // 5-minute candle trigger (10 seconds early)
+    if (remaining5 <= 10 && lastTrigger5mMinute !== triggerId5m) {
       lastTrigger5mMinute = triggerId5m;
       if (!timerSettings.mute5m && timerSettings.enable5m !== false) {
         playSynthesizedSound(timerSettings.sound5m || 'chime', timerSettings.volume5m ?? 0.8);
       }
     }
 
-    // 15-minute candle trigger (5 seconds early -> remaining15 === 5)
-    if (remaining15 === 5 && lastTrigger15mMinute !== triggerId15m) {
+    // 15-minute candle trigger (5 seconds early)
+    if (remaining15 <= 5 && lastTrigger15mMinute !== triggerId15m) {
       lastTrigger15mMinute = triggerId15m;
       if (!timerSettings.mute15m && timerSettings.enable15m !== false) {
         playSynthesizedSound(timerSettings.sound15m || 'radar', timerSettings.volume15m ?? 0.8);
