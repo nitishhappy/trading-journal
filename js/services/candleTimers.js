@@ -14,6 +14,8 @@ export const DEFAULT_CANDLE_TIMER_SETTINGS = {
   volume15m: 0.8,
   mute5m: false,
   mute15m: false,
+  enable5m: true,
+  enable15m: true,
   specialTimes: ["09:15", "10:00", "15:00"],
   specialSound: "special",
   specialVolume: 0.9,

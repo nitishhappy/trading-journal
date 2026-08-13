@@ -94,7 +94,13 @@ function tick() {
   const card15m = document.getElementById("candle-timer-15m-card");
 
   if (digits5m && fill5m && status5m) {
-    if (isSessionActive) {
+    if (timerSettings.enable5m === false) {
+      digits5m.textContent = "--:--";
+      fill5m.style.width = "0%";
+      status5m.textContent = `Disabled`;
+      card5m?.classList.toggle("timer-active-session", false);
+      card5m?.classList.toggle("timer-standby", true);
+    } else if (isSessionActive) {
       digits5m.textContent = formatMMSS(remaining5 === 300 ? 0 : remaining5);
       fill5m.style.width = `${progress5}%`;
       status5m.textContent = `Next Close: ${formatSecondsTo12Hour(next5mCloseSec)}`;
@@ -110,7 +116,13 @@ function tick() {
   }
 
   if (digits15m && fill15m && status15m) {
-    if (isSessionActive) {
+    if (timerSettings.enable15m === false) {
+      digits15m.textContent = "--:--";
+      fill15m.style.width = "0%";
+      status15m.textContent = `Disabled`;
+      card15m?.classList.toggle("timer-active-session", false);
+      card15m?.classList.toggle("timer-standby", true);
+    } else if (isSessionActive) {
       digits15m.textContent = formatMMSS(remaining15 === 900 ? 0 : remaining15);
       fill15m.style.width = `${progress15}%`;
       status15m.textContent = `Next Close: ${formatSecondsTo12Hour(next15mCloseSec)}`;
@@ -125,22 +137,24 @@ function tick() {
     }
   }
 
-  // Check Sound Triggers (Only during active session and on second 0 of candle close)
+  // Check Sound Triggers (Only during active session)
   const currentMinuteId = `${istDate.getFullYear()}-${istDate.getMonth()}-${istDate.getDate()}-${istDate.getHours()}-${istDate.getMinutes()}`;
+  const triggerId5m = `5m-${next5mCloseSec}`;
+  const triggerId15m = `15m-${next15mCloseSec}`;
 
-  if (isSessionActive && istDate.getSeconds() === 0) {
-    // 5-minute candle trigger
-    if (diff5 === 0 && lastTrigger5mMinute !== currentMinuteId) {
-      lastTrigger5mMinute = currentMinuteId;
-      if (!timerSettings.mute5m) {
+  if (isSessionActive) {
+    // 5-minute candle trigger (10 seconds early -> remaining5 === 10)
+    if (remaining5 === 10 && lastTrigger5mMinute !== triggerId5m) {
+      lastTrigger5mMinute = triggerId5m;
+      if (!timerSettings.mute5m && timerSettings.enable5m !== false) {
         playSynthesizedSound(timerSettings.sound5m || 'chime', timerSettings.volume5m ?? 0.8);
       }
     }
 
-    // 15-minute candle trigger
-    if (diff15 === 0 && lastTrigger15mMinute !== currentMinuteId) {
-      lastTrigger15mMinute = currentMinuteId;
-      if (!timerSettings.mute15m) {
+    // 15-minute candle trigger (5 seconds early -> remaining15 === 5)
+    if (remaining15 === 5 && lastTrigger15mMinute !== triggerId15m) {
+      lastTrigger15mMinute = triggerId15m;
+      if (!timerSettings.mute15m && timerSettings.enable15m !== false) {
         playSynthesizedSound(timerSettings.sound15m || 'radar', timerSettings.volume15m ?? 0.8);
       }
     }
@@ -171,6 +185,8 @@ export function startCandleTimers() {
 function updateMuteButtonsUI() {
   const mute5mBtn = document.getElementById("candle-timer-5m-mute");
   const mute15mBtn = document.getElementById("candle-timer-15m-mute");
+  const enable5mBtn = document.getElementById("candle-timer-5m-enable");
+  const enable15mBtn = document.getElementById("candle-timer-15m-enable");
 
   if (mute5mBtn) {
     mute5mBtn.textContent = timerSettings.mute5m ? "🔇" : "🔊";
@@ -183,12 +199,22 @@ function updateMuteButtonsUI() {
     mute15mBtn.title = timerSettings.mute15m ? "Unmute 15m Sound" : "Mute 15m Sound";
     mute15mBtn.classList.toggle("is-muted", !!timerSettings.mute15m);
   }
+
+  if (enable5mBtn) {
+    enable5mBtn.classList.toggle("is-muted", timerSettings.enable5m === false);
+  }
+
+  if (enable15mBtn) {
+    enable15mBtn.classList.toggle("is-muted", timerSettings.enable15m === false);
+  }
 }
 
 // Setup Event Listeners for in-bar Quick Mute controls
 function setupHUDEventListeners() {
   const mute5mBtn = document.getElementById("candle-timer-5m-mute");
   const mute15mBtn = document.getElementById("candle-timer-15m-mute");
+  const enable5mBtn = document.getElementById("candle-timer-5m-enable");
+  const enable15mBtn = document.getElementById("candle-timer-15m-enable");
 
   if (mute5mBtn) {
     mute5mBtn.addEventListener("click", async (e) => {
@@ -207,6 +233,26 @@ function setupHUDEventListeners() {
       updateMuteButtonsUI();
       await saveCandleTimerSettings(timerSettings);
       showToast(timerSettings.mute15m ? "15m Timer Muted" : "15m Timer Unmuted");
+    });
+  }
+
+  if (enable5mBtn) {
+    enable5mBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      timerSettings.enable5m = timerSettings.enable5m === false ? true : false;
+      updateMuteButtonsUI();
+      await saveCandleTimerSettings(timerSettings);
+      showToast(timerSettings.enable5m ? "5m Timer Enabled" : "5m Timer Disabled");
+    });
+  }
+
+  if (enable15mBtn) {
+    enable15mBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      timerSettings.enable15m = timerSettings.enable15m === false ? true : false;
+      updateMuteButtonsUI();
+      await saveCandleTimerSettings(timerSettings);
+      showToast(timerSettings.enable15m ? "15m Timer Enabled" : "15m Timer Disabled");
     });
   }
 }

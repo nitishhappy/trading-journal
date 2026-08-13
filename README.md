@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.5 — Candle Timer Enhancements
+- **Timer Enable/Disable Toggle**: Added dedicated enable/disable toggle buttons for both the 5-minute and 15-minute candle timers directly in the Levels tab HUD.
+- **Early Audio Triggers**: Adjusted audio triggers to prevent overlapping sounds. The 5-minute timer now plays 10 seconds before the candle close, and the 15-minute timer plays 5 seconds before the candle close.
+
 ### v1.4 — Android Keep App Active & Seamless Session Persistence
 - **Keep App Active Mode**: Added a toggle in Settings to request Screen Wake Lock (`navigator.wakeLock.request('screen')`), keeping the screen active and reducing OS background suspension.
 - **Android Battery Setting Guidance**: Included clear instructions in Settings for configuring Android App Info → Battery → "Unrestricted" mode to prevent Android OS Low Memory Killer from suspending the app process.
