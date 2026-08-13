@@ -33,6 +33,162 @@ if (typeof window !== 'undefined') {
  * @param {string} type - 'chime' | 'radar' | 'bell' | 'beep' | 'special'
  * @param {number} volume - 0.0 to 1.0
  */
+// ===================== Silent Background Audio for Android Keep-Alive =====================
+// Plays a near-silent looping audio track via an HTML5 <audio> element.
+// Android Chrome treats any tab with active media playback as a high-priority
+// "media player" process, preventing the Low Memory Killer from suspending or
+// terminating the WebAPK. The Media Session API is also set so the Android
+// lock-screen / notification tray shows "Trade Journal – Active" instead of
+// a generic media notification.
+
+let silentAudioEl = null;
+let silentAudioPlaying = false;
+
+// Minimal valid WAV file: 1 second of near-silence at 8kHz mono 8-bit.
+// The single sample value 128 (0x80) is the DC midpoint for unsigned 8-bit
+// PCM, producing no audible sound. Total size: 8044 bytes base64-encoded.
+function createSilentWavBlob() {
+  const sampleRate = 8000;
+  const numSamples = sampleRate; // 1 second
+  const headerSize = 44;
+  const dataSize = numSamples;
+  const buffer = new ArrayBuffer(headerSize + dataSize);
+  const view = new DataView(buffer);
+
+  // RIFF header
+  writeString(view, 0, 'RIFF');
+  view.setUint32(4, 36 + dataSize, true);
+  writeString(view, 8, 'WAVE');
+
+  // fmt sub-chunk
+  writeString(view, 12, 'fmt ');
+  view.setUint32(16, 16, true);        // SubChunk1Size (PCM)
+  view.setUint16(20, 1, true);         // AudioFormat (PCM)
+  view.setUint16(22, 1, true);         // NumChannels (Mono)
+  view.setUint32(24, sampleRate, true); // SampleRate
+  view.setUint32(28, sampleRate, true); // ByteRate
+  view.setUint16(32, 1, true);         // BlockAlign
+  view.setUint16(34, 8, true);         // BitsPerSample
+
+  // data sub-chunk
+  writeString(view, 36, 'data');
+  view.setUint32(40, dataSize, true);
+
+  // Fill with silence (128 = DC midpoint for unsigned 8-bit PCM)
+  const bytes = new Uint8Array(buffer, headerSize);
+  bytes.fill(128);
+
+  return new Blob([buffer], { type: 'audio/wav' });
+}
+
+function writeString(view, offset, str) {
+  for (let i = 0; i < str.length; i++) {
+    view.setUint8(offset + i, str.charCodeAt(i));
+  }
+}
+
+/**
+ * Start playing silent audio in the background to keep Android from killing
+ * the PWA process. Also registers a Media Session so the notification/lock
+ * screen shows a friendly "Trade Journal – Active" label.
+ */
+export function startSilentAudio() {
+  if (silentAudioPlaying && silentAudioEl) return;
+
+  try {
+    if (!silentAudioEl) {
+      const blob = createSilentWavBlob();
+      const url = URL.createObjectURL(blob);
+
+      silentAudioEl = document.createElement('audio');
+      silentAudioEl.id = 'keep-alive-silent-audio';
+      silentAudioEl.loop = true;
+      silentAudioEl.volume = 0.01; // Near-silent but non-zero so Android treats it as active media
+      silentAudioEl.src = url;
+      silentAudioEl.setAttribute('playsinline', '');
+      silentAudioEl.setAttribute('webkit-playsinline', '');
+      // Keep element in DOM so Android doesn't garbage-collect the media session
+      document.body.appendChild(silentAudioEl);
+    }
+
+    const playPromise = silentAudioEl.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise
+        .then(() => {
+          silentAudioPlaying = true;
+          setupMediaSession();
+          console.log('[KeepAlive] Silent audio started');
+        })
+        .catch(err => {
+          console.warn('[KeepAlive] Silent audio play failed (user gesture needed?):', err.message);
+          silentAudioPlaying = false;
+        });
+    }
+  } catch (err) {
+    console.warn('[KeepAlive] Could not start silent audio:', err);
+  }
+}
+
+/**
+ * Stop the silent background audio and clear the Media Session.
+ */
+export function stopSilentAudio() {
+  if (silentAudioEl) {
+    silentAudioEl.pause();
+    silentAudioEl.currentTime = 0;
+    silentAudioPlaying = false;
+    console.log('[KeepAlive] Silent audio stopped');
+  }
+  // Clear media session metadata
+  if ('mediaSession' in navigator) {
+    try {
+      navigator.mediaSession.metadata = null;
+      navigator.mediaSession.playbackState = 'none';
+    } catch (e) {}
+  }
+}
+
+/**
+ * Returns whether the silent keep-alive audio is currently playing.
+ */
+export function isSilentAudioPlaying() {
+  return silentAudioPlaying;
+}
+
+/**
+ * Set up the Media Session API so Android's notification tray / lock screen
+ * shows a friendly label instead of a generic "media playing" notification.
+ */
+function setupMediaSession() {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: 'Trade Journal – Active',
+      artist: 'Keep Open Mode',
+      album: 'Trade Journal',
+    });
+    navigator.mediaSession.playbackState = 'playing';
+
+    // Prevent accidental pause from lock-screen controls
+    navigator.mediaSession.setActionHandler('pause', () => {
+      // Do nothing — user must disable via in-app toggle
+    });
+    navigator.mediaSession.setActionHandler('play', () => {
+      if (silentAudioEl && silentAudioEl.paused) {
+        silentAudioEl.play().catch(() => {});
+      }
+    });
+    // Swallow other actions so they don't interfere
+    ['seekbackward', 'seekforward', 'previoustrack', 'nexttrack', 'stop'].forEach(action => {
+      try { navigator.mediaSession.setActionHandler(action, () => {}); } catch (e) {}
+    });
+  } catch (err) {
+    console.warn('[KeepAlive] MediaSession setup failed:', err);
+  }
+}
+
+// ===================== Synthesized Sound Tones =====================
+
 export async function playSynthesizedSound(type = 'chime', volume = 0.8) {
   try {
     const ctx = getAudioContext();

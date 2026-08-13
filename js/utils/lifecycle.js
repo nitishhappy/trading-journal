@@ -1,5 +1,6 @@
 import { state } from '../state.js';
 import { showToast } from './toast.js';
+import { startSilentAudio, stopSilentAudio } from './audio.js';
 
 const SESSION_KEY = 'trade_journal_session_state';
 const KEEP_ACTIVE_KEY = 'trade_journal_keep_active';
@@ -157,22 +158,35 @@ export function releaseWakeLock() {
 }
 
 /**
- * Toggle Keep App Active / Keep Open mode
+ * Toggle Keep App Active / Keep Open mode.
+ * 
+ * This now does TWO things:
+ * 1. Screen Wake Lock — keeps the screen on while the app is in the foreground.
+ * 2. Silent Audio Playback — plays an inaudible looping WAV and registers a
+ *    Media Session. Android Chrome treats this as an active "media player"
+ *    process, elevating its priority so the Low Memory Killer won't suspend
+ *    or terminate it while backgrounded. The lock-screen / notification tray
+ *    shows "Trade Journal – Active".
  */
 export function setKeepAppActive(enabled, userInitiated = false) {
   state.keepAppActiveMode = !!enabled;
   localStorage.setItem(KEEP_ACTIVE_KEY, enabled ? 'true' : 'false');
 
   if (enabled) {
+    // Start the silent audio keep-alive (the main defense against Android LMK)
+    startSilentAudio();
+
+    // Screen Wake Lock (secondary — keeps screen on in foreground)
     requestWakeLock().then(success => {
-      if (userInitiated && success) {
-        showToast('Keep App Active enabled (Screen Wake Lock active)');
+      if (userInitiated) {
+        showToast('Keep Open mode enabled — app will stay active in background');
       }
     });
   } else {
+    stopSilentAudio();
     releaseWakeLock();
     if (userInitiated) {
-      showToast('Keep App Active disabled');
+      showToast('Keep Open mode disabled');
     }
   }
 }
@@ -185,16 +199,32 @@ export function initLifecycleManager() {
   const savedKeepActive = localStorage.getItem(KEEP_ACTIVE_KEY) === 'true';
   state.keepAppActiveMode = savedKeepActive;
   if (savedKeepActive) {
+    // Defer silent audio start until first user interaction (browser autoplay policy)
+    const startOnInteraction = () => {
+      if (state.keepAppActiveMode) {
+        startSilentAudio();
+        requestWakeLock();
+      }
+      window.removeEventListener('click', startOnInteraction);
+      window.removeEventListener('touchstart', startOnInteraction);
+    };
+    window.addEventListener('click', startOnInteraction, { once: false });
+    window.addEventListener('touchstart', startOnInteraction, { once: false });
+    // Also try immediately (works if returning to an already-interacted page)
     requestWakeLock();
+    startSilentAudio();
   }
 
-  // Save session state on visibility change (when user background/switches apps)
+  // Save session state on visibility change (when user backgrounds/switches apps)
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
       saveSessionState();
     } else if (document.visibilityState === 'visible') {
+      // When app returns to foreground, re-acquire wake lock and restart
+      // silent audio if it was paused by the OS during backgrounding
       if (state.keepAppActiveMode) {
         requestWakeLock();
+        startSilentAudio();
       }
     }
   });

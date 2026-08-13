@@ -120,6 +120,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.6 — Android Background Keep-Alive (Silent Audio Media Session)
+- **Silent Audio Keep-Alive**: "Keep Open" mode now plays an inaudible looping WAV track via an `<audio>` element. Android Chrome treats the PWA as an active media player, elevating process priority so the Low Memory Killer will not suspend or kill the app while backgrounded.
+- **Media Session Integration**: Registers `navigator.mediaSession` metadata so the Android notification tray / lock-screen shows "Trade Journal – Active" instead of a generic media notification. Lock-screen pause/play controls are intercepted to prevent accidental stop.
+- **Auto-Restart on Foreground**: When the app returns to the foreground after backgrounding, silent audio and wake lock are automatically re-acquired if they were paused by the OS.
+- **Autoplay Policy Handling**: On cold start with "Keep Open" already enabled, defers silent audio start until the first user interaction (tap/click) to comply with browser autoplay policies.
+
 ### v1.5 — Candle Timer Enhancements
 - **Timer Enable/Disable Toggle**: Added dedicated enable/disable toggle buttons for both the 5-minute and 15-minute candle timers directly in the Levels tab HUD.
 - **Early Audio Triggers**: Adjusted audio triggers to prevent overlapping sounds. The 5-minute timer now plays 10 seconds before the candle close, and the 15-minute timer plays 5 seconds before the candle close.
