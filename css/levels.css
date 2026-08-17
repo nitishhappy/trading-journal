@@ -1062,6 +1062,17 @@
     font-weight: 700;
     font-family: var(--font-mono);
     color: var(--text);
+    transition: color 0.3s ease;
+}
+
+#floater-price-val.tick-up {
+    color: #26a69a !important;
+    text-shadow: 0 0 8px rgba(38, 166, 154, 0.5);
+}
+
+#floater-price-val.tick-down {
+    color: #ef5350 !important;
+    text-shadow: 0 0 8px rgba(239, 83, 80, 0.5);
 }
 
 #level-price-floater {

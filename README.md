@@ -120,6 +120,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.7 — Levels Tab Real-Time Live Price & Floater Updates
+- **Active Tab Real-Time Polling**: The Daily Levels tab now actively polls the live Nifty price every 15 seconds while open, ensuring the floating toolbar displays real-time prices without requiring manual reloads or push alerts to be toggled on.
+- **Immediate Refresh on Navigation & Visibility**: When switching to the Daily Levels tab or foregrounding the app, live prices and level evaluations refresh immediately.
+- **Cache Prevention**: Added strict `Cache-Control: no-cache, no-store, must-revalidate` headers on `/api/niftyCandles` and `/api/livePrices`, plus timestamp cache-busting on client-side fetches to prevent stale cached candle responses.
+- **Live Tick Flash Animations**: Added real-time green/red tick animations to the floating toolbar price to visually indicate price changes on each update.
+
 ### v1.6 — Android Background Keep-Alive (Silent Audio Media Session)
 - **Silent Audio Keep-Alive**: "Keep Open" mode now plays an inaudible looping WAV track via an `<audio>` element. Android Chrome treats the PWA as an active media player, elevating process priority so the Low Memory Killer will not suspend or kill the app while backgrounded.
 - **Media Session Integration**: Registers `navigator.mediaSession` metadata so the Android notification tray / lock-screen shows "Trade Journal – Active" instead of a generic media notification. Lock-screen pause/play controls are intercepted to prevent accidental stop.

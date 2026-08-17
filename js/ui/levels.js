@@ -890,9 +890,10 @@ if (viewLevels) {
     }
 
     async function fetch5mCandles(dateStr) {
+        const ts = Date.now();
         // 1. Try serverless backend route first
         try {
-            const res = await fetch(`/api/niftyCandles?date=${encodeURIComponent(dateStr)}`);
+            const res = await fetch(`/api/niftyCandles?date=${encodeURIComponent(dateStr)}&_t=${ts}`, { cache: 'no-store' });
             if (res.ok) {
                 const data = await res.json();
                 if (data.success && Array.isArray(data.candles) && data.candles.length > 0) {
@@ -910,7 +911,7 @@ if (viewLevels) {
             let rawCandles = [];
 
             if (dateStr === todayIst) {
-                const intraRes = await fetch(`https://api.upstox.com/v2/historical-candle/intraday/${encInst}/1minute`);
+                const intraRes = await fetch(`https://api.upstox.com/v2/historical-candle/intraday/${encInst}/1minute?_t=${ts}`, { cache: 'no-store' });
                 if (intraRes.ok) {
                     const data = await intraRes.json();
                     rawCandles = data?.data?.candles || [];
@@ -918,7 +919,7 @@ if (viewLevels) {
             }
 
             if (!rawCandles || rawCandles.length === 0) {
-                const histRes = await fetch(`https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${dateStr}/${dateStr}`);
+                const histRes = await fetch(`https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${dateStr}/${dateStr}?_t=${ts}`, { cache: 'no-store' });
                 if (histRes.ok) {
                     const data = await histRes.json();
                     rawCandles = data?.data?.candles || [];
@@ -1312,11 +1313,38 @@ if (viewLevels) {
         import('../utils/toast.js').then(m => m.showToast("Live alerts paused"));
     }
 
+    let isLevelsViewActive = true;
+    let levelsPollingInterval = null;
+
+    function startLevelsPolling() {
+        if (levelsPollingInterval) clearInterval(levelsPollingInterval);
+        levelsPollingInterval = setInterval(() => {
+            if (isLevelsViewActive) {
+                runSilentLiveEvaluation();
+            }
+        }, 15000);
+    }
+
+    function stopLevelsPolling() {
+        if (levelsPollingInterval) {
+            clearInterval(levelsPollingInterval);
+            levelsPollingInterval = null;
+        }
+    }
+
     // Safety net: when user switches back to this tab, immediately re-evaluate
-    // in case the worker was somehow killed by the OS
     document.addEventListener('visibilitychange', () => {
-        if (!document.hidden && isLiveAlertsOn) {
-            runSilentLiveEvaluation();
+        if (!document.hidden) {
+            if (isLevelsViewActive || isLiveAlertsOn) {
+                runSilentLiveEvaluation();
+            }
+            if (isLevelsViewActive) {
+                startLevelsPolling();
+            }
+        } else {
+            if (!isLiveAlertsOn) {
+                stopLevelsPolling();
+            }
         }
     });
 
@@ -1361,9 +1389,17 @@ if (viewLevels) {
         const floaterTitle = document.getElementById('floater-title-text');
         
         if (floater && floaterVal && !floater.classList.contains('user-closed')) {
-            floaterVal.innerText = lastCandle.close;
+            const currentPrice = Number(lastCandle.close);
+            const oldPrice = parseFloat(floaterVal.innerText.replace(/,/g, '')) || 0;
+            const formattedPrice = currentPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            floaterVal.innerText = formattedPrice;
+            if (oldPrice && currentPrice !== oldPrice) {
+                const cls = currentPrice > oldPrice ? 'tick-up' : 'tick-down';
+                floaterVal.classList.add(cls);
+                setTimeout(() => floaterVal.classList.remove(cls), 1000);
+            }
             if (floaterTitle) {
-                floaterTitle.setAttribute('data-price', lastCandle.close);
+                floaterTitle.setAttribute('data-price', formattedPrice);
             }
             floater.classList.remove('hidden');
         }
@@ -1572,16 +1608,22 @@ if (viewLevels) {
 
 
 
-    // Listen for tab view changes to trigger auto-scroll when entering Daily Levels (only if not scrolled yet)
+    // Listen for tab view changes to trigger evaluation and live price polling
     window.addEventListener('view-changed', (e) => {
         if (e.detail && e.detail.view === 'levels') {
-            if (!hasAutoScrolledOnLoad) {
-                runSilentLiveEvaluation({ forceScroll: true });
+            isLevelsViewActive = true;
+            runSilentLiveEvaluation({ forceScroll: !hasAutoScrolledOnLoad });
+            startLevelsPolling();
+        } else {
+            isLevelsViewActive = false;
+            if (!isLiveAlertsOn) {
+                stopLevelsPolling();
             }
         }
     });
 
     // Call init when module loads
     initLevels();
+    startLevelsPolling();
 }
 
