@@ -1199,3 +1199,17 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Mapped key breakout buy levels (Nifty 24530, Bank Nifty 57450, Sensex 78384), invalidation resistance (Nifty 24630), breakdown short triggers (Nifty 24429, Bank Nifty 57159, Sensex 78000), and Wave C minimum targets (Nifty 24328).
   - Added tactical rules: Avoid trading current expiry index options after 12:00 PM IST due to CS auction spikes/manipulation; wrap up early or switch to Crude Oil / Stock Options.
 
+### v2.3.19 — 18 Aug 2026 — Market Summary Panel & Nifty-Only Level Extraction
+
+- **Market Summary Panel (`index.html`, `js/ui/levels.js`)**:
+  - Added a new collapsible "Market Summary" panel at the top of the Daily Levels tab (`#levels-summary-panel`, `#levels-summary-header`, `#levels-summary-body`).
+  - Rendered by `renderSummary()` in `levels.js`, which reads from the `window.dailyPlanSummary` array in `daily_plan.js`.
+  - Supports delta/appending — multiple briefing updates per day are displayed together with source badges and pre-wrapped text formatting.
+  - Follows the same 4 PM IST daily cleanup rule as levels data.
+- **Nifty-Only Level Extraction (`daily_plan.js`)**:
+  - Updated prediction workflow to extract only Nifty levels. BankNifty and Sensex levels are no longer written to `daily_plan.js`.
+- **AI Source Integration**:
+  - Pre-market briefing workflow ("How'z market?") appends AI-sourced Nifty levels with `"source": "AI"` and a combined market summary to `daily_plan.js`.
+  - New `window.dailyPlanSummary` array structure in `daily_plan.js` stores summary objects with `source`, `text`, and `timestamp` fields.
+- **Files Modified**: `index.html`, `js/ui/levels.js`, `js/data/daily_plan.js`
+
