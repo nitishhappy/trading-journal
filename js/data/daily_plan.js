@@ -1,6 +1,13 @@
 window.dailyPlanSummary = [
-  { source: 'SMU', text: 'Institutional bias leans slightly bearish to sideways. Keep position sizes strictly in check and wait for confirmation breakouts.' },
-  { source: 'BT', text: 'Market volatility is low (VIX around 11). Look for liquidity sweeps rather than continuous trends.' }
+  { source: 'Combined', text: `Summary for August 18 (SMU & BT):
+
+Data Bias: Market volatility is low (VIX around 11) and institutional bias leans slightly bearish to sideways.
+Nifty Levels:
+Make-or-Break / Resistance Zone: 24350–24400.
+Buy Trigger: If 15-min candle closes above 24370 (Target: 24415).
+Short Trigger: If price rejects from 24370 or breaks down below 24320–24325 (Targets: 24250, then 24136).
+Liquidity & Extremes: There is a major liquidity sweep target upwards around 24470, and a downside inefficiency target at 24000.
+Strategy: Wait to sell on rise near supply areas if market opens flat and drops. If a large gap-down occurs (~1%), do not short blindly; instead, watch for a bullish reversal towards the closing price since price will stray too far from SMA 50.` }
 ];
 
 window.dailyPlanData = [

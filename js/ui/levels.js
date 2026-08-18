@@ -308,6 +308,7 @@ if (viewLevels) {
             content.style.fontSize = '14px';
             content.style.color = 'var(--text)';
             content.style.lineHeight = '1.4';
+            content.style.whiteSpace = 'pre-wrap';
             content.innerText = item.text || '';
             
             row.appendChild(header);
