@@ -1,0 +1,38 @@
+name: AI Co-Pilot & ML Engine 15M Cloud Cron
+
+on:
+  schedule:
+    # Run every 15 minutes Monday through Friday (03:30 to 18:30 UTC = 09:00 to 00:00 IST)
+    - cron: '*/15 3-18 * * 1-5'
+  workflow_dispatch: # Allows manual trigger from GitHub web UI anytime
+
+jobs:
+  run-ml-copilot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Trading Journal Codebase
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pandas numpy scikit-learn xgboost joblib requests
+
+      - name: Run Cloud ML Exporter
+        run: |
+          python js/data/cloud_ml_runner.py || true
+
+      - name: Commit & Push Updated ML Data to Trading Journal
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add js/data/ml_coherence_data.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update AI Co-Pilot ML Data [skip ci]" && git push origin main)
