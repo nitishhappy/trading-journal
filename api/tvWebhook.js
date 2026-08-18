@@ -33,29 +33,33 @@ module.exports = async (req, res) => {
     data = { ...parsed };
   }
 
-  const { symbol, action, price, strategy, interval, keyword, timeframe, image, imageUrl, sl, targets, summary, source, ...extra } = data;
+  const { symbol, action, price, strategy, interval, keyword, timeframe, image, imageUrl, sl, targets, summary, source, telegram_date, telegramDate, telegram_chat_id, telegram_message_id, ...extra } = data;
 
   // Resolve timeframe: prefer parsed 'timeframe', fall back to 'interval'
   const resolvedTimeframe = timeframe || interval || null;
   const resolvedImage = imageUrl || image || null;
+  const resolvedTelegramDate = telegram_date || telegramDate || null;
 
   const notifRef = db.collection("users").doc(uid).collection("tvNotifications").doc();
   await notifRef.set({
     raw,
-    symbol:    symbol    || null,
-    action:    action    || null,
-    price:     price !== undefined && price !== null ? price : null,
-    strategy:  strategy  || null,
-    interval:  resolvedTimeframe,
-    keyword:   keyword   || null,
-    image:     resolvedImage,
-    sl:        sl        || null,
-    targets:   targets   || null,
-    summary:   summary   || null,
-    read:      false,
-    receivedAt: admin.firestore.FieldValue.serverTimestamp(),
+    symbol:        symbol    || null,
+    action:        action    || null,
+    price:         price !== undefined && price !== null ? price : null,
+    strategy:      strategy  || null,
+    interval:      resolvedTimeframe,
+    keyword:       keyword   || null,
+    image:         resolvedImage,
+    sl:            sl        || null,
+    targets:       targets   || null,
+    summary:       summary   || null,
+    read:          false,
+    receivedAt:    admin.firestore.FieldValue.serverTimestamp(),
+    telegramDate:  resolvedTelegramDate,
+    telegramChatId: telegram_chat_id || null,
+    telegramMsgId: telegram_message_id || null,
     extra,
-    source:    source    || "tradingview",
+    source:        source    || "tradingview",
   });
 
   // Garbage Collection & Daily 4:00 PM IST Cleanup

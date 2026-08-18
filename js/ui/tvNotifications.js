@@ -546,7 +546,19 @@ function formatMessageWithHighlights(text) {
 }
 
 function buildCard(notif) {
-  const ts = notif.receivedAt?.toDate ? notif.receivedAt.toDate() : new Date();
+  // Use original Telegram message timestamp if available; otherwise fallback to receivedAt
+  let ts;
+  const rawTgDate = notif.telegramDate || notif.telegram_date || notif.extra?.telegram_date || notif.extra?.telegramDate;
+  if (rawTgDate) {
+    const parsedTg = new Date(rawTgDate);
+    if (!isNaN(parsedTg.getTime())) {
+      ts = parsedTg;
+    }
+  }
+  if (!ts) {
+    ts = notif.receivedAt?.toDate ? notif.receivedAt.toDate() : new Date();
+  }
+
   const timeStr = ts.toLocaleTimeString('en-IN', {
     timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
   });
