@@ -8,16 +8,33 @@ Buy Trigger: If 15-min candle closes above 24370 (Target: 24415).
 Short Trigger: If price rejects from 24370 or breaks down below 24320–24325 (Targets: 24250, then 24136).
 Liquidity & Extremes: There is a major liquidity sweep target upwards around 24470, and a downside inefficiency target at 24000.
 Strategy: Wait to sell on rise near supply areas if market opens flat and drops. If a large gap-down occurs (~1%), do not short blindly; instead, watch for a bullish reversal towards the closing price since price will stray too far from SMA 50.` },
-  { source: 'AI', text: `Pre-Market Briefing (Aug 18):
+  { source: 'AI', text: `Pre-Market NIFTY Analysis & Trading Plan (Aug 18):
 
-Sentiment: Risk-Off. US markets closed lower (S&P -0.5%, Dow -0.51%). 30-yr Treasury yield at 5.3% (highest since 2007). Asian markets negative.
-GIFT Nifty: ~24,296 (-0.32%), signaling gap-down open. 5th consecutive red session.
-Gold: $4,427 — strong safe-haven bid. Crude Brent at $91 — headwind for India.
-Key Nifty Levels: Resistance 24,350-24,400 (supply zone). Support 24,200-24,220 (critical), 24,000 (structural).
-Buy Confirmation: Sweep of 24,200-24,220 lows + 5-min CHoCH above first 15-min high.
-Sell Confirmation: Rejection at 24,350-24,370 supply with bearish engulfing/wick.
-No Trade Zone: 24,270-24,320 chop territory.
-Risk: Weekly expiry day. VIX ~11 = slow grinding after opening flush. Do NOT hold options if first 15-min range doesn't break by 10 AM.` }
+1. Market Structure & Sentiment:
+• 5-day consecutive red streak — persistent distribution, but orderly without panic capitulation.
+• Short-term structure: Bearish with lower highs & lower lows on 1H. No bullish CHoCH yet.
+• GIFT Nifty at ~24,296 (-0.32%) indicating a gap-down open below yesterday's 24,287 close.
+
+2. Key Nifty Levels:
+• Major Resistance: 24,400 (heavy Call writing + prior day high zone; trend invalidation).
+• Supply Zone / Gap-Fill: 24,350–24,370 (1H bearish Order Block; prime sell-on-rise area).
+• Immediate Support: 24,250 (intraday pivot; sell-side liquidity resting below).
+• Critical Support: 24,200–24,220 (breaking opens room to 24,000 structural support).
+• Inefficiency Target: 24,000 (psychological round number + unfilled FVG below).
+
+3. SMC / Price Action Perspective:
+• Liquidity: Sell-side liquidity (SSL) below 24,250 & 24,200. Buy-side liquidity (BSL) above 24,370–24,400 equal highs.
+• Order Blocks: Bearish OB at 24,350–24,370 (origin of 1H down-move). Bullish OB near 24,200–24,220.
+• Premium/Discount: Currently in deep discount territory on weekly range — ripe for smart money accumulation if confirmed.
+
+4. 5-Min Intraday Action Plan:
+• BUY SETUP: Wait for opening sweep of 24,200–24,220 lows. If 5-min candle leaves long lower wick + 5-min CHoCH (close above first 15-min high) + bullish FVG, enter ATM CE targeting 24,350. SL below sweep low.
+• SELL SETUP: If market rallies into 24,350–24,370 supply with a wick rejection or 5-min bearish engulfing, enter ATM PE targeting 24,250 → 24,200. SL above 24,400.
+• NO-TRADE ZONE: 24,270–24,320 mid-range chop. Do NOT buy options here.
+
+5. Risk Warning (Expiry Day):
+• Today is Nifty Weekly Expiry. Low VIX (~11) means rapid theta decay after initial 30-min flush.
+• If first 15-min range doesn't break by 10:00 AM IST, avoid holding options. Trade ONLY at key extremes (24,200 or 24,370).` }
 ];
 
 window.dailyPlanData = [

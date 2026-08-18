@@ -1128,17 +1128,6 @@
         <div class="layout-wrapper-levels">
             <!-- LEFT COLUMN: Form and List -->
             <div class="left-col">
-                <!-- MARKET SUMMARY PANEL -->
-                <div class="panel" id="levels-summary-panel" style="display: none;">
-                    <h2 class="collapsible-header" id="levels-summary-header">
-                        <span>Market Summary</span>
-                        <span class="toggle-icon">▼</span>
-                    </h2>
-                    <div id="levels-summary-body" class="collapsible-body" style="display:block;">
-                        <!-- Summaries injected here -->
-                    </div>
-                </div>
-
                 <!-- INPUT PANEL -->
                 <div class="panel">
                     <h2 class="collapsible-header" id="levels-form-header">
@@ -1266,8 +1255,19 @@
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: Visual Chart Map -->
+            <!-- RIGHT COLUMN: Summary & Visual Chart Map -->
             <div class="right-col">
+                <!-- MARKET SUMMARY PANEL -->
+                <div class="panel" id="levels-summary-panel" style="display: none; margin-bottom: 1.5rem;">
+                    <h2 class="collapsible-header" id="levels-summary-header">
+                        <span>Market Summary</span>
+                        <span class="toggle-icon">▼</span>
+                    </h2>
+                    <div id="levels-summary-body" class="collapsible-body" style="display:block;">
+                        <!-- Summaries injected here -->
+                    </div>
+                </div>
+
                 <div class="panel chart-wrapper">
                     <h2 style="margin: 0; font-size: 1.15rem; font-weight: 600;">Visual Chart Map</h2>
                     <p style="margin: 0.25rem 0 1.5rem 0; color: var(--text-dim); font-size: 0.85rem;">Levels automatically plot here in sequence.</p>
