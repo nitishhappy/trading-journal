@@ -2,7 +2,7 @@ import { state } from '../state.js';
 import { saveSessionState } from '../utils/lifecycle.js';
 import {
   mainTabs, mainTabsWrapper, tabsScrollLeftBtn, tabsScrollRightBtn,
-  viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, currentFolderLabel,
+  viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, viewAiCoPilot, currentFolderLabel,
   fullscreenBtn, lightbox, lightboxImg, lightboxClose
 } from '../dom.js';
 
@@ -115,7 +115,7 @@ mainTabs.addEventListener("click", (e) => {
   // Center active tab in scrollable container
   tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
-  [viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels].forEach((v) => {
+  [viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, viewAiCoPilot].forEach((v) => {
     if (v) v.classList.add("hidden");
   });
 
@@ -140,10 +140,16 @@ mainTabs.addEventListener("click", (e) => {
     currentFolderLabel.textContent = "Candle Checklist";
   } else if (state.activeView === "tvNotifications") {
     if (viewTvNotifications) viewTvNotifications.classList.remove("hidden");
-    currentFolderLabel.textContent = "TV Notifications";
+    currentFolderLabel.textContent = "TV Alerts";
   } else if (state.activeView === "levels") {
     if (viewLevels) viewLevels.classList.remove("hidden");
     currentFolderLabel.textContent = "Daily Levels";
+  } else if (state.activeView === "aico-pilot") {
+    if (viewAiCoPilot) viewAiCoPilot.classList.remove("hidden");
+    currentFolderLabel.textContent = "AI Co-Pilot & ML";
+    if (typeof window.initAICoPilotView === 'function') {
+      window.initAICoPilotView();
+    }
   }
 
   // Dispatch custom event when view changes

@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/aicoach.css">
   <link rel="stylesheet" href="css/tv-notifications.css">
   <link rel="stylesheet" href="css/levels.css">
+  <link rel="stylesheet" href="css/aico-pilot.css">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -94,6 +95,7 @@
         <button class="main-tab" data-view="tradelog">Trade Log</button>
         <button class="main-tab" data-view="tvNotifications">TV Alerts</button>
         <button class="main-tab" data-view="levels">Levels</button>
+        <button class="main-tab" data-view="aico-pilot">🤖 AI Co-Pilot</button>
       </nav>
       <button class="tabs-nav-btn tabs-nav-right" id="tabs-scroll-right" aria-label="Scroll tabs right" title="Scroll right">
         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1280,7 +1282,125 @@
         </div>
     </div>
     
-  </div>
+    <!-- ===== AI CO-PILOT & ML DASHBOARD VIEW ===== -->
+    <div id="view-aico-pilot" class="view hidden">
+      <div class="copilot-container" style="max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem;">
+        
+        <!-- Header Controls -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h1 style="font-size: 1.35rem; font-weight: 700; color: #f8fafc; margin: 0;">🤖 AI 15M Co-Pilot & ML Outcome Matrix</h1>
+            <p style="margin: 0.2rem 0 0 0; font-size: 0.82rem; color: #94a3b8;">Real-time Multi-Asset Self-Learning System • NIFTY & XAU/USD (Gold)</p>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <div class="tabs-wrap" style="display: inline-flex; background: rgba(0,0,0,0.3); padding: 3px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+              <button class="main-tab active" id="copilot-tab-nifty" style="padding: 6px 14px; font-size: 12px;" onclick="switchCopilotAsset('nifty')">📈 NIFTY 50</button>
+              <button class="main-tab" id="copilot-tab-gold" style="padding: 6px 14px; font-size: 12px; color: #fbbf24;" onclick="switchCopilotAsset('gold')">🪙 GOLD (XAU/USD)</button>
+            </div>
+            <button class="btn-small" style="padding: 6px 12px; font-size: 12px;" onclick="renderAICoPilot()">↻ Refresh View</button>
+          </div>
+        </div>
+
+        <!-- Metric Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 1.5rem;">
+          <div class="panel" style="padding: 14px 18px; background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;">
+            <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px;">Total Predictions Logged</div>
+            <div id="copilot-stat-total" style="font-size: 1.5rem; font-weight: 700; color: #f8fafc; margin-top: 4px;">--</div>
+          </div>
+          <div class="panel" style="padding: 14px 18px; background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;">
+            <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px;">Resolved Actionable Trades</div>
+            <div id="copilot-stat-resolved" style="font-size: 1.5rem; font-weight: 700; color: #38bdf8; margin-top: 4px;">--</div>
+          </div>
+          <div class="panel" style="padding: 14px 18px; background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;">
+            <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px;">Historical Baseline WR</div>
+            <div id="copilot-stat-winrate" style="font-size: 1.5rem; font-weight: 700; color: #34d399; margin-top: 4px;">--</div>
+          </div>
+          <div class="panel" style="padding: 14px 18px; background: #0f172a; border: 1px solid #1e293b; border-radius: 10px;">
+            <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.5px;">Avg ML Model Confidence</div>
+            <div id="copilot-stat-mlconf" style="font-size: 1.5rem; font-weight: 700; color: #818cf8; margin-top: 4px;">--</div>
+          </div>
+        </div>
+
+        <!-- Coherence Matrix Card -->
+        <div class="panel" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem;">
+          <div style="padding: 12px 18px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.01);">
+            <h3 id="copilot-coherence-title" style="margin: 0; font-size: 13px; font-weight: 600; color: #f8fafc;">📊 AI vs ML Coherence Analytics Matrix</h3>
+            <span style="font-size: 11px; color: #34d399; font-weight: 600;">⚡ EOD Auto-Calibrated Matrix</span>
+          </div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+              <thead>
+                <tr style="background: #0b1120; border-bottom: 1px solid #1e293b;">
+                  <th style="padding: 10px 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 11px;">Coherence Tier</th>
+                  <th style="padding: 10px 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 11px;">Trigger Condition</th>
+                  <th style="padding: 10px 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 11px;">Role & Profile</th>
+                  <th style="padding: 10px 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 11px;">Sample Trades</th>
+                  <th style="padding: 10px 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 11px;">Win Rate</th>
+                  <th style="padding: 10px 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 11px;">Net PnL Pts</th>
+                  <th style="padding: 10px 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; font-size: 11px;">Profit Factor</th>
+                </tr>
+              </thead>
+              <tbody id="copilot-coherence-body">
+                <!-- Populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Workspace 2-Column Split -->
+        <div style="display: grid; grid-template-columns: 1fr 440px; gap: 16px; align-items: start;">
+          
+          <!-- Table Ledger -->
+          <div class="panel" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden;">
+            <div style="padding: 12px 18px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <h3 id="copilot-table-title" style="margin: 0; font-size: 13px; font-weight: 600; color: #f8fafc; display: inline-block;">Actionable Trades Ledger</h3>
+                <span id="copilot-table-subtitle" style="font-size: 11px; color: #34d399; margin-left: 8px;">⚡ Showing Only Actionable Setups</span>
+              </div>
+              <div style="display: flex; gap: 6px;">
+                <button id="copilot-filter-high" class="main-tab active" style="padding: 4px 10px; font-size: 11px;" onclick="setCopilotFilter('high')">🔥 High Conviction Only</button>
+                <button id="copilot-filter-all" class="main-tab" style="padding: 4px 10px; font-size: 11px;" onclick="setCopilotFilter('all')">📋 All Actionable</button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto; max-height: 600px;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+                <thead>
+                  <tr style="background: #0b1120; border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 2;">
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">Date / Time</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">Action</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">Spot</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">SL</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">TP</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">R:R</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">AI Conf</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">ML Conf</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">Analytical WR</th>
+                    <th style="padding: 10px 12px; font-weight: 600; color: #94a3b8; font-size: 11px; text-transform: uppercase;">Outcome</th>
+                  </tr>
+                </thead>
+                <tbody id="copilot-ledger-body">
+                  <!-- Populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Confluence Inspector -->
+          <div class="panel" style="background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; position: sticky; top: 1rem;">
+            <div style="padding: 12px 18px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.01);">
+              <h3 style="margin: 0; font-size: 13px; font-weight: 600; color: #f8fafc;">🔍 Setup & Confluence Inspector</h3>
+              <span id="copilot-inspector-tag" style="font-size: 11px; color: #94a3b8; font-family: monospace;"></span>
+            </div>
+            <div id="copilot-inspector-content" style="padding: 16px; font-size: 12.5px; line-height: 1.6; color: #cbd5e1; max-height: 550px; overflow-y: auto;">
+              <p style="color: #64748b; text-align: center; margin-top: 50px;">Select any trade row from the table to view the 15M candle anatomy, structure, and confluence indicators.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
 
   <!-- ===================== OBSERVATION MODAL (Create/Edit) ===================== -->
   <div id="obs-modal" class="modal-overlay hidden">
@@ -1707,6 +1827,8 @@
   <script src="./js/data/sectors.js?v=20260803"></script>
   <script src="./js/data/daily_plan.js?v=20260805"></script>
   <script src="./js/data/scanned_stocks.js?v=20260803"></script>
+  <script src="./js/data/ml_coherence_data.js"></script>
+  <script src="./js/ui/aico-pilot.js"></script>
   <script type="module" src="app.js"></script>
   <script type="module" src="trade-security.js"></script>
   <script>
