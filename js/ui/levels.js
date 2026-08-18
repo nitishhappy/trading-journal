@@ -43,6 +43,13 @@ if (viewLevels) {
     });
 
     // Collapsible panels
+    const summaryHeader = document.getElementById('levels-summary-header');
+    if (summaryHeader) {
+        summaryHeader.addEventListener('click', function() {
+            togglePanel('levels-summary-body', this);
+        });
+    }
+
     document.getElementById('levels-form-header').addEventListener('click', function() {
         togglePanel('levels-form-body', this);
     });
@@ -258,9 +265,55 @@ if (viewLevels) {
         });
 
         saveLevelsData();
+        renderSummary();
         renderChart();
         renderScorecard();
         runSilentLiveEvaluation();
+    }
+
+    function renderSummary() {
+        const summaryPanel = document.getElementById('levels-summary-panel');
+        const summaryBody = document.getElementById('levels-summary-body');
+        if (!summaryPanel || !summaryBody) return;
+
+        const summaryData = window.dailyPlanSummary || [];
+        if (!Array.isArray(summaryData) || summaryData.length === 0) {
+            summaryPanel.style.display = 'none';
+            return;
+        }
+
+        summaryPanel.style.display = 'block';
+        summaryBody.innerHTML = '';
+        
+        summaryData.forEach(item => {
+            const row = document.createElement('div');
+            row.style.marginBottom = '12px';
+            row.style.padding = '10px';
+            row.style.background = 'var(--surface-2)';
+            row.style.borderRadius = 'var(--radius)';
+            row.style.borderLeft = '3px solid var(--accent)';
+            
+            const header = document.createElement('div');
+            header.style.display = 'flex';
+            header.style.alignItems = 'center';
+            header.style.marginBottom = '6px';
+            
+            const badge = document.createElement('span');
+            badge.className = 'source-badge';
+            badge.innerText = item.source || 'UNK';
+            
+            header.appendChild(badge);
+            
+            const content = document.createElement('div');
+            content.style.fontSize = '14px';
+            content.style.color = 'var(--text)';
+            content.style.lineHeight = '1.4';
+            content.innerText = item.text || '';
+            
+            row.appendChild(header);
+            row.appendChild(content);
+            summaryBody.appendChild(row);
+        });
     }
 
     function saveLevelsData() {

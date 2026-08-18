@@ -1,3 +1,8 @@
+window.dailyPlanSummary = [
+  { source: 'SMU', text: 'Institutional bias leans slightly bearish to sideways. Keep position sizes strictly in check and wait for confirmation breakouts.' },
+  { source: 'BT', text: 'Market volatility is low (VIX around 11). Look for liquidity sweeps rather than continuous trends.' }
+];
+
 window.dailyPlanData = [
   // --- TACTICAL RULES & STRATEGIES ---
   { "source": "MARKET", "price": "TACTICAL RULE: 12:00 PM Wrap Up & Expiry Avoidance", "bias": "neutral", "behavior": "Avoid trading current expiry index options after 12:00 PM IST due to CAS closing auction manipulation and volume drops. Wrap up index trades before noon or switch to next expiry / Crude Oil / Stock Options.", "tp": "-", "sl": "-", "status": "na" },
