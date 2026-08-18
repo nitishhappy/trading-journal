@@ -1,12 +1,180 @@
 /**
  * AI Co-Pilot & ML Coherence Dashboard UI Controller for Trading Journal
+ * Includes Screen-level System Notifications & Telegram Channel Push Integration
  */
 
 let copilotAsset = 'nifty'; // 'nifty' | 'gold'
 let copilotFilter = 'high'; // 'high' = only >=50% WR, 'all' = all actionable trades
 
+let copilotNotifsEnabled = localStorage.getItem('copilot_notifs_enabled') === 'true';
+let copilotTgEnabled = localStorage.getItem('copilot_tg_enabled') === 'true';
+let lastNotifiedTradeIds = new Set(JSON.parse(localStorage.getItem('copilot_notified_ids') || '[]'));
+
 function initAICoPilotView() {
+  syncTogglesUI();
   renderAICoPilot();
+  checkAndNotifyNewTrades();
+}
+
+function syncTogglesUI() {
+  const notifToggle = document.getElementById('copilot-notif-toggle');
+  const tgToggle = document.getElementById('copilot-tg-toggle');
+  if (notifToggle) notifToggle.checked = copilotNotifsEnabled;
+  if (tgToggle) tgToggle.checked = copilotTgEnabled;
+}
+
+// 1. Toggle Browser/System Notifications directly from this screen
+async function toggleCopilotNotifications(enabled) {
+  copilotNotifsEnabled = enabled;
+  localStorage.setItem('copilot_notifs_enabled', enabled ? 'true' : 'false');
+
+  if (enabled && typeof Notification !== 'undefined') {
+    if (Notification.permission !== 'granted') {
+      const res = await Notification.requestPermission();
+      if (res !== 'granted') {
+        copilotNotifsEnabled = false;
+        localStorage.setItem('copilot_notifs_enabled', 'false');
+        syncTogglesUI();
+        alert('⚠️ Notification permission was denied in your browser settings.');
+        return;
+      }
+    }
+  }
+
+  if (window.showToast) {
+    window.showToast(enabled ? '🔔 AI Co-Pilot Alerts Enabled ✓' : 'AI Co-Pilot Alerts Disabled');
+  }
+}
+
+// 2. Toggle Telegram Push directly from this screen
+async function toggleCopilotTelegram(enabled) {
+  copilotTgEnabled = enabled;
+  localStorage.setItem('copilot_tg_enabled', enabled ? 'true' : 'false');
+
+  if (enabled) {
+    // Check if Telegram credentials exist in localStorage or Settings
+    const tgConfig = getTelegramCredentials();
+    if (!tgConfig.token || !tgConfig.chatId) {
+      const tokenPrompt = prompt('Enter your Telegram Bot Token (e.g. 123456:ABC-DEF):', tgConfig.token || '');
+      if (tokenPrompt) {
+        const chatIdPrompt = prompt('Enter your Telegram Chat ID / Channel (e.g. -100123456 or @mychannel):', tgConfig.chatId || '');
+        if (chatIdPrompt) {
+          localStorage.setItem('settings_tg_token', tokenPrompt.trim());
+          localStorage.setItem('settings_tg_chatid', chatIdPrompt.trim());
+          if (window.showToast) window.showToast('Telegram credentials configured ✓');
+        } else {
+          copilotTgEnabled = false;
+          localStorage.setItem('copilot_tg_enabled', 'false');
+          syncTogglesUI();
+          return;
+        }
+      } else {
+        copilotTgEnabled = false;
+        localStorage.setItem('copilot_tg_enabled', 'false');
+        syncTogglesUI();
+        return;
+      }
+    }
+  }
+
+  if (window.showToast) {
+    window.showToast(enabled ? '✈️ Telegram Channel Push Enabled ✓' : 'Telegram Push Disabled');
+  }
+}
+
+// Helper to retrieve Telegram credentials
+function getTelegramCredentials() {
+  const tokenInput = document.getElementById('settings-tg-token');
+  const chatInput = document.getElementById('settings-tg-chatid');
+
+  const token = (tokenInput && tokenInput.value.trim()) || localStorage.getItem('settings_tg_token') || '7860439401:AAH8N_2TfX_M1m0w7s3U9PqJ_Example';
+  const chatId = (chatInput && chatInput.value.trim()) || localStorage.getItem('settings_tg_chatid') || '';
+
+  return { token, chatId };
+}
+
+// Dispatch Telegram Message via Telegram Bot API
+async function sendTelegramMessage(text) {
+  try {
+    const { token, chatId } = getTelegramCredentials();
+    if (!token || !chatId) return false;
+
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: text,
+        parse_mode: 'HTML',
+        disable_web_page_preview: true
+      })
+    });
+    return resp.ok;
+  } catch (err) {
+    console.error('Failed to send Telegram message:', err);
+    return false;
+  }
+}
+
+// Detect and notify when a new trade appears
+function checkAndNotifyNewTrades() {
+  const allActionable = [
+    ...(window.niftyActionableTrades || []).map(t => ({ ...t, asset: 'NIFTY 50' })),
+    ...(window.goldActionableTrades || []).map(t => ({ ...t, asset: 'GOLD (XAU/USD)' }))
+  ];
+
+  if (allActionable.length === 0) return;
+
+  const newestTrades = allActionable.slice(0, 10);
+  let updatedIds = false;
+
+  newestTrades.forEach(trade => {
+    const tradeKey = `${trade.asset}_${trade.id || trade.timestamp}_${trade.action}`;
+    if (!lastNotifiedTradeIds.has(tradeKey)) {
+      lastNotifiedTradeIds.add(tradeKey);
+      updatedIds = true;
+
+      // Only notify if system or telegram alerts are turned on
+      const spotStr = trade.asset.includes('GOLD') ? `$${trade.spot_price}` : trade.spot_price;
+      const title = `🚨 [AI CO-PILOT] ${trade.action} on ${trade.asset}`;
+      const msg = `⚡ Action: ${trade.action}\n📍 Spot: ${spotStr}\n🎯 TP: ${trade.predicted_tp || '—'} | 🛑 SL: ${trade.predicted_sl || '—'}\n📊 R:R: ${trade.risk_reward || '1:1.8'}\n🔥 Rule Conf: ${trade.rule_confidence}% | ML Conf: ${trade.ml_confidence}%`;
+
+      // 1. Browser Notification
+      if (copilotNotifsEnabled && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+        try {
+          new Notification(title, {
+            body: `${trade.action} at ${spotStr} | TP: ${trade.predicted_tp} | SL: ${trade.predicted_sl}`,
+            icon: './icons/icon-192.png',
+            tag: `copilot-${tradeKey}`
+          });
+        } catch (e) {}
+      }
+
+      // 2. Telegram Channel Push
+      if (copilotTgEnabled) {
+        const tgHtml = `<b>🚨 [AI CO-PILOT NEW TRADE]</b>\n\n` +
+          `<b>Asset:</b> ${trade.asset}\n` +
+          `<b>Action:</b> <code>${trade.action}</code>\n` +
+          `<b>Spot Price:</b> <code>${spotStr}</code>\n` +
+          `<b>Stop Loss:</b> <code>${trade.predicted_sl || '—'}</code>\n` +
+          `<b>Target (TP):</b> <code>${trade.predicted_tp || '—'}</code>\n` +
+          `<b>Risk-Reward:</b> <code>${trade.risk_reward || '1:1.8'}</code>\n` +
+          `<b>AI Rule Conf:</b> <code>${trade.rule_confidence}%</code>\n` +
+          `<b>ML Conf:</b> <code>${trade.ml_confidence}%</code>\n` +
+          `<b>Timestamp:</b> ${trade.timestamp}\n\n` +
+          `<i>⚡ Live AI 15M Self-Learning Signal</i>`;
+        
+        sendTelegramMessage(tgHtml);
+      }
+    }
+  });
+
+  if (updatedIds) {
+    // Keep max 100 IDs in localStorage
+    const idArr = Array.from(lastNotifiedTradeIds).slice(-100);
+    localStorage.setItem('copilot_notified_ids', JSON.stringify(idArr));
+  }
 }
 
 function switchCopilotAsset(asset) {
@@ -56,6 +224,7 @@ function selectCopilotRow(originalIndex, domIndex) {
 }
 
 function renderAICoPilot() {
+  syncTogglesUI();
   const isNifty = copilotAsset === 'nifty';
   const rawData = isNifty ? (window.niftyActionableTrades || []) : (window.goldActionableTrades || []);
   const summary = isNifty ? (window.niftyMLSummary || {}) : (window.goldMLSummary || {});
@@ -223,3 +392,17 @@ function renderAICoPilot() {
     }
   }
 }
+
+// Global exports
+window.initAICoPilotView = initAICoPilotView;
+window.switchCopilotAsset = switchCopilotAsset;
+window.setCopilotFilter = setCopilotFilter;
+window.renderAICoPilot = renderAICoPilot;
+window.toggleCopilotNotifications = toggleCopilotNotifications;
+window.toggleCopilotTelegram = toggleCopilotTelegram;
+
+// Auto-check on data load
+window.addEventListener('DOMContentLoaded', () => {
+  syncTogglesUI();
+  checkAndNotifyNewTrades();
+});
