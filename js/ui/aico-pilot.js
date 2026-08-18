@@ -10,19 +10,6 @@ let copilotNotifsEnabled = localStorage.getItem('copilot_notifs_enabled') === 't
 let copilotTgEnabled = localStorage.getItem('copilot_tg_enabled') === 'true';
 let lastNotifiedTradeIds = new Set(JSON.parse(localStorage.getItem('copilot_notified_ids') || '[]'));
 
-function initAICoPilotView() {
-  syncTogglesUI();
-  renderAICoPilot();
-  checkAndNotifyNewTrades();
-}
-
-function syncTogglesUI() {
-  const notifToggle = document.getElementById('copilot-notif-toggle');
-  const tgToggle = document.getElementById('copilot-tg-toggle');
-  if (notifToggle) notifToggle.checked = copilotNotifsEnabled;
-  if (tgToggle) tgToggle.checked = copilotTgEnabled;
-}
-
 // 1. Toggle Browser/System Notifications directly from this screen
 async function toggleCopilotNotifications(enabled) {
   copilotNotifsEnabled = enabled;
@@ -80,6 +67,23 @@ async function toggleCopilotTelegram(enabled) {
   if (window.showToast) {
     window.showToast(enabled ? '✈️ Telegram Channel Push Enabled ✓' : 'Telegram Push Disabled');
   }
+}
+
+// Bind functions immediately to window
+window.toggleCopilotNotifications = toggleCopilotNotifications;
+window.toggleCopilotTelegram = toggleCopilotTelegram;
+
+function initAICoPilotView() {
+  syncTogglesUI();
+  renderAICoPilot();
+  checkAndNotifyNewTrades();
+}
+
+function syncTogglesUI() {
+  const notifToggle = document.getElementById('copilot-notif-toggle');
+  const tgToggle = document.getElementById('copilot-tg-toggle');
+  if (notifToggle) notifToggle.checked = copilotNotifsEnabled;
+  if (tgToggle) tgToggle.checked = copilotTgEnabled;
 }
 
 // Helper to retrieve Telegram credentials
@@ -294,8 +298,8 @@ function renderAICoPilot() {
     let matchedTier = null;
     if (ai >= 85 && ml >= 75) matchedTier = coherence[0];
     else if (ai >= 80 && ml >= 65) matchedTier = coherence[1];
-    else if (ai >= 75 && ml >= 60) matchedTier = coherence[2];
-    else if (ai >= 85 && ml < 55) matchedTier = coherence[3];
+    else if (ai >= 75 && ml >= 55) matchedTier = coherence[2];
+    else if (ai >= 85 && ml < 50) matchedTier = coherence[3];
     else matchedTier = coherence[4] || coherence[coherence.length - 1];
 
     if (matchedTier && matchedTier.win_rate && matchedTier.win_rate !== 'N/A') {
