@@ -29,6 +29,10 @@ Strategy: The market is in a structural correction. Option selling is favored ov
 
 5. Risk & Expiry Warnings: Low IV and rapid theta decay make option buying hazardous in rangebound conditions. Avoid holding naked options in the chop zone; require clear breakout displacement.`
   }
+  , {
+    source: 'SMU & BT Update',
+    text: `SMU Data Bias: Retailers sideways to bullish. FIIs side-ways to bearish. Proprietary desks slightly bullish (long straddle). Expecting big momentum.\nSMU Nifty Levels: Support at 24000. Resistance at 24100. Buy above 24088 (or 24100 closing) targeting 24136, 24175. If it rejects 24088, short targeting 24026, 23975. Short below 24026 targeting 23891. Above 24150, trap shorts targeting 24250.\nBT Data Bias: Favorable for buyers. Liquidity injection in US bonds, bullish for Gold and Indian markets.\nBT Nifty Levels: SMA 50 support. Upside target 24500 (liquidity grab). Gap up target 24230 then 24500. Gap down below 23980 voids bullish view.`
+  }
 ];
 
 window.dailyPlanData = [
@@ -48,5 +52,11 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24000-24041", "bias": "bullish", "behavior": "Macro demand & inefficiency fill zone, look for liquidity sweep & reversal", "tp": "24136", "sl": "23960", "status": "na" },
   { "source": "AI", "price": "24630", "bias": "bullish", "behavior": "Higher Timeframe (HTF) daily structural reversal target", "tp": "24850", "sl": "na", "status": "na" },
   { "source": "AI", "price": "23891", "bias": "bearish", "behavior": "Higher Timeframe (HTF) macro downside extension target on breakdown below 24000", "tp": "23500", "sl": "na", "status": "na" }
+  , { "source": "SMU", "price": "24088-24100", "bias": "bullish", "behavior": "Buy above 24088 (or 24100 closing)", "tp": "24136-24175", "sl": "na", "status": "na" },
+  { "source": "SMU", "price": "24088", "bias": "bearish", "behavior": "Rejection from 24088 (wick only)", "tp": "24026-23975", "sl": "na", "status": "na" },
+  { "source": "SMU", "price": "24026", "bias": "bearish", "behavior": "Short below 24026", "tp": "23891", "sl": "na", "status": "na" },
+  { "source": "SMU", "price": "24150", "bias": "bullish", "behavior": "Trap shorts above 24150", "tp": "24250", "sl": "na", "status": "na" },
+  { "source": "BT", "price": "24500", "bias": "bullish", "behavior": "Upper side liquidity target", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BT", "price": "24230", "bias": "bullish", "behavior": "Gap up target after retracement", "tp": "24500", "sl": "na", "status": "na" },
+  { "source": "BT", "price": "23980", "bias": "bearish", "behavior": "Gap down below this level shatters bullish view", "tp": "na", "sl": "na", "status": "na" }
 ];
-
