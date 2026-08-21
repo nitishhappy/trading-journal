@@ -14,6 +14,38 @@ Strategy:
 - Breakout Long: If sustaining above 24267-24275 with 15-min closes; look for long opportunities targeting 24350.
 - Rejection/Sell on Rise: If price hits the 24275-24375 zone and rejects, short targeting 24183 (gap fill).
 - Gap Down: If gap down near 24180, wait for a 15-min close back above 24180/24200 to go long. If massive gap down directly into the 24000-24047 zone, expect a bounce.`
+  },
+  {
+    source: 'AI',
+    text: `AI Pre-Market Briefing & Nifty Action Plan (August 21):
+
+1. Nifty Market Structure & Distribution:
+- Current Structure: Short-term consolidation / base-building above key 24,150 swing low. Price testing the 24,265–24,275 breakout neckline.
+- Directional Bias: Neutral-to-Bullish above 24,200; aggressive bullish expansion on sustained 15m close above 24,275. Long unwinding bias below 24,180.
+
+2. Key Nifty Technical Levels:
+- Major Resistance: 24,275 (Breakout Trigger), 24,350 (Major Supply / Call Wall), 24,415 (Swing Target).
+- Major Support: 24,200 (Put Writer Base), 24,183 (Gap Fill / Demand Shelf), 24,150 (Structural Pivot / SL Invalidation), 24,000–24,047 (Macro Institutional Base).
+- HTF Extreme Targets: Upside 24,550 & 24,780 (Wave C Extension) | Downside 24,000 & 23,800.
+
+3. SMC Perspective (Smart Money Concepts):
+- Liquidity Pools: BSL resting above 24,280 & 24,350 (trapped short stops). SSL resting below 24,180 & 24,150.
+- Order Blocks (OB): Bullish Demand OB at 24,160–24,185. Bearish Supply OB at 24,275–24,310.
+- Fair Value Gaps (FVG): Bullish 15m FVG at 24,200–24,225. Bearish FVG at 24,330–24,360.
+- Equilibrium / Dealing Range: Range 24,150–24,350; EQ at 24,250 (Premium > 24,250, Discount < 24,250).
+
+4. 5-Min Intraday Action Plan:
+- BUY Trigger 1 (Breakout): 15-min candle close ABOVE 24,275 with high green volume. Retest entry at 24,265–24,275 -> TP1: 24,350, TP2: 24,415, SL: 24,235.
+- BUY Trigger 2 (Discount Dip): Price sweeps SSL into 24,180–24,200 FVG, forms 5m bullish CHoCH/engulfing -> TP: 24,270 / 24,350, SL: 24,150.
+- SELL Trigger 1 (Rejection Short): Price rejects at 24,275–24,300 with 5m MSB below 24,250 -> TP1: 24,200, TP2: 24,183, SL: 24,315.
+- SELL Trigger 2 (Breakdown Short): 15-min candle close BELOW 24,180 -> TP1: 24,150, TP2: 24,050, SL: 24,220.
+- 15-Min ORB Filter: NEVER enter reversals on 3rd 5m candle (09:25 AM). Wait for complete 15m ORB (09:15–09:30 AM) close. Reversal Long requires close above 15m High; Reversal Short requires close below 15m Low.
+- Extreme Gap Contingency (>100–150 pts): If gap up >24,350, do NOT chase; wait for 15m ORB close and trade breakout continuation or mean-reversion trap. If massive gap down into 24,000–24,047, look for liquidity sweep & buying absorption for mean-reversion bounce.
+- No-Trade Zone: 24,220–24,265 (Equilibrium / Chop Range — avoid option buying here).
+
+5. Practical Risk & Option Buying Warnings:
+- Fast theta decay inside the 24,220–24,265 chop zone. Avoid entering before 15m confirmation closes.
+- Trade strictly with defined stop losses; do not average losing long positions below 24,150.`
   }
 ];
 
@@ -38,5 +70,15 @@ window.dailyPlanData = [
   { "source": "NTBP", "price": "24267", "bias": "bullish", "behavior": "Buy confirmation level. Go long if price breaks and closes above this level.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24183", "bias": "bullish", "behavior": "Gap fill target for downside moves. Potential support for a bounce.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24180-24200", "bias": "neutral", "behavior": "In case of a gap down, wait for a close above this zone to buy. If it closes below 24180, short on retracement.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "NTBP", "price": "24000-24047", "bias": "bullish", "behavior": "Major lower support zone in case of a massive gap down. Look for a bounce/buying pressure.", "tp": "na", "sl": "na", "status": "na" }
+  { "source": "NTBP", "price": "24000-24047", "bias": "bullish", "behavior": "Major lower support zone in case of a massive gap down. Look for a bounce/buying pressure.", "tp": "na", "sl": "na", "status": "na" },
+
+  { "source": "AI", "price": "24415", "bias": "bearish", "behavior": "Extended swing target and major supply zone where higher-timeframe sellers are active.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24350", "bias": "bearish", "behavior": "Major resistance & call writing wall. Book maximum quantity on longs or watch for exhaustion.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24275", "bias": "bullish", "behavior": "Critical breakout trigger level. Sustained 15-min close above triggers momentum short covering.", "tp": "24350", "sl": "24235", "status": "na" },
+  { "source": "AI", "price": "24220-24265", "bias": "neutral", "behavior": "No-trade equilibrium / chop zone. Avoid fresh option buying here.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "Immediate options support and put writing defense zone.", "tp": "24270", "sl": "24170", "status": "na" },
+  { "source": "AI", "price": "24183", "bias": "bullish", "behavior": "Gap fill support & discount demand POI. Look for bullish reversal / liquidity sweep bounce.", "tp": "24260", "sl": "24150", "status": "na" },
+  { "source": "AI", "price": "24180", "bias": "bearish", "behavior": "Breakdown trigger. Sustaining below initiates long unwinding towards 24150-24050.", "tp": "24050", "sl": "24220", "status": "na" },
+  { "source": "AI", "price": "24150", "bias": "bearish", "behavior": "Key structural swing low invalidation level for intraday bulls.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24000-24047", "bias": "bullish", "behavior": "Macro institutional demand & psychological support. Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" }
 ];
