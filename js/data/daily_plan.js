@@ -1,62 +1,34 @@
 window.dailyPlanSummary = [
-  { source: 'Combined', text: `Summary for August 20 (AK, BT, CETA, SMU, STL):
-
-Data Bias: Retailers are heavily bullish, while FIIs and Proprietary desks are turning bearish (increased put buying and call writing). Institutional data leans bearish.
-Nifty Levels:
-Resistance: 24232 - 24270 (breakout zone for longs), 24308 (ABC wave completion confirmation).
-Support / Downside Targets: 24134-24136 (Immediate support), 24041, 24000 (Major psychological support & inefficiency fill), 23980, 23891.
-Strategy: The market is in a structural correction. Option selling is favored over buying due to IV crash. Wait for 15-minute closings above 24232-24270 for any long trades. For shorts, breaking below 24136 is the trigger targeting lower levels. Expect chop if the market stays between 24136 and 24232.` },
   {
-    source: 'AI',
-    text: `NIFTY Comprehensive Market Briefing & Action Plan (Pre-Market):
+    source: 'Combined',
+    text: `Summary for August 21 (AK, PRS, SMU, NTBP):
 
-1. Market Structure & Distribution: Nifty has experienced 7 sessions of corrective drift, now attempting a relief bounce. Structure remains in a lower timeframe downtrend/consolidation beneath major supply at 24,270-24,310. HTF daily trend reversal requires a daily close above 24,630. Macro bearish extension target lies at 23,891 / 23,500.
+Data Bias & Overall View:
+Retailers are buying puts, while FIIs and PROs are writing puts (expecting support). Overall data is neutral to slightly bearish, but SMU and PRS note heavy put writing at 24200 and 24000. AK sees an 'option buyer's market' with a bullish bias. NTBP leans bearish due to geopolitical tensions (Sell on Rise). PRS is slightly bullish for the short term, projecting a 24000-24600 range.
 
-2. Key Levels:
-- Resistance / Supply: 24,270 (Breakout trigger / ORH), 24,308-24,350 (ABC completion & supply block), 24,630 (HTF reversal).
-- Support / Demand: 24,136-24,134 (Immediate support / SSL), 24,041 & 24,000-23,980 (Macro liquidity pool & demand zone), 23,891 (Deep macro extension).
+Key Nifty Levels:
+- Resistance: 24267-24275 is a critical resistance zone. A sustained breakout here triggers short covering with targets up to 24350/24415 (SMU) and potentially 24780 (AK). 24370 (NTBP) and 24400-24600 (PRS) serve as higher resistances.
+- Support: 24180-24200 is immediate support. 24150 is the make-or-break level for the bullish setup (AK). 24000-24047 is a major, deep support zone for the next few days. 23800 is the ultimate structural safety net.
 
-3. SMC Perspective:
-- Liquidity: BSL resting at 24,280-24,310; SSL stacked under 24,134 and 24,000.
-- Order Blocks / FVGs: Bearish 15m/1H OB at 24,250-24,280; Overnight gap creates FVG at 24,180-24,220; Bullish demand OB at 24,000-24,040.
-- CHoCH Trigger: 15m close above 24,270 signals bullish CHoCH; loss of 24,134 triggers bearish BOS continuation.
-
-4. 5-Min Intraday Action Plan:
-- 15-Minute Opening Range Filter: Mandatory wait until 09:30 AM close. NEVER enter reversals on 3rd 5m candle (09:25 AM).
-- BUY Trigger: 5m close above 15m High (>24,270) with expanding volume. Target: 24,310 / 24,350. SL: 24,220.
-- SELL Trigger: Rejection at 24,250-24,270 OB with lower timeframe CHoCH, OR breakdown below 24,136 with volume. Target: 24,041 / 24,000. SL: 24,180.
-- No-Trade Zone: 24,140 - 24,230 (Chop / equilibrium inside range).
-
-5. Risk & Expiry Warnings: Low IV and rapid theta decay make option buying hazardous in rangebound conditions. Avoid holding naked options in the chop zone; require clear breakout displacement.`
-  }
-  , {
-    source: 'SMU & BT Update',
-    text: `SMU Data Bias: Retailers sideways to bullish. FIIs side-ways to bearish. Proprietary desks slightly bullish (long straddle). Expecting big momentum.\nSMU Nifty Levels: Support at 24000. Resistance at 24100. Buy above 24088 (or 24100 closing) targeting 24136, 24175. If it rejects 24088, short targeting 24026, 23975. Short below 24026 targeting 23891. Above 24150, trap shorts targeting 24250.\nBT Data Bias: Favorable for buyers. Liquidity injection in US bonds, bullish for Gold and Indian markets.\nBT Nifty Levels: SMA 50 support. Upside target 24500 (liquidity grab). Gap up target 24230 then 24500. Gap down below 23980 voids bullish view.`
+Strategy:
+- Breakout Long: If sustaining above 24267-24275 with 15-min closes; targets towards 24350/24400.
+- Rejection/Sell on Rise: If price hits 24267-24370 and rejects, short targeting 24180. NTBP advises strictly booking 10 pts profit on options due to high premium decay.
+- Gap Down: If gap down near 24180, wait for a 15-min close back above 24180/24200 to go long. A breakdown below 24180-24150 voids the bullish view, leading to a slide towards 24000. If massive gap down directly to 24000-24047, expect a bounce. Wait till 10:00-10:30 AM on extreme gaps to read OI.`
   }
 ];
 
 window.dailyPlanData = [
-  { "source": "AK", "price": "24270", "bias": "bullish", "behavior": "Buy above 24270 for long positions", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AK", "price": "23980-24000", "bias": "bearish", "behavior": "Downside targets if market collapses, but avoiding short trades due to risk-reward", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BT", "price": "24134", "bias": "bullish", "behavior": "Support zone, potential buy for upside shift if liquidity grab or bear trap occurs", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BT", "price": "24000", "bias": "bullish", "behavior": "Inefficiency fill, wait for pullback to fill and buy on second pullback confirmation", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "CETA", "price": "24308", "bias": "bullish", "behavior": "ABC completion, closing above means confirmation of completion", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "CETA", "price": "24630", "bias": "bullish", "behavior": "Trend change to bullish above this level on daily closing", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "SMU", "price": "24136", "bias": "bearish", "behavior": "Short below 24136", "tp": "24041", "sl": "na", "status": "na" },
-  { "source": "SMU", "price": "24041", "bias": "bearish", "behavior": "Next target below 24041", "tp": "23891", "sl": "na", "status": "na" },
-  { "source": "SMU", "price": "24232", "bias": "bullish", "behavior": "Buy above 24232", "tp": "24280", "sl": "na", "status": "na" },
-  { "source": "SMU", "price": "24280", "bias": "bullish", "behavior": "Target above 24232, next level 24325", "tp": "24325", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24270", "bias": "bullish", "behavior": "Long breakout confirmation on 15m close above 24270 ORH", "tp": "24310-24350", "sl": "24220", "status": "na" },
-  { "source": "AI", "price": "24350", "bias": "bearish", "behavior": "Key overhead resistance & supply zone, watch for rejection/exhaustion", "tp": "24270", "sl": "24380", "status": "na" },
-  { "source": "AI", "price": "24136", "bias": "bearish", "behavior": "Short breakdown trigger below 24136 with expanding volume", "tp": "24041", "sl": "24180", "status": "na" },
-  { "source": "AI", "price": "24000-24041", "bias": "bullish", "behavior": "Macro demand & inefficiency fill zone, look for liquidity sweep & reversal", "tp": "24136", "sl": "23960", "status": "na" },
-  { "source": "AI", "price": "24630", "bias": "bullish", "behavior": "Higher Timeframe (HTF) daily structural reversal target", "tp": "24850", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "23891", "bias": "bearish", "behavior": "Higher Timeframe (HTF) macro downside extension target on breakdown below 24000", "tp": "23500", "sl": "na", "status": "na" }
-  , { "source": "SMU", "price": "24088-24100", "bias": "bullish", "behavior": "Buy above 24088 (or 24100 closing)", "tp": "24136-24175", "sl": "na", "status": "na" },
-  { "source": "SMU", "price": "24088", "bias": "bearish", "behavior": "Rejection from 24088 (wick only)", "tp": "24026-23975", "sl": "na", "status": "na" },
-  { "source": "SMU", "price": "24026", "bias": "bearish", "behavior": "Short below 24026", "tp": "23891", "sl": "na", "status": "na" },
-  { "source": "SMU", "price": "24150", "bias": "bullish", "behavior": "Trap shorts above 24150", "tp": "24250", "sl": "na", "status": "na" },
-  { "source": "BT", "price": "24500", "bias": "bullish", "behavior": "Upper side liquidity target", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BT", "price": "24230", "bias": "bullish", "behavior": "Gap up target after retracement", "tp": "24500", "sl": "na", "status": "na" },
-  { "source": "BT", "price": "23980", "bias": "bearish", "behavior": "Gap down below this level shatters bullish view", "tp": "na", "sl": "na", "status": "na" }
+  { "source": "AK", "price": "24270", "bias": "bullish", "behavior": "Breakout above this crucial zone will trigger massive short covering and start Wave C of the 3rd wave.", "tp": "24780", "sl": "24150", "status": "na" },
+  { "source": "AK", "price": "24150", "bias": "bearish", "behavior": "If price falls below 24150-24060 zone and breaks today's low, the bullish setup is invalidated.", "tp": "24000", "sl": "24270", "status": "na" },
+  { "source": "PRS", "price": "24600", "bias": "bearish", "behavior": "Major resistance for the next 3 days", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "PRS", "price": "24400", "bias": "bearish", "behavior": "Important resistance (50% Fibonacci retracement)", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "PRS", "price": "24200", "bias": "bullish", "behavior": "Very good immediate support (huge put writing)", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "PRS", "price": "24000", "bias": "bullish", "behavior": "Major support for the next 3 days", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "PRS", "price": "23800", "bias": "bullish", "behavior": "Very strong structural support", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "SMU", "price": "24267", "bias": "bullish", "behavior": "Breakout and close above", "tp": "24350, 24415", "sl": "na", "status": "na" },
+  { "source": "SMU", "price": "24267", "bias": "bearish", "behavior": "Rejection (goes above but closes below with wick) or flat open resistance", "tp": "24183", "sl": "Above high", "status": "na" },
+  { "source": "SMU", "price": "24180-24200", "bias": "bullish", "behavior": "Recovery (opens gap down but closes above 180/200)", "tp": "24267", "sl": "na", "status": "na" },
+  { "source": "SMU", "price": "24180", "bias": "bearish", "behavior": "Breakdown and close below 180 (wait for retracement)", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "NTBP", "price": "24275-24370", "bias": "bearish", "behavior": "Key Resistance zone. Sell on rise. Expect rejection if market reaches here.", "tp": "10 points (options)", "sl": "Strict SL", "status": "na" },
+  { "source": "NTBP", "price": "24000-24047", "bias": "bullish", "behavior": "Key Support zone. Bounce on massive gap down directly into this zone.", "tp": "10 points (options)", "sl": "Strict SL", "status": "na" }
 ];
