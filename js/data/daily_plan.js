@@ -4,7 +4,7 @@ window.dailyPlanSummary = [
     text: `Summary for August 21 (AK, SMU, NTBP):
 
 Data Bias & Overall View:
-Retailers are buying puts, while FIIs and PROs are writing puts (expecting support). Overall data is neutral to slightly bearish, but SMU notes heavy put writing at 24200. AK sees an 'option buyer's market' with a bullish bias. NTBP leans bearish due to geopolitical tensions (Sell on Rise).
+Retailers are buying puts, while FIIs and PROs are writing puts (expecting support). Overall data is neutral to slightly bullish on pullbacks, but SMU notes heavy put writing at 24200. AK sees an 'option buyer's market' with a bullish bias. NTBP leans cautious due to geopolitical tensions (Sell on Rise at upper bands).
 
 Key Nifty Levels:
 - Resistance & Upside Targets: 24267-24275 is a critical resistance zone. A sustained breakout here triggers short covering with targets at 24350 and 24415 (SMU/NTBP). 24275-24375 is heavily defended and marked visually as a sell-on-rise zone. AK's ultimate upside target for Wave C is 24780.
@@ -20,16 +20,16 @@ Strategy:
     text: `AI Pre-Market Briefing & Nifty Action Plan (August 21):
 
 1. Nifty Market Structure & Distribution:
-- Current Structure: Short-term consolidation / base-building above key 24,150 swing low. Price testing the 24,265–24,275 breakout neckline.
-- Directional Bias: Neutral-to-Bullish above 24,200; aggressive bullish expansion on sustained 15m close above 24,275. Long unwinding bias below 24,180.
+- Current Structure: Short-term consolidation / base-building above the key 24,150 swing low. Price testing the 24,265–24,275 breakout neckline after snapping a 7-day losing streak.
+- Directional Bias: Neutral-to-Bullish above 24,200; aggressive bullish expansion on sustained 15m close above 24,275. Long unwinding / bearish breakdown bias below 24,180.
 
 2. Key Nifty Technical Levels:
-- Major Resistance: 24,275 (Breakout Trigger), 24,350 (Major Supply / Call Wall), 24,415 (Swing Target).
-- Major Support: 24,200 (Put Writer Base), 24,183 (Gap Fill / Demand Shelf), 24,150 (Structural Pivot / SL Invalidation), 24,000–24,047 (Macro Institutional Base).
-- HTF Extreme Targets: Upside 24,550 & 24,780 (Wave C Extension) | Downside 24,000 & 23,800.
+- Major Resistance: 24,275 (Breakout Confirmation Trigger), 24,350 (Major Supply / Call Wall), 24,415 (Swing Target / R3).
+- Major Support: 24,200 (Put Writer Base / S1), 24,183 (Gap Fill / Demand Shelf / S2), 24,150 (Structural Pivot / Invalidation), 24,000–24,047 (Macro Institutional Demand).
+- Higher Timeframe Extreme Targets: Upside 24,550 & 24,780 (Wave C Extension) | Downside 24,000 & 23,800.
 
 3. SMC Perspective (Smart Money Concepts):
-- Liquidity Pools: BSL resting above 24,280 & 24,350 (trapped short stops). SSL resting below 24,180 & 24,150.
+- Liquidity Pools: Buy-Side Liquidity (BSL) resting above 24,280 & 24,350. Sell-Side Liquidity (SSL) resting below 24,180 & 24,150.
 - Order Blocks (OB): Bullish Demand OB at 24,160–24,185. Bearish Supply OB at 24,275–24,310.
 - Fair Value Gaps (FVG): Bullish 15m FVG at 24,200–24,225. Bearish FVG at 24,330–24,360.
 - Equilibrium / Dealing Range: Range 24,150–24,350; EQ at 24,250 (Premium > 24,250, Discount < 24,250).
@@ -72,6 +72,8 @@ window.dailyPlanData = [
   { "source": "NTBP", "price": "24180-24200", "bias": "neutral", "behavior": "In case of a gap down, wait for a close above this zone to buy. If it closes below 24180, short on retracement.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24000-24047", "bias": "bullish", "behavior": "Major lower support zone in case of a massive gap down. Look for a bounce/buying pressure.", "tp": "na", "sl": "na", "status": "na" },
 
+  { "source": "AI", "price": "24780", "bias": "bullish", "behavior": "Higher Timeframe Wave C extension & macro swing peak target.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24550", "bias": "bearish", "behavior": "Higher Timeframe multi-day supply shelf & breakdown origin resistance.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24415", "bias": "bearish", "behavior": "Extended swing target and major supply zone where higher-timeframe sellers are active.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24350", "bias": "bearish", "behavior": "Major resistance & call writing wall. Book maximum quantity on longs or watch for exhaustion.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24275", "bias": "bullish", "behavior": "Critical breakout trigger level. Sustained 15-min close above triggers momentum short covering.", "tp": "24350", "sl": "24235", "status": "na" },
@@ -80,5 +82,6 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24183", "bias": "bullish", "behavior": "Gap fill support & discount demand POI. Look for bullish reversal / liquidity sweep bounce.", "tp": "24260", "sl": "24150", "status": "na" },
   { "source": "AI", "price": "24180", "bias": "bearish", "behavior": "Breakdown trigger. Sustaining below initiates long unwinding towards 24150-24050.", "tp": "24050", "sl": "24220", "status": "na" },
   { "source": "AI", "price": "24150", "bias": "bearish", "behavior": "Key structural swing low invalidation level for intraday bulls.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24000-24047", "bias": "bullish", "behavior": "Macro institutional demand & psychological support. Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" }
+  { "source": "AI", "price": "24000-24047", "bias": "bullish", "behavior": "Macro institutional demand & psychological support. Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" },
+  { "source": "AI", "price": "23800", "bias": "bullish", "behavior": "Higher Timeframe deep macro institutional demand base & liquidity sweep zone.", "tp": "na", "sl": "na", "status": "na" }
 ];
