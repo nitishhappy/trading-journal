@@ -16,6 +16,7 @@ if (viewLevels) {
     const inpBehavior = document.getElementById('inp-level-behavior');
     const inpTp = document.getElementById('inp-level-tp');
     const inpSl = document.getElementById('inp-level-sl');
+    const filterSourceEl = document.getElementById('filter-level-source');
     
     // Quick Source buttons
     document.querySelectorAll('.level-source-btn').forEach(btn => {
@@ -268,6 +269,8 @@ if (viewLevels) {
         renderSummary();
         renderChart();
         renderScorecard();
+        updateSourceFilterOptions();
+        applySourceFilter();
         runSilentLiveEvaluation();
     }
 
@@ -636,16 +639,67 @@ if (viewLevels) {
         updateCount();
         renderChart();
         renderScorecard();
+        updateSourceFilterOptions();
+        applySourceFilter();
         if(shouldSave) saveLevelsData();
     }
 
     function updateCount() {
-        const count = document.querySelectorAll('.level-card').length;
-        document.getElementById('level-count').innerText = `${count} Level${count !== 1 ? 's' : ''}`;
-        if (count === 0) {
+        // Count only visible cards (respects active source filter)
+        const allCards = document.querySelectorAll('.level-card');
+        const visibleCount = Array.from(allCards).filter(c => c.style.display !== 'none').length;
+        const totalCount = allCards.length;
+        const countEl = document.getElementById('level-count');
+        if (filterSourceEl && filterSourceEl.value) {
+            countEl.innerText = `${visibleCount}/${totalCount} Level${totalCount !== 1 ? 's' : ''}`;
+        } else {
+            countEl.innerText = `${totalCount} Level${totalCount !== 1 ? 's' : ''}`;
+        }
+        if (totalCount === 0) {
             const empty = document.getElementById('levels-empty-state');
             if(empty) empty.style.display = 'block';
         }
+    }
+
+    // ===================== SOURCE FILTER ===================== //
+    function updateSourceFilterOptions() {
+        if (!filterSourceEl) return;
+        const currentValue = filterSourceEl.value;
+        const sources = new Set();
+        allLevels.forEach(l => {
+            if (l.source) sources.add(l.source.toUpperCase());
+        });
+        // Keep "All Sources" as first option, rebuild the rest
+        filterSourceEl.innerHTML = '<option value="">All Sources</option>';
+        Array.from(sources).sort().forEach(src => {
+            const opt = document.createElement('option');
+            opt.value = src;
+            opt.textContent = src;
+            filterSourceEl.appendChild(opt);
+        });
+        // Restore previous selection if it still exists
+        if (currentValue && sources.has(currentValue)) {
+            filterSourceEl.value = currentValue;
+        }
+    }
+
+    function applySourceFilter() {
+        const selected = filterSourceEl ? filterSourceEl.value : '';
+        const cards = document.querySelectorAll('.level-card');
+        cards.forEach(card => {
+            if (!selected) {
+                card.style.display = '';
+                return;
+            }
+            const sourceBadge = card.querySelector('.source-badge');
+            const cardSource = sourceBadge ? sourceBadge.innerText.trim().toUpperCase() : '';
+            card.style.display = (cardSource === selected) ? '' : 'none';
+        });
+        updateCount();
+    }
+
+    if (filterSourceEl) {
+        filterSourceEl.addEventListener('change', applySourceFilter);
     }
 
     // ===================== EOD PERFORMANCE SCORECARD ===================== //

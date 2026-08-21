@@ -120,6 +120,16 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.8.1 — Mapped Levels Source Filter
+- **Source Filter Dropdown**: Added an "All Sources" filter dropdown in the Mapped Levels panel header. Users can now filter level cards by source (BT, SM, CETA, AK, etc.) to focus on levels from a specific channel.
+- **Dynamic Options**: Filter options are automatically populated from the sources present in mapped levels and update as levels are added, synced, or uploaded.
+- **Filtered Count Display**: Level count badge shows filtered vs total count (e.g. "3/8 Levels") when a source filter is active.
+
+### v1.8 — Intraday Watchdog & AI Push Notifications
+- **Intraday AI Re-Calibration**: The Antigravity 15M Copilot now features an autonomous Watchdog that monitors live market conditions for Extreme Gap Stabilization (>100 pts), Structural Invalidation (>80 pts shift), and Institutional Volume Anomalies (>3x volume spike). 
+- **Real-Time App Notifications**: When the Watchdog is triggered, it recalculates the Nifty Intraday Tactical Plan in the background and instantly fires a POST payload to the Trading Journal's `/api/tvWebhook` endpoint.
+- **In-App Alerts**: Users instantly receive a push notification and in-app Toast saying `🚨 AI ALERT: NIFTY 50 - New AI levels mapped! Trigger: [Reason]` alerting them to refresh their Daily Levels tab to view the newly synced intraday No-Trade and High-Momentum zones.
+
 ### v1.7 — Levels Tab Real-Time Live Price & Floater Updates
 - **Active Tab Real-Time Polling**: The Daily Levels tab now actively polls the live Nifty price every 15 seconds while open, ensuring the floating toolbar displays real-time prices without requiring manual reloads or push alerts to be toggled on.
 - **Immediate Refresh on Navigation & Visibility**: When switching to the Daily Levels tab or foregrounding the app, live prices and level evaluations refresh immediately.
