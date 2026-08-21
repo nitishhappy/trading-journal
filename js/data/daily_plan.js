@@ -46,6 +46,31 @@ Strategy:
 5. Practical Risk & Option Buying Warnings:
 - Fast theta decay inside the 24,220–24,265 chop zone. Avoid entering before 15m confirmation closes.
 - Trade strictly with defined stop losses; do not average losing long positions below 24,150.`
+  },
+  {
+    source: 'AI',
+    text: `⚡ Intraday Tactical Update | Trigger: Manual Test (Simulated Structural Invalidation) (Aug 21):
+
+1. Live Market Structure & Price Action Context:
+- Session Range: 24,184.55 (Day's Low / Gap Demand) to 24,284.05 (Day's High / BSL Sweep). Live Price: ~24,234.30.
+- Price rejected the 24,284 highs and bounced off 24,184.55 demand shelf, currently rotating in the mid-range equilibrium value area.
+
+2. Re-calculated Chop / No-Trade Zone:
+- Zone: 24,210 – 24,260 (Equilibrium / High Theta Decay Box).
+- Action: STRICT NO-TRADE for option buyers inside this band. Await breakout/breakdown confirmation.
+
+3. Re-calculated High Momentum / Explosive Zones:
+- Upside Explosive Zone (>24,285): Sustained 5m close above day's high triggers short-covering squeeze -> TP1: 24,350, TP2: 24,415.
+- Downside Explosive Zone (<24,180): Sustained 5m close below day's low triggers long unwinding cascade -> TP1: 24,150, TP2: 24,050.
+
+4. Exact 5-Min Execution Triggers:
+- BUY Trigger 1 (Breakout Long): 5-min close ABOVE 24,285 with green volume. Retest 24,275–24,285 -> TP1: 24,350, TP2: 24,415, SL: 24,245.
+- BUY Trigger 2 (Demand Sweep Long): Liquidity sweep of 24,184 into 24,170–24,185 demand OB + 5m bullish CHoCH closing above 24,200 -> TP1: 24,260, TP2: 24,285, SL: 24,165.
+- SELL Trigger 1 (Supply Rejection Short): Push into 24,280–24,290 rejected with 5m bearish MSB closing below 24,250 -> TP1: 24,200, TP2: 24,185, SL: 24,295.
+- SELL Trigger 2 (Breakdown Short): 5-min close BELOW 24,180 with volume -> TP1: 24,150, TP2: 24,050, SL: 24,210.
+
+5. Invalidation & Risk Warning:
+- Structural invalidation level for intraday bulls remains 24,150. A break below voids recovery thesis towards 24,047/24,000.`
   }
 ];
 
@@ -76,11 +101,12 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24550", "bias": "bearish", "behavior": "Higher Timeframe multi-day supply shelf & breakdown origin resistance.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24415", "bias": "bearish", "behavior": "Extended swing target and major supply zone where higher-timeframe sellers are active.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24350", "bias": "bearish", "behavior": "Major resistance & call writing wall. Book maximum quantity on longs or watch for exhaustion.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24285", "bias": "bullish", "behavior": "Intraday breakout momentum trigger. Sustained 5m close above day's high (24284) triggers short covering.", "tp": "24350", "sl": "24245", "status": "na" },
   { "source": "AI", "price": "24275", "bias": "bullish", "behavior": "Critical breakout trigger level. Sustained 15-min close above triggers momentum short covering.", "tp": "24350", "sl": "24235", "status": "na" },
-  { "source": "AI", "price": "24220-24265", "bias": "neutral", "behavior": "No-trade equilibrium / chop zone. Avoid fresh option buying here.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24210-24260", "bias": "neutral", "behavior": "Re-calculated live intraday chop / no-trade equilibrium zone. High theta decay; avoid option buying.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "Immediate options support and put writing defense zone.", "tp": "24270", "sl": "24170", "status": "na" },
   { "source": "AI", "price": "24183", "bias": "bullish", "behavior": "Gap fill support & discount demand POI. Look for bullish reversal / liquidity sweep bounce.", "tp": "24260", "sl": "24150", "status": "na" },
-  { "source": "AI", "price": "24180", "bias": "bearish", "behavior": "Breakdown trigger. Sustaining below initiates long unwinding towards 24150-24050.", "tp": "24050", "sl": "24220", "status": "na" },
+  { "source": "AI", "price": "24180", "bias": "bearish", "behavior": "Intraday breakdown trigger below day's low (24184). Sustained 5m close below triggers long unwinding.", "tp": "24050", "sl": "24210", "status": "na" },
   { "source": "AI", "price": "24150", "bias": "bearish", "behavior": "Key structural swing low invalidation level for intraday bulls.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24000-24047", "bias": "bullish", "behavior": "Macro institutional demand & psychological support. Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" },
   { "source": "AI", "price": "23800", "bias": "bullish", "behavior": "Higher Timeframe deep macro institutional demand base & liquidity sweep zone.", "tp": "na", "sl": "na", "status": "na" }

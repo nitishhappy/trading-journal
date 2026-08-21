@@ -1225,6 +1225,10 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended a comprehensive Nifty pre-market briefing summary to `window.dailyPlanSummary` covering base-building market structure, key supply/demand levels, SMC liquidity/order blocks, 5-minute action plan with mandatory 15-minute ORB filter, extreme gap contingency plan, and option buying risk warnings.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.22 — 21 Aug 2026 — Intraday Tactical Update & Nifty Level Re-Calculation
 
-
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Re-calculated live intraday chop zone (24,210–24,260), upside breakout momentum trigger (24,285), and downside breakdown trigger (24,180) based on session price action (day's high 24,284.05 / day's low 24,184.55).
+  - Appended the 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
