@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.8.2 — NIFTY Intraday Tactical Update (Structural Invalidation Recalibration)
+- **Live AI Tactical Recalibration**: Recalculated Nifty support/resistance levels, chop zones (24,175–24,205), high momentum explosive triggers (breakout >24,215 / breakdown <24,170), and 5-min execution scenarios following the >80 pt structural shift from Day Open (24,285.05).
+- **Daily Plan Data Sync**: Updated `daily_plan.js` with real-time AI-sourced levels and tactical action plan summary for live app interface rendering.
+
 ### v1.8.1 — Mapped Levels Source Filter
 - **Source Filter Dropdown**: Added an "All Sources" filter dropdown in the Mapped Levels panel header. Users can now filter level cards by source (BT, SM, CETA, AK, etc.) to focus on levels from a specific channel.
 - **Dynamic Options**: Filter options are automatically populated from the sources present in mapped levels and update as levels are added, synced, or uploaded.
