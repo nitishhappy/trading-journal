@@ -71,6 +71,40 @@ Strategy:
 
 5. Invalidation & Risk Warning:
 - Structural invalidation level for intraday bulls remains 24,150. A break below voids recovery thesis towards 24,047/24,000.`
+  },
+  {
+    source: 'AI',
+    text: `AI Pre-Market Briefing & Nifty Action Plan (August 24):
+
+1. Nifty Market Structure & Distribution:
+- Current Structure: Short-term consolidation breakout attempt. Price formed a double-bottom base above 24,150 on Friday and is indicated to open with a +100 to +130 pt gap-up (~24,350–24,380) driven by positive global cues (GIFT Nifty at 24,383).
+- Directional Bias: Bullish expansion if price sustains above 24,385 on a 15m ORB close; Sell-on-rejection / Mean-reversion gap-fill if price fails at 24,380 and breaks below 24,340. Structural invalidation for bulls remains 24,150.
+
+2. Key Nifty Technical Levels:
+- Major Resistance: 24,380–24,385 (Gap High / Immediate Supply), 24,415 (Swing Target / R2), 24,550 (Macro Supply Shelf).
+- Major Support: 24,285–24,300 (Polarity Flip Demand / S1), 24,250 (Dealing EQ / Friday Close), 24,200 (Put Writer Base / S2), 24,180–24,184 (Gap Base Low / S3), 24,150 (Structural Pivot / Invalidation), 24,000–24,047 (Macro Institutional Demand).
+- Higher Timeframe Extreme Targets: Upside 24,550 & 24,780 (Wave C Extension) | Downside 24,000 & 23,800.
+
+3. SMC Perspective (Smart Money Concepts):
+- Liquidity Pools: Buy-Side Liquidity (BSL) resting above 24,385 & 24,420. Sell-Side Liquidity (SSL) resting below 24,250 & 24,180.
+- Order Blocks (OB): Bullish Demand OB at 24,285–24,305 (Breakout Retest / Polarity Flip). Bearish Supply OB at 24,380–24,415. Deep Demand OB at 24,180–24,200.
+- Fair Value Gaps (FVG): Bullish 15m Opening FVG at 24,285–24,340. Bearish 1H FVG at 24,400–24,435.
+- Equilibrium / Dealing Range: Range 24,150–24,415; EQ at 24,282. Opening price (~24,360–24,380) is in Premium territory (>24,282).
+
+4. 5-Min Intraday Action Plan:
+- BUY Trigger 1 (15m ORB Breakout Continuation Long): 15-min candle (09:15–09:30 AM) closes firmly ABOVE 24,385 with high green volume. Retest entry at 24,370–24,385 -> TP1: 24,415, TP2: 24,480, SL: 24,340.
+- BUY Trigger 2 (Gap-Fill Demand Sweep Long): Opening gap pulls back into 24,285–24,305 demand OB, absorbs selling with 5m Bullish CHoCH candle closing above 24,320 -> TP1: 24,380, TP2: 24,415, SL: 24,265.
+- SELL Trigger 1 (Supply Rejection / Gap-Trap Short): Price rejects 24,380–24,400 during opening 15m, forms exhaustion pin bar, and breaks below 24,340 with 5m bearish MSB -> TP1: 24,285 (gap fill), TP2: 24,250, SL: 24,405.
+- SELL Trigger 2 (Breakdown Short): 15-min candle closes firmly BELOW 24,260 (gap failure) -> TP1: 24,200, TP2: 24,180, SL: 24,300.
+- High Momentum / Explosive Zones: Upside squeeze above 24,385 (trapped call writers); Downside flush below 24,260 (trapped gap-chasers).
+- 15-Min ORB Filter: NEVER enter reversals on 3rd 5m candle (09:25 AM). Wait for complete 15m ORB (09:15–09:30 AM) close. Reversal Long requires close above 15m High; Reversal Short requires close below 15m Low.
+- Extreme Gap Contingency (>100–150 pts): With ~110–130 pt gap-up, do NOT FOMO buy at the open into 24,380 supply. Await 15m ORB resolution. If ORB High breaks -> trend day continuation; if ORB Low breaks -> gap-fill mean-reversion.
+- No-Trade Zone: 24,320–24,365 (Opening chop / equilibrium box — avoid option buying here).
+
+5. Practical Risk & Option Buying Warnings:
+- Fast IV crush and theta decay inside the 24,320–24,365 chop zone on opening gap-ups.
+- Avoid chasing green candles into the 24,380–24,400 call writing wall without confirmed 15m closes.
+- Strict invalidation at 24,150; maintain defined stop loss on all index option trades.`
   }
 ];
 
@@ -97,16 +131,16 @@ window.dailyPlanData = [
   { "source": "NTBP", "price": "24180-24200", "bias": "neutral", "behavior": "In case of a gap down, wait for a close above this zone to buy. If it closes below 24180, short on retracement.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24000-24047", "bias": "bullish", "behavior": "Major lower support zone in case of a massive gap down. Look for a bounce/buying pressure.", "tp": "na", "sl": "na", "status": "na" },
 
-  { "source": "AI", "price": "24780", "bias": "bullish", "behavior": "Higher Timeframe Wave C extension & macro swing peak target.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24550", "bias": "bearish", "behavior": "Higher Timeframe multi-day supply shelf & breakdown origin resistance.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24780", "bias": "bullish", "behavior": "Higher Timeframe Wave C extension & macro swing expansion peak target.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24550", "bias": "bearish", "behavior": "Higher Timeframe multi-day supply shelf & macro breakdown origin resistance.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24415", "bias": "bearish", "behavior": "Extended swing target and major supply zone where higher-timeframe sellers are active.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24350", "bias": "bearish", "behavior": "Major resistance & call writing wall. Book maximum quantity on longs or watch for exhaustion.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24285", "bias": "bullish", "behavior": "Intraday breakout momentum trigger. Sustained 5m close above day's high (24284) triggers short covering.", "tp": "24350", "sl": "24245", "status": "na" },
-  { "source": "AI", "price": "24275", "bias": "bullish", "behavior": "Critical breakout trigger level. Sustained 15-min close above triggers momentum short covering.", "tp": "24350", "sl": "24235", "status": "na" },
-  { "source": "AI", "price": "24210-24260", "bias": "neutral", "behavior": "Re-calculated live intraday chop / no-trade equilibrium zone. High theta decay; avoid option buying.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "Immediate options support and put writing defense zone.", "tp": "24270", "sl": "24170", "status": "na" },
-  { "source": "AI", "price": "24183", "bias": "bullish", "behavior": "Gap fill support & discount demand POI. Look for bullish reversal / liquidity sweep bounce.", "tp": "24260", "sl": "24150", "status": "na" },
-  { "source": "AI", "price": "24180", "bias": "bearish", "behavior": "Intraday breakdown trigger below day's low (24184). Sustained 5m close below triggers long unwinding.", "tp": "24050", "sl": "24210", "status": "na" },
+  { "source": "AI", "price": "24385", "bias": "bullish", "behavior": "Opening gap breakout momentum trigger. Sustained 5m close above triggers short covering towards 24415/24480.", "tp": "24415", "sl": "24340", "status": "na" },
+  { "source": "AI", "price": "24350", "bias": "bearish", "behavior": "Critical pivot & call writing wall. Rejection here triggers gap-fill pullback; sustained breakout acts as support.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24320-24365", "bias": "neutral", "behavior": "Intraday equilibrium / morning chop zone. High theta decay; strictly avoid option buying inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24285-24300", "bias": "bullish", "behavior": "Immediate polarity flip support (Friday high). Primary demand POI for morning gap-fill dip buyers.", "tp": "24380", "sl": "24265", "status": "na" },
+  { "source": "AI", "price": "24260", "bias": "bearish", "behavior": "Intraday breakdown trigger. Sustained 5m close below fails the gap-up and triggers long unwinding cascade.", "tp": "24200", "sl": "24300", "status": "na" },
+  { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "Key options support zone defended by institutional put writers.", "tp": "24285", "sl": "24170", "status": "na" },
+  { "source": "AI", "price": "24180-24184", "bias": "bullish", "behavior": "Friday's session low & gap base demand shelf. Critical short-term bull defense.", "tp": "24260", "sl": "24150", "status": "na" },
   { "source": "AI", "price": "24150", "bias": "bearish", "behavior": "Key structural swing low invalidation level for intraday bulls.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24000-24047", "bias": "bullish", "behavior": "Macro institutional demand & psychological support. Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" },
   { "source": "AI", "price": "23800", "bias": "bullish", "behavior": "Higher Timeframe deep macro institutional demand base & liquidity sweep zone.", "tp": "na", "sl": "na", "status": "na" }

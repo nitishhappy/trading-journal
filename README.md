@@ -1242,3 +1242,10 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended the 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.23 — 24 Aug 2026 — AI Pre-Market Briefing & Nifty Daily Plan Synthesis
+
+- **Synthesized AI Pre-Market Briefing & Levels (`daily_plan.js`)**:
+  - Appended structured technical levels (`source: "AI"`) for the August 24 trading session: major resistance (24380–24385, 24415, 24550, 24780), critical pivot / call wall (24350), morning chop zone (24320–24365), polarity flip demand POI (24285–24300), intraday breakdown trigger (24260), key options support (24200), Friday low demand (24180–24184), structural invalidation (24150), and macro psychological demand (24000–24047, 23800).
+  - Appended a comprehensive Nifty pre-market briefing summary to `window.dailyPlanSummary` covering gap-up breakout structure from positive global cues, key levels, SMC liquidity/order blocks, 5-minute action plan with mandatory 15-minute ORB filter, extreme gap contingency plan, explosive momentum zones, and option buying risk warnings.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
