@@ -102,6 +102,33 @@ Trigger: Structural Invalidation (>80.0 pts shift from Day Open 24285.05)
 - BUY Trigger 2 (Macro Demand Bounce Long): Deep flush into 24,040–24,060 institutional shelf followed by 5m Bullish CHoCH candle closing above 24,080 -> TP1: 24,120, TP2: 24,150, SL: 24,025.
 - SELL Trigger 1 (Structural Breakdown Short): 5m candle closes firmly BELOW 24,145 with high red volume (violating multi-day structural support 24,150). Retest entry at 24,145–24,155 -> TP1: 24,100, TP2: 24,050, SL: 24,175.
 - SELL Trigger 2 (Pullback Rejection Short): Price pulls back into 24,190–24,215 and forms a 5m Bearish Rejection candle closing below 24,185 -> TP1: 24,150, TP2: 24,100, SL: 24,230.`
+  },
+  {
+    source: "AI",
+    text: `⚡ Intraday Tactical Update (03:00 PM IST | August 24):
+Trigger: Structural Invalidation (>80.0 pts shift from Day Open 24285.05)
+
+1. Market Structure & Live Technical Context:
+- Spot: 24,174.25 | Day Open: 24,285.05 | Day High: 24,313.00 | Day Low: 24,144.30 | Net Shift: -110.8 pts.
+- Structure: Sell-Side Liquidity (SSL) sweep completed at 24,144.30 (testing 24,150 multi-day macro demand pivot) followed by a sharp responsive bounce back above 24,170 into the 3:00 PM closing window.
+- Derivatives & OI: PCR at 0.69. Call writing wall remains heavy at 24,300 (35.4M OI, +21.9M) and 24,200 (28.4M OI, +19.5M). Put writers defending 24,150 (+7.7M OI today, 13.7M total) and 24,100 (14.0M OI, +5.7M).
+
+2. Live Key Nifty Levels:
+- Resistance & Supply: 24,185–24,200 (Immediate Breakdown Polarity Flip Supply), 24,225–24,250 (Bearish FVG & Call Shelf), 24,300 (Primary Call Wall Ceiling).
+- Support & Demand: 24,158–24,165 (Intraday Equilibrium Support), 24,144–24,150 (Session Low / Macro Structural Floor), 24,100 (Major Secondary Put Floor), 24,000–24,050 (Macro Institutional Shelf).
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- 24,160 – 24,185 (Tight 25-pt compression box between the 24,144 SSL sweep bounce and 24,185 overhead supply; strict NO-TRADE zone for option buyers due to closing gamma fluctuations).
+
+4. High Momentum / Explosive Zones:
+- Upside Squeeze Zone: Decisive 5m close ABOVE 24,185 triggers closing short covering towards 24,220 and 24,250.
+- Downside Breakdown Zone: Decisive 5m close BELOW 24,140 triggers stop-loss cascade and long unwinding towards 24,100 and 24,050.
+
+5. 5-Min Intraday Action Plan (Confirmation Triggers):
+- BUY Trigger 1 (Closing Short-Covering Squeeze Long): 5m candle closes firmly ABOVE 24,185 with rising green volume. Retest entry at 24,175–24,185 -> TP1: 24,220, TP2: 24,250, SL: 24,160.
+- BUY Trigger 2 (Macro Demand Sweep Long): Re-test of 24,140–24,150 with 5m Bullish CHoCH candle closing above 24,165 -> TP1: 24,195, TP2: 24,225, SL: 24,135.
+- SELL Trigger 1 (Session Low Breakdown Short): 5m candle closes firmly BELOW 24,140 with expanding red volume. Retest entry at 24,140–24,150 -> TP1: 24,100, TP2: 24,050, SL: 24,165.
+- SELL Trigger 2 (Pullback Rejection Short): Price tests 24,200–24,215 supply and prints 5m Bearish Rejection candle closing below 24,195 -> TP1: 24,160, TP2: 24,144, SL: 24,225.`
   }
 ];
 
@@ -111,17 +138,17 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24415", "bias": "bearish", "behavior": "Extended swing target and major supply zone where higher-timeframe sellers are active.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24400", "bias": "bearish", "behavior": "Call Wall & Immediate Supply Ceiling. Heavy Call OI concentration capping upside momentum.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24385", "bias": "bullish", "behavior": "Opening Range High (09:15-09:30). Sustained 5m close above triggers explosive short covering towards 24415/24480.", "tp": "24415", "sl": "24345", "status": "na" },
-  { "source": "AI", "price": "24300", "bias": "bearish", "behavior": "Primary Call Wall (40.7M OI, +27.2M today) & Breakdown Origin. Absolute ceiling for intraday bulls.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24250", "bias": "bearish", "behavior": "Heavy Call Resistance (+18.5M OI, 25.2M total). Bearish FVG & Breakdown Polarity Shelf.", "tp": "24285", "sl": "24215", "status": "na" },
+  { "source": "AI", "price": "24300", "bias": "bearish", "behavior": "Primary Call Wall (35.4M OI, +21.9M today) & Breakdown Origin. Absolute ceiling for intraday bulls.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24250", "bias": "bearish", "behavior": "Heavy Call Resistance (+14.9M OI, 21.6M total). Bearish FVG & Breakdown Polarity Shelf.", "tp": "24285", "sl": "24215", "status": "na" },
   { "source": "AI", "price": "24225-24250", "bias": "bearish", "behavior": "Bearish FVG & Breakdown Polarity Shelf. Primary sell-on-rise rejection zone for trend continuation.", "tp": "24180", "sl": "24265", "status": "na" },
-  { "source": "AI", "price": "24200", "bias": "bearish", "behavior": "Major Call Writing Shift (+24.6M OI today, 33.4M total). Former support flipped into strong overhead resistance.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24180-24200", "bias": "bearish", "behavior": "02:00 PM Breakdown Polarity Flip Supply & Resistance. Primary sell-on-rise rejection zone.", "tp": "24145", "sl": "24220", "status": "na" },
-  { "source": "AI", "price": "24185", "bias": "bullish", "behavior": "02:00 PM Short-Covering Squeeze Long Trigger. Sustained 5m close above triggers rapid squeeze towards 24220/24250.", "tp": "24220", "sl": "24155", "status": "na" },
-  { "source": "AI", "price": "24145-24185", "bias": "neutral", "behavior": "02:00 PM Re-calculated Intraday Chop Zone. Consolidation box around 24150 pivot; strict NO-TRADE for option buyers.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24150", "bias": "neutral", "behavior": "02:00 PM Multi-Day Macro Structural Pivot & Active 24150 Straddle Battleground (10.6M Call vs 14.3M Put OI).", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24145", "bias": "bearish", "behavior": "02:00 PM Structural Breakdown Short Trigger. Sustained 5m close below 24145/24150 accelerates flush towards 24100.", "tp": "24100", "sl": "24175", "status": "na" },
-  { "source": "AI", "price": "24100", "bias": "bullish", "behavior": "02:00 PM Secondary Put Writer Base & Lower Retracement Target (14.2M Put OI).", "tp": "24180", "sl": "24060", "status": "na" },
-  { "source": "AI", "price": "24000-24050", "bias": "bullish", "behavior": "Macro institutional demand & psychological support (19.5M Put OI). Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" },
+  { "source": "AI", "price": "24200", "bias": "bearish", "behavior": "Major Call Writing Shift (+19.5M OI today, 28.4M total). Former support flipped into strong overhead resistance.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24185-24200", "bias": "bearish", "behavior": "03:00 PM Polarity Flip Supply & Heavy Call Writer Wall (28.4M OI). Primary sell-on-rise rejection shelf.", "tp": "24150", "sl": "24220", "status": "na" },
+  { "source": "AI", "price": "24185", "bias": "bullish", "behavior": "03:00 PM Short-Covering Squeeze Long Trigger. Sustained 5m close above 24185 accelerates squeeze towards 24220/24250.", "tp": "24220", "sl": "24160", "status": "na" },
+  { "source": "AI", "price": "24160-24185", "bias": "neutral", "behavior": "03:00 PM Re-calculated Closing Chop Zone. Tight 25-pt compression box; strict NO-TRADE for option buyers.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24144-24150", "bias": "bullish", "behavior": "03:00 PM Session Low SSL Sweep Base & Macro Structural Floor. Active Put Writing Defense (+7.7M OI).", "tp": "24195", "sl": "24135", "status": "na" },
+  { "source": "AI", "price": "24140", "bias": "bearish", "behavior": "03:00 PM Breakdown Flush Trigger. Sustained 5m close below 24140 triggers aggressive long unwinding towards 24100.", "tp": "24100", "sl": "24165", "status": "na" },
+  { "source": "AI", "price": "24100", "bias": "bullish", "behavior": "03:00 PM Secondary Put Writer Base & Lower Retracement Target (14.0M Put OI).", "tp": "24180", "sl": "24060", "status": "na" },
+  { "source": "AI", "price": "24000-24050", "bias": "bullish", "behavior": "Macro institutional demand & psychological support (18.7M Put OI). Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" },
   { "source": "AI", "price": "23800", "bias": "bullish", "behavior": "Higher Timeframe deep macro institutional demand base & liquidity sweep zone.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "CETA", "price": "24630", "bias": "bullish", "behavior": "Critical breakout level. Crossing this confirms the start of the next impulse trend.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "CETA", "price": "23805", "bias": "bearish", "behavior": "Invalidation point for the Terminal Impulse wave. A close below this invalidates the bullish structure.", "tp": "na", "sl": "na", "status": "na" },

@@ -1278,6 +1278,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.27 — 24 Aug 2026 — Intraday Tactical Update (03:00 PM SSL Sweep & Closing Window Plan)
 
-
-
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Processed live structural invalidation shift (-110.8 pts from day open 24,285.05) following a Sell-Side Liquidity (SSL) sweep at 24,144.30 and responsive bounce back above 24,170 into the closing session.
+  - Re-calculated live closing chop / no-trade zone (24,160–24,185) between the SSL sweep low bounce and the 24,185 overhead polarity shelf.
+  - Mapped high momentum upside squeeze zone (>24,185 towards 24,220/24,250) and downside breakdown zone (<24,140 towards 24,100/24,050) based on live Upstox option chain data (PCR 0.69, 24,300 CE 35.4M OI, 24,200 CE 28.4M OI, 24,150 PE 13.7M OI defense).
+  - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
