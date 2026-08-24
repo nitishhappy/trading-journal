@@ -1256,4 +1256,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended 5-minute tactical execution triggers (Breakout Long, Demand Sweep Long, Rejection Short, Breakdown Short) and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.25 — 24 Aug 2026 — Intraday Tactical Update (Structural Invalidation >80 pts from Open)
+
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Processed live structural invalidation shift (>90 pts drop from day's open 24,285.05 down to 24,194.45) triggered by heavy breakdown between 10:45–11:15 AM.
+  - Re-calculated live chop / no-trade zone (24,190–24,235) around the 24,200 battleground straddle box.
+  - Mapped high momentum explosive flush zone (<24,180) and short-covering squeeze zone (>24,250) based on live Upstox option chain data (PCR 0.68, 24,300 CE 40.1M OI, 24,250 CE 24.5M OI).
+  - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+
 
