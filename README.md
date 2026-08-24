@@ -1249,3 +1249,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended a comprehensive Nifty pre-market briefing summary to `window.dailyPlanSummary` covering gap-up breakout structure from positive global cues, key levels, SMC liquidity/order blocks, 5-minute action plan with mandatory 15-minute ORB filter, extreme gap contingency plan, explosive momentum zones, and option buying risk warnings.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.24 — 24 Aug 2026 — Intraday Tactical Update (10:30 AM Option Chain Mapping)
+
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Re-calculated live intraday chop zone (24,325–24,365), upside momentum breakout zone (>24,385), and downside breakdown trigger (<24,300) based on session price action (day's high 24,384.80 / day's low 24,315.20) and active 10:30 AM option chain OI walls (24,400 Call Wall / 24,300 Put Floor).
+  - Appended 5-minute tactical execution triggers (Breakout Long, Demand Sweep Long, Rejection Short, Breakdown Short) and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+

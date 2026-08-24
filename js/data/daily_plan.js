@@ -105,6 +105,31 @@ Strategy:
 - Fast IV crush and theta decay inside the 24,320–24,365 chop zone on opening gap-ups.
 - Avoid chasing green candles into the 24,380–24,400 call writing wall without confirmed 15m closes.
 - Strict invalidation at 24,150; maintain defined stop loss on all index option trades.`
+  },
+  {
+    source: 'AI',
+    text: `⚡ Intraday Tactical Update | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain Mapping) (Aug 24):
+
+1. Live Market Structure & Price Action Context:
+- Session Range: 24,315.20 (Day's Low / Put Writer Base) to 24,384.80 (Day's High / Opening Gap High). Live Price: ~24,348.60.
+- Price opened with a gap-up, tested initial resistance at 24,385, and is currently consolidating in equilibrium between the 24,400 Call Wall and 24,300 Put Floor.
+
+2. Re-calculated Chop / No-Trade Zone:
+- Zone: 24,325 – 24,365 (Equilibrium / High Theta Decay Box).
+- Action: STRICT NO-TRADE for option buyers inside this band. Await breakout above 24,385 or breakdown below 24,300.
+
+3. Re-calculated High Momentum / Explosive Zones:
+- Upside Explosive Zone (>24,385): Sustained 5m close above day's high triggers short-covering squeeze against 24,400 CE writers -> TP1: 24,415, TP2: 24,480.
+- Downside Explosive Zone (<24,300): Sustained 5m close below 24,300 triggers long unwinding cascade -> TP1: 24,250, TP2: 24,200.
+
+4. Exact 5-Min Execution Triggers:
+- BUY Trigger 1 (Breakout Long): 5-min close ABOVE 24,385 with expanding volume. Retest 24,375–24,385 -> TP1: 24,415, TP2: 24,480, SL: 24,345.
+- BUY Trigger 2 (Demand Sweep Long): Liquidity sweep of 24,315 into 24,300–24,305 Put OB + 5m bullish CHoCH closing above 24,330 -> TP1: 24,365, TP2: 24,385, SL: 24,285.
+- SELL Trigger 1 (Supply Rejection Short): Push into 24,380–24,390 rejected with 5m bearish MSB closing below 24,355 -> TP1: 24,325, TP2: 24,300, SL: 24,405.
+- SELL Trigger 2 (Breakdown Short): 5-min close BELOW 24,300 with volume -> TP1: 24,250, TP2: 24,200, SL: 24,335.
+
+5. Invalidation & Risk Warning:
+- Structural invalidation level for intraday bulls remains 24,260 (gap failure). Rapid theta decay inside 24,325–24,365; avoid early anticipation.`
   }
 ];
 
@@ -134,12 +159,13 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24780", "bias": "bullish", "behavior": "Higher Timeframe Wave C extension & macro swing expansion peak target.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24550", "bias": "bearish", "behavior": "Higher Timeframe multi-day supply shelf & macro breakdown origin resistance.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24415", "bias": "bearish", "behavior": "Extended swing target and major supply zone where higher-timeframe sellers are active.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24385", "bias": "bullish", "behavior": "Opening gap breakout momentum trigger. Sustained 5m close above triggers short covering towards 24415/24480.", "tp": "24415", "sl": "24340", "status": "na" },
-  { "source": "AI", "price": "24350", "bias": "bearish", "behavior": "Critical pivot & call writing wall. Rejection here triggers gap-fill pullback; sustained breakout acts as support.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24320-24365", "bias": "neutral", "behavior": "Intraday equilibrium / morning chop zone. High theta decay; strictly avoid option buying inside.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24285-24300", "bias": "bullish", "behavior": "Immediate polarity flip support (Friday high). Primary demand POI for morning gap-fill dip buyers.", "tp": "24380", "sl": "24265", "status": "na" },
-  { "source": "AI", "price": "24260", "bias": "bearish", "behavior": "Intraday breakdown trigger. Sustained 5m close below fails the gap-up and triggers long unwinding cascade.", "tp": "24200", "sl": "24300", "status": "na" },
-  { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "Key options support zone defended by institutional put writers.", "tp": "24285", "sl": "24170", "status": "na" },
+  { "source": "AI", "price": "24400", "bias": "bearish", "behavior": "10:30 AM Call Wall & Immediate Supply Ceiling. Heavy Call OI concentration capping upside momentum.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24385", "bias": "bullish", "behavior": "Opening Range High (09:15-09:30). Sustained 5m close above triggers explosive short covering towards 24415/24480.", "tp": "24415", "sl": "24345", "status": "na" },
+  { "source": "AI", "price": "24325-24365", "bias": "neutral", "behavior": "10:30 AM Re-calculated Intraday Chop Zone. Strict NO-TRADE box for option buyers; severe theta decay.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24300-24305", "bias": "bullish", "behavior": "10:30 AM Primary Put Writer Base & Demand Sweep POI. Look for SSL sweep and 5m Bullish CHoCH reversal.", "tp": "24365", "sl": "24285", "status": "na" },
+  { "source": "AI", "price": "24300", "bias": "bearish", "behavior": "10:30 AM Intraday Breakdown Trigger. Sustained 5m close below breaks put floor and triggers long unwinding.", "tp": "24250", "sl": "24335", "status": "na" },
+  { "source": "AI", "price": "24250", "bias": "bullish", "behavior": "Dealing EQ & Friday Close. Secondary support and 50% gap-fill retracement zone.", "tp": "24320", "sl": "24200", "status": "na" },
+  { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "Key macro options support zone defended by institutional put writers.", "tp": "24285", "sl": "24170", "status": "na" },
   { "source": "AI", "price": "24180-24184", "bias": "bullish", "behavior": "Friday's session low & gap base demand shelf. Critical short-term bull defense.", "tp": "24260", "sl": "24150", "status": "na" },
   { "source": "AI", "price": "24150", "bias": "bearish", "behavior": "Key structural swing low invalidation level for intraday bulls.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24000-24047", "bias": "bullish", "behavior": "Macro institutional demand & psychological support. Strong reversal bounce expected on extreme sell-off.", "tp": "24180", "sl": "23960", "status": "na" },
