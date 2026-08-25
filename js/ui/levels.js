@@ -288,7 +288,8 @@ if (viewLevels) {
         summaryPanel.style.display = 'block';
         summaryBody.innerHTML = '';
         
-        summaryData.forEach(item => {
+        // Clone and reverse to show latest updates on top
+        [...summaryData].reverse().forEach(item => {
             const row = document.createElement('div');
             row.style.marginBottom = '12px';
             row.style.padding = '10px';
