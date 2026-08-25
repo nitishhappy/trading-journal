@@ -289,35 +289,59 @@ if (viewLevels) {
         summaryBody.innerHTML = '';
         
         // Clone and reverse to show latest updates on top
-        [...summaryData].reverse().forEach(item => {
-            const row = document.createElement('div');
-            row.style.marginBottom = '12px';
-            row.style.padding = '10px';
-            row.style.background = 'var(--surface-2)';
-            row.style.borderRadius = 'var(--radius)';
-            row.style.borderLeft = '3px solid var(--accent)';
+        [...summaryData].reverse().forEach((item, index) => {
+            const isLatest = (index === 0);
+            
+            const card = document.createElement('div');
+            card.className = `summary-item-card ${isLatest ? 'is-latest' : ''}`;
             
             const header = document.createElement('div');
-            header.style.display = 'flex';
-            header.style.alignItems = 'center';
-            header.style.marginBottom = '6px';
+            header.className = 'summary-item-header';
+            
+            const headerLeft = document.createElement('div');
+            headerLeft.className = 'summary-item-header-left';
             
             const badge = document.createElement('span');
             badge.className = 'source-badge';
             badge.innerText = item.source || 'UNK';
+            headerLeft.appendChild(badge);
+
+            const rawText = item.text || '';
+            const firstLine = rawText.split('\n')[0].replace(/:$/, '').trim();
+            const titleEl = document.createElement('span');
+            titleEl.className = 'summary-item-title';
+            titleEl.innerText = firstLine || (item.source ? `${item.source} Plan` : 'Summary Entry');
+            titleEl.title = firstLine;
+            headerLeft.appendChild(titleEl);
+
+            if (isLatest) {
+                const latestBadge = document.createElement('span');
+                latestBadge.className = 'summary-latest-pill';
+                latestBadge.innerText = 'LATEST';
+                headerLeft.appendChild(latestBadge);
+            }
             
-            header.appendChild(badge);
+            const toggleIcon = document.createElement('span');
+            toggleIcon.className = 'summary-item-toggle';
+            toggleIcon.innerText = isLatest ? '▼' : '▶';
+            
+            header.appendChild(headerLeft);
+            header.appendChild(toggleIcon);
             
             const content = document.createElement('div');
-            content.style.fontSize = '14px';
-            content.style.color = 'var(--text)';
-            content.style.lineHeight = '1.4';
-            content.style.whiteSpace = 'pre-wrap';
-            content.innerText = item.text || '';
+            content.className = 'summary-item-body';
+            content.innerText = rawText;
+            content.style.display = isLatest ? 'block' : 'none';
             
-            row.appendChild(header);
-            row.appendChild(content);
-            summaryBody.appendChild(row);
+            header.addEventListener('click', () => {
+                const isHidden = content.style.display === 'none';
+                content.style.display = isHidden ? 'block' : 'none';
+                toggleIcon.innerText = isHidden ? '▼' : '▶';
+            });
+            
+            card.appendChild(header);
+            card.appendChild(content);
+            summaryBody.appendChild(card);
         });
     }
 

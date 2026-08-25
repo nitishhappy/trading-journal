@@ -1313,4 +1313,13 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.30 — 25 Aug 2026 — Market Summary Collapsible Entries
+
+- **Market Summary Section (`js/ui/levels.js`, `css/levels.css`)**:
+  - Implemented collapsible accordion cards for individual market summary entries in the Daily Levels tab.
+  - Automatically keeps only the latest market summary update expanded by default while collapsing older historical entries to save vertical space.
+  - Added click-to-toggle interactivity for each entry with smooth chevron indicators, source badges, first-line preview titles, and a distinct "LATEST" status pill.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `css/levels.css`
+
+
 

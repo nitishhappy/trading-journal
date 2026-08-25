@@ -1106,3 +1106,82 @@
     font-family: var(--font-mono);
     font-weight: 700;
 }
+
+/* Market Summary Collapsible Item Styles */
+.summary-item-card {
+    margin-bottom: 10px;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    overflow: hidden;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.summary-item-card.is-latest {
+    border-left-color: #6366f1;
+}
+
+.summary-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+    transition: background 0.15s ease;
+}
+
+.summary-item-header:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.summary-item-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.summary-item-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.summary-latest-pill {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success, #10b981);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 4px;
+    padding: 1px 5px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.summary-item-toggle {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.summary-item-body {
+    padding: 0 12px 12px 12px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.4;
+    white-space: pre-wrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 2px;
+    padding-top: 10px;
+}
+
