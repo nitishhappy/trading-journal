@@ -1300,3 +1300,13 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.29 — 25 Aug 2026 — Intraday Tactical Update (01:30 PM Pre-Closing Breakout Mapping)
+
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Processed live spot market action at 01:30 PM (Spot: 24,126.90, Day High: 24,198.25, Day Low: 24,115.45, 15M ORB: 24,128.85–24,198.25, Proxied Future Volume: 0.90x 8-bar average).
+  - Re-calculated live intraday compression / no-trade chop zone (24,118–24,148) around the ORB low consolidation shelf.
+  - Mapped high momentum downside long-unwinding flush zone (<24,115 targeting 24,075 / 24,050 / 24,020) and upside short-covering squeeze zone (>24,155 targeting 24,198 / 24,225 / 24,250).
+  - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+

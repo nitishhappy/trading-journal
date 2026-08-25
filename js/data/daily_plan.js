@@ -67,6 +67,26 @@ Nifty Spot (24,127.50) is testing the 15M ORB Low (24,128.85) and has establishe
 - PE Setup (Sell-on-Rise): Pullback into 24,165–24,175 with upper rejection wicks. Target: 24,125 / 24,115. SL: 24,185.
 - CE Setup (Liquidity Sweep Reversal): Sweep of 24,115 followed by strong 5m reclaim ABOVE 24,140 with green futures volume surge. Target: 24,175 / 24,198. SL: 24,110.
 - CE Setup (Breakout Long): Sustained 5m close ABOVE 24,175. Target: 24,200 / 24,235. SL: 24,145.`
+  },
+  {
+    "source": "AI",
+    "text": `Intraday Tactical Update (01:30 PM - Aug 25, 2026):
+
+1. Live Intraday Market Structure & Pre-Closing Context:
+Nifty Spot (24,126.90) is coiling tightly near the session lows (Day Low 24,115.45 / 15M ORB Low 24,128.85). The midday range has compressed into a narrow 30-point box with proxied Futures volume drying up to 0.90x 8-bar average. Heading into the 01:30 PM – 03:00 PM European crossover and pre-closing squaring window, this volatility compression is setting up for an explosive expansion.
+
+2. Re-calculated Chop Zone / No-Trade Zone:
+- 24,118 – 24,148: Tight midday compression box near the ORB low threshold. Option buyers must strictly stand aside inside this zone due to elevated theta decay and false intraday wicks.
+
+3. High Momentum / Explosive Zones:
+- Downside Long-Unwinding Panic (< 24,115): A sustained 5m close below Day Low 24,115 triggers a swift cascading breakdown targeting 24,075 (1H liquidity shelf) and 24,050–24,020 (macro institutional demand block).
+- Upside Short-Covering Squeeze (> 24,155): A sustained 5m close above 24,155 traps midday breakdown sellers and triggers a short-covering squeeze toward 24,198 (Day High / 15M ORB High) and 24,225.
+
+4. 5-Min Tactical Execution Triggers:
+- PE Setup (Breakdown Short): 5m candle CLOSE firmly below 24,115 with expanding red futures volume (>1.2x). Target: 24,075 / 24,050 / 24,020. SL: 24,140.
+- PE Setup (Sell-on-Rise): Rejection at 24,150–24,160 with upper wicks and declining green volume. Target: 24,120 / 24,115. SL: 24,175.
+- CE Setup (Liquidity Sweep Reversal): Sweep below 24,115 followed by quick 5m reclaim ABOVE 24,135 with green futures volume surge. Target: 24,175 / 24,198. SL: 24,110.
+- CE Setup (Breakout Long): Sustained 5m close ABOVE 24,155 with expanding green futures volume. Target: 24,198 / 24,225 / 24,250. SL: 24,125.`
   }
 ];
 
@@ -89,5 +109,7 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24198", "bias": "bearish", "behavior": "Day High & 15M ORB High. Strong intraday ceiling & call supply zone.", "tp": "24140", "sl": "24220", "status": "na" },
   { "source": "AI", "price": "24165-24175", "bias": "bearish", "behavior": "Intraday Supply Shelf & Breakdown Retest. Sell-on-rise rejection zone.", "tp": "24125", "sl": "24185", "status": "na" },
   { "source": "AI", "price": "24125-24165", "bias": "neutral", "behavior": "Live Intraday Chop Zone. Range-bound whipsaw box; avoid option buying.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24115", "bias": "bearish", "behavior": "Day Low & 15M ORB Breakdown Trigger. Sustained 5m close below accelerates sell-off.", "tp": "24075", "sl": "24140", "status": "na" }
+  { "source": "AI", "price": "24115", "bias": "bearish", "behavior": "Day Low & 15M ORB Breakdown Trigger. Sustained 5m close below accelerates sell-off.", "tp": "24075", "sl": "24140", "status": "na" },
+  { "source": "AI", "price": "24118-24148", "bias": "neutral", "behavior": "01:30 PM Midday Compression Box. Avoid option buying inside this 30-pt range.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24155", "bias": "bullish", "behavior": "Pre-Closing Squeeze Trigger. 5m close above 24155 triggers short covering toward Day High.", "tp": "24198", "sl": "24125", "status": "na" }
 ];
