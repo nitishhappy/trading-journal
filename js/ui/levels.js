@@ -1031,7 +1031,6 @@ if (viewLevels) {
                 }
 
                 const srcTag = lvl.source ? `<span class="source-badge" style="font-size:0.72rem; margin-right:4px;">${lvl.source}</span>` : '';
-                const activeTag = isCurrentPriceLevel ? `<span class="summary-latest-pill" style="font-size:0.6rem; padding:1px 5px; margin-left:4px;">CURRENT</span>` : '';
                 const rawBehavior = (lvl.behavior || '').trim();
                 const previewText = rawBehavior.length > 40 ? rawBehavior.slice(0, 40) + '…' : rawBehavior;
 
@@ -1040,7 +1039,6 @@ if (viewLevels) {
                         <div style="display:flex; align-items:center; gap:4px; flex:1; min-width:0;">
                             ${srcTag}
                             <span class="badge ${lvl.bias}" style="font-size:0.75rem; padding:2px 6px;">${lvl.biasBadge}${rangeText}</span>
-                            ${activeTag}
                         </div>
                         <div style="display:flex; align-items:center; gap:6px;">
                             <div class="chart-status-group" style="display:flex; gap:3px;">

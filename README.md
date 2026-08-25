@@ -1325,10 +1325,17 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 
 - **Visual Chart Map Focused View (`js/ui/levels.js`, `css/levels.css`, `index.html`)**:
   - Implemented dynamic focused view showing 6–7 levels in total centered on the live market price (3 levels above and 3 levels below the current price).
-  - Configured the closest/current level card to remain expanded by default (with a `CURRENT` badge) while collapsing outer levels into space-saving preview bars.
+  - Configured the closest/current level card to remain expanded by default while collapsing outer levels into space-saving preview bars.
   - Added click-to-expand interactivity on all chart cards so any level can be viewed in detail on demand.
   - Added a `🎯 Focused (±3) / 🌐 All Levels` mode toggle pill to switch between focused and full chart views.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `css/levels.css`, `index.html`
+
+### v2.3.32 — 25 Aug 2026 — Cleaned Visual Chart Map Header Tags
+
+- **Visual Chart Map Refinement (`js/ui/levels.js`)**:
+  - Removed redundant `CURRENT` status pill badge from the active chart level header for a cleaner, streamlined layout.
+- **Files Modified**: `README.md`, `js/ui/levels.js`
+
 
 
 
