@@ -1336,6 +1336,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Removed redundant `CURRENT` status pill badge from the active chart level header for a cleaner, streamlined layout.
 - **Files Modified**: `README.md`, `js/ui/levels.js`
 
+### v2.3.33 — 25 Aug 2026 — Expanded Cards in Full Maps View
+
+- **Visual Chart Map Full View Mode (`js/ui/levels.js`)**:
+  - Configured Full Map View (`🌐 All Levels`) to render all price level cards uncollapsed/expanded by default with complete behavioral notes and TP/SL details.
+  - Focused View (`🎯 Focused (±3)`) continues to keep only the active level open and outer levels collapsed.
+- **Files Modified**: `README.md`, `js/ui/levels.js`
+
+
 
 
 

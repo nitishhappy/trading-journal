@@ -1017,8 +1017,10 @@ if (viewLevels) {
                 if(lvl.bias === 'bullish') cColor = 'var(--success)';
                 if(lvl.bias === 'bearish') cColor = 'var(--danger)';
 
+                const isExpandedByDefault = (chartViewMode === 'all') || isCurrentPriceLevel;
+
                 const ann = document.createElement('div');
-                ann.className = `chart-annotation ${isCurrentPriceLevel ? 'is-expanded-level is-active-level' : 'is-collapsed-level'}`;
+                ann.className = `chart-annotation ${isExpandedByDefault ? 'is-expanded-level' : 'is-collapsed-level'} ${isCurrentPriceLevel ? 'is-active-level' : ''}`;
                 ann.id = `chart-card-${lvl.id}`;
                 ann.style.border = '1px solid ' + cColor;
                 ann.style.borderLeft = '4px solid ' + cColor;
@@ -1046,13 +1048,13 @@ if (viewLevels) {
                                 <button type="button" class="status-btn status-failed chart-status-${lvl.id} ${lvl.status === 'failed' ? 'active' : ''}" data-status="failed" onclick="event.stopPropagation(); window.setLevelStatus('${lvl.id}', 'failed')" style="font-size:0.65rem; padding:2px 5px;" title="Failed">❌</button>
                                 <button type="button" class="status-btn status-na chart-status-${lvl.id} ${lvl.status === 'na' ? 'active' : ''}" data-status="na" onclick="event.stopPropagation(); window.setLevelStatus('${lvl.id}', 'na')" style="font-size:0.65rem; padding:2px 5px;" title="NA">⚪</button>
                             </div>
-                            <span class="chart-annotation-toggle" style="font-size:0.75rem; color:var(--text-dim); margin-left:2px;">${isCurrentPriceLevel ? '▼' : '▶'}</span>
+                            <span class="chart-annotation-toggle" style="font-size:0.75rem; color:var(--text-dim); margin-left:2px;">${isExpandedByDefault ? '▼' : '▶'}</span>
                         </div>
                     </div>
-                    <div class="chart-annotation-preview" style="display:${isCurrentPriceLevel ? 'none' : 'block'}; font-size:0.8rem; color:var(--text-dim); margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                    <div class="chart-annotation-preview" style="display:${isExpandedByDefault ? 'none' : 'block'}; font-size:0.8rem; color:var(--text-dim); margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
                         ${previewText}
                     </div>
-                    <div class="chart-annotation-body" style="display:${isCurrentPriceLevel ? 'block' : 'none'}; margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid rgba(255, 255, 255, 0.05);">
+                    <div class="chart-annotation-body" style="display:${isExpandedByDefault ? 'block' : 'none'}; margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid rgba(255, 255, 255, 0.05);">
                         <div class="text" style="line-height:1.5; color:var(--text); font-size:0.92rem;">${rawBehavior}</div>
                         <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--text-dim); display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace;">
                             <span>TP: <strong style="color:var(--success);">${lvl.tp||'Open'}</strong></span>
