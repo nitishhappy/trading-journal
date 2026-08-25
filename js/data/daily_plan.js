@@ -14,6 +14,39 @@ Strategy:
 - Sell on Rise: Near 24,250 - 24,300 with strict stops.
 - Breakdown Short: Below 24,172 or 24,136, look for shorts targeting 24,075.
 - Buy on Dips: If the market drops to 24,000 - 24,050, look for a double bottom or reversal bounce for long entries.`
+  },
+  {
+    "source": "AI",
+    "text": `Pre-Market AI Tactical Plan (Aug 25, 2026):
+
+1. Market Structure & Distribution:
+Nifty Spot closed at 24,219.05 with a lower-high formation on the daily chart (double top ceiling near 24,300). GIFT Nifty indicates a gap-down open near 24,150–24,165. The overall intraday structure is cautious/bearish below 24,220, sitting right on the precipice of the 24,136 swing lows. FIIs/Pros are heavily positioned in Call Writing (24,250–24,300), capping upside momentum.
+
+2. Key Resistance, Support & Inefficiencies:
+- Major Resistance / Call Wall: 24,280 – 24,300 (Daily double-top ceiling).
+- 15m Bearish FVG / Supply: 24,220 – 24,250 (Primary sell-on-rise zone).
+- Pivot / No-Trade Chop Range: 24,160 – 24,210 (Avoid option buying).
+- Breakdown Level / SSL: 24,136 (Below this triggers long unwinding).
+- Intermediate Support / 1H FVG: 24,050 – 24,080.
+- Macro Institutional Demand Block: 24,000 – 24,020 (Strong reversal base).
+
+3. SMC Perspective:
+- Buy-Side Liquidity (BSL): Clustered at 24,260–24,300 (Equal highs and call writer stops).
+- Sell-Side Liquidity (SSL): Sitting exposed below 24,136 and 24,000.
+- Order Blocks: Bearish OB at 24,275–24,310; Bullish OB at 24,000–24,040.
+- CHoCH Trigger: 15m close above 24,255 turns intraday bias bullish; 15m close below 24,136 confirms bearish trend expansion.
+
+4. 5-Min Intraday Action Plan:
+- CE Setup (Reversal Long): Wait for a sweep of 24,136 into 24,100–24,120 followed by a 5m bullish hammer/engulfing candle reclaiming 24,150 with expanding futures volume. Target: 24,200 / 24,250. SL: 24,100.
+- CE Setup (Breakout Long): Sustained 5m close ABOVE 24,250. Target: 24,300 / 24,350. SL: 24,215.
+- PE Setup (Sell-on-Rise): Pullback into 24,220–24,250 showing rejection wicks and declining buy volume. Target: 24,150 / 24,100. SL: 24,275.
+- PE Setup (Breakdown Short): Sustained 5m close BELOW 24,136 with heavy red futures volume. Target: 24,075 / 24,020. SL: 24,165.
+- 15-Minute ORB Filter: On gap-down, NO entries on 3rd 5m candle (09:25 AM). Wait for full 15m range (09:15–09:30 AM) to break out/down.
+- High Momentum Zones: Breakdown <24,136 (panic sell-off); Breakout >24,255 (short-covering squeeze).
+- No-Trade Zone: 24,160 – 24,210.
+
+5. Risk & Expiry Dynamics:
+Low VIX environment (~13) accelerates premium decay inside the chop zone. Option buyers must strictly avoid holding trades in the 24,160–24,210 range. Execute only on momentum breakouts or liquidity sweep confirmations with strict 15–20 pt spot SL.`
   }
 ];
 
@@ -25,5 +58,12 @@ window.dailyPlanData = [
   { "source": "NTBP", "price": "24172", "bias": "bearish", "behavior": "Breakdown trigger. Sustaining below leads to shorting pressure.", "tp": "24075", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24050-24100", "bias": "bullish", "behavior": "Max put writer support. Expected to act as a bounce zone after trapping early sellers.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24223", "bias": "bullish", "behavior": "First upside target on a bounce from support.", "tp": "24281", "sl": "na", "status": "na" },
-  { "source": "PG", "price": "24300", "bias": "bearish", "behavior": "Strong Resistance level. Daily chart formed a Double Top, indicating weakness.", "tp": "na", "sl": "na", "status": "na" }
+  { "source": "PG", "price": "24300", "bias": "bearish", "behavior": "Strong Resistance level. Daily chart formed a Double Top, indicating weakness.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24300", "bias": "bearish", "behavior": "Major Call Wall & HTF Resistance. Daily Double Top ceiling. Sell on rise / rejection.", "tp": "na", "sl": "24330", "status": "na" },
+  { "source": "AI", "price": "24250-24280", "bias": "bearish", "behavior": "Supply Zone / 15m Bearish FVG. Short entry on bearish rejection with SL above 24300.", "tp": "24150", "sl": "24300", "status": "na" },
+  { "source": "AI", "price": "24255", "bias": "bullish", "behavior": "High-Momentum Short Covering Trigger. Sustained 5m close above triggers fast squeeze.", "tp": "24350", "sl": "24215", "status": "na" },
+  { "source": "AI", "price": "24160-24210", "bias": "neutral", "behavior": "No-Trade Chop Zone. Range-bound whipsaws & high theta decay for option buyers.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24136", "bias": "bearish", "behavior": "Breakdown Trigger / SSL Level. 5m close below triggers explosive long-unwinding move.", "tp": "24075", "sl": "24165", "status": "na" },
+  { "source": "AI", "price": "24050-24080", "bias": "bullish", "behavior": "1H Bullish FVG & Intermediate Demand. Watch for bounce / liquidity sweep.", "tp": "24150", "sl": "24020", "status": "na" },
+  { "source": "AI", "price": "24000-24020", "bias": "bullish", "behavior": "Macro Institutional Demand Base / Order Block. High-probability reversal zone for longs.", "tp": "24120", "sl": "23970", "status": "na" }
 ];
