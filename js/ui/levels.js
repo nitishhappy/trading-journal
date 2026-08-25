@@ -3,6 +3,8 @@ import { viewLevels } from '../dom.js';
 
 if (viewLevels) {
     let allLevels = [];
+    let currentMarketPrice = null;
+    let chartViewMode = 'focused'; // 'focused' (3 levels above & 3 levels below) or 'all'
 
     // ===================== LIVE ALERTS STATE =====================
     let liveAlertsInterval = null;
@@ -830,11 +832,16 @@ if (viewLevels) {
 
     function renderChart() {
         const area = document.getElementById('visual-chart-area');
+        const toggleContainer = document.getElementById('chart-view-toggle-container');
+        const subtitle = document.getElementById('chart-subtitle');
+        if (!area) return;
         area.innerHTML = ''; 
 
         const validLevels = allLevels.filter(l => !isNaN(l.pHigh));
         
         if(validLevels.length === 0) {
+            if (toggleContainer) toggleContainer.innerHTML = '';
+            if (subtitle) subtitle.innerText = 'Levels automatically plot here in sequence.';
             area.style.display = 'block';
             area.innerHTML = '<div class="empty-state-levels" id="chart-empty">Add numeric price levels to see the visual map.</div>';
             return;
@@ -852,8 +859,77 @@ if (viewLevels) {
 
         const sortedPrices = Object.keys(grouped).map(Number).sort((a, b) => b - a);
 
-        sortedPrices.forEach(price => {
+        // Determine active price based on current market price or middle level
+        let activePrice = null;
+        if (currentMarketPrice !== null && !isNaN(currentMarketPrice)) {
+            activePrice = sortedPrices.reduce((closest, p) => 
+                Math.abs(p - currentMarketPrice) < Math.abs(closest - currentMarketPrice) ? p : closest, sortedPrices[0]);
+        } else {
+            const floaterVal = document.getElementById('floater-price-val');
+            const parsedFloater = floaterVal ? parseFloat(floaterVal.innerText.replace(/,/g, '')) : null;
+            if (parsedFloater && !isNaN(parsedFloater)) {
+                currentMarketPrice = parsedFloater;
+                activePrice = sortedPrices.reduce((closest, p) => 
+                    Math.abs(p - currentMarketPrice) < Math.abs(closest - currentMarketPrice) ? p : closest, sortedPrices[0]);
+            } else {
+                const midIndex = Math.floor(sortedPrices.length / 2);
+                activePrice = sortedPrices[midIndex];
+            }
+        }
+
+        const activeIndex = sortedPrices.indexOf(activePrice);
+
+        // Determine visible prices subset (3 above, active level, 3 below = 6-7 levels)
+        let visiblePrices = sortedPrices;
+        if (chartViewMode === 'focused' && sortedPrices.length > 7) {
+            let startIdx = activeIndex - 3;
+            let endIdx = activeIndex + 3;
+            
+            if (startIdx < 0) {
+                endIdx = Math.min(sortedPrices.length - 1, endIdx - startIdx);
+                startIdx = 0;
+            }
+            if (endIdx >= sortedPrices.length) {
+                startIdx = Math.max(0, startIdx - (endIdx - sortedPrices.length + 1));
+                endIdx = sortedPrices.length - 1;
+            }
+            
+            visiblePrices = sortedPrices.slice(startIdx, endIdx + 1);
+        }
+
+        // Render mode toggle pill and subtitle
+        if (toggleContainer) {
+            if (sortedPrices.length > 7) {
+                toggleContainer.innerHTML = `
+                    <button type="button" id="btn-toggle-chart-mode" class="chart-mode-pill" style="font-size: 0.72rem; padding: 3px 9px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-1); color: var(--text-dim); cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; transition: all 0.2s ease;">
+                        <span>${chartViewMode === 'focused' ? '🎯 Focused (±3)' : '🌐 All Levels'}</span>
+                        <span style="color: var(--accent); font-size: 0.68rem; font-family: 'JetBrains Mono', monospace;">(${visiblePrices.length}/${sortedPrices.length})</span>
+                    </button>
+                `;
+                const btnToggle = document.getElementById('btn-toggle-chart-mode');
+                if (btnToggle) {
+                    btnToggle.addEventListener('click', () => {
+                        chartViewMode = (chartViewMode === 'focused') ? 'all' : 'focused';
+                        renderChart();
+                    });
+                }
+            } else {
+                toggleContainer.innerHTML = '';
+            }
+        }
+
+        if (subtitle) {
+            if (chartViewMode === 'focused' && sortedPrices.length > 7) {
+                const currentLabel = currentMarketPrice ? `₹${currentMarketPrice.toLocaleString('en-IN')}` : `₹${activePrice}`;
+                subtitle.innerText = `Showing 3 levels above & 3 below current level (${currentLabel}).`;
+            } else {
+                subtitle.innerText = `Levels automatically plot here in sequence (${sortedPrices.length} total levels).`;
+            }
+        }
+
+        visiblePrices.forEach(price => {
             const levelsInGroup = grouped[price];
+            const isCurrentPriceLevel = (price === activePrice);
             
             const row = document.createElement('div');
             row.style.position = 'relative';
@@ -942,7 +1018,7 @@ if (viewLevels) {
                 if(lvl.bias === 'bearish') cColor = 'var(--danger)';
 
                 const ann = document.createElement('div');
-                ann.className = 'chart-annotation';
+                ann.className = `chart-annotation ${isCurrentPriceLevel ? 'is-expanded-level is-active-level' : 'is-collapsed-level'}`;
                 ann.id = `chart-card-${lvl.id}`;
                 ann.style.border = '1px solid ' + cColor;
                 ann.style.borderLeft = '4px solid ' + cColor;
@@ -955,25 +1031,59 @@ if (viewLevels) {
                 }
 
                 const srcTag = lvl.source ? `<span class="source-badge" style="font-size:0.72rem; margin-right:4px;">${lvl.source}</span>` : '';
+                const activeTag = isCurrentPriceLevel ? `<span class="summary-latest-pill" style="font-size:0.6rem; padding:1px 5px; margin-left:4px;">CURRENT</span>` : '';
+                const rawBehavior = (lvl.behavior || '').trim();
+                const previewText = rawBehavior.length > 40 ? rawBehavior.slice(0, 40) + '…' : rawBehavior;
 
                 ann.innerHTML = `
-                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem; flex-wrap:wrap; gap:6px;">
-                        <div>
+                    <div class="chart-annotation-header" style="display:flex; align-items:center; justify-content:space-between; gap:6px;">
+                        <div style="display:flex; align-items:center; gap:4px; flex:1; min-width:0;">
                             ${srcTag}
-                            <span class="badge ${lvl.bias}">${lvl.biasBadge}${rangeText}</span>
+                            <span class="badge ${lvl.bias}" style="font-size:0.75rem; padding:2px 6px;">${lvl.biasBadge}${rangeText}</span>
+                            ${activeTag}
                         </div>
-                        <div class="chart-status-group" style="display:flex; gap:4px;">
-                            <button type="button" class="status-btn status-worked chart-status-${lvl.id} ${lvl.status === 'worked' ? 'active' : ''}" data-status="worked" onclick="window.setLevelStatus('${lvl.id}', 'worked')" style="font-size:0.7rem; padding:2px 6px;" title="Worked">✅</button>
-                            <button type="button" class="status-btn status-failed chart-status-${lvl.id} ${lvl.status === 'failed' ? 'active' : ''}" data-status="failed" onclick="window.setLevelStatus('${lvl.id}', 'failed')" style="font-size:0.7rem; padding:2px 6px;" title="Failed">❌</button>
-                            <button type="button" class="status-btn status-na chart-status-${lvl.id} ${lvl.status === 'na' ? 'active' : ''}" data-status="na" onclick="window.setLevelStatus('${lvl.id}', 'na')" style="font-size:0.7rem; padding:2px 6px;" title="NA">⚪</button>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <div class="chart-status-group" style="display:flex; gap:3px;">
+                                <button type="button" class="status-btn status-worked chart-status-${lvl.id} ${lvl.status === 'worked' ? 'active' : ''}" data-status="worked" onclick="event.stopPropagation(); window.setLevelStatus('${lvl.id}', 'worked')" style="font-size:0.65rem; padding:2px 5px;" title="Worked">✅</button>
+                                <button type="button" class="status-btn status-failed chart-status-${lvl.id} ${lvl.status === 'failed' ? 'active' : ''}" data-status="failed" onclick="event.stopPropagation(); window.setLevelStatus('${lvl.id}', 'failed')" style="font-size:0.65rem; padding:2px 5px;" title="Failed">❌</button>
+                                <button type="button" class="status-btn status-na chart-status-${lvl.id} ${lvl.status === 'na' ? 'active' : ''}" data-status="na" onclick="event.stopPropagation(); window.setLevelStatus('${lvl.id}', 'na')" style="font-size:0.65rem; padding:2px 5px;" title="NA">⚪</button>
+                            </div>
+                            <span class="chart-annotation-toggle" style="font-size:0.75rem; color:var(--text-dim); margin-left:2px;">${isCurrentPriceLevel ? '▼' : '▶'}</span>
                         </div>
                     </div>
-                    <div class="text" style="line-height:1.5; color:var(--text); font-size:0.95rem;">${lvl.behavior}</div>
-                    <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--text-dim); display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace;">
-                        <span>TP: <strong style="color:var(--success);">${lvl.tp||'Open'}</strong></span>
-                        <span>SL: <strong style="color:var(--danger);">${lvl.sl||'Manual'}</strong></span>
+                    <div class="chart-annotation-preview" style="display:${isCurrentPriceLevel ? 'none' : 'block'}; font-size:0.8rem; color:var(--text-dim); margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                        ${previewText}
+                    </div>
+                    <div class="chart-annotation-body" style="display:${isCurrentPriceLevel ? 'block' : 'none'}; margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid rgba(255, 255, 255, 0.05);">
+                        <div class="text" style="line-height:1.5; color:var(--text); font-size:0.92rem;">${rawBehavior}</div>
+                        <div style="margin-top:0.75rem; font-size:0.8rem; color:var(--text-dim); display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace;">
+                            <span>TP: <strong style="color:var(--success);">${lvl.tp||'Open'}</strong></span>
+                            <span>SL: <strong style="color:var(--danger);">${lvl.sl||'Manual'}</strong></span>
+                        </div>
                     </div>
                 `;
+
+                ann.addEventListener('click', (e) => {
+                    if (e.target.closest('.status-btn')) return;
+                    const body = ann.querySelector('.chart-annotation-body');
+                    const preview = ann.querySelector('.chart-annotation-preview');
+                    const toggleIcon = ann.querySelector('.chart-annotation-toggle');
+                    
+                    if (body.style.display === 'none') {
+                        body.style.display = 'block';
+                        if (preview) preview.style.display = 'none';
+                        if (toggleIcon) toggleIcon.innerText = '▼';
+                        ann.classList.remove('is-collapsed-level');
+                        ann.classList.add('is-expanded-level');
+                    } else {
+                        body.style.display = 'none';
+                        if (preview) preview.style.display = 'block';
+                        if (toggleIcon) toggleIcon.innerText = '▶';
+                        ann.classList.remove('is-expanded-level');
+                        ann.classList.add('is-collapsed-level');
+                    }
+                });
+
                 stack.appendChild(ann);
             });
 
@@ -1521,8 +1631,11 @@ if (viewLevels) {
         const floaterVal = document.getElementById('floater-price-val');
         const floaterTitle = document.getElementById('floater-title-text');
         
+        const currentPrice = Number(lastCandle.close);
+        const prevPrice = currentMarketPrice;
+        currentMarketPrice = currentPrice;
+        
         if (floater && floaterVal && !floater.classList.contains('user-closed')) {
-            const currentPrice = Number(lastCandle.close);
             const oldPrice = parseFloat(floaterVal.innerText.replace(/,/g, '')) || 0;
             const formattedPrice = currentPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             floaterVal.innerText = formattedPrice;
@@ -1537,10 +1650,14 @@ if (viewLevels) {
             floater.classList.remove('hidden');
         }
 
+        if (prevPrice === null || Math.abs(prevPrice - currentPrice) > 5) {
+            renderChart();
+        }
+
         let insideLevels = [];
         let aboveLevels = [];
         let belowLevels = [];
-        const price = lastCandle.close;
+        const price = currentPrice;
 
         validLevels.forEach(lvl => {
             const margin = lvl.isRange ? 0 : 15;

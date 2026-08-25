@@ -1274,8 +1274,11 @@
                 </div>
 
                 <div class="panel chart-wrapper">
-                    <h2 style="margin: 0; font-size: 1.15rem; font-weight: 600;">Visual Chart Map</h2>
-                    <p style="margin: 0.25rem 0 1.5rem 0; color: var(--text-dim); font-size: 0.85rem;">Levels automatically plot here in sequence.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                        <h2 style="margin: 0; font-size: 1.15rem; font-weight: 600;">Visual Chart Map</h2>
+                        <div id="chart-view-toggle-container" style="display: flex; align-items: center; gap: 6px;"></div>
+                    </div>
+                    <p id="chart-subtitle" style="margin: 0.25rem 0 1.25rem 0; color: var(--text-dim); font-size: 0.85rem;">Levels automatically plot here in sequence.</p>
                     
                     <div id="visual-chart-area">
                         <div class="empty-state-levels" id="chart-empty">Add numeric price levels to see the visual map.</div>
