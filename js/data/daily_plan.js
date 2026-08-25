@@ -1,13 +1,13 @@
 window.dailyPlanSummary = [
   {
     "source": "Combined",
-    "text": `Summary for August 25 (BS, NTBP Data):
+    "text": `Summary for August 25 (PG, BS, NTBP Data):
 
 Data Bias & Overall View:
-The market is currently in a highly range-bound, frustrating chop zone ("not fun to trade"). FII and Pro desks have taken slightly bearish to aggressive call-writing positions, capping the upside. Retailers remain aggressively bullish. PCR is at 0.70 (weak/neutral). The consensus is that the expiry is likely to happen below 24,300 due to heavy call writing. A dip towards 24,000 may be used to scare put writers before a bounce.
+The market is currently in a highly range-bound, frustrating chop zone ("not fun to trade"). FII and Pro desks have taken slightly bearish to aggressive call-writing positions, capping the upside. Retailers remain aggressively bullish. PCR is at 0.70 (weak/neutral). The consensus is that the expiry is likely to happen below 24,300 due to heavy call writing and a double-top structure forming on the daily chart. A dip towards 24,000 may be used to scare put writers before a bounce.
 
 Key Nifty Levels:
-- Resistance & Upside Targets: 24,250 - 24,300 is the major resistance ceiling. Heavy call writing is seen at 24,300. A breakout above 24,250 might trigger short covering, but otherwise, sell-on-rise is expected. 
+- Resistance & Upside Targets: 24,250 - 24,300 is the major resistance ceiling. Heavy call writing is seen at 24,300, and this aligns with PG's "Strong Resistance" level. A breakout above 24,250 might trigger short covering, but otherwise, sell-on-rise is expected. 
 - Support & Downside Targets: 24,200 is an immediate, but weak, support. Stronger support lies at 24,050 - 24,100, with 24,000 acting as a psychological base and ideal entry zone for longs.
 
 Strategy:
@@ -24,5 +24,6 @@ window.dailyPlanData = [
   { "source": "NTBP", "price": "24250-24300", "bias": "bearish", "behavior": "Major resistance zone based on Pro call writing. Sell on rise expected.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24172", "bias": "bearish", "behavior": "Breakdown trigger. Sustaining below leads to shorting pressure.", "tp": "24075", "sl": "na", "status": "na" },
   { "source": "NTBP", "price": "24050-24100", "bias": "bullish", "behavior": "Max put writer support. Expected to act as a bounce zone after trapping early sellers.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "NTBP", "price": "24223", "bias": "bullish", "behavior": "First upside target on a bounce from support.", "tp": "24281", "sl": "na", "status": "na" }
+  { "source": "NTBP", "price": "24223", "bias": "bullish", "behavior": "First upside target on a bounce from support.", "tp": "24281", "sl": "na", "status": "na" },
+  { "source": "PG", "price": "24300", "bias": "bearish", "behavior": "Strong Resistance level. Daily chart formed a Double Top, indicating weakness.", "tp": "na", "sl": "na", "status": "na" }
 ];
