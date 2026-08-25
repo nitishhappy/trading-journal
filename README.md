@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.8.4 — NIFTY Intraday Tactical Update (Structural Invalidation Recalibration)
+- **Live AI Tactical Recalibration**: Recalculated Nifty support/resistance levels, chop zones (24,240–24,265), high momentum explosive triggers (breakout >24,270 / breakdown <24,230), and 5-min execution scenarios following the >80 pt structural expansion from Day Open (24,175.75).
+- **Daily Plan Data Sync**: Updated `daily_plan.js` with real-time AI-sourced levels and tactical action plan summary for live app interface rendering.
+
 ### v1.8.3 — Pre-Market AI Briefing & Daily Plan Sync (Aug 25, 2026)
 - **Pre-Market Briefing & SMC Levels**: Mapped pre-market Nifty structure, Order Blocks, FVGs, and liquidity triggers following overnight global risk-off cues and GIFT Nifty gap-down indications.
 - **Daily Plan Data Sync**: Appended AI-sourced key levels, chop zones (24,160–24,210), breakdown triggers (24,136), and short-covering thresholds (24,255) into `daily_plan.js`.

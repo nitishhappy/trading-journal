@@ -87,6 +87,26 @@ Nifty Spot (24,126.90) is coiling tightly near the session lows (Day Low 24,115.
 - PE Setup (Sell-on-Rise): Rejection at 24,150–24,160 with upper wicks and declining green volume. Target: 24,120 / 24,115. SL: 24,175.
 - CE Setup (Liquidity Sweep Reversal): Sweep below 24,115 followed by quick 5m reclaim ABOVE 24,135 with green futures volume surge. Target: 24,175 / 24,198. SL: 24,110.
 - CE Setup (Breakout Long): Sustained 5m close ABOVE 24,155 with expanding green futures volume. Target: 24,198 / 24,225 / 24,250. SL: 24,125.`
+  },
+  {
+    "source": "AI",
+    "text": `Intraday Tactical Update (03:15 PM - Aug 25, 2026):
+
+1. Live Intraday Market Structure & Structural Invalidation:
+Nifty Spot (24,260.05) has experienced a massive +84.30 pt shift from Day Open (24,175.75) and +144.60 pt surge from Day Low (24,115.45), triggering a structural invalidation of the earlier bearish bias. Proxied Futures volume ratio surged to 2.89x 8-bar average, confirming aggressive institutional short-covering that smashed through the 15M ORB High (24,198.25) and printed a fresh Day High at 24,267.05 right into the 24,280–24,300 macro call wall.
+
+2. Re-calculated Chop Zone / No-Trade Zone:
+- 24,240 – 24,265: Live consolidation shelf directly under the Day High (24,267.05). Option buyers must avoid chasing market orders inside this 25-point band due to rapid intraday whipsaws and premium decay.
+
+3. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 24,270): Sustained 5m close above Day High 24,267.05 triggers rapid expansion into 24,300 (Daily Double-Top ceiling) and 24,330.
+- Downside Long-Liquidation Flush (< 24,230): Sustained 5m close below 24,230 triggers swift profit-booking and mean-reversion toward 24,198 (15M ORB High) and 24,175 (Day Open).
+
+4. 5-Min Tactical Execution Triggers:
+- CE Setup (Breakout Long): Sustained 5m close ABOVE 24,270 with expanding green futures volume (>2.5x). Target: 24,300 / 24,330. SL: 24,245.
+- CE Setup (Pullback Long): Retest of 24,230–24,240 holding with lower rejection wicks and volume confirmation. Target: 24,265 / 24,295. SL: 24,215.
+- PE Setup (Macro Ceiling Rejection): Rejection at 24,280–24,300 with upper wicks and declining green volume. Target: 24,240 / 24,200. SL: 24,315.
+- PE Setup (Breakdown Short): Sustained 5m close BELOW 24,230 with heavy red futures volume. Target: 24,198 / 24,175. SL: 24,255.`
   }
 ];
 
@@ -111,5 +131,9 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24125-24165", "bias": "neutral", "behavior": "Live Intraday Chop Zone. Range-bound whipsaw box; avoid option buying.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24115", "bias": "bearish", "behavior": "Day Low & 15M ORB Breakdown Trigger. Sustained 5m close below accelerates sell-off.", "tp": "24075", "sl": "24140", "status": "na" },
   { "source": "AI", "price": "24118-24148", "bias": "neutral", "behavior": "01:30 PM Midday Compression Box. Avoid option buying inside this 30-pt range.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24155", "bias": "bullish", "behavior": "Pre-Closing Squeeze Trigger. 5m close above 24155 triggers short covering toward Day High.", "tp": "24198", "sl": "24125", "status": "na" }
+  { "source": "AI", "price": "24155", "bias": "bullish", "behavior": "Pre-Closing Squeeze Trigger. 5m close above 24155 triggers short covering toward Day High.", "tp": "24198", "sl": "24125", "status": "na" },
+  { "source": "AI", "price": "24267", "bias": "neutral", "behavior": "Current Day High. Sustained 5m breakout above 24270 triggers momentum squeeze to 24300.", "tp": "24300", "sl": "24245", "status": "na" },
+  { "source": "AI", "price": "24240-24265", "bias": "neutral", "behavior": "Live Intraday Chop Zone. Consolidation shelf below Day High; avoid chasing option buys.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24230", "bias": "bearish", "behavior": "Intraday Pullback Pivot & Breakdown Trigger. 5m close below accelerates long unwinding to 24198.", "tp": "24198", "sl": "24255", "status": "na" },
+  { "source": "AI", "price": "24270", "bias": "bullish", "behavior": "High-Momentum Breakout Trigger. 5m close above Day High drives squeeze into 24300-24330.", "tp": "24330", "sl": "24245", "status": "na" }
 ];
