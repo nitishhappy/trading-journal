@@ -1290,3 +1290,13 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Mapped high momentum upside squeeze zone (>24,185 towards 24,220/24,250) and downside breakdown zone (<24,140 towards 24,100/24,050) based on live Upstox option chain data (PCR 0.69, 24,300 CE 35.4M OI, 24,200 CE 28.4M OI, 24,150 PE 13.7M OI defense).
   - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+### v2.3.28 — 25 Aug 2026 — Intraday Tactical Update (10:30 AM 15M ORB Breakdown Test & Option Chain Mapping)
+
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Processed live spot market action at 10:30 AM (Spot: 24,127.50, Day High: 24,198.25, Day Low: 24,115.45, 15M ORB: 24,128.85–24,198.25, Proxied Future Volume: 1.16x).
+  - Re-calculated live intraday chop / no-trade zone (24,125–24,165) between the ORB low breakdown threshold and the descending supply shelf.
+  - Mapped high momentum downside breakdown flush zone (<24,115 targeting 24,075 / 24,050) and upside short-covering squeeze zone (>24,175 targeting 24,198 / 24,225).
+  - Appended 5-minute tactical execution action plan and updated AI levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+

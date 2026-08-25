@@ -47,6 +47,26 @@ Nifty Spot closed at 24,219.05 with a lower-high formation on the daily chart (d
 
 5. Risk & Expiry Dynamics:
 Low VIX environment (~13) accelerates premium decay inside the chop zone. Option buyers must strictly avoid holding trades in the 24,160–24,210 range. Execute only on momentum breakouts or liquidity sweep confirmations with strict 15–20 pt spot SL.`
+  },
+  {
+    "source": "AI",
+    "text": `Intraday Tactical Update (10:30 AM - Aug 25, 2026):
+
+1. Live Intraday Market Structure:
+Nifty Spot (24,127.50) is testing the 15M ORB Low (24,128.85) and has established a fresh Day Low at 24,115.45. Proxied Futures volume ratio is 1.16x (elevated institutional participation). The market is testing the lower boundary of the opening balance.
+
+2. Re-calculated Chop Zone / No-Trade Zone:
+- 24,125 – 24,165: Immediate consolidation box between the ORB low breakdown threshold and the descending supply shelf. Option buyers must strictly stand aside inside this zone.
+
+3. High Momentum / Explosive Zones:
+- Downside Long-Unwinding Flush (< 24,115): Sustained 5m close below Day Low triggers momentum sell-off targeting 24,075 (intermediate support) and 24,050–24,020 (macro demand base).
+- Upside Short-Covering Squeeze (> 24,175): 5m close above the morning breakdown pivot forces aggressive call covering toward 24,198 (ORB / Day High) and 24,225.
+
+4. 5-Min Tactical Execution Triggers:
+- PE Setup (Breakdown Short): Sustained 5m close BELOW 24,115 with strong red futures volume. Target: 24,075 / 24,050. SL: 24,140.
+- PE Setup (Sell-on-Rise): Pullback into 24,165–24,175 with upper rejection wicks. Target: 24,125 / 24,115. SL: 24,185.
+- CE Setup (Liquidity Sweep Reversal): Sweep of 24,115 followed by strong 5m reclaim ABOVE 24,140 with green futures volume surge. Target: 24,175 / 24,198. SL: 24,110.
+- CE Setup (Breakout Long): Sustained 5m close ABOVE 24,175. Target: 24,200 / 24,235. SL: 24,145.`
   }
 ];
 
@@ -65,5 +85,9 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24160-24210", "bias": "neutral", "behavior": "No-Trade Chop Zone. Range-bound whipsaws & high theta decay for option buyers.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24136", "bias": "bearish", "behavior": "Breakdown Trigger / SSL Level. 5m close below triggers explosive long-unwinding move.", "tp": "24075", "sl": "24165", "status": "na" },
   { "source": "AI", "price": "24050-24080", "bias": "bullish", "behavior": "1H Bullish FVG & Intermediate Demand. Watch for bounce / liquidity sweep.", "tp": "24150", "sl": "24020", "status": "na" },
-  { "source": "AI", "price": "24000-24020", "bias": "bullish", "behavior": "Macro Institutional Demand Base / Order Block. High-probability reversal zone for longs.", "tp": "24120", "sl": "23970", "status": "na" }
+  { "source": "AI", "price": "24000-24020", "bias": "bullish", "behavior": "Macro Institutional Demand Base / Order Block. High-probability reversal zone for longs.", "tp": "24120", "sl": "23970", "status": "na" },
+  { "source": "AI", "price": "24198", "bias": "bearish", "behavior": "Day High & 15M ORB High. Strong intraday ceiling & call supply zone.", "tp": "24140", "sl": "24220", "status": "na" },
+  { "source": "AI", "price": "24165-24175", "bias": "bearish", "behavior": "Intraday Supply Shelf & Breakdown Retest. Sell-on-rise rejection zone.", "tp": "24125", "sl": "24185", "status": "na" },
+  { "source": "AI", "price": "24125-24165", "bias": "neutral", "behavior": "Live Intraday Chop Zone. Range-bound whipsaw box; avoid option buying.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24115", "bias": "bearish", "behavior": "Day Low & 15M ORB Breakdown Trigger. Sustained 5m close below accelerates sell-off.", "tp": "24075", "sl": "24140", "status": "na" }
 ];
