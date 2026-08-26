@@ -1343,6 +1343,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Focused View (`🎯 Focused (±3)`) continues to keep only the active level open and outer levels collapsed.
 - **Files Modified**: `README.md`, `js/ui/levels.js`
 
+### v2.3.34 — 26 Aug 2026 — Pre-Market Briefing & Tactical AI Plan
+
+- **Pre-Market Briefing & Level Mapping (`daily_plan.js`)**:
+  - Generated pre-market structural analysis for August 26, 2026 covering overnight global cues, crude oil price drops, and GIFT Nifty gap-up indication (+75 to +90 pts).
+  - Appended August 26 Pre-Market Tactical Summary to `window.dailyPlanSummary` with market structure, key resistance/support zones, SMC POIs, 5-minute action triggers, and risk guidelines.
+  - Appended structured AI levels to `window.dailyPlanData` encompassing macro extension targets (24,500–24,560), 1H supply blocks (24,380–24,450), 15m bullish FVG retest base (24,270–24,300), and breakdown pivot (24,260).
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+
 
 
 
