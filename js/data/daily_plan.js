@@ -143,6 +143,16 @@ Nifty Spot closed at 24,334.55 (+115.50 pts, +0.48%) following a powerful late-s
 
 5. Risk & Expiry Dynamics:
 Low VIX environment (~13.0) will cause rapid premium decay in the 24,310–24,360 chop box. Today is also a banking settlement holiday (Eid-e-Milad; markets open, backend clearing paused). Execute strictly on structural triggers with Spot-based 15–20 pt risk.`
+  },
+  {
+    "source": "YT-Videos",
+    "text": `**Video Predictions Combined Summary (Aug 26 - Aug 27)**:
+The consensus from multiple analysts is strongly bullish on Nifty, indicating that the market has bottomed out and a new impulsive wave is underway. The weekly chart displays a double hammer pattern acting as robust support, suggesting an incoming blast or momentum squeeze. The daily chart also formed a bullish engulfing pattern. The overall trend remains a "buy on dips" strategy. Analysts believe a "higher low" structure is forming, predicting a breakout in the coming days toward 24,500 and eventually 24,600-24,700, potentially launching a 1,000+ point rally toward 25,116.
+
+**Trading Scenarios**:
+- **Flat Open**: A flat open followed by a dip into the Golden Zone / FVG is a prime buying opportunity. The 24,260-24,280 area (21 EMA) acts as immediate support and a buy trigger, targeting 24,370/24,380.
+- **Gap-Down Open**: A minor gap-down (40-50 pts) should be bought immediately. A deeper dip of 100-150 pts brings Nifty to the 24,190-24,200 structural base. The 24,200 level is heavily backed by put writing and acts as a massive support base. However, if the market heavily gaps down below 24,130-24,140 or the 0.5% retracement level, the bullish structure is invalidated and shorting on bounces is recommended. 24,000 acts as a final protective stop-loss for the positional macro bullish view.
+- **Gap-Up Open**: A gap-up directly into the 24,470-24,500 resistance zone is likely to attract profit-booking. Sustaining above 24,300 is necessary for maintaining intraday bullishness. 24,500 is a major resistance; a daily close above it is required to confirm the next leg of the positional bull run.`
   }
 ];
 
@@ -179,5 +189,17 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24270-24300", "bias": "bullish", "behavior": "15m Bullish FVG & Key Pullback Support (Old Resistance Ceiling). Primary long entry zone on bullish retest.", "tp": "24380", "sl": "24245", "status": "na" },
   { "source": "AI", "price": "24260", "bias": "bearish", "behavior": "Downside Long-Unwinding Breakdown Trigger. Sustained 5m close below triggers fast liquidation toward 24200/24175.", "tp": "24175", "sl": "24295", "status": "na" },
   { "source": "AI", "price": "24200-24230", "bias": "bullish", "behavior": "Intermediate Discount Demand Shelf / 50% Retracement Base. Reversal bounce zone on deep pullback.", "tp": "24300", "sl": "24170", "status": "na" },
-  { "source": "AI", "price": "24115", "bias": "bullish", "behavior": "Macro Structural Floor & Swing Low Demand. High-probability institutional accumulation base.", "tp": "24250", "sl": "24080", "status": "na" }
+  { "source": "AI", "price": "24115", "bias": "bullish", "behavior": "Macro Structural Floor & Swing Low Demand. High-probability institutional accumulation base.", "tp": "24250", "sl": "24080", "status": "na" },
+  {"source": "NBN", "price": "24470-24500", "bias": "bearish", "behavior": "Major resistance and profit-booking zone. If the market gaps up here, watch for price action weakness to short.", "tp": "PDC", "sl": "na", "status": "na"},
+  {"source": "NBN", "price": "24500", "bias": "bullish", "behavior": "Major breakout level. A daily close above confirms positional bullish momentum toward 24,600-24,700.", "tp": "24600", "sl": "na", "status": "na"},
+  {"source": "NAFT", "price": "24400", "bias": "bullish", "behavior": "Resistance level. Sustaining above adds more strength to the up move.", "tp": "24500", "sl": "na", "status": "na"},
+  {"source": "NAFT", "price": "24357-24370", "bias": "bullish", "behavior": "Intermediate resistance / First major target. Passing this level provides better bullish strength.", "tp": "24500", "sl": "na", "status": "na"},
+  {"source": "NBO", "price": "24300", "bias": "neutral", "behavior": "Pivot level and immediate resistance. Sustaining above is bullish. Slipping below allows for minor shorting.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "SINR", "price": "24260-24280", "bias": "bullish", "behavior": "Initial dip buying zone (21 EMA). Minor gap down or 40-50 pts dip should be bought immediately.", "tp": "24370", "sl": "na", "status": "na"},
+  {"source": "LNSA", "price": "24200", "bias": "bullish", "behavior": "Strong support base backed by heavy put writing. Excellent entry zone for longs.", "tp": "24300", "sl": "na", "status": "na"},
+  {"source": "LNSA", "price": "24179-24200", "bias": "bearish", "behavior": "Crucial support zone. A breakdown below 24180 allows increasing short quantity on a bearish candle low break.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "STL", "price": "24140-24160", "bias": "bullish", "behavior": "Reversal zone to buy on deeper dips.", "tp": "24280", "sl": "24130", "status": "na"},
+  {"source": "STL", "price": "24130", "bias": "bearish", "behavior": "Critical support and bullish setup invalidation trigger. Breakdown negates the bullish bias.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "CETA", "price": "24103", "bias": "neutral", "behavior": "Gap magnet. May attract price if support breaks.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "CETA", "price": "24000", "bias": "bullish", "behavior": "Wave 2 low acting as full and final protective stop-loss for positional longs. Very decent macro support.", "tp": "na", "sl": "na", "status": "na"}
 ];
