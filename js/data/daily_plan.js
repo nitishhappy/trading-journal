@@ -87,10 +87,10 @@ window.dailyPlanData = [
   {"source": "STL", "price": "24130", "bias": "bearish", "behavior": "Critical support and bullish setup invalidation trigger. Breakdown negates the bullish bias.", "tp": "na", "sl": "na", "status": "na"},
   {"source": "CETA", "price": "24103", "bias": "neutral", "behavior": "Gap magnet. May attract price if support breaks.", "tp": "na", "sl": "na", "status": "na"},
   {"source": "CETA", "price": "24000", "bias": "bullish", "behavior": "Wave 2 low acting as full and final protective stop-loss for positional longs. Very decent macro support.", "tp": "na", "sl": "na", "status": "na"},
-  { "source": "AI [14-05]", "price": "24360", "bias": "bearish", "behavior": "Day High Resistance & BSL Pool. Key profit-booking ceiling and potential rejection zone.", "tp": "24300", "sl": "24385", "status": "na" },
-  { "source": "AI [14-05]", "price": "24295-24310", "bias": "bullish", "behavior": "15M ORB Low Reclaim & Short-Covering Trigger. Sustained 5m close above drives upside squeeze toward 24340/24360.", "tp": "24360", "sl": "24260", "status": "na" },
-  { "source": "AI [14-05]", "price": "24245-24290", "bias": "neutral", "behavior": "Intraday Tactical Chop Zone / No-Trade Compression Box. High theta decay for option buyers; avoid entries inside.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI [14-05]", "price": "24240", "bias": "bearish", "behavior": "Micro Support Breakdown Trigger. Sustained 5m close below triggers downside test of Day Low (24200).", "tp": "24200", "sl": "24270", "status": "na" },
-  { "source": "AI [14-05]", "price": "24195-24200", "bias": "bullish", "behavior": "Day Low Demand & SSL Sweep Base. Reversal bounce zone on liquidity sweep.", "tp": "24265", "sl": "24185", "status": "na" },
-  { "source": "AI [14-05]", "price": "24195", "bias": "bearish", "behavior": "Day Low Breakdown Flush Trigger. Sustained 5m close below accelerates liquidation toward 24150/24115.", "tp": "24115", "sl": "24230", "status": "na" }
+  { "source": "AI", "price": "24360", "bias": "bearish", "behavior": "[14:05] Day High Resistance & BSL Pool. Key profit-booking ceiling and potential rejection zone.", "tp": "24300", "sl": "24385", "status": "na" },
+  { "source": "AI", "price": "24295-24310", "bias": "bullish", "behavior": "[14:05] 15M ORB Low Reclaim & Short-Covering Trigger. Sustained 5m close above drives upside squeeze toward 24340/24360.", "tp": "24360", "sl": "24260", "status": "na" },
+  { "source": "AI", "price": "24245-24290", "bias": "neutral", "behavior": "[14:05] Intraday Tactical Chop Zone / No-Trade Compression Box. High theta decay for option buyers; avoid entries inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24240", "bias": "bearish", "behavior": "[14:05] Micro Support Breakdown Trigger. Sustained 5m close below triggers downside test of Day Low (24200).", "tp": "24200", "sl": "24270", "status": "na" },
+  { "source": "AI", "price": "24195-24200", "bias": "bullish", "behavior": "[14:05] Day Low Demand & SSL Sweep Base. Reversal bounce zone on liquidity sweep.", "tp": "24265", "sl": "24185", "status": "na" },
+  { "source": "AI", "price": "24195", "bias": "bearish", "behavior": "[14:05] Day Low Breakdown Flush Trigger. Sustained 5m close below accelerates liquidation toward 24150/24115.", "tp": "24115", "sl": "24230", "status": "na" }
 ];
