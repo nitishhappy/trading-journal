@@ -44,6 +44,24 @@ The consensus from multiple analysts is strongly bullish on Nifty, indicating th
 - **Flat Open**: A flat open followed by a dip into the Golden Zone / FVG is a prime buying opportunity. The 24,260-24,280 area (21 EMA) acts as immediate support and a buy trigger, targeting 24,370/24,380.
 - **Gap-Down Open**: A minor gap-down (40-50 pts) should be bought immediately. A deeper dip of 100-150 pts brings Nifty to the 24,190-24,200 structural base. The 24,200 level is heavily backed by put writing and acts as a massive support base. However, if the market heavily gaps down below 24,130-24,140 or the 0.5% retracement level, the bullish structure is invalidated and shorting on bounces is recommended. 24,000 acts as a final protective stop-loss for the positional macro bullish view.
 - **Gap-Up Open**: A gap-up directly into the 24,470-24,500 resistance zone is likely to attract profit-booking. Sustaining above 24,300 is necessary for maintaining intraday bullishness. 24,500 is a major resistance; a daily close above it is required to confirm the next leg of the positional bull run.`
+  },
+  {
+    "source": "AI [14-05]",
+    "text": `Intraday Tactical Update (01:30 PM / 14:05 IST):
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: 24,245 – 24,290 (Spot).
+- Logic: Compression corridor between micro-support (24,245) and overhead 24,290–24,300 CE resistance / 15M ORB Low shelf. Option buyers should strictly avoid entering inside this 45-point box due to theta decay and 1.0x average volume compression.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (>24,295 – 24,310): Sustained 5m candle close above 24,295 reclaims the 15M ORB Low and 24,300 CE strike, triggering a rapid short-covering squeeze toward 24,340 and 24,360 (Day High).
+- Downside Long-Unwinding Flush (<24,240 & <24,195): A 5m breakdown below 24,240 accelerates selling toward 24,200 (Day Low). A sustained 5m close below 24,195 breaks the day's base, triggering a rapid stop-run flush toward 24,150 / 24,115.
+
+5. 5-Min Intraday Action Plan:
+- CE Setup 1 (ORB Low Reclaim Breakout Long): 5m close >24,295 with expanding green futures volume (>1.2x). TP: 24,340 / 24,360. SL: 24,260.
+- CE Setup 2 (Day Low SSL Sweep Long): Liquidity sweep below 24,200 followed by strong 5m close back >24,215 with volume surge. TP: 24,265 / 24,300. SL: 24,185.
+- PE Setup 1 (ORB Low Rejection Short): Pullback into 24,285–24,305 with upper wick rejection and 5m close <24,275. TP: 24,240 / 24,200. SL: 24,315.
+- PE Setup 2 (Day Low Breakdown Short): Sustained 5m close <24,195 with expanding red futures volume (>1.3x). TP: 24,150 / 24,115. SL: 24,230.`
   }
 
 ];
@@ -68,6 +86,11 @@ window.dailyPlanData = [
   {"source": "STL", "price": "24140-24160", "bias": "bullish", "behavior": "Reversal zone to buy on deeper dips.", "tp": "24280", "sl": "24130", "status": "na"},
   {"source": "STL", "price": "24130", "bias": "bearish", "behavior": "Critical support and bullish setup invalidation trigger. Breakdown negates the bullish bias.", "tp": "na", "sl": "na", "status": "na"},
   {"source": "CETA", "price": "24103", "bias": "neutral", "behavior": "Gap magnet. May attract price if support breaks.", "tp": "na", "sl": "na", "status": "na"},
-  {"source": "CETA", "price": "24000", "bias": "bullish", "behavior": "Wave 2 low acting as full and final protective stop-loss for positional longs. Very decent macro support.", "tp": "na", "sl": "na", "status": "na"}
-
+  {"source": "CETA", "price": "24000", "bias": "bullish", "behavior": "Wave 2 low acting as full and final protective stop-loss for positional longs. Very decent macro support.", "tp": "na", "sl": "na", "status": "na"},
+  { "source": "AI [14-05]", "price": "24360", "bias": "bearish", "behavior": "Day High Resistance & BSL Pool. Key profit-booking ceiling and potential rejection zone.", "tp": "24300", "sl": "24385", "status": "na" },
+  { "source": "AI [14-05]", "price": "24295-24310", "bias": "bullish", "behavior": "15M ORB Low Reclaim & Short-Covering Trigger. Sustained 5m close above drives upside squeeze toward 24340/24360.", "tp": "24360", "sl": "24260", "status": "na" },
+  { "source": "AI [14-05]", "price": "24245-24290", "bias": "neutral", "behavior": "Intraday Tactical Chop Zone / No-Trade Compression Box. High theta decay for option buyers; avoid entries inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI [14-05]", "price": "24240", "bias": "bearish", "behavior": "Micro Support Breakdown Trigger. Sustained 5m close below triggers downside test of Day Low (24200).", "tp": "24200", "sl": "24270", "status": "na" },
+  { "source": "AI [14-05]", "price": "24195-24200", "bias": "bullish", "behavior": "Day Low Demand & SSL Sweep Base. Reversal bounce zone on liquidity sweep.", "tp": "24265", "sl": "24185", "status": "na" },
+  { "source": "AI [14-05]", "price": "24195", "bias": "bearish", "behavior": "Day Low Breakdown Flush Trigger. Sustained 5m close below accelerates liquidation toward 24150/24115.", "tp": "24115", "sl": "24230", "status": "na" }
 ];

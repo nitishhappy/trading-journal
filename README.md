@@ -1351,6 +1351,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended structured AI levels to `window.dailyPlanData` encompassing macro extension targets (24,500–24,560), 1H supply blocks (24,380–24,450), 15m bullish FVG retest base (24,270–24,300), and breakdown pivot (24,260).
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.35 — 26 Aug 2026 — Intraday Tactical Update (01:30 PM / 14:05 IST)
+
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Processed live spot market action at 01:30 PM / 14:05 IST (Spot: 24,266.95, Day High: 24,360, Day Low: 24,200, 15M ORB: 24,309.50–24,363.20, Proxied Future Volume: 1.0x 8-bar avg).
+  - Re-calculated live intraday compression / no-trade chop zone (24,245–24,290) between micro-support (24,245) and overhead 24,290–24,300 CE resistance / 15M ORB Low shelf.
+  - Mapped high momentum upside short-covering squeeze zone (>24,295–24,310 targeting 24,340 / 24,360) and downside long-unwinding breakdown zone (<24,240 and <24,195 targeting 24,150 / 24,115).
+  - Appended 5-minute tactical action triggers and updated `AI [14-05]` levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+
 
 
 
