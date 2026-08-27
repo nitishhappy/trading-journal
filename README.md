@@ -1404,6 +1404,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended 5-minute tactical action triggers and updated `AI` levels prepended with `[14:00]` to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.41 — 27 Aug 2026 — Intraday Tactical Update (03:15 PM IST)
+
+- **Intraday Tactical Update (`daily_plan.js`)**:
+  - Processed live spot market action at 03:15 PM IST (Spot: 24,133.05, Day High: 24,297.45, Day Low: 24,120.60, 15M ORB: 24,198.35–24,297.45, Day Open: 24,277.6, Proxied Future Volume: 1.0x 8-bar avg).
+  - Re-calculated live intraday compression / no-trade chop zone (24,125–24,150) along the terminal closing expiry compression band.
+  - Mapped high momentum downside liquidation cascade zone (<24,115 Spot breaking below Day Low 24,120.60 targeting 24,080 / 24,050) and upside short-covering squeeze triggers (>24,155 and >24,200 Spot targeting 24,180 / 24,200 / 24,240).
+  - Appended 5-minute tactical action triggers and updated `AI` levels prepended with `[15:15]` to `window.dailyPlanSummary` and `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+
 
 
 
