@@ -340,6 +340,15 @@ if (viewLevels) {
             // e.g., 24,115 or 24090.85 or 24000
             let formattedText = safeText.replace(/\b(\d{1,2},?\d{3}(?:\.\d+)?)\b/g, '<span style="color: #fb923c; font-weight: 700; font-family: \'JetBrains Mono\', monospace;">$1</span>');
             
+            // Highlight Green/Bullish Keywords
+            formattedText = formattedText.replace(/\b(Longs?|Buy|Buyers?|Buying|Support|Demand|BSL|CE)\b/gi, '<span style="color: #10b981; font-weight: 700;">$&</span>');
+            
+            // Highlight Red/Bearish Keywords
+            formattedText = formattedText.replace(/\b(Shorts?|Sell|Sellers?|Selling|Resistance|Supply|SSL|PE)\b/gi, '<span style="color: #f43f5e; font-weight: 700;">$&</span>');
+            
+            // Highlight Structural Keywords (Purple)
+            formattedText = formattedText.replace(/\b(FVGs?|Fair Value Gaps?|Order Blocks?|OBs?|Liquidity|CHoCH|BOS)\b/gi, '<span style="color: #a855f7; font-weight: 700;">$&</span>');
+            
             // Convert newlines to <br> since we are using innerHTML
             formattedText = formattedText.replace(/\n/g, '<br>');
             
