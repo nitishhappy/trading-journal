@@ -1642,24 +1642,38 @@ if (viewLevels) {
         const validLevels = allLevels.filter(l => !isNaN(l.pHigh));
         if (validLevels.length === 0) return;
 
-        const dateStr = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
-        const data = await fetch5mCandles(dateStr);
-        
-        if (!data || !data.success || !data.candles || data.candles.length === 0) return;
-        const candles = data.candles;
+        let currentPrice = null;
+        let isGold = (window.currentActiveAsset === 'GOLD');
 
-        const lastCandle = candles[candles.length - 1];
+        try {
+            const res = await fetch('/api/livePrices');
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.success) {
+                    currentPrice = isGold ? data.xauusd : data.nifty;
+                }
+            }
+        } catch (e) {
+            console.error("Live price fetch failed:", e);
+        }
+        
+        if (!currentPrice) return;
+
         const floater = document.getElementById('level-price-floater');
         const floaterVal = document.getElementById('floater-price-val');
         const floaterTitle = document.getElementById('floater-title-text');
         
-        const currentPrice = Number(lastCandle.close);
+        if (floaterTitle) {
+            floaterTitle.innerText = isGold ? "GOLD LIVE" : "NIFTY LIVE";
+        }
+        
         const prevPrice = currentMarketPrice;
         currentMarketPrice = currentPrice;
         
         if (floater && floaterVal && !floater.classList.contains('user-closed')) {
             const oldPrice = parseFloat(floaterVal.innerText.replace(/,/g, '')) || 0;
-            const formattedPrice = currentPrice.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const locale = isGold ? 'en-US' : 'en-IN';
+            const formattedPrice = currentPrice.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             floaterVal.innerText = formattedPrice;
             if (oldPrice && currentPrice !== oldPrice) {
                 const cls = currentPrice > oldPrice ? 'tick-up' : 'tick-down';
