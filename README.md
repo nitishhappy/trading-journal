@@ -1421,6 +1421,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added dedicated Gold data structures `window.goldDailyPlanSummary` and `window.goldDailyPlanData` with AI-sourced levels prepended with `[18:54]`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`
 
+### v2.3.43 — 27 Aug 2026 — Gold (XAU/USD) Intraday Tactical Update (07:40 PM IST Spot Recalibration)
+
+- **Gold (XAU/USD) Intraday Tactical Update (`daily_plan.js`)**:
+  - Recalibrated live spot market structure and liquidity pools for Gold Spot (XAU/USD) at 07:40 PM IST (Spot: 4576.44, Day High: 4593.00, Day Low: 4570.00).
+  - Mapped live intraday compression / no-trade chop zone ($4574.00–$4579.00), high-momentum BSL breakout (> $4584.00 / > $4594.00), and downside SSL liquidation cascade (< $4568.00) zones.
+  - Appended exact 5-min/15-min confirmation triggers and new AI-sourced Gold levels prepended with `[19:40]` to `window.goldDailyPlanSummary` and `window.goldDailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`
+
+
 
 
 
