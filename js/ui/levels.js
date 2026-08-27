@@ -332,7 +332,18 @@ if (viewLevels) {
             
             const content = document.createElement('div');
             content.className = 'summary-item-body';
-            content.innerText = rawText;
+            
+            // Escape basic HTML to prevent XSS
+            let safeText = rawText.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            
+            // Highlight price levels (4 to 5 digit numbers, with optional commas and decimals)
+            // e.g., 24,115 or 24090.85 or 24000
+            let formattedText = safeText.replace(/\b(\d{1,2},?\d{3}(?:\.\d+)?)\b/g, '<span style="color: #fb923c; font-weight: 700; font-family: \'JetBrains Mono\', monospace;">$1</span>');
+            
+            // Convert newlines to <br> since we are using innerHTML
+            formattedText = formattedText.replace(/\n/g, '<br>');
+            
+            content.innerHTML = formattedText;
             content.style.display = isLatest ? 'block' : 'none';
             
             header.addEventListener('click', () => {
