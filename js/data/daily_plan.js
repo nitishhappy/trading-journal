@@ -93,6 +93,21 @@ Weekly Thursday expiry dynamics with low-to-moderate VIX (~13.2â€“13.8) wil
 - CE Setup 2 (Breakout Long): Sustained 5m close ABOVE 24,260 with green volume >1.5x. TP: 24,297 / 24,340. SL: 24,220 (Spot basis).
 - PE Setup 1 (ORB Low Rejection Short): Pullback into 24,190–24,200 rejected with upper wick, followed by 5m close BELOW 24,165 with drying volume. TP: 24,135 / 24,100 / 24,080. SL: 24,205 (Spot basis).
 - PE Setup 2 (Day Low Breakdown Short): Sustained 5m close BELOW 24,130 with red volume >1.2x. TP: 24,100 / 24,080 / 24,025. SL: 24,160 (Spot basis).`
+  },
+  {
+    "source": "AI",
+    "text": `Intraday Tactical Update (02:00 PM IST - Aug 27, 2026):
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: 24,130 – 24,160 (Spot Index).
+- Context: Spot price is hovering at 24,131.5 right at the newly formed Day Low (24,129), having broken lower from previous consolidation. With volume at 1.0x 8-bar avg and Thursday weekly expiry decay accelerating in the final session, this 30-pt compression band between 24,130 and 24,160 is a trap zone for option buyers. Avoid fresh entries inside this zone without breakout confirmation.
+4. High Momentum / Explosive Zones:
+- Downside Long-Liquidation Cascade (< 24,125 Spot): A sustained 5m candle close below 24,125 (decisively taking out the 24,129 Day Low and 24,115–24,140 demand base) with expanding red futures volume (>1.2x) triggers rapid cascade selling toward 24,080 and 24,000–24,025 (Macro Demand Floor).
+- Upside Short-Covering Squeeze (> 24,175 & > 24,200 Spot): Reclaiming above 24,175 and sustaining 5m close above 24,200 (15M ORB Low underside) traps late breakdown shorts, igniting an explosive short squeeze toward 24,240 and 24,260. A sustained close above 24,260 accelerates to 24,297.45 (Day High).
+5. 5-Min Intraday Action Plan:
+- PE Setup 1 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW 24,125 with red futures volume >1.2x. TP: 24,080 / 24,025 / 24,000. SL: 24,155 (Spot basis).
+- CE Setup 1 (Day Low Trap & SSL Sweep Reclaim Long): Sweep below 24,129 rejected with lower wick, followed by 5m close back ABOVE 24,165 with green futures volume >1.2x. TP: 24,200 / 24,240 / 24,260. SL: 24,125 (Spot basis).
+- CE Setup 2 (15M ORB Reclaim Squeeze Long): Sustained 5m close ABOVE 24,200 with green futures volume >1.3x. TP: 24,240 / 24,260 / 24,297 (Day High). SL: 24,160 (Spot basis).
+- PE Setup 2 (Pullback Rejection Short): Pullback into 24,170–24,190 rejected with upper wick, followed by 5m close BELOW 24,150 with drying volume. TP: 24,125 / 24,080. SL: 24,195 (Spot basis).`
   }
 ];
 window.dailyPlanData = [
@@ -147,5 +162,10 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "[13:00] 15M ORB Low Re-entry & Short-Covering Squeeze Trigger. Sustained 5m close above 24200 accelerates toward 24240/24260.", "tp": "24260", "sl": "24165", "status": "na" },
   { "source": "AI", "price": "24260", "bias": "bullish", "behavior": "[13:00] Explosive Momentum Breakout Trigger. Sustained 5m close above 24260 triggers rapid expansion to 24297 Day High.", "tp": "24297", "sl": "24220", "status": "na" },
   { "source": "AI", "price": "24130", "bias": "bearish", "behavior": "[13:00] Day Low Breakdown & Long-Liquidation Cascade Trigger. Sustained 5m close below 24130 triggers drop toward 24100/24080.", "tp": "24080", "sl": "24160", "status": "na" },
-  { "source": "AI", "price": "24080-24100", "bias": "bullish", "behavior": "[13:00] Downside Demand Base & SSL Liquidity Zone. Key long absorption and reversal defense shelf.", "tp": "24180", "sl": "24050", "status": "na" }
+  { "source": "AI", "price": "24080-24100", "bias": "bullish", "behavior": "[13:00] Downside Demand Base & SSL Liquidity Zone. Key long absorption and reversal defense shelf.", "tp": "24180", "sl": "24050", "status": "na" },
+  { "source": "AI", "price": "24130-24160", "bias": "neutral", "behavior": "[14:00] Live Intraday Chop Zone & Day Low Edge Compression. High theta decay; avoid option buying inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24125", "bias": "bearish", "behavior": "[14:00] Day Low Breakdown & Liquidation Cascade Trigger. Sustained 5m close below 24125 accelerates toward 24080/24025/24000.", "tp": "24025", "sl": "24155", "status": "na" },
+  { "source": "AI", "price": "24165", "bias": "bullish", "behavior": "[14:00] Day Low Trap & SSL Sweep Reclaim Trigger. 5m close above 24165 traps breakdown shorts, targeting 24200/24240.", "tp": "24240", "sl": "24125", "status": "na" },
+  { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "[14:00] 15M ORB Low Re-entry & Short-Covering Squeeze Trigger. Sustained 5m close above 24200 accelerates toward 24240/24260/24297.", "tp": "24260", "sl": "24160", "status": "na" },
+  { "source": "AI", "price": "24080-24100", "bias": "bullish", "behavior": "[14:00] Downside Demand Base & SSL Liquidity Zone. Key long absorption and reversal defense shelf.", "tp": "24160", "sl": "24050", "status": "na" }
 ];
