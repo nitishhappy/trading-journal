@@ -123,6 +123,24 @@ Weekly Thursday expiry dynamics with low-to-moderate VIX (~13.2â€“13.8) wil
 - CE Setup 1 (Day Low Demand Trap & Squeeze Long): Rejection wick at 24,120 demand shelf followed by 5m close back ABOVE 24,155 with green futures volume >1.2x. TP: 24,180 / 24,200 / 24,240. SL: 24,120 (Spot basis).
 - CE Setup 2 (15M ORB Reclaim Squeeze Long): Sustained 5m close ABOVE 24,200 with green futures volume >1.4x. TP: 24,240 / 24,260 / 24,297. SL: 24,165 (Spot basis).
 - PE Setup 2 (Late Pullback Rejection Short): Pullback into 24,160–24,175 rejected with upper wick, followed by 5m close BELOW 24,145 with drying volume. TP: 24,120 / 24,080. SL: 24,185 (Spot basis).`
+  },
+  {
+    "source": "AI",
+    "text": `End of Day Tactical Update (EOD Close - Aug 27, 2026):
+4. NIFTY Analysis (Changes since 15:15):
+- The final 15 minutes witnessed a sustained breakdown below the 24,115 Day Low, accelerating into a long-liquidation cascade.
+- Nifty Spot closed at 24,090.85, officially tagging the 24,080 - 24,100 downside demand base / SSL liquidity zone.
+- Current Market Structure: Heavy intraday bearish structure. The market is now sitting squarely on the critical 24,080 invalidation pivot.
+5. GOLD Analysis:
+- Gold remains steady with no major structural delta into the US session.
+6. SMC / Price Action Perspective:
+- SSL Sweep: The key sell-side liquidity below 24,115 was swept and price has tapped the deeper macro liquidity pool at 24,080.
+- BOS: Intraday bearish BOS confirmed with the 5m close below 24,115.
+7. Trading Plan (Forward Looking):
+- The opening gap tomorrow is crucial. A gap-down below 24,080 completely negates the short-term bounce structure and exposes the 24,000 psychological floor.
+- A flat open or gap-up must clear the newly formed 24,150 late-day supply ceiling to trap today's late shorts.
+8. Risk Warning:
+- Carrying overnight longs is highly risky here given the close at the absolute bottom of the range and heavy late-day liquidation volume.`
   }
 ];
 window.dailyPlanData = [
@@ -187,5 +205,7 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24115", "bias": "bearish", "behavior": "[15:15] Day Low Breakdown & Long Liquidation Cascade Trigger. Sustained 5m close below 24115 triggers acceleration to 24080/24050.", "tp": "24050", "sl": "24145", "status": "na" },
   { "source": "AI", "price": "24155", "bias": "bullish", "behavior": "[15:15] Day Low Reversal & Short-Covering Squeeze Trigger. 5m close above 24155 traps breakdown shorts, targeting 24180/24200.", "tp": "24200", "sl": "24120", "status": "na" },
   { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "[15:15] 15M ORB Low Re-entry & Short-Covering Expansion Trigger. Sustained 5m close above 24200 accelerates toward 24240/24260.", "tp": "24260", "sl": "24165", "status": "na" },
-  { "source": "AI", "price": "24050-24080", "bias": "bullish", "behavior": "[15:15] Terminal Downside Demand Shelf & Macro Support. Potential end-of-day absorption and stabilization zone.", "tp": "24140", "sl": "24020", "status": "na" }
+  { "source": "AI", "price": "24050-24080", "bias": "bullish", "behavior": "[15:15] Terminal Downside Demand Shelf & Macro Support. Potential end-of-day absorption and stabilization zone.", "tp": "24140", "sl": "24020", "status": "na" },
+  { "source": "AI", "price": "24090", "bias": "neutral", "behavior": "[EOD] Previous Day Close (PDC). Resting directly on major demand shelf.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24150", "bias": "bearish", "behavior": "[EOD] Late-day breakdown supply ceiling. Will act as strong resistance on flat open or gap-up.", "tp": "24080", "sl": "24180", "status": "na" }
 ];
