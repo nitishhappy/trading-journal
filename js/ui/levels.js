@@ -183,9 +183,10 @@ if (viewLevels) {
             }
         });
 
-        // Determine if we should sync from window.dailyPlanData:
-        // Sync if forceSync is requested, or if loaded data has fewer levels, or if legacy bug marked all as BT
-        const planLevels = (window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : [];
+        // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
+        const isGold = (window.currentActiveAsset === 'GOLD');
+        const planLevelsSource = isGold ? window.goldDailyPlanData : window.dailyPlanData;
+        const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
         const shouldSyncFromPlan = forceSync || loaded.length === 0 || (loaded.length < planLevels.length) || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'));
 
         const finalLevels = [];
@@ -281,7 +282,8 @@ if (viewLevels) {
         const summaryBody = document.getElementById('levels-summary-body');
         if (!summaryPanel || !summaryBody) return;
 
-        const summaryData = window.dailyPlanSummary || [];
+        const isGold = (window.currentActiveAsset === 'GOLD');
+        const summaryData = isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || []);
         if (!Array.isArray(summaryData) || summaryData.length === 0) {
             summaryPanel.style.display = 'none';
             return;
@@ -1892,7 +1894,25 @@ if (viewLevels) {
         }
     });
 
+    const btnNifty = document.getElementById('btn-asset-nifty');
+    const btnGold = document.getElementById('btn-asset-gold');
+    if (btnNifty && btnGold) {
+        btnNifty.addEventListener('click', () => {
+            window.currentActiveAsset = 'NIFTY';
+            btnNifty.className = 'btn-primary';
+            btnGold.className = 'btn-secondary';
+            initLevels(true);
+        });
+        btnGold.addEventListener('click', () => {
+            window.currentActiveAsset = 'GOLD';
+            btnGold.className = 'btn-primary';
+            btnNifty.className = 'btn-secondary';
+            initLevels(true);
+        });
+    }
+
     // Call init when module loads
+    window.currentActiveAsset = 'NIFTY';
     initLevels();
     startLevelsPolling();
 }
