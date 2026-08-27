@@ -1,4 +1,4 @@
-﻿window.dailyPlanSummary = [
+window.dailyPlanSummary = [
 {
 "source": "YT-Videos",
     "text": `**Video Predictions Combined Summary (Aug 26 - Aug 27)**:
@@ -47,46 +47,69 @@ Nifty Spot closed at 24,207.75 (-126.80 pts, -0.52%) on Wednesday, settling on t
 
 5. Risk & Expiry Dynamics:
 Weekly Thursday expiry dynamics with low-to-moderate VIX (~13.2â€“13.8) will cause violent theta erosion inside 24,150â€“24,195. Stick strictly to ATM strikes (24,150 CE / 24,200 PE), avoid chasing without 15m ORB confirmation, and maintain 15â€“20 pt Spot-based SL.`
-  }
-
-];
-
-window.dailyPlanData = [
-    { "source": "AI", "price": "24500-24560", "bias": "bearish", "behavior": "[Aug 27] HTF Macro Extension Target & Major Multi-Week Peak. Heavy institutional profit booking zone.", "tp": "na", "sl": "24580", "status": "na" },
-    { "source": "AI", "price": "24360-24400", "bias": "bearish", "behavior": "[Aug 27] Major Supply Block & 1H Bearish Breaker. Sell-on-rise rejection ceiling.", "tp": "24260", "sl": "24425", "status": "na" },
-    { "source": "AI", "price": "24280-24300", "bias": "bearish", "behavior": "[Aug 27] Overhead Resistance & Call Writing Wall. Strong resistance on pullback.", "tp": "24200", "sl": "24330", "status": "na" },
-    { "source": "AI", "price": "24260", "bias": "bullish", "behavior": "[Aug 27] High-Momentum Short-Covering Breakout Trigger. Sustained 5m close above drives fast expansion to 24320/24360.", "tp": "24360", "sl": "24220", "status": "na" },
-    { "source": "AI", "price": "24195-24207", "bias": "bearish", "behavior": "[Aug 27] Previous Day Close / Gap-Down Resistance Shelf. Gap-fill rejection zone.", "tp": "24120", "sl": "24235", "status": "na" },
-    { "source": "AI", "price": "24150-24195", "bias": "neutral", "behavior": "[Aug 27] Opening No-Trade Chop Zone / Dynamic Compression Box. High theta decay; avoid entries inside.", "tp": "na", "sl": "na", "status": "na" },
-    { "source": "AI", "price": "24115-24140", "bias": "bullish", "behavior": "[Aug 27] Immediate Discount Demand & SSL Sweep Base. Gap absorption and primary long retest zone.", "tp": "24200", "sl": "24095", "status": "na" },
-    { "source": "AI", "price": "24080", "bias": "bearish", "behavior": "[Aug 27] High-Momentum Long-Liquidation Breakdown Trigger. Sustained 5m close below triggers cascade toward 24025/24000.", "tp": "24000", "sl": "24120", "status": "na" },
-    { "source": "AI", "price": "24000-24025", "bias": "bullish", "behavior": "[Aug 27] Macro Institutional Demand Floor & Put Writing Base. High-probability bounce base.", "tp": "24120", "sl": "23970", "status": "na" },
-    { "source": "AI", "price": "23800-23850", "bias": "bullish", "behavior": "[Aug 27] HTF Macro Demand Base & Multi-Month Swing Accumulation Floor (Extreme Extension Target).", "tp": "24000", "sl": "23750", "status": "na" },
-  { "source": "STL", "price": "24380", "bias": "bullish", "behavior": "Major resistance & Bull Flag breakout trigger; strong buying momentum on candle close above.", "tp": "24450-24500", "sl": "24330", "status": "na" },
-  { "source": "STL", "price": "24330", "bias": "bullish", "behavior": "Immediate resistance; closing above confirms intraday strength towards 24380 breakout level.", "tp": "24380", "sl": "24280", "status": "na" },
-  { "source": "STL", "price": "24240", "bias": "bullish", "behavior": "Key trendline retest & dip-support zone (21 EMA); look for reversal buy setup on rejection wicks.", "tp": "24330", "sl": "24180", "status": "na" },
-  { "source": "STL", "price": "24180", "bias": "bearish", "behavior": "Critical invalidation support; breakdown below negates immediate bull flag breakout structure.", "tp": "24100", "sl": "24240", "status": "na" },
-  { "source": "TBT", "price": "24400", "bias": "bearish", "behavior": "Major swing high resistance and primary upside target for all long trades.", "tp": "24300", "sl": "24430", "status": "na" },
-  { "source": "TBT", "price": "24210", "bias": "bullish", "behavior": "Fibonacci Golden Zone (0.50-0.618) & 15m FVG demand; flat open reversal trigger on hammer/engulfing candle.", "tp": "24400", "sl": "24170", "status": "na" },
-  { "source": "TBT", "price": "24180", "bias": "neutral", "behavior": "Lower boundary of Golden Pocket; double price action breakdown below triggers short trade.", "tp": "24100", "sl": "24220", "status": "na" },
-  { "source": "TBT", "price": "24100", "bias": "bullish", "behavior": "Previous swing low liquidity zone (24080-24100); look for SSL liquidity sweep reversal to buy towards PDC.", "tp": "24207", "sl": "24060", "status": "na" },
-  { "source": "SMO", "price": "24300", "bias": "bearish", "behavior": "Immediate Call OI wall & overhead resistance level; requires absorption for further rally.", "tp": "24100", "sl": "24360", "status": "na" },
-  { "source": "SMO", "price": "24200", "bias": "bullish", "behavior": "Spot support pivot; resilient futures strength indicates low-volume dip buying near current levels.", "tp": "24350", "sl": "24000", "status": "na" },
-  { "source": "SMO", "price": "24000", "bias": "bullish", "behavior": "Major structural macro base & regime invalidation floor. Positional bullish outlook active above 24000.", "tp": "24400-24500", "sl": "23950", "status": "na" },
-  { "source": "CKZ", "price": "24630", "bias": "bearish", "behavior": "HTF 75-min 5-3-5 Zig-Zag major supply & resistance zone.", "tp": "24350", "sl": "24700", "status": "na" },
-  { "source": "CKZ", "price": "24580.40", "bias": "bullish", "behavior": "161.8% Trending Impulse upside extension target for Wave 3.", "tp": "24630", "sl": "24400", "status": "na" },
-  { "source": "CKZ", "price": "24402.80", "bias": "bullish", "behavior": "100% Terminal Impulse upside target for Wave 3.", "tp": "24580.40", "sl": "24250", "status": "na" },
-  { "source": "CKZ", "price": "24247.05", "bias": "bullish", "behavior": "50% Fibonacci retracement of sub-wave 3. Reclaiming confirms Wave 3 impulse continuation.", "tp": "24402.80", "sl": "24115", "status": "na" },
-  { "source": "CKZ", "price": "24215.95", "bias": "neutral", "behavior": "61.8% Fibonacci retracement level of sub-wave 3; late breakdown line needing immediate reclaiming.", "tp": "24402.80", "sl": "24115", "status": "na" },
-  { "source": "CKZ", "price": "24115", "bias": "bullish", "behavior": "Crucial Elliott Wave 2 base & mandatory long protective stop. Breakdown triggers complete surrender of bullish count.", "tp": "24402.80", "sl": "24090", "status": "na" },
-  { "source": "TMP", "price": "24350", "bias": "bearish", "behavior": "Major resistance / Call writing zone (24300-24400 CE). Watch for rejection or short-covering trigger above.", "tp": "24207", "sl": "24385", "status": "na" },
-  { "source": "TMP", "price": "24300", "bias": "bullish", "behavior": "Buy on 15m candle close above 24300 for short-covering rally.", "tp": "24375, 24415", "sl": "24265", "status": "na" },
-  { "source": "TMP", "price": "24178", "bias": "bearish", "behavior": "Short breakdown trigger on 15m candle close below 24178.", "tp": "24050, 24000", "sl": "24220", "status": "na" },
-  { "source": "TMP", "price": "24100", "bias": "bullish", "behavior": "Gap-down reversal buy zone at daily rising trendline support on double bottom / bullish engulfing.", "tp": "24207, 24265", "sl": "24070", "status": "na" },
-  { "source": "MAA", "price": "24500", "bias": "bullish", "behavior": "Major macro resistance & heavy CE OI wall. Daily close above 24500 confirms full positional bull run.", "tp": "24650", "sl": "24420", "status": "na" },
-  { "source": "MAA", "price": "24357", "bias": "bullish", "behavior": "Key resistance breakout. Break & sustain above 24357 triggers aggressive momentum long expansion.", "tp": "24459, 24500", "sl": "24320", "status": "na" },
-  { "source": "MAA", "price": "24300", "bias": "bullish", "behavior": "Crucial pivot support. Sustaining above 24300 triggers small-quantity longs or pullback bounce.", "tp": "24357", "sl": "24270", "status": "na" },
-  { "source": "MAA", "price": "24179", "bias": "bearish", "behavior": "Major demand breakdown. Decisive move below 24200/24179 accelerates shorting momentum.", "tp": "24000", "sl": "24240", "status": "na" },
-  { "source": "MAA", "price": "24000", "bias": "bullish", "behavior": "Major psychological macro support zone / PE base. Strong reversal bounce zone if tested.", "tp": "24180", "sl": "23950", "status": "na" }
-];
+50:   },
+51:   {
+52:     "source": "AI",
+53:     "text": `Intraday Tactical Update (10:30 AM IST - Aug 27, 2026):
+54: 
+55: 3. Live Intraday Chop Zone / No-Trade Zone:
+56: - Range: 24,180 – 24,200 (Spot Index).
+57: - Context: Spot price is testing Day Low (24,178.65) right below 15M ORB Low (24,198.35). With volume running at 1.0x 8-bar avg, this tight boundary between 24,180 and 24,200 is vulnerable to sudden wicks and chop. Avoid fresh entries inside this band.
+58: 
+59: 4. High Momentum / Explosive Zones:
+60: - Downside Breakdown Expansion (< 24,175 Spot): A sustained 5m candle close below 24,175 with expanding red futures volume (>1.2x) triggers rapid liquidation toward 24,140 and 24,115 (Key Demand Shelf).
+61: - Upside Short-Covering Squeeze (> 24,200 & > 24,260 Spot): Reclaiming above 24,200 traps sub-ORB breakdown shorts, initiating a short-covering squeeze toward 24,240 and 24,260. A sustained close above 24,260 accelerates toward 24,297 (Day High).
+62: 
+63: 5. 5-Min Intraday Action Plan:
+64: - PE Breakdown Setup: Sustained 5m close BELOW 24,175 with red volume >1.2x. TP: 24,140 / 24,115 / 24,080. SL: 24,205 (Spot basis).
+65: - CE Reversal Setup (Failed Breakdown Trap): Sweep below 24,175 rejected with lower wick, followed by 5m close back ABOVE 24,200 with green volume >1.2x. TP: 24,240 / 24,260 / 24,297. SL: 24,170 (Spot basis).
+66: - CE Breakout Setup: Sustained 5m close ABOVE 24,260 with green volume >1.5x. TP: 24,297 (Day High) / 24,340. SL: 24,225 (Spot basis).`
+67:   }
+68: 
+69: ];
+70: 
+71: window.dailyPlanData = [
+72:     { "source": "AI", "price": "24500-24560", "bias": "bearish", "behavior": "[Aug 27] HTF Macro Extension Target & Major Multi-Week Peak. Heavy institutional profit booking zone.", "tp": "na", "sl": "24580", "status": "na" },
+73:     { "source": "AI", "price": "24360-24400", "bias": "bearish", "behavior": "[Aug 27] Major Supply Block & 1H Bearish Breaker. Sell-on-rise rejection ceiling.", "tp": "24260", "sl": "24425", "status": "na" },
+74:     { "source": "AI", "price": "24280-24300", "bias": "bearish", "behavior": "[Aug 27] Overhead Resistance & Call Writing Wall. Strong resistance on pullback.", "tp": "24200", "sl": "24330", "status": "na" },
+75:     { "source": "AI", "price": "24260", "bias": "bullish", "behavior": "[Aug 27] High-Momentum Short-Covering Breakout Trigger. Sustained 5m close above drives fast expansion to 24320/24360.", "tp": "24360", "sl": "24220", "status": "na" },
+76:     { "source": "AI", "price": "24195-24207", "bias": "bearish", "behavior": "[Aug 27] Previous Day Close / Gap-Down Resistance Shelf. Gap-fill rejection zone.", "tp": "24120", "sl": "24235", "status": "na" },
+77:     { "source": "AI", "price": "24150-24195", "bias": "neutral", "behavior": "[Aug 27] Opening No-Trade Chop Zone / Dynamic Compression Box. High theta decay; avoid entries inside.", "tp": "na", "sl": "na", "status": "na" },
+78:     { "source": "AI", "price": "24115-24140", "bias": "bullish", "behavior": "[Aug 27] Immediate Discount Demand & SSL Sweep Base. Gap absorption and primary long retest zone.", "tp": "24200", "sl": "24095", "status": "na" },
+79:     { "source": "AI", "price": "24080", "bias": "bearish", "behavior": "[Aug 27] High-Momentum Long-Liquidation Breakdown Trigger. Sustained 5m close below triggers cascade toward 24025/24000.", "tp": "24000", "sl": "24120", "status": "na" },
+80:     { "source": "AI", "price": "24000-24025", "bias": "bullish", "behavior": "[Aug 27] Macro Institutional Demand Floor & Put Writing Base. High-probability bounce base.", "tp": "24120", "sl": "23970", "status": "na" },
+81:     { "source": "AI", "price": "23800-23850", "bias": "bullish", "behavior": "[Aug 27] HTF Macro Demand Base & Multi-Month Swing Accumulation Floor (Extreme Extension Target).", "tp": "24000", "sl": "23750", "status": "na" },
+82:   { "source": "STL", "price": "24380", "bias": "bullish", "behavior": "Major resistance & Bull Flag breakout trigger; strong buying momentum on candle close above.", "tp": "24450-24500", "sl": "24330", "status": "na" },
+83:   { "source": "STL", "price": "24330", "bias": "bullish", "behavior": "Immediate resistance; closing above confirms intraday strength towards 24380 breakout level.", "tp": "24380", "sl": "24280", "status": "na" },
+84:   { "source": "STL", "price": "24240", "bias": "bullish", "behavior": "Key trendline retest & dip-support zone (21 EMA); look for reversal buy setup on rejection wicks.", "tp": "24330", "sl": "24180", "status": "na" },
+85:   { "source": "STL", "price": "24180", "bias": "bearish", "behavior": "Critical invalidation support; breakdown below negates immediate bull flag breakout structure.", "tp": "24100", "sl": "24240", "status": "na" },
+86:   { "source": "TBT", "price": "24400", "bias": "bearish", "behavior": "Major swing high resistance and primary upside target for all long trades.", "tp": "24300", "sl": "24430", "status": "na" },
+87:   { "source": "TBT", "price": "24210", "bias": "bullish", "behavior": "Fibonacci Golden Zone (0.50-0.618) & 15m FVG demand; flat open reversal trigger on hammer/engulfing candle.", "tp": "24400", "sl": "24170", "status": "na" },
+88:   { "source": "TBT", "price": "24180", "bias": "neutral", "behavior": "Lower boundary of Golden Pocket; double price action breakdown below triggers short trade.", "tp": "24100", "sl": "24220", "status": "na" },
+89:   { "source": "TBT", "price": "24100", "bias": "bullish", "behavior": "Previous swing low liquidity zone (24080-24100); look for SSL liquidity sweep reversal to buy towards PDC.", "tp": "24207", "sl": "24060", "status": "na" },
+90:   { "source": "SMO", "price": "24300", "bias": "bearish", "behavior": "Immediate Call OI wall & overhead resistance level; requires absorption for further rally.", "tp": "24100", "sl": "24360", "status": "na" },
+91:   { "source": "SMO", "price": "24200", "bias": "bullish", "behavior": "Spot support pivot; resilient futures strength indicates low-volume dip buying near current levels.", "tp": "24350", "sl": "24000", "status": "na" },
+92:   { "source": "SMO", "price": "24000", "bias": "bullish", "behavior": "Major structural macro base & regime invalidation floor. Positional bullish outlook active above 24000.", "tp": "24400-24500", "sl": "23950", "status": "na" },
+93:   { "source": "CKZ", "price": "24630", "bias": "bearish", "behavior": "HTF 75-min 5-3-5 Zig-Zag major supply & resistance zone.", "tp": "24350", "sl": "24700", "status": "na" },
+94:   { "source": "CKZ", "price": "24580.40", "bias": "bullish", "behavior": "161.8% Trending Impulse upside extension target for Wave 3.", "tp": "24630", "sl": "24400", "status": "na" },
+95:   { "source": "CKZ", "price": "24402.80", "bias": "bullish", "behavior": "100% Terminal Impulse upside target for Wave 3.", "tp": "24580.40", "sl": "24250", "status": "na" },
+96:   { "source": "CKZ", "price": "24247.05", "bias": "bullish", "behavior": "50% Fibonacci retracement of sub-wave 3. Reclaiming confirms Wave 3 impulse continuation.", "tp": "24402.80", "sl": "24115", "status": "na" },
+97:   { "source": "CKZ", "price": "24215.95", "bias": "neutral", "behavior": "61.8% Fibonacci retracement level of sub-wave 3; late breakdown line needing immediate reclaiming.", "tp": "24402.80", "sl": "24115", "status": "na" },
+98:   { "source": "CKZ", "price": "24115", "bias": "bullish", "behavior": "Crucial Elliott Wave 2 base & mandatory long protective stop. Breakdown triggers complete surrender of bullish count.", "tp": "24402.80", "sl": "24090", "status": "na" },
+99:   { "source": "TMP", "price": "24350", "bias": "bearish", "behavior": "Major resistance / Call writing zone (24300-24400 CE). Watch for rejection or short-covering trigger above.", "tp": "24207", "sl": "24385", "status": "na" },
+100:   { "source": "TMP", "price": "24300", "bias": "bullish", "behavior": "Buy on 15m candle close above 24300 for short-covering rally.", "tp": "24375, 24415", "sl": "24265", "status": "na" },
+101:   { "source": "TMP", "price": "24178", "bias": "bearish", "behavior": "Short breakdown trigger on 15m candle close below 24178.", "tp": "24050, 24000", "sl": "24220", "status": "na" },
+102:   { "source": "TMP", "price": "24100", "bias": "bullish", "behavior": "Gap-down reversal buy zone at daily rising trendline support on double bottom / bullish engulfing.", "tp": "24207, 24265", "sl": "24070", "status": "na" },
+103:   { "source": "MAA", "price": "24500", "bias": "bullish", "behavior": "Major macro resistance & heavy CE OI wall. Daily close above 24500 confirms full positional bull run.", "tp": "24650", "sl": "24420", "status": "na" },
+104:   { "source": "MAA", "price": "24357", "bias": "bullish", "behavior": "Key resistance breakout. Break & sustain above 24357 triggers aggressive momentum long expansion.", "tp": "24459, 24500", "sl": "24320", "status": "na" },
+105:   { "source": "MAA", "price": "24300", "bias": "bullish", "behavior": "Crucial pivot support. Sustaining above 24300 triggers small-quantity longs or pullback bounce.", "tp": "24357", "sl": "24270", "status": "na" },
+106:   { "source": "MAA", "price": "24179", "bias": "bearish", "behavior": "Major demand breakdown. Decisive move below 24200/24179 accelerates shorting momentum.", "tp": "24000", "sl": "24240", "status": "na" },
+107:   { "source": "MAA", "price": "24000", "bias": "bullish", "behavior": "Major psychological macro support zone / PE base. Strong reversal bounce zone if tested.", "tp": "24180", "sl": "23950", "status": "na" },
+108:   { "source": "AI", "price": "24180-24200", "bias": "neutral", "behavior": "[10:30] Live Intraday Chop Zone & 15M ORB Low Compression. Avoid option buying inside this zone due to chop risk.", "tp": "na", "sl": "na", "status": "na" },
+109:   { "source": "AI", "price": "24175", "bias": "bearish", "behavior": "[10:30] Day Low Breakdown & Momentum Short Trigger. Sustained 5m close below 24175 triggers acceleration toward 24140/24115.", "tp": "24115", "sl": "24205", "status": "na" },
+110:   { "source": "AI", "price": "24200", "bias": "bullish", "behavior": "[10:30] Sub-ORB False Breakdown Reversal Trigger. 5m close reclaiming above 24200 traps shorts, squeezing to 24240/24260.", "tp": "24260", "sl": "24170", "status": "na" },
+111:   { "source": "AI", "price": "24260", "bias": "bullish", "behavior": "[10:30] Explosive Short-Covering Expansion Trigger. Sustained 5m close above 24260 triggers rapid squeeze to 24297 Day High.", "tp": "24297", "sl": "24225", "status": "na" },
+112:   { "source": "AI", "price": "24115-24140", "bias": "bullish", "behavior": "[10:30] Primary Downside Demand Shelf & Long Absorption Zone. Look for SSL sweep reversal if tested.", "tp": "24200", "sl": "24095", "status": "na" }
+113: ];
+114: 
 
