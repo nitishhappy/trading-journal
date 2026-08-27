@@ -62,6 +62,45 @@ The consensus from multiple analysts is strongly bullish on Nifty, indicating th
 - CE Setup 2 (Day Low SSL Sweep Long): Liquidity sweep below 24,200 followed by strong 5m close back >24,215 with volume surge. TP: 24,265 / 24,300. SL: 24,185.
 - PE Setup 1 (ORB Low Rejection Short): Pullback into 24,285–24,305 with upper wick rejection and 5m close <24,275. TP: 24,240 / 24,200. SL: 24,315.
 - PE Setup 2 (Day Low Breakdown Short): Sustained 5m close <24,195 with expanding red futures volume (>1.3x). TP: 24,150 / 24,115. SL: 24,230.`
+  },
+  {
+    "source": "AI",
+    "text": `Pre-Market AI Tactical Plan (Aug 27, 2026):
+
+1. Market Structure & Distribution:
+Nifty Spot closed at 24,207.75 (-126.80 pts, -0.52%) on Wednesday, settling on the low of the session after encountering stiff rejection near 24,360. GIFT Nifty indicates a gap-down opening near 24,120–24,135 (-80 to -90 pts). Daily structure remains in a broader 24,000–24,500 consolidation band, testing the immediate 24,115–24,140 institutional discount demand shelf at open.
+
+2. Key Resistance, Support & Inefficiencies:
+- Macro Extension Resistance: 24,500 – 24,560 (Major multi-week peak & swing target).
+- Major Overhead Supply Block: 24,360 – 24,400 (Yesterday's Day High & 1H Bearish Breaker).
+- Strong Resistance / Call Writing Wall: 24,280 – 24,300 (Breakdown shelf & heavy 24,300 CE OI).
+- High-Momentum Short-Covering Trigger: 24,260 (Clearing 15m Bearish FVG triggers rapid short squeeze).
+- Previous Day Close / Converted Resistance: 24,195 – 24,207.75 (Immediate dynamic ceiling on gap-down).
+- Opening Dynamic Compression / No-Trade Zone: 24,150 – 24,195 (Option buying chop box).
+- Immediate Discount Demand / Gap Target: 24,115 – 24,140 (Aug 25 swing base & primary long retest shelf).
+- Invalidation Pivot / Bullish Defense Floor: 24,080 (Key swing low; 5m breakdown invalidates bounce structure).
+- Macro Institutional Demand Floor: 24,000 – 24,025 (Psychological round number & Put writing base).
+- HTF Macro Demand Base: 23,800 – 23,850 (Multi-month extreme extension accumulation floor).
+
+3. SMC Perspective:
+- Buy-Side Liquidity (BSL): Clustered above 24,260, 24,300, and 24,360 (Day High shorts & Call writers' stops).
+- Sell-Side Liquidity (SSL): Exposed below 24,200 (yesterday's low), 24,115 (swing low), and 24,000 (macro floor).
+- Order Blocks (OB): Bearish 15m Breaker OB at 24,260–24,295; Bullish Discount Demand OB at 24,080–24,120.
+- Fair Value Gaps (FVG): 15m Bearish FVG between 24,220–24,260 formed during yesterday's afternoon slide.
+- CHoCH / BOS: Internal bullish CHoCH triggers on 5m close above 24,200 and confirms above 24,260; Bearish BOS triggers on sustained close below 24,080.
+- Equilibrium / Discount: 50% equilibrium of yesterday's range sits at 24,280; price below 24,180 is in deep discount.
+
+4. 5-Min Intraday Action Plan:
+- CE Setup 1 (Discount Demand Absorption / SSL Sweep Long): Gap down into 24,115–24,140, liquidity sweep below 24,115 followed by lower wick rejection and 5m close back >24,150 with expanding green futures volume (>1.2x). TP: 24,200 / 24,240 / 24,280. SL: 24,095.
+- CE Setup 2 (Breakout Long): Sustained 5m candle close ABOVE 24,260 with high green futures volume (>1.5x). TP: 24,320 / 24,360. SL: 24,220.
+- PE Setup 1 (Gap-Fill Rejection Short): Pullback into 24,195–24,220 (PDC & FVG shelf) with upper wick rejection and 5m close <24,180 with drying buy volume. TP: 24,120 / 24,080. SL: 24,235.
+- PE Setup 2 (Breakdown Continuation Short): Sustained 5m close BELOW 24,080 with surging red futures volume (>1.4x). TP: 24,025 / 24,000. SL: 24,120.
+- 15-Minute Opening Range Filter Rule: On gap-down, NEVER execute reversal entries on 3rd 5m candle (09:25 AM). Wait for full 15m range (09:15–09:30 AM) to complete. Break above 15m High confirms reversal long; break below 15m Low confirms continuation short.
+- High Momentum / Explosive Zones: Breakout >24,260 (Call short-covering squeeze); Breakdown <24,080 (Long liquidation cascade).
+- No-Trade Zone: 24,150 – 24,195 (Dynamic opening compression box).
+
+5. Risk & Expiry Dynamics:
+Weekly Thursday expiry dynamics with low-to-moderate VIX (~13.2–13.8) will cause violent theta erosion inside 24,150–24,195. Stick strictly to ATM strikes (24,150 CE / 24,200 PE), avoid chasing without 15m ORB confirmation, and maintain 15–20 pt Spot-based SL.`
   }
 
 ];
@@ -92,5 +131,15 @@ window.dailyPlanData = [
   { "source": "AI", "price": "24245-24290", "bias": "neutral", "behavior": "[14:05] Intraday Tactical Chop Zone / No-Trade Compression Box. High theta decay for option buyers; avoid entries inside.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "24240", "bias": "bearish", "behavior": "[14:05] Micro Support Breakdown Trigger. Sustained 5m close below triggers downside test of Day Low (24200).", "tp": "24200", "sl": "24270", "status": "na" },
   { "source": "AI", "price": "24195-24200", "bias": "bullish", "behavior": "[14:05] Day Low Demand & SSL Sweep Base. Reversal bounce zone on liquidity sweep.", "tp": "24265", "sl": "24185", "status": "na" },
-  { "source": "AI", "price": "24195", "bias": "bearish", "behavior": "[14:05] Day Low Breakdown Flush Trigger. Sustained 5m close below accelerates liquidation toward 24150/24115.", "tp": "24115", "sl": "24230", "status": "na" }
+  { "source": "AI", "price": "24195", "bias": "bearish", "behavior": "[14:05] Day Low Breakdown Flush Trigger. Sustained 5m close below accelerates liquidation toward 24150/24115.", "tp": "24115", "sl": "24230", "status": "na" },
+  { "source": "AI", "price": "24500-24560", "bias": "bearish", "behavior": "[Aug 27] HTF Macro Extension Target & Major Multi-Week Peak. Heavy institutional profit booking zone.", "tp": "na", "sl": "24580", "status": "na" },
+  { "source": "AI", "price": "24360-24400", "bias": "bearish", "behavior": "[Aug 27] Major Supply Block & 1H Bearish Breaker. Sell-on-rise rejection ceiling.", "tp": "24260", "sl": "24425", "status": "na" },
+  { "source": "AI", "price": "24280-24300", "bias": "bearish", "behavior": "[Aug 27] Overhead Resistance & Call Writing Wall. Strong resistance on pullback.", "tp": "24200", "sl": "24330", "status": "na" },
+  { "source": "AI", "price": "24260", "bias": "bullish", "behavior": "[Aug 27] High-Momentum Short-Covering Breakout Trigger. Sustained 5m close above drives fast expansion to 24320/24360.", "tp": "24360", "sl": "24220", "status": "na" },
+  { "source": "AI", "price": "24195-24207", "bias": "bearish", "behavior": "[Aug 27] Previous Day Close / Gap-Down Resistance Shelf. Gap-fill rejection zone.", "tp": "24120", "sl": "24235", "status": "na" },
+  { "source": "AI", "price": "24150-24195", "bias": "neutral", "behavior": "[Aug 27] Opening No-Trade Chop Zone / Dynamic Compression Box. High theta decay; avoid entries inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24115-24140", "bias": "bullish", "behavior": "[Aug 27] Immediate Discount Demand & SSL Sweep Base. Gap absorption and primary long retest zone.", "tp": "24200", "sl": "24095", "status": "na" },
+  { "source": "AI", "price": "24080", "bias": "bearish", "behavior": "[Aug 27] High-Momentum Long-Liquidation Breakdown Trigger. Sustained 5m close below triggers cascade toward 24025/24000.", "tp": "24000", "sl": "24120", "status": "na" },
+  { "source": "AI", "price": "24000-24025", "bias": "bullish", "behavior": "[Aug 27] Macro Institutional Demand Floor & Put Writing Base. High-probability bounce base.", "tp": "24120", "sl": "23970", "status": "na" },
+  { "source": "AI", "price": "23800-23850", "bias": "bullish", "behavior": "[Aug 27] HTF Macro Demand Base & Multi-Month Swing Accumulation Floor (Extreme Extension Target).", "tp": "24000", "sl": "23750", "status": "na" }
 ];

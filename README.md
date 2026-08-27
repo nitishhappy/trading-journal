@@ -1360,6 +1360,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended 5-minute tactical action triggers and updated `AI [14-05]` levels to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
+### v2.3.36 — 27 Aug 2026 — Pre-Market Briefing & Tactical AI Plan
+
+- **Pre-Market Briefing & Level Mapping (`daily_plan.js`)**:
+  - Generated full pre-market structural briefing for August 27, 2026 covering global sentiment, overnight crude price drops ($87.24 Brent), Gold consolidation above $4,600, and GIFT Nifty gap-down indication (~80–90 pts to 24,120–24,135).
+  - Appended August 27 Pre-Market AI Summary to `window.dailyPlanSummary` detailing market structure, key resistance/support zones, SMC POIs, 5-minute action triggers, 15m ORB rules, explosive momentum zones, and weekly expiry risk dynamics.
+  - Appended 10 structured AI levels to `window.dailyPlanData` covering macro extension targets (24,500–24,560 / 23,800–23,850), overhead supply blocks (24,360–24,400), short-covering trigger (24,260), opening no-trade compression box (24,150–24,195), discount demand base (24,115–24,140), breakdown trigger (24,080), and macro demand floor (24,000–24,025).
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+
 
 
 
