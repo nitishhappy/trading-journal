@@ -20,6 +20,24 @@ NIFTY Spot opens with a mild positive bias (~24,440-24,460), consolidating near 
 - BUY Setup 2 (Demand Absorption Long): Dip to 24,250-24,260 Demand OB with lower-wick rejection and 5m close back above 24,290. TP: 24,380 / 24,450. SL: 24,230.
 - SELL Setup 1 (Supply Rejection Short): Rejection at 24,480-24,500 with upper-wick sweep and 5m red close below 24,460. TP: 24,400 / 24,350 / 24,300. SL: 24,520.
 - SELL Setup 2 (Liquidation Cascade Short): Sustained 15m close BELOW 24,300 triggers long-liquidation cascade to 24,250 / 24,150. SL: 24,340.`
+  },
+  {
+    "source": "AI",
+    "text": `NIFTY 50 Intraday Tactical Update (10:30 AM IST - Aug 28, 2026 | Trigger: Scheduled 10:30 AM Update):
+
+1. Live Intraday Chop Zone / No-Trade Zone:
+- Range: 24,155.00 – 24,185.00 (Spot Index).
+- Context: Spot price (24,170.15) is compressed between the 15M ORB High retest shelf (24,158.25) and Day High resistance (24,188.30). With Futures volume tracking at 1x baseline, taking unconfirmed trades inside this 30-point compression zone exposes traders to severe option decay and rotational whipsaws. Avoid unconfirmed entries inside this zone.
+
+2. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 24,190.00 Spot): A sustained 5-minute candle close above Day High (24,188.30) with volume expansion will force immediate short-covering among 24,200 Call writers, unlocking rapid expansion toward 24,225.00, 24,255.00, and 24,300.00.
+- Downside Bull-Trap Cascade (< 24,150.00 Spot): A sustained 5-minute candle close below 24,150 pulls price back inside the 15M Opening Range, trapping breakout longs and triggering a long-unwinding cascade toward 24,130.00 (ORB 50% Mid), 24,106.55 (Day Low), and 24,060.00.
+
+3. 5-Min Intraday Action Plan & Triggers:
+- BUY Setup 1 (Day High / ORB Breakout Long - CE): Sustained 5m close ABOVE 24,190.00 with expanding Futures volume (>1.2x). TP: 24,225.00 / 24,255.00 / 24,300.00. SL: 24,160.00.
+- BUY Setup 2 (ORB High Retest Absorption Long - CE): Pullback into 24,155.00–24,160.00 with lower-wick rejection, closing back ABOVE 24,168.00 on 5m candle. TP: 24,188.00 / 24,220.00 / 24,250.00. SL: 24,142.00.
+- SELL Setup 1 (Day High Liquidity Sweep Reversal Short - PE): False sweep above Day High (24,188.30) rejected with upper wick, closing back BELOW 24,175.00 on 5m candle. TP: 24,158.00 / 24,135.00 / 24,110.00. SL: 24,198.00.
+- SELL Setup 2 (ORB Breakdown Continuation Short - PE): Sustained 5m close BELOW 24,150.00. TP: 24,130.00 / 24,106.55 / 24,060.00. SL: 24,172.00.`
   }
 ];
 window.dailyPlanData = [
@@ -264,6 +282,69 @@ window.dailyPlanData = [
     "behavior": "[09:00] Higher Timeframe Macro Demand Floor & Capitulation Liquidity Base. V-reversal / Dead-cat bounce shelf.",
     "tp": "24300",
     "sl": "24050",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24188-24200",
+    "bias": "bearish",
+    "behavior": "[10:30] Day High Supply & Heavy 24200 Call Writing Wall. Overhead ceiling; watch for liquidity sweep rejection or breakout.",
+    "tp": "24158",
+    "sl": "24205",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24190",
+    "bias": "bullish",
+    "behavior": "[10:30] High-Momentum BSL Breakout Trigger. Sustained 5m close above Day High triggers rapid short-covering squeeze to 24225/24255/24300.",
+    "tp": "24300",
+    "sl": "24160",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24155-24185",
+    "bias": "neutral",
+    "behavior": "[10:30] Live Intraday Compression & No-Trade Chop Zone. Post-ORB equilibrium; stay flat inside to avoid premium decay.",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24168",
+    "bias": "bullish",
+    "behavior": "[10:30] 15M ORB High Retest Absorption Trigger. Lower-wick rejection of 24155-24160 closing above 24168 targets 24188/24220.",
+    "tp": "24220",
+    "sl": "24142",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24155-24158",
+    "bias": "bullish",
+    "behavior": "[10:30] 15M ORB High Retest Shelf & Immediate Support Base. Key shelf defending morning breakout structure.",
+    "tp": "24188",
+    "sl": "24145",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24150",
+    "bias": "bearish",
+    "behavior": "[10:30] Bull-Trap Breakdown & Liquidation Cascade Trigger. Sustained 5m close below triggers unwinding back into ORB to 24130/24106.",
+    "tp": "24106",
+    "sl": "24172",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24106-24110",
+    "bias": "bullish",
+    "behavior": "[10:30] Day Low SSL Liquidity Base & Session Demand Floor. Primary long absorption and liquidity sweep zone.",
+    "tp": "24160",
+    "sl": "24085",
     "status": "na"
   }
 ];
