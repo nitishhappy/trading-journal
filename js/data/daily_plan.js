@@ -581,6 +581,32 @@ Gold Spot (XAU/USD) is currently consolidating at $4508.28 following an impulsiv
 - BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE $4516.00. TP: $4528.00 / $4538.00 / $4555.00. SL: $4507.00.
 - SELL Setup 1 (Bearish FVG Rejection Short): Corrective bounce into $4528.00–$4538.00 FVG rejected with upper wick, closing back BELOW $4524.00 on 5m candle. TP: $4512.00 / $4505.00 / $4495.00. SL: $4542.50.
 - SELL Setup 2 (Round-Number Breakdown Continuation Short): Sustained 5m close BELOW $4497.00. TP: $4485.00 / $4472.00 / $4460.00. SL: $4506.00.`
+  },
+  {
+    "source": "AI",
+    "text": `Gold (XAU/USD) Intraday Tactical Update (10:09 PM IST / London Close Exhaustion - Aug 28, 2026):
+1. Market Structure & Session Bias:
+Gold Spot (XAU/USD) is currently consolidating at $4485.77 following an impulsive downside liquidation cascade that breached the prior session low of $4515.30. Spot is now probing the upper boundary of the major higher-timeframe 4H discount demand base ($4470.00–$4485.00) within the day's broad structure (Day High: $4688.00 | Prior Broken Low: $4515.30 | Live Spot: $4485.77). As the London trading session moves into its closing auction / London fix exhaustion (10:00 PM - 10:30 PM IST), aggressive European trend selling typically decelerates due to position squaring. With DXY testing intraday resistance and US 10-Year Treasury Yields plateauing, spot is positioned for a potential London Close short-covering mean reversion or a high-momentum continuation if $4475.00 breaks.
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above $4493.00 local swing highs, extending into 15M Bearish FVG ($4505.00–$4518.00), prior broken low Breaker Block ($4515.00–$4525.00), and macro day high targets up to $4688.00.
+- Sell-Side Liquidity (SSL): Concentrated below $4475.00 down to the deeper macro 4H demand base ($4450.00–$4465.00).
+- Order Blocks (OB): Bullish Demand OB at $4475.00–$4480.00; Bearish Breaker OB at $4515.00–$4525.00 and Bearish Supply OB at $4535.00–$4545.00.
+- Fair Value Gaps (FVG): 15M Bearish FVG at $4505.00–$4518.00; 5M Bullish Displacement FVG at $4487.00–$4492.00.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $4482.00 – $4489.00.
+- Context: Current spot ($4485.77) is oscillating inside a tight post-expansion equilibrium pocket. Bid-ask spread friction, micro-wicks, and late-session volume transitions create adverse risk-reward for scalpers. Avoid taking unconfirmed entries inside this zone.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $4493.00 Spot): A sustained 5m candle close above $4493.00 clears local compression and forces late-session breakout shorts to cover, triggering a fast expansion toward $4505.00, $4515.00 (15M FVG / Breaker), and $4525.00.
+- Downside Long-Liquidation Cascade (< $4475.00 Spot): A sustained 5m close below the 4H demand shelf ($4475.00) triggers institutional stop cascades accelerating toward $4465.00 and $4450.00.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (London Close SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $4480.00 rejected with lower wick, followed by 5m close back ABOVE $4489.00. TP: $4498.00 / $4508.00 / $4515.00. SL: $4473.00.
+- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4493.00. TP: $4505.00 / $4515.00 / $4525.00. SL: $4484.00.
+- SELL Setup 1 (Bearish Breaker / FVG Rejection Short): Corrective relief bounce into $4512.00–$4518.00 rejected with upper wick, closing back BELOW $4508.00 on 5m candle. TP: $4495.00 / $4485.00 / $4475.00. SL: $4522.00.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $4475.00. TP: $4465.00 / $4455.00 / $4445.00. SL: $4483.00.`
   }
 ];
 
@@ -665,6 +691,15 @@ window.goldDailyPlanData = [
   { "source": "AI", "price": "4509.5", "bias": "bullish", "behavior": "[21:43] Day Low SSL Sweep Reversal Trigger. Lower wick rejection of $4500 reclaiming $4509.50 targets $4518/$4528.", "tp": "4528", "sl": "4496.5", "status": "na" },
   { "source": "AI", "price": "4500-4503.5", "bias": "bullish", "behavior": "[21:43] Psychological Round-Number Support & Liquidity Base ($4500). Primary dip-absorption shelf.", "tp": "4518", "sl": "4495", "status": "na" },
   { "source": "AI", "price": "4497", "bias": "bearish", "behavior": "[21:43] Session Low Breakdown & Liquidation Cascade Trigger. Sustained 5m close below $4500 accelerates to $4485/$4470.", "tp": "4470", "sl": "4506", "status": "na" },
-  { "source": "AI", "price": "4470-4485", "bias": "bullish", "behavior": "[21:43] HTF 4H Discount Demand Base & Macro Reversal Floor. High-probability institutional bid shelf.", "tp": "4505", "sl": "4460", "status": "na" }
+  { "source": "AI", "price": "4470-4485", "bias": "bullish", "behavior": "[21:43] HTF 4H Discount Demand Base & Macro Reversal Floor. High-probability institutional bid shelf.", "tp": "4505", "sl": "4460", "status": "na" },
+  { "source": "AI", "price": "4675-4688", "bias": "bearish", "behavior": "[22:09] Day High Macro BSL Liquidity Pool & Major 4H Supply Shelf. Heavy institutional sell-liquidity zone.", "tp": "na", "sl": "4695", "status": "na" },
+  { "source": "AI", "price": "4515-4525", "bias": "bearish", "behavior": "[22:09] Prior Broken Day Low ($4515.30) Flipped Resistance & Bearish Breaker Block. 15M FVG supply defense zone.", "tp": "4495", "sl": "4530", "status": "na" },
+  { "source": "AI", "price": "4505-4512", "bias": "bearish", "behavior": "[22:09] 15M Imbalance & Bearish FVG Shelf. Corrective pullback rejection and supply zone.", "tp": "4490", "sl": "4518", "status": "na" },
+  { "source": "AI", "price": "4493", "bias": "bullish", "behavior": "[22:09] High-Momentum Short-Covering Reclaim Trigger. Sustained 5m close above clears local compression to $4505/$4515.", "tp": "4515", "sl": "4484", "status": "na" },
+  { "source": "AI", "price": "4482-4489", "bias": "neutral", "behavior": "[22:09] Live Intraday Compression & No-Trade Chop Zone. London close equilibrium ($4485.77); avoid unconfirmed entries inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "4489", "bias": "bullish", "behavior": "[22:09] Day Low SSL Sweep Reversal Trigger. Lower wick rejection of $4478 reclaiming $4489 targets $4498/$4508.", "tp": "4508", "sl": "4473", "status": "na" },
+  { "source": "AI", "price": "4475-4480", "bias": "bullish", "behavior": "[22:09] Session Low SSL Liquidity Base & 4H Demand Shelf ($4478). Primary dip-absorption shelf.", "tp": "4495", "sl": "4470", "status": "na" },
+  { "source": "AI", "price": "4475", "bias": "bearish", "behavior": "[22:09] Demand Floor Breakdown & Liquidation Cascade Trigger. Sustained 5m close below $4475 accelerates to $4465/$4450.", "tp": "4450", "sl": "4483", "status": "na" },
+  { "source": "AI", "price": "4450-4465", "bias": "bullish", "behavior": "[22:09] HTF 4H Deep Discount Demand Base & Macro Reversal Floor. High-probability institutional bid shelf.", "tp": "4485", "sl": "4440", "status": "na" }
 ];
 
