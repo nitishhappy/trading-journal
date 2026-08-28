@@ -159,22 +159,31 @@ if (viewLevels) {
     function initLevels(forceSync = false) {
         loadScorecardHistory();
 
+        const isGold = (window.currentActiveAsset === 'GOLD');
+        const storageKey = isGold ? 'goldTradePlanData' : 'dailyTradePlanData';
         let loaded = [];
-        const saved = localStorage.getItem('dailyTradePlanData');
+        const saved = localStorage.getItem(storageKey);
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
                 if (Array.isArray(parsed)) loaded = parsed;
             } catch (e) {
-                console.warn("Could not parse saved dailyTradePlanData:", e);
+                console.warn("Could not parse saved " + storageKey, e);
             }
         }
 
         // Map existing review statuses by signature (price + behavior) to preserve user selections
         const userStatusMap = {};
         let allWereBT = true;
+        let assetMismatch = false;
         loaded.forEach(l => {
-            const sig = ((l.rawPrice || l.price || '') + '__' + (l.behavior || '')).trim().toLowerCase();
+            const prStr = (l.rawPrice || l.price || '').toString();
+            const num = parseFloat(prStr.replace(/[^0-9.]/g, ''));
+            if (!isNaN(num) && num > 0) {
+                if (!isGold && num < 10000) assetMismatch = true; // NIFTY levels should be > 10000
+                if (isGold && num > 10000) assetMismatch = true; // GOLD levels should be < 10000
+            }
+            const sig = (prStr + '__' + (l.behavior || '')).trim().toLowerCase();
             if (l.status && l.status !== 'na') {
                 userStatusMap[sig] = l.status;
             }
@@ -184,10 +193,9 @@ if (viewLevels) {
         });
 
         // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
-        const isGold = (window.currentActiveAsset === 'GOLD');
         const planLevelsSource = isGold ? window.goldDailyPlanData : window.dailyPlanData;
         const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
-        const shouldSyncFromPlan = forceSync || loaded.length === 0 || (loaded.length < planLevels.length) || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'));
+        const shouldSyncFromPlan = forceSync || assetMismatch || loaded.length === 0 || (loaded.length < planLevels.length) || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'));
 
         const finalLevels = [];
         const seenSignatures = new Set();
@@ -373,7 +381,9 @@ if (viewLevels) {
     }
 
     function saveLevelsData() {
-        localStorage.setItem('dailyTradePlanData', JSON.stringify(allLevels));
+        const isGold = (window.currentActiveAsset === 'GOLD');
+        const storageKey = isGold ? 'goldTradePlanData' : 'dailyTradePlanData';
+        localStorage.setItem(storageKey, JSON.stringify(allLevels));
     }
 
     // Sync Plan button

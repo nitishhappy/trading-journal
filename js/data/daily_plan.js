@@ -556,6 +556,7 @@ Gold Spot (XAU/USD) is trading at $4507.23 following an impulsive downside liqui
 - BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE $4515.00. TP: $4525.00 / $4535.00 / $4550.00. SL: $4506.00.
 - SELL Setup 1 (Bearish FVG Rejection Short): Corrective bounce into $4528.00–$4535.00 FVG rejected with upper wick, closing back BELOW $4524.00 on 5m candle. TP: $4512.00 / $4505.00 / $4495.00. SL: $4538.50.
 - SELL Setup 2 (Round-Number Breakdown Continuation Short): Sustained 5m close BELOW $4497.00. TP: $4485.00 / $4475.00 / $4465.00. SL: $4505.50.`
+  },
   {
     "source": "AI",
     "text": `Gold (XAU/USD) Intraday Tactical Update (09:43 PM IST / Late London & NY Overlap - Aug 28, 2026):
