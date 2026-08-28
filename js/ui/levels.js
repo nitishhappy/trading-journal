@@ -354,6 +354,9 @@ if (viewLevels) {
             // Convert newlines to <br> since we are using innerHTML
             formattedText = formattedText.replace(/\n/g, '<br>');
             
+            // Parse Markdown Bold
+            formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
             content.innerHTML = formattedText;
             content.style.display = isLatest ? 'block' : 'none';
             
