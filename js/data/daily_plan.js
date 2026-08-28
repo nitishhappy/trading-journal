@@ -2,6 +2,24 @@ window.dailyPlanSummary = [
   {
     "source": "AI Consolidated",
     "text": "**Market Bias:** Highly mixed context across analysts.\n- MPF: Cautiously bullish, buy dips at 24300.\n- NBA: Neutral/bearish, play the 24250-24500 range, heavy call writing at 24500.\n- NPF: Strongly bullish, expecting gap up and continuation to ATH.\n- LNA: Overwhelmingly bearish, FII selling, warning of bull trap, short at 24480.\n- STL: Consolidating inside 24380-24420 chop zone, trade the breakout/breakdown.\n\n**Key Confluence Levels:**\n- Support: 24300 is heavily cited as make-or-break (MPF, LNA). 24250-24260 is deep support (NBA, STL).\n- Resistance: 24500-24550 is a major supply ceiling (NBA, NPF, STL).\n- Action Plan: Avoid the 24380-24420 immediate chop zone. Look for aggressive shorts at 24480-24500 or longs on dips to 24300 with strict stops."
+  },
+  {
+    "source": "AI Pre-Market Briefing",
+    "text": `NIFTY 50 Pre-Market & Intraday Tactical Briefing (09:00 AM IST - Aug 28, 2026):
+
+1. Market Structure & Bias:
+NIFTY Spot opens with a mild positive bias (~24,440-24,460), consolidating near the upper boundary of its recent 24,380-24,480 range. The higher timeframe trend remains bullish targeting All-Time Highs (24,540/24,650), but immediate intraday momentum is capped beneath the 24,480-24,500 FII supply defense zone. The market is poised for an explosive expansion upon breaking either 24,480 (Upside Short-Covering) or 24,300 (Downside Liquidation Cascade).
+
+2. SMC & Key Confluence Levels:
+- Resistance / BSL: 24,480-24,500 (Call Writing Wall & Supply OB), 24,540-24,550 (ATH Resistance), 24,650 (HTF Macro BSL Expansion Target).
+- Support / SSL: 24,300 (Make-or-Break Pivot Floor), 24,250-24,260 (Unmitigated 15M/1H Demand OB), 24,100-24,150 (Macro Capitulation Base).
+- Chop Zone: 24,380-24,420 (50% Equilibrium No-Trade Box).
+
+3. Action Plan & High-Momentum Triggers:
+- BUY Setup 1 (BSL Breakout Long): Sustained 5m/15m close ABOVE 24,480 triggers short-covering squeeze to 24,540 / 24,600 / 24,650. SL: 24,440.
+- BUY Setup 2 (Demand Absorption Long): Dip to 24,250-24,260 Demand OB with lower-wick rejection and 5m close back above 24,290. TP: 24,380 / 24,450. SL: 24,230.
+- SELL Setup 1 (Supply Rejection Short): Rejection at 24,480-24,500 with upper-wick sweep and 5m red close below 24,460. TP: 24,400 / 24,350 / 24,300. SL: 24,520.
+- SELL Setup 2 (Liquidation Cascade Short): Sustained 15m close BELOW 24,300 triggers long-liquidation cascade to 24,250 / 24,150. SL: 24,340.`
   }
 ];
 window.dailyPlanData = [
@@ -165,6 +183,87 @@ window.dailyPlanData = [
     "behavior": "Unmitigated Demand Zone. High probability area for longing the dip.",
     "tp": "24380",
     "sl": "24220",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24650",
+    "bias": "bearish",
+    "behavior": "[09:00] HTF Extreme ATH Extension & Major Buy-Side Liquidity Target. Heavy institutional profit booking zone.",
+    "tp": "24550",
+    "sl": "24700",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24540-24550",
+    "bias": "bearish",
+    "behavior": "[09:00] Immediate ATH Supply Shelf & Resistance. Overhead Order Block; watch for rejection or 15m breakout.",
+    "tp": "24450",
+    "sl": "24580",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24480-24500",
+    "bias": "bearish",
+    "behavior": "[09:00] FII Supply Defense & Heavy Call Writing Wall. Primary intraday ceiling; rejection offers short entry.",
+    "tp": "24380",
+    "sl": "24530",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24480",
+    "bias": "bullish",
+    "behavior": "[09:00] High-Momentum Short-Covering Trigger. Sustained 5m/15m close above accelerates expansion to 24540/24650.",
+    "tp": "24650",
+    "sl": "24440",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24380-24420",
+    "bias": "neutral",
+    "behavior": "[09:00] Intraday Equilibrium Compression & No-Trade Chop Zone. Stay flat; avoid unconfirmed trades inside.",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24300",
+    "bias": "bearish",
+    "behavior": "[09:00] Key Make-or-Break Pivot & Liquidation Cascade Trigger. Sustained 15m close below drives drop to 24250/24150.",
+    "tp": "24150",
+    "sl": "24340",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24300",
+    "bias": "bullish",
+    "behavior": "[09:00] Institutional Support Pivot. Lower-wick rejection here defends range floor for bounce to 24380/24450.",
+    "tp": "24450",
+    "sl": "24270",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24250-24260",
+    "bias": "bullish",
+    "behavior": "[09:00] Unmitigated 15M/1H Demand Order Block. High-probability institutional dip-buying zone.",
+    "tp": "24380",
+    "sl": "24220",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24100-24150",
+    "bias": "bullish",
+    "behavior": "[09:00] Higher Timeframe Macro Demand Floor & Capitulation Liquidity Base. V-reversal / Dead-cat bounce shelf.",
+    "tp": "24300",
+    "sl": "24050",
     "status": "na"
   }
 ];
