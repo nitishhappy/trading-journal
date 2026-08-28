@@ -340,6 +340,32 @@ Gold Spot (XAU/USD) is currently consolidating at $4609.49, resting directly at 
 - BUY Setup 2 (BSL Breakout Momentum Long): Sustained 5m/15m close ABOVE $4615.50. TP: $4625.00 / $4635.00 / $4645.00. SL: $4609.00.
 - SELL Setup 1 (Day High BSL Sweep Reversal Short - SFP): False breakout sweep above $4614.49 rejected with upper wick, closing back BELOW $4612.50 on 5m candle. TP: $4607.00 / $4604.50 / $4595.00. SL: $4618.00.
 - SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW $4603.50. TP: $4595.00 / $4588.00 / $4580.00. SL: $4608.50.`
+  },
+  {
+    "source": "AI",
+    "text": `Gold (XAU/USD) Intraday Tactical Update (06:07 AM IST / Asian Session - Aug 28, 2026):
+1. Market Structure & Session Bias:
+Gold Spot (XAU/USD) is currently consolidating at $4590.06, oscillating at the exact 50% equilibrium midpoint of its initial $10 Asian session range between Day Low ($4585.06) and Day High ($4595.06). Early Asian price discovery shows tight initial balance compression while the US Dollar Index (DXY) and US 10-Year Treasury Yields consolidate overnight. Market structure is neutral within the Asian range, setting up for range-extreme liquidity sweeps or expansion as Asian/European volume builds.
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above Day High $4595.06, expanding into 1H supply ($4605.00–$4615.00) and macro 4H expansion targets ($4625.00–$4635.00).
+- Sell-Side Liquidity (SSL): Resting beneath Day Low $4585.06 and deeper macro discount demand ($4565.00–$4575.00).
+- Order Blocks (OB): Bullish Demand OB at $4583.50–$4586.00; Bearish Supply OB at $4594.50–$4597.00.
+- Fair Value Gaps (FVG): 15M Bullish FVG at $4586.00–$4588.50; 15M Bearish FVG at $4591.50–$4593.50.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $4588.00 – $4592.00.
+- Context: Current price ($4590.06) is idling dead-center in the 50% equilibrium compression box. Low-volume Asian spread friction and false micro-wicks inside this $4 pocket make unconfirmed scalping risky. Avoid taking unconfirmed entries inside this zone.
+
+4. High Momentum / Explosive Zones:
+- Upside BSL Breakout Expansion (> $4596.00 Spot): A sustained 5m/15m candle close above Day High ($4595.06) sweeps resting buy stops and triggers a short-covering squeeze toward $4605.00, $4615.00, and $4625.00+.
+- Downside Long-Liquidation Cascade (< $4584.00 Spot): A sustained 5m close below Day Low support ($4585.06) triggers an institutional stop cascade accelerating down to $4575.00 and $4565.00.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $4585.06 rejected with lower wick, followed by 5m close back ABOVE $4587.00. TP: $4592.50 / $4595.00 / $4605.00. SL: $4582.50.
+- BUY Setup 2 (BSL Breakout Momentum Long): Sustained 5m/15m close ABOVE $4596.00. TP: $4605.00 / $4615.00 / $4625.00. SL: $4589.50.
+- SELL Setup 1 (Day High BSL Sweep Reversal Short - SFP): False breakout sweep above $4595.06 rejected with upper wick, closing back BELOW $4593.00 on 5m candle. TP: $4588.00 / $4585.00 / $4575.00. SL: $4598.00.
+- SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW $4584.00. TP: $4575.00 / $4568.00 / $4560.00. SL: $4589.50.`
   }
 ];
 
@@ -388,6 +414,15 @@ window.goldDailyPlanData = [
   { "source": "AI", "price": "4606.5", "bias": "bullish", "behavior": "[22:49] Day Low SSL Sweep Reversal Trigger. Lower wick rejection of 4604.49 reclaiming 4606.50 targets 4612/4614.5.", "tp": "4614.5", "sl": "4602", "status": "na" },
   { "source": "AI", "price": "4603-4605.5", "bias": "bullish", "behavior": "[22:49] Day Low SSL Liquidity Base & Session Demand OB. Primary long absorption and liquidity sweep zone.", "tp": "4612", "sl": "4600", "status": "na" },
   { "source": "AI", "price": "4603.5", "bias": "bearish", "behavior": "[22:49] Day Low Breakdown & Liquidation Cascade Trigger. Sustained 5m close below accelerates to 4595/4585.", "tp": "4585", "sl": "4608.5", "status": "na" },
-  { "source": "AI", "price": "4585-4595", "bias": "bullish", "behavior": "[22:49] HTF 4H Discount Demand Base & Macro Reversal Floor. High-probability institutional bid shelf.", "tp": "4610", "sl": "4580", "status": "na" }
+  { "source": "AI", "price": "4585-4595", "bias": "bullish", "behavior": "[22:49] HTF 4H Discount Demand Base & Macro Reversal Floor. High-probability institutional bid shelf.", "tp": "4610", "sl": "4580", "status": "na" },
+  { "source": "AI", "price": "4625-4635", "bias": "bearish", "behavior": "[06:07] Macro HTF Expansion Target & Major 4H Supply Shelf. Heavy institutional profit booking zone.", "tp": "na", "sl": "4640", "status": "na" },
+  { "source": "AI", "price": "4605-4615", "bias": "bearish", "behavior": "[06:07] Intermediate HTF Swing High & 1H Supply Zone. Upside expansion target on BSL breakout.", "tp": "4595", "sl": "4620", "status": "na" },
+  { "source": "AI", "price": "4594.5-4597", "bias": "bearish", "behavior": "[06:07] Day High Liquidity Shelf & Bearish Order Block. Watch for BSL sweep and upper wick rejection.", "tp": "4588", "sl": "4599.5", "status": "na" },
+  { "source": "AI", "price": "4596", "bias": "bullish", "behavior": "[06:07] High-Momentum BSL Breakout Trigger. Sustained 5m/15m close above drives fast expansion to 4605/4615.", "tp": "4615", "sl": "4589.5", "status": "na" },
+  { "source": "AI", "price": "4588-4592", "bias": "neutral", "behavior": "[06:07] Live Intraday Compression & No-Trade Chop Zone. 50% equilibrium band ($4590.06); avoid unconfirmed entries inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "4587", "bias": "bullish", "behavior": "[06:07] Day Low SSL Sweep Reversal Trigger. Lower wick rejection of 4585.06 reclaiming 4587.00 targets 4592.5/4595.", "tp": "4595", "sl": "4582.5", "status": "na" },
+  { "source": "AI", "price": "4583.5-4586", "bias": "bullish", "behavior": "[06:07] Day Low SSL Liquidity Base & Session Demand OB. Primary long absorption and liquidity sweep zone.", "tp": "4592.5", "sl": "4580.5", "status": "na" },
+  { "source": "AI", "price": "4584", "bias": "bearish", "behavior": "[06:07] Day Low Breakdown & Liquidation Cascade Trigger. Sustained 5m close below accelerates to 4575/4565.", "tp": "4565", "sl": "4589.5", "status": "na" },
+  { "source": "AI", "price": "4565-4575", "bias": "bullish", "behavior": "[06:07] HTF 4H Discount Demand Base & Macro Reversal Floor. High-probability institutional bid shelf.", "tp": "4590", "sl": "4558", "status": "na" }
 ];
 
