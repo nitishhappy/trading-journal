@@ -1,17 +1,7 @@
 window.dailyPlanSummary = [
   {
     "source": "AI Consolidated",
-    "text": "**Market Bias:** Highly mixed context across analysts.
-- MPF: Cautiously bullish, buy dips at 24300.
-- NBA: Neutral/bearish, play the 24250-24500 range, heavy call writing at 24500.
-- NPF: Strongly bullish, expecting gap up and continuation to ATH.
-- LNA: Overwhelmingly bearish, FII selling, warning of bull trap, short at 24480.
-- STL: Consolidating inside 24380-24420 chop zone, trade the breakout/breakdown.
-
-**Key Confluence Levels:**
-- Support: 24300 is heavily cited as make-or-break (MPF, LNA). 24250-24260 is deep support (NBA, STL).
-- Resistance: 24500-24550 is a major supply ceiling (NBA, NPF, STL).
-- Action Plan: Avoid the 24380-24420 immediate chop zone. Look for aggressive shorts at 24480-24500 or longs on dips to 24300 with strict stops."
+    "text": "**Market Bias:** Highly mixed context across analysts.\n- MPF: Cautiously bullish, buy dips at 24300.\n- NBA: Neutral/bearish, play the 24250-24500 range, heavy call writing at 24500.\n- NPF: Strongly bullish, expecting gap up and continuation to ATH.\n- LNA: Overwhelmingly bearish, FII selling, warning of bull trap, short at 24480.\n- STL: Consolidating inside 24380-24420 chop zone, trade the breakout/breakdown.\n\n**Key Confluence Levels:**\n- Support: 24300 is heavily cited as make-or-break (MPF, LNA). 24250-24260 is deep support (NBA, STL).\n- Resistance: 24500-24550 is a major supply ceiling (NBA, NPF, STL).\n- Action Plan: Avoid the 24380-24420 immediate chop zone. Look for aggressive shorts at 24480-24500 or longs on dips to 24300 with strict stops."
   }
 ];
 window.dailyPlanData = [
@@ -178,7 +168,6 @@ window.dailyPlanData = [
     "status": "na"
   }
 ];
-
 window.goldDailyPlanSummary = [
   {
     "source": "AI",
