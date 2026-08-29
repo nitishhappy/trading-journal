@@ -160,7 +160,8 @@ if (viewLevels) {
         loadScorecardHistory();
 
         const isGold = (window.currentActiveAsset === 'GOLD');
-        const storageKey = isGold ? 'goldTradePlanData' : 'dailyTradePlanData';
+        const isBtc = (window.currentActiveAsset === 'BTC');
+        const storageKey = isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData');
         let loaded = [];
         const saved = localStorage.getItem(storageKey);
         if (saved) {
@@ -180,8 +181,9 @@ if (viewLevels) {
             const prStr = (l.rawPrice || l.price || '').toString();
             const num = parseFloat(prStr.replace(/[^0-9.]/g, ''));
             if (!isNaN(num) && num > 0) {
-                if (!isGold && num < 10000) assetMismatch = true; // NIFTY levels should be > 10000
+                if (!isGold && !isBtc && num < 10000) assetMismatch = true; // NIFTY levels should be > 10000
                 if (isGold && num > 10000) assetMismatch = true; // GOLD levels should be < 10000
+                if (isBtc && num < 10000) assetMismatch = true; // BTC levels should be > 10000
             }
             const sig = (prStr + '__' + (l.behavior || '')).trim().toLowerCase();
             if (l.status && l.status !== 'na') {
@@ -193,7 +195,7 @@ if (viewLevels) {
         });
 
         // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
-        const planLevelsSource = isGold ? window.goldDailyPlanData : window.dailyPlanData;
+        const planLevelsSource = isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData);
         const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
         const planSig = planLevels.map(p => (p.price || '') + '__' + (p.behavior || '')).join('||');
         const lastSig = localStorage.getItem(storageKey + '_sig');
@@ -296,7 +298,8 @@ if (viewLevels) {
         if (!summaryPanel || !summaryBody) return;
 
         const isGold = (window.currentActiveAsset === 'GOLD');
-        const summaryData = isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || []);
+        const isBtc = (window.currentActiveAsset === 'BTC');
+        const summaryData = isBtc ? (window.btcDailyPlanSummary || []) : (isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || []));
         if (!Array.isArray(summaryData) || summaryData.length === 0) {
             summaryPanel.style.display = 'none';
             return;
@@ -387,7 +390,8 @@ if (viewLevels) {
 
     function saveLevelsData() {
         const isGold = (window.currentActiveAsset === 'GOLD');
-        const storageKey = isGold ? 'goldTradePlanData' : 'dailyTradePlanData';
+        const isBtc = (window.currentActiveAsset === 'BTC');
+        const storageKey = isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData');
         localStorage.setItem(storageKey, JSON.stringify(allLevels));
     }
 
@@ -1662,17 +1666,31 @@ if (viewLevels) {
 
         let currentPrice = null;
         let isGold = (window.currentActiveAsset === 'GOLD');
+        let isBtc = (window.currentActiveAsset === 'BTC');
 
         try {
             const res = await fetch('/api/livePrices');
             if (res.ok) {
                 const data = await res.json();
                 if (data && data.success) {
-                    currentPrice = isGold ? data.xauusd : data.nifty;
+                    currentPrice = isBtc ? (data.btcusd || data.btcusdt) : (isGold ? data.xauusd : data.nifty);
                 }
             }
         } catch (e) {
             console.error("Live price fetch failed:", e);
+        }
+
+        // BTC fallback: fetch from Binance if livePrices doesn't have BTC
+        if (isBtc && !currentPrice) {
+            try {
+                const binRes = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+                if (binRes.ok) {
+                    const binData = await binRes.json();
+                    currentPrice = parseFloat(binData.price);
+                }
+            } catch (e) {
+                console.error("Binance BTC price fetch failed:", e);
+            }
         }
         
         if (!currentPrice) return;
@@ -1682,7 +1700,7 @@ if (viewLevels) {
         const floaterTitle = document.getElementById('floater-title-text');
         
         if (floaterTitle) {
-            floaterTitle.innerText = isGold ? "GOLD LIVE" : "NIFTY LIVE";
+            floaterTitle.innerText = isBtc ? "BTC LIVE" : (isGold ? "GOLD LIVE" : "NIFTY LIVE");
         }
         
         const prevPrice = currentMarketPrice;
@@ -1690,7 +1708,7 @@ if (viewLevels) {
         
         if (floater && floaterVal && !floater.classList.contains('user-closed')) {
             const oldPrice = parseFloat(floaterVal.innerText.replace(/,/g, '')) || 0;
-            const locale = isGold ? 'en-US' : 'en-IN';
+            const locale = (isGold || isBtc) ? 'en-US' : 'en-IN';
             const formattedPrice = currentPrice.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             floaterVal.innerText = formattedPrice;
             if (oldPrice && currentPrice !== oldPrice) {
@@ -1928,19 +1946,31 @@ if (viewLevels) {
 
     const btnNifty = document.getElementById('btn-asset-nifty');
     const btnGold = document.getElementById('btn-asset-gold');
+    const btnBtc = document.getElementById('btn-asset-btc');
     if (btnNifty && btnGold) {
         btnNifty.addEventListener('click', () => {
             window.currentActiveAsset = 'NIFTY';
             btnNifty.className = 'btn-primary';
             btnGold.className = 'btn-secondary';
+            if (btnBtc) btnBtc.className = 'btn-secondary';
             initLevels(true);
         });
         btnGold.addEventListener('click', () => {
             window.currentActiveAsset = 'GOLD';
             btnGold.className = 'btn-primary';
             btnNifty.className = 'btn-secondary';
+            if (btnBtc) btnBtc.className = 'btn-secondary';
             initLevels(true);
         });
+        if (btnBtc) {
+            btnBtc.addEventListener('click', () => {
+                window.currentActiveAsset = 'BTC';
+                btnBtc.className = 'btn-primary';
+                btnNifty.className = 'btn-secondary';
+                btnGold.className = 'btn-secondary';
+                initLevels(true);
+            });
+        }
     }
 
     // Call init when module loads

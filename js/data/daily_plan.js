@@ -654,3 +654,158 @@ window.goldDailyPlanData = [
   { "source": "AI", "price": "4420-4435", "bias": "bullish", "behavior": "[19:34] HTF 4H Deep Discount Demand Base & Macro Reversal Floor. High-probability institutional bid shelf.", "tp": "4455", "sl": "4410", "status": "na" }
 ];
 
+// ============ BITCOIN (BTC/USD) ============
+window.btcDailyPlanSummary = [
+  {
+    "source": "BTC-AI",
+    "text": "### \u23f1\ufe0f Run Time: 2026-08-29 23:19:29 IST (BTC 15M Candle: 23:19 IST)\n\n* **Action:** **`[BUY]` \u2014 BULLISH MOMENTUM BREAKOUT**\n* **Active Session:** **`New York Session (US Opening)`** (Maximum Momentum / US Data Releases / Trend Runs)\n* **Setup Identified:** BTC 15M Standard Rotational Candle (Bullish (Green)) + Above 200 EMA/VWAP + Strong Bearish 4H Macro\n* **Live Spot Price (BTC/USDT):** **$78040.53** | **Trend:** `Strong Bullish Momentum (Above 9 & 21 EMA)`\n* **Entry Trigger:** Buy on Dips toward 15M EMA9 ($77995.31)\n* **Stop Loss (SL):** `15M Close below 77860.3 (Structure Pivot / 1.3x ATR)`\n* **Targets (TP):** `78310.8 (1:1.5) -> 78491.0 (1:2.5)`\n\n#### \ud83c\udfaf Confluences & Trade Thesis:\n- Candle Anatomy: Standard Rotational Candle (Bullish (Green))\n- Macro Regime: Above 200 EMA ($78333.43) & Above Session VWAP ($77590.65).\n- Session Range Level: Above Asian High ($77950.31) \u2014 Bullish Breakout / BSL Probe.\n- FVG Scanner: Found 2 Active FVG(s) near spot.\n\n---\n"
+  }
+];
+
+window.btcDailyPlanData = [
+  {
+    "source": "BTC-AI",
+    "price": "77995.31",
+    "bias": "bullish",
+    "behavior": "15M EMA 9",
+    "tp": "78495.3",
+    "sl": "77795.3",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77904.13",
+    "bias": "bearish",
+    "behavior": "15M EMA 21",
+    "tp": "77404.1",
+    "sl": "78104.1",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "78333.43",
+    "bias": "neutral",
+    "behavior": "15M EMA 200",
+    "tp": "77833.4",
+    "sl": "78533.4",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "81435.09",
+    "bias": "bearish",
+    "behavior": "Previous Day High",
+    "tp": "80935.1",
+    "sl": "81635.1",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "76880.01",
+    "bias": "bullish",
+    "behavior": "Previous Day Low",
+    "tp": "77380.0",
+    "sl": "76680.0",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77564.06",
+    "bias": "neutral",
+    "behavior": "Previous Day Close",
+    "tp": "77064.1",
+    "sl": "77764.1",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77950.31",
+    "bias": "bearish",
+    "behavior": "Asian High",
+    "tp": "77450.3",
+    "sl": "78150.3",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77287.28",
+    "bias": "bullish",
+    "behavior": "Asian Low",
+    "tp": "77787.3",
+    "sl": "77087.3",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "78142.63",
+    "bias": "bearish",
+    "behavior": "London High",
+    "tp": "77642.6",
+    "sl": "78342.6",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77433.38",
+    "bias": "bullish",
+    "behavior": "London Low",
+    "tp": "77933.4",
+    "sl": "77233.4",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77590.65",
+    "bias": "neutral",
+    "behavior": "Session VWAP",
+    "tp": "77090.6",
+    "sl": "77790.6",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77463.02",
+    "bias": "neutral",
+    "behavior": "Volume Profile POC",
+    "tp": "76963.0",
+    "sl": "77663.0",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77750.0",
+    "bias": "bullish",
+    "behavior": "FVG Bottom (bullish)",
+    "tp": "78250.0",
+    "sl": "77550.0",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "77917.8",
+    "bias": "bullish",
+    "behavior": "FVG Top (bullish)",
+    "tp": "78417.8",
+    "sl": "77717.8",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "78033.76",
+    "bias": "bullish",
+    "behavior": "FVG Bottom (bullish)",
+    "tp": "78533.8",
+    "sl": "77833.8",
+    "status": "na"
+  },
+  {
+    "source": "BTC-AI",
+    "price": "78041.97",
+    "bias": "bullish",
+    "behavior": "FVG Top (bullish)",
+    "tp": "78542.0",
+    "sl": "77842.0",
+    "status": "na"
+  }
+];
+
