@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.8.6 — Gold (XAU/USD) Intraday Tactical Update & Daily Plan Sync
+- **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD support/resistance levels, chop zone ($4451.00–$4458.00), high-momentum triggers (short-covering breakout >$4462.00 / demand breakdown <$4445.00), and 5-min execution scenarios following the Asian session downside liquidation cascade to $4454.51.
+- **Daily Plan & Mentorship Sync**: Appended AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and updated `Gold_Learn.md` with SMC institutional breakdown.
+
 ### v1.8.5 — Gold (XAU/USD) Intraday Tactical Update & Daily Plan Sync
 - **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD support/resistance levels, chop zone ($4505.00–$4511.00), high-momentum triggers (breakout >$4516.00 / breakdown <$4497.00), and 5-min execution scenarios following the downside liquidation cascade to $4508.28.
 - **Daily Plan & Mentorship Sync**: Appended AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and updated `Gold_Learn.md` with SMC institutional breakdown.
