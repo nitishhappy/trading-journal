@@ -658,36 +658,36 @@ window.goldDailyPlanData = [
 window.btcDailyPlanSummary = [
   {
     "source": "BTC-AI",
-    "text": "### \u23f1\ufe0f Run Time: 2026-08-29 23:19:29 IST (BTC 15M Candle: 23:19 IST)\n\n* **Action:** **`[BUY]` \u2014 BULLISH MOMENTUM BREAKOUT**\n* **Active Session:** **`New York Session (US Opening)`** (Maximum Momentum / US Data Releases / Trend Runs)\n* **Setup Identified:** BTC 15M Standard Rotational Candle (Bullish (Green)) + Above 200 EMA/VWAP + Strong Bearish 4H Macro\n* **Live Spot Price (BTC/USDT):** **$78040.53** | **Trend:** `Strong Bullish Momentum (Above 9 & 21 EMA)`\n* **Entry Trigger:** Buy on Dips toward 15M EMA9 ($77995.31)\n* **Stop Loss (SL):** `15M Close below 77860.3 (Structure Pivot / 1.3x ATR)`\n* **Targets (TP):** `78310.8 (1:1.5) -> 78491.0 (1:2.5)`\n\n#### \ud83c\udfaf Confluences & Trade Thesis:\n- Candle Anatomy: Standard Rotational Candle (Bullish (Green))\n- Macro Regime: Above 200 EMA ($78333.43) & Above Session VWAP ($77590.65).\n- Session Range Level: Above Asian High ($77950.31) \u2014 Bullish Breakout / BSL Probe.\n- FVG Scanner: Found 2 Active FVG(s) near spot.\n\n---\n"
+    "text": "Bitcoin (BTC/USD) Intraday Tactical Update (2026-08-29 23:25:34 IST / New York Session (US Opening)):\n\n1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at $77,993.80, strong bullish momentum (above 9 & 21 ema) within the updated daily structure (Day High: $78,142.63 | Day Low: $77,265.71 | Prior Day Close: $77,564.06 | Live Spot: $77,993.80). During New York Session (US Opening) (Maximum Momentum / US Data Releases / Trend Runs), intermarket dynamics (DXY $99.677 (Bullish DXY (Headwind for BTC)) and S&P 500 Futures $7722.0) combined with crypto-native context (Funding Rate is 0.0100% (neutral); Fear & Greed Index: 68 (Greed); CME Gap inactive at 77815.0 (below, size: 178.80)) guide structure. Spot is inside previous day range | above pdc (day green) | at day high.\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Clustered above $78,142.60 local swing highs, extending into 15M Bearish FVG ($78043.8\u2013$78143.8), and macro day high targets up to $81,435.09.\n- Sell-Side Liquidity (SSL): Concentrated below $77,265.70 psychological round number down to deeper macro 4H demand base ($76,880.01).\n- Order Blocks (OB) & Key Levels: Bullish Demand OB at $77,980.08\u2013$77,896.91; Session VWAP at $77,590.65; 200 EMA at $78,332.62; Volume Profile POC at $77,463.02.\n- Fair Value Gaps (FVG): 15M Bearish FVG at $78043.8\u2013$78143.8; 15M Bullish FVG at $77750.0\u2013$77917.8.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: $77,397.25 \u2013 $77,704.17 (Value Area) / $77,287.28 \u2013 $77,950.31 (Asian Range).\n- Context: Current spot ($77,993.80) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> $78,142.60 Spot): A sustained 5m/15m candle close above $78,142.60 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,293.80 and $78,593.80.\n- Downside Long-Liquidation Cascade (< $77,265.70 Spot): A sustained 5m close below the demand shelf ($77,265.70) triggers institutional stop cascades accelerating toward $77,693.80 and $77,393.80.\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,265.70 rejected with lower wick, followed by 5m close back ABOVE $77,980.08. TP: $78,218.80 / $78,368.80. SL: $77,843.80.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $78,142.60. TP: $78,393.80 / $78,793.80. SL: $77,843.80.\n- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78043.8\u2013$78143.8 rejected with upper wick, closing back BELOW $77,980.08 on 5m candle. TP: $77,693.80 / $77,493.80. SL: $78,193.80.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,265.70. TP: $77,593.80 / $77,193.80. SL: $78,143.80.\n"
   }
 ];
 
 window.btcDailyPlanData = [
   {
     "source": "BTC-AI",
-    "price": "77995.31",
+    "price": "77980.08",
     "bias": "bullish",
     "behavior": "15M EMA 9",
-    "tp": "78495.3",
-    "sl": "77795.3",
+    "tp": "78480.1",
+    "sl": "77780.1",
     "status": "na"
   },
   {
     "source": "BTC-AI",
-    "price": "77904.13",
+    "price": "77896.91",
     "bias": "bearish",
     "behavior": "15M EMA 21",
-    "tp": "77404.1",
-    "sl": "78104.1",
+    "tp": "77396.9",
+    "sl": "78096.9",
     "status": "na"
   },
   {
     "source": "BTC-AI",
-    "price": "78333.43",
+    "price": "78332.62",
     "bias": "neutral",
     "behavior": "15M EMA 200",
-    "tp": "77833.4",
-    "sl": "78533.4",
+    "tp": "77832.6",
+    "sl": "78532.6",
     "status": "na"
   },
   {
@@ -787,24 +787,6 @@ window.btcDailyPlanData = [
     "behavior": "FVG Top (bullish)",
     "tp": "78417.8",
     "sl": "77717.8",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78033.76",
-    "bias": "bullish",
-    "behavior": "FVG Bottom (bullish)",
-    "tp": "78533.8",
-    "sl": "77833.8",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78041.97",
-    "bias": "bullish",
-    "behavior": "FVG Top (bullish)",
-    "tp": "78542.0",
-    "sl": "77842.0",
     "status": "na"
   }
 ];
