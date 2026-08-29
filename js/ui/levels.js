@@ -195,12 +195,17 @@ if (viewLevels) {
         // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
         const planLevelsSource = isGold ? window.goldDailyPlanData : window.dailyPlanData;
         const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
-        const shouldSyncFromPlan = forceSync || assetMismatch || loaded.length === 0 || (loaded.length < planLevels.length) || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'));
+        const planSig = planLevels.map(p => (p.price || '') + '__' + (p.behavior || '')).join('||');
+        const lastSig = localStorage.getItem(storageKey + '_sig');
+        const planChanged = (planSig !== lastSig);
+
+        const shouldSyncFromPlan = forceSync || assetMismatch || loaded.length === 0 || planChanged || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'));
 
         const finalLevels = [];
         const seenSignatures = new Set();
 
         if (shouldSyncFromPlan && planLevels.length > 0) {
+            localStorage.setItem(storageKey + '_sig', planSig);
             planLevels.forEach((lvl, idx) => {
                 const src = (lvl.source || 'BT').toUpperCase();
                 const pr = lvl.price || lvl.rawPrice || '';
