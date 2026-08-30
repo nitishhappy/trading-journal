@@ -161,7 +161,8 @@ if (viewLevels) {
 
         const isGold = (window.currentActiveAsset === 'GOLD');
         const isBtc = (window.currentActiveAsset === 'BTC');
-        const storageKey = isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData');
+        const isSp500 = (window.currentActiveAsset === 'SP500');
+        const storageKey = isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData'));
         let loaded = [];
         const saved = localStorage.getItem(storageKey);
         if (saved) {
@@ -181,9 +182,10 @@ if (viewLevels) {
             const prStr = (l.rawPrice || l.price || '').toString();
             const num = parseFloat(prStr.replace(/[^0-9.]/g, ''));
             if (!isNaN(num) && num > 0) {
-                if (!isGold && !isBtc && num < 10000) assetMismatch = true; // NIFTY levels should be > 10000
+                if (!isGold && !isBtc && !isSp500 && num < 10000) assetMismatch = true; // NIFTY levels should be > 10000
                 if (isGold && num > 10000) assetMismatch = true; // GOLD levels should be < 10000
                 if (isBtc && num < 10000) assetMismatch = true; // BTC levels should be > 10000
+                if (isSp500 && (num < 3000 || num > 15000)) assetMismatch = true; // SP500 levels range
             }
             const sig = (prStr + '__' + (l.behavior || '')).trim().toLowerCase();
             if (l.status && l.status !== 'na') {
@@ -195,7 +197,7 @@ if (viewLevels) {
         });
 
         // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
-        const planLevelsSource = isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData);
+        const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
         const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
         const planSig = planLevels.map(p => (p.price || '') + '__' + (p.behavior || '')).join('||');
         const lastSig = localStorage.getItem(storageKey + '_sig');
@@ -299,7 +301,8 @@ if (viewLevels) {
 
         const isGold = (window.currentActiveAsset === 'GOLD');
         const isBtc = (window.currentActiveAsset === 'BTC');
-        const summaryData = isBtc ? (window.btcDailyPlanSummary || []) : (isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || []));
+        const isSp500 = (window.currentActiveAsset === 'SP500');
+        const summaryData = isSp500 ? (window.sp500DailyPlanSummary || []) : (isBtc ? (window.btcDailyPlanSummary || []) : (isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || [])));
         if (!Array.isArray(summaryData) || summaryData.length === 0) {
             summaryPanel.style.display = 'none';
             return;
@@ -391,7 +394,8 @@ if (viewLevels) {
     function saveLevelsData() {
         const isGold = (window.currentActiveAsset === 'GOLD');
         const isBtc = (window.currentActiveAsset === 'BTC');
-        const storageKey = isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData');
+        const isSp500 = (window.currentActiveAsset === 'SP500');
+        const storageKey = isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData'));
         localStorage.setItem(storageKey, JSON.stringify(allLevels));
     }
 
@@ -1667,17 +1671,30 @@ if (viewLevels) {
         let currentPrice = null;
         let isGold = (window.currentActiveAsset === 'GOLD');
         let isBtc = (window.currentActiveAsset === 'BTC');
+        let isSp500 = (window.currentActiveAsset === 'SP500');
 
         try {
             const res = await fetch('/api/livePrices');
             if (res.ok) {
                 const data = await res.json();
                 if (data && data.success) {
-                    currentPrice = isBtc ? (data.btcusd || data.btcusdt) : (isGold ? data.xauusd : data.nifty);
+                    currentPrice = isSp500 ? (data.sp500 || data.gspc) : (isBtc ? (data.btcusd || data.btcusdt) : (isGold ? data.xauusd : data.nifty));
                 }
             }
         } catch (e) {
             console.error("Live price fetch failed:", e);
+        }
+
+        if (isSp500 && !currentPrice) {
+            try {
+                const r = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1m&range=1d');
+                if (r.ok) {
+                    const d = await r.json();
+                    const closes = d.chart.result[0].indicators.quote[0].close;
+                    const cleanCloses = closes.filter(c => c !== null);
+                    if (cleanCloses.length > 0) currentPrice = cleanCloses[cleanCloses.length - 1];
+                }
+            } catch(e) {}
         }
 
         // BTC fallback: fetch from Binance if livePrices doesn't have BTC
@@ -1947,12 +1964,15 @@ if (viewLevels) {
     const btnNifty = document.getElementById('btn-asset-nifty');
     const btnGold = document.getElementById('btn-asset-gold');
     const btnBtc = document.getElementById('btn-asset-btc');
+    const btnSp500 = document.getElementById('btn-asset-sp500');
+
     if (btnNifty && btnGold) {
         btnNifty.addEventListener('click', () => {
             window.currentActiveAsset = 'NIFTY';
             btnNifty.className = 'btn-primary';
             btnGold.className = 'btn-secondary';
             if (btnBtc) btnBtc.className = 'btn-secondary';
+            if (btnSp500) btnSp500.className = 'btn-secondary';
             initLevels(true);
         });
         btnGold.addEventListener('click', () => {
@@ -1960,6 +1980,7 @@ if (viewLevels) {
             btnGold.className = 'btn-primary';
             btnNifty.className = 'btn-secondary';
             if (btnBtc) btnBtc.className = 'btn-secondary';
+            if (btnSp500) btnSp500.className = 'btn-secondary';
             initLevels(true);
         });
         if (btnBtc) {
@@ -1968,6 +1989,17 @@ if (viewLevels) {
                 btnBtc.className = 'btn-primary';
                 btnNifty.className = 'btn-secondary';
                 btnGold.className = 'btn-secondary';
+                if (btnSp500) btnSp500.className = 'btn-secondary';
+                initLevels(true);
+            });
+        }
+        if (btnSp500) {
+            btnSp500.addEventListener('click', () => {
+                window.currentActiveAsset = 'SP500';
+                btnSp500.className = 'btn-primary';
+                btnNifty.className = 'btn-secondary';
+                btnGold.className = 'btn-secondary';
+                if (btnBtc) btnBtc.className = 'btn-secondary';
                 initLevels(true);
             });
         }

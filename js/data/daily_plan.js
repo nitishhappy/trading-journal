@@ -773,3 +773,7 @@ window.btcDailyPlanData = [
   }
 ];
 
+
+
+window.sp500DailyPlanSummary = [];
+window.sp500DailyPlanData = [];
