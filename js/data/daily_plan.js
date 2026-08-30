@@ -595,7 +595,17 @@ window.dailyPlanData = [
 window.goldDailyPlanSummary = [
   {
     "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (08:03 PM IST / NY Session Overlap - Aug 28, 2026):
+    "text": `================================================================================
+🎯 GOLD DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +5.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: $4609.70 (A 15M close above $4609.70 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Gold is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian High/Low boundaries.
+
+Gold (XAU/USD) Intraday Tactical Update (08:03 PM IST / NY Session Overlap - Aug 28, 2026):
 1. Market Structure & Session Bias:
 Gold Spot (XAU/USD) is currently consolidating at $4561.91, resting precisely at the 50% equilibrium midpoint of its tight $10 intraday range between Day Low ($4556.91) and Day High ($4566.91). During the London/New York session overlap, intermarket dynamics (DXY consolidation and US 10-Year Treasury Yield stability) are compressing spot action into an equilibrium holding pattern awaiting directional liquidity expansion.
 
