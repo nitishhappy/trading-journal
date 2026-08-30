@@ -832,7 +832,7 @@ window.btcDailyPlanData = [
     "behavior": "[19:34] 15M Dynamic 9 EMA Shelf ($78,729.47). Primary short-term momentum trail & intraday pullback defense zone.",
     "tp": "79291.1",
     "sl": "78579.5",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -967,7 +967,17 @@ window.btcDailyPlanData = [
 window.sp500DailyPlanSummary = [
   {
     "source": "SP500-AI",
-    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:34 PM IST - Aug 30, 2026):
+    "text": `================================================================================
+🎯 S&P 500 DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: 🟢 BULLISH | Bias Score: +2.5 / +6.0 | Confidence: High (86%)
+• Bias Invalidation Floor: 7650.70 (A 15M close below 7650.70 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Buy-on-Dip Expansion. Institutional bias & ES futures momentum favor absorption at discount demand OBs followed by upside expansion.
+• Execution: Avoid counter-trend shorts during early session. Wait for 15M opening range filter before entries.
+
+S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:34 PM IST - Aug 30, 2026):
 
 1. Market Structure & Macro Synthesis:
 - S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7722.0 | NQ Futures: 29491.75).
