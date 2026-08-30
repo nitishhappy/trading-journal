@@ -915,7 +915,7 @@ window.btcDailyPlanData = [
 window.sp500DailyPlanSummary = [
   {
     "source": "SP500-AI",
-    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (06:05 AM IST - Aug 30, 2026):
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:34 PM IST - Aug 30, 2026):
 
 1. Market Structure & Macro Synthesis:
 - S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7722.0 | NQ Futures: 29491.75).
@@ -949,7 +949,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7703.76-7719.76",
     "bias": "neutral",
-    "behavior": "[06:05] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
+    "behavior": "[07:34] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
     "tp": "na",
     "sl": "na",
     "status": "na"
@@ -958,7 +958,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7726.76",
     "bias": "bullish",
-    "behavior": "[06:05] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7726.76 targets 7771.48 and 7766.76.",
+    "behavior": "[07:34] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7726.76 targets 7771.48 and 7766.76.",
     "tp": "7771.48",
     "sl": "7716.76",
     "status": "na"
@@ -967,7 +967,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7771.48",
     "bias": "bearish",
-    "behavior": "[06:05] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
+    "behavior": "[07:34] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
     "tp": "7726.76",
     "sl": "7781.48",
     "status": "na"
@@ -976,7 +976,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7696.76",
     "bias": "bearish",
-    "behavior": "[06:05] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7696.76 targets 7638.17 and 7656.76.",
+    "behavior": "[07:34] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7696.76 targets 7638.17 and 7656.76.",
     "tp": "7638.17",
     "sl": "7706.76",
     "status": "na"
@@ -985,7 +985,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7638.17",
     "bias": "bullish",
-    "behavior": "[06:05] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
+    "behavior": "[07:34] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
     "tp": "7696.76",
     "sl": "7628.17",
     "status": "na"
