@@ -108,6 +108,34 @@ NIFTY Spot trades at 24,071.75 with a neutral-to-cautious bias following an open
 - BUY Setup 2 (Displacement FVG Pullback Absorption Long - CE): Pullback into 24,035–24,050 with lower-wick rejection, closing 5m candle firmly back ABOVE 24,065. TP: 24,095 / 24,128 / 24,165. SL: 24,018.
 - SELL Setup 1 (Day High / Breaker Sweep Rejection Short - PE): Corrective rally into 24,095–24,130 rejected with upper wick, closing 5m candle back BELOW 24,080. TP: 24,035 / 24,000 / 23,993. SL: 24,142.
 - SELL Setup 2 (FVG Breakdown Continuation Short - PE): Sustained 5m close BELOW 24,035 with expanding red Futures volume. TP: 24,000 / 23,993 / 23,950. SL: 24,068.`
+  },
+  {
+    "source": "AI Pre-Market Briefing",
+    "text": `NIFTY 50 Pre-Market Tactical Briefing (01:04 PM IST - Aug 31, 2026 | Spot: 24068.35 | Trigger: Ad-Hoc Run):
+
+================================================================================
+🎯 DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -2.5 / +6.0 | Confidence: Moderate (65%)
+• Bias Invalidation Floor: 24090.85 (A 15M close above 24090.85 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
+
+1. Market Structure & Bias:
+NIFTY Spot trades at 24,068.35 with a neutral-to-cautious bias following an opening liquidity sweep down to 23,993.60 (sub-24,000 psychological floor) and a sharp institutional V-shaped absorption rally back toward the 24,090.85 prior day close. Market structure is testing overhead supply at 24,090–24,130 (Day High: 24,128.70) while holding firmly above the 24,035 15M displacement base. A sustained 5m close above 24,095 confirms short-covering expansion toward 24,128 and 24,205–24,225, whereas a breakdown below 24,035 triggers long-unwinding cascades back toward 24,000 and 23,993.
+
+2. SMC & Key Confluence Levels:
+- Resistance / BSL: 24,090-24,095 (Prior Day Close / Bearish Breaker & Short-Covering Trigger), 24,128-24,130 (Day High Supply Shelf), 24,205-24,225 (50% Equilibrium Retracement Shelf), 24,295-24,300 (Previous Day High Supply OB), 24,340-24,380 (2-Day Swing High Breaker Block), 24,480-24,500 (Heavy FII Call Writing Wall), 24,540-24,550 (ATH Supply Shelf), 24,650-24,750 (HTF Macro ATH Extension Target).
+- Support / SSL: 24,055-24,085 (Live Intraday Equilibrium Compression / Chop Zone), 24,035 (15M Bullish Displacement FVG Base & Liquidation Cascade Floor), 24,000 (Major Psychological Support Shelf), 23,993.60 (Day Low SSL Sweep Floor), 23,850-23,900 (HTF Macro Daily Demand Base).
+- Chop Zone: 24,055-24,085 (50% Equilibrium Compression No-Trade Box).
+
+3. Action Plan & High-Momentum Triggers:
+- BUY Setup 1 (BSL Short-Covering Breakout Long - CE): Sustained 5m close ABOVE 24,095 with expanding Futures volume (>1.2x). TP: 24,128 / 24,165 / 24,205. SL: 24,065.
+- BUY Setup 2 (Displacement FVG Pullback Absorption Long - CE): Pullback into 24,035–24,050 with lower-wick rejection, closing 5m candle firmly back ABOVE 24,065. TP: 24,095 / 24,128 / 24,165. SL: 24,018.
+- SELL Setup 1 (Day High / Breaker Sweep Rejection Short - PE): Corrective rally into 24,095–24,130 rejected with upper wick, closing 5m candle back BELOW 24,080. TP: 24,035 / 24,000 / 23,993. SL: 24,142.
+- SELL Setup 2 (FVG Breakdown Continuation Short - PE): Sustained 5m close BELOW 24,035 with expanding red Futures volume. TP: 24,000 / 23,993 / 23,950. SL: 24,068.`
   }
 ];
 
@@ -918,6 +946,114 @@ window.dailyPlanData = [
     "price": "23850-23900",
     "bias": "bullish",
     "behavior": "[12:51] Higher Timeframe Macro Daily Demand Base & Capitulation Liquidity Floor. Deep panic-flush rebound zone.",
+    "tp": "24150",
+    "sl": "23800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24650-24750",
+    "bias": "bearish",
+    "behavior": "[01:04] HTF Extreme ATH Extension & Terminal Institutional Distribution Zone. Major multi-week profit booking target.",
+    "tp": "24550",
+    "sl": "24800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24540-24550",
+    "bias": "bearish",
+    "behavior": "[01:04] ATH Overhead Supply Shelf & Resistance. Institutional profit booking zone; watch for rejection or 15m expansion.",
+    "tp": "24450",
+    "sl": "24580",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24480-24500",
+    "bias": "bearish",
+    "behavior": "[01:04] FII Supply Defense & Heavy Call Writing Wall. Primary HTF supply ceiling; rejection offers short setups.",
+    "tp": "24350",
+    "sl": "24530",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24340-24380",
+    "bias": "bearish",
+    "behavior": "[01:04] 2-Day Swing High Supply Shelf & 1H Bearish Breaker. Heavy overhead resistance on relief pullbacks.",
+    "tp": "24260",
+    "sl": "24400",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24205-24225",
+    "bias": "bearish",
+    "behavior": "[01:04] 50% Equilibrium Retracement Shelf & Flipped Bearish Breaker. High-probability relief bounce profit taking zone.",
+    "tp": "24130",
+    "sl": "24250",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24128-24130",
+    "bias": "bearish",
+    "behavior": "[01:04] Day High BSL Liquidity Pool & Session Supply Shelf ($24,128.70). Watch for Turtle Soup sweep rejection.",
+    "tp": "24080",
+    "sl": "24145",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24095",
+    "bias": "bullish",
+    "behavior": "[01:04] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m close above 24095 clears PDC to 24128/24165/24205.",
+    "tp": "24205",
+    "sl": "24065",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24055-24085",
+    "bias": "neutral",
+    "behavior": "[01:04] Live Intraday Compression & No-Trade Chop Zone. 50% Equilibrium pocket; stay flat to avoid option decay.",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24035",
+    "bias": "bullish",
+    "behavior": "[01:04] 15M Bullish Displacement FVG Base & Pullback Retest Shelf. Holding above defends morning V-reversal structure.",
+    "tp": "24095",
+    "sl": "24018",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24035",
+    "bias": "bearish",
+    "behavior": "[01:04] Bull-Trap Breakdown & Liquidation Cascade Trigger. Sustained 5m close below accelerates selloff to 24000/23993.",
+    "tp": "23993",
+    "sl": "24060",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23993-24000",
+    "bias": "bullish",
+    "behavior": "[01:04] Day Low SSL Liquidity Base & Psychological Floor ($24,000). Primary morning absorption and bounce shelf.",
+    "tp": "24080",
+    "sl": "23970",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23850-23900",
+    "bias": "bullish",
+    "behavior": "[01:04] Higher Timeframe Macro Daily Demand Base & Capitulation Liquidity Floor. Deep panic-flush rebound zone.",
     "tp": "24150",
     "sl": "23800",
     "status": "na"
