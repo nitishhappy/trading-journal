@@ -953,7 +953,17 @@ window.dailyPlanData = [
 window.goldDailyPlanSummary = [
   {
     "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (02:36 AM IST - Aug 31, 2026 | Spot: $4454.51 | Trigger: Level Exhaustion Wick Breakout (Candle High $4688.00 > Max AI Level $4635.00)):
+    "text": `================================================================================
+🎯 GOLD DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.0 / +5.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: $4478.10 (A 15M close above $4478.10 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Gold is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian High/Low boundaries.
+
+Gold (XAU/USD) Intraday Tactical Update (02:36 AM IST - Aug 31, 2026 | Spot: $4454.51 | Trigger: Level Exhaustion Wick Breakout (Candle High $4688.00 > Max AI Level $4635.00)):
 
 1. Market Structure & Session Bias:
 Gold Spot (XAU/USD) is trading at $4454.51 following an extreme volatility event where an exhaustion wick swept past the previous maximum AI level of $4635.00 up to Day High ($4688.00), before experiencing a massive long-liquidation cascade and mean-reversion selloff back down through the $4495.00 floor. Spot is currently consolidating just above the major $4450.00 institutional demand base (Day High: $4688.00 | Prior Broken Floor: $4495.00 | Live Spot: $4454.51). Late in the US session / post-NY close transition, intermarket forces (DXY holding at ~99.68 and US 10-Year Treasury Yields at 4.72%) are maintaining dollar resilience, keeping Gold compressed in discount territory ($4451.00–$4458.00) while probing liquidity ahead of Asian market positioning.
