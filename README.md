@@ -125,6 +125,7 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 - **Dynamic In-Memory Updates**: Fresh levels, AI pre-market briefings, and tactical summaries are evaluated and rendered seamlessly with zero page reload or user interruption, while preserving user reviewed outcome statuses.
 - **Service Worker Query-Parameter Cache Matching**: Fixed Service Worker URL matching for `NETWORK_FIRST_FILES` to properly strip query parameters and hash fragments so data files with versioning or timestamp parameters are always fetched network-first.
 - **Server-Aware Manual Sync**: Upgraded the "Sync Plan" button to fetch the latest `daily_plan.js` directly from the server with cache-busting headers and show responsive status feedback.
+- **Master Agent Behavioral Rules Sync**: Mirrored the core global behavioral rules into `.agents/AGENTS.md` (including **DDC / Discuss-Discuss-Confirm**, **Assumptions Transparency**, **Root Cause & Fix Transparency**, and **Constraints Transparency**).
 
 ### v1.8.8 — Gold (XAU/USD) Intraday Tactical Update & Daily Plan Sync
 - **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD support/resistance levels, chop zone ($4418.00–$4426.00), high-momentum triggers (short-covering breakout >$4430.00 / demand breakdown <$4412.00), and 5-min execution scenarios following the +$16.60 extreme price surge to $4422.51.
