@@ -1580,16 +1580,18 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended detailed educational breakdown ("What retail sees" vs "What smart money sees") to `Gold_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Gold_Learn.md`
 
-### v2.3.56 — 31 Aug 2026 — Gold (XAU/USD) Intraday Tactical Update (08:17 AM IST)
+### v2.3.57 — 31 Aug 2026 — NIFTY & GOLD Pre-Market Briefing (09:00 AM IST)
 
-- **Gold (XAU/USD) Intraday Tactical Update (`daily_plan.js`)**:
-  - Processed live spot market action at 08:17 AM IST (Spot: $4404.75, Day High: $4468.00, Day Low: $4402.025, Broken Floor: $4415.00).
-  - Factored in trigger: Extreme Floor Breakdown past $4415.00 with immediate probe of $4400.00 psychological support.
-  - Mapped live intraday compression / no-trade chop zone ($4402.00–$4408.00), high-momentum short-covering squeeze trigger (> $4415.00), and downside long-liquidation cascade (< $4398.00) zones.
-  - Appended exact 5-min/15-min confirmation triggers and new AI-sourced Gold levels prepended with `[08:17]` to `window.goldDailyPlanSummary` and `window.goldDailyPlanData`.
+- **NIFTY & GOLD Pre-Market Briefing (`daily_plan.js`)**:
+  - Executed full 8-point pre-market workflow synthesizing global sentiment (hawkish Fed at Jackson Hole, US yields at 4.72%, Brent crude surge to $90 on Strait of Hormuz conflict, Asian indices down), overnight moves (GIFT Nifty discount at 24,000–24,050, Gold rebound to $4,422.50 after $4,402 flush), and macro calendar.
+  - Calculated Nifty 50 Calibrated 5-Pillar Daily Bias (Score: -2.5 / +6.0, ⚪ NEUTRAL / Chop Regime, Invalidation: 24,090.85) and injected Tactical Directives.
+  - Formatted Nifty Support & Resistance levels into structured Markdown table with emoji highlighting (🟢 BUY, 🔴 SELL, ⚪ NEUTRAL).
+  - Defined Higher Timeframe (1H/Daily) Extreme Extension Targets (ATH expansion 24,650–24,750 vs macro capitulation base 23,900–23,950 / 23,600–23,650).
+  - Outlined exact 5-min intraday action plans, High Momentum / Explosive Zones (> 24,160 Spot / < 24,000 Spot), 15-Minute Opening Range filter rules, and extreme gap contingency plans.
+  - Appended AI-sourced Nifty levels (`[09:00]`) and comprehensive briefing summary to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Mentorship Log Update**:
-  - Appended detailed educational breakdown ("What retail sees" vs "What smart money sees") to `Gold_Learn.md`.
-- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Gold_Learn.md`
+  - Appended detailed level-by-level educational breakdown ("What the retail trader sees" vs "What the smart money sees") to `Nifty_Learn.md`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Nifty_Learn.md`
 
 
 

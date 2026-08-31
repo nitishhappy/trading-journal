@@ -55,7 +55,7 @@ NIFTY Spot opens with a subdued/neutral-to-cautious bias (~24,180-24,200), conso
   },
   {
     "source": "AI Pre-Market Briefing",
-    "text": `NIFTY 50 Pre-Market Tactical Briefing (09:00 AM IST - Aug 30, 2026 | Spot: 24175.65 | Trigger: 09:00 AM Pre-Market Briefing):
+    "text": `NIFTY 50 Pre-Market Tactical Briefing (09:00 AM IST - Aug 30, 2026 | Spot: 24117.55 | Trigger: 09:00 AM Pre-Market Briefing):
 
 ================================================================================
 🎯 DAILY MARKET BIAS & OUTLOOK
@@ -66,31 +66,19 @@ NIFTY Spot opens with a subdued/neutral-to-cautious bias (~24,180-24,200), conso
 📍 Tactical Directives:
 • Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
 • Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
-• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +0.5 / +6.0 | Confidence: Neutral (Chop)
-• Bias Invalidation Floor: 24207.75 (A 15M close above 24207.75 invalidates bias)
-
-📍 Tactical Directives:
-• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
-• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
-• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +0.5 / +6.0 | Confidence: Neutral (Chop)
-• Bias Invalidation Floor: 24207.75 (A 15M close above 24207.75 invalidates bias)
-
-📍 Tactical Directives:
-• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
-• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
 
 1. Market Structure & Bias:
-NIFTY Spot opens with a neutral-to-mild positive bias (~24,210-24,240), consolidating near the 50% equilibrium of its recent 24,090-24,297 range. Following an inside-day structural pattern and defense of the 24,090 low, price action is hovering below the 24,220-24,250 50% equilibrium retracement shelf. India VIX at 10.68 confirms a low-volatility environment prone to rotational chop. A decisive 5m/15m breakout above 24,220 is required for an upside short-covering expansion, while a breakdown below 24,090 will trigger liquidation cascades.
+NIFTY Spot opens with a neutral-to-flat bias (~24,117.55), consolidating in discount territory following a bearish breakdown below the D-2 low (24,207.75) and closing near session lows at 24,090.85. Market structure is testing institutional bid absorption around the 24,000–24,050 demand shelf while capped beneath the 24,205–24,225 50% equilibrium retracement breaker. Sustaining above 24,220 unlocks upside short-covering expansion toward 24,295 and 24,350, while a sustained 5m breakdown below 24,090 triggers liquidation cascades toward 24,050 and 24,000.
 
 2. SMC & Key Confluence Levels:
-- Resistance / BSL: 24,220-24,240 (50% Equilibrium Retracement Shelf & Short-Covering Trigger), 24,295-24,300 (Previous Day High & Supply OB), 24,340-24,350 (2-Day High Supply Breaker), 24,480-24,500 (Heavy FII Call Writing Wall), 24,540-24,550 (ATH Supply Shelf), 24,650-24,750 (HTF Macro ATH Extension Target).
-- Support / SSL: 24,100-24,120 (Day Low SSL Pool & Demand Retest), 24,090 (Downside Liquidation Cascade Trigger), 24,000-24,050 (Major Psychological Floor & 1H Demand OB), 23,850-23,900 (HTF Macro Daily Demand Base).
-- Chop Zone: 24,160-24,200 (Opening Range Equilibrium No-Trade Box).
+- Resistance / BSL: 24,205-24,225 (50% Equilibrium Retracement Shelf & Short-Covering Trigger), 24,295-24,300 (Previous Day High & Supply OB), 24,340-24,380 (2-Day Swing High Breaker Block), 24,480-24,500 (Heavy FII Call Writing Wall), 24,540-24,550 (ATH Supply Shelf), 24,650-24,750 (HTF Macro ATH Extension Target).
+- Support / SSL: 24,090.85 (Day Low SSL Pool & Liquidation Cascade Trigger), 24,000-24,050 (Major Psychological Floor & Unmitigated 1H Demand OB), 23,850-23,900 (HTF Macro Daily Demand Base).
+- Chop Zone: 24,100-24,160 (Opening Range Equilibrium No-Trade Box).
 
 3. Action Plan & High-Momentum Triggers:
-- BUY Setup 1 (Day Low SSL Sweep Reversal Long - CE / Turtle Soup): Sweep below 24,090 into 24,050-24,070 with lower-wick rejection, closing 5m candle firmly back ABOVE 24,110 with expanding volume. TP: 24,180 / 24,220 / 24,250. SL: 24,045.
-- BUY Setup 2 (High-Momentum Breakout Long - CE): Sustained 5m/15m candle close ABOVE 24,220 with expanding Futures volume (>1.3x). TP: 24,280 / 24,320 / 24,350. SL: 24,175.
-- SELL Setup 1 (Supply Rejection Short - PE): Corrective rally into 24,240-24,260 or 24,295-24,300 rejected with upper wick, closing 5m candle back BELOW 24,210 (or 24,275). TP: 24,160 / 24,110 / 24,070. SL: 24,275 (or 24,325).
+- BUY Setup 1 (Day Low SSL Sweep Reversal Long - CE / Turtle Soup): Sweep below 24,090 into 24,050-24,070 with lower-wick rejection, closing 5m candle firmly back ABOVE 24,115 with expanding volume. TP: 24,180 / 24,220 / 24,280. SL: 24,045.
+- BUY Setup 2 (High-Momentum Breakout Long - CE): Sustained 5m/15m candle close ABOVE 24,220 with expanding Futures volume (>1.2x). TP: 24,280 / 24,300 / 24,350. SL: 24,175.
+- SELL Setup 1 (Supply Rejection Short - PE): Corrective rally into 24,205-24,225 or 24,295-24,300 rejected with upper wick, closing 5m candle back BELOW 24,185 (or 24,270). TP: 24,120 / 24,090 / 24,050. SL: 24,245 (or 24,320).
 - SELL Setup 2 (Day Low Breakdown Continuation Short - PE): Sustained 5m/15m candle close BELOW 24,090 with expanding red Futures volume. TP: 24,050 / 24,000 / 23,950. SL: 24,130.`
   }
 ];
@@ -598,6 +586,96 @@ window.dailyPlanData = [
     "behavior": "[09:00] Higher Timeframe Macro Daily Demand Base & Capitulation Liquidity Floor. Deep panic-flush rebound zone.",
     "tp": "24150",
     "sl": "23800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24650-24750",
+    "bias": "bearish",
+    "behavior": "[09:00] HTF Extreme ATH Extension & Terminal Institutional Distribution Zone. Major multi-week profit booking target.",
+    "tp": "24550",
+    "sl": "24800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24540-24550",
+    "bias": "bearish",
+    "behavior": "[09:00] ATH Overhead Supply Shelf & Resistance. Institutional profit booking zone; watch for rejection or 15m expansion.",
+    "tp": "24450",
+    "sl": "24580",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24480-24500",
+    "bias": "bearish",
+    "behavior": "[09:00] FII Supply Defense & Heavy Call Writing Wall. Primary HTF supply ceiling; rejection offers short setups.",
+    "tp": "24350",
+    "sl": "24530",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24340-24360",
+    "bias": "bearish",
+    "behavior": "[09:00] 2-Day High Supply Shelf & 1H Bearish Breaker. Heavy overhead resistance on relief pullbacks.",
+    "tp": "24260",
+    "sl": "24380",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24200-24220",
+    "bias": "bearish",
+    "behavior": "[09:00] 50% Equilibrium Retracement Shelf & Intraday Supply OB. Rejection confirms downside continuation.",
+    "tp": "24140",
+    "sl": "24250",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24160",
+    "bias": "bullish",
+    "behavior": "[09:00] High-Momentum BSL Short-Covering Trigger. Sustained 5m close above clears opening compression to 24220/24280/24340.",
+    "tp": "24340",
+    "sl": "24110",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24060-24100",
+    "bias": "neutral",
+    "behavior": "[09:00] Intraday Opening Compression & No-Trade Chop Zone. Stay flat; avoid unconfirmed trades inside.",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24000-24020",
+    "bias": "bullish",
+    "behavior": "[09:00] Major Psychological Floor & Unmitigated 1H Demand OB. High-probability institutional dip-buying shelf.",
+    "tp": "24140",
+    "sl": "23950",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24000",
+    "bias": "bearish",
+    "behavior": "[09:00] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below accelerates sell-off to 23950/23900.",
+    "tp": "23900",
+    "sl": "24045",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23900-23950",
+    "bias": "bullish",
+    "behavior": "[09:00] Higher Timeframe Macro Daily Demand Base & Capitulation Liquidity Floor. Deep panic-flush rebound zone.",
+    "tp": "24150",
+    "sl": "23850",
     "status": "na"
   }
 ,
