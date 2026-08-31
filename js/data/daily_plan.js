@@ -1,11 +1,14 @@
 window.dailyPlanData = [
-  { "source": "AI", "price": "24055-24085", "bias": "neutral", "behavior": "[04:18] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24095", "bias": "bullish", "behavior": "[04:18] BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).", "tp": "24130", "sl": "24065", "status": "na" },
-  { "source": "AI", "price": "24035-24050", "bias": "bullish", "behavior": "[04:18] Displacement FVG Pullback Absorption Long. Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065.", "tp": "24095", "sl": "24020", "status": "na" },
-  { "source": "AI", "price": "24095-24130", "bias": "bearish", "behavior": "[04:18] Overhead Supply / Breaker Sweep Rejection Short. Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080.", "tp": "24035", "sl": "24142", "status": "na" },
-  { "source": "AI", "price": "24035", "bias": "bearish", "behavior": "[04:18] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.", "tp": "24000", "sl": "24070", "status": "na" },
-  { "source": "AI", "price": "23993.60", "bias": "bullish", "behavior": "[04:18] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base.", "tp": "24090", "sl": "23950", "status": "na" },
-  { "source": "AI", "price": "23850-23900", "bias": "bullish", "behavior": "[04:18] HTF Macro Daily Demand Base & Major Institutional Support Shelf.", "tp": "24050", "sl": "23820", "status": "na" }
+  { "source": "AI", "price": "24055-24085", "bias": "neutral", "behavior": "[04:43] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24095", "bias": "bullish", "behavior": "[04:43] BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).", "tp": "24130", "sl": "24065", "status": "na" },
+  { "source": "AI", "price": "24035-24050", "bias": "bullish", "behavior": "[04:43] Displacement FVG Pullback Absorption Long. Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065.", "tp": "24095", "sl": "24020", "status": "na" },
+  { "source": "AI", "price": "24095-24130", "bias": "bearish", "behavior": "[04:43] Overhead Supply / Breaker Sweep Rejection Short. Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080.", "tp": "24035", "sl": "24142", "status": "na" },
+  { "source": "AI", "price": "24035", "bias": "bearish", "behavior": "[04:43] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.", "tp": "24000", "sl": "24070", "status": "na" },
+  { "source": "AI", "price": "23993.60", "bias": "bullish", "behavior": "[04:43] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base.", "tp": "24090", "sl": "23950", "status": "na" },
+  { "source": "AI", "price": "23850-23900", "bias": "bullish", "behavior": "[04:43] HTF Macro Daily Demand Base & Major Institutional Support Shelf.", "tp": "24050", "sl": "23820", "status": "na" },
+  { "source": "AI", "price": "24188.30-24200", "bias": "bearish", "behavior": "[04:43] Previous Day High (PDH) Supply Order Block & BSL Pool.", "tp": "24120", "sl": "24220", "status": "na" },
+  { "source": "AI", "price": "24280-24335", "bias": "bearish", "behavior": "[04:43] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.", "tp": "24180", "sl": "24360", "status": "na" },
+  { "source": "AI", "price": "24650-24750", "bias": "bullish", "behavior": "[04:43] HTF Macro All-Time High Extension BSL Target.", "tp": "24750", "sl": "24500", "status": "na" }
 ];
 
 window.goldDailyPlanData = [
@@ -175,7 +178,9 @@ S&P 500 Spot: 7686.14 (04:37 AM IST - Sep 01, 2026) Trigger: US Market Watchdog
 window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
-    "text": `================================================================================
+    "text": `NIFTY 50 Pre-Market Tactical Briefing (04:43 AM IST - Sep 01, 2026 | Spot: 24090.85 | Trigger: Ad-Hoc Run):
+
+================================================================================
 🎯 DAILY MARKET BIAS & OUTLOOK
 ================================================================================
 • Daily Market Bias: ⚪ NEUTRAL | Bias Score: +0.5 / +6.0 | Confidence: Neutral (Chop)
@@ -183,6 +188,29 @@ window.dailyPlanSummary = [
 
 📍 Tactical Directives:
 • Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
-• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.`
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
+
+1. Market Structure & Macro Synthesis:
+- NIFTY 50 Spot closed at 24090.85 with GIFT Nifty indicating a mild +73.15 pt (+0.30%) opening near 24164.00.
+- Broader structure is consolidating in an Inside Day 50% discount equilibrium compression pocket.
+- Key Macro Drivers: India VIX subdued at 11.19 (Low Volatility / Theta Burn regime) | Crude oil spiked to $90.69/bbl on Persian Gulf tensions | DXY steady at 99.41 | US 10Y Yield at 4.76%.
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above 24095, Previous Day High (24188.30), and 2-Day swing high (24341.95).
+- Sell-Side Liquidity (SSL): Concentrated below 24035, Day Low (23993.60), and HTF Macro Demand Base (23850–23900).
+- Order Blocks & FVGs: 15M Bullish Displacement FVG at 24035–24050; 15M Bearish Breaker / FVG supply pocket at 24095–24130.
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 24055 – 24085 (30-point rotational box). Avoid taking unconfirmed breakout market orders inside this compression pocket.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 24095): Sustained 5m/15m close above 24095 with expanding Futures volume (>1.2x average) clears local supply, accelerating momentum into 24130 and 24188.
+- Downside Long-Liquidation Cascade (< 24035): Sustained 5m close below 24035 triggers stop cascades accelerating toward 24000 and 23993.60.
+
+5. 5-Min Action Plan & Tactical Triggers:
+- BUY Setup 1 (FVG Pullback Absorption Long): Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065. TP: 24095 / 24130. SL: 24020. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 23993.60 rejected with lower wick, closing 5m candle back ABOVE 24015. TP: 24080 / 24130. SL: 23970. Risk-Reward: ~1:2.8.
+- SELL Setup 1 (Overhead Breaker Sweep Rejection Short): Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080. TP: 24035 / 24000. SL: 24145. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Breakdown Continuation Short): Sustained 5m close BELOW 24035. TP: 23993.60 / 23950. SL: 24070. Risk-Reward: ~1:3.0.`
   }
 ];
