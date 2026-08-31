@@ -169,3 +169,10 @@ S&P 500 Spot: 7686.14 (04:37 AM IST - Sep 01, 2026) Trigger: US Market Watchdog
     "status": "na"
   }
 ];
+
+window.dailyPlanSummary = [
+  {
+    "source": "AI Pre-Market Briefing",
+    "text": "================================================================================\n\ud83c\udfaf DAILY MARKET BIAS & OUTLOOK\n================================================================================\n\u2022 Daily Market Bias: \u26aa NEUTRAL | Bias Score: +0.5 / +6.0 | Confidence: Neutral (Chop)\n\u2022 Bias Invalidation Floor: 24207.75 (A 15M close above 24207.75 invalidates bias)\n\n\ud83d\udccd Tactical Directives:\n\u2022 Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n\u2022 Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n"
+  }
+];

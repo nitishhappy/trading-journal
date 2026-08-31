@@ -197,20 +197,31 @@ if (viewLevels) {
             }
         });
 
-        const isExplicitlyCleared = (localStorage.getItem(storageKey + '_cleared') === 'true');
-        if (isExplicitlyCleared && !isManualSync) {
+        // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
+        const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
+        const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+        const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
+        const summaryData = (summarySource && Array.isArray(summarySource)) ? summarySource : [];
+        const planSig = planLevels.map(p => `${p.source || ''}__${p.price || p.rawPrice || ''}__${p.bias || ''}__${p.behavior || ''}__${p.tp || ''}__${p.sl || ''}`).join('||') + '___SUM___' + summaryData.map(s => (s.text || '').substring(0, 80)).join('||');
+        const lastSig = localStorage.getItem(storageKey + '_sig');
+        const planChanged = (planSig !== lastSig);
+
+        const clearedSig = localStorage.getItem(storageKey + '_cleared_sig');
+        let isExplicitlyCleared = (localStorage.getItem(storageKey + '_cleared') === 'true');
+
+        if (isExplicitlyCleared && clearedSig && clearedSig !== planSig) {
+            // A brand-new Ad-Hoc AI run / briefing has arrived on the server!
+            localStorage.removeItem(storageKey + '_cleared');
+            localStorage.removeItem(storageKey + '_cleared_sig');
+            isExplicitlyCleared = false;
+            clearedSummaries[window.currentActiveAsset || 'NIFTY'] = false;
+        } else if (isExplicitlyCleared && !isManualSync) {
             clearedSummaries[window.currentActiveAsset || 'NIFTY'] = true;
         } else if (isManualSync) {
             localStorage.removeItem(storageKey + '_cleared');
+            localStorage.removeItem(storageKey + '_cleared_sig');
             clearedSummaries[window.currentActiveAsset || 'NIFTY'] = false;
         }
-
-        // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
-        const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
-        const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
-        const planSig = planLevels.map(p => `${p.source || ''}__${p.price || p.rawPrice || ''}__${p.bias || ''}__${p.behavior || ''}__${p.tp || ''}__${p.sl || ''}`).join('||');
-        const lastSig = localStorage.getItem(storageKey + '_sig');
-        const planChanged = (planSig !== lastSig);
 
         const shouldSyncFromPlan = (forceSync && (!isExplicitlyCleared || isManualSync)) || (!isExplicitlyCleared && (assetMismatch || loaded.length === 0 || planChanged || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'))));
 
@@ -896,13 +907,22 @@ if (viewLevels) {
         e.stopPropagation();
         if(confirm("Are you sure you want to clear today's mapped levels and summary? (Scorecard statistics will be kept)")) {
             allLevels = [];
-            const isGold = (window.currentActiveAsset === 'GOLD');
-            const isBtc = (window.currentActiveAsset === 'BTC');
-            const isSp500 = (window.currentActiveAsset === 'SP500');
+            const activeAsset = window.currentActiveAsset || 'NIFTY';
+            const isGold = (activeAsset === 'GOLD');
+            const isBtc = (activeAsset === 'BTC');
+            const isSp500 = (activeAsset === 'SP500');
             const storageKey = isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData'));
+            
+            const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
+            const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+            const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
+            const summaryData = (summarySource && Array.isArray(summarySource)) ? summarySource : [];
+            const currentPlanSig = planLevels.map(p => `${p.source || ''}__${p.price || p.rawPrice || ''}__${p.bias || ''}__${p.behavior || ''}__${p.tp || ''}__${p.sl || ''}`).join('||') + '___SUM___' + summaryData.map(s => (s.text || '').substring(0, 80)).join('||');
+
             localStorage.setItem(storageKey + '_cleared', 'true');
+            localStorage.setItem(storageKey + '_cleared_sig', currentPlanSig);
             document.getElementById('levels-list').innerHTML = `<div class="empty-state-levels" id="levels-empty-state">No levels mapped yet. Add a level above to build your trade plan.</div>`;
-            clearedSummaries[window.currentActiveAsset || 'NIFTY'] = true;
+            clearedSummaries[activeAsset] = true;
             saveLevelsData();
             updateCount();
             renderSummary();
