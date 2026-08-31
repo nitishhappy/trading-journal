@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.2 — S&P 500 Watchdog US Market Session Guard
+- **S&P 500 Market Hours Filtering**: Implemented `is_us_market_session()` guard in `sp500_watchdog.py` to restrict background scans to active US market hours (5:00 PM IST – 2:30 AM IST, Mon–Fri).
+- **Resource Optimization**: Automatically skips off-hours executions in <1 second without issuing redundant API calls or Git commits when the US market is closed.
+
 ### v1.9.1 — Dynamic Real-Time Date & Timestamp Briefing Automation Fix
 - **Dynamic Briefing Prompt Fix**: Fixed `premarket_briefing.ps1` prompt template by replacing static hardcoded date strings with dynamic PowerShell variables (`$timeFormatted` and `$fullDateStr`).
 - **Nifty Daily Plan Sync**: Generated and synced the **Aug 31, 2026** Nifty Pre-Market Tactical Briefing & levels into `daily_plan.js` and pushed to GitHub/Vercel.
