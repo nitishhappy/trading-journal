@@ -1446,87 +1446,9 @@ Bitcoin Spot (BTC/USD) is trading at $78,094.01, consolidating in a pullback / e
   },
   {
     "source": "BTC-AI",
-    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (07:34 PM IST - Aug 30, 2026 | Spot: 78891.12 | Trigger: Extreme Outer Target Exhausted (High $78963.72 >= Extreme Target $78817.60)):
-
-1. Market Structure & Session Bias:
-Bitcoin Spot (BTC/USD) is trading at $78,891.12, displaying strong bullish momentum above the 15M 9 EMA ($78,729.47) and 21 EMA ($78,519.57) within the updated daily structure (Day High: $78,963.72 | Day Low: $77,959.12 | Prior Day Close: $78,050.56 | Live Spot: $78,891.12). During the London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY at $99.68 [Bullish DXY / Headwind for BTC] and S&P 500 Futures at $7,722.00) combined with crypto-native context (Funding Rate: 0.0100% [Neutral]; Fear & Greed Index: 69 [Greed]; CME Gap active at $77,815.00 [Below, size: $1,079.92]) guide structure. Spot is executing an aggressive bullish expansion above Prior Day High ($78,145.15), pushing directly into Day High liquidity after exhausting the previous extreme outer target ($78,817.60).
-
-2. SMC & Liquidity Zones:
-- Buy-Side Liquidity (BSL): Clustered above $78,963.72 (Day High / Session High), extending into 15M Bearish FVG ($78,944.90–$79,044.90), and higher-timeframe expansion targets at $79,200.00–$79,500.00.
-- Sell-Side Liquidity (SSL): Concentrated below $77,959.12 (Day Low / London Low) and Asian Low ($77,980.88), with macro demand anchored at Prior Day Low ($77,265.71).
-- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,519.57–$78,729.47 (15M 9/21 EMA Shelf); Session VWAP at $78,390.70; 200 EMA at $78,272.65; Volume Profile POC at $78,134.92.
-- Fair Value Gaps (FVG): 15M Bearish FVG at $78,944.90–$79,044.90; 15M Bullish Demand FVG at $78,728.92–$78,791.68.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $78,009.35 – $78,813.03 (Value Area) / $77,980.88 – $78,323.07 (Asian Range).
-- Context: Current spot ($78,891.12) is expanding above the Value Area High ($78,813.03). False breakout wicks and aggressive pullback retests near $78,850–$78,900 create high slippage for chasing longs. Avoid unconfirmed market orders inside this pocket.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $78,963.72 Spot): A sustained 5m/15m candle close above Day High ($78,963.72) clears overhead liquidity and forces late-session breakout shorts to liquidate, accelerating expansion toward $79,294.90 and $79,694.90.
-- Downside Long-Liquidation Cascade (< $77,959.12 Spot): A sustained 5m close below the session demand shelf ($77,959.12) triggers institutional stop cascades accelerating toward $77,500.00 and $77,265.71.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Demand Floor SSL / EMA Retest Long - SFP / Dip Absorption): Pullback into 15M 9 EMA ($78,729.47) or Bullish FVG ($78,728.92–$78,791.68) with lower-wick rejection, closing 5m candle back ABOVE $78,790.00. TP: $79,294.90 / $79,694.90. SL: $78,579.50.
-- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close firmly ABOVE $78,963.72 with volume confirmation. TP: $79,294.90 / $79,694.90. SL: $78,744.90.
-- SELL Setup 1 (Day High Liquidity Sweep Reversal Short - SFP): False breakout sweep above $78,963.72 rejected with upper wick, closing 5m candle back BELOW $78,850.00. TP: $78,594.90 / $78,390.70. SL: $79,163.70.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,959.12. TP: $77,500.00 / $77,265.71. SL: $78,200.00.`
-  }
-]; Active CME BTC Futures Gap overhead at $78,505.00) anchor the tactical backdrop. Spot is holding just above the 15M 9/21 EMA dynamic shelf ($78,002–$78,083) and Session VWAP ($77,925.52), capped beneath the 200 EMA ($78,253.87) and overhead 15M Bearish FVG.
-
-2. SMC & Liquidity Zones:
-- Buy-Side Liquidity (BSL): Clustered above Day High ($79,169.84), Asian Session High ($78,795.90), and London High ($78,299.96), with extreme HTF targets at Prior Day High ($79,387.86).
-- Sell-Side Liquidity (SSL): Concentrated below London Low ($78,021.38), Prior Day Low ($77,959.12), and Asian Low / Day Low ($77,049.70).
-- Order Blocks (OB) & Key Levels: 15M Dynamic Demand OB at $78,002.64–$78,083.25 (9/21 EMA Shelf); Session VWAP at $77,925.52; 200 EMA Pivot at $78,253.87; High-Volume POC Node at $77,632.74; Overhead CME Gap Magnet at $78,505.00.
-- Fair Value Gaps (FVG): 15M Bearish Supply FVG at $78,050.01–$78,151.23; 15M Bullish Demand FVG at $77,772.18–$77,854.30.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $78,000.00 – $78,250.00 (Spot Index).
-- Context: Current spot ($78,094.01) is compressed between the 21 EMA support shelf ($78,002.64) and the 200 EMA / 15M Bearish FVG resistance ($78,253.87). Micro-wicks and early London Judas swings create high slippage for breakout chasers. Avoid taking unconfirmed entries inside this compression pocket.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $78,300.00 Spot): A sustained 5m/15m candle close above the 200 EMA and London High ($78,299.96) clears overhead supply, forcing short liquidations and triggering a fast expansion toward the CME Gap ($78,505.00), Asian High ($78,795.90), and Day High ($79,169.84).
-- Downside Long-Liquidation Cascade (< $77,950.00 Spot): A sustained 5m close below the VWAP and Prior Day Low ($77,959.12) triggers stop cascades accelerating toward the 15M Bullish FVG ($77,772.18–$77,854.30), Volume Profile POC ($77,632.74), and Day Low ($77,049.70).
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below Prior Day Low ($77,959.12) or London Low ($78,021.38) rejected with lower wick, followed by 5m candle firmly back ABOVE $78,085.00. TP: $78,300.00 / $78,505.00 / $78,800.00. SL: $77,930.00.
-- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE $78,300.00 with expanding volume. TP: $78,505.00 / $78,795.90 / $79,169.84. SL: $78,150.00.
-- SELL Setup 1 (Overhead FVG / 200 EMA Rejection Short): Corrective relief bounce into $78,150.00–$78,250.00 rejected with upper wick, closing 5m candle back BELOW $78,080.00. TP: $77,950.00 / $77,770.00 / $77,630.00. SL: $78,320.00.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,950.00. TP: $77,770.00 / $77,630.00 / $77,050.00. SL: $78,100.00.`
-  },
-  {
-    "source": "BTC-AI",
     "text": `Bitcoin (BTC/USD) Intraday Tactical Update (2026-08-31 13:36:29 IST / London Session (European Opening)):\n\n1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at $78,069.99, consolidation / pullback state within the updated daily structure (Day High: $79,169.84 | Day Low: $77,049.70 | Prior Day Close: $78,999.87 | Live Spot: $78,069.99). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.507 (Bearish DXY (Tailwind for BTC)) and S&P 500 Futures $7709.5) combined with crypto-native context (Funding Rate is 0.0071% (neutral); Fear & Greed Index: 62 (Greed); CME Gap active at 78505.0 (above, size: 435.01)) guide structure. Spot is inside previous day range | below pdc (day red).\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Clustered above $79,169.80 local swing highs, extending into 15M Bearish FVG ($78050.0\u2013$78151.2), and macro day high targets up to $79,387.86.\n- Sell-Side Liquidity (SSL): Concentrated below $77,049.70 psychological round number down to deeper macro 4H demand base ($77,959.12).\n- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,083.25\u2013$78,002.64; Session VWAP at $77,925.52; 200 EMA at $78,253.87; Volume Profile POC at $77,632.74.\n- Fair Value Gaps (FVG): 15M Bearish FVG at $78050.0\u2013$78151.2; 15M Bullish FVG at $77772.2\u2013$77854.3.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: $77,367.72 \u2013 $78,215.78 (Value Area) / $77,049.70 \u2013 $78,795.90 (Asian Range).\n- Context: Current spot ($78,069.99) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> $79,169.80 Spot): A sustained 5m/15m candle close above $79,169.80 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,369.99 and $78,669.99.\n- Downside Long-Liquidation Cascade (< $77,049.70 Spot): A sustained 5m close below the demand shelf ($77,049.70) triggers institutional stop cascades accelerating toward $77,769.99 and $77,469.99.\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,049.70 rejected with lower wick, followed by 5m close back ABOVE $78,083.25. TP: $78,069.99 / $78,069.99. SL: $78,069.99.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,169.80. TP: $78,469.99 / $78,869.99. SL: $77,919.99.\n- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78050.0\u2013$78151.2 rejected with upper wick, closing back BELOW $78,083.25 on 5m candle. TP: $77,769.99 / $77,569.99. SL: $78,269.99.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,049.70. TP: $77,669.99 / $77,269.99. SL: $78,219.99.\n`
-  },
-  {
-    "source": "BTC-AI",
-    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (07:34 PM IST - Aug 30, 2026 | Spot: 78891.12 | Trigger: Extreme Outer Target Exhausted (High $78963.72 >= Extreme Target $78817.60)):
-
-1. Market Structure & Session Bias:
-Bitcoin Spot (BTC/USD) is trading at $78,891.12, displaying strong bullish momentum above the 15M 9 EMA ($78,729.47) and 21 EMA ($78,519.57) within the updated daily structure (Day High: $78,963.72 | Day Low: $77,959.12 | Prior Day Close: $78,050.56 | Live Spot: $78,891.12). During the London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY at $99.68 [Bullish DXY / Headwind for BTC] and S&P 500 Futures at $7,722.00) combined with crypto-native context (Funding Rate: 0.0100% [Neutral]; Fear & Greed Index: 69 [Greed]; CME Gap active at $77,815.00 [Below, size: $1,079.92]) guide structure. Spot is executing an aggressive bullish expansion above Prior Day High ($78,145.15), pushing directly into Day High liquidity after exhausting the previous extreme outer target ($78,817.60).
-
-2. SMC & Liquidity Zones:
-- Buy-Side Liquidity (BSL): Clustered above $78,963.72 (Day High / Session High), extending into 15M Bearish FVG ($78,944.90–$79,044.90), and higher-timeframe expansion targets at $79,200.00–$79,500.00.
-- Sell-Side Liquidity (SSL): Concentrated below $77,959.12 (Day Low / London Low) and Asian Low ($77,980.88), with macro demand anchored at Prior Day Low ($77,265.71).
-- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,519.57–$78,729.47 (15M 9/21 EMA Shelf); Session VWAP at $78,390.70; 200 EMA at $78,272.65; Volume Profile POC at $78,134.92.
-- Fair Value Gaps (FVG): 15M Bearish FVG at $78,944.90–$79,044.90; 15M Bullish Demand FVG at $78,728.92–$78,791.68.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $78,009.35 – $78,813.03 (Value Area) / $77,980.88 – $78,323.07 (Asian Range).
-- Context: Current spot ($78,891.12) is expanding above the Value Area High ($78,813.03). False breakout wicks and aggressive pullback retests near $78,850–$78,900 create high slippage for chasing longs. Avoid unconfirmed market orders inside this pocket.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $78,963.72 Spot): A sustained 5m/15m candle close above Day High ($78,963.72) clears overhead liquidity and forces late-session breakout shorts to liquidate, accelerating expansion toward $79,294.90 and $79,694.90.
-- Downside Long-Liquidation Cascade (< $77,959.12 Spot): A sustained 5m close below the session demand shelf ($77,959.12) triggers institutional stop cascades accelerating toward $77,500.00 and $77,265.71.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Demand Floor SSL / EMA Retest Long - SFP / Dip Absorption): Pullback into 15M 9 EMA ($78,729.47) or Bullish FVG ($78,728.92–$78,791.68) with lower-wick rejection, closing 5m candle back ABOVE $78,790.00. TP: $79,294.90 / $79,694.90. SL: $78,579.50.
-- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close firmly ABOVE $78,963.72 with volume confirmation. TP: $79,294.90 / $79,694.90. SL: $78,744.90.
-- SELL Setup 1 (Day High Liquidity Sweep Reversal Short - SFP): False breakout sweep above $78,963.72 rejected with upper wick, closing 5m candle back BELOW $78,850.00. TP: $78,594.90 / $78,390.70. SL: $79,163.70.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,959.12. TP: $77,500.00 / $77,265.71. SL: $78,200.00.`
   }
-];
-
-window.btcDailyPlanData = [
+];btcDailyPlanData = [
   {
     "source": "BTC-AI",
     "price": "78828.74",
@@ -1676,6 +1598,36 @@ window.btcDailyPlanData = [
 
 
 window.sp500DailyPlanSummary = [
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 Spot: 7684.07 (11:49 PM IST - Aug 31, 2026) Trigger: Ad-Hoc Run
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7684.07 (ES Futures: 7694.25 | NQ Futures: 29454.0).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.07 (Moderate Volatility (Balanced)) | DXY at 99.41 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7704.07), and London High (7709.07).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7664.07), and London Low (7659.07).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7676.07 – 7692.07 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7699.07): Sustained 5m close above 7699.07 clears local supply, targeting 7771.48 and 7739.07.
+- Downside Long-Liquidation Cascade (< 7669.07): Sustained 5m close below 7669.07 triggers stop cascades accelerating toward 7650.92 and 7629.07.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7650.92 rejected with lower wick, followed by 5m close back ABOVE 7655.92. TP: 7699.07 / 7771.48. SL: 7640.92. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7699.07 with volume confirmation. TP: 7771.48 / 7739.07. SL: 7689.07. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7699.07 / 7669.07. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7669.07. TP: 7650.92 / 7629.07. SL: 7679.07. Risk-Reward: ~1:3.`
+  },
   {
     "source": "SP500-AI",
     "text": `S&P 500 Spot: 7668.59 (09:36 PM IST - Aug 31, 2026) Trigger: US Market Watchdog
@@ -2245,39 +2197,8 @@ window.sp500DailyPlanSummary = [
 - BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
 - SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
 - SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
-  },
-  {
-    "source": "SP500-AI",
-    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (10:21 AM IST - Aug 31, 2026):
-
-1. Market Structure & Macro Synthesis:
-- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7694.75 | NQ Futures: 29373.0).
-- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
-- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.61 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
-- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
-- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
-- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
-- Session Sweep Status: Inside Prior Session Range
-
-3. Live Chop Zone / No-Trade Zone:
-- Range: 7703.76 – 7719.76 Index Points.
-- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
-- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
-
-5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
-- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
-- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
-- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
   }
-];
-window.sp500DailyPlanData = [
+];sp500DailyPlanData = [
   {
     "source": "SP500-AI",
     "price": "7676.59-7692.59",
