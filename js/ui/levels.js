@@ -1888,44 +1888,31 @@ if (viewLevels) {
                 }
             }
 
-            // Only trigger push alerts during active market hours
-            if (isMarketOpen()) {
-                let firstIn = null;
-                let firstOut = null;
-
-                for (let idx = 0; idx < candles.length; idx++) {
-                    const c = candles[idx];
-
-                    if (!firstIn) {
-                        if (c.low <= lHigh && c.high >= lLow) {
-                            firstIn = c;
-                        }
-                    } else {
-                        if (!firstOut && idx > candles.indexOf(firstIn)) {
-                            if (c.close > lHigh) firstOut = { candle: c, dir: 'above' };
-                            else if (c.close < lLow) firstOut = { candle: c, dir: 'below' };
-                        }
-                    }
-                }
-
+            // Only trigger push alerts during active market hours (or 24/7 for BTC/GOLD)
+            const marketActive = isBtc || isGold || isMarketOpen();
+            if (marketActive) {
                 // Initialize state for this level if missing
                 if (!alertedLevels[lvl.id]) {
-                    alertedLevels[lvl.id] = { in: false, out: false };
+                    alertedLevels[lvl.id] = { in: false, out: false, wasInside: false };
                 }
 
                 const state = alertedLevels[lvl.id];
+                const isInside = (price <= lHigh && price >= lLow);
+                const assetName = isSp500 ? 'S&P 500' : (isBtc ? 'BTC' : (isGold ? 'GOLD' : 'Nifty'));
 
                 // Trigger IN alert
-                if (firstIn && !state.in) {
+                if (isInside && !state.in) {
                     state.in = true;
-                    const msg = `Nifty entered level: ${lvl.rawPrice} (${lvl.behavior || lvl.bias})`;
+                    state.wasInside = true;
+                    const msg = `${assetName} entered level: ${lvl.rawPrice} (${lvl.behavior || lvl.bias})`;
                     triggerSystemAlert(`Level Entry: ${lvl.source || 'BT'}`, msg);
                 }
 
-                // Trigger OUT alert
-                if (firstOut && !state.out) {
+                // Trigger OUT alert if price was inside level and has moved strictly outside
+                if (state.wasInside && !isInside && !state.out) {
                     state.out = true;
-                    const msg = `Nifty closed strictly ${firstOut.dir} level ${lvl.rawPrice}`;
+                    const dir = price > lHigh ? 'above' : 'below';
+                    const msg = `${assetName} moved strictly ${dir} level ${lvl.rawPrice}`;
                     triggerSystemAlert(`Level Exit: ${lvl.source || 'BT'}`, msg);
                 }
             }

@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.0 — Fix ReferenceError: candles is not defined in Levels Evaluation
+- **Bug Fix**: Resolved `ReferenceError: candles is not defined` crash in `js/ui/levels.js` by replacing an un-scoped historical candle loop with direct live market price evaluation against level boundaries (`pHigh`, `pLow`).
+- **Live Alert & UI Stability**: Restored silent background price level evaluation, automatic level highlighting, auto-scrolling, and push entry/exit alert triggers for Nifty, Gold, and BTC assets.
+
 ### v1.8.9 — Automated Real-Time Levels Sync & Cache Invalidation
 - **Automated Real-Time Levels Sync**: Eliminates the need for manual `Ctrl + F5` hard refreshes. The Levels tab now automatically fetches the freshest `daily_plan.js` from the server in the background whenever the user switches to the Levels tab, returns to the app (visibility change), or while actively viewing the tab (periodic polling loop).
 - **Dynamic In-Memory Updates**: Fresh levels, AI pre-market briefings, and tactical summaries are evaluated and rendered seamlessly with zero page reload or user interruption, while preserving user reviewed outcome statuses.
