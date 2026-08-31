@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.9 — Fix Task Scheduler PowerShell Argument Escaping Syntax
+- **Task Scheduler Argument Fix**: Fixed argument string parsing for `SP500_AI_Watchdog_15m` and `BTC_AI_Watchdog_15m` scheduled tasks by stripping trailing backslashes before closing quotes.
+- **Flawless Automated Execution**: Resolved `TerminatorExpectedAtEndOfString` exit code `1` errors, restoring reliable 15-minute background watchdog execution (verified exit code `0`).
+
 ### v1.9.8 — Manual Start Option for Candle Timers
 - **Manual Timer Start/Stop**: Added a Manual Start/Pause button (`▶` / `⏸`) to both the 5-Minute and 15-Minute candle timer cards on the Candle tab.
 - **Standby Mode Overrides**: Allows users to manually start the timer countdown during Standby mode (outside session hours) while maintaining exact 5m / 15m candle close conditions.
