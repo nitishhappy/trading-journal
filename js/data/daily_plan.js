@@ -1231,6 +1231,33 @@ Gold Spot (XAU/USD) is trading at $4447.59, hovering right above the Day Low sup
 - BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4456.00 with expanding volume. TP: $4468.00 / $4482.00 / $4495.00. SL: $4446.00.
 - SELL Setup 1 (Bearish Breaker / FVG Rejection Short): Corrective relief bounce into $4458.00–$4465.00 (or $4472.00–$4480.00) rejected with upper wick, closing back BELOW $4452.00 on 5m candle. TP: $4445.00 / $4432.00 / $4415.00. SL: $4469.00 (or $4486.00).
 - SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW $4442.00 with expanding momentum. TP: $4430.00 / $4415.00 / $4402.00. SL: $4452.00.`
+  },
+  {
+    "source": "AI",
+    "text": `Gold (XAU/USD) Intraday Tactical Update (06:06 PM IST - Aug 31, 2026 | Spot: 4445.5 | Trigger: Scheduled 06:00 PM Update (New York Pre-Market & US Data)):
+
+1. Market Structure & Session Bias:
+Gold Spot (XAU/USD) is trading at $4445.50, sitting directly on top of the Day Low liquidity floor ($4445.60) in an extended lower-high compression from Day High ($4521.50) into the London/New York session transition. Ahead of the US opening bell (06:00–07:00 PM IST / 08:30–09:30 AM EST) and incoming US macroeconomic data releases, smart money is staging aggressive liquidity tests. Intermarket macro forces (DXY Dollar Index holding firm at ~99.60–99.70 and US 10-Year Treasury Yields elevated at 4.72%) continue to supply macro headwinds against bullion. Spot structure is probing institutional bid absorption at the Day Low Sell-Side Liquidity (SSL) shelf ($4445.60), setting up either an engineered Turtle Soup liquidity sweep reversal or a high-momentum long-liquidation cascade into deep 4H demand.
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above Day High ($4521.50), London High ($4468.00), and intermediate supply shelves at $4485.00–$4495.00 (4H Bearish Supply Block) and $4468.00–$4475.00 (15M Bearish Imbalance FVG).
+- Sell-Side Liquidity (SSL): Concentrated directly below Day Low ($4445.60 / $4445.50 live probe), with resting stop pools extending down to intermediate 15M demand at $4415.00–$4425.00 and 4H deep macro demand at $4375.00–$4385.00.
+- Order Blocks (OB): Bullish Demand OB at $4415.00–$4425.00 & $4375.00–$4385.00; Bearish Breaker OB at $4455.00–$4462.00 & $4485.00–$4495.00; Bearish Supply OB at $4515.00–$4521.50.
+- Fair Value Gaps (FVG): 15M Bearish Imbalance FVG at $4468.00–$4475.00; 5M Bearish Displacement FVG at $4450.00–$4454.00; 5M Bullish Absorption FVG at $4442.00–$4446.00.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $4442.00 – $4449.00.
+- Context: Current spot ($4445.50) is tightly compressed directly around the Day Low floor ($4445.60). Pre-US data spread widening, erratic micro-wicks, and high-frequency positioning make unconfirmed market orders hazardous. Avoid unconfirmed entries inside this compression pocket.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $4455.00 Spot): A sustained 5m/15m candle close above $4455.00 clears local 5M supply, trapping aggressive session breakout shorts and triggering a rapid short-covering surge toward $4468.00, $4482.00 (15M FVG), and $4495.00.
+- Downside Long-Liquidation Cascade (< $4440.00 Spot): A sustained 5m close below the $4440.00 threshold triggers cascading stop-loss liquidations of late buyers beneath Day Low ($4445.60), accelerating a sharp flush toward $4428.00, $4415.00, and $4385.00.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below Day Low ($4445.60, probing $4440.00–$4444.00) rejected with lower wick, followed by 5m candle close back ABOVE $4449.00. TP: $4460.00 / $4475.00 / $4492.00. SL: $4437.00.
+- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4455.00 with expanding volume. TP: $4468.00 / $4482.00 / $4495.00. SL: $4445.00.
+- SELL Setup 1 (Bearish Breaker / FVG Rejection Short): Corrective relief bounce into $4455.00–$4462.00 (or $4468.00–$4475.00) rejected with upper wick, closing back BELOW $4450.00 on 5m candle. TP: $4442.00 / $4428.00 / $4415.00. SL: $4466.00 (or $4482.00).
+- SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW $4440.00 with expanding momentum. TP: $4428.00 / $4415.00 / $4385.00. SL: $4449.00.`
   }
 ];
 
@@ -1265,7 +1292,17 @@ window.goldDailyPlanData = [
   { "source": "AI", "price": "4450", "bias": "bullish", "behavior": "[13:36] Day Low SSL Sweep Reversal Long Trigger. Lower wick rejection of $4440-$4444 reclaiming $4450 targets $4462/$4475.", "tp": "4475", "sl": "4438", "status": "na" },
   { "source": "AI", "price": "4445.6", "bias": "bullish", "behavior": "[13:36] Day Low SSL Liquidity Base & Session Demand Floor ($4445.60). Key liquidity pool; watch for Turtle Soup sweep absorption.", "tp": "4465", "sl": "4438", "status": "na" },
   { "source": "AI", "price": "4442", "bias": "bearish", "behavior": "[13:36] Day Low Breakdown & Liquidation Cascade Trigger. Sustained 5m close below $4442 accelerates flush to $4430/$4415/$4402.", "tp": "4415", "sl": "4452", "status": "na" },
-  { "source": "AI", "price": "4415-4425", "bias": "bullish", "behavior": "[13:36] 15M Demand Order Block & Intermediate Liquidity Target. High-probability bounce shelf on downside cascade.", "tp": "4445", "sl": "4405", "status": "na" }
+  { "source": "AI", "price": "4415-4425", "bias": "bullish", "behavior": "[13:36] 15M Demand Order Block & Intermediate Liquidity Target. High-probability bounce shelf on downside cascade.", "tp": "4445", "sl": "4405", "status": "na" },
+  { "source": "AI", "price": "4521.5", "bias": "bearish", "behavior": "[18:06] Day High BSL Liquidity Pool & Major Session Supply Shelf ($4521.50). Overhead resting buy stops ceiling; major distribution zone.", "tp": "4485", "sl": "4532", "status": "na" },
+  { "source": "AI", "price": "4485-4495", "bias": "bearish", "behavior": "[18:06] 4H Bearish Supply Block & Institutional Re-distribution Zone. Unmitigated imbalance ceiling on HTF relief bounces.", "tp": "4460", "sl": "4505", "status": "na" },
+  { "source": "AI", "price": "4468-4475", "bias": "bearish", "behavior": "[18:06] 15M Bearish Imbalance FVG & Overhead Resistance Shelf. Primary supply hurdle for NY session relief rallies.", "tp": "4450", "sl": "4482", "status": "na" },
+  { "source": "AI", "price": "4455", "bias": "bullish", "behavior": "[18:06] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m close above $4455 clears local supply to $4468/$4482/$4495.", "tp": "4482", "sl": "4445", "status": "na" },
+  { "source": "AI", "price": "4442-4449", "bias": "neutral", "behavior": "[18:06] Live Intraday Compression & No-Trade Chop Zone. NY pre-market Day Low probe equilibrium ($4445.50); avoid unconfirmed market entries inside.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "4449", "bias": "bullish", "behavior": "[18:06] Day Low SSL Sweep Reversal Long Trigger. Lower wick rejection of $4440-$4444 reclaiming $4449 targets $4460/$4475.", "tp": "4475", "sl": "4437", "status": "na" },
+  { "source": "AI", "price": "4445.6", "bias": "bullish", "behavior": "[18:06] Day Low SSL Liquidity Base & Session Demand Floor ($4445.60). Key liquidity pool; watch for Turtle Soup sweep absorption.", "tp": "4465", "sl": "4437", "status": "na" },
+  { "source": "AI", "price": "4440", "bias": "bearish", "behavior": "[18:06] Day Low Breakdown & Liquidation Cascade Trigger. Sustained 5m close below $4440 accelerates flush to $4428/$4415/$4385.", "tp": "4415", "sl": "4449", "status": "na" },
+  { "source": "AI", "price": "4415-4425", "bias": "bullish", "behavior": "[18:06] 15M Demand Order Block & Intermediate Liquidity Target. High-probability bounce shelf on downside cascade.", "tp": "4445", "sl": "4405", "status": "na" },
+  { "source": "AI", "price": "4375-4385", "bias": "bullish", "behavior": "[18:06] HTF 4H Deep Discount Macro Demand Base. High-probability institutional bid absorption and macro reversal shelf.", "tp": "4420", "sl": "4365", "status": "na" }
 ];
 
 // ============ BITCOIN (BTC/USD) ============
