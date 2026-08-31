@@ -483,7 +483,7 @@ if (viewLevels) {
                     if (colonIdx !== -1) {
                         const type = cleanLine.substring(0, colonIdx).trim();
                         const details = cleanLine.substring(colonIdx + 1).trim();
-                        html += `<tr><td style="font-weight: 700; color: var(--accent); white-space: nowrap;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
+                        html += `<tr><td style="font-weight: 700; color: var(--accent); min-width: 110px; max-width: 200px; word-break: break-word;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
                     } else {
                         html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
                     }
@@ -520,7 +520,7 @@ if (viewLevels) {
                         const details = cleanLine.substring(colonIdx + 1).trim();
                         const isBull = /upside|short-covering|squeeze|bullish/i.test(type);
                         const badgeClass = isBull ? 'badge-buy' : 'badge-sell';
-                        html += `<tr><td style="font-weight: 700; white-space: nowrap;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
+                        html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 200px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
                     } else {
                         html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
                     }
@@ -566,7 +566,7 @@ if (viewLevels) {
                     const badgeClass = dir === 'BUY' ? 'badge-buy' : (dir === 'SELL' ? 'badge-sell' : '');
 
                     html += `<tr>`;
-                    html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 140px;">${escapeHtml(setupName)}</td>`;
+                    html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word;">${escapeHtml(setupName)}</td>`;
                     html += `<td><span class="${badgeClass}">${dir}</span></td>`;
                     html += `<td>${formatInlineHighlights(entry)}</td>`;
                     html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;

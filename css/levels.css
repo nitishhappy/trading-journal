@@ -1239,7 +1239,9 @@
     letter-spacing: 0.5px;
     padding: 0.6rem 0.8rem;
     border-bottom: 1px solid var(--border, rgba(255,255,255,0.1));
-    white-space: nowrap;
+    white-space: normal;
+    word-break: normal;
+    min-width: 70px;
 }
 .levels-summary-table td {
     padding: 0.6rem 0.8rem;
@@ -1247,6 +1249,8 @@
     color: var(--text, #f8fafc);
     vertical-align: top;
     line-height: 1.45;
+    white-space: normal;
+    word-break: break-word;
 }
 .levels-summary-table tr:last-child td {
     border-bottom: none;
