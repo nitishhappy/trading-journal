@@ -1752,3 +1752,10 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 - **Tab Glow Badge Removal (`levels.js`)**:
   - Updated `updateAssetTabBadges()` signature caching to permanently clear tab glow indicators (`.btn-tab-updated`) when an active tab is checked and navigated away from.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/ui/levels.js`, `sw.js`
+
+### v2.3.68 — 01 Sep 2026 — Standardized Daily Bias & Market Structure Integration
+
+- **Daily Market Bias Preamble & Section 1 Renderer (`levels.js`)**:
+  - Updated `renderSummaryTableContent()` to render any top Daily Market Bias & Outlook preamble text in a highlighted hero banner above Section 1.
+  - Ensures Daily Market Bias (`🟢 BULLISH`, `🔴 BEARISH`, `⚪ NEUTRAL`), score, invalidation floor, and Section 1 Market Structure display consistently across all 4 asset tabs (NIFTY, GOLD, BTC, S&P 500) for both pre-market and ad-hoc runs.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`

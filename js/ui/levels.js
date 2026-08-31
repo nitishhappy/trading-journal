@@ -487,6 +487,20 @@ if (viewLevels) {
 
         let html = '';
 
+        // Check if there is preamble text before section 1 (e.g. Daily Market Bias & Outlook block)
+        if (matches.length > 0 && matches[0].index > 0) {
+            const preamble = bodyText.substring(0, matches[0].index).trim();
+            if (preamble && preamble.length > 5) {
+                const cleanPreamble = preamble.split('\n').filter(line => !/^[=─-]{5,}$/.test(line.trim())).join('\n').trim();
+                if (cleanPreamble) {
+                    html += `<div class="summary-table-section">`;
+                    html += `<div class="summary-table-title">🎯 Daily Market Bias & Outlook</div>`;
+                    html += `<div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); padding: 0.85rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.88rem; line-height: 1.5; color: var(--text-main);">${formatInlineHighlights(cleanPreamble)}</div>`;
+                    html += `</div>`;
+                }
+            }
+        }
+
         matches.forEach((match, idx) => {
             const headerTitle = match[1].trim();
             const startIdx = match.index + match[0].length;
