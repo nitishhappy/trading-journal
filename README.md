@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.1 — Dynamic Real-Time Date & Timestamp Briefing Automation Fix
+- **Dynamic Briefing Prompt Fix**: Fixed `premarket_briefing.ps1` prompt template by replacing static hardcoded date strings with dynamic PowerShell variables (`$timeFormatted` and `$fullDateStr`).
+- **Nifty Daily Plan Sync**: Generated and synced the **Aug 31, 2026** Nifty Pre-Market Tactical Briefing & levels into `daily_plan.js` and pushed to GitHub/Vercel.
+
 ### v1.9.0 — Fix ReferenceError: candles is not defined in Levels Evaluation
 - **Bug Fix**: Resolved `ReferenceError: candles is not defined` crash in `js/ui/levels.js` by replacing an un-scoped historical candle loop with direct live market price evaluation against level boundaries (`pHigh`, `pLow`).
 - **Live Alert & UI Stability**: Restored silent background price level evaluation, automatic level highlighting, auto-scrolling, and push entry/exit alert triggers for Nifty, Gold, and BTC assets.
