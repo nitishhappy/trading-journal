@@ -10,6 +10,7 @@ if (viewLevels) {
     let liveAlertsInterval = null;
     let alertedLevels = {}; // format: { 'lvl-id': { firstInAlerted: boolean, firstOutAlerted: boolean } }
     let isLiveAlertsOn = false;
+    let clearedSummaries = {}; // format: { 'NIFTY': boolean, 'GOLD': boolean, ... }
 
     // DOM refs
     const inpSource = document.getElementById('inp-level-source');
@@ -585,9 +586,16 @@ if (viewLevels) {
         const summaryBody = document.getElementById('levels-summary-body');
         if (!summaryPanel || !summaryBody) return;
 
-        const isGold = (window.currentActiveAsset === 'GOLD');
-        const isBtc = (window.currentActiveAsset === 'BTC');
-        const isSp500 = (window.currentActiveAsset === 'SP500');
+        const activeAsset = window.currentActiveAsset || 'NIFTY';
+        if (clearedSummaries[activeAsset]) {
+            summaryPanel.style.display = 'none';
+            summaryBody.innerHTML = '';
+            return;
+        }
+
+        const isGold = (activeAsset === 'GOLD');
+        const isBtc = (activeAsset === 'BTC');
+        const isSp500 = (activeAsset === 'SP500');
         const summaryData = isSp500 ? (window.sp500DailyPlanSummary || []) : (isBtc ? (window.btcDailyPlanSummary || []) : (isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || [])));
         if (!Array.isArray(summaryData) || summaryData.length === 0) {
             summaryPanel.style.display = 'none';
@@ -810,6 +818,7 @@ if (viewLevels) {
             btnSyncPlan.disabled = true;
             btnSyncPlan.innerText = 'Syncing...';
             try {
+                clearedSummaries[window.currentActiveAsset || 'NIFTY'] = false;
                 await autoSyncDailyPlan(true, false);
                 const count = allLevels.length;
                 if (window.showToast) {
@@ -874,11 +883,13 @@ if (viewLevels) {
 
     document.getElementById('btn-level-clear').addEventListener('click', (e) => {
         e.stopPropagation();
-        if(confirm("Are you sure you want to clear today's mapped levels? (Scorecard statistics will be kept)")) {
+        if(confirm("Are you sure you want to clear today's mapped levels and summary? (Scorecard statistics will be kept)")) {
             allLevels = [];
             document.getElementById('levels-list').innerHTML = `<div class="empty-state-levels" id="levels-empty-state">No levels mapped yet. Add a level above to build your trade plan.</div>`;
+            clearedSummaries[window.currentActiveAsset || 'NIFTY'] = true;
             saveLevelsData();
             updateCount();
+            renderSummary();
             renderChart();
             renderScorecard();
         }

@@ -25,17 +25,14 @@
 
 .right-col {
     flex: 1.2;
-    position: sticky;
-    top: 2rem;
-    height: calc(100vh - 8rem);
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    gap: 1rem;
+    gap: 1.5rem;
+    min-width: 0;
 }
 
 #levels-summary-body {
-    max-height: 46vh;
+    max-height: 420px;
     overflow-y: auto;
     padding-right: 4px;
 }

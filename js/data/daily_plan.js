@@ -1,3 +1,69 @@
+window.dailyPlanData = [
+  {
+    "source": "AI",
+    "price": "24055-24085",
+    "bias": "neutral",
+    "behavior": "[11:56] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24095",
+    "bias": "bullish",
+    "behavior": "[11:56] BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).",
+    "tp": "24128",
+    "sl": "24065",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24035-24050",
+    "bias": "bullish",
+    "behavior": "[11:56] Displacement FVG Pullback Absorption Long. Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065.",
+    "tp": "24095",
+    "sl": "24020",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24095-24130",
+    "bias": "bearish",
+    "behavior": "[11:56] Day High / Breaker Sweep Rejection Short. Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080.",
+    "tp": "24035",
+    "sl": "24142",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24035",
+    "bias": "bearish",
+    "behavior": "[11:56] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.",
+    "tp": "24000",
+    "sl": "24070",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23993.60",
+    "bias": "bullish",
+    "behavior": "[11:56] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base.",
+    "tp": "24090",
+    "sl": "23950",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23850-23900",
+    "bias": "bullish",
+    "behavior": "[11:56] HTF Macro Daily Demand Base & Major Institutional Support Shelf.",
+    "tp": "24050",
+    "sl": "23820",
+    "status": "na"
+  }
+];
+
 window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",

@@ -1683,3 +1683,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added vertical scrolling (`overflow-y: auto`) to `.right-col` and capped `#levels-summary-body` max height to keep both Market Summary and Visual Chart Map visible and accessible.
   - Recorded mandatory Asset Isolation & Data Structure Contract in `.agents/rules/daily-plan-updates.md` to prevent future AI appender regressions.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/ui/levels.js`, `css/levels.css`, `.agents/rules/daily-plan-updates.md`, `sw.js`
+
+### v2.3.60 — 01 Sep 2026 — Clear All Summary Clearing, Nifty Data Restoration & Scroll Un-trapping
+
+- **Clear All Summary Clearing (`levels.js`)**:
+  - Updated "Clear All" (`btn-level-clear`) button handler to clear both mapped level cards AND hide/clear the Market Summary panel (`#levels-summary-panel`) for the active asset tab.
+  - Added asset-level `clearedSummaries` state tracking so "Clear All" hides the summary, and "Sync Plan" (`btn-level-sync`) restores fresh levels and Market Summary entries.
+- **Nifty Data Restoration (`daily_plan.js`)**:
+  - Restored `window.dailyPlanData` array in `daily_plan.js` containing active Nifty trade plan levels, allowing automatic server syncing and eliminating stale 127-level cache stacking from `localStorage`.
+- **Right Column Un-trapped Layout (`levels.css`)**:
+  - Removed `position: sticky` and fixed `height: calc(100vh - 8rem)` from `.right-col`.
+  - Capped `#levels-summary-body` max-height to `420px; overflow-y: auto;`, enabling natural page-level scrolling down to the Visual Chart Map when Market Summary is expanded.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/ui/levels.js`, `css/levels.css`, `sw.js`
