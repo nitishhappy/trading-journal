@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.4 — Fix SyntaxError: Unexpected end of input in levels.js
+- **Syntax Error Fix**: Restored missing closing brace `}` for `initLevels()` in `js/ui/levels.js` at line 295, resolving `SyntaxError: Unexpected end of input` that broke script module loading and user login.
+- **Service Worker Cache Invalidation**: Updated Service Worker cache version to purge stale browser caches.
+
 ### v1.9.3 — Compact Market Summary Pane Header & Body Deduplication
 - **Sleek Compact Pane Headers**: Formatted accordion pane title bars into a high-signal key-info string (`Asset : Spot : Time ,Date : Trigger`) across all 4 assets (Gold, Nifty, BTC, S&P 500).
 - **Body Text Header Deduplication (Option A)**: Automatically stripped the repetitive top title line from inside the card body so expanding the card immediately displays clean, structured analysis.

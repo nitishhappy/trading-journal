@@ -292,6 +292,8 @@ if (viewLevels) {
         updateSourceFilterOptions();
         applySourceFilter();
         runSilentLiveEvaluation();
+    }
+
     function formatCompactPaneHeader(firstLine, activeAsset) {
         if (!firstLine) return 'Summary Entry';
 
