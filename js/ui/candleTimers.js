@@ -2,13 +2,14 @@
 import { state } from '../state.js';
 import { showToast } from '../utils/toast.js';
 import { playSynthesizedSound } from '../utils/audio.js';
-import { loadCandleTimerSettings, saveCandleTimerSettings, DEFAULT_CANDLE_TIMER_SETTINGS } from '../services/candleTimers.js';
-
-let timerSettings = { ...DEFAULT_CANDLE_TIMER_SETTINGS };
+import { loadCandleTimerSettings, saveCandleTimerSettings, DEFAULT_CANDLE_TIMER_SETTINGS } from '../services/candleTimers.js';let timerSettings = { ...DEFAULT_CANDLE_TIMER_SETTINGS };
 let timerInterval = null;
 let lastTrigger5mMinute = null;
 let lastTrigger15mMinute = null;
 let lastSpecialTriggerKey = null;
+
+let manual5mActive = false;
+let manual15mActive = false;
 
 // Helper to get current Date object adjusted to IST (Asia/Kolkata)
 function getISTDate() {
@@ -61,6 +62,9 @@ function tick() {
   const nowSec = istDate.getHours() * 3600 + istDate.getMinutes() * 60 + istDate.getSeconds();
   const isSessionActive = checkSessionActive(istDate);
 
+  const is5mActive = isSessionActive || manual5mActive;
+  const is15mActive = isSessionActive || manual15mActive;
+
   const [ancH, ancM] = (timerSettings.anchorTime || "09:15").split(":").map(Number);
   const ancSec = ancH * 3600 + ancM * 60;
 
@@ -100,7 +104,7 @@ function tick() {
       status5m.textContent = `Disabled`;
       card5m?.classList.toggle("timer-active-session", false);
       card5m?.classList.toggle("timer-standby", true);
-    } else if (isSessionActive) {
+    } else if (is5mActive) {
       digits5m.textContent = formatMMSS(remaining5 === 300 ? 0 : remaining5);
       fill5m.style.width = `${progress5}%`;
       status5m.textContent = `Next Close: ${formatSecondsTo12Hour(next5mCloseSec)}`;
@@ -122,7 +126,7 @@ function tick() {
       status15m.textContent = `Disabled`;
       card15m?.classList.toggle("timer-active-session", false);
       card15m?.classList.toggle("timer-standby", true);
-    } else if (isSessionActive) {
+    } else if (is15mActive) {
       digits15m.textContent = formatMMSS(remaining15 === 900 ? 0 : remaining15);
       fill15m.style.width = `${progress15}%`;
       status15m.textContent = `Next Close: ${formatSecondsTo12Hour(next15mCloseSec)}`;
@@ -137,12 +141,12 @@ function tick() {
     }
   }
 
-  // Check Sound Triggers (Only during active session)
+  // Check Sound Triggers
   const currentMinuteId = `${istDate.getFullYear()}-${istDate.getMonth()}-${istDate.getDate()}-${istDate.getHours()}-${istDate.getMinutes()}`;
   const triggerId5m = `5m-${next5mCloseSec}`;
   const triggerId15m = `15m-${next15mCloseSec}`;
 
-  if (isSessionActive) {
+  if (is5mActive) {
     // 5-minute candle trigger (10 seconds early)
     if (remaining5 <= 10 && lastTrigger5mMinute !== triggerId5m) {
       lastTrigger5mMinute = triggerId5m;
@@ -150,7 +154,9 @@ function tick() {
         playSynthesizedSound(timerSettings.sound5m || 'chime', timerSettings.volume5m ?? 0.8);
       }
     }
+  }
 
+  if (is15mActive) {
     // 15-minute candle trigger (5 seconds early)
     if (remaining15 <= 5 && lastTrigger15mMinute !== triggerId15m) {
       lastTrigger15mMinute = triggerId15m;
@@ -172,6 +178,8 @@ function tick() {
       }
     }
   }
+
+  updateMuteButtonsUI();
 }
 
 // Start the timer loop
@@ -181,12 +189,17 @@ export function startCandleTimers() {
   timerInterval = setInterval(tick, 1000);
 }
 
-// Update local state and UI mute buttons
+// Update local state and UI buttons (mute, enable, manual start)
 function updateMuteButtonsUI() {
+  const istDate = getISTDate();
+  const isSessionActive = checkSessionActive(istDate);
+
   const mute5mBtn = document.getElementById("candle-timer-5m-mute");
   const mute15mBtn = document.getElementById("candle-timer-15m-mute");
   const enable5mBtn = document.getElementById("candle-timer-5m-enable");
   const enable15mBtn = document.getElementById("candle-timer-15m-enable");
+  const start5mBtn = document.getElementById("candle-timer-5m-start");
+  const start15mBtn = document.getElementById("candle-timer-15m-start");
 
   if (mute5mBtn) {
     mute5mBtn.textContent = timerSettings.mute5m ? "🔇" : "🔊";
@@ -207,14 +220,78 @@ function updateMuteButtonsUI() {
   if (enable15mBtn) {
     enable15mBtn.classList.toggle("is-muted", timerSettings.enable15m === false);
   }
+
+  if (start5mBtn) {
+    if (isSessionActive) {
+      start5mBtn.textContent = "▶";
+      start5mBtn.title = "Timer Active (Auto Session)";
+      start5mBtn.classList.remove("is-running");
+    } else if (manual5mActive) {
+      start5mBtn.textContent = "⏸";
+      start5mBtn.title = "Stop Manual 5m Timer";
+      start5mBtn.classList.add("is-running");
+    } else {
+      start5mBtn.textContent = "▶";
+      start5mBtn.title = "Manual Start 5m Timer";
+      start5mBtn.classList.remove("is-running");
+    }
+  }
+
+  if (start15mBtn) {
+    if (isSessionActive) {
+      start15mBtn.textContent = "▶";
+      start15mBtn.title = "Timer Active (Auto Session)";
+      start15mBtn.classList.remove("is-running");
+    } else if (manual15mActive) {
+      start15mBtn.textContent = "⏸";
+      start15mBtn.title = "Stop Manual 15m Timer";
+      start15mBtn.classList.add("is-running");
+    } else {
+      start15mBtn.textContent = "▶";
+      start15mBtn.title = "Manual Start 15m Timer";
+      start15mBtn.classList.remove("is-running");
+    }
+  }
 }
 
-// Setup Event Listeners for in-bar Quick Mute controls
+// Setup Event Listeners for in-bar Quick Mute & Manual Start controls
 function setupHUDEventListeners() {
   const mute5mBtn = document.getElementById("candle-timer-5m-mute");
   const mute15mBtn = document.getElementById("candle-timer-15m-mute");
   const enable5mBtn = document.getElementById("candle-timer-5m-enable");
   const enable15mBtn = document.getElementById("candle-timer-15m-enable");
+  const start5mBtn = document.getElementById("candle-timer-5m-start");
+  const start15mBtn = document.getElementById("candle-timer-15m-start");
+
+  if (start5mBtn) {
+    start5mBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const istDate = getISTDate();
+      if (checkSessionActive(istDate)) {
+        showToast("5m Timer is already running automatically in session");
+        return;
+      }
+      manual5mActive = !manual5mActive;
+      updateMuteButtonsUI();
+      tick();
+      showToast(manual5mActive ? "Manual 5m Timer Started ▶" : "Manual 5m Timer Stopped ⏸");
+    });
+  }
+
+  if (start15mBtn) {
+    start15mBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const istDate = getISTDate();
+      if (checkSessionActive(istDate)) {
+        showToast("15m Timer is already running automatically in session");
+        return;
+      }
+      manual15mActive = !manual15mActive;
+      updateMuteButtonsUI();
+      tick();
+      showToast(manual15mActive ? "Manual 15m Timer Started ▶" : "Manual 15m Timer Stopped ⏸");
+    });
+  }
 
   if (mute5mBtn) {
     mute5mBtn.addEventListener("click", async (e) => {

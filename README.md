@@ -120,6 +120,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.8 — Manual Start Option for Candle Timers
+- **Manual Timer Start/Stop**: Added a Manual Start/Pause button (`▶` / `⏸`) to both the 5-Minute and 15-Minute candle timer cards on the Candle tab.
+- **Standby Mode Overrides**: Allows users to manually start the timer countdown during Standby mode (outside session hours) while maintaining exact 5m / 15m candle close conditions.
+- **Sound Alert Integration**: Retains all configured audio chimes and radar alerts as remaining time counts down to candle closes.
+
 ### v1.9.7 — Headless Windowless Execution Across All 4 Asset Watchdogs
 - **Zero Pop-up Windows**: Updated Task Scheduler actions for Nifty, Gold, BTC, and S&P 500 to execute headlessly via PowerShell using `-NoProfile -WindowStyle Hidden`.
 - **Silent Background Automation**: All 4 symbol watchdogs now evaluate market ticks and sync AI levels 100% invisibly in the background without spawning console windows or interrupting the desktop.

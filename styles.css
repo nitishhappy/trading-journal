@@ -4138,6 +4138,12 @@ textarea { resize: vertical; }
   opacity: 0.5;
 }
 
+.candle-timer-manual-btn.is-running {
+  color: #00e5ff;
+  opacity: 1;
+  text-shadow: 0 0 6px rgba(0, 229, 255, 0.6);
+}
+
 .candle-timer-progress-track {
   width: 100%;
   height: 4px;
