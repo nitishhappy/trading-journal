@@ -1702,3 +1702,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Implemented persistent `storageKey + '_cleared'` state tracking in `localStorage` when **Clear All** (`btn-level-clear`) is clicked.
   - Updated `initLevels()` so page reloads (F5) respect the explicit clear state, keeping mapped levels empty and Market Summary hidden across refreshes until **Sync Plan** (`btn-level-sync`) is explicitly tapped.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
+
+### v2.3.62 — 01 Sep 2026 — Asset Tab Switching Clear-State Persistence Fix
+
+- **Asset Tab Switching Fix (`levels.js`)**:
+  - Updated asset tab button click handlers (NIFTY, GOLD, BTC, S&P 500) to call `initLevels(false)` instead of `initLevels(true)`.
+  - Prevents asset tab switching from triggering force resets that erased `_cleared` flags in `localStorage`.
+  - Ensures **Clear All** state persists seamlessly across tab switches, view navigations, and F5 page reloads until **🔄 Sync Plan** is explicitly tapped.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`

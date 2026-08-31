@@ -2403,7 +2403,7 @@ if (viewLevels) {
             btnGold.className = 'btn-secondary';
             if (btnBtc) btnBtc.className = 'btn-secondary';
             if (btnSp500) btnSp500.className = 'btn-secondary';
-            initLevels(true);
+            initLevels(false);
             autoSyncDailyPlan(false, false);
         });
         btnGold.addEventListener('click', () => {
@@ -2412,7 +2412,7 @@ if (viewLevels) {
             btnNifty.className = 'btn-secondary';
             if (btnBtc) btnBtc.className = 'btn-secondary';
             if (btnSp500) btnSp500.className = 'btn-secondary';
-            initLevels(true);
+            initLevels(false);
             autoSyncDailyPlan(false, false);
         });
         if (btnBtc) {
@@ -2422,7 +2422,7 @@ if (viewLevels) {
                 btnNifty.className = 'btn-secondary';
                 btnGold.className = 'btn-secondary';
                 if (btnSp500) btnSp500.className = 'btn-secondary';
-                initLevels(true);
+                initLevels(false);
                 autoSyncDailyPlan(false, false);
             });
         }
@@ -2433,7 +2433,7 @@ if (viewLevels) {
                 btnNifty.className = 'btn-secondary';
                 btnGold.className = 'btn-secondary';
                 if (btnBtc) btnBtc.className = 'btn-secondary';
-                initLevels(true);
+                initLevels(false);
                 autoSyncDailyPlan(false, false);
             });
         }
