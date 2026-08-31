@@ -197,6 +197,14 @@ if (viewLevels) {
             }
         });
 
+        const isExplicitlyCleared = (localStorage.getItem(storageKey + '_cleared') === 'true');
+        if (isExplicitlyCleared && !forceSync) {
+            clearedSummaries[window.currentActiveAsset || 'NIFTY'] = true;
+        } else if (forceSync) {
+            localStorage.removeItem(storageKey + '_cleared');
+            clearedSummaries[window.currentActiveAsset || 'NIFTY'] = false;
+        }
+
         // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
         const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
         const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
@@ -204,7 +212,7 @@ if (viewLevels) {
         const lastSig = localStorage.getItem(storageKey + '_sig');
         const planChanged = (planSig !== lastSig);
 
-        const shouldSyncFromPlan = forceSync || assetMismatch || loaded.length === 0 || planChanged || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'));
+        const shouldSyncFromPlan = forceSync || (!isExplicitlyCleared && (assetMismatch || loaded.length === 0 || planChanged || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'))));
 
         const finalLevels = [];
         const seenSignatures = new Set();
@@ -885,6 +893,11 @@ if (viewLevels) {
         e.stopPropagation();
         if(confirm("Are you sure you want to clear today's mapped levels and summary? (Scorecard statistics will be kept)")) {
             allLevels = [];
+            const isGold = (window.currentActiveAsset === 'GOLD');
+            const isBtc = (window.currentActiveAsset === 'BTC');
+            const isSp500 = (window.currentActiveAsset === 'SP500');
+            const storageKey = isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData'));
+            localStorage.setItem(storageKey + '_cleared', 'true');
             document.getElementById('levels-list').innerHTML = `<div class="empty-state-levels" id="levels-empty-state">No levels mapped yet. Add a level above to build your trade plan.</div>`;
             clearedSummaries[window.currentActiveAsset || 'NIFTY'] = true;
             saveLevelsData();

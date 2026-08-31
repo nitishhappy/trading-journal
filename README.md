@@ -1695,3 +1695,10 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Removed `position: sticky` and fixed `height: calc(100vh - 8rem)` from `.right-col`.
   - Capped `#levels-summary-body` max-height to `420px; overflow-y: auto;`, enabling natural page-level scrolling down to the Visual Chart Map when Market Summary is expanded.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/ui/levels.js`, `css/levels.css`, `sw.js`
+
+### v2.3.61 — 01 Sep 2026 — Persistent Clear All State Across Page Refreshes
+
+- **Persistent Clear State (`levels.js`)**:
+  - Implemented persistent `storageKey + '_cleared'` state tracking in `localStorage` when **Clear All** (`btn-level-clear`) is clicked.
+  - Updated `initLevels()` so page reloads (F5) respect the explicit clear state, keeping mapped levels empty and Market Summary hidden across refreshes until **Sync Plan** (`btn-level-sync`) is explicitly tapped.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
