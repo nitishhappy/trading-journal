@@ -1879,7 +1879,7 @@ if (viewLevels) {
         const floaterTitle = document.getElementById('floater-title-text');
         
         if (floaterTitle) {
-            floaterTitle.innerText = isBtc ? "BTC LIVE" : (isGold ? "GOLD LIVE" : "NIFTY LIVE");
+            floaterTitle.innerText = isSp500 ? "S&P 500 LIVE" : (isBtc ? "BTC LIVE" : (isGold ? "GOLD LIVE" : "NIFTY LIVE"));
         }
         
         const prevPrice = currentMarketPrice;
@@ -1887,7 +1887,7 @@ if (viewLevels) {
         
         if (floater && floaterVal && !floater.classList.contains('user-closed')) {
             const oldPrice = parseFloat(floaterVal.innerText.replace(/,/g, '')) || 0;
-            const locale = (isGold || isBtc) ? 'en-US' : 'en-IN';
+            const locale = (isGold || isBtc || isSp500) ? 'en-US' : 'en-IN';
             const formattedPrice = currentPrice.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             floaterVal.innerText = formattedPrice;
             if (oldPrice && currentPrice !== oldPrice) {

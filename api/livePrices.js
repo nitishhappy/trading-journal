@@ -103,10 +103,29 @@ export default async function handler(req, res) {
       }
     }
 
+    // 3. Fetch S&P 500 Price (^GSPC)
+    const spUrl = "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=1m&range=1d";
+    const spRes = await fetchUrl(spUrl);
+    
+    let sp500Price = null;
+    if (spRes?.chart?.result?.[0]) {
+      const result = spRes.chart.result[0];
+      if (result.meta && result.meta.regularMarketPrice) {
+        sp500Price = Number(result.meta.regularMarketPrice);
+      }
+      if (!sp500Price && result.indicators?.quote?.[0]?.close) {
+        const closes = result.indicators.quote[0].close.filter(c => c !== null && c !== undefined);
+        if (closes.length > 0) {
+          sp500Price = Number(closes[closes.length - 1]);
+        }
+      }
+    }
+
     return res.status(200).json({
       success: true,
       nifty: niftyPrice,
       xauusd: xauusdPrice,
+      sp500: sp500Price,
       timestamp: Date.now()
     });
 
