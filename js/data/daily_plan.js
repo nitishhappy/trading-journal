@@ -1260,6 +1260,46 @@ window.sp500DailyPlanSummary = [
 • Primary Outlook: Rotational Range Chop. S&P 500 is consolidating within 50% equilibrium.
 • Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian/London High/Low boundaries.
 
+S&P 500 Spot: 7691.20 (01:25 AM IST - Sep 01, 2026) Trigger: 15m Watchdog
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7691.20 (ES Futures: 7698.0 | NQ Futures: 29477.0).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.99 (Moderate Volatility (Balanced)) | DXY at 99.43 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7693.15), and London High (7716.20).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7668.32), and London Low (7666.20).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7683.20 – 7699.20 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7706.20): Sustained 5m close above 7706.20 clears local supply, targeting 7771.48 and 7746.20.
+- Downside Long-Liquidation Cascade (< 7676.20): Sustained 5m close below 7676.20 triggers stop cascades accelerating toward 7650.92 and 7636.20.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7650.92 rejected with lower wick, followed by 5m close back ABOVE 7655.92. TP: 7706.20 / 7771.48. SL: 7640.92. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7706.20 with volume confirmation. TP: 7771.48 / 7746.20. SL: 7696.20. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7706.20 / 7676.20. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7676.20. TP: 7650.92 / 7636.20. SL: 7686.20. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `================================================================================
+🎯 S&P 500 DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -0.5 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: 7730.99 (A 15M close above 7730.99 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. S&P 500 is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian/London High/Low boundaries.
+
 S&P 500 Spot: 7683.28 (01:10 AM IST - Sep 01, 2026) Trigger: 15m Watchdog
 
 1. Market Structure & Macro Synthesis:
@@ -1412,46 +1452,46 @@ S&P 500 Spot: 7674.30 (12:25 AM IST - Sep 01, 2026) Trigger: 15m Watchdog
 window.sp500DailyPlanData = [
   {
     "source": "SP500-AI",
-    "price": "7675.28-7691.28",
+    "price": "7683.20-7699.20",
     "bias": "neutral",
-    "behavior": "[01:10] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
+    "behavior": "[01:25] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7698.28",
+    "price": "7706.20",
     "bias": "bullish",
-    "behavior": "[01:10] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7698.28 targets 7771.48 and 7738.28.",
+    "behavior": "[01:25] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7706.20 targets 7771.48 and 7746.20.",
     "tp": "7771.48",
-    "sl": "7688.28",
+    "sl": "7696.20",
     "status": "na"
   },
   {
     "source": "SP500-AI",
     "price": "7771.48",
     "bias": "bearish",
-    "behavior": "[01:10] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
-    "tp": "7698.28",
+    "behavior": "[01:25] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
+    "tp": "7706.20",
     "sl": "7781.48",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7668.28",
+    "price": "7676.20",
     "bias": "bearish",
-    "behavior": "[01:10] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7668.28 targets 7650.92 and 7628.28.",
+    "behavior": "[01:25] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7676.20 targets 7650.92 and 7636.20.",
     "tp": "7650.92",
-    "sl": "7678.28",
+    "sl": "7686.20",
     "status": "na"
   },
   {
     "source": "SP500-AI",
     "price": "7650.92",
     "bias": "bullish",
-    "behavior": "[01:10] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
-    "tp": "7668.28",
+    "behavior": "[01:25] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
+    "tp": "7676.20",
     "sl": "7640.92",
     "status": "na"
   }
