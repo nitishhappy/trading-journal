@@ -1735,3 +1735,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Same plan continues to stay 100% hidden across F5 page reloads, tab switches, and app restarts.
   - When a brand-NEW Ad-Hoc AI run / briefing is published to `daily_plan.js` on the server (`planSig !== clearedSig`), the app automatically detects the new run, un-clears, and displays the fresh Ad-Hoc analysis and levels instantly on screen without requiring Ctrl+F5 or manual Sync Plan.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
+
+### v2.3.66 — 01 Sep 2026 — Gold (XAU/USD) Intraday Tactical Update (04:43 AM IST)
+
+- **Gold Intraday Tactical Update (`daily_plan.js`, `Gold_Learn.md`)**:
+  - Published comprehensive XAU/USD Intraday Tactical Briefing (Spot: $4444.15 | Trigger: Manual Ad-Hoc Run).
+  - Appended exact 5-min/15-min confirmation triggers and new AI-sourced Gold levels prepended with `[04:43]` to `window.goldDailyPlanData` and `window.goldDailyPlanSummary`.
+  - Updated SMC Masterclass educational walkthrough in `Gold_Learn.md`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
