@@ -30,6 +30,14 @@
     height: calc(100vh - 8rem);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+#levels-summary-body {
+    max-height: 46vh;
+    overflow-y: auto;
+    padding-right: 4px;
 }
 
 .panel {

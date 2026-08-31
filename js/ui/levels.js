@@ -214,7 +214,10 @@ if (viewLevels) {
                 const src = (lvl.source || 'BT').toUpperCase();
                 const pr = lvl.price || lvl.rawPrice || '';
                 const beh = lvl.behavior || '';
-                const sig = (pr + '__' + beh).trim().toLowerCase();
+                const cleanBeh = beh.replace(/\[\d{1,2}:\d{2}\]/g, '').trim();
+                const sig = (pr + '__' + cleanBeh).toLowerCase();
+                
+                if (seenSignatures.has(sig)) return;
                 seenSignatures.add(sig);
 
                 const restoredStatus = userStatusMap[sig] || lvl.status || 'na';
@@ -295,7 +298,7 @@ if (viewLevels) {
     }
 
     function formatCompactPaneHeader(firstLine, activeAsset, rawText = '') {
-        if (!firstLine) return 'Summary Entry';
+        if (!firstLine && !rawText) return 'Summary Entry';
 
         const fullText = (firstLine + '\n' + (rawText || '')).trim();
 
@@ -308,19 +311,19 @@ if (viewLevels) {
 
         // Extract Time & Date: matches "(08:36 AM IST - Aug 31, 2026 ...)"
         let timeDate = '';
-        const timeMatch = firstLine.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*(?:IST)?\s*-\s*([A-Za-z]{3}\s+\d{1,2})(?:,\s*\d{4})?/i);
+        const timeMatch = fullText.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*(?:IST)?\s*-\s*([A-Za-z]{3}\s+\d{1,2})(?:,\s*\d{4})?/i);
         if (timeMatch) {
             const timeStr = timeMatch[1].replace(/\s+/, ''); // 08:36AM
             const dateStr = timeMatch[2]; // Aug 31
             timeDate = `${timeStr} ,${dateStr}`;
         } else {
-            const dateOnlyMatch = firstLine.match(/([A-Za-z]{3}\s+\d{1,2})/);
+            const dateOnlyMatch = fullText.match(/([A-Za-z]{3}\s+\d{1,2})/);
             if (dateOnlyMatch) timeDate = dateOnlyMatch[1];
         }
 
         // Extract Trigger: matches "Trigger: X" (strip extra parenthetical math like ($16.60 >= $15.00) and redundant leading timestamps)
         let trigger = '';
-        const triggerMatch = firstLine.match(/Trigger:\s*([^)]+)/i);
+        const triggerMatch = fullText.match(/Trigger:\s*([^)\n]+)/i);
         if (triggerMatch) {
             let trgRaw = triggerMatch[1].replace(/\(\$.*?\)/, '').replace(/:$/, '').trim();
             trgRaw = trgRaw.replace(/^\d{1,2}:\d{2}\s*(?:AM|PM)?\s*(?:IST)?\s*/i, '').trim();
@@ -328,14 +331,14 @@ if (viewLevels) {
                 trgRaw = 'Ad-Hoc Run';
             }
             trigger = trgRaw;
-        } else if (/Tactical Briefing|Pure AI|Watchdog/i.test(firstLine)) {
-            if (/Watchdog/i.test(firstLine)) trigger = '15m Watchdog';
-            else if (/Tactical Briefing|Pure AI/i.test(firstLine)) trigger = 'Pure AI Briefing';
+        } else if (/Tactical Briefing|Pure AI|Watchdog/i.test(fullText)) {
+            if (/Watchdog/i.test(fullText)) trigger = '15m Watchdog';
+            else if (/Tactical Briefing|Pure AI/i.test(fullText)) trigger = 'Pure AI Briefing';
         }
 
         // Determine clean asset label
         let asset = 'Market';
-        const textLower = firstLine.toLowerCase();
+        const textLower = fullText.toLowerCase();
         if (textLower.includes('gold') || activeAsset === 'GOLD') asset = 'Gold';
         else if (textLower.includes('nifty') || activeAsset === 'NIFTY') asset = 'Nifty';
         else if (textLower.includes('btc') || textLower.includes('bitcoin') || activeAsset === 'BTC') asset = 'BTC';
@@ -352,7 +355,8 @@ if (viewLevels) {
         }
 
         // Fallback if parsing didn't match structured format
-        return firstLine.length > 65 ? firstLine.substring(0, 62) + '...' : firstLine;
+        const cleanFirstLine = firstLine.replace(/^=+/, '').trim();
+        return cleanFirstLine.length > 65 ? cleanFirstLine.substring(0, 62) + '...' : (cleanFirstLine || 'Summary Entry');
     }
 
     function stripHeaderLineFromBody(rawText) {

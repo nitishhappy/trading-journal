@@ -1670,19 +1670,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended detailed educational breakdown ("What retail sees" vs "What smart money sees") to `Gold_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Gold_Learn.md`
 
+### v2.3.59 — 01 Sep 2026 — Levels Tab Fixes & Asset Data Isolation Contract
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- **Data Partitioning & Scope Attachment (`daily_plan.js`)**:
+  - Restructured `daily_plan.js` into 4 dedicated, explicit `window.` scope arrays (`window.dailyPlanSummary`, `window.goldDailyPlanSummary`, `window.btcDailyPlanSummary`, `window.sp500DailyPlanSummary`).
+  - Fixed scope issue where `btcDailyPlanData` and `btcDailyPlanSummary` were declared without `window.` prefix.
+  - Eliminated cross-asset briefing contamination on NIFTY and restored GOLD, BTC, and S&P 500 market summaries.
+- **Level Deduplication & Title Extractor (`levels.js`)**:
+  - Upgraded `formatCompactPaneHeader()` to search full multi-line text bodies for spot prices, timestamps `(HH:MM AM/PM IST)`, and session triggers, bypassing ASCII divider banners (`====`).
+  - Updated `initLevels()` deduplication logic to normalize timestamp tags (`[HH:MM]`) in behavior strings, preventing duplicate level cards from stacking on visual chart maps.
+- **Scroll Container & Agent Rules (`levels.css`, `.agents/rules/daily-plan-updates.md`)**:
+  - Added vertical scrolling (`overflow-y: auto`) to `.right-col` and capped `#levels-summary-body` max height to keep both Market Summary and Visual Chart Map visible and accessible.
+  - Recorded mandatory Asset Isolation & Data Structure Contract in `.agents/rules/daily-plan-updates.md` to prevent future AI appender regressions.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/ui/levels.js`, `css/levels.css`, `.agents/rules/daily-plan-updates.md`, `sw.js`
