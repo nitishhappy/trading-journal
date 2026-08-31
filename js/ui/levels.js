@@ -199,7 +199,7 @@ if (viewLevels) {
         // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
         const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
         const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
-        const planSig = planLevels.map(p => (p.price || '') + '__' + (p.behavior || '')).join('||');
+        const planSig = planLevels.map(p => `${p.source || ''}__${p.price || p.rawPrice || ''}__${p.bias || ''}__${p.behavior || ''}__${p.tp || ''}__${p.sl || ''}`).join('||');
         const lastSig = localStorage.getItem(storageKey + '_sig');
         const planChanged = (planSig !== lastSig);
 
@@ -399,14 +399,98 @@ if (viewLevels) {
         localStorage.setItem(storageKey, JSON.stringify(allLevels));
     }
 
+    // ===================== AUTOMATED REAL-TIME PLAN SYNC ===================== //
+    let isAutoSyncingPlan = false;
+    let lastPlanFetchTime = 0;
+
+    async function autoSyncDailyPlan(force = false, notifyUser = false) {
+        if (isAutoSyncingPlan) return false;
+        const now = Date.now();
+        if (!force && (now - lastPlanFetchTime < 15000)) return false;
+        lastPlanFetchTime = now;
+        isAutoSyncingPlan = true;
+
+        try {
+            const res = await fetch(`./js/data/daily_plan.js?t=${now}`, {
+                cache: 'no-store',
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                }
+            });
+
+            if (!res.ok) return false;
+            const scriptContent = await res.text();
+
+            // Snapshot old signatures across all assets
+            const oldSig = JSON.stringify({
+                nifty: window.dailyPlanData || [],
+                niftySummary: window.dailyPlanSummary || [],
+                gold: window.goldDailyPlanData || [],
+                goldSummary: window.goldDailyPlanSummary || [],
+                btc: window.btcDailyPlanData || [],
+                btcSummary: window.btcDailyPlanSummary || [],
+                sp500: window.sp500DailyPlanData || [],
+                sp500Summary: window.sp500DailyPlanSummary || []
+            });
+
+            // Execute script in window scope to refresh in-memory datasets
+            const exec = new Function(scriptContent);
+            exec.call(window);
+
+            const newSig = JSON.stringify({
+                nifty: window.dailyPlanData || [],
+                niftySummary: window.dailyPlanSummary || [],
+                gold: window.goldDailyPlanData || [],
+                goldSummary: window.goldDailyPlanSummary || [],
+                btc: window.btcDailyPlanData || [],
+                btcSummary: window.btcDailyPlanSummary || [],
+                sp500: window.sp500DailyPlanData || [],
+                sp500Summary: window.sp500DailyPlanSummary || []
+            });
+
+            const hasChanged = (oldSig !== newSig);
+
+            if (force || hasChanged) {
+                console.log('[Levels] Fresh daily plan data received from server. Updating UI...');
+                initLevels(true);
+                if (notifyUser || hasChanged) {
+                    if (window.showToast) {
+                        window.showToast('⚡ Levels updated automatically with latest tactical plan', 2500);
+                    }
+                }
+                return true;
+            }
+        } catch (err) {
+            console.warn('[Levels] Failed to auto-sync daily plan from server:', err);
+        } finally {
+            isAutoSyncingPlan = false;
+        }
+        return false;
+    }
+
     // Sync Plan button
     const btnSyncPlan = document.getElementById('btn-level-sync');
     if (btnSyncPlan) {
-        btnSyncPlan.addEventListener('click', (e) => {
+        btnSyncPlan.addEventListener('click', async (e) => {
             e.stopPropagation();
-            initLevels(true);
-            const count = allLevels.length;
-            alert(`✅ Synced ${count} levels from Bengal Trader (BT), Stock Marketed (SM), and Chartking Elliott Trading Academy (CETA).`);
+            const originalText = btnSyncPlan.innerText;
+            btnSyncPlan.disabled = true;
+            btnSyncPlan.innerText = 'Syncing...';
+            try {
+                await autoSyncDailyPlan(true, false);
+                const count = allLevels.length;
+                if (window.showToast) {
+                    window.showToast(`✅ Synced ${count} levels from latest server plan.`);
+                } else {
+                    alert(`✅ Synced ${count} levels from latest server plan.`);
+                }
+            } catch (err) {
+                console.error(err);
+            } finally {
+                btnSyncPlan.disabled = false;
+                btnSyncPlan.innerText = originalText || '⚡ Sync Plan';
+            }
         });
     }
 
@@ -1612,6 +1696,7 @@ if (viewLevels) {
         levelsPollingInterval = setInterval(() => {
             if (isLevelsViewActive) {
                 runSilentLiveEvaluation();
+                autoSyncDailyPlan(false, false);
             }
         }, 15000);
     }
@@ -1628,6 +1713,7 @@ if (viewLevels) {
         if (!document.hidden) {
             if (isLevelsViewActive || isLiveAlertsOn) {
                 runSilentLiveEvaluation();
+                autoSyncDailyPlan(false, false);
             }
             if (isLevelsViewActive) {
                 startLevelsPolling();
@@ -1953,6 +2039,7 @@ if (viewLevels) {
             isLevelsViewActive = true;
             runSilentLiveEvaluation({ forceScroll: !hasAutoScrolledOnLoad });
             startLevelsPolling();
+            autoSyncDailyPlan(false, false);
         } else {
             isLevelsViewActive = false;
             if (!isLiveAlertsOn) {
@@ -1974,6 +2061,7 @@ if (viewLevels) {
             if (btnBtc) btnBtc.className = 'btn-secondary';
             if (btnSp500) btnSp500.className = 'btn-secondary';
             initLevels(true);
+            autoSyncDailyPlan(false, false);
         });
         btnGold.addEventListener('click', () => {
             window.currentActiveAsset = 'GOLD';
@@ -1982,6 +2070,7 @@ if (viewLevels) {
             if (btnBtc) btnBtc.className = 'btn-secondary';
             if (btnSp500) btnSp500.className = 'btn-secondary';
             initLevels(true);
+            autoSyncDailyPlan(false, false);
         });
         if (btnBtc) {
             btnBtc.addEventListener('click', () => {
@@ -1991,6 +2080,7 @@ if (viewLevels) {
                 btnGold.className = 'btn-secondary';
                 if (btnSp500) btnSp500.className = 'btn-secondary';
                 initLevels(true);
+                autoSyncDailyPlan(false, false);
             });
         }
         if (btnSp500) {
@@ -2001,6 +2091,7 @@ if (viewLevels) {
                 btnGold.className = 'btn-secondary';
                 if (btnBtc) btnBtc.className = 'btn-secondary';
                 initLevels(true);
+                autoSyncDailyPlan(false, false);
             });
         }
     }
@@ -2009,5 +2100,6 @@ if (viewLevels) {
     window.currentActiveAsset = 'NIFTY';
     initLevels();
     startLevelsPolling();
+    autoSyncDailyPlan(false, false);
 }
 

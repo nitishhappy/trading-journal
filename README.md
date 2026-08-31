@@ -120,6 +120,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.8.9 — Automated Real-Time Levels Sync & Cache Invalidation
+- **Automated Real-Time Levels Sync**: Eliminates the need for manual `Ctrl + F5` hard refreshes. The Levels tab now automatically fetches the freshest `daily_plan.js` from the server in the background whenever the user switches to the Levels tab, returns to the app (visibility change), or while actively viewing the tab (periodic polling loop).
+- **Dynamic In-Memory Updates**: Fresh levels, AI pre-market briefings, and tactical summaries are evaluated and rendered seamlessly with zero page reload or user interruption, while preserving user reviewed outcome statuses.
+- **Service Worker Query-Parameter Cache Matching**: Fixed Service Worker URL matching for `NETWORK_FIRST_FILES` to properly strip query parameters and hash fragments so data files with versioning or timestamp parameters are always fetched network-first.
+- **Server-Aware Manual Sync**: Upgraded the "Sync Plan" button to fetch the latest `daily_plan.js` directly from the server with cache-busting headers and show responsive status feedback.
+
 ### v1.8.8 — Gold (XAU/USD) Intraday Tactical Update & Daily Plan Sync
 - **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD support/resistance levels, chop zone ($4418.00–$4426.00), high-momentum triggers (short-covering breakout >$4430.00 / demand breakdown <$4412.00), and 5-min execution scenarios following the +$16.60 extreme price surge to $4422.51.
 - **Daily Plan & Mentorship Sync**: Appended AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and updated `Gold_Learn.md` with SMC institutional breakdown.

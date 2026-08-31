@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-970db7c80a";
+const CACHE_NAME = "trade-journal-976fa6b59f";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -164,7 +164,8 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  const isAppShellFile = NETWORK_FIRST_FILES.some((f) => url.endsWith(f)) || url.endsWith("/");
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  const isAppShellFile = NETWORK_FIRST_FILES.some((f) => cleanUrl.endsWith(f)) || cleanUrl.endsWith("/");
 
   if (isAppShellFile) {
     // Network-first: always try to get the freshest code.
