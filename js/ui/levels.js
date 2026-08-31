@@ -322,6 +322,9 @@ if (viewLevels) {
         if (triggerMatch) {
             let trgRaw = triggerMatch[1].replace(/\(\$.*?\)/, '').replace(/:$/, '').trim();
             trgRaw = trgRaw.replace(/^\d{1,2}:\d{2}\s*(?:AM|PM)?\s*(?:IST)?\s*/i, '').trim();
+            if (/adhoc|ad-hoc|manual/i.test(trgRaw)) {
+                trgRaw = 'Ad-Hoc Run';
+            }
             trigger = trgRaw;
         }
 
