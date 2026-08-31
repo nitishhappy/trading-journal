@@ -1743,3 +1743,12 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended exact 5-min/15-min confirmation triggers and new AI-sourced Gold levels prepended with `[04:43]` to `window.goldDailyPlanData` and `window.goldDailyPlanSummary`.
   - Updated SMC Masterclass educational walkthrough in `Gold_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+### v2.3.67 — 01 Sep 2026 — BTC Data Restoration & Tab Glow Badge Removal Fix
+
+- **BTC Data Array Restoration (`daily_plan.js`)**:
+  - Restored `window.btcDailyPlanSummary` and `window.btcDailyPlanData` arrays in `daily_plan.js` (which had been truncated during a previous ad-hoc script run).
+  - Restored active BTC Market Summaries and key levels with explicit `window.` scope prefixes.
+- **Tab Glow Badge Removal (`levels.js`)**:
+  - Updated `updateAssetTabBadges()` signature caching to permanently clear tab glow indicators (`.btn-tab-updated`) when an active tab is checked and navigated away from.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/ui/levels.js`, `sw.js`
