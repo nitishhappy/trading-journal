@@ -60,6 +60,12 @@ NIFTY Spot opens with a subdued/neutral-to-cautious bias (~24,180-24,200), conso
 ================================================================================
 🎯 DAILY MARKET BIAS & OUTLOOK
 ================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -2.5 / +6.0 | Confidence: Moderate (65%)
+• Bias Invalidation Floor: 24090.85 (A 15M close above 24090.85 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
 • Daily Market Bias: ⚪ NEUTRAL | Bias Score: +0.5 / +6.0 | Confidence: Neutral (Chop)
 • Bias Invalidation Floor: 24207.75 (A 15M close above 24207.75 invalidates bias)
 
@@ -87,11 +93,6 @@ NIFTY Spot opens with a neutral-to-mild positive bias (~24,210-24,240), consolid
 - SELL Setup 1 (Supply Rejection Short - PE): Corrective rally into 24,240-24,260 or 24,295-24,300 rejected with upper wick, closing 5m candle back BELOW 24,210 (or 24,275). TP: 24,160 / 24,110 / 24,070. SL: 24,275 (or 24,325).
 - SELL Setup 2 (Day Low Breakdown Continuation Short - PE): Sustained 5m/15m candle close BELOW 24,090 with expanding red Futures volume. TP: 24,050 / 24,000 / 23,950. SL: 24,130.`
   }
-,
-  {
-  "source": "YT-Videos",
-  "text": "NIFTY 50 Video Predictions Synthesis & Multi-Analyst Consensus (Monday, 31 August 2026):\n\n1. Multi-Analyst Structure & Sentiment Bias:\n- NSA (FII DII Data Alert): Moderately Bullish. Smart Money (FIIs & Pros) bought Call options (+35k FII calls, +1.34L Net Pro calls) while Retail clients turned heavily Bearish (selling ~2L Calls and buying Puts). Major Put writing base is established at 24,100-24,000.\n- NBA (Sensibull / Market Outlook): Mildly Bullish / Hold Long. Nifty daily chart formed a Bullish Harami pattern sitting directly on long-term trendline and gap support (cash close at 24,175). Target bounce to 25,100 / 25,200.\n- STL (Super Trader Lakshya): Mixed to Cautiously Bullish. Low VIX indicates lack of panic. Advises treating early morning dips/manipulation into 24,890-24,900 or 24,600 as buying opportunities. 24,300 is the ultimate structural \"Lakshman Rekha\".\n- NPM (Chartkingz Elliott Wave & Hurst Cycles): Bullish (Wave 4 Pullback in Contracting Triangle Wave D). Time Period Support Zone at 23,901.90-23,805.20 offers optimal risk:reward for long entries targeting 24,360 (Cycle High), 24,772.35 (61.8% Fibo), and 25,585.35 (81.2% Equality Projection). Strict invalidation at 23,606 (Daily Wave 2 Low).\n\n2. Consensus Key Levels & Confluence:\n- Overhead Resistance / BSL: 24,180 (Buy Trigger), 24,254, 24,300 (Heavy Call OI Wall / Cycle High), 24,357-24,360, 24,772.35, 25,100, 25,200, 25,585.35.\n- Support & Demand Bases / SSL: 24,140-24,175 (Trendline & Gap Support), 24,100 (Make-or-Break Put Writing Floor), 24,076 (PDL), 24,000 (Psychological Floor), 23,901.90-23,805.20 (Wave 4 Time Period Support), 23,645, 23,606 (Elliott Wave Invalidation Floor).\n- Bearish Invalidation / Breakdown Targets: 23,500, 23,070, 22,000.\n\n3. Actionable Tactical Trading Scenarios:\n- Scenario A (Flat / Early Morning Dip): Buying on dips near 24,140-24,175 or 23,900-23,805 with strict stop-loss below 24,100 (or 23,606 for swing). First target 24,254 / 24,300.\n- Scenario B (Gap-Up / Breakout > 24,300 - 24,360): Sustained 15M close above 24,300 triggers massive short-covering towards 24,357, 24,772, and 25,100.\n- Scenario C (Gap-Down / Breakdown < 24,100): Breakdown below 24,100 invalidates intraday bullish setup, triggering PE buying / short continuation towards 24,076, 24,000, and 23,881."
-}
 ];
 
 window.dailyPlanData = [
