@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.7 — Headless Windowless Execution Across All 4 Asset Watchdogs
+- **Zero Pop-up Windows**: Updated Task Scheduler actions for Nifty, Gold, BTC, and S&P 500 to execute headlessly via PowerShell using `-NoProfile -WindowStyle Hidden`.
+- **Silent Background Automation**: All 4 symbol watchdogs now evaluate market ticks and sync AI levels 100% invisibly in the background without spawning console windows or interrupting the desktop.
+
 ### v1.9.6 — Explicit Ad-Hoc Run Trigger Labeling
 - **Ad-Hoc Trigger Normalization**: Updated manual launcher automation (`premarket_briefing.ps1 -Force` and client renderer `levels.js`) to label manual ad-hoc executions explicitly as `Trigger: Ad-Hoc Run`.
 - **Clean Pane Header Output**: Renders ad-hoc header bars cleanly as `Nifty : 24071.75 : 12:51PM ,Aug 31 : Ad-Hoc Run` across all 4 instruments.
