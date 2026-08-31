@@ -1375,7 +1375,73 @@ window.goldDailyPlanData = [
 window.btcDailyPlanSummary = [
   {
     "source": "BTC-AI",
-    "text": "Bitcoin (BTC/USD) Intraday Tactical Update (10:36 PM IST - Aug 31, 2026 | Spot: 78698.01 | Trigger: US Session Prime (Peak Volume + CME Activity)):\n\n1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at $78,698.01, displaying strong bullish momentum (above 9 & 21 EMA) within the updated daily structure (Day High: $79,169.84 | Day Low: $77,049.70 | Prior Day Close: $78,999.87 | Live Spot: $78,698.01). During US Session Prime (Peak Volume + CME Activity), intermarket dynamics (DXY $99.429 (Bearish DXY tailwind for BTC) and S&P 500 Futures $7686.75) combined with crypto-native context (Funding Rate 0.0073% (neutral); Fear & Greed Index: 62 (Greed); CME Gap active at $79,075.00 (above, size: 331.00)) guide structural flow. Spot is compressing near the upper value area shelf below PDC.\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Clustered above $79,169.84 Day High / local swing highs, extending into 15M Bearish FVG ($78,794.00–$78,894.00), and macro day high targets up to $79,387.86.\n- Sell-Side Liquidity (SSL): Concentrated below $77,049.70 Day Low / Asian Range Low down to deeper macro 4H demand base ($77,959.12).\n- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,603.24–$78,459.41; Session VWAP at $78,105.52; 200 EMA at $78,296.71; Volume Profile POC at $77,950.76.\n- Fair Value Gaps (FVG): 15M Bearish FVG at $78,794.00–$78,894.00; 15M Bullish FVG at $78,516.90–$78,532.30.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: $77,685.74 – $78,745.81 (Value Area) / $77,049.70 – $78,795.90 (Asian Range).\n- Context: Current spot ($78,698.01) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed market orders hazardous. Avoid unconfirmed entries inside this compression pocket.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> $79,169.84 Spot): A sustained 5m/15m candle close above Day High ($79,169.84) clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $79,387.86 and $79,575.00 (CME Gap Magnet).\n- Downside Long-Liquidation Cascade (< $77,049.70 Spot): A sustained 5m close below the Day Low demand shelf ($77,049.70) triggers institutional stop cascades accelerating toward $76,800.00 and $76,400.00.\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,049.70 rejected with lower wick, followed by 5m close back ABOVE $78,603.24. TP: $79,013.40 / $79,193.00. SL: $78,564.40.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,169.84 with volume expansion. TP: $79,387.86 / $79,575.00. SL: $78,594.00.\n- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78,794.00–$78,894.00 rejected with upper wick, closing back BELOW $78,603.24 on 5m candle. TP: $78,444.00 / $78,244.00. SL: $78,944.00.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,049.70. TP: $78,344.00 / $77,944.00. SL: $78,894.00.\n"
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (10:36 PM IST - Aug 31, 2026 | Spot: 78698.01 | Trigger: US Session Prime (Peak Volume + CME Activity)):\n\n1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at $78,698.01, displaying strong bullish momentum (above 9 & 21 EMA) within the updated daily structure (Day High: $79,169.84 | Day Low: $77,049.70 | Prior Day Close: $78,999.87 | Live Spot: $78,698.01). During US Session Prime (Peak Volume + CME Activity), intermarket dynamics (DXY $99.429 (Bearish DXY tailwind for BTC) and S&P 500 Futures $7686.75) combined with crypto-native context (Funding Rate 0.0073% (neutral); Fear & Greed Index: 62 (Greed); CME Gap active at $79,075.00 (above, size: 331.00)) guide structural flow. Spot is compressing near the upper value area shelf below PDC.\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Clustered above $79,169.84 Day High / local swing highs, extending into 15M Bearish FVG ($78,794.00–$78,894.00), and macro day high targets up to $79,387.86.\n- Sell-Side Liquidity (SSL): Concentrated below $77,049.70 Day Low / Asian Range Low down to deeper macro 4H demand base ($77,959.12).\n- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,603.24–$78,459.41; Session VWAP at $78,105.52; 200 EMA at $78,296.71; Volume Profile POC at $77,950.76.\n- Fair Value Gaps (FVG): 15M Bearish FVG at $78,794.00–$78,894.00; 15M Bullish FVG at $78,516.90–$78,532.30.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: $77,685.74 – $78,745.81 (Value Area) / $77,049.70 – $78,795.90 (Asian Range).\n- Context: Current spot ($78,698.01) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed market orders hazardous. Avoid unconfirmed entries inside this compression pocket.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> $79,169.84 Spot): A sustained 5m/15m candle close above Day High ($79,169.84) clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $79,387.86 and $79,575.00 (CME Gap Magnet).\n- Downside Long-Liquidation Cascade (< $77,049.70 Spot): A sustained 5m close below the Day Low demand shelf ($77,049.70) triggers institutional stop cascades accelerating toward $76,800.00 and $76,400.00.\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,049.70 rejected with lower wick, followed by 5m close back ABOVE $78,603.24. TP: $79,013.40 / $79,193.00. SL: $78,564.40.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,169.84 with volume expansion. TP: $79,387.86 / $79,575.00. SL: $78,594.00.\n- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78,794.00–$78,894.00 rejected with upper wick, closing back BELOW $78,603.24 on 5m candle. TP: $78,444.00 / $78,244.00. SL: $78,944.00.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,049.70. TP: $78,344.00 / $77,944.00. SL: $78,894.00.\n`
+  },
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (10:36 PM IST - Aug 31, 2026 | Spot: 78744.00 | Trigger: New York Session (US Opening) (Intraday Update)):\n\n1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at $78,744.00, strong bullish momentum (above 9 & 21 ema) within the updated daily structure (Day High: $79,169.84 | Day Low: $77,049.70 | Prior Day Close: $78,999.87 | Live Spot: $78,744.00). During New York Session (US Opening) (Maximum Momentum / US Data Releases / Trend Runs), intermarket dynamics (DXY $99.429 (Bearish DXY (Tailwind for BTC)) and S&P 500 Futures $7686.75) combined with crypto-native context (Funding Rate is 0.0073% (neutral); Fear & Greed Index: 62 (Greed); CME Gap active at 79075.0 (above, size: 331.00)) guide structure. Spot is inside previous day range | below pdc (day red).\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Clustered above $79,169.80 local swing highs, extending into 15M Bearish FVG ($78794.0\u2013$78894.0), and macro day high targets up to $79,387.86.\n- Sell-Side Liquidity (SSL): Concentrated below $77,049.70 psychological round number down to deeper macro 4H demand base ($77,959.12).\n- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,603.24\u2013$78,459.41; Session VWAP at $78,105.52; 200 EMA at $78,296.71; Volume Profile POC at $77,950.76.\n- Fair Value Gaps (FVG): 15M Bearish FVG at $78794.0\u2013$78894.0; 15M Bullish FVG at $78516.9\u2013$78532.3.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: $77,685.74 \u2013 $78,745.81 (Value Area) / $77,049.70 \u2013 $78,795.90 (Asian Range).\n- Context: Current spot ($78,744.00) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> $79,169.80 Spot): A sustained 5m/15m candle close above $79,169.80 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $79,044.00 and $79,344.00.\n- Downside Long-Liquidation Cascade (< $77,049.70 Spot): A sustained 5m close below the demand shelf ($77,049.70) triggers institutional stop cascades accelerating toward $78,444.00 and $78,144.00.\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,049.70 rejected with lower wick, followed by 5m close back ABOVE $78,603.24. TP: $79,013.40 / $79,193.00. SL: $78,564.40.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,169.80. TP: $79,144.00 / $79,544.00. SL: $78,594.00.\n- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78794.0\u2013$78894.0 rejected with upper wick, closing back BELOW $78,603.24 on 5m candle. TP: $78,444.00 / $78,244.00. SL: $78,944.00.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,049.70. TP: $78,344.00 / $77,944.00. SL: $78,894.00.\n`
+  },
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (09:06 PM IST - Aug 31, 2026 | Spot: 78544.77 | Trigger: New York Session (US Opening) (Intraday Update)):\n\n1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at $78,544.77, strong bullish momentum (above 9 & 21 ema) within the updated daily structure (Day High: $79,169.84 | Day Low: $77,049.70 | Prior Day Close: $78,999.87 | Live Spot: $78,544.77). During New York Session (US Opening) (Maximum Momentum / US Data Releases / Trend Runs), intermarket dynamics (DXY $99.439 (Bearish DXY (Tailwind for BTC)) and S&P 500 Futures $7687.0) combined with crypto-native context (Funding Rate is 0.0071% (neutral); Fear & Greed Index: 62 (Greed); CME Gap inactive at 78635.0 (above, size: 90.23)) guide structure. Spot is inside previous day range | below pdc (day red).\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Clustered above $79,169.80 local swing highs, extending into 15M Bearish FVG ($78510.2\u2013$78584.1), and macro day high targets up to $79,387.86.\n- Sell-Side Liquidity (SSL): Concentrated below $77,049.70 psychological round number down to deeper macro 4H demand base ($77,959.12).\n- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,350.66\u2013$78,274.27; Session VWAP at $78,067.20; 200 EMA at $78,271.29; Volume Profile POC at $77,950.76.\n- Fair Value Gaps (FVG): 15M Bearish FVG at $78510.2\u2013$78584.1; 15M Bullish FVG at $78500.0\u2013$78580.1.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: $77,685.74 \u2013 $78,639.80 (Value Area) / $77,049.70 \u2013 $78,795.90 (Asian Range).\n- Context: Current spot ($78,544.77) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> $79,169.80 Spot): A sustained 5m/15m candle close above $79,169.80 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,844.77 and $79,144.77.\n- Downside Long-Liquidation Cascade (< $77,049.70 Spot): A sustained 5m close below the demand shelf ($77,049.70) triggers institutional stop cascades accelerating toward $78,244.77 and $77,944.77.\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,049.70 rejected with lower wick, followed by 5m close back ABOVE $78,350.66. TP: $78,882.90 / $79,108.30. SL: $78,319.40.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,169.80. TP: $78,944.77 / $79,344.77. SL: $78,394.77.\n- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78510.2\u2013$78584.1 rejected with upper wick, closing back BELOW $78,350.66 on 5m candle. TP: $78,244.77 / $78,044.77. SL: $78,744.77.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,049.70. TP: $78,144.77 / $77,744.77. SL: $78,694.77.\n`
+  },
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (01:36 PM IST - Aug 31, 2026 | Spot: 78094.01 | Trigger: London Open (European Session Start)):
+
+1. Market Structure & Session Bias:
+Bitcoin Spot (BTC/USD) is trading at $78,094.01, consolidating in a pullback / equilibrium state within today's broad daily structure (Day High: $79,169.84 | Day Low: $77,049.70 | Prior Day Close: $78,999.87 | Live Spot: $78,094.01). With the European / London Session opening bell (12:30–20:30 IST), smart money is staging initial liquidity probes around Asian session boundaries. Macro intermarket drivers (DXY Dollar Index at ~99.51 showing mild weakness as a crypto tailwind; S&P 500 Futures at 7,709.50) alongside crypto-native metrics (Binance Funding Rate neutral at 0.0071%; Fear & Greed Index at 62 [Greed]; Active CME BTC Futures Gap overhead at $78,505.00) anchor the tactical backdrop. Spot is holding just above the 15M 9/21 EMA dynamic shelf ($78,002–$78,083) and Session VWAP ($77,925.52), capped beneath the 200 EMA ($78,253.87) and overhead 15M Bearish FVG.
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above Day High ($79,169.84), Asian Session High ($78,795.90), and London High ($78,299.96), with extreme HTF targets at Prior Day High ($79,387.86).
+- Sell-Side Liquidity (SSL): Concentrated below London Low ($78,021.38), Prior Day Low ($77,959.12), and Asian Low / Day Low ($77,049.70).
+- Order Blocks (OB) & Key Levels: 15M Dynamic Demand OB at $78,002.64–$78,083.25 (9/21 EMA Shelf); Session VWAP at $77,925.52; 200 EMA Pivot at $78,253.87; High-Volume POC Node at $77,632.74; Overhead CME Gap Magnet at $78,505.00.
+- Fair Value Gaps (FVG): 15M Bearish Supply FVG at $78,050.01–$78,151.23; 15M Bullish Demand FVG at $77,772.18–$77,854.30.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $78,000.00 – $78,250.00 (Spot Index).
+- Context: Current spot ($78,094.01) is compressed between the 21 EMA support shelf ($78,002.64) and the 200 EMA / 15M Bearish FVG resistance ($78,253.87). Micro-wicks and early London Judas swings create high slippage for breakout chasers. Avoid taking unconfirmed entries inside this compression pocket.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $78,300.00 Spot): A sustained 5m/15m candle close above the 200 EMA and London High ($78,299.96) clears overhead supply, forcing short liquidations and triggering a fast expansion toward the CME Gap ($78,505.00), Asian High ($78,795.90), and Day High ($79,169.84).
+- Downside Long-Liquidation Cascade (< $77,950.00 Spot): A sustained 5m close below the VWAP and Prior Day Low ($77,959.12) triggers stop cascades accelerating toward the 15M Bullish FVG ($77,772.18–$77,854.30), Volume Profile POC ($77,632.74), and Day Low ($77,049.70).
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below Prior Day Low ($77,959.12) or London Low ($78,021.38) rejected with lower wick, followed by 5m candle firmly back ABOVE $78,085.00. TP: $78,300.00 / $78,505.00 / $78,800.00. SL: $77,930.00.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE $78,300.00 with expanding volume. TP: $78,505.00 / $78,795.90 / $79,169.84. SL: $78,150.00.
+- SELL Setup 1 (Overhead FVG / 200 EMA Rejection Short): Corrective relief bounce into $78,150.00–$78,250.00 rejected with upper wick, closing 5m candle back BELOW $78,080.00. TP: $77,950.00 / $77,770.00 / $77,630.00. SL: $78,320.00.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,950.00. TP: $77,770.00 / $77,630.00 / $77,050.00. SL: $78,100.00.`
+  },
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (2026-08-31 13:36:29 IST / London Session (European Opening)):\n\n1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at $78,069.99, consolidation / pullback state within the updated daily structure (Day High: $79,169.84 | Day Low: $77,049.70 | Prior Day Close: $78,999.87 | Live Spot: $78,069.99). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.507 (Bearish DXY (Tailwind for BTC)) and S&P 500 Futures $7709.5) combined with crypto-native context (Funding Rate is 0.0071% (neutral); Fear & Greed Index: 62 (Greed); CME Gap active at 78505.0 (above, size: 435.01)) guide structure. Spot is inside previous day range | below pdc (day red).\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Clustered above $79,169.80 local swing highs, extending into 15M Bearish FVG ($78050.0\u2013$78151.2), and macro day high targets up to $79,387.86.\n- Sell-Side Liquidity (SSL): Concentrated below $77,049.70 psychological round number down to deeper macro 4H demand base ($77,959.12).\n- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,083.25\u2013$78,002.64; Session VWAP at $77,925.52; 200 EMA at $78,253.87; Volume Profile POC at $77,632.74.\n- Fair Value Gaps (FVG): 15M Bearish FVG at $78050.0\u2013$78151.2; 15M Bullish FVG at $77772.2\u2013$77854.3.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: $77,367.72 \u2013 $78,215.78 (Value Area) / $77,049.70 \u2013 $78,795.90 (Asian Range).\n- Context: Current spot ($78,069.99) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> $79,169.80 Spot): A sustained 5m/15m candle close above $79,169.80 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,369.99 and $78,669.99.\n- Downside Long-Liquidation Cascade (< $77,049.70 Spot): A sustained 5m close below the demand shelf ($77,049.70) triggers institutional stop cascades accelerating toward $77,769.99 and $77,469.99.\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,049.70 rejected with lower wick, followed by 5m close back ABOVE $78,083.25. TP: $78,069.99 / $78,069.99. SL: $78,069.99.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,169.80. TP: $78,469.99 / $78,869.99. SL: $77,919.99.\n- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78050.0\u2013$78151.2 rejected with upper wick, closing back BELOW $78,083.25 on 5m candle. TP: $77,769.99 / $77,569.99. SL: $78,269.99.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,049.70. TP: $77,669.99 / $77,269.99. SL: $78,219.99.\n`
+  },
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (07:34 PM IST - Aug 30, 2026 | Spot: 78891.12 | Trigger: Extreme Outer Target Exhausted (High $78963.72 >= Extreme Target $78817.60)):
+
+1. Market Structure & Session Bias:
+Bitcoin Spot (BTC/USD) is trading at $78,891.12, displaying strong bullish momentum above the 15M 9 EMA ($78,729.47) and 21 EMA ($78,519.57) within the updated daily structure (Day High: $78,963.72 | Day Low: $77,959.12 | Prior Day Close: $78,050.56 | Live Spot: $78,891.12). During the London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY at $99.68 [Bullish DXY / Headwind for BTC] and S&P 500 Futures at $7,722.00) combined with crypto-native context (Funding Rate: 0.0100% [Neutral]; Fear & Greed Index: 69 [Greed]; CME Gap active at $77,815.00 [Below, size: $1,079.92]) guide structure. Spot is executing an aggressive bullish expansion above Prior Day High ($78,145.15), pushing directly into Day High liquidity after exhausting the previous extreme outer target ($78,817.60).
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above $78,963.72 (Day High / Session High), extending into 15M Bearish FVG ($78,944.90–$79,044.90), and higher-timeframe expansion targets at $79,200.00–$79,500.00.
+- Sell-Side Liquidity (SSL): Concentrated below $77,959.12 (Day Low / London Low) and Asian Low ($77,980.88), with macro demand anchored at Prior Day Low ($77,265.71).
+- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,519.57–$78,729.47 (15M 9/21 EMA Shelf); Session VWAP at $78,390.70; 200 EMA at $78,272.65; Volume Profile POC at $78,134.92.
+- Fair Value Gaps (FVG): 15M Bearish FVG at $78,944.90–$79,044.90; 15M Bullish Demand FVG at $78,728.92–$78,791.68.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $78,009.35 – $78,813.03 (Value Area) / $77,980.88 – $78,323.07 (Asian Range).
+- Context: Current spot ($78,891.12) is expanding above the Value Area High ($78,813.03). False breakout wicks and aggressive pullback retests near $78,850–$78,900 create high slippage for chasing longs. Avoid unconfirmed market orders inside this pocket.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $78,963.72 Spot): A sustained 5m/15m candle close above Day High ($78,963.72) clears overhead liquidity and forces late-session breakout shorts to liquidate, accelerating expansion toward $79,294.90 and $79,694.90.
+- Downside Long-Liquidation Cascade (< $77,959.12 Spot): A sustained 5m close below the session demand shelf ($77,959.12) triggers institutional stop cascades accelerating toward $77,500.00 and $77,265.71.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Demand Floor SSL / EMA Retest Long - SFP / Dip Absorption): Pullback into 15M 9 EMA ($78,729.47) or Bullish FVG ($78,728.92–$78,791.68) with lower-wick rejection, closing 5m candle back ABOVE $78,790.00. TP: $79,294.90 / $79,694.90. SL: $78,579.50.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close firmly ABOVE $78,963.72 with volume confirmation. TP: $79,294.90 / $79,694.90. SL: $78,744.90.
+- SELL Setup 1 (Day High Liquidity Sweep Reversal Short - SFP): False breakout sweep above $78,963.72 rejected with upper wick, closing 5m candle back BELOW $78,850.00. TP: $78,594.90 / $78,390.70. SL: $79,163.70.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,959.12. TP: $77,500.00 / $77,265.71. SL: $78,200.00.`
   }
 ];
 
@@ -1540,6 +1606,36 @@ window.btcDailyPlanData = [
 window.sp500DailyPlanSummary = [
   {
     "source": "SP500-AI",
+    "text": `S&P 500 Spot: 7684.59 (11:44 PM IST - Aug 31, 2026) Trigger: Ad-Hoc Run
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7684.59 (ES Futures: 7693.75 | NQ Futures: 29452.75).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.09 (Moderate Volatility (Balanced)) | DXY at 99.42 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7704.59), and London High (7709.59).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7664.59), and London Low (7659.59).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7676.59 – 7692.59 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7699.59): Sustained 5m close above 7699.59 clears local supply, targeting 7771.48 and 7739.59.
+- Downside Long-Liquidation Cascade (< 7669.59): Sustained 5m close below 7669.59 triggers stop cascades accelerating toward 7650.92 and 7629.59.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7650.92 rejected with lower wick, followed by 5m close back ABOVE 7655.92. TP: 7699.59 / 7771.48. SL: 7640.92. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7699.59 with volume confirmation. TP: 7771.48 / 7739.59. SL: 7689.59. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7699.59 / 7669.59. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7669.59. TP: 7650.92 / 7629.59. SL: 7679.59. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
     "text": `S&P 500 Spot: 7668.59 (09:36 PM IST - Aug 31, 2026) Trigger: US Market Watchdog
 
 1. Market Structure & Macro Synthesis:
@@ -1567,52 +1663,592 @@ window.sp500DailyPlanSummary = [
 - BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7683.59 with volume confirmation. TP: 7771.48 / 7723.59. SL: 7673.59. Risk-Reward: ~1:3.
 - SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7683.59 / 7653.59. SL: 7781.48. Risk-Reward: ~1:2.5.
 - SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7653.59. TP: 7636.59 / 7613.59. SL: 7663.59. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 Spot: 7668.59 (09:36 PM IST - Aug 31, 2026) Trigger: US Market Watchdog
+
+1. Market Structure & Macro Synthesis:`,StartLine:1546,TargetContent:
+- S&P 500 Spot (^GSPC) is trading at 7668.59 (ES Futures: 7687.0 | NQ Futures: 29409.75).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.14 (Moderate Volatility (Balanced)) | DXY at 99.42 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7688.59), and London High (7693.59).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7648.59), and London Low (7643.59).
+- Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7660.59 – 7676.59 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7683.59): Sustained 5m close above 7683.59 clears local supply, targeting 7771.48 and 7723.59.
+- Downside Long-Liquidation Cascade (< 7653.59): Sustained 5m close below 7653.59 triggers stop cascades accelerating toward 7636.59 and 7613.59.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7636.59 rejected with lower wick, followed by 5m close back ABOVE 7641.59. TP: 7683.59 / 7771.48. SL: 7626.59. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7683.59 with volume confirmation. TP: 7771.48 / 7723.59. SL: 7673.59. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7683.59 / 7653.59. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7653.59. TP: 7636.59 / 7613.59. SL: 7663.59. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (09:36 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7668.59 (ES Futures: 7687.0 | NQ Futures: 29409.75).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.14 (Moderate Volatility (Balanced)) | DXY at 99.42 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7688.59), and London High (7693.59).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7648.59), and London Low (7643.59).
+- Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7660.59 – 7676.59 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7683.59): Sustained 5m close above 7683.59 clears local supply, targeting 7771.48 and 7723.59.
+- Downside Long-Liquidation Cascade (< 7653.59): Sustained 5m close below 7653.59 triggers stop cascades accelerating toward 7636.59 and 7613.59.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7636.59 rejected with lower wick, followed by 5m close back ABOVE 7641.59. TP: 7683.59 / 7771.48. SL: 7626.59. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7683.59 with volume confirmation. TP: 7771.48 / 7723.59. SL: 7673.59. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7683.59 / 7653.59. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7653.59. TP: 7636.59 / 7613.59. SL: 7663.59. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (09:21 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7677.99 (ES Futures: 7683.5 | NQ Futures: 29390.5).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.18 (Moderate Volatility (Balanced)) | DXY at 99.41 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7697.99), and London High (7702.99).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7657.99), and London Low (7652.99).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7669.99 – 7685.99 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7692.99): Sustained 5m close above 7692.99 clears local supply, targeting 7771.48 and 7732.99.
+- Downside Long-Liquidation Cascade (< 7662.99): Sustained 5m close below 7662.99 triggers stop cascades accelerating toward 7645.99 and 7622.99.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7645.99 rejected with lower wick, followed by 5m close back ABOVE 7650.99. TP: 7692.99 / 7771.48. SL: 7635.99. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7692.99 with volume confirmation. TP: 7771.48 / 7732.99. SL: 7682.99. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7692.99 / 7662.99. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7662.99. TP: 7645.99 / 7622.99. SL: 7672.99. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (09:06 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7674.90 (ES Futures: 7687.5 | NQ Futures: 29428.25).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.19 (Moderate Volatility (Balanced)) | DXY at 99.44 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7694.90), and London High (7699.90).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7654.90), and London Low (7649.90).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7666.90 – 7682.90 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7689.90): Sustained 5m close above 7689.90 clears local supply, targeting 7771.48 and 7729.90.
+- Downside Long-Liquidation Cascade (< 7659.90): Sustained 5m close below 7659.90 triggers stop cascades accelerating toward 7642.90 and 7619.90.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7642.90 rejected with lower wick, followed by 5m close back ABOVE 7647.90. TP: 7689.90 / 7771.48. SL: 7632.90. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7689.90 with volume confirmation. TP: 7771.48 / 7729.90. SL: 7679.90. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7689.90 / 7659.90. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7659.90. TP: 7642.90 / 7619.90. SL: 7669.90. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (08:51 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7675.46 (ES Futures: 7686.0 | NQ Futures: 29416.5).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.18 (Moderate Volatility (Balanced)) | DXY at 99.44 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7695.46), and London High (7700.46).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7655.46), and London Low (7650.46).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7667.46 – 7683.46 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7690.46): Sustained 5m close above 7690.46 clears local supply, targeting 7771.48 and 7730.46.
+- Downside Long-Liquidation Cascade (< 7660.46): Sustained 5m close below 7660.46 triggers stop cascades accelerating toward 7643.46 and 7620.46.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7643.46 rejected with lower wick, followed by 5m close back ABOVE 7648.46. TP: 7690.46 / 7771.48. SL: 7633.46. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7690.46 with volume confirmation. TP: 7771.48 / 7730.46. SL: 7680.46. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7690.46 / 7660.46. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7660.46. TP: 7643.46 / 7620.46. SL: 7670.46. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (08:36 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7676.46 (ES Futures: 7685.75 | NQ Futures: 29412.25).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.27 (Moderate Volatility (Balanced)) | DXY at 99.43 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7696.46), and London High (7701.46).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7656.46), and London Low (7651.46).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7668.46 – 7684.46 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7691.46): Sustained 5m close above 7691.46 clears local supply, targeting 7771.48 and 7731.46.
+- Downside Long-Liquidation Cascade (< 7661.46): Sustained 5m close below 7661.46 triggers stop cascades accelerating toward 7644.46 and 7621.46.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7644.46 rejected with lower wick, followed by 5m close back ABOVE 7649.46. TP: 7691.46 / 7771.48. SL: 7634.46. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7691.46 with volume confirmation. TP: 7771.48 / 7731.46. SL: 7681.46. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7691.46 / 7661.46. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7661.46. TP: 7644.46 / 7621.46. SL: 7671.46. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (08:21 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7673.32 (ES Futures: 7685.0 | NQ Futures: 29415.5).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.33 (Moderate Volatility (Balanced)) | DXY at 99.48 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7693.32), and London High (7698.32).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7653.32), and London Low (7648.32).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7665.32 – 7681.32 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7688.32): Sustained 5m close above 7688.32 clears local supply, targeting 7771.48 and 7728.32.
+- Downside Long-Liquidation Cascade (< 7658.32): Sustained 5m close below 7658.32 triggers stop cascades accelerating toward 7641.32 and 7618.32.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7641.32 rejected with lower wick, followed by 5m close back ABOVE 7646.32. TP: 7688.32 / 7771.48. SL: 7631.32. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7688.32 with volume confirmation. TP: 7771.48 / 7728.32. SL: 7678.32. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7688.32 / 7658.32. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7658.32. TP: 7641.32 / 7618.32. SL: 7668.32. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (08:06 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7670.45 (ES Futures: 7675.5 | NQ Futures: 29359.25).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.28 (Moderate Volatility (Balanced)) | DXY at 99.50 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7690.45), and London High (7695.45).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7650.45), and London Low (7645.45).
+- Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7662.45 – 7678.45 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7685.45): Sustained 5m close above 7685.45 clears local supply, targeting 7771.48 and 7725.45.
+- Downside Long-Liquidation Cascade (< 7655.45): Sustained 5m close below 7655.45 triggers stop cascades accelerating toward 7638.45 and 7615.45.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.45 rejected with lower wick, followed by 5m close back ABOVE 7643.45. TP: 7685.45 / 7771.48. SL: 7628.45. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7685.45 with volume confirmation. TP: 7771.48 / 7725.45. SL: 7675.45. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7685.45 / 7655.45. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7655.45. TP: 7638.45 / 7615.45. SL: 7665.45. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:51 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7675.67 (ES Futures: 7683.75 | NQ Futures: 29392.75).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.31 (Moderate Volatility (Balanced)) | DXY at 99.53 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7695.67), and London High (7700.67).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7655.67), and London Low (7650.67).
+- Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7667.67 – 7683.67 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7690.67): Sustained 5m close above 7690.67 clears local supply, targeting 7771.48 and 7730.67.
+- Downside Long-Liquidation Cascade (< 7660.67): Sustained 5m close below 7660.67 triggers stop cascades accelerating toward 7643.67 and 7620.67.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7643.67 rejected with lower wick, followed by 5m close back ABOVE 7648.67. TP: 7690.67 / 7771.48. SL: 7633.67. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7690.67 with volume confirmation. TP: 7771.48 / 7730.67. SL: 7680.67. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7690.67 / 7660.67. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7660.67. TP: 7643.67 / 7620.67. SL: 7670.67. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:43 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7673.92 (ES Futures: 7686.25 | NQ Futures: 29403.0).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.26 (Moderate Volatility (Balanced)) | DXY at 99.55 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7693.92), and London High (7698.92).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7653.92), and London Low (7648.92).
+- Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7665.92 – 7681.92 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7688.92): Sustained 5m close above 7688.92 clears local supply, targeting 7771.48 and 7728.92.
+- Downside Long-Liquidation Cascade (< 7658.92): Sustained 5m close below 7658.92 triggers stop cascades accelerating toward 7641.92 and 7618.92.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7641.92 rejected with lower wick, followed by 5m close back ABOVE 7646.92. TP: 7688.92 / 7771.48. SL: 7631.92. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7688.92 with volume confirmation. TP: 7771.48 / 7728.92. SL: 7678.92. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7688.92 / 7658.92. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7658.92. TP: 7641.92 / 7618.92. SL: 7668.92. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:25 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7682.27 (ES Futures: 7688.25 | NQ Futures: 29410.25).
+- Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 15.35 (Moderate Volatility (Balanced)) | DXY at 99.56 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.75%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7702.27), and London High (7707.27).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7662.27), and London Low (7657.27).
+- Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7674.27 – 7690.27 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7697.27): Sustained 5m close above 7697.27 clears local supply, targeting 7771.48 and 7737.27.
+- Downside Long-Liquidation Cascade (< 7667.27): Sustained 5m close below 7667.27 triggers stop cascades accelerating toward 7650.27 and 7627.27.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7650.27 rejected with lower wick, followed by 5m close back ABOVE 7655.27. TP: 7697.27 / 7771.48. SL: 7640.27. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7697.27 with volume confirmation. TP: 7771.48 / 7737.27. SL: 7687.27. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7697.27 / 7667.27. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7667.27. TP: 7650.27 / 7627.27. SL: 7677.27. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (12:05 PM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7709.0 | NQ Futures: 29509.0).
+- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.61 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
+- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7703.76 – 7719.76 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
+- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (11:50 AM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7705.5 | NQ Futures: 29488.25).
+- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.62 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
+- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7703.76 – 7719.76 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
+- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (11:35 AM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7703.5 | NQ Futures: 29450.0).
+- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.62 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
+- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7703.76 – 7719.76 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
+- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (11:21 AM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7700.5 | NQ Futures: 29430.0).
+- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.61 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
+- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7703.76 – 7719.76 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
+- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (11:06 AM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7709.75 | NQ Futures: 29475.25).
+- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.61 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
+- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7703.76 – 7719.76 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
+- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (10:51 AM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7702.25 | NQ Futures: 29420.25).
+- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.61 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
+- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7703.76 – 7719.76 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
+- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
+  },
+  {
+    "source": "SP500-AI",
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (10:36 AM IST - Aug 31, 2026):
+
+1. Market Structure & Macro Synthesis:
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7698.5 | NQ Futures: 29397.0).
+- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.60 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7732.14), and London High (7736.76).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7638.17), Asian Low (7700.91), and London Low (7686.76).
+- Active FVGs / OBs: 3 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.
+- Session Sweep Status: Inside Prior Session Range
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 7703.76 – 7719.76 Index Points.
+- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 7726.76): Sustained 5m close above 7726.76 clears local supply, targeting 7771.48 and 7766.76.
+- Downside Long-Liquidation Cascade (< 7696.76): Sustained 5m close below 7696.76 triggers stop cascades accelerating toward 7638.17 and 7656.76.
+
+5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7638.17 rejected with lower wick, followed by 5m close back ABOVE 7643.17. TP: 7726.76 / 7771.48. SL: 7628.17. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7726.76 with volume confirmation. TP: 7771.48 / 7766.76. SL: 7716.76. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7726.76 / 7696.76. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7696.76. TP: 7638.17 / 7656.76. SL: 7706.76. Risk-Reward: ~1:3.`
   }
 ];
 window.sp500DailyPlanData = [
   {
     "source": "SP500-AI",
-    "price": "7660.59-7676.59",
+    "price": "7676.59-7692.59",
     "bias": "neutral",
-    "behavior": "[09:36] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
+    "behavior": "[11:44] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7683.59",
+    "price": "7699.59",
     "bias": "bullish",
-    "behavior": "[09:36] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7683.59 targets 7771.48 and 7723.59.",
+    "behavior": "[11:44] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7699.59 targets 7771.48 and 7739.59.",
     "tp": "7771.48",
-    "sl": "7673.59",
+    "sl": "7689.59",
     "status": "na"
   },
   {
     "source": "SP500-AI",
     "price": "7771.48",
     "bias": "bearish",
-    "behavior": "[09:36] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
-    "tp": "7683.59",
+    "behavior": "[11:44] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
+    "tp": "7699.59",
     "sl": "7781.48",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7653.59",
+    "price": "7669.59",
     "bias": "bearish",
-    "behavior": "[09:36] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7653.59 targets 7636.59 and 7613.59.",
-    "tp": "7636.59",
-    "sl": "7663.59",
+    "behavior": "[11:44] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7669.59 targets 7650.92 and 7629.59.",
+    "tp": "7650.92",
+    "sl": "7679.59",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7636.59",
+    "price": "7650.92",
     "bias": "bullish",
-    "behavior": "[09:36] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
-    "tp": "7653.59",
-    "sl": "7626.59",
+    "behavior": "[11:44] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
+    "tp": "7669.59",
+    "sl": "7640.92",
     "status": "na"
   }
 ];
