@@ -1083,22 +1083,45 @@ S&P 500 Spot: 7672.32 (12:10 AM IST - Sep 01, 2026) Trigger: 15m Watchdog
 - SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7685.93 / 7655.93. SL: 7781.48. Risk-Reward: ~1:2.5.
 - SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7655.93. TP: 7638.93 / 7615.93. SL: 7665.93. Risk-Reward: ~1:3.`
   }
-];sp500DailyPlanData = [
-  { "source": "SP500-AI", "price": "7664.32-7680.32", "bias": "neutral", "behavior": "[12:10] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "SP500-AI", "price": "7687.32", "bias": "bullish", "behavior": "[12:10] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7687.32 targets 7771.48 and 7727.32.", "tp": "7771.48", "sl": "7677.32", "status": "na" },
-  { "source": "SP500-AI", "price": "7771.48", "bias": "bearish", "behavior": "[12:10] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.", "tp": "7687.32", "sl": "7781.48", "status": "na" },
-  { "source": "SP500-AI", "price": "7657.32", "bias": "bearish", "behavior": "[12:10] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7657.32 targets 7640.32 and 7617.32.", "tp": "7640.32", "sl": "7667.32", "status": "na" },
-  { "source": "SP500-AI", "price": "7640.32", "bias": "bullish", "behavior": "[12:10] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.", "tp": "7657.32", "sl": "7630.32", "status": "na" }
 ];btcDailyPlanData = [
-  { "source": "BTC-AI", "price": "78845.31", "bias": "bullish", "behavior": "[00:10] 15M Dynamic 9 EMA Shelf ($78,845.31). Primary short-term momentum trail & intraday pullback defense zone.", "tp": "79393.9", "sl": "78695.3", "status": "na" },
-  { "source": "BTC-AI", "price": "78658.83", "bias": "bullish", "behavior": "[00:10] 15M Dynamic 21 EMA Mean-Reversion Floor ($78,658.83). Secondary trend filter & institutional re-entry zone.", "tp": "79493.9", "sl": "78458.8", "status": "na" },
-  { "source": "BTC-AI", "price": "78332.21", "bias": "neutral", "behavior": "[00:10] 15M/1H 200 EMA Macro Equilibrium Floor ($78,332.21). High-probability structural pivot & macro trend separator.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "79169.84", "bias": "bearish", "behavior": "[00:10] Prior Day High ($79,169.84) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.", "tp": "78393.9", "sl": "79419.8", "status": "na" },
-  { "source": "BTC-AI", "price": "77049.7", "bias": "bullish", "behavior": "[00:10] Prior Day Low ($77,049.70) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.", "tp": "79593.9", "sl": "76799.7", "status": "na" },
+  { "source": "BTC-AI", "price": "78855.98", "bias": "bullish", "behavior": "[00:10] 15M Dynamic 9 EMA Shelf ($78,855.98). Primary short-term momentum trail & intraday pullback defense zone.", "tp": "79432.0", "sl": "78706.0", "status": "na" },
+  { "source": "BTC-AI", "price": "78663.68", "bias": "bullish", "behavior": "[00:10] 15M Dynamic 21 EMA Mean-Reversion Floor ($78,663.68). Secondary trend filter & institutional re-entry zone.", "tp": "79532.0", "sl": "78463.7", "status": "na" },
+  { "source": "BTC-AI", "price": "78332.74", "bias": "neutral", "behavior": "[00:10] 15M/1H 200 EMA Macro Equilibrium Floor ($78,332.74). High-probability structural pivot & macro trend separator.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "79169.84", "bias": "bearish", "behavior": "[00:10] Prior Day High ($79,169.84) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.", "tp": "78432.0", "sl": "79419.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77049.7", "bias": "bullish", "behavior": "[00:10] Prior Day Low ($77,049.70) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.", "tp": "79632.0", "sl": "76799.7", "status": "na" },
   { "source": "BTC-AI", "price": "78892.55", "bias": "neutral", "behavior": "[00:10] Prior Day Close ($78,892.55) Intraday Equilibrium Pivot. Day green/red sentiment baseline.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "BTC-AI", "price": "78965.39", "bias": "neutral", "behavior": "[00:10] Intraday Session VWAP Benchmark ($78,965.39). Institutional average cost anchor & fair value magnet.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "BTC-AI", "price": "78629.83", "bias": "neutral", "behavior": "[00:10] Intraday High-Volume Point of Control (POC) ($78,629.83). Heavy institutional trading volume node.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "BTC-AI", "price": "78736.11", "bias": "bullish", "behavior": "[00:10] 15M Bullish Demand Fair Value Gap Bottom ($78,736.11). Imbalance mitigation zone.", "tp": "79136.1", "sl": "78586.1", "status": "na" },
   { "source": "BTC-AI", "price": "78829.33", "bias": "bullish", "behavior": "[00:10] 15M Bullish Demand Fair Value Gap Top ($78,829.33). Imbalance mitigation zone.", "tp": "79229.3", "sl": "78679.3", "status": "na" },
-  { "source": "BTC-AI", "price": "79225.0", "bias": "bullish", "behavior": "[00:10] CME BTC Futures Gap Magnet ($79,225.00). High-probability >80% historical gap fill magnet.", "tp": "79725.0", "sl": "79025.0", "status": "na" }
+  { "source": "BTC-AI", "price": "79235.0", "bias": "bullish", "behavior": "[00:10] CME BTC Futures Gap Magnet ($79,235.00). High-probability >80% historical gap fill magnet.", "tp": "79735.0", "sl": "79035.0", "status": "na" }
+];btcDailyPlanSummary = [
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (12:10 AM IST - Sep 01, 2026 | Spot: 79032.00 | Trigger: New York Session (US Opening) (Intraday Update)):
+
+1. Market Structure & Session Bias:
+Bitcoin Spot (BTC/USD) is trading at $79,032.00, strong bullish momentum (above 9 & 21 ema) within the updated daily structure (Day High: $79,036.90 | Day Low: $78,873.65 | Prior Day Close: $78,892.55 | Live Spot: $79,032.00). During New York Session (US Opening) (Maximum Momentum / US Data Releases / Trend Runs), intermarket dynamics (DXY $99.426 (Consolidating DXY) and S&P 500 Futures $7691.75) combined with crypto-native context (Funding Rate is 0.0073% (neutral); Fear & Greed Index: 62 (Greed); CME Gap active at 79235.0 (above, size: 203.00)) guide structure. Spot is inside previous day range | above pdc (day green) | at day high.
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above $79,132.00 local swing highs, extending into 15M Bearish FVG ($79082.0–$79182.0), and macro day high targets up to $79,169.84.
+- Sell-Side Liquidity (SSL): Concentrated below $78,873.60 psychological round number down to deeper macro 4H demand base ($77,049.70).
+- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,855.98–$78,663.68; Session VWAP at $78,965.39; 200 EMA at $78,332.74; Volume Profile POC at $78,629.83.
+- Fair Value Gaps (FVG): 15M Bearish FVG at $79082.0–$79182.0; 15M Bullish FVG at $78736.1–$78829.3.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $77,900.34 – $79,011.94 (Value Area) / $78,932.00 – $79,132.00 (Asian Range).
+- Context: Current spot ($79,032.00) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $79,132.00 Spot): A sustained 5m/15m candle close above $79,132.00 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $79,332.00 and $79,632.00.
+- Downside Long-Liquidation Cascade (< $78,873.60 Spot): A sustained 5m close below the demand shelf ($78,873.60) triggers institutional stop cascades accelerating toward $78,732.00 and $78,432.00.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $78,873.60 rejected with lower wick, followed by 5m close back ABOVE $78,855.98. TP: $79,472.10 / $79,765.50. SL: $78,738.60.
+- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,132.00. TP: $79,432.00 / $79,832.00. SL: $78,882.00.
+- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $79082.0–$79182.0 rejected with upper wick, closing back BELOW $78,855.98 on 5m candle. TP: $78,732.00 / $78,532.00. SL: $79,232.00.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $78,873.60. TP: $78,632.00 / $78,232.00. SL: $79,182.00.
+`
+  }
 ];
