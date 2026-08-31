@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.6 — Explicit Ad-Hoc Run Trigger Labeling
+- **Ad-Hoc Trigger Normalization**: Updated manual launcher automation (`premarket_briefing.ps1 -Force` and client renderer `levels.js`) to label manual ad-hoc executions explicitly as `Trigger: Ad-Hoc Run`.
+- **Clean Pane Header Output**: Renders ad-hoc header bars cleanly as `Nifty : 24071.75 : 12:51PM ,Aug 31 : Ad-Hoc Run` across all 4 instruments.
+
 ### v1.9.5 — Fix Pane Header Trigger Text Extraction & Redundant Timestamp Stripping
 - **Trigger Text Extraction Fix**: Updated trigger parsing regex in `formatCompactPaneHeader()` in `js/ui/levels.js` to avoid truncating at colons in timestamp strings (e.g. `Trigger: 11:56 AM IST Pre-Market Briefing`).
 - **Clean Label Formatting**: Automatically strips redundant leading timestamps from trigger text so pane headers render clean title strings (e.g. `Nifty : 24082.25 : 11:56AM ,Aug 31 : Pre-Market Briefing`).
