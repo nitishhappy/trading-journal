@@ -292,6 +292,70 @@ if (viewLevels) {
         updateSourceFilterOptions();
         applySourceFilter();
         runSilentLiveEvaluation();
+    function formatCompactPaneHeader(firstLine, activeAsset) {
+        if (!firstLine) return 'Summary Entry';
+
+        // Extract Spot Price: matches "Spot: X" or "Spot X" or "$X"
+        let spot = '';
+        const spotMatch = firstLine.match(/Spot:\s*\$?([0-9.,]+)/i);
+        if (spotMatch) {
+            spot = spotMatch[1];
+        }
+
+        // Extract Time & Date: matches "(08:36 AM IST - Aug 31, 2026 ...)"
+        let timeDate = '';
+        const timeMatch = firstLine.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*(?:IST)?\s*-\s*([A-Za-z]{3}\s+\d{1,2})(?:,\s*\d{4})?/i);
+        if (timeMatch) {
+            const timeStr = timeMatch[1].replace(/\s+/, ''); // 08:36AM
+            const dateStr = timeMatch[2]; // Aug 31
+            timeDate = `${timeStr} ,${dateStr}`;
+        } else {
+            const dateOnlyMatch = firstLine.match(/([A-Za-z]{3}\s+\d{1,2})/);
+            if (dateOnlyMatch) timeDate = dateOnlyMatch[1];
+        }
+
+        // Extract Trigger: matches "Trigger: X" (strip extra parenthetical math like ($16.60 >= $15.00))
+        let trigger = '';
+        const triggerMatch = firstLine.match(/Trigger:\s*([^):]+)/i);
+        if (triggerMatch) {
+            trigger = triggerMatch[1].replace(/\(\$.*?\)/, '').trim();
+        }
+
+        // Determine clean asset label
+        let asset = 'Market';
+        const textLower = firstLine.toLowerCase();
+        if (textLower.includes('gold') || activeAsset === 'GOLD') asset = 'Gold';
+        else if (textLower.includes('nifty') || activeAsset === 'NIFTY') asset = 'Nifty';
+        else if (textLower.includes('btc') || textLower.includes('bitcoin') || activeAsset === 'BTC') asset = 'BTC';
+        else if (textLower.includes('s&p') || textLower.includes('sp500') || activeAsset === 'SP500') asset = 'S&P 500';
+
+        // Assemble compact pane header: "Gold : 4422.51 : 08:36AM ,Aug 31 : Extreme Price Shift"
+        const parts = [asset];
+        if (spot) parts.push(spot);
+        if (timeDate) parts.push(timeDate);
+        if (trigger) parts.push(trigger);
+
+        if (parts.length > 1) {
+            return parts.join(' : ');
+        }
+
+        // Fallback if parsing didn't match structured format
+        return firstLine.length > 65 ? firstLine.substring(0, 62) + '...' : firstLine;
+    }
+
+    function stripHeaderLineFromBody(rawText) {
+        if (!rawText) return '';
+        const lines = rawText.split('\n');
+        // Check if first line looks like a summary header (contains "Tactical", "Briefing", "Update", or "Spot:")
+        if (lines.length > 1 && /(Tactical|Briefing|Update|Spot:)/i.test(lines[0])) {
+            // Strip first line and any immediate blank lines below it
+            let contentLines = lines.slice(1);
+            while (contentLines.length > 0 && contentLines[0].trim() === '') {
+                contentLines.shift();
+            }
+            return contentLines.join('\n');
+        }
+        return rawText;
     }
 
     function renderSummary() {
@@ -331,9 +395,11 @@ if (viewLevels) {
 
             const rawText = item.text || '';
             const firstLine = rawText.split('\n')[0].replace(/:$/, '').trim();
+            const compactPaneTitle = formatCompactPaneHeader(firstLine, window.currentActiveAsset);
+            
             const titleEl = document.createElement('span');
             titleEl.className = 'summary-item-title';
-            titleEl.innerText = firstLine || (item.source ? `${item.source} Plan` : 'Summary Entry');
+            titleEl.innerText = compactPaneTitle || (item.source ? `${item.source} Plan` : 'Summary Entry');
             titleEl.title = firstLine;
             headerLeft.appendChild(titleEl);
 
@@ -354,8 +420,11 @@ if (viewLevels) {
             const content = document.createElement('div');
             content.className = 'summary-item-body';
             
+            // Option A: Strip repetitive top header line from body text so content starts cleanly
+            const bodyRawText = stripHeaderLineFromBody(rawText);
+
             // Escape basic HTML to prevent XSS
-            let safeText = rawText.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let safeText = bodyRawText.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
             
             // Highlight price levels (4 to 5 digit numbers, with optional commas and decimals)
             // e.g., 24,115 or 24090.85 or 24000

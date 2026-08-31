@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.3 — Compact Market Summary Pane Header & Body Deduplication
+- **Sleek Compact Pane Headers**: Formatted accordion pane title bars into a high-signal key-info string (`Asset : Spot : Time ,Date : Trigger`) across all 4 assets (Gold, Nifty, BTC, S&P 500).
+- **Body Text Header Deduplication (Option A)**: Automatically stripped the repetitive top title line from inside the card body so expanding the card immediately displays clean, structured analysis.
+
 ### v1.9.2 — S&P 500 Watchdog US Market Session Guard
 - **S&P 500 Market Hours Filtering**: Implemented `is_us_market_session()` guard in `sp500_watchdog.py` to restrict background scans to active US market hours (5:00 PM IST – 2:30 AM IST, Mon–Fri).
 - **Resource Optimization**: Automatically skips off-hours executions in <1 second without issuing redundant API calls or Git commits when the US market is closed.
