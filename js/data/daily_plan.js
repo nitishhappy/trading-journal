@@ -1461,79 +1461,79 @@ window.btcDailyPlanData = [
 window.sp500DailyPlanSummary = [
   {
     "source": "SP500-AI",
-    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:43 PM IST - Aug 31, 2026):
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (07:51 PM IST - Aug 31, 2026):
 
 1. Market Structure & Macro Synthesis:
-- S&P 500 Spot (^GSPC) is trading at 7673.92 (ES Futures: 7686.25 | NQ Futures: 29403.0).
+- S&P 500 Spot (^GSPC) is trading at 7675.67 (ES Futures: 7683.75 | NQ Futures: 29392.75).
 - Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
-- Intermarket Drivers: VIX at 15.26 (Moderate Volatility (Balanced)) | DXY at 99.55 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
+- Intermarket Drivers: VIX at 15.31 (Moderate Volatility (Balanced)) | DXY at 99.53 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
 - US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
 
 2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7693.92), and London High (7698.92).
-- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7653.92), and London Low (7648.92).
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7695.67), and London High (7700.67).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7650.92), Asian Low (7655.67), and London Low (7650.67).
 - Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.
 - Session Sweep Status: Inside Prior Session Range
 
 3. Live Chop Zone / No-Trade Zone:
-- Range: 7665.92 – 7681.92 Index Points.
+- Range: 7667.67 – 7683.67 Index Points.
 - Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
 
 4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> 7688.92): Sustained 5m close above 7688.92 clears local supply, targeting 7771.48 and 7728.92.
-- Downside Long-Liquidation Cascade (< 7658.92): Sustained 5m close below 7658.92 triggers stop cascades accelerating toward 7641.92 and 7618.92.
+- Upside Short-Covering Squeeze (> 7690.67): Sustained 5m close above 7690.67 clears local supply, targeting 7771.48 and 7730.67.
+- Downside Long-Liquidation Cascade (< 7660.67): Sustained 5m close below 7660.67 triggers stop cascades accelerating toward 7643.67 and 7620.67.
 
 5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
-- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7641.92 rejected with lower wick, followed by 5m close back ABOVE 7646.92. TP: 7688.92 / 7771.48. SL: 7631.92. Risk-Reward: ~1:2.5.
-- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7688.92 with volume confirmation. TP: 7771.48 / 7728.92. SL: 7678.92. Risk-Reward: ~1:3.
-- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7688.92 / 7658.92. SL: 7781.48. Risk-Reward: ~1:2.5.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7658.92. TP: 7641.92 / 7618.92. SL: 7668.92. Risk-Reward: ~1:3.`
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7643.67 rejected with lower wick, followed by 5m close back ABOVE 7648.67. TP: 7690.67 / 7771.48. SL: 7633.67. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7690.67 with volume confirmation. TP: 7771.48 / 7730.67. SL: 7680.67. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7690.67 / 7660.67. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7660.67. TP: 7643.67 / 7620.67. SL: 7670.67. Risk-Reward: ~1:3.`
   }
 ];
 window.sp500DailyPlanData = [
   {
     "source": "SP500-AI",
-    "price": "7665.92-7681.92",
+    "price": "7667.67-7683.67",
     "bias": "neutral",
-    "behavior": "[07:43] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
+    "behavior": "[07:51] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7688.92",
+    "price": "7690.67",
     "bias": "bullish",
-    "behavior": "[07:43] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7688.92 targets 7771.48 and 7728.92.",
+    "behavior": "[07:51] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7690.67 targets 7771.48 and 7730.67.",
     "tp": "7771.48",
-    "sl": "7678.92",
+    "sl": "7680.67",
     "status": "na"
   },
   {
     "source": "SP500-AI",
     "price": "7771.48",
     "bias": "bearish",
-    "behavior": "[07:43] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
-    "tp": "7688.92",
+    "behavior": "[07:51] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
+    "tp": "7690.67",
     "sl": "7781.48",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7658.92",
+    "price": "7660.67",
     "bias": "bearish",
-    "behavior": "[07:43] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7658.92 targets 7641.92 and 7618.92.",
-    "tp": "7641.92",
-    "sl": "7668.92",
+    "behavior": "[07:51] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7660.67 targets 7643.67 and 7620.67.",
+    "tp": "7643.67",
+    "sl": "7670.67",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7641.92",
+    "price": "7643.67",
     "bias": "bullish",
-    "behavior": "[07:43] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
-    "tp": "7658.92",
-    "sl": "7631.92",
+    "behavior": "[07:51] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
+    "tp": "7660.67",
+    "sl": "7633.67",
     "status": "na"
   }
 ];
