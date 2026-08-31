@@ -87,7 +87,13 @@ NIFTY Spot opens with a neutral-to-mild positive bias (~24,210-24,240), consolid
 - SELL Setup 1 (Supply Rejection Short - PE): Corrective rally into 24,240-24,260 or 24,295-24,300 rejected with upper wick, closing 5m candle back BELOW 24,210 (or 24,275). TP: 24,160 / 24,110 / 24,070. SL: 24,275 (or 24,325).
 - SELL Setup 2 (Day Low Breakdown Continuation Short - PE): Sustained 5m/15m candle close BELOW 24,090 with expanding red Futures volume. TP: 24,050 / 24,000 / 23,950. SL: 24,130.`
   }
+,
+  {
+  "source": "YT-Videos",
+  "text": "NIFTY 50 Video Predictions Synthesis & Multi-Analyst Consensus (Monday, 31 August 2026):\n\n1. Multi-Analyst Structure & Sentiment Bias:\n- NSA (FII DII Data Alert): Moderately Bullish. Smart Money (FIIs & Pros) bought Call options (+35k FII calls, +1.34L Net Pro calls) while Retail clients turned heavily Bearish (selling ~2L Calls and buying Puts). Major Put writing base is established at 24,100-24,000.\n- NBA (Sensibull / Market Outlook): Mildly Bullish / Hold Long. Nifty daily chart formed a Bullish Harami pattern sitting directly on long-term trendline and gap support (cash close at 24,175). Target bounce to 25,100 / 25,200.\n- STL (Super Trader Lakshya): Mixed to Cautiously Bullish. Low VIX indicates lack of panic. Advises treating early morning dips/manipulation into 24,890-24,900 or 24,600 as buying opportunities. 24,300 is the ultimate structural \"Lakshman Rekha\".\n- NPM (Chartkingz Elliott Wave & Hurst Cycles): Bullish (Wave 4 Pullback in Contracting Triangle Wave D). Time Period Support Zone at 23,901.90-23,805.20 offers optimal risk:reward for long entries targeting 24,360 (Cycle High), 24,772.35 (61.8% Fibo), and 25,585.35 (81.2% Equality Projection). Strict invalidation at 23,606 (Daily Wave 2 Low).\n\n2. Consensus Key Levels & Confluence:\n- Overhead Resistance / BSL: 24,180 (Buy Trigger), 24,254, 24,300 (Heavy Call OI Wall / Cycle High), 24,357-24,360, 24,772.35, 25,100, 25,200, 25,585.35.\n- Support & Demand Bases / SSL: 24,140-24,175 (Trendline & Gap Support), 24,100 (Make-or-Break Put Writing Floor), 24,076 (PDL), 24,000 (Psychological Floor), 23,901.90-23,805.20 (Wave 4 Time Period Support), 23,645, 23,606 (Elliott Wave Invalidation Floor).\n- Bearish Invalidation / Breakdown Targets: 23,500, 23,070, 22,000.\n\n3. Actionable Tactical Trading Scenarios:\n- Scenario A (Flat / Early Morning Dip): Buying on dips near 24,140-24,175 or 23,900-23,805 with strict stop-loss below 24,100 (or 23,606 for swing). First target 24,254 / 24,300.\n- Scenario B (Gap-Up / Breakout > 24,300 - 24,360): Sustained 15M close above 24,300 triggers massive short-covering towards 24,357, 24,772, and 25,100.\n- Scenario C (Gap-Down / Breakdown < 24,100): Breakdown below 24,100 invalidates intraday bullish setup, triggering PE buying / short continuation towards 24,076, 24,000, and 23,881."
+}
 ];
+
 window.dailyPlanData = [
   {
     "source": "MPF",
@@ -593,7 +599,34 @@ window.dailyPlanData = [
     "sl": "23800",
     "status": "na"
   }
+,
+  {"source": "NSA", "price": "24357", "bias": "bullish", "behavior": "Extension target above 24,300 breakout.", "tp": "24500", "sl": "na", "status": "na"},
+  {"source": "NSA", "price": "24300", "bias": "bullish", "behavior": "Major Call OI wall. A 15m candle close above 24,300 triggers heavy short covering & quantity expansion.", "tp": "24357", "sl": "24180", "status": "na"},
+  {"source": "NSA", "price": "24254", "bias": "bullish", "behavior": "Interim institutional resistance & initial upside target above 24,180.", "tp": "24300", "sl": "24180", "status": "na"},
+  {"source": "NSA", "price": "24180", "bias": "bullish", "behavior": "Upper Institutional Resistance & buy trigger. Bullish 10-15m candle close above opens long trade.", "tp": "24254", "sl": "24100", "status": "na"},
+  {"source": "NSA", "price": "24100", "bias": "bearish", "behavior": "Make-or-Break Floor / Put writing base (~70k fresh contracts). Sustaining below invalidates bullish setup.", "tp": "24076", "sl": "24180", "status": "na"},
+  {"source": "NSA", "price": "24076", "bias": "bullish", "behavior": "Previous Day Low & Institutional Support where price bounced cleanly.", "tp": "24180", "sl": "24000", "status": "na"},
+  {"source": "NSA", "price": "24000", "bias": "bullish", "behavior": "Major Support & Psychological Put writing floor. Potential bounce POI.", "tp": "24076", "sl": "23881", "status": "na"},
+  {"source": "NSA", "price": "23881", "bias": "bullish", "behavior": "Macro lower institutional support level if 24,000 fails.", "tp": "24000", "sl": "na", "status": "na"},
+  {"source": "NBA", "price": "25200", "bias": "bullish", "behavior": "Upper extension target; breaking above opens blow-off top rally.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "NBA", "price": "25100", "bias": "bullish", "behavior": "Upside technical target for the bounce out of trendline support.", "tp": "25200", "sl": "na", "status": "na"},
+  {"source": "NBA", "price": "24300", "bias": "bearish", "behavior": "Heavy Call OI accumulation & key immediate hurdle for expiry.", "tp": "24175", "sl": "24350", "status": "na"},
+  {"source": "NBA", "price": "24140-24175", "bias": "bullish", "behavior": "Trendline support + Gap support + Daily Bullish Harami base. Cash closed at 24,175 holding support.", "tp": "25100", "sl": "24100", "status": "na"},
+  {"source": "NBA", "price": "24000", "bias": "bullish", "behavior": "Major Put Open Interest base & psychological round number support.", "tp": "24140", "sl": "23900", "status": "na"},
+  {"source": "NBA", "price": "22000", "bias": "bearish", "behavior": "Macro downside target if trendline & gap support zone (24,140\u201324,175) breaks down completely.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "STL", "price": "24890-24900", "bias": "bullish", "behavior": "Recent minor swing low area. Morning manipulation dip into this zone is a buy opportunity.", "tp": "25100", "sl": "24600", "status": "na"},
+  {"source": "STL", "price": "24600", "bias": "bullish", "behavior": "Critical structural support floor. Must hold to maintain short-term bullish consolidation.", "tp": "24900", "sl": "24300", "status": "na"},
+  {"source": "STL", "price": "24300", "bias": "bearish", "behavior": "Major swing low & Lakshman Rekha. Breakdown below triggers severe panic drop.", "tp": "23500", "sl": "24600", "status": "na"},
+  {"source": "STL", "price": "23500", "bias": "bullish", "behavior": "Macro downside target & extreme demand zone if 24,300 fails.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "NPM", "price": "25585.35", "bias": "bullish", "behavior": "81.2% Rule of Equality (A=C) projection for Wave C of D / Wave 5 Maximum Target.", "tp": "na", "sl": "na", "status": "na"},
+  {"source": "NPM", "price": "24772.35", "bias": "bullish", "behavior": "61.8% Fibonacci Extension target for Wave C / Wave 5.", "tp": "25585.35", "sl": "na", "status": "na"},
+  {"source": "NPM", "price": "24360", "bias": "bullish", "behavior": "20-Week & 10-Week Nominal Cycle High. Weekly close above confirms Wave (D) expansion.", "tp": "24772.35", "sl": "23901.90", "status": "na"},
+  {"source": "NPM", "price": "23901.90-23805.20", "bias": "bullish", "behavior": "Time Period Support / Wave 4 pullback zone (Optimal Risk:Reward Buy Zone).", "tp": "24360", "sl": "23606", "status": "na"},
+  {"source": "NPM", "price": "23645", "bias": "bullish", "behavior": "High of Nominal Cycle candle on Weekly chart; critical macro support floor.", "tp": "23901.90", "sl": "23606", "status": "na"},
+  {"source": "NPM", "price": "23606", "bias": "bearish", "behavior": "Wave 2 Low on Daily chart. Strict Invalidation Point for Terminal Impulse / Ending Diagonal.", "tp": "23070", "sl": "23645", "status": "na"},
+  {"source": "NPM", "price": "23070", "bias": "bullish", "behavior": "Swing Low of Nominal Cycle; lower limit of macro support range.", "tp": "na", "sl": "na", "status": "na"}
 ];
+
 window.goldDailyPlanSummary = [
   {
     "source": "AI",
