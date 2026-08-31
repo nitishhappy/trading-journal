@@ -157,7 +157,7 @@ if (viewLevels) {
     }
 
     // Initialize Levels with robust multi-channel sync
-    function initLevels(forceSync = false) {
+    function initLevels(forceSync = false, isManualSync = false) {
         loadScorecardHistory();
 
         const isGold = (window.currentActiveAsset === 'GOLD');
@@ -198,9 +198,9 @@ if (viewLevels) {
         });
 
         const isExplicitlyCleared = (localStorage.getItem(storageKey + '_cleared') === 'true');
-        if (isExplicitlyCleared && !forceSync) {
+        if (isExplicitlyCleared && !isManualSync) {
             clearedSummaries[window.currentActiveAsset || 'NIFTY'] = true;
-        } else if (forceSync) {
+        } else if (isManualSync) {
             localStorage.removeItem(storageKey + '_cleared');
             clearedSummaries[window.currentActiveAsset || 'NIFTY'] = false;
         }
@@ -212,7 +212,7 @@ if (viewLevels) {
         const lastSig = localStorage.getItem(storageKey + '_sig');
         const planChanged = (planSig !== lastSig);
 
-        const shouldSyncFromPlan = forceSync || (!isExplicitlyCleared && (assetMismatch || loaded.length === 0 || planChanged || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'))));
+        const shouldSyncFromPlan = (forceSync && (!isExplicitlyCleared || isManualSync)) || (!isExplicitlyCleared && (assetMismatch || loaded.length === 0 || planChanged || (allWereBT && planLevels.some(p => (p.source || '').toUpperCase() !== 'BT'))));
 
         const finalLevels = [];
         const seenSignatures = new Set();
@@ -751,7 +751,7 @@ if (viewLevels) {
     let isAutoSyncingPlan = false;
     let lastPlanFetchTime = 0;
 
-    async function autoSyncDailyPlan(force = false, notifyUser = false) {
+    async function autoSyncDailyPlan(force = false, notifyUser = false, isManual = false) {
         if (isAutoSyncingPlan) return false;
         const now = Date.now();
         if (!force && (now - lastPlanFetchTime < 15000)) return false;
@@ -801,7 +801,7 @@ if (viewLevels) {
 
             if (force || hasChanged) {
                 console.log('[Levels] Fresh daily plan data received from server. Updating UI...');
-                initLevels(true);
+                initLevels(force, isManual);
                 if (notifyUser || hasChanged) {
                     if (window.showToast) {
                         window.showToast('⚡ Levels updated automatically with latest tactical plan', 2500);
@@ -826,8 +826,11 @@ if (viewLevels) {
             btnSyncPlan.disabled = true;
             btnSyncPlan.innerText = 'Syncing...';
             try {
-                clearedSummaries[window.currentActiveAsset || 'NIFTY'] = false;
-                await autoSyncDailyPlan(true, false);
+                const activeAsset = window.currentActiveAsset || 'NIFTY';
+                const storageKey = (activeAsset === 'SP500') ? 'sp500TradePlanData' : ((activeAsset === 'BTC') ? 'btcTradePlanData' : ((activeAsset === 'GOLD') ? 'goldTradePlanData' : 'dailyTradePlanData'));
+                localStorage.removeItem(storageKey + '_cleared');
+                clearedSummaries[activeAsset] = false;
+                await autoSyncDailyPlan(true, false, true);
                 const count = allLevels.length;
                 if (window.showToast) {
                     window.showToast(`✅ Synced ${count} levels from latest server plan.`);
