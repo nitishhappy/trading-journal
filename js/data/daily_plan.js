@@ -929,3 +929,9 @@ window.sp500DailyPlanData = [
   { "source": "SP500-AI", "price": "7671.14", "bias": "bearish", "behavior": "[04:18] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7671.14 targets 7650.92 and 7631.14.", "tp": "7650.92", "sl": "7681.14", "status": "na" },
   { "source": "SP500-AI", "price": "7650.92", "bias": "bullish", "behavior": "[04:18] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.", "tp": "7671.14", "sl": "7640.92", "status": "na" }
 ];
+window.dailyPlanSummary = [
+  {
+    "source": "AI Pre-Market Briefing",
+    "text": "================================================================================\n\ud83c\udfaf DAILY MARKET BIAS & OUTLOOK\n================================================================================\n\u2022 Daily Market Bias: \u26aa NEUTRAL | Bias Score: +0.5 / +6.0 | Confidence: Neutral (Chop)\n\u2022 Bias Invalidation Floor: 24207.75 (A 15M close above 24207.75 invalidates bias)\n\n\ud83d\udccd Tactical Directives:\n\u2022 Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n\u2022 Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n"
+  }
+];

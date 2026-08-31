@@ -1710,3 +1710,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Prevents asset tab switching from triggering force resets that erased `_cleared` flags in `localStorage`.
   - Ensures **Clear All** state persists seamlessly across tab switches, view navigations, and F5 page reloads until **🔄 Sync Plan** is explicitly tapped.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
+
+### v2.3.63 — 01 Sep 2026 — F5 Page Reload & Background Sync Clear-State Retention Fix
+
+- **Manual vs Background Sync Separation (`levels.js`)**:
+  - Differentiated manual **🔄 Sync Plan** button clicks (`isManualSync = true`) from automatic background/page-load plan checks (`autoSyncDailyPlan`).
+  - Enforced that `localStorage.removeItem(storageKey + '_cleared')` is ONLY executed on explicit manual **Sync Plan** clicks.
+  - Guarantees **Clear All** state remains 100% persistent across F5 page reloads, tab switches, and app refreshes until **🔄 Sync Plan** is manually tapped.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
