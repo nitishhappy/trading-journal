@@ -72,6 +72,12 @@ NIFTY Spot opens with a subdued/neutral-to-cautious bias (~24,180-24,200), conso
 📍 Tactical Directives:
 • Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
 • Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -2.5 / +6.0 | Confidence: Moderate (65%)
+• Bias Invalidation Floor: 24090.85 (A 15M close above 24090.85 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
 
 1. Market Structure & Bias:
 NIFTY Spot opens with a neutral-to-flat bias (~24,117.55), consolidating in discount territory following a bearish breakdown below the D-2 low (24,207.75) and closing near session lows at 24,090.85. Market structure is testing institutional bid absorption around the 24,000–24,050 demand shelf while capped beneath the 24,205–24,225 50% equilibrium retracement breaker. Sustaining above 24,220 unlocks upside short-covering expansion toward 24,295 and 24,350, while a sustained 5m breakdown below 24,090 triggers liquidation cascades toward 24,050 and 24,000.
