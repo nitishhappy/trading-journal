@@ -294,12 +294,14 @@ if (viewLevels) {
         runSilentLiveEvaluation();
     }
 
-    function formatCompactPaneHeader(firstLine, activeAsset) {
+    function formatCompactPaneHeader(firstLine, activeAsset, rawText = '') {
         if (!firstLine) return 'Summary Entry';
 
-        // Extract Spot Price: matches "Spot: X" or "Spot X" or "$X"
+        const fullText = (firstLine + '\n' + (rawText || '')).trim();
+
+        // Extract Spot Price: matches "Spot: X" or "Spot X" or "$X" or "trading at X"
         let spot = '';
-        const spotMatch = firstLine.match(/Spot:\s*\$?([0-9.,]+)/i);
+        const spotMatch = fullText.match(/(?:Spot:\s*\$?|trading at\s*\$?)([0-9.,]+)/i);
         if (spotMatch) {
             spot = spotMatch[1];
         }
@@ -326,6 +328,9 @@ if (viewLevels) {
                 trgRaw = 'Ad-Hoc Run';
             }
             trigger = trgRaw;
+        } else if (/Tactical Briefing|Pure AI|Watchdog/i.test(firstLine)) {
+            if (/Watchdog/i.test(firstLine)) trigger = '15m Watchdog';
+            else if (/Tactical Briefing|Pure AI/i.test(firstLine)) trigger = 'Pure AI Briefing';
         }
 
         // Determine clean asset label
@@ -336,7 +341,7 @@ if (viewLevels) {
         else if (textLower.includes('btc') || textLower.includes('bitcoin') || activeAsset === 'BTC') asset = 'BTC';
         else if (textLower.includes('s&p') || textLower.includes('sp500') || activeAsset === 'SP500') asset = 'S&P 500';
 
-        // Assemble compact pane header: "Gold : 4422.51 : 08:36AM ,Aug 31 : Extreme Price Shift"
+        // Assemble compact pane header: "S&P 500 : 7677.99 : 09:21PM ,Aug 31 : 15m Watchdog"
         const parts = [asset];
         if (spot) parts.push(spot);
         if (timeDate) parts.push(timeDate);
@@ -402,7 +407,7 @@ if (viewLevels) {
 
             const rawText = item.text || '';
             const firstLine = rawText.split('\n')[0].replace(/:$/, '').trim();
-            const compactPaneTitle = formatCompactPaneHeader(firstLine, window.currentActiveAsset);
+            const compactPaneTitle = formatCompactPaneHeader(firstLine, window.currentActiveAsset, rawText);
             
             const titleEl = document.createElement('span');
             titleEl.className = 'summary-item-title';

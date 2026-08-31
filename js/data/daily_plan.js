@@ -1544,9 +1544,9 @@ window.btcDailyPlanData = [
 window.sp500DailyPlanSummary = [
   {
     "source": "SP500-AI",
-    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (09:36 PM IST - Aug 31, 2026):
+    "text": `S&P 500 Spot: 7668.59 (09:36 PM IST - Aug 31, 2026) Trigger: US Market Watchdog
 
-1. Market Structure & Macro Synthesis:
+1. Market Structure & Macro Synthesis:`,StartLine:1546,TargetContent:
 - S&P 500 Spot (^GSPC) is trading at 7668.59 (ES Futures: 7687.0 | NQ Futures: 29409.75).
 - Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
 - Intermarket Drivers: VIX at 15.14 (Moderate Volatility (Balanced)) | DXY at 99.42 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.76%.
