@@ -1726,3 +1726,12 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Since summary arrays in `daily_plan.js` are prepended with the newest briefing at index `0`, removing `.reverse()` guarantees the newest update (e.g. `04:18 AM Asian Session`) appears at the top marked `LATEST`.
   - Older briefings follow sequentially underneath in clean descending chronological order.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
+
+### v2.3.65 — 01 Sep 2026 — Smart New-Plan Signature Detection for Ad-Hoc AI Runs
+
+- **Smart New-Plan Signature Tracking (`levels.js`)**:
+  - Implemented `storageKey + '_cleared_sig'` snapshotting when **Clear All** (`btn-level-clear`) is clicked.
+  - Updated `initLevels()` to compare incoming plan signatures (`planSig`) against `clearedSig`.
+  - Same plan continues to stay 100% hidden across F5 page reloads, tab switches, and app restarts.
+  - When a brand-NEW Ad-Hoc AI run / briefing is published to `daily_plan.js` on the server (`planSig !== clearedSig`), the app automatically detects the new run, un-clears, and displays the fresh Ad-Hoc analysis and levels instantly on screen without requiring Ctrl+F5 or manual Sync Plan.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
