@@ -1621,6 +1621,18 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended detailed level-by-level educational breakdown ("What the retail trader sees" vs "What the smart money sees") to `Nifty_Learn.md` and `Gold_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Nifty_Learn.md`, `Gold_Learn.md`
 
+### v2.3.58 — 31 Aug 2026 — Gold (XAU/USD) Intraday Tactical Update (01:36 PM IST)
+
+- **Gold (XAU/USD) Intraday Tactical Update (`daily_plan.js`)**:
+  - Processed live spot market action at 01:36 PM IST (Spot: $4447.59, Day High: $4521.50, Day Low: $4445.60).
+  - Integrated London Open & Asian Range Sweep mechanics (Judas Swing probes, DXY ~99.58–99.68, US 10Y Yields at 4.72%).
+  - Mapped live intraday discount compression / no-trade chop zone ($4444.00–$4452.00), high-momentum short-covering squeeze trigger (> $4456.00), and downside long-liquidation cascade (< $4442.00) zones.
+  - Appended exact 5-min/15-min confirmation triggers and new AI-sourced Gold levels prepended with `[13:36]` to `window.goldDailyPlanSummary` and `window.goldDailyPlanData`.
+- **Mentorship Log Update**:
+  - Appended detailed educational breakdown ("What retail sees" vs "What smart money sees") to `Gold_Learn.md`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Gold_Learn.md`
+
+
 
 
 
