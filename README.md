@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.0.2 — Gold (XAU/USD) Intraday Tactical Update & Daily Plan Sync
+- **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD support/resistance levels, chop zone ($4426.00–$4434.00), high-momentum triggers (short-covering breakout >$4436.00 / demand breakdown <$4422.00), and 5-min execution scenarios following the New York session discount expansion to $4429.81 below the prior Day Low ($4445.60).
+- **Daily Plan & Mentorship Sync**: Appended AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and updated `Gold_Learn.md` with SMC institutional breakdown.
+
 ### v2.0.1 — Level Asset Tab Refreshed Notification Glow & Badges
 - **Visual Refreshed Tab Notification**: Added animated pulsing glow effect (`.btn-tab-updated`) and glowing notification dot (`.unread-level-dot`) to inactive asset tabs (**NIFTY**, **GOLD**, **BTC**, **S&P 500**) whenever new levels or market summary updates are synced.
 - **Smart Unread State Persistence**: Stores per-asset data signatures in `localStorage` (`levels_last_seen_sig_<ASSET>`) so unread status persists across sessions and is cleanly dismissed as soon as the user clicks the updated asset tab.
