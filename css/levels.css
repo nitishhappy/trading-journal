@@ -1191,13 +1191,91 @@
 }
 
 .summary-item-body {
-    padding: 0 12px 12px 12px;
+    padding: 10px 12px 12px 12px;
     font-size: 14px;
     color: var(--text);
-    line-height: 1.4;
-    white-space: pre-wrap;
+    line-height: 1.45;
+    white-space: normal;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     margin-top: 2px;
-    padding-top: 10px;
+}
+
+/* ===================== SUMMARY TABLES STYLING ===================== */
+.summary-table-section {
+    margin-bottom: 1.25rem;
+}
+.summary-table-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--accent, #6366f1);
+    margin-bottom: 0.5rem;
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.35rem;
+}
+.levels-summary-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border, rgba(255,255,255,0.1));
+    background: rgba(15, 23, 42, 0.6);
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.levels-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    text-align: left;
+}
+.levels-summary-table th {
+    background: rgba(30, 41, 59, 0.85);
+    color: var(--text-dim, #94a3b8);
+    font-size: 0.73rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border, rgba(255,255,255,0.1));
+    white-space: nowrap;
+}
+.levels-summary-table td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text, #f8fafc);
+    vertical-align: top;
+    line-height: 1.45;
+}
+.levels-summary-table tr:last-child td {
+    border-bottom: none;
+}
+.levels-summary-table tr:hover td {
+    background: rgba(255, 255, 255, 0.025);
+}
+.badge-buy {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+}
+.badge-sell {
+    display: inline-block;
+    background: rgba(244, 63, 94, 0.15);
+    color: #fda4af;
+    border: 1px solid rgba(244, 63, 94, 0.35);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
 }
 

@@ -120,7 +120,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
-### v2.0.4 — Gold (XAU/USD) Intraday Tactical Update & Daily Plan Sync
+### v2.0.5 — Interactive Table Rendering for Levels Tab Market Summaries
+- **Structured Table Renderer in Levels Tab**: Upgraded `js/ui/levels.js` and `css/levels.css` to dynamically parse and render market summaries (for Gold, Bitcoin, S&P 500, and NIFTY 50) as clean, interactive dark-themed HTML tables.
+- **Support for Structured & Markdown Tables**: Parses numbered sections (`1. Market Structure`, `2. SMC & Key Confluence Levels`, `3. Chop Zone`, `4. High Momentum Scenarios`, `5. Action Plan & Triggers`) as well as native Markdown tables (`| Header | ... |`) into structured UI table layouts with color-coded trade setup badges (`BUY` / `SELL`), price highlights, and responsive overflow wrappers.
 - **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD support/resistance levels, chop zone ($4431.00–$4439.00), high-momentum triggers (short-covering breakout >$4440.00 / demand breakdown <$4426.00), and 5-min execution scenarios following London Close session exhaustion around spot $4434.83.
 - **Daily Plan & Mentorship Sync**: Appended AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and updated `Gold_Learn.md` with SMC institutional breakdown.
 
