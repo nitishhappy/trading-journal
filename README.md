@@ -1583,21 +1583,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 ### v2.3.57 — 31 Aug 2026 — NIFTY & GOLD Pre-Market Briefing (09:00 AM IST)
 
 - **NIFTY & GOLD Pre-Market Briefing (`daily_plan.js`)**:
-  - Executed full 8-point pre-market workflow synthesizing global sentiment (hawkish Fed at Jackson Hole, US yields at 4.72%, Brent crude surge to $90 on Strait of Hormuz conflict, Asian indices down), overnight moves (GIFT Nifty discount at 24,000–24,050, Gold rebound to $4,422.50 after $4,402 flush), and macro calendar.
+  - Executed full 8-point pre-market workflow synthesizing global sentiment (US index consolidation, DXY at 99.59, 10Y Yield at 4.72%, Brent/WTI crude at $84.92, Asian indices mixed), overnight commodity/forex moves (Gold consolidation at $4,475.90 after $4,402 flush, GIFT Nifty flat-to-mild tick open ~24,117.55), and macro calendar.
   - Calculated Nifty 50 Calibrated 5-Pillar Daily Bias (Score: -2.5 / +6.0, ⚪ NEUTRAL / Chop Regime, Invalidation: 24,090.85) and injected Tactical Directives.
   - Formatted Nifty Support & Resistance levels into structured Markdown table with emoji highlighting (🟢 BUY, 🔴 SELL, ⚪ NEUTRAL).
-  - Defined Higher Timeframe (1H/Daily) Extreme Extension Targets (ATH expansion 24,650–24,750 vs macro capitulation base 23,900–23,950 / 23,600–23,650).
-  - Outlined exact 5-min intraday action plans, High Momentum / Explosive Zones (> 24,160 Spot / < 24,000 Spot), 15-Minute Opening Range filter rules, and extreme gap contingency plans.
+  - Defined Higher Timeframe (1H/Daily) Extreme Extension Targets (ATH expansion 24,650–24,750 vs macro capitulation base 23,850–23,900).
+  - Outlined exact 5-min intraday action plans, High Momentum / Explosive Zones (> 24,220 Spot / < 24,090 Spot), 15-Minute Opening Range filter rules, and extreme gap contingency plans.
   - Appended AI-sourced Nifty levels (`[09:00]`) and comprehensive briefing summary to `window.dailyPlanSummary` and `window.dailyPlanData`.
 - **Mentorship Log Update**:
-  - Appended detailed level-by-level educational breakdown ("What the retail trader sees" vs "What the smart money sees") to `Nifty_Learn.md`.
-- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Nifty_Learn.md`
-
-
-
-
-
-
+  - Appended detailed level-by-level educational breakdown ("What the retail trader sees" vs "What the smart money sees") to `Nifty_Learn.md` and `Gold_Learn.md`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`, `Nifty_Learn.md`, `Gold_Learn.md`
 
 
 

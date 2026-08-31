@@ -617,65 +617,65 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "price": "24340-24360",
+    "price": "24340-24380",
     "bias": "bearish",
-    "behavior": "[09:00] 2-Day High Supply Shelf & 1H Bearish Breaker. Heavy overhead resistance on relief pullbacks.",
+    "behavior": "[09:00] 2-Day Swing High Supply Shelf & 1H Bearish Breaker. Heavy overhead resistance on relief pullbacks.",
     "tp": "24260",
-    "sl": "24380",
+    "sl": "24400",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24200-24220",
+    "price": "24295-24300",
     "bias": "bearish",
-    "behavior": "[09:00] 50% Equilibrium Retracement Shelf & Intraday Supply OB. Rejection confirms downside continuation.",
-    "tp": "24140",
-    "sl": "24250",
+    "behavior": "[09:00] Previous Day High & Supply OB. Local session ceiling (24297.45); watch for BSL sweep rejection.",
+    "tp": "24220",
+    "sl": "24325",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24160",
+    "price": "24205-24225",
     "bias": "bullish",
-    "behavior": "[09:00] High-Momentum BSL Short-Covering Trigger. Sustained 5m close above clears opening compression to 24220/24280/24340.",
-    "tp": "24340",
-    "sl": "24110",
+    "behavior": "[09:00] High-Momentum BSL Short-Covering Trigger. Sustained 5m close above clears 50% equilibrium to 24280/24300/24350.",
+    "tp": "24350",
+    "sl": "24175",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24060-24100",
+    "price": "24100-24160",
     "bias": "neutral",
-    "behavior": "[09:00] Intraday Opening Compression & No-Trade Chop Zone. Stay flat; avoid unconfirmed trades inside.",
+    "behavior": "[09:00] Intraday Equilibrium Compression & No-Trade Chop Zone. Stay flat; avoid unconfirmed trades inside.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24000-24020",
+    "price": "24090.85",
+    "bias": "bearish",
+    "behavior": "[09:00] Day Low SSL & Downside Liquidation Cascade Trigger. Sustained 5m close below accelerates sell-off to 24050/24000.",
+    "tp": "23950",
+    "sl": "24130",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "24000-24050",
     "bias": "bullish",
     "behavior": "[09:00] Major Psychological Floor & Unmitigated 1H Demand OB. High-probability institutional dip-buying shelf.",
-    "tp": "24140",
-    "sl": "23950",
+    "tp": "24180",
+    "sl": "23960",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24000",
-    "bias": "bearish",
-    "behavior": "[09:00] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below accelerates sell-off to 23950/23900.",
-    "tp": "23900",
-    "sl": "24045",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "23900-23950",
+    "price": "23850-23900",
     "bias": "bullish",
     "behavior": "[09:00] Higher Timeframe Macro Daily Demand Base & Capitulation Liquidity Floor. Deep panic-flush rebound zone.",
     "tp": "24150",
-    "sl": "23850",
+    "sl": "23800",
     "status": "na"
   }
 ,
