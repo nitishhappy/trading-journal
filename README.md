@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v1.9.5 — Fix Pane Header Trigger Text Extraction & Redundant Timestamp Stripping
+- **Trigger Text Extraction Fix**: Updated trigger parsing regex in `formatCompactPaneHeader()` in `js/ui/levels.js` to avoid truncating at colons in timestamp strings (e.g. `Trigger: 11:56 AM IST Pre-Market Briefing`).
+- **Clean Label Formatting**: Automatically strips redundant leading timestamps from trigger text so pane headers render clean title strings (e.g. `Nifty : 24082.25 : 11:56AM ,Aug 31 : Pre-Market Briefing`).
+
 ### v1.9.4 — Fix SyntaxError: Unexpected end of input in levels.js
 - **Syntax Error Fix**: Restored missing closing brace `}` for `initLevels()` in `js/ui/levels.js` at line 295, resolving `SyntaxError: Unexpected end of input` that broke script module loading and user login.
 - **Service Worker Cache Invalidation**: Updated Service Worker cache version to purge stale browser caches.

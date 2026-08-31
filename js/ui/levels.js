@@ -316,11 +316,13 @@ if (viewLevels) {
             if (dateOnlyMatch) timeDate = dateOnlyMatch[1];
         }
 
-        // Extract Trigger: matches "Trigger: X" (strip extra parenthetical math like ($16.60 >= $15.00))
+        // Extract Trigger: matches "Trigger: X" (strip extra parenthetical math like ($16.60 >= $15.00) and redundant leading timestamps)
         let trigger = '';
-        const triggerMatch = firstLine.match(/Trigger:\s*([^):]+)/i);
+        const triggerMatch = firstLine.match(/Trigger:\s*([^)]+)/i);
         if (triggerMatch) {
-            trigger = triggerMatch[1].replace(/\(\$.*?\)/, '').trim();
+            let trgRaw = triggerMatch[1].replace(/\(\$.*?\)/, '').replace(/:$/, '').trim();
+            trgRaw = trgRaw.replace(/^\d{1,2}:\d{2}\s*(?:AM|PM)?\s*(?:IST)?\s*/i, '').trim();
+            trigger = trgRaw;
         }
 
         // Determine clean asset label
