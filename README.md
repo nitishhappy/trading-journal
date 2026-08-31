@@ -1718,3 +1718,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Enforced that `localStorage.removeItem(storageKey + '_cleared')` is ONLY executed on explicit manual **Sync Plan** clicks.
   - Guarantees **Clear All** state remains 100% persistent across F5 page reloads, tab switches, and app refreshes until **🔄 Sync Plan** is manually tapped.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
+
+### v2.3.64 — 01 Sep 2026 — Market Summary Chronological Ordering Fix
+
+- **Briefing Ordering Fix (`levels.js`)**:
+  - Removed `.reverse()` call from `renderSummary()` iteration over `summaryData`.
+  - Since summary arrays in `daily_plan.js` are prepended with the newest briefing at index `0`, removing `.reverse()` guarantees the newest update (e.g. `04:18 AM Asian Session`) appears at the top marked `LATEST`.
+  - Older briefings follow sequentially underneath in clean descending chronological order.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`

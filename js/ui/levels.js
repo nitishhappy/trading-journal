@@ -613,8 +613,8 @@ if (viewLevels) {
         summaryPanel.style.display = 'block';
         summaryBody.innerHTML = '';
         
-        // Clone and reverse to show latest updates on top
-        [...summaryData].reverse().forEach((item, index) => {
+        // Array is already prepended with latest updates at index 0
+        summaryData.forEach((item, index) => {
             const isLatest = (index === 0);
             
             const card = document.createElement('div');
