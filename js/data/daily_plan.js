@@ -1126,12 +1126,12 @@ window.btcDailyPlanData = [
 window.sp500DailyPlanSummary = [
   {
     "source": "SP500-AI",
-    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (11:50 AM IST - Aug 31, 2026):
+    "text": `S&P 500 (^GSPC) Intraday Pure AI Tactical Briefing (12:05 PM IST - Aug 31, 2026):
 
 1. Market Structure & Macro Synthesis:
-- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7705.5 | NQ Futures: 29488.25).
+- S&P 500 Spot (^GSPC) is trading at 7711.76 (ES Futures: 7709.0 | NQ Futures: 29509.0).
 - Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7704.82 | 48H Swing Range: 7638.17 – 7771.48).
-- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.62 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
+- Intermarket Drivers: VIX at 14.43 (Moderate Volatility (Balanced)) | DXY at 99.61 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.72%.
 - US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
 
 2. SMC & Session Liquidity Confluence:
@@ -1160,7 +1160,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7703.76-7719.76",
     "bias": "neutral",
-    "behavior": "[11:50] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
+    "behavior": "[12:05] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
     "tp": "na",
     "sl": "na",
     "status": "na"
@@ -1169,7 +1169,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7726.76",
     "bias": "bullish",
-    "behavior": "[11:50] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7726.76 targets 7771.48 and 7766.76.",
+    "behavior": "[12:05] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7726.76 targets 7771.48 and 7766.76.",
     "tp": "7771.48",
     "sl": "7716.76",
     "status": "na"
@@ -1178,7 +1178,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7771.48",
     "bias": "bearish",
-    "behavior": "[11:50] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
+    "behavior": "[12:05] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
     "tp": "7726.76",
     "sl": "7781.48",
     "status": "na"
@@ -1187,7 +1187,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7696.76",
     "bias": "bearish",
-    "behavior": "[11:50] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7696.76 targets 7638.17 and 7656.76.",
+    "behavior": "[12:05] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7696.76 targets 7638.17 and 7656.76.",
     "tp": "7638.17",
     "sl": "7706.76",
     "status": "na"
@@ -1196,7 +1196,7 @@ window.sp500DailyPlanData = [
     "source": "SP500-AI",
     "price": "7638.17",
     "bias": "bullish",
-    "behavior": "[11:50] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
+    "behavior": "[12:05] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
     "tp": "7696.76",
     "sl": "7628.17",
     "status": "na"
