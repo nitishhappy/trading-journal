@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.0.1 — Level Asset Tab Refreshed Notification Glow & Badges
+- **Visual Refreshed Tab Notification**: Added animated pulsing glow effect (`.btn-tab-updated`) and glowing notification dot (`.unread-level-dot`) to inactive asset tabs (**NIFTY**, **GOLD**, **BTC**, **S&P 500**) whenever new levels or market summary updates are synced.
+- **Smart Unread State Persistence**: Stores per-asset data signatures in `localStorage` (`levels_last_seen_sig_<ASSET>`) so unread status persists across sessions and is cleanly dismissed as soon as the user clicks the updated asset tab.
+
 ### v2.0.0 — S&P 500 Live Price Ticker & Backend Integration
 - **S&P 500 Backend Price API**: Added server-side S&P 500 (`^GSPC`) fetching logic from Yahoo Finance to `/api/livePrices.js`, bypassing client-side browser CORS restrictions.
 - **Frontend S&P 500 Live Floater Title & Formatting**: Updated `floaterTitle` in `js/ui/levels.js` to correctly display `S&P 500 LIVE` and apply `en-US` number formatting when the S&P 500 asset tab is selected.

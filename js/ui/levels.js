@@ -465,7 +465,73 @@ if (viewLevels) {
             card.appendChild(content);
             summaryBody.appendChild(card);
         });
+
+        updateAssetTabBadges();
     }
+
+    function getAssetDataSignature(assetKey) {
+        const isGold = (assetKey === 'GOLD');
+        const isBtc = (assetKey === 'BTC');
+        const isSp500 = (assetKey === 'SP500');
+
+        const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
+        const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+
+        return JSON.stringify({
+            levels: planLevelsSource || [],
+            summary: summarySource || []
+        });
+    }
+
+    function updateAssetTabBadges() {
+        const assets = [
+            { key: 'NIFTY', btnId: 'btn-asset-nifty' },
+            { key: 'GOLD', btnId: 'btn-asset-gold' },
+            { key: 'BTC', btnId: 'btn-asset-btc' },
+            { key: 'SP500', btnId: 'btn-asset-sp500' }
+        ];
+
+        const currentActive = window.currentActiveAsset || 'NIFTY';
+
+        assets.forEach(asset => {
+            const btn = document.getElementById(asset.btnId);
+            if (!btn) return;
+
+            const currentSig = getAssetDataSignature(asset.key);
+            const storageKey = `levels_last_seen_sig_${asset.key}`;
+            const lastSeenSig = localStorage.getItem(storageKey);
+
+            if (asset.key === currentActive) {
+                // Active tab: update signature immediately and clear unread badge
+                localStorage.setItem(storageKey, currentSig);
+                btn.classList.remove('btn-tab-updated');
+                const dot = btn.querySelector('.unread-level-dot');
+                if (dot) dot.remove();
+            } else {
+                if (lastSeenSig === null) {
+                    // Initialize baseline signature on first app load if not set
+                    localStorage.setItem(storageKey, currentSig);
+                    btn.classList.remove('btn-tab-updated');
+                    const dot = btn.querySelector('.unread-level-dot');
+                    if (dot) dot.remove();
+                } else if (lastSeenSig !== currentSig) {
+                    // Inactive tab receives fresh data signature: show glow & dot
+                    btn.classList.add('btn-tab-updated');
+                    if (!btn.querySelector('.unread-level-dot')) {
+                        const dot = document.createElement('span');
+                        dot.className = 'unread-level-dot';
+                        dot.title = 'New levels / summary updated';
+                        btn.appendChild(dot);
+                    }
+                } else {
+                    btn.classList.remove('btn-tab-updated');
+                    const dot = btn.querySelector('.unread-level-dot');
+                    if (dot) dot.remove();
+                }
+            }
+        });
+    }
+    window.updateAssetTabBadges = updateAssetTabBadges;
 
     function saveLevelsData() {
         const isGold = (window.currentActiveAsset === 'GOLD');
