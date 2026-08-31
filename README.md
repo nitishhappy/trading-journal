@@ -120,7 +120,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
-### v2.0.6 — Adaptive Sizing for Summary Table Headers & Columns
+### v2.0.7 — Dynamic Summary Table Parsing Across All 4 Asset Scripts
+- **Universal Multi-Asset Summary Table Parsing**: Enhanced `renderSummaryTableContent()` in `js/ui/levels.js` to dynamically match and parse briefing summaries for all 4 assets (**Gold**, **Bitcoin**, **S&P 500**, and **NIFTY 50**).
+- **Dynamic Numbered Section Parser**: Uses regex section block extraction (`/^\s*(\d+\.\s*[^:\n]+:)/gm`) to convert Market Structure, SMC Confluence Levels, Chop Zones, High Momentum Scenarios, and 5-min Action Plans into adaptive, dark-themed HTML tables regardless of symbol or variant section titles.
 - **Adaptive Column Header & Title Sizing**: Updated `.levels-summary-table th` and first-column `td` elements in `css/levels.css` and `js/ui/levels.js` to allow adaptive text wrapping (`white-space: normal; word-break: break-word;`) and flexible responsive widths across setup names, structure types, and header titles.
 - **Structured Table Renderer in Levels Tab**: Upgraded `js/ui/levels.js` and `css/levels.css` to dynamically parse and render market summaries (for Gold, Bitcoin, S&P 500, and NIFTY 50) as clean, interactive dark-themed HTML tables.
 - **Support for Structured & Markdown Tables**: Parses numbered sections (`1. Market Structure`, `2. SMC & Key Confluence Levels`, `3. Chop Zone`, `4. High Momentum Scenarios`, `5. Action Plan & Triggers`) as well as native Markdown tables (`| Header | ... |`) into structured UI table layouts with color-coded trade setup badges (`BUY` / `SELL`), price highlights, and responsive overflow wrappers.

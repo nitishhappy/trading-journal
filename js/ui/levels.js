@@ -446,7 +446,11 @@ if (viewLevels) {
             return parseMarkdownTablesToHtml(bodyText);
         }
 
-        if (!/(?:1\.\s*Market|2\.\s*SMC|3\.\s*Live|4\.\s*High|5\.\s*Action)/i.test(bodyText)) {
+        // Split text by numbered section headers (e.g., 1. Market Structure..., 2. SMC...)
+        const sectionHeaderRegex = /^\s*(\d+\.\s*[^:\n]+:)/gm;
+        const matches = [...bodyText.matchAll(sectionHeaderRegex)];
+
+        if (matches.length === 0) {
             let safeText = escapeHtml(bodyText);
             let formattedText = safeText.replace(/\b(\$?\d{1,2},?\d{3}(?:\.\d+)?)\b/g, '<span style="color: #fb923c; font-weight: 700; font-family: \'JetBrains Mono\', monospace;">$1</span>');
             formattedText = formattedText.replace(/\b(Longs?|Buy|Buyers?|Buying|Support|Demand|BSL|CE)\b/gi, '<span style="color: #10b981; font-weight: 700;">$&</span>');
@@ -459,124 +463,115 @@ if (viewLevels) {
 
         let html = '';
 
-        // Section 1: Market Structure & Session Bias
-        const sec1Match = bodyText.match(/(?:1\.\s*Market Structure[^:]*:)([\s\S]*?)(?=(?:2\.\s*SMC|3\.\s*Live|4\.\s*High|5\.\s*Action|$))/i);
-        if (sec1Match) {
-            const sec1Content = sec1Match[1].trim();
-            html += `<div class="summary-table-section">`;
-            html += `<div class="summary-table-title">📌 1. Market Structure & Session Bias</div>`;
-            html += `<div style="background: rgba(0,0,0,0.25); border: 1px solid var(--border); padding: 0.85rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.88rem; line-height: 1.5;">${formatInlineHighlights(sec1Content)}</div>`;
-            html += `</div>`;
-        }
+        matches.forEach((match, idx) => {
+            const headerTitle = match[1].trim();
+            const startIdx = match.index + match[0].length;
+            const endIdx = (idx < matches.length - 1) ? matches[idx + 1].index : bodyText.length;
+            const sectionContent = bodyText.substring(startIdx, endIdx).trim();
 
-        // Section 2: SMC & Liquidity Zones
-        const sec2Match = bodyText.match(/(?:2\.\s*SMC[^:]*:)([\s\S]*?)(?=(?:3\.\s*Live|4\.\s*High|5\.\s*Action|$))/i);
-        if (sec2Match) {
-            const lines = sec2Match[1].trim().split('\n').filter(l => l.trim().startsWith('-'));
+            const titleLower = headerTitle.toLowerCase();
+
             html += `<div class="summary-table-section">`;
-            html += `<div class="summary-table-title">🎯 2. SMC & Key Confluence Levels</div>`;
-            if (lines.length > 0) {
-                html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Zone / Structure Type</th><th>Confluence Details & Price Levels</th></tr></thead><tbody>`;
-                lines.forEach(line => {
-                    const cleanLine = line.replace(/^-/, '').trim();
-                    const colonIdx = cleanLine.indexOf(':');
-                    if (colonIdx !== -1) {
-                        const type = cleanLine.substring(0, colonIdx).trim();
-                        const details = cleanLine.substring(colonIdx + 1).trim();
-                        html += `<tr><td style="font-weight: 700; color: var(--accent); min-width: 110px; max-width: 200px; word-break: break-word;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
-                    } else {
-                        html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
-                    }
-                });
-                html += `</tbody></table></div>`;
+
+            if (titleLower.includes('market structure') || titleLower.includes('bias') || titleLower.includes('synthesis')) {
+                html += `<div class="summary-table-title">📌 ${escapeHtml(headerTitle)}</div>`;
+                html += `<div style="background: rgba(0,0,0,0.25); border: 1px solid var(--border); padding: 0.85rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.88rem; line-height: 1.5;">${formatInlineHighlights(sectionContent)}</div>`;
+            } else if (titleLower.includes('smc') || titleLower.includes('confluence') || titleLower.includes('liquidity')) {
+                html += `<div class="summary-table-title">🎯 ${escapeHtml(headerTitle)}</div>`;
+                const lines = sectionContent.split('\n').filter(l => l.trim().startsWith('-'));
+                if (lines.length > 0) {
+                    html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Zone / Structure Type</th><th>Confluence Details & Price Levels</th></tr></thead><tbody>`;
+                    lines.forEach(line => {
+                        const cleanLine = line.replace(/^-/, '').trim();
+                        const colonIdx = cleanLine.indexOf(':');
+                        if (colonIdx !== -1) {
+                            const type = cleanLine.substring(0, colonIdx).trim();
+                            const details = cleanLine.substring(colonIdx + 1).trim();
+                            html += `<tr><td style="font-weight: 700; color: var(--accent); min-width: 110px; max-width: 200px; word-break: break-word;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
+                        } else {
+                            html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
+                        }
+                    });
+                    html += `</tbody></table></div>`;
+                } else {
+                    html += `<div style="padding: 0.5rem; font-size: 0.85rem;">${formatInlineHighlights(sectionContent)}</div>`;
+                }
+            } else if (titleLower.includes('chop') || titleLower.includes('no-trade')) {
+                html += `<div class="summary-table-title">⚠️ ${escapeHtml(headerTitle)}</div>`;
+                html += `<div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.5; color: #fde68a; margin-bottom: 0.75rem;">${formatInlineHighlights(sectionContent)}</div>`;
+            } else if (titleLower.includes('momentum') || titleLower.includes('explosive') || titleLower.includes('breakout')) {
+                html += `<div class="summary-table-title">⚡ ${escapeHtml(headerTitle)}</div>`;
+                const lines = sectionContent.split('\n').filter(l => l.trim().startsWith('-'));
+                if (lines.length > 0) {
+                    html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Scenario Type</th><th>Trigger Condition & Target Expansion</th></tr></thead><tbody>`;
+                    lines.forEach(line => {
+                        const cleanLine = line.replace(/^-/, '').trim();
+                        const colonIdx = cleanLine.indexOf(':');
+                        if (colonIdx !== -1) {
+                            const type = cleanLine.substring(0, colonIdx).trim();
+                            const details = cleanLine.substring(colonIdx + 1).trim();
+                            const isBull = /upside|short-covering|squeeze|bullish/i.test(type);
+                            const badgeClass = isBull ? 'badge-buy' : 'badge-sell';
+                            html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 200px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
+                        } else {
+                            html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
+                        }
+                    });
+                    html += `</tbody></table></div>`;
+                } else {
+                    html += `<div style="padding: 0.5rem; font-size: 0.85rem;">${formatInlineHighlights(sectionContent)}</div>`;
+                }
+            } else if (titleLower.includes('action plan') || titleLower.includes('triggers') || titleLower.includes('setup')) {
+                html += `<div class="summary-table-title">🚀 ${escapeHtml(headerTitle)}</div>`;
+                const lines = sectionContent.split('\n').filter(l => l.trim().startsWith('-'));
+                if (lines.length > 0) {
+                    html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Trade Setup</th><th>Dir</th><th>Entry Trigger Condition</th><th>Take Profit (TP)</th><th>Stop Loss (SL)</th></tr></thead><tbody>`;
+                    lines.forEach(line => {
+                        const cleanLine = line.replace(/^-/, '').trim();
+                        let setupName = cleanLine;
+                        let dir = 'NEUTRAL';
+                        let entry = cleanLine;
+                        let tp = '-';
+                        let sl = '-';
+
+                        const tpMatch = cleanLine.match(/TP:\s*([^.\n]+?)(?=\.\s*SL:|\s*SL:|$)/i);
+                        if (tpMatch) tp = tpMatch[1].trim();
+
+                        const slMatch = cleanLine.match(/SL:\s*([^.\n]+)/i);
+                        if (slMatch) sl = slMatch[1].trim();
+
+                        let textWithoutTpSl = cleanLine.replace(/TP:.*$/i, '').trim();
+
+                        const colonIdx = textWithoutTpSl.indexOf(':');
+                        if (colonIdx !== -1) {
+                            setupName = textWithoutTpSl.substring(0, colonIdx).trim();
+                            entry = textWithoutTpSl.substring(colonIdx + 1).trim();
+                        }
+
+                        if (/BUY|Long|CE/i.test(setupName)) dir = 'BUY';
+                        else if (/SELL|Short|PE/i.test(setupName)) dir = 'SELL';
+
+                        const badgeClass = dir === 'BUY' ? 'badge-buy' : (dir === 'SELL' ? 'badge-sell' : '');
+
+                        html += `<tr>`;
+                        html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word;">${escapeHtml(setupName)}</td>`;
+                        html += `<td><span class="${badgeClass}">${dir}</span></td>`;
+                        html += `<td>${formatInlineHighlights(entry)}</td>`;
+                        html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;
+                        html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e; white-space: nowrap;">${formatInlineHighlights(sl)}</td>`;
+                        html += `</tr>`;
+                    });
+                    html += `</tbody></table></div>`;
+                } else {
+                    html += `<div style="padding: 0.5rem; font-size: 0.85rem;">${formatInlineHighlights(sectionContent)}</div>`;
+                }
             } else {
-                html += `<div style="padding: 0.5rem; font-size: 0.85rem;">${formatInlineHighlights(sec2Match[1])}</div>`;
+                html += `<div class="summary-table-title">${escapeHtml(headerTitle)}</div>`;
+                html += `<div style="padding: 0.5rem 0; font-size: 0.88rem; line-height: 1.5;">${formatInlineHighlights(sectionContent)}</div>`;
             }
+
             html += `</div>`;
-        }
-
-        // Section 3: Live Chop Zone
-        const sec3Match = bodyText.match(/(?:3\.\s*Live[^:]*:)([\s\S]*?)(?=(?:4\.\s*High|5\.\s*Action|$))/i);
-        if (sec3Match) {
-            html += `<div class="summary-table-section">`;
-            html += `<div class="summary-table-title">⚠️ 3. Live Intraday Chop Zone / No-Trade Zone</div>`;
-            html += `<div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.5; color: #fde68a; margin-bottom: 0.75rem;">${formatInlineHighlights(sec3Match[1].trim())}</div>`;
-            html += `</div>`;
-        }
-
-        // Section 4: High Momentum / Explosive Zones
-        const sec4Match = bodyText.match(/(?:4\.\s*High Momentum[^:]*:)([\s\S]*?)(?=(?:5\.\s*Action|$))/i);
-        if (sec4Match) {
-            const lines = sec4Match[1].trim().split('\n').filter(l => l.trim().startsWith('-'));
-            html += `<div class="summary-table-section">`;
-            html += `<div class="summary-table-title">⚡ 4. High Momentum / Explosive Breakout Scenarios</div>`;
-            if (lines.length > 0) {
-                html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Scenario Type</th><th>Trigger Condition & Target Expansion</th></tr></thead><tbody>`;
-                lines.forEach(line => {
-                    const cleanLine = line.replace(/^-/, '').trim();
-                    const colonIdx = cleanLine.indexOf(':');
-                    if (colonIdx !== -1) {
-                        const type = cleanLine.substring(0, colonIdx).trim();
-                        const details = cleanLine.substring(colonIdx + 1).trim();
-                        const isBull = /upside|short-covering|squeeze|bullish/i.test(type);
-                        const badgeClass = isBull ? 'badge-buy' : 'badge-sell';
-                        html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 200px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
-                    } else {
-                        html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
-                    }
-                });
-                html += `</tbody></table></div>`;
-            }
-            html += `</div>`;
-        }
-
-        // Section 5: Action Plan & Triggers
-        const sec5Match = bodyText.match(/(?:5\.\s*(?:5-Min|15-Min)?\s*Action Plan[^:]*:)([\s\S]*?)$/i);
-        if (sec5Match) {
-            const lines = sec5Match[1].trim().split('\n').filter(l => l.trim().startsWith('-'));
-            html += `<div class="summary-table-section">`;
-            html += `<div class="summary-table-title">🚀 5. Action Plan & High-Momentum Triggers</div>`;
-            if (lines.length > 0) {
-                html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Trade Setup</th><th>Dir</th><th>Entry Trigger Condition</th><th>Take Profit (TP)</th><th>Stop Loss (SL)</th></tr></thead><tbody>`;
-                lines.forEach(line => {
-                    const cleanLine = line.replace(/^-/, '').trim();
-                    let setupName = cleanLine;
-                    let dir = 'NEUTRAL';
-                    let entry = cleanLine;
-                    let tp = '-';
-                    let sl = '-';
-
-                    const tpMatch = cleanLine.match(/TP:\s*([^.\n]+?)(?=\.\s*SL:|\s*SL:|$)/i);
-                    if (tpMatch) tp = tpMatch[1].trim();
-
-                    const slMatch = cleanLine.match(/SL:\s*([^.\n]+)/i);
-                    if (slMatch) sl = slMatch[1].trim();
-
-                    let textWithoutTpSl = cleanLine.replace(/TP:.*$/i, '').trim();
-
-                    const colonIdx = textWithoutTpSl.indexOf(':');
-                    if (colonIdx !== -1) {
-                        setupName = textWithoutTpSl.substring(0, colonIdx).trim();
-                        entry = textWithoutTpSl.substring(colonIdx + 1).trim();
-                    }
-
-                    if (/BUY|Long|CE/i.test(setupName)) dir = 'BUY';
-                    else if (/SELL|Short|PE/i.test(setupName)) dir = 'SELL';
-
-                    const badgeClass = dir === 'BUY' ? 'badge-buy' : (dir === 'SELL' ? 'badge-sell' : '');
-
-                    html += `<tr>`;
-                    html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word;">${escapeHtml(setupName)}</td>`;
-                    html += `<td><span class="${badgeClass}">${dir}</span></td>`;
-                    html += `<td>${formatInlineHighlights(entry)}</td>`;
-                    html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;
-                    html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e; white-space: nowrap;">${formatInlineHighlights(sl)}</td>`;
-                    html += `</tr>`;
-                });
-                html += `</tbody></table></div>`;
-            }
-            html += `</div>`;
-        }
+        });
 
         return html;
     }
