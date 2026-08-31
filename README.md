@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.0.4 — Gold (XAU/USD) Intraday Tactical Update & Daily Plan Sync
+- **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD support/resistance levels, chop zone ($4431.00–$4439.00), high-momentum triggers (short-covering breakout >$4440.00 / demand breakdown <$4426.00), and 5-min execution scenarios following London Close session exhaustion around spot $4434.83.
+- **Daily Plan & Mentorship Sync**: Appended AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and updated `Gold_Learn.md` with SMC institutional breakdown.
+
 ### v2.0.3 — Fix S&P 500 Summary History Persistence & Header Trigger Reason
 - **Summary History Preservation**: Updated `update_daily_plan_js()` in `sp500_copilot_main.py` to prepend new S&P 500 summaries to `window.sp500DailyPlanSummary` instead of overwriting the array, preventing past summaries from getting wiped out.
 - **Header Trigger Reason & Spot Extraction**: Added `Spot: {spot_price}` and `Trigger: {trigger_reason}` to S&P 500 summary headers, and updated `formatCompactPaneHeader()` in `js/ui/levels.js` to extract spot prices and trigger reasons cleanly across all summary formats.
