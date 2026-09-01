@@ -33,7 +33,9 @@ window.dailyPlanData = [
   { "source": "BTC-AI", "price": "78638.01", "bias": "bearish", "behavior": "[04:42] 15M Bearish Supply Fair Value Gap Top ($78,638.01). Imbalance mitigation zone.", "tp": "78238.0", "sl": "78788.0", "status": "na" },
   { "source": "BTC-AI", "price": "78427.26", "bias": "bearish", "behavior": "[04:42] 15M Bearish Supply Fair Value Gap Bottom ($78,427.26). Imbalance mitigation zone.", "tp": "78027.3", "sl": "78577.3", "status": "na" },
   { "source": "BTC-AI", "price": "78555.01", "bias": "bearish", "behavior": "[04:42] 15M Bearish Supply Fair Value Gap Top ($78,555.01). Imbalance mitigation zone.", "tp": "78155.0", "sl": "78705.0", "status": "na" },
-  { "source": "BTC-AI", "price": "78680.0", "bias": "bullish", "behavior": "[04:42] CME BTC Futures Gap Magnet ($78,680.00). High-probability >80% historical gap fill magnet.", "tp": "79180.0", "sl": "78480.0", "status": "na" }
+  { "source": "BTC-AI", "price": "78680.0", "bias": "bullish", "behavior": "[04:42] CME BTC Futures Gap Magnet ($78,680.00). High-probability >80% historical gap fill magnet.", "tp": "79180.0", "sl": "78480.0", "status": "na" },
+  { "source": "SMO", "price": "24000", "bias": "bullish", "behavior": "Major Put Writing & Trendline Support / Gap Fill Base. Holding this level preserves upside trendline structure; decisive break triggers fast sell-off.", "tp": "24200", "sl": "23960", "status": "na" },
+  { "source": "SMO", "price": "24200", "bias": "bearish", "behavior": "Primary Call Writing Overhead Resistance Zone. Resistance target for relief bounces.", "tp": "24000", "sl": "24240", "status": "na" }
 ];
 
 window.sp500DailyPlanData = [
@@ -263,5 +265,34 @@ window.dailyPlanSummary = [
 📍 Tactical Directives:
 • Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
 • Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.`
+  },
+  {
+    "source": "AI Pre-Market Briefing",
+    "text": `================================================================================
+🎯 DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
+
+Stock Market Outlook (SMO) - Nifty 50 Prediction & Intraday Outlook (Sep 01, 2026):
+
+1. Overall Market Bias:
+• Bias: Neutral / Sideways with Bullish Undertone (Nifty consolidation near trendline support; Bank Nifty strong bullish hammer).
+• Structure: Nifty formed a Dragonfly Doji / potential Bullish Hammer near trendline support. Close was marginally below prior Bullish Harami, but gap fill base is holding and breakdown is NOT confirmed.
+
+2. Key Nifty Levels:
+• Immediate Support: 24,000 (Major Put writing, trendline support, gap fill base).
+• Immediate Resistance: 24,200 (Call writing resistance shelf).
+• Downside Breakdown Trigger: Decisive close below 24,000 triggers fast sell-off toward lower demand shelves.
+
+3. Institutional & Options Data:
+• FII / DII Data: FIIs net buyers in Options (Bullish), Pro traders Bearish, Retail Clients Bullish.
+• Cash/Futures Activity: FIIs sold ₹1,000 Cr in Futures and ₹8,000 Cr in Cash (partially impacted by block deal flows).
+• Option Chain / PCR: ATM PCR is ~0.8 (Neutral). Put writing focused at 24,000 strike (<50% OI change).
+• Sectorial Intermarket Support: Bank Nifty registered its highest close since August 6th with a strong bullish hammer. Given ~35-36% banking weight in Nifty 50, Bank Nifty strength acts as a major upward anchor.`
   }
 ];
