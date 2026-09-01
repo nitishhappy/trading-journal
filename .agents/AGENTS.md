@@ -49,3 +49,10 @@ Before marking a task complete:
 - [ ] `node generate-version.js` executed
 - [ ] Git commit and push completed
 - [ ] Architecture context (Vercel hosting) was respected
+
+## AI Automation Constraints (MUST KNOW)
+- **NIFTY FIRST RUN (9:10 AM)**: The automation script must request the full suite of sections from the LLM (Global Market Sentiment, Overnight Moves, News, Analysis, GOLD, SMC, Tactical Trading Plan).
+- **NIFTY REST RUN (Ad-Hoc / Watchdog / Tactical)**: The automation script must conditionally truncate the LLM prompt to ONLY request:
+  - Section 4: NIFTY Analysis & Key Levels
+  - Section 6: SMC / Price Action Perspective (NIFTY)
+  - Section 7: Tactical Trading Plan & Action Triggers
