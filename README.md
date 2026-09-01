@@ -1759,3 +1759,11 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Updated `renderSummaryTableContent()` to render any top Daily Market Bias & Outlook preamble text in a highlighted hero banner above Section 1.
   - Ensures Daily Market Bias (`🟢 BULLISH`, `🔴 BEARISH`, `⚪ NEUTRAL`), score, invalidation floor, and Section 1 Market Structure display consistently across all 4 asset tabs (NIFTY, GOLD, BTC, S&P 500) for both pre-market and ad-hoc runs.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `sw.js`
+
+### v2.3.69 — 01 Sep 2026 — NIFTY 50 & GOLD Pre-Market Briefing (09:10 AM IST)
+
+- **Pre-Market Tactical Briefing (`daily_plan.js`, `Nifty_Learn.md`, `Gold_Learn.md`)**:
+  - Published comprehensive 09:10 AM IST Pre-Market Tactical Briefing for NIFTY 50 (Spot: 24,077.55 | Daily Bias: ⚪ NEUTRAL -1.5 / +6.0) and Gold (Spot: $4,484.80).
+  - Appended exact 5-min/15-min tactical triggers, High Momentum zones, and refreshed `[09:10]` AI levels to `window.dailyPlanData` and `window.dailyPlanSummary`.
+  - Appended Smart Money Concepts (SMC) educational logs to `Nifty_Learn.md` and `Gold_Learn.md`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`
