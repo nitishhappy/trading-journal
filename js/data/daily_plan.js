@@ -1,54 +1,54 @@
 window.dailyPlanData = [
   {
     "source": "AI",
-    "price": "24055-24085",
+    "price": "24060-24095",
     "bias": "neutral",
-    "behavior": "[03:34] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.",
+    "behavior": "[15:50] Live Intraday Chop / 50% Equilibrium No-Trade Box (FinNifty Expiry). Heavy theta decay pocket around 24050-24100 straddles; stay flat without breakout.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24095",
+    "price": "24128.70",
     "bias": "bullish",
-    "behavior": "[03:34] High-Momentum BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).",
-    "tp": "24180",
-    "sl": "24055",
+    "behavior": "[15:50] High-Momentum Day High / ORB Breakout Trigger. Sustained 5m/15m candle close ABOVE 24128.70 with expanding green Futures volume (>1.2x).",
+    "tp": "24188.30",
+    "sl": "24085",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24035-24050",
+    "price": "24036.20-24050",
     "bias": "bullish",
-    "behavior": "[03:34] Displacement FVG Pullback Absorption Long. Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065.",
-    "tp": "24095",
-    "sl": "24020",
+    "behavior": "[15:50] 15M ORB Low / FVG Pullback Demand Absorption. Pullback into 24036.20–24050 with lower-wick rejection, closing 5m candle back ABOVE 24070.",
+    "tp": "24128.70",
+    "sl": "24018",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24095-24130",
+    "price": "24115-24128.70",
     "bias": "bearish",
-    "behavior": "[03:34] Overhead Supply / Breaker Sweep Rejection Short. Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080.",
-    "tp": "24035",
-    "sl": "24142",
+    "behavior": "[15:50] Day High / Breaker Supply Rejection Short. Corrective rally into 24115–24128.70 rejected with upper wick, closing 5m candle back BELOW 24095.",
+    "tp": "24036.20",
+    "sl": "24145",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "24035",
+    "price": "24036.20",
     "bias": "bearish",
-    "behavior": "[03:34] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.",
-    "tp": "24000",
-    "sl": "24070",
+    "behavior": "[15:50] 15M ORB Low Breakdown Continuation Short. Sustained 5m close BELOW 24036.20 with expanding red Futures volume.",
+    "tp": "23993.60",
+    "sl": "24075",
     "status": "na"
   },
   {
     "source": "AI",
     "price": "23993.60",
     "bias": "bullish",
-    "behavior": "[03:34] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base (Turtle Soup Long). Sweep below 24000/23993.60 rejected with lower wick, closing back ABOVE 24035.",
+    "behavior": "[15:50] Day Low SSL Sweep Floor & Turtle Soup Reversal Long. Sweep below 23993.60 rejected with lower wick, closing back ABOVE 24036.20.",
     "tp": "24095",
     "sl": "23960",
     "status": "na"
@@ -57,7 +57,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23993.60",
     "bias": "bearish",
-    "behavior": "[03:34] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m close BELOW 23993.60 triggers stop cascade.",
+    "behavior": "[15:50] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m candle close firmly BELOW 23993.60 with expanding red Futures volume.",
     "tp": "23881",
     "sl": "24040",
     "status": "na"
@@ -66,7 +66,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23850-23900",
     "bias": "bullish",
-    "behavior": "[03:34] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).",
+    "behavior": "[15:50] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).",
     "tp": "24050",
     "sl": "23820",
     "status": "na"
@@ -75,7 +75,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23796-23881",
     "bias": "bullish",
-    "behavior": "[03:34] Extreme Panic Flush Liquidity Base & SL Hunting Sweep Floor.",
+    "behavior": "[15:50] Deep Panic Demand Base & Extreme SL Hunting Liquidity Sweep Floor.",
     "tp": "24000",
     "sl": "23750",
     "status": "na"
@@ -84,7 +84,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24188.30-24200",
     "bias": "bearish",
-    "behavior": "[03:34] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.",
+    "behavior": "[15:50] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.",
     "tp": "24120",
     "sl": "24220",
     "status": "na"
@@ -93,7 +93,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24280-24335",
     "bias": "bearish",
-    "behavior": "[03:34] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.",
+    "behavior": "[15:50] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.",
     "tp": "24180",
     "sl": "24360",
     "status": "na"
@@ -102,7 +102,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24650-24750",
     "bias": "bullish",
-    "behavior": "[03:34] HTF Macro All-Time High Extension BSL Target.",
+    "behavior": "[15:50] HTF Macro All-Time High Extension BSL Target.",
     "tp": "24750",
     "sl": "24500",
     "status": "na"
