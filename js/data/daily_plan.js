@@ -3,7 +3,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24055-24085",
     "bias": "neutral",
-    "behavior": "[03:10] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.",
+    "behavior": "[03:34] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.",
     "tp": "na",
     "sl": "na",
     "status": "na"
@@ -12,7 +12,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24095",
     "bias": "bullish",
-    "behavior": "[03:10] High-Momentum BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).",
+    "behavior": "[03:34] High-Momentum BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).",
     "tp": "24180",
     "sl": "24055",
     "status": "na"
@@ -21,7 +21,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24035-24050",
     "bias": "bullish",
-    "behavior": "[03:10] Displacement FVG Pullback Absorption Long. Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065.",
+    "behavior": "[03:34] Displacement FVG Pullback Absorption Long. Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065.",
     "tp": "24095",
     "sl": "24020",
     "status": "na"
@@ -30,7 +30,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24095-24130",
     "bias": "bearish",
-    "behavior": "[03:10] Overhead Supply / Breaker Sweep Rejection Short. Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080.",
+    "behavior": "[03:34] Overhead Supply / Breaker Sweep Rejection Short. Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080.",
     "tp": "24035",
     "sl": "24142",
     "status": "na"
@@ -39,7 +39,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24035",
     "bias": "bearish",
-    "behavior": "[03:10] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.",
+    "behavior": "[03:34] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.",
     "tp": "24000",
     "sl": "24070",
     "status": "na"
@@ -48,7 +48,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23993.60",
     "bias": "bullish",
-    "behavior": "[03:10] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base (Turtle Soup Long). Sweep below 24000/23993.60 rejected with lower wick, closing back ABOVE 24035.",
+    "behavior": "[03:34] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base (Turtle Soup Long). Sweep below 24000/23993.60 rejected with lower wick, closing back ABOVE 24035.",
     "tp": "24095",
     "sl": "23960",
     "status": "na"
@@ -57,7 +57,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23993.60",
     "bias": "bearish",
-    "behavior": "[03:10] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m close BELOW 23993.60 triggers stop cascade.",
+    "behavior": "[03:34] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m close BELOW 23993.60 triggers stop cascade.",
     "tp": "23881",
     "sl": "24040",
     "status": "na"
@@ -66,7 +66,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23850-23900",
     "bias": "bullish",
-    "behavior": "[03:10] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).",
+    "behavior": "[03:34] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).",
     "tp": "24050",
     "sl": "23820",
     "status": "na"
@@ -75,7 +75,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23796-23881",
     "bias": "bullish",
-    "behavior": "[03:10] Extreme Panic Flush Liquidity Base & SL Hunting Sweep Floor.",
+    "behavior": "[03:34] Extreme Panic Flush Liquidity Base & SL Hunting Sweep Floor.",
     "tp": "24000",
     "sl": "23750",
     "status": "na"
@@ -84,7 +84,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24188.30-24200",
     "bias": "bearish",
-    "behavior": "[03:10] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.",
+    "behavior": "[03:34] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.",
     "tp": "24120",
     "sl": "24220",
     "status": "na"
@@ -93,7 +93,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24280-24335",
     "bias": "bearish",
-    "behavior": "[03:10] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.",
+    "behavior": "[03:34] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.",
     "tp": "24180",
     "sl": "24360",
     "status": "na"
@@ -102,7 +102,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24650-24750",
     "bias": "bullish",
-    "behavior": "[03:10] HTF Macro All-Time High Extension BSL Target.",
+    "behavior": "[03:34] HTF Macro All-Time High Extension BSL Target.",
     "tp": "24750",
     "sl": "24500",
     "status": "na"
@@ -731,7 +731,7 @@ window.btcDailyPlanData = [
 window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
-    "text": `NIFTY 50 Pre-Market Tactical Briefing (03:10 PM IST - Sep 01, 2026 | Spot: 24043.40 | Trigger: Ad-Hoc Run):
+    "text": `NIFTY 50 Pre-Market Tactical Briefing (03:34 PM IST - Sep 01, 2026 | Spot: 24043.40 | Trigger: Ad-Hoc Run):
 
 ================================================================================
 🎯 NIFTY 50 CALIBRATED 5-PILLAR DAILY BIAS & OUTLOOK
@@ -744,8 +744,8 @@ window.dailyPlanSummary = [
 • Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
 
 # 🌅 Pre-Market Tactical Briefing: NIFTY 50 & GOLD (XAU/USD)
-**Date & Session:** Tuesday, September 01, 2026 | 03:10 PM IST Ad-Hoc Run  
-**Spot Benchmarks:** NIFTY Spot: **24,043.40** | GOLD (XAU/USD): **$4,485.10** | DXY: **99.495** | India VIX: **11.28**
+**Date & Session:** Tuesday, September 01, 2026 | 03:34 PM IST Ad-Hoc Run  
+**Spot Benchmarks:** NIFTY Spot: **24,043.40** | GOLD (XAU/USD): **$4,374.73** | DXY: **99.495** | India VIX: **11.28**
 
 
 ---
@@ -759,7 +759,7 @@ window.dailyPlanSummary = [
 
 ## 2. Overnight Market Moves
 * **NIFTY 50 / GIFT NIFTY:** NIFTY Spot closed yesterday at **24,080.40** (Daily Range: 23,993.60 – 24,188.30). GIFT Nifty indicates a flat to mildly subdued opening around **24,040–24,050**.
-* **GOLD (XAU/USD):** Trading at **$4,485.10/oz** after an overnight high-volatility spike to **$4,510.50** (Day High exhaustion wick) followed by a sharp mean-reversion drop into the **$4,438.00–$4,445.00** demand pocket.
+* **GOLD (XAU/USD):** Trading at **$4,374.73/oz** following an overnight high-volatility spike to **$4,510.50** (Day High exhaustion wick) and subsequent European session liquidation breakdown through the $4,430.70 prior session floor into the $4,368.00–$4,374.00 demand base.
 * **USD/INR:** Hovering at **95.01**, elevated against the rupee and reflecting broader dollar strength.
 * **Crude Oil (WTI / Brent):** Surged **+5.35% to $86.63/barrel** on geopolitical and supply-tightness headlines.
 * **Global Tech vs Cyclicals:** Semiconductor and megacap tech strength continues to outperform traditional cyclicals and energy consumers.
@@ -808,15 +808,15 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
 
 
 ## 5. GOLD Analysis (XAU/USD)
-* **Current Direction & Momentum:** Gold is digesting its explosive spike to **$4,510.50** and is currently consolidating at **$4,485.10** within the 15M Bearish Fair Value Gap ($4,480–$4,495).
+* **Current Direction & Momentum:** Gold Spot is trading at **$4,374.73/oz**, experiencing an intraday liquidation cascade during European trade down from Day High **$4,510.50** through the $4,430.70 broken support shelf into the Daily Macro Demand zone ($4,350–$4,370).
 * **Key SMC Support & Resistance:**
-  * **Resistance:** **$4,495.00** (15M FVG top / momentum squeeze trigger), **$4,510.50** (Day High exhaustion wick peak), and **$4,525–$4,535** (4H Macro Supply).
-  * **Support:** **$4,448.00** (Liquidation cascade trigger), **$4,438.00–$4,445.00** (Session Low SSL sweep base), and **$4,400–$4,415** (HTF 4H Deep Discount Demand).
+  * **Resistance:** **$4,384.00** (Short-covering breakout trigger), **$4,395.00–$4,410.00** (15M Bearish Imbalance FVG), **$4,430.70–$4,445.00** (Breaker Block), and **$4,510.50** (Day High Exhaustion Peak).
+  * **Support:** **$4,365.00** (Long-liquidation breakdown trigger), **$4,368.00–$4,374.00** (Day Low SSL sweep zone), and **$4,340.00–$4,360.00** (HTF Daily Macro Demand Base).
 * **Tactical Gold Scenarios:**
-  * **Bullish Setup (Turtle Soup Long):** Sweep below $4,445.00 rejected with lower wick, closing 5m candle back **ABOVE $4,452.00**. TP: $4,485.00 / $4,495.00. SL: $4,430.00.
-  * **Bullish Setup (Momentum Breakout):** Sustained 5m/15m close **ABOVE $4,495.00**. TP: $4,510.50 / $4,525.00. SL: $4,484.00.
-  * **Bearish Setup (FVG Rejection Short):** Relief bounce into $4,495.00 rejected with upper wick, closing 5m back **BELOW $4,480.00**. TP: $4,452.00 / $4,445.00. SL: $4,502.00.
-  * **Bearish Setup (Liquidation Short):** Sustained 5m close **BELOW $4,448.00**. TP: $4,420.00 / $4,405.00. SL: $4,458.00.
+  * **Bullish Setup 1 (Day Low SSL Sweep Reversal / Turtle Soup):** Sweep into $4,368.00–$4,374.00 rejected with lower wick, closing 5m candle back **ABOVE $4,378.50**. TP: $4,395.00 / $4,410.00. SL: $4,362.00.
+  * **Bullish Setup 2 (Momentum Squeeze Long):** Sustained 5m/15m close **ABOVE $4,384.00**. TP: $4,410.00 / $4,430.00. SL: $4,372.00.
+  * **Bearish Setup 1 (15M FVG / Breaker Rejection Short):** Corrective relief rally into $4,395.00–$4,410.00 rejected with upper wick, closing 5m candle back **BELOW $4,385.00**. TP: $4,374.00 / $4,365.00. SL: $4,418.00.
+  * **Bearish Setup 2 (Breakdown Continuation Short):** Sustained 5m close **BELOW $4,365.00**. TP: $4,350.00 / $4,340.00. SL: $4,376.00.
 
 
 ## 6. SMC / Price Action Perspective (NIFTY)
