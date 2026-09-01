@@ -1767,3 +1767,12 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended exact 5-min/15-min tactical triggers, High Momentum zones, and refreshed `[09:10]` AI levels to `window.dailyPlanData` and `window.dailyPlanSummary`.
   - Appended Smart Money Concepts (SMC) educational logs to `Nifty_Learn.md` and `Gold_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
+
+### v2.3.70 — 01 Sep 2026 — Fix Market Summary Briefing Truncation & Automation Sync
+
+- **Deterministic Briefing Parser & Sync Pipeline (`sync_briefing_to_daily_plan.py`, `premarket_briefing.ps1`)**:
+  - Created a deterministic Python parser (`sync_briefing_to_daily_plan.py`) to directly extract full 8-section tactical briefings (Global Sentiment, Overnight Moves, News, Nifty S&R Table, Gold Analysis, SMC POIs, 5-Min Action Triggers, Risk Warnings) from generated `.md` reports and sync them into `daily_plan.js`.
+  - Integrated `sync_briefing_to_daily_plan.py` directly into `premarket_briefing.ps1` so automated runs never rely on non-deterministic LLM subagent file editing.
+  - Restored today's complete Nifty 50 Pre-Market Tactical Briefing into `window.dailyPlanSummary` and synced updated AI levels to `window.dailyPlanData`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`
+
