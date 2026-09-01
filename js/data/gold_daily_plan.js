@@ -1,46 +1,28 @@
 window.goldDailyPlanData = [
   {
     "source": "AI",
-    "price": "4348.00-4356.00",
+    "price": "4369.00-4378.00",
     "bias": "neutral",
-    "behavior": "[19:10] Live Intraday Chop / No-Trade Zone. Equilibrium consolidation pocket around $4352.45 inside 15M FVG mitigation; avoid unconfirmed market orders.",
+    "behavior": "[19:55] Live Intraday Chop / No-Trade Zone. 50% Equilibrium consolidation pocket around $4373.66 at base of 15M breaker block; avoid unconfirmed market orders.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "4365.00",
+    "price": "4385.00",
     "bias": "bullish",
-    "behavior": "[19:10] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m/15m candle close ABOVE $4365.00 clears 15M FVG supply, targeting $4380.00, $4395.00, and $4415.00.",
-    "tp": "4415.00",
-    "sl": "4348.00",
+    "behavior": "[19:55] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m/15m candle close ABOVE $4385.00 clears breaker resistance, targeting $4398.00, $4415.00, and $4430.70.",
+    "tp": "4430.70",
+    "sl": "4368.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "4338.00-4346.00",
+    "price": "4356.00-4365.00",
     "bias": "bullish",
-    "behavior": "[19:10] Demand Pullback & 15M Bullish FVG Defense Long. Retest of $4338.00–$4346.00 rejected with lower wick, closing 5m candle back ABOVE $4352.00.",
-    "tp": "4380.00",
-    "sl": "4328.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4360.00-4368.00",
-    "bias": "bearish",
-    "behavior": "[19:10] 15M Supply FVG & Overhead Mitigation Rejection Short. Upper-wick rejection in $4360.00–$4368.00, closing 5m candle back BELOW $4352.00.",
-    "tp": "4338.00",
-    "sl": "4375.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4335.00",
-    "bias": "bearish",
-    "behavior": "[19:10] Downside Trend-Continuation Breakdown Trigger. Sustained 5m close BELOW $4335.00 invalidates relief bounce, targeting $4322.00 and $4300.00.",
-    "tp": "4300.00",
+    "behavior": "[19:55] Demand Pullback & 15M Bullish Displacement FVG Defense Long. Retest of $4356.00–$4365.00 rejected with lower wick, closing 5m candle back ABOVE $4370.00.",
+    "tp": "4395.00",
     "sl": "4348.00",
     "status": "na"
   },
@@ -48,16 +30,34 @@ window.goldDailyPlanData = [
     "source": "AI",
     "price": "4378.00-4395.00",
     "bias": "bearish",
-    "behavior": "[19:10] Prior Broken Session Floor ($4378.00) Flipped Resistance & Breaker Block. Former floor flipped to heavy institutional supply.",
-    "tp": "4345.00",
+    "behavior": "[19:55] 15M/1H Overhead Breaker Block & FVG Supply Rejection Short. Upper-wick rejection in $4378.00–$4395.00, closing 5m candle back BELOW $4368.00.",
+    "tp": "4356.00",
     "sl": "4405.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "4355.00",
+    "bias": "bearish",
+    "behavior": "[19:55] Downside Trend-Continuation Breakdown Trigger. Sustained 5m close BELOW $4355.00 invalidates relief surge, targeting $4338.00 and $4322.00.",
+    "tp": "4322.00",
+    "sl": "4368.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "4322.00-4335.00",
+    "bias": "bullish",
+    "behavior": "[19:55] Session Low SSL Liquidity Base & Turtle Soup Reversal Shelf ($4322.00–$4335.00). Extreme panic sweep floor for sharp relief rebounds.",
+    "tp": "4370.00",
+    "sl": "4310.00",
     "status": "na"
   },
   {
     "source": "AI",
     "price": "4285.00-4305.00",
     "bias": "bullish",
-    "behavior": "[19:10] HTF Daily Deep Discount Macro Demand Shelf. Major institutional limit buy absorption base on deep panic cascades.",
+    "behavior": "[19:55] HTF Daily Deep Discount Macro Demand Shelf. Major institutional limit buy absorption base on deep panic cascades.",
     "tp": "4365.00",
     "sl": "4270.00",
     "status": "na"
@@ -66,7 +66,7 @@ window.goldDailyPlanData = [
     "source": "AI",
     "price": "4510.50",
     "bias": "bearish",
-    "behavior": "[19:10] Day High BSL Liquidity Sweep Peak & Exhaustion Wick Block ($4510.50). Institutional distribution ceiling.",
+    "behavior": "[19:55] Day High BSL Liquidity Sweep Peak & Exhaustion Wick Block ($4510.50). Institutional distribution ceiling.",
     "tp": "4380.00",
     "sl": "4522.00",
     "status": "na"
@@ -224,5 +224,39 @@ Gold Spot (XAU/USD) is trading at $4,352.45, experiencing an aggressive short-co
 - BUY Setup 2 (High-Momentum Short-Covering Squeeze Long): Sustained 5m/15m close ABOVE $4365.00 with expanding green volume. TP: $4,380.00 / $4,395.00. SL: $4,348.00. Risk-Reward: ~1:2.6.
 - SELL Setup 1 (15M Bearish FVG Mitigation Rejection Short): Corrective spike into $4,360.00–$4,368.00 rejected with an upper wick, closing 5m candle back BELOW $4352.00. TP: $4,338.00 / $4,322.00. SL: $4,375.00. Risk-Reward: ~1:2.4.
 - SELL Setup 2 (Breakdown Continuation Short): Sustained 5m close BELOW $4335.00 with expanding volume. TP: $4,322.00 / $4,300.00. SL: $4,348.00. Risk-Reward: ~1:2.5.`
+  },
+  {
+    "source": "AI Intraday Tactical Update",
+    "text": `Gold (XAU/USD) Intraday Tactical Update (07:55 PM IST - Sep 01, 2026 | Spot: 4373.66 | Trigger: Extreme Price Shift ($21.21 >= $15.00)):
+
+================================================================================
+🎯 GOLD DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL / RELIEF SQUEEZE | Bias Score: 0.0 / +6.0
+• Bias Invalidation Floor: $4355.00 (A 15M close below $4355.00 invalidates relief bounce momentum)
+
+1. Market Structure & Session Bias:
+Gold Spot (XAU/USD) is trading at $4,373.66/oz during the active London/New York session overlap, staging a sharp +$21.21 high-momentum relief squeeze from the $4,352.45 intraday base. The sudden displacement is fueled by a minor cooling in the US Dollar Index (DXY easing to ~99.50) and institutional short-covering across European desk closing books. Spot is currently testing the underside of the 15M/1H Breaker Block ($4,378.00–$4,395.00) and the Day High ($4,510.50) / Day Low ($4,374.10) equilibrium threshold.
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above $4,385.00 local swing high, extending into 15M Bearish FVG ($4,395.00–$4,410.00), Breaker Block ($4,430.70–$4,445.00), and Day High ($4,510.50).
+- Sell-Side Liquidity (SSL): Clustered below 15M Bullish Displacement FVG ($4,356.00–$4,365.00), Session Low base ($4,322.00–$4,335.00), and HTF Daily Macro Demand Shelf ($4,285.00–$4,305.00).
+- Fair Value Gaps (FVG): 15M Bullish Demand FVG at $4,356.00–$4,365.00; 15M Bearish Supply FVG at $4,395.00–$4,410.00; Breaker Supply Block at $4,378.00–$4,395.00.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $4,369.00 – $4,378.00.
+- Context: Current spot ($4,373.66) is compressing right at the threshold of the 15M Breaker Block after the vertical +$21.21 surge. Spread friction, high-frequency NY overlap algorithmic churn, and dual-sided wicks make unconfirmed entries dangerous. Stay flat inside this $9 pocket without confirmed breakout.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $4,385.00 Spot): A sustained 5m/15m candle close above $4,385.00 clears breaker resistance, forcing session short sellers into rapid capitulation toward $4,398.00, $4,415.00, and $4,430.70.
+- Downside Long-Liquidation Cascade (< $4,355.00 Spot): A sustained 5m close below $4,355.00 punctures the 15M Bullish FVG shelf, triggering cascading stop runs accelerating toward $4,338.00, $4,322.00, and $4,300.00.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (High-Momentum Breaker Reclaim Long): Sustained 5m/15m candle close ABOVE $4385.00. | TP: $4,410.00 / $4,430.70 | SL: $4,368.00.
+- BUY Setup 2 (15M Bullish FVG Pullback Absorption Long): Pullback into $4356.00–$4365.00 rejected with lower wick, closing 5m candle back ABOVE $4370.00. | TP: $4,385.00 / $4,400.00 | SL: $4,348.00.
+- BUY Setup 3 (Day Low / Deep Discount SSL Sweep Reversal Long - Turtle Soup): Sweep below $4322.00 into $4300.00–$4315.00 rejected with lower wick, closing 5m candle back ABOVE $4335.00. | TP: $4,365.00 / $4,385.00 | SL: $4,288.00.
+- SELL Setup 1 (Breaker Block / Overhead FVG Rejection Short): Corrective push into $4378.00–$4395.00 rejected with upper wick, closing 5m candle back BELOW $4368.00. | TP: $4,356.00 / $4,340.00 | SL: $4,405.00.
+- SELL Setup 2 (15M FVG Breakdown Continuation Short): Sustained 5m close BELOW $4355.00. | TP: $4,338.00 / $4,322.00 | SL: $4,368.00.
+- SELL Setup 3 (HTF Day High Rejection Short): Test of $4500.00–$4510.50 rejected with upper-wick exhaustion. | TP: $4,430.00 / $4,380.00 | SL: $4,522.00.`
   }
 ];
