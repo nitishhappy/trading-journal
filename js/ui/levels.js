@@ -654,8 +654,31 @@ if (viewLevels) {
         summaryPanel.style.display = 'block';
         summaryBody.innerHTML = '';
         
-        // Array is already prepended with latest updates at index 0
-        summaryData.forEach((item, index) => {
+        // Parse timestamp from text for proper sorting
+        const parseHeaderTime = (text) => {
+            if (!text) return 0;
+            const timeMatch = text.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*(?:IST)?\s*-\s*([A-Za-z]{3}\s+\d{1,2})(?:,\s*(\d{4}))?/i);
+            if (timeMatch) {
+                let timeStr = timeMatch[1];
+                let dateStr = timeMatch[2];
+                let yearStr = timeMatch[3] || new Date().getFullYear();
+                return new Date(`${dateStr} ${yearStr} ${timeStr}`).getTime() || 0;
+            }
+            const fallbackMatch = text.match(/\[(\d{1,2}):(\d{2})\]/);
+            if (fallbackMatch) {
+                const d = new Date();
+                d.setHours(parseInt(fallbackMatch[1], 10), parseInt(fallbackMatch[2], 10), 0, 0);
+                return d.getTime();
+            }
+            return 0;
+        };
+
+        // Sort summaries newest first based on their internal timestamps
+        const sortedSummaryData = [...summaryData].sort((a, b) => {
+            return parseHeaderTime(b.text) - parseHeaderTime(a.text);
+        });
+
+        sortedSummaryData.forEach((item, index) => {
             const isLatest = (index === 0);
             
             const card = document.createElement('div');
