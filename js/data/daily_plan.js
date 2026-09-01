@@ -17,11 +17,44 @@ window.dailyPlanSummary = [
 ];
 
 window.goldDailyPlanData = [
-
+  { "source": "AI", "price": "4352.00 - 4360.00", "bias": "neutral", "behavior": "[22:10] Live Intraday Chop / No-Trade Zone. 50% Equilibrium consolidation around current spot; avoid entering inside this $8 compression band.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "4365.00", "bias": "bullish", "behavior": "[22:10] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m close above 4365.00 clears immediate supply, targeting 4374.00 and 4388.00.", "tp": "4374.00, 4388.00", "sl": "4358.00", "status": "na" },
+  { "source": "AI", "price": "4374.00 - 4382.00", "bias": "bearish", "behavior": "[22:10] Broken Day Low Breaker Block & Bearish FVG Resistance. Watch for upper wick rejection to re-short.", "tp": "4355.00, 4345.00", "sl": "4386.00", "status": "na" },
+  { "source": "AI", "price": "4348.00", "bias": "bearish", "behavior": "[22:10] Downside Trend-Continuation Breakdown Trigger. Sustained 5m close below 4348.00 accelerates liquidation cascade toward 4335.00 and 4322.00.", "tp": "4335.00, 4322.00", "sl": "4355.00", "status": "na" },
+  { "source": "AI", "price": "4322.00 - 4335.00", "bias": "bullish", "behavior": "[22:10] HTF 4H Discount Demand Shelf & Macro SSL Sweep Zone. Look for aggressive institutional absorption and lower wick bounce.", "tp": "4355.00, 4374.00", "sl": "4314.00", "status": "na" },
+  { "source": "AI", "price": "4510.50", "bias": "bearish", "behavior": "[22:10] Day High Major Distribution Ceiling & BSL Sweep Peak. Extreme macro resistance.", "tp": "4430.00", "sl": "4520.00", "status": "na" }
 ];
 
 window.goldDailyPlanSummary = [
+  {
+    "source": "AI",
+    "text": `Gold (XAU/USD) Intraday Tactical Update (10:10 PM IST - Sep 01, 2026 | Spot: 4354.96 | Trigger: Scheduled 10:00 PM Update (London Close Exhaustion)):
 
+1. Market Structure & Macro Intermarket Dynamics:
+- Gold Spot (XAU/USD) is trading at 4354.96 (Day High: 4510.50 | Prior Day Low: 4374.10).
+- Session Context: London Close Exhaustion transitioning into the New York Afternoon Session.
+- Intermarket Drivers: DXY (US Dollar Index) remains elevated around 99.68, exerting macro pressure, while US 10-Year Treasury Yields trade near 4.78%.
+- Higher Timeframe Structure: Heavy intraday sell-off from 4510.50 has breached the prior 4374.10 base, pushing price into a deep discount liquidity pocket near 4350–4355.
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above former Day Low / Breaker Block (4374.10–4382.00), European Session Highs (4415.00), and Day High (4510.50).
+- Sell-Side Liquidity (SSL): Sits directly beneath session lows (4348.00–4352.00) and extends down into the HTF 4H Demand Shelf (4322.00–4335.00).
+- Fair Value Gaps (FVG) & Order Blocks: 15M Bearish Breaker Block at 4374.00–4382.00 formed on the breakdown; 4H Bullish Demand Block anchored at 4322.00–4335.00.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: 4352.00 – 4360.00 USD.
+- Context: Spot is consolidating in an $8 compression band as London books square off. Avoid initiating unconfirmed market orders inside this equilibrium churn pocket.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 4365.00): A sustained 5m close above 4365.00 forces trapped late-breakdown shorts to cover, releasing momentum toward 4374.00 and 4388.00.
+- Downside Long-Liquidation Cascade (< 4348.00): A sustained 5m close below 4348.00 triggers stop runs on early dip buyers, accelerating downside toward 4335.00 and 4322.00.
+
+5. 5-Min / 15-Min Action Plan & Spot Triggers:
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 4348.00 rejected with lower wick, followed by a 5m candle closing back ABOVE 4355.00. TP: 4368.00 / 4375.00. SL: 4344.00. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 4365.00 with expanding bullish displacement. TP: 4374.00 / 4388.00. SL: 4358.00. Risk-Reward: ~1:2.8.
+- SELL Setup 1 (Breaker Block Rejection Short): Relief rally into 4374.00–4380.00 rejected with an upper exhaustion wick, closing 5m candle back BELOW 4368.00. TP: 4355.00 / 4348.00. SL: 4384.00. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Liquidation Cascade Continuation Short): Sustained 5m close BELOW 4348.00 with volume confirmation. TP: 4335.00 / 4322.00. SL: 4355.00. Risk-Reward: ~1:3.0.`
+  }
 ];
 
 window.btcDailyPlanData = [
