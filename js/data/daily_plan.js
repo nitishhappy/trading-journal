@@ -1,451 +1,51 @@
 window.dailyPlanData = [
-  {
-    "source": "AI",
-    "price": "24060-24095",
-    "bias": "neutral",
-    "behavior": "[15:50] Live Intraday Chop / 50% Equilibrium No-Trade Box (FinNifty Expiry). Heavy theta decay pocket around 24050-24100 straddles; stay flat without breakout.",
-    "tp": "na",
-    "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "24128.70",
-    "bias": "bullish",
-    "behavior": "[15:50] High-Momentum Day High / ORB Breakout Trigger. Sustained 5m/15m candle close ABOVE 24128.70 with expanding green Futures volume (>1.2x).",
-    "tp": "24188.30",
-    "sl": "24085",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "24036.20-24050",
-    "bias": "bullish",
-    "behavior": "[15:50] 15M ORB Low / FVG Pullback Demand Absorption. Pullback into 24036.20\u201324050 with lower-wick rejection, closing 5m candle back ABOVE 24070.",
-    "tp": "24128.70",
-    "sl": "24018",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "24115-24128.70",
-    "bias": "bearish",
-    "behavior": "[15:50] Day High / Breaker Supply Rejection Short. Corrective rally into 24115\u201324128.70 rejected with upper wick, closing 5m candle back BELOW 24095.",
-    "tp": "24036.20",
-    "sl": "24145",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "24036.20",
-    "bias": "bearish",
-    "behavior": "[15:50] 15M ORB Low Breakdown Continuation Short. Sustained 5m close BELOW 24036.20 with expanding red Futures volume.",
-    "tp": "23993.60",
-    "sl": "24075",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "23993.60",
-    "bias": "bullish",
-    "behavior": "[15:50] Day Low SSL Sweep Floor & Turtle Soup Reversal Long. Sweep below 23993.60 rejected with lower wick, closing back ABOVE 24036.20.",
-    "tp": "24095",
-    "sl": "23960",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "23993.60",
-    "bias": "bearish",
-    "behavior": "[15:50] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m candle close firmly BELOW 23993.60 with expanding red Futures volume.",
-    "tp": "23881",
-    "sl": "24040",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "23850-23900",
-    "bias": "bullish",
-    "behavior": "[15:50] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).",
-    "tp": "24050",
-    "sl": "23820",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "23796-23881",
-    "bias": "bullish",
-    "behavior": "[15:50] Deep Panic Demand Base & Extreme SL Hunting Liquidity Sweep Floor.",
-    "tp": "24000",
-    "sl": "23750",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "24188.30-24200",
-    "bias": "bearish",
-    "behavior": "[15:50] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.",
-    "tp": "24120",
-    "sl": "24220",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "24280-24335",
-    "bias": "bearish",
-    "behavior": "[15:50] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.",
-    "tp": "24180",
-    "sl": "24360",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "24650-24750",
-    "bias": "bullish",
-    "behavior": "[15:50] HTF Macro All-Time High Extension BSL Target.",
-    "tp": "24750",
-    "sl": "24500",
-    "status": "na"
-  },
-  {
-    "source": "SMO",
-    "price": "24000",
-    "bias": "bullish",
-    "behavior": "Major Put Writing & Trendline Support / Gap Fill Base. Holding this level preserves upside trendline structure; decisive break triggers fast sell-off.",
-    "tp": "24200",
-    "sl": "23960",
-    "status": "na"
-  },
-  {
-    "source": "SMO",
-    "price": "24200",
-    "bias": "bearish",
-    "behavior": "Primary Call Writing Overhead Resistance Zone. Resistance target for relief bounces.",
-    "tp": "24000",
-    "sl": "24240",
-    "status": "na"
-  },
-  {
-    "source": "SMO",
-    "price": "24000",
-    "bias": "bearish",
-    "behavior": "Decisive breakdown trigger. Sustained close below triggers rapid downside slide.",
-    "tp": "23850",
-    "sl": "24040",
-    "status": "na"
-  },
-  {
-    "source": "NEL",
-    "price": "24095-24100",
-    "bias": "bullish",
-    "behavior": "Flat open breakout trigger. 15m candle close above PDC range high triggers rally.",
-    "tp": "24200",
-    "sl": "24040",
-    "status": "na"
-  },
-  {
-    "source": "NEL",
-    "price": "23980-24000",
-    "bias": "bullish",
-    "behavior": "Bear trap / swing low liquidity sweep re-entry buy setup.",
-    "tp": "24100",
-    "sl": "23940",
-    "status": "na"
-  },
-  {
-    "source": "NEL",
-    "price": "24160",
-    "bias": "neutral",
-    "behavior": "1-Hour intermediate resistance hurdle.",
-    "tp": "24280",
-    "sl": "24100",
-    "status": "na"
-  },
-  {
-    "source": "NEL",
-    "price": "24280",
-    "bias": "neutral",
-    "behavior": "2nd 1-Hour intermediate resistance hurdle.",
-    "tp": "24350",
-    "sl": "24200",
-    "status": "na"
-  },
-  {
-    "source": "NEL",
-    "price": "24350",
-    "bias": "bullish",
-    "behavior": "Primary 1-Hour Mitigated Order Block HTF target.",
-    "tp": "24350",
-    "sl": "24250",
-    "status": "na"
-  },
-  {
-    "source": "NEL",
-    "price": "23950",
-    "bias": "bearish",
-    "behavior": "Sustained breakdown below swing low (2nd half only).",
-    "tp": "23850",
-    "sl": "24000",
-    "status": "na"
-  },
-  {
-    "source": "NAC",
-    "price": "23997-24000",
-    "bias": "bullish",
-    "behavior": "Oversold mean-reversion long on day low sweep.",
-    "tp": "24175",
-    "sl": "23950",
-    "status": "na"
-  },
-  {
-    "source": "NAC",
-    "price": "24080",
-    "bias": "bullish",
-    "behavior": "Mid-range breakout buy trigger confirming short-covering towards high.",
-    "tp": "24250",
-    "sl": "24000",
-    "status": "na"
-  },
-  {
-    "source": "NAC",
-    "price": "23997",
-    "bias": "bearish",
-    "behavior": "Breakdown short trigger on late-session 3:00 PM cash selling sweep.",
-    "tp": "23880",
-    "sl": "24080",
-    "status": "na"
-  },
-  {
-    "source": "NAC",
-    "price": "24176.70",
-    "bias": "bearish",
-    "behavior": "Supply zone rejection short near day high.",
-    "tp": "24050",
-    "sl": "24220",
-    "status": "na"
-  },
-  {
-    "source": "NPT",
-    "price": "24124-24150",
-    "bias": "bearish",
-    "behavior": "Major overhead resistance & rejection zone (Pro call writing).",
-    "tp": "24020",
-    "sl": "24170",
-    "status": "na"
-  },
-  {
-    "source": "NPT",
-    "price": "24124",
-    "bias": "bullish",
-    "behavior": "Breakout level. 15m close above triggers short covering to 24200/24250.",
-    "tp": "24200",
-    "sl": "24090",
-    "status": "na"
-  },
-  {
-    "source": "NPT",
-    "price": "24080",
-    "bias": "bearish",
-    "behavior": "Intraday target for reversal long / minor resistance.",
-    "tp": "24000",
-    "sl": "24105",
-    "status": "na"
-  },
-  {
-    "source": "NPT",
-    "price": "24000",
-    "bias": "bullish",
-    "behavior": "Key support / double bottom sweep level (15m wick rejection buy).",
-    "tp": "24080",
-    "sl": "23975",
-    "status": "na"
-  },
-  {
-    "source": "NPT",
-    "price": "24000",
-    "bias": "bearish",
-    "behavior": "Breakdown level (15m close below triggers drop to 23891).",
-    "tp": "23891",
-    "sl": "24035",
-    "status": "na"
-  },
-  {
-    "source": "NPT",
-    "price": "23891",
-    "bias": "bullish",
-    "behavior": "Downside target & major demand support level.",
-    "tp": "24000",
-    "sl": "23850",
-    "status": "na"
-  },
-  {
-    "source": "NES",
-    "price": "24000",
-    "bias": "bullish",
-    "behavior": "Major support & Put OI wall. Reversal candle on dip is buy trigger.",
-    "tp": "24100",
-    "sl": "23950",
-    "status": "na"
-  },
-  {
-    "source": "NES",
-    "price": "23881",
-    "bias": "bullish",
-    "behavior": "SL hunting dip target. Reversal opportunity on sweep.",
-    "tp": "24000",
-    "sl": "23830",
-    "status": "na"
-  },
-  {
-    "source": "NES",
-    "price": "23796",
-    "bias": "bullish",
-    "behavior": "Deep panic support & extreme sweep level for potential V/U-shape recovery.",
-    "tp": "23881",
-    "sl": "23750",
-    "status": "na"
-  },
-  {
-    "source": "NES",
-    "price": "24100",
-    "bias": "bearish",
-    "behavior": "Immediate PRO call selling zone. Rejection triggers short towards 24000.",
-    "tp": "24000",
-    "sl": "24130",
-    "status": "na"
-  },
-  {
-    "source": "NES",
-    "price": "24200",
-    "bias": "bullish",
-    "behavior": "Intermediate resistance. Sustained move allows scaling longs towards 24300.",
-    "tp": "24300",
-    "sl": "24150",
-    "status": "na"
-  },
-  {
-    "source": "NES",
-    "price": "24300",
-    "bias": "bullish",
-    "behavior": "Major bullish momentum breakout level. Clearing opens 24500 target.",
-    "tp": "24500",
-    "sl": "24240",
-    "status": "na"
-  },
-  {
-    "source": "STL",
-    "price": "24180",
-    "bias": "bullish",
-    "behavior": "Breakout Trigger above 24,180 / 24,200 trendline resistance. Expansion towards 24,350-24,400.",
-    "tp": "24400",
-    "sl": "23988",
-    "status": "na"
-  },
-  {
-    "source": "STL",
-    "price": "24040",
-    "bias": "bullish",
-    "behavior": "Immediate intra-day support zone (today low 23,988). Strong buying intervention seen.",
-    "tp": "24180",
-    "sl": "23980",
-    "status": "na"
-  },
-  {
-    "source": "STL",
-    "price": "23800",
-    "bias": "bullish",
-    "behavior": "Major macro demand base (23,800-23,900). FII short-covering floor on gap-down panic.",
-    "tp": "24200",
-    "sl": "23750",
-    "status": "na"
-  },
-  {
-    "source": "STL",
-    "price": "24200",
-    "bias": "bearish",
-    "behavior": "Critical trendline reversal level. Daily closing above confirms macro bullish rally continuation.",
-    "tp": "24700",
-    "sl": "24150",
-    "status": "na"
-  }
-];
-
-window.goldDailyPlanData = [
-  {
-    "source": "AI",
-    "price": "4378.00-4388.00",
-    "bias": "neutral",
-    "behavior": "[16:01] Live Intraday Chop / No-Trade Zone. Equilibrium consolidation pocket around $4383.53; avoid unconfirmed market orders.",
-    "tp": "na",
-    "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4395.00",
-    "bias": "bullish",
-    "behavior": "[16:01] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m/15m candle close ABOVE $4395.00 clears local compression, targeting $4413.00, $4430.70, and $4450.00.",
-    "tp": "4450.00",
-    "sl": "4382.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4374.00-4380.00",
-    "bias": "bullish",
-    "behavior": "[16:01] Day Low SSL Sweep Reversal Long (Turtle Soup). Sweep into $4365.00–$4372.00 rejected with lower wick, closing 5m candle back ABOVE $4380.00.",
-    "tp": "4413.00",
-    "sl": "4362.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4365.00",
-    "bias": "bearish",
-    "behavior": "[16:01] Downside Long-Liquidation Cascade Trigger. Sustained 5m close BELOW $4365.00 triggers stop runs accelerating toward $4350.00 and $4340.00.",
-    "tp": "4340.00",
-    "sl": "4378.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4395.00-4410.00",
-    "bias": "bearish",
-    "behavior": "[16:01] 15M Bearish Imbalance FVG & Mitigation Shelf. Overhead liquidity void & premium reload zone on corrective relief rallies.",
-    "tp": "4374.00",
-    "sl": "4418.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4430.70-4445.00",
-    "bias": "bearish",
-    "behavior": "[16:01] Prior Broken Session Floor ($4430.70) Flipped Resistance & Breaker Block. Former support flipped to institutional supply.",
-    "tp": "4395.00",
-    "sl": "4455.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4340.00-4360.00",
-    "bias": "bullish",
-    "behavior": "[16:01] HTF Daily Deep Discount Macro Demand Shelf. Major institutional limit buy absorption base.",
-    "tp": "4410.00",
-    "sl": "4328.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4510.50",
-    "bias": "bearish",
-    "behavior": "[16:01] Day High BSL Liquidity Sweep Peak & Exhaustion Wick Block ($4510.50). Institutional distribution ceiling.",
-    "tp": "4430.00",
-    "sl": "4522.00",
-    "status": "na"
-  }
-];
-
-window.sp500DailyPlanData = [
+  { "source": "AI", "price": "24060-24095", "bias": "neutral", "behavior": "[15:50] Live Intraday Chop / 50% Equilibrium No-Trade Box (FinNifty Expiry). Heavy theta decay pocket around 24050-24100 straddles; stay flat without breakout.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "24128.70", "bias": "bullish", "behavior": "[15:50] High-Momentum Day High / ORB Breakout Trigger. Sustained 5m/15m candle close ABOVE 24128.70 with expanding green Futures volume (>1.2x).", "tp": "24188.30", "sl": "24085", "status": "na" },
+  { "source": "AI", "price": "24036.20-24050", "bias": "bullish", "behavior": "[15:50] 15M ORB Low / FVG Pullback Demand Absorption. Pullback into 24036.20\u201324050 with lower-wick rejection, closing 5m candle back ABOVE 24070.", "tp": "24128.70", "sl": "24018", "status": "na" },
+  { "source": "AI", "price": "24115-24128.70", "bias": "bearish", "behavior": "[15:50] Day High / Breaker Supply Rejection Short. Corrective rally into 24115\u201324128.70 rejected with upper wick, closing 5m candle back BELOW 24095.", "tp": "24036.20", "sl": "24145", "status": "na" },
+  { "source": "AI", "price": "24036.20", "bias": "bearish", "behavior": "[15:50] 15M ORB Low Breakdown Continuation Short. Sustained 5m close BELOW 24036.20 with expanding red Futures volume.", "tp": "23993.60", "sl": "24075", "status": "na" },
+  { "source": "AI", "price": "23993.60", "bias": "bullish", "behavior": "[15:50] Day Low SSL Sweep Floor & Turtle Soup Reversal Long. Sweep below 23993.60 rejected with lower wick, closing back ABOVE 24036.20.", "tp": "24095", "sl": "23960", "status": "na" },
+  { "source": "AI", "price": "23993.60", "bias": "bearish", "behavior": "[15:50] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m candle close firmly BELOW 23993.60 with expanding red Futures volume.", "tp": "23881", "sl": "24040", "status": "na" },
+  { "source": "AI", "price": "23850-23900", "bias": "bullish", "behavior": "[15:50] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).", "tp": "24050", "sl": "23820", "status": "na" },
+  { "source": "AI", "price": "23796-23881", "bias": "bullish", "behavior": "[15:50] Deep Panic Demand Base & Extreme SL Hunting Liquidity Sweep Floor.", "tp": "24000", "sl": "23750", "status": "na" },
+  { "source": "AI", "price": "24188.30-24200", "bias": "bearish", "behavior": "[15:50] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.", "tp": "24120", "sl": "24220", "status": "na" },
+  { "source": "AI", "price": "24280-24335", "bias": "bearish", "behavior": "[15:50] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.", "tp": "24180", "sl": "24360", "status": "na" },
+  { "source": "AI", "price": "24650-24750", "bias": "bullish", "behavior": "[15:50] HTF Macro All-Time High Extension BSL Target.", "tp": "24750", "sl": "24500", "status": "na" },
+  { "source": "NES", "price": "24000", "bias": "bullish", "behavior": "Major support & Put OI wall. Reversal candle on dip is buy trigger.", "tp": "24100", "sl": "23950", "status": "na" },
+  { "source": "STL", "price": "24200", "bias": "bearish", "behavior": "Critical trendline reversal level. Daily closing above confirms macro bullish rally continuation.", "tp": "24700", "sl": "24150", "status": "na" },
+  { "source": "NPT", "price": "24000", "bias": "bearish", "behavior": "Breakdown level (15m close below triggers drop to 23891).", "tp": "23891", "sl": "24035", "status": "na" },
+  { "source": "NEL", "price": "24095-24100", "bias": "bullish", "behavior": "Flat open breakout trigger. 15m candle close above PDC range high triggers rally.", "tp": "24200", "sl": "24040", "status": "na" },
+  { "source": "NEL", "price": "23980-24000", "bias": "bullish", "behavior": "Bear trap / swing low liquidity sweep re-entry buy setup.", "tp": "24100", "sl": "23940", "status": "na" },
+  { "source": "NEL", "price": "24160", "bias": "neutral", "behavior": "1-Hour intermediate resistance hurdle.", "tp": "24280", "sl": "24100", "status": "na" },
+  { "source": "NEL", "price": "24280", "bias": "neutral", "behavior": "2nd 1-Hour intermediate resistance hurdle.", "tp": "24350", "sl": "24200", "status": "na" },
+  { "source": "NEL", "price": "24350", "bias": "bullish", "behavior": "Primary 1-Hour Mitigated Order Block HTF target.", "tp": "24350", "sl": "24250", "status": "na" },
+  { "source": "NEL", "price": "23950", "bias": "bearish", "behavior": "Sustained breakdown below swing low (2nd half only).", "tp": "23850", "sl": "24000", "status": "na" },
+  { "source": "NAC", "price": "23997-24000", "bias": "bullish", "behavior": "Oversold mean-reversion long on day low sweep.", "tp": "24175", "sl": "23950", "status": "na" },
+  { "source": "NAC", "price": "24080", "bias": "bullish", "behavior": "Mid-range breakout buy trigger confirming short-covering towards high.", "tp": "24250", "sl": "24000", "status": "na" },
+  { "source": "NAC", "price": "23997", "bias": "bearish", "behavior": "Breakdown short trigger on late-session 3:00 PM cash selling sweep.", "tp": "23880", "sl": "24080", "status": "na" },
+  { "source": "NAC", "price": "24176.70", "bias": "bearish", "behavior": "Supply zone rejection short near day high.", "tp": "24050", "sl": "24220", "status": "na" },
+  { "source": "NPT", "price": "24124-24150", "bias": "bearish", "behavior": "Major overhead resistance & rejection zone (Pro call writing).", "tp": "24020", "sl": "24170", "status": "na" },
+  { "source": "NPT", "price": "24124", "bias": "bullish", "behavior": "Breakout level. 15m close above triggers short covering to 24200/24250.", "tp": "24200", "sl": "24090", "status": "na" },
+  { "source": "NPT", "price": "24080", "bias": "bearish", "behavior": "Intraday target for reversal long / minor resistance.", "tp": "24000", "sl": "24105", "status": "na" },
+  { "source": "NPT", "price": "23891", "bias": "bullish", "behavior": "Downside target & major demand support level.", "tp": "24000", "sl": "23850", "status": "na" },
+  { "source": "NES", "price": "23881", "bias": "bullish", "behavior": "SL hunting dip target. Reversal opportunity on sweep.", "tp": "24000", "sl": "23830", "status": "na" },
+  { "source": "NES", "price": "23796", "bias": "bullish", "behavior": "Deep panic support & extreme sweep level for potential V/U-shape recovery.", "tp": "23881", "sl": "23750", "status": "na" },
+  { "source": "NES", "price": "24100", "bias": "bearish", "behavior": "Immediate PRO call selling zone. Rejection triggers short towards 24000.", "tp": "24000", "sl": "24130", "status": "na" },
+  { "source": "NES", "price": "24200", "bias": "bullish", "behavior": "Intermediate resistance. Sustained move allows scaling longs towards 24300.", "tp": "24300", "sl": "24150", "status": "na" },
+  { "source": "NES", "price": "24300", "bias": "bullish", "behavior": "Major bullish momentum breakout level. Clearing opens 24500 target.", "tp": "24500", "sl": "24240", "status": "na" },
+  { "source": "STL", "price": "24180", "bias": "bullish", "behavior": "Breakout Trigger above 24,180 / 24,200 trendline resistance. Expansion towards 24,350-24,400.", "tp": "24400", "sl": "23988", "status": "na" },
+  { "source": "STL", "price": "24040", "bias": "bullish", "behavior": "Immediate intra-day support zone (today low 23,988). Strong buying intervention seen.", "tp": "24180", "sl": "23980", "status": "na" },
+  { "source": "STL", "price": "23800", "bias": "bullish", "behavior": "Major macro demand base (23,800-23,900). FII short-covering floor on gap-down panic.", "tp": "24200", "sl": "23750", "status": "na" }
+];goldDailyPlanData = [
+  { "source": "AI", "price": "4378.00-4388.00", "bias": "neutral", "behavior": "[16:01] Live Intraday Chop / No-Trade Zone. Equilibrium consolidation pocket around $4383.53; avoid unconfirmed market orders.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "4395.00", "bias": "bullish", "behavior": "[16:01] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m/15m candle close ABOVE $4395.00 clears local compression, targeting $4413.00, $4430.70, and $4450.00.", "tp": "4450.00", "sl": "4382.00", "status": "na" },
+  { "source": "AI", "price": "4374.00-4380.00", "bias": "bullish", "behavior": "[16:01] Day Low SSL Sweep Reversal Long (Turtle Soup). Sweep into $4365.00–$4372.00 rejected with lower wick, closing 5m candle back ABOVE $4380.00.", "tp": "4413.00", "sl": "4362.00", "status": "na" },
+  { "source": "AI", "price": "4365.00", "bias": "bearish", "behavior": "[16:01] Downside Long-Liquidation Cascade Trigger. Sustained 5m close BELOW $4365.00 triggers stop runs accelerating toward $4350.00 and $4340.00.", "tp": "4340.00", "sl": "4378.00", "status": "na" },
+  { "source": "AI", "price": "4395.00-4410.00", "bias": "bearish", "behavior": "[16:01] 15M Bearish Imbalance FVG & Mitigation Shelf. Overhead liquidity void & premium reload zone on corrective relief rallies.", "tp": "4374.00", "sl": "4418.00", "status": "na" },
+  { "source": "AI", "price": "4430.70-4445.00", "bias": "bearish", "behavior": "[16:01] Prior Broken Session Floor ($4430.70) Flipped Resistance & Breaker Block. Former support flipped to institutional supply.", "tp": "4395.00", "sl": "4455.00", "status": "na" },
+  { "source": "AI", "price": "4340.00-4360.00", "bias": "bullish", "behavior": "[16:01] HTF Daily Deep Discount Macro Demand Shelf. Major institutional limit buy absorption base.", "tp": "4410.00", "sl": "4328.00", "status": "na" },
+  { "source": "AI", "price": "4510.50", "bias": "bearish", "behavior": "[16:01] Day High BSL Liquidity Sweep Peak & Exhaustion Wick Block ($4510.50). Institutional distribution ceiling.", "tp": "4430.00", "sl": "4522.00", "status": "na" }
+];sp500DailyPlanData = [
   {
     "source": "SP500-AI",
     "price": "7678.14-7694.14",
@@ -496,7 +96,7 @@ window.sp500DailyPlanData = [
 window.goldDailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
-    "text": "XAUUSD (Gold) Pre-Market Tactical Briefing (09:13 AM IST - Sep 01, 2026 | Spot: 4485.10 | Trigger: Ad-Hoc Run):\n\n================================================================================\n\ud83c\udfaf GOLD DAILY MARKET BIAS & OUTLOOK\n================================================================================\n\u2022 Daily Market Bias: \u26aa NEUTRAL / MEAN-REVERSION | Bias Score: 0.0 / +6.0\n\u2022 Bias Invalidation Floor: .00 (A 15M close below .00 invalidates mean-reversion)\n\n1. Market Structure & Session Bias:\nGold Spot (XAU/USD) is trading at ,485.10/oz following an overnight spike to Day High ,510.50 and subsequent sharp mean-reversion flush down to ,438.00\u2013,445.00 before settling into the ,480\u2013,495 FVG consolidation zone. DXY is firming at 99.495 (+0.33%), while Crude Oil surged +5.35% to .63/bbl.\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Concentrated above ,510.50 (Day High exhaustion spike) and ,525.00.\n- Sell-Side Liquidity (SSL): Clustered below ,445.00 / ,438.00 down to HTF 4H Demand at ,400\u2013,415.\n- Fair Value Gaps: 15M Bearish Imbalance FVG at ,475.50\u2013,495.00.\n\n3. Tactical Action Plan:\n- BUY Setup 1 (SSL Sweep Reversal / Turtle Soup): Sweep below ,445.00 rejected with lower wick, closing 5m back ABOVE ,452.00. TP: ,485.00 / ,495.00. SL: ,430.00.\n- BUY Setup 2 (Momentum Reclaim): Sustained 5m/15m close ABOVE ,495.00. TP: ,510.50 / ,525.00. SL: ,484.00.\n- SELL Setup 1 (FVG Rejection Short): Relief test of ,495.00 rejected with upper wick, closing 5m back BELOW ,480.00. TP: ,452.00 / ,445.00. SL: ,502.00.\n- SELL Setup 2 (Breakdown Short): Sustained 5m close BELOW ,448.00. TP: ,420.00 / ,405.00. SL: ,458.00."
+    "text": `XAUUSD (Gold) Pre-Market Tactical Briefing (09:13 AM IST - Sep 01, 2026 | Spot: 4485.10 | Trigger: Ad-Hoc Run):\n\n================================================================================\n\ud83c\udfaf GOLD DAILY MARKET BIAS & OUTLOOK\n================================================================================\n\u2022 Daily Market Bias: \u26aa NEUTRAL / MEAN-REVERSION | Bias Score: 0.0 / +6.0\n\u2022 Bias Invalidation Floor: .00 (A 15M close below .00 invalidates mean-reversion)\n\n1. Market Structure & Session Bias:\nGold Spot (XAU/USD) is trading at ,485.10/oz following an overnight spike to Day High ,510.50 and subsequent sharp mean-reversion flush down to ,438.00\u2013,445.00 before settling into the ,480\u2013,495 FVG consolidation zone. DXY is firming at 99.495 (+0.33%), while Crude Oil surged +5.35% to .63/bbl.\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Concentrated above ,510.50 (Day High exhaustion spike) and ,525.00.\n- Sell-Side Liquidity (SSL): Clustered below ,445.00 / ,438.00 down to HTF 4H Demand at ,400\u2013,415.\n- Fair Value Gaps: 15M Bearish Imbalance FVG at ,475.50\u2013,495.00.\n\n3. Tactical Action Plan:\n- BUY Setup 1 (SSL Sweep Reversal / Turtle Soup): Sweep below ,445.00 rejected with lower wick, closing 5m back ABOVE ,452.00. TP: ,485.00 / ,495.00. SL: ,430.00.\n- BUY Setup 2 (Momentum Reclaim): Sustained 5m/15m close ABOVE ,495.00. TP: ,510.50 / ,525.00. SL: ,484.00.\n- SELL Setup 1 (FVG Rejection Short): Relief test of ,495.00 rejected with upper wick, closing 5m back BELOW ,480.00. TP: ,452.00 / ,445.00. SL: ,502.00.\n- SELL Setup 2 (Breakdown Short): Sustained 5m close BELOW ,448.00. TP: ,420.00 / ,405.00. SL: ,458.00.`
   },
   {
     "source": "AI Intraday Tactical Update",
@@ -562,9 +162,46 @@ Gold Spot (XAU/USD) is trading at $4,383.53/oz during the London session heading
 - SELL Setup 1 (15M FVG / Breaker Rejection Short): Corrective relief bounce into $4,395.00–$4,410.00 rejected with upper wick, closing 5m candle back BELOW $4,388.00. TP: $4,374.00 / $4,365.00. SL: $4,418.00.
 - SELL Setup 2 (Breakdown Continuation Short): Sustained 5m close BELOW $4,365.00. TP: $4,350.00 / $4,340.00. SL: $4,378.00.`
   }
-];
+];btcDailyPlanSummary = [
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (04:04 PM IST - Sep 01, 2026 | Spot: 78090.11 | Trigger: London Session (European Opening) (European Session Start)):
 
-window.btcDailyPlanSummary = [
+================================================================================
+🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: 🟢 BULLISH | Bias Score: +1.0 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: $77500.00 (A 15M close below $77500.00 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Buy-on-Dip Expansion. Institutional momentum favors absorption at discount demand OBs followed by upside expansion.
+• Execution: Avoid counter-trend shorts during early session. Wait for 15M opening range filter before entries.
+
+
+1. Market Structure & Session Bias:
+Bitcoin Spot (BTC/USD) is trading at $78,090.11, consolidation / pullback state within the updated daily structure (Day High: $79,253.90 | Day Low: $77,740.56 | Prior Day Close: $78,892.55 | Live Spot: $78,090.11). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.57 (Consolidating DXY) and S&P 500 Futures $7661.25) combined with crypto-native context (Funding Rate is 0.0100% (neutral); Fear & Greed Index: 69 (Greed); CME Gap inactive at 78215.0 (above, size: 124.89)) guide structure. Spot is inside previous day range | below pdc (day red).
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above $79,253.90 local swing highs, extending into 15M Bearish FVG ($78317.9–$78565.3), and macro day high targets up to $79,169.84.
+- Sell-Side Liquidity (SSL): Concentrated below $77,740.60 psychological round number down to deeper macro 4H demand base ($77,049.70).
+- Order Blocks (OB) & Key Levels: Bullish Demand OB at $78,034.54–$78,213.63; Session VWAP at $78,538.13; 200 EMA at $78,442.19; Volume Profile POC at $78,762.06.
+- Fair Value Gaps (FVG): 15M Bearish FVG at $78317.9–$78565.3; 15M Bullish FVG at $77980.0–$77989.7.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $77,816.23 – $79,026.90 (Value Area) / $78,161.48 – $79,195.32 (Asian Range).
+- Context: Current spot ($78,090.11) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $79,253.90 Spot): A sustained 5m/15m candle close above $79,253.90 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,390.11 and $78,690.11.
+- Downside Long-Liquidation Cascade (< $77,740.60 Spot): A sustained 5m close below the demand shelf ($77,740.60) triggers institutional stop cascades accelerating toward $77,790.11 and $77,490.11.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $77,740.60 rejected with lower wick, followed by 5m close back ABOVE $78,034.54. TP: $77,865.10 / $77,715.10. SL: $78,240.10.
+- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $79,253.90. TP: $78,490.11 / $78,890.11. SL: $77,940.11.
+- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78317.9–$78565.3 rejected with upper wick, closing back BELOW $78,034.54 on 5m candle. TP: $77,790.11 / $77,590.11. SL: $78,290.11.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $77,740.60. TP: $77,690.11 / $77,290.11. SL: $78,240.11.
+`
+  },
   {
     "source": "BTC-AI",
     "text": `Bitcoin (BTC/USD) Intraday Tactical Update (08:10 AM IST - Sep 01, 2026 | Spot: 78339.65 | Trigger: Asian Session Review (Tokyo/Sydney Overnight Moves)):
@@ -642,135 +279,27 @@ Bitcoin Spot (BTC/USD) is trading at $78,629.47, strong bearish trend (below 9 &
 ];
 
 window.btcDailyPlanData = [
-  {
-    "source": "BTC-AI",
-    "price": "78408.26",
-    "bias": "bearish",
-    "behavior": "[08:10] 15M Dynamic 9 EMA Shelf ($78,408.26). Primary short-term momentum trail & intraday pullback defense zone.",
-    "tp": "77936.5",
-    "sl": "78558.3",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78566.24",
-    "bias": "bearish",
-    "behavior": "[08:10] 15M Dynamic 21 EMA Mean-Reversion Floor ($78,566.24). Secondary trend filter & institutional re-entry zone.",
-    "tp": "77836.5",
-    "sl": "78766.2",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78430.42",
-    "bias": "neutral",
-    "behavior": "[08:10] 15M/1H 200 EMA Macro Equilibrium Floor ($78,430.42). High-probability structural pivot & macro trend separator.",
-    "tp": "na",
-    "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "79169.84",
-    "bias": "bearish",
-    "behavior": "[08:10] Prior Day High ($79,169.84) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.",
-    "tp": "77736.5",
-    "sl": "79419.8",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "77049.7",
-    "bias": "bullish",
-    "behavior": "[08:10] Prior Day Low ($77,049.70) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.",
-    "tp": "78936.5",
-    "sl": "76799.7",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78892.55",
-    "bias": "neutral",
-    "behavior": "[08:10] Prior Day Close ($78,892.55) Intraday Equilibrium Pivot. Day green/red sentiment baseline.",
-    "tp": "na",
-    "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "79050.0",
-    "bias": "bearish",
-    "behavior": "[08:10] Asian Session High ($79,050.00) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.",
-    "tp": "77936.5",
-    "sl": "79200.0",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78161.48",
-    "bias": "bullish",
-    "behavior": "[08:10] Asian Session Low ($78,161.48) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.",
-    "tp": "78736.5",
-    "sl": "78011.5",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78776.28",
-    "bias": "neutral",
-    "behavior": "[08:10] Intraday Session VWAP Benchmark ($78,776.28). Institutional average cost anchor & fair value magnet.",
-    "tp": "na",
-    "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78898.86",
-    "bias": "neutral",
-    "behavior": "[08:10] Intraday High-Volume Point of Control (POC) ($78,898.86). Heavy institutional trading volume node.",
-    "tp": "na",
-    "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78298.51",
-    "bias": "bearish",
-    "behavior": "[08:10] 15M Bearish Supply Fair Value Gap Bottom ($78298.51). Imbalance mitigation zone.",
-    "tp": "77898.5",
-    "sl": "78448.5",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78353.94",
-    "bias": "bearish",
-    "behavior": "[08:10] 15M Bearish Supply Fair Value Gap Top ($78353.94). Imbalance mitigation zone.",
-    "tp": "77953.9",
-    "sl": "78503.9",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78298.51",
-    "bias": "bullish",
-    "behavior": "[08:10] 15M Bullish Demand Fair Value Gap Bottom ($78298.51). Imbalance mitigation zone.",
-    "tp": "78698.5",
-    "sl": "78148.5",
-    "status": "na"
-  },
-  {
-    "source": "BTC-AI",
-    "price": "78308.35",
-    "bias": "bullish",
-    "behavior": "15M Bullish Demand Fair Value Gap Top ($78308.35). Imbalance mitigation zone.",
-    "tp": "78708.4",
-    "sl": "78158.4",
-    "status": "na"
-  }
-];
-
-window.dailyPlanSummary = [
+  { "source": "BTC-AI", "price": "78034.54", "bias": "bullish", "behavior": "[16:04] 15M Dynamic 9 EMA Shelf ($78,034.54). Primary short-term momentum trail & intraday pullback defense zone.", "tp": "78490.1", "sl": "77884.5", "status": "na" },
+  { "source": "BTC-AI", "price": "78213.63", "bias": "bearish", "behavior": "[16:04] 15M Dynamic 21 EMA Mean-Reversion Floor ($78,213.63). Secondary trend filter & institutional re-entry zone.", "tp": "77590.1", "sl": "78413.6", "status": "na" },
+  { "source": "BTC-AI", "price": "78442.19", "bias": "neutral", "behavior": "[16:04] 15M/1H 200 EMA Macro Equilibrium Floor ($78,442.19). High-probability structural pivot & macro trend separator.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "79169.84", "bias": "bearish", "behavior": "[16:04] Prior Day High ($79,169.84) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.", "tp": "77490.1", "sl": "79419.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77049.7", "bias": "bullish", "behavior": "[16:04] Prior Day Low ($77,049.70) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.", "tp": "78690.1", "sl": "76799.7", "status": "na" },
+  { "source": "BTC-AI", "price": "78892.55", "bias": "neutral", "behavior": "[16:04] Prior Day Close ($78,892.55) Intraday Equilibrium Pivot. Day green/red sentiment baseline.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "79195.32", "bias": "bearish", "behavior": "[16:04] Asian Session High ($79,195.32) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.", "tp": "77690.1", "sl": "79345.3", "status": "na" },
+  { "source": "BTC-AI", "price": "78161.48", "bias": "bullish", "behavior": "[16:04] Asian Session Low ($78,161.48) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.", "tp": "78490.1", "sl": "78011.5", "status": "na" },
+  { "source": "BTC-AI", "price": "78781.52", "bias": "bearish", "behavior": "[16:04] London Session High ($78,781.52) Liquidity Shelf. European expansion peak & supply rejection zone.", "tp": "77590.1", "sl": "78981.5", "status": "na" },
+  { "source": "BTC-AI", "price": "77740.56", "bias": "bullish", "behavior": "[16:04] London Session Low ($77,740.56) Demand Floor. European session low & liquidity absorption shelf.", "tp": "78590.1", "sl": "77540.6", "status": "na" },
+  { "source": "BTC-AI", "price": "78538.13", "bias": "neutral", "behavior": "[16:04] Intraday Session VWAP Benchmark ($78,538.13). Institutional average cost anchor & fair value magnet.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "78762.06", "bias": "neutral", "behavior": "[16:04] Intraday High-Volume Point of Control (POC) ($78,762.06). Heavy institutional trading volume node.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "78317.94", "bias": "bearish", "behavior": "[16:04] 15M Bearish Supply Fair Value Gap Bottom ($78,317.94). Imbalance mitigation zone.", "tp": "77917.9", "sl": "78467.9", "status": "na" },
+  { "source": "BTC-AI", "price": "78565.31", "bias": "bearish", "behavior": "[16:04] 15M Bearish Supply Fair Value Gap Top ($78,565.31). Imbalance mitigation zone.", "tp": "78165.3", "sl": "78715.3", "status": "na" },
+  { "source": "BTC-AI", "price": "78019.59", "bias": "bearish", "behavior": "[16:04] 15M Bearish Supply Fair Value Gap Bottom ($78,019.59). Imbalance mitigation zone.", "tp": "77619.6", "sl": "78169.6", "status": "na" },
+  { "source": "BTC-AI", "price": "78246.0", "bias": "bearish", "behavior": "[16:04] 15M Bearish Supply Fair Value Gap Top ($78,246.00). Imbalance mitigation zone.", "tp": "77846.0", "sl": "78396.0", "status": "na" },
+  { "source": "BTC-AI", "price": "77980.0", "bias": "bullish", "behavior": "[16:04] 15M Bullish Demand Fair Value Gap Bottom ($77,980.00). Imbalance mitigation zone.", "tp": "78380.0", "sl": "77830.0", "status": "na" },
+  { "source": "BTC-AI", "price": "77989.66", "bias": "bullish", "behavior": "[16:04] 15M Bullish Demand Fair Value Gap Top ($77,989.66). Imbalance mitigation zone.", "tp": "78389.7", "sl": "77839.7", "status": "na" },
+  { "source": "BTC-AI", "price": "78027.56", "bias": "bullish", "behavior": "[16:04] 15M Bullish Demand Fair Value Gap Bottom ($78,027.56). Imbalance mitigation zone.", "tp": "78427.6", "sl": "77877.6", "status": "na" },
+  { "source": "BTC-AI", "price": "78065.32", "bias": "bullish", "behavior": "[16:04] 15M Bullish Demand Fair Value Gap Top ($78,065.32). Imbalance mitigation zone.", "tp": "78465.3", "sl": "77915.3", "status": "na" }
+];dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
     "text": `NIFTY 50 Pre-Market Tactical Briefing (03:41 PM IST - Sep 01, 2026 | Spot: 24043.40 | Trigger: Ad-Hoc Run):
