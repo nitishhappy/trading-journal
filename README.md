@@ -1768,11 +1768,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended Smart Money Concepts (SMC) educational logs to `Nifty_Learn.md` and `Gold_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`
 
-### v2.3.70 — 01 Sep 2026 — Fix Market Summary Briefing Truncation & Automation Sync
+### v2.3.71 — 01 Sep 2026 — Multi-Asset Dedicated Physical JS Files Architecture
 
-- **Deterministic Briefing Parser & Sync Pipeline (`sync_briefing_to_daily_plan.py`, `premarket_briefing.ps1`)**:
-  - Created a deterministic Python parser (`sync_briefing_to_daily_plan.py`) to directly extract full 8-section tactical briefings (Global Sentiment, Overnight Moves, News, Nifty S&R Table, Gold Analysis, SMC POIs, 5-Min Action Triggers, Risk Warnings) from generated `.md` reports and sync them into `daily_plan.js`.
-  - Integrated `sync_briefing_to_daily_plan.py` directly into `premarket_briefing.ps1` so automated runs never rely on non-deterministic LLM subagent file editing.
-  - Restored today's complete Nifty 50 Pre-Market Tactical Briefing into `window.dailyPlanSummary` and synced updated AI levels to `window.dailyPlanData`.
-- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `sw.js`
+- **Dedicated Physical Data Files (`js/data/`)**:
+  - Created 4 dedicated physical JS files: `nifty_daily_plan.js`, `gold_daily_plan.js`, `btc_daily_plan.js`, and `sp500_daily_plan.js`.
+  - Guarantees 100% physical file isolation — no background script can ever overwrite another asset's data file.
+  - Included all 4 script tags in `index.html` and `sw.js` precache list.
+- **Automation Pipeline Alignment (`C:\Nitish\ClaudeApps\Utilities`)**:
+  - Updated `sync_briefing_to_daily_plan.py`, `inject_nifty_bias.py`, `inject_gold_bias.py`, `inject_sp500_bias.py`, `sp500_copilot_main.py`, and `config.py` (Bitcoin Setup) to target their respective dedicated JS files.
+- **Files Modified**: `README.md`, `index.html`, `sw.js`, `js/data/nifty_daily_plan.js`, `js/data/gold_daily_plan.js`, `js/data/btc_daily_plan.js`, `js/data/sp500_daily_plan.js`
+
 
