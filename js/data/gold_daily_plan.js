@@ -1,54 +1,54 @@
 window.goldDailyPlanData = [
   {
     "source": "AI",
-    "price": "4328.00-4336.00",
+    "price": "4348.00-4356.00",
     "bias": "neutral",
-    "behavior": "[18:40] Live Intraday Chop / No-Trade Zone. Equilibrium consolidation pocket around $4332.15; avoid unconfirmed market orders.",
+    "behavior": "[19:10] Live Intraday Chop / No-Trade Zone. Equilibrium consolidation pocket around $4352.45 inside 15M FVG mitigation; avoid unconfirmed market orders.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "4345.00",
+    "price": "4365.00",
     "bias": "bullish",
-    "behavior": "[18:40] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m/15m candle close ABOVE $4345.00 clears local supply, targeting $4365.00, $4380.00, and $4400.00.",
-    "tp": "4400.00",
-    "sl": "4330.00",
+    "behavior": "[19:10] High-Momentum Short-Covering Squeeze Trigger. Sustained 5m/15m candle close ABOVE $4365.00 clears 15M FVG supply, targeting $4380.00, $4395.00, and $4415.00.",
+    "tp": "4415.00",
+    "sl": "4348.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "4325.00-4335.00",
+    "price": "4338.00-4346.00",
     "bias": "bullish",
-    "behavior": "[18:40] Day Low SSL Sweep Reversal Long (Turtle Soup). Sweep into $4318.00–$4325.00 rejected with lower wick, closing 5m candle back ABOVE $4335.00.",
-    "tp": "4365.00",
-    "sl": "4312.00",
+    "behavior": "[19:10] Demand Pullback & 15M Bullish FVG Defense Long. Retest of $4338.00–$4346.00 rejected with lower wick, closing 5m candle back ABOVE $4352.00.",
+    "tp": "4380.00",
+    "sl": "4328.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "4322.00",
+    "price": "4360.00-4368.00",
     "bias": "bearish",
-    "behavior": "[18:40] Downside Long-Liquidation Cascade Trigger. Sustained 5m close BELOW $4322.00 triggers stop runs accelerating toward $4300.00 and $4285.00.",
-    "tp": "4285.00",
-    "sl": "4335.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "price": "4350.00-4365.00",
-    "bias": "bearish",
-    "behavior": "[18:40] 15M Bearish Imbalance FVG & Mitigation Shelf. Overhead liquidity void & premium reload zone on corrective relief rallies.",
-    "tp": "4325.00",
+    "behavior": "[19:10] 15M Supply FVG & Overhead Mitigation Rejection Short. Upper-wick rejection in $4360.00–$4368.00, closing 5m candle back BELOW $4352.00.",
+    "tp": "4338.00",
     "sl": "4375.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "4335.00",
+    "bias": "bearish",
+    "behavior": "[19:10] Downside Trend-Continuation Breakdown Trigger. Sustained 5m close BELOW $4335.00 invalidates relief bounce, targeting $4322.00 and $4300.00.",
+    "tp": "4300.00",
+    "sl": "4348.00",
     "status": "na"
   },
   {
     "source": "AI",
     "price": "4378.00-4395.00",
     "bias": "bearish",
-    "behavior": "[18:40] Prior Broken Session Floor ($4378.00) Flipped Resistance & Breaker Block. Former floor flipped to institutional supply.",
+    "behavior": "[19:10] Prior Broken Session Floor ($4378.00) Flipped Resistance & Breaker Block. Former floor flipped to heavy institutional supply.",
     "tp": "4345.00",
     "sl": "4405.00",
     "status": "na"
@@ -57,7 +57,7 @@ window.goldDailyPlanData = [
     "source": "AI",
     "price": "4285.00-4305.00",
     "bias": "bullish",
-    "behavior": "[18:40] HTF Daily Deep Discount Macro Demand Shelf. Major institutional limit buy absorption base.",
+    "behavior": "[19:10] HTF Daily Deep Discount Macro Demand Shelf. Major institutional limit buy absorption base on deep panic cascades.",
     "tp": "4365.00",
     "sl": "4270.00",
     "status": "na"
@@ -66,7 +66,7 @@ window.goldDailyPlanData = [
     "source": "AI",
     "price": "4510.50",
     "bias": "bearish",
-    "behavior": "[18:40] Day High BSL Liquidity Sweep Peak & Exhaustion Wick Block ($4510.50). Institutional distribution ceiling.",
+    "behavior": "[19:10] Day High BSL Liquidity Sweep Peak & Exhaustion Wick Block ($4510.50). Institutional distribution ceiling.",
     "tp": "4380.00",
     "sl": "4522.00",
     "status": "na"
@@ -191,5 +191,38 @@ Gold Spot (XAU/USD) is trading at $4,332.15, extending an aggressive intraday tr
 - BUY Setup 2 (High-Momentum Short-Covering Squeeze Long): Sustained 5m/15m close ABOVE $4345.00 with volume expansion. TP: $4,380.00 / $4,400.00. SL: $4,330.00. Risk-Reward: ~1:2.5.
 - SELL Setup 1 (15M Bearish FVG / Mitigation Rejection Short): Corrective relief rally into $4,350.00–$4,365.00 rejected with an upper wick, closing 5m candle back BELOW $4,345.00. TP: $4,325.00 / $4,300.00. SL: $4,375.00. Risk-Reward: ~1:2.4.
 - SELL Setup 2 (Breakdown Continuation Short): Sustained 5m close BELOW $4,322.00 with expanding sell volume. TP: $4,300.00 / $4,285.00. SL: $4,335.00. Risk-Reward: ~1:2.6.`
+  },
+  {
+    "source": "AI Intraday Tactical Update",
+    "text": `Gold (XAU/USD) Intraday Tactical Update (07:10 PM IST - Sep 01, 2026 | Spot: 4352.45 | Trigger: Extreme Price Shift ($20.30 >= $15.00)):
+
+================================================================================
+🎯 GOLD DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: 🔴 BEARISH / RELIEF PULLBACK MITIGATION | Bias Score: -1.5 / +6.0
+• Bias Invalidation Floor: $4368.00 (A 15M close above $4368.00 invalidates short-side order flow)
+
+1. Market Structure & Session Bias:
+Gold Spot (XAU/USD) is trading at $4,352.45, experiencing an aggressive short-covering relief squeeze (+$20.30 from the $4,332.15 session low) during the active London/New York session overlap. The violent intraday sell-off from Day High $4,510.50 found interim absorption near $4,322.00–$4,325.00 SSL discount, triggering a sharp mean-reversion move into the overhead 15M Bearish Imbalance Fair Value Gap ($4,350.00–$4,365.00). Macro sentiment remains pressured by elevated US 10-Year Treasury Yields (~4.77%) and firm US Dollar Index (DXY ~99.58), positioning this relief move as a structural test of overhead institutional supply.
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above $4,365.00 (15M FVG Top & Session Supply), extending toward the Breaker Block ($4,378.00–$4,395.00) and Day High ($4,510.50).
+- Sell-Side Liquidity (SSL): Concentrated below the pullback base ($4,338.00) and Session Low ($4,322.00–$4,325.00) down to the HTF Daily Deep Discount Macro Demand Shelf ($4,285.00–$4,305.00).
+- Fair Value Gaps (FVG): Active 15M Bearish Imbalance FVG between $4,350.00–$4,365.00; 15M Bullish Demand FVG between $4,338.00–$4,346.00.
+- Order Blocks / Breakers: Major Bearish Breaker Block at $4,378.00–$4,395.00 (former support flipped to heavy resistance).
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $4,348.00 – $4,356.00.
+- Context: Spot ($4,352.45) is currently oscillating inside 50% equilibrium within the active 15M FVG mitigation zone. Micro-whipsaws and spread widening during NY opening flow create high trap risk. Stay flat inside this zone.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $4,365.00 Spot): A sustained 5m/15m candle close above $4,365.00 clears the entire 15M Bearish FVG, forcing intraday short sellers to cover and driving rapid expansion toward $4,380.00, $4,395.00, and $4,415.00.
+- Downside Long-Liquidation Cascade (< $4,335.00 Spot): A sustained 5m close below $4,335.00 breaks local demand support, triggering trailing stop runs accelerating toward $4,322.00 and $4,300.00.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Demand Pullback & FVG Absorption Long): Retest into $4,338.00–$4,346.00 rejected with a clear lower wick, followed by a 5m close back ABOVE $4352.00. TP: $4,365.00 / $4,380.00. SL: $4,330.00. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Short-Covering Squeeze Long): Sustained 5m/15m close ABOVE $4365.00 with expanding green volume. TP: $4,380.00 / $4,395.00. SL: $4,348.00. Risk-Reward: ~1:2.6.
+- SELL Setup 1 (15M Bearish FVG Mitigation Rejection Short): Corrective spike into $4,360.00–$4,368.00 rejected with an upper wick, closing 5m candle back BELOW $4352.00. TP: $4,338.00 / $4,322.00. SL: $4,375.00. Risk-Reward: ~1:2.4.
+- SELL Setup 2 (Breakdown Continuation Short): Sustained 5m close BELOW $4335.00 with expanding volume. TP: $4,322.00 / $4,300.00. SL: $4,348.00. Risk-Reward: ~1:2.5.`
   }
 ];

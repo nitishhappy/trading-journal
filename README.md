@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.0.9 — Gold (XAU/USD) Intraday Tactical Update (19:10 IST)
+- **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD levels, chop zone ($4348.00–$4356.00), high-momentum squeeze trigger (> $4365.00), and breakdown continuation trigger (< $4335.00) following the +$20.30 relief bounce to spot $4352.45 into 15M Bearish FVG supply during London/NY overlap.
+- **Daily Plan & Mentorship Sync**: Updated AI-sourced Gold levels and summary in `daily_plan.js` / `gold_daily_plan.js` and synced the SMC breakdown in `Gold_Learn.md`.
+
 ### v2.0.8 — Fix Nifty Markdown Section & Table Parsing
 - **Fixed Section Header Extraction**: Updated `sectionHeaderRegex` to `(?:#{1,6}\s*)?(\d+\.\s*[^:\n]+:?)` in `levels.js` to correctly capture section headings for Nifty (which uses `## ` and lacks trailing colons) alongside BTC/GOLD (which use colons).
 - **Embedded Markdown Tables**: Ensures any numbered section containing a native Markdown table correctly parses the embedded table while preserving the rich HTML styling of the surrounding section content.
