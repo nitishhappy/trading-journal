@@ -3,7 +3,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24055-24085",
     "bias": "neutral",
-    "behavior": "[09:13] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.",
+    "behavior": "[03:10] 50% Equilibrium Compression No-Trade Box. Avoid breakout chasing inside opening range box; play mean-reversion edge fades.",
     "tp": "na",
     "sl": "na",
     "status": "na"
@@ -12,7 +12,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24095",
     "bias": "bullish",
-    "behavior": "[09:13] High-Momentum BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).",
+    "behavior": "[03:10] High-Momentum BSL Short-Covering Breakout Trigger. Sustained 5m/15m candle close ABOVE 24095 with expanding Futures volume (>1.2x).",
     "tp": "24180",
     "sl": "24055",
     "status": "na"
@@ -21,7 +21,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24035-24050",
     "bias": "bullish",
-    "behavior": "[09:13] Displacement FVG Pullback Absorption Long. Pullback into 24035\u201324050 with lower-wick rejection, closing 5m candle back ABOVE 24065.",
+    "behavior": "[03:10] Displacement FVG Pullback Absorption Long. Pullback into 24035–24050 with lower-wick rejection, closing 5m candle back ABOVE 24065.",
     "tp": "24095",
     "sl": "24020",
     "status": "na"
@@ -30,7 +30,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24095-24130",
     "bias": "bearish",
-    "behavior": "[09:13] Overhead Supply / Breaker Sweep Rejection Short. Corrective rally into 24095\u201324130 rejected with upper wick, closing 5m candle back BELOW 24080.",
+    "behavior": "[03:10] Overhead Supply / Breaker Sweep Rejection Short. Corrective rally into 24095–24130 rejected with upper wick, closing 5m candle back BELOW 24080.",
     "tp": "24035",
     "sl": "24142",
     "status": "na"
@@ -39,7 +39,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24035",
     "bias": "bearish",
-    "behavior": "[09:13] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.",
+    "behavior": "[03:10] FVG Breakdown Continuation Short. Sustained 5m close BELOW 24035 with expanding red Futures volume.",
     "tp": "24000",
     "sl": "24070",
     "status": "na"
@@ -48,7 +48,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23993.60",
     "bias": "bullish",
-    "behavior": "[09:13] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base (Turtle Soup Long). Sweep below 24000/23993.60 rejected with lower wick, closing back ABOVE 24035.",
+    "behavior": "[03:10] Day Low SSL Sweep Floor & Institutional V-shaped Absorption Base (Turtle Soup Long). Sweep below 24000/23993.60 rejected with lower wick, closing back ABOVE 24035.",
     "tp": "24095",
     "sl": "23960",
     "status": "na"
@@ -57,7 +57,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23993.60",
     "bias": "bearish",
-    "behavior": "[09:13] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m close BELOW 23993.60 triggers stop cascade.",
+    "behavior": "[03:10] Downside Long-Liquidation Cascade Breakdown Trigger. Sustained 15m close BELOW 23993.60 triggers stop cascade.",
     "tp": "23881",
     "sl": "24040",
     "status": "na"
@@ -66,7 +66,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23850-23900",
     "bias": "bullish",
-    "behavior": "[09:13] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).",
+    "behavior": "[03:10] HTF Macro Daily Demand Base & Major Institutional Support Shelf (FII Short-Covering Floor).",
     "tp": "24050",
     "sl": "23820",
     "status": "na"
@@ -75,7 +75,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23796-23881",
     "bias": "bullish",
-    "behavior": "[09:13] Extreme Panic Flush Liquidity Base & SL Hunting Sweep Floor.",
+    "behavior": "[03:10] Extreme Panic Flush Liquidity Base & SL Hunting Sweep Floor.",
     "tp": "24000",
     "sl": "23750",
     "status": "na"
@@ -84,7 +84,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24188.30-24200",
     "bias": "bearish",
-    "behavior": "[09:13] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.",
+    "behavior": "[03:10] Previous Day High (PDH) Supply Order Block & Pro Call Writing Wall.",
     "tp": "24120",
     "sl": "24220",
     "status": "na"
@@ -93,7 +93,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24280-24335",
     "bias": "bearish",
-    "behavior": "[09:13] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.",
+    "behavior": "[03:10] 2-Day Swing High Supply Wall & 200 EMA Resistance Shelf.",
     "tp": "24180",
     "sl": "24360",
     "status": "na"
@@ -102,7 +102,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24650-24750",
     "bias": "bullish",
-    "behavior": "[09:13] HTF Macro All-Time High Extension BSL Target.",
+    "behavior": "[03:10] HTF Macro All-Time High Extension BSL Target.",
     "tp": "24750",
     "sl": "24500",
     "status": "na"
@@ -731,33 +731,28 @@ window.btcDailyPlanData = [
 window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
-    "text": `================================================================================
+    "text": `NIFTY 50 Pre-Market Tactical Briefing (03:10 PM IST - Sep 01, 2026 | Spot: 24043.40 | Trigger: Ad-Hoc Run):
+
+================================================================================
 🎯 NIFTY 50 CALIBRATED 5-PILLAR DAILY BIAS & OUTLOOK
 ================================================================================
 • Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
 • Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)
-
-🧠 5-Pillar Rationale & Calibrated Score Breakdown (90-Day Empirical Calibration):
-1. Overnight & GIFT Nifty (+0.0): Neutral Flat Open (-0.01%)
-2. Market Structure (-1.5 - HIGHEST IMPACT): Bearish Breakdown (Closed below D-2 Low 24090.85)
-3. SMC Equilibrium (+1.0): Discount Equilibrium (< 24186.1)
-4. Moving Average Slope (-1.0): Bearish MA Alignment (Price < 9 EMA < 21 EMA)
-5. Closing Bar Strength (+0.0): Mid-Bar Close (64% position)
 
 📍 Tactical Directives:
 • Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
 • Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
 
 # 🌅 Pre-Market Tactical Briefing: NIFTY 50 & GOLD (XAU/USD)
-**Date & Session:** Tuesday, September 01, 2026 | 09:13 AM IST Pre-Market Briefing  
+**Date & Session:** Tuesday, September 01, 2026 | 03:10 PM IST Ad-Hoc Run  
 **Spot Benchmarks:** NIFTY Spot: **24,043.40** | GOLD (XAU/USD): **$4,485.10** | DXY: **99.495** | India VIX: **11.28**
 
 
 ---
 
 ## 1. Global Market Sentiment
-* **US Markets & Futures:** Wall Street exhibited notable divergence overnight. Tech led gains with the **Nasdaq Composite jumping +1.50% (+390.70 pts to 26,370.89)** and the **S&P 500 rising +0.43% (+33.28 pts to 7,686.14)**, while the **Dow Jones dipped -0.43% (-231.26 pts to 53,185.90)** due to industrial drag.
-* **Asian Markets:** Mixed to cautious. Asian equities are digesting the firming US Dollar Index and elevated benchmark yields ahead of key global manufacturing PMI prints.
+* **US Markets & Futures:** Wall Street exhibited notable divergence overnight. Tech led gains with the **Nasdaq Composite jumping +1.50% (+390.70 pts to 26,370.89)** and the **S&P 500 rising +0.43% (+33.28 pts to 7,686.14)**, while the **Dow Jones dipped -0.43% (-231.26 pts to 53,185.90)** due to industrial drag. US ES Futures trade steady near 7,695.
+* **Asian Markets:** Mixed to cautious. Asian equities are digesting the firming US Dollar Index and benchmark yields ahead of key global manufacturing PMI prints. Nikkei 225 trades mildly lower (-0.17%), while Hang Seng consolidates (-1.10%).
 * **European Markets:** Subdued and range-bound ahead of upcoming inflation and ECB economic releases.
 * **Risk Appetite / Sentiment:** Mixed/Cautious risk-off undertone. A sudden **+5.35% spike in Crude Oil** ($86.63/bbl) and a firming **US Dollar Index (DXY 99.495)** alongside US 10-Year Treasury Yields (~4.74%–4.76%) create headwinds for emerging market domestic equities.
 
@@ -807,6 +802,10 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
 * **Buy-Side Liquidity (BSL):** Resting stops above **24,095** (local swing), **24,188.30** (PDH), and **24,335** (2-day swing high).
 * **Sell-Side Liquidity (SSL):** Clustered below **23,993.60** (Day Low) and **23,881** (Panic stop cluster).
 
+### Bullish & Bearish Scenarios
+* **Bullish Scenario:** Dip absorption at 24,035–24,050 or sustained 5m/15m breakout above 24,095 triggers an intraday short squeeze targeting 24,188.30 and 24,250.
+* **Bearish Scenario:** Failure at 24,095–24,130 followed by breakdown below 24,035/23,993.60 unleashes a long-liquidation flush down into 23,881–23,850.
+
 
 ## 5. GOLD Analysis (XAU/USD)
 * **Current Direction & Momentum:** Gold is digesting its explosive spike to **$4,510.50** and is currently consolidating at **$4,485.10** within the 15M Bearish Fair Value Gap ($4,480–$4,495).
@@ -843,6 +842,9 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
 2. **Setup 2 (High-Momentum Short-Covering Breakout Long):**
    * *Condition:* Price sustains a 5m/15m candle close **ABOVE 24,095** with expanding Futures volume (>1.2x 20 EMA volume).
    * *Target:* **24,180 / 24,250**. *Stop Loss:* **24,055**.
+3. **Setup 3 (Displacement FVG Pullback Absorption Long):**
+   * *Condition:* Pullback into 24,035–24,050 with lower-wick rejection, closing 5m candle back **ABOVE 24,065**.
+   * *Target:* **24,095 / 24,180**. *Stop Loss:* **24,020**.
 
 ### 🎯 SELL Action Plan & Triggers
 1. **Setup 1 (Overhead Breaker / FVG Rejection Short):**
@@ -851,6 +853,9 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
 2. **Setup 2 (Liquidation Cascade Breakdown Short):**
    * *Condition:* 15-minute candle closes *firmly BELOW* **23,993.60** with heavy red Futures volume.
    * *Target:* **23,881 / 23,796**. *Stop Loss:* **24,040**.
+3. **Setup 3 (FVG Breakdown Continuation Short):**
+   * *Condition:* Sustained 5m close **BELOW 24,035** with expanding red Futures volume.
+   * *Target:* **24,000 / 23,891**. *Stop Loss:* **24,070**.
 
 
 ### 🚀 High Momentum / Explosive Zones
