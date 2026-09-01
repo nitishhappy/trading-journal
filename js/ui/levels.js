@@ -359,10 +359,17 @@ if (viewLevels) {
         // Determine clean asset label
         let asset = 'Market';
         const textLower = fullText.toLowerCase();
-        if (textLower.includes('gold') || activeAsset === 'GOLD') asset = 'Gold';
-        else if (textLower.includes('nifty') || activeAsset === 'NIFTY') asset = 'Nifty';
-        else if (textLower.includes('btc') || textLower.includes('bitcoin') || activeAsset === 'BTC') asset = 'BTC';
-        else if (textLower.includes('s&p') || textLower.includes('sp500') || activeAsset === 'SP500') asset = 'S&P 500';
+        
+        // Prioritize explicit activeAsset parameter if provided
+        if (activeAsset === 'GOLD') asset = 'Gold';
+        else if (activeAsset === 'NIFTY') asset = 'Nifty';
+        else if (activeAsset === 'BTC') asset = 'BTC';
+        else if (activeAsset === 'SP500') asset = 'S&P 500';
+        // Fallback to text matching
+        else if (textLower.includes('nifty')) asset = 'Nifty';
+        else if (textLower.includes('gold')) asset = 'Gold';
+        else if (textLower.includes('btc') || textLower.includes('bitcoin')) asset = 'BTC';
+        else if (textLower.includes('s&p') || textLower.includes('sp500')) asset = 'S&P 500';
 
         // Assemble compact pane header: "S&P 500 : 7677.99 : 09:21PM ,Aug 31 : 15m Watchdog"
         const parts = [asset];
