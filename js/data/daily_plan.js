@@ -8,19 +8,79 @@ window.dailyPlanData = [
   { "source": "SMU", "price": "24142", "bias": "bullish", "behavior": "Breakout above 24142 triggers short-covering move", "tp": "24250", "sl": "NA", "status": "na" },
   { "source": "SMU", "price": "24120 - 24142", "bias": "bearish", "behavior": "Rejection candle formed around 24120 - 24142 zone", "tp": "23891", "sl": "NA", "status": "na" },
   { "source": "SMU", "price": "24020", "bias": "bearish", "behavior": "Breakdown below Today's Day Low (~24020)", "tp": "23891", "sl": "NA", "status": "na" },
-  { "source": "SMU", "price": "23891", "bias": "bearish", "behavior": "Breakdown below 23891 level", "tp": "23823", "sl": "NA", "status": "na" }
+  { "source": "SMU", "price": "23891", "bias": "bearish", "behavior": "Breakdown below 23891 level", "tp": "23823", "sl": "NA", "status": "na" },
+  { "source": "AI", "price": "23952.55", "bias": "bullish", "behavior": "[22:58] Day Low SSL Sweep Reversal Base (23,952.55). Swift liquidity sweep below 23952 followed by 5m close above 24000 confirms SFP reversal.", "tp": "24080.00 / 24143.15", "sl": "23930.00", "status": "na" },
+  { "source": "AI", "price": "24143.15", "bias": "bullish", "behavior": "[22:58] High-Momentum Day High Breakout Trigger (24,143.15). Sustained 5m/15m close above 24143 with volume triggers short-covering squeeze.", "tp": "24188.00 / 24232.00", "sl": "24110.00", "status": "na" },
+  { "source": "AI", "price": "24143.15 - 24172.76", "bias": "bearish", "behavior": "[22:58] 9 EMA & Supply FVG Rejection Short (24,143.15 - 24,172.76). Bearish upper-wick rejection closing 5m candle below 24120.", "tp": "24055.00 / 23952.55", "sl": "24185.00", "status": "na" },
+  { "source": "AI", "price": "23952.55", "bias": "bearish", "behavior": "[22:58] Day Low Breakdown Continuation Short (23,952.55). Sustained 5m close below 23952 triggers institutional liquidation cascade.", "tp": "23880.00 / 23796.00", "sl": "23985.00", "status": "na" },
+  { "source": "AI", "price": "24050 - 24095", "bias": "neutral", "behavior": "[22:58] 50% Intraday Equilibrium & No-Trade Chop Zone (24,050 - 24,095). High-whipsaw compression box; stay flat to protect capital.", "tp": "na", "sl": "na", "status": "na" }
 ];
 
 window.dailyPlanSummary = [
+  {
+    "source": "AI",
+    "text": `NIFTY 50 Pre-Market Tactical Briefing (10:58 PM IST - Sep 01, 2026 | Spot: 24055.80 | Trigger: Ad-Hoc Run):
 
+================================================================================
+🎯 NIFTY 50 DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL (Consolidation & Straddle Compression) | Bias Score: -1.5 / +5.0 | Confidence: Moderate (72%)
+• Bias Invalidation Floor: 24,180.00 (A sustained 15M candle close above 9 EMA / 24,172.76 invalidates bearish intraday drift)
+
+📍 Tactical Directives:
+• Primary Outlook: Range-Bound Rotation & Liquidity Sweep Regimes. Spot (24,055.80) is oscillating between Day Low (23,952.55) demand absorption shelf and overhead resistance at Day High / 50 EMA (24,139.49–24,143.15) & 9 EMA (24,172.76).
+• Execution: Do NOT chase trades inside the 24,050–24,095 equilibrium compression box. Favour sniper long entries only on confirmed Turtle Soup / SFP sweeps below Day Low (23,952.55) or upside momentum breakouts above 24,143.15. Favour short entries on supply rejection at 24,143–24,172.
+
+1. Market Structure & Macro Synthesis:
+- NIFTY 50 Spot (^NSEI) is trading at 24055.80 (Day High: 24143.15 | Day Low: 23952.55 | Prior Day Close: 24080.40 | Change: -0.10%).
+- Structural State: Operating in Discount Zone relative to 10-Day Swing Range (Equilibrium: 24165.58 | 10-Day Range: 23952.55 – 24378.60).
+- Intermarket Drivers: Bank Nifty Spot is weak at 57409.60 (-1.06%), DXY is elevated at 99.69 (+0.27%), WTI Crude surged +4.48% to $89.60/bbl (macro inflation headwind), US 10Y Yield holds firm at 4.78%, while India VIX sits compressed at 11.19 (severe theta decay regime).
+- Macro Headline Guard: Global equity consolidation following S&P 500 (-0.70%) and Nasdaq (-0.96%) pullback as tech profit-taking accelerates.
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above Day High (24,143.15), 9 EMA / Bearish Breaker (24,172.76), 21 EMA (24,232.66), and 10-Day Swing High (24,378.60).
+- Sell-Side Liquidity (SSL): Concentrated below 24,000 round handle, Day Low (23,952.55), HTF Bullish Order Block (23,880–23,920), and 200 EMA (23,728.24).
+- Active Imbalances & POIs: Intraday Bearish Fair Value Gap (FVG) at 24,143–24,172; Institutional Absorption Demand Shelf at 23,952–24,000.
+
+3. Live Chop Zone / No-Trade Zone:
+- Range: 24,050.00 – 24,095.00 Index Points.
+- Context: Price is churning near 50% intraday equilibrium. Taking market orders inside this 45-point band exposes option buyers to dual theta erosion and whipsaw stop-outs.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> 24,143.15 Spot): A sustained 5m/15m candle close above Day High (24,143.15) with expanding Futures volume forces 24,100–24,150 Call writers into immediate unwinding, accelerating price toward 24,172 (9 EMA) and 24,232 (21 EMA).
+- Downside Long-Liquidation Cascade (< 23,952.55 Spot): A sustained 5m close below Day Low (23,952.55) triggers institutional stop cascades accelerating toward 23,880–23,920 and 23,728 (200 EMA).
+
+5. 5-Min / 15-Min Action Plan & Index Triggers:
+- BUY Setup 1 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Swift liquidity sweep below 23,952.55 followed by immediate lower-wick rejection and a 5m candle close back ABOVE 24,000.00. | TP: 24,080.00 / 24,143.15 | SL: 23,930.00.
+- BUY Setup 2 (High-Momentum Day High Breakout Long): Sustained 5m/15m close ABOVE 24,143.15 with expanding Nifty Futures volume (>1.2x). | TP: 24,188.00 / 24,232.00 | SL: 24,110.00.
+- SELL Setup 1 (9 EMA / Bearish FVG Rejection Short): Corrective relief rally into 24,143.15–24,172.76 rejected with upper wick, closing 5m candle back BELOW 24,120.00. | TP: 24,055.00 / 23,980.00 / 23,952.55 | SL: 24,185.00.
+- SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW 23,952.55 confirming structural failure. | TP: 23,880.00 / 23,796.00 | SL: 23,985.00.`
+  }
 ];
 
 window.goldDailyPlanData = [
-
+  { "source": "AI", "price": "4374.10", "bias": "bullish", "behavior": "[22:58] Day Low SSL Sweep Reversal / 200 EMA Floor ($4,374.10). Lower-wick rejection and 5m close above $4,385 confirms SFP rebound toward $4,410 / $4,435.", "tp": "4410.00 / 4435.00", "sl": "4360.00", "status": "na" },
+  { "source": "AI", "price": "4435.00", "bias": "bullish", "behavior": "[22:58] High-Momentum Short-Covering Breakout ($4,435.00). Sustained 5m/15m close above 21 EMA / $4,435 targets $4,488 (9 EMA) / $4,510.", "tp": "4488.00 / 4510.00", "sl": "4415.00", "status": "na" },
+  { "source": "AI", "price": "4488.00 - 4510.50", "bias": "bearish", "behavior": "[22:58] 9 EMA & Day High Supply Rejection Short ($4,488.00 - $4,510.50). Upper-wick rejection in premium supply zone targets $4,435 / $4,390.", "tp": "4435.00 / 4390.00", "sl": "4525.00", "status": "na" },
+  { "source": "AI", "price": "4369.00", "bias": "bearish", "behavior": "[22:58] 200 EMA Breakdown Continuation Short ($4,369.00). Sustained 5m close below 200 EMA / $4,369 accelerates drop toward $4,328 (50 EMA).", "tp": "4328.00 / 4300.00", "sl": "4385.00", "status": "na" },
+  { "source": "AI", "price": "4385.00 - 4405.00", "bias": "neutral", "behavior": "[22:58] Equilibrium Compression & Chop Zone ($4,385.00 - $4,405.00). Sideways consolidation pocket; avoid market order execution.", "tp": "na", "sl": "na", "status": "na" }
 ];
 
 window.goldDailyPlanSummary = [
+  {
+    "source": "AI",
+    "text": `Gold (XAU/USD) Intraday Tactical Briefing (10:58 PM IST - Sep 01, 2026 | Spot: $4,392.60 | Trigger: US Session Active):
 
+================================================================================
+🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL (Mean-Reversion / 200 EMA Support Defense) | Bias Score: -0.5 / +5.0 | Confidence: Moderate
+• Bias Invalidation Floor: $4,369.00 (A sustained 15M candle close below Daily 200 EMA invalidates support structure)
+
+📍 Tactical Directives:
+• Primary Outlook: Mean-reversion from macro discount floor ($4,369–$4,374.10) back toward 21 EMA ($4,422.09) and 9 EMA ($4,488.62).
+• Execution: Look for Turtle Soup SFP long entries on sweeps into $4,374.10 or high-momentum breakouts above $4,435.00.`
+  }
 ];
 
 window.btcDailyPlanData = [
