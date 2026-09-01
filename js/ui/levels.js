@@ -466,15 +466,14 @@ if (viewLevels) {
         if (!rawText) return '';
         const bodyText = stripHeaderLineFromBody(rawText);
 
-        if (bodyText.includes('|') && bodyText.includes('---')) {
-            return parseMarkdownTablesToHtml(bodyText);
-        }
-
         // Split text by numbered section headers (e.g., 1. Market Structure..., 2. SMC...)
-        const sectionHeaderRegex = /^\s*(\d+\.\s*[^:\n]+:)/gm;
+        const sectionHeaderRegex = /^\s*(?:#{1,6}\s*)?(\d+\.\s*[^:\n]+:?)/gm;
         const matches = [...bodyText.matchAll(sectionHeaderRegex)];
 
         if (matches.length === 0) {
+            if (bodyText.includes('|') && bodyText.includes('---')) {
+                return parseMarkdownTablesToHtml(bodyText);
+            }
             let safeText = escapeHtml(bodyText);
             let formattedText = safeText.replace(/\b(\$?\d{1,2},?\d{3}(?:\.\d+)?)\b/g, '<span style="color: #fb923c; font-weight: 700; font-family: \'JetBrains Mono\', monospace;">$1</span>');
             formattedText = formattedText.replace(/\b(Longs?|Buy|Buyers?|Buying|Support|Demand|BSL|CE)\b/gi, '<span style="color: #10b981; font-weight: 700;">$&</span>');
@@ -569,16 +568,22 @@ if (viewLevels) {
                         let setupName = cleanLine;
                         let dir = 'NEUTRAL';
                         let entry = cleanLine;
+                        
+                        let textWithoutTpSl = cleanLine;
+                        const stripMatch = cleanLine.match(/(?:\|\s*\*\*)?(?:TP:|SL:)/i);
+                        if (stripMatch) {
+                            textWithoutTpSl = cleanLine.substring(0, stripMatch.index).trim();
+                            textWithoutTpSl = textWithoutTpSl.replace(/[|.-]\s*$/, '').trim();
+                        }
+
                         let tp = '-';
                         let sl = '-';
 
-                        const tpMatch = cleanLine.match(/TP:\s*([^.\n]+?)(?=\.\s*SL:|\s*SL:|$)/i);
-                        if (tpMatch) tp = tpMatch[1].trim();
+                        const tpMatch = cleanLine.match(/TP:\s*\*?\*?\s*(.*?)(?=(?:\|\s*\*?\*?\s*)?SL:|\.\s*SL:|\s*SL:|$)/i);
+                        if (tpMatch) tp = tpMatch[1].replace(/\*+/g, '').replace(/\.$/, '').trim();
 
-                        const slMatch = cleanLine.match(/SL:\s*([^.\n]+)/i);
-                        if (slMatch) sl = slMatch[1].trim();
-
-                        let textWithoutTpSl = cleanLine.replace(/TP:.*$/i, '').trim();
+                        const slMatch = cleanLine.match(/SL:\s*\*?\*?\s*(.*?)(?=(?:\|\s*\*?\*?\s*)?TP:|\.\s*TP:|\s*TP:|$)/i);
+                        if (slMatch) sl = slMatch[1].replace(/\*+/g, '').replace(/\.$/, '').trim();
 
                         const colonIdx = textWithoutTpSl.indexOf(':');
                         if (colonIdx !== -1) {
@@ -605,7 +610,11 @@ if (viewLevels) {
                 }
             } else {
                 html += `<div class="summary-table-title">${escapeHtml(headerTitle)}</div>`;
-                html += `<div style="padding: 0.5rem 0; font-size: 0.88rem; line-height: 1.5;">${formatInlineHighlights(sectionContent)}</div>`;
+                if (sectionContent.includes('|') && sectionContent.includes('---')) {
+                    html += parseMarkdownTablesToHtml(sectionContent);
+                } else {
+                    html += `<div style="padding: 0.5rem 0; font-size: 0.88rem; line-height: 1.5;">${formatInlineHighlights(sectionContent)}</div>`;
+                }
             }
 
             html += `</div>`;

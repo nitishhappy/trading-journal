@@ -120,6 +120,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.0.8 — Fix Nifty Markdown Section & Table Parsing
+- **Fixed Section Header Extraction**: Updated `sectionHeaderRegex` to `(?:#{1,6}\s*)?(\d+\.\s*[^:\n]+:?)` in `levels.js` to correctly capture section headings for Nifty (which uses `## ` and lacks trailing colons) alongside BTC/GOLD (which use colons).
+- **Embedded Markdown Tables**: Ensures any numbered section containing a native Markdown table correctly parses the embedded table while preserving the rich HTML styling of the surrounding section content.
+- **Robust TP/SL Extraction**: Re-wrote the regex logic for the "Action Plan" summary tables so `TP:` and `SL:` bounds are extracted correctly regardless of their order. This natively supports Nifty's `\| **SL:**` formatting.
+
 ### v2.0.7 — Dynamic Summary Table Parsing Across All 4 Asset Scripts
 - **Universal Multi-Asset Summary Table Parsing**: Enhanced `renderSummaryTableContent()` in `js/ui/levels.js` to dynamically match and parse briefing summaries for all 4 assets (**Gold**, **Bitcoin**, **S&P 500**, and **NIFTY 50**).
 - **Dynamic Numbered Section Parser**: Uses regex section block extraction (`/^\s*(\d+\.\s*[^:\n]+:)/gm`) to convert Market Structure, SMC Confluence Levels, Chop Zones, High Momentum Scenarios, and 5-min Action Plans into adaptive, dark-themed HTML tables regardless of symbol or variant section titles.
