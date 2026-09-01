@@ -690,14 +690,164 @@ window.btcDailyPlanData = [
 window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
-    "text": "NIFTY 50 Pre-Market Tactical Briefing (09:13 AM IST - Sep 01, 2026 | Spot: 24043.40 | Trigger: Ad-Hoc Run):\n\n================================================================================\n\ud83c\udfaf DAILY MARKET BIAS & OUTLOOK\n================================================================================\n\u2022 Daily Market Bias: \u26aa NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)\n\u2022 Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)\n\n\ud83d\udccd Tactical Directives:\n\u2022 Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n\u2022 Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n1. Market Structure & Session Bias:\nNifty Spot (NSE:NIFTY) is trading at 24,043.40, consolidating near the lower boundary of yesterday's range (Aug 31 High: 24,188.30 | Low: 23,993.60 | Close: 24,080.40). The market formed a long lower-shadow absorption candle after sweeping the 24,000 psychological strike and Sell-Side Liquidity (SSL) at 23,993.60. Global sentiment is mixed (Nasdaq +1.50% vs Dow -0.43%), but elevated Crude Oil (.63/bbl, +5.35%) and USD/INR (95.01) alongside subdued India VIX (11.28) keep broader index momentum rotational.\n\n2. SMC & Liquidity Zones:\n- Buy-Side Liquidity (BSL): Concentrated above 24,095 (15M Breaker top), extending into PDH at 24,188.30, and major macro swing high at 24,280\u201324,335.\n- Sell-Side Liquidity (SSL): Clustered below 23,993.60 (Day Low sweep base) down to Daily Macro Demand at 23,850\u201323,900 and panic floor at 23,796\u201323,881.\n- Order Blocks (OB): Bullish Demand OB at 23,980\u201324,000; Bearish Breaker & Supply OB at 24,095\u201324,130; PDH Supply OB at 24,188\u201324,200.\n- Fair Value Gaps (FVG): 15M Bullish Displacement FVG at 24,035\u201324,050; 15M Bearish Imbalance FVG at 24,095\u201324,130.\n\n3. Live Intraday Chop Zone / No-Trade Zone:\n- Range: 24,055 \u2013 24,085 (50% Equilibrium Pocket).\n- Context: Price is hovering inside equilibrium. With India VIX at 11.28, option writers dominate this 30-point compression band. Avoid market orders and breakout chasing inside this box.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> 24,095 Spot): A sustained 5m/15m candle close above 24,095 with expanding Nifty Futures volume (>1.2x) forces call writers to cover, triggering a rapid rally towards 24,130 and 24,188.30.\n- Downside Long-Liquidation Cascade (< 23,993.60 Spot): A sustained 5m close below 23,993.60 triggers stop runs accelerating through 24,000 down into 23,881 and 23,796.\n\n5. 5-Min / 15-Min Action Plan & Tactical Triggers:\n- BUY Setup 1 (Day Low SSL Sweep Reversal Long - Turtle Soup): Sweep below 24,000 / 23,993.60 rejected with lower wick, closing 5m candle back ABOVE 24,035. TP: 24,095 / 24,180. SL: 23,960.\n- BUY Setup 2 (BSL Short-Covering Breakout Long): Sustained 5m/15m close ABOVE 24,095 with expanding green Futures volume. TP: 24,180 / 24,250. SL: 24,055.\n- SELL Setup 1 (Breaker / Supply Rejection Short): Corrective bounce into 24,095\u201324,130 rejected with upper wick, closing 5m candle back BELOW 24,080. TP: 24,035 / 24,000. SL: 24,142.\n- SELL Setup 2 (Liquidation Breakdown Short): 15-minute candle closes firmly BELOW 23,993.60 with expanding red Futures volume. TP: 23,881 / 23,796. SL: 24,040.\n\n6. Risk Warning & Option Buying Constraints:\n- India VIX at 11.28 indicates severe theta decay risk for naked option buyers. Only take trades at confirmed edges (24,035 discount floor or 24,095 breakout line).\n- Observe the 15-Minute Opening Range Filter (09:15\u201309:30 AM IST) before executing reversal entries."
-  },
-  {
-    "source": "AI Pre-Market Briefing",
-    "text": "================================================================================\n\ud83c\udfaf DAILY MARKET BIAS & OUTLOOK\n================================================================================\n\u2022 Daily Market Bias: \u26aa NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)\n\u2022 Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)\n\n\ud83d\udccd Tactical Directives:\n\u2022 Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n\u2022 Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\nStock Market Outlook (SMO) - Nifty 50 Prediction & Intraday Outlook (Sep 01, 2026):\n\n1. Overall Market Bias:\n\u2022 Bias: Neutral / Sideways with Bullish Undertone (Nifty consolidation near trendline support; Bank Nifty strong bullish hammer).\n\u2022 Structure: Nifty formed a Dragonfly Doji / potential Bullish Hammer near trendline support. Close was marginally below prior Bullish Harami, but gap fill base is holding and breakdown is NOT confirmed.\n\n2. Key Nifty Levels:\n\u2022 Immediate Support: 24,000 (Major Put writing, trendline support, gap fill base).\n\u2022 Immediate Resistance: 24,200 (Call writing resistance shelf).\n\u2022 Downside Breakdown Trigger: Decisive close below 24,000 triggers fast sell-off toward lower demand shelves.\n\n3. Institutional & Options Data:\n\u2022 FII / DII Data: FIIs net buyers in Options (Bullish), Pro traders Bearish, Retail Clients Bullish.\n\u2022 Cash/Futures Activity: FIIs sold \u20b91,000 Cr in Futures and \u20b98,000 Cr in Cash (partially impacted by block deal flows).\n\u2022 Option Chain / PCR: ATM PCR is ~0.8 (Neutral). Put writing focused at 24,000 strike (<50% OI change).\n\u2022 Sectorial Intermarket Support: Bank Nifty registered its highest close since August 6th with a strong bullish hammer. Given ~35-36% banking weight in Nifty 50, Bank Nifty strength acts as a major upward anchor."
-  },
-  {
-    "source": "AI Multi-Analyst Synthesis",
-    "text": "================================================================================\n\ud83c\udfaf COMPREHENSIVE MULTI-ANALYST NIFTY PREDICTION SYNTHESIS (01 SEP 2026)\n================================================================================\n\u2022 Consensus Bias: \u26aa NEUTRAL / VOLATILE EXPIRY (Oversold Dip Sweep -> Bullish Reversal Potential)\n\u2022 Primary Demand Floor: 23,980 \u2013 24,000 (Major Put OI Wall, 15M SSL Sweep Zone, Oversold Floor)\n\u2022 Secondary Panic Support: 23,881 / 23,796 (FII Short-Covering Floor & SL Hunting Base)\n\u2022 Primary Overhead Wall: 24,095 \u2013 24,150 (PRO Call Writing Concentration, PDC Hurdle)\n\u2022 Macro Breakout Ceiling: 24,180 \u2013 24,200 (HTF Trendline Breakout Trigger to 24,350 OB)\n\n1. Synthesis Rationale & Institutional Data:\n- FII vs PRO Divergence: FIIs heavily short Index Futures (~91%), while PRO desks aggressively wrote Calls (1.09L\u20131.99L contracts at 24,100 strike). Retailers are heavily Call buyers.\n- Market Breadth & Volatility: India VIX rose +5.71% to 11.28. Market breadth weak (Adv/Dec 1:2.4) with late-session 3:00 PM cash selling pressure.\n- High-Probability Expiry Trap (Tri-Color Setup): Algos likely to flush 24,000 support early to trigger retail stop-loss cascades towards 23,881 / 23,796 before establishing a U/V-shaped short-covering recovery.\n\n2. Actionable Scenarios:\n- BUY Setup 1 (Oversold Liquidity Sweep Reversal): Dip into 23,980\u201324,000 (or 23,881 panic sweep) with 15m wick rejection reclaiming 24,000. Targets: 24,080 / 24,124 / 24,200.\n- BUY Setup 2 (Short-Covering Breakout): 15m close firmly ABOVE 24,100\u201324,124. Targets: 24,200 / 24,280 / 24,350 HTF Order Block.\n- SELL Setup 1 (PRO Call Wall Rejection Short): Rally into 24,124\u201324,150 rejected with upper wick. Targets: 24,050 / 24,000.\n- SELL Setup 2 (Flush Breakdown Short): 15m close BELOW 23,950\u201323,997 (especially 3:00 PM window). Targets: 23,891 / 23,796."
+    "text": `================================================================================
+🎯 DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
+
+================================================================================
+🎯 NIFTY 50 CALIBRATED 5-PILLAR DAILY BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)
+
+🧠 5-Pillar Rationale & Calibrated Score Breakdown (90-Day Empirical Calibration):
+1. Overnight & GIFT Nifty (+0.0): Neutral Flat Open (-0.01%)
+2. Market Structure (-1.5 - HIGHEST IMPACT): Bearish Breakdown (Closed below D-2 Low 24090.85)
+3. SMC Equilibrium (+1.0): Discount Equilibrium (< 24186.1)
+4. Moving Average Slope (-1.0): Bearish MA Alignment (Price < 9 EMA < 21 EMA)
+5. Closing Bar Strength (+0.0): Mid-Bar Close (64% position)
+
+📍 Tactical Directives:
+• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
+
+# 🌅 Pre-Market Tactical Briefing: NIFTY 50 & GOLD (XAU/USD)
+**Date & Session:** Tuesday, September 01, 2026 | 09:13 AM IST Pre-Market Briefing  
+**Spot Benchmarks:** NIFTY Spot: **24,043.40** | GOLD (XAU/USD): **$4,485.10** | DXY: **99.495** | India VIX: **11.28**
+
+
+---
+
+## 1. Global Market Sentiment
+* **US Markets & Futures:** Wall Street exhibited notable divergence overnight. Tech led gains with the **Nasdaq Composite jumping +1.50% (+390.70 pts to 26,370.89)** and the **S&P 500 rising +0.43% (+33.28 pts to 7,686.14)**, while the **Dow Jones dipped -0.43% (-231.26 pts to 53,185.90)** due to industrial drag.
+* **Asian Markets:** Mixed to cautious. Asian equities are digesting the firming US Dollar Index and elevated benchmark yields ahead of key global manufacturing PMI prints.
+* **European Markets:** Subdued and range-bound ahead of upcoming inflation and ECB economic releases.
+* **Risk Appetite / Sentiment:** Mixed/Cautious risk-off undertone. A sudden **+5.35% spike in Crude Oil** ($86.63/bbl) and a firming **US Dollar Index (DXY 99.495)** alongside US 10-Year Treasury Yields (~4.74%–4.76%) create headwinds for emerging market domestic equities.
+
+
+## 2. Overnight Market Moves
+* **NIFTY 50 / GIFT NIFTY:** NIFTY Spot closed yesterday at **24,080.40** (Daily Range: 23,993.60 – 24,188.30). GIFT Nifty indicates a flat to mildly subdued opening around **24,040–24,050**.
+* **GOLD (XAU/USD):** Trading at **$4,485.10/oz** after an overnight high-volatility spike to **$4,510.50** (Day High exhaustion wick) followed by a sharp mean-reversion drop into the **$4,438.00–$4,445.00** demand pocket.
+* **USD/INR:** Hovering at **95.01**, elevated against the rupee and reflecting broader dollar strength.
+* **Crude Oil (WTI / Brent):** Surged **+5.35% to $86.63/barrel** on geopolitical and supply-tightness headlines.
+* **Global Tech vs Cyclicals:** Semiconductor and megacap tech strength continues to outperform traditional cyclicals and energy consumers.
+
+
+## 3. Major News & Economic Events
+* **Geopolitical & Energy Spike:** WTI crude spiked past $86.60/bbl, exerting pressure on domestic oil marketing and paint companies while strengthening energy producers.
+* **Domestic Institutional Data:**
+  * **FII Index Positioning:** FIIs remain heavily net-short on Index Futures (~91% short ratio), creating persistent fuel for a violent short-covering squeeze if key technical barriers break.
+  * **Pro Desk Positioning:** Pro desks hold heavy call-writing concentration at 24,100–24,150 (1.09L–1.99L contracts).
+  * **Bank Nifty Relative Strength:** Bank Nifty formed a strong bullish hammer near multi-week highs (Aug 6 structure), providing a heavyweight structural anchor (~35-36% index weight) against unilateral panic in Nifty 50.
+* **Key Calendar Data Today:** US ISM Manufacturing PMI, Eurozone CPI flash estimates, and domestic monthly auto sales and GST revenue updates.
+
+
+## 4. NIFTY Analysis
+
+### Market Structure & Price Action
+Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.30), forming a Dragonfly Doji / potential Bullish Hammer after sweeping the psychological **24,000** Put open-interest base. While the macro trend remains resilient, intraday price action is positioned below the 9 EMA (~24,115) and 21 EMA (~24,180), locking the index inside a compression box.
+
+### 📊 NIFTY Support & Resistance Key Levels Table
+
+| Level | Type (Support / Resistance / Liquidity) | Logic & Significance |
+| :--- | :--- | :--- |
+| 🟢 **24,650 – 24,750** | Macro Target (ATH Extension BSL Target) | Terminal Buy-Side Liquidity pool on higher-timeframe multi-session short squeeze. |
+| 🔴 **24,280 – 24,335** | Resistance (2-Day Swing High & 200 EMA) | 1-Hour Mitigated Order Block and dynamic 200 EMA resistance shelf. |
+| 🔴 **24,188.30 – 24,200** | Resistance (PDH & Pro Call Writing Wall) | Previous Day High (PDH) BSL pool and major institutional Call writing concentration. |
+| 🔴 **24,095 – 24,130** | Resistance (15M Bearish Breaker & FVG) | Overhead supply zone; Pro call-writing shelf; expect initial rejection unless cleared with volume. |
+| 🟢 **24,095.00** | Breakout Trigger (High-Momentum BSL Squeeze) | 15M structural reclaim; 5m/15m candle close above forces intraday shorts to panic cover. |
+| ⚪ **24,055 – 24,085** | Neutral (50% Equilibrium Chop Zone) | Intraday compression range; high theta decay pocket — **NO-TRADE CHOP ZONE**. |
+| 🟢 **24,035 – 24,050** | Support (Displacement FVG Pullback Demand) | 15M Bullish Fair Value Gap and intraday absorption shelf. |
+| 🟢 **23,993.60 – 24,000** | Support (Day Low & Primary Put OI Wall) | Major Put writing concentration, trendline support, and primary Turtle Soup SSL sweep baseline. |
+| 🟢 **23,850 – 23,900** | Support (HTF Macro Demand Shelf) | Higher timeframe daily demand base and major FII short-covering floor on panic selloffs. |
+| 🟢 **23,796 – 23,881** | Support (Deep Panic Demand / SL Hunt) | Deep Sell-Side Liquidity (SSL) sweep pool; institutional limit buy absorption floor for sharp V-reversal. |
+
+### Higher Timeframe (1H / Daily) Extreme Extension Targets
+* **HTF Bullish Target (Upside Extension):** **24,350** (1H Mitigated OB) and **24,650–24,750** (All-Time High Liquidity Pool).
+* **HTF Bearish Target (Downside Extension):** **23,850–23,900** (Macro Daily Demand Base) and **23,796** (Capitulation Flush Base).
+
+### Liquidity Zones
+* **Buy-Side Liquidity (BSL):** Resting stops above **24,095** (local swing), **24,188.30** (PDH), and **24,335** (2-day swing high).
+* **Sell-Side Liquidity (SSL):** Clustered below **23,993.60** (Day Low) and **23,881** (Panic stop cluster).
+
+
+## 5. GOLD Analysis (XAU/USD)
+* **Current Direction & Momentum:** Gold is digesting its explosive spike to **$4,510.50** and is currently consolidating at **$4,485.10** within the 15M Bearish Fair Value Gap ($4,480–$4,495).
+* **Key SMC Support & Resistance:**
+  * **Resistance:** **$4,495.00** (15M FVG top / momentum squeeze trigger), **$4,510.50** (Day High exhaustion wick peak), and **$4,525–$4,535** (4H Macro Supply).
+  * **Support:** **$4,448.00** (Liquidation cascade trigger), **$4,438.00–$4,445.00** (Session Low SSL sweep base), and **$4,400–$4,415** (HTF 4H Deep Discount Demand).
+* **Tactical Gold Scenarios:**
+  * **Bullish Setup (Turtle Soup Long):** Sweep below $4,445.00 rejected with lower wick, closing 5m candle back **ABOVE $4,452.00**. TP: $4,485.00 / $4,495.00. SL: $4,430.00.
+  * **Bullish Setup (Momentum Breakout):** Sustained 5m/15m close **ABOVE $4,495.00**. TP: $4,510.50 / $4,525.00. SL: $4,484.00.
+  * **Bearish Setup (FVG Rejection Short):** Relief bounce into $4,495.00 rejected with upper wick, closing 5m back **BELOW $4,480.00**. TP: $4,452.00 / $4,445.00. SL: $4,502.00.
+  * **Bearish Setup (Liquidation Short):** Sustained 5m close **BELOW $4,448.00**. TP: $4,420.00 / $4,405.00. SL: $4,458.00.
+
+
+## 6. SMC / Price Action Perspective (NIFTY)
+* **Order Blocks (POIs):**
+  * **Bullish Demand OB (23,980–24,000):** Institutional absorption block where large Put writers defend the 24,000 strike.
+  * **Bearish Supply Breaker (24,095–24,130):** Structural resistance formed by yesterday's broken support.
+* **Fair Value Gaps (FVGs):**
+  * **15M Bullish Displacement FVG (24,035–24,050):** Immediate discount pullback cushion.
+  * **15M Bearish Imbalance FVG (24,095–24,130):** Overhead liquidity void that smart money uses to test seller depth.
+* **Equilibrium & Premium/Discount Analysis:**
+  * **Range:** 23,993.60 (Low) to 24,188.30 (High).
+  * **50% Equilibrium:** **24,090.95**.
+  * **Discount Zone (< 24,090):** Favors institutional dip absorption and SSL sweep longs.
+  * **Premium Zone (> 24,090):** Favors short-fades unless confirmed by an explosive BSL squeeze.
+
+
+## 7. Tactical Trading Plan (5-Min NIFTY Intraday Option Buying)
+
+### 🎯 BUY Action Plan & Triggers
+1. **Setup 1 (Day Low SSL Sweep Reversal Long - Turtle Soup / SFP):**
+   * *Condition:* Early dip sweeps below 24,000 / 23,993.60, triggers retail stop-losses, and forms a distinct 5-minute lower-wick rejection candle closing **ABOVE 24,035**.
+   * *Target:* **24,095 / 24,180**. *Stop Loss:* **23,960**.
+2. **Setup 2 (High-Momentum Short-Covering Breakout Long):**
+   * *Condition:* Price sustains a 5m/15m candle close **ABOVE 24,095** with expanding Futures volume (>1.2x 20 EMA volume).
+   * *Target:* **24,180 / 24,250**. *Stop Loss:* **24,055**.
+
+### 🎯 SELL Action Plan & Triggers
+1. **Setup 1 (Overhead Breaker / FVG Rejection Short):**
+   * *Condition:* Relief bounce into 24,095–24,130 shows upper-wick exhaustion and closes a 5m candle back **BELOW 24,080**.
+   * *Target:* **24,035 / 24,000**. *Stop Loss:* **24,142**.
+2. **Setup 2 (Liquidation Cascade Breakdown Short):**
+   * *Condition:* 15-minute candle closes *firmly BELOW* **23,993.60** with heavy red Futures volume.
+   * *Target:* **23,881 / 23,796**. *Stop Loss:* **24,040**.
+
+
+### 🚀 High Momentum / Explosive Zones
+* **Upside Short-Covering Squeeze (> 24,095 Spot):** A sustained 15m close above 24,095 forces aggressive 24,100 Call writers (1.09L–1.99L contracts) into panic covering, unleashing a fast 80–150 pt momentum expansion straight to **24,188.30** and **24,250**.
+* **Downside Long-Liquidation Cascade (< 23,993.60 Spot):** A breakdown below 23,993.60 triggers cascading sell stops from overnight 24,000 Put writers, causing a rapid capitulation slide into **23,881** and **23,796**.
+
+
+### 🛡️ 15-Minute Opening Range Filter Rule (Mandatory)
+* **NEVER take a reversal entry on the 3rd 5-minute candle (09:25 AM).**
+* Wait for the complete **15-minute Opening Range (09:15–09:30 AM IST)** to form.
+* **For CE Longs:** Price must break and close above the 15m OR High with expanding green volume.
+* **For PE Shorts:** Price must break and close below the 15m OR Low with expanding red volume.
+
+
+### ⚡ Extreme Gap Contingency Plan (>100–150 pts Gap Up / Down)
+* **Massive Gap-Down Contingency:** If Nifty opens with deep panic (>100 pts) directly into 23,881–23,900, **DO NOT chase PE into the hole**. Look for an Opening Range Low sweep into the 23,850–23,881 macro demand shelf for a high-velocity mean-reversion rebound back toward 24,000.
+* **Massive Gap-Up Contingency:** If Nifty gaps up >100 pts directly into 24,180–24,200, expect an initial rejection trap against the Pro Call Writing Wall. Only enter continuation longs if price builds value above 24,200 after 09:45 AM.
+
+
+### 🚫 No-Trade Chop Zone
+* **24,055 – 24,085 (50% Equilibrium Box):** Stay flat! High risk of theta decay and whipsaw fakeouts. Do not execute unconfirmed market orders inside this range.
+
+
+## 8. Risk Warning & Option Buying Constraints
+* **Subdued India VIX (11.28):** Low implied volatility creates severe theta decay for out-of-the-money options. Trade strictly in ITM / deep ATM strikes.
+* **FII Net Short Divergence (~91%):** High probability of sudden, sharp short-covering spikes. Always honor hard stop losses.
+* **Patience Over Frequency:** Wait for institutional sweeps at the boundaries rather than anticipating moves inside the equilibrium box.
+
+---`
   }
 ];
