@@ -373,10 +373,8 @@ window.dailyPlanData = [
 window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
-    "text": `NIFTY 50 Pre-Market Tactical Briefing (03:10 PM IST - Sep 01, 2026 | Spot: 24043.40 | Trigger: Ad-Hoc Run):
-
-================================================================================
-🎯 NIFTY 50 CALIBRATED 5-PILLAR DAILY BIAS & OUTLOOK
+    "text": `================================================================================
+🎯 DAILY MARKET BIAS & OUTLOOK
 ================================================================================
 • Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
 • Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)
@@ -390,25 +388,23 @@ window.dailyPlanSummary = [
 **Spot Benchmarks:** NIFTY Spot: **24,043.40** | GOLD (XAU/USD): **$4,485.10** | DXY: **99.495** | India VIX: **11.28**
 
 
----
-
 ## 1. Global Market Sentiment
-* **US Markets & Futures:** Wall Street exhibited notable divergence overnight. Tech led gains with the **Nasdaq Composite jumping +1.50% (+390.70 pts to 26,370.89)** and the **S&P 500 rising +0.43% (+33.28 pts to 7,686.14)**, while the **Dow Jones dipped -0.43% (-231.26 pts to 53,185.90)** due to industrial drag. US ES Futures trade steady near 7,695.
-* **Asian Markets:** Mixed to cautious. Asian equities are digesting the firming US Dollar Index and benchmark yields ahead of key global manufacturing PMI prints. Nikkei 225 trades mildly lower (-0.17%), while Hang Seng consolidates (-1.10%).
+* **US Markets & Futures:** Wall Street closed with marked divergence. Megacap tech and semiconductors propelled the **Nasdaq Composite jumping +1.50% (+390.70 pts to 26,370.89)** and the **S&P 500 rising +0.43% (+33.28 pts to 7,686.14)** higher, while the **Dow Jones Industrial Average slipped -0.43% (-231.26 pts to 53,185.90)** due to industrial, healthcare, and banking drag. US ES Futures trade steady near 7,695.
+* **Asian Markets:** Cautious and mixed. Asian equities are digesting the firming US Dollar Index and benchmark yields ahead of key global manufacturing PMI prints. Nikkei 225 trades mildly lower (-0.17%), while Hang Seng consolidates (-1.10%).
 * **European Markets:** Subdued and range-bound ahead of upcoming inflation and ECB economic releases.
 * **Risk Appetite / Sentiment:** Mixed/Cautious risk-off undertone. A sudden **+5.35% spike in Crude Oil** ($86.63/bbl) and a firming **US Dollar Index (DXY 99.495)** alongside US 10-Year Treasury Yields (~4.74%–4.76%) create headwinds for emerging market domestic equities.
 
 
 ## 2. Overnight Market Moves
 * **NIFTY 50 / GIFT NIFTY:** NIFTY Spot closed yesterday at **24,080.40** (Daily Range: 23,993.60 – 24,188.30). GIFT Nifty indicates a flat to mildly subdued opening around **24,040–24,050**.
-* **GOLD (XAU/USD):** Trading at **$4,485.10/oz** after an overnight high-volatility spike to **$4,510.50** (Day High exhaustion wick) followed by a sharp mean-reversion drop into the **$4,438.00–$4,445.00** demand pocket.
+* **GOLD (XAU/USD):** Bullion trades at **$4,485.10/oz** after an overnight high-volatility spike to **$4,510.50** (Day High exhaustion wick) followed by a sharp mean-reversion drop into the **$4,438.00–$4,445.00** demand pocket.
 * **USD/INR:** Hovering at **95.01**, elevated against the rupee and reflecting broader dollar strength.
 * **Crude Oil (WTI / Brent):** Surged **+5.35% to $86.63/barrel** on geopolitical and supply-tightness headlines.
 * **Global Tech vs Cyclicals:** Semiconductor and megacap tech strength continues to outperform traditional cyclicals and energy consumers.
 
 
 ## 3. Major News & Economic Events
-* **Geopolitical & Energy Spike:** WTI crude spiked past $86.60/bbl, exerting pressure on domestic oil marketing and paint companies while strengthening energy producers.
+* **Geopolitical & Energy Spike:** WTI crude spiked past $86.60/bbl, exerting margin pressure on domestic oil marketing and paint companies while strengthening energy upstream producers.
 * **Domestic Institutional Data:**
   * **FII Index Positioning:** FIIs remain heavily net-short on Index Futures (~91% short ratio), creating persistent fuel for a violent short-covering squeeze if key technical barriers break.
   * **Pro Desk Positioning:** Pro desks hold heavy call-writing concentration at 24,100–24,150 (1.09L–1.99L contracts).
@@ -455,10 +451,10 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
   * **Resistance:** **$4,495.00** (15M FVG top / momentum squeeze trigger), **$4,510.50** (Day High exhaustion wick peak), and **$4,525–$4,535** (4H Macro Supply).
   * **Support:** **$4,448.00** (Liquidation cascade trigger), **$4,438.00–$4,445.00** (Session Low SSL sweep base), and **$4,400–$4,415** (HTF 4H Deep Discount Demand).
 * **Tactical Gold Scenarios:**
-  * **Bullish Setup (Turtle Soup Long):** Sweep below $4,445.00 rejected with lower wick, closing 5m candle back **ABOVE $4,452.00**. TP: $4,485.00 / $4,495.00. SL: $4,430.00.
-  * **Bullish Setup (Momentum Breakout):** Sustained 5m/15m close **ABOVE $4,495.00**. TP: $4,510.50 / $4,525.00. SL: $4,484.00.
-  * **Bearish Setup (FVG Rejection Short):** Relief bounce into $4,495.00 rejected with upper wick, closing 5m back **BELOW $4,480.00**. TP: $4,452.00 / $4,445.00. SL: $4,502.00.
-  * **Bearish Setup (Liquidation Short):** Sustained 5m close **BELOW $4,448.00**. TP: $4,420.00 / $4,405.00. SL: $4,458.00.
+  * **Bullish Setup 1 (Turtle Soup Long):** Sweep below $4,445.00 rejected with lower wick, closing 5m candle back **ABOVE $4,452.00**. TP: $4,485.00 / $4,495.00. SL: $4,430.00.
+  * **Bullish Setup 2 (Momentum Breakout):** Sustained 5m/15m close **ABOVE $4,495.00**. TP: $4,510.50 / $4,525.00. SL: $4,484.00.
+  * **Bearish Setup 1 (FVG Rejection Short):** Relief bounce into $4,495.00 rejected with upper wick, closing 5m back **BELOW $4,480.00**. TP: $4,452.00 / $4,445.00. SL: $4,502.00.
+  * **Bearish Setup 2 (Liquidation Short):** Sustained 5m close **BELOW $4,448.00**. TP: $4,420.00 / $4,405.00. SL: $4,458.00.
 
 
 ## 6. SMC / Price Action Perspective (NIFTY)
@@ -499,11 +495,9 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
    * *Condition:* Sustained 5m close **BELOW 24,035** with expanding red Futures volume.
    * *Target:* **24,000 / 23,891**. *Stop Loss:* **24,070**.
 
-
 ### 🚀 High Momentum / Explosive Zones
 * **Upside Short-Covering Squeeze (> 24,095 Spot):** A sustained 15m close above 24,095 forces aggressive 24,100 Call writers (1.09L–1.99L contracts) into panic covering, unleashing a fast 80–150 pt momentum expansion straight to **24,188.30** and **24,250**.
 * **Downside Long-Liquidation Cascade (< 23,993.60 Spot):** A breakdown below 23,993.60 triggers cascading sell stops from overnight 24,000 Put writers, causing a rapid capitulation slide into **23,881** and **23,796**.
-
 
 ### 🛡️ 15-Minute Opening Range Filter Rule (Mandatory)
 * **NEVER take a reversal entry on the 3rd 5-minute candle (09:25 AM).**
@@ -511,11 +505,9 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
 * **For CE Longs:** Price must break and close above the 15m OR High with expanding green volume.
 * **For PE Shorts:** Price must break and close below the 15m OR Low with expanding red volume.
 
-
 ### ⚡ Extreme Gap Contingency Plan (>100–150 pts Gap Up / Down)
 * **Massive Gap-Down Contingency:** If Nifty opens with deep panic (>100 pts) directly into 23,881–23,900, **DO NOT chase PE into the hole**. Look for an Opening Range Low sweep into the 23,850–23,881 macro demand shelf for a high-velocity mean-reversion rebound back toward 24,000.
 * **Massive Gap-Up Contingency:** If Nifty gaps up >100 pts directly into 24,180–24,200, expect an initial rejection trap against the Pro Call Writing Wall. Only enter continuation longs if price builds value above 24,200 after 09:45 AM.
-
 
 ### 🚫 No-Trade Chop Zone
 * **24,055 – 24,085 (50% Equilibrium Box):** Stay flat! High risk of theta decay and whipsaw fakeouts. Do not execute unconfirmed market orders inside this range.
@@ -526,6 +518,14 @@ Nifty Spot is consolidating within a 195-point daily range (23,993.60 to 24,188.
 * **FII Net Short Divergence (~91%):** High probability of sudden, sharp short-covering spikes. Always honor hard stop losses.
 * **Patience Over Frequency:** Wait for institutional sweeps at the boundaries rather than anticipating moves inside the equilibrium box.
 
----`
+
+## 🚀 Trading Journal & Mentorship Sync Status
+- [x] [daily_plan.js](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/daily_plan.js): Updated AI levels (\`[03:10]\` timestamp) and updated \`window.dailyPlanSummary\` with the strict required header \`NIFTY 50 Pre-Market Tactical Briefing (03:10 PM IST - Sep 01, 2026 | Spot: 24043.40 | Trigger: Ad-Hoc Run):\`.
+- [x] [nifty_daily_plan.js](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/nifty_daily_plan.js): Synchronized dedicated Nifty plan dataset.
+- [x] [Nifty_Learn.md](file:///C:/Nitish/ClaudeApps/Utilities/Nifty_Learn.md): Appended educational SMC Masterclass log for the 03:10 PM IST session.
+- [x] [generate-version.js](file:///C:/Nitish/ClaudeApps/trading-journal/generate-version.js): Cache hash bumped to \`trade-journal-e86f22c2ab\`.
+- [x] **Git Auto-Sync**: Committed and pushed changes to \`main\` across both repositories:
+  - \`trading-journal\`: \`22294b2\`
+  - \`Utilities\`: \`a181b99\``
   }
 ];
