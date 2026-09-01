@@ -376,7 +376,9 @@ Bitcoin Spot (BTC/USD) is trading at $78,629.47, strong bearish trend (below 9 &
 - SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $78870.0–$78932.0 rejected with upper wick, closing back BELOW $78,757.35 on 5m candle. TP: $78,329.47 / $78,129.47. SL: $78,829.47.
 - SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $78,605.90. TP: $78,229.47 / $77,829.47. SL: $78,779.47.`
   }
-];btcDailyPlanData = [
+];
+
+window.btcDailyPlanData = [
   {
     "source": "BTC-AI",
     "price": "77957.61",
@@ -562,7 +564,7 @@ Bitcoin Spot (BTC/USD) is trading at $78,629.47, strong bearish trend (below 9 &
 window.btcDailyPlanSummary = [
   {
     "source": "BTC-AI",
-    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (07:25 PM IST - Sep 01, 2026 | Spot: 78051.83 | Trigger: London Session (European Opening) (European Session Start)):
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (07:25 PM IST - Sep 01, 2026 | Spot: 78043.14 | Trigger: Stateful Level Breach (BTC Level $77891.60-$78508.00 breached for first time today)):
 
 ================================================================================
 🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK
@@ -576,7 +578,7 @@ window.btcDailyPlanSummary = [
 
 
 1. Market Structure & Session Bias:
-Bitcoin Spot (BTC/USD) is trading at $78,051.83, consolidation / pullback state within the updated daily structure (Day High: $79,253.90 | Day Low: $77,471.99 | Prior Day Close: $78,892.55 | Live Spot: $78,051.83). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.561 (Consolidating DXY) and S&P 500 Futures $7647.5) combined with crypto-native context (Funding Rate is 0.0100% (neutral); Fear & Greed Index: 69 (Greed); CME Gap inactive at 78170.0 (above, size: 118.17)) guide structure. Spot is inside previous day range | below pdc (day red).
+Bitcoin Spot (BTC/USD) is trading at $78,043.14, consolidation / pullback state within the updated daily structure (Day High: $79,253.90 | Day Low: $77,471.99 | Prior Day Close: $78,892.55 | Live Spot: $78,043.14). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.561 (Consolidating DXY) and S&P 500 Futures $7647.5) combined with crypto-native context (Funding Rate is 0.0100% (neutral); Fear & Greed Index: 69 (Greed); CME Gap inactive at 78170.0 (above, size: 118.17)) guide structure. Spot is inside previous day range | below pdc (day red).
 
 2. SMC & Liquidity Zones:
 - Buy-Side Liquidity (BSL): Clustered above $79,253.90 local swing highs, extending into 15M Bearish FVG ($78019.6–$78246.0), and macro day high targets up to $79,169.84.
@@ -586,7 +588,7 @@ Bitcoin Spot (BTC/USD) is trading at $78,051.83, consolidation / pullback state 
 
 3. Live Intraday Chop Zone / No-Trade Zone:
 - Range: $77,739.28 – $78,986.61 (Value Area) / $78,161.48 – $79,195.32 (Asian Range).
-- Context: Current spot ($78,051.83) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
+- Context: Current spot ($78,043.14) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
 
 4. High Momentum / Explosive Zones:
 - Upside Short-Covering Squeeze (> $79,253.90 Spot): A sustained 5m/15m candle close above $79,253.90 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,351.83 and $78,651.83.
