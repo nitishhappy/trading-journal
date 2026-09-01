@@ -167,6 +167,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 - **Zero Pop-up Windows**: Updated Task Scheduler actions for Nifty, Gold, BTC, and S&P 500 to execute headlessly via PowerShell using `-NoProfile -WindowStyle Hidden`.
 - **Silent Background Automation**: All 4 symbol watchdogs now evaluate market ticks and sync AI levels 100% invisibly in the background without spawning console windows or interrupting the desktop.
 
+### v2.1.0 — Multi-Asset Daily Plan Recovery & Robust Parser Engine
+- **Data Integrity & Array Restoration**: Restored all historical AI summaries and mapped levels for Nifty, Gold, Bitcoin, and S&P 500 in `js/data/daily_plan.js`.
+- **Bracket-Balanced JS Parser**: Replaced fragile regular expression file slicers with a robust bracket-balanced parser in `prune_daily_plan.py` and asset copilot engines, preventing accidental array truncation when summaries contain backticks, quotes, or markdown tables.
+- **Clean Sectional File Rebuilder**: Enforced strict variable formatting (`window.<asset>DailyPlanData` and `window.<asset>DailyPlanSummary`) with isolated sections for all 4 assets.
+
 ### v1.9.6 — Explicit Ad-Hoc Run Trigger Labeling
 - **Ad-Hoc Trigger Normalization**: Updated manual launcher automation (`premarket_briefing.ps1 -Force` and client renderer `levels.js`) to label manual ad-hoc executions explicitly as `Trigger: Ad-Hoc Run`.
 - **Clean Pane Header Output**: Renders ad-hoc header bars cleanly as `Nifty : 24071.75 : 12:51PM ,Aug 31 : Ad-Hoc Run` across all 4 instruments.
