@@ -9,52 +9,102 @@ window.dailyPlanData = [
   { "source": "SMU", "price": "24120 - 24142", "bias": "bearish", "behavior": "Rejection candle formed around 24120 - 24142 zone", "tp": "23891", "sl": "NA", "status": "na" },
   { "source": "SMU", "price": "24020", "bias": "bearish", "behavior": "Breakdown below Today's Day Low (~24020)", "tp": "23891", "sl": "NA", "status": "na" },
   { "source": "SMU", "price": "23891", "bias": "bearish", "behavior": "Breakdown below 23891 level", "tp": "23823", "sl": "NA", "status": "na" },
-  { "source": "AI", "price": "23952.55", "bias": "bullish", "behavior": "[22:58] Day Low SSL Sweep Reversal Base (23,952.55). Swift liquidity sweep below 23952 followed by 5m close above 24000 confirms SFP reversal.", "tp": "24080.00 / 24143.15", "sl": "23930.00", "status": "na" },
-  { "source": "AI", "price": "24143.15", "bias": "bullish", "behavior": "[22:58] High-Momentum Day High Breakout Trigger (24,143.15). Sustained 5m/15m close above 24143 with volume triggers short-covering squeeze.", "tp": "24188.00 / 24232.00", "sl": "24110.00", "status": "na" },
-  { "source": "AI", "price": "24143.15 - 24172.76", "bias": "bearish", "behavior": "[22:58] 9 EMA & Supply FVG Rejection Short (24,143.15 - 24,172.76). Bearish upper-wick rejection closing 5m candle below 24120.", "tp": "24055.00 / 23952.55", "sl": "24185.00", "status": "na" },
-  { "source": "AI", "price": "23952.55", "bias": "bearish", "behavior": "[22:58] Day Low Breakdown Continuation Short (23,952.55). Sustained 5m close below 23952 triggers institutional liquidation cascade.", "tp": "23880.00 / 23796.00", "sl": "23985.00", "status": "na" },
-  { "source": "AI", "price": "24050 - 24095", "bias": "neutral", "behavior": "[22:58] 50% Intraday Equilibrium & No-Trade Chop Zone (24,050 - 24,095). High-whipsaw compression box; stay flat to protect capital.", "tp": "na", "sl": "na", "status": "na" }
+  { "source": "AI", "price": "23952.55", "bias": "bullish", "behavior": "[09:10] Day Low SSL Sweep Reversal Base (23,952.55). Swift liquidity sweep below 23952 followed by 5m close above 24000 confirms SFP reversal.", "tp": "24080.00 / 24143.15", "sl": "23930.00", "status": "na" },
+  { "source": "AI", "price": "24143.15", "bias": "bullish", "behavior": "[09:10] High-Momentum Day High Breakout Trigger (24,143.15). Sustained 5m/15m close above 24143 with volume triggers short-covering squeeze.", "tp": "24188.00 / 24232.00", "sl": "24110.00", "status": "na" },
+  { "source": "AI", "price": "24000 - 24035", "bias": "bullish", "behavior": "[09:10] 15M Bullish Displacement FVG Demand Shelf (24,000 - 24,035). Pullback retest with lower-wick rejection confirms long entry.", "tp": "24095.00 / 24143.15", "sl": "23980.00", "status": "na" },
+  { "source": "AI", "price": "24143.15 - 24172.76", "bias": "bearish", "behavior": "[09:10] 9 EMA & Supply FVG Rejection Short (24,143.15 - 24,172.76). Bearish upper-wick rejection closing 5m candle below 24120.", "tp": "24055.00 / 23952.55", "sl": "24185.00", "status": "na" },
+  { "source": "AI", "price": "23952.55", "bias": "bearish", "behavior": "[09:10] Day Low Breakdown Continuation Short (23,952.55). Sustained 5m close below 23952 triggers institutional liquidation cascade.", "tp": "23880.00 / 23796.00", "sl": "23985.00", "status": "na" },
+  { "source": "AI", "price": "24050 - 24095", "bias": "neutral", "behavior": "[09:10] 50% Intraday Equilibrium & No-Trade Chop Zone (24,050 - 24,095). High-whipsaw compression box; stay flat to protect capital.", "tp": "na", "sl": "na", "status": "na" }
 ];
 
 window.dailyPlanSummary = [
   {
     "source": "AI",
-    "text": `NIFTY 50 Pre-Market Tactical Briefing (10:58 PM IST - Sep 01, 2026 | Spot: 24055.80 | Trigger: Ad-Hoc Run):
+    "text": `NIFTY 50 Pre-Market Tactical Briefing (09:10 AM IST - Sep 02, 2026 | Spot: 24055.80 | Trigger: 09:10 AM IST Pre-Market Briefing):
 
 ================================================================================
-🎯 NIFTY 50 DAILY MARKET BIAS & OUTLOOK
+🎯 DAILY MARKET BIAS & OUTLOOK
 ================================================================================
-• Daily Market Bias: ⚪ NEUTRAL (Consolidation & Straddle Compression) | Bias Score: -1.5 / +5.0 | Confidence: Moderate (72%)
-• Bias Invalidation Floor: 24,180.00 (A sustained 15M candle close above 9 EMA / 24,172.76 invalidates bearish intraday drift)
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: 24055.80 (A 15M close above 24055.80 invalidates bias)
 
 📍 Tactical Directives:
-• Primary Outlook: Range-Bound Rotation & Liquidity Sweep Regimes. Spot (24,055.80) is oscillating between Day Low (23,952.55) demand absorption shelf and overhead resistance at Day High / 50 EMA (24,139.49–24,143.15) & 9 EMA (24,172.76).
-• Execution: Do NOT chase trades inside the 24,050–24,095 equilibrium compression box. Favour sniper long entries only on confirmed Turtle Soup / SFP sweeps below Day Low (23,952.55) or upside momentum breakouts above 24,143.15. Favour short entries on supply rejection at 24,143–24,172.
+• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
+• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
 
-1. Market Structure & Macro Synthesis:
-- NIFTY 50 Spot (^NSEI) is trading at 24055.80 (Day High: 24143.15 | Day Low: 23952.55 | Prior Day Close: 24080.40 | Change: -0.10%).
-- Structural State: Operating in Discount Zone relative to 10-Day Swing Range (Equilibrium: 24165.58 | 10-Day Range: 23952.55 – 24378.60).
-- Intermarket Drivers: Bank Nifty Spot is weak at 57409.60 (-1.06%), DXY is elevated at 99.69 (+0.27%), WTI Crude surged +4.48% to $89.60/bbl (macro inflation headwind), US 10Y Yield holds firm at 4.78%, while India VIX sits compressed at 11.19 (severe theta decay regime).
-- Macro Headline Guard: Global equity consolidation following S&P 500 (-0.70%) and Nasdaq (-0.96%) pullback as tech profit-taking accelerates.
+1. Global market sentiment:
+- US Markets & Futures: S&P 500 closed at 7631.47 (-0.70%), ES Futures trading near 7644.00. Nasdaq closed near 26120.00 (-0.96%), NQ Futures at 29125.75 on tech consolidation. Dow Jones holding near record high above 52000.
+- Asian Markets: Cautious undertone. Nikkei 225 down -0.35%, Hang Seng down -0.85% under tech and real-estate pressure. GIFT Nifty indicates a flat-to-subdued opening near 24040–24060.
+- European Markets: DAX, CAC 40, and FTSE 100 consolidating ahead of Eurozone CPI and services PMI data.
+- Risk Sentiment: Risk-off/cautious stance. Elevated US Dollar Index (DXY 99.78, +0.34%), high US 10-Year Treasury Yields (4.80%), and elevated WTI Crude Oil ($89.60/bbl, +4.48%) create macro headwinds for emerging market domestic equities.
 
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above Day High (24,143.15), 9 EMA / Bearish Breaker (24,172.76), 21 EMA (24,232.66), and 10-Day Swing High (24,378.60).
-- Sell-Side Liquidity (SSL): Concentrated below 24,000 round handle, Day Low (23,952.55), HTF Bullish Order Block (23,880–23,920), and 200 EMA (23,728.24).
-- Active Imbalances & POIs: Intraday Bearish Fair Value Gap (FVG) at 24,143–24,172; Institutional Absorption Demand Shelf at 23,952–24,000.
+2. Overnight market moves:
+- NIFTY 50 / GIFT NIFTY: NIFTY 50 Spot closed at 24080.40 / Spot reference 24055.80. Prior day range spanned 23952.55 (Day Low) to 24143.15 (Day High). GIFT NIFTY indicates opening around 24040–24060.
+- GOLD (XAU/USD): Trading at $4293.48/oz following overnight New York liquidation and failed Asian counter-trend relief pop (rejected at $4309.39–$4318.00 breaker supply), consolidating below the $4300 psychological handle.
+- USD/INR: Elevated at 95.05 on sustained dollar index strength.
+- Crude Oil: WTI Crude up +4.48% at $89.60/bbl on supply tightness headlines.
+- Major Global Indices: Consolidation across global equities with tech profit-taking after multi-week expansion.
 
-3. Live Chop Zone / No-Trade Zone:
-- Range: 24,050.00 – 24,095.00 Index Points.
-- Context: Price is churning near 50% intraday equilibrium. Taking market orders inside this 45-point band exposes option buyers to dual theta erosion and whipsaw stop-outs.
+3. Major news/events:
+- US Macro & Yield Pressures: Sticky US Treasury yields (4.80%) and firm DXY (99.78) maintain capital cost pressure and cap emerging market equity inflows.
+- Energy Inflation Headwinds: Elevated crude at $89.60/bbl pressures Indian OMC and consumer goods margins while providing tailwinds to energy upstream heavyweights.
+- Institutional FII Skew: FII net short index futures ratio remains heavily skewed (~91% short ratio), presenting persistent overhead resistance but immense squeeze potential on any structural breakout.
+- Pro Desk Straddle Defense: Heavy Call writing concentration at 24100–24150 balanced by Put defense at 24000.
+- Key Calendar Data Today: India Services PMI, US ISM Non-Manufacturing PMI, ADP Employment data, and Eurozone PPI.
 
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> 24,143.15 Spot): A sustained 5m/15m candle close above Day High (24,143.15) with expanding Futures volume forces 24,100–24,150 Call writers into immediate unwinding, accelerating price toward 24,172 (9 EMA) and 24,232 (21 EMA).
-- Downside Long-Liquidation Cascade (< 23,952.55 Spot): A sustained 5m close below Day Low (23,952.55) triggers institutional stop cascades accelerating toward 23,880–23,920 and 23,728 (200 EMA).
+4. NIFTY analysis:
+- Market Structure: Nifty Spot is oscillating in discount territory within the 10-day swing range (23952.55 to 24378.60, 50% Equilibrium: 24165.58), positioned below Daily 9 EMA (24172.76) and 21 EMA (24232.66).
+- Higher Timeframe Extension Targets: Bullish HTF targets sit at 24378.60 (10-Day Swing High BSL), 24500 (1H Mitigated OB), and 24650–24750 (All-Time High Liquidity Pool). Bearish HTF targets sit at 23880–23920 (Macro Demand Base) and 23728.24 (Daily 200 EMA Macro Anchor).
+- Liquidity Zones: Buy-Side Liquidity (BSL) rests above 24143.15 (Day High), 24172.76 (9 EMA Breaker), 24232.66 (21 EMA), and 24378.60 (10-Day Swing High). Sell-Side Liquidity (SSL) is clustered below 24000, 23952.55 (Day Low), 23880–23920, and 23728.24 (200 EMA).
+- Bullish Scenario: Early dip absorption holding above 23952–24000 followed by sustained 5m/15m breakout above 24143.15 triggers short-covering squeeze toward 24188 and 24232.
+- Bearish Scenario: Breakdown and 15m candle close below 23952.55 unleashes long liquidation cascade down into 23880–23920.
 
-5. 5-Min / 15-Min Action Plan & Index Triggers:
-- BUY Setup 1 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Swift liquidity sweep below 23,952.55 followed by immediate lower-wick rejection and a 5m candle close back ABOVE 24,000.00. | TP: 24,080.00 / 24,143.15 | SL: 23,930.00.
-- BUY Setup 2 (High-Momentum Day High Breakout Long): Sustained 5m/15m close ABOVE 24,143.15 with expanding Nifty Futures volume (>1.2x). | TP: 24,188.00 / 24,232.00 | SL: 24,110.00.
-- SELL Setup 1 (9 EMA / Bearish FVG Rejection Short): Corrective relief rally into 24,143.15–24,172.76 rejected with upper wick, closing 5m candle back BELOW 24,120.00. | TP: 24,055.00 / 23,980.00 / 23,952.55 | SL: 24,185.00.
-- SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW 23,952.55 confirming structural failure. | TP: 23,880.00 / 23,796.00 | SL: 23,985.00.`
+| Level | Type (Support/Resistance/Liquidity) | Logic & Significance |
+| :--- | :--- | :--- |
+| 🟢 **24,650 – 24,750** | Macro Target (ATH Extension BSL Target) | Terminal Buy-Side Liquidity pool on higher-timeframe multi-session institutional short squeeze. |
+| 🔴 **24,378.60** | Resistance (10-Day Swing High BSL Pool) | Major multi-day swing ceiling and resting short stop-loss cluster. |
+| 🔴 **24,232 – 24,250** | Resistance (Daily 21 EMA & Major Supply OB) | Institutional distribution ceiling; clearing this confirms swing trend reversal. |
+| 🔴 **24,172 – 24,188** | Resistance (Daily 9 EMA & Bearish FVG) | Dynamic resistance and Bearish Breaker mitigation zone; bias invalidation shelf. |
+| 🟢 **24,143.15** | Breakout Trigger (High-Momentum BSL Squeeze) | Day High structural trigger; 5m/15m close above forces 24,100–24,150 Call writers into rapid short-covering. |
+| ⚪ **24,050 – 24,095** | Neutral (50% Equilibrium Chop Zone) | Intraday compression range; high theta decay pocket — **NO-TRADE CHOP ZONE**. |
+| 🟢 **24,000 – 24,035** | Support (Displacement FVG Pullback Demand) | 15M Bullish Fair Value Gap and round number institutional absorption shelf. |
+| 🟢 **23,952.55** | Support (Day Low & Primary SSL Sweep Floor) | Major Put writing defense, trendline base, and primary Turtle Soup / SFP sweep baseline. |
+| 🔴 **23,952.55** | Breakdown Trigger (Downside Long-Liquidation Cascade) | Sustained 5m/15m close below Day Low triggers stop cascades into HTF demand. |
+| 🟢 **23,880 – 23,920** | Support (HTF Macro Demand Base) | Higher timeframe unmitigated demand block and primary FII short-covering floor on panic sell-offs. |
+| 🟢 **23,728 – 23,796** | Support (Daily 200 EMA & Deep Capitulation Floor) | Macro 200 EMA institutional anchor; ultimate limit buy absorption shelf for violent V-reversals. |
+
+5. GOLD analysis:
+- Current Direction & Momentum: Gold Spot is trading at $4293.48/oz, consolidating below the $4300 psychological handle after overnight liquidation and Asian session relief rejection at $4309.39–$4318.00 breaker supply.
+- Overhead Supply & Resistance: $4300.00–$4308.00 (Broken $4300 Breaker Block & 15M Supply FVG), $4315.00–$4322.00 (Broken 4H Breaker & 15M FVG), $4332.00 (Session Supply High), $4385.50 (Day High BSL).
+- Demand Floor & Support: $4284.00 (Asian Sweep Low), $4270.00–$4280.00 (Deep Discount HTF Daily Order Block), $4255.00 (Macro Demand Extension).
+- Bullish & Bearish Scenarios: Bullish mean-reversion requires Turtle Soup sweep below $4284 reclaiming $4288 or momentum breakout above $4305; bearish continuation targets $4270 and $4255 on sustained 5m close below $4284.
+
+6. SMC & Session Liquidity Confluence:
+- Bullish Demand Order Block (23,952–24,000): Institutional absorption block defending 24000 Put open interest and absorbing retail Sell-Side Liquidity.
+- Bearish Supply Breaker Block (24,143–24,172): Structural overhead supply formed by broken support and 15M Bearish Fair Value Gap / 9 EMA.
+- Active Fair Value Gaps (FVGs): 15M Bullish Displacement FVG at 24000–24035; 15M Bearish Imbalance FVG at 24143–24172.
+- BOS / CHoCH Dynamics: Intraday Change of Character (CHoCH) requires sustained 15M close above 24143.15; Break of Structure (BOS) down confirmed on 15M close below 23952.55.
+- 50% Equilibrium Analysis: Daily range is 23952.55 to 24143.15 with 50% Equilibrium at 24047.85. Discount zone (< 24048) favors dip absorption; Premium zone (> 24048) favors supply short fades.
+
+7. 5-Min / 15-Min Action Plan & Index Triggers:
+- BUY Setup 1 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Swift liquidity sweep below 23952.55 followed by immediate lower-wick rejection and a 5m candle close back ABOVE 24000.00. | TP: 24080.00 / 24143.15 | SL: 23930.00.
+- BUY Setup 2 (High-Momentum Day High Breakout Long): Sustained 5m/15m close ABOVE 24143.15 with expanding Nifty Futures volume (>1.2x 20 EMA volume). | TP: 24188.00 / 24232.00 | SL: 24110.00.
+- BUY Setup 3 (Displacement FVG Pullback Absorption Long): Pullback into 24000.00–24035.00 with lower-wick rejection, closing 5m candle back ABOVE 24050.00. | TP: 24095.00 / 24143.15 | SL: 23980.00.
+- SELL Setup 1 (9 EMA / Bearish FVG Rejection Short): Corrective relief rally into 24143.15–24172.76 rejected with upper wick, closing 5m candle back BELOW 24120.00. | TP: 24055.00 / 23980.00 / 23952.55 | SL: 24185.00.
+- SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW 23952.55 confirming structural failure and institutional long liquidation. | TP: 23880.00 / 23796.00 | SL: 23985.00.
+- SELL Setup 3 (Overhead Breaker Rejection Short): Push into 24188.00–24232.00 shows exhaustion wicks, closing 5m candle back BELOW 24160.00. | TP: 24110.00 / 24055.00 | SL: 24245.00.
+- Upside Short-Covering Squeeze (> 24143.15 Spot): Sustained 5m/15m candle close above Day High (24143.15) with expanding Futures volume forces 24100–24150 Call writers into immediate unwinding, accelerating price toward 24172 (9 EMA) and 24232 (21 EMA).
+- Downside Long-Liquidation Cascade (< 23952.55 Spot): Sustained 5m close below Day Low (23952.55) triggers institutional stop cascades accelerating toward 23880–23920 (HTF Demand Base) and 23728 (200 EMA).
+- 15-Minute Opening Range Filter Rule: NEVER execute a reversal entry on the 3rd 5-minute candle (09:25 AM). Wait for the complete 15-minute Opening Range (09:15–09:30 AM IST) to close. For CE Longs, price must break and close firmly ABOVE the 15-minute Opening Range High with expanding green Futures volume. For PE Shorts, price must break and close firmly BELOW the 15-minute Opening Range Low with expanding red Futures volume.
+- Extreme Gap Contingency Plan (Massive Gap-Down >100 pts into 23880–23920): DO NOT panic short into HTF Demand. Look for an Opening Range Low sweep into 23880–23900 with a sharp lower-wick rejection to enter high-velocity mean-reversion longs back toward 24000.
+- Extreme Gap Contingency Plan (Massive Gap-Up >100 pts into 24180–24230): Expect heavy initial supply defense from Pro Call writers and 9/21 EMAs. Do NOT chase breakout green candles; wait for a pullback holding above 24143 or a 15-minute value acceptance above 24232 after 09:45 AM before participating in continuation longs.
+- Live Chop Zone / No-Trade Zone (24050.00 – 24095.00 Spot): Stay flat inside the 50% Equilibrium Box. High theta decay and dual-sided wick traps punish option buyers.
+
+8. Risk warning:
+- Compressed India VIX (11.19): Low implied volatility creates severe theta decay for out-of-the-money options. Trade strictly in ITM or deep ATM strikes (e.g., 24000 CE / 24100 PE).
+- Heavy FII Short Skew (~91% Net Short Ratio): High probability of sharp, sudden short-covering bursts on any intraday upside trigger. Strictly adhere to predefined stop losses.
+- Expiry Dynamics & Theta Erosion: Rotational consolidation will cause aggressive premium decay. Exit intraday option buying positions promptly upon target attainment.
+- Discipline & Patience: Avoid chasing unconfirmed breakouts inside the equilibrium zone; wait for institutional sweeps at structural extremes.`
   }
 ];
 
