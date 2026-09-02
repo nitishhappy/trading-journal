@@ -4565,3 +4565,56 @@ strong, b {
   color: #000000;
 }
 
+
+/* =========================================================
+   UI UPGRADE 3: Sleek Dark Mode Polish & Accents
+   ========================================================= */
+
+/* Deep, rich gradient background for dark mode (replaces flat color) */
+body:not([data-theme="light"]) {
+  background: radial-gradient(ellipse at top center, #131b2c 0%, #080b12 100%) !important;
+  background-attachment: fixed !important;
+}
+
+/* Make active main-tab glow beautifully */
+body:not([data-theme="light"]) .main-tab.active {
+  border-bottom: 2px solid var(--accent) !important;
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(79, 158, 255, 0.5) !important;
+  box-shadow: inset 0 -20px 20px -20px rgba(79, 158, 255, 0.4) !important;
+  background: linear-gradient(to top, rgba(79, 158, 255, 0.05), transparent) !important;
+}
+
+/* Vibrant folder tabs in dark mode */
+body:not([data-theme="light"]) .folder-tabs .tab.active {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 4px 16px rgba(79, 158, 255, 0.35) !important;
+}
+
+/* Softer borders globally for dark mode to reduce harsh wireframe look */
+body:not([data-theme="light"]) .panel, 
+body:not([data-theme="light"]) .dash-stat,
+body:not([data-theme="light"]) .list-item {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Enhance drop shadows for dark mode cards to create pure depth */
+body:not([data-theme="light"]) .panel {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+}
+
+/* --- Light Mode Accents --- */
+[data-theme="light"] .main-tab.active {
+  border-bottom: 2px solid var(--accent) !important;
+  color: var(--accent) !important;
+  background: linear-gradient(to top, rgba(79, 158, 255, 0.08), transparent) !important;
+}
+[data-theme="light"] .folder-tabs .tab.active {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(79, 158, 255, 0.25) !important;
+  border-color: var(--accent) !important;
+}
+
