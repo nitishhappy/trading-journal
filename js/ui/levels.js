@@ -106,7 +106,7 @@ if (viewLevels) {
 
         const externalLink = document.getElementById('tv-external-link');
         if (externalLink) {
-            externalLink.href = `https://www.tradingview.com/chart/?symbol=${linkSymbol}`;
+            externalLink.href = `https://in.tradingview.com/chart/?symbol=${linkSymbol}`;
         }
         return widgetSymbol;
     }
