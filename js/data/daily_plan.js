@@ -219,7 +219,7 @@ window.dailyPlanSummary = [
 
 window.goldDailyPlanData = [
   { "source": "AI", "price": "4374.10", "bias": "bullish", "behavior": "[22:58] Day Low SSL Sweep Reversal / 200 EMA Floor ($4,374.10). Lower-wick rejection and 5m close above $4,385 confirms SFP rebound toward $4,410 / $4,435.", "tp": "4410.00 / 4435.00", "sl": "4360.00", "status": "na" },
-  { "source": "AI", "price": "4435.00", "bias": "bullish", "behavior": "[22:58] High-Momentum Short-Covering Breakout ($4,435.00). Sustained 5m/15m close above 21 EMA / $4,435 targets $4,488 (9 EMA) / $4,510.", "tp": "4488.00 / 4510.00", "sl": "4415.00", "status": "na" },
+  { "source": "AI", "price": "4435.00", "bias": "bullish", "behavior": "[19:39] High-Momentum Day High Breakout Trigger ($4,435.00). Sustained 5m/15m close above Day High ($4,433.50) clears resting BSL, targeting $4,450 / $4,468 / $4,488 (Daily 9 EMA).", "tp": "4450.00 / 4488.00", "sl": "4422.00", "status": "na" },
   { "source": "AI", "price": "4488.00 - 4510.50", "bias": "bearish", "behavior": "[22:58] 9 EMA & Day High Supply Rejection Short ($4,488.00 - $4,510.50). Upper-wick rejection in premium supply zone targets $4,435 / $4,390.", "tp": "4435.00 / 4390.00", "sl": "4525.00", "status": "na" },
   { "source": "AI", "price": "4369.00", "bias": "bearish", "behavior": "[22:58] 200 EMA Breakdown Continuation Short ($4,369.00). Sustained 5m close below 200 EMA / $4,369 accelerates drop toward $4,328 (50 EMA).", "tp": "4328.00 / 4300.00", "sl": "4385.00", "status": "na" },
   { "source": "AI", "price": "4385.00 - 4405.00", "bias": "neutral", "behavior": "[22:58] Equilibrium Compression & Chop Zone ($4,385.00 - $4,405.00). Sideways consolidation pocket; avoid market order execution.", "tp": "na", "sl": "na", "status": "na" },
@@ -261,7 +261,6 @@ window.goldDailyPlanData = [
   { "source": "AI", "price": "4328.00", "bias": "bearish", "behavior": "[18:00] 4H Demand Floor Breakdown Continuation Short ($4,328.00). Sustained 5m close below $4,328 triggers institutional stop cascade toward $4,315 / $4,300 psych floor.", "tp": "4315.00 / 4300.00", "sl": "4336.00", "status": "na" },
   { "source": "AI", "price": "4332.00 - 4342.00", "bias": "neutral", "behavior": "[18:00] Live Intraday Equilibrium & No-Trade Chop Zone ($4,332.00 - $4,342.00). NY Pre-Market compression pocket around spot $4,336.78; avoid unconfirmed market orders ahead of US data.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "4385.00 - 4392.00", "bias": "bullish", "behavior": "[19:39] NY Reclaimed Demand Shelf & 15M FVG Retest Long ($4,385.00 - $4,392.00). Pullback retest with lower-wick rejection and 5m close above $4,400 confirms continuation toward $4,418 / $4,433.50.", "tp": "4418.00 / 4433.50", "sl": "4376.00", "status": "na" },
-  { "source": "AI", "price": "4435.00", "bias": "bullish", "behavior": "[19:39] High-Momentum Day High Breakout Trigger ($4,435.00). Sustained 5m/15m close above Day High ($4,433.50) clears resting BSL, targeting $4,450 / $4,468 / $4,488 (Daily 9 EMA).", "tp": "4450.00 / 4488.00", "sl": "4422.00", "status": "na" },
   { "source": "AI", "price": "4433.50 - 4442.00", "bias": "bearish", "behavior": "[19:39] Day High False Breakout Rejection Short ($4,433.50 - $4,442.00). Upper-wick sweep rejection closing 5m candle below $4,425 confirms trap short targeting $4,400 / $4,388.", "tp": "4400.00 / 4388.00", "sl": "4448.00", "status": "na" },
   { "source": "AI", "price": "4385.00", "bias": "bearish", "behavior": "[19:39] Demand Shelf Breakdown Continuation Short ($4,385.00). Sustained 5m close below $4,385 triggers profit-taking pullback accelerating toward $4,365 / $4,348.", "tp": "4365.00 / 4348.00", "sl": "4398.00", "status": "na" },
   { "source": "AI", "price": "4390.00 - 4405.00", "bias": "neutral", "behavior": "[19:39] Live Intraday Equilibrium & No-Trade Chop Zone ($4,390.00 - $4,405.00). Post-surge compression pocket around spot $4,396.18; avoid unconfirmed market orders during London/NY overlap.", "tp": "na", "sl": "na", "status": "na" }
@@ -812,11 +811,11 @@ window.btcDailyPlanSummary = [
 ];
 
 window.sp500DailyPlanData = [
-  { "source": "SP500-AI", "price": "7638.45-7654.45", "bias": "neutral", "behavior": "[07:30] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "SP500-AI", "price": "7661.45", "bias": "bullish", "behavior": "[07:30] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7661.45 targets 7771.48 and 7701.45.", "tp": "7771.48", "sl": "7651.45", "status": "na" },
-  { "source": "SP500-AI", "price": "7771.48", "bias": "bearish", "behavior": "[07:30] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.", "tp": "7661.45", "sl": "7781.48", "status": "na" },
-  { "source": "SP500-AI", "price": "7631.45", "bias": "bearish", "behavior": "[07:30] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7631.45 targets 7611.20 and 7591.45.", "tp": "7611.20", "sl": "7641.45", "status": "na" },
-  { "source": "SP500-AI", "price": "7611.20", "bias": "bullish", "behavior": "[07:30] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.", "tp": "7631.45", "sl": "7601.20", "status": "na" }
+  { "source": "SP500-AI", "price": "7652.93-7668.93", "bias": "neutral", "behavior": "[07:45] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "SP500-AI", "price": "7675.93", "bias": "bullish", "behavior": "[07:45] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7675.93 targets 7771.48 and 7715.93.", "tp": "7771.48", "sl": "7665.93", "status": "na" },
+  { "source": "SP500-AI", "price": "7771.48", "bias": "bearish", "behavior": "[07:45] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.", "tp": "7675.93", "sl": "7781.48", "status": "na" },
+  { "source": "SP500-AI", "price": "7645.93", "bias": "bearish", "behavior": "[07:45] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7645.93 targets 7611.20 and 7605.93.", "tp": "7611.20", "sl": "7655.93", "status": "na" },
+  { "source": "SP500-AI", "price": "7611.20", "bias": "bullish", "behavior": "[07:45] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.", "tp": "7645.93", "sl": "7601.20", "status": "na" }
 ];
 
 window.sp500DailyPlanSummary = [
@@ -832,32 +831,32 @@ window.sp500DailyPlanSummary = [
 • Primary Outlook: Rotational Range Chop. S&P 500 is consolidating within 50% equilibrium.
 • Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian/London High/Low boundaries.
 
-S&P 500 Spot: 7646.45 (07:30 PM IST - Sep 02, 2026) Trigger: 15m Watchdog
+S&P 500 Spot: 7660.93 (07:45 PM IST - Sep 02, 2026) Trigger: 15m Watchdog
 
 1. Market Structure & Macro Synthesis:
-- S&P 500 Spot (^GSPC) is trading at 7646.45 (ES Futures: 7648.0 | NQ Futures: 29054.0).
+- S&P 500 Spot (^GSPC) is trading at 7660.93 (ES Futures: 7664.5 | NQ Futures: 29084.75).
 - Market Structure: Operating in Discount Zone (Look for Longs) (Equilibrium: 7691.34 | 48H Swing Range: 7611.20 – 7771.48).
-- Intermarket Drivers: VIX at 15.90 (Moderate Volatility (Balanced)) | DXY at 99.55 (Macro Headwind (Bearish for Equities)) | 10Y Yield at 4.78%.
+- Intermarket Drivers: VIX at 15.78 (Moderate Volatility (Balanced)) | DXY at 99.47 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.78%.
 - US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains
 
 2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7632.60), and London High (7671.45).
-- Sell-Side Liquidity (SSL): Concentrated below PDL (7611.20), Asian Low (7611.20), and London Low (7621.45).
+- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7632.60), and London High (7685.93).
+- Sell-Side Liquidity (SSL): Concentrated below PDL (7611.20), Asian Low (7611.20), and London Low (7635.93).
 - Active FVGs / OBs: 3 Active FVG(s) & 2 Order Block(s) identified in immediate proximity.
 - Session Sweep Status: Above Asian High ($7632.6)
 
 3. Live Chop Zone / No-Trade Zone:
-- Range: 7638.45 – 7654.45 Index Points.
+- Range: 7652.93 – 7668.93 Index Points.
 - Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.
 
 4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> 7661.45): Sustained 5m close above 7661.45 clears local supply, targeting 7771.48 and 7701.45.
-- Downside Long-Liquidation Cascade (< 7631.45): Sustained 5m close below 7631.45 triggers stop cascades accelerating toward 7611.20 and 7591.45.
+- Upside Short-Covering Squeeze (> 7675.93): Sustained 5m close above 7675.93 clears local supply, targeting 7771.48 and 7715.93.
+- Downside Long-Liquidation Cascade (< 7645.93): Sustained 5m close below 7645.93 triggers stop cascades accelerating toward 7611.20 and 7605.93.
 
 5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):
-- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7611.20 rejected with lower wick, followed by 5m close back ABOVE 7616.20. TP: 7661.45 / 7771.48. SL: 7601.20. Risk-Reward: ~1:2.5.
-- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7661.45 with volume confirmation. TP: 7771.48 / 7701.45. SL: 7651.45. Risk-Reward: ~1:3.
-- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7661.45 / 7631.45. SL: 7781.48. Risk-Reward: ~1:2.5.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7631.45. TP: 7611.20 / 7591.45. SL: 7641.45. Risk-Reward: ~1:3.`
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7611.20 rejected with lower wick, followed by 5m close back ABOVE 7616.20. TP: 7675.93 / 7771.48. SL: 7601.20. Risk-Reward: ~1:2.5.
+- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7675.93 with volume confirmation. TP: 7771.48 / 7715.93. SL: 7665.93. Risk-Reward: ~1:3.
+- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7675.93 / 7645.93. SL: 7781.48. Risk-Reward: ~1:2.5.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7645.93. TP: 7611.20 / 7605.93. SL: 7655.93. Risk-Reward: ~1:3.`
   }
 ];
