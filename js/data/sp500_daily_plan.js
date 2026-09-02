@@ -45,6 +45,6 @@ S&P 500 Spot: 7643.63 (07:15 PM IST - Sep 02, 2026) Trigger: 15m Watchdog
 - BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7611.20 rejected with lower wick, followed by 5m close back ABOVE 7616.20. TP: 7658.63 / 7771.48. SL: 7601.20. Risk-Reward: ~1:2.5.
 - BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7658.63 with volume confirmation. TP: 7771.48 / 7698.63. SL: 7648.63. Risk-Reward: ~1:3.
 - SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7658.63 / 7628.63. SL: 7781.48. Risk-Reward: ~1:2.5.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7628.63. TP: 7611.20 / 7588.63. SL: 7638.63. Risk-Reward: ~1:3.\`
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7628.63. TP: 7611.20 / 7588.63. SL: 7638.63. Risk-Reward: ~1:3.`
   }
 ];
