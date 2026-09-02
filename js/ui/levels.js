@@ -63,6 +63,89 @@ if (viewLevels) {
         togglePanel('levels-list-body', this);
     });
 
+    // ===================== TRADINGVIEW CHART =====================
+    let tvWidget = null;
+    let isTvChartOpen = false;
+
+    const tvChartHeader = document.getElementById('tv-chart-header');
+    if (tvChartHeader) {
+        tvChartHeader.addEventListener('click', function() {
+            const body = document.getElementById('tv-chart-body');
+            const icon = document.getElementById('tv-chart-icon');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                if (icon) icon.innerText = '▼';
+                isTvChartOpen = true;
+                renderTvChart();
+            } else {
+                body.style.display = 'none';
+                if (icon) icon.innerText = '▶';
+                isTvChartOpen = false;
+            }
+        });
+    }
+
+    function renderTvChart() {
+        if (!isTvChartOpen) return; // Only render when panel is expanded
+        
+        const assetMap = {
+            'NIFTY': 'NSE:NIFTY',
+            'GOLD': 'OANDA:XAUUSD',
+            'BTC': 'BINANCE:BTCUSDT',
+            'SP500': 'SP:SPX'
+        };
+        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NSE:NIFTY';
+
+        const container = document.getElementById('tv_chart_container');
+        if (container) container.innerHTML = ''; // clear old widget
+        
+        if (typeof TradingView !== 'undefined') {
+            tvWidget = new TradingView.widget({
+              "autosize": true,
+              "symbol": symbol,
+              "interval": "5",
+              "timezone": "Asia/Kolkata",
+              "theme": "dark",
+              "style": "1",
+              "locale": "en",
+              "enable_publishing": false,
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "gridColor": "rgba(42, 46, 57, 0.06)",
+              "hide_top_toolbar": false,
+              "hide_legend": false,
+              "save_image": false,
+              "container_id": "tv_chart_container",
+              "studies": [
+                "Volume@tv-basicstudies",
+                "Moving Average Exponential@tv-basicstudies"
+              ]
+            });
+        }
+    }
+
+    function repositionTvChart() {
+        const chartPanel = document.getElementById('tv-chart-panel');
+        const rightCol = document.querySelector('.layout-wrapper-levels .right-col');
+        const leftCol = document.querySelector('.layout-wrapper-levels .left-col');
+        if (!chartPanel || !rightCol || !leftCol) return;
+        
+        if (window.innerWidth <= 1200) {
+            if (chartPanel.parentElement !== rightCol) {
+                rightCol.insertBefore(chartPanel, rightCol.firstChild);
+            }
+        } else {
+            if (chartPanel.parentElement !== leftCol) {
+                leftCol.insertBefore(chartPanel, leftCol.firstChild);
+            }
+        }
+    }
+    
+    window.addEventListener('resize', repositionTvChart);
+    // Trigger on load
+    setTimeout(repositionTvChart, 50);
+
+    // ===================== END TRADINGVIEW =====================
+
     function togglePanel(bodyId, headerEl) {
         const body = document.getElementById(bodyId);
         const icon = headerEl.querySelector('.toggle-icon');
@@ -311,6 +394,7 @@ if (viewLevels) {
         saveLevelsData();
         renderSummary();
         renderChart();
+        renderTvChart();
         renderScorecard();
         updateSourceFilterOptions();
         applySourceFilter();

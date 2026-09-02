@@ -120,6 +120,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.1.4 — Levels Tab UI Enhancement
+- **TradingView Advanced Chart Integration**: Added a collapsible, dynamic TradingView Advanced Chart to the Levels tab. Features auto-syncing symbols (NIFTY, GOLD, BTC, SP500) based on the active tab, default 5m timeframe, Volume, and EMA 9 indicators. Positioned responsively for desktop and mobile layouts.
+
 ### v2.1.3 — NIFTY 50 Intraday Tactical Update (03:45 PM IST)
 - **Live AI Nifty Tactical Recalibration**: Recalculated Nifty spot levels, chop zone (23,885.00–23,915.00), high-momentum squeeze trigger (> 23,915.00), and breakdown continuation triggers (< 23,880.00 / < 23,786.80) following the end-of-day +127-point recovery to close at the exact Day High (spot 23,914.45) above 15M ORB High (23,882.95).
 - **Daily Plan & Mentorship Sync**: Appended updated AI-sourced Nifty levels and comprehensive tactical summary to `daily_plan.js` and synced the SMC breakdown in `Utilities/Nifty_Learn.md`.
