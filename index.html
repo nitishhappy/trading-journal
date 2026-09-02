@@ -1148,7 +1148,10 @@
                             <span>Live Chart</span>
                             <a id="tv-external-link" href="https://in.tradingview.com/chart/?symbol=NSE:NIFTY" style="font-size: 0.8rem; color: var(--accent); text-decoration: none; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border);" onclick="event.stopPropagation();" title="Open chart">↗ Web</a>
                         </div>
-                        <span class="toggle-icon" id="tv-chart-icon">▶</span>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <button type="button" class="maximize-btn" title="Maximize Panel" onclick="toggleMaximizePanel(this, event)">⛶</button>
+                            <span class="toggle-icon" id="tv-chart-icon">▶</span>
+                        </div>
                     </h2>
                     <div id="tv-chart-body" class="collapsible-body" style="display:none; height: 500px; padding: 0.5rem;">
                         <div id="tv_chart_container" style="width: 100%; height: 100%;"></div>
@@ -1291,16 +1294,22 @@
                 <div class="panel" id="levels-summary-panel" style="display: none; margin-bottom: 1.5rem;">
                     <h2 class="collapsible-header" id="levels-summary-header">
                         <span>Market Summary</span>
-                        <span class="toggle-icon">▼</span>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <button type="button" class="maximize-btn" title="Maximize Panel" onclick="toggleMaximizePanel(this, event)">⛶</button>
+                            <span class="toggle-icon">▼</span>
+                        </div>
                     </h2>
                     <div id="levels-summary-body" class="collapsible-body" style="display:block;">
                         <!-- Summaries injected here -->
                     </div>
                 </div>
 
-                <div class="panel chart-wrapper">
+                <div class="panel chart-wrapper" id="visual-chart-panel">
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                        <h2 style="margin: 0; font-size: 1.15rem; font-weight: 600;">Visual Chart Map</h2>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <h2 style="margin: 0; font-size: 1.15rem; font-weight: 600;">Visual Chart Map</h2>
+                            <button type="button" class="maximize-btn" title="Maximize Panel" onclick="toggleMaximizePanel(this, event)">⛶</button>
+                        </div>
                         <div id="chart-view-toggle-container" style="display: flex; align-items: center; gap: 6px;"></div>
                     </div>
                     <p id="chart-subtitle" style="margin: 0.25rem 0 1.25rem 0; color: var(--text-dim); font-size: 0.85rem;">Levels automatically plot here in sequence.</p>

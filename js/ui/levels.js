@@ -2277,7 +2277,37 @@ if (viewLevels) {
     let isLevelsViewActive = true;
     let levelsPollingInterval = null;
 
-    function startLevelsPolling() {
+    window.renderTvChart = renderTvChart;
+
+window.toggleMaximizePanel = function(btn, event) {
+    if (event) event.stopPropagation(); // Prevent collapsible trigger if in header
+
+    const panel = btn.closest('.panel');
+    if (!panel) return;
+
+    const isMaximized = panel.classList.toggle('is-maximized');
+    
+    // Toggle icon
+    btn.innerHTML = isMaximized ? '◱' : '⛶';
+    btn.title = isMaximized ? 'Restore Panel' : 'Maximize Panel';
+
+    // If panel is collapsible, ensure it's open when maximized
+    const body = panel.querySelector('.collapsible-body');
+    const icon = panel.querySelector('.toggle-icon');
+    if (isMaximized && body && body.style.display === 'none') {
+        body.style.display = 'block';
+        if (icon) icon.style.transform = 'rotate(0deg)';
+    }
+
+    // Small hack to ensure TV widget resizes properly when container dimensions change
+    if (panel.id === 'tv-chart-panel' && window.tvWidget) {
+        setTimeout(() => {
+            // Re-render or just let the iframe handle flex scaling automatically
+        }, 100);
+    }
+};
+
+export function initLevels() {
         if (levelsPollingInterval) clearInterval(levelsPollingInterval);
         levelsPollingInterval = setInterval(() => {
             if (isLevelsViewActive) {
