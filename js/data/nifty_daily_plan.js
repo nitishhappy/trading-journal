@@ -364,6 +364,39 @@ window.dailyPlanData = [
 window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
+    "text": `# 🌅 Pre-Market Tactical Briefing (AI Synthesized Prediction)
+
+**Global Market Sentiment & Data:**
+- The US markets and global cues are currently showing weakness. US 10-year bond yields have spiked up to 4.78%, a significant headwind for equity markets.
+- Crude oil is consistently trading above , which is negative for net importer economies like India.
+- Japan's bond yields are hitting all-time highs, causing capital to potentially flow out of US/global equities.
+- Despite India's GDP printing a solid 7.8%, the August Manufacturing PMI data came in at a 5-year low.
+- **Overall Data Bias: STRONGLY BEARISH** due to high crude, rising bond yields, and heavy FII selling.
+
+**NIFTY Options & Institutional Data:**
+- FIIs and PROs have heavily shorted the market. FIIs added 13,000 net short contracts in Index Futures and significantly increased Put buying (now holding over 6,32,000 put longs) alongside heavy Call writing.
+- Retailers, conversely, are heavily long (adding over 61,000 Calls and shorting Puts). This divergence typically leads to retail getting trapped on the wrong side.
+- Thus, the primary tactical directive is **Sell on Rise**, until the market significantly clears this overhead resistance.
+
+**NIFTY Price Action & Key Levels:**
+- Yesterday, Nifty experienced a sharp sell-off in the final hours, dragging prices below the psychological 24,000 mark intra-day.
+- A break below yesterday's low (23,950 area) on a 15-minute close will open the doors for a rapid slide towards 23,881 and 23,796.
+- If the market gaps up, it is likely to face stiff resistance around the 24,100 to 24,200 zones (PDC/Order Blocks).
+
+### NIFTY Support & Resistance Levels
+
+| Level | Type | Logic & Significance |
+|---|---|---|
+| 🔴 24,300 | Major Resistance | Above this level, bears lose control. Daily close above this shifts the trend back to bullish. |
+| 🔴 24,200 | Resistance | High Open Interest resistance and fresh Order Block. Sell on rise entry zone. |
+| 🔴 24,100 | Resistance | Immediate hurdle on any gap up. Pullback rejection here signals continuation down. |
+| ⚪ 24,000 | Psychological Chop Zone | High volatility area. Avoid trading directly at 24k without clear 15m closing confirmation. |
+| 🔴 23,950 | Breakout (Sell Trigger) | Yesterday's Low. A firm 15m candle close below here triggers a high-probability short entry. |
+| 🟢 23,881 | Support / Target | First downside target and liquidity gap-fill area for short trades. |
+| 🟢 23,796 | Major Support / Target | Deeper liquidity sweep zone if panic selling accelerates. |`
+  },
+  {
+    "source": "AI Pre-Market Briefing",
     "text": `﻿# Pre-Market Briefing â€” 2026-09-02
 > Auto-generated at 09:14 AM IST
 
