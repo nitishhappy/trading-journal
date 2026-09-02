@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.1.3 — NIFTY 50 Intraday Tactical Update (03:45 PM IST)
+- **Live AI Nifty Tactical Recalibration**: Recalculated Nifty spot levels, chop zone (23,885.00–23,915.00), high-momentum squeeze trigger (> 23,915.00), and breakdown continuation triggers (< 23,880.00 / < 23,786.80) following the end-of-day +127-point recovery to close at the exact Day High (spot 23,914.45) above 15M ORB High (23,882.95).
+- **Daily Plan & Mentorship Sync**: Appended updated AI-sourced Nifty levels and comprehensive tactical summary to `daily_plan.js` and synced the SMC breakdown in `Utilities/Nifty_Learn.md`.
+
 ### v2.1.2 — Gold (XAU/USD) Intraday Tactical Update (01:30 PM IST)
 - **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD levels, chop zone ($4,320.00–$4,328.00), high-momentum squeeze trigger (> $4,332.00), and breakdown continuation trigger (< $4,318.00) following the London Open Asian range liquidity sweep to spot $4,323.60 entering the 4H Macro Demand Base / Daily 50 EMA ($4,318.00–$4,328.00).
 - **Daily Plan & Mentorship Sync**: Appended updated AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and synced the SMC breakdown in `Gold Setup v2/Gold_Learn.md`.
