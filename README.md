@@ -120,6 +120,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.1.6 — Visual Chart Map UI Fix
+- **Highlighted Levels Auto-Expand**: Fixed a UI issue in the Visual Chart Map where highlighted/active levels could appear collapsed. Highlighted annotations now automatically expand and cannot be collapsed by accidental clicks, ensuring critical live context is always visible.
+
 ### v2.1.5 — TV Chart Symbol Fix
 - **TradingView Symbol Patch**: Replaced restricted S&P 500 index symbol (`SP:SPX`) with the real-time CFD alternative (`VANTAGE:SP500`) to resolve the "symbol only available on TradingView" widget error.
 

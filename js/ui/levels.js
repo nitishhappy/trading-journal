@@ -1713,6 +1713,12 @@ if (viewLevels) {
 
                 ann.addEventListener('click', (e) => {
                     if (e.target.closest('.status-btn')) return;
+
+                    // Prevent collapsing if it's a highlighted level
+                    if (ann.classList.contains('active-level-highlight') && ann.classList.contains('is-expanded-level')) {
+                        return;
+                    }
+
                     const body = ann.querySelector('.chart-annotation-body');
                     const preview = ann.querySelector('.chart-annotation-preview');
                     const toggleIcon = ann.querySelector('.chart-annotation-toggle');
@@ -2399,6 +2405,18 @@ if (viewLevels) {
             if (chartCardEl) {
                 if (isHighlighted) {
                     chartCardEl.classList.add('active-level-highlight');
+                    
+                    // Force expand highlighted levels in Visual Chart Map
+                    const body = chartCardEl.querySelector('.chart-annotation-body');
+                    const preview = chartCardEl.querySelector('.chart-annotation-preview');
+                    const toggleIcon = chartCardEl.querySelector('.chart-annotation-toggle');
+                    if (body && preview && toggleIcon && chartCardEl.classList.contains('is-collapsed-level')) {
+                        body.style.display = 'block';
+                        preview.style.display = 'none';
+                        toggleIcon.innerText = '▼';
+                        chartCardEl.classList.remove('is-collapsed-level');
+                        chartCardEl.classList.add('is-expanded-level');
+                    }
                 } else {
                     chartCardEl.classList.remove('active-level-highlight');
                 }
