@@ -86,18 +86,29 @@ if (viewLevels) {
     }
 
     function updateTvLink() {
-        const assetMap = {
-            'NIFTY': 'VANTAGE:NIFTY50',
+        // Symbols for the external "↗ Web" link (Official indices where user is logged in)
+        const linkAssetMap = {
+            'NIFTY': 'NIFTY',
+            'GOLD': 'OANDA:XAUUSD',
+            'BTC': 'BINANCE:BTCUSDT',
+            'SP500': 'SP:SPX'
+        };
+        // Symbols for the in-app Widget (Unrestricted feeds / CFDs so the chart is visible in app)
+        const widgetAssetMap = {
+            'NIFTY': 'BSE:NIFTY50',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
             'SP500': 'VANTAGE:SP500'
         };
-        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NIFTY';
+        
+        const linkSymbol = linkAssetMap[window.currentActiveAsset || 'NIFTY'] || 'NIFTY';
+        const widgetSymbol = widgetAssetMap[window.currentActiveAsset || 'NIFTY'] || 'BSE:NIFTY50';
+
         const externalLink = document.getElementById('tv-external-link');
         if (externalLink) {
-            externalLink.href = `https://www.tradingview.com/chart/?symbol=${symbol}`;
+            externalLink.href = `https://www.tradingview.com/chart/?symbol=${linkSymbol}`;
         }
-        return symbol;
+        return widgetSymbol;
     }
 
     function renderTvChart() {
