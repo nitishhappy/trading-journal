@@ -4699,6 +4699,7 @@ button, a, input, select, textarea, .collapsible-header, .tab, .main-tab, .dash-
 .panel.is-maximized > #visual-chart-area {
   flex-grow: 1 !important;
   height: auto !important;
+  max-height: none !important;
   overflow-y: auto;
   margin-top: 0 !important;
   padding: 1rem !important;

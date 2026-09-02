@@ -2291,19 +2291,30 @@ window.toggleMaximizePanel = function(btn, event) {
     btn.innerHTML = isMaximized ? '◱' : '⛶';
     btn.title = isMaximized ? 'Restore Panel' : 'Maximize Panel';
 
-    // If panel is collapsible, ensure it's open when maximized
-    const body = panel.querySelector('.collapsible-body');
-    const icon = panel.querySelector('.toggle-icon');
-    if (isMaximized && body && body.style.display === 'none') {
-        body.style.display = 'block';
-        if (icon) icon.style.transform = 'rotate(0deg)';
+    if (isMaximized) {
+        // Move to body to prevent ANY CSS container trapping (guarantees true fullscreen)
+        panel._originalParent = panel.parentNode;
+        panel._originalNextSibling = panel.nextSibling;
+        document.body.appendChild(panel);
+
+        // If closed, trigger native click to open properly (which initializes charts)
+        const body = panel.querySelector('.collapsible-body');
+        const header = panel.querySelector('.collapsible-header');
+        if (body && body.style.display === 'none' && header) {
+            header.click();
+        }
+    } else {
+        // Restore to original DOM position
+        if (panel._originalParent) {
+            panel._originalParent.insertBefore(panel, panel._originalNextSibling);
+        }
     }
 
-    // Small hack to ensure TV widget resizes properly when container dimensions change
-    if (panel.id === 'tv-chart-panel' && window.tvWidget) {
+    // Force re-render of TV widget (moving an iframe in DOM clears it, and container size changed)
+    if (panel.id === 'tv-chart-panel' && window.renderTvChart) {
         setTimeout(() => {
-            // Re-render or just let the iframe handle flex scaling automatically
-        }, 100);
+            window.renderTvChart();
+        }, 150);
     }
 };
 
