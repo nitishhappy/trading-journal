@@ -87,7 +87,7 @@ if (viewLevels) {
 
     function updateTvLink() {
         const assetMap = {
-            'NIFTY': 'NIFTY',
+            'NIFTY': 'VANTAGE:NIFTY50',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
             'SP500': 'VANTAGE:SP500'
