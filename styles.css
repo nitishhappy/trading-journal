@@ -4618,3 +4618,58 @@ body:not([data-theme="light"]) .panel {
   border-color: var(--accent) !important;
 }
 
+
+/* =========================================================
+   UI UPGRADE 4: Smooth Micro-Interactions (Animations)
+   ========================================================= */
+
+/* Global smooth transition for all interactive elements */
+button, a, input, select, textarea, .collapsible-header, .tab, .main-tab, .dash-stat, .obs-card, .list-item, .panel {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Hover lift effect for primary buttons */
+.btn-primary:hover, .btn-small-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(54, 199, 90, 0.35) !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Click (press down) effect for primary buttons */
+.btn-primary:active, .btn-small-primary:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 2px 8px rgba(54, 199, 90, 0.25) !important;
+}
+
+/* Hover effect for unselected tabs */
+.main-tab:not(.active):hover, .folder-tabs .tab:not(.active):hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-1px) !important;
+}
+[data-theme="light"] .main-tab:not(.active):hover, 
+[data-theme="light"] .folder-tabs .tab:not(.active):hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Interactive hover lift for panels and stat cards */
+.dash-stat:hover, .obs-card:hover, .list-item:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6) !important;
+}
+[data-theme="light"] .dash-stat:hover, 
+[data-theme="light"] .obs-card:hover, 
+[data-theme="light"] .list-item:hover {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1) !important;
+}
+
+/* Icon button subtle pop effect */
+.icon-btn:hover {
+  transform: scale(1.1) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="light"] .icon-btn:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
