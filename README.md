@@ -1856,6 +1856,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Appended Smart Money Concepts (SMC) educational logs to `Nifty_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/data/nifty_daily_plan.js`
 
+### v2.3.76 — 02 Sep 2026 — Gold (XAU/USD) Intraday Tactical Update (06:00 PM IST)
+
+- **Gold Intraday Tactical Update (`daily_plan.js`, `gold_daily_plan.js`, `Gold_Learn.md`)**:
+  - Published comprehensive XAU/USD Intraday Tactical Briefing (Spot: $4336.78 | Trigger: Scheduled 06:00 PM Update (New York Pre-Market & US Data)).
+  - Appended exact 5-min/15-min confirmation triggers, High Momentum zones, and new AI-sourced Gold levels prepended with `[18:00]` to `window.goldDailyPlanData` and `window.goldDailyPlanSummary`.
+  - Updated SMC Masterclass educational walkthrough in `Gold Setup v2/Gold_Learn.md`.
+- **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/data/gold_daily_plan.js`
+
 
 
 
