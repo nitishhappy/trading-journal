@@ -685,7 +685,7 @@ window.btcDailyPlanData = [
     "behavior": "[22:30] 15M Dynamic 9 EMA Shelf ($77,195.28). Primary short-term momentum trail & intraday pullback defense zone.",
     "tp": "76780.8",
     "sl": "77345.3",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",

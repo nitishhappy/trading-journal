@@ -2307,7 +2307,7 @@ window.toggleMaximizePanel = function(btn, event) {
     }
 };
 
-export function initLevels() {
+    function startLevelsPolling() {
         if (levelsPollingInterval) clearInterval(levelsPollingInterval);
         levelsPollingInterval = setInterval(() => {
             if (isLevelsViewActive) {
