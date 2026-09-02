@@ -123,6 +123,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 ### vNext — Audio Notification for Tab Updates
 - **Market Bell Alert**: Added a subtle, synthesized double market bell sound (using Web Audio API) that plays automatically when a background/inactive asset tab receives new market summary updates, complementing the existing visual tab glow.
 
+### v2.1.7 — TV Chart NIFTY Symbol Patch
+- **TradingView Symbol Patch**: Updated the NIFTY 50 symbol on the TV widget from `NSE:NIFTY` to strictly `NIFTY` to prevent widget access restrictions.
+
 ### v2.1.6 — Visual Chart Map UI Fix
 - **Highlighted Levels Auto-Expand**: Fixed a UI issue in the Visual Chart Map where highlighted/active levels could appear collapsed. Highlighted annotations now automatically expand and cannot be collapsed by accidental clicks, ensuring critical live context is always visible.
 
