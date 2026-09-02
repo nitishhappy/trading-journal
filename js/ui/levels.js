@@ -89,12 +89,12 @@ if (viewLevels) {
         if (!isTvChartOpen) return; // Only render when panel is expanded
         
         const assetMap = {
-            'NIFTY': 'NSE:NIFTY',
+            'NIFTY': 'NIFTY',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
             'SP500': 'VANTAGE:SP500'
         };
-        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NSE:NIFTY';
+        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NIFTY';
 
         const container = document.getElementById('tv_chart_container');
         if (container) container.innerHTML = ''; // clear old widget
@@ -837,6 +837,45 @@ if (viewLevels) {
         });
     }
 
+    let audioCtx = null;
+    function playMarketBellSound() {
+        try {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            
+            const playSingleBell = (delay) => {
+                const freqs = [400, 520, 600, 800, 1000];
+                const now = audioCtx.currentTime + delay;
+                
+                freqs.forEach((freq, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq + (Math.random() * 10 - 5);
+                    
+                    gain.gain.setValueAtTime(0, now);
+                    gain.gain.linearRampToValueAtTime(0.08 / freqs.length, now + 0.01);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2 - (i * 0.15));
+                    
+                    osc.start(now);
+                    osc.stop(now + 1.2);
+                });
+            };
+
+            playSingleBell(0);
+            playSingleBell(1.0); // Play second time 1 second later
+        } catch (e) {
+            console.error("Audio playback failed", e);
+        }
+    }
+
     function updateAssetTabBadges() {
         const assets = [
             { key: 'NIFTY', btnId: 'btn-asset-nifty' },
@@ -857,6 +896,9 @@ if (viewLevels) {
 
             if (asset.key === currentActive) {
                 // Active tab: update signature immediately and clear unread badge
+                if (lastSeenSig !== null && lastSeenSig !== currentSig) {
+                    playMarketBellSound();
+                }
                 localStorage.setItem(storageKey, currentSig);
                 btn.classList.remove('btn-tab-updated');
                 const dot = btn.querySelector('.unread-level-dot');
@@ -870,6 +912,9 @@ if (viewLevels) {
                     if (dot) dot.remove();
                 } else if (lastSeenSig !== currentSig) {
                     // Inactive tab receives fresh data signature: show glow & dot
+                    if (!btn.classList.contains('btn-tab-updated')) {
+                        playMarketBellSound();
+                    }
                     btn.classList.add('btn-tab-updated');
                     if (!btn.querySelector('.unread-level-dot')) {
                         const dot = document.createElement('span');

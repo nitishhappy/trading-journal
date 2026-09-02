@@ -120,6 +120,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### vNext — Audio Notification for Tab Updates
+- **Market Bell Alert**: Added a subtle, synthesized double market bell sound (using Web Audio API) that plays automatically when a background/inactive asset tab receives new market summary updates, complementing the existing visual tab glow.
+
 ### v2.1.6 — Visual Chart Map UI Fix
 - **Highlighted Levels Auto-Expand**: Fixed a UI issue in the Visual Chart Map where highlighted/active levels could appear collapsed. Highlighted annotations now automatically expand and cannot be collapsed by accidental clicks, ensuring critical live context is always visible.
 
