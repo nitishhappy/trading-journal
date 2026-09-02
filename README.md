@@ -123,6 +123,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 ### vNext — Audio Notification for Tab Updates
 - **Market Bell Alert**: Added a subtle, synthesized double market bell sound (using Web Audio API) that plays automatically when a background/inactive asset tab receives new market summary updates, complementing the existing visual tab glow.
 
+### v2.1.8 — Gold (XAU/USD) Intraday Tactical Update (07:39 PM IST)
+- **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD levels, chop zone ($4,390.00–$4,405.00), high-momentum Day High breakout trigger (> $4,435.00), demand shelf pullback absorption long ($4,385.00–$4,392.00), and false breakout rejection short ($4,433.50–$4,442.00) following the explosive +$104.30 V-reversal from Day Low ($4,329.20) to Day High ($4,433.50) into active London/NY overlap (spot $4,396.18).
+- **Daily Plan & Mentorship Sync**: Appended updated AI-sourced Gold levels and comprehensive summary to `daily_plan.js` and synced the SMC breakdown in `Gold Setup v2/Gold_Learn.md`.
+
 ### v2.1.7 — TV Chart NIFTY Symbol Patch
 - **TradingView Symbol Patch**: Updated the NIFTY 50 symbol on the TV widget from `NSE:NIFTY` to strictly `NIFTY` to prevent widget access restrictions.
 
