@@ -4484,4 +4484,47 @@ textarea { resize: vertical; }
     transform: scale(0.95);
     box-shadow: 0 0 4px #3b82f6;
   }
-}
+} 
+ / *   U I   U P G R A D E   1   * /  
+ 
+/* =========================================================
+   UI UPGRADE 1: Modern "Card" UI & Soft Shadows
+   ========================================================= */
+
+/* Dash stats modern cards */
+.dash-stat {
+  border-radius: 12px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important;
+  transition: transform 0.2s, box-shadow 0.2s;
+  padding: 16px 8px !important;
+}
+
+/* Any input field modernization */
+input[type="text"], input[type="number"], select, textarea {
+  border-radius: 8px !important;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* General panel/card modernization */
+.panel {
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25) !important;
+  border: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* List items / list-like elements as cards */
+.list-item, .journal-entry, .obs-card, .log-row {
+  border-radius: 12px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+  margin-bottom: 12px;
+}
+
+/* Make folder tabs look like floating pills */
+.folder-tabs .tab {
+  border-radius: 20px !important;
+  padding: 6px 14px !important;
+}
+
