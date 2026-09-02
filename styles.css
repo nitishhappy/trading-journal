@@ -4698,6 +4698,9 @@ button, a, input, select, textarea, .collapsible-header, .tab, .main-tab, .dash-
 .panel.is-maximized > .collapsible-body,
 .panel.is-maximized > #visual-chart-area {
   flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
   height: auto !important;
   max-height: none !important;
   overflow-y: auto;
@@ -4707,6 +4710,8 @@ button, a, input, select, textarea, .collapsible-header, .tab, .main-tab, .dash-
 
 /* Ensure the TV container takes full remaining height when maximized */
 .panel.is-maximized #tv_chart_container {
+  flex-grow: 1 !important;
+  width: 100% !important;
   height: 100% !important;
   min-height: calc(100vh - 80px) !important;
 }

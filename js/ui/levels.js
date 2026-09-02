@@ -115,6 +115,12 @@ if (viewLevels) {
         const symbol = updateTvLink();
         if (!isTvChartOpen) return; // Only render when panel is expanded
 
+        // Properly destroy old widget if it exists to prevent iframe ghosting/sizing bugs
+        if (tvWidget && typeof tvWidget.remove === 'function') {
+            try { tvWidget.remove(); } catch(e) {}
+            tvWidget = null;
+        }
+
         const container = document.getElementById('tv_chart_container');
         if (container) container.innerHTML = ''; // clear old widget
         
