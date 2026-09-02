@@ -85,16 +85,24 @@ if (viewLevels) {
         });
     }
 
-    function renderTvChart() {
-        if (!isTvChartOpen) return; // Only render when panel is expanded
-        
+    function updateTvLink() {
         const assetMap = {
-            'NIFTY': 'NSE:NIFTY',
+            'NIFTY': 'NIFTY',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
             'SP500': 'VANTAGE:SP500'
         };
-        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NSE:NIFTY';
+        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NIFTY';
+        const externalLink = document.getElementById('tv-external-link');
+        if (externalLink) {
+            externalLink.href = `https://www.tradingview.com/chart/?symbol=${symbol}`;
+        }
+        return symbol;
+    }
+
+    function renderTvChart() {
+        const symbol = updateTvLink();
+        if (!isTvChartOpen) return; // Only render when panel is expanded
 
         const container = document.getElementById('tv_chart_container');
         if (container) container.innerHTML = ''; // clear old widget
@@ -109,15 +117,12 @@ if (viewLevels) {
               "style": "1",
               "locale": "en",
               "enable_publishing": false,
-              "allow_symbol_change": true,
-              "hide_top_toolbar": false,
-              "withdateranges": true,
-              "hide_side_toolbar": false,
-              "save_image": false,
-              "container_id": "tv_chart_container",
               "backgroundColor": "rgba(0, 0, 0, 1)",
               "gridColor": "rgba(42, 46, 57, 0.06)",
+              "hide_top_toolbar": false,
               "hide_legend": false,
+              "save_image": false,
+              "container_id": "tv_chart_container",
               "studies": [
                 "Volume@tv-basicstudies",
                 "Moving Average Exponential@tv-basicstudies"

@@ -1144,7 +1144,10 @@
                 <!-- TRADINGVIEW CHART PANEL -->
                 <div class="panel" id="tv-chart-panel" style="margin-bottom: 1.5rem;">
                     <h2 class="collapsible-header" id="tv-chart-header">
-                        <span>Live Chart</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span>Live Chart</span>
+                            <a id="tv-external-link" href="https://www.tradingview.com/chart/?symbol=NSE:NIFTY" target="_blank" style="font-size: 0.8rem; color: var(--accent); text-decoration: none; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border);" onclick="event.stopPropagation();" title="Open chart in new tab">↗ Web</a>
+                        </div>
                         <span class="toggle-icon" id="tv-chart-icon">▶</span>
                     </h2>
                     <div id="tv-chart-body" class="collapsible-body" style="display:none; height: 500px; padding: 0.5rem;">
