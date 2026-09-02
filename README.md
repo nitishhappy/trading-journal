@@ -120,6 +120,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.1.5 — TV Chart Symbol Fix
+- **TradingView Symbol Patch**: Replaced restricted S&P 500 index symbol (`SP:SPX`) with the real-time CFD alternative (`VANTAGE:SP500`) to resolve the "symbol only available on TradingView" widget error.
+
 ### v2.1.4 — Levels Tab UI Enhancement
 - **TradingView Advanced Chart Integration**: Added a collapsible, dynamic TradingView Advanced Chart to the Levels tab. Features auto-syncing symbols (NIFTY, GOLD, BTC, SP500) based on the active tab, default 5m timeframe, Volume, and EMA 9 indicators. Positioned responsively for desktop and mobile layouts.
 

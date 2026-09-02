@@ -92,7 +92,7 @@ if (viewLevels) {
             'NIFTY': 'NSE:NIFTY',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
-            'SP500': 'SP:SPX'
+            'SP500': 'VANTAGE:SP500'
         };
         const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NSE:NIFTY';
 
