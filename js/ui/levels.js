@@ -89,12 +89,12 @@ if (viewLevels) {
         if (!isTvChartOpen) return; // Only render when panel is expanded
         
         const assetMap = {
-            'NIFTY': 'NIFTY',
+            'NIFTY': 'NSE:NIFTY',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
             'SP500': 'VANTAGE:SP500'
         };
-        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NIFTY';
+        const symbol = assetMap[window.currentActiveAsset || 'NIFTY'] || 'NSE:NIFTY';
 
         const container = document.getElementById('tv_chart_container');
         if (container) container.innerHTML = ''; // clear old widget
@@ -109,12 +109,15 @@ if (viewLevels) {
               "style": "1",
               "locale": "en",
               "enable_publishing": false,
-              "backgroundColor": "rgba(0, 0, 0, 1)",
-              "gridColor": "rgba(42, 46, 57, 0.06)",
+              "allow_symbol_change": true,
               "hide_top_toolbar": false,
-              "hide_legend": false,
+              "withdateranges": true,
+              "hide_side_toolbar": false,
               "save_image": false,
               "container_id": "tv_chart_container",
+              "backgroundColor": "rgba(0, 0, 0, 1)",
+              "gridColor": "rgba(42, 46, 57, 0.06)",
+              "hide_legend": false,
               "studies": [
                 "Volume@tv-basicstudies",
                 "Moving Average Exponential@tv-basicstudies"
