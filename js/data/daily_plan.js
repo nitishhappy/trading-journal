@@ -446,35 +446,35 @@ window.goldDailyPlanSummary = [
 ];
 
 window.btcDailyPlanData = [
-  { "source": "BTC-AI", "price": "77735.87", "bias": "bearish", "behavior": "[13:31] 15M Dynamic 9 EMA Shelf ($77,735.87). Primary short-term momentum trail & intraday pullback defense zone.", "tp": "77326.7", "sl": "77885.9", "status": "na" },
-  { "source": "BTC-AI", "price": "77671.89", "bias": "bullish", "behavior": "[13:31] 15M Dynamic 21 EMA Mean-Reversion Floor ($77,671.89). Secondary trend filter & institutional re-entry zone.", "tp": "78226.7", "sl": "77471.9", "status": "na" },
-  { "source": "BTC-AI", "price": "77530.19", "bias": "neutral", "behavior": "[13:31] 15M/1H 200 EMA Macro Equilibrium Floor ($77,530.19). High-probability structural pivot & macro trend separator.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "77749.99", "bias": "bearish", "behavior": "[13:31] Prior Day High ($77,749.99) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.", "tp": "77126.7", "sl": "78000.0", "status": "na" },
-  { "source": "BTC-AI", "price": "76244.74", "bias": "bullish", "behavior": "[13:31] Prior Day Low ($76,244.74) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.", "tp": "78326.7", "sl": "75994.7", "status": "na" },
-  { "source": "BTC-AI", "price": "77417.49", "bias": "neutral", "behavior": "[13:31] Prior Day Close ($77,417.49) Intraday Equilibrium Pivot. Day green/red sentiment baseline.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "77877.19", "bias": "bearish", "behavior": "[13:31] Asian Session High ($77,877.19) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.", "tp": "77326.7", "sl": "78027.2", "status": "na" },
-  { "source": "BTC-AI", "price": "76937.86", "bias": "bullish", "behavior": "[13:31] Asian Session Low ($76,937.86) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.", "tp": "78126.7", "sl": "76787.9", "status": "na" },
-  { "source": "BTC-AI", "price": "78147.2", "bias": "bearish", "behavior": "[13:31] London Session High ($78,147.20) Liquidity Shelf. European expansion peak & supply rejection zone.", "tp": "77226.7", "sl": "78347.2", "status": "na" },
-  { "source": "BTC-AI", "price": "77560.87", "bias": "bullish", "behavior": "[13:31] London Session Low ($77,560.87) Demand Floor. European session low & liquidity absorption shelf.", "tp": "78226.7", "sl": "77360.9", "status": "na" },
-  { "source": "BTC-AI", "price": "77424.57", "bias": "neutral", "behavior": "[13:31] Intraday Session VWAP Benchmark ($77,424.57). Institutional average cost anchor & fair value magnet.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "77270.43", "bias": "neutral", "behavior": "[13:31] Intraday High-Volume Point of Control (POC) ($77,270.43). Heavy institutional trading volume node.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "77458.47", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,458.47). Imbalance mitigation zone.", "tp": "77858.5", "sl": "77308.5", "status": "na" },
-  { "source": "BTC-AI", "price": "77531.99", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,531.99). Imbalance mitigation zone.", "tp": "77932.0", "sl": "77382.0", "status": "na" },
-  { "source": "BTC-AI", "price": "77586.85", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,586.85). Imbalance mitigation zone.", "tp": "77986.8", "sl": "77436.8", "status": "na" },
-  { "source": "BTC-AI", "price": "77711.48", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,711.48). Imbalance mitigation zone.", "tp": "78111.5", "sl": "77561.5", "status": "na" },
-  { "source": "BTC-AI", "price": "77483.52", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,483.52). Imbalance mitigation zone.", "tp": "77883.5", "sl": "77333.5", "status": "na" },
-  { "source": "BTC-AI", "price": "77658.85", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,658.85). Imbalance mitigation zone.", "tp": "78058.8", "sl": "77508.8", "status": "na" },
-  { "source": "BTC-AI", "price": "77818.05", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,818.05). Imbalance mitigation zone.", "tp": "78218.0", "sl": "77668.0", "status": "na" },
-  { "source": "BTC-AI", "price": "77849.74", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,849.74). Imbalance mitigation zone.", "tp": "78249.7", "sl": "77699.7", "status": "na" },
-  { "source": "BTC-AI", "price": "77686.77", "bias": "bearish", "behavior": "[13:31] 15M Bearish Supply Fair Value Gap Bottom ($77,686.77). Imbalance mitigation zone.", "tp": "77286.8", "sl": "77836.8", "status": "na" },
-  { "source": "BTC-AI", "price": "77824.39", "bias": "bearish", "behavior": "[13:31] 15M Bearish Supply Fair Value Gap Top ($77,824.39). Imbalance mitigation zone.", "tp": "77424.4", "sl": "77974.4", "status": "na" },
-  { "source": "BTC-AI", "price": "78015.0", "bias": "bullish", "behavior": "[13:31] CME BTC Futures Gap Magnet ($78,015.00). High-probability >80% historical gap fill magnet.", "tp": "78515.0", "sl": "77815.0", "status": "na" }
+  { "source": "BTC-AI", "price": "77735.87", "bias": "bearish", "behavior": "[13:30] 15M Dynamic 9 EMA Shelf ($77,735.87). Primary short-term momentum trail & intraday pullback defense zone.", "tp": "77326.7", "sl": "77885.9", "status": "na" },
+  { "source": "BTC-AI", "price": "77671.89", "bias": "bullish", "behavior": "[13:30] 15M Dynamic 21 EMA Mean-Reversion Floor ($77,671.89). Secondary trend filter & institutional re-entry zone.", "tp": "78226.7", "sl": "77471.9", "status": "na" },
+  { "source": "BTC-AI", "price": "77530.19", "bias": "neutral", "behavior": "[13:30] 15M/1H 200 EMA Macro Equilibrium Floor ($77,530.19). High-probability structural pivot & macro trend separator.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77749.99", "bias": "bearish", "behavior": "[13:30] Prior Day High ($77,749.99) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.", "tp": "77126.7", "sl": "78000.0", "status": "na" },
+  { "source": "BTC-AI", "price": "76244.74", "bias": "bullish", "behavior": "[13:30] Prior Day Low ($76,244.74) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.", "tp": "78326.7", "sl": "75994.7", "status": "na" },
+  { "source": "BTC-AI", "price": "77417.49", "bias": "neutral", "behavior": "[13:30] Prior Day Close ($77,417.49) Intraday Equilibrium Pivot. Day green/red sentiment baseline.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77877.19", "bias": "bearish", "behavior": "[13:30] Asian Session High ($77,877.19) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.", "tp": "77326.7", "sl": "78027.2", "status": "na" },
+  { "source": "BTC-AI", "price": "76937.86", "bias": "bullish", "behavior": "[13:30] Asian Session Low ($76,937.86) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.", "tp": "78126.7", "sl": "76787.9", "status": "na" },
+  { "source": "BTC-AI", "price": "78147.2", "bias": "bearish", "behavior": "[13:30] London Session High ($78,147.20) Liquidity Shelf. European expansion peak & supply rejection zone.", "tp": "77226.7", "sl": "78347.2", "status": "na" },
+  { "source": "BTC-AI", "price": "77560.87", "bias": "bullish", "behavior": "[13:30] London Session Low ($77,560.87) Demand Floor. European session low & liquidity absorption shelf.", "tp": "78226.7", "sl": "77360.9", "status": "na" },
+  { "source": "BTC-AI", "price": "77424.57", "bias": "neutral", "behavior": "[13:30] Intraday Session VWAP Benchmark ($77,424.57). Institutional average cost anchor & fair value magnet.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77270.43", "bias": "neutral", "behavior": "[13:30] Intraday High-Volume Point of Control (POC) ($77,270.43). Heavy institutional trading volume node.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77458.47", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Bottom ($77,458.47). Imbalance mitigation zone.", "tp": "77858.5", "sl": "77308.5", "status": "na" },
+  { "source": "BTC-AI", "price": "77531.99", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Top ($77,531.99). Imbalance mitigation zone.", "tp": "77932.0", "sl": "77382.0", "status": "na" },
+  { "source": "BTC-AI", "price": "77586.85", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Bottom ($77,586.85). Imbalance mitigation zone.", "tp": "77986.8", "sl": "77436.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77711.48", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Top ($77,711.48). Imbalance mitigation zone.", "tp": "78111.5", "sl": "77561.5", "status": "na" },
+  { "source": "BTC-AI", "price": "77483.52", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Bottom ($77,483.52). Imbalance mitigation zone.", "tp": "77883.5", "sl": "77333.5", "status": "na" },
+  { "source": "BTC-AI", "price": "77658.85", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Top ($77,658.85). Imbalance mitigation zone.", "tp": "78058.8", "sl": "77508.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77818.05", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Bottom ($77,818.05). Imbalance mitigation zone.", "tp": "78218.0", "sl": "77668.0", "status": "na" },
+  { "source": "BTC-AI", "price": "77849.74", "bias": "bullish", "behavior": "[13:30] 15M Bullish Demand Fair Value Gap Top ($77,849.74). Imbalance mitigation zone.", "tp": "78249.7", "sl": "77699.7", "status": "na" },
+  { "source": "BTC-AI", "price": "77686.77", "bias": "bearish", "behavior": "[13:30] 15M Bearish Supply Fair Value Gap Bottom ($77,686.77). Imbalance mitigation zone.", "tp": "77286.8", "sl": "77836.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77824.39", "bias": "bearish", "behavior": "[13:30] 15M Bearish Supply Fair Value Gap Top ($77,824.39). Imbalance mitigation zone.", "tp": "77424.4", "sl": "77974.4", "status": "na" },
+  { "source": "BTC-AI", "price": "78015.0", "bias": "bullish", "behavior": "[13:30] CME BTC Futures Gap Magnet ($78,015.00). High-probability >80% historical gap fill magnet.", "tp": "78515.0", "sl": "77815.0", "status": "na" }
 ];
 
 window.btcDailyPlanSummary = [
   {
     "source": "BTC-AI",
-    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (01:31 PM IST - Sep 03, 2026 | Spot: 77726.69 | Trigger: London Session (European Opening) (European Session Start)):
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (01:30 PM IST - Sep 03, 2026 | Spot: 77672.05 | Trigger: London Open (European Session Start)):
 
 ================================================================================
 🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK
@@ -488,7 +488,7 @@ window.btcDailyPlanSummary = [
 
 
 1. Market Structure & Session Bias:
-Bitcoin Spot (BTC/USD) is trading at $77,726.69, consolidation / pullback state within the updated daily structure (Day High: $78,147.20 | Day Low: $76,937.86 | Prior Day Close: $77,417.49 | Live Spot: $77,726.69). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.305 (Bearish DXY (Tailwind for BTC)) and S&P 500 Futures $7677.25) combined with crypto-native context (Funding Rate is 0.0038% (neutral); Fear & Greed Index: 65 (Greed); CME Gap active at 78015.0 (above, size: 288.31)) guide structure. Spot is inside previous day range | above pdc (day green).
+Bitcoin Spot (BTC/USD) is trading at $77,672.05, consolidation / pullback state within the updated daily structure (Day High: $78,147.20 | Day Low: $76,937.86 | Prior Day Close: $77,417.49 | Live Spot: $77,672.05). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.305 (Bearish DXY (Tailwind for BTC)) and S&P 500 Futures $7677.25) combined with crypto-native context (Funding Rate is 0.0038% (neutral); Fear & Greed Index: 65 (Greed); CME Gap active at 78015.0 (above, size: 288.31)) guide structure. Spot is inside previous day range | above pdc (day green).
 - Crypto News Guard: ⚠️ BTC NEWS: BC-Most Active Stocks
 
 2. SMC & Liquidity Zones:
@@ -499,7 +499,7 @@ Bitcoin Spot (BTC/USD) is trading at $77,726.69, consolidation / pullback state 
 
 3. Live Intraday Chop Zone / No-Trade Zone:
 - Range: $77,058.79 – $77,844.86 (Value Area) / $76,937.86 – $77,877.19 (Asian Range).
-- Context: Current spot ($77,726.69) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
+- Context: Current spot ($77,672.05) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
 
 4. High Momentum / Explosive Zones:
 - Upside Short-Covering Squeeze (> $78,147.20 Spot): A sustained 5m/15m candle close above $78,147.20 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,026.69 and $78,326.69.
