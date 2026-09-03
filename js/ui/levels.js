@@ -603,15 +603,40 @@ if (viewLevels) {
 
         let html = '';
 
-        // Check if there is preamble text before section 1 (e.g. Daily Market Bias & Outlook block)
+        // Check if there is preamble text before section 1 (e.g. Assumptions, Daily Market Bias & Outlook block)
         if (matches.length > 0 && matches[0].index > 0) {
             const preamble = bodyText.substring(0, matches[0].index).trim();
             if (preamble && preamble.length > 5) {
-                const cleanPreamble = preamble.split('\n').filter(line => !/^[=─-]{5,}$/.test(line.trim())).join('\n').trim();
-                if (cleanPreamble) {
+                // Separate ASSUMPTIONS block if present
+                let assumptionsHtml = '';
+                let remainingPreamble = preamble;
+
+                const assumptionsMatch = remainingPreamble.match(/>\s*⚠️\s*ASSUMPTIONS[\s\S]*?(?=\n\s*---\s*\n|\n\s*#|\n\s*={5,}|\Z)/i);
+                if (assumptionsMatch) {
+                    const rawAssump = assumptionsMatch[0].replace(/^>\s*/gm, '').trim();
+                    assumptionsHtml = `<div style="background: rgba(251, 191, 36, 0.08); border-left: 3px solid #f59e0b; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 0.75rem; font-size: 0.84rem; line-height: 1.6; color: #fde68a; white-space: pre-line;">${formatInlineHighlights(rawAssump)}</div>`;
+                    remainingPreamble = remainingPreamble.replace(assumptionsMatch[0], '').trim();
+                }
+
+                // Strip horizontal dividers and top title lines like '# 🪙 Gold...' from remaining preamble
+                const cleanPreambleLines = remainingPreamble.split('\n').filter(line => {
+                    const l = line.trim();
+                    if (/^[=─-]{3,}$/.test(l)) return false;
+                    if (/^#+\s*.*(?:Briefing|Tactical Update|Predictions)/i.test(l)) return false;
+                    if (/^#+\s*[🪙🎯📍]/.test(l)) return false;
+                    return true;
+                });
+                const cleanPreamble = cleanPreambleLines.join('\n').trim();
+
+                if (assumptionsHtml || cleanPreamble) {
                     html += `<div class="summary-table-section">`;
-                    html += `<div class="summary-table-title">🎯 Daily Market Bias & Outlook</div>`;
-                    html += `<div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); padding: 0.85rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.88rem; line-height: 1.5; color: var(--text-main);">${formatInlineHighlights(cleanPreamble)}</div>`;
+                    if (assumptionsHtml) {
+                        html += assumptionsHtml;
+                    }
+                    if (cleanPreamble) {
+                        html += `<div class="summary-table-title">🎯 Daily Market Bias & Outlook</div>`;
+                        html += `<div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); padding: 0.85rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.88rem; line-height: 1.6; color: var(--text-main); white-space: pre-line;">${formatInlineHighlights(cleanPreamble)}</div>`;
+                    }
                     html += `</div>`;
                 }
             }
@@ -621,116 +646,136 @@ if (viewLevels) {
             const headerTitle = match[1].trim();
             const startIdx = match.index + match[0].length;
             const endIdx = (idx < matches.length - 1) ? matches[idx + 1].index : bodyText.length;
-            const sectionContent = bodyText.substring(startIdx, endIdx).trim();
+            let sectionContent = bodyText.substring(startIdx, endIdx).trim();
 
             const titleLower = headerTitle.toLowerCase();
 
+            // 1. FILTER OUT DEVELOPER DEPLOYMENT / REPO SYNC SECTIONS
+            if (/integration|repository sync|deployment status|trading journal synchronized|mentorship log/i.test(titleLower)) {
+                return;
+            }
+
+            // Strip trailing horizontal rules
+            sectionContent = sectionContent.replace(/\n*[-*=_]{3,}\s*$/g, '').trim();
+
             html += `<div class="summary-table-section">`;
 
-            if (titleLower.includes('market structure') || titleLower.includes('bias') || titleLower.includes('synthesis')) {
+            if (titleLower.includes('market structure') || titleLower.includes('global macro') || titleLower.includes('bias') || titleLower.includes('synthesis')) {
                 html += `<div class="summary-table-title">📌 ${escapeHtml(headerTitle)}</div>`;
-                html += `<div style="background: rgba(0,0,0,0.25); border: 1px solid var(--border); padding: 0.85rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.88rem; line-height: 1.5;">${formatInlineHighlights(sectionContent)}</div>`;
+                html += `<div style="background: rgba(0,0,0,0.25); border: 1px solid var(--border); padding: 0.85rem; border-radius: 8px; margin-bottom: 0.75rem; font-size: 0.88rem; line-height: 1.6; white-space: pre-line;">${formatInlineHighlights(sectionContent)}</div>`;
             } else if (titleLower.includes('smc') || titleLower.includes('confluence') || titleLower.includes('liquidity')) {
                 html += `<div class="summary-table-title">🎯 ${escapeHtml(headerTitle)}</div>`;
-                const lines = sectionContent.split('\n').filter(l => l.trim().startsWith('-'));
-                if (lines.length > 0) {
-                    html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Zone / Structure Type</th><th>Confluence Details & Price Levels</th></tr></thead><tbody>`;
-                    lines.forEach(line => {
-                        const cleanLine = line.replace(/^-/, '').trim();
-                        const colonIdx = cleanLine.indexOf(':');
-                        if (colonIdx !== -1) {
-                            const type = cleanLine.substring(0, colonIdx).trim();
-                            const details = cleanLine.substring(colonIdx + 1).trim();
-                            html += `<tr><td style="font-weight: 700; color: var(--accent); min-width: 110px; max-width: 200px; word-break: break-word;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
-                        } else {
-                            html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
-                        }
-                    });
-                    html += `</tbody></table></div>`;
+                if (sectionContent.includes('|') && sectionContent.includes('---')) {
+                    html += parseMarkdownTablesToHtml(sectionContent);
                 } else {
-                    html += `<div style="padding: 0.5rem; font-size: 0.85rem;">${formatInlineHighlights(sectionContent)}</div>`;
+                    const lines = sectionContent.split('\n').filter(l => /^[-*]\s+/.test(l.trim()) && !/^[-*]{3,}$/.test(l.trim()));
+                    if (lines.length > 0) {
+                        html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Zone / Structure Type</th><th>Confluence Details & Price Levels</th></tr></thead><tbody>`;
+                        lines.forEach(line => {
+                            const cleanLine = line.trim().replace(/^[-*]\s+/, '').trim();
+                            const colonIdx = cleanLine.indexOf(':');
+                            if (colonIdx !== -1) {
+                                const type = cleanLine.substring(0, colonIdx).trim().replace(/\*\*/g, '');
+                                const details = cleanLine.substring(colonIdx + 1).trim();
+                                html += `<tr><td style="font-weight: 700; color: var(--accent); min-width: 110px; max-width: 200px; word-break: break-word;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
+                            } else {
+                                html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
+                            }
+                        });
+                        html += `</tbody></table></div>`;
+                    } else {
+                        html += `<div style="padding: 0.5rem; font-size: 0.85rem; white-space: pre-line; line-height: 1.6;">${formatInlineHighlights(sectionContent)}</div>`;
+                    }
                 }
             } else if (titleLower.includes('chop') || titleLower.includes('no-trade')) {
                 html += `<div class="summary-table-title">⚠️ ${escapeHtml(headerTitle)}</div>`;
-                html += `<div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.5; color: #fde68a; margin-bottom: 0.75rem;">${formatInlineHighlights(sectionContent)}</div>`;
+                html += `<div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; line-height: 1.6; color: #fde68a; margin-bottom: 0.75rem; white-space: pre-line;">${formatInlineHighlights(sectionContent)}</div>`;
             } else if (titleLower.includes('momentum') || titleLower.includes('explosive') || titleLower.includes('breakout')) {
                 html += `<div class="summary-table-title">⚡ ${escapeHtml(headerTitle)}</div>`;
-                const lines = sectionContent.split('\n').filter(l => l.trim().startsWith('-'));
-                if (lines.length > 0) {
-                    html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Scenario Type</th><th>Trigger Condition & Target Expansion</th></tr></thead><tbody>`;
-                    lines.forEach(line => {
-                        const cleanLine = line.replace(/^-/, '').trim();
-                        const colonIdx = cleanLine.indexOf(':');
-                        if (colonIdx !== -1) {
-                            const type = cleanLine.substring(0, colonIdx).trim();
-                            const details = cleanLine.substring(colonIdx + 1).trim();
-                            const isBull = /upside|short-covering|squeeze|bullish/i.test(type);
-                            const badgeClass = isBull ? 'badge-buy' : 'badge-sell';
-                            html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 200px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
-                        } else {
-                            html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
-                        }
-                    });
-                    html += `</tbody></table></div>`;
+                if (sectionContent.includes('|') && sectionContent.includes('---')) {
+                    html += parseMarkdownTablesToHtml(sectionContent);
                 } else {
-                    html += `<div style="padding: 0.5rem; font-size: 0.85rem;">${formatInlineHighlights(sectionContent)}</div>`;
+                    const lines = sectionContent.split('\n').filter(l => /^[-*]\s+/.test(l.trim()) && !/^[-*]{3,}$/.test(l.trim()));
+                    if (lines.length > 0) {
+                        html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Scenario Type</th><th>Trigger Condition & Target Expansion</th></tr></thead><tbody>`;
+                        lines.forEach(line => {
+                            const cleanLine = line.trim().replace(/^[-*]\s+/, '').trim();
+                            const colonIdx = cleanLine.indexOf(':');
+                            if (colonIdx !== -1) {
+                                const type = cleanLine.substring(0, colonIdx).trim().replace(/\*\*/g, '');
+                                const details = cleanLine.substring(colonIdx + 1).trim();
+                                const isBull = /upside|short-covering|squeeze|bullish|buy/i.test(type);
+                                const badgeClass = isBull ? 'badge-buy' : 'badge-sell';
+                                html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 200px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
+                            } else {
+                                html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
+                            }
+                        });
+                        html += `</tbody></table></div>`;
+                    } else {
+                        html += `<div style="padding: 0.5rem; font-size: 0.85rem; white-space: pre-line; line-height: 1.6;">${formatInlineHighlights(sectionContent)}</div>`;
+                    }
                 }
             } else if (titleLower.includes('action plan') || titleLower.includes('triggers') || titleLower.includes('setup')) {
                 html += `<div class="summary-table-title">🚀 ${escapeHtml(headerTitle)}</div>`;
-                const lines = sectionContent.split('\n').filter(l => l.trim().startsWith('-'));
-                if (lines.length > 0) {
-                    html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Trade Setup</th><th>Dir</th><th>Entry Trigger Condition</th><th>Take Profit (TP)</th><th>Stop Loss (SL)</th></tr></thead><tbody>`;
-                    lines.forEach(line => {
-                        const cleanLine = line.replace(/^-/, '').trim();
-                        let setupName = cleanLine;
-                        let dir = 'NEUTRAL';
-                        let entry = cleanLine;
-                        
-                        let textWithoutTpSl = cleanLine;
-                        const stripMatch = cleanLine.match(/(?:\|\s*\*\*)?(?:TP:|SL:)/i);
-                        if (stripMatch) {
-                            textWithoutTpSl = cleanLine.substring(0, stripMatch.index).trim();
-                            textWithoutTpSl = textWithoutTpSl.replace(/[|.-]\s*$/, '').trim();
-                        }
-
-                        let tp = '-';
-                        let sl = '-';
-
-                        const tpMatch = cleanLine.match(/TP:\s*\*?\*?\s*(.*?)(?=(?:\|\s*\*?\*?\s*)?SL:|\.\s*SL:|\s*SL:|$)/i);
-                        if (tpMatch) tp = tpMatch[1].replace(/\*+/g, '').replace(/\.$/, '').trim();
-
-                        const slMatch = cleanLine.match(/SL:\s*\*?\*?\s*(.*?)(?=(?:\|\s*\*?\*?\s*)?TP:|\.\s*TP:|\s*TP:|$)/i);
-                        if (slMatch) sl = slMatch[1].replace(/\*+/g, '').replace(/\.$/, '').trim();
-
-                        const colonIdx = textWithoutTpSl.indexOf(':');
-                        if (colonIdx !== -1) {
-                            setupName = textWithoutTpSl.substring(0, colonIdx).trim();
-                            entry = textWithoutTpSl.substring(colonIdx + 1).trim();
-                        }
-
-                        if (/BUY|Long|CE/i.test(setupName)) dir = 'BUY';
-                        else if (/SELL|Short|PE/i.test(setupName)) dir = 'SELL';
-
-                        const badgeClass = dir === 'BUY' ? 'badge-buy' : (dir === 'SELL' ? 'badge-sell' : '');
-
-                        html += `<tr>`;
-                        html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word;">${escapeHtml(setupName)}</td>`;
-                        html += `<td><span class="${badgeClass}">${dir}</span></td>`;
-                        html += `<td>${formatInlineHighlights(entry)}</td>`;
-                        html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;
-                        html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e; white-space: nowrap;">${formatInlineHighlights(sl)}</td>`;
-                        html += `</tr>`;
-                    });
-                    html += `</tbody></table></div>`;
+                if (sectionContent.includes('|') && sectionContent.includes('---')) {
+                    html += parseMarkdownTablesToHtml(sectionContent);
                 } else {
-                    html += `<div style="padding: 0.5rem; font-size: 0.85rem;">${formatInlineHighlights(sectionContent)}</div>`;
+                    const lines = sectionContent.split('\n').filter(l => /^[-*]\s+/.test(l.trim()) && !/^[-*]{3,}$/.test(l.trim()));
+                    if (lines.length > 0) {
+                        html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Trade Setup</th><th>Dir</th><th>Entry Trigger Condition</th><th>Take Profit (TP)</th><th>Stop Loss (SL)</th></tr></thead><tbody>`;
+                        lines.forEach(line => {
+                            const cleanLine = line.trim().replace(/^[-*]\s+/, '').trim();
+                            let setupName = cleanLine;
+                            let dir = 'NEUTRAL';
+                            let entry = cleanLine;
+                            
+                            let textWithoutTpSl = cleanLine;
+                            const stripMatch = cleanLine.match(/(?:\|\s*\*\*)?(?:TP:|SL:)/i);
+                            if (stripMatch) {
+                                textWithoutTpSl = cleanLine.substring(0, stripMatch.index).trim();
+                                textWithoutTpSl = textWithoutTpSl.replace(/[|.-]\s*$/, '').trim();
+                            }
+
+                            let tp = '-';
+                            let sl = '-';
+
+                            const tpMatch = cleanLine.match(/TP:\s*\*?\*?\s*(.*?)(?=(?:\|\s*\*?\*?\s*)?SL:|\.\s*SL:|\s*SL:|$)/i);
+                            if (tpMatch) tp = tpMatch[1].replace(/\*+/g, '').replace(/\.$/, '').trim();
+
+                            const slMatch = cleanLine.match(/SL:\s*\*?\*?\s*(.*?)(?=(?:\|\s*\*?\*?\s*)?TP:|\.\s*TP:|\s*TP:|$)/i);
+                            if (slMatch) sl = slMatch[1].replace(/\*+/g, '').replace(/\.$/, '').trim();
+
+                            const colonIdx = textWithoutTpSl.indexOf(':');
+                            if (colonIdx !== -1) {
+                                setupName = textWithoutTpSl.substring(0, colonIdx).trim().replace(/\*\*/g, '');
+                                entry = textWithoutTpSl.substring(colonIdx + 1).trim();
+                            }
+
+                            if (/BUY|Long|CE/i.test(setupName)) dir = 'BUY';
+                            else if (/SELL|Short|PE/i.test(setupName)) dir = 'SELL';
+
+                            const badgeClass = dir === 'BUY' ? 'badge-buy' : (dir === 'SELL' ? 'badge-sell' : '');
+
+                            html += `<tr>`;
+                            html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word;">${escapeHtml(setupName)}</td>`;
+                            html += `<td><span class="${badgeClass}">${dir}</span></td>`;
+                            html += `<td>${formatInlineHighlights(entry)}</td>`;
+                            html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;
+                            html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e; white-space: nowrap;">${formatInlineHighlights(sl)}</td>`;
+                            html += `</tr>`;
+                        });
+                        html += `</tbody></table></div>`;
+                    } else {
+                        html += `<div style="padding: 0.5rem; font-size: 0.85rem; white-space: pre-line; line-height: 1.6;">${formatInlineHighlights(sectionContent)}</div>`;
+                    }
                 }
             } else {
                 html += `<div class="summary-table-title">${escapeHtml(headerTitle)}</div>`;
                 if (sectionContent.includes('|') && sectionContent.includes('---')) {
                     html += parseMarkdownTablesToHtml(sectionContent);
                 } else {
-                    html += `<div style="padding: 0.5rem 0; font-size: 0.88rem; line-height: 1.5;">${formatInlineHighlights(sectionContent)}</div>`;
+                    html += `<div style="padding: 0.5rem 0; font-size: 0.88rem; line-height: 1.6; white-space: pre-line;">${formatInlineHighlights(sectionContent)}</div>`;
                 }
             }
 
