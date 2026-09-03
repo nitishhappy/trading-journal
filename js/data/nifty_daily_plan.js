@@ -1,7 +1,7 @@
 window.dailyPlanData = [
-  {
+{
     "source": "AI",
-    "price": "24,650 – 24,750",
+    "price": "24,650 \u2013 24,750",
     "bias": "bullish",
     "behavior": "[09:16] Macro Target (ATH Extension BSL Target): Terminal Buy-Side Liquidity pool on higher-timeframe multi-session institutional short squeeze.",
     "tp": "na",
@@ -10,7 +10,7 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "price": "24,254 – 24,300",
+    "price": "24,254 \u2013 24,300",
     "bias": "bearish",
     "behavior": "[09:16] Resistance (Daily 21 EMA & Positional Confirmation): Major structural resistance; daily LTP close above confirms macro bullish trend resumption.",
     "tp": "na",
@@ -19,7 +19,7 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "price": "24,180 – 24,200",
+    "price": "24,180 \u2013 24,200",
     "bias": "bearish",
     "behavior": "[09:16] Resistance (Previous Day High & Trendline Supply OB): Supply Order Block and Pro call-writing wall; prime take-profit and fade area.",
     "tp": "na",
@@ -28,9 +28,9 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "price": "24,100 – 24,130",
+    "price": "24,100 \u2013 24,130",
     "bias": "bullish",
-    "behavior": "[09:16] Explosive Zone (High-Momentum Short-Covering Squeeze): In-the-money call writers at 23,700–23,750 trapped; rapid short-covering accelerator.",
+    "behavior": "[09:16] Explosive Zone (High-Momentum Short-Covering Squeeze): In-the-money call writers at 23,700\u201323,750 trapped; rapid short-covering accelerator.",
     "tp": "na",
     "sl": "na",
     "status": "na"
@@ -39,23 +39,23 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "24,000.00",
     "bias": "bearish",
-    "behavior": "[09:16] Resistance / Breakout Trigger (Psychological Wall & Max OI): Decisive 15M close above triggers rapid short-covering toward 24,100–24,130.",
+    "behavior": "[09:16] Resistance / Breakout Trigger (Psychological Wall & Max OI): Decisive 15M close above triggers rapid short-covering toward 24,100\u201324,130.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "23,950 – 24,000",
+    "price": "23,950 \u2013 24,000",
     "bias": "neutral",
-    "behavior": "[09:16] Neutral (Live 15M ORB & No-Trade Chop Zone): Opening range compression band and psychological friction pocket — avoid random scalps.",
+    "behavior": "[09:16] Neutral (Live 15M ORB & No-Trade Chop Zone): Opening range compression band and psychological friction pocket \u2014 avoid random scalps.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "AI",
-    "price": "23,914 – 23,930",
+    "price": "23,914 \u2013 23,930",
     "bias": "bullish",
     "behavior": "[09:16] Support (Prior Day High / Gap-Fill Demand Shelf): Broken yesterday high flipped to demand; prime pullback absorption zone for continuation longs.",
     "tp": "na",
@@ -64,7 +64,7 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "price": "23,850 – 23,880",
+    "price": "23,850 \u2013 23,880",
     "bias": "bullish",
     "behavior": "[09:16] Support (Session Demand Base & 15M FVG Shelf): Intermediate demand shelf; holding this preserves intraday higher-low bullish structure.",
     "tp": "na",
@@ -73,7 +73,7 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "price": "23,786 – 23,800",
+    "price": "23,786 \u2013 23,800",
     "bias": "bullish",
     "behavior": "[09:16] Support (Prior Day Low & Max Put Writer Defense Floor): Major institutional absorption base and primary Turtle Soup SSL sweep floor.",
     "tp": "na",
@@ -84,7 +84,7 @@ window.dailyPlanData = [
     "source": "AI",
     "price": "23,787.00",
     "bias": "bearish",
-    "behavior": "[09:16] Breakdown Trigger (Downside Invalidation Floor): Sustained 15M close below 23,787 invalidates bullish thesis, opening downside to 23,733–23,645.",
+    "behavior": "[09:16] Breakdown Trigger (Downside Invalidation Floor): Sustained 15M close below 23,787 invalidates bullish thesis, opening downside to 23,733\u201323,645.",
     "tp": "na",
     "sl": "na",
     "status": "na"
