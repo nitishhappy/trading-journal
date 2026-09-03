@@ -1,4 +1,30 @@
 window.dailyPlanData = [
+  // ============================================================
+  // 📅 SEP 03, 2026 — NIFTY LEVELS (Sensex Expiry Day)
+  // Sources: BT, MAA, SMU, BS | Synthesized at 08:26 AM IST
+  // ============================================================
+  { "source": "BT", "price": "24000", "bias": "bullish", "behavior": "BUY ON DIP target — 24,000 is the key magnet for tomorrow. Flat open + immediate up move → enter CE. On any 70-100pt dip from opening, re-buy. Strategy valid all day.", "tp": "24000", "sl": "Below liquidity sweep low", "status": "na" },
+  { "source": "BT", "price": "23786 - 23800", "bias": "bullish", "behavior": "Liquidity sweep buy zone. If market sweeps into this zone and SL is taken, re-enter with DOUBLE quantity. Previous day low area — smart money accumulating here.", "tp": "PDC / Day High", "sl": "23760", "status": "na" },
+  { "source": "BT", "price": "Day Low (gap-down)", "bias": "bullish", "behavior": "Small gap-down: price gaps below Day Low then immediately gaps back inside (gap fill) → buy CE. Targets: PDC then Day High. Ignore very large gap-downs — wait second half.", "tp": "PDC / Day High", "sl": "Day Low +15pts", "status": "na" },
+  { "source": "BT", "price": "23640 - 23600", "bias": "bearish", "behavior": "BEAR CASE ONLY: Gap-down + Day Low breakdown with bearish PA → downward pressure can extend to 23,640-23,600. Stay flat unless clear directional signal.", "tp": "23600", "sl": "Day High", "status": "na" },
+  { "source": "MAA", "price": "23796", "bias": "bullish", "behavior": "Positional SL — closing basis. BUY ON DIP view valid as long as Nifty does NOT close below 23,796. SL hunts at 23,881 and 23,796 already done. Smart money accumulating. FII: ₹6,700 cr cash buy + FCNR ₹12L cr inflow = macro positive.", "tp": "24000 / 24254", "sl": "23796 (closing basis)", "status": "na" },
+  { "source": "MAA", "price": "23900 - 23913", "bias": "bullish", "behavior": "Breakout trigger. Bullish candle + high break above 23,900 → increase quantity. Max option OI at 23,900 (not 24k) shows writers expect market can exceed 24,000.", "tp": "24000 / 24200", "sl": "23850", "status": "na" },
+  { "source": "MAA", "price": "24000", "bias": "bullish", "behavior": "Critical resistance — major OI. Close above 24,000 → target 24,254. Short covering accelerates move. FII data + FCNR inflow = macro tailwind.", "tp": "24254 / 24500", "sl": "23950", "status": "na" },
+  { "source": "MAA", "price": "24254 - 24300", "bias": "bullish", "behavior": "Positional confirmation. Daily LTP close above 24,254-24,300 → structural reversal confirmed. First signal of meaningful bullish trend resumption.", "tp": "24500", "sl": "24000", "status": "na" },
+  { "source": "MAA", "price": "23900", "bias": "bearish", "behavior": "Short trigger — SMALL QTY ONLY. Bearish candle below 23,900 → small short entry. Not aggressive short given strong macro data. Reduce qty on any bounce.", "tp": "23800 / 23733", "sl": "23950", "status": "na" },
+  { "source": "SMU", "price": "23913", "bias": "bullish", "behavior": "Primary CE buy trigger. 15M candle close above 23,913 → long entry. Gift Nifty ~84pts above suggests gap-up open scenario likely.", "tp": "24100 / 24166", "sl": "23850", "status": "na" },
+  { "source": "SMU", "price": "24100 - 24130", "bias": "bullish", "behavior": "Short-covering EXPLOSIVE zone. In-the-money call writers at 23,700-23,750 are trapped — any gap-up forces rapid covering → fast rally to 24,100-24,130.", "tp": "24166 / 24255", "sl": "24050", "status": "na" },
+  { "source": "SMU", "price": "23800", "bias": "bullish", "behavior": "Max put writer support (ATM). PROs + FII put writing anchored here. If market wicks below with reversal → strong CE entry. PCR 0.73 overall / 0.8 ATM.", "tp": "23913 / 24100", "sl": "23745", "status": "na" },
+  { "source": "SMU", "price": "23805", "bias": "bearish", "behavior": "Support breakdown level. 15M close below 23,805 → next stops 23,733 then 23,645. Watch for closing below this level.", "tp": "23733 / 23645", "sl": "23860", "status": "na" },
+  { "source": "SMU", "price": "23787", "bias": "bearish", "behavior": "Bearish trigger. 15M close below 23,787 → small PE entry. Targets: 23,733 / 23,645. All channels advise SMALL qty on shorts only.", "tp": "23733 / 23645", "sl": "23840", "status": "na" },
+  { "source": "BS", "price": "24000 - 24100", "bias": "bullish", "behavior": "Trend line retest zone (Sensibull). Even if daily trend line is broken, path forward is likely one more up-move testing 24,000-24,100 before any extended downside. Morning star confirmation awaited.", "tp": "24100", "sl": "23786", "status": "na" },
+  { "source": "BS", "price": "23800", "bias": "bullish", "behavior": "Fibonacci + PCR support. PCR 0.8 ATM — evenly matched at 23,800. Green hammer today = potential Morning Star. If today's close is positive → Morning Star confirmed = bullish reversal signal.", "tp": "24000 / 24100", "sl": "23730", "status": "na" },
+  { "source": "AI", "price": "23800 - 23913", "bias": "neutral", "behavior": "[08:26 Sep-03] ⚠️ NO-TRADE CHOP ZONE — Sensex Expiry Day. PCR 0.73, conflicting FII signals. Wait for complete 15M ORB (9:15–9:30 AM) before any entry. NEVER trade on 3rd 5-min candle (9:25 AM). Premium decay is severe on expiry.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "23913", "bias": "bullish", "behavior": "[08:26 Sep-03] HIGH-MOMENTUM BREAKOUT TRIGGER. 15M ORB close above 23,913 → CE long entry. Short-covering from trapped call writers at 23,700-23,750 will fuel explosive move. Gift Nifty ~84pts premium supports gap-up thesis.", "tp": "24000 / 24100 / 24130", "sl": "23860", "status": "na" },
+  { "source": "AI", "price": "23800", "bias": "bullish", "behavior": "[08:26 Sep-03] DEMAND ABSORPTION LONG. Dip to 23,800 (max put support) + lower-wick reversal + 5M close above 23,830 → CE long. Buy-on-dip valid above 23,796 closing basis (consensus across all 4 channels: BT, MAA, SMU, BS).", "tp": "23913 / 24000", "sl": "23760", "status": "na" },
+  { "source": "AI", "price": "24000", "bias": "bullish", "behavior": "[08:26 Sep-03] ⚡ EXPLOSIVE SHORT-COVERING ZONE. 15M close above 24,000 → trapped 23,900-strike call writers must cover → rapid squeeze to 24,100-24,130. Increase qty ONLY on confirmed 15M breakout candle close.", "tp": "24100 / 24130 / 24255", "sl": "23950", "status": "na" },
+  { "source": "AI", "price": "23787 - 23796", "bias": "bearish", "behavior": "[08:26 Sep-03] INVALIDATION FLOOR. 15M close below 23,787 → ALL bullish thesis invalidated. Small PE entry only. VERY SMALL qty — all 4 channels (BT, MAA, SMU, BS) advise against aggressive shorting here.", "tp": "23733 / 23645", "sl": "23840", "status": "na" },
+
   {
     "source": "AI",
     "price": "24050-24095",
@@ -363,8 +389,87 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
   {
+    "source": "WF-NIFTY-PRED | Sep 03, 2026",
+    "text": `📅 NIFTY PREDICTION SYNTHESIS — Thursday, 03 Sep 2026 (Sensex Expiry Day)
+Sources: BT (Bengal Trader) | MAA (Market Analysis Academy) | SMU (Stock Market Unlimited) | BS (Be Sensibull)
+Synthesized at: 08:26 AM IST | 4 Videos + 4 Transcripts Downloaded & Analyzed
+
+================================================================================
+🎯 DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: 🟡 CAUTIOUSLY BULLISH (Conditional — Expiry Day)
+• Bias Score: +35 / +60 | Confidence: Moderate
+• Bias Invalidation Floor: 23,796 (closing basis) — Below this, ALL bullish thesis invalidated
+• Primary Strategy: BUY ON DIP until 24,000 target (all 4 channels aligned on this)
+
+📍 Tactical Directives:
+• DO NOT trade on 3rd 5-minute candle (9:25 AM) — Wait full 15M ORB close (9:15–9:30 AM)
+• Gift Nifty ~84 pts premium suggests moderate gap-up open — expect initial spike
+• Sensex Expiry: Premium decay is FAST today — exit CE trades promptly on target hit
+• No conviction to short from any channel — even BS (despite trend line break) says "don't jump into a short here"
+
+================================================================================
+📊 5-PILLAR DAILY BIAS RATIONALE
+================================================================================
+1. 🌏 Global / GIFT Nifty (+15): S&P up, NASDAQ up, Gift Nifty ~84pts above → Bullish open expected
+2. 📊 FII/DII Net Data (+10): FII cash +₹6,700 cr (big positive), FCNR inflow ₹12L cr (macro positive), Stock Futures +42,000 lots (smart money long), Pros put-writing → Mixed-to-Bullish
+3. 🏗️ SMC Market Structure (+5): Daily trend line technically broken BUT today's candle = bullish hammer / potential Morning Star on gap-down. 23,800 held as support. Structure attempting reversal from demand zone.
+4. ⛓️ Options Chain PCR (-5): PCR 0.73 overall / 0.8 ATM → Bearish territory. Call writing at 23,700-23,750 (in-the-money). Max put support at 23,800. Explosive short-covering potential if 24,000 breaks.
+5. 📺 Channel Consensus (+10): BT: Buy on dip to 24,000. MAA: Buy on dip, SL 23,796. SMU: Bullish above 23,913. BS: No conviction to short → Consensus: Cautiously Bullish
+
+================================================================================
+📍 KEY NIFTY LEVELS — SEP 03 (Spot Index Only)
+================================================================================
+
+| Level | Type | Logic / Significance |
+|---|---|---|
+| ⚡ 24,100–24,130 | 🟢 Explosive Short-Covering Zone | ITM call writers at 23,700-23,750 trapped — gap-up forces panic covering → fast rally |
+| 🔴 24,000 | Critical Resistance → Breakout Trigger | Major OI wall. Close above → 24,254 target. Short-covering accelerates here |
+| 🔴 23,913 | Buy Trigger (SMU / AI) | 15M ORB close above → CE long confirmed. Gift Nifty ~84pts premium supports |
+| 🔴 23,900 | Breakout Zone (MAA) | Bullish candle + high break → increase qty. Max option OI here (not 24k) |
+| ⚪ 23,800–23,913 | ⚠️ NO-TRADE CHOP ZONE | PCR 0.73, expiry day premium decay — wait for directional close outside this range |
+| 🟢 23,800 | Max Put Support (ATM) | Pros + FII put writing anchored here. Wick + reversal → strong CE entry |
+| 🟢 23,796 | Positional SL Floor (MAA) | Closing below this invalidates all bullish thesis. Two SL hunts already done |
+| 🟢 23,786–23,800 | Liquidity Sweep Buy Zone (BT) | Previous day low area — smart money accumulating. Double qty on sweep + reversal |
+| 🔴 23,787 | Bearish Trigger (SMU / AI) | 15M close below → small PE entry only. All channels: VERY small qty on shorts |
+| ⚡ 23,645–23,733 | Downside Targets (bear case) | Only valid below 23,787 breakdown + sustained close below 23,805 |
+
+================================================================================
+📈 TRADING PLAN — SEP 03
+================================================================================
+
+✅ BULLISH SCENARIO (CE):
+• Scenario A — Gap-up open (~24,000+): Wait for 15M ORB. Do NOT chase. Buy retracement holding above 23,950. Target 24,100-24,130.
+• Scenario B — Flat/Small gap-up: 15M close above 23,913 → enter CE. Target 24,000 → 24,100. SL 23,860.
+• Scenario C — Dip to 23,800 support: 5M wick rejection + close above 23,830 → buy CE. Target 23,913 → 24,000. SL 23,760.
+• Scenario D — 24,000 breakout (15M close): Increase qty. Target 24,100-24,130 (short-covering). SL 23,950.
+
+❌ BEARISH SCENARIO (PE — SMALL QTY ONLY):
+• Trigger: 15M close below 23,787 with bearish PA
+• Target: 23,733 → 23,645
+• MAXIMUM small quantity — no aggressive shorting (all 4 channels aligned on this)
+
+⛔ NO-TRADE ZONE: 23,800–23,913 (without directional 15M candle close outside)
+
+⚠️ EXPIRY DAY RULES:
+• Never trade on 3rd 5-min candle (9:25 AM)
+• Very large gap-up (>150pts) or very large gap-down (>150pts) → IGNORE first half, wait for second half
+• Sensex Expiry: Check Sensex levels too — contra plays available on expiry flush moves
+• Morning Star confirmation: If today's close is positive → Morning Star on daily = bullish reversal confirmed (BS)
+
+================================================================================
+⚠️ RISK WARNINGS
+================================================================================
+• Sensex Expiry Day — Premium decay is extremely fast, especially 10:00 AM–12:00 PM
+• PCR at 0.73 (bearish territory) — market can flip direction quickly
+• FII data is MIXED (cash bullish but index futures net short) — choppy moves likely in first 30 min
+• Do NOT average losers — set hard SLs and exit
+• The 6,700 cr FII cash buy figure is unusual (possibly block deals per BS) — treat with caution
+• Avoid unconfirmed trades inside 23,800-23,913 chop zone — theta decay will punish option buyers`
+  },
+  {
     "source": "AI Pre-Market Briefing",
-    "text": `﻿# Pre-Market Briefing â€” 2026-09-03
+    "text": `﻿# Pre-Market Briefing — 2026-09-03
 > Auto-generated at 08:00 AM IST
 
 
@@ -372,7 +477,7 @@ Error: Agent execution terminated due to error.`
   },
   {
     "source": "AI Pre-Market Briefing",
-    "text": `﻿# Pre-Market Briefing â€” 2026-09-03
+    "text": `﻿# Pre-Market Briefing — 2026-09-03
 > Auto-generated at 06:18 AM IST
 
 
