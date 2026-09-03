@@ -317,7 +317,7 @@ if (viewLevels) {
         const clearedSig = localStorage.getItem(storageKey + '_cleared_sig');
         let isExplicitlyCleared = (localStorage.getItem(storageKey + '_cleared') === 'true');
 
-        if (isExplicitlyCleared && clearedSig && clearedSig !== planSig) {
+        if (isExplicitlyCleared && (!clearedSig || clearedSig !== planSig)) {
             // A brand-new Ad-Hoc AI run / briefing has arrived on the server!
             localStorage.removeItem(storageKey + '_cleared');
             localStorage.removeItem(storageKey + '_cleared_sig');
@@ -328,6 +328,7 @@ if (viewLevels) {
         } else if (isManualSync) {
             localStorage.removeItem(storageKey + '_cleared');
             localStorage.removeItem(storageKey + '_cleared_sig');
+            isExplicitlyCleared = false;
             clearedSummaries[window.currentActiveAsset || 'NIFTY'] = false;
         }
 
