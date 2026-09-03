@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### vNext — 03 Sep 2026 — NIFTY 50 Intraday Tactical Update (10:30 AM IST)
+- **NIFTY Live Recalibration**: Recalculated live intraday compression / no-trade chop zone (23,965.00–24,005.00 Spot) around the 24,000 ATM straddle wall, upside short-covering squeeze trigger (> 24,025.40 Spot), and downside breakdown trigger (< 23,955.35 Spot) amidst Sensex Expiry theta decay and India VIX dropping -4.23%.
+- **Daily Plan & Mentorship Sync**: Appended `[10:30]` AI levels to `window.dailyPlanData` and new tactical summary to `window.dailyPlanSummary` in `nifty_daily_plan.js` and `daily_plan.js`, and synced the SMC breakdown in `Utilities/Nifty_Learn.md`.
+
 ### vNext — Audio Notification for Tab Updates
 - **Market Bell Alert**: Added a subtle, synthesized double market bell sound (using Web Audio API) that plays automatically when a background/inactive asset tab receives new market summary updates, complementing the existing visual tab glow.
 
@@ -1878,5 +1882,6 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 
 
 
--   f i x ( s p 5 0 0 ) :   m o v e   7   P M   a d h o c   A I   c o p i l o t   b r i e f i n g   f r o m   d a i l y _ p l a n . j s   t o   d e d i c a t e d   s p 5 0 0 _ d a i l y _ p l a n . j s   t o   f i x   m i s s i n g   u p d a t e   i n   U I  
+-   f i x ( s p 5 0 0 ) :   m o v e   7   P M   a d h o c   A I   c o p i l o t   b r i e f i n g   f r o m   d a i l y _ p l a n . j s   t o   d e d i c a t e d   s p 5 0 0 _ d a i l y _ p l a n . j s   t o   f i x   m i s s i n g   u p d a t e   i n   U I 
+ 
  
