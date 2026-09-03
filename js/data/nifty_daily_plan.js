@@ -389,7 +389,7 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
   {
-    "source": "WF-NIFTY-PRED | Sep 03, 2026",
+    "source": "AI Pre-Market Briefing",
     "text": `📅 NIFTY PREDICTION SYNTHESIS — Thursday, 03 Sep 2026 (Sensex Expiry Day)
 Sources: BT (Bengal Trader) | MAA (Market Analysis Academy) | SMU (Stock Market Unlimited) | BS (Be Sensibull)
 Synthesized at: 08:26 AM IST | 4 Videos + 4 Transcripts Downloaded & Analyzed
@@ -628,8 +628,8 @@ Error: Agent execution terminated due to error.`
 ================================================================================
 🎯 DAILY MARKET BIAS & OUTLOOK
 ================================================================================
-• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
-• Bias Invalidation Floor: 24055.80 (A 15M close above 24055.80 invalidates bias)
+• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +1.0 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: 23914.45 (A 15M close above 23914.45 invalidates bias)
 
 📍 Tactical Directives:
 • Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
