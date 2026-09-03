@@ -977,16 +977,21 @@ if (viewLevels) {
         isAutoSyncingPlan = true;
 
         try {
-            const res = await fetch(`./js/data/daily_plan.js?t=${now}`, {
+            const planFiles = [
+                `./js/data/daily_plan.js?t=${now}`,
+                `./js/data/nifty_daily_plan.js?t=${now}`,
+                `./js/data/gold_daily_plan.js?t=${now}`,
+                `./js/data/btc_daily_plan.js?t=${now}`,
+                `./js/data/sp500_daily_plan.js?t=${now}`
+            ];
+
+            const fetchOpts = {
                 cache: 'no-store',
                 headers: {
                     'Cache-Control': 'no-cache, no-store, must-revalidate',
                     'Pragma': 'no-cache'
                 }
-            });
-
-            if (!res.ok) return false;
-            const scriptContent = await res.text();
+            };
 
             // Snapshot old signatures across all assets
             const oldSig = JSON.stringify({
@@ -1000,9 +1005,19 @@ if (viewLevels) {
                 sp500Summary: window.sp500DailyPlanSummary || []
             });
 
-            // Execute script in window scope to refresh in-memory datasets
-            const exec = new Function(scriptContent);
-            exec.call(window);
+            // Execute scripts in sequence so dedicated files (nifty_daily_plan.js, etc.) overwrite legacy defaults
+            for (const file of planFiles) {
+                try {
+                    const res = await fetch(file, fetchOpts);
+                    if (res && res.ok) {
+                        const scriptContent = await res.text();
+                        const exec = new Function(scriptContent);
+                        exec.call(window);
+                    }
+                } catch (e) {
+                    console.warn('[Levels] Failed to fetch script:', file, e);
+                }
+            }
 
             const newSig = JSON.stringify({
                 nifty: window.dailyPlanData || [],
