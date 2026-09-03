@@ -641,9 +641,9 @@ window.dailyPlanData = [
 ];
 
 window.dailyPlanSummary = [
-{
+  {
     "source": "AI Intraday Briefing",
-    "text": "\ufeffError: unexpected argument \"NEUTRAL,\\n     summary: Full\".\nPrompts are read only from -p/--print, -i/--prompt-interactive, or stdin, so this argument would have been ignored."
+    "text": "================================================================================\n\ud83c\udfaf DAILY MARKET BIAS & OUTLOOK\n================================================================================\n\u2022 Daily Market Bias: \u26aa NEUTRAL | Bias Score: +1.0 / +6.0 | Confidence: Neutral (Chop)\n\u2022 Bias Invalidation Floor: 23914.45 (A 15M close above 23914.45 invalidates bias)\n\n\ud83d\udccd Tactical Directives:\n\u2022 Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n\u2022 Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n\ufeffError: unexpected argument \"NEUTRAL,\\n     summary: Full\".\nPrompts are read only from -p/--print, -i/--prompt-interactive, or stdin, so this argument would have been ignored."
   },
   {
     "source": "AI Intraday Briefing",
@@ -701,28 +701,4 @@ window.dailyPlanSummary = [
     "source": "AI Pre-Market Briefing",
     "text": "# \\ud83c\\udf05 Pre-Market Tactical Briefing (AI Synthesized Prediction)\\n\\n**Global Market Sentiment & Data:**\\n- The US markets and global cues are currently showing weakness. US 10-year bond yields have spiked up to 4.78%, a significant headwind for equity markets.\\n- Crude oil is consistently trading above , which is negative for net importer economies like India.\\n- Japan's bond yields are hitting all-time highs, causing capital to potentially flow out of US/global equities.\\n- Despite India's GDP printing a solid 7.8%, the August Manufacturing PMI data came in at a 5-year low.\\n- **Overall Data Bias: STRONGLY BEARISH** due to high crude, rising bond yields, and heavy FII selling.\\n\\n**NIFTY Options & Institutional Data:**\\n- FIIs and PROs have heavily shorted the market. FIIs added 13,000 net short contracts in Index Futures and significantly increased Put buying (now holding over 6,32,000 put longs) alongside heavy Call writing.\\n- Retailers, conversely, are heavily long (adding over 61,000 Calls and shorting Puts). This divergence typically leads to retail getting trapped on the wrong side.\\n- Thus, the primary tactical directive is **Sell on Rise**, until the market significantly clears this overhead resistance.\\n\\n**NIFTY Price Action & Key Levels:**\\n- Yesterday, Nifty experienced a sharp sell-off in the final hours, dragging prices below the psychological 24,000 mark intra-day.\\n- A break below yesterday's low (23,950 area) on a 15-minute close will open the doors for a rapid slide towards 23,881 and 23,796.\\n- If the market gaps up, it is likely to face stiff resistance around the 24,100 to 24,200 zones (PDC/Order Blocks).\\n\\n### NIFTY Support & Resistance Levels\\n\\n| Level | Type | Logic & Significance |\\n|---|---|---|\\n| \\ud83d\\udd34 24,300 | Major Resistance | Above this level, bears lose control. Daily close above this shifts the trend back to bullish. |\\n| \\ud83d\\udd34 24,200 | Resistance | High Open Interest resistance and fresh Order Block. Sell on rise entry zone. |\\n| \\ud83d\\udd34 24,100 | Resistance | Immediate hurdle on any gap up. Pullback rejection here signals continuation down. |\\n| \\u26aa 24,000 | Psychological Chop Zone | High volatility area. Avoid trading directly at 24k without clear 15m closing confirmation. |\\n| \\ud83d\\udd34 23,950 | Breakout (Sell Trigger) | Yesterday's Low. A firm 15m candle close below here triggers a high-probability short entry. |\\n| \\ud83d\\udfe2 23,881 | Support / Target | First downside target and liquidity gap-fill area for short trades. |\\n| \\ud83d\\udfe2 23,796 | Major Support / Target | Deeper liquidity sweep zone if panic selling accelerates. |"
   }
-];
-
-window.goldDailyPlanData = [
-
-];
-
-window.goldDailyPlanSummary = [
-
-];
-
-window.btcDailyPlanData = [
-
-];
-
-window.btcDailyPlanSummary = [
-
-];
-
-window.sp500DailyPlanData = [
-
-];
-
-window.sp500DailyPlanSummary = [
-
 ];
