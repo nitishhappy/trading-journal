@@ -91,7 +91,7 @@ S&P 500 Spot: 7697.59 (08:15 PM IST - Sep 03, 2026) Trigger: 15m Watchdog
     "source": "SP500-AI",
     "text": `# S&P 500 (^GSPC) Pure AI Tactical Briefing
 
-\`\`\`markdown
+\\`\\`\\`markdown
 ================================================================================
 🎯 S&P 500 DAILY MARKET BIAS & OUTLOOK
 ================================================================================
@@ -129,7 +129,7 @@ S&P 500 Spot: 7703.24 (08:00 PM IST - Sep 03, 2026) Trigger: Scheduled 08:00 PM 
 - BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7718.24 with volume confirmation. TP: 7771.48 / 7758.24. SL: 7708.24. Risk-Reward: ~1:3.
 - SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7771.48 with upper wick, closing 5m candle back BELOW 7766.48. TP: 7718.24 / 7688.24. SL: 7781.48. Risk-Reward: ~1:2.5.
 - SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7688.24. TP: 7611.20 / 7648.24. SL: 7698.24. Risk-Reward: ~1:3.
-\`\`\``
+\\`\\`\\``
   },
   {
     "source": "SP500-AI",
