@@ -120,6 +120,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### vNext — 03 Sep 2026 — Bitcoin (BTC/USD) Intraday Tactical Update (07:15 PM IST)
+- **Live AI Bitcoin Tactical Recalibration**: Recalculated BTC/USD levels, extreme outer target exhaustion shelf ($78,902.04), 15M Bullish Demand FVG & 9 EMA shelf ($78,569.65–$78,777.12), high-momentum breakout trigger (> $78,982.00), Day High false breakout sweep rejection ($78,950.00–$78,982.00), and breakdown cascade trigger (< $78,569.65) following the explosive upside expansion past the previous extreme outer target ($78,515.00) to a new Day High at $78,902.04.
+- **Daily Plan Sync**: Appended `[19:15]` AI levels to `window.btcDailyPlanData` and new tactical summary to `window.btcDailyPlanSummary` in `daily_plan.js` and `btc_daily_plan.js`.
+
+### vNext — 03 Sep 2026 — Gold (XAU/USD) Intraday Tactical Update (07:15 PM IST)
+- **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD levels, post-exhaustion wick chop zone ($4,462.00–$4,476.00), 15M Bullish Demand Shelf & FVG retest ($4,455.00–$4,465.00), high-momentum short-covering reclaim trigger (> $4,482.00), Day High exhaustion wick sweep rejection ($4,535.00–$4,543.70), and breakout expansion trigger (> $4,545.00) following the explosive surge to Day High ($4,543.70) and -$75.09 exhaustion wick retracement to spot $4,468.61 during London/NY session overlap.
+- **Daily Plan & Mentorship Sync**: Appended `[19:15]` AI levels to `window.goldDailyPlanData` and new tactical summary to `window.goldDailyPlanSummary` in `daily_plan.js` / `gold_daily_plan.js` and synced the SMC breakdown in `Gold Setup v2/Gold_Learn.md`.
+
 ### vNext — 03 Sep 2026 — Gold (XAU/USD) Intraday Tactical Update (01:30 PM IST)
 - **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD levels, London Open chop zone ($4,424.00–$4,434.00), Asian Low SSL sweep reversal & SFP demand shelf ($4,415.00–$4,420.00), high-momentum short-covering squeeze trigger (> $4,436.00), and Day High breakout expansion trigger (> $4,490.00) following the Asian range expansion ($4,418.30–$4,486.00) and London open liquidity sweep to spot $4,429.25.
 - **Daily Plan & Mentorship Sync**: Appended updated AI-sourced Gold levels and comprehensive summary to `daily_plan.js` / `gold_daily_plan.js` and synced the SMC breakdown in `Gold Setup v2/Gold_Learn.md`.
