@@ -1473,7 +1473,7 @@ window.btcDailyPlanData = [
     "behavior": "[19:15] 15M Dynamic 21 EMA Mean-Reversion Floor ($78,233.23). Secondary trend filter & institutional re-entry zone.",
     "tp": "79402.1",
     "sl": "78033.2",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
