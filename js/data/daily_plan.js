@@ -38,8 +38,8 @@ window.dailyPlanData = [
   { "source": "AI", "price": "23786 - 23800", "bias": "bullish", "behavior": "[09:16] DAY LOW SSL SWEEP REVERSAL BASE. Swift liquidity sweep below 23,786 followed by 5m close above 23,815 confirms Turtle Soup SFP reversal long.", "tp": "23914 / 24000", "sl": "23760", "status": "na" },
   { "source": "AI", "price": "23787", "bias": "bearish", "behavior": "[09:16] POSITIONAL INVALIDATION FLOOR SHORT. Sustained 15m close below 23,787 invalidates bullish thesis, opening downside to 23,733 / 23,645.", "tp": "23733 / 23645", "sl": "23830", "status": "na" },
   { "source": "AI", "price": "23965 - 24005", "bias": "neutral", "behavior": "[10:30] Live Intraday Compression & No-Trade Chop Zone (23,965 - 24,005). ATM 24,000 straddle friction band; stay flat with VIX down -4.23% to avoid dual-sided theta burn.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "AI", "price": "24025.40", "bias": "bullish", "behavior": "[10:30] High-Momentum Day High / ORB Breakout Trigger (24,025.40). Sustained 5m/15m close above 24025.40 with expanding Futures volume forces 24,000 Call writers to cover toward 24,065 / 24,100 / 24,130.", "tp": "24065.00 / 24100.00 / 24130.00", "sl": "23995.00", "status": "na" },
-  { "source": "AI", "price": "23955.35", "bias": "bullish", "behavior": "[10:30] Day Low SSL Sweep Reversal Base (23,955.35). Swift liquidity sweep below 23955.35 followed by 5m close back above 23970 confirms Turtle Soup SFP long rebound.", "tp": "24005.00 / 24025.40", "sl": "23942.00", "status": "na" },
+  { "source": "AI", "price": "24025.40", "bias": "bullish", "behavior": "[12:30] High-Momentum Day High Breakout Trigger (24,025.40). Sustained 5m/15m close above 24025.40 with expanding Futures volume forces call writers to cover toward 24065 / 24100 / 24130.", "tp": "24065.00 / 24100.00 / 24130.00", "sl": "23995.00", "status": "na" },
+  { "source": "AI", "price": "23955.35", "bias": "bullish", "behavior": "[12:30] Reclaimed ORB Low Momentum Long (23,955.35). Sustained 5m close above 23955.35 confirms failed breakdown and forces call writers to cover toward 23985 / 24025.40.", "tp": "23985.00 / 24010.00 / 24025.40", "sl": "23925.00", "status": "na" },
   { "source": "AI", "price": "23914.45 - 23930.00", "bias": "bullish", "behavior": "[10:30] Prior Day High / Gap-Fill Demand Retest Long (23,914.45 - 23,930.00). Pullback retest with lower-wick rejection closing 5m candle above 23945 confirms institutional absorption.", "tp": "23985.00 / 24025.40", "sl": "23895.00", "status": "na" },
   { "source": "AI", "price": "24025.40 - 24035.00", "bias": "bearish", "behavior": "[10:30] Day High False Breakout Rejection Short (24,025.40 - 24,035.00). Upper-wick sweep rejection closing 5m candle below 24005 confirms bull trap and reversal.", "tp": "23970.00 / 23955.35", "sl": "24038.00", "status": "na" },
   { "source": "AI", "price": "23955.35", "bias": "bearish", "behavior": "[10:30] Day Low Breakdown Continuation Short (23,955.35). Sustained 5m close below 23955.35 with expanding Futures volume accelerates long liquidation toward Gap-Fill (23914.45).", "tp": "23914.45 / 23880.00", "sl": "23980.00", "status": "na" },
@@ -48,9 +48,7 @@ window.dailyPlanData = [
   { "source": "AI", "price": "23904.80", "bias": "bearish", "behavior": "[12:30] Day Low Breakdown Continuation Short (23,904.80). Sustained 5m close below 23904.80 with expanding Futures volume accelerates liquidation cascade toward 23850 / 23800.", "tp": "23850.00 / 23800.00 / 23786.80", "sl": "23935.00", "status": "na" },
   { "source": "AI", "price": "23904.80", "bias": "bullish", "behavior": "[12:30] Day Low SSL Sweep Reversal Base (23,904.80). Swift liquidity sweep below 23904.80 followed by 5m close back above 23915 confirms Turtle Soup SFP long rebound.", "tp": "23955.35 / 23985.00 / 24025.40", "sl": "23892.00", "status": "na" },
   { "source": "AI", "price": "23945.00 - 23955.35", "bias": "bearish", "behavior": "[12:30] Broken ORB Low Breaker Rejection Short (23,945.00 - 23,955.35). Pullback into broken 15M ORB Low rejected with upper wick closing 5m candle below 23930 confirms bear flag.", "tp": "23904.80 / 23880.00 / 23850.00", "sl": "23968.00", "status": "na" },
-  { "source": "AI", "price": "23955.35", "bias": "bullish", "behavior": "[12:30] Reclaimed ORB Low Momentum Long (23,955.35). Sustained 5m close above 23955.35 confirms failed breakdown and forces call writers to cover toward 23985 / 24025.40.", "tp": "23985.00 / 24010.00 / 24025.40", "sl": "23925.00", "status": "na" },
-  { "source": "AI", "price": "23900.00", "bias": "bearish", "behavior": "[12:30] Gap-Fill Invalidation Continuation Short (23,900.00). Sustained 5m close below 23900 confirms failed gap support and unleashes slide toward 23850 / 23800.", "tp": "23850.00 / 23800.00", "sl": "23928.00", "status": "na" },
-  { "source": "AI", "price": "24025.40", "bias": "bullish", "behavior": "[12:30] High-Momentum Day High Breakout Trigger (24,025.40). Sustained 5m/15m close above 24025.40 with expanding Futures volume forces call writers to cover toward 24065 / 24100 / 24130.", "tp": "24065.00 / 24100.00 / 24130.00", "sl": "23995.00", "status": "na" }
+  { "source": "AI", "price": "23900.00", "bias": "bearish", "behavior": "[12:30] Gap-Fill Invalidation Continuation Short (23,900.00). Sustained 5m close below 23900 confirms failed gap support and unleashes slide toward 23850 / 23800.", "tp": "23850.00 / 23800.00", "sl": "23928.00", "status": "na" }
 ];
 
 window.dailyPlanSummary = [
@@ -190,156 +188,6 @@ window.dailyPlanSummary = [
   },
   {
     "source": "AI",
-    "text": `NIFTY 50 Pre-Market Tactical Briefing (09:10 AM IST - Sep 02, 2026 | Spot: 24055.80 | Trigger: 09:10 AM IST Pre-Market Briefing):
-
-================================================================================
-🎯 DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
-• Bias Invalidation Floor: 24055.80 (A 15M close above 24055.80 invalidates bias)
-
-📍 Tactical Directives:
-• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
-• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.
-
-1. Global market sentiment:
-- US Markets & Futures: S&P 500 closed at 7631.47 (-0.70%), ES Futures trading near 7644.00. Nasdaq closed near 26120.00 (-0.96%), NQ Futures at 29125.75 on tech consolidation. Dow Jones holding near record high above 52000.
-- Asian Markets: Cautious undertone. Nikkei 225 down -0.35%, Hang Seng down -0.85% under tech and real-estate pressure. GIFT Nifty indicates a flat-to-subdued opening near 24040–24060.
-- European Markets: DAX, CAC 40, and FTSE 100 consolidating ahead of Eurozone CPI and services PMI data.
-- Risk Sentiment: Risk-off/cautious stance. Elevated US Dollar Index (DXY 99.78, +0.34%), high US 10-Year Treasury Yields (4.80%), and elevated WTI Crude Oil ($89.60/bbl, +4.48%) create macro headwinds for emerging market domestic equities.
-
-2. Overnight market moves:
-- NIFTY 50 / GIFT NIFTY: NIFTY 50 Spot closed at 24080.40 / Spot reference 24055.80. Prior day range spanned 23952.55 (Day Low) to 24143.15 (Day High). GIFT NIFTY indicates opening around 24040–24060.
-- GOLD (XAU/USD): Trading at $4293.48/oz following overnight New York liquidation and failed Asian counter-trend relief pop (rejected at $4309.39–$4318.00 breaker supply), consolidating below the $4300 psychological handle.
-- USD/INR: Elevated at 95.05 on sustained dollar index strength.
-- Crude Oil: WTI Crude up +4.48% at $89.60/bbl on supply tightness headlines.
-- Major Global Indices: Consolidation across global equities with tech profit-taking after multi-week expansion.
-
-3. Major news/events:
-- US Macro & Yield Pressures: Sticky US Treasury yields (4.80%) and firm DXY (99.78) maintain capital cost pressure and cap emerging market equity inflows.
-- Energy Inflation Headwinds: Elevated crude at $89.60/bbl pressures Indian OMC and consumer goods margins while providing tailwinds to energy upstream heavyweights.
-- Institutional FII Skew: FII net short index futures ratio remains heavily skewed (~91% short ratio), presenting persistent overhead resistance but immense squeeze potential on any structural breakout.
-- Pro Desk Straddle Defense: Heavy Call writing concentration at 24100–24150 balanced by Put defense at 24000.
-- Key Calendar Data Today: India Services PMI, US ISM Non-Manufacturing PMI, ADP Employment data, and Eurozone PPI.
-
-4. NIFTY analysis:
-- Market Structure: Nifty Spot is oscillating in discount territory within the 10-day swing range (23952.55 to 24378.60, 50% Equilibrium: 24165.58), positioned below Daily 9 EMA (24172.76) and 21 EMA (24232.66).
-- Higher Timeframe Extension Targets: Bullish HTF targets sit at 24378.60 (10-Day Swing High BSL), 24500 (1H Mitigated OB), and 24650–24750 (All-Time High Liquidity Pool). Bearish HTF targets sit at 23880–23920 (Macro Demand Base) and 23728.24 (Daily 200 EMA Macro Anchor).
-- Liquidity Zones: Buy-Side Liquidity (BSL) rests above 24143.15 (Day High), 24172.76 (9 EMA Breaker), 24232.66 (21 EMA), and 24378.60 (10-Day Swing High). Sell-Side Liquidity (SSL) is clustered below 24000, 23952.55 (Day Low), 23880–23920, and 23728.24 (200 EMA).
-- Bullish Scenario: Early dip absorption holding above 23952–24000 followed by sustained 5m/15m breakout above 24143.15 triggers short-covering squeeze toward 24188 and 24232.
-- Bearish Scenario: Breakdown and 15m candle close below 23952.55 unleashes long liquidation cascade down into 23880–23920.
-
-| Level | Type (Support/Resistance/Liquidity) | Logic & Significance |
-| :--- | :--- | :--- |
-| 🟢 **24,650 – 24,750** | Macro Target (ATH Extension BSL Target) | Terminal Buy-Side Liquidity pool on higher-timeframe multi-session institutional short squeeze. |
-| 🔴 **24,378.60** | Resistance (10-Day Swing High BSL Pool) | Major multi-day swing ceiling and resting short stop-loss cluster. |
-| 🔴 **24,232 – 24,250** | Resistance (Daily 21 EMA & Major Supply OB) | Institutional distribution ceiling; clearing this confirms swing trend reversal. |
-| 🔴 **24,172 – 24,188** | Resistance (Daily 9 EMA & Bearish FVG) | Dynamic resistance and Bearish Breaker mitigation zone; bias invalidation shelf. |
-| 🟢 **24,143.15** | Breakout Trigger (High-Momentum BSL Squeeze) | Day High structural trigger; 5m/15m close above forces 24,100–24,150 Call writers into rapid short-covering. |
-| ⚪ **24,050 – 24,095** | Neutral (50% Equilibrium Chop Zone) | Intraday compression range; high theta decay pocket — **NO-TRADE CHOP ZONE**. |
-| 🟢 **24,000 – 24,035** | Support (Displacement FVG Pullback Demand) | 15M Bullish Fair Value Gap and round number institutional absorption shelf. |
-| 🟢 **23,952.55** | Support (Day Low & Primary SSL Sweep Floor) | Major Put writing defense, trendline base, and primary Turtle Soup / SFP sweep baseline. |
-| 🔴 **23,952.55** | Breakdown Trigger (Downside Long-Liquidation Cascade) | Sustained 5m/15m close below Day Low triggers stop cascades into HTF demand. |
-| 🟢 **23,880 – 23,920** | Support (HTF Macro Demand Base) | Higher timeframe unmitigated demand block and primary FII short-covering floor on panic sell-offs. |
-| 🟢 **23,728 – 23,796** | Support (Daily 200 EMA & Deep Capitulation Floor) | Macro 200 EMA institutional anchor; ultimate limit buy absorption shelf for violent V-reversals. |
-
-5. GOLD analysis:
-- Current Direction & Momentum: Gold Spot is trading at $4293.48/oz, consolidating below the $4300 psychological handle after overnight liquidation and Asian session relief rejection at $4309.39–$4318.00 breaker supply.
-- Overhead Supply & Resistance: $4300.00–$4308.00 (Broken $4300 Breaker Block & 15M Supply FVG), $4315.00–$4322.00 (Broken 4H Breaker & 15M FVG), $4332.00 (Session Supply High), $4385.50 (Day High BSL).
-- Demand Floor & Support: $4284.00 (Asian Sweep Low), $4270.00–$4280.00 (Deep Discount HTF Daily Order Block), $4255.00 (Macro Demand Extension).
-- Bullish & Bearish Scenarios: Bullish mean-reversion requires Turtle Soup sweep below $4284 reclaiming $4288 or momentum breakout above $4305; bearish continuation targets $4270 and $4255 on sustained 5m close below $4284.
-
-6. SMC & Session Liquidity Confluence:
-- Bullish Demand Order Block (23,952–24,000): Institutional absorption block defending 24000 Put open interest and absorbing retail Sell-Side Liquidity.
-- Bearish Supply Breaker Block (24,143–24,172): Structural overhead supply formed by broken support and 15M Bearish Fair Value Gap / 9 EMA.
-- Active Fair Value Gaps (FVGs): 15M Bullish Displacement FVG at 24000–24035; 15M Bearish Imbalance FVG at 24143–24172.
-- BOS / CHoCH Dynamics: Intraday Change of Character (CHoCH) requires sustained 15M close above 24143.15; Break of Structure (BOS) down confirmed on 15M close below 23952.55.
-- 50% Equilibrium Analysis: Daily range is 23952.55 to 24143.15 with 50% Equilibrium at 24047.85. Discount zone (< 24048) favors dip absorption; Premium zone (> 24048) favors supply short fades.
-
-7. 5-Min / 15-Min Action Plan & Index Triggers:
-- BUY Setup 1 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Swift liquidity sweep below 23952.55 followed by immediate lower-wick rejection and a 5m candle close back ABOVE 24000.00. | TP: 24080.00 / 24143.15 | SL: 23930.00.
-- BUY Setup 2 (High-Momentum Day High Breakout Long): Sustained 5m/15m close ABOVE 24143.15 with expanding Nifty Futures volume (>1.2x 20 EMA volume). | TP: 24188.00 / 24232.00 | SL: 24110.00.
-- BUY Setup 3 (Displacement FVG Pullback Absorption Long): Pullback into 24000.00–24035.00 with lower-wick rejection, closing 5m candle back ABOVE 24050.00. | TP: 24095.00 / 24143.15 | SL: 23980.00.
-- SELL Setup 1 (9 EMA / Bearish FVG Rejection Short): Corrective relief rally into 24143.15–24172.76 rejected with upper wick, closing 5m candle back BELOW 24120.00. | TP: 24055.00 / 23980.00 / 23952.55 | SL: 24185.00.
-- SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m close BELOW 23952.55 confirming structural failure and institutional long liquidation. | TP: 23880.00 / 23796.00 | SL: 23985.00.
-- SELL Setup 3 (Overhead Breaker Rejection Short): Push into 24188.00–24232.00 shows exhaustion wicks, closing 5m candle back BELOW 24160.00. | TP: 24110.00 / 24055.00 | SL: 24245.00.
-- Upside Short-Covering Squeeze (> 24143.15 Spot): Sustained 5m/15m candle close above Day High (24143.15) with expanding Futures volume forces 24100–24150 Call writers into immediate unwinding, accelerating price toward 24172 (9 EMA) and 24232 (21 EMA).
-- Downside Long-Liquidation Cascade (< 23952.55 Spot): Sustained 5m close below Day Low (23952.55) triggers institutional stop cascades accelerating toward 23880–23920 (HTF Demand Base) and 23728 (200 EMA).
-- 15-Minute Opening Range Filter Rule: NEVER execute a reversal entry on the 3rd 5-minute candle (09:25 AM). Wait for the complete 15-minute Opening Range (09:15–09:30 AM IST) to close. For CE Longs, price must break and close firmly ABOVE the 15-minute Opening Range High with expanding green Futures volume. For PE Shorts, price must break and close firmly BELOW the 15-minute Opening Range Low with expanding red Futures volume.
-- Extreme Gap Contingency Plan (Massive Gap-Down >100 pts into 23880–23920): DO NOT panic short into HTF Demand. Look for an Opening Range Low sweep into 23880–23900 with a sharp lower-wick rejection to enter high-velocity mean-reversion longs back toward 24000.
-- Extreme Gap Contingency Plan (Massive Gap-Up >100 pts into 24180–24230): Expect heavy initial supply defense from Pro Call writers and 9/21 EMAs. Do NOT chase breakout green candles; wait for a pullback holding above 24143 or a 15-minute value acceptance above 24232 after 09:45 AM before participating in continuation longs.
-- Live Chop Zone / No-Trade Zone (24050.00 – 24095.00 Spot): Stay flat inside the 50% Equilibrium Box. High theta decay and dual-sided wick traps punish option buyers.
-
-8. Risk warning:
-- Compressed India VIX (11.19): Low implied volatility creates severe theta decay for out-of-the-money options. Trade strictly in ITM or deep ATM strikes (e.g., 24000 CE / 24100 PE).
-- Heavy FII Short Skew (~91% Net Short Ratio): High probability of sharp, sudden short-covering bursts on any intraday upside trigger. Strictly adhere to predefined stop losses.
-- Expiry Dynamics & Theta Erosion: Rotational consolidation will cause aggressive premium decay. Exit intraday option buying positions promptly upon target attainment.
-- Discipline & Patience: Avoid chasing unconfirmed breakouts inside the equilibrium zone; wait for institutional sweeps at structural extremes.`
-  },
-  {
-    "source": "AI",
-    "text": `NIFTY 50 Intraday Tactical Update (10:30 AM IST - Sep 02, 2026 | Spot: 23881.65 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain Mapping)):
-
-================================================================================
-🎯 DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: ⚪ NEUTRAL / MEAN-REVERSION (Day High Retest / Range Expansion) | Bias Score: +0.5 / +6.0 | Confidence: Moderate (75%)
-• Bias Invalidation Floor: 23840.00 (A sustained 5m/15m candle close below ORB midpoint / 23840.00 invalidates morning recovery momentum)
-
-📍 Tactical Directives:
-• Primary Outlook: Range Expansion & Day High Probe. Spot (23881.65) has recovered from Day Low (23786.80) and is testing the 15M ORB High / Day High resistance (23882.95).
-• Execution: Do NOT take market orders inside the 23840.00–23875.00 chop zone. Look for confirmed high-momentum breakouts above 23883.00 targeting 23920.00 and 23952.55, or trade fakeout rejections below 23865.00 targeting the ORB midpoint.
-
-3. Live Chop Zone / No-Trade Zone:
-- Range: 23,840.00 – 23,875.00 Spot.
-- Context: Price is consolidating near the 15M ORB High / Day High ceiling (23882.95) after an initial 96-point expansion from Day Low (23786.80). Taking unconfirmed market orders inside this 35-point compression pocket exposes traders to rapid two-way wick traps and severe theta decay. Stay flat inside this zone.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> 23883.00 Spot): A sustained 5m/15m candle close ABOVE Day High (23882.95) with expanding Nifty Futures volume (>1.2x average) forces 23850 and 23900 Call writers into immediate unwinding, triggering a fast short-covering expansion toward 23920.00 and 23952.55 (Broken Prior Day Low Breaker Block).
-- Downside Long-Liquidation Cascade (< 23840.00 Spot): A sustained 5m close BELOW 23840.00 (15M ORB Midpoint / Session Equilibrium) traps late breakout buyers and triggers an unwinding cascade accelerating down toward 23800.00 and 23786.80 (Day Low / Sell-Side Liquidity Pool).
-- Macro Capitulation Floor Breakdown (< 23786.80 Spot): A sustained 5m/15m close BELOW Day Low (23786.80) unleashes institutional stop-runs accelerating into the Daily 200 EMA macro anchor (23728.00–23750.00).
-
-5. 5-Min / 15-Min Action Plan:
-- BUY Setup 1 (High-Momentum Day High / ORB High Breakout Long): Sustained 5m/15m close ABOVE 23883.00 with expanding green Nifty Futures volume (>1.2x). | TP: 23920.00 / 23952.55 / 24000.00 | SL: 23850.00.
-- BUY Setup 2 (ORB Midpoint / Demand Retest Absorption Long): Pullback into 23835.00–23845.00 with lower-wick rejection, closing 5m candle back ABOVE 23855.00. | TP: 23882.95 / 23920.00 | SL: 23820.00.
-- BUY Setup 3 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Swift liquidity sweep below 23786.80 followed by immediate lower-wick rejection and a 5m candle close back ABOVE 23810.00. | TP: 23860.00 / 23882.95 | SL: 23765.00.
-- SELL Setup 1 (Day High False Breakout Rejection Short - Turtle Soup): Sweep above 23882.95 (probing 23885–23895) with long upper wick, closing 5m candle back BELOW 23865.00. | TP: 23835.00 / 23800.00 / 23786.80 | SL: 23905.00.
-- SELL Setup 2 (ORB Midpoint Breakdown Continuation Short): Sustained 5m candle close BELOW 23840.00 confirming failed Day High breakout and intraday bull trap. | TP: 23800.00 / 23786.80 / 23750.00 | SL: 23868.00.
-- SELL Setup 3 (Day Low Breakdown Continuation Short): Sustained 5m candle close BELOW 23786.80 confirming structural failure and continuation of institutional liquidation. | TP: 23750.00 / 23728.24 | SL: 23815.00.`
-  },
-  {
-    "source": "AI",
-    "text": `NIFTY 50 Intraday Tactical Update (01:30 PM IST - Sep 02, 2026 | Spot: 23874.7 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping)):
-
-================================================================================
-🎯 DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: ⚪ NEUTRAL / MEAN-REVERSION (Day High Retest / Pre-Closing Compression) | Bias Score: +0.5 / +6.0 | Confidence: Moderate (75%)
-• Bias Invalidation Floor: 23840.00 (A sustained 5m/15m candle close below ORB midpoint / 23840.00 invalidates afternoon breakout structure)
-
-📍 Tactical Directives:
-• Primary Outlook: Pre-Closing Breakout Mapping & Day High Compression. Spot (23874.70) is hovering near the Day High (23896.05) and 15M ORB High (23882.95) ceiling following recovery from Day Low (23786.80).
-• Execution: Do NOT take market orders inside the 23850.00–23885.00 chop zone. Look for confirmed high-momentum breakout above 23896.05 targeting 23925.00 and 23952.55, or trade fakeout rejections below 23875.00 targeting 23840.00 and Day Low.
-
-3. Live Chop Zone / No-Trade Zone:
-- Range: 23,850.00 – 23,885.00 Spot.
-- Context: Price is consolidating near the Day High ceiling (23896.05) after an initial recovery from Day Low (23786.80). Taking unconfirmed market orders inside this 35-point compression pocket exposes traders to rapid two-way wick traps and severe theta decay during the European open transition. Stay flat inside this zone.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> 23896.05 Spot): A sustained 5m/15m candle close ABOVE Day High (23896.05) with expanding Nifty Futures volume (>1.2x baseline) forces 23900 Call writers into immediate unwinding, triggering a fast short-covering expansion toward 23925.00 and 23952.55 (Broken Prior Day Low Breaker Block).
-- Downside Long-Liquidation Cascade (< 23840.00 Spot): A sustained 5m close BELOW 23840.00 (15M ORB Midpoint / Session Equilibrium) traps late breakout buyers and triggers an unwinding cascade accelerating down toward 23800.00 and 23786.80 (Day Low / Sell-Side Liquidity Pool).
-- Macro Capitulation Floor Breakdown (< 23786.80 Spot): A sustained 5m/15m close BELOW Day Low (23786.80) unleashes institutional stop-runs accelerating into the Daily 200 EMA macro anchor (23728.00–23750.00).
-
-5. 5-Min / 15-Min Action Plan:
-- BUY Setup 1 (High-Momentum Day High Breakout Long): Sustained 5m/15m close ABOVE 23896.05 with expanding green Nifty Futures volume (>1.2x). | TP: 23925.00 / 23952.55 / 23980.00 | SL: 23865.00.
-- BUY Setup 2 (ORB Midpoint / Demand Retest Absorption Long): Pullback into 23840.00–23850.00 with lower-wick rejection, closing 5m candle back ABOVE 23865.00. | TP: 23896.05 / 23925.00 / 23952.55 | SL: 23828.00.
-- BUY Setup 3 (Day Low SSL Sweep Reversal Long - SFP / Turtle Soup): Swift liquidity sweep below 23786.80 followed by immediate lower-wick rejection and a 5m candle close back ABOVE 23815.00. | TP: 23865.00 / 23896.05 | SL: 23765.00.
-- SELL Setup 1 (Day High False Breakout Rejection Short - Turtle Soup): Sweep above 23896.05 (probing 23900–23910) with long upper wick, closing 5m candle back BELOW 23875.00. | TP: 23840.00 / 23800.00 / 23786.80 | SL: 23918.00.
-- SELL Setup 2 (Session Midpoint Breakdown Continuation Short): Sustained 5m candle close BELOW 23840.00 confirming failed Day High breakout and intraday bull trap. | TP: 23800.00 / 23786.80 / 23750.00 | SL: 23870.00.
-- SELL Setup 3 (Day Low Breakdown Continuation Short): Sustained 5m candle close BELOW 23786.80 confirming structural failure and continuation of institutional liquidation. | TP: 23750.00 / 23728.24 | SL: 23815.00.`
-  },
-  {
-    "source": "AI",
     "text": `NIFTY 50 Intraday Tactical Update (03:45 PM IST - Sep 02, 2026 | Spot: 23914.45 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis)):
 
 ================================================================================
@@ -433,286 +281,6 @@ window.goldDailyPlanData = [
 ];
 
 window.goldDailyPlanSummary = [
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Briefing (10:58 PM IST - Sep 01, 2026 | Spot: $4,392.60 | Trigger: US Session Active):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: ⚪ NEUTRAL (Mean-Reversion / 200 EMA Support Defense) | Bias Score: -0.5 / +5.0 | Confidence: Moderate
-• Bias Invalidation Floor: $4,369.00 (A sustained 15M candle close below Daily 200 EMA invalidates support structure)
-
-📍 Tactical Directives:
-• Primary Outlook: Mean-reversion from macro discount floor ($4,369–$4,374.10) back toward 21 EMA ($4,422.09) and 9 EMA ($4,488.62).
-• Execution: Look for Turtle Soup SFP long entries on sweeps into $4,374.10 or high-momentum breakouts above $4,435.00.`
-  },
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (11:01 PM IST - Sep 01, 2026 | Spot: 4351.21 | Trigger: Manual Ad-Hoc Run):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🔴 BEARISH (Sell-on-Rally / Breaker Defense) | Bias Score: -2.5 / +5.0 | Confidence: High (82%)
-• Bias Invalidation Floor: $4,382.00 (A sustained 15M candle close above Broken Day Low Breaker / $4,382.00 invalidates intraday bearish displacement)
-
-📍 Tactical Directives:
-• Primary Outlook: Downside Expansion & Breaker Block Defense. Spot ($4,351.21) has broken below the prior Day Low ($4,374.10), flipping it into institutional supply. Market is probing discount liquidity toward the 4H Macro Demand Base ($4,322–$4,335 / Daily 50 EMA).
-• Execution: Do NOT take market orders inside the $4,348–$4,358 equilibrium chop zone. Favour shorting on corrective relief retests into $4,374.10–$4,382.00 or continuation breakdown below $4,345.00. Aggressive mean-reversion long setups strictly require a confirmed Turtle Soup SFP sweep below $4,348 with a 5m close back above $4,356.00 targeting $4,374.10.
-
-1. Global Macro & Forex Mechanics:
-- Session Regime: Late New York Session / Post-London Close Transition. Algorithmic rebalancing and late-session position squaring dominate order flow.
-- Intermarket Dynamics: US Dollar Index (DXY) holds firm at 99.70 (+0.28%), and US 10-Year Treasury Yields are elevated at 4.78%, exerting macro headwinds on bullion.
-- Macro Headline & Data Context: US economic resilience and sticky Treasury yields continue to cap upside momentum, forcing Gold through prior support shelves.
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above $4,365.00 (Session Reclaim), $4,374.10–$4,382.00 (Broken Day Low Breaker & FVG), $4,422.09 (21 EMA), $4,488.62 (9 EMA), and $4,510.50 (Day High BSL).
-- Sell-Side Liquidity (SSL): Concentrated beneath session lows ($4,345.00–$4,348.00) and resting institutional stops above the 4H Macro Order Block ($4,322.00–$4,335.00 / Daily 50 EMA $4,328.90).
-- Active Imbalances & POIs: Bearish Breaker Block at $4,374.10–$4,382.00; Bearish 15M FVG at $4,365–$4,374; 4H Macro Discount Demand Shelf at $4,322–$4,335.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $4,348.00 – $4,358.00 Spot.
-- Context: Price is churning in a tight $10 compression pocket following the breakdown below $4,374. Taking market orders in this equilibrium pocket exposes traders to dual-sided wick whipsaws and bid-ask spread decay.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $4,365.00 Spot): A sustained 5m/15m candle close above $4,365.00 forces trapped late short sellers into immediate short-covering, driving a rapid rally toward the $4,374.10–$4,382.00 breaker block.
-- Downside Long-Liquidation Cascade (< $4,345.00 Spot): A sustained 5m close below $4,345.00 triggers trailing stop cascades of intraday buyers, accelerating price toward $4,335.00 and $4,322.00 (Daily 50 EMA / 4H Demand Base).
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Session Low SSL Sweep Reversal Long - SFP / Turtle Soup): Swift sweep below $4,348.00 followed by immediate lower-wick rejection and a 5m candle close back ABOVE $4,356.00. | TP: $4,368.00 / $4,374.10 | SL: $4,338.00 | Risk-Reward: ~1:2.5.
-- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4,365.00 with expanding volume. | TP: $4,374.10 / $4,388.00 | SL: $4,352.00 | Risk-Reward: ~1:2.8.
-- SELL Setup 1 (Broken Day Low Breaker & FVG Rejection Short): Corrective relief bounce into $4,374.10–$4,382.00 rejected with an upper wick, closing 5m candle back BELOW $4,368.00. | TP: $4,351.00 / $4,335.00 | SL: $4,392.00 | Risk-Reward: ~1:3.0.
-- SELL Setup 2 (Session Low Breakdown Continuation Short): Sustained 5m candle close BELOW $4,345.00 confirming continuation of institutional liquidation. | TP: $4,335.00 / $4,322.00 | SL: $4,358.00 | Risk-Reward: ~1:2.5.`
-  },
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (11:40 PM IST - Sep 01, 2026 | Spot: $4336.69 | Trigger: Level Exhaustion Breakdown (Spot $4336.69 < Min AI Level $4345.00)):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🔴 BEARISH (Macro Demand Test / Breaker Defense) | Bias Score: -3.0 / +5.0 | Confidence: High (85%)
-• Bias Invalidation Floor: $4,365.00 (A sustained 15M candle close above $4,365.00 invalidates late-session breakdown displacement)
-
-📍 Tactical Directives:
-• Primary Outlook: Level Exhaustion Breakdown & Macro Demand Probe. Spot ($4,336.69) has breached the $4,345.00 floor and is directly entering the primary 4H Macro Demand Base ($4,322.00–$4,335.00 / Daily 50 EMA ~ $4,328.90).
-• Execution: Do NOT chase market sell orders inside the $4,334.00–$4,342.00 compression pocket directly into 4H macro demand. Look to short corrective relief rallies into $4,345.00–$4,355.00 or trade continuation only on a confirmed 5m close below $4,322.00. Aggressive mean-reversion longs strictly require a confirmed Turtle Soup SFP sweep into $4,322–$4,330 with a 5m close back above $4,340.00.
-
-1. Global Macro & Forex Mechanics:
-- Session Regime: Late New York Session / Pre-Asian Handover. Algorithmic distribution has flushed Gold into deep discount zones as liquidity thins toward the close.
-- Intermarket Dynamics: US Dollar Index (DXY) remains elevated near 99.70 (+0.28%) and US 10-Year Treasury Yields trade firm at 4.78%, maintaining strong downward pressure on non-yielding bullion.
-- Macro Headline & Data Context: Persistent dollar strength and high real yields continue to penalize long positioning across precious metals.
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above $4,348.00 (Immediate Squeeze Trigger), $4,365.00 (15M Structure High), $4,374.10–$4,382.00 (Broken Day Low Breaker & 1H FVG), and $4,510.50 (Day High BSL).
-- Sell-Side Liquidity (SSL): Concentrated beneath $4,335.00 and resting institutional stops beneath the 4H Macro Order Block ($4,322.00).
-- Active Imbalances & POIs: Broken Support Breaker at $4,345.00–$4,355.00; Bearish 15M FVG at $4,358.00–$4,368.00; 4H Macro Discount Demand Base & Daily 50 EMA ($4,328.90) at $4,322.00–$4,335.00.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $4,334.00 – $4,342.00 Spot.
-- Context: Price is consolidating in an $8 churn pocket following the sharp impulse breakdown below $4345. Entering market orders here exposes traders to spread expansion and erratic low-liquidity whipsaws.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $4348.00 Spot): A sustained 5m/15m candle close above $4,348.00 forces late breakdown shorts to cover, igniting a fast short-squeeze toward $4,365.00 and the $4,374.10 breaker block.
-- Downside Panic Cascade (< $4322.00 Spot): A sustained 5m close below the 4H Macro Demand Base ($4,322.00) triggers a severe liquidation cascade accelerating toward $4,300.00 and $4,285.00–$4,305.00.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (4H Macro Demand Base SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep into $4,322.00–$4,330.00 followed by lower-wick rejection and a 5m candle close back ABOVE $4,340.00. | TP: $4355.00 / $4374.10 | SL: $4316.00 | Risk-Reward: ~1:3.0.
-- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4,348.00 with expanding volume. | TP: $4365.00 / $4374.10 | SL: $4336.00 | Risk-Reward: ~1:2.4.
-- SELL Setup 1 (Broken Support Breaker & FVG Supply Rejection Short): Corrective relief bounce into $4,345.00–$4,355.00 rejected with an upper wick, closing 5m candle back BELOW $4,342.00. | TP: $4330.00 / $4322.00 | SL: $4360.00 | Risk-Reward: ~1:2.6.
-- SELL Setup 2 (4H Macro Demand Floor Breakdown Continuation Short): Sustained 5m candle close BELOW $4,322.00 confirming full HTF structural breakdown. | TP: $4300.00 / $4285.00 | SL: $4334.00 | Risk-Reward: ~1:3.1.`
-  },
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (06:30 AM IST - Sep 02, 2026 | Spot: $4315.78 | Trigger: Level Exhaustion Breakdown (Spot $4315.78 < Min AI Level $4322.00)):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🔴 BEARISH (Macro Liquidation / Demand Floor Probe) | Bias Score: -3.5 / +5.0 | Confidence: High (88%)
-• Bias Invalidation Floor: $4,332.00 (A sustained 15M candle close above Broken 4H Demand Breaker / $4,332.00 invalidates ongoing breakdown displacement)
-
-📍 Tactical Directives:
-• Primary Outlook: Level Exhaustion Breakdown & Deep Discount Macro Liquidity Probe. Spot ($4,315.78) has breached the prior 4H Macro Demand Base ($4,322.00–$4,335.00 / Daily 50 EMA ~ $4,328.90), flipping former support into immediate overhead supply. Price is searching for high-timeframe limit order absorption toward the $4,300.00 psychological handle and $4,285.00–$4,305.00 macro demand shelf.
-• Execution: Do NOT take aggressive market sell orders inside the $4,312.00–$4,320.00 post-breakdown compression pocket directly into major psychological support. Favour shorting corrective relief retests into $4,322.00–$4,332.00 or continuation breakdown below $4,308.00. High-probability mean-reversion long setups strictly require a confirmed Turtle Soup SFP sweep into $4,300.00–$4,308.00 with an immediate 5m candle close back above $4,318.00.
-
-1. Global Macro & Forex Mechanics:
-- Session Regime: Early Asian Session (Tokyo / Sydney Opening Phase). Thin interbank liquidity and algorithmic price discovery following the late New York distribution drive.
-- Intermarket Dynamics: US Dollar Index (DXY) remains elevated near 99.75 (+0.32%), and US 10-Year Treasury Yields trade firm at 4.79%, maintaining sustained downward pressure on non-yielding bullion.
-- Macro Headline & Yield Context: Resilient US economic indicators and sticky benchmark yields have triggered institutional de-risking and long unwinding across precious metals.
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above $4,325.00 (Short-Covering Trigger), $4,332.00 (15M Breaker Ceiling), $4,348.00 (Session Structure High), and $4,385.50 (Day High BSL).
-- Sell-Side Liquidity (SSL): Concentrated beneath $4,310.00, resting stops below the $4,300.00 round psych barrier, and extending into the $4,285.00–$4,305.00 HTF Daily Demand Shelf.
-- Active Imbalances & POIs: Bearish Breaker Block at $4,322.00–$4,332.00; Bearish 15M FVG at $4,328.00–$4,338.00; Deep Discount HTF Macro Demand at $4,285.00–$4,305.00.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $4,312.00 – $4,320.00 Spot.
-- Context: Price is consolidating in an $8 post-breakdown churn pocket around spot $4,315.78. Taking market orders in this equilibrium zone risks spread slippage and low-liquidity whipsaws.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $4,325.00 Spot): A sustained 5m/15m candle close above $4,325.00 forces trapped late breakdown shorts into stop-loss covering, triggering a rapid relief expansion toward $4,338.00 and $4,350.00.
-- Downside Panic Cascade (< $4,308.00 Spot): A sustained 5m candle close below $4,308.00 triggers trailing stop cascades of intraday dip-buyers, accelerating price directly into $4,300.00 and the $4,285.00–$4,305.00 macro demand base.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Deep Discount SSL Sweep Reversal Long - SFP / Turtle Soup): Swift sweep below $4,310.00 / into $4,300.00–$4,308.00 followed by immediate lower-wick rejection and a 5m candle close back ABOVE $4,318.00. | TP: $4,330.00 / $4,345.00 | SL: $4,295.00 | Risk-Reward: ~1:3.0.
-- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4,325.00 with expanding volume. | TP: $4,338.00 / $4,350.00 | SL: $4,315.00 | Risk-Reward: ~1:2.5.
-- SELL Setup 1 (Broken 4H Demand Breaker & FVG Supply Rejection Short): Corrective relief bounce into $4,322.00–$4,332.00 rejected with an upper wick, closing 5m candle back BELOW $4,320.00. | TP: $4,308.00 / $4,300.00 / $4,285.00 | SL: $4,336.00 | Risk-Reward: ~1:2.8.
-- SELL Setup 2 (Downside Long-Liquidation Breakdown Continuation Short): Sustained 5m candle close BELOW $4,308.00 confirming continuation of institutional liquidation cascade. | TP: $4,300.00 / $4,285.00 | SL: $4,318.00 | Risk-Reward: ~1:2.5.`
-  },
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (07:30 AM IST - Sep 02, 2026 | Spot: $4290.92 | Trigger: Level Exhaustion Breakdown (Spot $4290.92 < Min AI Level $4300.00)):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🔴 BEARISH (Macro Liquidation / Sub-$4300 Price Discovery) | Bias Score: -4.0 / +5.0 | Confidence: High (90%)
-• Bias Invalidation Floor: $4,310.00 (A sustained 15M candle close above Broken $4300 Floor / $4,310.00 invalidates ongoing breakdown displacement)
-
-📍 Tactical Directives:
-• Primary Outlook: Level Exhaustion Breakdown & Deep Discount Liquidity Search. Spot ($4,290.92) has breached the major psychological $4,300.00 round floor, confirming continuation of institutional distribution and long liquidation. Price is searching for high-timeframe order block absorption in the $4,275.00–$4,285.00 macro demand pocket.
-• Execution: Do NOT chase market sell orders inside the $4,286.00–$4,296.00 post-flush compression pocket. Favour shorting corrective relief retests into $4,300.00–$4,310.00 (Bearish Breaker Block) or continuation breakdown below $4,284.00. High-probability mean-reversion long setups strictly require a confirmed Turtle Soup SFP sweep into $4,275.00–$4,285.00 with an immediate 5m candle close back above $4,296.00.
-
-1. Global Macro & Forex Mechanics:
-- Session Regime: Asian Session Mid-Day / Pre-European Handover. Algorithmic liquidity sweeps and deep discount price discovery following sustained overnight New York and Asian liquidation waves.
-- Intermarket Dynamics: US Dollar Index (DXY) continues trading strong at 99.80 (+0.35%), and US 10-Year Treasury Yields hover near multi-month highs at 4.80%, keeping strong institutional macro headwinds pinned on non-yielding precious metals.
-- Macro Headline & Yield Context: Sticky US inflation expectations and hawkish central bank positioning continue to drive dollar strength, causing institutional funds to systematically unwind commodity longs.
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above $4,302.00 (Short-Covering Squeeze Trigger), $4,310.00 (Broken $4,300 Breaker Ceiling), $4,325.00 (Asian Breakdown Origin), and $4,385.50 (Day High BSL).
-- Sell-Side Liquidity (SSL): Concentrated beneath $4,285.00 (Session Flush Lows) and resting stops underneath the $4,275.00–$4,285.00 HTF Daily Demand Shelf.
-- Active Imbalances & POIs: Bearish Breaker Block at $4,300.00–$4,310.00; Bearish 15M Fair Value Gap (FVG) at $4,305.00–$4,318.00; Deep Discount HTF Daily Order Block at $4,275.00–$4,285.00.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $4,286.00 – $4,296.00 Spot.
-- Context: Price is consolidating in a $10 post-breakdown churn pocket around spot $4,290.92. Taking unconfirmed market orders in this compression zone risks spread slippage and low-liquidity micro-whipsaws.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $4,302.00 Spot): A sustained 5m/15m candle close above $4,302.00 forces trapped breakdown short sellers into rapid stop-loss covering, triggering a sharp relief rally toward $4,315.00 and $4,325.00.
-- Downside Panic Cascade (< $4,284.00 Spot): A sustained 5m close below $4,284.00 triggers trailing stop cascades of dip-buyers, accelerating price directly into $4,270.00 and $4,255.00 macro demand extension targets.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Deep Discount SSL Sweep Reversal Long - SFP / Turtle Soup): Swift sweep below $4,288.00 / into $4,275.00–$4,285.00 followed by immediate lower-wick rejection and a 5m candle close back ABOVE $4,296.00. | TP: $4,308.00 / $4,322.00 | SL: $4,268.00 | Risk-Reward: ~1:3.0.
-- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4,302.00 with expanding volume. | TP: $4,315.00 / $4,325.00 | SL: $4,290.00 | Risk-Reward: ~1:2.5.
-- SELL Setup 1 (Broken $4,300 Breaker & FVG Supply Rejection Short): Corrective relief bounce into $4,300.00–$4,310.00 rejected with an upper wick, closing 5m candle back BELOW $4,295.00. | TP: $4,285.00 / $4,275.00 / $4,255.00 | SL: $4,316.00 | Risk-Reward: ~1:2.8.
-- SELL Setup 2 (Downside Long-Liquidation Breakdown Continuation Short): Sustained 5m candle close BELOW $4,284.00 confirming continuation of institutional liquidation cascade. | TP: $4,270.00 / $4,255.00 | SL: $4,294.00 | Risk-Reward: ~1:2.5.`
-  },
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (08:15 AM IST - Sep 02, 2026 | Spot: 4309.39 | Trigger: Extreme Price Shift ($18.47 >= $15.00)):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🔴 BEARISH / COUNTER-TREND SQUEEZE (Psychological Reclaim Probe) | Bias Score: -2.0 / +5.0 | Confidence: Moderate-High (78%)
-• Bias Invalidation Floor: $4,322.00 (A sustained 15M candle close above Broken 4H Breaker / $4,322.00 invalidates intraday bearish dominance)
-
-📍 Tactical Directives:
-• Primary Outlook: Extreme Price Shift ($18.47 move from $4,290.92 sweep low to $4,309.39) & Breaker Block Test. Spot ($4,309.39) has reclaimed the psychological $4,300.00 handle on short-covering and is testing the overhead Bearish Breaker Block and 15M Fair Value Gap ($4,315.00–$4,322.00).
-• Execution: Do NOT chase market buy orders inside the $4,305.00–$4,315.00 compression zone directly into overhead breaker supply. Favour short setups on upper-wick rejection inside $4,315.00–$4,322.00 or continuation breakdown back below $4,300.00. High-momentum long breakouts require a sustained 5m/15m close above $4,318.00, or a confirmed pullback retest bounce holding above $4,298.00–$4,305.00.
-
-1. Global Macro & Forex Mechanics:
-- Session Regime: Asian Session Second-Half / Pre-European Handover. Fast short-covering liquidity sweep following overnight New York liquidation.
-- Intermarket Dynamics: US Dollar Index (DXY) holds near 99.75 (+0.30%), and US 10-Year Treasury Yields trade near 4.79%, creating structural headwinds against sustained multi-session rallies in non-yielding bullion.
-- Macro Headline & Yield Context: Benchmark Treasury yields and a strong dollar cap structural expansion, keeping rallies rotational rather than trending unless macro yields break lower.
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above $4,318.00 (Breaker Reclaim Trigger), $4,332.00 (15M Structure High), $4,350.00 (Overnight Pivot), and $4,385.50 (Day High BSL).
-- Sell-Side Liquidity (SSL): Concentrated beneath $4,300.00 (Psychological Reclaim Floor), $4,284.00 (Asian Sweep Low), and $4,275.00 (HTF Daily Demand Base).
-- Active Imbalances & POIs: Bearish Breaker Block at $4,315.00–$4,322.00; Bearish 15M FVG at $4,318.00–$4,328.00; Reclaimed SFP Demand Pocket at $4,298.00–$4,305.00; Deep Discount HTF Demand at $4,275.00–$4,285.00.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $4,305.00 – $4,315.00 Spot.
-- Context: Price is churning in a $10 compression pocket following the sharp $18.47 relief pop. Taking unconfirmed market orders inside this churn zone risks spread slippage and dual-sided wick traps.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $4,318.00 Spot): A sustained 5m/15m candle close above $4,318.00 forces trapped Asian shorts into stop-loss covering, triggering a rapid relief expansion toward $4,332.00 and $4,345.00.
-- Downside Long-Liquidation Cascade (< $4,300.00 Spot): A sustained 5m close back below $4,300.00 triggers trailing stop cascades of late squeeze buyers, accelerating price directly into $4,284.00 and $4,275.00.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Psychological Floor Re-test & Bounce Long): Pullback into $4,298.00–$4,305.00 rejected with lower wick, followed by a 5m candle close back ABOVE $4,308.00. | TP: $4,318.00 / $4,332.00 | SL: $4,292.00 | Risk-Reward: ~1:2.8.
-- BUY Setup 2 (High-Momentum Supply Breaker Breakout Long): Sustained 5m/15m close ABOVE $4,318.00 with expanding volume. | TP: $4,332.00 / $4,345.00 | SL: $4,306.00 | Risk-Reward: ~1:2.5.
-- SELL Setup 1 (Broken 4H Breaker & Supply FVG Rejection Short): Corrective relief push into $4,315.00–$4,322.00 rejected with an upper wick, closing 5m candle back BELOW $4,308.00. | TP: $4,298.00 / $4,285.00 | SL: $4,328.00 | Risk-Reward: ~1:2.8.
-- SELL Setup 2 (Reclaimed Floor Breakdown Continuation Short): Sustained 5m candle close BELOW $4,300.00 confirming bull trap and continuation of institutional liquidation. | TP: $4,284.00 / $4,275.00 | SL: $4,312.00 | Risk-Reward: ~1:2.5.`
-  },
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (09:00 AM IST - Sep 02, 2026 | Spot: 4293.48 | Trigger: Extreme Price Shift ($15.91 >= $15.00)):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🔴 BEARISH (Failed Reclaim / Sub-$4300 Pressure) | Bias Score: -3.0 / +5.0 | Confidence: High (85%)
-• Bias Invalidation Floor: $4,308.00 (A sustained 15M candle close above Broken $4,300 Breaker / $4,308.00 invalidates ongoing intraday bearish displacement)
-
-📍 Tactical Directives:
-• Primary Outlook: Extreme Price Shift Reversal ($15.91 drop from $4,309.39 relief peak to $4,293.48 spot) & Sub-$4,300 Distribution. The early Asian counter-trend relief rally was heavily rejected at the $4,315–$4,322 breaker supply zone, forcing price back below the $4,300 psychological round handle (confirming an intraday bull trap). Price is probing liquidity above the $4,284.00 Asian sweep low.
-• Execution: Do NOT chase market sell orders inside the $4,288.00–$4,298.00 compression chop zone. Favour short setups on corrective relief pullbacks into $4,300.00–$4,308.00 (Broken Psych Breaker & FVG) or continuation breakdowns below $4,284.00. High-probability mean-reversion long entries strictly require a confirmed Turtle Soup SFP sweep below $4,284.00 into $4,270.00–$4,280.00 with a 5m close back above $4,288.00, or a high-momentum breakout above $4,305.00.
-
-1. Global Macro & Forex Mechanics:
-- Session Regime: Asian Session Late Phase / Pre-European (London) Pre-Market Transition. Algorithmic liquidity repositioning following overnight New York liquidation and failed Asian bounce.
-- Intermarket Dynamics: US Dollar Index (DXY) trades strong at 99.78 (+0.34%), and US 10-Year Treasury Yields hold elevated near 4.80%, continuing to exert institutional macro headwinds against sustained gold rallies.
-- Macro Headline & Yield Context: Resilient Treasury yields and a strong dollar cap structural expansion, keeping rallies rotational rather than trending unless macro yields break lower.
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above $4,305.00 (Short-Covering Squeeze Trigger), $4,315.00–$4,322.00 (Broken 4H Breaker & 15M FVG), $4,332.00 (Session Supply High), and $4,385.50 (Day High BSL).
-- Sell-Side Liquidity (SSL): Concentrated beneath $4,284.00 (Asian Sweep Low) and deep resting liquidity in the HTF Daily Demand Order Block ($4,270.00–$4,280.00).
-- Active Imbalances & POIs: Bearish Breaker Block at $4,300.00–$4,308.00; Bearish 15M FVG at $4,302.00–$4,312.00; Deep Discount HTF Daily Order Block at $4,270.00–$4,280.00.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $4,288.00 – $4,298.00 Spot.
-- Context: Price is consolidating in a $10 post-rejection compression pocket around spot $4,293.48. Taking unconfirmed market orders in this compression zone risks spread slippage and low-liquidity micro-whipsaws.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $4,305.00 Spot): A sustained 5m/15m candle close above $4,305.00 clears immediate supply, forcing late Asian breakdown shorts to cover and triggering a fast relief rally toward $4,315.00 and $4,325.00.
-- Downside Long-Liquidation Cascade (< $4,284.00 Spot): A sustained 5m close below the Asian session low ($4,284.00) triggers institutional trailing stop cascades, accelerating price directly into $4,270.00 and $4,255.00 macro demand targets.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Deep Discount SSL Sweep Reversal Long - SFP / Turtle Soup): Swift sweep below $4,284.00 into $4,270.00–$4,280.00 followed by immediate lower-wick rejection and a 5m candle close back ABOVE $4,288.00. | TP: $4,302.00 / $4,315.00 | SL: $4,262.00 | Risk-Reward: ~1:2.8.
-- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4,305.00 with expanding volume. | TP: $4,315.00 / $4,325.00 | SL: $4,295.00 | Risk-Reward: ~1:2.5.
-- SELL Setup 1 (Broken $4,300 Breaker & FVG Supply Rejection Short): Corrective relief bounce into $4,300.00–$4,308.00 rejected with an upper wick, closing 5m candle back BELOW $4,295.00. | TP: $4,284.00 / $4,270.00 | SL: $4,314.00 | Risk-Reward: ~1:2.8.
-- SELL Setup 2 (Asian Low Breakdown Continuation Short): Sustained 5m candle close BELOW $4,284.00 confirming continuation of institutional liquidation cascade. | TP: $4,270.00 / $4,255.00 | SL: $4,294.00 | Risk-Reward: ~1:2.6.`
-  },
-  {
-    "source": "AI",
-    "text": `Gold (XAU/USD) Intraday Tactical Update (01:30 PM IST - Sep 02, 2026 | Spot: 4323.6 | Trigger: Scheduled 01:30 PM Update (London Open & Asian Range Sweep)):
-
-================================================================================
-🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🔴 BEARISH / POTENTIAL SFP DEMAND ABSORPTION | Bias Score: -2.5 / +5.0 | Confidence: High (84%)
-• Bias Invalidation Floor: $4,342.00 (A sustained 15M candle close above Broken Breaker / $4,342.00 invalidates ongoing intraday bearish displacement)
-
-📍 Tactical Directives:
-• Primary Outlook: London Open Judas Swing & 4H Macro Demand Base / 50 EMA Test. Spot ($4,323.60) is probing below the Asian Session Low / Day Low ($4,329.20), entering the critical 4H Macro Demand Base ($4,318.00–$4,328.00 / Daily 50 EMA). Market makers are engineering an Asian range liquidity sweep ahead of London volume injection.
-• Execution: Do NOT chase market orders inside the $4,320.00–$4,328.00 compression chop zone. Favour shorting corrective relief retests into $4,332.00–$4,340.00 (Broken Breaker & 15M FVG) or continuation breakdown below $4,318.00. High-probability mean-reversion long setups strictly require a confirmed Turtle Soup SFP sweep below $4,322.00 with a 5m close back above $4,328.00 targeting $4,345.00 / $4,360.00.
-
-1. Global Macro & Forex Mechanics:
-- Session Regime: London Open / European Session Transition (Judas Swing Phase). Interbank liquidity increases sharply as European institutional desks take over from the Asian session.
-- Intermarket Dynamics: US Dollar Index (DXY) holds firm at 99.75 (+0.32%), and US 10-Year Treasury Yields trade near 4.79%, maintaining persistent macro resistance against non-yielding precious metals.
-- Macro Headline & Yield Context: Cautious sentiment across European equities and sticky US benchmark yields keep institutional positioning defensive, favoring liquidity fades over unconfirmed breakouts.
-
-2. SMC & Session Liquidity Confluence:
-- Buy-Side Liquidity (BSL): Clustered above $4,332.00 (Immediate Short-Covering Trigger), $4,348.00 (15M Structure High), $4,365.00 (Overnight Breaker), and $4,385.50 (Day High BSL).
-- Sell-Side Liquidity (SSL): Concentrated beneath Day Low ($4,329.20), $4,322.00 (4H Demand Baseline), and extending down to $4,300.00 psychological barrier and $4,284.00 (Asian Sweep Low).
-- Active Imbalances & POIs: Bearish Breaker Block at $4,332.00–$4,340.00; Bearish 15M FVG at $4,335.00–$4,345.00; 4H Macro Demand Base & Daily 50 EMA at $4,318.00–$4,328.00.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $4,320.00 – $4,328.00 Spot.
-- Context: Price is consolidating in an $8 post-sweep churn pocket around spot $4,323.60 directly at the 4H Demand Base. Taking unconfirmed market orders inside this compression zone risks spread slippage and London Open whipsaws.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $4,332.00 Spot): A sustained 5m/15m candle close above $4,332.00 forces trapped London opening shorts to cover, triggering a rapid relief expansion toward $4,345.00 and $4,360.00.
-- Downside Long-Liquidation Cascade (< $4,318.00 Spot): A sustained 5m close below the 4H Demand Floor ($4,318.00) triggers trailing stop-loss cascades of dip-buyers, accelerating price directly into $4,300.00 and $4,284.00 (Asian Sweep Low).
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (4H Macro Demand SSL Sweep Reversal Long - SFP / Turtle Soup): Swift sweep below $4,322.00 into $4,318.00–$4,322.00 followed by immediate lower-wick rejection and a 5m candle close back ABOVE $4,328.00. | TP: $4,345.00 / $4,360.00 | SL: $4,312.00 | Risk-Reward: ~1:2.8.
-- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $4,332.00 with expanding volume. | TP: $4,345.00 / $4,360.00 | SL: $4,322.00 | Risk-Reward: ~1:2.5.
-- SELL Setup 1 (Broken Support Breaker & 15M FVG Supply Rejection Short): Corrective relief bounce into $4,332.00–$4,340.00 rejected with an upper wick, closing 5m candle back BELOW $4,328.00. | TP: $4,318.00 / $4,305.00 | SL: $4,345.00 | Risk-Reward: ~1:2.7.
-- SELL Setup 2 (4H Macro Demand Floor Breakdown Continuation Short): Sustained 5m candle close BELOW $4,318.00 confirming breakdown of macro demand anchor. | TP: $4,300.00 / $4,284.00 | SL: $4,328.00 | Risk-Reward: ~1:2.6.`
-  },
   {
     "source": "AI",
     "text": `Gold (XAU/USD) Intraday Tactical Update (06:00 PM IST - Sep 02, 2026 | Spot: 4336.78 | Trigger: Scheduled 06:00 PM Update (New York Pre-Market & US Data)):
@@ -878,26 +446,72 @@ window.goldDailyPlanSummary = [
 ];
 
 window.btcDailyPlanData = [
-  { "source": "BTC-AI", "price": "77250.27", "bias": "bullish", "behavior": "[23:30] 15M Dynamic 9 EMA Shelf ($77,250.27). Primary short-term momentum trail & intraday pullback defense zone.", "tp": "77781.6", "sl": "77100.3", "status": "na" },
-  { "source": "BTC-AI", "price": "77168.75", "bias": "bullish", "behavior": "[23:30] 15M Dynamic 21 EMA Mean-Reversion Floor ($77,168.75). Secondary trend filter & institutional re-entry zone.", "tp": "77881.6", "sl": "76968.8", "status": "na" },
-  { "source": "BTC-AI", "price": "77564.52", "bias": "neutral", "behavior": "[23:30] 15M/1H 200 EMA Macro Equilibrium Floor ($77,564.52). High-probability structural pivot & macro trend separator.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "79253.9", "bias": "bearish", "behavior": "[23:30] Prior Day High ($79,253.90) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.", "tp": "76781.6", "sl": "79503.9", "status": "na" },
-  { "source": "BTC-AI", "price": "76736.93", "bias": "bullish", "behavior": "[23:30] Prior Day Low ($76,736.93) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.", "tp": "77981.6", "sl": "76486.9", "status": "na" },
-  { "source": "BTC-AI", "price": "77035.0", "bias": "neutral", "behavior": "[23:30] Prior Day Close ($77,035.00) Intraday Equilibrium Pivot. Day green/red sentiment baseline.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "77749.99", "bias": "bearish", "behavior": "[23:30] Asian Session High ($77,749.99) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.", "tp": "76981.6", "sl": "77900.0", "status": "na" },
-  { "source": "BTC-AI", "price": "76663.54", "bias": "bullish", "behavior": "[23:30] Asian Session Low ($76,663.54) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.", "tp": "77781.6", "sl": "76513.5", "status": "na" },
-  { "source": "BTC-AI", "price": "77732.92", "bias": "bearish", "behavior": "[23:30] London Session High ($77,732.92) Liquidity Shelf. European expansion peak & supply rejection zone.", "tp": "76881.6", "sl": "77932.9", "status": "na" },
-  { "source": "BTC-AI", "price": "76244.74", "bias": "bullish", "behavior": "[23:30] London Session Low ($76,244.74) Demand Floor. European session low & liquidity absorption shelf.", "tp": "77881.6", "sl": "76044.7", "status": "na" },
-  { "source": "BTC-AI", "price": "77105.96", "bias": "neutral", "behavior": "[23:30] Intraday Session VWAP Benchmark ($77,105.96). Institutional average cost anchor & fair value magnet.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "77260.78", "bias": "neutral", "behavior": "[23:30] Intraday High-Volume Point of Control (POC) ($77,260.78). Heavy institutional trading volume node.", "tp": "na", "sl": "na", "status": "na" },
-  { "source": "BTC-AI", "price": "77133.22", "bias": "bullish", "behavior": "[23:30] 15M Bullish Demand Fair Value Gap Bottom ($77,133.22). Imbalance mitigation zone.", "tp": "77533.2", "sl": "76983.2", "status": "na" },
-  { "source": "BTC-AI", "price": "77284.96", "bias": "bullish", "behavior": "[23:30] 15M Bullish Demand Fair Value Gap Top ($77,284.96). Imbalance mitigation zone.", "tp": "77685.0", "sl": "77135.0", "status": "na" },
-  { "source": "BTC-AI", "price": "77276.51", "bias": "bullish", "behavior": "[23:30] 15M Bullish Demand Fair Value Gap Bottom ($77,276.51). Imbalance mitigation zone.", "tp": "77676.5", "sl": "77126.5", "status": "na" },
-  { "source": "BTC-AI", "price": "77289.08", "bias": "bullish", "behavior": "[23:30] 15M Bullish Demand Fair Value Gap Top ($77,289.08). Imbalance mitigation zone.", "tp": "77689.1", "sl": "77139.1", "status": "na" },
-  { "source": "BTC-AI", "price": "77630.0", "bias": "bullish", "behavior": "[23:30] CME BTC Futures Gap Magnet ($77,630.00). High-probability >80% historical gap fill magnet.", "tp": "78130.0", "sl": "77430.0", "status": "na" }
+  { "source": "BTC-AI", "price": "77735.87", "bias": "bearish", "behavior": "[13:31] 15M Dynamic 9 EMA Shelf ($77,735.87). Primary short-term momentum trail & intraday pullback defense zone.", "tp": "77326.7", "sl": "77885.9", "status": "na" },
+  { "source": "BTC-AI", "price": "77671.89", "bias": "bullish", "behavior": "[13:31] 15M Dynamic 21 EMA Mean-Reversion Floor ($77,671.89). Secondary trend filter & institutional re-entry zone.", "tp": "78226.7", "sl": "77471.9", "status": "na" },
+  { "source": "BTC-AI", "price": "77530.19", "bias": "neutral", "behavior": "[13:31] 15M/1H 200 EMA Macro Equilibrium Floor ($77,530.19). High-probability structural pivot & macro trend separator.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77749.99", "bias": "bearish", "behavior": "[13:31] Prior Day High ($77,749.99) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.", "tp": "77126.7", "sl": "78000.0", "status": "na" },
+  { "source": "BTC-AI", "price": "76244.74", "bias": "bullish", "behavior": "[13:31] Prior Day Low ($76,244.74) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.", "tp": "78326.7", "sl": "75994.7", "status": "na" },
+  { "source": "BTC-AI", "price": "77417.49", "bias": "neutral", "behavior": "[13:31] Prior Day Close ($77,417.49) Intraday Equilibrium Pivot. Day green/red sentiment baseline.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77877.19", "bias": "bearish", "behavior": "[13:31] Asian Session High ($77,877.19) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.", "tp": "77326.7", "sl": "78027.2", "status": "na" },
+  { "source": "BTC-AI", "price": "76937.86", "bias": "bullish", "behavior": "[13:31] Asian Session Low ($76,937.86) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.", "tp": "78126.7", "sl": "76787.9", "status": "na" },
+  { "source": "BTC-AI", "price": "78147.2", "bias": "bearish", "behavior": "[13:31] London Session High ($78,147.20) Liquidity Shelf. European expansion peak & supply rejection zone.", "tp": "77226.7", "sl": "78347.2", "status": "na" },
+  { "source": "BTC-AI", "price": "77560.87", "bias": "bullish", "behavior": "[13:31] London Session Low ($77,560.87) Demand Floor. European session low & liquidity absorption shelf.", "tp": "78226.7", "sl": "77360.9", "status": "na" },
+  { "source": "BTC-AI", "price": "77424.57", "bias": "neutral", "behavior": "[13:31] Intraday Session VWAP Benchmark ($77,424.57). Institutional average cost anchor & fair value magnet.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77270.43", "bias": "neutral", "behavior": "[13:31] Intraday High-Volume Point of Control (POC) ($77,270.43). Heavy institutional trading volume node.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "BTC-AI", "price": "77458.47", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,458.47). Imbalance mitigation zone.", "tp": "77858.5", "sl": "77308.5", "status": "na" },
+  { "source": "BTC-AI", "price": "77531.99", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,531.99). Imbalance mitigation zone.", "tp": "77932.0", "sl": "77382.0", "status": "na" },
+  { "source": "BTC-AI", "price": "77586.85", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,586.85). Imbalance mitigation zone.", "tp": "77986.8", "sl": "77436.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77711.48", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,711.48). Imbalance mitigation zone.", "tp": "78111.5", "sl": "77561.5", "status": "na" },
+  { "source": "BTC-AI", "price": "77483.52", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,483.52). Imbalance mitigation zone.", "tp": "77883.5", "sl": "77333.5", "status": "na" },
+  { "source": "BTC-AI", "price": "77658.85", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,658.85). Imbalance mitigation zone.", "tp": "78058.8", "sl": "77508.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77818.05", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Bottom ($77,818.05). Imbalance mitigation zone.", "tp": "78218.0", "sl": "77668.0", "status": "na" },
+  { "source": "BTC-AI", "price": "77849.74", "bias": "bullish", "behavior": "[13:31] 15M Bullish Demand Fair Value Gap Top ($77,849.74). Imbalance mitigation zone.", "tp": "78249.7", "sl": "77699.7", "status": "na" },
+  { "source": "BTC-AI", "price": "77686.77", "bias": "bearish", "behavior": "[13:31] 15M Bearish Supply Fair Value Gap Bottom ($77,686.77). Imbalance mitigation zone.", "tp": "77286.8", "sl": "77836.8", "status": "na" },
+  { "source": "BTC-AI", "price": "77824.39", "bias": "bearish", "behavior": "[13:31] 15M Bearish Supply Fair Value Gap Top ($77,824.39). Imbalance mitigation zone.", "tp": "77424.4", "sl": "77974.4", "status": "na" },
+  { "source": "BTC-AI", "price": "78015.0", "bias": "bullish", "behavior": "[13:31] CME BTC Futures Gap Magnet ($78,015.00). High-probability >80% historical gap fill magnet.", "tp": "78515.0", "sl": "77815.0", "status": "na" }
 ];
 
 window.btcDailyPlanSummary = [
+  {
+    "source": "BTC-AI",
+    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (01:31 PM IST - Sep 03, 2026 | Spot: 77726.69 | Trigger: London Session (European Opening) (European Session Start)):
+
+================================================================================
+🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: 🟢 BULLISH | Bias Score: +1.0 / +6.0 | Confidence: Neutral (Chop)
+• Bias Invalidation Floor: $77500.00 (A 15M close below $77500.00 invalidates bias)
+
+📍 Tactical Directives:
+• Primary Outlook: Buy-on-Dip Expansion. Institutional momentum favors absorption at discount demand OBs followed by upside expansion.
+• Execution: Avoid counter-trend shorts during early session. Wait for 15M opening range filter before entries.
+
+
+1. Market Structure & Session Bias:
+Bitcoin Spot (BTC/USD) is trading at $77,726.69, consolidation / pullback state within the updated daily structure (Day High: $78,147.20 | Day Low: $76,937.86 | Prior Day Close: $77,417.49 | Live Spot: $77,726.69). During London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts), intermarket dynamics (DXY $99.305 (Bearish DXY (Tailwind for BTC)) and S&P 500 Futures $7677.25) combined with crypto-native context (Funding Rate is 0.0038% (neutral); Fear & Greed Index: 65 (Greed); CME Gap active at 78015.0 (above, size: 288.31)) guide structure. Spot is inside previous day range | above pdc (day green).
+- Crypto News Guard: ⚠️ BTC NEWS: BC-Most Active Stocks
+
+2. SMC & Liquidity Zones:
+- Buy-Side Liquidity (BSL): Clustered above $78,147.20 local swing highs, extending into 15M Bearish FVG ($77686.8–$77824.4), and macro day high targets up to $77,749.99.
+- Sell-Side Liquidity (SSL): Concentrated below $76,937.90 psychological round number down to deeper macro 4H demand base ($76,244.74).
+- Order Blocks (OB) & Key Levels: Bullish Demand OB at $77,735.87–$77,671.89; Session VWAP at $77,424.57; 200 EMA at $77,530.19; Volume Profile POC at $77,270.43.
+- Fair Value Gaps (FVG): 15M Bearish FVG at $77686.8–$77824.4; 15M Bullish FVG at $77458.5–$77532.0.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $77,058.79 – $77,844.86 (Value Area) / $76,937.86 – $77,877.19 (Asian Range).
+- Context: Current spot ($77,726.69) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $78,147.20 Spot): A sustained 5m/15m candle close above $78,147.20 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $78,026.69 and $78,326.69.
+- Downside Long-Liquidation Cascade (< $76,937.90 Spot): A sustained 5m close below the demand shelf ($76,937.90) triggers institutional stop cascades accelerating toward $77,426.69 and $77,126.69.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $76,937.90 rejected with lower wick, followed by 5m close back ABOVE $77,735.87. TP: $77,951.70 / $78,101.70. SL: $77,576.70.
+- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $78,147.20. TP: $78,126.69 / $78,526.69. SL: $77,576.69.
+- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $77686.8–$77824.4 rejected with upper wick, closing back BELOW $77,735.87 on 5m candle. TP: $77,426.69 / $77,226.69. SL: $77,926.69.
+- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $76,937.90. TP: $77,326.69 / $76,926.69. SL: $77,876.69.
+`
+  },
   {
     "source": "BTC-AI",
     "text": `Bitcoin (BTC/USD) Intraday Tactical Update (11:30 PM IST - Sep 02, 2026 | Spot: 77381.65 | Trigger: Extreme Outer Floor Exhausted (Low $76244.74 <= Extreme Floor $76799.70)):
@@ -1061,86 +675,6 @@ window.btcDailyPlanSummary = [
 - BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $76,815.00 with expanding volume. | TP: $77,005.00 / $77,260.00 / $77,650.00 | SL: $76,600.00 | Risk-Reward: ~1:2.8.
 - SELL Setup 1 (15M Supply FVG & 9/21 EMA Rejection Short): Corrective relief bounce into $76,697.22–$76,813.90 rejected with upper wick, closing 5m candle back BELOW $76,650.00. | TP: $76,350.00 / $76,244.74 / $75,800.00 | SL: $76,870.00 | Risk-Reward: ~1:2.7.
 - SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m candle close BELOW $76,244.74 confirming breakdown of intraday demand floor. | TP: $75,800.00 / $75,200.00 | SL: $76,450.00 | Risk-Reward: ~1:2.6.`
-  },
-  {
-    "source": "BTC-AI",
-    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (01:30 PM IST - Sep 02, 2026 | Spot: 77483.77 | Trigger: London Open (European Session Start)):
-
-================================================================================
-🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: 🟢 BULLISH | Bias Score: +1.0 / +6.0 | Confidence: Neutral (Chop)
-• Bias Invalidation Floor: $77500.00 (A 15M close below $77500.00 invalidates bias)
-
-📍 Tactical Directives:
-• Primary Outlook: Buy-on-Dip Expansion. Institutional momentum favors absorption at discount demand OBs followed by upside expansion.
-• Execution: Avoid counter-trend shorts during early session. Wait for 15M opening range filter before entries.
-
-1. Market Structure & Session Bias:
-- Bitcoin Spot (BTC/USD) is trading at $77,483.77 (Day High: $77,749.99 | Day Low: $76,381.09 | Prior Day Close: $77,035.00 | Live Spot: $77,483.77).
-- Session Regime: London Session (European Opening) (Judas Swings / High-Volatility Expansion Breakouts). Spot is consolidating within local equilibrium.
-- Intermarket Dynamics: US Dollar Index (DXY) is trading at $99.73 (Bearish DXY - Tailwind for BTC) and S&P 500 Futures at $7,637.50.
-- Crypto-Native Context: Perpetual Funding Rate is 0.0038% (Neutral); Crypto Fear & Greed Index is at 63 (Greed); unmitigated CME Futures Gap sits above spot at $77,850.00 (size: $366.23) acting as an overhead price magnet.
-- Crypto News Guard: ⚠️ BTC NEWS: BC-Most Active Stocks.
-
-2. SMC & Liquidity Zones:
-- Buy-Side Liquidity (BSL): Clustered above $77,750.00 local swing highs & Asian High ($77,749.99), extending into 15M Bearish FVG ($77,404.10–$77,458.10), and macro day high targets up to $79,253.90.
-- Sell-Side Liquidity (SSL): Concentrated below $76,381.09 Day Low down to deeper macro 4H demand base ($76,736.93).
-- Order Blocks (OB) & Key Levels: Bullish Demand OB at $77,482.16–$77,497.49; Session VWAP at $77,249.02; 200 EMA at $77,852.16; Volume Profile POC at $77,236.65.
-- Fair Value Gaps (FVG): 15M Bearish FVG at $77,404.10–$77,458.10; 15M Bullish FVG at $77,254.00–$77,255.60.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $77,065.54 – $77,613.10 (Value Area) / $76,663.54 – $77,749.99 (Asian Range).
-- Context: Current spot ($77,483.77) is consolidating within local equilibrium. Micro-wicks and liquidity sweeps make unconfirmed entries inside hazardous. Avoid taking unconfirmed entries inside this zone.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $77,750.00 Spot): A sustained 5m/15m candle close above $77,750.00 clears local compression and forces intraday breakout shorts to cover, triggering a fast expansion toward $77,783.77 and $78,083.77.
-- Downside Long-Liquidation Cascade (< $76,381.10 Spot): A sustained 5m close below the demand shelf ($76,381.10) triggers institutional stop cascades accelerating toward $77,183.77 and $76,883.77.
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below $76,381.10 rejected with lower wick, followed by 5m close back ABOVE $77,497.49. | TP: $77,750.00 / $77,850.00 (CME Gap) | SL: $76,300.00.
-- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m close ABOVE $77,750.00. | TP: $77,883.77 / $78,283.77 | SL: $77,333.77.
-- SELL Setup 1 (Bearish Rejection / FVG Rejection Short): Corrective relief bounce into $77,404.10–$77,458.10 rejected with upper wick, closing back BELOW $77,482.00 on 5m candle. | TP: $77,183.77 / $76,983.77 | SL: $77,683.77.
-- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW $76,381.10. | TP: $77,083.77 / $76,683.77 | SL: $77,633.77.`
-  },
-  {
-    "source": "BTC-AI",
-    "text": `Bitcoin (BTC/USD) Intraday Tactical Update (08:00 AM IST - Sep 02, 2026 | Spot: 77310.01 | Trigger: Asian Session Review (Tokyo/Sydney Overnight Moves)):
-
-================================================================================
-🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK
-================================================================================
-• Daily Market Bias: ⚪ NEUTRAL / BULLISH CONSOLIDATION (Asian Range Compression) | Bias Score: +1.0 / +6.0 | Confidence: Moderate (70%)
-• Bias Invalidation Floor: $77,035.00 (A sustained 15M candle close below Prior Day Close / Session VWAP invalidates intraday bullish drift)
-
-📍 Tactical Directives:
-• Primary Outlook: Asian Range Accumulation & Overhead Liquidity Testing. Spot ($77,310.01) is consolidating within the upper quadrant of the daily range (Day High: $77,479.14 | Day Low: $76,381.09), holding above 15M 9 EMA ($77,140.20), 21 EMA ($77,181.07), and Session VWAP ($77,086.12). Price is probing overhead BSL at Asian High ($77,479.14).
-• Execution: Do NOT chase market orders inside the $77,180.00 – $77,380.00 compression zone. Favour long entries on confirmed pullback bounces into 15M Bullish FVGs / EMAs ($77,140.00 – $77,181.00) or high-momentum breakouts above $77,479.14. Favour short setups on upper-wick liquidity sweeps (Judas Swings) above $77,479.14 or structural breakdown below $77,035.00.
-
-1. Market Structure & Session Bias:
-- Bitcoin Spot (BTC/USD) is trading at $77,310.01 (Day High: $77,479.14 | Day Low: $76,381.09 | Prior Day Close: $77,035.00 | 24H Change: +0.36%).
-- Session Regime: Asian Session Review (Tokyo/Sydney Overnight Moves) — Accumulation & Range-Bound Liquidity Building ahead of London Open.
-- Intermarket Dynamics: US Dollar Index (DXY) is trading at 99.77 (macro headwind), while S&P 500 Futures hold at 7,640.00.
-- Crypto-Native Metrics: Perpetual Funding Rate is 0.0100% (Neutral positioning), Crypto Fear & Greed Index is at 63 (Greed), and an unmitigated CME Futures Gap sits above near $77,855.00 acting as an overhead price magnet.
-
-2. SMC & Liquidity Zones:
-- Buy-Side Liquidity (BSL): Clustered above Asian Session High / Day High ($77,479.14), extending into 200 EMA ($77,948.95), and macro Prior Day High ($79,253.90).
-- Sell-Side Liquidity (SSL): Concentrated below 15M EMAs ($77,140–$77,181), Prior Day Close ($77,035.00), Asian Low ($76,663.54), and Day Low ($76,381.09).
-- Order Blocks (OB) & Imbalances: 15M Bullish Demand FVG at $77,140.00–$77,165.00 & $77,277.16–$77,316.13; 15M Bearish Supply FVG at $77,222.76–$77,306.38; Volume Profile POC at $77,232.08; Session VWAP at $77,086.12; 15M/1H 200 EMA at $77,948.95.
-
-3. Live Intraday Chop Zone / No-Trade Zone:
-- Range: $77,180.00 – $77,380.00 Spot.
-- Context: Price is oscillating around Volume Profile POC ($77,232.08) and local micro-FVGs. Unconfirmed market orders inside this 200-point compression pocket risk whipsaws and spread slippage.
-
-4. High Momentum / Explosive Zones:
-- Upside Short-Covering Squeeze (> $77,479.14 Spot): A sustained 5m/15m candle close above Asian Session High ($77,479.14) forces intraday breakout shorts to cover, triggering an accelerated expansion toward $77,750.00 and $77,948.95 (200 EMA).
-- Downside Long-Liquidation Cascade (< $77,035.00 Spot): A sustained 5m close below Prior Day Close ($77,035.00) & Session VWAP ($77,086.12) triggers institutional long unwinding toward $76,663.54 (Asian Low) and $76,381.09 (Day Low).
-
-5. 5-Min / 15-Min Action Plan & Triggers:
-- BUY Setup 1 (15M Bullish FVG & EMA Pullback Rebound Long): Pullback into $77,140.00–$77,181.00 rejected with lower wick, followed by a 5m candle close back ABOVE $77,240.00. | TP: $77,479.14 / $77,750.00 | SL: $77,020.00 | Risk-Reward: ~1:2.8.
-- BUY Setup 2 (High-Momentum Asian High Breakout Long): Sustained 5m/15m candle close ABOVE $77,479.14 with expanding volume. | TP: $77,750.00 / $77,948.95 (200 EMA) | SL: $77,280.00 | Risk-Reward: ~1:2.5.
-- SELL Setup 1 (Asian High Judas Swing / SFP Rejection Short): Swift liquidity sweep above $77,479.14 rejected with sharp upper wick, closing 5m candle back BELOW $77,400.00. | TP: $77,180.00 / $77,086.00 (VWAP) | SL: $77,560.00 | Risk-Reward: ~1:2.6.
-- SELL Setup 2 (PDC / VWAP Breakdown Continuation Short): Sustained 5m close BELOW $77,035.00 confirming structural distribution. | TP: $76,663.54 / $76,381.09 | SL: $77,220.00 | Risk-Reward: ~1:2.7.`
   }
 ];
 
