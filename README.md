@@ -19,10 +19,11 @@ A private, installable (PWA) daily trading journal. Built with vanilla HTML/CSS/
 - **Firestore** → Database for all app data
 - **Vercel API** (`/api/tvWebhook`) → Handles TradingView webhook alerts, writes to Firestore via Firebase Admin SDK
 
-### Key Files
+### Key Files & Data Layer
 - `vercel.json` — Vercel routing configuration
 - `api/tvWebhook.js` — Vercel serverless function for TradingView webhooks
 - `api/firebase-admin.js` — Firebase Admin SDK initialization for Firestore writes
+- `js/data/*_daily_plan.js` — Offline-first local data files (`nifty_daily_plan.js`, `gold_daily_plan.js`, `sp500_daily_plan.js`, `btc_daily_plan.js`) protected by Node.js Quality Gate auto-rollback
 - `app.js` — **Client-side entry point** (not a server file)
 
 ---
