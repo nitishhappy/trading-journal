@@ -71,7 +71,7 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
   {
-    "source": "AI Pre-Market Briefing",
+    "source": "AI Intraday Briefing",
     "text": `﻿# ⚡ NIFTY 50 Intraday Tactical Update (01:30 PM IST - Sep 03, 2026 | Spot: 23910.3 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))
 
 3. Live Chop Zone / No-Trade Zone:
@@ -91,6 +91,10 @@ window.dailyPlanSummary = [
 - [SELL Setup 1 - Day Low Breakdown Continuation Short]: Sustained 5m candle close BELOW Day Low 23897.85 Spot with expanding Nifty Futures volume confirming structural breakdown. | TP: 23850.00 / 23800.00 / 23786.80 | SL: 23928.00.
 - [SELL Setup 2 - Broken ORB Low Breaker Rejection Short]: Corrective relief pullback into 23945.00–23955.35 Spot rejected with sharp upper wick, closing 5m candle back BELOW 23930.00 Spot. | TP: 23897.85 / 23875.00 / 23850.00 | SL: 23968.00.
 - [SELL Setup 3 - Gap-Fill Rejection Continuation Short]: Push into Prior Day Close 23914.45–23925.00 Spot rejected with bearish candle closing BELOW 23905.00 Spot. | TP: 23897.85 / 23850.00 / 23800.00 | SL: 23935.00.`
+  },
+  {
+    "source": "AI Pre-Market Briefing",
+    "text": `﻿Error: Agent execution terminated due to error.`
   },
   {
     "source": "AI Pre-Market Briefing",
@@ -167,8 +171,8 @@ window.dailyPlanSummary = [
 
 
 > ⚠️ ASSUMPTIONS
-> - **Spot Price References**: NIFTY 50 Spot Index ([\\`nifty_daily_plan.js\\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/nifty_daily_plan.js)) pegged at **23,977.30** (Today Open: 23,997.95 | Prior Day Close: 23,914.45 | Prior Day Range: 23,786.80 – 23,914.45); GOLD (XAU/USD) Spot pegged at **$4,426.75/oz** (Swissquote live feed | Session High: $4,430.70 | Range: $4,293.48 – $4,430.70); DXY at **99.78** (+0.34%); India VIX estimated at **11.25**; WTI Crude at **$89.60/bbl** (+4.48%); US 10-Year Treasury Yield at **4.80%**.
-> - **Volume & Execution Framework**: Volume analysis strictly proxied from active **NIFTY Futures** ([\\`NSE_FO\\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/nifty_daily_plan.js)) while all price levels, triggers, ORB, and EMAs are strictly anchored on the **NIFTY 50 SPOT INDEX** (\\`NSE:NIFTY\\`).
+> - **Spot Price References**: NIFTY 50 Spot Index ([\`nifty_daily_plan.js\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/nifty_daily_plan.js)) pegged at **23,977.30** (Today Open: 23,997.95 | Prior Day Close: 23,914.45 | Prior Day Range: 23,786.80 – 23,914.45); GOLD (XAU/USD) Spot pegged at **$4,426.75/oz** (Swissquote live feed | Session High: $4,430.70 | Range: $4,293.48 – $4,430.70); DXY at **99.78** (+0.34%); India VIX estimated at **11.25**; WTI Crude at **$89.60/bbl** (+4.48%); US 10-Year Treasury Yield at **4.80%**.
+> - **Volume & Execution Framework**: Volume analysis strictly proxied from active **NIFTY Futures** ([\`NSE_FO\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/nifty_daily_plan.js)) while all price levels, triggers, ORB, and EMAs are strictly anchored on the **NIFTY 50 SPOT INDEX** (\`NSE:NIFTY\`).
 > - **Daily Bias Engine**: Zero-causal calibrated 5-pillar bias score evaluated at **+1.0 / +6.0 (⚪ NEUTRAL / Rotational Range Chop)**.
 
 ================================================================================
@@ -265,12 +269,12 @@ window.dailyPlanSummary = [
 
 ### 📦 Integration & Repository Sync Summary
 1. **Trading Journal Synchronized**:
-   - Appended \\`[09:16]\\` AI levels to \\`window.dailyPlanData\\` and prepended the complete briefing block with header \\`NIFTY 50 Pre-Market Tactical Briefing (09:16 AM IST - Sep 03, 2026 | Spot: 23977.30 | Trigger: 09:16 AM IST Pre-Market Briefing):\\` to \\`window.dailyPlanSummary\\` in [\\`nifty_daily_plan.js\\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/nifty_daily_plan.js) and [\\`daily_plan.js\\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/daily_plan.js).
-   - Executed \\`node generate-version.js\\` (service worker cache bumped to \\`trade-journal-7526a89618\\`).
-   - Committed and pushed to GitHub \\`main\\` (\\`commit c7ece07\\`).
+   - Appended \`[09:16]\` AI levels to \`window.dailyPlanData\` and prepended the complete briefing block with header \`NIFTY 50 Pre-Market Tactical Briefing (09:16 AM IST - Sep 03, 2026 | Spot: 23977.30 | Trigger: 09:16 AM IST Pre-Market Briefing):\` to \`window.dailyPlanSummary\` in [\`nifty_daily_plan.js\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/nifty_daily_plan.js) and [\`daily_plan.js\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/daily_plan.js).
+   - Executed \`node generate-version.js\` (service worker cache bumped to \`trade-journal-7526a89618\`).
+   - Committed and pushed to GitHub \`main\` (\`commit c7ece07\`).
 2. **SMC Masterclass Mentorship Log Updated**:
-   - Appended educational breakdown to [\\`Nifty_Learn.md\\`](file:///C:/Nitish/ClaudeApps/Utilities/Nifty_Learn.md).
-   - Committed and pushed to GitHub \\`main\\` (\\`commit aa30be5\\`).`
+   - Appended educational breakdown to [\`Nifty_Learn.md\`](file:///C:/Nitish/ClaudeApps/Utilities/Nifty_Learn.md).
+   - Committed and pushed to GitHub \`main\` (\`commit aa30be5\`).`
   },
   {
     "source": "AI Pre-Market Briefing",
@@ -505,8 +509,8 @@ Error: Agent execution terminated due to error.`
 
 
 > ⚠️ ASSUMPTIONS
-> - **Spot Price Reference**: NIFTY 50 Spot Index ([\\`NSE:NIFTY\\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/daily_plan.js)) pegged at **24,055.80** (Prior Day Range: 23,952.55 – 24,143.15 | Prior Day Close: 24,080.40); GOLD (XAU/USD) Spot pegged at **$4,293.48/oz** (Day Range: $4,284.00 – $4,385.50); DXY at **99.78** (+0.34%); India VIX at **11.19**; WTI Crude at **$89.60/bbl** (+4.48%); US 10-Year Treasury Yield at **4.80%**.
-> - **Execution Framework**: Strict 5-Minute / 15-Minute Smart Money Concepts (SMC) confirmation with price action anchored strictly on **NIFTY 50 Spot Index** (\\`NSE:NIFTY\\`) and volume analysis proxied from active **NIFTY Futures** (\\`NSE_FO\\`).
+> - **Spot Price Reference**: NIFTY 50 Spot Index ([\`NSE:NIFTY\`](file:///C:/Nitish/ClaudeApps/trading-journal/js/data/daily_plan.js)) pegged at **24,055.80** (Prior Day Range: 23,952.55 – 24,143.15 | Prior Day Close: 24,080.40); GOLD (XAU/USD) Spot pegged at **$4,293.48/oz** (Day Range: $4,284.00 – $4,385.50); DXY at **99.78** (+0.34%); India VIX at **11.19**; WTI Crude at **$89.60/bbl** (+4.48%); US 10-Year Treasury Yield at **4.80%**.
+> - **Execution Framework**: Strict 5-Minute / 15-Minute Smart Money Concepts (SMC) confirmation with price action anchored strictly on **NIFTY 50 Spot Index** (\`NSE:NIFTY\`) and volume analysis proxied from active **NIFTY Futures** (\`NSE_FO\`).
 > - **Daily Bias Engine**: 5-Pillar Calibrated Daily Bias Score evaluated at **-1.5 / +6.0 (⚪ NEUTRAL / Chop Mode)**.
 
 ================================================================================

@@ -147,7 +147,14 @@ window.goldDailyPlanData = [
   { "source": "AI", "price": "4355.00", "bias": "bearish", "behavior": "[22:00] FVG Demand Floor Breakdown Continuation Short ($4,355.00). Sustained 5m close below $4,355 triggers trailing stop cascade of dip buyers, accelerating price toward $4,340 / $4,329.20.", "tp": "4340.00 / 4329.20", "sl": "4366.00", "status": "na" },
   { "source": "AI", "price": "4362.00 - 4375.00", "bias": "neutral", "behavior": "[22:00] Live Intraday Equilibrium & No-Trade Chop Zone ($4,362.00 - $4,375.00). London Close exhaustion compression pocket around spot $4,368.41; stay flat to avoid dual-sided spread decay.", "tp": "na", "sl": "na", "status": "na" },
   { "source": "AI", "price": "4322.00 - 4329.20", "bias": "bullish", "behavior": "[22:00] Day Low SSL Sweep Reversal / 4H Demand Base ($4,322.00 - $4,329.20). Lower-wick sweep below Day Low ($4,329.20) into 4H demand followed by 5m close above $4,336 confirms Turtle Soup rebound toward $4,355 / $4,374.", "tp": "4355.00 / 4374.00", "sl": "4316.00", "status": "na" },
-  { "source": "AI", "price": "4444.40 - 4452.00", "bias": "bearish", "behavior": "[22:00] Day High BSL False Breakout Sweep Rejection ($4,444.40 - $4,452.00). Upper-wick sweep rejection closing 5m candle below $4,435 confirms trap short targeting $4,410 / $4,385.", "tp": "4410.00 / 4385.00", "sl": "4458.00", "status": "na" }
+  { "source": "AI", "price": "4444.40 - 4452.00", "bias": "bearish", "behavior": "[22:00] Day High BSL False Breakout Sweep Rejection ($4,444.40 - $4,452.00). Upper-wick sweep rejection closing 5m candle below $4,435 confirms trap short targeting $4,410 / $4,385.", "tp": "4410.00 / 4385.00", "sl": "4458.00", "status": "na" },
+  { "source": "AI", "price": "4415.00 - 4420.00", "bias": "bullish", "behavior": "[13:30] Asian Low SSL Sweep Reversal & SFP Demand Shelf ($4,415.00 - $4,420.00). Lower-wick sweep below Day Low ($4,418.30) followed by 5m close back above $4,422.00 confirms Turtle Soup rebound toward $4,435.00 / $4,445.00.", "tp": "4435.00 / 4445.00", "sl": "4410.00", "status": "na" },
+  { "source": "AI", "price": "4436.00", "bias": "bullish", "behavior": "[13:30] High-Momentum Short-Covering Squeeze Trigger ($4,436.00). Sustained 5m/15m candle close above $4,436.00 clears immediate London supply, targeting $4,448.00 / $4,460.00 / $4,475.00.", "tp": "4448.00 / 4475.00", "sl": "4424.00", "status": "na" },
+  { "source": "AI", "price": "4436.00 - 4446.00", "bias": "bearish", "behavior": "[13:30] 15M/1H Broken Breaker & Supply FVG Defense ($4,436.00 - $4,446.00). Corrective relief bounce rejected with upper wick, closing 5m candle back below $4,430.00 confirms supply defense targeting $4,422.00 / $4,418.30.", "tp": "4422.00 / 4418.30", "sl": "4450.00", "status": "na" },
+  { "source": "AI", "price": "4415.00", "bias": "bearish", "behavior": "[13:30] Downside Long-Liquidation Cascade Trigger ($4,415.00). Sustained 5m close below $4,415.00 breaks Asian demand base, accelerating institutional selling toward $4,400.00 psychological level and $4,390.00.", "tp": "4400.00 / 4390.00", "sl": "4424.00", "status": "na" },
+  { "source": "AI", "price": "4424.00 - 4434.00", "bias": "neutral", "behavior": "[13:30] Live Intraday Equilibrium & No-Trade Chop Zone ($4,424.00 - $4,434.00). London Open compression pocket around spot $4,429.25; avoid unconfirmed market orders to prevent whipsaws.", "tp": "na", "sl": "na", "status": "na" },
+  { "source": "AI", "price": "4486.00 - 4495.00", "bias": "bearish", "behavior": "[13:30] Day High BSL False Breakout Sweep Rejection ($4,486.00 - $4,495.00). Upper-wick sweep rejection closing 5m candle below $4,478.00 confirms trap short targeting $4,460.00 / $4,445.00.", "tp": "4460.00 / 4445.00", "sl": "4500.00", "status": "na" },
+  { "source": "AI", "price": "4490.00", "bias": "bullish", "behavior": "[13:30] High-Momentum Day High Breakout Trigger ($4,490.00). Sustained 5m/15m close above Day High clears resting BSL, targeting $4,510.50 and $4,525.00.", "tp": "4510.50 / 4525.00", "sl": "4475.00", "status": "na" }
 ];
 
 window.goldDailyPlanSummary = [
@@ -609,6 +616,47 @@ Gold Spot (XAU/USD) is trading at $4,373.66/oz during the active London/New York
 - SELL Setup 1 (Broken Midpoint Breaker & 15M FVG Supply Rejection Short): Corrective relief rally into $4,382.00–$4,392.00 rejected with upper wick, closing 5m candle back BELOW $4,376.00. | TP: $4,362.00 / $4,355.00 / $4,340.00 | SL: $4,398.00 | Risk-Reward: ~1:2.7.
 - SELL Setup 2 (Demand Shelf Breakdown Continuation Short): Sustained 5m candle close BELOW $4,355.00 confirming breakdown of discount demand. | TP: $4,340.00 / $4,329.20 | SL: $4,366.00 | Risk-Reward: ~1:2.5.
 - SELL Setup 3 (Day High False Breakout Rejection Short - Turtle Soup): Sweep above Day High ($4,444.40), testing $4,446.00–$4,452.00 with long upper wick, closing 5m candle back BELOW $4,435.00. | TP: $4,410.00 / $4,385.00 | SL: $4,458.00 | Risk-Reward: ~1:3.0.`
+  },
+  {
+    "source": "AI",
+    "text": `Gold (XAU/USD) Intraday Tactical Update (01:30 PM IST - Sep 03, 2026 | Spot: 4429.25 | Trigger: Scheduled 01:30 PM Update (London Open & Asian Range Sweep)):
+
+================================================================================
+🎯 GOLD (XAU/USD) DAILY MARKET BIAS & OUTLOOK
+================================================================================
+• Daily Market Bias: ⚪ NEUTRAL / POTENTIAL BULLISH EXPANSION (Discount Demand Defense / London Judas Swing Watch) | Bias Score: +0.5 / +5.0 | Confidence: Moderate-High (76%)
+• Bias Invalidation Floor: $4,415.00 (A sustained 15M candle close below Asian Low / $4,415.00 invalidates the discount demand defense and shifts bias to bearish liquidation)
+
+📍 Tactical Directives:
+• Primary Outlook: London Open Asian Range Sweep & Discount Absorption. Gold Spot ($4429.25) is operating in the discount quadrant of today's $67.70 daily range ($4,418.30 – $4,486.00). Having held the Asian Low ($4,418.30) during the morning session, London desks are probing local liquidity with an Asian range sweep. Spot is consolidating directly below the 15M Bearish Breaker & Supply FVG ($4,436.00–$4,446.00).
+• Execution: Do NOT chase market orders inside the $4,424.00–$4,434.00 compression chop zone. Favour long setups on confirmed demand absorption holding above $4,418.30 (Turtle Soup SFP) or high-momentum breakout above $4,436.00. Favour short setups on upper-wick rejections inside $4,436.00–$4,446.00 or continuation breakdown below $4,415.00.
+
+1. Global Macro & Forex Mechanics:
+- Session Regime: London Session Opening (European Open & London/Asian Handover). Interbank liquidity surges as City of London dealing desks initiate directional exposure and execute Judas swing liquidity runs against Asian session stops.
+- Intermarket Dynamics: US Dollar Index (DXY) consolidates near 99.45–99.55, while US 10-Year Treasury Yields trade near 4.75%, providing a neutral-to-supportive backdrop for precious metals following yesterday's volatility.
+- Macro Headline & Data Drop Context: Markets are eyeing upcoming US economic releases (Jobless Claims and ISM Services PMI scheduled for the US morning session), prompting cautious rotational positioning during early European trading.
+
+2. SMC & Session Liquidity Confluence:
+- Buy-Side Liquidity (BSL): Clustered above $4,436.00 (London Squeeze Trigger), $4,452.15 (50% Daily Equilibrium), $4,468.00 (Intermediate Supply Shelf), and $4,486.00 (Day High BSL Pool / Asian High). Higher timeframe macro BSL sits at $4,510.50.
+- Sell-Side Liquidity (SSL): Concentrated beneath Day Low ($4,418.30), $4,415.00 (Liquidation Trigger), extending down to $4,400.00 (Psychological Round Handle) and $4,375.00–$4,390.00 (4H Macro Demand Base).
+- Active Imbalances & POIs: 15M/1H Bearish Breaker Block & Supply FVG at $4,436.00–$4,446.00; Asian Low Demand Absorption Shelf at $4,415.00–$4,420.00; Overhead Day High Supply Block at $4,486.00–$4,495.00.
+
+3. Live Intraday Chop Zone / No-Trade Zone:
+- Range: $4,424.00 – $4,434.00 Spot.
+- Context: Price is consolidating in a $10 compression pocket around spot $4,429.25 between the Asian low bounce base ($4,422) and overhead supply ($4,436). Taking unconfirmed market orders inside this pre-expansion churn zone exposes traders to severe dual-sided spread slippage and whipsaws. Stay flat inside this zone.
+
+4. High Momentum / Explosive Zones:
+- Upside Short-Covering Squeeze (> $4,436.00 Spot): A sustained 5m/15m candle close above $4,436.00 clears London overhead resistance, forcing trapped shorts into stop-loss covering and driving a rapid expansion toward $4,448.00, $4,460.00, and $4,475.00.
+- Downside Long-Liquidation Cascade (< $4,415.00 Spot): A sustained 5m close below the Asian Demand Floor ($4,415.00) triggers trailing stop cascades of dip buyers, accelerating price directly into $4,400.00 and $4,390.00.
+- Day High Bullish Expansion (> $4,490.00 Spot): A sustained 5m/15m close above Day High ($4,486.00) clears all resting BSL, triggering an explosive short-squeeze toward $4,510.50 and $4,525.00.
+
+5. 5-Min / 15-Min Action Plan & Triggers:
+- BUY Setup 1 (Asian Low SSL Sweep Reversal Long - SFP / Turtle Soup): Lower-wick sweep below $4,418.30 into $4,415.00–$4,420.00 followed by immediate lower-wick rejection and a 5m candle close back ABOVE $4,422.00. | TP: $4,435.00 / $4,445.00 / $4,460.00 | SL: $4,410.00 | Risk-Reward: ~1:2.8.
+- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m candle close ABOVE $4,436.00 with expanding volume. | TP: $4,448.00 / $4,460.00 / $4,475.00 | SL: $4,424.00 | Risk-Reward: ~1:2.6.
+- BUY Setup 3 (Day High Breakout Expansion Long): Sustained 5m/15m candle close ABOVE $4,490.00 with expanding volume. | TP: $4,510.50 / $4,525.00 | SL: $4,475.00 | Risk-Reward: ~1:2.5.
+- SELL Setup 1 (Broken Breaker & 15M FVG Supply Rejection Short): Corrective relief bounce into $4,436.00–$4,446.00 rejected with an upper wick, closing 5m candle back BELOW $4,430.00. | TP: $4,422.00 / $4,418.30 / $4,410.00 | SL: $4,450.00 | Risk-Reward: ~1:2.7.
+- SELL Setup 2 (Asian Demand Floor Breakdown Continuation Short): Sustained 5m candle close BELOW $4,415.00 confirming breakdown of Asian demand anchor. | TP: $4,400.00 / $4,390.00 / $4,375.00 | SL: $4,424.00 | Risk-Reward: ~1:2.5.
+- SELL Setup 3 (Day High False Breakout Rejection Short - Turtle Soup): Sweep above Day High ($4,486.00), probing $4,488.00–$4,495.00 with long upper wick, closing 5m candle back BELOW $4,478.00. | TP: $4,460.00 / $4,445.00 / $4,430.00 | SL: $4,500.00 | Risk-Reward: ~1:3.0.`
   }
 ];
 

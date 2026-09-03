@@ -120,6 +120,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### vNext — 03 Sep 2026 — Gold (XAU/USD) Intraday Tactical Update (01:30 PM IST)
+- **Live AI Gold Tactical Recalibration**: Recalculated XAU/USD levels, London Open chop zone ($4,424.00–$4,434.00), Asian Low SSL sweep reversal & SFP demand shelf ($4,415.00–$4,420.00), high-momentum short-covering squeeze trigger (> $4,436.00), and Day High breakout expansion trigger (> $4,490.00) following the Asian range expansion ($4,418.30–$4,486.00) and London open liquidity sweep to spot $4,429.25.
+- **Daily Plan & Mentorship Sync**: Appended updated AI-sourced Gold levels and comprehensive summary to `daily_plan.js` / `gold_daily_plan.js` and synced the SMC breakdown in `Gold Setup v2/Gold_Learn.md`.
+
 ### vNext — 03 Sep 2026 — NIFTY 50 Intraday Tactical Update (10:30 AM IST)
 - **NIFTY Live Recalibration**: Recalculated live intraday compression / no-trade chop zone (23,965.00–24,005.00 Spot) around the 24,000 ATM straddle wall, upside short-covering squeeze trigger (> 24,025.40 Spot), and downside breakdown trigger (< 23,955.35 Spot) amidst Sensex Expiry theta decay and India VIX dropping -4.23%.
 - **Daily Plan & Mentorship Sync**: Appended `[10:30]` AI levels to `window.dailyPlanData` and new tactical summary to `window.dailyPlanSummary` in `nifty_daily_plan.js` and `daily_plan.js`, and synced the SMC breakdown in `Utilities/Nifty_Learn.md`.
