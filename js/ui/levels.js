@@ -581,7 +581,9 @@ if (viewLevels) {
 
     function renderSummaryTableContent(rawText) {
         if (!rawText) return '';
-        const bodyText = stripHeaderLineFromBody(rawText);
+        let bodyText = stripHeaderLineFromBody(rawText);
+        // Strip developer deployment / repository sync footers from bodyText upfront
+        bodyText = bodyText.replace(/\n*###?\s*[📦🛠️]?\s*(?:Integration|Repository Sync|Execution & Deployment|Deployment Status)[\s\S]*$/i, '').trim();
 
         // Split text by numbered section headers (e.g., 1. Market Structure..., 2. SMC...)
         const sectionHeaderRegex = /^\s*(?:#{1,6}\s*)?(\d+\.\s*[^:\n]+:?)/gm;
@@ -651,7 +653,7 @@ if (viewLevels) {
             const titleLower = headerTitle.toLowerCase();
 
             // 1. FILTER OUT DEVELOPER DEPLOYMENT / REPO SYNC SECTIONS
-            if (/integration|repository sync|deployment status|trading journal synchronized|mentorship log/i.test(titleLower)) {
+            if (/integration|repository sync|deployment|trading journal|mentorship|playbook maintenance|sync summary|sync status/i.test(titleLower)) {
                 return;
             }
 
