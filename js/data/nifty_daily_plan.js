@@ -508,7 +508,7 @@ window.dailyPlanSummary = [
 🎯 DAILY MARKET BIAS & OUTLOOK
 ================================================================================
 • Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.5 / +6.0 | Confidence: Neutral (Chop)
-• Bias Invalidation Floor: 24055.80 (A 15M close above 24055.80 invalidates bias)
+• Bias Invalidation Floor: 24080.40 (A 15M close above 24080.40 invalidates bias)
 
 📍 Tactical Directives:
 • Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.
