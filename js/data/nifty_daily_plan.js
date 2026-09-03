@@ -365,6 +365,14 @@ window.dailyPlanSummary = [
   {
     "source": "AI Pre-Market Briefing",
     "text": `﻿# Pre-Market Briefing â€” 2026-09-03
+> Auto-generated at 08:00 AM IST
+
+
+Error: Agent execution terminated due to error.`
+  },
+  {
+    "source": "AI Pre-Market Briefing",
+    "text": `﻿# Pre-Market Briefing â€” 2026-09-03
 > Auto-generated at 06:18 AM IST
 
 
