@@ -121,7 +121,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
-### vNext — 03 Sep 2026 — Bitcoin (BTC/USD) Intraday Tactical Update (07:15 PM IST)
+### v2.3.31 — 05 Sep 2026 — Structured JSON Summary Architecture & 24H Rolling Window Fix
+- **Structured JSON Summary Metadata**: Migrated summary entries from unstructured Markdown blobs to structured JSON objects containing explicit metadata tags (`id`, `timestamp`, `timeDisplay`, `spot`, `trigger`, `source`, `text`).
+- **Eliminated False Deduplication Bug**: Completely removed flawed `txt[:120]` slice comparisons across `prune_daily_plan.py`, `sp500_copilot_main.py`, `btc_copilot_main.py`, and `sync_briefing_to_daily_plan.py` that previously collapsed intraday runs sharing identical title banners into a single entry.
+- **Robust 24-Hour Rolling Window**: Enabled deterministic timestamp evaluation via ISO timestamps and multi-format date parsers, ensuring all distinct intraday tactical briefings from the past 24 hours are preserved.
+- **Bot Junk Filtering**: Automatically filters out conversational boilerplate strings (e.g. "How can I help you today?") from summary arrays.
+- **UI Performance & Clarity (`levels.js`)**: Updated `renderSummary()` in `levels.js` to sort by ISO timestamps and format card titles directly from structured tags (`spot`, `timeDisplay`, `trigger`), eliminating redundant client-side regex parsing while maintaining full backward-compatibility.
+
 - **Live AI Bitcoin Tactical Recalibration**: Recalculated BTC/USD levels, extreme outer target exhaustion shelf ($78,902.04), 15M Bullish Demand FVG & 9 EMA shelf ($78,569.65–$78,777.12), high-momentum breakout trigger (> $78,982.00), Day High false breakout sweep rejection ($78,950.00–$78,982.00), and breakdown cascade trigger (< $78,569.65) following the explosive upside expansion past the previous extreme outer target ($78,515.00) to a new Day High at $78,902.04.
 - **Daily Plan Sync**: Appended `[19:15]` AI levels to `window.btcDailyPlanData` and new tactical summary to `window.btcDailyPlanSummary` in `daily_plan.js` and `btc_daily_plan.js`.
 
