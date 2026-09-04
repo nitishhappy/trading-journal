@@ -87,7 +87,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] London Session Low ($79,195.24) Demand Floor. European session low & liquidity absorption shelf.",
     "tp": "80036.0",
     "sl": "78995.2",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
