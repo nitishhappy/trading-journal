@@ -1,55 +1,55 @@
 window.sp500DailyPlanData = [
 {
     "source": "SP500-AI",
-    "price": "7737.60-7753.60",
+    "price": "7732.11-7748.11",
     "bias": "neutral",
-    "behavior": "[09:00] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
+    "behavior": "[07:19] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
     "tp": "na",
     "sl": "na",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7760.60",
+    "price": "7755.11",
     "bias": "bullish",
-    "behavior": "[09:00] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7760.60 targets 7777.60 and 7800.60.",
-    "tp": "7777.60",
-    "sl": "7750.60",
+    "behavior": "[07:19] High-Momentum BSL Breakout Trigger. Sustained 5m close above 7755.11 targets 7772.11 and 7795.11.",
+    "tp": "7772.11",
+    "sl": "7745.11",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7777.60",
+    "price": "7772.11",
     "bias": "bearish",
-    "behavior": "[09:00] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
-    "tp": "7760.60",
-    "sl": "7787.60",
+    "behavior": "[07:19] Overhead Supply OB / PDH Liquidity Ceiling. Watch for SFP sweep rejection.",
+    "tp": "7755.11",
+    "sl": "7782.11",
     "status": "na"
   },
   {
     "source": "SP500-AI",
-    "price": "7730.60",
+    "price": "7725.11",
     "bias": "bearish",
-    "behavior": "[09:00] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7730.60 targets 7611.20 and 7690.60.",
+    "behavior": "[07:19] Downside Long-Liquidation Cascade Trigger. Sustained 5m close below 7725.11 targets 7611.20 and 7685.11.",
     "tp": "7611.20",
-    "sl": "7740.60",
+    "sl": "7735.11",
     "status": "na"
   },
   {
     "source": "SP500-AI",
     "price": "7611.20",
     "bias": "bullish",
-    "behavior": "[09:00] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
-    "tp": "7730.60",
+    "behavior": "[07:19] Demand OB Floor & SSL Sweep Zone. Look for lower-wick rejection absorption.",
+    "tp": "7725.11",
     "sl": "7601.20",
     "status": "na"
   }
 ];
 
 window.sp500DailyPlanSummary = [
-  {
+{
     "source": "SP500-AI",
-    "text": "================================================================================\n🎯 S&P 500 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: 🟢 BULLISH | Bias Score: +5.0 / +6.0 | Confidence: High (86%)\n• Bias Invalidation Floor: 7641.60 (A 15M close below 7641.60 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Buy-on-Dip Expansion. Institutional bias & ES futures momentum favor absorption at discount demand OBs followed by upside expansion.\n• Execution: Avoid counter-trend shorts during early session. Wait for 15M opening range filter before entries.\n\nS&P 500 Spot: 7745.60 (09:00 PM IST - Sep 03, 2026) Trigger: Scheduled 09:00 PM IST Update (London Close & Mid-Day Liquidity Shift)\n\n1. Market Structure & Macro Synthesis:\n- S&P 500 Spot (^GSPC) is trading at 7745.60 (ES Futures: 7746.0 | NQ Futures: 29471.5).\n- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7691.34 | 48H Swing Range: 7611.20 – 7771.48).\n- Intermarket Drivers: VIX at 14.88 (Moderate Volatility (Balanced)) | DXY at 98.99 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.75%.\n- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains\n\n2. SMC & Session Liquidity Confluence:\n- Buy-Side Liquidity (BSL): Clustered above PDH (7771.48), Asian High (7671.48), and London High (7770.60).\n- Sell-Side Liquidity (SSL): Concentrated below PDL (7611.20), Asian Low (7662.48), and London Low (7720.60).\n- Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.\n- Session Sweep Status: Above Asian High ($7671.48)\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 7737.60 – 7753.60 Index Points.\n- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> 7760.60): Sustained 5m close above 7760.60 clears local supply, targeting 7777.60 and 7800.60.\n- Downside Long-Liquidation Cascade (< 7730.60): Sustained 5m close below 7730.60 triggers stop cascades accelerating toward 7611.20 and 7690.60.\n\n5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7611.20 rejected with lower wick, followed by 5m close back ABOVE 7616.20. TP: 7760.60 / 7777.60. SL: 7601.20. Risk-Reward: ~1:2.5.\n- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7760.60 with volume confirmation. TP: 7777.60 / 7800.60. SL: 7750.60. Risk-Reward: ~1:3.\n- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7777.60 with upper wick, closing 5m candle back BELOW 7772.60. TP: 7760.60 / 7730.60. SL: 7787.60. Risk-Reward: ~1:2.5.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7730.60. TP: 7611.20 / 7690.60. SL: 7740.60. Risk-Reward: ~1:3."
+    "text": "================================================================================\n🎯 S&P 500 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +1.5 / +6.0 | Confidence: Moderate (70%)\n• Bias Invalidation Floor: 7747.71 (A 15M close above 7747.71 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. S&P 500 is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian/London High/Low boundaries.\n\nS&P 500 Spot: 7740.11 (07:19 PM IST - Sep 04, 2026) Trigger: Ad-Hoc Run\n\n1. Market Structure & Macro Synthesis:\n- S&P 500 Spot (^GSPC) is trading at 7740.11 (ES Futures: 7745.75 | NQ Futures: 29620.5).\n- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7691.34 | 48H Swing Range: 7611.20 – 7771.48).\n- Intermarket Drivers: VIX at 14.11 (Moderate Volatility (Balanced)) | DXY at 99.15 (Macro Tailwind (Bullish for Equities)) | 10Y Yield at 4.77%.\n- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow closes above 52,000 for first time, S&P 500 and Nasdaq rally as tech gains\n\n2. SMC & Session Liquidity Confluence:\n- Buy-Side Liquidity (BSL): Clustered above PDH (7756.76), Asian High (7755.54), and London High (7765.11).\n- Sell-Side Liquidity (SSL): Concentrated below PDL (7611.20), Asian Low (7744.25), and London Low (7715.11).\n- Active FVGs / OBs: 3 Active FVG(s) & 1 Order Block(s) identified in immediate proximity.\n- Session Sweep Status: Below Asian Low ($7744.25)\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 7732.11 – 7748.11 Index Points.\n- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> 7755.11): Sustained 5m close above 7755.11 clears local supply, targeting 7772.11 and 7795.11.\n- Downside Long-Liquidation Cascade (< 7725.11): Sustained 5m close below 7725.11 triggers stop cascades accelerating toward 7611.20 and 7685.11.\n\n5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 7611.20 rejected with lower wick, followed by 5m close back ABOVE 7616.20. TP: 7755.11 / 7772.11. SL: 7601.20. Risk-Reward: ~1:2.5.\n- BUY Setup 2 (High-Momentum Breakout Long): Sustained 5m/15m close ABOVE 7755.11 with volume confirmation. TP: 7772.11 / 7795.11. SL: 7745.11. Risk-Reward: ~1:3.\n- SELL Setup 1 (Supply OB / PDH Sweep Reversal Short): Rejection at 7772.11 with upper wick, closing 5m candle back BELOW 7767.11. TP: 7755.11 / 7725.11. SL: 7782.11. Risk-Reward: ~1:2.5.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m close BELOW 7725.11. TP: 7611.20 / 7685.11. SL: 7735.11. Risk-Reward: ~1:3."
   },
   {
     "source": "SP500-AI",
