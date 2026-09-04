@@ -696,7 +696,7 @@ window.btcDailyPlanData = [
     "behavior": "[19:15] London Session High / Day High ($78,902.04). Peak expansion ceiling & supply rejection zone.",
     "tp": "78402.1",
     "sl": "79102.0",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
