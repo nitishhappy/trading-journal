@@ -173,9 +173,9 @@ window.btcDailyPlanData = [
 ];
 
 window.btcDailyPlanSummary = [
-{
-    "id": "BTC_20260905_010322",
-    "timestamp": "2026-09-05T01:03:22+05:30",
+  {
+    "id": "BTC_20260904_182500",
+    "timestamp": "2026-09-04T18:25:00+05:30",
     "timeDisplay": "01:03 AM, Sep 05",
     "spot": "79720.39",
     "trigger": "New York Session (US Opening",

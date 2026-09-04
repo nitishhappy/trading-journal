@@ -101,7 +101,7 @@ window.dailyPlanData = [
 ];
 
 window.dailyPlanSummary = [
-{
+  {
     "id": "NIFTY_20260903_144500",
     "timestamp": "2026-09-03T14:45:00+05:30",
     "timeDisplay": "02:45 PM, Sep 03",
