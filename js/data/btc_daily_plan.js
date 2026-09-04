@@ -33,7 +33,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] Prior Day High ($81,391.48) BSL Liquidity Pool. Overhead resting buy stops ceiling; major distribution & sweep target.",
     "tp": "78936.0",
     "sl": "81641.5",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
