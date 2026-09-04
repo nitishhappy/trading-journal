@@ -69,7 +69,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] Asian Session Low ($80,667.94) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.",
     "tp": "79936.0",
     "sl": "80517.9",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -129,6 +129,10 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "source": "BTC-AI",
+    "text": "How can I help you today? Please let me know what you'd like to work on!"
+  },
+  {
     "source": "BTC-AI",
     "text": "Hi! How can I assist you with your projects today? Feel free to share what you'd like to work on."
   },
