@@ -678,7 +678,7 @@ window.btcDailyPlanData = [
     "behavior": "[19:15] Asian Session High ($77,877.19) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.",
     "tp": "78502.1",
     "sl": "78027.2",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -687,7 +687,7 @@ window.btcDailyPlanData = [
     "behavior": "[19:15] Asian Session Low ($76,937.86) SSL Sweep Trigger. Primary Asian accumulation floor & demand sweep shelf.",
     "tp": "79302.1",
     "sl": "76787.9",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
