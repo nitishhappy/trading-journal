@@ -702,15 +702,29 @@ if (viewLevels) {
                         html += `<div class="levels-summary-table-wrap"><table class="levels-summary-table"><thead><tr><th>Scenario Type</th><th>Trigger Condition & Target Expansion</th></tr></thead><tbody>`;
                         lines.forEach(line => {
                             const cleanLine = line.trim().replace(/^[-*]\s+/, '').trim();
-                            const colonIdx = cleanLine.indexOf(':');
-                            if (colonIdx !== -1) {
-                                const type = cleanLine.substring(0, colonIdx).trim().replace(/\*\*/g, '');
-                                const details = cleanLine.substring(colonIdx + 1).trim();
-                                const isBull = /upside|short-covering|squeeze|bullish|buy/i.test(type);
-                                const badgeClass = isBull ? 'badge-buy' : 'badge-sell';
-                                html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 200px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
+                            let type = '';
+                            let details = '';
+
+                            if (cleanLine.startsWith('[') && cleanLine.includes(']')) {
+                                type = cleanLine.substring(1, cleanLine.indexOf(']')).trim();
+                                details = cleanLine.substring(cleanLine.indexOf(']') + 1).replace(/^[:\s-]+/, '').trim();
                             } else {
-                                html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
+                                const colonIdx = cleanLine.indexOf(':');
+                                if (colonIdx !== -1) {
+                                    type = cleanLine.substring(0, colonIdx).trim().replace(/\*\*/g, '');
+                                    details = cleanLine.substring(colonIdx + 1).trim();
+                                } else {
+                                    details = cleanLine;
+                                }
+                            }
+
+                            if (type) {
+                                const isBull = /upside|short-covering|squeeze|bullish|buy/i.test(type);
+                                const isBear = /downside|long-liquidation|cascade|bearish|sell|breakdown/i.test(type);
+                                const badgeClass = isBull ? 'badge-buy' : (isBear ? 'badge-sell' : '');
+                                html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 180px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
+                            } else {
+                                html += `<tr><td colspan="2">${formatInlineHighlights(details)}</td></tr>`;
                             }
                         });
                         html += `</tbody></table></div>`;
@@ -748,10 +762,15 @@ if (viewLevels) {
                             const slMatch = cleanLine.match(/SL:\s*\*?\*?\s*(.*?)(?=(?:\|\s*\*?\*?\s*)?TP:|\.\s*TP:|\s*TP:|$)/i);
                             if (slMatch) sl = slMatch[1].replace(/\*+/g, '').replace(/\.$/, '').trim();
 
-                            const colonIdx = textWithoutTpSl.indexOf(':');
-                            if (colonIdx !== -1) {
-                                setupName = textWithoutTpSl.substring(0, colonIdx).trim().replace(/\*\*/g, '');
-                                entry = textWithoutTpSl.substring(colonIdx + 1).trim();
+                            if (textWithoutTpSl.startsWith('[') && textWithoutTpSl.includes(']')) {
+                                setupName = textWithoutTpSl.substring(1, textWithoutTpSl.indexOf(']')).trim();
+                                entry = textWithoutTpSl.substring(textWithoutTpSl.indexOf(']') + 1).replace(/^[:\s-]+/, '').trim();
+                            } else {
+                                const colonIdx = textWithoutTpSl.indexOf(':');
+                                if (colonIdx !== -1) {
+                                    setupName = textWithoutTpSl.substring(0, colonIdx).trim().replace(/\*\*/g, '');
+                                    entry = textWithoutTpSl.substring(colonIdx + 1).trim();
+                                }
                             }
 
                             if (/BUY|Long|CE/i.test(setupName)) dir = 'BUY';
