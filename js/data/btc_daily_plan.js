@@ -24,7 +24,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M/1H 200 EMA Macro Equilibrium Floor ($79,607.43). High-probability structural pivot & macro trend separator.",
     "tp": "na",
     "sl": "na",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
