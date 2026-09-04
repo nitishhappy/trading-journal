@@ -51,7 +51,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] Prior Day Close ($79,540.07) Intraday Equilibrium Pivot. Day green/red sentiment baseline.",
     "tp": "na",
     "sl": "na",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
