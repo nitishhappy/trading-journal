@@ -96,7 +96,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] Intraday Session VWAP Benchmark ($80,912.49). Institutional average cost anchor & fair value magnet.",
     "tp": "na",
     "sl": "na",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -129,6 +129,15 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "id": "BTC_20260905_002627",
+    "timestamp": "2026-09-05T00:26:27+05:30",
+    "timeDisplay": "12:26 AM, Sep 05",
+    "spot": "",
+    "trigger": "Intraday Tactical Refresh",
+    "source": "BTC-AI",
+    "text": "Error: failed to send message: send failed; already reported to the user: Eligibility check failed: failed to get load code assist response: Post \"https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist\": dial tcp: lookup daily-cloudcode-pa.googleapis.com: no such host"
+  },
+  {
     "id": "BTC_20260904_182500",
     "timestamp": "2026-09-04T18:25:00+05:30",
     "timeDisplay": "06:25 PM, Sep 04",
