@@ -830,15 +830,26 @@ if (viewLevels) {
         summaryPanel.style.display = 'block';
         summaryBody.innerHTML = '';
         
-        // Parse timestamp from text for proper sorting
-        const parseHeaderTime = (text) => {
-            if (!text) return 0;
+        // Parse timestamp for proper sorting (prefers explicit ISO timestamp if present)
+        const parseHeaderTime = (item) => {
+            if (!item) return 0;
+            if (item.timestamp) {
+                const parsedIso = new Date(item.timestamp).getTime();
+                if (!isNaN(parsedIso) && parsedIso > 0) return parsedIso;
+            }
+            const text = item.text || '';
             const timeMatch = text.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*(?:IST)?\s*-\s*([A-Za-z]{3}\s+\d{1,2})(?:,\s*(\d{4}))?/i);
             if (timeMatch) {
                 let timeStr = timeMatch[1];
                 let dateStr = timeMatch[2];
                 let yearStr = timeMatch[3] || new Date().getFullYear();
                 return new Date(`${dateStr} ${yearStr} ${timeStr}`).getTime() || 0;
+            }
+            const isoMatch = text.match(/(\d{4})-(\d{2})-(\d{2})/);
+            if (isoMatch) {
+                const timeOnlyMatch = text.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))/i);
+                const timeStr = timeOnlyMatch ? timeOnlyMatch[1] : '12:00 PM';
+                return new Date(`${isoMatch[1]}-${isoMatch[2]}-${isoMatch[3]} ${timeStr}`).getTime() || 0;
             }
             const fallbackMatch = text.match(/\[(\d{1,2}):(\d{2})\]/);
             if (fallbackMatch) {
@@ -849,9 +860,9 @@ if (viewLevels) {
             return 0;
         };
 
-        // Sort summaries newest first based on their internal timestamps
+        // Sort summaries newest first based on their timestamps
         const sortedSummaryData = [...summaryData].sort((a, b) => {
-            return parseHeaderTime(b.text) - parseHeaderTime(a.text);
+            return parseHeaderTime(b) - parseHeaderTime(a);
         });
 
         sortedSummaryData.forEach((item, index) => {
@@ -873,7 +884,13 @@ if (viewLevels) {
 
             const rawText = item.text || '';
             const firstLine = rawText.split('\n')[0].replace(/:$/, '').trim();
-            const compactPaneTitle = formatCompactPaneHeader(firstLine, window.currentActiveAsset, rawText);
+            let compactPaneTitle = '';
+            if (item.spot && item.timeDisplay && item.trigger) {
+                const assetLabel = (window.currentActiveAsset === 'SP500') ? 'S&P 500' : ((window.currentActiveAsset === 'BTC') ? 'BTC' : ((window.currentActiveAsset === 'GOLD') ? 'Gold' : 'Nifty'));
+                compactPaneTitle = `${assetLabel} : ${item.spot} : ${item.timeDisplay.replace(/\s*,\s*/, ' ,')} : ${item.trigger}`;
+            } else {
+                compactPaneTitle = formatCompactPaneHeader(firstLine, window.currentActiveAsset, rawText);
+            }
             
             const titleEl = document.createElement('span');
             titleEl.className = 'summary-item-title';
