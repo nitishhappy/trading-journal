@@ -60,7 +60,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] Asian Session High ($82,272.00) BSL Probe Level. Watch for Judas swing sweep or short-covering breakout.",
     "tp": "79136.0",
     "sl": "82422.0",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -129,6 +129,10 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "source": "BTC-AI",
+    "text": "Hi! How can I assist you with your projects today? Feel free to share what you'd like to work on."
+  },
+  {
     "source": "BTC-AI",
     "text": "Hello! How can I help you today? Please let me know what task, analysis, or workflow you'd like to work on."
   },
