@@ -78,7 +78,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] London Session High ($81,405.38) Liquidity Shelf. European expansion peak & supply rejection zone.",
     "tp": "79036.0",
     "sl": "81605.4",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -129,6 +129,10 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "source": "BTC-AI",
+    "text": "How can I help you today? Please let me know what you would like to work on in **Utilities** or **Trading Journal**, or share your query!"
+  },
+  {
     "source": "BTC-AI",
     "text": "How can I help you today? Please let me know what you'd like to work on!"
   },
