@@ -587,7 +587,7 @@ window.goldDailyPlanData = [
 ];
 
 window.goldDailyPlanSummary = [
-  {
+{
     "id": "GOLD_20260904_200200",
     "timestamp": "2026-09-04T20:02:00+05:30",
     "timeDisplay": "08:02 PM, Sep 04",

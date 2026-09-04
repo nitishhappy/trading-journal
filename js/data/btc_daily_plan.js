@@ -123,7 +123,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] 15M Bearish Supply Fair Value Gap Top ($81,129.00). Imbalance mitigation zone.",
     "tp": "80729.0",
     "sl": "81279.0",
-    "status": "na"
+    "status": "triggered"
   }
 ];
 
