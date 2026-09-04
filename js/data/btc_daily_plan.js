@@ -42,7 +42,7 @@ window.btcDailyPlanData = [
     "behavior": "[18:25] Prior Day Low ($76,937.86) SSL Liquidity Base. Major sell stop cluster; institutional demand sweep shelf.",
     "tp": "80136.0",
     "sl": "76687.9",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
