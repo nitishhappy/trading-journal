@@ -1,7 +1,7 @@
 window.sp500DailyPlanData = [
 {
     "source": "SP500-AI",
-    "timestamp": "2026-09-05T19:31:00+05:30",
+    "timestamp": "2026-09-05T19:31:25+05:30",
     "timeDisplay": "07:31 PM, Sep 05",
     "price": "7710.60-7726.60",
     "bias": "neutral",
@@ -12,7 +12,7 @@ window.sp500DailyPlanData = [
   },
   {
     "source": "SP500-AI",
-    "timestamp": "2026-09-05T19:31:00+05:30",
+    "timestamp": "2026-09-05T19:31:25+05:30",
     "timeDisplay": "07:31 PM, Sep 05",
     "price": "7733.60",
     "bias": "bullish",
@@ -23,7 +23,7 @@ window.sp500DailyPlanData = [
   },
   {
     "source": "SP500-AI",
-    "timestamp": "2026-09-05T19:31:00+05:30",
+    "timestamp": "2026-09-05T19:31:25+05:30",
     "timeDisplay": "07:31 PM, Sep 05",
     "price": "7756.76",
     "bias": "bearish",
@@ -34,7 +34,7 @@ window.sp500DailyPlanData = [
   },
   {
     "source": "SP500-AI",
-    "timestamp": "2026-09-05T19:31:00+05:30",
+    "timestamp": "2026-09-05T19:31:25+05:30",
     "timeDisplay": "07:31 PM, Sep 05",
     "price": "7703.60",
     "bias": "bearish",
@@ -45,7 +45,7 @@ window.sp500DailyPlanData = [
   },
   {
     "source": "SP500-AI",
-    "timestamp": "2026-09-05T19:31:00+05:30",
+    "timestamp": "2026-09-05T19:31:25+05:30",
     "timeDisplay": "07:31 PM, Sep 05",
     "price": "7611.20",
     "bias": "bullish",
@@ -58,8 +58,8 @@ window.sp500DailyPlanData = [
 
 window.sp500DailyPlanSummary = [
 {
-    "id": "SP500_20260905_193100",
-    "timestamp": "2026-09-05T19:31:00+05:30",
+    "id": "SP500_20260905_193125",
+    "timestamp": "2026-09-05T19:31:25+05:30",
     "timeDisplay": "07:31 PM, Sep 05",
     "spot": "7718.60",
     "trigger": "Ad-Hoc Run",
