@@ -1,44 +1,44 @@
 window.dailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-09-05T14:30:30+05:30",
-    "timeDisplay": "02:30 PM, Sep 05",
+    "timestamp": "2026-09-05T14:58:03+05:30",
+    "timeDisplay": "02:58 PM, Sep 05",
     "price": "24005",
     "bias": "bullish",
-    "behavior": "[SAT 14:30] Explosive Breakout / Supply Wall: [B2] Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
+    "behavior": "[SAT 14:58] Explosive Breakout / Supply Wall: [B2] Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
     "tp": "24,080 / 24,140",
     "sl": "23,960",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-05T14:30:30+05:30",
-    "timeDisplay": "02:30 PM, Sep 05",
+    "timestamp": "2026-09-05T14:58:03+05:30",
+    "timeDisplay": "02:58 PM, Sep 05",
     "price": "23980",
     "bias": "bearish",
-    "behavior": "[SAT 14:30] Resistance / Chop High: [S1] Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
+    "behavior": "[SAT 14:58] Resistance / Chop High: [S1] Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
     "tp": "23,890 / 23,850",
     "sl": "24,025",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-05T14:30:30+05:30",
-    "timeDisplay": "02:30 PM, Sep 05",
+    "timestamp": "2026-09-05T14:58:03+05:30",
+    "timeDisplay": "02:58 PM, Sep 05",
     "price": "23910",
     "bias": "bullish",
-    "behavior": "[SAT 14:30] Support / Pivot Floor: [B1] Intraday pivot & lower value area boundary; reclaim level for SFP longs following a sweep below 23,870",
+    "behavior": "[SAT 14:58] Support / Pivot Floor: [B1] Intraday pivot & lower value area boundary; reclaim level for SFP longs following a sweep below 23,870",
     "tp": "23,980 / 24,020",
     "sl": "23,850",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-05T14:30:30+05:30",
-    "timeDisplay": "02:30 PM, Sep 05",
+    "timestamp": "2026-09-05T14:58:03+05:30",
+    "timeDisplay": "02:58 PM, Sep 05",
     "price": "23870",
     "bias": "bearish",
-    "behavior": "[SAT 14:30] Explosive Breakdown / Demand Shelf: [S2] Put writer defense floor; sustained 5m candle close below triggers long liquidation cascade",
+    "behavior": "[SAT 14:58] Explosive Breakdown / Demand Shelf: [S2] Put writer defense floor; sustained 5m candle close below triggers long liquidation cascade",
     "tp": "23,800 / 23,730",
     "sl": "23,915",
     "status": "na"
@@ -182,9 +182,9 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
-    "id": "NIFTY_20260905_143030",
-    "timestamp": "2026-09-05T14:30:30+05:30",
-    "timeDisplay": "02:30 PM, Sep 05",
+    "id": "NIFTY_20260905_145803",
+    "timestamp": "2026-09-05T14:58:03+05:30",
+    "timeDisplay": "02:58 PM, Sep 05",
     "spot": "0",
     "trigger": "Manual Ad-Hoc Update` strictly adhering to the prompt specification.",
     "source": "AI Intraday Briefing",
