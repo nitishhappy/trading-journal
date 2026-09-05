@@ -1,6 +1,42 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "price": "24005",
+    "bias": "bullish",
+    "behavior": "[09:54] Explosive Breakout / Supply Wall: Session high & 24,000 Call writer defense; sustained 5m close above triggers short-covering squeeze",
+    "tp": "24,080 / 24,140",
+    "sl": "23,960",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23980",
+    "bias": "bearish",
+    "behavior": "[09:54] Resistance / Chop High: Upper boundary of consolidation chop zone; supply rejection zone",
+    "tp": "23,890",
+    "sl": "24,025",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23910",
+    "bias": "bullish",
+    "behavior": "[09:54] Support / Pivot Floor: Intraday pivot & lower value area boundary; reclaim level for SFP longs",
+    "tp": "23,980",
+    "sl": "23,850",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "price": "23870",
+    "bias": "bearish",
+    "behavior": "[09:54] Explosive Breakdown / Demand Shelf: Put writer defense floor; 5m close below triggers long liquidation cascade",
+    "tp": "23,800 / 23,730",
+    "sl": "23,915",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "price": "79653.24",
     "bias": "neutral",
     "behavior": "[08:08] Prior Day Close: $79,540.07: Live Spot: $79,653.24). During Asian Session (Tokyo/Sydney) (Accumulation / Range-Bound Liquidity Building), intermarket dynamics (DXY $99.157 (Bullish DXY (Headwind for BTC)) and S&P 500 Futures $7722.0) combined with crypto-native context (Funding Rate is 0.0065% (neutral); Fear & Greed Index: 73 (Greed); CME Gap inactive at 79830.0 (above, size: 176.76)) guide structure. Spot is inside previous day range",
@@ -138,6 +174,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260905_095424",
+    "timestamp": "2026-09-05T09:54:24+05:30",
+    "timeDisplay": "09:54 AM, Sep 05",
+    "spot": "0",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:51 AM IST - Sep 05, 2026 | Spot: 0 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,910 – 23,980 (Value Area Equilibrium / 23,950 Straddle Compression).\n- Context: Spot is anchored near the Friday close (23,897.70), consolidating in a low-momentum equilibrium pocket below the 23,980 supply shelf. Both 23,900 and 24,000 strikes exhibit balanced call and put open interest, creating a high-decay neutral corridor with frequent false boundary wicks.\n- Directives: Refrain from taking naked option buying entries inside the 23,910–23,980 band. Theta erosion is maximal inside this zone; wait for confirmed liquidity sweeps or sustained boundary breakouts.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> 24,005 Spot): A sustained 5m/15m candle close above the 24,005 high clears the 24,000 Call Writer supply wall, forcing aggressive intraday short covering and accelerating price rapidly toward 24,080 and 24,140.\n- Downside Long-Liquidation Cascade (< 23,870 Spot): A sustained 5m candle close below the 23,870 demand shelf breaches 23,900 Put Writer defense, triggering stop cascades and rapid long liquidation toward 23,800 and 23,730.\n\n5. 5-Min / 15-Min Action Plan:\n- BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP / Turtle Soup): Sweep below 23,870 rejected with a lower absorption wick, followed by a 5m candle close back ABOVE 23,910 with expanding volume. | TP: 23,980 / 24,020 | SL: 23,850.\n- BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m/15m candle close ABOVE 24,005 with institutional volume expansion confirming call writer trap. | TP: 24,080 / 24,140 | SL: 23,960.\n- SELL Setup 1 (Supply Wall Rejection Fade Short): Corrective relief bounce into 23,980–24,005 rejected with upper wick, confirmed by a 5m candle close back BELOW 23,940. | TP: 23,890 / 23,850 | SL: 24,025.\n- SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m candle close BELOW 23,870 accompanied by futures volume expansion, confirming institutional distribution. | TP: 23,800 / 23,730 | SL: 23,915."
+  },
+  {
     "id": "NIFTY_20260905_081735",
     "timestamp": "2026-09-05T08:17:35+05:30",
     "timeDisplay": "08:17 AM, Sep 05",
