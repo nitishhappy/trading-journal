@@ -679,9 +679,13 @@ if (viewLevels) {
                             if (colonIdx !== -1) {
                                 const type = cleanLine.substring(0, colonIdx).trim().replace(/\*\*/g, '');
                                 const details = cleanLine.substring(colonIdx + 1).trim();
-                                html += `<tr><td style="font-weight: 700; color: var(--accent); min-width: 110px; max-width: 200px; word-break: break-word;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
+                                if (!details) {
+                                    html += `<tr><td colspan="2" style="font-weight: 700; color: #64748b; background: rgba(30, 41, 59, 0.4); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px;">${escapeHtml(type)}</td></tr>`;
+                                } else {
+                                    html += `<tr><td style="font-weight: 700; color: var(--accent); min-width: 110px; max-width: 200px; word-break: break-word;">${escapeHtml(type)}</td><td>${formatInlineHighlights(details)}</td></tr>`;
+                                }
                             } else {
-                                html += `<tr><td colspan="2">${formatInlineHighlights(cleanLine)}</td></tr>`;
+                                html += `<tr><td colspan="2" style="font-weight: 700; color: #64748b; background: rgba(30, 41, 59, 0.4); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px;">${escapeHtml(cleanLine)}</td></tr>`;
                             }
                         });
                         html += `</tbody></table></div>`;
@@ -724,7 +728,7 @@ if (viewLevels) {
                                 const badgeClass = isBull ? 'badge-buy' : (isBear ? 'badge-sell' : '');
                                 html += `<tr><td style="font-weight: 700; min-width: 110px; max-width: 180px; word-break: break-word;"><span class="${badgeClass}">${escapeHtml(type)}</span></td><td>${formatInlineHighlights(details)}</td></tr>`;
                             } else {
-                                html += `<tr><td colspan="2">${formatInlineHighlights(details)}</td></tr>`;
+                                html += `<tr><td colspan="2" style="font-weight: 700; color: #64748b; background: rgba(30, 41, 59, 0.4); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px;">${formatInlineHighlights(details)}</td></tr>`;
                             }
                         });
                         html += `</tbody></table></div>`;
@@ -770,21 +774,27 @@ if (viewLevels) {
                                 if (colonIdx !== -1) {
                                     setupName = textWithoutTpSl.substring(0, colonIdx).trim().replace(/\*\*/g, '');
                                     entry = textWithoutTpSl.substring(colonIdx + 1).trim();
+                                } else {
+                                    entry = '';
                                 }
                             }
 
                             if (/BUY|Long|CE/i.test(setupName)) dir = 'BUY';
                             else if (/SELL|Short|PE/i.test(setupName)) dir = 'SELL';
 
-                            const badgeClass = dir === 'BUY' ? 'badge-buy' : (dir === 'SELL' ? 'badge-sell' : '');
+                            const badgeClass = dir === 'BUY' ? 'badge-buy' : (dir === 'SELL' ? 'badge-sell' : 'badge-neutral');
 
-                            html += `<tr>`;
-                            html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word;">${escapeHtml(setupName)}</td>`;
-                            html += `<td><span class="${badgeClass}">${dir}</span></td>`;
-                            html += `<td>${formatInlineHighlights(entry)}</td>`;
-                            html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;
-                            html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e; white-space: nowrap;">${formatInlineHighlights(sl)}</td>`;
-                            html += `</tr>`;
+                            if (!entry && tp === '-' && sl === '-') {
+                                html += `<tr><td colspan="5" style="font-weight: 700; color: #64748b; background: rgba(30, 41, 59, 0.4); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px;">${escapeHtml(setupName)}</td></tr>`;
+                            } else {
+                                html += `<tr>`;
+                                html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word; ${(!entry || entry.trim() === '') ? 'color: #64748b;' : ''}">${escapeHtml(setupName)}</td>`;
+                                html += `<td><span class="${badgeClass}">${dir}</span></td>`;
+                                html += `<td>${formatInlineHighlights(entry)}</td>`;
+                                html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;
+                                html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e; white-space: nowrap;">${formatInlineHighlights(sl)}</td>`;
+                                html += `</tr>`;
+                            }
                         });
                         html += `</tbody></table></div>`;
                     } else {
