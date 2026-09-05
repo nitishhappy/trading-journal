@@ -1769,7 +1769,7 @@ if (viewLevels) {
                 const zone = document.createElement('div');
                 zone.style.position = 'absolute';
                 zone.style.top = '10px';
-                zone.style.left = '0';
+                zone.style.left = '85px';
                 zone.style.right = '0';
                 zone.style.height = '60px'; 
                 zone.style.backgroundColor = lineBg.replace('0.4', '0.1');
@@ -1782,7 +1782,7 @@ if (viewLevels) {
                 const line = document.createElement('div');
                 line.style.position = 'absolute';
                 line.style.top = '16px'; 
-                line.style.left = '0';
+                line.style.left = '85px';
                 line.style.right = '0';
                 line.style.height = '2px';
                 line.style.backgroundColor = lineBg;
@@ -1795,14 +1795,16 @@ if (viewLevels) {
             const axisLblHigh = document.createElement('div');
             axisLblHigh.style.position = 'absolute';
             axisLblHigh.style.top = '16px';
-            axisLblHigh.style.left = '-75px';
-            axisLblHigh.style.width = '65px';
+            axisLblHigh.style.left = '5px';
+            axisLblHigh.style.width = '75px';
             axisLblHigh.style.textAlign = 'right';
             axisLblHigh.style.transform = 'translateY(-50%)';
             axisLblHigh.style.fontFamily = "'JetBrains Mono', monospace";
             axisLblHigh.style.fontSize = '0.85rem';
             axisLblHigh.style.fontWeight = 'bold';
             axisLblHigh.style.color = mainColor;
+            axisLblHigh.style.whiteSpace = 'nowrap';
+            axisLblHigh.style.zIndex = '3';
             axisLblHigh.innerText = price;
             row.appendChild(axisLblHigh);
 
@@ -1810,13 +1812,15 @@ if (viewLevels) {
                 const axisLblLow = document.createElement('div');
                 axisLblLow.style.position = 'absolute';
                 axisLblLow.style.top = '70px'; 
-                axisLblLow.style.left = '-75px';
-                axisLblLow.style.width = '65px';
+                axisLblLow.style.left = '5px';
+                axisLblLow.style.width = '75px';
                 axisLblLow.style.textAlign = 'right';
                 axisLblLow.style.transform = 'translateY(-50%)';
                 axisLblLow.style.fontFamily = "'JetBrains Mono', monospace";
                 axisLblLow.style.fontSize = '0.85rem';
                 axisLblLow.style.color = 'var(--text-dim)';
+                axisLblLow.style.whiteSpace = 'nowrap';
+                axisLblLow.style.zIndex = '3';
                 axisLblLow.innerText = pLow;
                 row.appendChild(axisLblLow);
             }
@@ -1824,7 +1828,7 @@ if (viewLevels) {
             const stack = document.createElement('div');
             stack.style.position = 'relative';
             stack.style.zIndex = '10';
-            stack.style.marginLeft = '20px'; 
+            stack.style.marginLeft = '105px'; 
             stack.style.display = 'flex';
             stack.style.flexDirection = 'column';
             stack.style.gap = '10px';

@@ -4695,8 +4695,7 @@ button, a, input, select, textarea, .collapsible-header, .tab, .main-tab, .dash-
   background: var(--bg) !important;
 }
 
-.panel.is-maximized > .collapsible-body,
-.panel.is-maximized > #visual-chart-area {
+.panel.is-maximized > .collapsible-body {
   flex-grow: 1 !important;
   display: block !important;
   width: 100% !important;
@@ -4705,6 +4704,19 @@ button, a, input, select, textarea, .collapsible-header, .tab, .main-tab, .dash-
   overflow-y: auto;
   margin-top: 0 !important;
   padding: 1rem !important;
+}
+
+.panel.is-maximized > #visual-chart-area {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2rem !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: auto;
+  margin-top: 0 !important;
+  padding: 1rem 0.5rem 1rem 0 !important;
 }
 
 /* Ensure the TV container takes full remaining height when maximized */
