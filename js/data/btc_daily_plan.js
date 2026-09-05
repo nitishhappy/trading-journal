@@ -6,7 +6,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Dynamic 9 EMA Shelf ($79,664.15). Primary short-term momentum trail & intraday pullback defense zone.",
     "tp": "80084.6",
     "sl": "79514.2",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -60,7 +60,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] Intraday Session VWAP Benchmark ($79,672.74). Institutional average cost anchor & fair value magnet.",
     "tp": "na",
     "sl": "na",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -69,7 +69,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] Intraday High-Volume Point of Control (POC) ($79,625.08). Heavy institutional trading volume node.",
     "tp": "na",
     "sl": "na",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -105,7 +105,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bullish Demand Fair Value Gap Top ($79,730.75). Imbalance mitigation zone.",
     "tp": "80130.8",
     "sl": "79580.8",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -114,7 +114,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bearish Supply Fair Value Gap Bottom ($79,650.42). Imbalance mitigation zone.",
     "tp": "79250.4",
     "sl": "79800.4",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -123,7 +123,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bearish Supply Fair Value Gap Top ($79,730.75). Imbalance mitigation zone.",
     "tp": "79330.8",
     "sl": "79880.8",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -132,7 +132,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bearish Supply Fair Value Gap Bottom ($79,591.49). Imbalance mitigation zone.",
     "tp": "79191.5",
     "sl": "79741.5",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -141,7 +141,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bearish Supply Fair Value Gap Top ($79,618.60). Imbalance mitigation zone.",
     "tp": "79218.6",
     "sl": "79768.6",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -168,7 +168,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bullish Demand Fair Value Gap Bottom ($79,668.27). Imbalance mitigation zone.",
     "tp": "80068.3",
     "sl": "79518.3",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -177,7 +177,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bullish Demand Fair Value Gap Top ($79,701.08). Imbalance mitigation zone.",
     "tp": "80101.1",
     "sl": "79551.1",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -186,7 +186,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bearish Supply Fair Value Gap Bottom ($79,694.48). Imbalance mitigation zone.",
     "tp": "79294.5",
     "sl": "79844.5",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -195,7 +195,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] 15M Bearish Supply Fair Value Gap Top ($79,701.08). Imbalance mitigation zone.",
     "tp": "79301.1",
     "sl": "79851.1",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
@@ -204,7 +204,7 @@ window.btcDailyPlanData = [
     "behavior": "[01:07] CME BTC Futures Gap Magnet ($80,075.00). High-probability >80% historical gap fill magnet.",
     "tp": "80575.0",
     "sl": "79875.0",
-    "status": "na"
+    "status": "triggered"
   }
 ];
 
