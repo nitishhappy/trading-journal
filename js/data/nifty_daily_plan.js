@@ -1,11 +1,11 @@
 window.dailyPlanData = [
-{
+  {
     "source": "AI",
     "timestamp": "2026-09-06T12:52:45+05:30",
     "timeDisplay": "12:52 PM, Sep 06",
     "price": "24005",
     "bias": "bullish",
-    "behavior": "[SUN 12:52] : [B2]",
+    "behavior": "[SUN 12:52] [B2]: Sustained 5m candle close ABOVE 24,005 with active futures volume confirming absorption",
     "tp": "24,080 / 24,140",
     "sl": "23,960",
     "status": "na"
@@ -16,7 +16,7 @@ window.dailyPlanData = [
     "timeDisplay": "12:52 PM, Sep 06",
     "price": "23980",
     "bias": "bearish",
-    "behavior": "[SUN 12:52] : [S1]",
+    "behavior": "[SUN 12:52] [S1]: Corrective relief bounce into 23,980–24,005 upper value area boundary rejected with upper exhaustion wick",
     "tp": "23,890 / 23,850",
     "sl": "24,025",
     "status": "na"
@@ -27,7 +27,7 @@ window.dailyPlanData = [
     "timeDisplay": "12:52 PM, Sep 06",
     "price": "23910",
     "bias": "bullish",
-    "behavior": "[SUN 12:52] : [B1]",
+    "behavior": "[SUN 12:52] [B1]: Sweep below 23,870 rejected with lower absorption wick, followed by confirmed 5m close back ABOVE 23,910",
     "tp": "23,980 / 24,020",
     "sl": "23,850",
     "status": "na"
@@ -38,7 +38,7 @@ window.dailyPlanData = [
     "timeDisplay": "12:52 PM, Sep 06",
     "price": "23870",
     "bias": "bearish",
-    "behavior": "[SUN 12:52] : [S2]",
+    "behavior": "[SUN 12:52] [S2]: Sustained 5m candle close BELOW 23,870 accompanied by expanding red futures volume confirming distribution",
     "tp": "23,800 / 23,730",
     "sl": "23,915",
     "status": "na"
@@ -49,7 +49,7 @@ window.dailyPlanData = [
     "timeDisplay": "04:46 PM, Sep 05",
     "price": "24015",
     "bias": "bullish",
-    "behavior": "[SAT 16:46] Explosive Breakout / Supply Wall: [B2] Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
+    "behavior": "[SAT 16:46] [B2]: Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
     "tp": "24,080 / 24,140",
     "sl": "23,960",
     "status": "na"
@@ -60,7 +60,7 @@ window.dailyPlanData = [
     "timeDisplay": "04:46 PM, Sep 05",
     "price": "23990",
     "bias": "bearish",
-    "behavior": "[SAT 16:46] Resistance / Chop High: [S1] Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
+    "behavior": "[SAT 16:46] [S1]: Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
     "tp": "23,890 / 23,850",
     "sl": "24,025",
     "status": "na"

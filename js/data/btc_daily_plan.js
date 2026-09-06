@@ -30,7 +30,7 @@ window.btcDailyPlanData = [
     "behavior": "[SUN 12:53] : [B2]",
     "tp": "80,113.48 / 80,325.00",
     "sl": "79,660.00",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "AI",
