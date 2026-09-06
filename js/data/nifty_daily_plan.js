@@ -1,44 +1,44 @@
 window.dailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-09-06T23:47:40+05:30",
-    "timeDisplay": "11:47 PM, Sep 06",
+    "timestamp": "2026-09-06T23:48:51+05:30",
+    "timeDisplay": "11:48 PM, Sep 06",
     "price": "24005",
     "bias": "bullish",
-    "behavior": "[SUN 23:47] [B2]: Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
+    "behavior": "[SUN 23:48] [B2]: Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
     "tp": "24,080 / 24,140",
     "sl": "23,960",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-06T23:47:40+05:30",
-    "timeDisplay": "11:47 PM, Sep 06",
+    "timestamp": "2026-09-06T23:48:51+05:30",
+    "timeDisplay": "11:48 PM, Sep 06",
     "price": "23980",
     "bias": "bearish",
-    "behavior": "[SUN 23:47] [S1]: Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
+    "behavior": "[SUN 23:48] [S1]: Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
     "tp": "23,890 / 23,850",
     "sl": "24,025",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-06T23:47:40+05:30",
-    "timeDisplay": "11:47 PM, Sep 06",
+    "timestamp": "2026-09-06T23:48:51+05:30",
+    "timeDisplay": "11:48 PM, Sep 06",
     "price": "23910",
     "bias": "bullish",
-    "behavior": "[SUN 23:47] [B1]: Intraday pivot & lower value area boundary; reclaim level for SFP longs following a sweep below 23,870",
+    "behavior": "[SUN 23:48] [B1]: Intraday pivot & lower value area boundary; reclaim level for SFP longs following a sweep below 23,870",
     "tp": "23,980 / 24,020",
     "sl": "23,850",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-06T23:47:40+05:30",
-    "timeDisplay": "11:47 PM, Sep 06",
+    "timestamp": "2026-09-06T23:48:51+05:30",
+    "timeDisplay": "11:48 PM, Sep 06",
     "price": "23870",
     "bias": "bearish",
-    "behavior": "[SUN 23:47] [S2]: Put writer defense floor; sustained 5m candle close below triggers long liquidation cascade",
+    "behavior": "[SUN 23:48] [S2]: Put writer defense floor; sustained 5m candle close below triggers long liquidation cascade",
     "tp": "23,800 / 23,730",
     "sl": "23,915",
     "status": "na"
@@ -69,6 +69,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260906_234851",
+    "timestamp": "2026-09-06T23:48:51+05:30",
+    "timeDisplay": "11:48 PM, Sep 06",
+    "spot": "0",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:47 PM IST - Sep 06, 2026 | Spot: 0 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,910.00 – 23,980.00 (70-point Value Area Consolidation / 23,950 Straddle Equilibrium).\n- Rationale: Heavy concentration of 23,950 Straddle open interest creates aggressive bidirectional premium erosion, false boundary wicks, and rapid mean-reversion pullbacks. With the spot index calibrated to Friday's close (23,897.70) in weekend state, trading inside this corridor carries high chop risk for option buyers.\n- Directive: STRICT NO-TRADE ZONE for naked option buying. Stand aside until an intentional liquidity sweep occurs or price breaks cleanly outside this 70-point band with confirming volume.\n\n4. High Momentum / Explosive Zones:\n- [Upside Short-Covering Squeeze] ([Sustained 5m close ABOVE 24,005]): Triggers rapid stop-run acceleration and short-covering panic among 24,000 Call writers, driving an explosive momentum rally targeting 24,080 and 24,140.\n- [Downside Long-Liquidation Cascade] ([Sustained 5m close BELOW 23,870]): Breaches the 23,900 Put writers' defense floor and Friday session low liquidity shelf, unlocking an aggressive long-unwinding cascade targeting 23,800 and 23,730.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP): Sweep below 23,870 rejected with lower absorption wick, followed by a confirmed 5m candle close back ABOVE 23,910 with expanding futures volume confirming trapped breakdown sellers. | TP: 23,980 / 24,020 | SL: 23,850 | 💡 50-pt Next Wk Call Spread: Buy 23,900 CE + Sell 23,950 CE (Next Wk) | Spread R:R: ~1.75:1 | Max Risk: ~8.0% | TP1 Gain: +19.6% | TP2 Gain: +35.2%.\n- [B2] BUY Setup 2 (High-Momentum Short-Covering Breakout Long): Sustained 5m candle close ABOVE 24,005 accompanied by expanding active Nifty Futures volume confirming institutional absorption of 24,000 Call resistance. | TP: 24,080 / 24,140 | SL: 23,960 | 💡 50-pt Next Wk Call Spread: Buy 24,000 CE + Sell 24,050 CE (Next Wk) | Spread R:R: ~2.50:1 | Max Risk: ~7.8% | TP1 Gain: +19.6% | TP2 Gain: +35.2%.\n- [S1] SELL Setup 1 (Supply Wall Rejection Fade Short): Corrective relief bounce into the 23,980–24,005 upper value area boundary rejected with an upper exhaustion wick, followed by a confirmed 5m candle close back BELOW 23,940. | TP: 23,890 / 23,850 | SL: 24,025 | 💡 50-pt Next Wk Put Spread: Buy 23,950 PE + Sell 23,900 PE (Next Wk) | Spread R:R: ~0.88:1 | Max Risk: ~9.3% | TP1 Gain: +12.5% | TP2 Gain: +25.0%.\n- [S2] SELL Setup 2 (Demand Floor Breakdown Continuation Short): Sustained 5m candle close BELOW 23,870 accompanied by expanding red futures volume, confirming true institutional distribution through the put writer floor. | TP: 23,800 / 23,730 | SL: 23,915 | 💡 50-pt Next Wk Put Spread: Buy 23,850 PE + Sell 23,800 PE (Next Wk) | Spread R:R: ~2.33:1 | Max Risk: ~8.2% | TP1 Gain: +19.1% | TP2 Gain: +34.5%."
+  },
+  {
     "id": "NIFTY_20260906_234740",
     "timestamp": "2026-09-06T23:47:40+05:30",
     "timeDisplay": "11:47 PM, Sep 06",
