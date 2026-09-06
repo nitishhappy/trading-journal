@@ -41,7 +41,7 @@ window.btcDailyPlanData = [
     "behavior": "[SUN 11:46] Support / Macro 200 EMA: [KB3] 15M/1H 200 EMA macro equilibrium baseline & structural bull/bear dividing floor",
     "tp": "80,050.00 / 80,300.00",
     "sl": "79,550.00",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "AI",
@@ -129,7 +129,7 @@ window.btcDailyPlanData = [
     "behavior": "[SUN 11:40] Support / Macro 200 EMA: [KB3] 15M/1H 200 EMA macro equilibrium baseline & structural bull/bear dividing floor",
     "tp": "80,050.00 / 80,300.00",
     "sl": "79,550.00",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "BTC-AI",
