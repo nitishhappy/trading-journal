@@ -5,7 +5,7 @@ window.dailyPlanData = [
     "timeDisplay": "11:57 AM, Sep 06",
     "price": "24005",
     "bias": "bullish",
-    "behavior": "[SUN 11:57] Explosive Breakout / Supply Wall: [B2] Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
+    "behavior": "[SUN 11:57] : [B2]",
     "tp": "24,080 / 24,140",
     "sl": "23,960",
     "status": "na"
@@ -16,7 +16,7 @@ window.dailyPlanData = [
     "timeDisplay": "11:57 AM, Sep 06",
     "price": "23980",
     "bias": "bearish",
-    "behavior": "[SUN 11:57] Resistance / Chop High: [S1] Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
+    "behavior": "[SUN 11:57] : [S1]",
     "tp": "23,890 / 23,850",
     "sl": "24,025",
     "status": "na"
@@ -27,7 +27,7 @@ window.dailyPlanData = [
     "timeDisplay": "11:57 AM, Sep 06",
     "price": "23910",
     "bias": "bullish",
-    "behavior": "[SUN 11:57] Support / Pivot Floor: [B1] Intraday pivot & lower value area boundary; reclaim level for SFP longs following a sweep below 23,870",
+    "behavior": "[SUN 11:57] : [B1]",
     "tp": "23,980 / 24,020",
     "sl": "23,850",
     "status": "na"
@@ -38,7 +38,7 @@ window.dailyPlanData = [
     "timeDisplay": "11:57 AM, Sep 06",
     "price": "23870",
     "bias": "bearish",
-    "behavior": "[SUN 11:57] Explosive Breakdown / Demand Shelf: [S2] Put writer defense floor; sustained 5m candle close below triggers long liquidation cascade",
+    "behavior": "[SUN 11:57] : [S2]",
     "tp": "23,800 / 23,730",
     "sl": "23,915",
     "status": "na"

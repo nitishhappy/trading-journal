@@ -5,7 +5,7 @@ window.sp500DailyPlanData = [
     "timeDisplay": "11:39 AM, Sep 06",
     "price": "7710.60-7726.60",
     "bias": "neutral",
-    "behavior": "[11:39] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
+    "behavior": "[SUN 11:39] Live Intraday Chop / No-Trade Zone. 50% Equilibrium box; stay flat to avoid rotational whipsaws.",
     "tp": "na",
     "sl": "na",
     "status": "na"
@@ -16,7 +16,7 @@ window.sp500DailyPlanData = [
     "timeDisplay": "11:39 AM, Sep 06",
     "price": "7733.60",
     "bias": "bullish",
-    "behavior": "[11:39] [SP_B2] High-Momentum BSL Breakout Trigger: Sustained 5m close above 7733.60 targets 7756.76 and 7773.60.",
+    "behavior": "[SUN 11:39] [SP_B2] High-Momentum BSL Breakout Trigger: Sustained 5m close above 7733.60 targets 7756.76 and 7773.60.",
     "tp": "7756.76",
     "sl": "7723.60",
     "status": "na"
@@ -27,7 +27,7 @@ window.sp500DailyPlanData = [
     "timeDisplay": "11:39 AM, Sep 06",
     "price": "7756.76",
     "bias": "bearish",
-    "behavior": "[11:39] [SP_S1] Overhead Supply OB / PDH Liquidity Ceiling: Watch for SFP sweep rejection.",
+    "behavior": "[SUN 11:39] [SP_S1] Overhead Supply OB / PDH Liquidity Ceiling: Watch for SFP sweep rejection.",
     "tp": "7733.60",
     "sl": "7766.76",
     "status": "na"
@@ -38,7 +38,7 @@ window.sp500DailyPlanData = [
     "timeDisplay": "11:39 AM, Sep 06",
     "price": "7703.60",
     "bias": "bearish",
-    "behavior": "[11:39] [SP_S2] Downside Long-Liquidation Cascade Trigger: Sustained 5m close below 7703.60 targets 7611.20 and 7663.60.",
+    "behavior": "[SUN 11:39] [SP_S2] Downside Long-Liquidation Cascade Trigger: Sustained 5m close below 7703.60 targets 7611.20 and 7663.60.",
     "tp": "7611.20",
     "sl": "7713.60",
     "status": "na"
@@ -49,7 +49,7 @@ window.sp500DailyPlanData = [
     "timeDisplay": "11:39 AM, Sep 06",
     "price": "7611.20",
     "bias": "bullish",
-    "behavior": "[11:39] [SP_B1] Demand OB Floor & SSL Sweep Zone: Look for lower-wick rejection absorption.",
+    "behavior": "[SUN 11:39] [SP_B1] Demand OB Floor & SSL Sweep Zone: Look for lower-wick rejection absorption.",
     "tp": "7703.60",
     "sl": "7601.20",
     "status": "na"
