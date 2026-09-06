@@ -787,12 +787,30 @@ if (viewLevels) {
                             if (!entry && tp === '-' && sl === '-') {
                                 html += `<tr><td colspan="5" style="font-weight: 700; color: #64748b; background: rgba(30, 41, 59, 0.4); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px;">${escapeHtml(setupName)}</td></tr>`;
                             } else {
+                                let nakedSl = sl;
+                                let spreadInfo = '';
+                                if (sl.includes('💡')) {
+                                    const idx = sl.indexOf('💡');
+                                    nakedSl = sl.substring(0, idx).replace(/[|\s]+$/, '').trim();
+                                    spreadInfo = sl.substring(idx).trim();
+                                } else if (sl.includes('|')) {
+                                    const idx = sl.indexOf('|');
+                                    nakedSl = sl.substring(0, idx).trim();
+                                    spreadInfo = sl.substring(idx + 1).trim();
+                                }
+
                                 html += `<tr>`;
-                                html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 110px; max-width: 220px; word-break: break-word; ${(!entry || entry.trim() === '') ? 'color: #64748b;' : ''}">${escapeHtml(setupName)}</td>`;
-                                html += `<td><span class="${badgeClass}">${dir}</span></td>`;
-                                html += `<td>${formatInlineHighlights(entry)}</td>`;
-                                html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap;">${formatInlineHighlights(tp)}</td>`;
-                                html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e; white-space: nowrap;">${formatInlineHighlights(sl)}</td>`;
+                                html += `<td style="font-weight: 700; font-size: 0.82rem; min-width: 90px; max-width: 140px; word-break: break-word; vertical-align: top; ${(!entry || entry.trim() === '') ? 'color: #64748b;' : ''}">${escapeHtml(setupName)}</td>`;
+                                html += `<td style="vertical-align: top;"><span class="${badgeClass}">${dir}</span></td>`;
+                                html += `<td style="min-width: 260px; max-width: 420px; white-space: normal; vertical-align: top; line-height: 1.45;">${formatInlineHighlights(entry)}</td>`;
+                                html += `<td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981; white-space: nowrap; vertical-align: top;">${formatInlineHighlights(tp)}</td>`;
+                                
+                                html += `<td style="min-width: 260px; max-width: 420px; white-space: normal; vertical-align: top;">`;
+                                html += `<div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #f43f5e;">${formatInlineHighlights(nakedSl)}</div>`;
+                                if (spreadInfo) {
+                                    html += `<div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; padding: 6px 10px; border-radius: 6px; margin-top: 6px; font-size: 0.78rem; line-height: 1.45; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 400; color: #e2e8f0;">${formatInlineHighlights(spreadInfo)}</div>`;
+                                }
+                                html += `</td>`;
                                 html += `</tr>`;
                             }
                         });
