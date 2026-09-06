@@ -8,7 +8,7 @@ window.btcDailyPlanData = [
     "behavior": "[SUN 14:08] [KB1]: First-time intraday breached level ($79,827.51) & 15M Demand OB base; primary absorption pivot for European session recovery",
     "tp": "80,113.48 / 80,325.00",
     "sl": "79,660.00",
-    "status": "na"
+    "status": "triggered"
   },
   {
     "source": "AI",

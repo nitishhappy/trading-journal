@@ -1,44 +1,44 @@
 window.dailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-09-06T13:02:52+05:30",
-    "timeDisplay": "01:02 PM, Sep 06",
+    "timestamp": "2026-09-06T14:15:50+05:30",
+    "timeDisplay": "02:15 PM, Sep 06",
     "price": "24005",
     "bias": "bullish",
-    "behavior": "[SUN 13:02] [B2]: Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
+    "behavior": "[SUN 14:15] [B2]: Sustained 5m close ABOVE 24,005 with active futures volume confirming absorption",
     "tp": "24,080 / 24,140",
     "sl": "23,960",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-06T13:02:52+05:30",
-    "timeDisplay": "01:02 PM, Sep 06",
+    "timestamp": "2026-09-06T14:15:50+05:30",
+    "timeDisplay": "02:15 PM, Sep 06",
     "price": "23980",
     "bias": "bearish",
-    "behavior": "[SUN 13:02] [S1]: Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
+    "behavior": "[SUN 14:15] [S1]: Upper boundary of consolidation chop zone; supply rejection zone on corrective relief bounce",
     "tp": "23,890 / 23,850",
     "sl": "24,025",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-06T13:02:52+05:30",
-    "timeDisplay": "01:02 PM, Sep 06",
+    "timestamp": "2026-09-06T14:15:50+05:30",
+    "timeDisplay": "02:15 PM, Sep 06",
     "price": "23910",
     "bias": "bullish",
-    "behavior": "[SUN 13:02] [B1]: Intraday pivot & lower value area boundary; reclaim level for SFP longs following a sweep below 23,870",
+    "behavior": "[SUN 14:15] [B1]: Intraday pivot & lower value area boundary; reclaim level for SFP longs following a sweep below 23,870",
     "tp": "23,980 / 24,020",
     "sl": "23,850",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-06T13:02:52+05:30",
-    "timeDisplay": "01:02 PM, Sep 06",
+    "timestamp": "2026-09-06T14:15:50+05:30",
+    "timeDisplay": "02:15 PM, Sep 06",
     "price": "23870",
     "bias": "bearish",
-    "behavior": "[SUN 13:02] [S2]: Put writer defense floor; sustained 5m candle close below triggers long liquidation cascade",
+    "behavior": "[SUN 14:15] [S2]: Put writer defense floor; sustained 5m candle close below triggers long liquidation cascade",
     "tp": "23,800 / 23,730",
     "sl": "23,915",
     "status": "na"
@@ -69,9 +69,9 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
-    "id": "NIFTY_20260906_130252",
-    "timestamp": "2026-09-06T13:02:52+05:30",
-    "timeDisplay": "01:02 PM, Sep 06",
+    "id": "NIFTY_20260906_141550",
+    "timestamp": "2026-09-06T14:15:50+05:30",
+    "timeDisplay": "02:15 PM, Sep 06",
     "spot": "0",
     "trigger": "Manual Ad-Hoc Update",
     "source": "AI Intraday Briefing",
