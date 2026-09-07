@@ -1,6 +1,215 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23645",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Support: [STL] Wave 2 Hard Invalidation Floor & Macro Demand Base",
+    "tp": "24,000",
+    "sl": "23,600",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23733",
+    "bias": "bearish",
+    "behavior": "[MON 09:21] Support: [SMU] Extreme Downside Breakdown Target",
+    "tp": "23,650",
+    "sl": "23,800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23796",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Support: [MAA] Strongest Support & Trend Invalidation Floor",
+    "tp": "23,975",
+    "sl": "23,760",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23800",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Support: [BS] Lakshman Rekha Major Support & Put Floor",
+    "tp": "24,000",
+    "sl": "23,770",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23816",
+    "bias": "bearish",
+    "behavior": "[MON 09:21] Support: [SMU] Downside Target & Support Zone",
+    "tp": "23,733",
+    "sl": "23,880",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23850",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Support: [STL] Wave C Fib 38.2% Buying Opportunity Zone",
+    "tp": "24,000",
+    "sl": "23,796",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23876",
+    "bias": "bearish",
+    "behavior": "[MON 09:21] Support: [SMU] Intraday Support & Short Breakdown Trigger",
+    "tp": "23,816",
+    "sl": "23,938",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23881",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Support: [MAA] Primary Intraday Support Level",
+    "tp": "24,000",
+    "sl": "23,850",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23938",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Support: [SMU] Intraday Pullback Support Zone",
+    "tp": "24,008",
+    "sl": "23,890",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "23975",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Resistance: [SMU] Intraday Long Trigger / Breakout Level",
+    "tp": "24,066",
+    "sl": "23,920",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24000",
+    "bias": "bearish",
+    "behavior": "[MON 09:21] Resistance: [MAA/BS] Crucial Call OI Resistance Zone & Short-Covering Line",
+    "tp": "23,897",
+    "sl": "24,040",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24008",
+    "bias": "bearish",
+    "behavior": "[MON 09:21] Resistance: [SMU] First Resistance Target",
+    "tp": "23,938",
+    "sl": "24,050",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24066",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Resistance: [SMU] Second Long Breakout Trigger",
+    "tp": "24,142",
+    "sl": "24,000",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24076",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Resistance: [MAA] Medium-to-Full Long Position Expansion Trigger",
+    "tp": "24,179",
+    "sl": "24,020",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24142",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Resistance: [SMU] Short Covering Upside Target",
+    "tp": "24,250",
+    "sl": "24,066",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24179",
+    "bias": "bearish",
+    "behavior": "[MON 09:21] Resistance: [MAA] Upper Resistance Target",
+    "tp": "24,076",
+    "sl": "24,220",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24200",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Resistance: [BS] Bullish Confirmation & Range Breakout Trigger",
+    "tp": "24,360",
+    "sl": "24,120",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24254",
+    "bias": "bearish",
+    "behavior": "[MON 09:21] Resistance: [MAA] Key Structural Resistance",
+    "tp": "24,179",
+    "sl": "24,300",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "price": "24360",
+    "bias": "bullish",
+    "behavior": "[MON 09:21] Resistance: [STL] Weekly Cycle Resistance & Wave D Target",
+    "tp": "24,600",
+    "sl": "24,280",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-07T09:18:06+05:30",
     "timeDisplay": "09:18 AM, Sep 07",
     "price": "24005",
@@ -69,6 +278,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260907_092153",
+    "timestamp": "2026-09-07T09:21:53+05:30",
+    "timeDisplay": "09:21 AM, Sep 07",
+    "spot": "4482",
+    "trigger": "Intraday Tactical Refresh",
+    "source": "AI Intraday Briefing",
+    "text": "## 1. Global Market Sentiment\n- **US Markets**: S&P 500, Nasdaq, and Dow Jones closed in narrow rotational bands following employment data release. Volatility indices remain subdued.\n- **Asian Markets**: Nikkei 225, Hang Seng, and Shanghai Composite opened flat to mixed with sector-specific rotations.\n- **European Markets**: DAX, CAC 40, and FTSE 100 settled sideways amidst ECB commentary.\n- **Overall Sentiment**: Risk-contained neutral-to-bullish, setting up rotational mean-reversion with upside breakout potential.\n\n\n## 2. Overnight Market Moves\n- **NIFTY / GIFT NIFTY**: GIFT Nifty indicates a flat tick near 23,910–23,935 (+15 to +35 pts).\n- **GOLD**: Spot Gold trades near $4,482/oz.\n- **USD/INR**: Stable at 83.92–84.05.\n- **Crude Oil**: Brent crude holding steady at $73.40/bbl.\n\n\n## 3. Major News & Key Events\n- **SEBI Derivative Rules**: SEBI re-examining CAS/pre-open impact rules. Market anticipates positive regulatory clarifications within a week.\n- **Institutional Flows**: DII cash absorption (+₹8,900 Cr) completely offsets FII cash sales (-₹3,100 Cr). Net retail call unwinding creates short squeeze potential.\n\n\n## 4. NIFTY Analysis & Key Structural Levels\n\n### Structural Context\nNifty Spot closed at **23,897.70**. On 15M/1H charts, price is compressed between 23,870 and 24,005. Wave analysis indicates sub-wave C completion of wave D.\n\n### Higher Timeframe Extreme Extension Targets\n- **HTF Upside Extension Target**: **24,360.00 – 24,480.00** (Weekly cycle resistance & major multi-week supply zone)\n- **HTF Downside Macro Base**: **23,645.00** (STL Wave 2 Hard Invalidation Floor & macro demand)\n\n| Level | Type | Source Tag | Logic / Significance |\n| :--- | :--- | :--- | :--- |\n| 🟢 **23,645.00** | Support | STL | Wave 2 Hard Invalidation Floor & Macro Demand Base |\n| 🔴 **23,733.00** | Support | SMU | Extreme Downside Breakdown Target |\n| 🟢 **23,796.00** | Support | MAA | Strongest Support & Trend Invalidation Floor |\n| 🟢 **23,800.00** | Support | BS | Lakshman Rekha Major Support & Put Writer Floor |\n| 🔴 **23,816.00** | Support | SMU | Downside Target & Support Zone |\n| 🟢 **23,850.00** | Support | STL | Wave C Fib 38.2% Buying Opportunity Zone |\n| 🔴 **23,876.00** | Support | SMU | Intraday Support & Short Breakdown Trigger |\n| 🟢 **23,881.00** | Support | MAA | Primary Intraday Support Level |\n| 🟢 **23,938.00** | Support | SMU | Intraday Pullback Support Zone |\n| 🟢 **23,975.00** | Resistance | SMU | Intraday Long Trigger / Breakout Level |\n| 🔴 **24,000.00** | Resistance | MAA / BS | Crucial Call OI Resistance Zone & Short-Covering Line |\n| 🔴 **24,008.00** | Resistance | SMU | First Resistance Target |\n| 🟢 **24,066.00** | Resistance | SMU | Second Long Breakout Trigger |\n| 🟢 **24,076.00** | Resistance | MAA | Medium-to-Full Long Position Expansion Trigger |\n| 🟢 **24,142.00** | Resistance | SMU | Short Covering Upside Target |\n| 🔴 **24,179.00** | Resistance | MAA | Upper Resistance Target |\n| 🟢 **24,200.00** | Resistance | BS | Bullish Confirmation & Range Breakout Trigger |\n| 🔴 **24,254.00** | Resistance | MAA | Key Structural Resistance |\n| 🟢 **24,360.00** | Resistance | STL | Weekly Cycle Resistance & Wave D Target |\n\n\n## 5. SMC & Session Liquidity Confluence\n- **BSL Pools**: Above 24,005 (Friday High) & 24,076.\n- **SSL Pools**: Beneath 23,870 & 23,796.\n- **Order Blocks (OB)**: 15M Demand OB: 23,850–23,881. 15M Supply Breaker: 24,000–24,008.\n- **FVG Imbalance**: 1H Bearish FVG at 24,050–24,080 acting as immediate liquidity magnet on short squeeze.\n\n\n## 6. Trading Plan & Tactical Directives\n\n### 15-Minute Opening Range Filter Rule (Mandatory)\n- Do NOT execute reversal entries on the 3rd 5-minute candle (09:25 AM).\n- Wait for full 15-minute Opening Range (09:15–09:30 AM) to close.\n- **Reversal Long (CE)**: Price must break and close firmly ABOVE 15m ORB High with expanding futures volume.\n- **Reversal Short (PE)**: Price must break and close firmly BELOW 15m ORB Low with expanding red volume.\n\n### Extreme Gap Contingency Plan\n- **Gap-Up (> 24,000)**: Wait for 15m ORB close. Sustained hold above 24,000 targets 24,076 and 24,142.\n- **Gap-Down (< 23,850)**: Do not panic short into 23,850–23,796 demand shelf. Look for SFP sweep of 23,850 and 15m reclaim for reversal long back to 23,975.\n\n### High Momentum / Explosive Zones\n- 🚀 **Upside Short-Covering Squeeze (Above 24,000 / 24,005)**: Triggers aggressive stop runs of 24,00 CE sellers targeting 24,076 and 24,142.\n- 💥 **Downside Unwinding Cascade (Below 23,796)**: Sustained 15M candle close below 23,796 triggers long unwinding cascade into 23,733 and 23,645.\n\n### Action Plan (BUY/SELL Setups)\n- **[B1] BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP)**: Sweep below 23,881/23,850 rejected, 5m close back ABOVE 23,910. | **TP**: 23,980 / 24,020 | **SL**: 23,850 | 💡 Buy 23,900 CE + Sell 23,950 CE | R:R ~1.75\n- **[B2] BUY Setup 2 (High-Momentum Short-Covering Breakout Long)**: Sustained 5m close ABOVE 24,005 with expanding active futures volume. | **TP**: 24,076 / 24,142 | **SL**: 23,960 | 💡 Buy 24,000 CE + Sell 24,050 CE | R:R ~2.50\n- **[S1] SELL Setup 1 (Supply Wall Rejection Fade Short)**: Rejection from 24,000 Call Wall with upper wick, 5m close BELOW 23,940. | **TP**: 23,890 / 23,850 | **SL**: 24,025 | 💡 Buy 23,950 PE + Sell 23,900 PE | R:R ~0.88\n- **[S2] SELL Setup 2 (Demand Floor Breakdown Continuation Short)**: Sustained 5m close BELOW 23,796 with expanding red futures volume. | **TP**: 23,733 / 23,645 | **SL**: 23,850 | 💡 Buy 23,800 PE + Sell 23,750 PE | R:R ~2.33\n\n### Live Chop Zone / No-Trade Zone\n- **Range**: 23,910 – 23,975 (Consolidation corridor & 23,950 Straddle equilibrium). Stand aside inside this 65-point band for option buying.\n\n\n## 7. Risk Warning & Option Strategy\n- Low VIX (12–13 handle) requires strict delta management. Prefer credit/debit spreads over naked option buying during range-bound hours.\n\n\n``"
+  },
+  {
     "id": "NIFTY_20260907_091806",
     "timestamp": "2026-09-07T09:18:06+05:30",
     "timeDisplay": "09:18 AM, Sep 07",
