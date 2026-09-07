@@ -121,6 +121,16 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.34 — 08 Sep 2026 — Unified Level Exhaustion & Incremental Structural Shift Architecture Across All Assets
+- **Cooldown Bypass for Priority Triggers**: Both **Level Exhaustion** (live spot/candle close breaches active plan boundaries) and **Incremental Structural Shift** (price moves $\ge$ threshold from previous triggered spot) are restored as priority events that **ALWAYS BYPASS COOLDOWN** across all 4 assets (NIFTY, BTC, Gold, S&P 500).
+- **Standardized Multi-Asset Level Exhaustion Engine**: Restored `check_level_exhaustion_trigger` in `level_dedup_engine.py` for all assets, comparing live spot price / candle close against active `{asset}_daily_plan.js` boundaries (`level_high` & `level_low`). Once breached, cooldown is bypassed to re-calculate levels; the newly generated plan pushes expanded target levels to `{asset}_daily_plan.js`, automatically silencing subsequent 15m watchdog runs.
+- **Universal Incremental Structural Shift Engine**: Applied `check_incremental_structural_trigger` across all 4 assets with dedicated thresholds (Nifty: 80 pts, BTC: 500 pts, Gold: $15, S&P 500: 30 pts), persisting `{asset}_structural_state.json` to trigger immediately when an additional shift occurs.
+
+### v2.3.33 — 07 Sep 2026 — Multi-Asset Watchdog Trigger Overhaul (BTC, Gold, S&P 500, NIFTY)
+- **Eliminated Static Day High/Low Trigger Bug**: Completely removed flawed `day_high >= extreme_high` and `day_low <= extreme_low` checks across `btc_watchdog.py` and `gold_watchdog.py` that previously caused endless 15-minute re-calibration loops when session wicks hit outer plan boundaries.
+- **Dynamic 15M Window & Range Memory**: Restructured all 4 asset watchdogs (BTC, Gold, S&P 500, NIFTY) to evaluate live spot / candle close against active mapped plan boundaries (`level_high` & `level_low`). Once a breach triggers an update, the new plan establishes expanded target boundaries, automatically silencing subsequent 15m watchdog scans while price trades within the updated range.
+- **Enforced Cooldown Security**: Ensured stateful level breach evaluation is strictly guarded under non-cooldown states across all watchdogs.
+
 ### v2.3.32 — 07 Sep 2026 — NIFTY Watchdog Market Session Guard & Incremental Structural Trigger Fix
 - **Indian Market Session Guard**: Implemented strict market session time filtering (`09:15 AM - 03:30 PM IST`, Mon-Fri) in `nifty_copilot.py` for live intraday trigger evaluation (OI Traps, SMC Liquidity Sweeps, Structural Invalidations, Volume Anomalies), completely preventing redundant post-market watchdog runs after market close (03:30 PM).
 - **Incremental Structural Invalidation Logic**: Upgraded the static `abs(spot - day_open) > 80` trigger into a dynamic, stateful incremental step trigger. The Watchdog now fires on the first >80 pt shift from Day Open, and only re-triggers if spot price shifts an additional 80+ points (+160 pt, +240 pt total shift) relative to the previously triggered briefing spot level.
