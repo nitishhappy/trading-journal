@@ -121,6 +121,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.32 — 07 Sep 2026 — NIFTY Watchdog Market Session Guard & Incremental Structural Trigger Fix
+- **Indian Market Session Guard**: Implemented strict market session time filtering (`09:15 AM - 03:30 PM IST`, Mon-Fri) in `nifty_copilot.py` for live intraday trigger evaluation (OI Traps, SMC Liquidity Sweeps, Structural Invalidations, Volume Anomalies), completely preventing redundant post-market watchdog runs after market close (03:30 PM).
+- **Incremental Structural Invalidation Logic**: Upgraded the static `abs(spot - day_open) > 80` trigger into a dynamic, stateful incremental step trigger. The Watchdog now fires on the first >80 pt shift from Day Open, and only re-triggers if spot price shifts an additional 80+ points (+160 pt, +240 pt total shift) relative to the previously triggered briefing spot level.
+- **Scheduled EOD Summary Preservation**: Maintained exact execution capability for scheduled daily time triggers (10:30 AM, 01:30 PM, 03:45 PM EOD close briefing).
+
 ### v2.3.31 — 05 Sep 2026 — Structured JSON Summary Architecture & 24H Rolling Window Fix
 - **Structured JSON Summary Metadata**: Migrated summary entries from unstructured Markdown blobs to structured JSON objects containing explicit metadata tags (`id`, `timestamp`, `timeDisplay`, `spot`, `trigger`, `source`, `text`).
 - **Eliminated False Deduplication Bug**: Completely removed flawed `txt[:120]` slice comparisons across `prune_daily_plan.py`, `sp500_copilot_main.py`, `btc_copilot_main.py`, and `sync_briefing_to_daily_plan.py` that previously collapsed intraday runs sharing identical title banners into a single entry.
