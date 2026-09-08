@@ -17,12 +17,14 @@ A private, installable (PWA) daily trading journal. Built with vanilla HTML/CSS/
 - **Static files** (HTML/CSS/JS) → Served by Vercel
 - **Firebase Auth** → User login (email/password, optional)
 - **Firestore** → Database for all app data
-- **Vercel API** (`/api/tvWebhook`) → Handles TradingView webhook alerts, writes to Firestore via Firebase Admin SDK
+- **Vercel API** (`/api/tvWebhook`, `/api/sendPush`) → Handles TradingView webhooks and VAPID Web Push notifications (RFC 8291/8292) directly to Service Worker (`sw.js`) for lock-screen popups on mobile devices.
 
 ### Key Files & Data Layer
 - `vercel.json` — Vercel routing configuration
-- `api/tvWebhook.js` — Vercel serverless function for TradingView webhooks
-- `api/firebase-admin.js` — Firebase Admin SDK initialization for Firestore writes
+- `api/tvWebhook.js` — Vercel serverless function for TradingView webhooks & Web Push trigger
+- `api/sendPush.js` — Vercel serverless endpoint for dispatching encrypted VAPID push notifications
+- `api/vapidConfig.js` — VAPID keypair configuration helper
+- `js/services/webPush.js` — Frontend Web Push subscription manager & Firestore registration
 - `js/data/*_daily_plan.js` — Offline-first local data files (`nifty_daily_plan.js`, `gold_daily_plan.js`, `sp500_daily_plan.js`, `btc_daily_plan.js`) protected by Node.js Quality Gate auto-rollback
 - `app.js` — **Client-side entry point** (not a server file)
 

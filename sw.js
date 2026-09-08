@@ -33,6 +33,7 @@ const ASSETS = [
   "./js/services/tvNotifications.js",
   "./js/services/sequenceRules.js",
   "./js/services/stocks.js",
+  "./js/services/webPush.js",
   "./js/ui/common.js",
   "./js/ui/auth.js",
   "./js/ui/settings.js",
@@ -76,7 +77,7 @@ const NETWORK_FIRST_FILES = [
   "js/services/checklists.js", "js/services/ai.js",
   "js/services/candleChecklist.js",
   "js/services/tvNotifications.js", "js/services/sequenceRules.js",
-  "js/services/stocks.js",
+  "js/services/stocks.js", "js/services/webPush.js",
   "js/ui/common.js", "js/ui/auth.js", "js/ui/settings.js",
   "js/ui/dashboard.js", "js/ui/revision.js", "js/ui/aicoach.js",
   "js/ui/tradelog.js", "js/ui/checklists.js", "js/ui/candleChecklist.js",
@@ -116,6 +117,32 @@ self.addEventListener("activate", (event) => {
     )
   );
   self.clients.claim();
+});
+
+// ─── Web Push event handler ──────────────────────────────────────────────────
+// Receive lock-screen push notifications sent from Vercel / Python backend
+self.addEventListener("push", (event) => {
+  let data = {};
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (e) {
+      data = { title: "TradeLog Alert", body: event.data.text() };
+    }
+  }
+
+  const title = data.title || "TradeLog Notification";
+  const options = {
+    body: data.body || "New market update received",
+    icon: data.icon || "./icons/icon-192.png",
+    badge: data.badge || "./icons/icon-192.png",
+    tag: data.tag || "tradelog-alert",
+    data: data.url || "./",
+    vibrate: [200, 100, 200],
+    requireInteraction: data.requireInteraction || false
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 
 // ─── Notification click handler ──────────────────────────────────────────────

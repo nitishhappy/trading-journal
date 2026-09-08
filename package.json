@@ -10,7 +10,8 @@
     "cors": "^2.8.6",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.0",
-    "git": "^0.1.5"
+    "git": "^0.1.5",
+    "web-push": "^3.6.7"
   },
   "private": true
 }

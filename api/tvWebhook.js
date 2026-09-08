@@ -1,5 +1,46 @@
+const webpush = require('web-push');
 const { admin, db } = require('./firebase-admin');
 const { runSequenceEngine } = require('./sequenceEngine');
+const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = require('./vapidConfig');
+
+try {
+  webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY);
+} catch(e) {}
+
+async function sendWebPushAlert(uid, title, body, tag) {
+  try {
+    const userSubsSnap = await db.collection("users").doc(uid).collection("pushSubscriptions").get();
+    const globalSubsSnap = await db.collection("pushSubscriptions").get();
+    
+    const subs = [];
+    userSubsSnap.forEach(doc => subs.push({ id: doc.id, ref: doc.ref, ...doc.data() }));
+    globalSubsSnap.forEach(doc => {
+      const d = doc.data();
+      if (!subs.some(s => s.endpoint === d.endpoint)) subs.push({ id: doc.id, ref: doc.ref, ...d });
+    });
+
+    const payload = JSON.stringify({
+      title,
+      body,
+      tag: tag || "tv-signal",
+      icon: "./icons/icon-192.png",
+      badge: "./icons/icon-192.png"
+    });
+
+    for (const sub of subs) {
+      if (sub.endpoint && sub.keys) {
+        webpush.sendNotification({ endpoint: sub.endpoint, keys: sub.keys }, payload).catch(err => {
+          if (err.statusCode === 404 || err.statusCode === 410) {
+            if (sub.ref) sub.ref.delete().catch(() => {});
+            db.collection("pushSubscriptions").doc(sub.id).delete().catch(() => {});
+          }
+        });
+      }
+    }
+  } catch(e) {
+    console.error("sendWebPushAlert error:", e);
+  }
+}
 
 // POST /api/tvWebhook?token=SECRET
 module.exports = async (req, res) => {
@@ -61,6 +102,15 @@ module.exports = async (req, res) => {
     extra,
     source:        source    || "tradingview",
   });
+
+  // Dispatch Web Push Lock-Screen Notification
+  try {
+    const pushTitle = `${symbol || 'SIGNAL'} — ${action || 'ALERT'}${resolvedTimeframe ? ' (' + resolvedTimeframe + ')' : ''}`;
+    const pushBody = price ? `Price: ${price}${summary ? ' | ' + summary : ''}` : (summary || raw.substring(0, 100));
+    sendWebPushAlert(uid, pushTitle, pushBody, 'tv-signal');
+  } catch (e) {
+    console.error("tvWebhook push error:", e);
+  }
 
   // Garbage Collection & Daily 4:00 PM IST Cleanup
   try {

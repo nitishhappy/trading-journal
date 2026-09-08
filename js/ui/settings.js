@@ -273,6 +273,12 @@ export function loadNotificationPreferencesSettings() {
         }
       }
 
+      if (val) {
+        if (typeof window.subscribeUserToPush === 'function') {
+          await window.subscribeUserToPush();
+        }
+      }
+
       localStorage.setItem(localKey, val ? 'true' : 'false');
       const currentUid = state.currentUser?.uid;
       if (currentUid) {
@@ -281,6 +287,13 @@ export function loadNotificationPreferencesSettings() {
           .set({ [firestoreKey]: val }, { merge: true })
           .catch(() => {});
       }
+
+      // If all toggles are OFF, unsubscribe Web Push
+      const anyActive = (summaryToggle?.checked || alertToggle?.checked || sequenceToggle?.checked || copilotToggle?.checked);
+      if (!anyActive && typeof window.unsubscribeUserFromPush === 'function') {
+        window.unsubscribeUserFromPush();
+      }
+
       showToast(val ? `${label} enabled ✓` : `${label} disabled`);
       window.dispatchEvent(new CustomEvent('notification-settings-changed', { detail: { key: firestoreKey, enabled: val } }));
     });

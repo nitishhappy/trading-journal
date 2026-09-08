@@ -23,6 +23,7 @@ import './js/services/trades.js';
 import './js/services/checklists.js';
 import './js/services/candleTimers.js';
 import './js/services/ai.js';
+import './js/services/webPush.js';
 
 import './js/utils/error-tracking.js';
 
