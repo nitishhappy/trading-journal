@@ -1,6 +1,204 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "22149",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Support: [STL] Alternate Flat Correction 61.8% Fib Downside Target",
+    "tp": "21,500",
+    "sl": "22,500",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23381",
+    "bias": "bullish",
+    "behavior": "[TUE 08:14] Support: [STL] Alternate Irregular Contracting Triangle Wave C Floor",
+    "tp": "23,800",
+    "sl": "23,300",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23556",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Support: [SMU] Downside Target & Breakdown Support",
+    "tp": "23,450",
+    "sl": "23,650",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23584",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Support: [MAA] Downside Extension Target & Support Zone",
+    "tp": "23,500",
+    "sl": "23,680",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23645",
+    "bias": "bullish",
+    "behavior": "[TUE 08:14] Support: [STL/BT] Macro Demand Base & Wave 2 Invalidation Floor",
+    "tp": "23,800",
+    "sl": "23,580",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23650",
+    "bias": "bullish",
+    "behavior": "[TUE 08:14] Support: [BT/SMU] Key Reversal Buy Shelf & Expiry Support",
+    "tp": "23,800",
+    "sl": "23,600",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23677",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Support: [MAA] Intraday Short Expansion Level",
+    "tp": "23,584",
+    "sl": "23,738",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23733",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Support: [SMU] Intraday Breakdown Target & Double Bottom Floor",
+    "tp": "23,645",
+    "sl": "23,800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23738",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Support: [BT/MAA] Session Low Liquidity Floor",
+    "tp": "23,650",
+    "sl": "23,800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23750",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Support: [MAA/SMU] Option Put Writer Defense Floor",
+    "tp": "23,677",
+    "sl": "23,800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23784",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Resistance: [SMU] GIFT Nifty Reference Pivot",
+    "tp": "23,733",
+    "sl": "23,830",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23800",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Resistance: [MAA/BS/SMU] Crucial Call Writing Wall & Short-Covering Line",
+    "tp": "23,738",
+    "sl": "23,850",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23850",
+    "bias": "bullish",
+    "behavior": "[TUE 08:14] Resistance: [SMU] Key Resistance & Short Covering Trigger",
+    "tp": "23,900",
+    "sl": "23,790",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23880",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Resistance: [BT] Immediate Resistance & Upside Target",
+    "tp": "23,800",
+    "sl": "23,920",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23900",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Resistance: [BT/SMU] Upper Resistance Target",
+    "tp": "23,800",
+    "sl": "23,950",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "23971",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Resistance: [BT/MAA] Major Resistance / Supply Zone",
+    "tp": "23,880",
+    "sl": "24,010",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "24000",
+    "bias": "bearish",
+    "behavior": "[TUE 08:14] Resistance: [MAA/BS/STL] Major Overhead Resistance & Medium-Long Trigger",
+    "tp": "23,880",
+    "sl": "24,050",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "price": "24360",
+    "bias": "bullish",
+    "behavior": "[TUE 08:14] Resistance: [STL] Weekly Cycle Resistance & Wave 5 Target",
+    "tp": "24,600",
+    "sl": "24,280",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-08T07:29:12+05:30",
     "timeDisplay": "07:29 AM, Sep 08",
     "price": "23765",
@@ -19,17 +217,6 @@ window.dailyPlanData = [
     "behavior": "[TUE 07:29] [B2]: Sustained 5m close ABOVE 23,820 with active futures volume confirming institutional reclaim of 15M ORB Low and 23,800 Call Wall",
     "tp": "23,860 / 23,890",
     "sl": "23,780",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-08T07:29:12+05:30",
-    "timeDisplay": "07:29 AM, Sep 08",
-    "price": "23800",
-    "bias": "bearish",
-    "behavior": "[TUE 07:29] [S1]: Corrective relief bounce into 23,810\u201323,820 rejected with upper wick, 5m close below 23,780",
-    "tp": "23,740 / 23,690",
-    "sl": "23,830",
     "status": "na"
   },
   {
@@ -201,28 +388,6 @@ window.dailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-07T09:21:53+05:30",
     "timeDisplay": "09:21 AM, Sep 07",
-    "price": "23645",
-    "bias": "bullish",
-    "behavior": "[MON 09:21] Support: [STL] Wave 2 Hard Invalidation Floor & Macro Demand Base",
-    "tp": "24,000",
-    "sl": "23,600",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-07T09:21:53+05:30",
-    "timeDisplay": "09:21 AM, Sep 07",
-    "price": "23733",
-    "bias": "bearish",
-    "behavior": "[MON 09:21] Support: [SMU] Extreme Downside Breakdown Target",
-    "tp": "23,650",
-    "sl": "23,800",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-07T09:21:53+05:30",
-    "timeDisplay": "09:21 AM, Sep 07",
     "price": "23796",
     "bias": "bullish",
     "behavior": "[MON 09:21] Support: [MAA] Strongest Support & Trend Invalidation Floor",
@@ -239,17 +404,6 @@ window.dailyPlanData = [
     "behavior": "[MON 09:21] Support: [SMU] Downside Target & Support Zone",
     "tp": "23,733",
     "sl": "23,880",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-07T09:21:53+05:30",
-    "timeDisplay": "09:21 AM, Sep 07",
-    "price": "23850",
-    "bias": "bullish",
-    "behavior": "[MON 09:21] Support: [STL] Wave C Fib 38.2% Buying Opportunity Zone",
-    "tp": "24,000",
-    "sl": "23,796",
     "status": "na"
   },
   {
@@ -294,17 +448,6 @@ window.dailyPlanData = [
     "behavior": "[MON 09:21] Resistance: [SMU] Intraday Long Trigger / Breakout Level",
     "tp": "24,066",
     "sl": "23,920",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-07T09:21:53+05:30",
-    "timeDisplay": "09:21 AM, Sep 07",
-    "price": "24000",
-    "bias": "bearish",
-    "behavior": "[MON 09:21] Resistance: [MAA/BS] Crucial Call OI Resistance Zone & Short-Covering Line",
-    "tp": "23,897",
-    "sl": "24,040",
     "status": "na"
   },
   {
@@ -386,17 +529,6 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-07T09:21:53+05:30",
-    "timeDisplay": "09:21 AM, Sep 07",
-    "price": "24360",
-    "bias": "bullish",
-    "behavior": "[MON 09:21] Resistance: [STL] Weekly Cycle Resistance & Wave D Target",
-    "tp": "24,600",
-    "sl": "24,280",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-09-07T09:18:06+05:30",
     "timeDisplay": "09:18 AM, Sep 07",
     "price": "24005",
@@ -454,6 +586,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260908_081413",
+    "timestamp": "2026-09-08T08:14:13+05:30",
+    "timeDisplay": "08:14 AM, Sep 08",
+    "spot": "97.73",
+    "trigger": "Intraday Tactical Refresh",
+    "source": "AI Intraday Briefing",
+    "text": "## 1. Global Market Sentiment\n- **US Markets**: Closed Monday for holiday. US Index Futures trading down -300 to -350 points in Asia trade on Middle East war escalation.\n- **Asian Markets**: Nikkei 225 (-1.4%), Hang Seng (-1.8%), and Shanghai Composite trading sharply lower in morning trade.\n- **European Markets**: DAX and CAC futures trading down on energy supply concerns.\n- **Overall Sentiment**: Risk-off bearish sentiment dominated by soaring crude oil prices ($97.73) and rising US bond yields.\n\n\n## 2. Overnight Market Moves\n- **NIFTY / GIFT NIFTY**: GIFT Nifty trading near 23,784, indicating a flat to mildly lower opening tick relative to Monday's close (23,779).\n- **GOLD**: Spot Gold steady at $4,476/oz.\n- **USD/INR**: Weakened to 84.10 NDF.\n- **Crude Oil**: Brent Crude surging at $97.73/bbl.\n\n\n## 3. Major News & Key Events\n- **Geopolitical Escalation**: US-Iran escalation pushing Brent crude near $98/bbl, impacting India's forex reserves and inflation outlook.\n- **Expiry Dynamics**: Nifty Tuesday Options Expiry with 23,800 CE wall acting as the primary institutional resistance ceiling.\n\n\n## 4. NIFTY Analysis & Key Structural Levels\n\n### Structural Context\nNifty Spot closed at **23,779.00**. On 15M/1H charts, Nifty has broken the 23,800 consolidation floor. Wave 2 hard invalidation floor sits at **23,645**.\n\n### Higher Timeframe Extreme Extension Targets\n- **HTF Upside Extension Target**: **24,000.00 – 24,360.00** (Weekly cycle resistance & major supply zone)\n- **HTF Downside Macro Base**: **23,645.00 – 23,584.00** (Wave 2 Floor & key reversal buy shelf) / **22,149.00** (Alternate Wave C 61.8% Fib)\n\n| Level | Type | Source Tag | Logic / Significance |\n| :--- | :--- | :--- | :--- |\n| 🔴 **22,149.00** | Support | STL | Alternate Flat Correction 61.8% Fib Downside Target |\n| 🟢 **23,381.00** | Support | STL | Alternate Irregular Contracting Triangle Wave C Floor |\n| 🔴 **23,556.00** | Support | SMU | Downside Target & Breakdown Support |\n| 🔴 **23,584.00** | Support | MAA | Downside Extension Target & Support Zone |\n| 🟢 **23,645.00** | Support | STL / BT | Macro Demand Base & Wave 2 Invalidation Floor |\n| 🟢 **23,650.00** | Support | BT / SMU | Key Reversal Buy Shelf & Expiry Support |\n| 🔴 **23,677.00** | Support | MAA | Intraday Short Expansion Level |\n| 🔴 **23,733.00** | Support | SMU | Intraday Breakdown Target & Double Bottom Floor |\n| 🔴 **23,738.00** | Support | BT / MAA | Session Low Liquidity Floor |\n| 🔴 **23,750.00** | Support | MAA / SMU | Option Put Writer Defense Floor |\n| 🔴 **23,784.00** | Resistance | SMU | GIFT Nifty Reference Pivot |\n| 🔴 **23,800.00** | Resistance | MAA / BS / SMU | Crucial Call Writing Wall & Short-Covering Line |\n| 🟢 **23,850.00** | Resistance | SMU | Key Resistance & Short Covering Trigger |\n| 🔴 **23,880.00** | Resistance | BT | Immediate Resistance & Upside Target |\n| 🔴 **23,900.00** | Resistance | BT / SMU | Upper Resistance Target |\n| 🔴 **23,971.00** | Resistance | BT / MAA | Major Resistance / Supply Zone |\n| 🔴 **24,000.00** | Resistance | MAA / BS / STL | Major Overhead Resistance & Medium-Long Trigger |\n| 🟢 **24,360.00** | Resistance | STL | Weekly Cycle Resistance & Wave 5 Target |\n\n\n## 5. SMC & Session Liquidity Confluence\n- **BSL Pools**: Above 23,800 & 23,880.\n- **SSL Pools**: Beneath 23,738 & 23,645.\n- **Order Blocks (OB)**: 15M Supply Breaker: 23,800–23,850. 15M Macro Demand OB: 23,645–23,650.\n- **FVG Imbalance**: Downside 1H FVG gap extending toward 23,650–23,584.\n\n\n## 6. Trading Plan & Tactical Directives\n\n### 15-Minute Opening Range Filter Rule (Mandatory)\n- Do NOT execute reversal entries on the 3rd 5-minute candle (09:25 AM).\n- Wait for full 15-minute Opening Range (09:15–09:30 AM) to close.\n- **Reversal Short (PE)**: Price must break and close firmly BELOW 15m ORB Low with expanding red futures volume.\n- **Reversal Long (CE)**: Price must break and close firmly ABOVE 15m ORB High with expanding green volume.\n\n### Extreme Gap Contingency Plan\n- **Gap-Down (< 23,700)**: Do not panic short into 23,650–23,645 macro demand shelf. Look for double bottom / W-pattern or 15m reclaim of 23,650 for an oversold relief bounce back to 23,750.\n- **Gap-Up (> 23,800)**: If price rejects from 23,800–23,850 supply wall with an upper wick, look for a breakdown fade short back to 23,738.\n\n### High Momentum / Explosive Zones\n- 💥 **Downside Long-Liquidation Cascade (Below 23,738 / 23,733)**: Triggers long unwinding cascade through 23,738 session low into 23,677 and 23,645.\n- 🚀 **Upside Short-Covering Squeeze (Sustained 15m close ABOVE 23,850)**: Forces 23,800 Call writers into short-covering panic, driving an explosive rally to 23,900 and 23,971.\n\n### Action Plan (BUY/SELL Setups)\n- **[S1] SELL Setup 1 (Supply Wall Rejection Fade Short)**: Pullback into 23,800–23,850 rejected with upper wick, 5m close BELOW 23,770. | **TP**: 23,738 / 23,677 | **SL**: 23,835 | 💡 Buy 23,800 PE + Sell 23,750 PE | R:R ~1.85\n- **[S2] SELL Setup 2 (Session Low Breakdown Continuation Short)**: Sustained 5m close BELOW 23,738 accompanied by expanding red futures volume. | **TP**: 23,677 / 23,645 | **SL**: 23,790 | 💡 Buy 23,750 PE + Sell 23,700 PE | R:R ~2.10\n- **[B1] BUY Setup 1 (Macro Demand Floor Reversal Long - SFP)**: Sweep below 23,650/23,645 rejected with lower absorption wick, 5m close back ABOVE 23,680. | **TP**: 23,750 / 23,800 | **SL**: 23,615 | 💡 Buy 23,650 CE + Sell 23,700 CE | R:R ~2.20\n- **[B2] BUY Setup 2 (High-Momentum Short-Covering Squeeze Long)**: Sustained 15m close ABOVE 23,850 with expanding futures volume. | **TP**: 23,900 / 23,971 | **SL**: 23,790 | 💡 Buy 23,850 CE + Sell 23,900 CE | R:R ~2.40\n\n### Live Chop Zone / No-Trade Zone\n- **Range**: 23,750 – 23,800 (50-point Expiry Equilibrium Band). Stand aside inside this corridor to avoid theta decay.\n\n\n## 7. Risk Warning & Option Strategy\n- Tuesday Expiry Day requires strict theta management. Prefer debit/credit spreads over naked option buying after 10:30 AM.\n\n\n``"
+  },
+  {
     "id": "NIFTY_20260908_072912",
     "timestamp": "2026-09-08T07:29:12+05:30",
     "timeDisplay": "07:29 AM, Sep 08",
