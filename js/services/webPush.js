@@ -55,12 +55,16 @@ export async function subscribeUserToPush() {
     const subJson = subscription.toJSON();
     const endpointHash = btoa(subJson.endpoint).replace(/[^a-zA-Z0-9]/g, '').substring(0, 32);
 
+    const timestamp = (typeof window !== 'undefined' && window.firebase?.firestore?.FieldValue?.serverTimestamp)
+      ? window.firebase.firestore.FieldValue.serverTimestamp()
+      : new Date().toISOString();
+
     if (user && db) {
       await db.collection("users").doc(user.uid).collection("pushSubscriptions").doc(endpointHash).set({
         endpoint: subJson.endpoint,
         keys: subJson.keys,
         userAgent: navigator.userAgent,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        updatedAt: timestamp
       }, { merge: true });
     }
 
@@ -71,12 +75,13 @@ export async function subscribeUserToPush() {
         endpoint: subJson.endpoint,
         keys: subJson.keys,
         userAgent: navigator.userAgent,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        updatedAt: timestamp
       }, { merge: true });
     }
 
     localStorage.setItem("tradelog_webpush_subscribed", "true");
     console.log("Web Push Subscription active:", endpointHash);
+    showToast("🟢 Lock-Screen Web Push Activated!");
     return subscription;
 
   } catch (err) {
