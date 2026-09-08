@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-f15c7db3ab";
+const CACHE_NAME = "trade-journal-ef5cac4e1f";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
