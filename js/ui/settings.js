@@ -212,12 +212,84 @@ export function loadSettings() {
       keepActiveToggle.onchange = (e) => setKeepAppActive(e.target.checked, true);
     }
 
+    loadNotificationPreferencesSettings();
     loadTelegramScannerSettings();
     window.dispatchEvent(new CustomEvent('settings-loaded'));
   }).catch((err) => {
     console.error("settings load error", err);
+    loadNotificationPreferencesSettings();
     loadTelegramScannerSettings();
   });
+}
+
+// ===================== Notification Preferences Engine =====================
+export function loadNotificationPreferencesSettings() {
+  const summaryToggle = document.getElementById('settings-summary-notif-toggle');
+  const alertToggle = document.getElementById('settings-alert-notif-toggle');
+  const sequenceToggle = document.getElementById('settings-sequence-notif-toggle');
+  const copilotToggle = document.getElementById('settings-copilot-notif-toggle');
+
+  const uid = state.currentUser?.uid;
+  if (!uid) return;
+
+  db.collection('users').doc(uid).collection('settings').doc('preferences').get().then((doc) => {
+    const data = doc.exists ? doc.data() : {};
+    
+    // 1. Summary Notifs (default true)
+    const summaryEnabled = data.summaryNotificationsEnabled !== false && localStorage.getItem('settings_summary_notifs') !== 'false';
+    if (summaryToggle) summaryToggle.checked = summaryEnabled;
+    localStorage.setItem('settings_summary_notifs', summaryEnabled ? 'true' : 'false');
+
+    // 2. Alert Notifs (default false)
+    const alertEnabled = data.alertNotificationsEnabled === true || localStorage.getItem('settings_alert_notifs') === 'true';
+    if (alertToggle) alertToggle.checked = alertEnabled;
+    localStorage.setItem('settings_alert_notifs', alertEnabled ? 'true' : 'false');
+
+    // 3. Sequence Notifs (default true)
+    const sequenceEnabled = data.sequenceNotificationsEnabled !== false && localStorage.getItem('settings_seq_notifs') !== 'false';
+    if (sequenceToggle) sequenceToggle.checked = sequenceEnabled;
+    localStorage.setItem('settings_seq_notifs', sequenceEnabled ? 'true' : 'false');
+
+    // 4. Copilot Notifs (default false)
+    const copilotEnabled = data.copilotNotificationsEnabled === true || localStorage.getItem('copilot_notifs_enabled') === 'true';
+    if (copilotToggle) copilotToggle.checked = copilotEnabled;
+    localStorage.setItem('copilot_notifs_enabled', copilotEnabled ? 'true' : 'false');
+  }).catch(() => {});
+
+  const setupToggleListener = (toggleEl, firestoreKey, localKey, label, defaultVal = true) => {
+    if (!toggleEl || toggleEl.dataset.initialized) return;
+    toggleEl.dataset.initialized = 'true';
+
+    toggleEl.addEventListener('change', async () => {
+      const val = toggleEl.checked;
+
+      if (val && typeof Notification !== 'undefined' && Notification.permission === 'default') {
+        const res = await Notification.requestPermission();
+        if (res !== 'granted') {
+          toggleEl.checked = false;
+          localStorage.setItem(localKey, 'false');
+          showToast('⚠️ Notification permission denied in browser settings');
+          return;
+        }
+      }
+
+      localStorage.setItem(localKey, val ? 'true' : 'false');
+      const currentUid = state.currentUser?.uid;
+      if (currentUid) {
+        db.collection('users').doc(currentUid)
+          .collection('settings').doc('preferences')
+          .set({ [firestoreKey]: val }, { merge: true })
+          .catch(() => {});
+      }
+      showToast(val ? `${label} enabled ✓` : `${label} disabled`);
+      window.dispatchEvent(new CustomEvent('notification-settings-changed', { detail: { key: firestoreKey, enabled: val } }));
+    });
+  };
+
+  setupToggleListener(summaryToggle, 'summaryNotificationsEnabled', 'settings_summary_notifs', 'New Summary pop-up notifications', true);
+  setupToggleListener(alertToggle, 'alertNotificationsEnabled', 'settings_alert_notifs', 'TradingView signal notifications', false);
+  setupToggleListener(sequenceToggle, 'sequenceNotificationsEnabled', 'settings_seq_notifs', 'SMC Sequence Rule notifications', true);
+  setupToggleListener(copilotToggle, 'copilotNotificationsEnabled', 'copilot_notifs_enabled', 'AI Co-Pilot notifications', false);
 }
 
 // ===================== Daily Backup Reminder Banner =====================

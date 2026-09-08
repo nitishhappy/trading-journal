@@ -1013,6 +1013,57 @@ if (viewLevels) {
         }
     }
 
+    function dispatchSummaryPushNotification(assetKey) {
+        if (localStorage.getItem('settings_summary_notifs') === 'false') return;
+        if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
+
+        const isGold = (assetKey === 'GOLD');
+        const isBtc = (assetKey === 'BTC');
+        const isSp500 = (assetKey === 'SP500');
+
+        const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+        const latestSummary = (summarySource && Array.isArray(summarySource) && summarySource.length > 0) ? summarySource[0] : null;
+
+        const assetLabels = {
+            'NIFTY': '📈 NIFTY 50',
+            'GOLD': '🪙 GOLD',
+            'BTC': '₿ BITCOIN',
+            'SP500': '🇺🇸 S&P 500'
+        };
+
+        const assetLabel = assetLabels[assetKey] || assetKey;
+        const nowStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        const timeStr = latestSummary?.timeDisplay ? latestSummary.timeDisplay.split(',')[0].strip?.() || latestSummary.timeDisplay.split(',')[0] : nowStr;
+        const spotStr = latestSummary?.spot ? ` (Spot: $${latestSummary.spot})` : '';
+
+        const title = `${assetLabel} — ${timeStr}`;
+        const options = {
+            body: `New Levels & Tactical Summary added${spotStr}`,
+            icon: './icons/icon-192.png',
+            badge: './icons/icon-192.png',
+            tag: `summary-push-${assetKey.toLowerCase()}-${Date.now()}`,
+            vibrate: [200, 100, 200]
+        };
+
+        try {
+            if (navigator.serviceWorker) {
+                navigator.serviceWorker.getRegistration().then(reg => {
+                    if (reg && typeof reg.showNotification === 'function') {
+                        reg.showNotification(title, options);
+                    } else {
+                        new Notification(title, options);
+                    }
+                }).catch(() => {
+                    new Notification(title, options);
+                });
+            } else {
+                new Notification(title, options);
+            }
+        } catch (e) {
+            console.error('Summary notification dispatch error:', e);
+        }
+    }
+
     function updateAssetTabBadges() {
         const assets = [
             { key: 'NIFTY', btnId: 'btn-asset-nifty' },
@@ -1035,6 +1086,7 @@ if (viewLevels) {
                 // Active tab: update signature immediately and clear unread badge
                 if (lastSeenSig !== null && lastSeenSig !== currentSig) {
                     playMarketBellSound();
+                    dispatchSummaryPushNotification(asset.key);
                 }
                 localStorage.setItem(storageKey, currentSig);
                 btn.classList.remove('btn-tab-updated');
@@ -1051,6 +1103,7 @@ if (viewLevels) {
                     // Inactive tab receives fresh data signature: show glow & dot
                     if (!btn.classList.contains('btn-tab-updated')) {
                         playMarketBellSound();
+                        dispatchSummaryPushNotification(asset.key);
                     }
                     btn.classList.add('btn-tab-updated');
                     if (!btn.querySelector('.unread-level-dot')) {

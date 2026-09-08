@@ -164,8 +164,9 @@ export function initSequenceRulesUI() {
         // 2. Play audio notification chime
         playAlertChime();
 
-        // 3. System Push Notification (if permission granted)
-        if ("Notification" in window && Notification.permission === "granted") {
+        // 3. System Push Notification (if enabled in settings and permission granted)
+        const isSeqNotifEnabled = localStorage.getItem('settings_seq_notifs') !== 'false';
+        if (isSeqNotifEnabled && "Notification" in window && Notification.permission === "granted") {
           const title = `🎯 ${newest.ruleName}`;
           const options = {
             body: `${newest.symbol || 'Asset'} (${newest.timeframe || '15'}) @ ${formattedPrice}\nSteps: ${stepsStr || 'Sequence Completed'}`,

@@ -1056,15 +1056,53 @@
           <input type="number" id="settings-seq-multiplier" min="1" max="100" style="width:100px;margin-bottom:12px;" value="6" />
           <button id="settings-seq-save-btn" class="btn-small" style="background:var(--grad-green); color:#04140A; border:none; display:block; width:100%; padding:10px 14px; margin-top:4px;">Save Sequence Timeout</button>
 
-          <h4 style="margin-top:20px; margin-bottom:8px;">Push Notification Preferences</h4>
-          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-            <label class="toggle-switch">
-              <input type="checkbox" id="settings-alert-notif-toggle" />
-              <span></span>
-            </label>
-            <span style="font-size:13px; color:var(--text-dim,#aaa);">Enable system notifications for every incoming TradingView alert</span>
+          <h4 style="margin-top:20px; margin-bottom:8px;">🔔 System & Push Notification Preferences</h4>
+          
+          <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:12px; background:var(--surface-2,#1a1a1a); border:1px solid var(--border,#333); border-radius:8px; padding:14px;">
+            <div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settings-summary-notif-toggle" checked />
+                  <span></span>
+                </label>
+                <span style="font-size:13px; font-weight:600; color:var(--text,#fff);">New Summary & Level Updates ("Asset - Time - New Levels added")</span>
+              </div>
+              <p class="settings-hint" style="margin:4px 0 0 46px; font-size:11px;">Fires a browser pop-up notification (e.g. "GOLD — 08:30 PM | New Levels & Tactical Summary added") when fresh plans sync.</p>
+            </div>
+
+            <div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settings-alert-notif-toggle" />
+                  <span></span>
+                </label>
+                <span style="font-size:13px; font-weight:600; color:var(--text,#fff);">TradingView & Live Signal Alerts</span>
+              </div>
+              <p class="settings-hint" style="margin:4px 0 0 46px; font-size:11px;">Fires system notifications for every incoming TradingView alert or private Telegram signal.</p>
+            </div>
+
+            <div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settings-sequence-notif-toggle" checked />
+                  <span></span>
+                </label>
+                <span style="font-size:13px; font-weight:600; color:var(--text,#fff);">SMC Pattern & Sequence Rule Trigger Alerts</span>
+              </div>
+              <p class="settings-hint" style="margin:4px 0 0 46px; font-size:11px;">Fires system notifications and rich toasts when a multi-candle sequence completes.</p>
+            </div>
+
+            <div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settings-copilot-notif-toggle" />
+                  <span></span>
+                </label>
+                <span style="font-size:13px; font-weight:600; color:var(--text,#fff);">AI Co-Pilot & System Run Alerts</span>
+              </div>
+              <p class="settings-hint" style="margin:4px 0 0 46px; font-size:11px;">Fires system notifications when AI Co-Pilot background analysis runs complete or find trade setups.</p>
+            </div>
           </div>
-          <p class="settings-hint" style="margin-top:0; font-size:11px;">When off, system notifications will only fire on sequence rule completions.</p>
         </div>
       </div>
 
