@@ -273,9 +273,11 @@ export function loadNotificationPreferencesSettings() {
         }
       }
 
+      let isSubbed = false;
       if (val) {
         if (typeof window.subscribeUserToPush === 'function') {
-          await window.subscribeUserToPush();
+          const sub = await window.subscribeUserToPush();
+          isSubbed = !!sub;
         }
       }
 
@@ -294,7 +296,11 @@ export function loadNotificationPreferencesSettings() {
         window.unsubscribeUserFromPush();
       }
 
-      showToast(val ? `${label} enabled ✓` : `${label} disabled`);
+      if (val) {
+        showToast(isSubbed ? `${label} & Lock-Screen Push Active ✓` : `${label} enabled ✓`, 3500);
+      } else {
+        showToast(`${label} disabled`);
+      }
       window.dispatchEvent(new CustomEvent('notification-settings-changed', { detail: { key: firestoreKey, enabled: val } }));
     });
   };
@@ -303,6 +309,49 @@ export function loadNotificationPreferencesSettings() {
   setupToggleListener(alertToggle, 'alertNotificationsEnabled', 'settings_alert_notifs', 'TradingView signal notifications', false);
   setupToggleListener(sequenceToggle, 'sequenceNotificationsEnabled', 'settings_seq_notifs', 'SMC Sequence Rule notifications', true);
   setupToggleListener(copilotToggle, 'copilotNotificationsEnabled', 'copilot_notifs_enabled', 'AI Co-Pilot notifications', false);
+
+  // Wire up ▶ Test Lock-Screen Push Notification button
+  const testPushBtn = document.getElementById('btn-test-webpush');
+  const pushStatusBadge = document.getElementById('webpush-status-badge');
+
+  if (testPushBtn && !testPushBtn.dataset.initialized) {
+    testPushBtn.dataset.initialized = 'true';
+    testPushBtn.addEventListener('click', async () => {
+      if (pushStatusBadge) pushStatusBadge.textContent = '⏳ Subscribing device & dispatching test push payload...';
+      
+      if (typeof window.subscribeUserToPush !== 'function') {
+        if (pushStatusBadge) pushStatusBadge.textContent = '❌ Error: webPush service not loaded';
+        return;
+      }
+
+      const sub = await window.subscribeUserToPush();
+      if (!sub) {
+        if (pushStatusBadge) pushStatusBadge.textContent = '⚠️ Subscription failed or permission denied by browser';
+        return;
+      }
+
+      try {
+        const resp = await fetch('https://trading-journal-sandy-three.vercel.app/api/sendPush', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: '🔔 TEST LOCK-SCREEN PUSH',
+            body: 'Lock-screen Web Push is working on TradeLog!',
+            category: 'test'
+          })
+        });
+        const resData = await resp.json();
+        if (resData.ok && resData.deliveredCount > 0) {
+          if (pushStatusBadge) pushStatusBadge.textContent = `🟢 Push Sent! Delivered to ${resData.deliveredCount} device(s). Check lock screen!`;
+          showToast('🟢 Lock-Screen Web Push Sent! Check banner', 3500);
+        } else {
+          if (pushStatusBadge) pushStatusBadge.textContent = `⚠️ Endpoint reached, but 0 devices received push (${resData.message || ''})`;
+        }
+      } catch (err) {
+        if (pushStatusBadge) pushStatusBadge.textContent = `❌ Push dispatch error: ${err.message || err}`;
+      }
+    });
+  }
 }
 
 // ===================== Daily Backup Reminder Banner =====================
