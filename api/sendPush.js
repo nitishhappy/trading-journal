@@ -22,7 +22,11 @@ module.exports = async (req, res) => {
     if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
     if (!db) return res.status(500).send("Database not initialized");
 
-    const { action, endpoint, keys, userAgent, title, body, tag, url, category, uid } = req.body || {};
+    let bodyObj = req.body || {};
+    if (typeof bodyObj === 'string') {
+      try { bodyObj = JSON.parse(bodyObj); } catch(e) {}
+    }
+    const { action, endpoint, keys, userAgent, title, body, tag, url, category, uid } = bodyObj;
 
     // ── Handle Subscription Registration ──────────────────────────────────────
     if (action === "register" || endpoint) {
