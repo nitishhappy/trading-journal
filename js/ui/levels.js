@@ -2547,16 +2547,18 @@ window.toggleMaximizePanel = function(btn, event) {
             } catch(e) {}
         }
 
-        // BTC fallback: fetch from Binance if livePrices doesn't have BTC
+        // BTC fallback: fetch from Coinbase if livePrices doesn't have BTC
         if (isBtc && !currentPrice) {
             try {
-                const binRes = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
-                if (binRes.ok) {
-                    const binData = await binRes.json();
-                    currentPrice = parseFloat(binData.price);
+                const cbRes = await fetch('https://api.coinbase.com/v2/prices/BTC-USD/spot');
+                if (cbRes.ok) {
+                    const cbData = await cbRes.json();
+                    if (cbData?.data?.amount) {
+                        currentPrice = parseFloat(cbData.data.amount);
+                    }
                 }
             } catch (e) {
-                console.error("Binance BTC price fetch failed:", e);
+                console.error("Coinbase BTC price fetch failed:", e);
             }
         }
         

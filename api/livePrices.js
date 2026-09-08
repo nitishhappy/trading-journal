@@ -121,11 +121,28 @@ export default async function handler(req, res) {
       }
     }
 
+    // 4. Fetch BTC Price (BTC-USD)
+    let btcPrice = null;
+    const btcCbUrl = "https://api.coinbase.com/v2/prices/BTC-USD/spot";
+    const btcCbRes = await fetchUrl(btcCbUrl);
+    if (btcCbRes?.data?.amount) {
+      btcPrice = Number(parseFloat(btcCbRes.data.amount).toFixed(2));
+    }
+    if (!btcPrice) {
+      const btcYurl = "https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?interval=1m&range=1d";
+      const btcYres = await fetchUrl(btcYurl);
+      if (btcYres?.chart?.result?.[0]?.meta?.regularMarketPrice) {
+        btcPrice = Number(btcYres.chart.result[0].meta.regularMarketPrice);
+      }
+    }
+
     return res.status(200).json({
       success: true,
       nifty: niftyPrice,
       xauusd: xauusdPrice,
       sp500: sp500Price,
+      btcusd: btcPrice,
+      btcusdt: btcPrice,
       timestamp: Date.now()
     });
 
