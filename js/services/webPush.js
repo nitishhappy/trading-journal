@@ -56,10 +56,11 @@ export async function subscribeUserToPush() {
     const endpointHash = btoa(subJson.endpoint).replace(/[^a-zA-Z0-9]/g, '').substring(0, 32);
 
     try {
-      await fetch('https://trading-journal-sandy-three.vercel.app/api/registerPush', {
+      await fetch('https://trading-journal-sandy-three.vercel.app/api/sendPush', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          action: 'register',
           endpoint: subJson.endpoint,
           keys: subJson.keys,
           userAgent: navigator.userAgent,
@@ -67,7 +68,7 @@ export async function subscribeUserToPush() {
         })
       });
     } catch (e) {
-      console.warn("registerPush API notice:", e);
+      console.warn("sendPush register API notice:", e);
     }
 
     // Optional client Firestore fallback (silently catch permission errors if unauthenticated)
