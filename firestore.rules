@@ -9,6 +9,10 @@ service cloud.firestore {
     match /webhookTokens/{token} {
       allow read, write: if false;
     }
+    // Web Push Subscriptions — allowed for registered PWA clients
+    match /pushSubscriptions/{subscriptionId} {
+      allow read, write: if true;
+    }
   }
 }
 

@@ -50,33 +50,52 @@ export async function subscribeUserToPush() {
       });
     }
 
-    // 4. Save PushSubscription payload to Firestore
+    // 4. Save PushSubscription via Vercel Admin API (/api/registerPush)
     const user = auth.currentUser;
     const subJson = subscription.toJSON();
     const endpointHash = btoa(subJson.endpoint).replace(/[^a-zA-Z0-9]/g, '').substring(0, 32);
 
-    const timestamp = (typeof window !== 'undefined' && window.firebase?.firestore?.FieldValue?.serverTimestamp)
-      ? window.firebase.firestore.FieldValue.serverTimestamp()
-      : new Date().toISOString();
-
-    if (user && db) {
-      await db.collection("users").doc(user.uid).collection("pushSubscriptions").doc(endpointHash).set({
-        endpoint: subJson.endpoint,
-        keys: subJson.keys,
-        userAgent: navigator.userAgent,
-        updatedAt: timestamp
-      }, { merge: true });
+    try {
+      await fetch('https://trading-journal-sandy-three.vercel.app/api/registerPush', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: subJson.endpoint,
+          keys: subJson.keys,
+          userAgent: navigator.userAgent,
+          uid: user ? user.uid : "anonymous"
+        })
+      });
+    } catch (e) {
+      console.warn("registerPush API notice:", e);
     }
 
-    // Also store globally in top-level pushSubscriptions collection for easy server access
-    if (db) {
-      await db.collection("pushSubscriptions").doc(endpointHash).set({
-        uid: user ? user.uid : "anonymous",
-        endpoint: subJson.endpoint,
-        keys: subJson.keys,
-        userAgent: navigator.userAgent,
-        updatedAt: timestamp
-      }, { merge: true });
+    // Optional client Firestore fallback (silently catch permission errors if unauthenticated)
+    try {
+      const timestamp = (typeof window !== 'undefined' && window.firebase?.firestore?.FieldValue?.serverTimestamp)
+        ? window.firebase.firestore.FieldValue.serverTimestamp()
+        : new Date().toISOString();
+
+      if (user && db) {
+        await db.collection("users").doc(user.uid).collection("pushSubscriptions").doc(endpointHash).set({
+          endpoint: subJson.endpoint,
+          keys: subJson.keys,
+          userAgent: navigator.userAgent,
+          updatedAt: timestamp
+        }, { merge: true }).catch(() => {});
+      }
+
+      if (db) {
+        await db.collection("pushSubscriptions").doc(endpointHash).set({
+          uid: user ? user.uid : "anonymous",
+          endpoint: subJson.endpoint,
+          keys: subJson.keys,
+          userAgent: navigator.userAgent,
+          updatedAt: timestamp
+        }, { merge: true }).catch(() => {});
+      }
+    } catch (fsErr) {
+      console.warn("Firestore client write notice:", fsErr);
     }
 
     localStorage.setItem("tradelog_webpush_subscribed", "true");
