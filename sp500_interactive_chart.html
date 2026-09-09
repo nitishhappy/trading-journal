@@ -501,7 +501,7 @@
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Levels`;
 
             // Load real 5m OHLC candle feed
-            const candles = await loadRealSp500Candles(levelsData.levels);
+            const candles = await loadRealSp500Candles();
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
 
@@ -620,137 +620,23 @@
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
         }
 
-        function pseudoRandom(seed) {
-            let x = Math.sin(seed) * 10000;
-            return x - Math.floor(x);
-        }
-
-        function enhanceFlatCandle(c, vol = 5.0) {
-            if (!c || c.high === undefined || c.low === undefined) return c;
-            if (Math.abs(c.high - c.low) < 0.15) {
-                const t = c.time;
-                const r1 = pseudoRandom(t + 1);
-                const r2 = pseudoRandom(t + 2);
-                const r3 = pseudoRandom(t + 3);
-                const delta = (r1 - 0.48) * vol;
-                const open = c.close;
-                const close = open + delta;
-                const high = Math.max(open, close) + r2 * (vol * 0.5);
-                const low = Math.min(open, close) - r3 * (vol * 0.5);
-                return {
-                    time: t,
-                    open: Number(open.toFixed(2)),
-                    high: Number(high.toFixed(2)),
-                    low: Number(low.toFixed(2)),
-                    close: Number(close.toFixed(2))
-                };
-            }
-            return c;
-        }
-
-        async function loadRealSp500Candles(levels) {
-            // 1. Primary: /api/sp500Candles Vercel / local API endpoint
+        async function loadRealSp500Candles() {
+            // Server-side /api/sp500Candles (Yahoo Finance ^GSPC 5m, bypasses CORS)
             try {
                 const res = await fetch('/api/sp500Candles');
                 if (res.ok) {
                     const json = await res.json();
                     if (json && json.candles && json.candles.length > 0) {
-                        return json.candles.map(c => enhanceFlatCandle(c, 5.0));
+                        return json.candles;
+                    }
+                    if (json && !json.success) {
+                        console.warn('[SP500 Chart] API returned no candles:', json.message);
                     }
                 }
-            } catch (e) {}
-
-            // 2. Secondary: Yahoo Finance ^GSPC (S&P 500 5m chart)
-            try {
-                const res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=5m&range=1d');
-                if (res.ok) {
-                    const json = await res.json();
-                    const result = json?.chart?.result?.[0];
-                    if (result && result.timestamp) {
-                        const times = result.timestamp;
-                        const quote = result.indicators.quote[0];
-                        const candles = [];
-                        for (let i = 0; i < times.length; i++) {
-                            if (quote.open[i] != null && quote.close[i] != null) {
-                                candles.push({
-                                    time: times[i],
-                                    open: parseFloat(quote.open[i].toFixed(2)),
-                                    high: parseFloat((quote.high[i] || quote.open[i]).toFixed(2)),
-                                    low: parseFloat((quote.low[i] || quote.open[i]).toFixed(2)),
-                                    close: parseFloat(quote.close[i].toFixed(2))
-                                });
-                            }
-                        }
-                        if (candles.length > 0) return candles.map(c => enhanceFlatCandle(c, 5.0));
-                    }
-                }
-            } catch (e) {}
-
-            // 3. Fallback: accumulate live spot feed from /api/livePrices
-            const fallbackCandles = await loadSpotFeedFallback('SP500', levels, 7630.00);
-            return fallbackCandles.map(c => enhanceFlatCandle(c, 5.0));
-        }
-
-        async function loadSpotFeedFallback(assetKey, levels, defaultBase) {
-            let spotPrice = null;
-            try {
-                const res = await fetch('/api/livePrices');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.success) {
-                        if (assetKey === 'GOLD') spotPrice = data.xauusd;
-                        else if (assetKey === 'BTC') spotPrice = data.btcusd || data.btcusdt;
-                        else if (assetKey === 'SP500') spotPrice = data.sp500;
-                        else if (assetKey === 'NIFTY') spotPrice = data.nifty;
-                    }
-                }
-            } catch (e) {}
-
-            if (!spotPrice && levels && levels.length > 0) {
-                const p = parseFloat(levels[0].price);
-                if (!isNaN(p)) spotPrice = p;
+            } catch (e) {
+                console.error('[SP500 Chart] /api/sp500Candles fetch failed:', e);
             }
-            if (!spotPrice) spotPrice = defaultBase;
-
-            const storageKey = `${assetKey}_real_5m_candles_v1`;
-            let stored = [];
-            try {
-                const str = localStorage.getItem(storageKey);
-                if (str) stored = JSON.parse(str);
-            } catch (e) {}
-
-            const nowSec = Math.floor(Date.now() / 1000);
-            const current5m = Math.floor(nowSec / 300) * 300;
-
-            if (stored.length === 0) {
-                let curr = spotPrice;
-                for (let t = current5m - (30 * 300); t <= current5m; t += 300) {
-                    stored.push({ time: t, open: curr, high: curr, low: curr, close: curr });
-                }
-            } else {
-                let lastCandle = stored[stored.length - 1];
-                if (lastCandle.time === current5m) {
-                    lastCandle.high = Math.max(lastCandle.high, spotPrice);
-                    lastCandle.low = Math.min(lastCandle.low, spotPrice);
-                    lastCandle.close = spotPrice;
-                } else if (lastCandle.time < current5m) {
-                    let prevClose = lastCandle.close;
-                    for (let t = lastCandle.time + 300; t <= current5m; t += 300) {
-                        if (t === current5m) {
-                            stored.push({ time: t, open: prevClose, high: Math.max(prevClose, spotPrice), low: Math.min(prevClose, spotPrice), close: spotPrice });
-                        } else {
-                            stored.push({ time: t, open: prevClose, high: prevClose, low: prevClose, close: prevClose });
-                        }
-                    }
-                }
-                if (stored.length > 100) stored = stored.slice(-100);
-            }
-
-            try {
-                localStorage.setItem(storageKey, JSON.stringify(stored));
-            } catch (e) {}
-
-            return stored;
+            return [];
         }
 
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
