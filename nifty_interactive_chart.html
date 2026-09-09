@@ -621,22 +621,39 @@
                 const res = await fetch('/api/niftyCandles');
                 if (!res.ok) return null;
                 const json = await res.json();
-                if (!json || !json.candles || !Array.isArray(json.candles)) return null;
+                if (!json || !json.candles || !Array.isArray(json.candles) || json.candles.length === 0) return null;
 
                 // Map Upstox candles to Lightweight Charts format
-                // Upstox candle format: [timestamp_str, open, high, low, close, volume]
+                // API format: { timestamp, open, high, low, close } OR [timestamp, open, high, low, close]
                 const formatted = json.candles.map(c => {
-                    const timeSec = typeof c[0] === 'number' ? c[0] : Math.floor(new Date(c[0]).getTime() / 1000);
-                    return {
-                        time: timeSec,
-                        open: parseFloat(c[1]),
-                        high: parseFloat(c[2]),
-                        low: parseFloat(c[3]),
-                        close: parseFloat(c[4])
-                    };
-                }).sort((a, b) => a.time - b.time);
+                    let timeSec;
+                    let open, high, low, close;
 
-                return formatted;
+                    if (typeof c === 'object' && c !== null && !Array.isArray(c)) {
+                        const tsStr = c.timestamp || c.timeStr || c.time;
+                        timeSec = typeof tsStr === 'number' ? tsStr : Math.floor(new Date(tsStr).getTime() / 1000);
+                        open = parseFloat(c.open);
+                        high = parseFloat(c.high);
+                        low = parseFloat(c.low);
+                        close = parseFloat(c.close);
+                    } else if (Array.isArray(c)) {
+                        timeSec = typeof c[0] === 'number' ? c[0] : Math.floor(new Date(c[0]).getTime() / 1000);
+                        open = parseFloat(c[1]);
+                        high = parseFloat(c[2]);
+                        low = parseFloat(c[3]);
+                        close = parseFloat(c[4]);
+                    }
+
+                    if (isNaN(timeSec) || isNaN(open) || isNaN(high) || isNaN(low) || isNaN(close)) {
+                        return null;
+                    }
+
+                    return { time: timeSec, open, high, low, close };
+                })
+                .filter(c => c !== null)
+                .sort((a, b) => a.time - b.time);
+
+                return formatted.length > 0 ? formatted : null;
             } catch (e) {
                 console.warn("[Candle Feed Error] Could not fetch /api/niftyCandles:", e);
                 return null;
