@@ -753,6 +753,11 @@
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
         }
 
+        function pseudoRandom(seed) {
+            let x = Math.sin(seed) * 10000;
+            return x - Math.floor(x);
+        }
+
         function generateCurrentISTNiftyCandles() {
             const candles = [];
             const now = new Date();
@@ -767,11 +772,14 @@
             let currentPrice = 23510;
             for (let i = 0; i <= elapsedCandles; i++) {
                 const time = startUnix + (i * 300);
-                const volatility = (Math.random() - 0.48) * 12;
+                const r1 = pseudoRandom(time + 1);
+                const r2 = pseudoRandom(time + 2);
+                const r3 = pseudoRandom(time + 3);
+                const volatility = (r1 - 0.48) * 12;
                 const open = currentPrice;
                 const close = open + volatility;
-                const high = Math.max(open, close) + Math.random() * 6;
-                const low = Math.min(open, close) - Math.random() * 6;
+                const high = Math.max(open, close) + r2 * 6;
+                const low = Math.min(open, close) - r3 * 6;
                 candles.push({ time, open, high, low, close });
                 currentPrice = close;
             }

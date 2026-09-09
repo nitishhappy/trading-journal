@@ -618,10 +618,17 @@
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
         }
 
+        function pseudoRandom(seed) {
+            let x = Math.sin(seed) * 10000;
+            return x - Math.floor(x);
+        }
+
         function generateSp500Candles(levels) {
             const candles = [];
-            const now = new Date();
-            const startUnix = Math.floor(now.getTime() / 1000) - (50 * 300);
+            const nowSec = Math.floor(Date.now() / 1000);
+            const current5m = Math.floor(nowSec / 300) * 300;
+            const anchorUnix = Math.floor(nowSec / 86400) * 86400;
+            const startUnix = Math.max(anchorUnix, current5m - (50 * 300));
 
             let basePrice = 7680.00;
             if (levels && levels.length > 0) {
@@ -630,14 +637,18 @@
             }
 
             let currentPrice = basePrice;
-            for (let i = 0; i <= 50; i++) {
-                const time = startUnix + (i * 300);
-                const delta = (Math.random() - 0.48) * 8.0;
+            for (let t = anchorUnix; t <= current5m; t += 300) {
+                const r1 = pseudoRandom(t + 1);
+                const r2 = pseudoRandom(t + 2);
+                const r3 = pseudoRandom(t + 3);
+                const delta = (r1 - 0.48) * 8.0;
                 const open = currentPrice;
                 const close = open + delta;
-                const high = Math.max(open, close) + Math.random() * 4.0;
-                const low = Math.min(open, close) - Math.random() * 4.0;
-                candles.push({ time, open, high, low, close });
+                const high = Math.max(open, close) + r2 * 4.0;
+                const low = Math.min(open, close) - r3 * 4.0;
+                if (t >= startUnix) {
+                    candles.push({ time: t, open, high, low, close });
+                }
                 currentPrice = close;
             }
             return candles;
