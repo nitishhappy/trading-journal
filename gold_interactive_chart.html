@@ -309,11 +309,14 @@
     <div class="header">
         <h1>🪙 Gold</h1>
         <div class="controls-row">
-            <button id="btn-toggle-alerts" class="btn">
-                <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
-            </button>
+            <div class="timer-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
+                <span>🔄</span> Auto Refresh: <span id="refresh-timer">15s</span>
+            </div>
             <button id="btn-manual-refresh" class="btn">
                 <span>⚡</span> Refresh Data
+            </button>
+            <button id="btn-toggle-alerts" class="btn">
+                <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
             </button>
         </div>
     </div>
@@ -349,11 +352,13 @@
         let levelsData = [];
         let candleSeries = null;
         let chartInstance = null;
+        let countdownSeconds = 15;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
             initChartApp();
             setupEventListeners();
+            startAutoRefreshTimer();
         });
 
         function checkEmbedMode() {
@@ -361,6 +366,18 @@
             if (urlParams.get('embed') === 'true') {
                 document.body.classList.add('embed-mode');
             }
+        }
+
+        function startAutoRefreshTimer() {
+            setInterval(() => {
+                countdownSeconds--;
+                if (countdownSeconds <= 0) {
+                    countdownSeconds = 15;
+                    reloadChartData();
+                }
+                const timerEl = document.getElementById('refresh-timer');
+                if (timerEl) timerEl.innerText = `${countdownSeconds}s`;
+            }, 1000);
         }
 
         function setupEventListeners() {
@@ -386,6 +403,7 @@
 
             refreshBtn.addEventListener('click', () => {
                 reloadChartData();
+                countdownSeconds = 15;
                 showToast("⚡ Gold Action Plan Refreshed", "Loaded latest Section 5 triggers & candles.");
             });
         }
