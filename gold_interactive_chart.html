@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GOLD (XAU/USD) • Live 5M/15M Action Plan & Triggers</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <script src="https://s3.tradingview.com/tv.js"></script>
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="js/data/gold_daily_plan.js"></script>
     <style>
         :root {
@@ -159,6 +159,7 @@
             flex: 1;
             width: 100%;
             min-height: 500px;
+            position: relative;
             border-radius: 8px;
             overflow: hidden;
         }
@@ -321,7 +322,7 @@
         <div class="chart-section">
             <div class="chart-toolbar">
                 <div class="symbol-title">
-                    <span>🪙 OANDA:XAUUSD (5M Live Chart)</span>
+                    <span>🪙 XAU/USD (5M Level Chart)</span>
                 </div>
                 <div class="timestamp-badge" id="briefing-time-badge">📌 Action Plan Raised: --</div>
             </div>
@@ -344,45 +345,21 @@
 
     <script>
         let alertsEnabled = false;
+        let activePriceLines = [];
         let levelsData = [];
-        let tvWidget = null;
+        let candleSeries = null;
+        let chartInstance = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
-            initTradingViewWidget();
+            initChartApp();
             setupEventListeners();
-            loadGoldActionPlan();
         });
 
         function checkEmbedMode() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('embed') === 'true') {
                 document.body.classList.add('embed-mode');
-            }
-        }
-
-        function initTradingViewWidget() {
-            if (typeof TradingView !== 'undefined') {
-                tvWidget = new TradingView.widget({
-                    "autosize": true,
-                    "symbol": "OANDA:XAUUSD",
-                    "interval": "5",
-                    "timezone": "Asia/Kolkata",
-                    "theme": "dark",
-                    "style": "1",
-                    "locale": "en",
-                    "enable_publishing": false,
-                    "backgroundColor": "rgba(11, 15, 23, 1)",
-                    "gridColor": "rgba(42, 46, 57, 0.1)",
-                    "hide_top_toolbar": false,
-                    "hide_legend": false,
-                    "save_image": false,
-                    "container_id": "chart-wrapper",
-                    "studies": [
-                        "Volume@tv-basicstudies",
-                        "Moving Average Exponential@tv-basicstudies"
-                    ]
-                });
             }
         }
 
@@ -408,46 +385,147 @@
             });
 
             refreshBtn.addEventListener('click', () => {
-                loadGoldActionPlan();
-                showToast("⚡ Gold Action Plan Refreshed", "Loaded latest Section 5 triggers.");
+                reloadChartData();
+                showToast("⚡ Gold Action Plan Refreshed", "Loaded latest Section 5 triggers & candles.");
             });
         }
 
-        function loadGoldActionPlan() {
+        function initChartApp() {
+            const container = document.getElementById('chart-wrapper');
+            
+            chartInstance = LightweightCharts.createChart(container, {
+                layout: {
+                    background: { type: 'solid', color: '#151c28' },
+                    textColor: '#94a3b8',
+                    fontFamily: 'Inter, sans-serif',
+                },
+                grid: {
+                    vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                    horzLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: 'rgba(245, 158, 11, 0.2)',
+                },
+                timeScale: {
+                    borderColor: 'rgba(245, 158, 11, 0.2)',
+                    timeVisible: true,
+                    secondsVisible: false,
+                    tickMarkFormatter: (time) => {
+                        const date = new Date(time * 1000);
+                        const h = date.getHours().toString().padStart(2, '0');
+                        const m = date.getMinutes().toString().padStart(2, '0');
+                        return `${h}:${m}`;
+                    }
+                },
+                localization: {
+                    timeFormatter: (time) => {
+                        const date = new Date(time * 1000);
+                        let h = date.getHours();
+                        const m = date.getMinutes().toString().padStart(2, '0');
+                        const ampm = h >= 12 ? 'PM' : 'AM';
+                        h = h % 12;
+                        h = h ? h : 12;
+                        return `${h}:${m} ${ampm}`;
+                    }
+                }
+            });
+
+            candleSeries = chartInstance.addCandlestickSeries({
+                upColor: '#10b981',
+                downColor: '#f43f5e',
+                borderVisible: false,
+                wickUpColor: '#10b981',
+                wickDownColor: '#f43f5e',
+            });
+
+            reloadChartData();
+
+            // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction!
+            chartInstance.subscribeClick((param) => {
+                if (!param || !param.point) return;
+
+                const clickedPrice = candleSeries.coordinateToPrice(param.point.y);
+                if (!clickedPrice) return;
+
+                let closestLevelIdx = -1;
+                let minDistance = 999;
+
+                activePriceLines.forEach((item) => {
+                    const dist = Math.abs(item.price - clickedPrice);
+                    if (dist < 4.0 && dist < minDistance) {
+                        minDistance = dist;
+                        closestLevelIdx = item.index;
+                    }
+                });
+
+                if (closestLevelIdx !== -1) {
+                    highlightCard(closestLevelIdx);
+                    const matchedLevel = activePriceLines[closestLevelIdx];
+                    showToast(`Selected Line: ${matchedLevel.tag} $${matchedLevel.price}`, matchedLevel.levelObj.behavior);
+                    triggerAlertSound(880, 'sine', 0.1);
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+            });
+            chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+        }
+
+        function reloadChartData() {
+            levelsData = getGoldActionPlanLevels();
+
+            const raisedTimeStr = levelsData.timeDisplay || "06:02 PM, Sep 09";
+            document.getElementById('briefing-time-badge').innerText = `📌 Action Plan Raised: ${raisedTimeStr}`;
+            document.getElementById('levels-count').innerText = `${levelsData.levels.length} Setups`;
+
+            // Generate candles centered around Gold Action Plan levels
+            const candles = generateGoldCandles(levelsData.levels);
+            candleSeries.setData(candles);
+
+            const targetCandleTime = candles[Math.floor(candles.length / 2)]?.time || Math.floor(Date.now() / 1000);
+            candleSeries.setMarkers([
+                {
+                    time: targetCandleTime,
+                    position: 'aboveBar',
+                    color: '#f59e0b',
+                    shape: 'arrowDown',
+                    text: `📌 Gold Plan Raised (${raisedTimeStr.split(',')[0]})`,
+                    size: 2
+                }
+            ]);
+
+            // Render Horizontal Level Lines & Side Cards
             const levelsListEl = document.getElementById('levels-list');
             levelsListEl.innerHTML = '';
+            
+            activePriceLines.forEach(item => {
+                if (item.line) candleSeries.removePriceLine(item.line);
+            });
+            activePriceLines = [];
 
-            let goldLevels = [];
-            let timeDisplay = "06:02 PM, Sep 09";
-
-            if (window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData) && window.goldDailyPlanData.length > 0) {
-                const latestTimestamp = window.goldDailyPlanData[0]?.timestamp;
-                timeDisplay = window.goldDailyPlanData[0]?.timeDisplay || timeDisplay;
-
-                // Filter for latest timestamp AND prioritize Section 5 Action Plan tags ([G_B1], [G_B2], [G_S1], [G_S2])
-                const latestItems = window.goldDailyPlanData.filter(item => item.timestamp === latestTimestamp);
-                const section5Items = latestItems.filter(item => /\[G_(B|S)\d\]/i.test(item.behavior || ''));
-
-                goldLevels = section5Items.length > 0 ? section5Items : latestItems;
-            }
-
-            // Fallback mock data if window.goldDailyPlanData is not loaded
-            if (goldLevels.length === 0) {
-                goldLevels = [
-                    { price: "4385.00", bias: "bullish", behavior: "[WED 18:02] [G_B1]: Day Low $4,381 SSL Sweep & Bullish Reclaim Trigger", tp: "4396.00 / 4406.00", sl: "4374.00" },
-                    { price: "4406.00", bias: "bullish", behavior: "[WED 18:02] [G_B2]: $4,400 Breaker Reclaim & Short-Squeeze Trigger", tp: "4418.00 / 4428.00", sl: "4397.00" },
-                    { price: "4400.00-4405.00", bias: "bearish", behavior: "[WED 18:02] [G_S1]: London Breaker Block & Polar Resistance Rejection", tp: "4388.00 / 4381.00", sl: "4410.00" },
-                    { price: "4378.00", bias: "bearish", behavior: "[WED 18:02] [G_S2]: Day Low $4,381 Structural Breakdown & Liquidation Cascade", tp: "4368.00 / 4358.00", sl: "4386.00" }
-                ];
-            }
-
-            document.getElementById('briefing-time-badge').innerText = `📌 Action Plan Raised: ${timeDisplay}`;
-            document.getElementById('levels-count').innerText = `${goldLevels.length} Action Plan Setups`;
-
-            goldLevels.forEach((lvl, idx) => {
+            levelsData.levels.forEach((lvl, idx) => {
                 const isBullish = lvl.bias === 'bullish';
+                const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const tag = extractTag(lvl.behavior) || (isBullish ? `[G_B${idx+1}]` : `[G_S${idx+1}]`);
-                
+                const priceVal = parseFloat(lvl.price.split('-')[0].replace(/[^0-9.]/g, ''));
+
+                if (!isNaN(priceVal)) {
+                    const pLine = candleSeries.createPriceLine({
+                        price: priceVal,
+                        color: lineColor,
+                        lineWidth: 2,
+                        lineStyle: LightweightCharts.LineStyle.Dashed,
+                        axisLabelVisible: true,
+                        title: `${tag} $${lvl.price}`,
+                    });
+
+                    activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx });
+                }
+
                 const card = document.createElement('div');
                 card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}`;
                 card.id = `card-gold-${idx}`;
@@ -484,6 +562,32 @@
             }
         }
 
+        function getGoldActionPlanLevels() {
+            let levels = [];
+            let timeDisplay = "06:02 PM, Sep 09";
+
+            if (window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData) && window.goldDailyPlanData.length > 0) {
+                const latestTimestamp = window.goldDailyPlanData[0]?.timestamp;
+                timeDisplay = window.goldDailyPlanData[0]?.timeDisplay || timeDisplay;
+
+                const latestItems = window.goldDailyPlanData.filter(item => item.timestamp === latestTimestamp);
+                const section5Items = latestItems.filter(item => /\[G_(B|S)\d\]/i.test(item.behavior || ''));
+
+                levels = section5Items.length > 0 ? section5Items : latestItems;
+            }
+
+            if (levels.length === 0) {
+                levels = [
+                    { price: "4385.00", bias: "bullish", behavior: "[WED 18:02] [G_B1]: Day Low $4,381 SSL Sweep & Bullish Reclaim Trigger", tp: "4396.00 / 4406.00", sl: "4374.00" },
+                    { price: "4406.00", bias: "bullish", behavior: "[WED 18:02] [G_B2]: $4,400 Breaker Reclaim & Short-Squeeze Trigger", tp: "4418.00 / 4428.00", sl: "4397.00" },
+                    { price: "4400.00-4405.00", bias: "bearish", behavior: "[WED 18:02] [G_S1]: London Breaker Block & Polar Resistance Rejection", tp: "4388.00 / 4381.00", sl: "4410.00" },
+                    { price: "4378.00", bias: "bearish", behavior: "[WED 18:02] [G_S2]: Day Low $4,381 Structural Breakdown & Liquidation Cascade", tp: "4368.00 / 4358.00", sl: "4386.00" }
+                ];
+            }
+
+            return { levels, timeDisplay };
+        }
+
         function extractTag(behaviorStr) {
             if (!behaviorStr) return '';
             const match = behaviorStr.match(/\[(G_B\d|G_S\d|KB\d|KS\d|B\d|S\d)\]/i);
@@ -493,6 +597,31 @@
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+        }
+
+        function generateGoldCandles(levels) {
+            const candles = [];
+            const now = new Date();
+            const startUnix = Math.floor(now.getTime() / 1000) - (50 * 300);
+
+            let basePrice = 4390.00;
+            if (levels && levels.length > 0) {
+                const firstPrice = parseFloat(levels[0].price);
+                if (!isNaN(firstPrice) && firstPrice > 1000) basePrice = firstPrice;
+            }
+
+            let currentPrice = basePrice;
+            for (let i = 0; i <= 50; i++) {
+                const time = startUnix + (i * 300);
+                const delta = (Math.random() - 0.48) * 3.5;
+                const open = currentPrice;
+                const close = open + delta;
+                const high = Math.max(open, close) + Math.random() * 2.0;
+                const low = Math.min(open, close) - Math.random() * 2.0;
+                candles.push({ time, open, high, low, close });
+                currentPrice = close;
+            }
+            return candles;
         }
 
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {

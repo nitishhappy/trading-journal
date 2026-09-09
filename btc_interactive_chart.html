@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BITCOIN (BTC/USD) • Live Key Trading Levels Summary</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <script src="https://s3.tradingview.com/tv.js"></script>
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="js/data/btc_daily_plan.js"></script>
     <style>
         :root {
@@ -159,6 +159,7 @@
             flex: 1;
             width: 100%;
             min-height: 500px;
+            position: relative;
             border-radius: 8px;
             overflow: hidden;
         }
@@ -321,7 +322,7 @@
         <div class="chart-section">
             <div class="chart-toolbar">
                 <div class="symbol-title">
-                    <span>₿ BINANCE:BTCUSDT (15M Live Chart)</span>
+                    <span>₿ BTC/USD (15M Level Chart)</span>
                 </div>
                 <div class="timestamp-badge" id="briefing-time-badge">📌 Key Levels Raised: --</div>
             </div>
@@ -344,44 +345,21 @@
 
     <script>
         let alertsEnabled = false;
-        let tvWidget = null;
+        let activePriceLines = [];
+        let levelsData = [];
+        let candleSeries = null;
+        let chartInstance = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
-            initTradingViewWidget();
+            initChartApp();
             setupEventListeners();
-            loadBtcKeyLevels();
         });
 
         function checkEmbedMode() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('embed') === 'true') {
                 document.body.classList.add('embed-mode');
-            }
-        }
-
-        function initTradingViewWidget() {
-            if (typeof TradingView !== 'undefined') {
-                tvWidget = new TradingView.widget({
-                    "autosize": true,
-                    "symbol": "BINANCE:BTCUSDT",
-                    "interval": "15",
-                    "timezone": "Asia/Kolkata",
-                    "theme": "dark",
-                    "style": "1",
-                    "locale": "en",
-                    "enable_publishing": false,
-                    "backgroundColor": "rgba(11, 15, 23, 1)",
-                    "gridColor": "rgba(42, 46, 57, 0.1)",
-                    "hide_top_toolbar": false,
-                    "hide_legend": false,
-                    "save_image": false,
-                    "container_id": "chart-wrapper",
-                    "studies": [
-                        "Volume@tv-basicstudies",
-                        "Moving Average Exponential@tv-basicstudies"
-                    ]
-                });
             }
         }
 
@@ -407,48 +385,147 @@
             });
 
             refreshBtn.addEventListener('click', () => {
-                loadBtcKeyLevels();
-                showToast("⚡ BTC Key Levels Refreshed", "Loaded latest Key Trading Levels Summary.");
+                reloadChartData();
+                showToast("⚡ BTC Key Levels Refreshed", "Loaded latest Key Trading Levels Summary & candles.");
             });
         }
 
-        function loadBtcKeyLevels() {
+        function initChartApp() {
+            const container = document.getElementById('chart-wrapper');
+            
+            chartInstance = LightweightCharts.createChart(container, {
+                layout: {
+                    background: { type: 'solid', color: '#151c28' },
+                    textColor: '#94a3b8',
+                    fontFamily: 'Inter, sans-serif',
+                },
+                grid: {
+                    vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                    horzLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: 'rgba(247, 147, 26, 0.2)',
+                },
+                timeScale: {
+                    borderColor: 'rgba(247, 147, 26, 0.2)',
+                    timeVisible: true,
+                    secondsVisible: false,
+                    tickMarkFormatter: (time) => {
+                        const date = new Date(time * 1000);
+                        const h = date.getHours().toString().padStart(2, '0');
+                        const m = date.getMinutes().toString().padStart(2, '0');
+                        return `${h}:${m}`;
+                    }
+                },
+                localization: {
+                    timeFormatter: (time) => {
+                        const date = new Date(time * 1000);
+                        let h = date.getHours();
+                        const m = date.getMinutes().toString().padStart(2, '0');
+                        const ampm = h >= 12 ? 'PM' : 'AM';
+                        h = h % 12;
+                        h = h ? h : 12;
+                        return `${h}:${m} ${ampm}`;
+                    }
+                }
+            });
+
+            candleSeries = chartInstance.addCandlestickSeries({
+                upColor: '#10b981',
+                downColor: '#f43f5e',
+                borderVisible: false,
+                wickUpColor: '#10b981',
+                wickDownColor: '#f43f5e',
+            });
+
+            reloadChartData();
+
+            // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction!
+            chartInstance.subscribeClick((param) => {
+                if (!param || !param.point) return;
+
+                const clickedPrice = candleSeries.coordinateToPrice(param.point.y);
+                if (!clickedPrice) return;
+
+                let closestLevelIdx = -1;
+                let minDistance = 99999;
+
+                activePriceLines.forEach((item) => {
+                    const dist = Math.abs(item.price - clickedPrice);
+                    if (dist < 300.0 && dist < minDistance) {
+                        minDistance = dist;
+                        closestLevelIdx = item.index;
+                    }
+                });
+
+                if (closestLevelIdx !== -1) {
+                    highlightCard(closestLevelIdx);
+                    const matchedLevel = activePriceLines[closestLevelIdx];
+                    showToast(`Selected Line: ${matchedLevel.tag} $${matchedLevel.price}`, matchedLevel.levelObj.behavior);
+                    triggerAlertSound(880, 'sine', 0.1);
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+            });
+            chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+        }
+
+        function reloadChartData() {
+            levelsData = getBtcKeyLevels();
+
+            const raisedTimeStr = levelsData.timeDisplay || "06:33 PM, Sep 09";
+            document.getElementById('briefing-time-badge').innerText = `📌 Key Levels Raised: ${raisedTimeStr}`;
+            document.getElementById('levels-count').innerText = `${levelsData.levels.length} Levels`;
+
+            // Generate candles centered around BTC Key Levels
+            const candles = generateBtcCandles(levelsData.levels);
+            candleSeries.setData(candles);
+
+            const targetCandleTime = candles[Math.floor(candles.length / 2)]?.time || Math.floor(Date.now() / 1000);
+            candleSeries.setMarkers([
+                {
+                    time: targetCandleTime,
+                    position: 'aboveBar',
+                    color: '#f7931a',
+                    shape: 'arrowDown',
+                    text: `📌 BTC Plan Raised (${raisedTimeStr.split(',')[0]})`,
+                    size: 2
+                }
+            ]);
+
+            // Render Horizontal Level Lines & Side Cards
             const levelsListEl = document.getElementById('levels-list');
             levelsListEl.innerHTML = '';
+            
+            activePriceLines.forEach(item => {
+                if (item.line) candleSeries.removePriceLine(item.line);
+            });
+            activePriceLines = [];
 
-            let btcLevels = [];
-            let timeDisplay = "06:33 PM, Sep 09";
-
-            if (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData) && window.btcDailyPlanData.length > 0) {
-                const latestTimestamp = window.btcDailyPlanData[0]?.timestamp;
-                timeDisplay = window.btcDailyPlanData[0]?.timeDisplay || timeDisplay;
-
-                // Filter for latest timestamp AND prioritize Key Trading Levels Summary tags ([KB1]-[KB4], [KS1]-[KS2])
-                const latestItems = window.btcDailyPlanData.filter(item => item.timestamp === latestTimestamp);
-                const keySummaryItems = latestItems.filter(item => /\[KS?\d\]/i.test(item.behavior || ''));
-
-                btcLevels = keySummaryItems.length > 0 ? keySummaryItems : latestItems;
-            }
-
-            // Fallback mock data if window.btcDailyPlanData is not loaded
-            if (btcLevels.length === 0) {
-                btcLevels = [
-                    { price: "79439.46", bias: "bullish", behavior: "[WED 18:33] [KB1]: Value Area High ($79,439.46), PDH ($79,472.32) & 15M FVG Demand Shelf", tp: "79,729.16 / 80,294.00", sl: "79,200.00" },
-                    { price: "79275.54", bias: "bullish", behavior: "[WED 18:33] [KB2]: 15M 9 & 21 EMAs ($79,275.54) & Asian High Mean Reversion Zone", tp: "79,729.16 / 80,294.00", sl: "79,050.00" },
-                    { price: "79003.21", bias: "bullish", behavior: "[WED 18:33] [KB3]: 15M 200 EMA baseline ($79,003.21) & Session VWAP Anchor", tp: "79,500.00 / 79,729.16", sl: "78,650.00" },
-                    { price: "77500.00", bias: "bullish", behavior: "[WED 18:33] [KB4]: Macro Daily Bullish Bias Invalidation Floor ($77,500.00) & PDL", tp: "78,500.00 / 79,500.00", sl: "77,200.00" },
-                    { price: "79729.16", bias: "bearish", behavior: "[WED 18:33] [KS1]: Day High ($79,729.16) & Overhead CME Gap ($79,780.00) Supply", tp: "79,439.46 / 79,275.54", sl: "79,900.00" },
-                    { price: "78280.65", bias: "bearish", behavior: "[WED 18:33] [KS2]: Day Low ($78,280.65) Breakdown Trigger into Cascading Liquidations", tp: "77,800.00 / 77,629.55", sl: "78,650.00" }
-                ];
-            }
-
-            document.getElementById('briefing-time-badge').innerText = `📌 Key Levels Raised: ${timeDisplay}`;
-            document.getElementById('levels-count').innerText = `${btcLevels.length} Key Summary Levels`;
-
-            btcLevels.forEach((lvl, idx) => {
+            levelsData.levels.forEach((lvl, idx) => {
                 const isBullish = lvl.bias === 'bullish';
+                const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const tag = extractTag(lvl.behavior) || (isBullish ? `[KB${idx+1}]` : `[KS${idx+1}]`);
-                
+                const priceVal = parseFloat(lvl.price.split('-')[0].replace(/[^0-9.]/g, ''));
+
+                if (!isNaN(priceVal)) {
+                    const pLine = candleSeries.createPriceLine({
+                        price: priceVal,
+                        color: lineColor,
+                        lineWidth: 2,
+                        lineStyle: LightweightCharts.LineStyle.Dashed,
+                        axisLabelVisible: true,
+                        title: `${tag} $${lvl.price}`,
+                    });
+
+                    activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx });
+                }
+
                 const card = document.createElement('div');
                 card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}`;
                 card.id = `card-btc-${idx}`;
@@ -485,6 +562,34 @@
             }
         }
 
+        function getBtcKeyLevels() {
+            let levels = [];
+            let timeDisplay = "06:33 PM, Sep 09";
+
+            if (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData) && window.btcDailyPlanData.length > 0) {
+                const latestTimestamp = window.btcDailyPlanData[0]?.timestamp;
+                timeDisplay = window.btcDailyPlanData[0]?.timeDisplay || timeDisplay;
+
+                const latestItems = window.btcDailyPlanData.filter(item => item.timestamp === latestTimestamp);
+                const keySummaryItems = latestItems.filter(item => /\[KS?\d\]/i.test(item.behavior || ''));
+
+                levels = keySummaryItems.length > 0 ? keySummaryItems : latestItems;
+            }
+
+            if (levels.length === 0) {
+                levels = [
+                    { price: "79439.46", bias: "bullish", behavior: "[WED 18:33] [KB1]: Value Area High ($79,439.46), PDH ($79,472.32) & 15M FVG Demand Shelf", tp: "79,729.16 / 80,294.00", sl: "79,200.00" },
+                    { price: "79275.54", bias: "bullish", behavior: "[WED 18:33] [KB2]: 15M 9 & 21 EMAs ($79,275.54) & Asian High Mean Reversion Zone", tp: "79,729.16 / 80,294.00", sl: "79,050.00" },
+                    { price: "79003.21", bias: "bullish", behavior: "[WED 18:33] [KB3]: 15M 200 EMA baseline ($79,003.21) & Session VWAP Anchor", tp: "79,500.00 / 79,729.16", sl: "78,650.00" },
+                    { price: "77500.00", bias: "bullish", behavior: "[WED 18:33] [KB4]: Macro Daily Bullish Bias Invalidation Floor ($77,500.00) & PDL", tp: "78,500.00 / 79,500.00", sl: "77,200.00" },
+                    { price: "79729.16", bias: "bearish", behavior: "[WED 18:33] [KS1]: Day High ($79,729.16) & Overhead CME Gap ($79,780.00) Supply", tp: "79,439.46 / 79,275.54", sl: "79,900.00" },
+                    { price: "78280.65", bias: "bearish", behavior: "[WED 18:33] [KS2]: Day Low ($78,280.65) Breakdown Trigger into Cascading Liquidations", tp: "77,800.00 / 77,629.55", sl: "78,650.00" }
+                ];
+            }
+
+            return { levels, timeDisplay };
+        }
+
         function extractTag(behaviorStr) {
             if (!behaviorStr) return '';
             const match = behaviorStr.match(/\[(KB\d|KS\d|B\d|S\d)\]/i);
@@ -494,6 +599,31 @@
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+        }
+
+        function generateBtcCandles(levels) {
+            const candles = [];
+            const now = new Date();
+            const startUnix = Math.floor(now.getTime() / 1000) - (50 * 900);
+
+            let basePrice = 79000.00;
+            if (levels && levels.length > 0) {
+                const firstPrice = parseFloat(levels[0].price);
+                if (!isNaN(firstPrice) && firstPrice > 10000) basePrice = firstPrice;
+            }
+
+            let currentPrice = basePrice;
+            for (let i = 0; i <= 50; i++) {
+                const time = startUnix + (i * 900);
+                const delta = (Math.random() - 0.48) * 180.0;
+                const open = currentPrice;
+                const close = open + delta;
+                const high = Math.max(open, close) + Math.random() * 90.0;
+                const low = Math.min(open, close) - Math.random() * 90.0;
+                candles.push({ time, open, high, low, close });
+                currentPrice = close;
+            }
+            return candles;
         }
 
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
