@@ -110,6 +110,9 @@ if (viewLevels) {
             if (currentAsset === 'NIFTY') {
                 externalLink.href = 'nifty_interactive_chart.html';
                 externalLink.target = '_blank';
+            } else if (currentAsset === 'GOLD') {
+                externalLink.href = 'gold_interactive_chart.html';
+                externalLink.target = '_blank';
             } else {
                 externalLink.href = `https://in.tradingview.com/chart/?symbol=${linkSymbol}`;
                 externalLink.target = '_blank';
