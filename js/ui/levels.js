@@ -109,14 +109,16 @@ if (viewLevels) {
             const currentAsset = window.currentActiveAsset || 'NIFTY';
             if (currentAsset === 'NIFTY') {
                 externalLink.href = 'nifty_interactive_chart.html';
-                externalLink.target = '_blank';
             } else if (currentAsset === 'GOLD') {
                 externalLink.href = 'gold_interactive_chart.html';
-                externalLink.target = '_blank';
+            } else if (currentAsset === 'BTC') {
+                externalLink.href = 'btc_interactive_chart.html';
+            } else if (currentAsset === 'SP500') {
+                externalLink.href = 'sp500_interactive_chart.html';
             } else {
                 externalLink.href = `https://in.tradingview.com/chart/?symbol=${linkSymbol}`;
-                externalLink.target = '_blank';
             }
+            externalLink.target = '_blank';
         }
         return widgetSymbol;
     }

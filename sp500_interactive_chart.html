@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&P 500 • Live Key Trading Levels Summary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://s3.tradingview.com/tv.js"></script>
+    <script src="js/data/sp500_daily_plan.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0b0f17;
+            --panel-bg: #151c28;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --border-color: rgba(59, 130, 246, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --bullish: #10b981;
+            --bearish: #f43f5e;
+            --sp-accent: #3b82f6;
+            --sp-glow: rgba(59, 130, 246, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #0f1b33, #0b0f17);
+            color: var(--text-main);
+            padding: 1.25rem;
+            min-height: 100vh;
+        }
+
+        body.embed-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.embed-mode .header {
+            display: none;
+        }
+
+        body.embed-mode .main-container {
+            height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #60a5fa;
+            transform: translateY(-1px);
+        }
+
+        .btn.active {
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 0 12px var(--sp-glow);
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 1.25rem;
+            height: calc(100vh - 90px);
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        .chart-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .chart-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .symbol-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timestamp-badge {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        #chart-wrapper {
+            flex: 1;
+            width: 100%;
+            min-height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .levels-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--sp-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .level-card {
+            background: var(--card-bg);
+            border-left: 4px solid var(--text-muted);
+            border-radius: 8px;
+            padding: 0.95rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .level-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .level-card.bullish {
+            border-left-color: var(--bullish);
+        }
+
+        .level-card.bearish {
+            border-left-color: var(--bearish);
+        }
+
+        .level-card.selected-highlight {
+            border: 2px solid var(--sp-accent) !important;
+            border-left: 6px solid var(--sp-accent) !important;
+            background: rgba(59, 130, 246, 0.18) !important;
+            box-shadow: 0 0 20px var(--sp-glow) !important;
+            animation: pulseCard 1.5s infinite alternate;
+        }
+
+        @keyframes pulseCard {
+            0% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); }
+            100% { box-shadow: 0 0 22px rgba(59, 130, 246, 0.8); }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .card-price.bullish { color: var(--bullish); }
+        .card-price.bearish { color: var(--bearish); }
+
+        .tag-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .tag-pill.bullish { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .tag-pill.bearish { background: rgba(244, 63, 94, 0.2); color: #f43f5e; }
+
+        .card-logic {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-targets {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            color: var(--text-muted);
+        }
+
+        .tp-val { color: #34d399; }
+        .sl-val { color: #f87171; }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e293b;
+            border: 1px solid var(--sp-accent);
+            color: #f8fafc;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none;
+            flex-direction: column;
+            gap: 0.3rem;
+            z-index: 100;
+            max-width: 320px;
+        }
+
+        .toast-title {
+            font-weight: 700;
+            color: #60a5fa;
+            font-size: 0.9rem;
+        }
+
+        .toast-body {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🇺🇸 S&P 500 (^GSPC) • Key Trading Levels Summary</h1>
+        <div class="controls-row">
+            <button id="btn-toggle-alerts" class="btn">
+                <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
+            </button>
+            <button id="btn-manual-refresh" class="btn">
+                <span>⚡</span> Refresh Data
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="chart-section">
+            <div class="chart-toolbar">
+                <div class="symbol-title">
+                    <span>🇺🇸 VANTAGE:SP500 (5M Live Chart)</span>
+                </div>
+                <div class="timestamp-badge" id="briefing-time-badge">📌 Key Levels Raised: --</div>
+            </div>
+            <div id="chart-wrapper"></div>
+        </div>
+
+        <div class="levels-section">
+            <div class="section-title">
+                <span>🎯 Key Trading Levels Summary</span>
+                <span id="levels-count" style="font-size: 0.8rem; color: #60a5fa;">0 Levels</span>
+            </div>
+            <div id="levels-list"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <div id="toast-title" class="toast-title">Notification</div>
+        <div id="toast-body" class="toast-body">Details here...</div>
+    </div>
+
+    <script>
+        let alertsEnabled = false;
+        let tvWidget = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkEmbedMode();
+            initTradingViewWidget();
+            setupEventListeners();
+            loadSp500KeyLevels();
+        });
+
+        function checkEmbedMode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('embed') === 'true') {
+                document.body.classList.add('embed-mode');
+            }
+        }
+
+        function initTradingViewWidget() {
+            if (typeof TradingView !== 'undefined') {
+                tvWidget = new TradingView.widget({
+                    "autosize": true,
+                    "symbol": "VANTAGE:SP500",
+                    "interval": "5",
+                    "timezone": "Asia/Kolkata",
+                    "theme": "dark",
+                    "style": "1",
+                    "locale": "en",
+                    "enable_publishing": false,
+                    "backgroundColor": "rgba(11, 15, 23, 1)",
+                    "gridColor": "rgba(42, 46, 57, 0.1)",
+                    "hide_top_toolbar": false,
+                    "hide_legend": false,
+                    "save_image": false,
+                    "container_id": "chart-wrapper",
+                    "studies": [
+                        "Volume@tv-basicstudies",
+                        "Moving Average Exponential@tv-basicstudies"
+                    ]
+                });
+            }
+        }
+
+        function setupEventListeners() {
+            const toggleBtn = document.getElementById('btn-toggle-alerts');
+            const refreshBtn = document.getElementById('btn-manual-refresh');
+
+            toggleBtn.addEventListener('click', () => {
+                alertsEnabled = !alertsEnabled;
+                if (alertsEnabled) {
+                    if ("Notification" in window) {
+                        Notification.requestPermission();
+                    }
+                    toggleBtn.classList.add('active');
+                    document.getElementById('alert-btn-text').innerText = 'Notifications ACTIVE';
+                    triggerAlertSound(880, 'sine', 0.15);
+                    showToast("Alert System Activated", "Desktop notifications & audio chime enabled for S&P 500 key levels.");
+                } else {
+                    toggleBtn.classList.remove('active');
+                    document.getElementById('alert-btn-text').innerText = 'Enable Notifications';
+                    showToast("Alert System Disabled", "Notifications paused.");
+                }
+            });
+
+            refreshBtn.addEventListener('click', () => {
+                loadSp500KeyLevels();
+                showToast("⚡ S&P 500 Key Levels Refreshed", "Loaded latest Key Trading Levels Summary.");
+            });
+        }
+
+        function loadSp500KeyLevels() {
+            const levelsListEl = document.getElementById('levels-list');
+            levelsListEl.innerHTML = '';
+
+            let spLevels = [];
+            let timeDisplay = "06:02 PM, Sep 09";
+
+            if (window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData) && window.sp500DailyPlanData.length > 0) {
+                const latestTimestamp = window.sp500DailyPlanData[0]?.timestamp;
+                timeDisplay = window.sp500DailyPlanData[0]?.timeDisplay || timeDisplay;
+
+                // Filter for latest timestamp AND prioritize Key Trading Levels Summary tags ([SP_KB\d], [SP_KS\d], [SP_B\d], [SP_S\d])
+                const latestItems = window.sp500DailyPlanData.filter(item => item.timestamp === latestTimestamp);
+                const keySummaryItems = latestItems.filter(item => /\[SP_(KB|KS|B|S)\d\]/i.test(item.behavior || ''));
+
+                spLevels = keySummaryItems.length > 0 ? keySummaryItems : latestItems;
+            }
+
+            // Fallback mock data if window.sp500DailyPlanData is not loaded
+            if (spLevels.length === 0) {
+                spLevels = [
+                    { price: "7689.69", bias: "bullish", behavior: "[WED 18:02] [SP_KB2]: 48H Equilibrium Anchor & Institutional Fair Value Mean-Reversion Pivot", tp: "7715.00 / 7735.00", sl: "7678.00" },
+                    { price: "7695.00", bias: "bullish", behavior: "[WED 18:02] [SP_B2]: High-Momentum BSL Breakout Trigger: Sustained 5M close above 7695.00", tp: "7715.00 / 7735.00", sl: "7684.00" },
+                    { price: "7666.99", bias: "bullish", behavior: "[WED 18:02] [SP_B1]: Demand Floor SSL Sweep Reversal Long (SFP / Turtle Soup)", tp: "7689.69 / 7693.09", sl: "7660.00" },
+                    { price: "7756.76", bias: "bearish", behavior: "[WED 18:02] [SP_S1]: Overhead Supply OB / PDH Liquidity Ceiling: SFP Sweep Rejection", tp: "7715.00 / 7693.09", sl: "7764.00" },
+                    { price: "7664.00", bias: "bearish", behavior: "[WED 18:02] [SP_S2]: Downside Long-Liquidation Cascade Trigger below 7664.00", tp: "7645.00 / 7611.20", sl: "7674.00" }
+                ];
+            }
+
+            document.getElementById('briefing-time-badge').innerText = `📌 Key Levels Raised: ${timeDisplay}`;
+            document.getElementById('levels-count').innerText = `${spLevels.length} Key Summary Levels`;
+
+            spLevels.forEach((lvl, idx) => {
+                const isBullish = lvl.bias === 'bullish';
+                const tag = extractTag(lvl.behavior) || (isBullish ? `[SP_B${idx+1}]` : `[SP_S${idx+1}]`);
+                
+                const card = document.createElement('div');
+                card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}`;
+                card.id = `card-sp-${idx}`;
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="card-price ${isBullish ? 'bullish' : 'bearish'}">
+                            ${isBullish ? '🟢' : '🔴'} ${lvl.price}
+                        </span>
+                        <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
+                    </div>
+                    <div class="card-logic">${cleanLogicText(lvl.behavior)}</div>
+                    <div class="card-targets">
+                        <span>TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></span>
+                        <span>SL: <strong class="sl-val">${lvl.sl || 'N/A'}</strong></span>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    highlightCard(idx);
+                    showToast(`Selected Level: ${tag} ${lvl.price}`, cleanLogicText(lvl.behavior));
+                    triggerAlertSound(880, 'sine', 0.15);
+                });
+
+                levelsListEl.appendChild(card);
+            });
+        }
+
+        function highlightCard(cardIdx) {
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected-highlight'));
+            const targetCard = document.getElementById(`card-sp-${cardIdx}`);
+            if (targetCard) {
+                targetCard.classList.add('selected-highlight');
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function extractTag(behaviorStr) {
+            if (!behaviorStr) return '';
+            const match = behaviorStr.match(/\[(SP_KB\d|SP_KS\d|SP_B\d|SP_S\d|B\d|S\d)\]/i);
+            return match ? match[0].toUpperCase() : '';
+        }
+
+        function cleanLogicText(behaviorStr) {
+            if (!behaviorStr) return '';
+            return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+        }
+
+        function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function showToast(title, body) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-body').innerText = body;
+            toast.style.display = 'flex';
+            setTimeout(() => { toast.style.display = 'none'; }, 4000);
+        }
+    </script>
+</body>
+</html>
