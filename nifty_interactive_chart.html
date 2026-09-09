@@ -313,6 +313,31 @@
             from { transform: translateY(-20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+
+        /* Embedded Mode in Trade Journal Iframe */
+        body.embed-mode {
+            padding: 0 !important;
+            background: #1e293b !important;
+            overflow: hidden !important;
+        }
+        body.embed-mode .header {
+            display: none !important;
+        }
+        body.embed-mode .main-container {
+            grid-template-columns: 1fr !important;
+            height: 100vh !important;
+            gap: 0 !important;
+        }
+        body.embed-mode .levels-section {
+            display: none !important;
+        }
+        body.embed-mode .chart-section {
+            border-radius: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: #1e293b !important;
+            padding: 0.5rem !important;
+        }
     </style>
 </head>
 <body>
@@ -382,10 +407,18 @@
         let countdownSeconds = 60;
 
         document.addEventListener('DOMContentLoaded', () => {
+            checkEmbedMode();
             initChartApp();
             setupEventListeners();
             startAutoRefreshTimer();
         });
+
+        function checkEmbedMode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('embed') === 'true') {
+                document.body.classList.add('embed-mode');
+            }
+        }
 
         function setupEventListeners() {
             const toggleBtn = document.getElementById('btn-toggle-alerts');
@@ -504,6 +537,11 @@
                     const matchedLevel = activePriceLines[closestLevelIdx];
                     showToast(`Selected Line: ${matchedLevel.tag} ₹${matchedLevel.price}`, matchedLevel.levelObj.behavior);
                     triggerAlertSound(750, 'sine', 0.1);
+
+                    // Notify parent window if embedded in iframe
+                    if (window.parent && window.parent !== window) {
+                        window.parent.postMessage({ type: 'HIGHLIGHT_LEVEL', index: closestLevelIdx }, '*');
+                    }
                 }
             });
 

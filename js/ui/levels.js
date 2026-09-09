@@ -131,7 +131,8 @@ if (viewLevels) {
                 tvWidget = null;
             }
             if (container) {
-                container.innerHTML = `<iframe src="nifty_interactive_chart.html" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>`;
+                const cacheBust = Date.now();
+                container.innerHTML = `<iframe src="nifty_interactive_chart.html?embed=true&t=${cacheBust}" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>`;
             }
             return;
         }
