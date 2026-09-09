@@ -30,6 +30,38 @@ A private, installable (PWA) daily trading journal. Built with vanilla HTML/CSS/
 
 ---
 
+## 🔔 Lock-Screen & Background Web Push Notification Architecture
+
+TradeLog supports true **Lock-Screen & Background Web Push Notifications** (RFC 8291 / RFC 8292 VAPID Protocol). Notifications fire on mobile devices (Android / iOS 16.4+) and desktop browsers even when the app is **completely closed or screen-locked**.
+
+### Flow & Components
+```
+[ Python AI Sync / TV Webhook / Sequence Rules ]
+                       │
+                       ▼ (HTTP POST)
+        [ Vercel API: /api/sendPush.js ] ── (VAPID Signed)
+                       │
+                       ▼
+         [ Google FCM / Apple APNs Push ]
+                       │ (OS Wakes Up SW)
+                       ▼
+       [ Service Worker: sw.js ('push') ] ──► [ Lock-Screen Pop-Up Banner ]
+```
+
+1. **VAPID Key Configuration (`api/vapidConfig.js`)**:
+   - Encrypted payloads are signed using VAPID keys (`PUBLIC_VAPID_KEY` / `PRIVATE_VAPID_KEY`).
+2. **Device Registration (`js/services/webPush.js` & `/api/sendPush.js`)**:
+   - When the user enables notifications or clicks **▶ Test Lock-Screen Push Notification** in Settings, `subscribeUserToPush()` requests browser permission (`Notification.requestPermission()`) and registers a `PushSubscription`.
+   - Token payloads are safely saved into Firestore (`pushSubscriptions` collection) via Firebase Admin SDK (`/api/sendPush` with `action: 'register'`).
+3. **Background Service Worker Listener (`sw.js`)**:
+   - Listens for background `"push"` events and invokes `self.registration.showNotification(title, options)`.
+   - Tapping the banner focuses or opens the TradeLog app via `notificationclick`.
+4. **Push Dispatchers**:
+   - **Daily Briefings (`sync_briefing_to_daily_plan.py`)**: Automatically dispatches push alerts when Nifty, Gold, BTC, or S&P 500 levels are published.
+   - **Live Signals (`api/tvWebhook.js`)**: Automatically dispatches push alerts for incoming TradingView alerts and Telegram signals.
+
+---
+
 ## How to use
 
 ### 1. Sign in
