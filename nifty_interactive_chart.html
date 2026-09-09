@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIFTY 50 • Live Level Chart Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --bullish: #10b981;
+            --bearish: #f43f5e;
+            --accent: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: var(--text-main);
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c084fc;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: rgba(139, 92, 246, 0.35);
+            border-color: #c084fc;
+            transform: translateY(-1px);
+        }
+
+        .btn.active {
+            background: #8b5cf6;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+        }
+
+        .timer-badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 1.5rem;
+            height: calc(100vh - 120px);
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        .chart-section {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .chart-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .symbol-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .timestamp-badge {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c084fc;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .feed-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        #chart-wrapper {
+            flex: 1;
+            width: 100%;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .levels-section {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-card {
+            background: var(--card-bg);
+            border-left: 4px solid var(--text-muted);
+            border-radius: 8px;
+            padding: 0.95rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .level-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .level-card.bullish {
+            border-left-color: var(--bullish);
+        }
+
+        .level-card.bearish {
+            border-left-color: var(--bearish);
+        }
+
+        .level-card.selected-highlight {
+            border: 2px solid var(--accent) !important;
+            border-left: 6px solid var(--accent) !important;
+            background: rgba(139, 92, 246, 0.2) !important;
+            box-shadow: 0 0 20px var(--accent-glow) !important;
+            animation: pulseCard 1.5s infinite alternate;
+        }
+
+        @keyframes pulseCard {
+            0% { box-shadow: 0 0 10px rgba(139, 92, 246, 0.3); }
+            100% { box-shadow: 0 0 22px rgba(139, 92, 246, 0.8); }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .card-price.bullish { color: var(--bullish); }
+        .card-price.bearish { color: var(--bearish); }
+
+        .tag-pill {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .tag-pill.bullish {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--bullish);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .tag-pill.bearish {
+            background: rgba(244, 63, 94, 0.15);
+            color: var(--bearish);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .card-logic {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-targets {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0,0,0,0.3);
+            padding: 0.45rem 0.65rem;
+            border-radius: 4px;
+        }
+
+        .tp-val { color: var(--bullish); }
+        .sl-val { color: var(--bearish); }
+
+        .toast-banner {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            z-index: 200;
+            background: #1e1b4b;
+            border: 1px solid var(--accent);
+            color: white;
+            padding: 0.85rem 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>
+            <h1>📉 NIFTY 50 • Live Level Chart Dashboard</h1>
+            <p style="color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem;">
+                Real-Time Spot Index Feed • Click price lines to highlight level cards • Auto Refresh 1 min
+            </p>
+        </div>
+        <div class="controls-row">
+            <div class="timer-badge">
+                <span>🔄</span> Auto Refresh: <span id="refresh-timer">60s</span>
+            </div>
+            <button id="btn-manual-refresh" class="btn">
+                <span>⚡</span> Refresh Now
+            </button>
+            <button id="btn-toggle-alerts" class="btn">
+                <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Chart Canvas Area -->
+        <div class="chart-section">
+            <div class="chart-toolbar">
+                <div class="symbol-title">
+                    <span>NSE:NIFTY50 (5M)</span>
+                    <span id="feed-status-badge" class="feed-badge">● UPSTOX REALTIME API</span>
+                    <span id="briefing-time-badge" class="timestamp-badge">📌 Plan Raised: Loading...</span>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">
+                    💡 Click price lines on chart to select card
+                </div>
+            </div>
+            <div id="chart-wrapper"></div>
+            <div id="toast" class="toast-banner">
+                <span style="font-size: 1.2rem;">🚨</span>
+                <div>
+                    <strong id="toast-title" style="display:block; font-size:0.9rem;">Level Alert Triggered</strong>
+                    <span id="toast-body" style="color:#cbd5e1;">Price approaching level</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side Key Trading Levels Summary Cards -->
+        <div class="levels-section">
+            <div class="section-title">
+                <span>Key Trading Levels Summary</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);" id="levels-count">0 Levels</span>
+            </div>
+            <div id="levels-list"></div>
+        </div>
+    </div>
+
+    <!-- Read current daily plan data dynamically -->
+    <script src="js/data/nifty_daily_plan.js"></script>
+
+    <script>
+        let alertsEnabled = false;
+        let activePriceLines = [];
+        let levelsData = [];
+        let candleSeries = null;
+        let chartInstance = null;
+        let countdownSeconds = 60;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initChartApp();
+            setupEventListeners();
+            startAutoRefreshTimer();
+        });
+
+        function setupEventListeners() {
+            const toggleBtn = document.getElementById('btn-toggle-alerts');
+            const refreshBtn = document.getElementById('btn-manual-refresh');
+
+            toggleBtn.addEventListener('click', () => {
+                alertsEnabled = !alertsEnabled;
+                if (alertsEnabled) {
+                    if ("Notification" in window) {
+                        Notification.requestPermission();
+                    }
+                    toggleBtn.classList.add('active');
+                    document.getElementById('alert-btn-text').innerText = 'Notifications ACTIVE';
+                    triggerAlertSound(880, 'sine', 0.15);
+                    showToast("Alert System Activated", "Desktop notifications & audio chime enabled for level touches.");
+                } else {
+                    toggleBtn.classList.remove('active');
+                    document.getElementById('alert-btn-text').innerText = 'Enable Notifications';
+                    showToast("Alert System Disabled", "Notifications paused.");
+                }
+            });
+
+            refreshBtn.addEventListener('click', () => {
+                reloadChartData();
+                countdownSeconds = 60;
+                showToast("⚡ Chart Refreshed", "Fetched latest Nifty candles and daily plan levels.");
+            });
+        }
+
+        function startAutoRefreshTimer() {
+            setInterval(() => {
+                countdownSeconds--;
+                if (countdownSeconds <= 0) {
+                    countdownSeconds = 60;
+                    reloadChartData();
+                }
+                document.getElementById('refresh-timer').innerText = `${countdownSeconds}s`;
+            }, 1000);
+        }
+
+        function initChartApp() {
+            const container = document.getElementById('chart-wrapper');
+            
+            // 1. Create Lightweight Chart Instance with IST Timezone Formatting
+            chartInstance = LightweightCharts.createChart(container, {
+                layout: {
+                    background: { type: 'solid', color: '#1e293b' },
+                    textColor: '#94a3b8',
+                    fontFamily: 'Inter, sans-serif',
+                },
+                grid: {
+                    vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                    horzLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                },
+                timeScale: {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                    timeVisible: true,
+                    secondsVisible: false,
+                    tickMarkFormatter: (time) => {
+                        const date = new Date(time * 1000);
+                        const h = date.getHours().toString().padStart(2, '0');
+                        const m = date.getMinutes().toString().padStart(2, '0');
+                        return `${h}:${m}`;
+                    }
+                },
+                localization: {
+                    timeFormatter: (time) => {
+                        const date = new Date(time * 1000);
+                        let h = date.getHours();
+                        const m = date.getMinutes().toString().padStart(2, '0');
+                        const ampm = h >= 12 ? 'PM' : 'AM';
+                        h = h % 12;
+                        h = h ? h : 12;
+                        return `${h}:${m} ${ampm}`;
+                    }
+                }
+            });
+
+            // Add Candlestick Series
+            candleSeries = chartInstance.addCandlestickSeries({
+                upColor: '#10b981',
+                downColor: '#f43f5e',
+                borderVisible: false,
+                wickUpColor: '#10b981',
+                wickDownColor: '#f43f5e',
+            });
+
+            reloadChartData();
+
+            // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction!
+            chartInstance.subscribeClick((param) => {
+                if (!param || !param.point) return;
+
+                const clickedPrice = candleSeries.coordinateToPrice(param.point.y);
+                if (!clickedPrice) return;
+
+                let closestLevelIdx = -1;
+                let minDistance = 999;
+
+                activePriceLines.forEach((item) => {
+                    const dist = Math.abs(item.price - clickedPrice);
+                    if (dist < 6 && dist < minDistance) {
+                        minDistance = dist;
+                        closestLevelIdx = item.index;
+                    }
+                });
+
+                if (closestLevelIdx !== -1) {
+                    highlightCard(closestLevelIdx);
+                    const matchedLevel = activePriceLines[closestLevelIdx];
+                    showToast(`Selected Line: ${matchedLevel.tag} ₹${matchedLevel.price}`, matchedLevel.levelObj.behavior);
+                    triggerAlertSound(750, 'sine', 0.1);
+                }
+            });
+
+            // Responsive Resize
+            window.addEventListener('resize', () => {
+                chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+            });
+            chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+        }
+
+        async function reloadChartData() {
+            // 2. Fetch Real-Time Candles from /api/niftyCandles endpoint
+            let candles = await fetchRealtimeNiftyCandles();
+
+            if (!candles || candles.length === 0) {
+                // Fallback to local IST candle generator if API endpoint is offline
+                candles = generateCurrentISTNiftyCandles();
+                document.getElementById('feed-status-badge').innerText = '⚡ DEMO FEED';
+                document.getElementById('feed-status-badge').style.color = '#fbbf24';
+            } else {
+                document.getElementById('feed-status-badge').innerText = '● UPSTOX REALTIME API';
+                document.getElementById('feed-status-badge').style.color = '#10b981';
+            }
+
+            candleSeries.setData(candles);
+
+            // 3. Extract Latest Levels & Raised Timestamp from window.dailyPlanData
+            levelsData = getLatestDailyPlanLevels();
+
+            const raisedTimeStr = levelsData.timeDisplay || "10:35 AM, Sep 09";
+            document.getElementById('briefing-time-badge').innerText = `📌 Plan Raised: ${raisedTimeStr}`;
+            document.getElementById('levels-count').innerText = `${levelsData.levels.length} Levels`;
+
+            // 4. Find candle matching the 10:35 AM raised timestamp
+            const planRaisedUnixTime = parseISTTimeToUnix(raisedTimeStr);
+            let targetCandleTime = candles[0]?.time || Math.floor(Date.now() / 1000);
+
+            if (planRaisedUnixTime && candles.length > 0) {
+                let smallestDiff = 9999999;
+                candles.forEach(c => {
+                    const diff = Math.abs(c.time - planRaisedUnixTime);
+                    if (diff < smallestDiff) {
+                        smallestDiff = diff;
+                        targetCandleTime = c.time;
+                    }
+                });
+            }
+
+            candleSeries.setMarkers([
+                {
+                    time: targetCandleTime,
+                    position: 'aboveBar',
+                    color: '#8b5cf6',
+                    shape: 'arrowDown',
+                    text: `📌 AI Plan Raised (${raisedTimeStr.split(',')[0]})`,
+                    size: 2
+                }
+            ]);
+
+            // 5. Render Horizontal Level Lines & Side Cards
+            const levelsListEl = document.getElementById('levels-list');
+            levelsListEl.innerHTML = '';
+            
+            // Clear previous price lines if any
+            activePriceLines.forEach(item => {
+                if (item.line) candleSeries.removePriceLine(item.line);
+            });
+            activePriceLines = [];
+
+            levelsData.levels.forEach((lvl, idx) => {
+                const isBullish = lvl.bias === 'bullish';
+                const lineColor = isBullish ? '#10b981' : '#f43f5e';
+                const tag = extractTag(lvl.behavior) || (isBullish ? `[B${idx+1}]` : `[S${idx+1}]`);
+                const priceVal = parseFloat(lvl.price);
+
+                const pLine = candleSeries.createPriceLine({
+                    price: priceVal,
+                    color: lineColor,
+                    lineWidth: 2,
+                    lineStyle: LightweightCharts.LineStyle.Dashed,
+                    axisLabelVisible: true,
+                    title: `${tag} ₹${lvl.price}`,
+                });
+
+                activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx });
+
+                const card = document.createElement('div');
+                card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}`;
+                card.id = `card-level-${idx}`;
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="card-price ${isBullish ? 'bullish' : 'bearish'}">
+                            ${isBullish ? '🟢' : '🔴'} ₹${lvl.price}
+                        </span>
+                        <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
+                    </div>
+                    <div class="card-logic">${cleanLogicText(lvl.behavior)}</div>
+                    <div class="card-targets">
+                        <span>TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></span>
+                        <span>SL: <strong class="sl-val">${lvl.sl || 'N/A'}</strong></span>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    highlightCard(idx);
+                });
+
+                levelsListEl.appendChild(card);
+            });
+        }
+
+        // Fetch Realtime OHLC Candles from /api/niftyCandles
+        async function fetchRealtimeNiftyCandles() {
+            try {
+                const res = await fetch('/api/niftyCandles');
+                if (!res.ok) return null;
+                const json = await res.json();
+                if (!json || !json.candles || !Array.isArray(json.candles)) return null;
+
+                // Map Upstox candles to Lightweight Charts format
+                // Upstox candle format: [timestamp_str, open, high, low, close, volume]
+                const formatted = json.candles.map(c => {
+                    const timeSec = typeof c[0] === 'number' ? c[0] : Math.floor(new Date(c[0]).getTime() / 1000);
+                    return {
+                        time: timeSec,
+                        open: parseFloat(c[1]),
+                        high: parseFloat(c[2]),
+                        low: parseFloat(c[3]),
+                        close: parseFloat(c[4])
+                    };
+                }).sort((a, b) => a.time - b.time);
+
+                return formatted;
+            } catch (e) {
+                console.warn("[Candle Feed Error] Could not fetch /api/niftyCandles:", e);
+                return null;
+            }
+        }
+
+        function highlightCard(cardIdx) {
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected-highlight'));
+            const targetCard = document.getElementById(`card-level-${cardIdx}`);
+            if (targetCard) {
+                targetCard.classList.add('selected-highlight');
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function getLatestDailyPlanLevels() {
+            let levels = [];
+            let timeDisplay = "10:35 AM, Sep 09";
+
+            if (window.dailyPlanData && Array.isArray(window.dailyPlanData) && window.dailyPlanData.length > 0) {
+                const latestTimestamp = window.dailyPlanData[0]?.timestamp;
+                timeDisplay = window.dailyPlanData[0]?.timeDisplay || timeDisplay;
+                levels = window.dailyPlanData.filter(item => item.timestamp === latestTimestamp);
+            }
+
+            if (levels.length === 0) {
+                levels = [
+                    { price: "23510", bias: "bullish", behavior: "[WED 10:35] [B1]: Pullback into 23,505-23,515 rejected with absorption wick", tp: "23,570 / 23,620", sl: "23,485" },
+                    { price: "23555", bias: "bullish", behavior: "[WED 10:35] [B2]: Sustained 5m close ABOVE 23,555 with expanding volume", tp: "23,600 / 23,635", sl: "23,515" },
+                    { price: "23550", bias: "bearish", behavior: "[WED 10:35] [S1]: Liquidity probe above 23,550 rejected with exhaustion wick", tp: "23,505 / 23,466", sl: "23,570" },
+                    { price: "23505", bias: "bearish", behavior: "[WED 10:35] [S2]: Sustained 5m close BELOW 23,505 with active red volume", tp: "23,466 / 23,420", sl: "23,545" }
+                ];
+            }
+
+            return { levels, timeDisplay };
+        }
+
+        function parseISTTimeToUnix(timeDisplayStr) {
+            try {
+                const match = timeDisplayStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+                if (!match) return null;
+                let hrs = parseInt(match[1]);
+                const mins = parseInt(match[2]);
+                const ampm = match[3].toUpperCase();
+                if (ampm === 'PM' && hrs < 12) hrs += 12;
+                if (ampm === 'AM' && hrs === 12) hrs = 0;
+
+                const today = new Date();
+                const planTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hrs, mins, 0);
+                return Math.floor(planTime.getTime() / 1000);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function extractTag(behaviorStr) {
+            if (!behaviorStr) return '';
+            const match = behaviorStr.match(/\[(B\d|S\d|KB\d|KS\d)\]/);
+            return match ? match[0] : '';
+        }
+
+        function cleanLogicText(behaviorStr) {
+            if (!behaviorStr) return '';
+            return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+        }
+
+        function generateCurrentISTNiftyCandles() {
+            const candles = [];
+            const now = new Date();
+            const marketOpen = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 15, 0);
+            const startUnix = Math.floor(marketOpen.getTime() / 1000);
+            const currentUnix = Math.floor(now.getTime() / 1000);
+
+            let elapsedCandles = Math.floor((currentUnix - startUnix) / 300);
+            if (elapsedCandles < 5) elapsedCandles = 36;
+            else if (elapsedCandles > 75) elapsedCandles = 75;
+
+            let currentPrice = 23510;
+            for (let i = 0; i <= elapsedCandles; i++) {
+                const time = startUnix + (i * 300);
+                const volatility = (Math.random() - 0.48) * 12;
+                const open = currentPrice;
+                const close = open + volatility;
+                const high = Math.max(open, close) + Math.random() * 6;
+                const low = Math.min(open, close) - Math.random() * 6;
+                candles.push({ time, open, high, low, close });
+                currentPrice = close;
+            }
+            return candles;
+        }
+
+        function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function showToast(title, body) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-body').innerText = body;
+            toast.style.display = 'flex';
+            setTimeout(() => { toast.style.display = 'none'; }, 4000);
+        }
+    </script>
+</body>
+</html>

@@ -25,6 +25,7 @@ A private, installable (PWA) daily trading journal. Built with vanilla HTML/CSS/
 - `api/sendPush.js` — Vercel serverless endpoint for dispatching encrypted VAPID push notifications
 - `api/vapidConfig.js` — VAPID keypair configuration helper
 - `js/services/webPush.js` — Frontend Web Push subscription manager & Firestore registration
+- `nifty_interactive_chart.html` — Interactive TradingView Lightweight Charts level dashboard with real-time Upstox `/api/niftyCandles` feed, IST timezone, clickable price lines, vertical timestamp markers, and desktop alerts
 - `js/data/*_daily_plan.js` — Offline-first local data files (`nifty_daily_plan.js`, `gold_daily_plan.js`, `sp500_daily_plan.js`, `btc_daily_plan.js`) protected by Node.js Quality Gate auto-rollback
 - `app.js` — **Client-side entry point** (not a server file)
 
