@@ -404,7 +404,7 @@
         let levelsData = [];
         let candleSeries = null;
         let chartInstance = null;
-        let countdownSeconds = 60;
+        let countdownSeconds = 15;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
@@ -443,7 +443,7 @@
 
             refreshBtn.addEventListener('click', () => {
                 reloadChartData();
-                countdownSeconds = 60;
+                countdownSeconds = 15;
                 showToast("⚡ Chart Refreshed", "Fetched latest Nifty candles and daily plan levels.");
             });
         }
@@ -452,7 +452,7 @@
             setInterval(() => {
                 countdownSeconds--;
                 if (countdownSeconds <= 0) {
-                    countdownSeconds = 60;
+                    countdownSeconds = 15;
                     reloadChartData();
                 }
                 document.getElementById('refresh-timer').innerText = `${countdownSeconds}s`;
