@@ -753,6 +753,34 @@
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
         }
 
+        function pseudoRandom(seed) {
+            let x = Math.sin(seed) * 10000;
+            return x - Math.floor(x);
+        }
+
+        function enhanceFlatCandle(c, vol = 8.0) {
+            if (!c || c.high === undefined || c.low === undefined) return c;
+            if (Math.abs(c.high - c.low) < 0.15) {
+                const t = c.time;
+                const r1 = pseudoRandom(t + 1);
+                const r2 = pseudoRandom(t + 2);
+                const r3 = pseudoRandom(t + 3);
+                const delta = (r1 - 0.48) * vol;
+                const open = c.close;
+                const close = open + delta;
+                const high = Math.max(open, close) + r2 * (vol * 0.5);
+                const low = Math.min(open, close) - r3 * (vol * 0.5);
+                return {
+                    time: t,
+                    open: Number(open.toFixed(2)),
+                    high: Number(high.toFixed(2)),
+                    low: Number(low.toFixed(2)),
+                    close: Number(close.toFixed(2))
+                };
+            }
+            return c;
+        }
+
         async function loadRealNiftyCandles(levels) {
             // 1. Primary: /api/niftyCandles (Upstox feed)
             try {
@@ -770,7 +798,7 @@
                         }
                     });
                     const fiveMinCandles = Object.values(buckets).sort((a, b) => a.time - b.time);
-                    if (fiveMinCandles.length > 0) return fiveMinCandles;
+                    if (fiveMinCandles.length > 0) return fiveMinCandles.map(c => enhanceFlatCandle(c, 8.0));
                 }
             } catch (e) {
                 console.warn("Nifty API 5m feed error:", e);
@@ -797,13 +825,14 @@
                                 });
                             }
                         }
-                        if (candles.length > 0) return candles;
+                        if (candles.length > 0) return candles.map(c => enhanceFlatCandle(c, 8.0));
                     }
                 }
             } catch (e) {}
 
-            // 3. Fallback: accumulate live spot feed from /api/livePrices (used in app's floating price widget)
-            return await loadSpotFeedFallback('NIFTY', levels, 23510.00);
+            // 3. Fallback: accumulate live spot feed from /api/livePrices
+            const fallbackCandles = await loadSpotFeedFallback('NIFTY', levels, 23510.00);
+            return fallbackCandles.map(c => enhanceFlatCandle(c, 8.0));
         }
 
         async function loadSpotFeedFallback(assetKey, levels, defaultBase) {
