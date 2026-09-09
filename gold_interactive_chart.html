@@ -501,7 +501,7 @@
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Setups`;
 
             // Load real 5m OHLC candle feed
-            const candles = await loadRealGoldCandles();
+            const candles = await loadRealGoldCandles(levelsData.levels);
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
 
@@ -646,8 +646,27 @@
         }
 
 
-        async function loadRealGoldCandles() {
-            // Server-side /api/goldCandles (Binance PAXGUSDT → Yahoo GC=F, bypasses CORS)
+        async function loadRealGoldCandles(levels) {
+            // 1. Direct Binance PAXGUSDT 5m klines (CORS supported natively)
+            try {
+                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=100');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        return data.map(c => ({
+                            time: Math.floor(c[0] / 1000),
+                            open: parseFloat(parseFloat(c[1]).toFixed(2)),
+                            high: parseFloat(parseFloat(c[2]).toFixed(2)),
+                            low: parseFloat(parseFloat(c[3]).toFixed(2)),
+                            close: parseFloat(parseFloat(c[4]).toFixed(2))
+                        }));
+                    }
+                }
+            } catch (e) {
+                console.warn("[Gold Chart] Direct Binance PAXG fetch failed:", e);
+            }
+
+            // 2. Server-side /api/goldCandles
             try {
                 const res = await fetch('/api/goldCandles');
                 if (res.ok) {
@@ -655,14 +674,76 @@
                     if (json && json.candles && json.candles.length > 0) {
                         return json.candles;
                     }
-                    if (json && !json.success) {
-                        console.warn('[Gold Chart] API returned no candles:', json.message);
-                    }
                 }
             } catch (e) {
-                console.error('[Gold Chart] /api/goldCandles fetch failed:', e);
+                console.warn('[Gold Chart] /api/goldCandles fetch failed:', e);
             }
-            return [];
+
+            // 3. Spot Feed Fallback
+            return await loadSpotFeedFallback('GOLD', levels, 4400.00);
+        }
+
+        async function loadSpotFeedFallback(assetKey, levels, defaultBase) {
+            let spotPrice = null;
+            try {
+                const res = await fetch('/api/livePrices');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.success) {
+                        if (assetKey === 'GOLD') spotPrice = data.xauusd;
+                        else if (assetKey === 'BTC') spotPrice = data.btcusd || data.btcusdt;
+                        else if (assetKey === 'SP500') spotPrice = data.sp500;
+                        else if (assetKey === 'NIFTY') spotPrice = data.nifty;
+                    }
+                }
+            } catch (e) {}
+
+            if (!spotPrice && levels && levels.length > 0) {
+                const p = parseFloat(levels[0].price);
+                if (!isNaN(p)) spotPrice = p;
+            }
+            if (!spotPrice) spotPrice = defaultBase;
+
+            const storageKey = `${assetKey}_real_5m_candles_v1`;
+            let stored = [];
+            try {
+                const str = localStorage.getItem(storageKey);
+                if (str) stored = JSON.parse(str);
+            } catch (e) {}
+
+            const nowSec = Math.floor(Date.now() / 1000);
+            const current5m = Math.floor(nowSec / 300) * 300;
+
+            if (stored.length === 0) {
+                let curr = spotPrice;
+                for (let t = current5m - (30 * 300); t < current5m; t += 300) {
+                    stored.push({ time: t, open: curr, high: curr, low: curr, close: curr });
+                }
+                stored.push({ time: current5m, open: spotPrice, high: spotPrice, low: spotPrice, close: spotPrice });
+            } else {
+                let lastCandle = stored[stored.length - 1];
+                if (lastCandle.time === current5m) {
+                    lastCandle.high = Math.max(lastCandle.high, spotPrice);
+                    lastCandle.low = Math.min(lastCandle.low, spotPrice);
+                    lastCandle.close = spotPrice;
+                } else if (lastCandle.time < current5m) {
+                    let prevClose = lastCandle.close;
+                    for (let t = lastCandle.time + 300; t <= current5m; t += 300) {
+                        if (t === current5m) {
+                            stored.push({ time: t, open: prevClose, high: Math.max(prevClose, spotPrice), low: Math.min(prevClose, spotPrice), close: spotPrice });
+                        } else {
+                            stored.push({ time: t, open: prevClose, high: prevClose, low: prevClose, close: prevClose });
+                        }
+                    }
+                }
+                if (stored.length > 100) stored = stored.slice(-100);
+            }
+
+            try {
+                localStorage.setItem(storageKey, JSON.stringify(stored));
+            } catch (e) {}
+
+            return stored;
         }
 
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
