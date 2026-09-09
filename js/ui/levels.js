@@ -106,7 +106,14 @@ if (viewLevels) {
 
         const externalLink = document.getElementById('tv-external-link');
         if (externalLink) {
-            externalLink.href = `https://in.tradingview.com/chart/?symbol=${linkSymbol}`;
+            const currentAsset = window.currentActiveAsset || 'NIFTY';
+            if (currentAsset === 'NIFTY') {
+                externalLink.href = 'nifty_interactive_chart.html';
+                externalLink.target = '_blank';
+            } else {
+                externalLink.href = `https://in.tradingview.com/chart/?symbol=${linkSymbol}`;
+                externalLink.target = '_blank';
+            }
         }
         return widgetSymbol;
     }
@@ -115,13 +122,26 @@ if (viewLevels) {
         const symbol = updateTvLink();
         if (!isTvChartOpen) return; // Only render when panel is expanded
 
+        const currentAsset = window.currentActiveAsset || 'NIFTY';
+        const container = document.getElementById('tv_chart_container');
+
+        if (currentAsset === 'NIFTY') {
+            if (tvWidget && typeof tvWidget.remove === 'function') {
+                try { tvWidget.remove(); } catch(e) {}
+                tvWidget = null;
+            }
+            if (container) {
+                container.innerHTML = `<iframe src="nifty_interactive_chart.html" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>`;
+            }
+            return;
+        }
+
         // Properly destroy old widget if it exists to prevent iframe ghosting/sizing bugs
         if (tvWidget && typeof tvWidget.remove === 'function') {
             try { tvWidget.remove(); } catch(e) {}
             tvWidget = null;
         }
 
-        const container = document.getElementById('tv_chart_container');
         if (container) container.innerHTML = ''; // clear old widget
         
         if (typeof TradingView !== 'undefined') {
