@@ -587,10 +587,32 @@
             let timeDisplay = "06:33 PM, Sep 09";
 
             if (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData) && window.btcDailyPlanData.length > 0) {
-                const latestTimestamp = window.btcDailyPlanData[0]?.timestamp;
-                timeDisplay = window.btcDailyPlanData[0]?.timeDisplay || timeDisplay;
+                // Option B: Anchor on the latest SUMMARY timestamp — btcDailyPlanSummary[0]
+                // always reflects the most recent briefing run, so this is the source of truth.
+                const latestSummaryTs = (window.btcDailyPlanSummary && Array.isArray(window.btcDailyPlanSummary) && window.btcDailyPlanSummary.length > 0)
+                    ? window.btcDailyPlanSummary[0].timestamp
+                    : null;
 
-                const latestItems = window.btcDailyPlanData.filter(item => item.timestamp === latestTimestamp);
+                let anchorTimestamp = latestSummaryTs;
+                if (latestSummaryTs) {
+                    const summaryMs = new Date(latestSummaryTs).getTime();
+                    const uniqueTs = [...new Set(window.btcDailyPlanData.map(i => i.timestamp))];
+                    let bestTs = uniqueTs[0];
+                    let bestDiff = Infinity;
+                    uniqueTs.forEach(ts => {
+                        const diff = Math.abs(new Date(ts).getTime() - summaryMs);
+                        if (diff < bestDiff) { bestDiff = diff; bestTs = ts; }
+                    });
+                    anchorTimestamp = bestTs;
+                } else {
+                    anchorTimestamp = window.btcDailyPlanData[0]?.timestamp;
+                }
+
+                timeDisplay = window.btcDailyPlanData.find(i => i.timestamp === anchorTimestamp)?.timeDisplay
+                    || window.btcDailyPlanSummary?.[0]?.timeDisplay
+                    || timeDisplay;
+
+                const latestItems = window.btcDailyPlanData.filter(item => item.timestamp === anchorTimestamp);
                 const keySummaryItems = latestItems.filter(item => /\[KS?\d\]/i.test(item.behavior || ''));
 
                 levels = keySummaryItems.length > 0 ? keySummaryItems : latestItems;
