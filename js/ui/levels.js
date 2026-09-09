@@ -120,20 +120,20 @@ if (viewLevels) {
 
     function renderTvChart() {
         const symbol = updateTvLink();
-        if (!isTvChartOpen) return; // Only render when panel is expanded
+        const body = document.getElementById('tv-chart-body');
+        if (!body || body.style.display === 'none') return; // Only render when chart panel is expanded
 
         const currentAsset = window.currentActiveAsset || 'NIFTY';
         const container = document.getElementById('tv_chart_container');
+        if (!container) return;
 
         if (currentAsset === 'NIFTY') {
             if (tvWidget && typeof tvWidget.remove === 'function') {
                 try { tvWidget.remove(); } catch(e) {}
                 tvWidget = null;
             }
-            if (container) {
-                const cacheBust = Date.now();
-                container.innerHTML = `<iframe src="nifty_interactive_chart.html?embed=true&t=${cacheBust}" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>`;
-            }
+            const cacheBust = Date.now();
+            container.innerHTML = `<iframe src="nifty_interactive_chart.html?embed=true&t=${cacheBust}" style="width: 100%; height: 100%; border: none; border-radius: 8px;"></iframe>`;
             return;
         }
 
@@ -143,7 +143,7 @@ if (viewLevels) {
             tvWidget = null;
         }
 
-        if (container) container.innerHTML = ''; // clear old widget
+        container.innerHTML = ''; // clear old widget/iframe content
         
         if (typeof TradingView !== 'undefined') {
             tvWidget = new TradingView.widget({
