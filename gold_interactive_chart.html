@@ -501,7 +501,7 @@
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Setups`;
 
             // Load real 5m OHLC candle feed
-            const candles = await loadRealGoldCandles(levelsData.levels);
+            const candles = await loadRealGoldCandles();
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
 
@@ -587,10 +587,36 @@
             let timeDisplay = "06:02 PM, Sep 09";
 
             if (window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData) && window.goldDailyPlanData.length > 0) {
-                const latestTimestamp = window.goldDailyPlanData[0]?.timestamp;
-                timeDisplay = window.goldDailyPlanData[0]?.timeDisplay || timeDisplay;
+                // Option B: Anchor on the latest SUMMARY timestamp — goldDailyPlanSummary[0]
+                // always reflects the most recent briefing run, so this is the source of truth.
+                // Fall back to goldDailyPlanData[0].timestamp if summary is unavailable.
+                const latestSummaryTs = (window.goldDailyPlanSummary && Array.isArray(window.goldDailyPlanSummary) && window.goldDailyPlanSummary.length > 0)
+                    ? window.goldDailyPlanSummary[0].timestamp
+                    : null;
 
-                const latestItems = window.goldDailyPlanData.filter(item => item.timestamp === latestTimestamp);
+                // Find the closest matching level timestamp to the summary timestamp
+                // (levels may be written at a slightly different second than the summary)
+                let anchorTimestamp = latestSummaryTs;
+                if (latestSummaryTs) {
+                    // Get all unique level timestamps and pick the one closest to summary ts
+                    const summaryMs = new Date(latestSummaryTs).getTime();
+                    const uniqueTs = [...new Set(window.goldDailyPlanData.map(i => i.timestamp))];
+                    let bestTs = uniqueTs[0];
+                    let bestDiff = Infinity;
+                    uniqueTs.forEach(ts => {
+                        const diff = Math.abs(new Date(ts).getTime() - summaryMs);
+                        if (diff < bestDiff) { bestDiff = diff; bestTs = ts; }
+                    });
+                    anchorTimestamp = bestTs;
+                } else {
+                    anchorTimestamp = window.goldDailyPlanData[0]?.timestamp;
+                }
+
+                timeDisplay = window.goldDailyPlanData.find(i => i.timestamp === anchorTimestamp)?.timeDisplay
+                    || window.goldDailyPlanSummary?.[0]?.timeDisplay
+                    || timeDisplay;
+
+                const latestItems = window.goldDailyPlanData.filter(item => item.timestamp === anchorTimestamp);
                 const section5Items = latestItems.filter(item => /\[G_(B|S)\d\]/i.test(item.behavior || ''));
 
                 levels = section5Items.length > 0 ? section5Items : latestItems;
@@ -619,146 +645,24 @@
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
         }
 
-        function pseudoRandom(seed) {
-            let x = Math.sin(seed) * 10000;
-            return x - Math.floor(x);
-        }
 
-        function enhanceFlatCandle(c, vol = 2.5) {
-            if (!c || c.high === undefined || c.low === undefined) return c;
-            if (Math.abs(c.high - c.low) < 0.15) {
-                const t = c.time;
-                const r1 = pseudoRandom(t + 1);
-                const r2 = pseudoRandom(t + 2);
-                const r3 = pseudoRandom(t + 3);
-                const delta = (r1 - 0.48) * vol;
-                const open = c.close;
-                const close = open + delta;
-                const high = Math.max(open, close) + r2 * (vol * 0.5);
-                const low = Math.min(open, close) - r3 * (vol * 0.5);
-                return {
-                    time: t,
-                    open: Number(open.toFixed(2)),
-                    high: Number(high.toFixed(2)),
-                    low: Number(low.toFixed(2)),
-                    close: Number(close.toFixed(2))
-                };
-            }
-            return c;
-        }
-
-        async function loadRealGoldCandles(levels) {
-            // 1. Primary: Binance PAXGUSDT (Gold 5m klines feed)
+        async function loadRealGoldCandles() {
+            // Server-side /api/goldCandles (Binance PAXGUSDT → Yahoo GC=F, bypasses CORS)
             try {
-                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=100');
+                const res = await fetch('/api/goldCandles');
                 if (res.ok) {
-                    const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        return data.map(c => enhanceFlatCandle({
-                            time: Math.floor(c[0] / 1000),
-                            open: parseFloat(c[1]),
-                            high: parseFloat(c[2]),
-                            low: parseFloat(c[3]),
-                            close: parseFloat(c[4])
-                        }, 2.5));
+                    const json = await res.json();
+                    if (json && json.candles && json.candles.length > 0) {
+                        return json.candles;
+                    }
+                    if (json && !json.success) {
+                        console.warn('[Gold Chart] API returned no candles:', json.message);
                     }
                 }
             } catch (e) {
-                console.warn("Gold 5m klines feed fetch error:", e);
+                console.error('[Gold Chart] /api/goldCandles fetch failed:', e);
             }
-
-            // 2. Secondary: Yahoo Finance GC=F (Gold Futures 5m chart)
-            try {
-                const res = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=5m&range=1d');
-                if (res.ok) {
-                    const json = await res.json();
-                    const result = json?.chart?.result?.[0];
-                    if (result && result.timestamp) {
-                        const times = result.timestamp;
-                        const quote = result.indicators.quote[0];
-                        const candles = [];
-                        for (let i = 0; i < times.length; i++) {
-                            if (quote.open[i] != null && quote.close[i] != null) {
-                                candles.push({
-                                    time: times[i],
-                                    open: parseFloat(quote.open[i].toFixed(2)),
-                                    high: parseFloat((quote.high[i] || quote.open[i]).toFixed(2)),
-                                    low: parseFloat((quote.low[i] || quote.open[i]).toFixed(2)),
-                                    close: parseFloat(quote.close[i].toFixed(2))
-                                });
-                            }
-                        }
-                        if (candles.length > 0) return candles.map(c => enhanceFlatCandle(c, 2.5));
-                    }
-                }
-            } catch (e) {}
-
-            // 3. Fallback: accumulate live spot feed from /api/livePrices
-            const fallbackCandles = await loadSpotFeedFallback('GOLD', levels, 4390.00);
-            return fallbackCandles.map(c => enhanceFlatCandle(c, 2.5));
-        }
-
-        async function loadSpotFeedFallback(assetKey, levels, defaultBase) {
-            let spotPrice = null;
-            try {
-                const res = await fetch('/api/livePrices');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.success) {
-                        if (assetKey === 'GOLD') spotPrice = data.xauusd;
-                        else if (assetKey === 'BTC') spotPrice = data.btcusd || data.btcusdt;
-                        else if (assetKey === 'SP500') spotPrice = data.sp500;
-                        else if (assetKey === 'NIFTY') spotPrice = data.nifty;
-                    }
-                }
-            } catch (e) {}
-
-            if (!spotPrice && levels && levels.length > 0) {
-                const p = parseFloat(levels[0].price);
-                if (!isNaN(p)) spotPrice = p;
-            }
-            if (!spotPrice) spotPrice = defaultBase;
-
-            const storageKey = `${assetKey}_real_5m_candles_v1`;
-            let stored = [];
-            try {
-                const str = localStorage.getItem(storageKey);
-                if (str) stored = JSON.parse(str);
-            } catch (e) {}
-
-            const nowSec = Math.floor(Date.now() / 1000);
-            const current5m = Math.floor(nowSec / 300) * 300;
-
-            if (stored.length === 0) {
-                let curr = spotPrice;
-                for (let t = current5m - (30 * 300); t < current5m; t += 300) {
-                    stored.push({ time: t, open: curr, high: curr, low: curr, close: curr });
-                }
-                stored.push({ time: current5m, open: spotPrice, high: spotPrice, low: spotPrice, close: spotPrice });
-            } else {
-                let lastCandle = stored[stored.length - 1];
-                if (lastCandle.time === current5m) {
-                    lastCandle.high = Math.max(lastCandle.high, spotPrice);
-                    lastCandle.low = Math.min(lastCandle.low, spotPrice);
-                    lastCandle.close = spotPrice;
-                } else if (lastCandle.time < current5m) {
-                    let prevClose = lastCandle.close;
-                    for (let t = lastCandle.time + 300; t <= current5m; t += 300) {
-                        if (t === current5m) {
-                            stored.push({ time: t, open: prevClose, high: Math.max(prevClose, spotPrice), low: Math.min(prevClose, spotPrice), close: spotPrice });
-                        } else {
-                            stored.push({ time: t, open: prevClose, high: prevClose, low: prevClose, close: prevClose });
-                        }
-                    }
-                }
-                if (stored.length > 100) stored = stored.slice(-100);
-            }
-
-            try {
-                localStorage.setItem(storageKey, JSON.stringify(stored));
-            } catch (e) {}
-
-            return stored;
+            return [];
         }
 
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
