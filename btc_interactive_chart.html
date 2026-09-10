@@ -579,7 +579,7 @@
                 const isBullish = lvl.bias === 'bullish';
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const tag = extractTag(lvl.behavior) || (isBullish ? `[KB${idx+1}]` : `[KS${idx+1}]`);
-                const priceVal = parseFloat(lvl.price.split('-')[0].replace(/[^0-9.]/g, ''));
+                const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.btcDailyPlanSummary);
 
                 if (!isNaN(priceVal)) {

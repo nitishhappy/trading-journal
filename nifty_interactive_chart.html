@@ -648,7 +648,7 @@
                 const isBullish = lvl.bias === 'bullish';
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const tag = extractTag(lvl.behavior) || (isBullish ? `[B${idx+1}]` : `[S${idx+1}]`);
-                const priceVal = parseFloat(lvl.price);
+                const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.dailyPlanSummary);
 
                 const pLine = candleSeries.createPriceLine({
