@@ -578,6 +578,7 @@
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const tag = extractTag(lvl.behavior) || (isBullish ? `[SP_B${idx+1}]` : `[SP_S${idx+1}]`);
                 const priceVal = parseFloat(lvl.price.split('-')[0].replace(/[^0-9.]/g, ''));
+                const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.sp500DailyPlanSummary);
 
                 if (!isNaN(priceVal)) {
                     const pLine = candleSeries.createPriceLine({
@@ -602,7 +603,7 @@
                         </span>
                         <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
                     </div>
-                    <div class="card-logic clamped" id="card-logic-sp500-${idx}">${cleanLogicText(lvl.behavior)}</div>
+                    <div class="card-logic clamped" id="card-logic-sp500-${idx}">${fullConfirmationLogic}</div>
                     <div class="expand-logic-btn" id="expand-btn-sp500-${idx}" onclick="toggleLogicExpand(event, 'sp500', ${idx})">▼ Show Full Confirmation Logic</div>
                     <div class="card-targets">
                         <span>TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></span>
@@ -612,7 +613,7 @@
                 
                 card.addEventListener('click', () => {
                     highlightCard(idx);
-                    showToast(`Selected Level: ${tag} $${lvl.price}`, cleanLogicText(lvl.behavior));
+                    showToast(`Selected Level: ${tag} $${lvl.price}`, fullConfirmationLogic);
                     triggerAlertSound(880, 'sine', 0.15);
                 });
 
@@ -744,6 +745,33 @@
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
             return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+        }
+
+        function getConfirmationPriceAction(tag, behaviorFallback, summaryArray) {
+            const fallbackText = cleanLogicText(behaviorFallback);
+            if (!tag || !summaryArray || !Array.isArray(summaryArray) || summaryArray.length === 0) {
+                return fallbackText;
+            }
+            const latestSummaryText = summaryArray[0]?.text || '';
+            if (!latestSummaryText) return fallbackText;
+
+            const cleanTagStr = tag.replace(/[\[\]]/g, '').trim();
+            if (!cleanTagStr) return fallbackText;
+
+            const lines = latestSummaryText.split('\n');
+            for (let line of lines) {
+                if (line.includes('|') && line.toLowerCase().includes(cleanTagStr.toLowerCase())) {
+                    const parts = line.split('|').map(p => p.trim());
+                    if (parts.length >= 5 && parts[4]) {
+                        let confirmation = parts[4];
+                        confirmation = confirmation.replace(/<br\s*\/?>/gi, ' ').replace(/\*\*/g, '').trim();
+                        if (confirmation && confirmation.length > 8 && !confirmation.toLowerCase().includes('confirmation price action')) {
+                            return confirmation;
+                        }
+                    }
+                }
+            }
+            return fallbackText;
         }
 
         async function loadRealSp500Candles() {
