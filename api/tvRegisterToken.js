@@ -1,5 +1,5 @@
 const cors = require('cors')({ origin: true });
-const { admin, db } = require('./firebase-admin');
+const { admin, db } = require('./_lib/firebase-admin');
 
 // POST /api/tvRegisterToken
 // Headers: Authorization: Bearer <idToken>

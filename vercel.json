@@ -2,6 +2,22 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/api/niftyCandles",
+      "destination": "/api/marketCandles?symbol=NIFTY"
+    },
+    {
+      "source": "/api/goldCandles",
+      "destination": "/api/marketCandles?symbol=GOLD"
+    },
+    {
+      "source": "/api/btcCandles",
+      "destination": "/api/marketCandles?symbol=BTC"
+    },
+    {
+      "source": "/api/sp500Candles",
+      "destination": "/api/marketCandles?symbol=SP500"
+    },
+    {
       "source": "/api/:path*",
       "destination": "/api/:path*"
     },

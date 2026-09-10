@@ -1,7 +1,7 @@
 const webpush = require('web-push');
 const cors = require('cors')({ origin: true });
-const { admin, db } = require('./firebase-admin');
-const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = require('./vapidConfig');
+const { admin, db } = require('./_lib/firebase-admin');
+const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = require('./_lib/vapidConfig');
 
 // Configure web-push VAPID details
 try {

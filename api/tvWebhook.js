@@ -1,7 +1,7 @@
 const webpush = require('web-push');
-const { admin, db } = require('./firebase-admin');
-const { runSequenceEngine } = require('./sequenceEngine');
-const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = require('./vapidConfig');
+const { admin, db } = require('./_lib/firebase-admin');
+const { runSequenceEngine } = require('./_lib/sequenceEngine');
+const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = require('./_lib/vapidConfig');
 
 try {
   webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY);

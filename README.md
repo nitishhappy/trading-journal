@@ -20,14 +20,36 @@ A private, installable (PWA) daily trading journal. Built with vanilla HTML/CSS/
 - **Vercel API** (`/api/tvWebhook`, `/api/sendPush`) → Handles TradingView webhooks and VAPID Web Push notifications (RFC 8291/8292) directly to Service Worker (`sw.js`) for lock-screen popups on mobile devices.
 
 ### Key Files & Data Layer
-- `vercel.json` — Vercel routing configuration
+- `vercel.json` — Vercel routing configuration & rewrite rules for consolidated API endpoints
+- `docs/VERCEL_FUNCTION_BUDGET.md` — Persistent source of truth for Vercel Serverless Function budget (5/12 functions active)
+- `api/livePrices.js` — Multi-asset live spot price aggregator (Nifty, Gold, S&P 500, BTC)
+- `api/marketCandles.js` — Consolidated 5M candlestick feed for all assets (`symbol=NIFTY|GOLD|BTC|SP500`)
 - `api/tvWebhook.js` — Vercel serverless function for TradingView webhooks & Web Push trigger
 - `api/sendPush.js` — Vercel serverless endpoint for dispatching encrypted VAPID push notifications
-- `api/vapidConfig.js` — VAPID keypair configuration helper
+- `api/tvRegisterToken.js` — TradingView webhook token registration endpoint
+- `api/_lib/` — Helper module directory (`firebase-admin.js`, `sequenceEngine.js`, `vapidConfig.js`) excluded from Vercel function count
 - `js/services/webPush.js` — Frontend Web Push subscription manager & Firestore registration
 - `nifty_interactive_chart.html` — Interactive TradingView Lightweight Charts level dashboard with real-time Upstox `/api/niftyCandles` feed, IST timezone, clickable price lines, vertical timestamp markers, and desktop alerts
 - `js/data/*_daily_plan.js` — Offline-first local data files (`nifty_daily_plan.js`, `gold_daily_plan.js`, `sp500_daily_plan.js`, `btc_daily_plan.js`) protected by Node.js Quality Gate auto-rollback
 - `app.js` — **Client-side entry point** (not a server file)
+
+---
+
+## ⚡ Vercel Serverless Function Architecture & Budget (Hard Limit: 12)
+
+This deployment enforces a hard limit of **12 Serverless Functions** (Vercel Hobby plan). 
+
+To optimize function capacity and maintain high platform headroom:
+1. **Helper Relocation**: Internal non-handler utility modules (`firebase-admin.js`, `sequenceEngine.js`, `vapidConfig.js`) sit in `api/_lib/` to prevent Vercel from compiling them as serverless function entry points.
+2. **Endpoint Consolidation**: Candlestick endpoints (`niftyCandles`, `goldCandles`, `btcCandles`, `sp500Candles`) are unified under `/api/marketCandles.js`, with transparent `vercel.json` rewrite routing.
+3. **Dormant Code Retirement**: Legacy `latestGoldPrice.js` and duplicate `registerPush.js` are retired.
+
+**Current Active Functions (5 / 12 — SAFE Status, 7 Available Slots)**:
+1. `api/livePrices.js`
+2. `api/marketCandles.js`
+3. `api/sendPush.js`
+4. `api/tvRegisterToken.js`
+5. `api/tvWebhook.js`
 
 ---
 
