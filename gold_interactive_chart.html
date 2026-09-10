@@ -505,7 +505,29 @@
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
 
-                const targetCandleTime = candles[Math.floor(candles.length / 2)]?.time || Math.floor(Date.now() / 1000);
+                let targetCandleTime = null;
+                if (levelsData.anchorTimestamp) {
+                    const planSec = Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000);
+                    let minDiff = Infinity;
+                    candles.forEach(c => {
+                        const diff = Math.abs(c.time - planSec);
+                        if (diff < minDiff) { minDiff = diff; targetCandleTime = c.time; }
+                    });
+                }
+                if (!targetCandleTime && raisedTimeStr) {
+                    const planSec = parseISTTimeToUnix(raisedTimeStr);
+                    if (planSec) {
+                        let minDiff = Infinity;
+                        candles.forEach(c => {
+                            const diff = Math.abs(c.time - planSec);
+                            if (diff < minDiff) { minDiff = diff; targetCandleTime = c.time; }
+                        });
+                    }
+                }
+                if (!targetCandleTime) {
+                    targetCandleTime = candles[candles.length - 1]?.time || Math.floor(Date.now() / 1000);
+                }
+
                 candleSeries.setMarkers([
                     {
                         time: targetCandleTime,
@@ -585,20 +607,14 @@
         function getGoldActionPlanLevels() {
             let levels = [];
             let timeDisplay = "06:02 PM, Sep 09";
+            let anchorTimestamp = null;
 
             if (window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData) && window.goldDailyPlanData.length > 0) {
-                // Option B: Anchor on the latest SUMMARY timestamp — goldDailyPlanSummary[0]
-                // always reflects the most recent briefing run, so this is the source of truth.
-                // Fall back to goldDailyPlanData[0].timestamp if summary is unavailable.
                 const latestSummaryTs = (window.goldDailyPlanSummary && Array.isArray(window.goldDailyPlanSummary) && window.goldDailyPlanSummary.length > 0)
                     ? window.goldDailyPlanSummary[0].timestamp
                     : null;
 
-                // Find the closest matching level timestamp to the summary timestamp
-                // (levels may be written at a slightly different second than the summary)
-                let anchorTimestamp = latestSummaryTs;
                 if (latestSummaryTs) {
-                    // Get all unique level timestamps and pick the one closest to summary ts
                     const summaryMs = new Date(latestSummaryTs).getTime();
                     const uniqueTs = [...new Set(window.goldDailyPlanData.map(i => i.timestamp))];
                     let bestTs = uniqueTs[0];
@@ -618,8 +634,20 @@
 
                 const latestItems = window.goldDailyPlanData.filter(item => item.timestamp === anchorTimestamp);
                 const section5Items = latestItems.filter(item => /\[G_(B|S)\d\]/i.test(item.behavior || ''));
+                const itemsToFilter = section5Items.length > 0 ? section5Items : latestItems;
 
-                levels = section5Items.length > 0 ? section5Items : latestItems;
+                // Deduplicate by setup tag (pick first occurrence of [G_B1], [G_B2], [G_S1], [G_S2])
+                const uniqueTagItems = [];
+                const seenTags = new Set();
+                itemsToFilter.forEach(item => {
+                    const tag = extractTag(item.behavior);
+                    if (tag && !seenTags.has(tag)) {
+                        seenTags.add(tag);
+                        uniqueTagItems.push(item);
+                    }
+                });
+
+                levels = uniqueTagItems.length > 0 ? uniqueTagItems : itemsToFilter.slice(0, 4);
             }
 
             if (levels.length === 0) {
@@ -631,7 +659,31 @@
                 ];
             }
 
-            return { levels, timeDisplay };
+            return { levels, timeDisplay, anchorTimestamp };
+        }
+
+        function parseISTTimeToUnix(timeDisplayStr) {
+            try {
+                const match = timeDisplayStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+                if (!match) return null;
+                let hrs = parseInt(match[1]);
+                const mins = parseInt(match[2]);
+                const ampm = match[3].toUpperCase();
+                if (ampm === 'PM' && hrs < 12) hrs += 12;
+                if (ampm === 'AM' && hrs === 12) hrs = 0;
+
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                const hrsStr = String(hrs).padStart(2, '0');
+                const minsStr = String(mins).padStart(2, '0');
+
+                const isoStr = `${year}-${month}-${day}T${hrsStr}:${minsStr}:00+05:30`;
+                return Math.floor(new Date(isoStr).getTime() / 1000);
+            } catch (e) {
+                return null;
+            }
         }
 
         function extractTag(behaviorStr) {

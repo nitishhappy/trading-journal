@@ -570,19 +570,31 @@
             document.getElementById('briefing-time-badge').innerText = `📌 Plan Raised: ${raisedTimeStr}`;
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Levels`;
 
-            // 4. Find candle matching the 10:35 AM raised timestamp
-            const planRaisedUnixTime = parseISTTimeToUnix(raisedTimeStr);
-            let targetCandleTime = candles[0]?.time || Math.floor(Date.now() / 1000);
-
-            if (planRaisedUnixTime && candles.length > 0) {
-                let smallestDiff = 9999999;
+            // 4. Find candle matching the plan raised timestamp
+            let targetCandleTime = null;
+            if (levelsData.anchorTimestamp) {
+                const planSec = Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000);
+                let minDiff = Infinity;
                 candles.forEach(c => {
-                    const diff = Math.abs(c.time - planRaisedUnixTime);
-                    if (diff < smallestDiff) {
-                        smallestDiff = diff;
-                        targetCandleTime = c.time;
-                    }
+                    const diff = Math.abs(c.time - planSec);
+                    if (diff < minDiff) { minDiff = diff; targetCandleTime = c.time; }
                 });
+            }
+            if (!targetCandleTime && raisedTimeStr) {
+                const planRaisedUnixTime = parseISTTimeToUnix(raisedTimeStr);
+                if (planRaisedUnixTime && candles.length > 0) {
+                    let smallestDiff = 9999999;
+                    candles.forEach(c => {
+                        const diff = Math.abs(c.time - planRaisedUnixTime);
+                        if (diff < smallestDiff) {
+                            smallestDiff = diff;
+                            targetCandleTime = c.time;
+                        }
+                    });
+                }
+            }
+            if (!targetCandleTime) {
+                targetCandleTime = candles[candles.length - 1]?.time || Math.floor(Date.now() / 1000);
             }
 
             candleSeries.setMarkers([
@@ -705,15 +717,13 @@
         function getLatestDailyPlanLevels() {
             let levels = [];
             let timeDisplay = "10:35 AM, Sep 09";
+            let anchorTimestamp = null;
 
             if (window.dailyPlanData && Array.isArray(window.dailyPlanData) && window.dailyPlanData.length > 0) {
-                // Option B: Anchor on the latest SUMMARY timestamp — dailyPlanSummary[0]
-                // always reflects the most recent briefing run, so this is the source of truth.
                 const latestSummaryTs = (window.dailyPlanSummary && Array.isArray(window.dailyPlanSummary) && window.dailyPlanSummary.length > 0)
                     ? window.dailyPlanSummary[0].timestamp
                     : null;
 
-                let anchorTimestamp = latestSummaryTs;
                 if (latestSummaryTs) {
                     const summaryMs = new Date(latestSummaryTs).getTime();
                     const uniqueTs = [...new Set(window.dailyPlanData.map(i => i.timestamp))];
@@ -732,7 +742,22 @@
                     || window.dailyPlanSummary?.[0]?.timeDisplay
                     || timeDisplay;
 
-                levels = window.dailyPlanData.filter(item => item.timestamp === anchorTimestamp);
+                const latestItems = window.dailyPlanData.filter(item => item.timestamp === anchorTimestamp);
+                const section5Items = latestItems.filter(item => /\[(B|S)\d\]/i.test(item.behavior || ''));
+                const itemsToFilter = section5Items.length > 0 ? section5Items : latestItems;
+
+                // Deduplicate by setup tag
+                const uniqueTagItems = [];
+                const seenTags = new Set();
+                itemsToFilter.forEach(item => {
+                    const tag = extractTag(item.behavior);
+                    if (tag && !seenTags.has(tag)) {
+                        seenTags.add(tag);
+                        uniqueTagItems.push(item);
+                    }
+                });
+
+                levels = uniqueTagItems.length > 0 ? uniqueTagItems : itemsToFilter.slice(0, 4);
             }
 
             if (levels.length === 0) {
@@ -744,7 +769,7 @@
                 ];
             }
 
-            return { levels, timeDisplay };
+            return { levels, timeDisplay, anchorTimestamp };
         }
 
         function parseISTTimeToUnix(timeDisplayStr) {
