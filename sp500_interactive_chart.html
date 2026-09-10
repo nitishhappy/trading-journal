@@ -259,7 +259,33 @@
             font-size: 0.85rem;
             color: #cbd5e1;
             line-height: 1.4;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-logic.clamped {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-logic.expanded {
+            display: block;
+            overflow: visible;
+        }
+
+        .expand-logic-btn {
+            font-size: 0.72rem;
+            color: #60a5fa;
+            cursor: pointer;
             margin-bottom: 0.6rem;
+            user-select: none;
+            font-weight: 600;
+        }
+
+        .expand-logic-btn:hover {
+            color: #93c5fd;
+            text-decoration: underline;
         }
 
         .card-targets {
@@ -576,7 +602,8 @@
                         </span>
                         <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
                     </div>
-                    <div class="card-logic">${cleanLogicText(lvl.behavior)}</div>
+                    <div class="card-logic clamped" id="card-logic-sp500-${idx}">${cleanLogicText(lvl.behavior)}</div>
+                    <div class="expand-logic-btn" id="expand-btn-sp500-${idx}" onclick="toggleLogicExpand(event, 'sp500', ${idx})">▼ Show Full Confirmation Logic</div>
                     <div class="card-targets">
                         <span>TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></span>
                         <span>SL: <strong class="sl-val">${lvl.sl || 'N/A'}</strong></span>
@@ -599,6 +626,30 @@
             if (targetCard) {
                 targetCard.classList.add('selected-highlight');
                 targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                const logicEl = document.getElementById(`card-logic-sp500-${cardIdx}`);
+                const btnEl = document.getElementById(`expand-btn-sp500-${cardIdx}`);
+                if (logicEl && logicEl.classList.contains('clamped')) {
+                    logicEl.classList.remove('clamped');
+                    logicEl.classList.add('expanded');
+                    if (btnEl) btnEl.innerText = '▲ Collapse Logic';
+                }
+            }
+        }
+
+        function toggleLogicExpand(event, prefix, idx) {
+            if (event) event.stopPropagation();
+            const logicEl = document.getElementById(`card-logic-${prefix}-${idx}`);
+            const btnEl = document.getElementById(`expand-btn-${prefix}-${idx}`);
+            if (logicEl) {
+                if (logicEl.classList.contains('clamped')) {
+                    logicEl.classList.remove('clamped');
+                    logicEl.classList.add('expanded');
+                    if (btnEl) btnEl.innerText = '▲ Collapse Logic';
+                } else {
+                    logicEl.classList.remove('expanded');
+                    logicEl.classList.add('clamped');
+                    if (btnEl) btnEl.innerText = '▼ Show Full Confirmation Logic';
+                }
             }
         }
 
