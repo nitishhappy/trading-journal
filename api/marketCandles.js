@@ -1,4 +1,7 @@
 import https from "https";
+import fbAdmin from "./_lib/firebase-admin.js";
+
+const db = fbAdmin ? fbAdmin.db : null;
 
 const fetchUrl = (url) => {
   return new Promise((resolve) => {
@@ -226,22 +229,57 @@ export default async function handler(req, res) {
       });
     }
 
-    // ── 4. S&P 500 SPOT INDEX CANDLES (^GSPC) ───────────────────────────
-    if (symInput === "SP500" || symInput === "^GSPC" || symInput === "SPX") {
+    // ── 4. S&P 500 SPOT INDEX CANDLES (^GSPC) — TRADINGVIEW ONLY ───────────
+    if (symInput === "SP500" || symInput === "^GSPC" || symInput === "SPX" || symInput === "SPX500") {
       let candles = [];
-      const json1 = await fetchUrl("https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=5m&range=1d");
-      if (json1) candles = parseYahooCandles(json1);
+
+      if (db) {
+        try {
+          const reqTf = req.query.timeframe || req.query.tf || "5m";
+          const normTf = (reqTf === "5" || reqTf === "5m") ? "5m" : (reqTf === "15" || reqTf === "15m") ? "15m" : (reqTf === "60" || reqTf === "1h") ? "1h" : (reqTf === "d" || reqTf === "1d") ? "1d" : "5m";
+          const limit = Math.min(parseInt(req.query.limit || "100", 10), 500);
+
+          const snapshot = await db.collection("sp500_candles")
+            .where("timeframe", "==", normTf)
+            .orderBy("timestamp", "desc")
+            .limit(limit)
+            .get();
+
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            candles.push({
+              time: data.timestamp,
+              open: data.open,
+              high: data.high,
+              low: data.low,
+              close: data.close,
+              volume: data.volume || 0
+            });
+          });
+
+          // Order ascending for chart engine
+          candles.sort((a, b) => a.time - b.time);
+        } catch (e) {
+          console.error("api/marketCandles SP500 query error:", e);
+        }
+      }
 
       if (candles.length === 0) {
-        const json2 = await fetchUrl("https://query2.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=5m&range=1d");
-        if (json2) candles = parseYahooCandles(json2);
+        return res.status(200).json({
+          success: false,
+          status: "TRADINGVIEW_DATA_UNAVAILABLE",
+          symbol: "SP500",
+          source: "TRADINGVIEW",
+          message: "TradingView S&P 500 candle data is currently unavailable in Firestore.",
+          candles: []
+        });
       }
 
       return res.status(200).json({
-        success: candles.length > 0,
+        success: true,
         symbol: "SP500",
-        candles,
-        message: candles.length === 0 ? "No real S&P 500 spot candle data available from Yahoo Finance." : undefined
+        source: "TRADINGVIEW",
+        candles
       });
     }
 

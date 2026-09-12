@@ -81,6 +81,43 @@ module.exports = async (req, res) => {
   const resolvedImage = imageUrl || image || null;
   const resolvedTelegramDate = telegram_date || telegramDate || null;
 
+  // ── S&P 500 TradingView Candle Persistence ──────────────────────────────
+  const rawSym = symbol || data.ticker || data.sym || "";
+  const cleanedSym = cleanSymbol(rawSym);
+  const isSp500 = cleanedSym === "SP500" || cleanedSym === "^GSPC" || cleanedSym === "SPX" || cleanedSym === "SPX500" || cleanedSym === "S&P500";
+
+  if (isSp500 && data.open !== undefined && data.high !== undefined && data.low !== undefined && data.close !== undefined) {
+    try {
+      const openVal = parseFloat(data.open);
+      const highVal = parseFloat(data.high);
+      const lowVal = parseFloat(data.low);
+      const closeVal = parseFloat(data.close);
+      const volVal = data.volume !== undefined ? parseFloat(data.volume) : 0;
+
+      if (!isNaN(openVal) && !isNaN(highVal) && !isNaN(lowVal) && !isNaN(closeVal)) {
+        const normTf = normalizeTimeframe(resolvedTimeframe || "5m");
+        const normTs = normalizeTimestamp(data.timestamp || data.time || data.date);
+        const docId = `SP500_${normTf}_${normTs}`;
+
+        await db.collection("sp500_candles").doc(docId).set({
+          symbol: "SP500",
+          timeframe: normTf,
+          timestamp: normTs,
+          isoTimestamp: new Date(normTs * 1000).toISOString(),
+          open: openVal,
+          high: highVal,
+          low: lowVal,
+          close: closeVal,
+          volume: isNaN(volVal) ? 0 : volVal,
+          source: "TRADINGVIEW",
+          updatedAt: admin.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+      }
+    } catch (e) {
+      console.error("tvWebhook: Error saving SP500 OHLC candle to Firestore:", e);
+    }
+  }
+
   const notifRef = db.collection("users").doc(uid).collection("tvNotifications").doc();
   await notifRef.set({
     raw,
@@ -344,3 +381,31 @@ function cleanSymbol(sym) {
   s = s.replace(/[\(\),]/g, " ").trim().split(/\s+/)[0].toUpperCase();
   return NON_SYMBOL_WORDS.has(s) ? "GENERAL" : s;
 }
+
+function normalizeTimeframe(tf) {
+  if (!tf) return "5m";
+  const s = String(tf).trim().toLowerCase();
+  if (s === "5" || s === "5m") return "5m";
+  if (s === "15" || s === "15m") return "15m";
+  if (s === "60" || s === "1h" || s === "60m") return "1h";
+  if (s === "d" || s === "1d" || s === "daily" || s === "1440") return "1d";
+  return s;
+}
+
+function normalizeTimestamp(ts) {
+  if (ts === undefined || ts === null) return Math.floor(Date.now() / 1000);
+  if (typeof ts === "number") {
+    return ts > 1e11 ? Math.floor(ts / 1000) : Math.floor(ts);
+  }
+  const str = String(ts).trim();
+  if (/^\d+$/.test(str)) {
+    const num = parseInt(str, 10);
+    return num > 1e11 ? Math.floor(num / 1000) : num;
+  }
+  const parsedDate = new Date(str);
+  if (!isNaN(parsedDate.getTime())) {
+    return Math.floor(parsedDate.getTime() / 1000);
+  }
+  return Math.floor(Date.now() / 1000);
+}
+
