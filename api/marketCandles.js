@@ -58,10 +58,10 @@ export default async function handler(req, res) {
   try {
     const symInput = (req.query.symbol || req.query.asset || "").toUpperCase();
     const queryDate = req.query.date ? req.query.date.trim() : "";
-    const instrument = req.query.instrument || "NSE_INDEX|Nifty 50";
+    const instrument = req.query.instrument || "";
 
     // ── 1. NIFTY 50 CANDLES ────────────────────────────────────────────────
-    if (symInput === "NIFTY" || symInput === "NIFTY50" || instrument.includes("Nifty")) {
+    if (symInput === "NIFTY" || symInput === "NIFTY50" || (instrument && instrument.includes("Nifty"))) {
       const encInst = encodeURIComponent(instrument);
       const now = new Date();
       const todayIst = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
