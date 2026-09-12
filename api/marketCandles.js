@@ -241,13 +241,12 @@ export default async function handler(req, res) {
 
           const snapshot = await db.collection("sp500_candles")
             .where("timeframe", "==", normTf)
-            .orderBy("timestamp", "desc")
-            .limit(limit)
             .get();
 
+          const rawCandles = [];
           snapshot.forEach(doc => {
             const data = doc.data();
-            candles.push({
+            rawCandles.push({
               time: data.timestamp,
               open: data.open,
               high: data.high,
@@ -257,7 +256,9 @@ export default async function handler(req, res) {
             });
           });
 
-          // Order ascending for chart engine
+          // Sort descending to slice latest candles, then sort ascending for return
+          rawCandles.sort((a, b) => b.time - a.time);
+          candles = rawCandles.slice(0, limit);
           candles.sort((a, b) => a.time - b.time);
         } catch (e) {
           console.error("api/marketCandles SP500 query error:", e);

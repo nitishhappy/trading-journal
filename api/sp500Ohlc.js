@@ -51,14 +51,12 @@ module.exports = async (req, res) => {
 
     const snapshot = await db.collection("sp500_candles")
       .where("timeframe", "==", timeframe)
-      .orderBy("timestamp", "desc")
-      .limit(limit)
       .get();
 
-    const candles = [];
+    const rawCandles = [];
     snapshot.forEach(doc => {
       const data = doc.data();
-      candles.push({
+      rawCandles.push({
         time: data.timestamp,
         open: data.open,
         high: data.high,
@@ -68,7 +66,9 @@ module.exports = async (req, res) => {
       });
     });
 
-    // Order ascending for technical analysis engines / charts
+    // Sort descending to slice latest candles, then sort ascending for return
+    rawCandles.sort((a, b) => b.time - a.time);
+    const candles = rawCandles.slice(0, limit);
     candles.sort((a, b) => a.time - b.time);
 
     const latestTimestamp = candles.length > 0 ? candles[candles.length - 1].time : 0;
