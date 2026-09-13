@@ -156,14 +156,24 @@
         }
 
         .feed-badge {
-            background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.4);
             padding: 0.2rem 0.6rem;
             border-radius: 4px;
             font-size: 0.75rem;
             font-family: 'JetBrains Mono', monospace;
             font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feed-badge-live {
+            background: rgba(16, 185, 129, 0.18) !important;
+            color: #10b981 !important;
+            border: 1px solid rgba(16, 185, 129, 0.4) !important;
+        }
+
+        .feed-badge-unavailable {
+            background: rgba(244, 63, 94, 0.18) !important;
+            color: #f43f5e !important;
+            border: 1px solid rgba(244, 63, 94, 0.4) !important;
         }
 
         #chart-wrapper {
@@ -600,17 +610,23 @@
             chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
         }
 
+        function updateFeedStatusBadge(isAvailable, textOverride) {
+            const badge = document.getElementById('feed-status-badge');
+            if (!badge) return;
+            if (isAvailable) {
+                badge.innerText = textOverride || '● LIVE API FEED';
+                badge.className = 'feed-badge feed-badge-live';
+            } else {
+                badge.innerText = textOverride || '⚠️ DATA UNAVAILABLE';
+                badge.className = 'feed-badge feed-badge-unavailable';
+            }
+        }
+
         async function reloadChartData() {
             // 2. Fetch Real-Time 5M Candles from API feed / /api/marketCandles endpoint
             let candles = await loadRealNiftyCandles();
 
-            if (!candles || candles.length === 0) {
-                document.getElementById('feed-status-badge').innerText = '⚠️ DATA UNAVAILABLE';
-                document.getElementById('feed-status-badge').style.color = '#f43f5e';
-            } else {
-                document.getElementById('feed-status-badge').innerText = '● LIVE API FEED';
-                document.getElementById('feed-status-badge').style.color = '#10b981';
-            }
+            updateFeedStatusBadge(candles && candles.length > 0);
 
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
@@ -765,16 +781,18 @@
             }
         }
 
-        // Fetch Realtime OHLC Candles from /api/niftyCandles
+        // Fetch Realtime OHLC Candles from /api/marketCandles?symbol=NIFTY or /api/niftyCandles
         async function fetchRealtimeNiftyCandles() {
             try {
-                const res = await fetch('/api/niftyCandles');
+                let res = await fetch(`/api/marketCandles?symbol=NIFTY&_t=${Date.now()}`, { cache: 'no-store' });
+                if (!res.ok) {
+                    res = await fetch('/api/niftyCandles');
+                }
                 if (!res.ok) return null;
                 const json = await res.json();
                 if (!json || !json.candles || !Array.isArray(json.candles) || json.candles.length === 0) return null;
 
-                // Map Upstox candles to Lightweight Charts format
-                // API format: { timestamp, open, high, low, close } OR [timestamp, open, high, low, close]
+                // Map candles to Lightweight Charts format
                 const formatted = json.candles.map(c => {
                     let timeSec;
                     let open, high, low, close;
@@ -805,7 +823,7 @@
 
                 return formatted.length > 0 ? formatted : null;
             } catch (e) {
-                console.warn("[Candle Feed Error] Could not fetch /api/niftyCandles:", e);
+                console.warn("[Candle Feed Error] Could not fetch Nifty candles:", e);
                 return null;
             }
         }

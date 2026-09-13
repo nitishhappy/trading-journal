@@ -155,6 +155,27 @@
             font-weight: 600;
         }
 
+        .feed-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feed-badge-live {
+            background: rgba(16, 185, 129, 0.18) !important;
+            color: #10b981 !important;
+            border: 1px solid rgba(16, 185, 129, 0.4) !important;
+        }
+
+        .feed-badge-unavailable {
+            background: rgba(244, 63, 94, 0.18) !important;
+            color: #f43f5e !important;
+            border: 1px solid rgba(244, 63, 94, 0.4) !important;
+        }
+
         #chart-wrapper {
             flex: 1;
             width: 100%;
@@ -373,6 +394,7 @@
             <div class="chart-toolbar">
                 <div class="symbol-title">
                     <span>🇺🇸 S&P 500 (5M Level Chart)</span>
+                    <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
                 </div>
                 <div class="timestamp-badge" id="briefing-time-badge">📌 Key Levels Raised: --</div>
             </div>
@@ -495,11 +517,7 @@
                         const ampm = h >= 12 ? 'PM' : 'AM';
                         h = h % 12;
                         h = h ? h : 12;
-                        const formattedTime = `${h}:${m} ${ampm}`;
-                        if (latestCandleTimestamp && time === latestCandleTimestamp) {
-                            return `${formattedTime} (Developing)`;
-                        }
-                        return formattedTime;
+                        return `${h}:${m} ${ampm}`;
                     }
                 }
             });
@@ -554,6 +572,7 @@
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Levels`;
 
             const candles = await loadRealSp500Candles();
+            updateFeedStatusBadge(candles && candles.length > 0);
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
                 latestCandleTimestamp = candles[candles.length - 1].time;
@@ -814,9 +833,9 @@
         }
 
         async function loadRealSp500Candles() {
-            // Server-side /api/sp500Candles (Yahoo Finance ^GSPC 5m, bypasses CORS)
+            // 1. Server-side /api/sp500Candles
             try {
-                const res = await fetch('/api/sp500Candles');
+                const res = await fetch(`/api/sp500Candles?_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
                     if (json && json.candles && json.candles.length > 0) {
@@ -824,9 +843,37 @@
                     }
                 }
             } catch (e) {
-                console.error('[SP500 Chart] /api/sp500Candles fetch failed:', e);
+                console.warn('[SP500 Chart] /api/sp500Candles fetch failed:', e);
             }
+
+            // 2. Fallback /api/marketCandles?symbol=SP500
+            try {
+                const res = await fetch(`/api/marketCandles?symbol=SP500&_t=${Date.now()}`, { cache: 'no-store' });
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json && json.candles && json.candles.length > 0) {
+                        return json.candles;
+                    }
+                }
+            } catch (e) {
+                console.warn('[SP500 Chart] /api/marketCandles fetch failed:', e);
+            }
+
+            // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
+            console.error("[SP500 Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds. ZERO synthetic candles generated.");
             return [];
+        }
+
+        function updateFeedStatusBadge(isAvailable) {
+            const badge = document.getElementById('feed-status-badge');
+            if (!badge) return;
+            if (isAvailable) {
+                badge.innerText = '● LIVE API FEED';
+                badge.className = 'feed-badge feed-badge-live';
+            } else {
+                badge.innerText = '⚠️ DATA UNAVAILABLE';
+                badge.className = 'feed-badge feed-badge-unavailable';
+            }
         }
 
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
