@@ -582,7 +582,7 @@
                     targetCandleTime = candles[candles.length - 1]?.time || Math.floor(Date.now() / 1000);
                 }
 
-                const markers = [
+                candleSeries.setMarkers([
                     {
                         time: targetCandleTime,
                         position: 'aboveBar',
@@ -591,21 +591,7 @@
                         text: `📌 Gold Plan Raised (${raisedTimeStr.split(',')[0]})`,
                         size: 2
                     }
-                ];
-
-                const nowSec = Math.floor(Date.now() / 1000);
-                if (nowSec - latestCandleTimestamp < 300 && targetCandleTime !== latestCandleTimestamp) {
-                    markers.push({
-                        time: latestCandleTimestamp,
-                        position: 'aboveBar',
-                        color: '#38bdf8',
-                        shape: 'circle',
-                        text: '⚡ Live (Developing)',
-                        size: 1
-                    });
-                }
-
-                candleSeries.setMarkers(markers);
+                ]);
             }
 
             // Render Horizontal Level Lines & Side Cards
