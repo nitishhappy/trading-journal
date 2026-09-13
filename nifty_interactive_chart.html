@@ -610,14 +610,25 @@
             chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
         }
 
-        function updateFeedStatusBadge(isAvailable, textOverride) {
+        function updateFeedStatusBadge(candles) {
             const badge = document.getElementById('feed-status-badge');
             if (!badge) return;
-            if (isAvailable) {
-                badge.innerText = textOverride || '● LIVE API FEED';
+
+            if (!candles || !Array.isArray(candles) || candles.length === 0) {
+                badge.innerText = '⚠️ DATA UNAVAILABLE';
+                badge.className = 'feed-badge feed-badge-unavailable';
+                return;
+            }
+
+            const latestCandleTime = candles[candles.length - 1].time;
+            const nowSec = Math.floor(Date.now() / 1000);
+            const ageMinutes = (nowSec - latestCandleTime) / 60;
+
+            if (ageMinutes <= 45) {
+                badge.innerText = '● LIVE API FEED';
                 badge.className = 'feed-badge feed-badge-live';
             } else {
-                badge.innerText = textOverride || '⚠️ DATA UNAVAILABLE';
+                badge.innerText = '🔒 MARKET CLOSED';
                 badge.className = 'feed-badge feed-badge-unavailable';
             }
         }
@@ -626,7 +637,7 @@
             // 2. Fetch Real-Time 5M Candles from API feed / /api/marketCandles endpoint
             let candles = await loadRealNiftyCandles();
 
-            updateFeedStatusBadge(candles && candles.length > 0);
+            updateFeedStatusBadge(candles);
 
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);

@@ -572,7 +572,7 @@
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Levels`;
 
             const candles = await loadRealSp500Candles();
-            updateFeedStatusBadge(candles && candles.length > 0);
+            updateFeedStatusBadge(candles);
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
                 latestCandleTimestamp = candles[candles.length - 1].time;
@@ -868,14 +868,25 @@
             return [];
         }
 
-        function updateFeedStatusBadge(isAvailable) {
+        function updateFeedStatusBadge(candles) {
             const badge = document.getElementById('feed-status-badge');
             if (!badge) return;
-            if (isAvailable) {
+
+            if (!candles || !Array.isArray(candles) || candles.length === 0) {
+                badge.innerText = '⚠️ DATA UNAVAILABLE';
+                badge.className = 'feed-badge feed-badge-unavailable';
+                return;
+            }
+
+            const latestCandleTime = candles[candles.length - 1].time;
+            const nowSec = Math.floor(Date.now() / 1000);
+            const ageMinutes = (nowSec - latestCandleTime) / 60;
+
+            if (ageMinutes <= 45) {
                 badge.innerText = '● LIVE API FEED';
                 badge.className = 'feed-badge feed-badge-live';
             } else {
-                badge.innerText = '⚠️ DATA UNAVAILABLE';
+                badge.innerText = '🔒 MARKET CLOSED';
                 badge.className = 'feed-badge feed-badge-unavailable';
             }
         }
