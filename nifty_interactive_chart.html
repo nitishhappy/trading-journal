@@ -746,6 +746,10 @@
 
                 levelsListEl.appendChild(card);
             });
+
+            if (candles && candles.length > 0) {
+                checkCandleCloseCrossings(candles, 'Nifty');
+            }
         }
 
         function highlightCard(cardIdx) {
@@ -1004,6 +1008,65 @@
             document.getElementById('toast-body').innerText = body;
             toast.style.display = 'flex';
             setTimeout(() => { toast.style.display = 'none'; }, 4000);
+        }
+
+        let levelCrossingMemory = {};
+
+        function checkCandleCloseCrossings(candles, assetName) {
+            if (!alertsEnabled || !candles || candles.length < 2 || !activePriceLines || activePriceLines.length === 0) {
+                return;
+            }
+
+            const latestCandle = candles[candles.length - 1];
+            const currClose = latestCandle.close;
+
+            activePriceLines.forEach(item => {
+                const lvlPrice = item.price;
+                const tag = item.tag || 'LEVEL';
+                const memoryKey = `${tag}_${lvlPrice}`;
+                const prevState = levelCrossingMemory[memoryKey];
+
+                let newState = prevState;
+                if (currClose >= lvlPrice) {
+                    newState = 'above';
+                } else {
+                    newState = 'below';
+                }
+
+                if (!prevState) {
+                    levelCrossingMemory[memoryKey] = newState;
+                    return;
+                }
+
+                if (prevState === 'below' && newState === 'above') {
+                    levelCrossingMemory[memoryKey] = 'above';
+                    const title = `🚀 ${assetName} Candle Closed ABOVE`;
+                    const body = `${assetName} closed at ₹${currClose.toFixed(2)} ABOVE ${tag} level (₹${lvlPrice})`;
+                    triggerAlertSound(1046, 'sine', 0.25);
+                    showToast(title, body);
+                    dispatchDesktopNotification(title, body);
+                } else if (prevState === 'above' && newState === 'below') {
+                    levelCrossingMemory[memoryKey] = 'below';
+                    const title = `🔻 ${assetName} Candle Closed BELOW`;
+                    const body = `${assetName} closed at ₹${currClose.toFixed(2)} BELOW ${tag} level (₹${lvlPrice})`;
+                    triggerAlertSound(440, 'sine', 0.25);
+                    showToast(title, body);
+                    dispatchDesktopNotification(title, body);
+                }
+            });
+        }
+
+        function dispatchDesktopNotification(title, body) {
+            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                try {
+                    new Notification(title, {
+                        body: body,
+                        icon: './icons/icon-192.png'
+                    });
+                } catch (e) {
+                    console.warn("[Chart Alert] Desktop notification failed:", e);
+                }
+            }
         }
     </script>
 </body>
