@@ -72,6 +72,10 @@ const FILES_TO_HASH = [
   "js/data/btc_daily_plan.js",
   "js/data/sp500_daily_plan.js",
   "js/data/scanned_stocks.js",
+  "nifty_interactive_chart.html",
+  "gold_interactive_chart.html",
+  "btc_interactive_chart.html",
+  "sp500_interactive_chart.html",
 ];
 
 function computeHash() {

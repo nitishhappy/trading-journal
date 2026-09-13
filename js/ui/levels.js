@@ -107,14 +107,15 @@ if (viewLevels) {
         const externalLink = document.getElementById('tv-external-link');
         if (externalLink) {
             const currentAsset = window.currentActiveAsset || 'NIFTY';
+            const cacheBust = Date.now();
             if (currentAsset === 'NIFTY') {
-                externalLink.href = 'nifty_interactive_chart.html';
+                externalLink.href = `nifty_interactive_chart.html?t=${cacheBust}`;
             } else if (currentAsset === 'GOLD') {
-                externalLink.href = 'gold_interactive_chart.html';
+                externalLink.href = `gold_interactive_chart.html?t=${cacheBust}`;
             } else if (currentAsset === 'BTC') {
-                externalLink.href = 'btc_interactive_chart.html';
+                externalLink.href = `btc_interactive_chart.html?t=${cacheBust}`;
             } else if (currentAsset === 'SP500') {
-                externalLink.href = 'sp500_interactive_chart.html';
+                externalLink.href = `sp500_interactive_chart.html?t=${cacheBust}`;
             } else {
                 externalLink.href = `https://in.tradingview.com/chart/?symbol=${linkSymbol}`;
             }
