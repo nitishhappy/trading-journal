@@ -455,6 +455,8 @@
             });
         }
 
+        let latestCandleTimestamp = null;
+
         function initChartApp() {
             const container = document.getElementById('chart-wrapper');
             
@@ -493,7 +495,11 @@
                         const ampm = h >= 12 ? 'PM' : 'AM';
                         h = h % 12;
                         h = h ? h : 12;
-                        return `${h}:${m} ${ampm}`;
+                        const formattedTime = `${h}:${m} ${ampm}`;
+                        if (latestCandleTimestamp && time === latestCandleTimestamp) {
+                            return `${formattedTime} (Developing)`;
+                        }
+                        return formattedTime;
                     }
                 }
             });
@@ -551,6 +557,7 @@
             const candles = await loadRealBtcCandles(levelsData.levels);
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
+                latestCandleTimestamp = candles[candles.length - 1].time;
 
                 let targetCandleTime = null;
                 if (levelsData.anchorTimestamp) {
@@ -575,7 +582,7 @@
                     targetCandleTime = candles[candles.length - 1]?.time || Math.floor(Date.now() / 1000);
                 }
 
-                candleSeries.setMarkers([
+                const markers = [
                     {
                         time: targetCandleTime,
                         position: 'aboveBar',
@@ -584,7 +591,22 @@
                         text: `📌 BTC Plan Raised (${raisedTimeStr.split(',')[0]})`,
                         size: 2
                     }
-                ]);
+                ];
+
+                // Tag developing candle if active (within 15m window)
+                const nowSec = Math.floor(Date.now() / 1000);
+                if (nowSec - latestCandleTimestamp < 900 && targetCandleTime !== latestCandleTimestamp) {
+                    markers.push({
+                        time: latestCandleTimestamp,
+                        position: 'aboveBar',
+                        color: '#38bdf8',
+                        shape: 'circle',
+                        text: '⚡ Live (Developing)',
+                        size: 1
+                    });
+                }
+
+                candleSeries.setMarkers(markers);
             }
 
             // Render Horizontal Level Lines & Side Cards

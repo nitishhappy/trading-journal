@@ -501,6 +501,8 @@
             }, 1000);
         }
 
+        let latestCandleTimestamp = null;
+
         function initChartApp() {
             const container = document.getElementById('chart-wrapper');
             
@@ -540,7 +542,11 @@
                         const ampm = h >= 12 ? 'PM' : 'AM';
                         h = h % 12;
                         h = h ? h : 12;
-                        return `${h}:${m} ${ampm}`;
+                        const formattedTime = `${h}:${m} ${ampm}`;
+                        if (latestCandleTimestamp && time === latestCandleTimestamp) {
+                            return `${formattedTime} (Developing)`;
+                        }
+                        return formattedTime;
                     }
                 }
             });
@@ -595,12 +601,12 @@
         }
 
         async function reloadChartData() {
-            // 2. Fetch Real-Time 5M Candles from API feed / /api/niftyCandles endpoint
+            // 2. Fetch Real-Time 5M Candles from API feed / /api/marketCandles endpoint
             let candles = await loadRealNiftyCandles();
 
             if (!candles || candles.length === 0) {
-                document.getElementById('feed-status-badge').innerText = '⚡ SPOT FEED';
-                document.getElementById('feed-status-badge').style.color = '#fbbf24';
+                document.getElementById('feed-status-badge').innerText = '⚠️ DATA UNAVAILABLE';
+                document.getElementById('feed-status-badge').style.color = '#f43f5e';
             } else {
                 document.getElementById('feed-status-badge').innerText = '● LIVE API FEED';
                 document.getElementById('feed-status-badge').style.color = '#10b981';
@@ -608,6 +614,7 @@
 
             if (candles && candles.length > 0) {
                 candleSeries.setData(candles);
+                latestCandleTimestamp = candles[candles.length - 1].time;
             }
 
             // 3. Extract Latest Levels & Raised Timestamp from window.dailyPlanData
@@ -640,20 +647,36 @@
                     });
                 }
             }
-            if (!targetCandleTime) {
+
+            if (candles && candles.length > 0 && targetCandleTime) {
+                const markers = [
+                    {
+                        time: targetCandleTime,
+                        position: 'aboveBar',
+                        color: '#8b5cf6',
+                        shape: 'arrowDown',
+                        text: `📌 AI Plan Raised (${raisedTimeStr.split(',')[0]})`,
+                        size: 2
+                    }
+                ];
+
+                const nowSec = Math.floor(Date.now() / 1000);
+                if (nowSec - latestCandleTimestamp < 300 && targetCandleTime !== latestCandleTimestamp) {
+                    markers.push({
+                        time: latestCandleTimestamp,
+                        position: 'aboveBar',
+                        color: '#38bdf8',
+                        shape: 'circle',
+                        text: '⚡ Live (Developing)',
+                        size: 1
+                    });
+                }
+
+                candleSeries.setMarkers(markers);
+            }
+            if (!targetCandleTime && candles && candles.length > 0) {
                 targetCandleTime = candles[candles.length - 1]?.time || Math.floor(Date.now() / 1000);
             }
-
-            candleSeries.setMarkers([
-                {
-                    time: targetCandleTime,
-                    position: 'aboveBar',
-                    color: '#8b5cf6',
-                    shape: 'arrowDown',
-                    text: `📌 AI Plan Raised (${raisedTimeStr.split(',')[0]})`,
-                    size: 2
-                }
-            ]);
 
             // 5. Render Horizontal Level Lines & Side Cards
             const levelsListEl = document.getElementById('levels-list');

@@ -178,7 +178,9 @@ export default async function handler(req, res) {
     // ── 2. GOLD / XAUUSD CANDLES ───────────────────────────────────────────
     if (symInput === "GOLD" || symInput === "XAUUSD" || symInput === "XAU") {
       let candles = [];
-      const binanceJson = await fetchUrl("https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=100");
+      const reqTf = (req.query.timeframe || req.query.tf || req.query.interval || "5m").toLowerCase();
+      const normTf = reqTf.includes("15") ? "15m" : "5m";
+      const binanceJson = await fetchUrl(`https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=100&_t=${Date.now()}`);
       if (Array.isArray(binanceJson) && binanceJson.length > 0) {
         candles = binanceJson.map(c => ({
           time: Math.floor(c[0] / 1000),
@@ -190,13 +192,14 @@ export default async function handler(req, res) {
       }
 
       if (candles.length === 0) {
-        const yahooJson = await fetchUrl("https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=5m&range=1d");
+        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=${normTf}&range=1d`);
         if (yahooJson) candles = parseYahooCandles(yahooJson);
       }
 
       return res.status(200).json({
         success: candles.length > 0,
         symbol: "GOLD",
+        timeframe: normTf,
         candles,
         message: candles.length === 0 ? "No Gold candle data available." : undefined
       });
@@ -205,7 +208,9 @@ export default async function handler(req, res) {
     // ── 3. BTC / BTCUSD CANDLES ────────────────────────────────────────────
     if (symInput === "BTC" || symInput === "BTCUSD" || symInput === "BTCUSDT") {
       let candles = [];
-      const binanceJson = await fetchUrl("https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=5m&limit=100");
+      const reqTf = (req.query.timeframe || req.query.tf || req.query.interval || "15m").toLowerCase();
+      const normTf = (reqTf.includes("5m") && !reqTf.includes("15")) ? "5m" : "15m";
+      const binanceJson = await fetchUrl(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${normTf}&limit=100&_t=${Date.now()}`);
       if (Array.isArray(binanceJson) && binanceJson.length > 0) {
         candles = binanceJson.map(c => ({
           time: Math.floor(c[0] / 1000),
@@ -217,13 +222,14 @@ export default async function handler(req, res) {
       }
 
       if (candles.length === 0) {
-        const yahooJson = await fetchUrl("https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?interval=5m&range=1d");
+        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?interval=${normTf}&range=1d`);
         if (yahooJson) candles = parseYahooCandles(yahooJson);
       }
 
       return res.status(200).json({
         success: candles.length > 0,
         symbol: "BTC",
+        timeframe: normTf,
         candles,
         message: candles.length === 0 ? "No BTC candle data available." : undefined
       });
