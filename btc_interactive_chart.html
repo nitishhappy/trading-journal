@@ -824,9 +824,9 @@
 
 
         async function loadRealBtcCandles(levels) {
-            // 1. Direct Binance BTCUSDT 15m klines (CORS supported natively)
+            // 1. Direct Binance BTCUSDT 15m klines (uncached, CORS supported natively)
             try {
-                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=100');
+                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=100&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
@@ -862,9 +862,9 @@
                 console.warn("[BTC Chart] Direct Coinbase fetch failed:", e);
             }
 
-            // 3. Server-side /api/btcCandles
+            // 3. Server-side /api/marketCandles
             try {
-                const res = await fetch('/api/btcCandles');
+                const res = await fetch('/api/marketCandles?symbol=BTC');
                 if (res.ok) {
                     const json = await res.json();
                     if (json && json.candles && json.candles.length > 0) {
@@ -872,74 +872,13 @@
                     }
                 }
             } catch (e) {
-                console.warn('[BTC Chart] /api/btcCandles fetch failed:', e);
+                console.warn('[BTC Chart] /api/marketCandles fetch failed:', e);
             }
 
-            // 4. Spot Feed Fallback
-            return await loadSpotFeedFallback('BTC', levels, 78760.00);
-        }
-
-        async function loadSpotFeedFallback(assetKey, levels, defaultBase) {
-            let spotPrice = null;
-            try {
-                const res = await fetch('/api/livePrices');
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.success) {
-                        if (assetKey === 'GOLD') spotPrice = data.xauusd;
-                        else if (assetKey === 'BTC') spotPrice = data.btcusd || data.btcusdt;
-                        else if (assetKey === 'SP500') spotPrice = data.sp500;
-                        else if (assetKey === 'NIFTY') spotPrice = data.nifty;
-                    }
-                }
-            } catch (e) {}
-
-            if (!spotPrice && levels && levels.length > 0) {
-                const p = parseFloat(levels[0].price);
-                if (!isNaN(p)) spotPrice = p;
-            }
-            if (!spotPrice) spotPrice = defaultBase;
-
-            const storageKey = `${assetKey}_real_5m_candles_v1`;
-            let stored = [];
-            try {
-                const str = localStorage.getItem(storageKey);
-                if (str) stored = JSON.parse(str);
-            } catch (e) {}
-
-            const nowSec = Math.floor(Date.now() / 1000);
-            const current5m = Math.floor(nowSec / 300) * 300;
-
-            if (stored.length === 0) {
-                let curr = spotPrice;
-                for (let t = current5m - (30 * 300); t < current5m; t += 300) {
-                    stored.push({ time: t, open: curr, high: curr, low: curr, close: curr });
-                }
-                stored.push({ time: current5m, open: spotPrice, high: spotPrice, low: spotPrice, close: spotPrice });
-            } else {
-                let lastCandle = stored[stored.length - 1];
-                if (lastCandle.time === current5m) {
-                    lastCandle.high = Math.max(lastCandle.high, spotPrice);
-                    lastCandle.low = Math.min(lastCandle.low, spotPrice);
-                    lastCandle.close = spotPrice;
-                } else if (lastCandle.time < current5m) {
-                    let prevClose = lastCandle.close;
-                    for (let t = lastCandle.time + 300; t <= current5m; t += 300) {
-                        if (t === current5m) {
-                            stored.push({ time: t, open: prevClose, high: Math.max(prevClose, spotPrice), low: Math.min(prevClose, spotPrice), close: spotPrice });
-                        } else {
-                            stored.push({ time: t, open: prevClose, high: prevClose, low: prevClose, close: prevClose });
-                        }
-                    }
-                }
-                if (stored.length > 100) stored = stored.slice(-100);
-            }
-
-            try {
-                localStorage.setItem(storageKey, JSON.stringify(stored));
-            } catch (e) {}
-
-            return stored;
+            // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console & raise UI toast
+            console.error("[BTC Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds (Binance, Coinbase, /api/marketCandles). ZERO synthetic candles generated.");
+            showToast("⚠️ Market Data Unavailable", "Failed to fetch real live BTC candles from APIs. Check DevTools console (F12) for details.");
+            return [];
         }
 
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
