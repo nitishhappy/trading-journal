@@ -255,6 +255,27 @@
         .tag-pill.bullish { background: rgba(16, 185, 129, 0.2); color: #10b981; }
         .tag-pill.bearish { background: rgba(244, 63, 94, 0.2); color: #f43f5e; }
 
+        /* Level type badge: distinguishes SETUP (B/S solid lines) from STRUCTURAL (KB/KS dashed lines) */
+        .level-type-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .badge-setup {
+            background: rgba(247, 147, 26, 0.18);
+            color: #f7931a;
+            border: 1px solid rgba(247, 147, 26, 0.35);
+        }
+        .badge-structural {
+            background: rgba(100, 116, 139, 0.2);
+            color: #94a3b8;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+
         .card-logic {
             font-size: 0.85rem;
             color: #cbd5e1;
@@ -582,12 +603,21 @@
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.btcDailyPlanSummary);
 
+                // ✅ Tag-aware line styles:
+                // [B*] / [S*]  = action SETUP triggers  → SOLID line, lineWidth 2 (prominent)
+                // [KB*] / [KS*] = STRUCTURAL key levels → DASHED line, lineWidth 1 (reference)
+                const isActionSetup = /^\[(?!K)[BS]\d+\]$/i.test(tag);
+                const lineStyle     = isActionSetup ? LightweightCharts.LineStyle.Solid : LightweightCharts.LineStyle.Dashed;
+                const lineWidth     = isActionSetup ? 2 : 1;
+                const levelTypeBadge = isActionSetup ? 'SETUP' : 'STRUCTURAL';
+                const levelTypeCss   = isActionSetup ? 'badge-setup' : 'badge-structural';
+
                 if (!isNaN(priceVal)) {
                     const pLine = candleSeries.createPriceLine({
                         price: priceVal,
                         color: lineColor,
-                        lineWidth: 2,
-                        lineStyle: LightweightCharts.LineStyle.Dashed,
+                        lineWidth: lineWidth,
+                        lineStyle: lineStyle,
                         axisLabelVisible: true,
                         title: `${tag} $${lvl.price}`,
                     });
@@ -603,7 +633,10 @@
                         <span class="card-price ${isBullish ? 'bullish' : 'bearish'}">
                             ${isBullish ? '🟢' : '🔴'} $${lvl.price}
                         </span>
-                        <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
+                        <div style="display:flex;gap:0.3rem;align-items:center;">
+                            <span class="level-type-badge ${levelTypeCss}">${levelTypeBadge}</span>
+                            <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
+                        </div>
                     </div>
                     <div class="card-logic clamped" id="card-logic-btc-${idx}">${fullConfirmationLogic}</div>
                     <div class="expand-logic-btn" id="expand-btn-btc-${idx}" onclick="toggleLogicExpand(event, 'btc', ${idx})">▼ Show Full Confirmation Logic</div>
@@ -622,6 +655,7 @@
                 levelsListEl.appendChild(card);
             });
         }
+
 
         function highlightCard(cardIdx) {
             document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected-highlight'));
@@ -685,21 +719,27 @@
                     || timeDisplay;
 
                 const latestItems = window.btcDailyPlanData.filter(item => item.timestamp === anchorTimestamp);
-                const keySummaryItems = latestItems.filter(item => /\[KS?\d\]/i.test(item.behavior || ''));
-                const itemsToFilter = keySummaryItems.length > 0 ? keySummaryItems : latestItems;
 
-                // Deduplicate by setup tag
+                // ✅ FIX: Collect ALL levels (KB, KS, B, S) — no pre-filtering by tag family.
+                // Ordered preference: KB/KS structural levels first, then B/S action setups.
+                const kbKsItems = latestItems.filter(item => /\[K[BS]\d+\]/i.test(item.behavior || ''));
+                const bsItems   = latestItems.filter(item => /\[(?!K)[BS]\d+\]/i.test(item.behavior || ''));
+                const orderedItems = [...kbKsItems, ...bsItems];
+
+                // Deduplicate by tag — keep first occurrence of each unique tag
                 const uniqueTagItems = [];
                 const seenTags = new Set();
-                itemsToFilter.forEach(item => {
+                orderedItems.forEach(item => {
                     const tag = extractTag(item.behavior);
                     if (tag && !seenTags.has(tag)) {
                         seenTags.add(tag);
                         uniqueTagItems.push(item);
+                    } else if (!tag) {
+                        uniqueTagItems.push(item);
                     }
                 });
 
-                levels = uniqueTagItems.length > 0 ? uniqueTagItems : itemsToFilter.slice(0, 4);
+                levels = uniqueTagItems.length > 0 ? uniqueTagItems : latestItems;
             }
 
             if (levels.length === 0) {
@@ -709,7 +749,11 @@
                     { price: "79003.21", bias: "bullish", behavior: "[WED 18:33] [KB3]: 15M 200 EMA baseline ($79,003.21) & Session VWAP Anchor", tp: "79,500.00 / 79,729.16", sl: "78,650.00" },
                     { price: "77500.00", bias: "bullish", behavior: "[WED 18:33] [KB4]: Macro Daily Bullish Bias Invalidation Floor ($77,500.00) & PDL", tp: "78,500.00 / 79,500.00", sl: "77,200.00" },
                     { price: "79729.16", bias: "bearish", behavior: "[WED 18:33] [KS1]: Day High ($79,729.16) & Overhead CME Gap ($79,780.00) Supply", tp: "79,439.46 / 79,275.54", sl: "79,900.00" },
-                    { price: "78280.65", bias: "bearish", behavior: "[WED 18:33] [KS2]: Day Low ($78,280.65) Breakdown Trigger into Cascading Liquidations", tp: "77,800.00 / 77,629.55", sl: "78,650.00" }
+                    { price: "78280.65", bias: "bearish", behavior: "[WED 18:33] [KS2]: Day Low ($78,280.65) Breakdown Trigger into Cascading Liquidations", tp: "77,800.00 / 77,629.55", sl: "78,650.00" },
+                    { price: "78280.65", bias: "bullish",  behavior: "[WED 18:33] [B1]: SSL Sweep below Day Low rejected, 5M close back ABOVE EMA9", tp: "79,000.00 / 79,300.00", sl: "78,100.00" },
+                    { price: "79729.16", bias: "bullish",  behavior: "[WED 18:33] [B2]: BSL Breakout above Day High with momentum", tp: "80,100.00 / 80,600.00", sl: "79,400.00" },
+                    { price: "79275.54", bias: "bearish",  behavior: "[WED 18:33] [S1]: Bearish FVG Rejection with upper wick close below EMA9", tp: "78,800.00 / 78,441.00", sl: "79,500.00" },
+                    { price: "78280.65", bias: "bearish",  behavior: "[WED 18:33] [S2]: Demand Floor Breakdown — sustained 5M close below Day Low", tp: "77,800.00 / 77,300.00", sl: "78,550.00" }
                 ];
             }
 
@@ -742,7 +786,7 @@
 
         function extractTag(behaviorStr) {
             if (!behaviorStr) return '';
-            const match = behaviorStr.match(/\[(KB\d|KS\d|B\d|S\d)\]/i);
+            const match = behaviorStr.match(/\[(KB\d+|KS\d+|B\d+|S\d+)\]/i);
             return match ? match[0].toUpperCase() : '';
         }
 
