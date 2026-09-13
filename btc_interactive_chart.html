@@ -591,7 +591,23 @@
             }
         }
 
+        function reloadPlanDataScript(assetName) {
+            return new Promise((resolve) => {
+                const scriptId = `dyn-${assetName}-script`;
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/${assetName}_daily_plan.js?t=${Date.now()}`;
+                script.onload = () => resolve(true);
+                script.onerror = () => resolve(false);
+                document.body.appendChild(script);
+            });
+        }
+
         async function reloadChartData() {
+            await reloadPlanDataScript('btc');
             levelsData = getBtcKeyLevels();
 
             const raisedTimeStr = levelsData.timeDisplay || "06:33 PM, Sep 09";
@@ -903,7 +919,7 @@
 
             // 2. Direct Coinbase BTC-USD 15m candles
             try {
-                const res = await fetch('https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=900');
+                const res = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=900&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
@@ -922,7 +938,7 @@
 
             // 3. Server-side /api/marketCandles
             try {
-                const res = await fetch('/api/marketCandles?symbol=BTC');
+                const res = await fetch(`/api/marketCandles?symbol=BTC&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
                     if (json && json.candles && json.candles.length > 0) {

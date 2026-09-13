@@ -633,7 +633,23 @@
             }
         }
 
+        function reloadPlanDataScript(assetName) {
+            return new Promise((resolve) => {
+                const scriptId = `dyn-${assetName}-script`;
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/nifty_daily_plan.js?t=${Date.now()}`;
+                script.onload = () => resolve(true);
+                script.onerror = () => resolve(false);
+                document.body.appendChild(script);
+            });
+        }
+
         async function reloadChartData() {
+            await reloadPlanDataScript('nifty');
             // 2. Fetch Real-Time 5M Candles from API feed / /api/marketCandles endpoint
             let candles = await loadRealNiftyCandles();
 
@@ -801,7 +817,7 @@
             try {
                 let res = await fetch(`/api/marketCandles?symbol=NIFTY&_t=${Date.now()}`, { cache: 'no-store' });
                 if (!res.ok) {
-                    res = await fetch('/api/niftyCandles');
+                    res = await fetch(`/api/niftyCandles?_t=${Date.now()}`, { cache: 'no-store' });
                 }
                 if (!res.ok) return null;
                 const json = await res.json();

@@ -564,7 +564,23 @@
             chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
         }
 
+        function reloadPlanDataScript(assetName) {
+            return new Promise((resolve) => {
+                const scriptId = `dyn-${assetName}-script`;
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/${assetName}_daily_plan.js?t=${Date.now()}`;
+                script.onload = () => resolve(true);
+                script.onerror = () => resolve(false);
+                document.body.appendChild(script);
+            });
+        }
+
         async function reloadChartData() {
+            await reloadPlanDataScript('sp500');
             levelsData = getSp500KeyLevels();
 
             const raisedTimeStr = levelsData.timeDisplay || "06:02 PM, Sep 09";
