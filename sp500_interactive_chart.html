@@ -255,6 +255,27 @@
         .tag-pill.bullish { background: rgba(16, 185, 129, 0.2); color: #10b981; }
         .tag-pill.bearish { background: rgba(244, 63, 94, 0.2); color: #f43f5e; }
 
+        /* Level type badge: SETUP (SP_B/SP_S solid) vs STRUCTURAL (SP_KB/SP_KS dashed) */
+        .level-type-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .badge-setup {
+            background: rgba(56, 189, 248, 0.18);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+        .badge-structural {
+            background: rgba(100, 116, 139, 0.2);
+            color: #94a3b8;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+
         .card-logic {
             font-size: 0.85rem;
             color: #cbd5e1;
@@ -580,12 +601,20 @@
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.sp500DailyPlanSummary);
 
+                // ✅ Tag-aware line styles for SP500:
+                // [SP_B*]/[SP_S*] = SETUP → SOLID lineWidth 2; [SP_KB*]/[SP_KS*] = STRUCTURAL → DASHED lineWidth 1
+                const isActionSetup = /^\[SP_[BS]\d+\]$/i.test(tag);
+                const lineStyle     = isActionSetup ? LightweightCharts.LineStyle.Solid : LightweightCharts.LineStyle.Dashed;
+                const lineWidth     = isActionSetup ? 2 : 1;
+                const levelTypeBadge = isActionSetup ? 'SETUP' : 'STRUCTURAL';
+                const levelTypeCss   = isActionSetup ? 'badge-setup' : 'badge-structural';
+
                 if (!isNaN(priceVal)) {
                     const pLine = candleSeries.createPriceLine({
                         price: priceVal,
                         color: lineColor,
-                        lineWidth: 2,
-                        lineStyle: LightweightCharts.LineStyle.Dashed,
+                        lineWidth: lineWidth,
+                        lineStyle: lineStyle,
                         axisLabelVisible: true,
                         title: `${tag} $${lvl.price}`,
                     });
@@ -601,7 +630,10 @@
                         <span class="card-price ${isBullish ? 'bullish' : 'bearish'}">
                             ${isBullish ? '🟢' : '🔴'} $${lvl.price}
                         </span>
-                        <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
+                        <div style="display:flex;gap:0.3rem;align-items:center;">
+                            <span class="level-type-badge ${levelTypeCss}">${levelTypeBadge}</span>
+                            <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
+                        </div>
                     </div>
                     <div class="card-logic clamped" id="card-logic-sp500-${idx}">${fullConfirmationLogic}</div>
                     <div class="expand-logic-btn" id="expand-btn-sp500-${idx}" onclick="toggleLogicExpand(event, 'sp500', ${idx})">▼ Show Full Confirmation Logic</div>
@@ -738,7 +770,7 @@
 
         function extractTag(behaviorStr) {
             if (!behaviorStr) return '';
-            const match = behaviorStr.match(/\[(SP_KB\d|SP_KS\d|SP_B\d|SP_S\d|B\d|S\d)\]/i);
+            const match = behaviorStr.match(/\[(SP_KB\d+|SP_KS\d+|SP_B\d+|SP_S\d+|B\d+|S\d+)\]/i);
             return match ? match[0].toUpperCase() : '';
         }
 
