@@ -599,7 +599,7 @@
                     let minDiff = Infinity;
                     candles.forEach(c => {
                         const diff = Math.abs(c.time - planSec);
-                        if (diff < minDiff) { minDiff = diff; targetCandleTime = c.time; }
+                        if (diff < minDiff && diff <= 900) { minDiff = diff; targetCandleTime = c.time; }
                     });
                 }
                 if (!targetCandleTime && raisedTimeStr) {
@@ -608,24 +608,25 @@
                         let minDiff = Infinity;
                         candles.forEach(c => {
                             const diff = Math.abs(c.time - planSec);
-                            if (diff < minDiff) { minDiff = diff; targetCandleTime = c.time; }
+                            if (diff < minDiff && diff <= 900) { minDiff = diff; targetCandleTime = c.time; }
                         });
                     }
                 }
-                if (!targetCandleTime) {
-                    targetCandleTime = candles[candles.length - 1]?.time || Math.floor(Date.now() / 1000);
-                }
 
-                candleSeries.setMarkers([
-                    {
-                        time: targetCandleTime,
-                        position: 'aboveBar',
-                        color: '#3b82f6',
-                        shape: 'arrowDown',
-                        text: `📌 S&P 500 Plan Raised (${raisedTimeStr.split(',')[0]})`,
-                        size: 2
-                    }
-                ]);
+                if (targetCandleTime) {
+                    candleSeries.setMarkers([
+                        {
+                            time: targetCandleTime,
+                            position: 'aboveBar',
+                            color: '#3b82f6',
+                            shape: 'arrowDown',
+                            text: `📌 S&P 500 Plan Raised (${raisedTimeStr.split(',')[0]})`,
+                            size: 2
+                        }
+                    ]);
+                } else {
+                    candleSeries.setMarkers([]);
+                }
             }
 
             const levelsListEl = document.getElementById('levels-list');
@@ -687,11 +688,39 @@
                 
                 card.addEventListener('click', () => {
                     highlightCard(idx);
-                    showToast(`Selected Level: ${tag} $${lvl.price}`, fullConfirmationLogic);
+                    showToast(`Selected Setup: ${tag} $${lvl.price}`, fullConfirmationLogic);
                     triggerAlertSound(880, 'sine', 0.15);
                 });
 
                 levelsListEl.appendChild(card);
+            });
+
+            // ✅ Autoscale Y-Axis to include ALL Action Plan Level lines alongside candles
+            candleSeries.applyOptions({
+                autoscaleInfoProvider: (original) => {
+                    const res = original();
+                    if (!res || !res.priceRange) return res;
+
+                    let min = res.priceRange.minValue;
+                    let max = res.priceRange.maxValue;
+
+                    if (activePriceLines && activePriceLines.length > 0) {
+                        activePriceLines.forEach(item => {
+                            if (!isNaN(item.price)) {
+                                if (item.price < min) min = item.price;
+                                if (item.price > max) max = item.price;
+                            }
+                        });
+                    }
+
+                    const padding = (max - min) * 0.03;
+                    return {
+                        priceRange: {
+                            minValue: min - padding,
+                            maxValue: max + padding,
+                        },
+                    };
+                },
             });
 
             if (candles && candles.length > 0) {

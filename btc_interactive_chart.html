@@ -628,7 +628,7 @@
                     let minDiff = Infinity;
                     candles.forEach(c => {
                         const diff = Math.abs(c.time - planSec);
-                        if (diff < minDiff) { minDiff = diff; targetCandleTime = c.time; }
+                        if (diff < minDiff && diff <= 900) { minDiff = diff; targetCandleTime = c.time; }
                     });
                 }
                 if (!targetCandleTime && raisedTimeStr) {
@@ -637,24 +637,25 @@
                         let minDiff = Infinity;
                         candles.forEach(c => {
                             const diff = Math.abs(c.time - planSec);
-                            if (diff < minDiff) { minDiff = diff; targetCandleTime = c.time; }
+                            if (diff < minDiff && diff <= 900) { minDiff = diff; targetCandleTime = c.time; }
                         });
                     }
                 }
-                if (!targetCandleTime) {
-                    targetCandleTime = candles[candles.length - 1]?.time || Math.floor(Date.now() / 1000);
-                }
 
-                candleSeries.setMarkers([
-                    {
-                        time: targetCandleTime,
-                        position: 'aboveBar',
-                        color: '#f7931a',
-                        shape: 'arrowDown',
-                        text: `📌 BTC Plan Raised (${raisedTimeStr.split(',')[0]})`,
-                        size: 2
-                    }
-                ]);
+                if (targetCandleTime) {
+                    candleSeries.setMarkers([
+                        {
+                            time: targetCandleTime,
+                            position: 'aboveBar',
+                            color: '#f7931a',
+                            shape: 'arrowDown',
+                            text: `📌 BTC Plan Raised (${raisedTimeStr.split(',')[0]})`,
+                            size: 2
+                        }
+                    ]);
+                } else {
+                    candleSeries.setMarkers([]);
+                }
             }
 
             // Render Horizontal Level Lines & Side Cards
@@ -723,6 +724,34 @@
                 });
 
                 levelsListEl.appendChild(card);
+            });
+
+            // ✅ Autoscale Y-Axis to include ALL Action Plan Level lines alongside candles
+            candleSeries.applyOptions({
+                autoscaleInfoProvider: (original) => {
+                    const res = original();
+                    if (!res || !res.priceRange) return res;
+
+                    let min = res.priceRange.minValue;
+                    let max = res.priceRange.maxValue;
+
+                    if (activePriceLines && activePriceLines.length > 0) {
+                        activePriceLines.forEach(item => {
+                            if (!isNaN(item.price)) {
+                                if (item.price < min) min = item.price;
+                                if (item.price > max) max = item.price;
+                            }
+                        });
+                    }
+
+                    const padding = (max - min) * 0.03;
+                    return {
+                        priceRange: {
+                            minValue: min - padding,
+                            maxValue: max + padding,
+                        },
+                    };
+                },
             });
 
             if (candles && candles.length > 0) {
@@ -900,7 +929,7 @@
         async function loadRealBtcCandles(levels) {
             // 1. Direct Binance BTCUSDT 15m klines (uncached, CORS supported natively)
             try {
-                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=100&_t=${Date.now()}`, { cache: 'no-store' });
+                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=300&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
