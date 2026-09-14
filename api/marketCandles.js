@@ -182,9 +182,9 @@ export default async function handler(req, res) {
       const normTf = reqTf.includes("15") ? "15m" : "5m";
 
       const spotUrls = [
-        `https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300&_t=${Date.now()}`,
-        `https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300&_t=${Date.now()}`,
-        `https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300&_t=${Date.now()}`
+        `https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300`,
+        `https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300`,
+        `https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300`
       ];
 
       for (const url of spotUrls) {
@@ -215,7 +215,7 @@ export default async function handler(req, res) {
       let candles = [];
       const reqTf = (req.query.timeframe || req.query.tf || req.query.interval || "15m").toLowerCase();
       const normTf = (reqTf.includes("5m") && !reqTf.includes("15")) ? "5m" : "15m";
-      const binanceJson = await fetchUrl(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${normTf}&limit=100&_t=${Date.now()}`);
+      const binanceJson = await fetchUrl(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${normTf}&limit=100`);
       if (Array.isArray(binanceJson) && binanceJson.length > 0) {
         candles = binanceJson.map(c => ({
           time: Math.floor(c[0] / 1000),

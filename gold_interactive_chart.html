@@ -885,10 +885,10 @@
 
         async function loadRealGoldCandles(levels) {
             const spotEndpoints = [
-                `https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`,
-                `https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`,
-                `https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`,
-                `https://api2.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`
+                'https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300',
+                'https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300',
+                'https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300',
+                'https://api2.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300'
             ];
 
             for (const url of spotEndpoints) {

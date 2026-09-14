@@ -929,7 +929,7 @@
         async function loadRealBtcCandles(levels) {
             // 1. Direct Binance BTCUSDT 15m klines (uncached, CORS supported natively)
             try {
-                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=300&_t=${Date.now()}`, { cache: 'no-store' });
+                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=300', { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
