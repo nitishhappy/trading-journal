@@ -180,20 +180,25 @@ export default async function handler(req, res) {
       let candles = [];
       const reqTf = (req.query.timeframe || req.query.tf || req.query.interval || "5m").toLowerCase();
       const normTf = reqTf.includes("15") ? "15m" : "5m";
-      const binanceJson = await fetchUrl(`https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=100&_t=${Date.now()}`);
-      if (Array.isArray(binanceJson) && binanceJson.length > 0) {
-        candles = binanceJson.map(c => ({
-          time: Math.floor(c[0] / 1000),
-          open: parseFloat(parseFloat(c[1]).toFixed(2)),
-          high: parseFloat(parseFloat(c[2]).toFixed(2)),
-          low: parseFloat(parseFloat(c[3]).toFixed(2)),
-          close: parseFloat(parseFloat(c[4]).toFixed(2))
-        }));
-      }
 
-      if (candles.length === 0) {
-        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=${normTf}&range=1d`);
-        if (yahooJson) candles = parseYahooCandles(yahooJson);
+      const spotUrls = [
+        `https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300&_t=${Date.now()}`,
+        `https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300&_t=${Date.now()}`,
+        `https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300&_t=${Date.now()}`
+      ];
+
+      for (const url of spotUrls) {
+        const binanceJson = await fetchUrl(url);
+        if (Array.isArray(binanceJson) && binanceJson.length > 0) {
+          candles = binanceJson.map(c => ({
+            time: Math.floor(c[0] / 1000),
+            open: parseFloat(parseFloat(c[1]).toFixed(2)),
+            high: parseFloat(parseFloat(c[2]).toFixed(2)),
+            low: parseFloat(parseFloat(c[3]).toFixed(2)),
+            close: parseFloat(parseFloat(c[4]).toFixed(2))
+          }));
+          if (candles.length > 0) break;
+        }
       }
 
       return res.status(200).json({
@@ -201,7 +206,7 @@ export default async function handler(req, res) {
         symbol: "GOLD",
         timeframe: normTf,
         candles,
-        message: candles.length === 0 ? "No Gold candle data available." : undefined
+        message: candles.length === 0 ? "No Spot Gold candle data available from upstream mirrors." : undefined
       });
     }
 

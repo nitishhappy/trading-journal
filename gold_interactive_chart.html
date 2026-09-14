@@ -884,26 +884,34 @@
 
 
         async function loadRealGoldCandles(levels) {
-            // 1. Direct Binance PAXGUSDT 5m klines (uncached, CORS supported natively)
-            try {
-                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`, { cache: 'no-store' });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        return data.map(c => ({
-                            time: Math.floor(c[0] / 1000),
-                            open: parseFloat(parseFloat(c[1]).toFixed(2)),
-                            high: parseFloat(parseFloat(c[2]).toFixed(2)),
-                            low: parseFloat(parseFloat(c[3]).toFixed(2)),
-                            close: parseFloat(parseFloat(c[4]).toFixed(2))
-                        }));
+            const spotEndpoints = [
+                `https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`,
+                `https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`,
+                `https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`,
+                `https://api2.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300&_t=${Date.now()}`
+            ];
+
+            for (const url of spotEndpoints) {
+                try {
+                    const res = await fetch(url, { cache: 'no-store' });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (Array.isArray(data) && data.length > 0) {
+                            return data.map(c => ({
+                                time: Math.floor(c[0] / 1000),
+                                open: parseFloat(parseFloat(c[1]).toFixed(2)),
+                                high: parseFloat(parseFloat(c[2]).toFixed(2)),
+                                low: parseFloat(parseFloat(c[3]).toFixed(2)),
+                                close: parseFloat(parseFloat(c[4]).toFixed(2))
+                            }));
+                        }
                     }
+                } catch (e) {
+                    console.warn(`[Gold Chart] Direct Spot Gold fetch from ${url} failed, trying next mirror:`, e);
                 }
-            } catch (e) {
-                console.warn("[Gold Chart] Direct Binance PAXG fetch failed, trying fallbacks:", e);
             }
 
-            // 2. Server-side /api/marketCandles
+            // Server-side /api/marketCandles fallback
             try {
                 const res = await fetch(`/api/marketCandles?symbol=GOLD&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
@@ -917,7 +925,7 @@
             }
 
             // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
-            console.error("[Gold Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds (Binance PAXG, /api/marketCandles). ZERO synthetic candles generated.");
+            console.error("[Gold Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds (Binance Vision, Binance REST, /api/marketCandles). ZERO synthetic candles generated.");
             return [];
         }
 
