@@ -237,7 +237,8 @@
     .badge-success { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
     .badge-danger { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
     .badge-active { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
-    .badge-expired { background: rgba(100, 116, 139, 0.15); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
+    .badge-waiting { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-expired, .badge-inactive { background: rgba(100, 116, 139, 0.15); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
 
     .bias-bullish { color: #10b981; font-weight: 700; }
     .bias-bearish { color: #ef4444; font-weight: 700; }
@@ -275,27 +276,42 @@
       <div class="kpi-card">
         <div class="kpi-title">Overall Win Rate</div>
         <div class="kpi-val" id="kpi-winrate" style="color: var(--accent-gold);">0.0%</div>
-        <div class="kpi-sub" id="kpi-winrate-sub">Decided Predictions</div>
+        <div class="kpi-sub" id="kpi-winrate-sub">Decided Active Trades</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-title">Total Evaluated</div>
+        <div class="kpi-title">% Triggered</div>
+        <div class="kpi-val" id="kpi-trigrate" style="color: var(--accent-cyan);">0.0%</div>
+        <div class="kpi-sub" id="kpi-trigrate-sub">Active + Success + Failed</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Total Logged</div>
         <div class="kpi-val" id="kpi-total">0</div>
         <div class="kpi-sub">Across All Assets</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-title">🟢 Success (TP Hit)</div>
+        <div class="kpi-title">🟢 Success</div>
         <div class="kpi-val" id="kpi-tp" style="color: var(--success-green);">0</div>
         <div class="kpi-sub">Target Achieved</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-title">🔴 Failed (SL Hit)</div>
+        <div class="kpi-title">🔴 Failed</div>
         <div class="kpi-val" id="kpi-sl" style="color: var(--danger-red);">0</div>
         <div class="kpi-sub">Stop Loss Hit</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-title">⚪ Active Tracking</div>
+        <div class="kpi-title">🔵 Active Tracking</div>
         <div class="kpi-val" id="kpi-active" style="color: var(--active-blue);">0</div>
-        <div class="kpi-sub">Pending Live Evaluation</div>
+        <div class="kpi-sub">Entry Triggered & Running</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">⏳ Waiting Entry</div>
+        <div class="kpi-val" id="kpi-waiting" style="color: var(--accent-gold);">0</div>
+        <div class="kpi-sub">Pending Entry Activation</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">⚪ Inactive</div>
+        <div class="kpi-val" id="kpi-inactive" style="color: var(--expired-gray);">0</div>
+        <div class="kpi-sub">Untriggered / Superseded</div>
       </div>
     </div>
 
@@ -312,10 +328,11 @@
       <div class="filter-group">
         <select id="status-filter" onchange="renderData()">
           <option value="all">Status: All</option>
-          <option value="tp_hit">🟢 SUCCESS (TP Hit)</option>
-          <option value="sl_hit">🔴 FAILED (SL Hit)</option>
-          <option value="active">⚪ ACTIVE</option>
-          <option value="expired">⌛ EXPIRED</option>
+          <option value="waiting">⏳ WAITING</option>
+          <option value="active">🔵 ACTIVE</option>
+          <option value="success">🟢 SUCCESS</option>
+          <option value="failed">🔴 FAILED</option>
+          <option value="inactive">⚪ INACTIVE</option>
         </select>
 
         <input type="text" id="search-input" placeholder="Search price, behavior..." onkeyup="renderData()">
@@ -366,7 +383,14 @@
 
       let filtered = levels.filter(lvl => {
         if (currentAsset !== 'all' && (lvl.asset || '').toLowerCase() !== currentAsset) return false;
-        if (statusFilter !== 'all' && lvl.status !== statusFilter) return false;
+        const st = (lvl.status || '').toLowerCase();
+        if (statusFilter !== 'all') {
+          if (statusFilter === 'success' && st !== 'success' && st !== 'tp_hit') return false;
+          if (statusFilter === 'failed' && st !== 'failed' && st !== 'sl_hit') return false;
+          if (statusFilter === 'inactive' && st !== 'inactive' && st !== 'expired') return false;
+          if (statusFilter === 'waiting' && st !== 'waiting') return false;
+          if (statusFilter === 'active' && st !== 'active') return false;
+        }
         if (searchTxt) {
           const matchStr = `${lvl.price} ${lvl.behavior} ${lvl.setup_tag} ${lvl.tp} ${lvl.sl}`.toLowerCase();
           if (!matchStr.includes(searchTxt)) return false;
@@ -375,25 +399,35 @@
       });
 
       // KPI Calculation
-      let total = 0, tpHits = 0, slHits = 0, active = 0;
+      let total = 0, waiting = 0, active = 0, success = 0, failed = 0, inactive = 0;
       levels.forEach(lvl => {
         if (currentAsset === 'all' || (lvl.asset || '').toLowerCase() === currentAsset) {
           total++;
-          if (lvl.status === 'tp_hit') tpHits++;
-          else if (lvl.status === 'sl_hit') slHits++;
-          else if (lvl.status === 'active') active++;
+          const st = (lvl.status || '').toLowerCase();
+          if (st === 'waiting') waiting++;
+          else if (st === 'active') active++;
+          else if (st === 'success' || st === 'tp_hit') success++;
+          else if (st === 'failed' || st === 'sl_hit') failed++;
+          else if (st === 'inactive' || st === 'expired') inactive++;
         }
       });
 
-      const decided = tpHits + slHits;
-      const winRate = decided > 0 ? ((tpHits / decided) * 100).toFixed(1) : "0.0";
+      const decided = success + failed;
+      const winRate = decided > 0 ? ((success / decided) * 100).toFixed(1) : "0.0";
+
+      const triggered = active + success + failed;
+      const trigRate = total > 0 ? ((triggered / total) * 100).toFixed(1) : "0.0";
 
       document.getElementById('kpi-winrate').innerText = `${winRate}%`;
-      document.getElementById('kpi-winrate-sub').innerText = `${tpHits} Won / ${decided} Decided`;
+      document.getElementById('kpi-winrate-sub').innerText = `${success} Won / ${decided} Decided`;
+      document.getElementById('kpi-trigrate').innerText = `${trigRate}%`;
+      document.getElementById('kpi-trigrate-sub').innerText = `${triggered} Triggered / ${total} Total`;
       document.getElementById('kpi-total').innerText = total;
-      document.getElementById('kpi-tp').innerText = tpHits;
-      document.getElementById('kpi-sl').innerText = slHits;
+      document.getElementById('kpi-tp').innerText = success;
+      document.getElementById('kpi-sl').innerText = failed;
       document.getElementById('kpi-active').innerText = active;
+      document.getElementById('kpi-waiting').innerText = waiting;
+      document.getElementById('kpi-inactive').innerText = inactive;
 
       // Table Render
       const tbody = document.getElementById('levels-table-body');
@@ -403,10 +437,12 @@
       }
 
       tbody.innerHTML = filtered.map(lvl => {
-        let statusBadge = '<span class="badge badge-active">⚪ ACTIVE</span>';
-        if (lvl.status === 'tp_hit') statusBadge = '<span class="badge badge-success">🟢 SUCCESS</span>';
-        else if (lvl.status === 'sl_hit') statusBadge = '<span class="badge badge-danger">🔴 FAILED</span>';
-        else if (lvl.status === 'expired') statusBadge = '<span class="badge badge-expired">⌛ EXPIRED</span>';
+        let statusBadge = '<span class="badge badge-waiting">⏳ WAITING</span>';
+        const st = (lvl.status || '').toLowerCase();
+        if (st === 'active') statusBadge = '<span class="badge badge-active">🔵 ACTIVE</span>';
+        else if (st === 'success' || st === 'tp_hit') statusBadge = '<span class="badge badge-success">🟢 SUCCESS</span>';
+        else if (st === 'failed' || st === 'sl_hit') statusBadge = '<span class="badge badge-danger">🔴 FAILED</span>';
+        else if (st === 'inactive' || st === 'expired') statusBadge = '<span class="badge badge-expired">⚪ INACTIVE</span>';
 
         const biasClass = (lvl.bias || '').toLowerCase() === 'bullish' ? 'bias-bullish' : 'bias-bearish';
 
