@@ -844,8 +844,7 @@
                         </span>
                         <div style="display:flex;gap:0.3rem;align-items:center;">
                             <span class="proximity-badge" id="prox-badge-btc-${idx}">🎯 NEAR BY</span>
-                            <span class="status-pill status-pill-${savedOutcome}" id="status-pill-btc-${idx}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '⚪ PENDING')}</span>
-                            <span class="level-type-badge ${levelTypeCss}">${levelTypeBadge}</span>
+                            <span class="status-pill status-pill-${savedOutcome}" id="status-pill-btc-${idx}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
                             <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
                         </div>
                     </div>
@@ -997,12 +996,15 @@
                 pill.className = `status-pill status-pill-${status}`;
                 if (status === 'worked') {
                     pill.innerText = '🟢 WORKED';
+                    pill.style.display = 'inline-block';
                     if (btnWorked) btnWorked.classList.add('active');
                 } else if (status === 'failed') {
                     pill.innerText = '🔴 FAILED';
+                    pill.style.display = 'inline-block';
                     if (btnFailed) btnFailed.classList.add('active');
                 } else {
-                    pill.innerText = '⚪ PENDING';
+                    pill.innerText = '';
+                    pill.style.display = 'none';
                 }
             }
         }
