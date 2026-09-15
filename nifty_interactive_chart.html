@@ -995,11 +995,12 @@
             const latestSummaryText = summaryArray[0]?.text || '';
             if (!latestSummaryText) return fallbackText;
 
-            const cleanTagStr = tag.replace(/[\[\]]/g, '').trim();
+            const cleanTagStr = tag.replace(/[\[\]]/g, '').trim();  // "B1", "S2", etc.
             if (!cleanTagStr) return fallbackText;
 
             const lines = latestSummaryText.split('\n');
             for (let line of lines) {
+                // ── Pass 1: Markdown table rows (BTC/GOLD format) ──
                 if (line.includes('|') && line.toLowerCase().includes(cleanTagStr.toLowerCase())) {
                     const parts = line.split('|').map(p => p.trim());
                     if (parts.length >= 5 && parts[4]) {
@@ -1011,6 +1012,41 @@
                     }
                 }
             }
+
+            // ── Pass 2: Bullet-point lines (NIFTY format) ──
+            // Format: - [B1] BUY Setup 1 (Name...): Full entry trigger text... | TP: ... | SL: ...
+            for (let line of lines) {
+                const trimmed = line.trim();
+                if (!trimmed.match(/^[-*]\s*\[/) ) continue;
+                if (!trimmed.toLowerCase().includes(`[${cleanTagStr.toLowerCase()}]`)) continue;
+
+                // Extract the full entry trigger condition text
+                // It comes after the setup name "): " and before " | TP:"
+                let entryText = trimmed;
+
+                // Remove the leading "- [B1] BUY/SELL Setup N (Name): " prefix
+                const colonAfterParen = entryText.indexOf('):');
+                if (colonAfterParen !== -1) {
+                    entryText = entryText.substring(colonAfterParen + 2).trim();
+                } else {
+                    // Fallback: remove "- [B1] ... : " prefix  
+                    entryText = entryText.replace(/^[-*]\s*\[[^\]]+\]\s*(?:BUY|SELL)\s+Setup\s+\d+[^:]*:\s*/i, '');
+                }
+
+                // Trim trailing fields after entry trigger: " | TP: ..." onwards
+                const tpSplit = entryText.indexOf(' | TP:');
+                if (tpSplit !== -1) {
+                    entryText = entryText.substring(0, tpSplit).trim();
+                }
+
+                // Clean up markdown artifacts
+                entryText = entryText.replace(/<br\s*\/?>/gi, ' ').replace(/\*\*/g, '').trim();
+
+                if (entryText && entryText.length > 15) {
+                    return entryText;
+                }
+            }
+
             return fallbackText;
         }
 
