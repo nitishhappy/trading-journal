@@ -1001,6 +1001,9 @@
             const lines = latestSummaryText.split('\n');
             for (let line of lines) {
                 // ── Pass 1: Markdown table rows (BTC/GOLD format) ──
+                // Skip bullet-point lines — they have pipes for TP/SL but are NOT table rows
+                const trimmedLine = line.trim();
+                if (trimmedLine.match(/^[-*]\s/) ) continue;
                 if (line.includes('|') && line.toLowerCase().includes(cleanTagStr.toLowerCase())) {
                     const parts = line.split('|').map(p => p.trim());
                     if (parts.length >= 5 && parts[4]) {
