@@ -140,74 +140,76 @@ module.exports = async (req, res) => {
     source:        source    || "tradingview",
   });
 
-  // Dispatch Web Push Lock-Screen Notification
-  try {
-    const pushTitle = `${symbol || 'SIGNAL'} — ${action || 'ALERT'}${resolvedTimeframe ? ' (' + resolvedTimeframe + ')' : ''}`;
-    const pushBody = price ? `Price: ${price}${summary ? ' | ' + summary : ''}` : (summary || raw.substring(0, 100));
-    sendWebPushAlert(uid, pushTitle, pushBody, 'tv-signal');
-  } catch (e) {
-    console.error("tvWebhook push error:", e);
-  }
+  // ⚡ Immediate HTTP 200 OK Response to prevent TradingView 3-second timeout errors!
+  res.status(200).send("OK");
 
-  // Garbage Collection & Daily 4:00 PM IST Cleanup
-  try {
-    const now = new Date();
-    const istTimeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: false });
-    const istHour = parseInt(istTimeString.split(':')[0], 10);
-    const todayIstStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
-    const todayIstMidnight = new Date(`${todayIstStr}T00:00:00+05:30`);
-
-    let cleanupCutoff;
-    if (istHour >= 16) {
-      // At or after 4:00 PM IST: purge all alerts from previous days
-      cleanupCutoff = todayIstMidnight;
-    } else {
-      // Before 4:00 PM IST: purge alerts older than yesterday 00:00 IST
-      cleanupCutoff = new Date(todayIstMidnight.getTime() - 24 * 60 * 60 * 1000);
+  // ── Background Execution (Asynchronous / Non-Blocking) ──────────────────
+  (async () => {
+    // 1. Dispatch Web Push Lock-Screen Notification
+    try {
+      const pushTitle = `${symbol || 'SIGNAL'} — ${action || 'ALERT'}${resolvedTimeframe ? ' (' + resolvedTimeframe + ')' : ''}`;
+      const pushBody = price ? `Price: ${price}${summary ? ' | ' + summary : ''}` : (summary || raw.substring(0, 100));
+      await sendWebPushAlert(uid, pushTitle, pushBody, 'tv-signal');
+    } catch (e) {
+      console.error("tvWebhook push error:", e);
     }
 
-    const oldSnaps = await db.collection("users").doc(uid).collection("tvNotifications")
-      .where("receivedAt", "<", cleanupCutoff)
-      .get();
-    
-    if (!oldSnaps.empty) {
-      const batch = db.batch();
-      oldSnaps.docs.forEach(doc => batch.delete(doc.ref));
-      await batch.commit();
-    }
-  } catch (err) {
-    console.error("tvWebhook: cleanup error", err);
-  }
+    // 2. Garbage Collection & Daily 4:00 PM IST Cleanup
+    try {
+      const now = new Date();
+      const istTimeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: false });
+      const istHour = parseInt(istTimeString.split(':')[0], 10);
+      const todayIstStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+      const todayIstMidnight = new Date(`${todayIstStr}T00:00:00+05:30`);
 
-  // Auto-clean sequence trigger logs (> 7 days) if enabled in user preferences
-  try {
-    const prefsDoc = await db.collection("users").doc(uid).collection("settings").doc("preferences").get();
-    const autoCleanEnabled = prefsDoc.exists ? (prefsDoc.data().triggerLogAutoClean !== false) : true;
-    if (autoCleanEnabled) {
-      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-      const oldLogsSnaps = await db.collection("users").doc(uid).collection("sequenceTriggerLogs")
-        .where("triggeredAt", "<", sevenDaysAgo)
+      let cleanupCutoff;
+      if (istHour >= 16) {
+        cleanupCutoff = todayIstMidnight;
+      } else {
+        cleanupCutoff = new Date(todayIstMidnight.getTime() - 24 * 60 * 60 * 1000);
+      }
+
+      const oldSnaps = await db.collection("users").doc(uid).collection("tvNotifications")
+        .where("receivedAt", "<", cleanupCutoff)
         .get();
-      if (!oldLogsSnaps.empty) {
+      
+      if (!oldSnaps.empty) {
         const batch = db.batch();
-        oldLogsSnaps.docs.forEach(doc => batch.delete(doc.ref));
+        oldSnaps.docs.forEach(doc => batch.delete(doc.ref));
         await batch.commit();
       }
-    }
-  } catch (err) {
-    console.error("tvWebhook: trigger logs auto-clean error", err);
-  }
-
-  // ── Run sequence engine (awaited to prevent Vercel context termination) ──
-  if (keyword) {
-    try {
-      await runSequenceEngine(db, uid, keyword, symbol, resolvedTimeframe, price);
     } catch (err) {
-      console.error("tvWebhook: sequenceEngine error", err);
+      console.error("tvWebhook: cleanup error", err);
     }
-  }
 
-  return res.status(200).send("OK");
+    // 3. Auto-clean sequence trigger logs (> 7 days) if enabled in user preferences
+    try {
+      const prefsDoc = await db.collection("users").doc(uid).collection("settings").doc("preferences").get();
+      const autoCleanEnabled = prefsDoc.exists ? (prefsDoc.data().triggerLogAutoClean !== false) : true;
+      if (autoCleanEnabled) {
+        const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        const oldLogsSnaps = await db.collection("users").doc(uid).collection("sequenceTriggerLogs")
+          .where("triggeredAt", "<", sevenDaysAgo)
+          .get();
+        if (!oldLogsSnaps.empty) {
+          const batch = db.batch();
+          oldLogsSnaps.docs.forEach(doc => batch.delete(doc.ref));
+          await batch.commit();
+        }
+      }
+    } catch (err) {
+      console.error("tvWebhook: trigger logs auto-clean error", err);
+    }
+
+    // 4. Run sequence engine
+    if (keyword) {
+      try {
+        await runSequenceEngine(db, uid, keyword, symbol, resolvedTimeframe, price);
+      } catch (err) {
+        console.error("tvWebhook: sequenceEngine error", err);
+      }
+    }
+  })().catch(e => console.error("tvWebhook background task error:", e));
 };
 
 // ─── Enhanced plain-text alert parser ────────────────────────────────────────
@@ -243,6 +245,18 @@ function parsePlainTextAlert(text) {
   // First token is signal keyword — strip trailing colon AND comma
   if (parts.length > 0) {
     parsed.keyword = parts[0].replace(/[:,]+$/, "").trim();
+  }
+
+  // 0a. OHLC Candle Parsing (e.g. "SP500 O: 7611.16 H: 7613.26 L: 7607.16 C: 7612.50")
+  const ohlcMatch = rawTrimmed.match(/(?:O|Open):\s*([0-9.,]+)\s+(?:H|High):\s*([0-9.,]+)\s+(?:L|Low):\s*([0-9.,]+)\s+(?:C|Close):\s*([0-9.,]+)/i);
+  if (ohlcMatch) {
+    parsed.open = parseFloat(ohlcMatch[1].replace(/,/g, ''));
+    parsed.high = parseFloat(ohlcMatch[2].replace(/,/g, ''));
+    parsed.low = parseFloat(ohlcMatch[3].replace(/,/g, ''));
+    parsed.close = parseFloat(ohlcMatch[4].replace(/,/g, ''));
+    if (isNaN(parsed.price) || parsed.price === undefined) {
+      parsed.price = parsed.close;
+    }
   }
 
   // 0. TradingView native crossing alert formats:

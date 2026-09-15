@@ -241,14 +241,16 @@ export default async function handler(req, res) {
       });
     }
 
-    // ── 4. S&P 500 SPOT INDEX CANDLES (^GSPC) — TRADINGVIEW ONLY ───────────
+    // ── 4. S&P 500 SPOT INDEX CANDLES (^GSPC) ──────────────────────────────
     if (symInput === "SP500" || symInput === "^GSPC" || symInput === "SPX" || symInput === "SPX500") {
       let candles = [];
+      let source = "TRADINGVIEW";
+
+      const reqTf = req.query.timeframe || req.query.tf || "5m";
+      const normTf = (reqTf === "5" || reqTf === "5m") ? "5m" : (reqTf === "15" || reqTf === "15m") ? "15m" : (reqTf === "60" || reqTf === "1h") ? "1h" : (reqTf === "d" || reqTf === "1d") ? "1d" : "5m";
 
       if (db) {
         try {
-          const reqTf = req.query.timeframe || req.query.tf || "5m";
-          const normTf = (reqTf === "5" || reqTf === "5m") ? "5m" : (reqTf === "15" || reqTf === "15m") ? "15m" : (reqTf === "60" || reqTf === "1h") ? "1h" : (reqTf === "d" || reqTf === "1d") ? "1d" : "5m";
           const limit = Math.min(parseInt(req.query.limit || "100", 10), 500);
 
           const snapshot = await db.collection("sp500_candles")
@@ -268,7 +270,6 @@ export default async function handler(req, res) {
             });
           });
 
-          // Sort descending to slice latest candles, then sort ascending for return
           rawCandles.sort((a, b) => b.time - a.time);
           candles = rawCandles.slice(0, limit);
           candles.sort((a, b) => a.time - b.time);
@@ -277,13 +278,33 @@ export default async function handler(req, res) {
         }
       }
 
+      // Check if Firestore candles are empty or stale (> 45 minutes old)
+      const nowSec = Math.floor(Date.now() / 1000);
+      const isStale = candles.length === 0 || (nowSec - candles[candles.length - 1].time) > 2700;
+
+      if (isStale) {
+        try {
+          const yahooInterval = (normTf === "15m") ? "15m" : (normTf === "1h") ? "60m" : (normTf === "1d") ? "1d" : "5m";
+          const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${yahooInterval}&range=2d`);
+          if (yahooJson) {
+            const yCandles = parseYahooCandles(yahooJson);
+            if (yCandles && yCandles.length > 0) {
+              candles = yCandles;
+              source = "YAHOO_FINANCE";
+            }
+          }
+        } catch (e) {
+          console.error("api/marketCandles SP500 Yahoo fallback error:", e);
+        }
+      }
+
       if (candles.length === 0) {
         return res.status(200).json({
           success: false,
-          status: "TRADINGVIEW_DATA_UNAVAILABLE",
+          status: "DATA_UNAVAILABLE",
           symbol: "SP500",
           source: "TRADINGVIEW",
-          message: "TradingView S&P 500 candle data is currently unavailable in Firestore.",
+          message: "S&P 500 candle data is currently unavailable.",
           candles: []
         });
       }
@@ -291,7 +312,7 @@ export default async function handler(req, res) {
       return res.status(200).json({
         success: true,
         symbol: "SP500",
-        source: "TRADINGVIEW",
+        source,
         candles
       });
     }
