@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-15T11:02:17+05:30",
+    "timeDisplay": "11:02 AM, Sep 15",
+    "price": "23365",
+    "bias": "bullish",
+    "behavior": "[TUE 11:02] [B1]: Liquidity probe sweeping below Day Low (23,327.35) rejected with lower absorption wick and 5m close back ABOVE 23,365",
+    "tp": "23,420 / 23,460",
+    "sl": "23,320",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T11:02:17+05:30",
+    "timeDisplay": "11:02 AM, Sep 15",
+    "price": "23390",
+    "bias": "bullish",
+    "behavior": "[TUE 11:02] [B2]: Sustained 5m close ABOVE 23,390 with active futures volume confirming absorption of 23,350 Call wall",
+    "tp": "23,440 / 23,480",
+    "sl": "23,350",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T11:02:17+05:30",
+    "timeDisplay": "11:02 AM, Sep 15",
+    "price": "23365",
+    "bias": "bearish",
+    "behavior": "[TUE 11:02] [S1]: Corrective relief bounce into 23,365-23,375 rejected with upper exhaustion wick and 5m close back BELOW 23,365",
+    "tp": "23,315 / 23,275",
+    "sl": "23,400",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T11:02:17+05:30",
+    "timeDisplay": "11:02 AM, Sep 15",
+    "price": "23320",
+    "bias": "bearish",
+    "behavior": "[TUE 11:02] [S2]: Sustained 5m close BELOW 23,320 with active red futures volume confirming breakdown through 23,300 demand floor",
+    "tp": "23,270 / 23,225",
+    "sl": "23,360",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-15T10:46:17+05:30",
     "timeDisplay": "10:46 AM, Sep 15",
     "price": "23380",
@@ -41,17 +85,6 @@ window.dailyPlanData = [
     "behavior": "[TUE 10:46] [S2]: Sustained 5m close BELOW 23,335 with active red futures volume confirming breakdown through 23,350 demand floor",
     "tp": "23,285 / 23,240",
     "sl": "23,375",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-15T10:33:35+05:30",
-    "timeDisplay": "10:33 AM, Sep 15",
-    "price": "23390",
-    "bias": "bullish",
-    "behavior": "[TUE 10:33] [B1]: Liquidity probe sweeping below Day Low (23,357.95) rejected with lower absorption wick and 5m close back ABOVE 23,390",
-    "tp": "23,445 / 23,485",
-    "sl": "23,345",
     "status": "na"
   },
   {
@@ -140,17 +173,6 @@ window.dailyPlanData = [
     "behavior": "[TUE 10:03] [S1]: Corrective relief bounce into 23,415-23,425 rejected with upper exhaustion wick and 5m close back BELOW 23,400",
     "tp": "23,370 / 23,335",
     "sl": "23,435",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-15T10:03:59+05:30",
-    "timeDisplay": "10:03 AM, Sep 15",
-    "price": "23365",
-    "bias": "bearish",
-    "behavior": "[TUE 10:03] [S2]: Sustained 5m close BELOW 23,365 with active red futures volume confirming breakdown through Day Low",
-    "tp": "23,320 / 23,280",
-    "sl": "23,400",
     "status": "na"
   },
   {
@@ -245,6 +267,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260915_110221",
+    "timestamp": "2026-09-15T11:02:21+05:30",
+    "timeDisplay": "11:02 AM, Sep 15",
+    "spot": "23338.35",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 23576.15",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:00 AM IST - Sep 15, 2026 | Spot: 23338.35 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 23576.15))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,325.00 – 23,365.00 (40-point Session Low & 23,300/23,350 Straddle Transition Corridor).\n- Rationale: NIFTY Spot (23,338.35) has registered a fresh intraday low at 23,327.35, extending its persistent intraday decline from the Day High (23,592.85) and trading deep below the 15M ORB Low (23,452.05). Price action is currently compressing between the newly established Day Low (23,327.35) and the broken 23,350–23,365 support shelf (now flipped into immediate overhead resistance). On this Tuesday (FinNifty Expiry), heavy cross-index gamma hedging and rapid open interest reallocation are dictating tight straddle pinning. Call writers have aggressively rolled down and fortified 23,350 CE (+18.4M contracts added today) and 23,400 CE (+30.7M contracts added today; 36.9M total), depressing live PCR to 0.59 and establishing an aggressive institutional supply ceiling that caps counter-trend relief bounces below the 15M 9 EMA (23,392.06) and VWAP (23,401.95). Concurrently, Put writers are mounting a stubborn defense at 23,300 PE (+10.3M contracts added today; 24.1M total) and 23,250 PE (+6.1M contracts added) to resist an immediate multi-strike collapse, creating intense two-way pin risk between 23,325 and 23,365. Active Nifty Futures volume remains baseline at 1.0x (8-bar average), indicating that institutional participants are harvesting Tuesday theta bleed across ATM options rather than committing fresh aggressive expansion capital inside this pocket. Chasing entries between 23,325 and 23,365 carries severe whip-saw risk and negative expectancy.\n- Directive: STRICT NO-TRADE ZONE for naked option buying. Do NOT buy dips or chase breakdowns inside 23,325–23,365. Stand aside until an intentional liquidity sweep forms below Day Low (23,327.35) with confirmed absorption wick, or a decisive 5-minute candle closes outside the boundary backed by expanding futures volume.\n\n4. High Momentum / Explosive Zones:\n- [Upside Short-Covering Squeeze] ([Sustained 5m close ABOVE 23,375 Spot]): Decisively reclaims the broken 23,350–23,365 supply shelf and punctures intraday descending supply, forcing rapid covering from aggressive 23,350 Call writers and triggering an accelerated short-covering squeeze toward 23,420.00 and 23,460.00.\n- [Downside Long-Liquidation Cascade] ([Sustained 5m close BELOW 23,320 Spot]): Decisively breaches the newly printed Day Low (23,327.35) and punctures the 23,300 Put writer defense threshold, triggering panic unwinding across 23,300/23,350 Put positions and unlocking a swift long-liquidation cascade targeting 23,270.00 and 23,225.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP): Liquidity probe sweeping below Day Low (23,327.35) into the 23,315–23,325 demand shelf rejected with a sharp lower absorption wick, followed by a confirmed 5m candle close back ABOVE 23,365 with expanding green futures volume confirming trapped sellers. | TP: 23,420 / 23,460 | SL: 23,320 | 💡 Buy 23,350 CE + Sell 23,400 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Chop Range Reclaim Short-Covering Breakout Long): Sustained 5m candle close ABOVE 23,390 accompanied by expanding active Nifty Futures volume (>1.2x avg) confirming institutional absorption of the 23,350 Call supply wall. | TP: 23,440 / 23,480 | SL: 23,350 | 💡 Buy 23,350 CE + Sell 23,400 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Broken Shelf Re-test Rejection Fade Short): Corrective relief bounce into the 23,365–23,375 supply ceiling (broken support turned resistance) rejected with an upper exhaustion wick, followed by a confirmed 5m candle close back BELOW 23,365. | TP: 23,315 / 23,275 | SL: 23,400 | 💡 Buy 23,350 PE + Sell 23,300 PE (Next Wk) | R:R: ~1.43 | Risk: ~8.5% | TP1: +16.0% | TP2: +32.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m candle close BELOW 23,320 accompanied by expanding red futures volume, confirming true institutional breakdown through the 23,300 demand floor to unlock liquidation cascade toward macro demand. | TP: 23,270 / 23,225 | SL: 23,360 | 💡 Buy 23,300 PE + Sell 23,250 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20260915_104620",
     "timestamp": "2026-09-15T10:46:20+05:30",
     "timeDisplay": "10:46 AM, Sep 15",
