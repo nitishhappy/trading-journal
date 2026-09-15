@@ -27,12 +27,23 @@
             padding: 0;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: radial-gradient(circle at top right, #1f1a08, #0b0f17);
             color: var(--text-main);
-            padding: 1.25rem;
-            min-height: 100vh;
+            padding: 0.5rem;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         body.embed-mode {
@@ -52,9 +63,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             padding-bottom: 0.4rem;
             border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
 
         .header h1 {
@@ -104,15 +116,18 @@
 
         .main-container {
             display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 1rem;
-            height: calc(100vh - 65px);
+            grid-template-columns: 1fr 380px;
+            gap: 0.6rem;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            overflow: hidden;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 900px) {
             .main-container {
                 grid-template-columns: 1fr;
-                height: auto;
+                grid-template-rows: 1fr 240px;
             }
         }
 
@@ -125,6 +140,9 @@
             flex-direction: column;
             position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            min-height: 0;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .chart-toolbar {
@@ -179,7 +197,8 @@
         #chart-wrapper {
             flex: 1;
             width: 100%;
-            min-height: 500px;
+            height: 100%;
+            min-height: 0;
             position: relative;
             border-radius: 8px;
             overflow: hidden;
@@ -189,12 +208,13 @@
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 1rem;
+            padding: 0.75rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            min-height: 0;
         }
 
         .section-title {
@@ -496,7 +516,13 @@
                     mode: LightweightCharts.CrosshairMode.Normal,
                 },
                 rightPriceScale: {
+                    visible: true,
                     borderColor: 'rgba(245, 158, 11, 0.2)',
+                    autoScale: true,
+                    scaleMargins: {
+                        top: 0.15,
+                        bottom: 0.15,
+                    },
                 },
                 timeScale: {
                     borderColor: 'rgba(245, 158, 11, 0.2)',
@@ -558,10 +584,21 @@
                 }
             });
 
-            window.addEventListener('resize', () => {
-                chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
-            });
-            chartInstance.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+            // Responsive Resize via ResizeObserver & Window Resize
+            const resizeChart = () => {
+                if (container && chartInstance) {
+                    const w = container.clientWidth;
+                    const h = container.clientHeight;
+                    if (w > 0 && h > 0) {
+                        chartInstance.applyOptions({ width: w, height: h });
+                    }
+                }
+            };
+
+            const resizeObserver = new ResizeObserver(() => resizeChart());
+            resizeObserver.observe(container);
+            window.addEventListener('resize', resizeChart);
+            resizeChart();
         }
 
         function reloadPlanDataScript(assetName) {
@@ -727,6 +764,10 @@
 
             if (candles && candles.length > 0) {
                 checkCandleCloseCrossings(candles, 'Gold');
+            }
+
+            if (chartInstance) {
+                chartInstance.timeScale().fitContent();
             }
         }
 
