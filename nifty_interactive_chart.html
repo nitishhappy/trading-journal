@@ -478,6 +478,7 @@
         let candleSeries = null;
         let chartInstance = null;
         let countdownSeconds = 15;
+        let isInitialLoad = true;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
@@ -497,6 +498,12 @@
             const toggleBtn = document.getElementById('btn-toggle-alerts');
             const refreshBtn = document.getElementById('btn-manual-refresh');
 
+            refreshBtn.addEventListener('click', () => {
+                reloadChartData(true);
+                countdownSeconds = 15;
+                showToast("⚡ Chart Refreshed", "Fetched latest Nifty candles and daily plan levels.");
+            });
+
             toggleBtn.addEventListener('click', () => {
                 alertsEnabled = !alertsEnabled;
                 if (alertsEnabled) {
@@ -512,12 +519,6 @@
                     document.getElementById('alert-btn-text').innerText = 'Enable Notifications';
                     showToast("Alert System Disabled", "Notifications paused.");
                 }
-            });
-
-            refreshBtn.addEventListener('click', () => {
-                reloadChartData();
-                countdownSeconds = 15;
-                showToast("⚡ Chart Refreshed", "Fetched latest Nifty candles and daily plan levels.");
             });
         }
 
@@ -685,7 +686,9 @@
             });
         }
 
-        async function reloadChartData() {
+        async function reloadChartData(forceFit = false) {
+            const savedRange = (!forceFit && !isInitialLoad && chartInstance) ? chartInstance.timeScale().getVisibleLogicalRange() : null;
+
             await reloadPlanDataScript('nifty');
             // 2. Fetch Real-Time 5M Candles from API feed / /api/marketCandles endpoint
             let candles = await loadRealNiftyCandles();
@@ -843,7 +846,12 @@
             }
 
             if (chartInstance) {
-                chartInstance.timeScale().fitContent();
+                if (!forceFit && !isInitialLoad && savedRange !== null) {
+                    chartInstance.timeScale().setVisibleLogicalRange(savedRange);
+                } else {
+                    chartInstance.timeScale().fitContent();
+                    isInitialLoad = false;
+                }
             }
         }
 

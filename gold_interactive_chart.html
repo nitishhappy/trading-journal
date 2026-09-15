@@ -442,6 +442,7 @@
         let candleSeries = null;
         let chartInstance = null;
         let countdownSeconds = 15;
+        let isInitialLoad = true;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
@@ -491,7 +492,7 @@
             });
 
             refreshBtn.addEventListener('click', () => {
-                reloadChartData();
+                reloadChartData(true);
                 countdownSeconds = 15;
                 showToast("⚡ Gold Action Plan Refreshed", "Loaded latest Section 5 triggers & candles.");
             });
@@ -616,7 +617,9 @@
             });
         }
 
-        async function reloadChartData() {
+        async function reloadChartData(forceFit = false) {
+            const savedRange = (!forceFit && !isInitialLoad && chartInstance) ? chartInstance.timeScale().getVisibleLogicalRange() : null;
+
             await reloadPlanDataScript('gold');
             levelsData = getGoldActionPlanLevels();
 
@@ -767,7 +770,12 @@
             }
 
             if (chartInstance) {
-                chartInstance.timeScale().fitContent();
+                if (!forceFit && !isInitialLoad && savedRange !== null) {
+                    chartInstance.timeScale().setVisibleLogicalRange(savedRange);
+                } else {
+                    chartInstance.timeScale().fitContent();
+                    isInitialLoad = false;
+                }
             }
         }
 
