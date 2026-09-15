@@ -617,6 +617,7 @@
         }
 
         let latestCandleTimestamp = null;
+        const IST_OFFSET_SEC = 19800; // +5:30 IST offset in seconds for Binance UTC→IST axis alignment
 
         function initChartApp() {
             const container = document.getElementById('chart-wrapper');
@@ -649,16 +650,16 @@
                     secondsVisible: false,
                     tickMarkFormatter: (time) => {
                         const date = new Date(time * 1000);
-                        const h = date.getHours().toString().padStart(2, '0');
-                        const m = date.getMinutes().toString().padStart(2, '0');
+                        const h = date.getUTCHours().toString().padStart(2, '0');
+                        const m = date.getUTCMinutes().toString().padStart(2, '0');
                         return `${h}:${m}`;
                     }
                 },
                 localization: {
                     timeFormatter: (time) => {
                         const date = new Date(time * 1000);
-                        let h = date.getHours();
-                        const m = date.getMinutes().toString().padStart(2, '0');
+                        let h = date.getUTCHours();
+                        const m = date.getUTCMinutes().toString().padStart(2, '0');
                         const ampm = h >= 12 ? 'PM' : 'AM';
                         h = h % 12;
                         h = h ? h : 12;
@@ -734,7 +735,7 @@
                 return;
             }
 
-            const latestCandleTime = candles[candles.length - 1].time;
+            const latestCandleTime = candles[candles.length - 1].time - IST_OFFSET_SEC; // Convert back to real UTC for freshness check
             const nowSec = Math.floor(Date.now() / 1000);
             const ageMinutes = (nowSec - latestCandleTime) / 60;
 
@@ -782,7 +783,7 @@
 
                 let targetCandleTime = null;
                 if (levelsData.anchorTimestamp) {
-                    const planSec = Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000);
+                    const planSec = Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000) + IST_OFFSET_SEC;
                     let minDiff = Infinity;
                     candles.forEach(c => {
                         const diff = Math.abs(c.time - planSec);
@@ -937,8 +938,19 @@
             if (chartInstance) {
                 if (!forceFit && !isInitialLoad && savedRange !== null) {
                     chartInstance.timeScale().setVisibleLogicalRange(savedRange);
-                } else {
+                } else if (fitAllLevels) {
                     chartInstance.timeScale().fitContent();
+                    isInitialLoad = false;
+                } else {
+                    if (candles && candles.length > 0) {
+                        const totalBars = candles.length;
+                        chartInstance.timeScale().setVisibleLogicalRange({
+                            from: Math.max(0, totalBars - 55),
+                            to: totalBars + 3
+                        });
+                    } else {
+                        chartInstance.timeScale().fitContent();
+                    }
                     isInitialLoad = false;
                 }
             }
@@ -1240,7 +1252,7 @@
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
                         return data.map(c => ({
-                            time: Math.floor(c[0] / 1000),
+                            time: Math.floor(c[0] / 1000) + IST_OFFSET_SEC,
                             open: parseFloat(parseFloat(c[1]).toFixed(2)),
                             high: parseFloat(parseFloat(c[2]).toFixed(2)),
                             low: parseFloat(parseFloat(c[3]).toFixed(2)),
@@ -1259,7 +1271,7 @@
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
                         return data.map(c => ({
-                            time: c[0],
+                            time: c[0] + IST_OFFSET_SEC,
                             open: parseFloat(c[3].toFixed(2)),
                             high: parseFloat(c[2].toFixed(2)),
                             low: parseFloat(c[1].toFixed(2)),

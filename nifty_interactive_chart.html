@@ -981,8 +981,19 @@
             if (chartInstance) {
                 if (!forceFit && !isInitialLoad && savedRange !== null) {
                     chartInstance.timeScale().setVisibleLogicalRange(savedRange);
-                } else {
+                } else if (fitAllLevels) {
                     chartInstance.timeScale().fitContent();
+                    isInitialLoad = false;
+                } else {
+                    if (candles && candles.length > 0) {
+                        const totalBars = candles.length;
+                        chartInstance.timeScale().setVisibleLogicalRange({
+                            from: Math.max(0, totalBars - 55),
+                            to: totalBars + 3
+                        });
+                    } else {
+                        chartInstance.timeScale().fitContent();
+                    }
                     isInitialLoad = false;
                 }
             }
