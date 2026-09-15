@@ -364,6 +364,102 @@
         .tp-val { color: #34d399; }
         .sl-val { color: #f87171; }
 
+        /* Visual Chart Map Enhancements: Proximity, Distance Pill & Outcome Badges */
+        .level-card.nearest-proximity {
+            border: 2px solid #38bdf8 !important;
+            border-left: 6px solid #38bdf8 !important;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.4) !important;
+        }
+
+        .proximity-badge {
+            background: rgba(56, 189, 248, 0.18);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            font-size: 0.62rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .dist-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .status-pill-worked { background: rgba(16, 185, 129, 0.25); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); }
+        .status-pill-failed { background: rgba(244, 63, 94, 0.25); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.5); }
+        .status-pill-pending { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
+
+        .card-outcome-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.6rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .outcome-label {
+            font-size: 0.68rem;
+            color: #94a3b8;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .outcome-btn-group {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .outcome-btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 0.2rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .outcome-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .outcome-btn.btn-worked:hover, .outcome-btn.btn-worked.active {
+            background: rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            border-color: #10b981;
+        }
+
+        .outcome-btn.btn-failed:hover, .outcome-btn.btn-failed.active {
+            background: rgba(244, 63, 94, 0.3);
+            color: #fb7185;
+            border-color: #f43f5e;
+        }
+
+        .outcome-btn.btn-reset:hover {
+            background: rgba(148, 163, 184, 0.3);
+            color: #f8fafc;
+            border-color: #94a3b8;
+        }
+
         .toast {
             position: fixed;
             bottom: 2rem;
@@ -714,9 +810,11 @@
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.btcDailyPlanSummary);
 
+                // Unique ID for Scorecard persistence
+                const levelUniqueId = `btc_${tag.replace(/[\[\]]/g,'')}_${lvl.price}`;
+                const savedOutcome = getSavedOutcome(levelUniqueId);
+
                 // ✅ Tag-aware line styles:
-                // [B*] / [S*]  = action SETUP triggers  → SOLID line, lineWidth 2 (prominent)
-                // [KB*] / [KS*] = STRUCTURAL key levels → DASHED line, lineWidth 1 (reference)
                 const isActionSetup = /^\[(?!K)[BS]\d+\]$/i.test(tag);
                 const lineStyle     = isActionSetup ? LightweightCharts.LineStyle.Solid : LightweightCharts.LineStyle.Dashed;
                 const lineWidth     = isActionSetup ? 2 : 1;
@@ -745,6 +843,8 @@
                             ${isBullish ? '🟢' : '🔴'} $${lvl.price}
                         </span>
                         <div style="display:flex;gap:0.3rem;align-items:center;">
+                            <span class="proximity-badge" id="prox-badge-btc-${idx}">🎯 NEAR BY</span>
+                            <span class="status-pill status-pill-${savedOutcome}" id="status-pill-btc-${idx}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '⚪ PENDING')}</span>
                             <span class="level-type-badge ${levelTypeCss}">${levelTypeBadge}</span>
                             <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
                         </div>
@@ -754,6 +854,15 @@
                     <div class="card-targets">
                         <span>TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></span>
                         <span>SL: <strong class="sl-val">${lvl.sl || 'N/A'}</strong></span>
+                        <span style="margin-left:auto;" class="dist-pill" id="dist-pill-btc-${idx}">--</span>
+                    </div>
+                    <div class="card-outcome-bar">
+                        <span class="outcome-label">Scorecard (AI):</span>
+                        <div class="outcome-btn-group">
+                            <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" id="btn-worked-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', 'worked', ${idx})">✓ Worked</button>
+                            <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" id="btn-failed-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', 'failed', ${idx})">✗ Failed</button>
+                            <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', 'na', ${idx})">↺ Reset</button>
+                        </div>
                     </div>
                 `;
                 
@@ -765,6 +874,12 @@
 
                 levelsListEl.appendChild(card);
             });
+
+            // Calculate proximity distances if candles loaded
+            if (candles && candles.length > 0) {
+                const latestSpot = candles[candles.length - 1].close;
+                updateProximityAndAutoSelect(latestSpot);
+            }
 
             // ✅ Autoscale Y-Axis to include ALL Action Plan Level lines alongside candles
             candleSeries.applyOptions({
@@ -805,6 +920,124 @@
                     chartInstance.timeScale().fitContent();
                     isInitialLoad = false;
                 }
+            }
+        }
+
+        // ================= EOD FORECAST SCORECARD & PROXIMITY ENGINE ================= //
+        function recordLevelOutcome(levelId, newSource, newStatus) {
+            const src = (newSource || 'AI').toUpperCase();
+            const st = (newStatus || 'na').toLowerCase();
+
+            let scorecardStats = {};
+            let levelReviewLog = {};
+
+            try {
+                const savedStats = localStorage.getItem('levelsScorecardHistory');
+                if (savedStats) scorecardStats = JSON.parse(savedStats);
+            } catch (e) { scorecardStats = {}; }
+
+            try {
+                const savedLog = localStorage.getItem('levelsLoggedReviews');
+                if (savedLog) levelReviewLog = JSON.parse(savedLog);
+            } catch (e) { levelReviewLog = {}; }
+
+            const prev = levelReviewLog[levelId];
+            if (prev) {
+                const prevSrc = (prev.source || 'AI').toUpperCase();
+                const prevSt = (prev.status || 'na').toLowerCase();
+                if (scorecardStats[prevSrc] && scorecardStats[prevSrc][prevSt] !== undefined) {
+                    scorecardStats[prevSrc][prevSt] = Math.max(0, scorecardStats[prevSrc][prevSt] - 1);
+                }
+            }
+
+            if (!scorecardStats[src]) {
+                scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
+            }
+
+            if (st !== 'na') {
+                scorecardStats[src][st] = (scorecardStats[src][st] || 0) + 1;
+                levelReviewLog[levelId] = { source: src, status: st, updatedAt: new Date().toISOString() };
+            } else {
+                delete levelReviewLog[levelId];
+            }
+
+            localStorage.setItem('levelsScorecardHistory', JSON.stringify(scorecardStats));
+            localStorage.setItem('levelsLoggedReviews', JSON.stringify(levelReviewLog));
+        }
+
+        function getSavedOutcome(levelId) {
+            try {
+                const savedLog = localStorage.getItem('levelsLoggedReviews');
+                if (savedLog) {
+                    const parsed = JSON.parse(savedLog);
+                    return parsed[levelId]?.status || 'na';
+                }
+            } catch (e) {}
+            return 'na';
+        }
+
+        function toggleLevelOutcome(event, levelId, status, idx) {
+            if (event) event.stopPropagation();
+            recordLevelOutcome(levelId, 'AI', status);
+            updateCardOutcomeUI(idx, status);
+            const label = status === 'worked' ? '🟢 WORKED' : (status === 'failed' ? '🔴 FAILED' : '⚪ RESET');
+            showToast(`Scorecard Logged (AI)`, `Level marked as ${label} in EOD Forecast Scorecard.`);
+            triggerAlertSound(880, 'sine', 0.1);
+        }
+
+        function updateCardOutcomeUI(idx, status) {
+            const pill = document.getElementById(`status-pill-btc-${idx}`);
+            const btnWorked = document.getElementById(`btn-worked-btc-${idx}`);
+            const btnFailed = document.getElementById(`btn-failed-btc-${idx}`);
+
+            if (btnWorked) btnWorked.classList.remove('active');
+            if (btnFailed) btnFailed.classList.remove('active');
+
+            if (pill) {
+                pill.className = `status-pill status-pill-${status}`;
+                if (status === 'worked') {
+                    pill.innerText = '🟢 WORKED';
+                    if (btnWorked) btnWorked.classList.add('active');
+                } else if (status === 'failed') {
+                    pill.innerText = '🔴 FAILED';
+                    if (btnFailed) btnFailed.classList.add('active');
+                } else {
+                    pill.innerText = '⚪ PENDING';
+                }
+            }
+        }
+
+        function updateProximityAndAutoSelect(latestPrice) {
+            if (!latestPrice || !activePriceLines || activePriceLines.length === 0) return;
+
+            let nearestIdx = -1;
+            let minDistance = Infinity;
+
+            activePriceLines.forEach((item) => {
+                const dist = Math.abs(item.price - latestPrice);
+                const distPct = (dist / latestPrice) * 100;
+                
+                const distEl = document.getElementById(`dist-pill-btc-${item.index}`);
+                if (distEl) {
+                    const diffVal = (latestPrice - item.price).toFixed(2);
+                    const sign = diffVal >= 0 ? '+' : '';
+                    distEl.innerText = `${sign}$${diffVal} (${distPct.toFixed(2)}%)`;
+                }
+
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    nearestIdx = item.index;
+                }
+            });
+
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('nearest-proximity'));
+            document.querySelectorAll('.proximity-badge').forEach(b => b.style.display = 'none');
+
+            if (nearestIdx !== -1) {
+                const nearestCard = document.getElementById(`card-btc-${nearestIdx}`);
+                const proxBadge = document.getElementById(`prox-badge-btc-${nearestIdx}`);
+                if (nearestCard) nearestCard.classList.add('nearest-proximity');
+                if (proxBadge) proxBadge.style.display = 'inline-block';
             }
         }
 
