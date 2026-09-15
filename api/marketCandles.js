@@ -62,7 +62,8 @@ export default async function handler(req, res) {
 
     // ── 1. NIFTY 50 CANDLES ────────────────────────────────────────────────
     if (symInput === "NIFTY" || symInput === "NIFTY50" || (instrument && instrument.includes("Nifty"))) {
-      const encInst = encodeURIComponent(instrument);
+      const resolvedInstrument = instrument || "NSE_INDEX|Nifty 50";
+      const encInst = encodeURIComponent(resolvedInstrument);
       const now = new Date();
       const todayIst = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
       const targetDate = queryDate || todayIst;
