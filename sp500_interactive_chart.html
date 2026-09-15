@@ -495,6 +495,9 @@
             <div class="timer-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
                 <span>🔄</span> Auto Refresh: <span id="refresh-timer">15s</span>
             </div>
+            <button id="btn-toggle-fit" class="btn" title="Toggle between zoomed-in candle focus and fitting all levels">
+                <span>🔍</span> <span id="fit-btn-text">Zoom Candles</span>
+            </button>
             <button id="btn-manual-refresh" class="btn">
                 <span>⚡</span> Refresh Data
             </button>
@@ -532,6 +535,7 @@
 
     <script>
         let alertsEnabled = false;
+        let fitAllLevels = false; // Default: FALSE = Zoom in on visible candles!
         let activePriceLines = [];
         let levelsData = [];
         let candleSeries = null;
@@ -568,6 +572,24 @@
         function setupEventListeners() {
             const toggleBtn = document.getElementById('btn-toggle-alerts');
             const refreshBtn = document.getElementById('btn-manual-refresh');
+            const fitBtn = document.getElementById('btn-toggle-fit');
+
+            if (fitBtn) {
+                fitBtn.addEventListener('click', () => {
+                    fitAllLevels = !fitAllLevels;
+                    const fitText = document.getElementById('fit-btn-text');
+                    if (fitAllLevels) {
+                        fitBtn.classList.add('active');
+                        if (fitText) fitText.innerText = 'Fit All Levels';
+                        showToast("Mode: Fit All Levels", "Chart Y-axis expanded to show all distant level lines.");
+                    } else {
+                        fitBtn.classList.remove('active');
+                        if (fitText) fitText.innerText = 'Zoom Candles';
+                        showToast("Mode: Zoom Candles", "Chart Y-axis focused on visible candle price action.");
+                    }
+                    reloadChartData(true);
+                });
+            }
 
             toggleBtn.addEventListener('click', () => {
                 alertsEnabled = !alertsEnabled;
@@ -846,11 +868,11 @@
                 updateProximityAndAutoSelect(latestSpot);
             }
 
-            // ✅ Autoscale Y-Axis to include ALL Action Plan Level lines alongside candles
+            // ✅ Autoscale Y-Axis: zoomed-in on candles by default, expands only if fitAllLevels is true
             candleSeries.applyOptions({
                 autoscaleInfoProvider: (original) => {
                     const res = original();
-                    if (!res || !res.priceRange) return res;
+                    if (!fitAllLevels || !res || !res.priceRange) return res;
 
                     let min = res.priceRange.minValue;
                     let max = res.priceRange.maxValue;
