@@ -1,13 +1,90 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-09-15T14:37:18+05:30",
-    "timeDisplay": "02:37 PM, Sep 15",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
     "price": "4268.00-4272.00",
     "bias": "bullish",
-    "behavior": "[TUE 14:37] [G_B1]: 4H Demand Sweep Recovery & SFP Spring Reclaim",
-    "tp": "4278.00 / 4288.00",
-    "sl": "4258.00",
+    "behavior": "[TUE 18:03] [G_B1]: 5M Demand Shelf Pullback & Absorption Reclaim",
+    "tp": "4282.00 / 4292.00",
+    "sl": "4264.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "price": "4282.00",
+    "bias": "bullish",
+    "behavior": "[TUE 18:03] [G_B2]: 15M FVG Clearance & Bullish Momentum Expansion",
+    "tp": "4295.00 / 4308.00",
+    "sl": "4275.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "price": "4274.00-4280.00",
+    "bias": "neutral",
+    "behavior": "[TUE 18:03] Chop: [Chop] Pre-NY Data Inflection & Supply-Demand Compression",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "price": "4280.00-4286.00",
+    "bias": "bearish",
+    "behavior": "[TUE 18:03] [G_S1]: 15M Bearish FVG & Breaker Shelf Rejection",
+    "tp": "4268.00 / 4260.00",
+    "sl": "4290.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "price": "4272.00",
+    "bias": "bearish",
+    "behavior": "[TUE 18:03] [G_S2]: Local Shelf Failure & Session Low Retest Breakdown",
+    "tp": "4262.00 / 4252.00",
+    "sl": "4278.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "price": "4300.00-4308.00",
+    "bias": "bearish",
+    "behavior": "[TUE 18:03] [G_S1]: Psychological Round Number & Major Imbalance Supply",
+    "tp": "4285.00 / 4272.00",
+    "sl": "4314.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "price": "4260.00-4265.00",
+    "bias": "bullish",
+    "behavior": "[TUE 18:03] [G_B1]: 4H Institutional Demand Block & Session Sweep Lows",
+    "tp": "4278.00 / 4290.00",
+    "sl": "4254.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T18:03:04+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "price": "4358.20",
+    "bias": "bullish",
+    "behavior": "[TUE 18:03] [G_B2]: Day High External Liquidity Target",
+    "tp": "4370.00 / 4385.00",
+    "sl": "4346.00",
     "status": "na"
   },
   {
@@ -58,33 +135,11 @@ window.goldDailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-15T14:37:18+05:30",
     "timeDisplay": "02:37 PM, Sep 15",
-    "price": "4300.00-4308.00",
-    "bias": "bearish",
-    "behavior": "[TUE 14:37] [G_S1]: Psychological Round Number & Major Imbalance Supply",
-    "tp": "4282.00 / 4270.00",
-    "sl": "4315.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-15T14:37:18+05:30",
-    "timeDisplay": "02:37 PM, Sep 15",
     "price": "4248.00-4252.00",
     "bias": "bullish",
     "behavior": "[TUE 14:37] [G_B1]: Macro Unmitigated Daily FVG Demand Base",
     "tp": "4268.00 / 4280.00",
     "sl": "4240.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-15T14:37:18+05:30",
-    "timeDisplay": "02:37 PM, Sep 15",
-    "price": "4358.20",
-    "bias": "bullish",
-    "behavior": "[TUE 14:37] [G_B2]: Day High External Liquidity Target",
-    "tp": "4372.00 / 4385.00",
-    "sl": "4346.00",
     "status": "na"
   },
   {
@@ -124,33 +179,11 @@ window.goldDailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-15T13:42:27+05:30",
     "timeDisplay": "01:42 PM, Sep 15",
-    "price": "4272.00",
-    "bias": "bearish",
-    "behavior": "[TUE 13:42] [G_S2]: Local Demand Floor Failure & Liquidation Cascade",
-    "tp": "4262.00 / 4250.00",
-    "sl": "4280.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-15T13:42:27+05:30",
-    "timeDisplay": "01:42 PM, Sep 15",
     "price": "4320.60-4328.00",
     "bias": "bearish",
     "behavior": "[TUE 13:42] [G_S1]: Broken Asian Low 1H Breaker & Primary Supply Ceiling",
     "tp": "4304.00 / 4290.00",
     "sl": "4335.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-15T13:42:27+05:30",
-    "timeDisplay": "01:42 PM, Sep 15",
-    "price": "4260.00-4265.00",
-    "bias": "bullish",
-    "behavior": "[TUE 13:42] [G_B1]: 4H Macro Institutional Demand Block Base",
-    "tp": "4280.00 / 4296.00",
-    "sl": "4252.00",
     "status": "na"
   },
   {
@@ -333,6 +366,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20260915_180306",
+    "timestamp": "2026-09-15T18:03:06+05:30",
+    "timeDisplay": "06:03 PM, Sep 15",
+    "spot": "4277.61",
+    "trigger": "Scheduled 06:00 PM Update (New York Pre-Market & US Data",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (06:00 PM IST - Sep 15, 2026 | Spot: 4277.61 | Trigger: Scheduled 06:00 PM Update (New York Pre-Market & US Data))\n\n---\n\n### 1. Global Macro & Forex Mechanics:\n* **London / New York Session Overlap Transition**: Spot Gold trades at **$4,277.61**, consolidating following a resilient intraday recovery from the European session demand sweep lows ($4,260.00–$4,265.00). Institutional books in London are transitioning order flow to incoming New York pre-market dealing desks ahead of high-impact US macro data releases and the Wall Street cash equity open. Price action reflects commercial absorption of early European liquidation, shifting immediate focus to whether New York liquidity drivers will validate an institutional short-covering expansion or initiate a secondary distribution wave from overhead Fair Value Gaps.\n* **US Dollar Index (DXY) Correlation**: The US Dollar Index (DXY) is testing intraday resistance around 102.20–102.35 after paring morning gains. A confirmed pre-market rollover in DXY back below 102.05 serves as the vital macro catalyst required to fuel an impulsive short squeeze in XAU/USD through $4,285.00. Conversely, if DXY breaks above 102.40 on hawkish macro prints, Gold will face aggressive headwinds and a potential rotation back toward lower liquidity pockets.\n* **US 10-Year Treasury Yields**: The benchmark US 10-Year Treasury yield is hovering near 4.44%–4.47%, coiling in a narrow range. Steady yields in pre-market trade have created a neutral macro backdrop, leaving bullion price discovery heavily tethered to intermarket order flow and liquidity imbalances.\n* **Forex Order Flow & Session Stop Cascades**: The afternoon bounce from $4,262.65 swept through early trapped shorts, bringing spot directly into the underside of the London acceleration breakdown base ($4,278.00–$4,284.00). New York pre-market liquidity is actively positioning on both sides of this shelf, with retail stop-orders tightly clustered above $4,282.00 and beneath $4,272.00.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Market Structure & Range Location**: On higher timeframes (1H/4H), Gold is digesting the pullback from the Day High ($4,358.20), holding critical structural bids above the 4H Institutional Demand Block ($4,260.00–$4,265.00). Lower timeframes (5M/15M) have printed a local Change of Character (CHoCH) attempt, pushing price into the lower boundary of an unmitigated 15M Bearish Fair Value Gap ($4,278.00–$4,286.00).\n* **Buy-Side Liquidity (BSL) Pools**:\n  - **$4,282.00 – $4,288.00**: 15M Bearish Breaker Block and primary supply hurdle from the London session acceleration shelf.\n  - **$4,300.00 – $4,308.00**: Major institutional round number, psychological threshold, and unmitigated 1H liquidity imbalance.\n  - **$4,320.00 – $4,328.00**: Broken Asian session range low and significant higher timeframe supply ceiling.\n  - **$4,358.20**: External Buy-Side Liquidity resting directly above the Day High.\n* **Sell-Side Liquidity (SSL) Pools**:\n  - **$4,270.00 – $4,272.00**: Local 5M higher-low shelf established during the afternoon European bounce.\n  - **$4,260.00 – $4,265.00**: 4H Bullish Institutional Demand Block and European session sweep low ($4,262.65).\n  - **$4,248.00 – $4,252.00**: Unmitigated Daily FVG and discount swing liquidity pool.\n  - **$4,235.00 – $4,240.00**: Macro structural demand base should lower liquidity shelves fail.\n* **Fair Value Gaps (FVG) & Key Order Blocks**:\n  - **15M Bearish FVG / Breaker ($4,278.00 – $4,286.00)**: Immediate premium liquidity imbalance currently capping spot at $4,277.61.\n  - **5M Bullish FVG ($4,270.00 – $4,273.50)**: Formed during the impulsive European recovery, serving as immediate dynamic support.\n  - **4H Institutional Demand Block ($4,260.00 – $4,265.00)**: Proven commercial absorption floor that defended the European sell-off.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Designated Chop Zone: $4,274.00 – $4,280.00 (Width: $6.00 around Spot $4,277.61)**\n* **Structural Rationale**: Spot is compressing inside the immediate inflection pocket between local intraday recovery momentum and the overhead 15M Bearish FVG. With the New York opening bell and incoming US economic releases imminent, market makers are actively oscillating price between $4,274 and $4,280 to build two-way book liquidity, creating high slippage, wick whipsaws, and false breakouts.\n* **Tactical Directive**: **STRICT NO-TRADE ZONE**. Do not enter market positions inside $4,274.00–$4,280.00. Wait for a confirmed 5M candle close above $4,282.00 (confirming supply absorption and expansion) or an impulsive 5M breakdown close below $4,272.00 (confirming rejection at the FVG ceiling).\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* 🚀 **Bullish FVG Clearance & Short Squeeze ($4,282.00 Reclaim)**: A decisive 5M candle close above $4,282.00 with expanding positive volume delta triggers an institutional short-covering acceleration into the 15M breaker gap, targeting $4,292.00 and $4,300.00.\n* ⚡ **Change of Character (CHoCH) Expansion ($4,300.00 Breakout)**: An impulsive 15M close clearing the $4,300.00 psychological barrier dismantles the intraday bearish structure, unlocking rapid momentum expansion toward $4,312.00 and $4,325.00.\n* 💥 **Bearish Breaker Rejection & Shelf Breakdown ($4,272.00 Breakdown)**: An impulsive 5M candle close below $4,272.00 confirms that the bounce into $4,278 was merely a corrective liquidity grab, precipitating a swift liquidation cascade back toward $4,262.00 and $4,252.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **Long (5M Demand Shelf Pullback & Absorption Reclaim)** | **$4,268.00 – $4,272.00** Pullback | Corrective dip into $4,268–$4,272 prints bottom wick exhaustion, followed by a 5M bullish close back above $4,273.50 with expanding buying delta | **TP1:** $4,282.00<br>**TP2:** $4,292.00<br>**TP3:** $4,304.00 | **$4,264.00** (Below demand base) | 1:1.1 / 1:2.4 / 1:3.8 |\n| **[G_B2]** | 🟢 **Long (Momentum Breakout above 15M FVG & Breaker Block)** | **$4,282.00** Breakout | Impulsive 5M/15M candle close firmly above $4,282.00 with surging positive volume, confirming acceptance above the London supply shelf | **TP1:** $4,295.00<br>**TP2:** $4,308.00<br>**TP3:** $4,322.00 | **$4,275.00** (Below breakout base) | 1:1.9 / 1:3.7 / 1:5.7 |\n| **[G_S1]** | 🔴 **Short (15M Bearish FVG & Breaker Shelf Rejection)** | **$4,280.00 – $4,286.00** Rejection | Price tests the 15M FVG ($4,280–$4,286), prints upper exhaustion wicks, and confirms a 5M close back below $4,276.00 with expanding sell volume | **TP1:** $4,268.00<br>**TP2:** $4,260.00<br>**TP3:** $4,248.00 | **$4,290.00** (Above supply cluster) | 1:1.2 / 1:2.3 / 1:4.0 |\n| **[G_S2]** | 🔴 **Short (Local Shelf Failure & Session Low Retest Breakdown)** | **$4,272.00** Breakdown | Impulsive 5M candle close firmly below $4,272.00 with surging red volume, confirming structural failure of the afternoon demand shelf | **TP1:** $4,262.00<br>**TP2:** $4,252.00<br>**TP3:** $4,240.00 | **$4,278.00** (Above breakdown retest shelf) | 1:1.7 / 1:3.3 / 1:5.3 |\n\n---"
+  },
+  {
     "id": "GOLD_20260915_143719",
     "timestamp": "2026-09-15T14:37:19+05:30",
     "timeDisplay": "02:37 PM, Sep 15",
