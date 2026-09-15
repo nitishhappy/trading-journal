@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-15T10:33:35+05:30",
+    "timeDisplay": "10:33 AM, Sep 15",
+    "price": "23390",
+    "bias": "bullish",
+    "behavior": "[TUE 10:33] [B1]: Liquidity probe sweeping below Day Low (23,357.95) rejected with lower absorption wick and 5m close back ABOVE 23,390",
+    "tp": "23,445 / 23,485",
+    "sl": "23,345",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T10:33:35+05:30",
+    "timeDisplay": "10:33 AM, Sep 15",
+    "price": "23415",
+    "bias": "bullish",
+    "behavior": "[TUE 10:33] [B2]: Sustained 5m close ABOVE 23,415 with active futures volume confirming absorption of 23,400 Call wall",
+    "tp": "23,465 / 23,505",
+    "sl": "23,375",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T10:33:35+05:30",
+    "timeDisplay": "10:33 AM, Sep 15",
+    "price": "23390",
+    "bias": "bearish",
+    "behavior": "[TUE 10:33] [S1]: Corrective relief bounce into 23,390-23,400 rejected with upper exhaustion wick and 5m close back BELOW 23,390",
+    "tp": "23,340 / 23,300",
+    "sl": "23,425",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T10:33:35+05:30",
+    "timeDisplay": "10:33 AM, Sep 15",
+    "price": "23340",
+    "bias": "bearish",
+    "behavior": "[TUE 10:33] [S2]: Sustained 5m close BELOW 23,340 with active red futures volume confirming breakdown through 23,350 demand floor",
+    "tp": "23,290 / 23,250",
+    "sl": "23,380",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-15T10:17:01+05:30",
     "timeDisplay": "10:17 AM, Sep 15",
     "price": "23395",
@@ -157,6 +201,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260915_103337",
+    "timestamp": "2026-09-15T10:33:37+05:30",
+    "timeDisplay": "10:33 AM, Sep 15",
+    "spot": "23357.95",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (10:30 AM IST - Sep 15, 2026 | Spot: 23357.95 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,345.00 – 23,385.00 (40-point Session Low & 23,350/23,400 Straddle Transition Corridor).\n- Rationale: NIFTY Spot (23,357.95) has continued its structural intraday decline from the Day High (23,592.85), breaking cleanly below the 15M ORB Low (23,452.05) and probing beneath the earlier morning swing base (23,361.10) to test 23,357.95. Price action is currently consolidating right above the 23,350 strike equilibrium. On this Tuesday (FinNifty Expiry), aggressive cross-index gamma hedging and option open interest shifts are enforcing tight straddle pinning. Call writers have heavily expanded their positioning across 23,400 CE (+24.8M contracts added today) and 23,450 CE (+28.1M contracts added), forming a massive overhead supply ceiling that resists any sudden upward move. Meanwhile, Put writers are fighting to defend the 23,350 PE (+11.2M contracts added) and 23,300 PE (+15.6M contracts added) strike zones, creating a compressed volatility clamp. Active Nifty Futures volume remains baseline at 1.0x (8-bar average), indicating that institutional participants are actively allowing Tuesday theta bleed to erode ATM options inside this corridor. Chasing entries between 23,345 and 23,385 carries severe whip-saw risk and negative expectancy.\n- Directive: STRICT NO-TRADE ZONE for naked option buying. Do NOT buy dips or chase breakdowns inside 23,345–23,385. Stand aside until a definitive liquidity sweep forms below 23,350 or a decisive 5-minute candle closes outside the boundary accompanied by expanding futures volume.\n\n4. High Momentum / Explosive Zones:\n- [Upside Short-Covering Squeeze] ([Sustained 5m close ABOVE 23,400 Spot]): Decisively reclaims the broken 23,400 strike shelf and forces aggressive intraday Call writer covering, triggering an accelerated short-covering squeeze toward 23,445.00 and 23,485.00.\n- [Downside Long-Liquidation Cascade] ([Sustained 5m close BELOW 23,340 Spot]): Decisively breaches the 23,350 Put writer defense floor and sweeps sell-side liquidity, triggering panic unwinding across 23,350/23,400 Put positions and unlocking a swift long-liquidation cascade targeting 23,290.00 and 23,250.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Demand Floor SSL Sweep Reversal Long - SFP): Liquidity probe sweeping below Day Low (23,357.95) into the 23,345–23,355 demand shelf rejected with a sharp lower absorption wick, followed by a confirmed 5m candle close back ABOVE 23,390 with expanding green futures volume confirming trapped sellers. | TP: 23,445 / 23,485 | SL: 23,345 | 💡 Buy 23,400 CE + Sell 23,450 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Chop Range Reclaim Short-Covering Breakout Long): Sustained 5m candle close ABOVE 23,415 accompanied by expanding active Nifty Futures volume (>1.2x avg) confirming institutional absorption of the 23,400 Call supply wall. | TP: 23,465 / 23,505 | SL: 23,375 | 💡 Buy 23,400 CE + Sell 23,450 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Broken Shelf Re-test Rejection Fade Short): Corrective relief bounce into the 23,390–23,400 supply ceiling (broken support turned resistance) rejected with an upper exhaustion wick, followed by a confirmed 5m candle close back BELOW 23,390. | TP: 23,340 / 23,300 | SL: 23,425 | 💡 Buy 23,400 PE + Sell 23,350 PE (Next Wk) | R:R: ~1.43 | Risk: ~8.5% | TP1: +16.0% | TP2: +32.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m candle close BELOW 23,340 accompanied by expanding red futures volume, confirming true institutional breakdown through the 23,350 demand floor to unlock liquidation cascade toward macro demand. | TP: 23,290 / 23,250 | SL: 23,380 | 💡 Buy 23,350 PE + Sell 23,300 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20260915_101705",
     "timestamp": "2026-09-15T10:17:05+05:30",
     "timeDisplay": "10:17 AM, Sep 15",
