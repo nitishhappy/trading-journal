@@ -648,6 +648,7 @@
                     borderColor: 'rgba(247, 147, 26, 0.2)',
                     timeVisible: true,
                     secondsVisible: false,
+                    rightOffset: 8,
                     tickMarkFormatter: (time) => {
                         const date = new Date(time * 1000);
                         const h = date.getUTCHours().toString().padStart(2, '0');
@@ -791,7 +792,7 @@
                     });
                 }
                 if (!targetCandleTime && raisedTimeStr) {
-                    const planSec = parseISTTimeToUnix(raisedTimeStr);
+                    const planSec = parseISTTimeToUnix(raisedTimeStr) ? parseISTTimeToUnix(raisedTimeStr) + IST_OFFSET_SEC : null;
                     if (planSec) {
                         let minDiff = Infinity;
                         candles.forEach(c => {
@@ -851,7 +852,7 @@
                         lineWidth: lineWidth,
                         lineStyle: lineStyle,
                         axisLabelVisible: true,
-                        title: `${tag} $${lvl.price}`,
+                        title: `${tag}`,
                     });
 
                     activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx });
@@ -945,8 +946,8 @@
                     if (candles && candles.length > 0) {
                         const totalBars = candles.length;
                         chartInstance.timeScale().setVisibleLogicalRange({
-                            from: Math.max(0, totalBars - 55),
-                            to: totalBars + 3
+                            from: Math.max(0, totalBars - 30),
+                            to: totalBars + 8
                         });
                     } else {
                         chartInstance.timeScale().fitContent();
