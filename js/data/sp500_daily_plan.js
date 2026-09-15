@@ -1,6 +1,61 @@
 window.sp500DailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-15T22:11:58+05:30",
+    "timeDisplay": "10:11 PM, Sep 15",
+    "price": "7619.98",
+    "bias": "neutral",
+    "behavior": "[TUE 22:11] Bias Score: -1.0 / +6.0: Confidence: Neutral (Chop)\n\u2022 Bias Invalidation Floor: 7619.98 (A 15M close above 7619.98 invalidates bias)\n\n\ud83d\udccd Tactical Directives:\n\u2022 Primary Outlook: Rotational Range Chop. S&P 500 is consolidating within 50% equilibrium.\n\u2022 Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian/London High/Low boundaries.\n\nS&P 500 Spot: 7587.07 (10:10 PM IST - Sep 15, 2026) Trigger: US Market Watchdog\n\n1. Market Structure & Macro Synthesis:\n- S&P 500 Spot (^GSPC) is trading at 7587.07 (ES Futures: 7656.75",
+    "tp": "NQ Futures: 29280.0).\n- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7583.52",
+    "sl": "48H Swing Range: 7572.69 \u2013 7594.34).\n- Intermarket Drivers: VIX at 17.52 (Moderate Volatility (Balanced))",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T22:11:58+05:30",
+    "timeDisplay": "10:11 PM, Sep 15",
+    "price": "10",
+    "bias": "bullish",
+    "behavior": "[TUE 22:11] [Chop]: Setup ID",
+    "tp": "Strategy / Bias",
+    "sl": "Trigger Level",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T22:11:58+05:30",
+    "timeDisplay": "10:11 PM, Sep 15",
+    "price": "1",
+    "bias": "neutral",
+    "behavior": "[TUE 22:11] Sweep below 7555.07 rejected with lower wick, followed by 5m close back ABOVE 7560.07: **TP1:** 7602.07<br>**TP2:** 7619.07",
+    "tp": "**7545.07**",
+    "sl": "1:2.5",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T22:11:58+05:30",
+    "timeDisplay": "10:11 PM, Sep 15",
+    "price": "2",
+    "bias": "neutral",
+    "behavior": "[TUE 22:11] [SP_B2]: \ud83d\udfe2 **Long (High-Momentum Breakout)**",
+    "tp": "**7602.07** Breakout",
+    "sl": "Sustained 5m/15m candle close ABOVE 7602.07 with volume confirmation",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-15T22:11:58+05:30",
+    "timeDisplay": "10:11 PM, Sep 15",
+    "price": "7619.07",
+    "bias": "neutral",
+    "behavior": "[TUE 22:11] **7619.07** Rejection: Rejection at 7619.07 with upper wick, closing 5m candle back BELOW 7614.07",
+    "tp": "**TP1:** 7602.07<br>**TP2:** 7572.07",
+    "sl": "**7629.07**",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-15T20:42:40+05:30",
     "timeDisplay": "08:42 PM, Sep 15",
     "price": "5420.00-5429.00",
@@ -190,6 +245,15 @@ window.sp500DailyPlanData = [
 
 window.sp500DailyPlanSummary = [
 {
+    "id": "SP500_20260915_221201",
+    "timestamp": "2026-09-15T22:12:01+05:30",
+    "timeDisplay": "10:12 PM, Sep 15",
+    "spot": "7587.07",
+    "trigger": "US Market Watchdog",
+    "source": "SP500-AI",
+    "text": "# S&P 500 (^GSPC) Pure AI Tactical Briefing\n\n```markdown\n================================================================================\n🎯 S&P 500 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: -1.0 / +6.0 | Confidence: Neutral (Chop)\n• Bias Invalidation Floor: 7619.98 (A 15M close above 7619.98 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. S&P 500 is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades at Asian/London High/Low boundaries.\n\nS&P 500 Spot: 7587.07 (10:10 PM IST - Sep 15, 2026) Trigger: US Market Watchdog\n\n1. Market Structure & Macro Synthesis:\n- S&P 500 Spot (^GSPC) is trading at 7587.07 (ES Futures: 7656.75 | NQ Futures: 29280.0).\n- Market Structure: Operating in Premium Zone (Look for Shorts) (Equilibrium: 7583.52 | 48H Swing Range: 7572.69 – 7594.34).\n- Intermarket Drivers: VIX at 17.52 (Moderate Volatility (Balanced)) | DXY at 99.64 (Macro Headwind (Bearish for Equities)) | 10Y Yield at 5.0%.\n- US Macro News Guard: ⚠️ MARKET NEWS: Stock market today: Dow, S&P 500, Nasdaq fall after 10-year Treasury yield rises\n\n2. SMC & Session Liquidity Confluence:\n- Buy-Side Liquidity (BSL): Clustered above PDH (7594.34), Asian High (7607.07), and London High (7612.07).\n- Sell-Side Liquidity (SSL): Concentrated below PDL (7572.69), Asian Low (7567.07), and London Low (7562.07).\n- Active FVGs / OBs: 0 Active FVG(s) & 0 Order Block(s) identified in immediate proximity.\n- Session Sweep Status: Inside Prior Session Range\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 7579.07 – 7595.07 Index Points.\n- Context: Price is consolidating near local equilibrium. Avoid taking unconfirmed entries inside this 16.0-point compression box.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Squeeze (> 7602.07): Sustained 5m close above 7602.07 clears local supply, targeting 7619.07 and 7642.07.\n- Downside Long-Liquidation Cascade (< 7572.07): Sustained 5m close below 7572.07 triggers stop cascades accelerating toward 7555.07 and 7532.07.\n\n5. 5-Min / 15-Min Action Plan & Index Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | 🟢 **Long (Demand Floor SSL Sweep)** | **7560.07** Reclaim | Sweep below 7555.07 rejected with lower wick, followed by 5m close back ABOVE 7560.07 | **TP1:** 7602.07<br>**TP2:** 7619.07 | **7545.07** | 1:2.5 |\n| **[SP_B2]** | 🟢 **Long (High-Momentum Breakout)** | **7602.07** Breakout | Sustained 5m/15m candle close ABOVE 7602.07 with volume confirmation | **TP1:** 7619.07<br>**TP2:** 7642.07 | **7592.07** | 1:3.0 |\n| **[SP_S1]** | 🔴 **Short (Supply OB / PDH Rejection)** | **7619.07** Rejection | Rejection at 7619.07 with upper wick, closing 5m candle back BELOW 7614.07 | **TP1:** 7602.07<br>**TP2:** 7572.07 | **7629.07** | 1:2.5 |\n| **[SP_S2]** | 🔴 **Short (Demand Floor Breakdown)** | **7572.07** Breakdown | Sustained 5m close BELOW 7572.07 with institutional sell displacement | **TP1:** 7555.07<br>**TP2:** 7532.07 | **7582.07** | 1:3.0 |\n```"
+  },
+  {
     "id": "SP500_20260915_204248",
     "timestamp": "2026-09-15T20:42:48+05:30",
     "timeDisplay": "08:42 PM, Sep 15",
