@@ -1197,15 +1197,19 @@
         }
 
         async function loadRealSp500Candles() {
+            const cutoffSec = Math.floor(Date.now() / 1000) - (24 * 3600);
+            const filterFresh = (arr) => (arr || []).filter(c => c && c.time && c.time >= cutoffSec);
+
             // 1. Server-side /api/sp500Ohlc or /api/sp500Candles
             try {
                 const res = await fetch(`/api/sp500Ohlc?token=4cfccc84fdff579e101d06092e62a3a0&timeframe=5m&limit=300&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
-                    if (json && json.candles && json.candles.length > 0) {
-                        const latestTs = json.candles[json.candles.length - 1].time;
+                    const candles = filterFresh(json?.candles);
+                    if (candles.length > 0) {
+                        const latestTs = candles[candles.length - 1].time;
                         const ageMin = (Math.floor(Date.now() / 1000) - latestTs) / 60;
-                        if (ageMin <= 45) return json.candles;
+                        if (ageMin <= 45) return candles;
                     }
                 }
             } catch (e) {
@@ -1217,8 +1221,9 @@
                 const res = await fetch(`/api/marketCandles?symbol=SP500&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
-                    if (json && json.candles && json.candles.length > 0) {
-                        return json.candles;
+                    const candles = filterFresh(json?.candles);
+                    if (candles.length > 0) {
+                        return candles;
                     }
                 }
             } catch (e) {
@@ -1246,7 +1251,8 @@
                                 });
                             }
                         }
-                        if (candles.length > 0) return candles;
+                        const fresh = filterFresh(candles);
+                        if (fresh.length > 0) return fresh;
                     }
                 }
             } catch (e) {

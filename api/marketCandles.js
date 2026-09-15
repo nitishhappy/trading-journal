@@ -257,17 +257,20 @@ export default async function handler(req, res) {
             .where("timeframe", "==", normTf)
             .get();
 
+          const cutoffSec = Math.floor(Date.now() / 1000) - (24 * 3600);
           const rawCandles = [];
           snapshot.forEach(doc => {
             const data = doc.data();
-            rawCandles.push({
-              time: data.timestamp,
-              open: data.open,
-              high: data.high,
-              low: data.low,
-              close: data.close,
-              volume: data.volume || 0
-            });
+            if (data.timestamp >= cutoffSec) {
+              rawCandles.push({
+                time: data.timestamp,
+                open: data.open,
+                high: data.high,
+                low: data.low,
+                close: data.close,
+                volume: data.volume || 0
+              });
+            }
           });
 
           rawCandles.sort((a, b) => b.time - a.time);
