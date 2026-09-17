@@ -1,44 +1,44 @@
 window.dailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-09-16T23:20:47+05:30",
-    "timeDisplay": "11:20 PM, Sep 16",
+    "timestamp": "2026-09-17T07:51:41+05:30",
+    "timeDisplay": "07:51 AM, Sep 17",
     "price": "23288",
     "bias": "bullish",
-    "behavior": "[WED 23:20] [B2]: Sustained 5m close ABOVE 23,288 with active futures volume confirming absorption of Day High (23,284.75) and Call stops",
+    "behavior": "[THU 07:51] [B2]: Sustained 5m close ABOVE 23,288 with active futures volume confirming absorption of Day High (23,284.75) and Call stops",
     "tp": "23,345 / 23,400",
     "sl": "23,240",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-16T23:20:47+05:30",
-    "timeDisplay": "11:20 PM, Sep 16",
+    "timestamp": "2026-09-17T07:51:41+05:30",
+    "timeDisplay": "07:51 AM, Sep 17",
     "price": "23285",
     "bias": "bearish",
-    "behavior": "[WED 23:20] [S1]: Day High / 15M ORB High rejection zone; exhaustion wick or false breakout sweep on push into 23,280\u201323,288",
+    "behavior": "[THU 07:51] [S1]: Day High / 15M ORB High rejection zone; exhaustion wick or false breakout sweep on push into 23,280\u201323,288",
     "tp": "23,190 / 23,140",
     "sl": "23,298",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-16T23:20:47+05:30",
-    "timeDisplay": "11:20 PM, Sep 16",
+    "timestamp": "2026-09-17T07:51:41+05:30",
+    "timeDisplay": "07:51 AM, Sep 17",
     "price": "23200",
     "bias": "bullish",
-    "behavior": "[WED 23:20] [B1]: Reclaimed 15M ORB Low and 23,200 base; support test and lower absorption wick on pullback into 23,190\u201323,205",
+    "behavior": "[THU 07:51] [B1]: Reclaimed 15M ORB Low and 23,200 base; support test and lower absorption wick on pullback into 23,190\u201323,205",
     "tp": "23,280 / 23,345",
     "sl": "23,170",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-16T23:20:47+05:30",
-    "timeDisplay": "11:20 PM, Sep 16",
+    "timestamp": "2026-09-17T07:51:41+05:30",
+    "timeDisplay": "07:51 AM, Sep 17",
     "price": "23180",
     "bias": "bearish",
-    "behavior": "[WED 23:20] [S2]: 15M ORB Low re-breakdown trigger; sustained 5m close BELOW 23,180 triggers trapped long unwinding cascade toward Day Low",
+    "behavior": "[THU 07:51] [S2]: 15M ORB Low re-breakdown trigger; sustained 5m close BELOW 23,180 triggers trapped long unwinding cascade toward Day Low",
     "tp": "23,116 / 23,050",
     "sl": "23,225",
     "status": "na"
@@ -124,6 +124,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260917_075148",
+    "timestamp": "2026-09-17T07:51:48+05:30",
+    "timeDisplay": "07:51 AM, Sep 17",
+    "spot": "23257.3",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (07:50 AM IST - Sep 17, 2026 | Spot: 23257.3 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,220.00 – 23,270.00 (50-point Mid-Range Compression Corridor / Pre-Breakout Indecision Zone).\n- Rationale: Spot price (23,257.30) has recovered strongly from the morning low (23,116.10) and is currently oscillating within the upper quadrant of the 15M Opening Range (23,186.55 – 23,281.15), immediately beneath the Day High barrier (23,284.75). Active futures volume is balanced at 1.0x 8-bar average, reflecting two-way positioning and consolidation around the 23,250 straddle pivot. Directional option buying inside this 50-point band carries high decay risk and vulnerability to false wicks.\n- Directive: STRICT NO-TRADE ZONE for naked option buying. Avoid initiating trades within this corridor; wait for an explicit breakout close above Day High or a structured pullback test to support with confirming futures volume expansion.\n\n4. High Momentum / Explosive Zones:\n- [Upside Day High / Short-Covering Squeeze] ([Sustained 5m close ABOVE 23,288]): Triggers forced stop runs and short covering among 23,250–23,300 Call writers and breaks Day High (23,284.75) and 15M ORB High (23,281.15), unlocking rapid upside acceleration targeting 23,345 and 23,400.\n- [Downside Re-Breakdown / Liquidation Flush] ([Sustained 5m close BELOW 23,180]): Breaks back below the 15M ORB Low (23,186.55) and invalidates the 23,200 intraday support shelf, triggering trapped long unwinding and a fast slide targeting 23,116 (Day Low) and 23,050.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB Support Test Pullback Long): Orderly pullback into the 23,190–23,205 support band rejected with a lower absorption wick, followed by a confirmed 5m candle close back ABOVE 23,220 with active futures volume confirming dip-buying defense. | TP: 23,280 / 23,345 | SL: 23,170 | 💡 Buy 23,200 CE + Sell 23,250 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Squeeze Long): Sustained 5m candle close ABOVE 23,288 accompanied by expanding active Nifty Futures volume (>1.2x avg) confirming institutional absorption of Day High (23,284.75) and 15M ORB High (23,281.15) with Call writer stops triggered. | TP: 23,345 / 23,400 | SL: 23,240 | 💡 Buy 23,250 CE + Sell 23,300 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Supply Rejection Fade Short): Push into the 23,280–23,288 Day High resistance zone rejected with an upper exhaustion wick or false breakout sweep, followed by a confirmed 5m candle close back BELOW 23,245. | TP: 23,190 / 23,140 | SL: 23,298 | 💡 Buy 23,250 PE + Sell 23,200 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Low Breakdown Continuation Short): Sustained 5m candle close BELOW 23,180 accompanied by expanding red futures volume (>1.2x avg), confirming institutional breakdown back below 15M ORB Low (23,186.55) and long liquidation cascade. | TP: 23,116 / 23,050 | SL: 23,225 | 💡 Buy 23,200 PE + Sell 23,150 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20260916_232048",
     "timestamp": "2026-09-16T23:20:48+05:30",
     "timeDisplay": "11:20 PM, Sep 16",
