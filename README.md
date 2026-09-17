@@ -188,6 +188,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 - **Dynamic 15M Window & Range Memory**: Restructured all 4 asset watchdogs (BTC, Gold, S&P 500, NIFTY) to evaluate live spot / candle close against active mapped plan boundaries (`level_high` & `level_low`). Once a breach triggers an update, the new plan establishes expanded target boundaries, automatically silencing subsequent 15m watchdog scans while price trades within the updated range.
 - **Enforced Cooldown Security**: Ensured stateful level breach evaluation is strictly guarded under non-cooldown states across all watchdogs.
 
+### v2.3.33 — 17 Sep 2026 — Market Summary Header Sequence & Badge Streamlining
+- **Streamlined Card Header**: Removed redundant purple source badge (`AI INTRADAY BRIEFING`) from summary card headers in `levels.js`.
+- **Reordered Title Sequence**: Updated summary card header text sequence to `[Time, Date] : [Trigger Reason] : [Level / Spot]` (e.g. `03:46 PM ,Sep 17 : Scheduled 03:45 PM Update... : 23270.6`) across both `renderSummary()` and `formatCompactPaneHeader()` in `js/ui/levels.js`.
+
 ### v2.3.32 — 07 Sep 2026 — NIFTY Watchdog Market Session Guard & Incremental Structural Trigger Fix
 - **Indian Market Session Guard**: Implemented strict market session time filtering (`09:15 AM - 03:30 PM IST`, Mon-Fri) in `nifty_copilot.py` for live intraday trigger evaluation (OI Traps, SMC Liquidity Sweeps, Structural Invalidations, Volume Anomalies), completely preventing redundant post-market watchdog runs after market close (03:30 PM).
 - **Incremental Structural Invalidation Logic**: Upgraded the static `abs(spot - day_open) > 80` trigger into a dynamic, stateful incremental step trigger. The Watchdog now fires on the first >80 pt shift from Day Open, and only re-triggers if spot price shifts an additional 80+ points (+160 pt, +240 pt total shift) relative to the previously triggered briefing spot level.
