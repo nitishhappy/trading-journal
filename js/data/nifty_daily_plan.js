@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-17T15:16:45+05:30",
+    "timeDisplay": "03:16 PM, Sep 17",
+    "price": "23320",
+    "bias": "bullish",
+    "behavior": "[THU 15:16] [B2]: Sustained 5m close ABOVE 23,320 with active futures volume confirming absorption of overhead supply and triggering short covering toward Day High",
+    "tp": "23,365 / 23,410",
+    "sl": "23,280",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-17T15:16:45+05:30",
+    "timeDisplay": "03:16 PM, Sep 17",
+    "price": "23310",
+    "bias": "bearish",
+    "behavior": "[THU 15:16] [S1]: Push into 23,305\u201323,320 rejected with upper exhaustion wicks followed by confirmed 5m close back below 23,280",
+    "tp": "23,240 / 23,200",
+    "sl": "23,330",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-17T15:16:45+05:30",
+    "timeDisplay": "03:16 PM, Sep 17",
+    "price": "23270",
+    "bias": "bullish",
+    "behavior": "[THU 15:16] [B1]: Pullback test into 23,265\u201323,275 rejected with lower absorption wicks and confirmed 5m close back above 23,295",
+    "tp": "23,340 / 23,365",
+    "sl": "23,255",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-17T15:16:45+05:30",
+    "timeDisplay": "03:16 PM, Sep 17",
+    "price": "23265",
+    "bias": "bearish",
+    "behavior": "[THU 15:16] [S2]: Sustained 5m close BELOW 23,265 triggers long liquidation cascade back toward Day Low / 15M ORB Low (23,193.65)",
+    "tp": "23,210 / 23,195",
+    "sl": "23,300",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-17T15:01:36+05:30",
     "timeDisplay": "03:01 PM, Sep 17",
     "price": "23310",
@@ -179,17 +223,6 @@ window.dailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-17T12:16:34+05:30",
     "timeDisplay": "12:16 PM, Sep 17",
-    "price": "23320",
-    "bias": "bullish",
-    "behavior": "[THU 12:16] [B1]: Pullback test into 23,315\u201323,325 rejected with lower absorption wick and 5m close back above 23,335",
-    "tp": "23,380 / 23,425",
-    "sl": "23,290",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T12:16:34+05:30",
-    "timeDisplay": "12:16 PM, Sep 17",
     "price": "23315",
     "bias": "bearish",
     "behavior": "[THU 12:16] [S2]: Sustained 5m close BELOW 23,315 triggers long liquidation cascade back toward 15M ORB High (23,267.70) and Day Open",
@@ -217,17 +250,6 @@ window.dailyPlanData = [
     "behavior": "[THU 12:01] [B1]: Pullback test into 23,270\u201323,285 rejected with lower absorption wick and 5m close back above 23,305",
     "tp": "23,355 / 23,410",
     "sl": "23,255",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T12:01:58+05:30",
-    "timeDisplay": "12:01 PM, Sep 17",
-    "price": "23265",
-    "bias": "bearish",
-    "behavior": "[THU 12:01] [S2]: Sustained 5m close BELOW 23,265 triggers long liquidation back inside 15M ORB range (23,267.70) toward Day Open and Day Low",
-    "tp": "23,210 / 23,160",
-    "sl": "23,305",
     "status": "na"
   },
   {
@@ -355,6 +377,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260917_151648",
+    "timestamp": "2026-09-17T15:16:48+05:30",
+    "timeDisplay": "03:16 PM, Sep 17",
+    "spot": "23294.35",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 23195.25",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:15 PM IST - Sep 17, 2026 | Spot: 23294.35 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 23195.25))\n\n> ⚠️ THETA CRUSH DAY: India VIX is down -6.15%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,270.00 – 23,320.00 (50-point Settlement Compression Corridor / 3:15 PM Expiry Pinning Band).\n- Rationale: Spot index (23,294.35) is auctioning +99.10 points above Day Open (23,195.25), compressing just above the 15M ORB High shelf (23,267.70) while facing overhead resistance below the morning breakdown pivot at 23,320. Active Nifty Futures volume sits at 1.0x 8-bar baseline, reflecting balanced two-way absorption and gamma pinning between 23,300 Call sellers and 23,250 Put writers. With India VIX dropping -6.15% into the final 15 minutes of the weekly expiry session, directional option premium decay is at its steepest point.\n- Directive: STRICT NO-TRADE ZONE for naked option buying. Avoid initiating directional positions inside this 23,270–23,320 corridor; only act on a high-volume closing squeeze break above 23,320 or an aggressive breakdown back below 23,265 into 15M ORB territory with expanding futures volume (>1.2x avg).\n\n4. High Momentum / Explosive Zones:\n- [Closing Squeeze / Overhead Call Absorption] ([Sustained 5m close ABOVE 23,320]): Triggers forced covering across intraday 23,300 and 23,350 Call writers, unlocking a rapid upside surge toward Day High at 23,365 and extension target 23,410.\n- [Late Long Liquidation / ORB Shelf Breakdown] ([Sustained 5m close BELOW 23,265]): Decisively violates the 15M ORB High shelf (23,267.70), trapping morning breakout longs and triggering a fast liquidation flush targeting 23,210 and Day Low support at 23,193.65.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Shelf Retest & Dip Absorption Long): Pullback test into 23,265–23,275 (15M ORB High retest shelf) rejected with lower absorption wicks, followed by a confirmed 5m close back ABOVE 23,295 with active futures volume confirming buyer defense. | TP: 23,340 / 23,365 | SL: 23,255 | 💡 Buy 23,300 CE + Sell 23,350 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Supply Wall Breakout & Closing Squeeze Long): Sustained 5m close ABOVE 23,320 accompanied by expanding active Nifty Futures volume (>1.2x avg) confirming absorption of overhead Call writing and triggering short covering toward Day High. | TP: 23,365 / 23,410 | SL: 23,280 | 💡 Buy 23,300 CE + Sell 23,350 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Zone Exhaustion Rejection Fade Short): Push into 23,305–23,320 rejected with upper exhaustion wicks, followed by a confirmed 5m close back BELOW 23,280. | TP: 23,240 / 23,200 | SL: 23,330 | 💡 Buy 23,300 PE + Sell 23,250 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Shelf Breakdown & Liquidation Flush Short): Sustained 5m close BELOW 23,265 accompanied by expanding red futures volume (>1.2x avg), confirming failed breakout trap back inside the opening range and triggering rapid long liquidation cascade toward Day Low. | TP: 23,210 / 23,195 | SL: 23,300 | 💡 Buy 23,250 PE + Sell 23,200 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20260917_150138",
     "timestamp": "2026-09-17T15:01:38+05:30",
     "timeDisplay": "03:01 PM, Sep 17",
