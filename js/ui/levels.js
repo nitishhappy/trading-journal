@@ -508,13 +508,13 @@ if (viewLevels) {
         else if (textLower.includes('btc') || textLower.includes('bitcoin')) asset = 'BTC';
         else if (textLower.includes('s&p') || textLower.includes('sp500')) asset = 'S&P 500';
 
-        // Assemble compact pane header: "S&P 500 : 7677.99 : 09:21PM ,Aug 31 : 15m Watchdog"
-        const parts = [asset];
-        if (spot) parts.push(spot);
+        // Assemble compact pane header: "[Time, Date] : [Trigger Reason] : [Level / Spot]"
+        const parts = [];
         if (timeDate) parts.push(timeDate);
         if (trigger) parts.push(trigger);
+        if (spot) parts.push(spot);
 
-        if (parts.length > 1) {
+        if (parts.length > 0) {
             return parts.join(' : ');
         }
 
@@ -932,17 +932,11 @@ if (viewLevels) {
             const headerLeft = document.createElement('div');
             headerLeft.className = 'summary-item-header-left';
             
-            const badge = document.createElement('span');
-            badge.className = 'source-badge';
-            badge.innerText = item.source || 'UNK';
-            headerLeft.appendChild(badge);
-
             const rawText = item.text || '';
             const firstLine = rawText.split('\n')[0].replace(/:$/, '').trim();
             let compactPaneTitle = '';
             if (item.spot && item.timeDisplay && item.trigger) {
-                const assetLabel = (window.currentActiveAsset === 'SP500') ? 'S&P 500' : ((window.currentActiveAsset === 'BTC') ? 'BTC' : ((window.currentActiveAsset === 'GOLD') ? 'Gold' : 'Nifty'));
-                compactPaneTitle = `${assetLabel} : ${item.spot} : ${item.timeDisplay.replace(/\s*,\s*/, ' ,')} : ${item.trigger}`;
+                compactPaneTitle = `${item.timeDisplay.replace(/\s*,\s*/, ' ,')} : ${item.trigger} : ${item.spot}`;
             } else {
                 compactPaneTitle = formatCompactPaneHeader(firstLine, window.currentActiveAsset, rawText);
             }
