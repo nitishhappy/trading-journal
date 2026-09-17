@@ -498,6 +498,12 @@
             <button id="btn-toggle-fit" class="btn" title="Toggle between zoomed-in candle focus and fitting all levels">
                 <span>🔍</span> <span id="fit-btn-text">Zoom Candles</span>
             </button>
+            <button id="btn-toggle-vlines" class="btn active" title="Toggle AI Briefing & Custom Vertical Lines">
+                <span>📍</span> <span id="vlines-btn-text">Lines ON</span>
+            </button>
+            <button id="btn-add-vline" class="btn" title="Click chart to place a custom vertical line">
+                <span>➕</span> Add Line
+            </button>
             <button id="btn-manual-refresh" class="btn">
                 <span>⚡</span> Refresh Data
             </button>
@@ -516,7 +522,9 @@
                 </div>
                 <div class="timestamp-badge" id="briefing-time-badge">📌 Key Levels Raised: --</div>
             </div>
-            <div id="chart-wrapper"></div>
+            <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
+                <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+            </div>
         </div>
 
         <div class="levels-section">
@@ -536,6 +544,10 @@
     <script>
         let alertsEnabled = false;
         let fitAllLevels = false; // Default: FALSE = Zoom in on visible candles!
+        let showVLines = true;
+        let addVLineMode = false;
+        let userVLines = []; // array of unix timestamps
+        let aiBriefingTimes = []; // array of { time, label }
         let activePriceLines = [];
         let levelsData = [];
         let candleSeries = null;
@@ -573,6 +585,38 @@
             const toggleBtn = document.getElementById('btn-toggle-alerts');
             const refreshBtn = document.getElementById('btn-manual-refresh');
             const fitBtn = document.getElementById('btn-toggle-fit');
+            const vlinesBtn = document.getElementById('btn-toggle-vlines');
+            const addVLineBtn = document.getElementById('btn-add-vline');
+
+            if (vlinesBtn) {
+                vlinesBtn.addEventListener('click', () => {
+                    showVLines = !showVLines;
+                    const textEl = document.getElementById('vlines-btn-text');
+                    if (showVLines) {
+                        vlinesBtn.classList.add('active');
+                        if (textEl) textEl.innerText = 'Lines ON';
+                        showToast("Vertical Lines ON", "AI Briefing & Custom vertical lines visible.");
+                    } else {
+                        vlinesBtn.classList.remove('active');
+                        if (textEl) textEl.innerText = 'Lines OFF';
+                        showToast("Vertical Lines OFF", "Vertical markers hidden.");
+                    }
+                    renderVerticalLinesOverlay();
+                });
+            }
+
+            if (addVLineBtn) {
+                addVLineBtn.addEventListener('click', () => {
+                    addVLineMode = !addVLineMode;
+                    if (addVLineMode) {
+                        addVLineBtn.classList.add('active');
+                        showToast("📍 Placement Mode", "Click on any candle on the chart to drop a custom vertical line.");
+                    } else {
+                        addVLineBtn.classList.remove('active');
+                        showToast("Placement Mode Cancelled", "");
+                    }
+                });
+            }
 
             if (fitBtn) {
                 fitBtn.addEventListener('click', () => {
@@ -677,9 +721,26 @@
 
             reloadChartData();
 
-            // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction!
+            // Subscribe TimeScale changes to redraw vertical line overlay smoothly during pan & zoom
+            chartInstance.timeScale().subscribeVisibleTimeScaleChange(() => {
+                renderVerticalLinesOverlay();
+            });
+
+            // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction & Custom Vertical Line Placement!
             chartInstance.subscribeClick((param) => {
                 if (!param || !param.point) return;
+
+                if (addVLineMode) {
+                    if (param.time) {
+                        userVLines.push(param.time);
+                        addVLineMode = false;
+                        const addBtn = document.getElementById('btn-add-vline');
+                        if (addBtn) addBtn.classList.remove('active');
+                        showToast("📍 Vertical Line Placed", `Custom vertical line dropped at clicked timestamp.`);
+                        renderVerticalLinesOverlay();
+                    }
+                    return;
+                }
 
                 const clickedPrice = candleSeries.coordinateToPrice(param.point.y);
                 if (!clickedPrice) return;
@@ -710,6 +771,7 @@
                     const h = container.clientHeight;
                     if (w > 0 && h > 0) {
                         chartInstance.applyOptions({ width: w, height: h });
+                        renderVerticalLinesOverlay();
                     }
                 }
             };
@@ -920,6 +982,128 @@
                     isInitialLoad = false;
                 }
             }
+
+            // Update AI Briefing timestamps and redraw vertical line overlay
+            const rawPlanArray = (window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData)) ? window.sp500DailyPlanData : [];
+            aiBriefingTimes = extractAiBriefingTimes(rawPlanArray);
+            renderVerticalLinesOverlay();
+        }
+
+        function extractAiBriefingTimes(dataArray) {
+            if (!Array.isArray(dataArray)) return [];
+            const seen = new Set();
+            const result = [];
+            dataArray.forEach(item => {
+                if (!item) return;
+                const timeStr = item.timeDisplay || "";
+                const rawTs = item.timestamp || "";
+                let unixSec = null;
+                if (rawTs) {
+                    unixSec = Math.floor(new Date(rawTs).getTime() / 1000);
+                } else if (timeStr) {
+                    unixSec = parseISTTimeToUnix(timeStr);
+                }
+                if (unixSec && !seen.has(unixSec)) {
+                    seen.add(unixSec);
+                    const label = timeStr ? timeStr.split(',')[0].trim() : "Briefing";
+                    result.push({ time: unixSec, label: label });
+                }
+            });
+            return result;
+        }
+
+        function renderVerticalLinesOverlay() {
+            const canvas = document.getElementById('vlines-canvas');
+            if (!canvas || !chartInstance) return;
+
+            const wrapper = document.getElementById('chart-wrapper');
+            if (!wrapper) return;
+
+            if (canvas.width !== wrapper.clientWidth || canvas.height !== wrapper.clientHeight) {
+                canvas.width = wrapper.clientWidth;
+                canvas.height = wrapper.clientHeight;
+            }
+
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!showVLines) return;
+
+            const timeScale = chartInstance.timeScale();
+
+            // 1. Draw AI Briefing Vertical Lines (Dashed Purple Lines)
+            aiBriefingTimes.forEach(item => {
+                const x = timeScale.timeToCoordinate(item.time);
+                if (x !== null && x >= 0 && x <= canvas.width) {
+                    ctx.beginPath();
+                    ctx.setLineDash([5, 4]);
+                    ctx.strokeStyle = '#a855f7';
+                    ctx.lineWidth = 1.5;
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height - 25);
+                    ctx.stroke();
+
+                    ctx.setLineDash([]);
+                    ctx.fillStyle = 'rgba(168, 85, 247, 0.25)';
+                    ctx.strokeStyle = '#a855f7';
+                    ctx.lineWidth = 1;
+                    const label = `📌 ${item.label}`;
+                    ctx.font = '600 11px Inter, sans-serif';
+                    const textWidth = ctx.measureText(label).width;
+                    const badgeW = textWidth + 12;
+                    const badgeH = 20;
+                    const badgeX = Math.max(2, Math.min(canvas.width - badgeW - 2, x - badgeW / 2));
+
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(badgeX, 4, badgeW, badgeH, 4);
+                    } else {
+                        ctx.rect(badgeX, 4, badgeW, badgeH);
+                    }
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#e9d5ff';
+                    ctx.fillText(label, badgeX + 6, 18);
+                }
+            });
+
+            // 2. Draw User Custom Vertical Lines (Dashed Amber Lines)
+            userVLines.forEach((time, idx) => {
+                const x = timeScale.timeToCoordinate(time);
+                if (x !== null && x >= 0 && x <= canvas.width) {
+                    ctx.beginPath();
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.lineWidth = 1.5;
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height - 25);
+                    ctx.stroke();
+
+                    ctx.setLineDash([]);
+                    ctx.fillStyle = 'rgba(245, 158, 11, 0.25)';
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.lineWidth = 1;
+                    const label = `📍 Line #${idx + 1}`;
+                    ctx.font = '600 11px Inter, sans-serif';
+                    const textWidth = ctx.measureText(label).width;
+                    const badgeW = textWidth + 12;
+                    const badgeH = 20;
+                    const badgeX = Math.max(2, Math.min(canvas.width - badgeW - 2, x - badgeW / 2));
+
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(badgeX, 28, badgeW, badgeH, 4);
+                    } else {
+                        ctx.rect(badgeX, 28, badgeW, badgeH);
+                    }
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#fef3c7';
+                    ctx.fillText(label, badgeX + 6, 42);
+                }
+            });
         }
 
         // ================= EOD FORECAST SCORECARD & PROXIMITY ENGINE ================= //
