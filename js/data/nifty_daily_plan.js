@@ -1,5 +1,93 @@
 window.dailyPlanData = [
-{
+  {
+    "source": "BT",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23300",
+    "bias": "bullish",
+    "behavior": "[FRI 08:50] [BT]: Buy on dips above 23,200 floor; flat open breakout or dip to sweep liquidity with 15m candle confirmation",
+    "tp": "23,450 / 23,550",
+    "sl": "23,200",
+    "status": "na"
+  },
+  {
+    "source": "BT",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23200",
+    "bias": "bearish",
+    "behavior": "[FRI 08:50] [BT]: Crucial invalidation floor; sustained 15m candle close below 23,200 triggers breakdown / trend change",
+    "tp": "23,100 / 23,050",
+    "sl": "23,250",
+    "status": "na"
+  },
+  {
+    "source": "MAA",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23441",
+    "bias": "bullish",
+    "behavior": "[FRI 08:50] [MAA]: Major resistance ceiling & short-covering pivot; sustained 10-15m candle close above 23,441 unleashes fast squeeze",
+    "tp": "23,520 / 23,580",
+    "sl": "23,380",
+    "status": "na"
+  },
+  {
+    "source": "MAA",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23300",
+    "bias": "bullish",
+    "behavior": "[FRI 08:50] [MAA]: Primary intraday threshold; sustained holding above 23,300 favors bullish trades targeting upper band",
+    "tp": "23,400 / 23,441",
+    "sl": "23,260",
+    "status": "na"
+  },
+  {
+    "source": "MAA",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23200",
+    "bias": "bearish",
+    "behavior": "[FRI 08:50] [MAA]: Crucial bear trigger; sustained trading below 23,200 hands full control to bears for heavy downside",
+    "tp": "23,120 / 23,050",
+    "sl": "23,250",
+    "status": "na"
+  },
+  {
+    "source": "SMU",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23360",
+    "bias": "bullish",
+    "behavior": "[FRI 08:50] [SMU]: Resistance breakout zone; sustained 15m candle close above 23,360 with put writer dominance",
+    "tp": "23,476 / 23,537",
+    "sl": "23,310",
+    "status": "na"
+  },
+  {
+    "source": "SMU",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23320",
+    "bias": "bearish",
+    "behavior": "[FRI 08:50] [SMU]: Upper rejection shelf; wick rejection at 23,320-23,350 or failure to close above 23,360 triggers pullback",
+    "tp": "23,220 / 23,160",
+    "sl": "23,360",
+    "status": "na"
+  },
+  {
+    "source": "SMU",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "price": "23270",
+    "bias": "bearish",
+    "behavior": "[FRI 08:50] [SMU]: Trendline breakdown trigger; slip below intraday support trendline opens immediate downside test",
+    "tp": "23,220 / 23,160",
+    "sl": "23,310",
+    "status": "na"
+  },
+  {
     "source": "AI",
     "timestamp": "2026-09-18T08:16:12+05:30",
     "timeDisplay": "08:16 AM, Sep 18",
@@ -387,7 +475,16 @@ window.dailyPlanData = [
 ];
 
 window.dailyPlanSummary = [
-{
+  {
+    "id": "NIFTY_PRED_20260918_085000",
+    "timestamp": "2026-09-18T08:50:00+05:30",
+    "timeDisplay": "08:50 AM, Sep 18",
+    "spot": "23270.6",
+    "trigger": "Channel Predictions Batch Synthesis (BT, MAA, SMU)",
+    "source": "YouTube Channel Predictions",
+    "text": "================================================================================\n🎯 COMBINED CHANNEL PREDICTIONS & DERIVATIVES BIAS (Sep 18, 2026)\n================================================================================\n• Institutional Data Bias: ⚪ NEUTRAL TO MILDLY BEARISH (High Chop)\n  - FII / Pro Desk Positioning: FIIs sold ₹2,837 Cr in cash and hold heavy net Put buy contracts (51k Puts bought vs 46k Calls bought). Pro desks hold massive Put buy inventory (13.63 Lakh contracts vs 13.38 Lakh Calls). Retailers hold net Put writing (59k contracts short).\n  - Overall Structure: Two-way derivative hedging suggests operators want to engineer severe chop to harvest premium on both wings unless key boundaries break.\n\n📍 Channel Consensus & Key Tactical Levels:\n• The Bengal Trader [BT]:\n  - Bias: Bullish on dips as long as 23,200 floor is protected.\n  - Buy trigger: Dip to sweep liquidity or breakout above flat open with 15m candle confirmation.\n  - Targets: 23,450 / 23,550. Invalidation: Sustained close below 23,200.\n• Market Analysis Academy [MAA]:\n  - Bias: Contained chop corridor between 23,200 and 23,441.\n  - Pivot threshold: 23,300. Sustaining above 23,300 opens 23,400–23,441. Decisive breakout above 23,441 triggers massive short-covering squeeze.\n  - Downside: Sustained break below 23,200 hands full control to bears.\n• Stock Market Unlimited [SMU]:\n  - Bias: Narrow range consolidation. Rejection observed at 23,320–23,350.\n  - Long trigger: Confirmed 15m close above 23,360 targets 23,476 and 23,537.\n  - Short trigger: Rejection wick at 23,320–23,350 or trendline breakdown below 23,270 targets 23,220 and 23,160.\n\n⚠️ Strategic Execution Directive: Expect heavy two-way whipsaws inside 23,250–23,320. Trade strictly on confirmed 15-minute candle breaks of the outer boundaries (23,360 / 23,441 for explosive upside, 23,200 for breakdown)."
+  },
+  {
     "id": "NIFTY_20260918_081614",
     "timestamp": "2026-09-18T08:16:14+05:30",
     "timeDisplay": "08:16 AM, Sep 18",
