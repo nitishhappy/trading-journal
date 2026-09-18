@@ -1,77 +1,77 @@
 window.sp500DailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-09-18T18:01:31+05:30",
-    "timeDisplay": "06:01 PM, Sep 18",
+    "timestamp": "2026-09-18T19:02:03+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
     "price": "7646.6",
     "bias": "bearish",
-    "behavior": "[FRI 18:01] [SP_KS1]: Previous Day High supply ceiling; major BSL pool and SFP rejection zone [SP_S1]",
+    "behavior": "[FRI 19:02] [SP_KS1]: Previous Day High supply ceiling; major BSL pool and SFP rejection zone [SP_S1]",
     "tp": "7629.20 / 7611.81",
     "sl": "7652.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-18T18:01:31+05:30",
-    "timeDisplay": "06:01 PM, Sep 18",
+    "timestamp": "2026-09-18T19:02:03+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
     "price": "7648.5",
     "bias": "bullish",
-    "behavior": "[FRI 18:01] [SP_B2]: Decisive 15M close above PDH triggering short-covering momentum toward $7675.00",
+    "behavior": "[FRI 19:02] [SP_B2]: Decisive 15M close above PDH triggering short-covering momentum toward $7675.00",
     "tp": "7660.00 / 7675.00 / 7700.00",
     "sl": "7636.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-18T18:01:31+05:30",
-    "timeDisplay": "06:01 PM, Sep 18",
+    "timestamp": "2026-09-18T19:02:03+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
     "price": "7629.2",
     "bias": "neutral",
-    "behavior": "[FRI 18:01] [SP_KB1]: 48H Equilibrium anchor & institutional fair value pivot separating premium from discount",
+    "behavior": "[FRI 19:02] [SP_KB1]: 48H Equilibrium anchor & institutional fair value pivot separating premium from discount",
     "tp": "7641.75 / 7646.60",
     "sl": "7622.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-18T18:01:31+05:30",
-    "timeDisplay": "06:01 PM, Sep 18",
+    "timestamp": "2026-09-18T19:02:03+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
     "price": "7627.0",
     "bias": "bearish",
-    "behavior": "[FRI 18:01] [SP_KS2]: Breakdown below 48H Equilibrium activating long-liquidation cascade toward PDL [SP_S2]",
+    "behavior": "[FRI 19:02] [SP_KS2]: Breakdown below 48H Equilibrium activating long-liquidation cascade toward PDL [SP_S2]",
     "tp": "7618.00 / 7611.81 / 7595.00",
     "sl": "7635.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-18T18:01:31+05:30",
-    "timeDisplay": "06:01 PM, Sep 18",
+    "timestamp": "2026-09-18T19:02:03+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
     "price": "7620.0",
     "bias": "bullish",
-    "behavior": "[FRI 18:01] [SP_KB2]: 15M Fair Value Gap discount mitigation shelf & institutional buyer replenishment block",
+    "behavior": "[FRI 19:02] [SP_KB2]: 15M Fair Value Gap discount mitigation shelf & institutional buyer replenishment block",
     "tp": "7635.00 / 7646.60",
     "sl": "7612.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-18T18:01:31+05:30",
-    "timeDisplay": "06:01 PM, Sep 18",
+    "timestamp": "2026-09-18T19:02:03+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
     "price": "7611.81",
     "bias": "bullish",
-    "behavior": "[FRI 18:01] [SP_KB3]: Previous Day Low (PDL) sell-side liquidity pool & primary discount SFP reversal base [SP_B1]",
+    "behavior": "[FRI 19:02] [SP_KB3]: Previous Day Low (PDL) sell-side liquidity pool & primary discount SFP reversal base [SP_B1]",
     "tp": "7629.20 / 7646.60",
     "sl": "7603.00",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-18T18:01:31+05:30",
-    "timeDisplay": "06:01 PM, Sep 18",
+    "timestamp": "2026-09-18T19:02:03+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
     "price": "7580.0",
     "bias": "bullish",
-    "behavior": "[FRI 18:01] [SP_KB4]: Deep macro structural demand shelf and unmitigated institutional accumulation base",
+    "behavior": "[FRI 19:02] [SP_KB4]: Deep macro structural demand shelf and unmitigated institutional accumulation base",
     "tp": "7611.81 / 7630.00",
     "sl": "7565.00",
     "status": "na"
@@ -130,88 +130,20 @@ window.sp500DailyPlanData = [
     "tp": "7555.00 / 7600.00",
     "sl": "7492.00",
     "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T19:01:15+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "price": "7523.42",
-    "bias": "bullish",
-    "behavior": "[THU 19:01] [SP_B1]: PDL liquidity sweep retest with volume absorption",
-    "tp": "7567.28 / 7613.56",
-    "sl": "7498.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T19:01:15+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "price": "7615.0",
-    "bias": "bullish",
-    "behavior": "[THU 19:01] [SP_B2]: Day High clearance with futures volume confirmation",
-    "tp": "7626.79 / 7660.00",
-    "sl": "7595.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T19:01:15+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "price": "7567.28",
-    "bias": "bearish",
-    "behavior": "[THU 19:01] [SP_S1]: 48H Equilibrium supply rejection with bearish divergence",
-    "tp": "7523.42 / 7507.77",
-    "sl": "7585.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T19:01:15+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "price": "7505.0",
-    "bias": "bearish",
-    "behavior": "[THU 19:01] [SP_S2]: Day Low breakdown leading to institutional long liquidation",
-    "tp": "7475.00 / 7445.00",
-    "sl": "7525.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T19:01:15+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "price": "7475.0",
-    "bias": "bullish",
-    "behavior": "[THU 19:01] [SP_KB3]: Macro volume node & institutional buyer replenishment block",
-    "tp": "7520.00",
-    "sl": "7455.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T19:01:15+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "price": "7445.0",
-    "bias": "bullish",
-    "behavior": "[THU 19:01] [SP_KB4]: Multi-week swing confluence & capitulation demand floor",
-    "tp": "7500.00",
-    "sl": "7420.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-17T19:01:15+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "price": "7626.79",
-    "bias": "bearish",
-    "behavior": "[THU 19:01] [SP_KS1]: Previous Day High & major institutional sell-side overhang",
-    "tp": "7567.28 / 7523.42",
-    "sl": "7640.00",
-    "status": "na"
   }
 ];
 
 window.sp500DailyPlanSummary = [
 {
+    "id": "SP500_20260918_190205",
+    "timestamp": "2026-09-18T19:02:05+05:30",
+    "timeDisplay": "07:02 PM, Sep 18",
+    "spot": "7637.42",
+    "trigger": "Scheduled 07:00 PM IST Update (US RTH Opening Bell & ORB",
+    "source": "SP500-AI",
+    "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (07:00 PM IST - Sep 18, 2026 | Spot: $7637.42 | Trigger: Scheduled 07:00 PM IST Update (US RTH Opening Bell & ORB))\n\n---\n\n### 1. Global Macro & US Intermarket Dynamics:\n* **Current Equilibrium & Range Valuation**: S&P 500 Spot (`^GSPC`) trades at **$7637.42**, positioned +8.22 points above the 48-hour Equilibrium benchmark of **$7629.20** within the defined two-day swing corridor of **$7611.81 (PDL) – $7646.60 (PDH)**. Operating in this upper quartile places spot index mechanics squarely inside the institutional **Premium Zone (Look for Shorts)**. At this premium valuation, smart money execution models prioritize fading exhaustive probes into overhead supply or demanding decisive, volume-backed confirmation before committing risk capital to long continuation breakouts.\n* **Treasury Yield Friction & Dollar Resistance**: The US 10-Year Treasury Yield (`^TNX`) remains sticky and elevated at **4.98%**, pressing against the psychologically critical 5.00% benchmark and sustaining aggressive valuation drag against equity discount rates and multiple expansion. Concurrently, the US Dollar Index (`DXY`) trades at **100.48**, maintaining an active macro headwind against multinational corporate balance sheets. This persistent dollar-yield friction caps aggressive upside follow-through unless broad institutional liquidity floods the cash tape.\n* **Volatility Regime & Dealer Gamma**: The CBOE Volatility Index (`^VIX`) prints at **15.40**, maintaining a balanced, low-stress volatility regime. Sub-16 VIX levels signal that options market-maker gamma remains neutral-to-positive, which dampens uncontrolled directional drift and enforces rotational, mean-reverting behavior between established range boundaries.\n* **Futures Basis Premium & Opening Bell Tone**: Front-month ES Futures trade at **7702.75** (maintaining a solid +65.33-point cash-basis premium), while NQ Futures trade firmly at **29793.00**. Despite the firm futures basis, index futures are wavering pre-bell following oil price volatility. With the US Regular Trading Hours (RTH) Opening Bell ringing at 07:00 PM IST (09:30 AM EST), opening auction order flow is set to inject two-way volume into the cash market.\n* **US Macro News Guard**: ⚠️ **MARKET NEWS: Stock market today: Dow, S&P 500, Nasdaq futures waver as oil prices slip**. Pre-market retail sentiment is hesitant amidst commodity volatility. Institutional desks typically utilize the opening bell volatility spike (07:00 PM – 07:15 PM IST) to engineer liquidity traps—sweeping resting stops above Day High or below Day Low before establishing real directional commitment.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Opening Bell Microstructure**: Spot ($7637.42) enters the RTH session tightly compressed between the Day Low (**$7632.69**) and Day High (**$7641.75**), consolidating directly underneath the key Previous Day High ceiling (**$7646.60**).\n* **Buy-Side Liquidity (BSL) Pools**:\n  * **Intraday Day High**: **$7641.75** (Immediate resting retail stop-loss pool from pre-market sellers).\n  * **Major BSL Pool / PDH**: **$7646.60** (Heavy cluster of resting buy stops; primary target for an institutional Swing Failure Pattern / Turtle Soup probe).\n  * **Institutional Gamma Wall & Extension Ceiling**: **$7655.00 – $7660.00** (Call open interest concentration and expansion target).\n* **Sell-Side Liquidity (SSL) Pools**:\n  * **Intraday Day Low**: **$7632.69** (Local resting sell stops).\n  * **48H Equilibrium Anchor**: **$7629.20** (Core fair-value institutional pivot separating premium distribution from discount accumulation).\n  * **Intermediate Demand Shelf**: **$7620.00 – $7624.00** (15M Bullish FVG and mitigation shelf).\n  * **Major SSL Pool / PDL**: **$7611.81** (Major institutional sell stop pool and primary discount accumulation baseline).\n* **Order Blocks & Fair Value Gaps (FVG)**:\n  * **15M Institutional Supply OB**: **$7642.00 – $7646.60** (Confluent with PDH; primary distribution and rejection block).\n  * **15M Institutional Demand Shelf / 48H Eq**: **$7627.00 – $7629.20** (Structural shelf separating premium distribution from discount accumulation).\n  * **1H Bullish Fair Value Gap (FVG)**: **$7615.00 – $7622.00** (Unmitigated liquidity imbalance from prior impulsive expansion).\n  * **Deep Structural Macro Demand Floor**: **$7580.00 – $7611.81** (PDL liquidity sweep absorption floor and multi-session accumulation base).\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Corridor Boundaries**: **$7632.00 – $7641.00** (9.00 Index Points Bandwidth).\n* **Microstructure Logic**: Spot price ($7637.42) is oscillating within the narrow pocket between Day Low ($7632.69) and Day High ($7641.75) inside premium territory. Entering trades within this narrow corridor prior to the completion of the 15-minute Opening Range (07:00 PM – 07:15 PM IST / 09:30 AM – 09:45 AM EST) subjects traders to whipsaw action, bid-ask spread decay, and false breakout wicks driven by opening automated market-maker quote shading.\n* **Tactical Directive**: **STRICTLY STAND ASIDE inside $7632.00 – $7641.00.** Execution is reserved exclusively for confirmed perimeter price action at liquidity boundaries ($7644.00–$7646.60 supply probe, $7648.50 breakout, or $7627.00 breakdown).\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* 🚀 **Bullish Breakout Expansion Zone (> $7648.50)**: A sustained 15-minute candle close firmly above the Previous Day High ($7646.60) with expanding ES futures volume will trigger systemic short-covering and force dealer gamma re-hedging, unlocking an explosive momentum expansion targeting **$7660.00**, **$7675.00**, and **$7700.00**.\n* 💥 **Bearish Cascade Liquidation Zone (< $7627.00)**: An impulsive 15-minute close below the 48H Equilibrium ($7629.20) shatters resting bids and flips institutional order flow delta negative, triggering a rapid long-liquidation cascade through the 1H FVG toward **$7618.00** and a direct test of the PDL at **$7611.81**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_S1]** | 🔴 High-Probability Short / Supply Rejection (Supply OB / PDH Rejection) | **$7644.00 – $7646.60** | Price probes PDH/Supply OB, prints an upper rejection wick (SFP / Turtle Soup), and closes a 5M candle back **BELOW $7640.00** with negative volume delta. | **TP1:** $7629.20<br>**TP2:** $7618.00<br>**TP3:** $7611.81 | **$7652.00** | ~1 : 2.8 |\n| **[SP_B2]** | 🟢 High-Momentum Breakout Long (Day High / BSL Clearance) | **$7648.50** | Decisive 15M candle close firmly **ABOVE $7648.50** clearing PDH ($7646.60) supported by expanding ES futures volume and positive market breadth. | **TP1:** $7660.00<br>**TP2:** $7675.00<br>**TP3:** $7700.00 | **$7636.00** | ~1 : 2.5 |\n| **[SP_B1]** | 🟢 High-Probability Long / Liquidity Sweep Recovery (Demand OB / PDL Sweep) | **$7611.81 – $7615.00** | Spot sweeps below PDL ($7611.81), forms a lower absorption pin-bar, and closes a 5M candle back **ABOVE $7618.00** with positive delta absorption. | **TP1:** $7629.20<br>**TP2:** $7638.00<br>**TP3:** $7646.60 | **$7604.00** | ~1 : 3.2 |\n| **[SP_S2]** | 🔴 High-Momentum Breakdown Short (Day Low / SSL Liquidation Cascade) | **$7627.00** | Impulsive 15M candle close decisively **BELOW $7627.00** breaching 48H Eq ($7629.20) with expanding red volume confirming systematic long liquidation. | **TP1:** $7618.00<br>**TP2:** $7611.81<br>**TP3:** $7595.00 | **$7635.00** | ~1 : 2.6 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$7629.20** | Primary Structural Support / 48H Equilibrium | **[SP_KB1]** | [SP_KB1] 48H Equilibrium benchmark; primary structural fair-value pivot separating discount accumulation from premium distribution | $7641.75 / $7646.60 | $7622.00 |\n| **$7620.00** | Intermediate Demand FVG | **[SP_KB2]** | [SP_KB2] 15M Bullish Fair Value Gap discount mitigation zone; institutional limit bid replenishment shelf | $7635.00 / $7646.60 | $7612.00 |\n| **$7611.81** | Major Swing Support / PDL | **[SP_KB3]** | [SP_KB3] Previous Day Low (PDL) sell-side liquidity pool & primary discount SFP reversal base [SP_B1] | $7629.20 / $7646.60 | $7603.00 |\n| **$7580.00** | Deep Structural Macro Demand | **[SP_KB4]** | [SP_KB4] Deep macro structural demand shelf and unmitigated institutional accumulation base | $7611.81 / $7630.00 | $7565.00 |\n| **$7646.60** | Primary Resistance / PDH Supply OB | **[SP_KS1]** | [SP_KS1] Previous Day High & major institutional supply ceiling; prime BSL pool and SFP fade zone [SP_S1] | $7629.20 / $7611.81 | $7652.00 |\n| **$7627.00** | Breakdown Floor / SSL Trigger | **[SP_KS2]** | [SP_KS2] Structural failure below 48H Equilibrium; activates systematic long liquidation cascade toward PDL [SP_S2] | $7611.81 / $7595.00 | $7635.00 |"
+  },
+  {
     "id": "SP500_20260918_180133",
     "timestamp": "2026-09-18T18:01:33+05:30",
     "timeDisplay": "06:01 PM, Sep 18",
@@ -246,14 +178,5 @@ window.sp500DailyPlanSummary = [
     "trigger": "Scheduled 08:00 PM IST Update (US Initial Balance & True Trend Confirmation",
     "source": "SP500-AI",
     "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (08:00 PM IST - Sep 17, 2026 | Spot: $7625.28 | Trigger: Scheduled 08:00 PM IST Update (US Initial Balance & True Trend Confirmation))\n\n---\n\n### 1. Global Macro & US Intermarket Dynamics:\n* **Current Equilibrium & Regime Assessment**: Spot S&P 500 (^GSPC) is trading at **$7625.28**, positioned firmly in the upper quadrant of the 48-hour range ($7507.77 – $7646.60). Trading above the 48H Equilibrium of **$7577.18** places index mechanics into a statistical **Premium Zone**, where institutional risk-to-reward favors fading exhaustive rallies or demanding high-volume confirmation before committing to long breakouts.\n* **Treasury Yields & US Dollar Pressure**: The US 10-Year Treasury Yield (`^TNX`) stands elevated at **4.95%**, creating an ongoing cost-of-capital friction for broad equity multiples. Simultaneously, the US Dollar Index (`DXY`) at **100.09** acts as an intermarket headwind, keeping large-cap multinational earnings sensitive to currency friction and preventing runaway upside momentum without fresh catalysts.\n* **Volatility Regime & Market Maker Gamma**: The CBOE Volatility Index (`^VIX`) sits at **15.81**, reflecting a balanced, non-panicked volatility regime. At sub-16 levels, option market makers remain in positive-to-neutral gamma territory, meaning intraday order flows will lean mean-reverting unless an impulse candle breaks past key strike concentrations ($7650 to the upside or $7600 to the downside).\n* **Futures Divergence & Tech Leadership**: ES Futures are trading at **7695.50** (pricing standard fair value basis premium), while NQ Futures trade robustly at **29706.25**. Tech relative strength has insulated the market from the pressure of 4.95% bond yields following headlines that the Fed rate trajectory has tempered long-term inflation fears. However, with spot approaching previous day extremes, execution must remain strictly tactical.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL) Pools**: Resting buy-stops are heavily stacked above the Day High and Previous Day High at **$7646.60**, extending into the major psychological milestone at **$7650.00**. A push into this pocket without sustained institutional volume will trigger a classic Swing Failure Pattern (SFP) / liquidity grab before a mean-reversion pullback.\n* **Sell-Side Liquidity (SSL) Pools**: Clustered below session VWAP and the intraday consolidation shelf at **$7605.00**, with deeper macro SSL pools resting beneath the 48H Equilibrium (**$7577.18**) and the Previous Day Low (**$7507.77**).\n* **Order Blocks & Fair Value Gaps (FVG)**:\n  * **15M Institutional Supply OB**: **$7642.00 – $7646.60**. Prior rejection origin; primary hurdle for institutional continuation.\n  * **15M Institutional Demand OB / High-Volume Shelf**: **$7572.00 – $7577.18**. Direct confluence with the 48H Equilibrium level.\n  * **Deep Structural Discount Demand OB**: **$7507.77 – $7515.00**. Prior liquidity sweep and structural accumulation floor.\n* **US Initial Balance (IB) Dynamics**: Having concluded the first hour of cash session trading (09:30 – 10:30 AM EST / 07:00 – 08:00 PM IST), the Initial Balance high is established right against the $7646.60 barrier. The market is attempting an upper IB extension; true trend confirmation requires acceptance above $7648.50 with expanding futures volume.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Corridor Boundary**: **$7605.00 – $7635.00**\n* **Microstructure Logic**: Current spot ($7625.28) is floating inside this two-way compression band. With the 48H Equilibrium below ($7577.18) and the Day High above ($7646.60), price action inside this $30 corridor is vulnerable to algorithmic ping-pong, bid-ask spread decay, and false 5-minute directional breaks.\n* **Tactical Directive**: **STRICTLY STAND ASIDE inside $7605.00 – $7635.00.** Do not initiate market orders inside this pocket. Execution is strictly reserved for the perimeter boundaries where defined order flow imbalances occur.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Breakout Acceleration Zone (> $7648.50)**: A decisive 15-minute close above the PDH / Day High ($7646.60) will trigger immediate short-covering from gamma hedges and trapped breakout sellers, clearing a rapid expansion pathway toward **$7675.00** and **$7700.00**.\n* **Bearish Cascade Liquidation Zone (< $7570.00)**: A structural loss of the 48H Equilibrium ($7577.18) and the $7570.00 liquidity shelf shifts institutional delta negative, unlocking a rapid long-unwinding cascade toward **$7540.00** and ultimately a retest of PDL at **$7507.77**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_S1]** | High-Probability Short / Supply Rejection | **$7644.00 – $7646.60** | 5M rejection wick / SFP at PDH with bearish CHoCH and close back below $7640.00 | **$7605.00 / $7578.00** | **$7654.00** | **1 : 3.5** |\n| **[SP_B2]** | High-Momentum Breakout Long | **$7648.50** | 15M candle close firmly above PDH ($7646.60) with expanding ES volume and VWAP holding as floor | **$7675.00 / $7700.00** | **$7634.00** | **1 : 2.8** |\n| **[SP_B1]** | High-Probability Long / Liquidity Sweep Recovery | **$7575.00 – $7577.18** | 5M liquidity sweep below 48H Equilibrium with immediate absorption wick and green engulfing close | **$7625.00 / $7645.00** | **$7565.00** | **1 : 3.2** |\n| **[SP_S2]** | High-Momentum Breakdown Short | **$7568.00** | 15M body close below $7570.00 confirming breakdown below 48H Eq with bearish delta acceleration | **$7535.00 / $7508.00** | **$7582.00** | **1 : 3.1** |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$7646.60** | Primary Resistance / PDH | `[SP_KS1]` | Previous Day High & Day High ceiling; major BSL pool and prime institutional supply rejection zone | $7605.00 / $7578.00 | $7654.00 |\n| **$7648.50** | Breakout Expansion Level | `[SP_B2]` | Clearance trigger above PDH; initiates short-squeeze momentum toward round psychological milestones | $7675.00 / $7700.00 | $7634.00 |\n| **$7605.00** | Primary Intraday Support | `[SP_KB1]` | Intraday Value Area floor and lower boundary of the immediate chop corridor; intraday bounce point | $7635.00 / $7646.00 | $7592.00 |\n| **$7577.18** | Major Structural Support | `[SP_KB2]` | 48H Equilibrium benchmark; institutional demand shelf where buyers defend medium-term structure | $7625.00 / $7645.00 | $7565.00 |\n| **$7570.00** | Breakdown Trigger Floor | `[SP_KS2]` | Critical pivot below Equilibrium; failure confirms trend change and unlocks swift SSL cascade | $7535.00 / $7508.00 | $7582.00 |\n| **$7540.00** | Intermediate Demand FVG | `[SP_KB3]` | 1H Bullish Fair Value Gap and institutional mitigation zone during pullback rotations | $7575.00 / $7610.00 | $7525.00 |\n| **$7507.77** | Deep Macro Demand Floor | `[SP_KB4]` | Previous Day Low & Day Low base; major sell-side liquidity pool and macro accumulation boundary | $7555.00 / $7600.00 | $7492.00 |"
-  },
-  {
-    "id": "SP500_20260917_190119",
-    "timestamp": "2026-09-17T19:01:19+05:30",
-    "timeDisplay": "07:01 PM, Sep 17",
-    "spot": "7523.73",
-    "trigger": "Scheduled 07:00 PM IST Update (US RTH Opening Bell & ORB",
-    "source": "SP500-AI",
-    "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (07:00 PM IST - Sep 17, 2026 | Spot: $7523.73 | Trigger: Scheduled 07:00 PM IST Update (US RTH Opening Bell & ORB))\n\n### 1. Global Macro & US Intermarket Dynamics:\n- **US Treasury Yields & DXY Headwind**: The US 10-Year Treasury Yield has eased slightly below the critical psychological threshold to 4.95% (down from 5.01%), providing tactical relief to mega-cap growth and equity valuation multiples. The US Dollar Index (DXY) consolidates at 100.11, maintaining a mild macro headwind against runaway rallies and requiring clean technical volume confirmation for sustained upside expansion.\n- **VIX Volatility Regime**: VIX at 15.45 reflects a balanced, moderate volatility regime. Options implied volatility shows no structural panic, indicating dealer gamma is well-positioned to support mean-reversion setups within established support zones rather than aggressive downside trending.\n- **Futures Positioning & RTH Basis Expansion**: ES Futures (7716.75) and NQ Futures (29731.25) demonstrate sustained pre-market bid expansion and positive basis over cash spot ($7523.73), signaling that institutional market participants are positioning for dip-buying into the US Regular Trading Hours (RTH) opening bell.\n- **48H Equilibrium & Valuation Placement**: Spot at 7523.73 sits precisely at the Previous Day Low (PDL: 7523.42) within the 48-hour swing range (7507.77 – 7626.79). Trading substantially below the 48H Equilibrium (7567.28) places the index firmly in the **Discount Zone**, where institutional risk-to-reward mathematically favors long liquidity sweep plays over chasing breakdown shorts into immediate support.\n- **US Macro News Guard**: 🔴 HIGH IMPACT NEWS: Stock Market Today: Dow Rises In Fed Aftermath; Generac, Nebius, Bloom, SpaceX Are Early Movers (Live Coverage). With the market actively digesting post-Fed interest rate guidance and opening bell rotation underway, expect an initial 15-minute period of heightened two-way liquidity sweeps before true institutional direction establishes.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n- **Current Institutional Location**: Spot ($7523.73) is directly anchored on the Previous Day Low ($7523.42), forming a classic institutional liquidity testing ground as the US RTH opening bell begins.\n- **Session Liquidity Pools**:\n  - **Buy-Side Liquidity (BSL)**: Concentrated above the 48H Equilibrium ($7567.28), Day High ($7613.56), and Previous Day High ($7626.79). Resting buy stops above 7567.28 represent primary targets for initial mean-reversion pushes.\n  - **Sell-Side Liquidity (SSL)**: Clustered tightly beneath PDL ($7523.42) and Day Low ($7507.77). Deeper resting institutional sell stops reside under the structural demand shelf at $7475.00 / $7445.00.\n- **Order Blocks & Fair Value Gaps (FVG)**:\n  - **15M Bullish Demand OB**: Nested at 7507.77 – 7520.00, defending the session low and serving as the primary accumulation launchpad for liquidity sweep recoveries.\n  - **15M Bearish Supply OB**: Stationed at 7565.00 – 7575.00, confluent with the 48H Equilibrium (7567.28), representing initial institutional profit-taking and distribution.\n  - **1H Imbalance / FVG**: Bearish inefficiency between 7580.00 – 7595.00 remaining open from prior distribution sessions.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Chop Zone Boundaries**: **7525.00 – 7550.00**\n- **Tactical Rationale**: The 25-point corridor between the PDL interaction level (7525.00) and the mid-session structural pivot (7550.00) is an institutional compression pocket. Executing market orders within this corridor during the opening 15–30 minutes carries high risk of whipsaws and false breakout traps.\n- **Directive**: Strictly abstain from initiating fresh directional market orders inside 7525.00 – 7550.00. Await confirmed liquidity sweeps at range extremes (7507.77 / 7523.42) or a decisive 15-minute Opening Range Breakout (ORB) close beyond 7550.00 / 7567.28.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n- **Bullish Expansion (> 7567.28)**: A sustained 15M candle close above the 48H Equilibrium (7567.28) triggers systemic short-covering and dealer gamma flip, driving rapid expansion through the 1H FVG toward 7613.56 (Day High) and 7626.79 (PDH).\n- **Bearish Liquidation Cascade (< 7507.77)**: A decisive 15M candle close below Day Low (7507.77) invalidates the discount accumulation thesis, sparking systematic CTA stop cascades and long liquidation toward 7475.00 and 7445.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | High-Probability Long / Liquidity Sweep Recovery (Demand OB / PDL Sweep) | 7507.77 – 7523.42 | 5M sweep below PDL (7523.42) or Day Low (7507.77) followed by rapid bullish pin-bar/engulfing close back above 7525.00 with delta absorption. | 7567.28 / 7613.56 | 7498.00 | 1:2.8 |\n| **[SP_B2]** | High-Momentum Breakout Long (Day High / BSL Clearance) | 7615.00 | 15M candle close above Day High (7613.56) backed by expanding ES futures volume and positive market breadth. | 7626.79 / 7660.00 | 7595.00 | 1:2.3 |\n| **[SP_S1]** | High-Probability Short / Supply Rejection (Supply OB / PDH Rejection) | 7565.00 – 7575.00 | 5M rejection wick into 48H Equilibrium (7567.28) / Supply OB, confirmed by bearish MACD/RSI divergence and 5M close below 7560.00. | 7523.42 / 7507.77 | 7585.00 | 1:2.5 |\n| **[SP_S2]** | High-Momentum Breakdown Short (Day Low / SSL Liquidation Cascade) | 7505.00 | 15M candle close decisively below Day Low (7507.77) with rising red volume and zero lower-wick absorption. | 7475.00 / 7445.00 | 7525.00 | 1:2.2 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **7523.42** | Support / PDL Retest | **[SP_KB1]** | Previous Day Low test with institutional absorption | 7567.28 | 7505.00 |\n| **7507.77** | Major Swing Support | **[SP_KB2]** | Day Low liquidity sweep & institutional discount entry zone | 7567.28 / 7613.56 | 7495.00 |\n| **7475.00** | Structural HTF Demand | **[SP_KB3]** | Macro volume node & institutional buyer replenishment block | 7520.00 | 7455.00 |\n| **7445.00** | Deep Structural Demand | **[SP_KB4]** | Multi-week swing confluence & capitulation demand floor | 7500.00 | 7420.00 |\n| **7626.79** | Primary Resistance / PDH | **[SP_KS1]** | Previous Day High & major institutional sell-side overhang | 7567.28 / 7523.42 | 7640.00 |\n| **7505.00** | Breakdown Floor / SSL | **[SP_KS2]** | Day Low breakdown trigger; failure activates liquidation cascade | 7475.00 / 7445.00 | 7525.00 |"
   }
 ];
