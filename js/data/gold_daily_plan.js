@@ -1,6 +1,61 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-18T17:46:46+05:30",
+    "timeDisplay": "05:46 PM, Sep 18",
+    "price": "4371.00-4376.00",
+    "bias": "neutral",
+    "behavior": "[FRI 17:46] [Chop]: Day Low Boundary Compression & Pre-NY Volatility Range",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T17:46:46+05:30",
+    "timeDisplay": "05:46 PM, Sep 18",
+    "price": "4368.00-4371.00",
+    "bias": "bullish",
+    "behavior": "[FRI 17:46] [G_B1]: Day Low Sweep & Judas Spring Liquidity Recovery",
+    "tp": "4382.00 / 4390.00 / 4402.00",
+    "sl": "4364.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T17:46:46+05:30",
+    "timeDisplay": "05:46 PM, Sep 18",
+    "price": "4392.00",
+    "bias": "bullish",
+    "behavior": "[FRI 17:46] [G_B2]: High-Momentum Structural Reclaim Above Broken Shelf",
+    "tp": "4405.00 / 4420.00 / 4439.80",
+    "sl": "4384.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T17:46:46+05:30",
+    "timeDisplay": "05:46 PM, Sep 18",
+    "price": "4384.00-4389.00",
+    "bias": "bearish",
+    "behavior": "[FRI 17:46] [G_S1]: Bearish Breaker Retest & Supply FVG Rejection",
+    "tp": "4374.00 / 4366.00 / 4355.00",
+    "sl": "4393.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T17:46:46+05:30",
+    "timeDisplay": "05:46 PM, Sep 18",
+    "price": "4370.00",
+    "bias": "bearish",
+    "behavior": "[FRI 17:46] [G_S2]: High-Momentum Day Low Breakdown Flush",
+    "tp": "4360.00 / 4352.00 / 4340.00",
+    "sl": "4376.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-18T13:32:20+05:30",
     "timeDisplay": "01:32 PM, Sep 18",
     "price": "4391.00-4397.00",
@@ -421,6 +476,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20260918_174648",
+    "timestamp": "2026-09-18T17:46:48+05:30",
+    "timeDisplay": "05:46 PM, Sep 18",
+    "spot": "4373.54",
+    "trigger": "Structural Invalidation (-15.4 pts incremental shift from previous trigger 4388.90",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (05:45 PM IST - Sep 18, 2026 | Spot: $4373.54 | Trigger: Structural Invalidation (-15.4 pts incremental shift from previous trigger 4388.90))\n\n---\n\n### 1. Global Macro & Forex Mechanics:\n* **London / New York Session Crossover (05:45 PM IST / 12:15 GMT / 08:15 EDT)**: Spot Gold trades under acute pressure at **$4,373.54**, pressing directly against the session baseline and Day Low ($4,372.20) as the London afternoon hands order flow over to the aggressive New York pre-market desks. The incremental drop of -15.4 points from the prior structural trigger at $4,388.90 represents an impulsive institutional distribution wave, breaking intraday higher-low structures and setting up a pivotal battle between institutional stop-hunts and fresh trend liquidations.\n* **US Dollar Index (DXY) Intermarket Pressure**: The US Dollar Index has staged an aggressive intraday bid, pushing higher through **103.10 – 103.25**. Sustained Dollar strength driven by safe-haven capital rotations and pre-data dollar demand continues to exert relentless downward pressure on Bullion. Bullion cannot establish a meaningful floor until DXY encounters supply resistance and rejects below 103.00; any further extension of DXY toward 103.45 will accelerate sell-side liquidation cascades through Gold's macro floor.\n* **US 10-Year Treasury Yield Alignment**: The benchmark US 10-Year Treasury yield is firming toward **4.44% – 4.46%**, climbing to fresh session peaks. The persistent upward grind in real yields increases the opportunity cost of holding physical spot bullion, empowering algorithmic sellers to hammer bids into session lows. A failure of yields to hold above 4.42% would be required to facilitate an aggressive short-covering squeeze in Gold.\n* **US Macro Data Drop Positioning (08:30 AM EDT / 06:00 PM IST)**: Institutional trading desks are actively clearing out resting liquidity ahead of the impending US macro economic releases (08:30 AM EDT). The aggressive flush toward Day Low ($4,372.20) is characteristic of a high-velocity stop-run engineered to trigger retail panic stops before high-impact volatility enters the market at the New York cash open.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Multi-Timeframe Market Structure (1H / 15M / 5M)**: Market structure has shifted to a short-term bearish displacement regime following the clean breakdown below the $4,388.90 breaker shelf. Price is currently probing the extreme lower boundary of the daily range.\n  - **Macro Day High**: $4,439.80 (Major Buy-Side Liquidity pool)\n  - **Overnight Distribution Block (1H Bearish OB)**: $4,410.00 – $4,422.00\n  - **Prior Structural Trigger / Breaker Origin**: $4,388.90\n  - **15M Bearish Displacement FVG / Overhead Supply**: $4,384.00 – $4,389.00\n  - **Intermediate Supply Shelf**: $4,379.00 – $4,381.00\n  - **Current Live Spot Price**: $4,373.54\n  - **Day Low Liquidity Cluster**: $4,372.20 (Major Sell-Side Liquidity resting pool)\n  - **Unmitigated Higher Timeframe Discount Demand Block**: $4,358.00 – $4,365.00\n* **Buy-Side Liquidity (BSL) Architecture**:\n  - **$4,384.00 – $4,389.00**: Trailing buy-stops of intraday momentum shorts placed during the -15.4 pt cascade.\n  - **$4,395.00 – $4,402.00**: Major breakout pool and resting buy orders above the psychological handle.\n  - **$4,439.80**: Macro Day High; ultimate upside target for macro swing liquidations.\n* **Sell-Side Liquidity (SSL) Architecture**:\n  - **$4,371.00 – $4,372.20**: High-density cluster of sell-stops stacked immediately beneath Day Low.\n  - **$4,360.00 – $4,365.00**: Untapped liquidity pocket sitting above 1H institutional demand.\n  - **$4,350.00 – $4,352.00**: Macro weekly swing low support shelf.\n* **Fair Value Gaps (FVG) & Order Blocks (OB)**:\n  - **15M Bearish FVG ($4,384.00 – $4,389.00)**: Formed during the impulsive down-leg from $4,388.90; serves as the primary supply wall for retest rejections.\n  - **1H Bullish Mitigation / Discount OB ($4,358.00 – $4,365.00)**: Untested institutional demand base where smart money accumulation is anticipated if the Day Low gives way completely.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Designated Chop Zone**: **$4,371.00 – $4,376.00** (Width: $5.00 centered around Live Spot $4,373.54 and Day Low $4,372.20)\n* **Structural Rationale**: Spot Gold is violently oscillating right at the knife-edge boundary of the Day Low ($4,372.20) ahead of the 06:00 PM IST (08:30 AM EDT) US macro data window. Market-making algorithms routinely engineer dual-sided wick expansions inside this narrow band to trigger stop orders on both sides of the book without providing directional follow-through.\n* **Tactical Directive**: **STRICT NO-TRADE ZONE**. Executing new market orders inside $4,371.00–$4,376.00 carries severe negative expectancy. Professional execution mandates waiting for either: (1) an SSL sweep into $4,368.00–$4,371.00 with an impulsive 5M green reclamation above $4,376.00, or (2) a confirmed 15M candle close cleanly below $4,370.00.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* ⚡ **Judas SSL Sweep & Spring Recovery ([G_B1] $4,368.00 – $4,371.00 Retest)**: An aggressive spike below Day Low ($4,372.20) that penetrates into $4,368.00–$4,371.00, purges resting retail sell-stops, leaves prominent lower absorption wicks on 5M/15M charts, and prints an impulsive green displacement close back above $4,376.00 triggers an A+ counter-trend recovery rally targeting $4,382.00, $4,390.00, and $4,402.00.\n* 🚀 **High-Momentum Structural Reclaim ([G_B2] $4,392.00 Breakout)**: An impulsive 15-minute candle close firmly above the prior invalidation origin at $4,392.00 with expanding positive volume delta invalidates the afternoon distribution sequence, triggering an explosive short squeeze through liquidity voids toward $4,405.00, $4,420.00, and Macro Day High $4,439.80.\n* 💥 **Bearish Breaker / FVG Retest Rejection ([G_S1] $4,384.00 – $4,389.00 Retest)**: Any corrective pullback into the broken breaker shelf and 15M Bearish FVG ($4,384.00–$4,389.00) that prints upper exhaustion wicks and confirms with a 5M red close back below $4,381.00 with expanding sell volume delta provides an institutional trend-continuation short targeting $4,374.00, $4,366.00, and $4,355.00.\n* 🩸 **Day Low Structural Breakdown Flush ([G_S2] $4,370.00 Breakdown)**: An impulsive 15-minute candle close firmly below $4,370.00 with surging negative volume delta confirms a definitive break of the daily support floor, unlocking an accelerated liquidation cascade down into $4,360.00, $4,352.00, and $4,340.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **Long (Day Low Sweep & Judas Spring)** | **$4368.00 – $4371.00** Sweep | Price sweeps Day Low ($4372.20), absorbs stops, and prints a 5M green displacement close back above $4376.00 | **TP1:** $4382.00<br>**TP2:** $4390.00<br>**TP3:** $4402.00 | **$4364.50** (Below sweep low) | 1:1.6 / 1:2.6 / 1:4.0 |\n| **[G_B2]** | 🟢 **Long (High-Momentum Structural Reclaim)** | **$4392.00** Breakout | Impulsive 15M candle close firmly above $4392.00 with expanding positive volume delta | **TP1:** $4405.00<br>**TP2:** $4420.00<br>**TP3:** $4439.80 | **$4384.00** (Below broken shelf) | 1:1.6 / 1:3.5 / 1:6.0 |\n| **[G_S1]** | 🔴 **Short (Breaker Shelf & FVG Rejection)** | **$4384.00 – $4389.00** Retest | Price retests broken 15M FVG, leaves upper rejection wicks, and confirms with a 5M red close below $4381.00 | **TP1:** $4374.00<br>**TP2:** $4366.00<br>**TP3:** $4355.00 | **$4393.50** (Above breaker swing high) | 1:1.5 / 1:2.8 / 1:4.6 |\n| **[G_S2]** | 🔴 **Short (High-Momentum Day Low Breakdown)** | **$4370.00** Breakdown | Impulsive 15M candle close firmly below $4370.00 with surging red volume delta confirming structural floor loss | **TP1:** $4360.00<br>**TP2:** $4352.00<br>**TP3:** $4340.00 | **$4376.50** (Above breakdown base) | 1:1.5 / 1:2.8 / 1:4.6 |\n\n---"
+  },
+  {
     "id": "GOLD_20260918_133223",
     "timestamp": "2026-09-18T13:32:23+05:30",
     "timeDisplay": "01:32 PM, Sep 18",
