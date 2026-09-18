@@ -1,5 +1,5 @@
 window.btcDailyPlanData = [
-  {
+{
     "source": "AI",
     "timestamp": "2026-09-18T08:16:35+05:30",
     "timeDisplay": "08:16 AM, Sep 18",
@@ -27,7 +27,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "08:16 AM, Sep 18",
     "price": "76974.6",
     "bias": "bearish",
-    "behavior": "[FRI 08:16] [S1]: 15M Bearish FVG ($76,974.60–$77,074.60) supply rejection short",
+    "behavior": "[FRI 08:16] [S1]: 15M Bearish FVG ($76,974.60\u2013$77,074.60) supply rejection short",
     "tp": "76,624.61 / 76,424.61",
     "sl": "77,124.61",
     "status": "na"
@@ -49,7 +49,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "08:16 AM, Sep 18",
     "price": "76699.53",
     "bias": "bullish",
-    "behavior": "[FRI 08:16] [KB1]: 15M Bullish Demand OB ($76,699.53–$76,585.62) primary absorption floor and retest support",
+    "behavior": "[FRI 08:16] [KB1]: 15M Bullish Demand OB ($76,699.53\u2013$76,585.62) primary absorption floor and retest support",
     "tp": "77,324.61 / 77,724.61",
     "sl": "76,540.00",
     "status": "na"
@@ -91,33 +91,11 @@ window.btcDailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-18T08:16:35+05:30",
     "timeDisplay": "08:16 AM, Sep 18",
-    "price": "76974.6",
-    "bias": "bearish",
-    "behavior": "[FRI 08:16] [KS1]: 15M Bearish FVG ($76,974.60–$77,074.60) and local buy-side liquidity pool overhead resistance barrier",
-    "tp": "76,699.53 / 76,512.27",
-    "sl": "77,150.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-18T08:16:35+05:30",
-    "timeDisplay": "08:16 AM, Sep 18",
     "price": "76186.88",
     "bias": "bearish",
     "behavior": "[FRI 08:16] [KS2]: Sustained 5M displacement below Day Low ($76,186.88) triggering long-liquidation cascade",
     "tp": "75,850.00 / 75,500.00",
     "sl": "76,400.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-18T08:03:08+05:30",
-    "timeDisplay": "08:03 AM, Sep 18",
-    "price": "76186.9",
-    "bias": "bullish",
-    "behavior": "[FRI 08:03] [B1]: Day Low ($76,186.90) SSL sweep and demand absorption reclaim long",
-    "tp": "77,579.70 / 77,996.20",
-    "sl": "76,538.40",
     "status": "na"
   },
   {
@@ -137,7 +115,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "08:03 AM, Sep 18",
     "price": "77004.9",
     "bias": "bearish",
-    "behavior": "[FRI 08:03] [S1]: 15M Bearish FVG ($77,004.90–$77,104.90) supply rejection short",
+    "behavior": "[FRI 08:03] [S1]: 15M Bearish FVG ($77,004.90\u2013$77,104.90) supply rejection short",
     "tp": "76,654.95 / 76,454.95",
     "sl": "77,154.95",
     "status": "na"
@@ -146,20 +124,9 @@ window.btcDailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-18T08:03:08+05:30",
     "timeDisplay": "08:03 AM, Sep 18",
-    "price": "76186.9",
-    "bias": "bearish",
-    "behavior": "[FRI 08:03] [S2]: Day Low ($76,186.90) breakdown continuation short",
-    "tp": "76,554.95 / 76,154.95",
-    "sl": "77,104.95",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-18T08:03:08+05:30",
-    "timeDisplay": "08:03 AM, Sep 18",
     "price": "76664.83",
     "bias": "bullish",
-    "behavior": "[FRI 08:03] [KB1]: 15M Bullish Demand OB ($76,664.83–$76,560.45) primary absorption floor and retest support",
+    "behavior": "[FRI 08:03] [KB1]: 15M Bullish Demand OB ($76,664.83\u2013$76,560.45) primary absorption floor and retest support",
     "tp": "77,254.95 / 77,554.95",
     "sl": "76,520.00",
     "status": "na"
@@ -188,28 +155,6 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-18T08:03:08+05:30",
-    "timeDisplay": "08:03 AM, Sep 18",
-    "price": "76186.88",
-    "bias": "bullish",
-    "behavior": "[FRI 08:03] [KB4]: Current Day Low ($76,186.88) primary sell-side liquidity defense barrier and macro 4H demand base",
-    "tp": "76,650.00 / 77,050.00",
-    "sl": "75,980.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-18T08:03:08+05:30",
-    "timeDisplay": "08:03 AM, Sep 18",
-    "price": "76186.88",
-    "bias": "bearish",
-    "behavior": "[FRI 08:03] [KS2]: Sustained 5M displacement below Day Low ($76,186.88) triggering long-liquidation cascade",
-    "tp": "75,850.00 / 75,500.00",
-    "sl": "76,400.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-09-18T07:55:58+05:30",
     "timeDisplay": "07:55 AM, Sep 18",
     "price": "76747.65",
@@ -225,7 +170,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "07:55 AM, Sep 18",
     "price": "76904.0",
     "bias": "bearish",
-    "behavior": "[FRI 07:55] [S1]: 15M Bearish FVG ($76,904.00–$77,004.00) supply rejection short",
+    "behavior": "[FRI 07:55] [S1]: 15M Bearish FVG ($76,904.00\u2013$77,004.00) supply rejection short",
     "tp": "76,550.00 / 76,350.00",
     "sl": "77,050.00",
     "status": "na"
@@ -236,7 +181,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "07:55 AM, Sep 18",
     "price": "76624.96",
     "bias": "bullish",
-    "behavior": "[FRI 07:55] [KB1]: 15M Bullish Demand OB ($76,624.96–$76,541.14) and Bullish FVG ($76,579.00–$76,615.20) primary absorption floor",
+    "behavior": "[FRI 07:55] [KB1]: 15M Bullish Demand OB ($76,624.96\u2013$76,541.14) and Bullish FVG ($76,579.00\u2013$76,615.20) primary absorption floor",
     "tp": "77,150.00 / 77,450.00",
     "sl": "76,480.00",
     "status": "na"
@@ -302,7 +247,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "10:34 PM, Sep 17",
     "price": "76842.0",
     "bias": "bearish",
-    "behavior": "[THU 22:34] [S1]: 15M Bearish FVG ($76,842.00–$76,942.00) supply rejection short",
+    "behavior": "[THU 22:34] [S1]: 15M Bearish FVG ($76,842.00\u2013$76,942.00) supply rejection short",
     "tp": "76,492.01 / 76,292.01",
     "sl": "76,992.01",
     "status": "na"
@@ -324,7 +269,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "10:34 PM, Sep 17",
     "price": "76634.91",
     "bias": "bullish",
-    "behavior": "[THU 22:34] [KB1]: 15M Bullish Demand OB ($76,634.91–$76,578.98) and Bullish FVG ($76,401.00–$76,739.20) immediate absorption floor",
+    "behavior": "[THU 22:34] [KB1]: 15M Bullish Demand OB ($76,634.91\u2013$76,578.98) and Bullish FVG ($76,401.00\u2013$76,739.20) immediate absorption floor",
     "tp": "77,076.90 / 77,350.00",
     "sl": "76,480.00",
     "status": "na"
@@ -368,7 +313,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "08:32 PM, Sep 17",
     "price": "76572.9",
     "bias": "bearish",
-    "behavior": "[THU 20:32] [S1]: 15M Bearish FVG ($76,572.90–$76,578.10) supply rejection short",
+    "behavior": "[THU 20:32] [S1]: 15M Bearish FVG ($76,572.90\u2013$76,578.10) supply rejection short",
     "tp": "76,357.00 / 76,150.00",
     "sl": "76,750.00",
     "status": "na"
@@ -379,7 +324,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "08:32 PM, Sep 17",
     "price": "76509.79",
     "bias": "bullish",
-    "behavior": "[THU 20:32] [KB1]: 15M Bullish Demand OB ($76,509.79–$76,528.43) and 15M Bullish FVG ($76,469.20–$76,499.90) immediate absorption floor",
+    "behavior": "[THU 20:32] [KB1]: 15M Bullish Demand OB ($76,509.79\u2013$76,528.43) and 15M Bullish FVG ($76,469.20\u2013$76,499.90) immediate absorption floor",
     "tp": "77,076.90 / 77,350.00",
     "sl": "76,380.00",
     "status": "na"
@@ -401,7 +346,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "07:32 PM, Sep 17",
     "price": "76495.94",
     "bias": "bullish",
-    "behavior": "[THU 19:32] [KB1]: 15M Bullish Demand OB ($76,470.25–$76,495.94) and 15M Bullish FVG ($76,469.20–$76,499.90) immediate absorption floor",
+    "behavior": "[THU 19:32] [KB1]: 15M Bullish Demand OB ($76,470.25\u2013$76,495.94) and 15M Bullish FVG ($76,469.20\u2013$76,499.90) immediate absorption floor",
     "tp": "77,076.90 / 77,350.00",
     "sl": "76,380.00",
     "status": "na"
@@ -445,7 +390,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "06:31 PM, Sep 17",
     "price": "76786.70",
     "bias": "bearish",
-    "behavior": "[THU 18:31] [S1]: 15M Bearish FVG ($76,700.20–$76,786.70) supply rejection short",
+    "behavior": "[THU 18:31] [S1]: 15M Bearish FVG ($76,700.20\u2013$76,786.70) supply rejection short",
     "tp": "76,470.00 / 76,270.00",
     "sl": "76,970.00",
     "status": "na"
@@ -467,7 +412,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "06:31 PM, Sep 17",
     "price": "76608.81",
     "bias": "bullish",
-    "behavior": "[THU 18:31] [KB1]: 15M Bullish Demand OB ($76,505.77–$76,608.81) immediate absorption floor",
+    "behavior": "[THU 18:31] [KB1]: 15M Bullish Demand OB ($76,505.77\u2013$76,608.81) immediate absorption floor",
     "tp": "77,076.90 / 77,370.00",
     "sl": "76,450.00",
     "status": "na"
@@ -489,7 +434,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "06:31 PM, Sep 17",
     "price": "77076.90",
     "bias": "bearish",
-    "behavior": "[THU 18:31] [KS1]: Current Day High ($77,076.90) and 15M Bearish FVG ($76,700.20–$76,786.70) overhead supply barrier",
+    "behavior": "[THU 18:31] [KS1]: Current Day High ($77,076.90) and 15M Bearish FVG ($76,700.20\u2013$76,786.70) overhead supply barrier",
     "tp": "76,608.81 / 76,319.94",
     "sl": "77,280.00",
     "status": "na"
@@ -511,7 +456,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "06:02 PM, Sep 17",
     "price": "77131.40",
     "bias": "bearish",
-    "behavior": "[THU 18:02] [S1]: 15M Bearish FVG ($77,131.40–$77,231.40) supply rejection short",
+    "behavior": "[THU 18:02] [S1]: 15M Bearish FVG ($77,131.40\u2013$77,231.40) supply rejection short",
     "tp": "76,781.39 / 76,581.39",
     "sl": "77,281.39",
     "status": "na"
@@ -522,7 +467,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "06:02 PM, Sep 17",
     "price": "76598.29",
     "bias": "bullish",
-    "behavior": "[THU 18:02] [KB1]: 15M Bullish Demand OB ($76,482.97–$76,598.29) immediate absorption floor",
+    "behavior": "[THU 18:02] [KB1]: 15M Bullish Demand OB ($76,482.97\u2013$76,598.29) immediate absorption floor",
     "tp": "77,481.39 / 77,881.39",
     "sl": "76,420.00",
     "status": "na"
@@ -566,7 +511,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "01:31 PM, Sep 17",
     "price": "76399.93",
     "bias": "bearish",
-    "behavior": "[THU 13:31] [S1]: 15M Bearish FVG ($76,328.40–$76,434.10) supply rejection short",
+    "behavior": "[THU 13:31] [S1]: 15M Bearish FVG ($76,328.40\u2013$76,434.10) supply rejection short",
     "tp": "76,171.67 / 75,971.67",
     "sl": "76,671.67",
     "status": "na"
@@ -577,7 +522,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "01:31 PM, Sep 17",
     "price": "76399.93",
     "bias": "bullish",
-    "behavior": "[THU 13:31] [KB1]: 15M Bullish Demand OB ($76,357.86–$76,399.93) immediate absorption floor",
+    "behavior": "[THU 13:31] [KB1]: 15M Bullish Demand OB ($76,357.86\u2013$76,399.93) immediate absorption floor",
     "tp": "76,704.26 / 77,071.67",
     "sl": "76,280.00",
     "status": "na"
@@ -588,7 +533,7 @@ window.btcDailyPlanData = [
     "timeDisplay": "01:31 PM, Sep 17",
     "price": "76302.51",
     "bias": "bullish",
-    "behavior": "[THU 13:31] [KB2]: 15M 200 EMA ($76,302.51) and 15M Bullish FVG ($76,297.50–$76,434.10) dynamic support cushion",
+    "behavior": "[THU 13:31] [KB2]: 15M 200 EMA ($76,302.51) and 15M Bullish FVG ($76,297.50\u2013$76,434.10) dynamic support cushion",
     "tp": "76,704.26 / 77,071.67",
     "sl": "76,180.00",
     "status": "na"
@@ -618,7 +563,7 @@ window.btcDailyPlanData = [
 ];
 
 window.btcDailyPlanSummary = [
-  {
+{
     "id": "BTC_20260918_081637",
     "timestamp": "2026-09-18T08:16:37+05:30",
     "timeDisplay": "08:16 AM, Sep 18",
