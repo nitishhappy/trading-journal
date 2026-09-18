@@ -1,6 +1,61 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-18T08:16:10+05:30",
+    "timeDisplay": "08:16 AM, Sep 18",
+    "price": "4348.50-4354.50",
+    "bias": "neutral",
+    "behavior": "[FRI 08:16] [Chop]: 50% Macro Equilibrium Compression & No-Trade Corridor",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T08:16:10+05:30",
+    "timeDisplay": "08:16 AM, Sep 18",
+    "price": "4341.00-4344.00",
+    "bias": "bullish",
+    "behavior": "[FRI 08:16] [G_B1]: Judas Sweep of Asian Lows & 5M Spring Reclaim",
+    "tp": "4352.50 / 4358.00 / 4364.00",
+    "sl": "4337.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T08:16:10+05:30",
+    "timeDisplay": "08:16 AM, Sep 18",
+    "price": "4360.00",
+    "bias": "bullish",
+    "behavior": "[FRI 08:16] [G_B2]: High-Momentum Breakout Above Asian High BSL",
+    "tp": "4370.00 / 4378.30 / 4388.00",
+    "sl": "4353.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T08:16:10+05:30",
+    "timeDisplay": "08:16 AM, Sep 18",
+    "price": "4356.50-4359.00",
+    "bias": "bearish",
+    "behavior": "[FRI 08:16] [G_S1]: Equal Highs SFP & Ignition Supply Rejection",
+    "tp": "4350.00 / 4344.00 / 4341.00",
+    "sl": "4362.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-18T08:16:10+05:30",
+    "timeDisplay": "08:16 AM, Sep 18",
+    "price": "4339.50",
+    "bias": "bearish",
+    "behavior": "[FRI 08:16] [G_S2]: Asian Low Breakdown & Structural Liquidation",
+    "tp": "4332.00 / 4324.00 / 4315.00",
+    "sl": "4346.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-18T07:51:47+05:30",
     "timeDisplay": "07:51 AM, Sep 18",
     "price": "4348.00-4354.50",
@@ -14,44 +69,11 @@ window.goldDailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-18T07:51:47+05:30",
     "timeDisplay": "07:51 AM, Sep 18",
-    "price": "4341.00-4344.00",
-    "bias": "bullish",
-    "behavior": "[FRI 07:51] [G_B1]: Judas Sweep of Asian Lows & 5M Spring Reclaim",
-    "tp": "4352.50 / 4358.00 / 4364.00",
-    "sl": "4337.50",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-18T07:51:47+05:30",
-    "timeDisplay": "07:51 AM, Sep 18",
-    "price": "4360.00",
-    "bias": "bullish",
-    "behavior": "[FRI 07:51] [G_B2]: High-Momentum Breakout Above Asian High BSL",
-    "tp": "4370.00 / 4378.30 / 4388.00",
-    "sl": "4353.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-18T07:51:47+05:30",
-    "timeDisplay": "07:51 AM, Sep 18",
     "price": "4357.00-4360.00",
     "bias": "bearish",
     "behavior": "[FRI 07:51] [G_S1]: Ignition Supply Rejection & SFP Short",
     "tp": "4350.00 / 4344.00 / 4341.00",
     "sl": "4362.50",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-18T07:51:47+05:30",
-    "timeDisplay": "07:51 AM, Sep 18",
-    "price": "4339.50",
-    "bias": "bearish",
-    "behavior": "[FRI 07:51] [G_S2]: Asian Low Breakdown & Structural Liquidation",
-    "tp": "4332.00 / 4324.00 / 4315.00",
-    "sl": "4346.00",
     "status": "na"
   },
   {
@@ -311,6 +333,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20260918_081612",
+    "timestamp": "2026-09-18T08:16:12+05:30",
+    "timeDisplay": "08:16 AM, Sep 18",
+    "spot": "4351.82",
+    "trigger": "Manual Ad-Hoc Run",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (08:14 AM IST - Sep 18, 2026 | Spot: $4351.82 | Trigger: Manual Ad-Hoc Run)\n\n---\n\n### 1. Global Macro & Forex Mechanics:\n* **Asian Session Microstructure (08:14 AM IST / 02:44 GMT / 22:44 EDT)**: Spot Gold trades at **$4,351.82**, rotating directly into the mathematical 50% Macro Daily Equilibrium ($4,352.42) after stabilizing from an earlier overnight liquidation that breached the prior support baseline at **Day Low ($4,378.30)** and extended down toward the Asian accumulation base, well beneath the macro peak at **Day High ($4,404.60)**. Tokyo and Singapore liquidity providers currently dominate interbank order flow during this pre-European window. With London and Frankfurt off-desk until 01:30 PM IST (08:00 GMT), spot order book depth is running at typical Asian session constraints (~35% of peak London/New York overlap volume). In this environment of thinned depth, price rotations toward range equilibrium represent mean-reversion re-balancing rather than fresh institutional trend commitment.\n* **US Dollar Index (DXY) Intermarket Confluence**: The US Dollar Index is oscillating in a tight consolidation range between **102.95 and 103.15**. Bullion's overnight displacement below $4,378.30 directly tracked Greenback firmness. For Gold to sustain a structural recovery beyond immediate supply ($4,358.00) and re-test the broken $4,378.30 shelf, the DXY must reject 103.15 and break below 102.85. Conversely, sustained Dollar strength above 103.30 will exert renewed downward pressure on metals, increasing the probability of an Asian Session Low sweep.\n* **US 10-Year Treasury Yield Alignment**: Benchmark US 10-Year Treasury yields remain anchored near **4.45%–4.47%** in overnight electronic trade. Elevated real yields maintain an ongoing opportunity cost headwind for non-yielding bullion, capping runaway topside momentum in the absence of fresh Tier-1 macro catalysts and keeping algorithmic sellers active on tests of overhead order blocks.\n* **Asian Liquidity Traps & Anti-Trap Dynamics**: With spot price pushing into $4,351.82 right at the 50% micro-equilibrium, retail traders are prone to gambling on directional continuation within the median. However, Equal Highs (BSL) clustered tightly at **$4,356.38** present an imminent trap setup: an upward probe may simply engineer liquidity into the Bearish Parabolic Ignition Order Block ($4,357.94–$4,358.07) before reversing. Capital preservation requires waiting for completed 5-minute/15-minute candle closes outside the equilibrium corridor before entering.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Higher Timeframe Market Structure (1H / 4H)**: Gold remains in an internal corrective phase following the rejection from Day High ($4,404.60). The overnight breakdown through $4,378.30 flipped that prior demand base into a major institutional breaker. Within today's session, price action is bounded by clear structural markers:\n  - **Macro Day High**: $4,404.60\n  - **Prior Day Low / Broken Shelf (Breaker)**: $4,378.30\n  - **Asian Session High**: $4,363.81\n  - **Bearish Parabolic Ignition Order Block**: $4,357.94 – $4,358.07 (Origin of -$5.79 flush)\n  - **Equal Highs (BSL Cluster)**: $4,356.38 (2 distinct taps)\n  - **Macro 50% Daily Equilibrium**: $4,352.42\n  - **1H Consolidation Shelf**: $4,343.68 to $4,356.38 (50% Micro-EQ: $4,350.03)\n  - **2H Swing Range Envelope**: $4,343.68 to $4,363.81 (50% Swing-EQ: $4,353.75)\n  - **Asian Session Low (SSL Pool)**: $4,341.03\n  - **Current Spot Location**: At $4,351.82, price is dead-center at Macro 50% Equilibrium ($4,352.42) and directly between the 1H Micro-EQ ($4,350.03) and 2H Swing-EQ ($4,353.75).\n* **Buy-Side Liquidity (BSL) Pools**:\n  - **$4,356.38**: Clustered Equal Highs with resting retail buy-stops (prime SFP probe target).\n  - **$4,357.94 – $4,363.81**: Bearish Parabolic Ignition Order Block and Asian Session High BSL.\n  - **$4,374.00 – $4,378.30**: Broken Day Low shelf, 15M Bearish Fair Value Gap (FVG), and institutional breaker block.\n  - **$4,392.00 – $4,404.60**: Overnight distribution origin and Macro Day High buy stops.\n* **Sell-Side Liquidity (SSL) Pools**:\n  - **$4,343.68 – $4,346.00**: 1H Consolidation Shelf base and local liquidity lows.\n  - **$4,341.03**: Asian Session Low resting Sell-Side Liquidity (SSL) pool and double-bottom stop cluster.\n  - **$4,332.00 – $4,336.00**: Major HTF structural demand zone from prior European accumulation.\n  - **$4,318.00 – $4,324.00**: Deep discount macro demand origin.\n* **Fair Value Gaps (FVG) & Order Blocks (OB)**:\n  - **Bearish Parabolic Ignition Order Block ($4,357.94 – $4,358.07)**: Primary immediate supply barrier and institutional defense wall.\n  - **15M Bearish Breaker / FVG ($4,374.00 – $4,378.30)**: Formed during the breakdown through prior Day Low; major macro reload zone for swing sellers.\n  - **1H Bullish Demand Block ($4,341.00 – $4,345.00)**: Key discount demand protecting Asian structural integrity.\n  - **Equilibrium Compression Zone ($4,348.50 – $4,354.50)**: High-frequency rotational chop band centered on current spot.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Designated Chop Zone: $4,348.50 – $4,354.50 (Width: $6.00 anchored around Macro EQ $4,352.42 & Spot $4,351.82)**\n* **Structural Rationale**: Spot Gold is oscillating directly at the confluence of the Macro Daily 50% EQ ($4,352.42), the 1H Micro-EQ ($4,350.03), and the 2H Swing-EQ ($4,353.75). Price action inside this $6.00 corridor is characterized by overlapping wicks, compressed candle bodies, and low-volume two-way algorithmic matching. Trading inside this pocket carries high whipsaw risk with negative expected value.\n* **Tactical Directive**: **STRICT NO-TRADE ZONE**. Do not initiate new market orders between $4,348.50 and $4,354.50. Wait for an external liquidity sweep of the session extremes (an Asian Low $4,341.03 sweep or an Equal Highs $4,356.38 / Ignition test) or an impulsive 15-minute candle displacement close holding fully outside this bracket.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* ⚡ **Judas Sweep of Asian Lows & Spring Reclaim ([G_B1] $4,341.00 – $4,344.00 Sweep & Reclaim)**: A fast liquidity probe piercing beneath the Asian Session Low ($4,341.03) into the 1H Bullish Demand Base ($4,338.00–$4,343.00), followed by an immediate 5M green displacement candle closing back above $4,346.00 with expanding buy delta, traps early breakout shorts and sparks an explosive short-covering bounce toward $4,352.50, $4,358.00, and $4,364.00.\n* 🚀 **Asian Range Breakout & Supply Absorption ([G_B2] $4,360.00 Breakout)**: An impulsive 15-minute candle close firmly above the Bearish Ignition Base ($4,358.07) and Asian High ($4,363.81) with expanding positive volume delta confirms institutional absorption of overhead supply, unlocking rapid expansion through the liquidity vacuum toward $4,370.00 and the $4,378.30 breaker.\n* 💥 **Equal Highs SFP & Supply Rejection Short ([G_S1] $4,356.50 – $4,359.00 Rejection)**: A liquidity probe running above the Equal Highs cluster ($4,356.38) into the Bearish Parabolic Ignition Block ($4,357.94–$4,358.07) that prints prominent upper rejection wicks (Swing Failure Pattern), followed by a confirmed 5M red displacement close back below $4,354.00 with expanding sell volume, triggers an institutional fade rotating price back toward the 50% Micro-EQ ($4,350.00) and Asian lows ($4,344.00 / $4,341.00).\n* ⚡ **Asian Low Breakdown & Liquidation Cascade ([G_S2] $4,339.50 Breakdown)**: An impulsive 15-minute candle close firmly below the Asian Session Low ($4,341.03) with surging red volume delta confirms structural failure of Asian accumulation, unleashing long liquidation down into discount liquidity at $4,332.00, $4,324.00, and $4,315.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **Long (Judas Sweep of Asian Lows & 5M Spring Reclaim)** | **$4,341.00 – $4,344.00** Reclaim | Price probes below Asian Low ($4,341.03) into 1H demand, rejects with lower wicks, and prints an impulsive 5M green close back above $4,346.00 with expanding buy volume | **TP1:** $4,352.50<br>**TP2:** $4,358.00<br>**TP3:** $4,364.00 | **$4,337.50** (Below sweep wick) | 1:0.8 / 1:1.4 / 1:2.1 |\n| **[G_B2]** | 🟢 **Long (High-Momentum Breakout Above Asian High BSL)** | **$4,360.00** Breakout | Impulsive 15M candle close firmly above $4,360.00 with surging positive volume delta, confirming absorption of the Bearish Ignition base and opening path to $4,378.30 | **TP1:** $4,370.00<br>**TP2:** $4,378.30<br>**TP3:** $4,388.00 | **$4,353.00** (Below breakout shelf) | 1:1.4 / 1:2.6 / 1:4.0 |\n| **[G_S1]** | 🔴 **Short (Equal Highs SFP & Ignition Supply Rejection)** | **$4,356.50 – $4,359.00** Rejection | Price sweeps resting stops above Equal Highs ($4,356.38) into $4,358 ignition supply, leaves upper wicks, and prints a decisive 5M close back below $4,354.00 with expanding sell volume | **TP1:** $4,350.00<br>**TP2:** $4,344.00<br>**TP3:** $4,341.00 | **$4,362.50** (Above supply ceiling) | 1:0.7 / 1:1.8 / 1:2.3 |\n| **[G_S2]** | 🔴 **Short (Asian Low Breakdown & Structural Liquidation)** | **$4,339.50** Breakdown | Impulsive 15M candle close firmly below $4,339.50 with surging red volume delta, confirming structural failure of Asian accumulation support | **TP1:** $4,332.00<br>**TP2:** $4,324.00<br>**TP3:** $4,315.00 | **$4,346.00** (Above breakdown base) | 1:1.2 / 1:2.4 / 1:3.8 |\n\n---"
+  },
+  {
     "id": "GOLD_20260918_075150",
     "timestamp": "2026-09-18T07:51:50+05:30",
     "timeDisplay": "07:51 AM, Sep 18",
