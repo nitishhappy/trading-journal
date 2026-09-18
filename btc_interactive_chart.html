@@ -728,9 +728,19 @@
             reloadChartData();
 
             // Subscribe TimeScale changes to redraw vertical line overlay smoothly during pan & zoom
-            chartInstance.timeScale().subscribeVisibleTimeScaleChange(() => {
-                renderVerticalLinesOverlay();
-            });
+            if (chartInstance && chartInstance.timeScale) {
+                const ts = chartInstance.timeScale();
+                if (typeof ts.subscribeVisibleLogicalRangeChange === 'function') {
+                    ts.subscribeVisibleLogicalRangeChange(() => {
+                        renderVerticalLinesOverlay();
+                    });
+                }
+                if (typeof ts.subscribeVisibleTimeRangeChange === 'function') {
+                    ts.subscribeVisibleTimeRangeChange(() => {
+                        renderVerticalLinesOverlay();
+                    });
+                }
+            }
 
             // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction & Custom Vertical Line Placement!
             chartInstance.subscribeClick((param) => {
@@ -1020,11 +1030,11 @@
 
             // Update AI Briefing timestamps and redraw vertical line overlay
             const rawPlanArray = (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : [];
-            aiBriefingTimes = extractAiBriefingTimes(rawPlanArray);
+            aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, candles);
             renderVerticalLinesOverlay();
         }
 
-        function extractAiBriefingTimes(dataArray) {
+        function extractAiBriefingTimes(dataArray, candlesList) {
             if (!Array.isArray(dataArray)) return [];
             const seen = new Set();
             const result = [];
@@ -1034,14 +1044,28 @@
                 const rawTs = item.timestamp || "";
                 let unixSec = null;
                 if (rawTs) {
-                    unixSec = Math.floor(new Date(rawTs).getTime() / 1000);
+                    unixSec = Math.floor(new Date(rawTs).getTime() / 1000) + IST_OFFSET_SEC;
                 } else if (timeStr) {
-                    unixSec = parseISTTimeToUnix(timeStr);
+                    const parsed = parseISTTimeToUnix(timeStr);
+                    if (parsed) unixSec = parsed + IST_OFFSET_SEC;
                 }
-                if (unixSec && !seen.has(unixSec)) {
-                    seen.add(unixSec);
-                    const label = timeStr ? timeStr.split(',')[0].trim() : "Briefing";
-                    result.push({ time: unixSec, label: label });
+                if (unixSec) {
+                    let targetTime = unixSec;
+                    if (candlesList && candlesList.length > 0) {
+                        let minDiff = Infinity;
+                        candlesList.forEach(c => {
+                            const diff = Math.abs(c.time - unixSec);
+                            if (diff < minDiff && diff <= 1800) {
+                                minDiff = diff;
+                                targetTime = c.time;
+                            }
+                        });
+                    }
+                    if (!seen.has(targetTime)) {
+                        seen.add(targetTime);
+                        const label = timeStr ? timeStr.split(',')[0].trim() : "Briefing";
+                        result.push({ time: targetTime, label: label });
+                    }
                 }
             });
             return result;
