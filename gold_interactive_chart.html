@@ -517,10 +517,10 @@
         <div class="chart-section">
             <div class="chart-toolbar">
                 <div class="symbol-title">
-                    <span>🪙 XAU/USD (5M Level Chart)</span>
+                    <span>🪙 XAU/USD (5M)</span>
                     <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
                 </div>
-                <div class="timestamp-badge" id="briefing-time-badge">📌 Action Plan Raised: --</div>
+                <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</div>
             </div>
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
                 <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
@@ -579,6 +579,38 @@
                 const timerEl = document.getElementById('refresh-timer');
                 if (timerEl) timerEl.innerText = `${countdownSeconds}s`;
             }, 1000);
+
+            // 5-Minute Candle Bar Close Countdown Timer (300 seconds)
+            startBarCloseCountdown(300);
+        }
+
+        function startBarCloseCountdown(barDurationSec = 300) {
+            function tick() {
+                const nowSec = Math.floor(Date.now() / 1000);
+                const secRemaining = barDurationSec - (nowSec % barDurationSec);
+                const mins = Math.floor(secRemaining / 60);
+                const secs = secRemaining % 60;
+                const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                const badge = document.getElementById('bar-close-badge');
+                if (badge) {
+                    badge.innerText = `⏳ Bar Close: ${formatted}`;
+                    if (secRemaining <= 30) {
+                        badge.style.background = 'rgba(239, 68, 68, 0.2)';
+                        badge.style.borderColor = '#ef4444';
+                        badge.style.color = '#f87171';
+                    } else if (secRemaining <= 60) {
+                        badge.style.background = 'rgba(245, 158, 11, 0.25)';
+                        badge.style.borderColor = '#f59e0b';
+                        badge.style.color = '#fbbf24';
+                    } else {
+                        badge.style.background = 'rgba(245, 158, 11, 0.15)';
+                        badge.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+                        badge.style.color = '#fbbf24';
+                    }
+                }
+            }
+            setInterval(tick, 1000);
+            tick();
         }
 
         function setupEventListeners() {
@@ -815,7 +847,8 @@
             levelsData = getGoldActionPlanLevels();
 
             const raisedTimeStr = levelsData.timeDisplay || "06:02 PM, Sep 09";
-            document.getElementById('briefing-time-badge').innerText = `📌 Action Plan Raised: ${raisedTimeStr}`;
+            const bBadge = document.getElementById('briefing-time-badge');
+            if (bBadge) bBadge.innerText = `📌 Action Plan Raised: ${raisedTimeStr}`;
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Setups`;
 
             // Load real 5m OHLC candle feed

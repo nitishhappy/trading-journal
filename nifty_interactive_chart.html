@@ -546,7 +546,7 @@
                 <div class="symbol-title">
                     <span>NSE:NIFTY50 (5M)</span>
                     <span id="feed-status-badge" class="feed-badge">● UPSTOX REALTIME API</span>
-                    <span id="briefing-time-badge" class="timestamp-badge">📌 Plan Raised: Loading...</span>
+                    <span id="bar-close-badge" class="timestamp-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</span>
                 </div>
                 <div style="font-size: 0.8rem; color: var(--text-muted);">
                     💡 Click price lines on chart to select card
@@ -690,8 +690,41 @@
                     countdownSeconds = 15;
                     reloadChartData();
                 }
-                document.getElementById('refresh-timer').innerText = `${countdownSeconds}s`;
+                const rTimer = document.getElementById('refresh-timer');
+                if (rTimer) rTimer.innerText = `${countdownSeconds}s`;
             }, 1000);
+
+            // 5-Minute Candle Bar Close Countdown Timer (300 seconds)
+            startBarCloseCountdown(300);
+        }
+
+        function startBarCloseCountdown(barDurationSec = 300) {
+            function tick() {
+                const nowSec = Math.floor(Date.now() / 1000);
+                const secRemaining = barDurationSec - (nowSec % barDurationSec);
+                const mins = Math.floor(secRemaining / 60);
+                const secs = secRemaining % 60;
+                const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                const badge = document.getElementById('bar-close-badge');
+                if (badge) {
+                    badge.innerText = `⏳ Bar Close: ${formatted}`;
+                    if (secRemaining <= 30) {
+                        badge.style.background = 'rgba(239, 68, 68, 0.2)';
+                        badge.style.borderColor = '#ef4444';
+                        badge.style.color = '#f87171';
+                    } else if (secRemaining <= 60) {
+                        badge.style.background = 'rgba(245, 158, 11, 0.25)';
+                        badge.style.borderColor = '#f59e0b';
+                        badge.style.color = '#fbbf24';
+                    } else {
+                        badge.style.background = 'rgba(245, 158, 11, 0.15)';
+                        badge.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+                        badge.style.color = '#fbbf24';
+                    }
+                }
+            }
+            setInterval(tick, 1000);
+            tick();
         }
 
         let latestCandleTimestamp = null;
@@ -894,7 +927,8 @@
             levelsData = getLatestDailyPlanLevels();
 
             const raisedTimeStr = levelsData.timeDisplay || "10:35 AM, Sep 09";
-            document.getElementById('briefing-time-badge').innerText = `📌 Plan Raised: ${raisedTimeStr}`;
+            const bBadge = document.getElementById('briefing-time-badge');
+            if (bBadge) bBadge.innerText = `📌 Plan Raised: ${raisedTimeStr}`;
             document.getElementById('levels-count').innerText = `${levelsData.levels.length} Levels`;
 
             // 4. Find candle matching the plan raised timestamp
