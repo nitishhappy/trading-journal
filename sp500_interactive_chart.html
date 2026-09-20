@@ -1344,7 +1344,16 @@
                     || window.sp500DailyPlanSummary?.[0]?.timeDisplay
                     || timeDisplay;
 
-                const latestItems = window.sp500DailyPlanData.filter(item => item.timestamp === anchorTimestamp);
+                const anchorMs = anchorTimestamp ? new Date(anchorTimestamp).getTime() : null;
+                const latestItems = window.sp500DailyPlanData.filter(item => {
+                    if (!item) return false;
+                    if (item.timestamp === anchorTimestamp) return true;
+                    if (anchorMs && item.timestamp) {
+                        const itemMs = new Date(item.timestamp).getTime();
+                        return Math.abs(itemMs - anchorMs) <= 60000;
+                    }
+                    return false;
+                });
                 const keySummaryItems = latestItems.filter(item => /\[SP_(KB|KS|B|S)\d\]/i.test(item.behavior || ''));
                 const itemsToFilter = keySummaryItems.length > 0 ? keySummaryItems : latestItems;
 

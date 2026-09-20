@@ -1348,7 +1348,16 @@
                     || window.goldDailyPlanSummary?.[0]?.timeDisplay
                     || timeDisplay;
 
-                const latestItems = window.goldDailyPlanData.filter(item => item.timestamp === anchorTimestamp);
+                const anchorMs = anchorTimestamp ? new Date(anchorTimestamp).getTime() : null;
+                const latestItems = window.goldDailyPlanData.filter(item => {
+                    if (!item) return false;
+                    if (item.timestamp === anchorTimestamp) return true;
+                    if (anchorMs && item.timestamp) {
+                        const itemMs = new Date(item.timestamp).getTime();
+                        return Math.abs(itemMs - anchorMs) <= 60000;
+                    }
+                    return false;
+                });
 // ✅ FIX: Collect ALL Gold levels without pre-filtering.
                 const uniqueTagItems = [];
                 const seenTags = new Set();

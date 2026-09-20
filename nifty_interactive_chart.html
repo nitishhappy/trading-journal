@@ -1479,7 +1479,16 @@
                     || window.dailyPlanSummary?.[0]?.timeDisplay
                     || timeDisplay;
 
-                const latestItems = window.dailyPlanData.filter(item => item.timestamp === anchorTimestamp);
+                const anchorMs = anchorTimestamp ? new Date(anchorTimestamp).getTime() : null;
+                const latestItems = window.dailyPlanData.filter(item => {
+                    if (!item) return false;
+                    if (item.timestamp === anchorTimestamp) return true;
+                    if (anchorMs && item.timestamp) {
+                        const itemMs = new Date(item.timestamp).getTime();
+                        return Math.abs(itemMs - anchorMs) <= 60000;
+                    }
+                    return false;
+                });
 
                 // ✅ FIX: Collect ALL levels (KB, KS, B, S) — KB/KS structural first, then B/S action setups.
                 const kbKsItems = latestItems.filter(item => /\[K[BS]\d+\]/i.test(item.behavior || ''));

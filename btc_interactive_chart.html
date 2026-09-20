@@ -1381,7 +1381,16 @@
                     || window.btcDailyPlanSummary?.[0]?.timeDisplay
                     || timeDisplay;
 
-                const latestItems = window.btcDailyPlanData.filter(item => item.timestamp === anchorTimestamp);
+                const anchorMs = anchorTimestamp ? new Date(anchorTimestamp).getTime() : null;
+                const latestItems = window.btcDailyPlanData.filter(item => {
+                    if (!item) return false;
+                    if (item.timestamp === anchorTimestamp) return true;
+                    if (anchorMs && item.timestamp) {
+                        const itemMs = new Date(item.timestamp).getTime();
+                        return Math.abs(itemMs - anchorMs) <= 60000;
+                    }
+                    return false;
+                });
 
                 // ✅ FIX: Collect ALL levels (KB, KS, B, S) — no pre-filtering by tag family.
                 // Ordered preference: KB/KS structural levels first, then B/S action setups.
