@@ -875,11 +875,11 @@
             const nowSec = Math.floor(Date.now() / 1000);
             const ageMinutes = (nowSec - latestCandleTime) / 60;
 
-            if (ageMinutes <= 45) {
+            if (ageMinutes <= 15) {
                 badge.innerText = `● BINANCE LIVE (${currentTf.toUpperCase()})`;
                 badge.className = 'feed-badge feed-badge-live';
             } else {
-                badge.innerText = '🔒 MARKET CLOSED';
+                badge.innerText = `⚠️ LAGGING (${Math.round(ageMinutes)}m ago)`;
                 badge.className = 'feed-badge feed-badge-unavailable';
             }
         }
@@ -1530,13 +1530,15 @@
 
         async function loadRealBtcCandles(levels) {
             const tfInterval = currentTf === '5m' ? '5m' : '15m';
+            let candles = null;
+
             // 1. Direct Binance BTCUSDT klines (uncached, CORS supported natively)
             try {
-                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=300`, { cache: 'no-store' });
+                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=300&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
-                        return data.map(c => ({
+                        candles = data.map(c => ({
                             time: Math.floor(c[0] / 1000) + IST_OFFSET_SEC,
                             open: parseFloat(parseFloat(c[1]).toFixed(2)),
                             high: parseFloat(parseFloat(c[2]).toFixed(2)),
@@ -1549,40 +1551,48 @@
                 console.warn("[BTC Chart] Direct Binance fetch failed, trying fallbacks:", e);
             }
 
-            // 2. Direct Coinbase BTC-USD candles
-            try {
-                const granularity = currentTf === '5m' ? 300 : 900;
-                const res = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=${granularity}&_t=${Date.now()}`, { cache: 'no-store' });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        return data.map(c => ({
-                            time: c[0] + IST_OFFSET_SEC,
-                            open: parseFloat(c[3].toFixed(2)),
-                            high: parseFloat(c[2].toFixed(2)),
-                            low: parseFloat(c[1].toFixed(2)),
-                            close: parseFloat(c[4].toFixed(2))
-                        })).sort((a, b) => a.time - b.time);
+            // 2. Direct Coinbase BTC-USD candles fallback
+            if (!candles || candles.length === 0) {
+                try {
+                    const granularity = currentTf === '5m' ? 300 : 900;
+                    const res = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=${granularity}&_t=${Date.now()}`, { cache: 'no-store' });
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (Array.isArray(data) && data.length > 0) {
+                            candles = data.map(c => ({
+                                time: c[0] + IST_OFFSET_SEC,
+                                open: parseFloat(c[3].toFixed(2)),
+                                high: parseFloat(c[2].toFixed(2)),
+                                low: parseFloat(c[1].toFixed(2)),
+                                close: parseFloat(c[4].toFixed(2))
+                            })).sort((a, b) => a.time - b.time);
+                        }
                     }
+                } catch (e) {
+                    console.warn("[BTC Chart] Direct Coinbase fetch failed:", e);
                 }
-            } catch (e) {
-                console.warn("[BTC Chart] Direct Coinbase fetch failed:", e);
             }
 
-            // 3. Server-side /api/marketCandles
-            try {
-                const res = await fetch(`/api/marketCandles?symbol=BTC&timeframe=${currentTf}&_t=${Date.now()}`, { cache: 'no-store' });
-                if (res.ok) {
-                    const json = await res.json();
-                    if (json && json.candles && json.candles.length > 0) {
-                        return json.candles;
+            // 3. Server-side /api/marketCandles fallback
+            if (!candles || candles.length === 0) {
+                try {
+                    const res = await fetch(`/api/marketCandles?symbol=BTC&timeframe=${currentTf}&_t=${Date.now()}`, { cache: 'no-store' });
+                    if (res.ok) {
+                        const json = await res.json();
+                        if (json && json.candles && json.candles.length > 0) {
+                            candles = json.candles;
+                        }
                     }
+                } catch (e) {
+                    console.warn('[BTC Chart] /api/marketCandles fetch failed:', e);
                 }
-            } catch (e) {
-                console.warn('[BTC Chart] /api/marketCandles fetch failed:', e);
             }
 
-            // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console (Option 2: header badge updates, popup toasts suppressed)
+            if (candles && candles.length > 0) {
+                return candles;
+            }
+
+            // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
             console.error("[BTC Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds (Binance, Coinbase, /api/marketCandles). ZERO synthetic candles generated.");
             return [];
         }

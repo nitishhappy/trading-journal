@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-7fb07c1617";
+const CACHE_NAME = "trade-journal-ba69a363a5";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -186,7 +186,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Never intercept Firebase, Google APIs, Groq, or Instagram — always go to network
+  // Never intercept Firebase, Google APIs, Groq, Instagram, ANY backend /api/ endpoints, or ANY market data feeds — always go straight to network
   if (
     url.includes("firestore.googleapis.com") ||
     url.includes("identitytoolkit") ||
@@ -195,7 +195,14 @@ self.addEventListener("fetch", (event) => {
     url.includes("fonts.gstatic.com") ||
     url.includes("fonts.googleapis.com") ||
     url.includes("instagram.com") ||
-    url.includes("cdninstagram.com")
+    url.includes("cdninstagram.com") ||
+    url.includes("/api/") ||
+    url.includes("binance.com") ||
+    url.includes("coinbase.com") ||
+    url.includes("swissquote.com") ||
+    url.includes("yahoo.com") ||
+    url.includes("upstox.com") ||
+    url.includes("tradingview.com")
   ) {
     return;
   }
