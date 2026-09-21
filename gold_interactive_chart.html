@@ -557,7 +557,7 @@
         let levelsData = [];
         let candleSeries = null;
         let chartInstance = null;
-        let countdownSeconds = 15;
+        let countdownSeconds = 5;
         let isInitialLoad = true;
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -578,7 +578,7 @@
             setInterval(() => {
                 countdownSeconds--;
                 if (countdownSeconds <= 0) {
-                    countdownSeconds = 15;
+                    countdownSeconds = 5;
                     reloadChartData();
                 }
                 const timerEl = document.getElementById('refresh-timer');
