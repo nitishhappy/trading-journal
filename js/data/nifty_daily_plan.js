@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-21T12:16:49+05:30",
+    "timeDisplay": "12:16 PM, Sep 21",
+    "price": "23440",
+    "bias": "bullish",
+    "behavior": "[MON 12:16] [B2]: Sustained 5m close ABOVE 23,440 clearing Day High (23,434.05) with active futures volume confirming absorption",
+    "tp": "23,495 / 23,540",
+    "sl": "23,405",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-21T12:16:49+05:30",
+    "timeDisplay": "12:16 PM, Sep 21",
+    "price": "23435",
+    "bias": "bearish",
+    "behavior": "[MON 12:16] [S1]: Push into 23,430\u201323,440 rejected with upper exhaustion wicks below 23,410",
+    "tp": "23,370 / 23,330",
+    "sl": "23,445",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-21T12:16:49+05:30",
+    "timeDisplay": "12:16 PM, Sep 21",
+    "price": "23415",
+    "bias": "bullish",
+    "behavior": "[MON 12:16] [B1]: Pullback test into 23,395\u201323,405 rejected with lower absorption wicks and confirmed 5m close back above 23,415",
+    "tp": "23,465 / 23,500",
+    "sl": "23,375",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-21T12:16:49+05:30",
+    "timeDisplay": "12:16 PM, Sep 21",
+    "price": "23395",
+    "bias": "bearish",
+    "behavior": "[MON 12:16] [S2]: Sustained 5m close BELOW 23,395 breaks back inside 15M ORB triggering long liquidation flush",
+    "tp": "23,345 / 23,315",
+    "sl": "23,430",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-21T12:04:25+05:30",
     "timeDisplay": "12:04 PM, Sep 21",
     "price": "23455",
@@ -91,17 +135,6 @@ window.dailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-21T10:52:37+05:30",
     "timeDisplay": "10:52 AM, Sep 21",
-    "price": "23415",
-    "bias": "bullish",
-    "behavior": "[MON 10:52] [B2]: Sustained 5m close ABOVE 23,415 clearing Day High (23,410.75) with active futures volume confirming absorption",
-    "tp": "23,465 / 23,510",
-    "sl": "23,375",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-21T10:52:37+05:30",
-    "timeDisplay": "10:52 AM, Sep 21",
     "price": "23405",
     "bias": "bearish",
     "behavior": "[MON 10:52] [S1]: Push into 23,405\u201323,415 rejected with upper exhaustion wicks below 23,370",
@@ -124,6 +157,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260921_121651",
+    "timestamp": "2026-09-21T12:16:51+05:30",
+    "timeDisplay": "12:16 PM, Sep 21",
+    "spot": "23418.4",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 23330.20",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (12:15 PM IST - Sep 21, 2026 | Spot: 23418.4 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 23330.20))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,405.00 – 23,435.00 (30-point Compression / Polarity Retest Corridor).\n- Rationale: Spot index (23,418.40) expanded +103.85 points off Day Open (23,330.20) and decisively broke out above the 15M ORB High (23,402.95) to print a fresh Day High at 23,434.05. Price is currently pulling back to retest the 15M ORB breakout boundary and consolidating directly above the 23,400 round number. Active Nifty Futures volume sits at baseline 1.0x (8-bar average), indicating two-way absorption without aggressive institutional displacement. Gamma positioning shows emergent 23,400 Put writing defense contending against sticky 23,450 Call writer overhead supply, pinning price in rotational chop.\n- Directive: STRICT NO-TRADE ZONE for directional naked option buying between 23,405.00 and 23,435.00. Avoid chasing micro-wicks inside this 30-point compression band. Wait for either a clean 5-minute continuation breakout above 23,440 with expanding volume or a structural breakdown back under 23,395.\n\n4. High Momentum / Explosive Zones:\n- [Upside Day High Breakout / Call Squeeze Expansion] ([Sustained 5m close ABOVE 23,440.00]): Decisively clears Day High (23,434.05) and absorbs the 23,450 Call writer barrier, triggering rapid short-covering panic and accelerating momentum toward 23,495.00 and 23,540.00.\n- [Downside Breakout Failure / Long Liquidation Cascade] ([Sustained 5m close BELOW 23,395.00]): Decisively breaks back inside the 15M ORB range (23,314.80–23,402.95) beneath the 23,400 put support shelf, trapping late breakout buyers and triggering rapid long liquidation flushes toward 23,345.00 and 23,315.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Shelf Retest & Dip Absorption Long): Pullback test into 23,395–23,405 (former 15M ORB High 23,402.95 polarity flip zone) rejected with lower absorption wicks, followed by a confirmed 5m close back ABOVE 23,415 with active futures volume confirming buyer defense. | TP: 23,465 / 23,500 | SL: 23,375 | 💡 Buy 23,400 CE + Sell 23,450 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout & Squeeze Expansion Long): Sustained 5m close ABOVE 23,440 accompanied by expanding active Nifty Futures volume (>1.2x avg) confirming decisive absorption of Day High (23,434.05) and triggering Call writer short-covering panic. | TP: 23,495 / 23,540 | SL: 23,405 | 💡 Buy 23,450 CE + Sell 23,500 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Supply Rejection Fade Short): Push into 23,430–23,440 (Day High supply zone) rejected with upper exhaustion wicks, followed by a confirmed 5m close back BELOW 23,410 crossing under the 23,450 Call wall. | TP: 23,370 / 23,330 | SL: 23,445 | 💡 Buy 23,450 PE + Sell 23,400 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Value Shelf Breakdown & Liquidation Flush Short): Sustained 5m close BELOW 23,395 accompanied by expanding red futures volume (>1.2x avg), confirming a failed breakout trap back inside the 15M ORB range (23,314.80–23,402.95) and triggering long liquidation toward Day Low. | TP: 23,345 / 23,315 | SL: 23,430 | 💡 Buy 23,400 PE + Sell 23,350 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20260921_120427",
     "timestamp": "2026-09-21T12:04:27+05:30",
     "timeDisplay": "12:04 PM, Sep 21",
