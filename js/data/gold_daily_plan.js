@@ -1,6 +1,72 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-22T05:15:55+05:30",
+    "timeDisplay": "05:15 AM, Sep 22",
+    "price": "4385.0",
+    "bias": "bearish",
+    "behavior": "[TUE 05:15] [G_B2]: Macro Liquidity Pool & Extension Target",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-22T05:15:55+05:30",
+    "timeDisplay": "05:15 AM, Sep 22",
+    "price": "4370.58",
+    "bias": "bearish",
+    "behavior": "[TUE 05:15] [G_B2]: Day High BSL Sweep & Breakout Trigger",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-22T05:15:55+05:30",
+    "timeDisplay": "05:15 AM, Sep 22",
+    "price": "4362.0",
+    "bias": "bullish",
+    "behavior": "[TUE 05:15] [G_B1]: 15M FVG Ceiling & Dynamic Demand Floor",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-22T05:15:55+05:30",
+    "timeDisplay": "05:15 AM, Sep 22",
+    "price": "4358.5",
+    "bias": "bullish",
+    "behavior": "[TUE 05:15] [G_B1]: Institutional Bullish FVG Baseline",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-22T05:15:55+05:30",
+    "timeDisplay": "05:15 AM, Sep 22",
+    "price": "4350.53",
+    "bias": "bullish",
+    "behavior": "[TUE 05:15] [G_S2]: Structural Invalidation Pivot & Breaker Base",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-22T05:15:55+05:30",
+    "timeDisplay": "05:15 AM, Sep 22",
+    "price": "4339.21",
+    "bias": "bullish",
+    "behavior": "[TUE 05:15] [G_S2]: Day Low Major SSL Pool Target",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-21T19:46:54+05:30",
     "timeDisplay": "07:46 PM, Sep 21",
     "price": "4335.50-4343.00",
@@ -223,6 +289,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20260922_051558",
+    "timestamp": "2026-09-22T05:15:58+05:30",
+    "timeDisplay": "05:15 AM, Sep 22",
+    "spot": "4368.37",
+    "trigger": "Structural Invalidation (+17.8 pts incremental shift from previous trigger 4350.53",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (05:15 AM IST - Sep 22, 2026 | Spot: 4368.37 | Trigger: Structural Invalidation (+17.8 pts incremental shift from previous trigger 4350.53))\n\n### 1. Global Macro & Forex Mechanics:\n* **Dollar Index (DXY) Correlation:** The US Dollar Index continues to meet persistent overhead supply near critical resistance, displaying deceleration and lower-high distribution. The inverse correlation remains robust, providing sustained upward pressure for bullion spot pricing.\n* **US 10-Year Treasury Yields:** Yields remain capped beneath key session pivot levels. Softer real yields are compressing the opportunity cost of non-yielding assets, supporting institutional bids into precious metals.\n* **Session Mechanics & Cross-Market Liquidity:** Following the New York cash close, liquidity has rotated cleanly through late-session rollover into the early Asian session. The +17.8 pt structural displacement from the prior 4350.53 trigger confirms institutional accumulation absorbing resting liquidity, now establishing acceptance near the upper boundary of the daily range ahead of the upcoming European liquidity injection.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL):** Major pools of resting stop-orders are stacked directly above the current Day High at **4370.58**, with secondary expansion targets clustered around psychological liquidity at **4380.00 – 4385.00**.\n* **Sell-Side Liquidity (SSL):** Internal liquidity rests below the immediate micro-consolidation floor at **4362.00**, while significant structural sell stops reside underneath the **4350.53** prior trigger base and macro day low at **4339.21**.\n* **Fair Value Gaps (FVGs) & Order Blocks (OB):** \n  * A pristine 15-Minute Bullish Fair Value Gap sits unmitigated between **4358.50 and 4362.00**.\n  * The origin of the current expansion leg forms a validated Bullish Breaker / Demand Order Block anchored at **4349.50 – 4351.50**.\n* **Structural Bias:** Strong Bullish Continuation. Price printed a decisive Break of Structure (BOS) on both the 5-minute and 15-minute timeframes, establishing higher-timeframe order flow dominance above 4350.53.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Range:** **4362.00 – 4367.00**\n* **Context:** This 5-point pocket represents mid-range fair-value balance directly below the day's high (4370.58). Executing within this corridor carries poor risk-to-reward metrics, elevated spread sensitivity during the Asian session, and high vulnerability to mean-reverting whipsaws. Active order placement should strictly await boundary interaction or clean directional displacement.\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion Zone (>4371.00):** A decisive 5-minute close above Day High (4370.58) triggers cascade buying from buy-stop execution and short-covering momentum, targeting an algorithmic expansion toward 4378.50 and 4385.00.\n* **Bearish Acceleration Zone (<4350.00):** A failure and structural close beneath the 4350.53 invalidation shelf triggers rapid long-liquidation into the void down toward 4342.00 and Day Low (4339.21).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **4362.00** | ** Retracement into the 15-min Bullish FVG (**4358.50 – 4361.50**), sweeping internal liquidity below 4362.00 followed by a 5-min bullish displacement/rejection close back above 4362.50 | **TP1:** ** TP1 at 4368.50 | **** 4355.00 (below the FVG baseline)** | 1:2.0 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | Confirmed | ** Strong 5-min candle body close firmly above Day High (**4371.00**) accompanied by sustained upside momentum | **TP1:** ** TP1 at 4378.50 | **** 4365.50** | 1:2.0 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4368.00** | ** False breakout / BSL sweep above Day High into **4371.50 – 4373.00** that immediately rejects and prints a 5-min bearish engulfing candle closing back inside the range below 4368.00 | **TP1:** ** TP1 at 4362.00 | **** 4374.50 (above the rejection wick)** | 1:2.0 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | Confirmed | ** Decisive 15-min structural close below the **4349.50** support pivot | **TP1:** ** TP1 at 4342.00 | **** 4355.50** | 1:2.0 |"
+  },
+  {
     "id": "GOLD_20260921_194656",
     "timestamp": "2026-09-21T19:46:56+05:30",
     "timeDisplay": "07:46 PM, Sep 21",
