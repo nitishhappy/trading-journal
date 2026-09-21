@@ -524,6 +524,7 @@
                         <button id="btn-tf-15m" class="btn" style="padding: 0.15rem 0.55rem; font-size: 0.72rem; min-height: 22px;">15M</button>
                     </div>
                     <span id="feed-status-badge" class="feed-badge feed-badge-live">● VANTAGE MT5 (5M)</span>
+                    <a id="local-server-link" href="http://localhost:8080/gold_interactive_chart.html" target="_blank" style="display:none; font-size:0.72rem; color:#fbbf24; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.4); padding:2px 8px; border-radius:4px; text-decoration:none;" title="Click to open local Vantage MT5 live chart">⚡ Switch to Local MT5 Feed (8080)</a>
                 </div>
                 <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</div>
             </div>
@@ -1041,14 +1042,16 @@
             }
 
             if (chartInstance) {
-                if (!forceFit && !isInitialLoad && savedRange !== null) {
+                const totalBars = candles ? candles.length : 0;
+                const isViewingLiveEdge = savedRange && totalBars > 0 && (savedRange.to >= (totalBars - 5));
+
+                if (!forceFit && !isInitialLoad && savedRange !== null && !isViewingLiveEdge) {
                     chartInstance.timeScale().setVisibleLogicalRange(savedRange);
                 } else if (fitAllLevels) {
                     chartInstance.timeScale().fitContent();
                     isInitialLoad = false;
                 } else {
                     if (candles && candles.length > 0) {
-                        const totalBars = candles.length;
                         chartInstance.timeScale().setVisibleLogicalRange({
                             from: Math.max(0, totalBars - 30),
                             to: totalBars + 8
@@ -1502,13 +1505,23 @@
             // Dynamically refresh local Vantage MT5 candle store
             await reloadCandlesScript();
 
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
             // 1. Primary Feed: Vantage MT5 from window.goldCandlesData (gold_market_data.db)
             if (window.goldCandlesData) {
                 const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
                 const candles = window.goldCandlesData[tfKey];
                 if (Array.isArray(candles) && candles.length > 0) {
-                    currentFeedSource = window.goldCandlesData.source || 'VANTAGE_MT5';
-                    return candles;
+                    const latestCandleTime = candles[candles.length - 1].time - IST_OFFSET_SEC;
+                    const nowSec = Math.floor(Date.now() / 1000);
+                    const ageMinutes = (nowSec - latestCandleTime) / 60;
+
+                    // On localhost, Vantage exporter runs live. If age is within 10 minutes (or on localhost):
+                    if (isLocal || ageMinutes <= 10) {
+                        currentFeedSource = window.goldCandlesData.source || 'VANTAGE_MT5';
+                        return candles;
+                    }
+                    console.warn(`[Gold Chart] window.goldCandlesData is stale (${ageMinutes.toFixed(1)} mins old). Attempting live cloud fallback.`);
                 }
             }
 
@@ -1517,7 +1530,7 @@
                 const res = await fetch(`/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
-                    if (json && json.candles && json.candles.length > 0) {
+                    if (json && json.candles && json.candles.length > 5) {
                         currentFeedSource = json.source || 'VANTAGE_MT5';
                         return json.candles;
                     }
@@ -1526,19 +1539,59 @@
                 console.warn('[Gold Chart] /api/marketCandles fetch failed:', e);
             }
 
-            // 3. Tertiary / Real-Time Tick Fallback: Swissquote BBO Spot
+            // 3. Tertiary / Real-Time Tick Fallback: Swissquote BBO Spot Anchor
+            // Uses historical bars from window.goldCandlesData, seamlessly updating the live forming bar with Swissquote spot
             try {
                 const sqRes = await fetch('https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD');
                 if (sqRes.ok) {
                     const sqData = await sqRes.json();
                     const prices = sqData[0]?.spreadProfilePrices;
                     if (prices && prices.length > 0) {
+                        const spot = parseFloat(((parseFloat(prices[0].bid) + parseFloat(prices[0].ask)) / 2).toFixed(2));
                         currentFeedSource = 'SWISSQUOTE_BBO';
-                        console.log('[Gold Chart] Swissquote BBO live spot anchor:', prices[0]);
+                        console.log('[Gold Chart] Swissquote BBO live spot anchor:', spot);
+
+                        const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
+                        const barSec = currentTf === '15m' ? 900 : 300;
+                        const baseCandles = (window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]))
+                            ? window.goldCandlesData[tfKey].map(c => ({...c}))
+                            : [];
+
+                        if (baseCandles.length > 0) {
+                            const nowSec = Math.floor(Date.now() / 1000);
+                            const currentBarTime = (Math.floor(nowSec / barSec) * barSec) + IST_OFFSET_SEC;
+                            const lastCandle = baseCandles[baseCandles.length - 1];
+
+                            if (lastCandle && lastCandle.time === currentBarTime) {
+                                lastCandle.high = Math.max(lastCandle.high, spot);
+                                lastCandle.low = Math.min(lastCandle.low, spot);
+                                lastCandle.close = spot;
+                            } else {
+                                baseCandles.push({
+                                    time: currentBarTime,
+                                    open: spot,
+                                    high: spot,
+                                    low: spot,
+                                    close: spot,
+                                    volume: 1
+                                });
+                            }
+                            return baseCandles;
+                        }
                     }
                 }
             } catch (e) {
                 console.warn('[Gold Chart] Swissquote BBO fallback note:', e);
+            }
+
+            // If baseCandles exist even if stale, return them as offline fallback rather than empty
+            if (window.goldCandlesData) {
+                const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
+                const candles = window.goldCandlesData[tfKey];
+                if (Array.isArray(candles) && candles.length > 0) {
+                    currentFeedSource = 'VANTAGE_OFFLINE';
+                    return candles;
+                }
             }
 
             // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
@@ -1548,6 +1601,13 @@
 
         function updateFeedStatusBadge(candles) {
             const badge = document.getElementById('feed-status-badge');
+            const localLink = document.getElementById('local-server-link');
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+            if (localLink) {
+                localLink.style.display = (!isLocal) ? 'inline-flex' : 'none';
+            }
+
             if (!badge) return;
 
             if (!candles || !Array.isArray(candles) || candles.length === 0) {
@@ -1563,6 +1623,12 @@
             if (currentFeedSource === 'SWISSQUOTE_BBO') {
                 badge.innerText = `● SWISSQUOTE SPOT (${currentTf.toUpperCase()})`;
                 badge.className = 'feed-badge feed-badge-live';
+                return;
+            }
+
+            if (currentFeedSource === 'VANTAGE_OFFLINE') {
+                badge.innerText = `⚠️ OFFLINE SNAPSHOT (${ageMinutes > 60 ? Math.round(ageMinutes/60) + 'h ago' : Math.round(ageMinutes) + 'm ago'})`;
+                badge.className = 'feed-badge feed-badge-unavailable';
                 return;
             }
 

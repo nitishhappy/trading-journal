@@ -517,9 +517,13 @@
     <div class="main-container">
         <div class="chart-section">
             <div class="chart-toolbar">
-                <div class="symbol-title">
-                    <span>₿ BTC/USD (15M)</span>
-                    <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
+                <div class="symbol-title" style="display: flex; align-items: center; gap: 8px;">
+                    <span>₿ BTC/USD</span>
+                    <div class="tf-selector" style="display: inline-flex; gap: 4px; background: rgba(255,255,255,0.05); padding: 2px; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <button id="btn-tf-5m" class="btn" style="padding: 0.15rem 0.55rem; font-size: 0.72rem; min-height: 22px;">5M</button>
+                        <button id="btn-tf-15m" class="btn active" style="padding: 0.15rem 0.55rem; font-size: 0.72rem; min-height: 22px;">15M</button>
+                    </div>
+                    <span id="feed-status-badge" class="feed-badge feed-badge-live">● BINANCE LIVE (15M)</span>
                 </div>
                 <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 15:00</div>
             </div>
@@ -555,6 +559,7 @@
         let chartInstance = null;
         let countdownSeconds = 15;
         let isInitialLoad = true;
+        let currentTf = '15m';
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
@@ -585,7 +590,9 @@
             startBarCloseCountdown(900);
         }
 
+        let barCloseInterval = null;
         function startBarCloseCountdown(barDurationSec = 900) {
+            if (barCloseInterval) clearInterval(barCloseInterval);
             function tick() {
                 const nowSec = Math.floor(Date.now() / 1000);
                 const secRemaining = barDurationSec - (nowSec % barDurationSec);
@@ -610,7 +617,7 @@
                     }
                 }
             }
-            setInterval(tick, 1000);
+            barCloseInterval = setInterval(tick, 1000);
             tick();
         }
 
@@ -620,6 +627,30 @@
             const fitBtn = document.getElementById('btn-toggle-fit');
             const vlinesBtn = document.getElementById('btn-toggle-vlines');
             const addVLineBtn = document.getElementById('btn-add-vline');
+
+            // Timeframe Selector Buttons (5M / 15M)
+            const tf5mBtn = document.getElementById('btn-tf-5m');
+            const tf15mBtn = document.getElementById('btn-tf-15m');
+            if (tf5mBtn && tf15mBtn) {
+                tf5mBtn.addEventListener('click', () => {
+                    if (currentTf === '5m') return;
+                    currentTf = '5m';
+                    tf5mBtn.classList.add('active');
+                    tf15mBtn.classList.remove('active');
+                    startBarCloseCountdown(300);
+                    reloadChartData(true);
+                    showToast("Timeframe: 5M", "Switched to 5-minute Binance candles.");
+                });
+                tf15mBtn.addEventListener('click', () => {
+                    if (currentTf === '15m') return;
+                    currentTf = '15m';
+                    tf15mBtn.classList.add('active');
+                    tf5mBtn.classList.remove('active');
+                    startBarCloseCountdown(900);
+                    reloadChartData(true);
+                    showToast("Timeframe: 15M", "Switched to 15-minute Binance candles.");
+                });
+            }
 
             if (vlinesBtn) {
                 vlinesBtn.addEventListener('click', () => {
@@ -845,7 +876,7 @@
             const ageMinutes = (nowSec - latestCandleTime) / 60;
 
             if (ageMinutes <= 45) {
-                badge.innerText = '● LIVE API FEED';
+                badge.innerText = `● BINANCE LIVE (${currentTf.toUpperCase()})`;
                 badge.className = 'feed-badge feed-badge-live';
             } else {
                 badge.innerText = '🔒 MARKET CLOSED';
@@ -1042,14 +1073,16 @@
             }
 
             if (chartInstance) {
-                if (!forceFit && !isInitialLoad && savedRange !== null) {
+                const totalBars = candles ? candles.length : 0;
+                const isViewingLiveEdge = savedRange && totalBars > 0 && (savedRange.to >= (totalBars - 5));
+
+                if (!forceFit && !isInitialLoad && savedRange !== null && !isViewingLiveEdge) {
                     chartInstance.timeScale().setVisibleLogicalRange(savedRange);
                 } else if (fitAllLevels) {
                     chartInstance.timeScale().fitContent();
                     isInitialLoad = false;
                 } else {
                     if (candles && candles.length > 0) {
-                        const totalBars = candles.length;
                         chartInstance.timeScale().setVisibleLogicalRange({
                             from: Math.max(0, totalBars - 30),
                             to: totalBars + 8
@@ -1496,9 +1529,10 @@
 
 
         async function loadRealBtcCandles(levels) {
-            // 1. Direct Binance BTCUSDT 15m klines (uncached, CORS supported natively)
+            const tfInterval = currentTf === '5m' ? '5m' : '15m';
+            // 1. Direct Binance BTCUSDT klines (uncached, CORS supported natively)
             try {
-                const res = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=300', { cache: 'no-store' });
+                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=300`, { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
@@ -1515,9 +1549,10 @@
                 console.warn("[BTC Chart] Direct Binance fetch failed, trying fallbacks:", e);
             }
 
-            // 2. Direct Coinbase BTC-USD 15m candles
+            // 2. Direct Coinbase BTC-USD candles
             try {
-                const res = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=900&_t=${Date.now()}`, { cache: 'no-store' });
+                const granularity = currentTf === '5m' ? 300 : 900;
+                const res = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=${granularity}&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const data = await res.json();
                     if (Array.isArray(data) && data.length > 0) {
@@ -1536,7 +1571,7 @@
 
             // 3. Server-side /api/marketCandles
             try {
-                const res = await fetch(`/api/marketCandles?symbol=BTC&_t=${Date.now()}`, { cache: 'no-store' });
+                const res = await fetch(`/api/marketCandles?symbol=BTC&timeframe=${currentTf}&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
                     if (json && json.candles && json.candles.length > 0) {
