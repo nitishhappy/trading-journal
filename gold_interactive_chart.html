@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="js/data/gold_daily_plan.js"></script>
+    <script src="js/data/gold_candles.js"></script>
     <style>
         :root {
             --bg-dark: #0b0f17;
@@ -516,9 +517,13 @@
     <div class="main-container">
         <div class="chart-section">
             <div class="chart-toolbar">
-                <div class="symbol-title">
-                    <span>🪙 XAU/USD (5M)</span>
-                    <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
+                <div class="symbol-title" style="display: flex; align-items: center; gap: 8px;">
+                    <span>🪙 XAU/USD</span>
+                    <div class="tf-selector" style="display: inline-flex; gap: 4px; background: rgba(255,255,255,0.05); padding: 2px; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <button id="btn-tf-5m" class="btn active" style="padding: 0.15rem 0.55rem; font-size: 0.72rem; min-height: 22px;">5M</button>
+                        <button id="btn-tf-15m" class="btn" style="padding: 0.15rem 0.55rem; font-size: 0.72rem; min-height: 22px;">15M</button>
+                    </div>
+                    <span id="feed-status-badge" class="feed-badge feed-badge-live">● VANTAGE MT5 (5M)</span>
                 </div>
                 <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</div>
             </div>
@@ -584,7 +589,9 @@
             startBarCloseCountdown(300);
         }
 
+        let barCloseInterval = null;
         function startBarCloseCountdown(barDurationSec = 300) {
+            if (barCloseInterval) clearInterval(barCloseInterval);
             function tick() {
                 const nowSec = Math.floor(Date.now() / 1000);
                 const secRemaining = barDurationSec - (nowSec % barDurationSec);
@@ -609,7 +616,7 @@
                     }
                 }
             }
-            setInterval(tick, 1000);
+            barCloseInterval = setInterval(tick, 1000);
             tick();
         }
 
@@ -619,6 +626,30 @@
             const fitBtn = document.getElementById('btn-toggle-fit');
             const vlinesBtn = document.getElementById('btn-toggle-vlines');
             const addVLineBtn = document.getElementById('btn-add-vline');
+
+            // Timeframe Selector Buttons (5M / 15M)
+            const tf5mBtn = document.getElementById('btn-tf-5m');
+            const tf15mBtn = document.getElementById('btn-tf-15m');
+            if (tf5mBtn && tf15mBtn) {
+                tf5mBtn.addEventListener('click', () => {
+                    if (currentTf === '5m') return;
+                    currentTf = '5m';
+                    tf5mBtn.classList.add('active');
+                    tf15mBtn.classList.remove('active');
+                    startBarCloseCountdown(300);
+                    reloadChartData(true);
+                    showToast("Timeframe: 5M", "Switched to 5-minute Vantage MT5 candles.");
+                });
+                tf15mBtn.addEventListener('click', () => {
+                    if (currentTf === '15m') return;
+                    currentTf = '15m';
+                    tf15mBtn.classList.add('active');
+                    tf5mBtn.classList.remove('active');
+                    startBarCloseCountdown(900);
+                    reloadChartData(true);
+                    showToast("Timeframe: 15M", "Switched to 15-minute Vantage MT5 candles.");
+                });
+            }
 
             if (vlinesBtn) {
                 vlinesBtn.addEventListener('click', () => {
@@ -1449,40 +1480,45 @@
         }
 
 
-        async function loadRealGoldCandles(levels) {
-            const spotEndpoints = [
-                'https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300',
-                'https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300',
-                'https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300',
-                'https://api2.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=5m&limit=300'
-            ];
+        let currentTf = '5m';
+        let currentFeedSource = 'VANTAGE_MT5';
 
-            for (const url of spotEndpoints) {
-                try {
-                    const res = await fetch(url, { cache: 'no-store' });
-                    if (res.ok) {
-                        const data = await res.json();
-                        if (Array.isArray(data) && data.length > 0) {
-                            return data.map(c => ({
-                                time: Math.floor(c[0] / 1000) + IST_OFFSET_SEC,
-                                open: parseFloat(parseFloat(c[1]).toFixed(2)),
-                                high: parseFloat(parseFloat(c[2]).toFixed(2)),
-                                low: parseFloat(parseFloat(c[3]).toFixed(2)),
-                                close: parseFloat(parseFloat(c[4]).toFixed(2))
-                            }));
-                        }
-                    }
-                } catch (e) {
-                    console.warn(`[Gold Chart] Direct Spot Gold fetch from ${url} failed, trying next mirror:`, e);
+        function reloadCandlesScript() {
+            return new Promise((resolve) => {
+                const scriptId = 'dyn-gold-candles-script';
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/gold_candles.js?t=${Date.now()}`;
+                script.onload = () => resolve(true);
+                script.onerror = () => resolve(false);
+                document.body.appendChild(script);
+            });
+        }
+
+        async function loadRealGoldCandles(levels) {
+            // Dynamically refresh local Vantage MT5 candle store
+            await reloadCandlesScript();
+
+            // 1. Primary Feed: Vantage MT5 from window.goldCandlesData (gold_market_data.db)
+            if (window.goldCandlesData) {
+                const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
+                const candles = window.goldCandlesData[tfKey];
+                if (Array.isArray(candles) && candles.length > 0) {
+                    currentFeedSource = window.goldCandlesData.source || 'VANTAGE_MT5';
+                    return candles;
                 }
             }
 
-            // Server-side /api/marketCandles fallback
+            // 2. Secondary Feed: Server-side /api/marketCandles (Firestore / API)
             try {
-                const res = await fetch(`/api/marketCandles?symbol=GOLD&_t=${Date.now()}`, { cache: 'no-store' });
+                const res = await fetch(`/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
                     if (json && json.candles && json.candles.length > 0) {
+                        currentFeedSource = json.source || 'VANTAGE_MT5';
                         return json.candles;
                     }
                 }
@@ -1490,8 +1526,23 @@
                 console.warn('[Gold Chart] /api/marketCandles fetch failed:', e);
             }
 
+            // 3. Tertiary / Real-Time Tick Fallback: Swissquote BBO Spot
+            try {
+                const sqRes = await fetch('https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD');
+                if (sqRes.ok) {
+                    const sqData = await sqRes.json();
+                    const prices = sqData[0]?.spreadProfilePrices;
+                    if (prices && prices.length > 0) {
+                        currentFeedSource = 'SWISSQUOTE_BBO';
+                        console.log('[Gold Chart] Swissquote BBO live spot anchor:', prices[0]);
+                    }
+                }
+            } catch (e) {
+                console.warn('[Gold Chart] Swissquote BBO fallback note:', e);
+            }
+
             // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
-            console.error("[Gold Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds (Binance Vision, Binance REST, /api/marketCandles). ZERO synthetic candles generated.");
+            console.error("[Gold Chart] F12 ERROR: Real market candle data unavailable from Vantage MT5 & Swissquote. ZERO synthetic candles generated.");
             return [];
         }
 
@@ -1505,12 +1556,18 @@
                 return;
             }
 
-            const latestCandleTime = candles[candles.length - 1].time - IST_OFFSET_SEC; // Convert back to real UTC for freshness check
+            const latestCandleTime = candles[candles.length - 1].time - IST_OFFSET_SEC; // Convert back to real UTC
             const nowSec = Math.floor(Date.now() / 1000);
             const ageMinutes = (nowSec - latestCandleTime) / 60;
 
-            if (ageMinutes <= 45) {
-                badge.innerText = '● LIVE API FEED';
+            if (currentFeedSource === 'SWISSQUOTE_BBO') {
+                badge.innerText = `● SWISSQUOTE SPOT (${currentTf.toUpperCase()})`;
+                badge.className = 'feed-badge feed-badge-live';
+                return;
+            }
+
+            if (ageMinutes <= 60) {
+                badge.innerText = `● VANTAGE MT5 (${currentTf.toUpperCase()})`;
                 badge.className = 'feed-badge feed-badge-live';
             } else {
                 badge.innerText = '🔒 MARKET CLOSED';

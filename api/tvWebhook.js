@@ -81,12 +81,13 @@ module.exports = async (req, res) => {
   const resolvedImage = imageUrl || image || null;
   const resolvedTelegramDate = telegram_date || telegramDate || null;
 
-  // ── S&P 500 TradingView Candle Persistence ──────────────────────────────
+  // ── S&P 500 & GOLD Candle Persistence ──────────────────────────────
   const rawSym = symbol || data.ticker || data.sym || "";
   const cleanedSym = cleanSymbol(rawSym);
   const isSp500 = cleanedSym === "SP500" || cleanedSym === "^GSPC" || cleanedSym === "SPX" || cleanedSym === "SPX500" || cleanedSym === "S&P500";
+  const isGold = cleanedSym === "GOLD" || cleanedSym === "XAUUSD" || cleanedSym === "XAU";
 
-  if (isSp500 && data.open !== undefined && data.high !== undefined && data.low !== undefined && data.close !== undefined) {
+  if ((isSp500 || isGold) && data.open !== undefined && data.high !== undefined && data.low !== undefined && data.close !== undefined) {
     try {
       const openVal = parseFloat(data.open);
       const highVal = parseFloat(data.high);
@@ -95,12 +96,14 @@ module.exports = async (req, res) => {
       const volVal = data.volume !== undefined ? parseFloat(data.volume) : 0;
 
       if (!isNaN(openVal) && !isNaN(highVal) && !isNaN(lowVal) && !isNaN(closeVal)) {
+        const targetAsset = isGold ? "GOLD" : "SP500";
+        const collName = isGold ? "gold_candles" : "sp500_candles";
         const normTf = normalizeTimeframe(resolvedTimeframe || "5m");
         const normTs = normalizeTimestamp(data.timestamp || data.time || data.date);
-        const docId = `SP500_${normTf}_${normTs}`;
+        const docId = `${targetAsset}_${normTf}_${normTs}`;
 
-        await db.collection("sp500_candles").doc(docId).set({
-          symbol: "SP500",
+        await db.collection(collName).doc(docId).set({
+          symbol: targetAsset,
           timeframe: normTf,
           timestamp: normTs,
           isoTimestamp: new Date(normTs * 1000).toISOString(),
@@ -109,12 +112,12 @@ module.exports = async (req, res) => {
           low: lowVal,
           close: closeVal,
           volume: isNaN(volVal) ? 0 : volVal,
-          source: "TRADINGVIEW",
+          source: isGold ? "VANTAGE_MT5" : "TRADINGVIEW",
           updatedAt: admin.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
       }
     } catch (e) {
-      console.error("tvWebhook: Error saving SP500 OHLC candle to Firestore:", e);
+      console.error("tvWebhook: Error saving OHLC candle to Firestore:", e);
     }
   }
 

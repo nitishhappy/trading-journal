@@ -177,37 +177,76 @@ export default async function handler(req, res) {
     }
 
     // ── 2. GOLD / XAUUSD CANDLES ───────────────────────────────────────────
+    // ── 2. GOLD / XAUUSD CANDLES (Vantage MT5 & Swissquote Spot) ───────────
     if (symInput === "GOLD" || symInput === "XAUUSD" || symInput === "XAU") {
       let candles = [];
       const reqTf = (req.query.timeframe || req.query.tf || req.query.interval || "5m").toLowerCase();
-      const normTf = reqTf.includes("15") ? "15m" : "5m";
+      const normTf = (reqTf === "15" || reqTf === "15m") ? "15m" : "5m";
 
-      const spotUrls = [
-        `https://data-api.binance.vision/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300`,
-        `https://api1.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300`,
-        `https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=${normTf}&limit=300`
-      ];
+      // 1. Try Firestore gold_candles collection (populated by Vantage MT5 sync)
+      if (db) {
+        try {
+          const limit = Math.min(parseInt(req.query.limit || "200", 10), 500);
+          const snapshot = await db.collection("gold_candles")
+            .where("timeframe", "==", normTf)
+            .get();
 
-      for (const url of spotUrls) {
-        const binanceJson = await fetchUrl(url);
-        if (Array.isArray(binanceJson) && binanceJson.length > 0) {
-          candles = binanceJson.map(c => ({
-            time: Math.floor(c[0] / 1000),
-            open: parseFloat(parseFloat(c[1]).toFixed(2)),
-            high: parseFloat(parseFloat(c[2]).toFixed(2)),
-            low: parseFloat(parseFloat(c[3]).toFixed(2)),
-            close: parseFloat(parseFloat(c[4]).toFixed(2))
-          }));
-          if (candles.length > 0) break;
+          const cutoffSec = Math.floor(Date.now() / 1000) - (48 * 3600);
+          const rawCandles = [];
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            if (data.timestamp >= cutoffSec) {
+              rawCandles.push({
+                time: data.timestamp,
+                open: data.open,
+                high: data.high,
+                low: data.low,
+                close: data.close,
+                volume: data.volume || 0
+              });
+            }
+          });
+
+          rawCandles.sort((a, b) => b.time - a.time);
+          candles = rawCandles.slice(0, limit);
+          candles.sort((a, b) => a.time - b.time);
+        } catch (e) {
+          console.error("api/marketCandles GOLD query error:", e);
+        }
+      }
+
+      // 2. Fallback: Swissquote BBO Spot Anchor (never synthetic, never Binance PAXG discount)
+      if (candles.length === 0) {
+        try {
+          const sqData = await fetchUrl("https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD");
+          if (Array.isArray(sqData) && sqData.length > 0) {
+            const prices = sqData[0].spreadProfilePrices || [];
+            if (prices.length > 0) {
+              const premium = prices[0];
+              const spot = Number(((Number(premium.bid) + Number(premium.ask)) / 2).toFixed(2));
+              const nowSec = Math.floor(Date.now() / 1000);
+              candles = [{
+                time: nowSec,
+                open: spot,
+                high: spot,
+                low: spot,
+                close: spot,
+                volume: 1
+              }];
+            }
+          }
+        } catch (e) {
+          console.error("api/marketCandles Swissquote fallback error:", e);
         }
       }
 
       return res.status(200).json({
         success: candles.length > 0,
         symbol: "GOLD",
+        source: "VANTAGE_MT5",
         timeframe: normTf,
         candles,
-        message: candles.length === 0 ? "No Spot Gold candle data available from upstream mirrors." : undefined
+        message: candles.length === 0 ? "No Spot Gold candle data available from Vantage MT5 or Swissquote." : undefined
       });
     }
 
