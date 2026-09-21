@@ -560,6 +560,8 @@
         let chartInstance = null;
         let countdownSeconds = 5;
         let isInitialLoad = true;
+        let currentTf = '5m';
+        let currentFeedSource = 'VANTAGE_MT5';
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
@@ -1483,9 +1485,6 @@
         }
 
 
-        let currentTf = '5m';
-        let currentFeedSource = 'VANTAGE_MT5';
-
         function reloadCandlesScript() {
             return new Promise((resolve) => {
                 const scriptId = 'dyn-gold-candles-script';
@@ -1506,92 +1505,96 @@
             await reloadCandlesScript();
 
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
+            const barSec = currentTf === '15m' ? 900 : 300;
 
             // 1. Primary Feed: Vantage MT5 from window.goldCandlesData (gold_market_data.db)
-            if (window.goldCandlesData) {
-                const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
+            if (window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]) && window.goldCandlesData[tfKey].length > 0) {
                 const candles = window.goldCandlesData[tfKey];
-                if (Array.isArray(candles) && candles.length > 0) {
-                    const latestCandleTime = candles[candles.length - 1].time - IST_OFFSET_SEC;
-                    const nowSec = Math.floor(Date.now() / 1000);
-                    const ageMinutes = (nowSec - latestCandleTime) / 60;
+                const latestCandleTime = candles[candles.length - 1].time - IST_OFFSET_SEC;
+                const nowSec = Math.floor(Date.now() / 1000);
+                const ageMinutes = (nowSec - latestCandleTime) / 60;
 
-                    // On localhost, Vantage exporter runs live. If age is within 10 minutes (or on localhost):
-                    if (isLocal || ageMinutes <= 10) {
-                        currentFeedSource = window.goldCandlesData.source || 'VANTAGE_MT5';
-                        return candles;
-                    }
-                    console.warn(`[Gold Chart] window.goldCandlesData is stale (${ageMinutes.toFixed(1)} mins old). Attempting live cloud fallback.`);
-                }
-            }
-
-            // 2. Secondary Feed: Server-side /api/marketCandles (Firestore / API)
-            try {
-                const res = await fetch(`/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&_t=${Date.now()}`, { cache: 'no-store' });
-                if (res.ok) {
-                    const json = await res.json();
-                    if (json && json.candles && json.candles.length > 5) {
-                        currentFeedSource = json.source || 'VANTAGE_MT5';
-                        return json.candles;
-                    }
-                }
-            } catch (e) {
-                console.warn('[Gold Chart] /api/marketCandles fetch failed:', e);
-            }
-
-            // 3. Tertiary / Real-Time Tick Fallback: Swissquote BBO Spot Anchor
-            // Uses historical bars from window.goldCandlesData, seamlessly updating the live forming bar with Swissquote spot
-            try {
-                const sqRes = await fetch('https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD');
-                if (sqRes.ok) {
-                    const sqData = await sqRes.json();
-                    const prices = sqData[0]?.spreadProfilePrices;
-                    if (prices && prices.length > 0) {
-                        const spot = parseFloat(((parseFloat(prices[0].bid) + parseFloat(prices[0].ask)) / 2).toFixed(2));
-                        currentFeedSource = 'SWISSQUOTE_BBO';
-                        console.log('[Gold Chart] Swissquote BBO live spot anchor:', spot);
-
-                        const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
-                        const barSec = currentTf === '15m' ? 900 : 300;
-                        const baseCandles = (window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]))
-                            ? window.goldCandlesData[tfKey].map(c => ({...c}))
-                            : [];
-
-                        if (baseCandles.length > 0) {
-                            const nowSec = Math.floor(Date.now() / 1000);
-                            const currentBarTime = (Math.floor(nowSec / barSec) * barSec) + IST_OFFSET_SEC;
-                            const lastCandle = baseCandles[baseCandles.length - 1];
-
-                            if (lastCandle && lastCandle.time === currentBarTime) {
-                                lastCandle.high = Math.max(lastCandle.high, spot);
-                                lastCandle.low = Math.min(lastCandle.low, spot);
-                                lastCandle.close = spot;
-                            } else {
-                                baseCandles.push({
-                                    time: currentBarTime,
-                                    open: spot,
-                                    high: spot,
-                                    low: spot,
-                                    close: spot,
-                                    volume: 1
-                                });
-                            }
-                            return baseCandles;
-                        }
-                    }
-                }
-            } catch (e) {
-                console.warn('[Gold Chart] Swissquote BBO fallback note:', e);
-            }
-
-            // If baseCandles exist even if stale, return them as offline fallback rather than empty
-            if (window.goldCandlesData) {
-                const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
-                const candles = window.goldCandlesData[tfKey];
-                if (Array.isArray(candles) && candles.length > 0) {
-                    currentFeedSource = 'VANTAGE_OFFLINE';
+                // On localhost, Vantage exporter runs live. If age is within 5 minutes on localhost:
+                if (isLocal && ageMinutes <= 5) {
+                    currentFeedSource = window.goldCandlesData.source || 'VANTAGE_MT5';
                     return candles;
                 }
+            }
+
+            // 2. Real-Time Spot Ingestion from Swissquote (via CORS-enabled server endpoints)
+            let liveSpot = null;
+
+            // A. Fetch from /api/livePrices (direct Swissquote proxy on backend, with CORS *)
+            const livePricesUrl = isLocal
+                ? 'https://trading-journal-sandy-three.vercel.app/api/livePrices'
+                : '/api/livePrices';
+            try {
+                const lpRes = await fetch(`${livePricesUrl}?_t=${Date.now()}`, { cache: 'no-store' });
+                if (lpRes.ok) {
+                    const lpJson = await lpRes.json();
+                    if (lpJson && typeof lpJson.xauusd === 'number' && lpJson.xauusd > 0) {
+                        liveSpot = lpJson.xauusd;
+                    }
+                }
+            } catch (e) {
+                console.warn('[Gold Chart] /api/livePrices fetch note:', e);
+            }
+
+            // B. Fallback to /api/marketCandles?symbol=GOLD
+            if (!liveSpot) {
+                const marketCandlesUrl = isLocal
+                    ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&_t=${Date.now()}`
+                    : `/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&_t=${Date.now()}`;
+                try {
+                    const mcRes = await fetch(marketCandlesUrl, { cache: 'no-store' });
+                    if (mcRes.ok) {
+                        const mcJson = await mcRes.json();
+                        if (mcJson && Array.isArray(mcJson.candles) && mcJson.candles.length > 0) {
+                            if (mcJson.candles.length > 5) {
+                                currentFeedSource = mcJson.source || 'VANTAGE_MT5';
+                                return mcJson.candles;
+                            }
+                            liveSpot = mcJson.candles[mcJson.candles.length - 1].close;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('[Gold Chart] /api/marketCandles fallback note:', e);
+                }
+            }
+
+            // 3. Anchor & Synthesize Live Forming Candle from Swissquote Spot
+            if (liveSpot && window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]) && window.goldCandlesData[tfKey].length > 0) {
+                const baseCandles = window.goldCandlesData[tfKey].map(c => ({...c}));
+                const nowSec = Math.floor(Date.now() / 1000);
+                const currentBarTime = (Math.floor(nowSec / barSec) * barSec) + IST_OFFSET_SEC;
+                const lastCandle = baseCandles[baseCandles.length - 1];
+
+                if (lastCandle && lastCandle.time === currentBarTime) {
+                    // Update active candle tick
+                    lastCandle.high = Math.max(lastCandle.high, liveSpot);
+                    lastCandle.low = Math.min(lastCandle.low, liveSpot);
+                    lastCandle.close = liveSpot;
+                } else if (lastCandle && currentBarTime > lastCandle.time) {
+                    // New bar has opened
+                    const openPrice = lastCandle.close;
+                    baseCandles.push({
+                        time: currentBarTime,
+                        open: openPrice,
+                        high: Math.max(openPrice, liveSpot),
+                        low: Math.min(openPrice, liveSpot),
+                        close: liveSpot,
+                        volume: 1
+                    });
+                }
+                currentFeedSource = 'SWISSQUOTE_BBO';
+                return baseCandles;
+            }
+
+            // 4. Offline Base Fallback (if cloud API is completely unreachable)
+            if (window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]) && window.goldCandlesData[tfKey].length > 0) {
+                currentFeedSource = 'VANTAGE_OFFLINE';
+                return window.goldCandlesData[tfKey];
             }
 
             // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console

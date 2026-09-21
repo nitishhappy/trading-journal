@@ -243,7 +243,7 @@ export default async function handler(req, res) {
       return res.status(200).json({
         success: candles.length > 0,
         symbol: "GOLD",
-        source: "VANTAGE_MT5",
+        source: candles.length === 1 ? "SWISSQUOTE_BBO" : "VANTAGE_MT5",
         timeframe: normTf,
         candles,
         message: candles.length === 0 ? "No Spot Gold candle data available from Vantage MT5 or Swissquote." : undefined
