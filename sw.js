@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-68d1f53445";
+const CACHE_NAME = "trade-journal-3f019df465";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -186,7 +186,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Never intercept Firebase, Google APIs, Groq, Instagram, ANY backend /api/ endpoints, or ANY market data feeds — always go straight to network
+  // Never intercept Firebase, Google APIs, Groq, Instagram, ANY backend /api/ endpoints, or ANY live market data feeds / candles — always go straight to network
   if (
     url.includes("firestore.googleapis.com") ||
     url.includes("identitytoolkit") ||
@@ -202,7 +202,12 @@ self.addEventListener("fetch", (event) => {
     url.includes("swissquote.com") ||
     url.includes("yahoo.com") ||
     url.includes("upstox.com") ||
-    url.includes("tradingview.com")
+    url.includes("tradingview.com") ||
+    url.includes("gold_candles.js") ||
+    url.includes("gold_daily_plan.js") ||
+    url.includes("nifty_daily_plan.js") ||
+    url.includes("btc_daily_plan.js") ||
+    url.includes("sp500_daily_plan.js")
   ) {
     return;
   }
@@ -216,9 +221,9 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          if (response && response.status === 200) {
+          if (response && response.status === 200 && event.request.url.startsWith("http")) {
             const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone).catch(() => {}));
           }
           return response;
         })
@@ -232,9 +237,9 @@ self.addEventListener("fetch", (event) => {
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
       return fetch(event.request).then((response) => {
-        if (event.request.method === "GET" && response.status === 200) {
+        if (event.request.method === "GET" && response.status === 200 && event.request.url.startsWith("http")) {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone).catch(() => {}));
         }
         return response;
       }).catch(() => cached);
