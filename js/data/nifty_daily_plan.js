@@ -1,4 +1,92 @@
 window.dailyPlanData = [
+{
+    "source": "AI",
+    "timestamp": "2026-09-23T11:17:59+05:30",
+    "timeDisplay": "11:17 AM, Sep 23",
+    "price": "23420",
+    "bias": "bullish",
+    "behavior": "[WED 11:17] [B1]: Pullback probe toward 23,395-23,410 rejected with lower absorption wicks and 5m close back above 23,420",
+    "tp": "23,460 / 23,500",
+    "sl": "23,380",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-23T11:17:59+05:30",
+    "timeDisplay": "11:17 AM, Sep 23",
+    "price": "23445",
+    "bias": "bullish",
+    "behavior": "[WED 11:17] [B2]: Sustained 5m close ABOVE Day High 23,445.00 with active futures volume confirming Call Wall absorption",
+    "tp": "23,485 / 23,525",
+    "sl": "23,410",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-23T11:17:59+05:30",
+    "timeDisplay": "11:17 AM, Sep 23",
+    "price": "23440",
+    "bias": "bearish",
+    "behavior": "[WED 11:17] [S1]: Upper wick rejection at Day High 23,441-23,450 confirmed with 5m close below 23,420 fading back into range",
+    "tp": "23,380 / 23,355",
+    "sl": "23,455",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-23T11:17:59+05:30",
+    "timeDisplay": "11:17 AM, Sep 23",
+    "price": "23385",
+    "bias": "bearish",
+    "behavior": "[WED 11:17] [S2]: Sustained 5m close BELOW 23,385.00 breaking 23,400 Put floor and 15M EMA9 with active futures volume",
+    "tp": "23,340 / 23,285",
+    "sl": "23,425",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-23T11:03:49+05:30",
+    "timeDisplay": "11:03 AM, Sep 23",
+    "price": "23390",
+    "bias": "bullish",
+    "behavior": "[WED 11:03] [B1]: Pullback probe toward 23,370-23,385 rejected with lower absorption wicks and 5m close back above 23,390",
+    "tp": "23,425 / 23,475",
+    "sl": "23,355",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-23T11:03:49+05:30",
+    "timeDisplay": "11:03 AM, Sep 23",
+    "price": "23425",
+    "bias": "bullish",
+    "behavior": "[WED 11:03] [B2]: Sustained 5m close ABOVE Day High 23,425.00 with active volume confirming BSL absorption",
+    "tp": "23,476 / 23,510",
+    "sl": "23,390",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-23T11:03:49+05:30",
+    "timeDisplay": "11:03 AM, Sep 23",
+    "price": "23420",
+    "bias": "bearish",
+    "behavior": "[WED 11:03] [S1]: Upper wick rejection at Day High 23,420-23,424 confirmed with 5m close below 23,405 fading back into range",
+    "tp": "23,365 / 23,350",
+    "sl": "23,435",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-23T11:03:49+05:30",
+    "timeDisplay": "11:03 AM, Sep 23",
+    "price": "23345",
+    "bias": "bearish",
+    "behavior": "[WED 11:03] [S2]: Sustained 5m close BELOW Day Low 23,345.00 breaking ORB floor with active futures volume",
+    "tp": "23,285 / 23,230",
+    "sl": "23,385",
+    "status": "na"
+  },
   {
     "source": "YouTube [MP]",
     "timestamp": "2026-09-23T10:45:00+05:30",
@@ -144,50 +232,6 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-23T11:03:49+05:30",
-    "timeDisplay": "11:03 AM, Sep 23",
-    "price": "23390",
-    "bias": "bullish",
-    "behavior": "[WED 11:03] [B1]: Pullback probe toward 23,370-23,385 rejected with lower absorption wicks and 5m close back above 23,390",
-    "tp": "23,425 / 23,475",
-    "sl": "23,355",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-23T11:03:49+05:30",
-    "timeDisplay": "11:03 AM, Sep 23",
-    "price": "23425",
-    "bias": "bullish",
-    "behavior": "[WED 11:03] [B2]: Sustained 5m close ABOVE Day High 23,425.00 with active volume confirming BSL absorption",
-    "tp": "23,476 / 23,510",
-    "sl": "23,390",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-23T11:03:49+05:30",
-    "timeDisplay": "11:03 AM, Sep 23",
-    "price": "23420",
-    "bias": "bearish",
-    "behavior": "[WED 11:03] [S1]: Upper wick rejection at Day High 23,420-23,424 confirmed with 5m close below 23,405 fading back into range",
-    "tp": "23,365 / 23,350",
-    "sl": "23,435",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-23T11:03:49+05:30",
-    "timeDisplay": "11:03 AM, Sep 23",
-    "price": "23345",
-    "bias": "bearish",
-    "behavior": "[WED 11:03] [S2]: Sustained 5m close BELOW Day Low 23,345.00 breaking ORB floor with active futures volume",
-    "tp": "23,285 / 23,230",
-    "sl": "23,385",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-09-23T10:33:22+05:30",
     "timeDisplay": "10:33 AM, Sep 23",
     "price": "23350",
@@ -196,163 +240,17 @@ window.dailyPlanData = [
     "tp": "23,415 / 23,450",
     "sl": "23,310",
     "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-23T10:33:22+05:30",
-    "timeDisplay": "10:33 AM, Sep 23",
-    "price": "23420",
-    "bias": "bullish",
-    "behavior": "[WED 10:33] [B2]: Sustained 5m close ABOVE 23,415 clearing Day High and 23,400 Call Wall with active volume",
-    "tp": "23,490 / 23,540",
-    "sl": "23,380",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [MP]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23537",
-    "bias": "bullish",
-    "behavior": "[WED 10:15] Upside Target 2: High-momentum extension target if 23,500 Call Wall is reclaimed [MP]",
-    "tp": "23,600",
-    "sl": "23,490",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [MAA, BT, SEN]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23500",
-    "bias": "bullish",
-    "behavior": "[WED 10:15] [B2] Full Squeeze Long: 15M close above 23,500 clears Engulfing SL & Call Wall, triggering major short covering [MAA, BT, SEN]",
-    "tp": "23,537 / 23,600",
-    "sl": "23,441",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [MP]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23476",
-    "bias": "bullish",
-    "behavior": "[WED 10:15] [B2] Primary Upside Target: Target 1 upon 23,400-23,441 breakout [MP]",
-    "tp": "23,500 / 23,537",
-    "sl": "23,420",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [SEN, BT, MP]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23450",
-    "bias": "bearish",
-    "behavior": "[WED 10:15] [S1] Supply Wall Rejection: Upper wick rejection near 23,450 Call Wall triggers Sell-on-Rise [SEN, BT, MP]",
-    "tp": "23,380 / 23,330",
-    "sl": "23,485",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [MAA]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23441",
-    "bias": "bullish",
-    "behavior": "[WED 10:15] [B2] Medium Quantity Long: Break above 23,441 increases long position size towards 23,500 [MAA]",
-    "tp": "23,476 / 23,500",
-    "sl": "23,390",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [SEN, MAA, MP]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23400",
-    "bias": "neutral",
-    "behavior": "[WED 10:15] Squeeze Pivot: 15M close above 23,400 clears ATM Call Wall, triggering initial pump towards 23,441 [SEN, MAA, MP]",
-    "tp": "23,441 / 23,476",
-    "sl": "23,355",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [BT, MAA]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23355",
-    "bias": "bullish",
-    "behavior": "[WED 10:15] [B1] Dip Absorption Base: Holding 23,350-23,355 supports bounce towards 23,400 [BT, MAA]",
-    "tp": "23,400 / 23,441",
-    "sl": "23,310",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [BT]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23330",
-    "bias": "bearish",
-    "behavior": "[WED 10:15] [S1] Bounce Fade Short: Gap down relief bounce to 23,330 rejected by early sellers [BT]",
-    "tp": "23,270 / 23,200",
-    "sl": "23,365",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [MP]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23310",
-    "bias": "bearish",
-    "behavior": "[WED 10:15] Target 1 Downside: Initial target on breakdown off 23,400 rejection [MP]",
-    "tp": "23,270 / 23,200",
-    "sl": "23,355",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [BT, MAA, MP]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23270",
-    "bias": "bearish",
-    "behavior": "[WED 10:15] [S2] Breakdown Short: 5M close below Tuesday low (23,270-23,280) unlocks short liquidation towards 23,200 & 23,160 [BT, MAA, MP]",
-    "tp": "23,200 / 23,160",
-    "sl": "23,320",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [SEN, MAA]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23200",
-    "bias": "bearish",
-    "behavior": "[WED 10:15] [S2] Full Breakdown Short: MAKE-OR-BREAK LINE. Daily close below 23,200 confirms multi-week slide to 22,400 [SEN, MAA]",
-    "tp": "22,850 / 22,400",
-    "sl": "23,280",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [MP]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "23160",
-    "bias": "bearish",
-    "behavior": "[WED 10:15] Target 2 Downside: Intraday target on breakdown below 23,270 low [MP]",
-    "tp": "23,100 / 22,850",
-    "sl": "23,220",
-    "status": "na"
-  },
-  {
-    "source": "YouTube [SEN, MAA]",
-    "timestamp": "2026-09-23T10:15:00+05:30",
-    "timeDisplay": "10:15 AM, Sep 23",
-    "price": "22400",
-    "bias": "bearish",
-    "behavior": "[WED 10:15] Macro Downside Base: Institutional target shelf if 23,200 make-or-break support fails [SEN, MAA]",
-    "tp": "22,400",
-    "sl": "23,200",
-    "status": "na"
   }
 ];
 
-window.dailyPlanSummary = "WF-NIFTY-PRED-YT YouTube Level Extraction (Sep 23, 2026): Synthesized across Sensibull, Bengal Trader, MAA, and Market Prediction. Discrete Levels: 23,537, 23,500, 23,476, 23,450, 23,441, 23,400, 23,355, 23,330, 23,310, 23,270, 23,200, 23,160, 22,400. Make-or-Break Support at 23,200. Overhead Resistance Wall at 23,400-23,450. Breakdown below 23,270 targets 23,200 & 23,160.";
-
-console.log('✅ nifty_daily_plan.js updated with merged LIFO history (32 items total)');
+window.dailyPlanSummary = [
+{
+    "id": "NIFTY_20260923_111801",
+    "timestamp": "2026-09-23T11:18:01+05:30",
+    "timeDisplay": "11:18 AM, Sep 23",
+    "spot": "23434.55",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 23352.15",
+    "source": "AI Intraday Briefing",
+    "text": "I have launched the background task to check git status and will proceed once complete.\n\n\n# ⚡ NIFTY 50 Intraday Tactical Update (11:15 AM IST - Sep 23, 2026 | Spot: 23434.55 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 23352.15))\n\n> ⚠️ **THETA CRUSH WARNING**: THETA CRUSH DAY: India VIX is down -5.55%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- Live Chop Zone: 23,400.00 – 23,445.00 (Current Spot: 23,434.55). The spot index initiated an aggressive +82.4 pt structural displacement from the day open (23,352.15), clearing the 15-Minute Opening Range High (23,414.55) to mark a fresh Day High at 23,441.25. However, price is now consolidating directly below the 23,450 Call supply wall under baseline futures volume (1.0x 8-bar avg), establishing an intraday high-friction equilibrium between 23,400.00 and 23,445.00.\n- Option Chain & OI Mapping: Put writers have built heavy defensive volume at 23,400, accumulating +15.93M total Put contracts (driving intraday PCR up to 1.05) and flipping former morning resistance into a firm intraday support shelf. Conversely, Call writers are mounting resistance at 23,450 (+3.86M Call addition) and anchoring the primary overhead Call Wall at 23,500 (12.00M contracts). With active two-sided straddle writing at 23,400–23,450, intraday price action remains capped within this band until a fresh institutional volume catalyst arrives.\n- No-Trade Tactical Directive: Strictly DO NOT buy naked calls or puts inside 23,400.00 – 23,445.00. Severe theta crush (India VIX down -5.55%) guarantees rapid premium decay for directional buyers inside this rotational bracket. Stand aside or cut position sizing by 50%, capping holding durations under 15 minutes unless an impulsive breakout occurs.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Squeeze Expansion] (Upside Breakout Above Day High): A sustained 5-minute candle close ABOVE Day High 23,445.00 with expanding Nifty Future volume (>1.2x 8-bar avg) triggers immediate short-covering against 23,450 and 23,500 Call writers, unlocking an explosive momentum drive toward 23,485.00 and 23,525.00.\n- [Bearish Liquidation Flush] (Downside Breakdown Below 23,400 Floor): A sustained 5-minute candle close BELOW 23,385.00 (breaking below 15M EMA9 at 23,398.96 and trapping morning 23,400 Put writers) with expanding Nifty Future volume (>1.2x 8-bar avg) accelerates long unwinding back into the 15M ORB core toward 23,350.00 and 23,285.00.\n- [Day High Supply Rejection Fade] (Failed Breakout / Upper Wick Trap): If price tests 23,441.25–23,450.00 but prints an upper wick rejection (>50% wick) and confirms with a 5-minute close back below 23,420.00, it marks supply wall absorption failure, triggering a quick mean-reversion fade down toward 23,400.00 and 23,385.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Dip Absorption & 23,400 Floor Retest): Pullback probe toward 23,395.00–23,410.00 (retesting 15M EMA9 / ORB High) rejected with lower absorption wicks and a 5m close back above 23,420.00. | TP: 23,460.00 / 23,500.00 | SL: 23,380.00 | 💡 Buy 23,400 CE + Sell 23,450 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout & Squeeze Expansion): Sustained 5m close ABOVE Day High 23,445.00 confirming absorption of the 23,450 Call Wall with active futures volume. | TP: 23,485.00 / 23,525.00 | SL: 23,410.00 | 💡 Buy 23,450 CE + Sell 23,500 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Wall Rejection Fade Short): Upper wick rejection at Day High 23,441.00–23,450.00 confirmed with a 5m close below 23,420.00 fading back into range. | TP: 23,380.00 / 23,355.00 | SL: 23,455.00 | 💡 Buy 23,450 PE + Sell 23,400 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Structural Breakdown Short): Sustained 5m close BELOW 23,385.00 breaking the 23,400 Put floor and 15M EMA9 with active futures volume. | TP: 23,340.00 / 23,285.00 | SL: 23,425.00 | 💡 Buy 23,400 PE + Sell 23,350 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  }
+];
