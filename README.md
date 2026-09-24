@@ -1974,6 +1974,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Updated SMC Masterclass educational walkthrough in `Gold Setup v2/Gold_Learn.md`.
 - **Files Modified**: `README.md`, `js/data/daily_plan.js`, `js/data/gold_daily_plan.js`
 
+### v2.3.77 — 24 Sep 2026 — Multi-Asset Interactive Level Charts: Zoom Retention, Live OHLC Telemetry & Interactive Scrollbar
+
+- **Interactive Chart PWAs Upgrade (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`)**:
+  - **Intact Zoom & Pan Retention**: Chart state engine tracks `userLogicalRange` via `subscribeVisibleLogicalRangeChange` and preserves exact zoom level across 15-second auto-refreshes. Added a `🎯 Snap to Live` toolbar button to quickly jump back to developing candles.
+  - **Live & Crosshair OHLC Telemetry Header**: Floating glassmorphism banner `.ohlc-legend-bar` displaying real-time `Open`, `High`, `Low`, `Close`, `Price Change`, and `Change %` on crosshair move, defaulting to the developing candle when off-canvas.
+  - **Interactive Horizontal Scrollbar Track**: HTML5 horizontal range track `.chart-scrollbar-container` with custom gradient thumb for smooth mouse-drag scrolling through historical candle data.
+- **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`, `README.md`
+
 
 
 

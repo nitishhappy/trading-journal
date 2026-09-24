@@ -204,6 +204,75 @@
             overflow: hidden;
         }
 
+        .ohlc-legend-bar {
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            z-index: 12;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            pointer-events: none;
+            user-select: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .ohlc-chg {
+            font-weight: 700;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+        }
+
+        .ohlc-chg.bullish {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .ohlc-chg.bearish {
+            color: #f43f5e;
+            background: rgba(244, 63, 94, 0.15);
+        }
+
+        .chart-scrollbar-container {
+            width: 100%;
+            padding: 6px 2px 2px 2px;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .scrollbar-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .scrollbar-thumb {
+            position: absolute;
+            top: 1px;
+            height: 6px;
+            background: linear-gradient(90deg, #f59e0b, #8b5cf6);
+            border-radius: 3px;
+            cursor: grab;
+            transition: background 0.2s;
+        }
+
+        .scrollbar-thumb:hover, .scrollbar-thumb:active {
+            background: linear-gradient(90deg, #fbbf24, #c084fc);
+            cursor: grabbing;
+        }
+
         .levels-section {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
@@ -508,6 +577,9 @@
             <button id="btn-manual-refresh" class="btn">
                 <span>⚡</span> Refresh Data
             </button>
+            <button id="btn-reset-zoom" class="btn" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">
+                <span>🎯</span> Snap to Live
+            </button>
             <button id="btn-toggle-alerts" class="btn">
                 <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
             </button>
@@ -528,7 +600,21 @@
                 <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 15:00</div>
             </div>
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
+                <div id="ohlc-legend" class="ohlc-legend-bar">
+                    <span id="ohlc-symbol" style="font-weight: 700; color: #f7931a;">BTC/USD</span>
+                    <span>O: <strong id="ohlc-o">--</strong></span>
+                    <span>H: <strong id="ohlc-h">--</strong></span>
+                    <span>L: <strong id="ohlc-l">--</strong></span>
+                    <span>C: <strong id="ohlc-c">--</strong></span>
+                    <span id="ohlc-change-pill" class="ohlc-chg">--</span>
+                </div>
                 <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+            </div>
+            <!-- Horizontal Scrollbar Track -->
+            <div class="chart-scrollbar-container">
+                <div class="scrollbar-track" id="scrollbar-track" title="Drag horizontal scrollbar or click track to scroll chart history">
+                    <div class="scrollbar-thumb" id="scrollbar-thumb"></div>
+                </div>
             </div>
         </div>
 
@@ -724,7 +810,178 @@
         }
 
         let latestCandleTimestamp = null;
+        let userHasInteracted = false;
+        let userLogicalRange = null;
+        let currentCandlesArray = [];
+        let isProgrammaticScroll = false;
+        let isDraggingScrollbar = false;
+        let dragStartX = 0;
+        let dragStartLeft = 0;
         const IST_OFFSET_SEC = 19800; // +5:30 IST offset in seconds for Binance UTC→IST axis alignment
+
+        function updateOHLCHeader(param) {
+            const legendO = document.getElementById('ohlc-o');
+            const legendH = document.getElementById('ohlc-h');
+            const legendL = document.getElementById('ohlc-l');
+            const legendC = document.getElementById('ohlc-c');
+            const legendChg = document.getElementById('ohlc-change-pill');
+            if (!legendO || !currentCandlesArray || currentCandlesArray.length === 0) return;
+
+            let candle = null;
+            if (param && param.time && param.seriesPrices && candleSeries) {
+                const priceData = param.seriesPrices.get(candleSeries);
+                if (priceData && priceData.open !== undefined) {
+                    candle = priceData;
+                }
+            }
+
+            if (!candle) {
+                candle = currentCandlesArray[currentCandlesArray.length - 1];
+            }
+
+            if (candle && candle.open !== undefined) {
+                const open = candle.open;
+                const high = candle.high;
+                const low = candle.low;
+                const close = candle.close;
+                const diff = close - open;
+                const pct = open !== 0 ? (diff / open) * 100 : 0;
+                const sign = diff >= 0 ? '+' : '';
+                const isBullish = diff >= 0;
+
+                const fmt = (val) => typeof val === 'number' ? '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '--';
+
+                legendO.innerText = fmt(open);
+                legendH.innerText = fmt(high);
+                legendL.innerText = fmt(low);
+                legendC.innerText = fmt(close);
+
+                if (legendChg) {
+                    legendChg.innerText = `${sign}${fmt(diff)} (${sign}${pct.toFixed(2)}%)`;
+                    legendChg.className = `ohlc-chg ${isBullish ? 'bullish' : 'bearish'}`;
+                }
+            }
+        }
+
+        function resetZoomToLive() {
+            userHasInteracted = false;
+            userLogicalRange = null;
+            if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                const totalBars = currentCandlesArray.length;
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: Math.max(0, totalBars - 30),
+                    to: totalBars + 8
+                });
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            }
+            const resetBtn = document.getElementById('btn-reset-zoom');
+            if (resetBtn) resetBtn.style.display = 'none';
+            showToast("🎯 Live View Snapped", "Returned to current developing candles.");
+        }
+
+        function updateScrollbarFromChart(range) {
+            if (isDraggingScrollbar || !currentCandlesArray || currentCandlesArray.length === 0) return;
+            const track = document.getElementById('scrollbar-track');
+            const thumb = document.getElementById('scrollbar-thumb');
+            if (!track || !thumb) return;
+
+            if (!range && chartInstance) {
+                range = chartInstance.timeScale().getVisibleLogicalRange();
+            }
+            if (!range) return;
+
+            const totalBars = currentCandlesArray.length;
+            const visibleBars = Math.max(1, range.to - range.from);
+            const trackWidth = track.clientWidth;
+
+            const widthPct = Math.min(100, Math.max(8, (visibleBars / totalBars) * 100));
+            const maxFrom = Math.max(1, totalBars - visibleBars);
+            const clampedFrom = Math.max(0, Math.min(range.from, maxFrom));
+            const leftPct = (clampedFrom / maxFrom) * (100 - widthPct);
+
+            thumb.style.width = `${widthPct}%`;
+            thumb.style.left = `${Math.max(0, Math.min(leftPct, 100 - widthPct))}%`;
+        }
+
+        function initHorizontalScrollbar() {
+            const track = document.getElementById('scrollbar-track');
+            const thumb = document.getElementById('scrollbar-thumb');
+            if (!track || !thumb) return;
+
+            thumb.addEventListener('mousedown', (e) => {
+                isDraggingScrollbar = true;
+                dragStartX = e.clientX;
+                dragStartLeft = thumb.offsetLeft;
+                document.body.style.userSelect = 'none';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDraggingScrollbar || !chartInstance || !currentCandlesArray || currentCandlesArray.length === 0) return;
+                const deltaX = e.clientX - dragStartX;
+                const trackWidth = track.clientWidth;
+                const thumbWidth = thumb.clientWidth;
+                const maxLeft = trackWidth - thumbWidth;
+                if (maxLeft <= 0) return;
+
+                let newLeft = Math.max(0, Math.min(dragStartLeft + deltaX, maxLeft));
+                thumb.style.left = `${newLeft}px`;
+
+                const totalBars = currentCandlesArray.length;
+                const currentRange = chartInstance.timeScale().getVisibleLogicalRange();
+                const visibleBars = currentRange ? (currentRange.to - currentRange.from) : 30;
+
+                const leftRatio = newLeft / maxLeft;
+                const maxFrom = totalBars - visibleBars;
+                const targetFrom = Math.round(leftRatio * maxFrom);
+                const targetTo = targetFrom + visibleBars;
+
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({ from: targetFrom, to: targetTo });
+                userLogicalRange = { from: targetFrom, to: targetTo };
+                userHasInteracted = true;
+                const resetBtn = document.getElementById('btn-reset-zoom');
+                if (resetBtn) resetBtn.style.display = 'flex';
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDraggingScrollbar) {
+                    isDraggingScrollbar = false;
+                    document.body.style.userSelect = '';
+                }
+            });
+
+            track.addEventListener('click', (e) => {
+                if (e.target === thumb) return;
+                const rect = track.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const trackWidth = track.clientWidth;
+                const thumbWidth = thumb.clientWidth;
+                const maxLeft = trackWidth - thumbWidth;
+                if (maxLeft <= 0) return;
+
+                let newLeft = Math.max(0, Math.min(clickX - thumbWidth / 2, maxLeft));
+                thumb.style.left = `${newLeft}px`;
+
+                const totalBars = currentCandlesArray.length;
+                const currentRange = chartInstance.timeScale().getVisibleLogicalRange();
+                const visibleBars = currentRange ? (currentRange.to - currentRange.from) : 30;
+
+                const leftRatio = newLeft / maxLeft;
+                const maxFrom = totalBars - visibleBars;
+                const targetFrom = Math.round(leftRatio * maxFrom);
+                const targetTo = targetFrom + visibleBars;
+
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({ from: targetFrom, to: targetTo });
+                userLogicalRange = { from: targetFrom, to: targetTo };
+                userHasInteracted = true;
+                const resetBtn = document.getElementById('btn-reset-zoom');
+                if (resetBtn) resetBtn.style.display = 'flex';
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            });
+        }
 
         function initChartApp() {
             const container = document.getElementById('chart-wrapper');
@@ -788,14 +1045,29 @@
                 wickDownColor: '#f43f5e',
             });
 
+            initHorizontalScrollbar();
             reloadChartData();
 
-            // Subscribe TimeScale changes to redraw vertical line overlay smoothly during pan & zoom
+            // Subscribe Crosshair Movement to update OHLC Telemetry
+            chartInstance.subscribeCrosshairMove((param) => {
+                updateOHLCHeader(param);
+            });
+
+            // Subscribe TimeScale changes to redraw vertical line overlay smoothly & sync scrollbar
             if (chartInstance && chartInstance.timeScale) {
                 const ts = chartInstance.timeScale();
                 if (typeof ts.subscribeVisibleLogicalRangeChange === 'function') {
-                    ts.subscribeVisibleLogicalRangeChange(() => {
+                    ts.subscribeVisibleLogicalRangeChange((range) => {
                         renderVerticalLinesOverlay();
+                        updateScrollbarFromChart(range);
+                        if (range && !isProgrammaticScroll && currentCandlesArray && currentCandlesArray.length > 0) {
+                            userLogicalRange = range;
+                            const totalBars = currentCandlesArray.length;
+                            const isScrolledBack = range.to < totalBars - 2 || (range.to - range.from) < (totalBars - 5);
+                            userHasInteracted = true;
+                            const resetBtn = document.getElementById('btn-reset-zoom');
+                            if (resetBtn) resetBtn.style.display = isScrolledBack ? 'flex' : 'none';
+                        }
                     });
                 }
                 if (typeof ts.subscribeVisibleTimeRangeChange === 'function') {
@@ -915,8 +1187,10 @@
             updateFeedStatusBadge(candles);
 
             if (candles && candles.length > 0) {
+                currentCandlesArray = candles;
                 candleSeries.setData(candles);
                 latestCandleTimestamp = candles[candles.length - 1].time;
+                updateOHLCHeader();
 
                 let targetCandleTime = null;
                 if (levelsData.anchorTimestamp) {
@@ -1073,26 +1347,29 @@
             }
 
             if (chartInstance) {
-                const totalBars = candles ? candles.length : 0;
-                const isViewingLiveEdge = savedRange && totalBars > 0 && (savedRange.to >= (totalBars - 5));
-
-                if (!forceFit && !isInitialLoad && savedRange !== null && !isViewingLiveEdge) {
-                    chartInstance.timeScale().setVisibleLogicalRange(savedRange);
+                if (!forceFit && !isInitialLoad && userHasInteracted && userLogicalRange !== null) {
+                    isProgrammaticScroll = true;
+                    chartInstance.timeScale().setVisibleLogicalRange(userLogicalRange);
+                    setTimeout(() => { isProgrammaticScroll = false; }, 50);
                 } else if (fitAllLevels) {
                     chartInstance.timeScale().fitContent();
                     isInitialLoad = false;
                 } else {
                     if (candles && candles.length > 0) {
+                        const totalBars = candles.length;
+                        isProgrammaticScroll = true;
                         chartInstance.timeScale().setVisibleLogicalRange({
                             from: Math.max(0, totalBars - 30),
                             to: totalBars + 8
                         });
+                        setTimeout(() => { isProgrammaticScroll = false; }, 50);
                     } else {
                         chartInstance.timeScale().fitContent();
                     }
                     isInitialLoad = false;
                 }
             }
+            updateScrollbarFromChart();
 
             // Update AI Briefing timestamps and redraw vertical line overlay
             const rawPlanArray = (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : [];
