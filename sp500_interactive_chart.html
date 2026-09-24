@@ -205,24 +205,18 @@
         }
 
         .ohlc-legend-bar {
-            position: absolute;
-            top: 8px;
-            left: 12px;
-            z-index: 12;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.65rem;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.78rem;
             color: #cbd5e1;
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(8px);
-            padding: 0.3rem 0.65rem;
+            padding: 0.2rem 0.55rem;
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.12);
-            pointer-events: none;
             user-select: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .ohlc-chg {
@@ -591,18 +585,18 @@
                 <div class="symbol-title">
                     <span>🇺🇸 S&P 500 (5M)</span>
                     <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
+                    <div id="ohlc-legend" class="ohlc-legend-bar">
+                        <span id="ohlc-symbol" style="font-weight: 700; color: #60a5fa;">S&P 500</span>
+                        <span>O: <strong id="ohlc-o">--</strong></span>
+                        <span>H: <strong id="ohlc-h">--</strong></span>
+                        <span>L: <strong id="ohlc-l">--</strong></span>
+                        <span>C: <strong id="ohlc-c">--</strong></span>
+                        <span id="ohlc-change-pill" class="ohlc-chg">--</span>
+                    </div>
                 </div>
                 <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</div>
             </div>
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
-                <div id="ohlc-legend" class="ohlc-legend-bar">
-                    <span id="ohlc-symbol" style="font-weight: 700; color: #60a5fa;">S&P 500</span>
-                    <span>O: <strong id="ohlc-o">--</strong></span>
-                    <span>H: <strong id="ohlc-h">--</strong></span>
-                    <span>L: <strong id="ohlc-l">--</strong></span>
-                    <span>C: <strong id="ohlc-c">--</strong></span>
-                    <span id="ohlc-change-pill" class="ohlc-chg">--</span>
-                </div>
                 <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
             </div>
             <!-- Horizontal Scrollbar Track -->
@@ -1089,6 +1083,36 @@
                     }
                 }
             };
+
+            // Side mouse wheel (horizontal wheel / tilt wheel) & Shift+Wheel support
+            if (container) {
+                container.addEventListener('wheel', (e) => {
+                    const isHorizontal = Math.abs(e.deltaX) > 0 || e.shiftKey;
+                    if (isHorizontal) {
+                        const delta = Math.abs(e.deltaX) > 0 ? e.deltaX : e.deltaY;
+                        if (Math.abs(delta) > 0 && chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const range = chartInstance.timeScale().getVisibleLogicalRange();
+                            if (range) {
+                                const totalBars = currentCandlesArray.length;
+                                const visibleBars = range.to - range.from;
+                                const shiftBars = Math.sign(delta) * Math.max(1, Math.round(Math.abs(delta) / 12));
+                                const maxFrom = Math.max(1, totalBars - visibleBars);
+                                const newFrom = Math.max(0, Math.min(range.from + shiftBars, maxFrom));
+                                const newTo = newFrom + visibleBars;
+                                isProgrammaticScroll = true;
+                                chartInstance.timeScale().setVisibleLogicalRange({ from: newFrom, to: newTo });
+                                userLogicalRange = { from: newFrom, to: newTo };
+                                userHasInteracted = true;
+                                const resetBtn = document.getElementById('btn-reset-zoom');
+                                if (resetBtn) resetBtn.style.display = 'flex';
+                                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                            }
+                        }
+                    }
+                }, { passive: false });
+            }
 
             const resizeObserver = new ResizeObserver(() => resizeChart());
             resizeObserver.observe(container);
