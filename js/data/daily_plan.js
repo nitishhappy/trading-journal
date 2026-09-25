@@ -57,10 +57,26 @@ window.dailyPlanSummary = [
   }
 ];
 
-if (!window.goldDailyPlanData) window.goldDailyPlanData = [];
-if (!window.goldDailyPlanSummary) window.goldDailyPlanSummary = [];
-if (!window.btcDailyPlanData) window.btcDailyPlanData = [];
-if (!window.btcDailyPlanSummary) window.btcDailyPlanSummary = [];
-if (!window.sp500DailyPlanData) window.sp500DailyPlanData = [];
-if (!window.sp500DailyPlanSummary) window.sp500DailyPlanSummary = [];
+window.goldDailyPlanData = [
 
+];
+
+window.goldDailyPlanSummary = [
+
+];
+
+window.btcDailyPlanData = [
+
+];
+
+window.btcDailyPlanSummary = [
+
+];
+
+window.sp500DailyPlanData = [
+
+];
+
+window.sp500DailyPlanSummary = [
+
+];
