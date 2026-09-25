@@ -33,6 +33,97 @@ export function isInstagramUrl(url) {
   return !!url && /instagram\.com\/(reel|reels|p)\/([a-zA-Z0-9_-]+)/i.test(url);
 }
 
+export function parseYoutubeUrl(url) {
+  if (!url) return null;
+  try {
+    const fullUrl = url.match(/^https?:\/\//i) ? url : `https://${url}`;
+    const parsed = new URL(fullUrl);
+    const host = parsed.hostname.toLowerCase();
+
+    if (!host.includes("youtube.com") && !host.includes("youtu.be")) {
+      return null;
+    }
+
+    let videoId = null;
+    let isShort = false;
+
+    if (host.includes("youtu.be")) {
+      videoId = parsed.pathname.slice(1).split("/")[0];
+    } else if (host.includes("youtube.com")) {
+      if (parsed.pathname.startsWith("/shorts/")) {
+        videoId = parsed.pathname.split("/")[2];
+        isShort = true;
+      } else if (parsed.pathname.startsWith("/embed/")) {
+        videoId = parsed.pathname.split("/")[2];
+      } else if (parsed.pathname.startsWith("/live/")) {
+        videoId = parsed.pathname.split("/")[2];
+      } else if (parsed.pathname === "/watch") {
+        videoId = parsed.searchParams.get("v");
+      }
+    }
+
+    if (!videoId) {
+      const match = url.match(/(?:v=|\/shorts\/|\/embed\/|\/live\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+      if (match) videoId = match[1];
+    }
+
+    if (videoId) {
+      videoId = videoId.replace(/[^a-zA-Z0-9_-]/g, "");
+    }
+
+    if (!videoId || videoId.length < 6) return null;
+
+    let startSeconds = 0;
+    const tParam = parsed.searchParams.get("t") || parsed.searchParams.get("start");
+    if (tParam) {
+      if (/^\d+s?$/i.test(tParam)) {
+        startSeconds = parseInt(tParam, 10) || 0;
+      } else {
+        const hours = tParam.match(/(\d+)h/i);
+        const minutes = tParam.match(/(\d+)m/i);
+        const seconds = tParam.match(/(\d+)s/i);
+        if (hours) startSeconds += parseInt(hours[1], 10) * 3600;
+        if (minutes) startSeconds += parseInt(minutes[1], 10) * 60;
+        if (seconds) startSeconds += parseInt(seconds[1], 10);
+      }
+    }
+
+    return { videoId, isShort, startSeconds };
+  } catch (e) {
+    return null;
+  }
+}
+
+export function isYoutubeUrl(url) {
+  return !!parseYoutubeUrl(url);
+}
+
+export function buildYoutubeEmbed(url) {
+  const parsed = parseYoutubeUrl(url);
+  if (!parsed) return null;
+
+  const { videoId, isShort, startSeconds } = parsed;
+  let embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
+  if (startSeconds > 0) {
+    embedUrl += `&start=${startSeconds}`;
+  }
+
+  const wrap = document.createElement("div");
+  wrap.className = `youtube-preview-wrap${isShort ? " youtube-shorts" : ""}`;
+  wrap.addEventListener("pointerdown", (e) => e.stopPropagation());
+  wrap.addEventListener("click", (e) => e.stopPropagation());
+
+  const iframe = document.createElement("iframe");
+  iframe.src = embedUrl;
+  iframe.title = "YouTube video player";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.allowFullscreen = true;
+  iframe.loading = "lazy";
+
+  wrap.appendChild(iframe);
+  return wrap;
+}
+
 // Instagram's official embed widget (the same script instagram.com itself
 // hands out for "Embed" on a post) needs to be loaded once per page. It
 // exposes window.instgrm.Embeds.process(), which scans for
@@ -359,6 +450,16 @@ export function buildLinkPreviewIfApplicable(url, container, onFail) {
   if (isInstagramUrl(url)) {
     const embed = buildInstagramEmbed(url);
     if (!embed) return false;
+    container.classList.add("has-instagram-preview");
+    container.innerHTML = "";
+    container.appendChild(embed);
+    return true;
+  }
+
+  if (isYoutubeUrl(url)) {
+    const embed = buildYoutubeEmbed(url);
+    if (!embed) return false;
+    container.classList.add("has-youtube-preview");
     container.innerHTML = "";
     container.appendChild(embed);
     return true;

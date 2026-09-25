@@ -178,6 +178,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.35 — 25 Sep 2026 — NIFTY Interactive Chart Candle Fix
+- **Fixed Duplicate `let isInitialLoad` Declaration**: Removed duplicate `let isInitialLoad = true;` at line 814 (first declared at line 672) in `nifty_interactive_chart.html`. The duplicate `let` in the same scope caused a `SyntaxError` that **killed the entire `<script>` block**, preventing chart initialization, candle fetching, and all interactive features from executing. The chart appeared blank with no candle data despite the API returning valid data.
+
 ### v2.3.34 — 08 Sep 2026 — Unified Level Exhaustion & Incremental Structural Shift Architecture Across All Assets
 - **Cooldown Bypass for Priority Triggers**: Both **Level Exhaustion** (live spot/candle close breaches active plan boundaries) and **Incremental Structural Shift** (price moves $\ge$ threshold from previous triggered spot) are restored as priority events that **ALWAYS BYPASS COOLDOWN** across all 4 assets (NIFTY, BTC, Gold, S&P 500).
 - **Standardized Multi-Asset Level Exhaustion Engine**: Restored `check_level_exhaustion_trigger` in `level_dedup_engine.py` for all assets, comparing live spot price / candle close against active `{asset}_daily_plan.js` boundaries (`level_high` & `level_low`). Once breached, cooldown is bypassed to re-calculate levels; the newly generated plan pushes expanded target levels to `{asset}_daily_plan.js`, automatically silencing subsequent 15m watchdog runs.

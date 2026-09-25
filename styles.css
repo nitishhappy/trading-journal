@@ -2636,7 +2636,10 @@ textarea { resize: vertical; }
   overflow: hidden;
   display: block;
 }
-.link-preview-mount:has(.instagram-preview-wrap) {
+.link-preview-mount:has(.instagram-preview-wrap),
+.link-preview-mount:has(.youtube-preview-wrap),
+.link-preview-mount.has-instagram-preview,
+.link-preview-mount.has-youtube-preview {
   aspect-ratio: auto;
   overflow: visible;
   background: transparent;
@@ -3401,8 +3404,38 @@ textarea { resize: vertical; }
 
 /* Also ensure the tile itself doesn't clip the embed content,
    but only for tiles that contain an instagram embed */
-.tile:has(.instagram-preview-wrap) {
+.tile:has(.instagram-preview-wrap),
+.tile:has(.youtube-preview-wrap) {
   overflow: visible;
+}
+
+/* ===================== YouTube Video / Shorts live embed preview ===================== */
+.youtube-preview-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 16 / 9;
+  margin: 6px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.youtube-preview-wrap.youtube-shorts {
+  max-width: 320px;
+  aspect-ratio: 9 / 16;
+  max-height: 520px;
+}
+
+.youtube-preview-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* ===================== Google Drive folder images grid ===================== */

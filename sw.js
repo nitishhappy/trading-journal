@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-1303fa75d6";
+const CACHE_NAME = "trade-journal-9702e6996e";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -196,6 +196,10 @@ self.addEventListener("fetch", (event) => {
     url.includes("fonts.googleapis.com") ||
     url.includes("instagram.com") ||
     url.includes("cdninstagram.com") ||
+    url.includes("youtube.com") ||
+    url.includes("youtube-nocookie.com") ||
+    url.includes("youtu.be") ||
+    url.includes("ytimg.com") ||
     url.includes("/api/") ||
     url.includes("binance.com") ||
     url.includes("coinbase.com") ||

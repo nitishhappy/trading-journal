@@ -506,7 +506,7 @@ function attachSwipeHandlers(card, obs) {
 
   function onPointerDown(e) {
     if (e.target.closest("a") || e.target.closest("button") || e.target.closest("iframe")) return;
-    const startedOnImage = !!e.target.closest("img, .il-img-more, .drive-link-preview, .instagram-preview-wrap");
+    const startedOnImage = !!e.target.closest("img, .il-img-more, .drive-link-preview, .instagram-preview-wrap, .youtube-preview-wrap");
 
     dragging = true;
     horizontalIntent = null;
