@@ -1,7 +1,7 @@
 window.btcDailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "84616.95",
     "bias": "bullish",
@@ -12,7 +12,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "84421.89",
     "bias": "bullish",
@@ -23,7 +23,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "83945.36",
     "bias": "bullish",
@@ -34,7 +34,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "77500.0",
     "bias": "bullish",
@@ -45,7 +45,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "84875.9",
     "bias": "bearish",
@@ -56,7 +56,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "83945.36",
     "bias": "bearish",
@@ -67,7 +67,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "83945.4",
     "bias": "bullish",
@@ -78,7 +78,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "84875.9",
     "bias": "bullish",
@@ -89,7 +89,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "84736.0",
     "bias": "bearish",
@@ -100,7 +100,7 @@ window.btcDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-09-25T08:04:01+05:30",
+    "timestamp": "2026-09-25T08:04:51+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "price": "83945.4",
     "bias": "bearish",
@@ -355,8 +355,8 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
-    "id": "BTC_20260925_080403",
-    "timestamp": "2026-09-25T08:04:03+05:30",
+    "id": "BTC_20260925_080453",
+    "timestamp": "2026-09-25T08:04:53+05:30",
     "timeDisplay": "08:04 AM, Sep 25",
     "spot": "84692.01",
     "trigger": "Asian Session Review (Tokyo/Sydney Overnight Moves",
