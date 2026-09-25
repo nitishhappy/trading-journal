@@ -985,7 +985,7 @@ if (viewLevels) {
             summaryBody.appendChild(card);
         });
 
-        updateAssetTabBadges();
+        updateAssetTabBadges(options);
     }
 
     function getAssetDataSignature(assetKey) {
@@ -1041,7 +1041,7 @@ if (viewLevels) {
         }
     }
 
-    function dispatchSummaryPushNotification(assetKey) {
+    function dispatchSummaryPushNotification(assetKey, currentSig, latestSummary) {
         if (localStorage.getItem('settings_summary_notifs') === 'false') return;
         if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return;
 
@@ -1049,8 +1049,34 @@ if (viewLevels) {
         const isBtc = (assetKey === 'BTC');
         const isSp500 = (assetKey === 'SP500');
 
-        const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
-        const latestSummary = (summarySource && Array.isArray(summarySource) && summarySource.length > 0) ? summarySource[0] : null;
+        if (!latestSummary) {
+            const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+            latestSummary = (summarySource && Array.isArray(summarySource) && summarySource.length > 0) ? summarySource[0] : null;
+        }
+
+        const notifSigKey = `levels_last_notified_sig_${assetKey}`;
+        const notifIdKey = `levels_last_notified_id_${assetKey}`;
+        const summaryId = latestSummary?.id || (latestSummary?.timestamp ? `${latestSummary.timestamp}_${latestSummary.spot || ''}` : null);
+
+        // Strict deduplication check: do not notify again if already notified
+        const lastNotifiedSig = localStorage.getItem(notifSigKey);
+        const lastNotifiedId = localStorage.getItem(notifIdKey);
+        if (lastNotifiedSig && currentSig && lastNotifiedSig === currentSig) return;
+        if (summaryId && lastNotifiedId && lastNotifiedId === summaryId) return;
+
+        // Check age of summary: do not dispatch push notification if summary is older than 3 hours
+        if (latestSummary?.timestamp) {
+            const summaryTime = new Date(latestSummary.timestamp).getTime();
+            if (!isNaN(summaryTime) && (Date.now() - summaryTime > 3 * 60 * 60 * 1000)) {
+                if (currentSig) localStorage.setItem(notifSigKey, currentSig);
+                if (summaryId) localStorage.setItem(notifIdKey, summaryId);
+                return;
+            }
+        }
+
+        // Record as notified immediately before async dispatch
+        if (currentSig) localStorage.setItem(notifSigKey, currentSig);
+        if (summaryId) localStorage.setItem(notifIdKey, summaryId);
 
         const assetLabels = {
             'NIFTY': '📈 NIFTY 50',
@@ -1065,11 +1091,12 @@ if (viewLevels) {
         const spotStr = latestSummary?.spot ? ` (Spot: $${latestSummary.spot})` : '';
 
         const title = `${assetLabel} — ${timeStr}`;
+        const notifTagId = latestSummary?.id || (latestSummary?.timestamp ? latestSummary.timestamp.replace(/[^a-zA-Z0-9]/g, '_') : 'latest');
         const options = {
             body: `New Levels & Tactical Summary added${spotStr}`,
             icon: './icons/icon-192.png',
             badge: './icons/icon-192.png',
-            tag: `summary-push-${assetKey.toLowerCase()}-${Date.now()}`,
+            tag: `summary-push-${assetKey.toLowerCase()}-${notifTagId}`,
             vibrate: [200, 100, 200]
         };
 
@@ -1092,7 +1119,7 @@ if (viewLevels) {
         }
     }
 
-    function updateAssetTabBadges() {
+    function updateAssetTabBadges(options = {}) {
         const assets = [
             { key: 'NIFTY', btnId: 'btn-asset-nifty' },
             { key: 'GOLD', btnId: 'btn-asset-gold' },
@@ -1101,6 +1128,7 @@ if (viewLevels) {
         ];
 
         const currentActive = window.currentActiveAsset || 'NIFTY';
+        const isLiveSync = (options && options.isLiveSync === true);
 
         assets.forEach(asset => {
             const btn = document.getElementById(asset.btnId);
@@ -1110,16 +1138,40 @@ if (viewLevels) {
             const storageKey = `levels_last_seen_sig_${asset.key}`;
             const lastSeenSig = localStorage.getItem(storageKey);
 
+            const notifSigKey = `levels_last_notified_sig_${asset.key}`;
+            const notifIdKey = `levels_last_notified_id_${asset.key}`;
+            const lastNotifiedSig = localStorage.getItem(notifSigKey);
+            const lastNotifiedId = localStorage.getItem(notifIdKey);
+
+            const isGold = (asset.key === 'GOLD');
+            const isBtc = (asset.key === 'BTC');
+            const isSp500 = (asset.key === 'SP500');
+            const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+            const latestSummary = (summarySource && Array.isArray(summarySource) && summarySource.length > 0) ? summarySource[0] : null;
+            const summaryId = latestSummary?.id || (latestSummary?.timestamp ? `${latestSummary.timestamp}_${latestSummary.spot || ''}` : null);
+
+            // On initial app boot, baseline existing state so opening the app never fires notifications
+            if (isInitialLevelsLoad) {
+                if (!lastNotifiedSig) {
+                    localStorage.setItem(notifSigKey, currentSig);
+                }
+                if (summaryId && !lastNotifiedId) {
+                    localStorage.setItem(notifIdKey, summaryId);
+                }
+            }
+
             if (asset.key === currentActive) {
                 // Active tab: update signature immediately and clear unread badge
-                if (lastSeenSig !== null && lastSeenSig !== currentSig) {
-                    playMarketBellSound();
-                    dispatchSummaryPushNotification(asset.key);
-                }
                 localStorage.setItem(storageKey, currentSig);
                 btn.classList.remove('btn-tab-updated');
                 const dot = btn.querySelector('.unread-level-dot');
                 if (dot) dot.remove();
+
+                // Only notify if a genuine live sync arrived while user was on active tab
+                if (isLiveSync && lastNotifiedSig !== currentSig && (!summaryId || lastNotifiedId !== summaryId)) {
+                    playMarketBellSound();
+                    dispatchSummaryPushNotification(asset.key, currentSig, latestSummary);
+                }
             } else {
                 if (lastSeenSig === null) {
                     // Initialize baseline signature on first app load if not set
@@ -1129,16 +1181,18 @@ if (viewLevels) {
                     if (dot) dot.remove();
                 } else if (lastSeenSig !== currentSig) {
                     // Inactive tab receives fresh data signature: show glow & dot
-                    if (!btn.classList.contains('btn-tab-updated')) {
-                        playMarketBellSound();
-                        dispatchSummaryPushNotification(asset.key);
-                    }
                     btn.classList.add('btn-tab-updated');
                     if (!btn.querySelector('.unread-level-dot')) {
                         const dot = document.createElement('span');
                         dot.className = 'unread-level-dot';
                         dot.title = 'New levels / summary updated';
                         btn.appendChild(dot);
+                    }
+
+                    // Only notify once when live background sync arrives, never on startup or re-opening
+                    if (isLiveSync && lastNotifiedSig !== currentSig && (!summaryId || lastNotifiedId !== summaryId)) {
+                        playMarketBellSound();
+                        dispatchSummaryPushNotification(asset.key, currentSig, latestSummary);
                     }
                 } else {
                     btn.classList.remove('btn-tab-updated');
@@ -1227,8 +1281,9 @@ if (viewLevels) {
 
             if (force || hasChanged) {
                 console.log('[Levels] Fresh daily plan data received from server. Updating UI...');
-                initLevels(force, isManual);
-                if (notifyUser || hasChanged) {
+                const isLive = (hasChanged && !isInitialLevelsLoad);
+                initLevels(force, isManual, { isLiveSync: isLive });
+                if (notifyUser || isLive) {
                     if (window.showToast) {
                         window.showToast('⚡ Levels updated automatically with latest tactical plan', 2500);
                     }
@@ -1239,6 +1294,7 @@ if (viewLevels) {
             console.warn('[Levels] Failed to auto-sync daily plan from server:', err);
         } finally {
             isAutoSyncingPlan = false;
+            isInitialLevelsLoad = false;
         }
         return false;
     }
@@ -2944,8 +3000,13 @@ window.toggleMaximizePanel = function(btn, event) {
 
     // Call init when module loads
     window.currentActiveAsset = 'NIFTY';
-    initLevels();
+    initLevels(false, false, { isLiveSync: false });
     startLevelsPolling();
-    autoSyncDailyPlan(false, false);
+    autoSyncDailyPlan(false, false).finally(() => {
+        isInitialLevelsLoad = false;
+    });
+    setTimeout(() => {
+        isInitialLevelsLoad = false;
+    }, 4000);
 }
 

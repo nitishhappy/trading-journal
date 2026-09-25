@@ -178,6 +178,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.36 — 25 Sep 2026 — Fix Repeat Summary Push Notification on Mobile App Open
+- **Decoupled Visual Tab Badge from Push Notification Dispatch**: Separated `levels_last_seen_sig` (visual unread indicator on asset tab button) from push notification dispatch tracking (`levels_last_notified_sig` and `levels_last_notified_id`). Previously, inactive asset tabs intentionally left `levels_last_seen_sig` unchanged to retain the unread badge, but because notification triggering checked `lastSeenSig !== currentSig` and relied solely on an ephemeral DOM class check `!btn.classList.contains('btn-tab-updated')`, every app launch on mobile created fresh DOM elements and fired duplicate push notifications and market bell sounds for previously added summaries (e.g. summaries from 6:00 PM).
+- **Startup Notification Guard**: Introduced an `isInitialLevelsLoad` state guard so that launching or reloading the app never triggers push notifications or chimes for existing data. Initial boot primes notification tracking signatures immediately.
+- **Strict Deduplication & Stale Summary Safeguard**: Persistent notification tracking prevents identical summary IDs or data signatures from notifying multiple times. Added a 3-hour summary age limit to ensure historical briefings never trigger push alerts.
+- **Deterministic Notification Tags**: Updated notification tags from `summary-push-${asset}-${Date.now()}` to deterministic `summary-push-${asset}-${summaryId}` so the OS notification shade deduplicates any redundant triggers instead of stacking duplicate alerts.
+
 ### v2.3.35 — 25 Sep 2026 — NIFTY Interactive Chart Candle Fix
 - **Fixed Duplicate `let isInitialLoad` Declaration**: Removed duplicate `let isInitialLoad = true;` at line 814 (first declared at line 672) in `nifty_interactive_chart.html`. The duplicate `let` in the same scope caused a `SyntaxError` that **killed the entire `<script>` block**, preventing chart initialization, candle fetching, and all interactive features from executing. The chart appeared blank with no candle data despite the API returning valid data.
 
