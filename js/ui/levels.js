@@ -291,8 +291,10 @@ if (viewLevels) {
         renderScorecard();
     }
 
+    let isInitialLevelsLoad = true;
+
     // Initialize Levels with robust multi-channel sync
-    function initLevels(forceSync = false, isManualSync = false) {
+    function initLevels(forceSync = false, isManualSync = false, options = {}) {
         loadScorecardHistory();
 
         const isGold = (window.currentActiveAsset === 'GOLD');
@@ -445,7 +447,7 @@ if (viewLevels) {
         });
 
         saveLevelsData();
-        renderSummary();
+        renderSummary(options);
         renderChart();
         renderTvChart();
         renderScorecard();
@@ -861,15 +863,19 @@ if (viewLevels) {
         return html;
     }
 
-    function renderSummary() {
+    function renderSummary(options = {}) {
         const summaryPanel = document.getElementById('levels-summary-panel');
         const summaryBody = document.getElementById('levels-summary-body');
-        if (!summaryPanel || !summaryBody) return;
+        if (!summaryPanel || !summaryBody) {
+            updateAssetTabBadges(options);
+            return;
+        }
 
         const activeAsset = window.currentActiveAsset || 'NIFTY';
         if (clearedSummaries[activeAsset]) {
             summaryPanel.style.display = 'none';
             summaryBody.innerHTML = '';
+            updateAssetTabBadges(options);
             return;
         }
 
@@ -879,6 +885,7 @@ if (viewLevels) {
         const summaryData = isSp500 ? (window.sp500DailyPlanSummary || []) : (isBtc ? (window.btcDailyPlanSummary || []) : (isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || [])));
         if (!Array.isArray(summaryData) || summaryData.length === 0) {
             summaryPanel.style.display = 'none';
+            updateAssetTabBadges(options);
             return;
         }
 

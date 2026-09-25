@@ -1994,3 +1994,12 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 -   f i x ( s p 5 0 0 ) :   m o v e   7   P M   a d h o c   A I   c o p i l o t   b r i e f i n g   f r o m   d a i l y _ p l a n . j s   t o   d e d i c a t e d   s p 5 0 0 _ d a i l y _ p l a n . j s   t o   f i x   m i s s i n g   u p d a t e   i n   U I 
  
  
+
+### v2.3.78 — 25 Sep 2026 — YouTube Video & Shorts Embed Support in Observations & Revision
+
+- **Observations & Revision Feed (js/utils/image.js, styles.css, index.html, js/ui/revision.js, js/ui/revision1.js, sw.js)**:
+  - **Universal YouTube Embed Parser**: Added parsing and extraction logic for all standard YouTube URL formats including standard watch links (youtube.com/watch?v=...), shortened links (youtu.be/...), YouTube Shorts (youtube.com/shorts/...), embeds, live streams, and timestamp parameters (t=1m30s, start=90).
+  - **Embedded Responsive Player**: Renders an inline iframe player with standard 16:9 aspect ratio for regular videos and a dedicated 9:16 vertical ratio for YouTube Shorts.
+  - **Touch & Swipe Protection**: Integrated stopPropagation and swipe touch bypasses (.youtube-preview-wrap) in revision swipe cards and feed tiles to prevent accidental card navigation or tile toggling during video playback.
+  - **Service Worker Bypass**: Updated sw.js to ensure YouTube domains (youtube.com, youtu.be, ytimg.com, youtube-nocookie.com) bypass service worker interception.
+- **Files Modified**: README.md, js/utils/image.js, styles.css, index.html, js/ui/revision.js, js/ui/revision1.js, sw.js
