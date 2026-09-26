@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.37 — 26 Sep 2026 — Interactive Charts: Historical Briefing Selection, Multi-Asset Right-Panel Level Sync, & Scorecard Integration
+- **Universal Historical Briefing Vertical Line & Badge Selection**: Implemented interactive AI briefing run selection across all four interactive chart dashboards (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`). Users can click any vertical dashed briefing line or top badge on the canvas, or click the horizontal filter pills bar (`#briefing-runs-pills`) in the levels panel.
+- **Bi-Directional Chart & Right-Panel Level Sync**: Selecting any historical briefing run (e.g., 06:46 AM, 08:14 AM, 10:34 AM, etc.) immediately:
+  1. Dynamically swaps chart horizontal price lines and candle marker arrows to match that exact run's trigger levels, highlighting the selected vertical marker with glowing theme colors.
+  2. Synchronizes right-side cards with full entry confirmation price action extracted directly from that specific briefing run.
+  3. Preserves independent EOD scorecard evaluation (`Worked`, `Failed`, `Reset`) per level and run in `localStorage`.
+  4. Displays a one-click "⚡ Return to Latest" button to immediately snap back to the live active trading plan.
+- **Zoom Position Retention & Universal Snap to Live**: Standardized zoom position retention across background auto-refresh cycles and ensured the "🎯 Snap to Live" button operates uniformly across BTC, Gold, NIFTY, and S&P 500 interactive charts.
+
 ### v2.3.36 — 25 Sep 2026 — Fix Repeat Summary Push Notification on Mobile App Open
 - **Decoupled Visual Tab Badge from Push Notification Dispatch**: Separated `levels_last_seen_sig` (visual unread indicator on asset tab button) from push notification dispatch tracking (`levels_last_notified_sig` and `levels_last_notified_id`). Previously, inactive asset tabs intentionally left `levels_last_seen_sig` unchanged to retain the unread badge, but because notification triggering checked `lastSeenSig !== currentSig` and relied solely on an ephemeral DOM class check `!btn.classList.contains('btn-tab-updated')`, every app launch on mobile created fresh DOM elements and fired duplicate push notifications and market bell sounds for previously added summaries (e.g. summaries from 6:00 PM).
 - **Startup Notification Guard**: Introduced an `isInitialLevelsLoad` state guard so that launching or reloading the app never triggers push notifications or chimes for existing data. Initial boot primes notification tracking signatures immediately.
