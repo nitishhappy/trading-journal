@@ -98,14 +98,15 @@ export default async function handler(req, res) {
 
       if (!rawCandles || rawCandles.length === 0) {
         const targetDt = new Date(`${targetDate}T12:00:00+05:30`);
-        const prevDt = new Date(targetDt.getTime() - 24 * 60 * 60 * 1000);
-        const prevDateStr = prevDt.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+        // Upstox historical: {to_date}/{from_date}. Look back 5 days to cover weekends and holidays
+        const lookbackDt = new Date(targetDt.getTime() - 5 * 24 * 60 * 60 * 1000);
+        const lookbackDateStr = lookbackDt.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
 
         const histUrl1 = `https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${targetDate}/${targetDate}`;
         rawCandles = await fetchUpstox(histUrl1);
 
         if (!rawCandles || rawCandles.length === 0) {
-          const histUrl2 = `https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${targetDate}/${prevDateStr}`;
+          const histUrl2 = `https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${targetDate}/${lookbackDateStr}`;
           rawCandles = await fetchUpstox(histUrl2);
         }
       }
@@ -119,15 +120,22 @@ export default async function handler(req, res) {
         });
       }
 
+      // If user specified queryDate, use that; otherwise auto-detect latest session date from candles
+      let sessionDate = queryDate || "";
+      if (!sessionDate) {
+        const latestTs = rawCandles[0] && rawCandles[0][0];
+        sessionDate = latestTs ? latestTs.split("T")[0] : targetDate;
+      }
+
       const filtered1m = rawCandles
-        .filter(c => c && c[0] && c[0].startsWith(targetDate))
+        .filter(c => c && c[0] && c[0].startsWith(sessionDate))
         .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime());
 
       if (filtered1m.length === 0) {
         return res.status(200).json({
           success: false,
-          message: `No candles found for ${targetDate}.`,
-          date: targetDate,
+          message: `No candles found for ${sessionDate}.`,
+          date: sessionDate,
           candles: []
         });
       }
@@ -143,9 +151,11 @@ export default async function handler(req, res) {
 
         const timeStr = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: false });
         const time12  = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true });
+        const timeSec = Math.floor(bucketDt.getTime() / 1000);
 
         if (candles5m.length === 0 || candles5m[candles5m.length - 1].timeStr !== timeStr) {
           candles5m.push({
+            time: timeSec,
             timeStr,
             time12,
             timestamp: ts,
@@ -168,7 +178,9 @@ export default async function handler(req, res) {
         success: true,
         symbol: "NIFTY",
         instrument,
-        date: targetDate,
+        date: sessionDate,
+        isLatestTradingDay: sessionDate === todayIst,
+        marketClosed: sessionDate !== todayIst,
         count: candles5m.length,
         dayHigh: Math.max(...candles5m.map(c => c.high)),
         dayLow: Math.min(...candles5m.map(c => c.low)),
@@ -296,7 +308,8 @@ export default async function handler(req, res) {
             .where("timeframe", "==", normTf)
             .get();
 
-          const cutoffSec = Math.floor(Date.now() / 1000) - (24 * 3600);
+          // 5-day lookback so weekend and closed market reviews retain the previous sessions
+          const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
           const rawCandles = [];
           snapshot.forEach(doc => {
             const data = doc.data();
@@ -327,7 +340,7 @@ export default async function handler(req, res) {
       if (isStale) {
         try {
           const yahooInterval = (normTf === "15m") ? "15m" : (normTf === "1h") ? "60m" : (normTf === "1d") ? "1d" : "5m";
-          const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${yahooInterval}&range=2d`);
+          const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${yahooInterval}&range=5d`);
           if (yahooJson) {
             const yCandles = parseYahooCandles(yahooJson);
             if (yCandles && yCandles.length > 0) {

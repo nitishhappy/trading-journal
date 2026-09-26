@@ -178,6 +178,20 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.43 — 26 Sep 2026 — Market-Closed Candle Persistence & Multi-Day Fallback (NIFTY & S&P 500)
+- **NIFTY 50 Market-Closed Lookback & Dynamic Session Resolution**:
+  - Fixed `/api/marketCandles.js` NIFTY handler which previously defaulted to `today` and strictly filtered by today's date, causing weekend and holiday queries to discard Upstox previous session candles and return `DATA UNAVAILABLE`.
+  - Added an automated 5-day historical lookback window (`Upstox historical 1-minute feed`) to bridge over weekends and multi-day exchange holidays.
+  - Automatically identifies the latest completed trading session date (e.g. Sep 25) when market is closed and returns all 75 5-minute session bars with Unix timestamps for Lightweight Charts.
+- **S&P 500 5-Day Weekend Window & Fallback Expansion**:
+  - Expanded the Firestore and client cutoff window from 24 hours to 5 days, preventing Friday US close candles from being discarded on weekends.
+  - Updated Yahoo Finance fallback query to `range=5d` so weekend requests receive complete market session histories rather than empty datasets.
+- **Static Candle Stores & Offline Support (`nifty_candles.js` & `sp500_candles.js`)**:
+  - Generated pre-aggregated 5M candle files in `js/data/` for NIFTY and S&P 500 (matching Gold's canopy architecture) for instant offline and weekend rendering.
+  - Updated `sw.js` precache assets and cache bypass rules to include both new candle stores.
+- **UI Status Badge & Plan Alignment**:
+  - Updated feed status badges on both chart dashboards (`nifty_interactive_chart.html`, `sp500_interactive_chart.html`) to display `🔒 MARKET CLOSED (Session: Sep 25)` instead of an erroneous `⚠️ DATA UNAVAILABLE` when viewing historical session data outside market hours.
+
 ### v2.3.42 — 26 Sep 2026 — Universal Historical Briefing Level Extraction via Client-Side Markdown Parser (Gold, S&P 500, NIFTY)
 - **Universal Multi-Asset Markdown Parsers**: Extended the client-side markdown briefing parsing architecture from Bitcoin across all remaining assets:
   - **Gold (`parseGoldLevelsFromMarkdown` in `gold_interactive_chart.html`)**: Extracts all tactical action plan setups (`[G_B1]`, `[G_B2]`, `[G_S1]`, `[G_S2]`) directly from `window.goldDailyPlanSummary` briefing texts.

@@ -6,6 +6,7 @@
     <title>NIFTY 50 • Live Level Chart Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="js/data/nifty_candles.js"></script>
     <style>
         :root {
             --bg-dark: #0f172a;
@@ -1360,9 +1361,26 @@
                 badge.innerText = '● LIVE API FEED';
                 badge.className = 'feed-badge feed-badge-live';
             } else {
-                badge.innerText = '🔒 MARKET CLOSED';
+                const candleDt = new Date(latestCandleTime * 1000);
+                const dateLabel = candleDt.toLocaleDateString('en-US', { timeZone: 'Asia/Kolkata', month: 'short', day: 'numeric' });
+                badge.innerText = `🔒 MARKET CLOSED (${dateLabel})`;
                 badge.className = 'feed-badge feed-badge-unavailable';
             }
+        }
+
+        function reloadCandlesScript() {
+            return new Promise((resolve) => {
+                const scriptId = 'dyn-nifty-candles-script';
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/nifty_candles.js?t=${Date.now()}`;
+                script.onload = () => resolve(true);
+                script.onerror = () => resolve(false);
+                document.body.appendChild(script);
+            });
         }
 
         function reloadPlanDataScript(assetName) {
@@ -2008,51 +2026,71 @@
             }
         }
 
-        // Fetch Realtime OHLC Candles from /api/marketCandles?symbol=NIFTY or /api/niftyCandles
+        // Fetch Realtime OHLC Candles from /api/marketCandles?symbol=NIFTY, /api/niftyCandles, or window.niftyCandlesData
         async function fetchRealtimeNiftyCandles() {
             try {
-                let res = await fetch(`/api/marketCandles?symbol=NIFTY&_t=${Date.now()}`, { cache: 'no-store' });
+                let planDate = '';
+                if (window.dailyPlanData && window.dailyPlanData[0] && window.dailyPlanData[0].timestamp) {
+                    planDate = window.dailyPlanData[0].timestamp.split('T')[0];
+                }
+                const dateParam = planDate ? `&date=${planDate}` : '';
+
+                let res = await fetch(`/api/marketCandles?symbol=NIFTY${dateParam}&_t=${Date.now()}`, { cache: 'no-store' });
                 if (!res.ok) {
                     res = await fetch(`/api/niftyCandles?_t=${Date.now()}`, { cache: 'no-store' });
                 }
-                if (!res.ok) return null;
-                const json = await res.json();
-                if (!json || !json.candles || !Array.isArray(json.candles) || json.candles.length === 0) return null;
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json && json.candles && Array.isArray(json.candles) && json.candles.length > 0) {
+                        const formatted = json.candles.map(c => {
+                            let timeSec;
+                            let open, high, low, close;
 
-                // Map candles to Lightweight Charts format
-                const formatted = json.candles.map(c => {
-                    let timeSec;
-                    let open, high, low, close;
+                            if (typeof c === 'object' && c !== null && !Array.isArray(c)) {
+                                const tsStr = c.time || c.timestamp || c.timeStr;
+                                timeSec = typeof tsStr === 'number' ? tsStr : Math.floor(new Date(tsStr).getTime() / 1000);
+                                open = parseFloat(c.open);
+                                high = parseFloat(c.high);
+                                low = parseFloat(c.low);
+                                close = parseFloat(c.close);
+                            } else if (Array.isArray(c)) {
+                                timeSec = typeof c[0] === 'number' ? c[0] : Math.floor(new Date(c[0]).getTime() / 1000);
+                                open = parseFloat(c[1]);
+                                high = parseFloat(c[2]);
+                                low = parseFloat(c[3]);
+                                close = parseFloat(c[4]);
+                            }
 
-                    if (typeof c === 'object' && c !== null && !Array.isArray(c)) {
-                        const tsStr = c.timestamp || c.timeStr || c.time;
-                        timeSec = typeof tsStr === 'number' ? tsStr : Math.floor(new Date(tsStr).getTime() / 1000);
-                        open = parseFloat(c.open);
-                        high = parseFloat(c.high);
-                        low = parseFloat(c.low);
-                        close = parseFloat(c.close);
-                    } else if (Array.isArray(c)) {
-                        timeSec = typeof c[0] === 'number' ? c[0] : Math.floor(new Date(c[0]).getTime() / 1000);
-                        open = parseFloat(c[1]);
-                        high = parseFloat(c[2]);
-                        low = parseFloat(c[3]);
-                        close = parseFloat(c[4]);
+                            if (isNaN(timeSec) || isNaN(open) || isNaN(high) || isNaN(low) || isNaN(close)) {
+                                return null;
+                            }
+
+                            return { time: timeSec, open, high, low, close };
+                        })
+                        .filter(c => c !== null)
+                        .sort((a, b) => a.time - b.time);
+
+                        if (formatted.length > 0) return formatted;
                     }
-
-                    if (isNaN(timeSec) || isNaN(open) || isNaN(high) || isNaN(low) || isNaN(close)) {
-                        return null;
-                    }
-
-                    return { time: timeSec, open, high, low, close };
-                })
-                .filter(c => c !== null)
-                .sort((a, b) => a.time - b.time);
-
-                return formatted.length > 0 ? formatted : null;
+                }
             } catch (e) {
-                console.warn("[Candle Feed Error] Could not fetch Nifty candles:", e);
-                return null;
+                console.warn("[Candle Feed Error] Could not fetch Nifty candles from API:", e);
             }
+
+            // Fallback: Check local / cached canopy data from window.niftyCandlesData
+            try {
+                if (typeof reloadCandlesScript === 'function') {
+                    await reloadCandlesScript();
+                }
+                if (window.niftyCandlesData && Array.isArray(window.niftyCandlesData.timeframe5m) && window.niftyCandlesData.timeframe5m.length > 0) {
+                    console.log("[Nifty Chart] Loaded candles from window.niftyCandlesData cache");
+                    return [...window.niftyCandlesData.timeframe5m];
+                }
+            } catch (e) {
+                console.warn("[Nifty Chart] Fallback candle store error:", e);
+            }
+
+            return null;
         }
 
         function highlightCard(cardIdx) {

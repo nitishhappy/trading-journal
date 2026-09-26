@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="js/data/sp500_daily_plan.js"></script>
+    <script src="js/data/sp500_candles.js"></script>
     <style>
         :root {
             --bg-dark: #0b0f17;
@@ -2239,7 +2240,8 @@
         }
 
         async function loadRealSp500Candles() {
-            const cutoffSec = Math.floor(Date.now() / 1000) - (24 * 3600);
+            // Allow up to 5 days lookback so weekend review of Friday's session works seamlessly
+            const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
             const filterFresh = (arr) => (arr || []).filter(c => c && c.time && c.time >= cutoffSec);
 
             // 1. Server-side /api/sp500Ohlc or /api/sp500Candles
@@ -2249,9 +2251,7 @@
                     const json = await res.json();
                     const candles = filterFresh(json?.candles);
                     if (candles.length > 0) {
-                        const latestTs = candles[candles.length - 1].time;
-                        const ageMin = (Math.floor(Date.now() / 1000) - latestTs) / 60;
-                        if (ageMin <= 45) return candles;
+                        return candles;
                     }
                 }
             } catch (e) {
@@ -2274,7 +2274,7 @@
 
             // 3. Direct Upstream Yahoo Finance (^GSPC) Real Spot Index Mirror
             try {
-                const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=5m&range=1d&_t=${Date.now()}`, { cache: 'no-store' });
+                const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=5m&range=5d&_t=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const json = await res.json();
                     const result = json?.chart?.result?.[0];
@@ -2301,6 +2301,12 @@
                 console.warn('[SP500 Chart] Direct Yahoo Finance ^GSPC fetch failed:', e);
             }
 
+            // 4. Fallback: Static / offline canopy from window.sp500CandlesData
+            if (window.sp500CandlesData && Array.isArray(window.sp500CandlesData.timeframe5m) && window.sp500CandlesData.timeframe5m.length > 0) {
+                console.log("[SP500 Chart] Loaded candles from window.sp500CandlesData cache");
+                return [...window.sp500CandlesData.timeframe5m];
+            }
+
             // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
             console.error("[SP500 Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds. ZERO synthetic candles generated.");
             return [];
@@ -2324,7 +2330,9 @@
                 badge.innerText = '● LIVE API FEED';
                 badge.className = 'feed-badge feed-badge-live';
             } else {
-                badge.innerText = '🔒 MARKET CLOSED';
+                const candleDt = new Date(latestCandleTime * 1000);
+                const dateLabel = candleDt.toLocaleDateString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric' });
+                badge.innerText = `🔒 MARKET CLOSED (${dateLabel})`;
                 badge.className = 'feed-badge feed-badge-unavailable';
             }
         }

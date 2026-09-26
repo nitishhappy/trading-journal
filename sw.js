@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-b1f3c9fe75";
+const CACHE_NAME = "trade-journal-1858333956";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -90,7 +90,7 @@ const NETWORK_FIRST_FILES = [
   "js/ui/stocks.js",
   "js/ui/levels.js",
   "css/levels.css",
-  "js/data/sectors.js", "js/data/daily_plan.js", "js/data/nifty_daily_plan.js", "js/data/gold_daily_plan.js", "js/data/btc_daily_plan.js", "js/data/sp500_daily_plan.js", "js/data/scanned_stocks.js", "js/data/gold_candles.js",
+  "js/data/sectors.js", "js/data/daily_plan.js", "js/data/nifty_daily_plan.js", "js/data/gold_daily_plan.js", "js/data/btc_daily_plan.js", "js/data/sp500_daily_plan.js", "js/data/scanned_stocks.js", "js/data/gold_candles.js", "js/data/nifty_candles.js", "js/data/sp500_candles.js",
   "js/utils/error-tracking.js", "css/tv-notifications.css",
   "js/workers/liveAlertWorker.js",
 ];
@@ -208,6 +208,8 @@ self.addEventListener("fetch", (event) => {
     url.includes("upstox.com") ||
     url.includes("tradingview.com") ||
     url.includes("gold_candles.js") ||
+    url.includes("nifty_candles.js") ||
+    url.includes("sp500_candles.js") ||
     url.includes("gold_daily_plan.js") ||
     url.includes("nifty_daily_plan.js") ||
     url.includes("btc_daily_plan.js") ||
