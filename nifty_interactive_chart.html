@@ -789,6 +789,7 @@
     <script src="js/data/nifty_daily_plan.js"></script>
 
     <script>
+        const IST_OFFSET_SEC = 19800; // +5:30 IST offset in seconds
         let alertsEnabled = false;
         let fitAllLevels = false; // Default: FALSE = Zoom in on visible candles!
         let showVLines = true;
@@ -1409,11 +1410,28 @@
             }
             container.style.display = 'flex';
 
-            const runsReversed = [...aiBriefingTimes].reverse();
-            runsReversed.forEach((run, idx) => {
+            // Find true latest run (newest timestamp)
+            let latestRun = aiBriefingTimes[0];
+            let maxTs = -Infinity;
+            aiBriefingTimes.forEach(run => {
+                const ts = run.timestamp ? new Date(run.timestamp).getTime() : (run.time * 1000);
+                if (ts > maxTs) {
+                    maxTs = ts;
+                    latestRun = run;
+                }
+            });
+
+            // Sort chronologically (earliest -> latest)
+            const sortedRuns = [...aiBriefingTimes].sort((a, b) => {
+                const aTime = a.timestamp ? new Date(a.timestamp).getTime() : (a.time * 1000);
+                const bTime = b.timestamp ? new Date(b.timestamp).getTime() : (b.time * 1000);
+                return aTime - bTime;
+            });
+
+            sortedRuns.forEach((run) => {
                 const btn = document.createElement('button');
                 btn.className = 'briefing-pill-btn';
-                const isLatest = idx === 0;
+                const isLatest = (run.timestamp === latestRun.timestamp) || (run.time === latestRun.time);
                 const isSelected = selectedBriefingTimestamp 
                     ? (selectedBriefingTimestamp === run.timestamp || selectedBriefingTimestamp === run.time)
                     : isLatest;
@@ -1579,9 +1597,11 @@
             if (levelsListEl) levelsListEl.innerHTML = '';
             
             // Clear previous price lines if any
-            activePriceLines.forEach(item => {
-                if (item.line) candleSeries.removePriceLine(item.line);
-            });
+            if (candleSeries) {
+                activePriceLines.forEach(item => {
+                    if (item.line) candleSeries.removePriceLine(item.line);
+                });
+            }
             activePriceLines = [];
 
             levelsData.levels.forEach((lvl, idx) => {
@@ -1597,10 +1617,12 @@
 
                 // ✅ Tag-aware line styles:
                 const isActionSetup = /^\[(?!K)[BS]\d+\]$/i.test(tag);
-                const lineStyle     = isActionSetup ? LightweightCharts.LineStyle.Solid : LightweightCharts.LineStyle.Dashed;
+                const lineStyle     = (typeof LightweightCharts !== 'undefined' && LightweightCharts.LineStyle)
+                    ? (isActionSetup ? LightweightCharts.LineStyle.Solid : LightweightCharts.LineStyle.Dashed)
+                    : 0;
                 const lineWidth     = isActionSetup ? 2 : 1;
 
-                if (!isNaN(priceVal)) {
+                if (!isNaN(priceVal) && candleSeries) {
                     const pLine = candleSeries.createPriceLine({
                         price: priceVal,
                         color: lineColor,

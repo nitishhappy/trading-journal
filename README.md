@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.44 — 26 Sep 2026 — Fix Historical Briefing Vertical Line Selection & Card Rendering (NIFTY & S&P 500)
+- **Resolved Fatal `IST_OFFSET_SEC` ReferenceError**:
+  - Fixed an unhandled `ReferenceError: IST_OFFSET_SEC is not defined` in `nifty_interactive_chart.html` and `sp500_interactive_chart.html` inside `getLatestDailyPlanLevels` and `getConfirmationPriceAction`.
+  - When users clicked a vertical dashed briefing line on the chart canvas or a timeline pill, this error halted JavaScript execution before level cards could be generated, leaving the right-side levels panel blank.
+  - Declared `const IST_OFFSET_SEC = 19800;` globally in both interactive chart dashboards.
+- **Null Safety Guard for Price Lines**:
+  - Added strict null guards for `candleSeries` when removing or creating horizontal price lines in `renderLevelsAndCards()`, preventing runtime exceptions if series are resetting.
+- **Fixed Briefing Timeline Pills Order & (Live) Pill Accuracy**:
+  - Corrected reverse ordering in `renderBriefingRunsPills()`, which previously marked the oldest historical briefing (Sep 24 01:34 PM) as `⚡ (Live)` instead of the newest active trading run.
+  - Dynamically computes the maximum timestamp to identify the true latest run, and renders runs in proper left-to-right chronological order.
+
 ### v2.3.43 — 26 Sep 2026 — Market-Closed Candle Persistence & Multi-Day Fallback (NIFTY & S&P 500)
 - **NIFTY 50 Market-Closed Lookback & Dynamic Session Resolution**:
   - Fixed `/api/marketCandles.js` NIFTY handler which previously defaulted to `today` and strictly filtered by today's date, causing weekend and holiday queries to discard Upstox previous session candles and return `DATA UNAVAILABLE`.
