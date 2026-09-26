@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-6378fd2615";
+const CACHE_NAME = "trade-journal-bf2c9249f4";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -56,6 +56,9 @@ const ASSETS = [
   "./js/data/gold_daily_plan.js",
   "./js/data/btc_daily_plan.js",
   "./js/data/sp500_daily_plan.js",
+  "./js/data/gold_candles.js",
+  "./js/data/nifty_candles.js",
+  "./js/data/sp500_candles.js",
   "./js/data/scanned_stocks.js",
   "./nifty_interactive_chart.html",
   "./gold_interactive_chart.html",
@@ -206,14 +209,7 @@ self.addEventListener("fetch", (event) => {
     url.includes("swissquote.com") ||
     url.includes("yahoo.com") ||
     url.includes("upstox.com") ||
-    url.includes("tradingview.com") ||
-    url.includes("gold_candles.js") ||
-    url.includes("nifty_candles.js") ||
-    url.includes("sp500_candles.js") ||
-    url.includes("gold_daily_plan.js") ||
-    url.includes("nifty_daily_plan.js") ||
-    url.includes("btc_daily_plan.js") ||
-    url.includes("sp500_daily_plan.js")
+    url.includes("tradingview.com")
   ) {
     return;
   }

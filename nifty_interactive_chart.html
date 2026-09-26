@@ -279,6 +279,17 @@
             gap: 0.75rem;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             min-height: 0;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel-briefing-highlight {
+            animation: panelGlow 1.2s ease;
+        }
+
+        @keyframes panelGlow {
+            0% { box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+            30% { box-shadow: 0 0 25px rgba(56, 189, 248, 0.75); border-color: rgba(56, 189, 248, 0.9); }
+            100% { box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
         }
 
         .section-title {
@@ -1209,6 +1220,31 @@
                 }
             }
 
+            // Direct container click listener for touch devices & top badges
+            if (container) {
+                container.addEventListener('click', (e) => {
+                    if (!chartInstance || !showVLines || !aiBriefingTimes || aiBriefingTimes.length === 0) return;
+                    const rect = container.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+                    const timeScale = chartInstance.timeScale();
+
+                    for (let item of aiBriefingTimes) {
+                        const x = timeScale.timeToCoordinate(item.time);
+                        if (x !== null) {
+                            const badgeW = item.badgeW || 75;
+                            const badgeX = item.badgeX !== undefined ? item.badgeX : (x - badgeW / 2);
+                            const clickedBadge = mouseY <= 36 && mouseX >= badgeX - 8 && mouseX <= badgeX + badgeW + 8;
+                            const clickedLine = Math.abs(mouseX - x) <= 20;
+                            if (clickedBadge || clickedLine) {
+                                selectBriefingRun(item);
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
+
             // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction & Custom Vertical Line Placement!
             chartInstance.subscribeClick((param) => {
                 if (!param || !param.point) return;
@@ -1230,15 +1266,14 @@
                     const timeScale = chartInstance.timeScale();
                     for (let item of aiBriefingTimes) {
                         const x = timeScale.timeToCoordinate(item.time);
-                        if (x !== null) {
-                            const badgeW = item.badgeW || 75;
-                            const badgeX = item.badgeX !== undefined ? item.badgeX : (x - badgeW / 2);
-                            const clickedBadge = param.point.y <= 32 && param.point.x >= badgeX - 4 && param.point.x <= badgeX + badgeW + 4;
-                            const clickedLine = Math.abs(param.point.x - x) <= 12;
-                            if (clickedBadge || clickedLine) {
-                                selectBriefingRun(item);
-                                return;
-                            }
+                        const badgeW = item.badgeW || 75;
+                        const badgeX = item.badgeX !== undefined ? item.badgeX : ((x !== null) ? (x - badgeW / 2) : 0);
+                        const clickedBadge = param.point.y <= 36 && x !== null && param.point.x >= badgeX - 8 && param.point.x <= badgeX + badgeW + 8;
+                        const clickedLinePx = x !== null && Math.abs(param.point.x - x) <= 24;
+                        const clickedLineTime = (param.time && Math.abs(param.time - item.time) <= 900);
+                        if (clickedBadge || clickedLinePx || clickedLineTime) {
+                            selectBriefingRun(item);
+                            return;
                         }
                     }
                 }
@@ -1499,6 +1534,20 @@
             renderVerticalLinesOverlay();
             setTimeout(() => renderVerticalLinesOverlay(), 60);
             setTimeout(() => renderVerticalLinesOverlay(), 200);
+
+            // ✨ Bring Levels Section & Cards into view & highlight
+            const levelsSection = document.querySelector('.levels-section');
+            if (levelsSection) {
+                levelsSection.scrollTop = 0;
+                if (window.innerWidth <= 900) {
+                    levelsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                levelsSection.classList.add('panel-briefing-highlight');
+                setTimeout(() => levelsSection.classList.remove('panel-briefing-highlight'), 1200);
+            }
+            if (item) {
+                setTimeout(() => highlightCard(0), 100);
+            }
         }
 
         function formatRiskRewardPill(entryPriceStr, slPriceStr, tpStr) {

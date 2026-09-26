@@ -178,6 +178,21 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.46 — 27 Sep 2026 — S&P 500 Vertical Line Snapping, Right Panel Synchronization & Resilient Offline Caching
+- **Vertical Line Snapping & Initial Session Visibility (S&P 500)**:
+  - Fixed initial viewport range calculation so that Friday's 06:05 PM pre-market briefing vertical line (snapped to the 7:00 PM session open bar #312) is immediately visible on screen. Previously, the chart auto-zoomed strictly into the last 35 bars (10:30 PM–01:30 AM), leaving bar #312 43 bars off-screen to the left and giving the impression that vertical lines were missing.
+  - Dynamically centers the viewport to frame from the active briefing anchor candle (`fromIdx = Math.max(0, latestBriefingIdx - 6)`) all the way to the latest session close (`totalBars + 8`).
+- **Vertical Line Click & Right-Side Levels Panel Synchronization (S&P 500 & NIFTY)**:
+  - Fixed vertical line hit testing by combining generous pixel coordinate proximity (±24px), candle time proximity (within 3 bars / 15 minutes), and top session badge bounds (±8px).
+  - Added a direct touch/click listener on the chart container to support mobile taps and Android PWA environments.
+  - When clicking a vertical dashed line or timeline pill, the right-side levels panel now automatically scrolls to the top, scrolls into viewport on mobile/narrow screens (<= 900px), triggers an accent pulse animation (`.panel-briefing-highlight`), and automatically highlights the top setup card (`card-sp500-0`).
+- **Fixed Timestamp Matching & Level Sync Deserialization**:
+  - Removed erroneous `+ (IST_OFFSET_SEC * 1000)` addition in `getSp500KeyLevels()` that was corrupting timestamp matching and desyncing level cards when switching between briefings separated by multiple hours.
+- **Resilient Offline Cache & Network-First Candle Fallback (`sw.js`)**:
+  - Added `./js/data/sp500_candles.js`, `./js/data/nifty_candles.js`, and `./js/data/gold_candles.js` to `ASSETS` in `sw.js`.
+  - Removed candle and daily plan stores from the Service Worker bypass list, routing them through Network-First with Cache fallback.
+  - Added `reloadCandlesScript()` with 2.5s timeout, added 2.5s timeout to `reloadPlanDataScript()`, and wrapped `/api/marketCandles` and `/api/sp500Ohlc` in 3.5s `AbortController` timeouts to prevent network stalls and blank initial screens.
+
 ### v2.3.45 — 26 Sep 2026 — S&P 500 Pre-Market Briefing Snapping, Vertical Line Rendering & Multi-Day Level Sync
 - **Pre-Market AI Briefing Snapping (S&P 500 & NIFTY)**:
   - Fixed pre-market briefing snapping in `extractAiBriefingTimes()`: pre-market plans generated before US cash market open (e.g. 06:05 PM IST vs 19:00 IST open) previously exceeded the strict 30-minute threshold (`diff <= 1800`), resulting in orphaned timestamps that returned `null` from `timeToCoordinate()`.

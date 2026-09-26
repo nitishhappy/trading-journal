@@ -279,6 +279,17 @@
             gap: 0.75rem;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             min-height: 0;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel-briefing-highlight {
+            animation: panelGlow 1.2s ease;
+        }
+
+        @keyframes panelGlow {
+            0% { box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+            30% { box-shadow: 0 0 25px rgba(96, 165, 250, 0.75); border-color: rgba(96, 165, 250, 0.9); }
+            100% { box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
         }
 
         .section-title {
@@ -1135,6 +1146,37 @@
             });
 
             initHorizontalScrollbar();
+
+            // Immediate initial synchronous bootstrap from local cached data (0ms perceived load)
+            if (window.sp500CandlesData && Array.isArray(window.sp500CandlesData.timeframe5m) && window.sp500CandlesData.timeframe5m.length > 0) {
+                currentCandlesArray = [...window.sp500CandlesData.timeframe5m];
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+
+                const rawPlanArray = (window.sp500DailyPlanSummary && window.sp500DailyPlanSummary.length > 0)
+                    ? window.sp500DailyPlanSummary
+                    : ((window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData)) ? window.sp500DailyPlanData : []);
+                aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
+                renderLevelsAndCards();
+                updateFeedStatusBadge(currentCandlesArray);
+
+                const totalBars = currentCandlesArray.length;
+                let fromIdx = Math.max(0, totalBars - 45);
+                if (aiBriefingTimes && aiBriefingTimes.length > 0) {
+                    const latestTime = aiBriefingTimes[0].time;
+                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestTime) <= 7200);
+                    if (idx !== -1 && idx > totalBars - 120) {
+                        fromIdx = Math.max(0, idx - 6);
+                    }
+                }
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: fromIdx,
+                    to: totalBars + 8
+                });
+                renderVerticalLinesOverlay();
+            }
+
             reloadChartData();
 
             // Subscribe Crosshair Movement to update OHLC Telemetry
@@ -1166,6 +1208,31 @@
                 }
             }
 
+            // Direct container click listener for touch devices & top badges
+            if (container) {
+                container.addEventListener('click', (e) => {
+                    if (!chartInstance || !showVLines || !aiBriefingTimes || aiBriefingTimes.length === 0) return;
+                    const rect = container.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+                    const timeScale = chartInstance.timeScale();
+
+                    for (let item of aiBriefingTimes) {
+                        const x = timeScale.timeToCoordinate(item.time);
+                        if (x !== null) {
+                            const badgeW = item.badgeW || 75;
+                            const badgeX = item.badgeX !== undefined ? item.badgeX : (x - badgeW / 2);
+                            const clickedBadge = mouseY <= 36 && mouseX >= badgeX - 8 && mouseX <= badgeX + badgeW + 8;
+                            const clickedLine = Math.abs(mouseX - x) <= 20;
+                            if (clickedBadge || clickedLine) {
+                                selectBriefingRun(item);
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
+
             // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction & Custom Vertical Line Placement!
             chartInstance.subscribeClick((param) => {
                 if (!param || !param.point) return;
@@ -1187,15 +1254,14 @@
                     const timeScale = chartInstance.timeScale();
                     for (let item of aiBriefingTimes) {
                         const x = timeScale.timeToCoordinate(item.time);
-                        if (x !== null) {
-                            const badgeW = item.badgeW || 75;
-                            const badgeX = item.badgeX !== undefined ? item.badgeX : (x - badgeW / 2);
-                            const clickedBadge = param.point.y <= 32 && param.point.x >= badgeX - 4 && param.point.x <= badgeX + badgeW + 4;
-                            const clickedLine = Math.abs(param.point.x - x) <= 12;
-                            if (clickedBadge || clickedLine) {
-                                selectBriefingRun(item);
-                                return;
-                            }
+                        const badgeW = item.badgeW || 75;
+                        const badgeX = item.badgeX !== undefined ? item.badgeX : ((x !== null) ? (x - badgeW / 2) : 0);
+                        const clickedBadge = param.point.y <= 36 && x !== null && param.point.x >= badgeX - 8 && param.point.x <= badgeX + badgeW + 8;
+                        const clickedLinePx = x !== null && Math.abs(param.point.x - x) <= 24;
+                        const clickedLineTime = (param.time && Math.abs(param.time - item.time) <= 900);
+                        if (clickedBadge || clickedLinePx || clickedLineTime) {
+                            selectBriefingRun(item);
+                            return;
                         }
                     }
                 }
@@ -1295,6 +1361,22 @@
             resizeChart();
         }
 
+        function reloadCandlesScript() {
+            return new Promise((resolve) => {
+                const scriptId = 'dyn-sp500-candles-script';
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/sp500_candles.js?t=${Date.now()}`;
+                const timer = setTimeout(() => resolve(false), 2500);
+                script.onload = () => { clearTimeout(timer); resolve(true); };
+                script.onerror = () => { clearTimeout(timer); resolve(false); };
+                document.body.appendChild(script);
+            });
+        }
+
         function reloadPlanDataScript(assetName) {
             return new Promise((resolve) => {
                 const scriptId = `dyn-${assetName}-script`;
@@ -1304,8 +1386,9 @@
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/${assetName}_daily_plan.js?t=${Date.now()}`;
-                script.onload = () => resolve(true);
-                script.onerror = () => resolve(false);
+                const timer = setTimeout(() => resolve(false), 2500);
+                script.onload = () => { clearTimeout(timer); resolve(true); };
+                script.onerror = () => { clearTimeout(timer); resolve(false); };
                 document.body.appendChild(script);
             });
         }
@@ -1373,7 +1456,14 @@
                 showToast("⚡ Returned to Latest", "Displaying latest active trading plan levels.");
                 if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
                     const totalBars = currentCandlesArray.length;
-                    const fromIdx = Math.max(0, totalBars - 35);
+                    let fromIdx = Math.max(0, totalBars - 45);
+                    if (aiBriefingTimes && aiBriefingTimes.length > 0) {
+                        const latestTime = aiBriefingTimes[0].time;
+                        const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestTime) <= 7200);
+                        if (idx !== -1 && idx > totalBars - 120) {
+                            fromIdx = Math.max(0, idx - 6);
+                        }
+                    }
                     const toIdx = totalBars + 8;
                     isProgrammaticScroll = true;
                     chartInstance.timeScale().setVisibleLogicalRange({ from: fromIdx, to: toIdx });
@@ -1392,7 +1482,7 @@
                     if (idx !== -1) {
                         isProgrammaticScroll = true;
                         const fromIdx = Math.max(0, idx - 12);
-                        const toIdx = Math.min(currentCandlesArray.length + 5, idx + 35);
+                        const toIdx = Math.min(currentCandlesArray.length + 5, idx + 40);
                         chartInstance.timeScale().setVisibleLogicalRange({
                             from: fromIdx,
                             to: toIdx
@@ -1410,6 +1500,20 @@
             renderVerticalLinesOverlay();
             setTimeout(() => renderVerticalLinesOverlay(), 60);
             setTimeout(() => renderVerticalLinesOverlay(), 200);
+
+            // ✨ Bring Levels Section & Cards into view & highlight
+            const levelsSection = document.querySelector('.levels-section');
+            if (levelsSection) {
+                levelsSection.scrollTop = 0;
+                if (window.innerWidth <= 900) {
+                    levelsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                levelsSection.classList.add('panel-briefing-highlight');
+                setTimeout(() => levelsSection.classList.remove('panel-briefing-highlight'), 1200);
+            }
+            if (item) {
+                setTimeout(() => highlightCard(0), 100);
+            }
         }
 
         function formatRiskRewardPill(entryPriceStr, slPriceStr, tpStr) {
@@ -1615,93 +1719,105 @@
         }
 
         async function reloadChartData(forceFit = false) {
-            await reloadPlanDataScript('sp500');
+            try {
+                await reloadPlanDataScript('sp500');
 
-            const candles = await loadRealSp500Candles();
-            updateFeedStatusBadge(candles);
-            if (candles && candles.length > 0) {
-                currentCandlesArray = candles;
-                candleSeries.setData(candles);
-                latestCandleTimestamp = candles[candles.length - 1].time;
-                updateOHLCHeader();
-            }
+                const candles = await loadRealSp500Candles();
+                updateFeedStatusBadge(candles);
+                if (candles && candles.length > 0) {
+                    currentCandlesArray = candles;
+                    candleSeries.setData(candles);
+                    latestCandleTimestamp = candles[candles.length - 1].time;
+                    updateOHLCHeader();
+                }
 
-            // Update AI Briefing timestamps
-            const rawPlanArray = (window.sp500DailyPlanSummary && window.sp500DailyPlanSummary.length > 0)
-                ? window.sp500DailyPlanSummary
-                : ((window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData)) ? window.sp500DailyPlanData : []);
-            aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
+                // Update AI Briefing timestamps
+                const rawPlanArray = (window.sp500DailyPlanSummary && window.sp500DailyPlanSummary.length > 0)
+                    ? window.sp500DailyPlanSummary
+                    : ((window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData)) ? window.sp500DailyPlanData : []);
+                aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
 
-            renderLevelsAndCards();
+                renderLevelsAndCards();
 
-            // ✅ Autoscale Y-Axis: zoomed-in on candles by default, expands only if fitAllLevels is true
-            candleSeries.applyOptions({
-                autoscaleInfoProvider: (original) => {
-                    const res = original();
-                    if (!fitAllLevels || !res || !res.priceRange) return res;
+                // ✅ Autoscale Y-Axis: zoomed-in on candles by default, expands only if fitAllLevels is true
+                candleSeries.applyOptions({
+                    autoscaleInfoProvider: (original) => {
+                        const res = original();
+                        if (!fitAllLevels || !res || !res.priceRange) return res;
 
-                    let min = res.priceRange.minValue;
-                    let max = res.priceRange.maxValue;
+                        let min = res.priceRange.minValue;
+                        let max = res.priceRange.maxValue;
 
-                    if (activePriceLines && activePriceLines.length > 0) {
-                        activePriceLines.forEach(item => {
-                            if (!isNaN(item.price)) {
-                                if (item.price < min) min = item.price;
-                                if (item.price > max) max = item.price;
+                        if (activePriceLines && activePriceLines.length > 0) {
+                            activePriceLines.forEach(item => {
+                                if (!isNaN(item.price)) {
+                                    if (item.price < min) min = item.price;
+                                    if (item.price > max) max = item.price;
+                                }
+                            });
+                        }
+
+                        const padding = (max - min) * 0.03;
+                        return {
+                            priceRange: {
+                                minValue: min - padding,
+                                maxValue: max + padding,
+                            },
+                        };
+                    },
+                });
+
+                if (currentCandlesArray && currentCandlesArray.length > 0) {
+                    checkCandleCloseCrossings(currentCandlesArray, 'S&P 500');
+                }
+
+                if (chartInstance) {
+                    if (!forceFit && !isInitialLoad && userHasInteracted && userLogicalRange !== null) {
+                        isProgrammaticScroll = true;
+                        chartInstance.timeScale().setVisibleLogicalRange(userLogicalRange);
+                        setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                    } else if (selectedBriefingTimestamp) {
+                        const briefingObj = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
+                        if (briefingObj && briefingObj.time && currentCandlesArray && currentCandlesArray.length > 0) {
+                            const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - briefingObj.time) <= 7200);
+                            if (idx !== -1) {
+                                isProgrammaticScroll = true;
+                                chartInstance.timeScale().setVisibleLogicalRange({
+                                    from: Math.max(0, idx - 12),
+                                    to: Math.min(currentCandlesArray.length + 5, idx + 40)
+                                });
+                                setTimeout(() => { isProgrammaticScroll = false; }, 50);
                             }
-                        });
-                    }
-
-                    const padding = (max - min) * 0.03;
-                    return {
-                        priceRange: {
-                            minValue: min - padding,
-                            maxValue: max + padding,
-                        },
-                    };
-                },
-            });
-
-            if (currentCandlesArray && currentCandlesArray.length > 0) {
-                checkCandleCloseCrossings(currentCandlesArray, 'S&P 500');
-            }
-
-            if (chartInstance) {
-                if (!forceFit && !isInitialLoad && userHasInteracted && userLogicalRange !== null) {
-                    isProgrammaticScroll = true;
-                    chartInstance.timeScale().setVisibleLogicalRange(userLogicalRange);
-                    setTimeout(() => { isProgrammaticScroll = false; }, 50);
-                } else if (selectedBriefingTimestamp) {
-                    const briefingObj = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
-                    if (briefingObj && briefingObj.time && currentCandlesArray && currentCandlesArray.length > 0) {
-                        const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - briefingObj.time) <= 7200);
-                        if (idx !== -1) {
+                        }
+                    } else {
+                        if (currentCandlesArray && currentCandlesArray.length > 0) {
+                            const totalBars = currentCandlesArray.length;
+                            let fromIdx = Math.max(0, totalBars - 45);
+                            if (aiBriefingTimes && aiBriefingTimes.length > 0) {
+                                const latestTime = aiBriefingTimes[0].time;
+                                const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestTime) <= 7200);
+                                if (idx !== -1 && idx > totalBars - 120) {
+                                    fromIdx = Math.max(0, idx - 6);
+                                }
+                            }
                             isProgrammaticScroll = true;
                             chartInstance.timeScale().setVisibleLogicalRange({
-                                from: Math.max(0, idx - 12),
-                                to: Math.min(currentCandlesArray.length + 5, idx + 35)
+                                from: fromIdx,
+                                to: totalBars + 8
                             });
                             setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                        } else {
+                            chartInstance.timeScale().fitContent();
                         }
+                        isInitialLoad = false;
                     }
-                } else {
-                    if (currentCandlesArray && currentCandlesArray.length > 0) {
-                        const totalBars = currentCandlesArray.length;
-                        isProgrammaticScroll = true;
-                        chartInstance.timeScale().setVisibleLogicalRange({
-                            from: Math.max(0, totalBars - 35),
-                            to: totalBars + 8
-                        });
-                        setTimeout(() => { isProgrammaticScroll = false; }, 50);
-                    } else {
-                        chartInstance.timeScale().fitContent();
-                    }
-                    isInitialLoad = false;
                 }
+                updateScrollbarFromChart();
+                renderVerticalLinesOverlay();
+                setTimeout(() => renderVerticalLinesOverlay(), 60);
+            } catch (err) {
+                console.error("[SP500 Chart] reloadChartData error:", err);
             }
-            updateScrollbarFromChart();
-            renderVerticalLinesOverlay();
-            setTimeout(() => renderVerticalLinesOverlay(), 60);
         }
 
         function extractAiBriefingTimes(dataArray, candlesList) {
@@ -2092,10 +2208,7 @@
                     window.sp500DailyPlanSummary.forEach(s => {
                         const sMs = new Date(s.timestamp).getTime();
                         if (!isNaN(sMs)) {
-                            const diff = Math.min(
-                                Math.abs(sMs - targetMs),
-                                Math.abs(sMs + (IST_OFFSET_SEC * 1000) - targetMs)
-                            );
+                            const diff = Math.abs(sMs - targetMs);
                             if (diff < bestDiff) {
                                 bestDiff = diff;
                                 matchedSummary = s;
@@ -2125,10 +2238,7 @@
                     uniqueTs.forEach(ts => {
                         const tsMs = new Date(ts).getTime();
                         if (!isNaN(tsMs)) {
-                            const diff = Math.min(
-                                Math.abs(tsMs - targetMs),
-                                Math.abs(tsMs + (IST_OFFSET_SEC * 1000) - targetMs)
-                            );
+                            const diff = Math.abs(tsMs - targetMs);
                             if (diff < bestDiff) {
                                 bestDiff = diff;
                                 bestTs = ts;
@@ -2304,9 +2414,15 @@
             const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
             const filterFresh = (arr) => (arr || []).filter(c => c && c.time && c.time >= cutoffSec);
 
-            // 1. Server-side /api/sp500Ohlc or /api/sp500Candles
+            // 1. Server-side /api/marketCandles?symbol=SP500 (proxies Yahoo Finance server-side & Firestore)
             try {
-                const res = await fetch(`/api/sp500Ohlc?token=4cfccc84fdff579e101d06092e62a3a0&timeframe=5m&limit=300&_t=${Date.now()}`, { cache: 'no-store' });
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 3500);
+                const res = await fetch(`/api/marketCandles?symbol=SP500&_t=${Date.now()}`, { 
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
                 if (res.ok) {
                     const json = await res.json();
                     const candles = filterFresh(json?.candles);
@@ -2315,12 +2431,18 @@
                     }
                 }
             } catch (e) {
-                console.warn('[SP500 Chart] /api/sp500Ohlc fetch failed:', e);
+                console.warn('[SP500 Chart] /api/marketCandles fetch failed or timed out:', e);
             }
 
-            // 2. Server-side /api/marketCandles?symbol=SP500
+            // 2. Server-side /api/sp500Ohlc (with short timeout)
             try {
-                const res = await fetch(`/api/marketCandles?symbol=SP500&_t=${Date.now()}`, { cache: 'no-store' });
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                const res = await fetch(`/api/sp500Ohlc?token=4cfccc84fdff579e101d06092e62a3a0&timeframe=5m&limit=300&_t=${Date.now()}`, { 
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
                 if (res.ok) {
                     const json = await res.json();
                     const candles = filterFresh(json?.candles);
@@ -2329,42 +2451,20 @@
                     }
                 }
             } catch (e) {
-                console.warn('[SP500 Chart] /api/marketCandles fetch failed:', e);
+                console.warn('[SP500 Chart] /api/sp500Ohlc fetch failed or timed out:', e);
             }
 
-            // 3. Direct Upstream Yahoo Finance (^GSPC) Real Spot Index Mirror
+            // 3. Fallback: reload and read from window.sp500CandlesData
             try {
-                const res = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=5m&range=5d&_t=${Date.now()}`, { cache: 'no-store' });
-                if (res.ok) {
-                    const json = await res.json();
-                    const result = json?.chart?.result?.[0];
-                    if (result && result.timestamp) {
-                        const times = result.timestamp;
-                        const quote = result.indicators.quote[0];
-                        const candles = [];
-                        for (let i = 0; i < times.length; i++) {
-                            if (quote.open[i] != null && quote.close[i] != null && quote.high[i] != null && quote.low[i] != null) {
-                                candles.push({
-                                    time: times[i],
-                                    open: Number(quote.open[i].toFixed(2)),
-                                    high: Number(quote.high[i].toFixed(2)),
-                                    low: Number(quote.low[i].toFixed(2)),
-                                    close: Number(quote.close[i].toFixed(2))
-                                });
-                            }
-                        }
-                        const fresh = filterFresh(candles);
-                        if (fresh.length > 0) return fresh;
-                    }
+                if (typeof reloadCandlesScript === 'function') {
+                    await reloadCandlesScript();
+                }
+                if (window.sp500CandlesData && Array.isArray(window.sp500CandlesData.timeframe5m) && window.sp500CandlesData.timeframe5m.length > 0) {
+                    console.log("[SP500 Chart] Loaded candles from window.sp500CandlesData cache");
+                    return [...window.sp500CandlesData.timeframe5m];
                 }
             } catch (e) {
-                console.warn('[SP500 Chart] Direct Yahoo Finance ^GSPC fetch failed:', e);
-            }
-
-            // 4. Fallback: Static / offline canopy from window.sp500CandlesData
-            if (window.sp500CandlesData && Array.isArray(window.sp500CandlesData.timeframe5m) && window.sp500CandlesData.timeframe5m.length > 0) {
-                console.log("[SP500 Chart] Loaded candles from window.sp500CandlesData cache");
-                return [...window.sp500CandlesData.timeframe5m];
+                console.warn('[SP500 Chart] Fallback candle reload failed:', e);
             }
 
             // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
