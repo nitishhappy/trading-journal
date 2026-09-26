@@ -178,6 +178,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.39 — 26 Sep 2026 — Interactive Charts: Minimal Scrollable Briefing Header & Vertical R:R Layout
+- **Dedicated Minimal Briefing Header Box**: Unified the Plan Raised timestamp badge, "⚡ Return to Latest" action, and briefing run selection pills into a compact `.briefing-header-box` (`flex-shrink: 0;`) across all 4 asset charts (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`). Prevents vertical compression and clipping when scrolling level cards.
+- **Enhanced Horizontal Runs Scroll**: Provided smooth, touch-friendly horizontal scrollbar styling with automatic `scrollIntoView()` whenever a historical briefing is selected from canvas vertical lines or pills.
+- **Vertical Auto-Adjusting R:R Section**: Restructured `.card-targets` and `.rr-pill` from an overflowing horizontal single line to an adaptive vertical stacked column (`TP1: 1:x`, `TP2: 1:y`, `TP3: 1:z`). Eliminates horizontal overflow past the card boundary while preserving symmetric alignment with the entry/SL target columns.
+
 ### v2.3.38 — 26 Sep 2026 — Interactive Charts: Dynamic Risk:Reward (R:R) per Target Price (TP)
 - **Dynamic Risk:Reward Calculation per TP**: Replaced the live spot price distance/points column inside setup card target rows with dynamic Risk:Reward ratio calculations (`formatRiskRewardPill`) across all 4 interactive charts (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`).
 - **Multi-Target Precision**: Parses entry, stop-loss, and one or more target prices separated by `/` or `|` (e.g. `TP1: 1:1.5 | TP2: 1:2.8` or `R:R 1:1.5`), computing $\text{Reward} / \text{Risk}$ independently for each target level.
