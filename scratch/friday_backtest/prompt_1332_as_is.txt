@@ -1,0 +1,35 @@
+Generate an Intraday Tactical Update for NIFTY based on the live chart.
+
+**LIVE SPOT MARKET CONTEXT (UPSTOX SPOT INDEX: NSE:NIFTY):**
+- Current Spot Price: 23040.50
+- Day High: 23121.60 | Day Low: 23020.95
+- 15M ORB Range: 23030.00 - 23116.65
+- Nifty Future Volume Ratio: 1.0 x 8-bar avg (Proxied from active Nifty Future)
+
+**CRITICAL PRICE VS VOLUME DESIGN RULES:**
+1. **PRICES MUST BE 100% SPOT INDEX (`NSE:NIFTY`):** All levels, strike selection, ORB boundaries, Day High/Low, Chop Zones, Entry Triggers, Stop Losses, and Targets MUST strictly be based on the NIFTY SPOT INDEX. NEVER use Nifty Futures (`NIFTY_F`) or GIFT NIFTY prices for any strike selection or price level.
+2. **VOLUME IS PROXIED FROM NIFTY FUTURES:** Spot index has no traded volume, so institutional volume activity (1.0 x) is proxied from the active Nifty Future contract.
+3. DO NOT output the full 8-point morning briefing. Cut the macro fluff.
+4. Output ONLY points 3, 4, and 5 from the standard morning plan (Live Intraday Chop Zone / No-Trade Zone, High Momentum / Explosive Zones, and 5-Min Intraday Action Plan). DO NOT output points 1 and 2 (Market Structure or Key Levels).
+5. The Markdown heading MUST include Spot Price, Time of Run, and Trigger Reason:
+   `# ⚡ NIFTY 50 Intraday Tactical Update (01:32 PM IST - Sep 25, 2026 | Spot: 23040.50 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))`
+6. The update must include:
+   - Live Intraday Chop Zone / No-Trade Zone (re-calculated based on current SPOT price action).
+   - High Momentum / Explosive Zones (re-calculated in SPOT points).
+   - Exact 5-min BUY/SELL confirmation triggers (in SPOT points).
+
+   **CRITICAL FORMATTING RULES FOR SECTIONS (UI TABLE PARSING):**
+   - You MUST output the sections with exact numbered headers like `3. Live Chop Zone / No-Trade Zone:`, `4. High Momentum / Explosive Zones:`, and `5. 5-Min / 15-Min Action Plan:` (No Markdown # or ##, use trailing colons).
+   - All bullet points MUST strictly start with a hyphen `- ` (do NOT use `*` or emojis at the start).
+   - For Section 4 (Momentum), format as: `- [Scenario Type] ([Condition]): [Details]`
+   - For Section 5 (Action Plan), format each bullet strictly starting with its compact setup code, including Naked TP/SL AND explicit 50-pt Next Week Option Spread recommendation with R:R and profit targets:
+     - `[B1] BUY Setup 1 (Description): [Entry Condition]. | TP: [Targets] | SL: [Stop Loss] | 💡 Buy [Strike] CE + Sell [Strike+50] CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.`
+     - `[B2] BUY Setup 2 (Description): [Entry Condition]. | TP: [Targets] | SL: [Stop Loss] | 💡 Buy [Strike] CE + Sell [Strike+50] CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.`
+     - `[S1] SELL Setup 1 (Description): [Entry Condition]. | TP: [Targets] | SL: [Stop Loss] | 💡 Buy [Strike] PE + Sell [Strike-50] PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.`
+     - `[S2] SELL Setup 2 (Description): [Entry Condition]. | TP: [Targets] | SL: [Stop Loss] | 💡 Buy [Strike] PE + Sell [Strike-50] PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.`
+     Every setup in Section 5 MUST strictly start with `[B1]`, `[B2]`, `[S1]`, or `[S2]`.
+7. **OUTPUT BOUNDARY RULE (STRICT):**
+   Your markdown output MUST end immediately after the ````json:app-data```` block. DO NOT include any operational status sections.
+8. **MANDATORY JSON DATA BLOCK CONTRACT (SECTION 5 TRACEABILITY):** 
+   The system uses Python scripts to sync your output to the Trading Journal PWA. At the very bottom of this markdown output, you MUST append a raw JSON block wrapped in ````json:app-data ... ````.
+   Every level in the `levels` array MUST include a compact `setup` code matching Section 5 (`B1`, `B2`, `S1`, `S2`), prefix `logic` with `[B1]`, `[B2]`, `[S1]`, or `[S2]`, AND include `"spread"` field.

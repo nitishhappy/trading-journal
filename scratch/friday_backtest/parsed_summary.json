@@ -1,0 +1,342 @@
+{
+  "historical": {
+    "1034": [
+      {
+        "setup": "B1",
+        "price": "23065",
+        "tp": "23,140.00 / 23,180.00",
+        "sl": "23,015.00",
+        "logic": "Pullback probe into 23,040\u201323,055 with 5m close back above 23,065"
+      },
+      {
+        "setup": "B2",
+        "price": "23125",
+        "tp": "23,200.00 / 23,250.00",
+        "sl": "23,075.00",
+        "logic": "Sustained 5m close ABOVE 23,125 clearing Day High (23,121.60)"
+      },
+      {
+        "setup": "S1",
+        "price": "23065",
+        "tp": "23,015.00 / 22,980.00",
+        "sl": "23,095.00",
+        "logic": "Failure to reclaim 23,100 followed by 5m close BELOW 23,065"
+      },
+      {
+        "setup": "S2",
+        "price": "23030",
+        "tp": "22,960.00 / 22,920.00",
+        "sl": "23,070.00",
+        "logic": "Sustained 5m close BELOW Day Low 23,030"
+      }
+    ],
+    "1332": [
+      {
+        "setup": "B1",
+        "price": "23070",
+        "tp": "23,115.00 / 23,145.00",
+        "sl": "23,020.00",
+        "logic": "Absorption probe holding above Day Low followed by 5m close back ABOVE 23,070 reclaiming VWAP"
+      },
+      {
+        "setup": "B2",
+        "price": "23125",
+        "tp": "23,180.00 / 23,220.00",
+        "sl": "23,070.00",
+        "logic": "Sustained 5m close ABOVE 23,125 clearing Day High (23,121.60)"
+      },
+      {
+        "setup": "S1",
+        "price": "23035",
+        "tp": "22,990.00 / 22,960.00",
+        "sl": "23,075.00",
+        "logic": "Rejection at 23,060\u201323,070 followed by 5m close below 23,035"
+      },
+      {
+        "setup": "S2",
+        "price": "23020",
+        "tp": "22,960.00 / 22,920.00",
+        "sl": "23,060.00",
+        "logic": "Sustained 5m close BELOW Day Low 23,020"
+      }
+    ]
+  },
+  "results": {
+    "1034_as_is": [
+      {
+        "price": 23125,
+        "setup": "B2",
+        "type": "Explosive Breakout / Day High Supply Wall",
+        "logic": "[B2] Sustained 5m close ABOVE 23,125 clearing Day High (23,121.60) with active futures volume confirming absorption",
+        "bias": "bullish",
+        "tp": "23,200.00 / 23,250.00",
+        "sl": "23,075.00",
+        "spread": "Buy 23,100 CE + Sell 23,150 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23065,
+        "setup": "B1",
+        "type": "Support / Dip Absorption Floor",
+        "logic": "[B1] Pullback probe into 23,040.00\u201323,055.00 rejected with lower absorption wicks and confirmed 5m close back above 23,065.00",
+        "bias": "bullish",
+        "tp": "23,140.00 / 23,180.00",
+        "sl": "23,015.00",
+        "spread": "Buy 23,050 CE + Sell 23,100 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23060,
+        "setup": "S1",
+        "type": "Resistance / Chop Breakdown Fade",
+        "logic": "[S1] Failure to reclaim 23,100 Call resistance confirmed with 5m close below 23,065.00 fading toward 15M ORB Low",
+        "bias": "bearish",
+        "tp": "23,015.00 / 22,980.00",
+        "sl": "23,095.00",
+        "spread": "Buy 23,100 PE + Sell 23,050 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%"
+      },
+      {
+        "price": 23030,
+        "setup": "S2",
+        "type": "Day Low Breakdown / Liquidation Flush",
+        "logic": "[S2] Sustained 5m close BELOW Day Low 23,030.00 decisively shattering 23,000 Put support with expanding active futures volume",
+        "bias": "bearish",
+        "tp": "22,960.00 / 22,920.00",
+        "sl": "23,070.00",
+        "spread": "Buy 23,050 PE + Sell 23,000 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+      }
+    ],
+    "1034_to_be": [
+      {
+        "price": 23090,
+        "setup": "B1",
+        "type": "ORB Midpoint Reclaim Long",
+        "logic": "[B1] Absorption retest holding above ORB Midpoint (23,073.30) followed by 5m close back above 23,090",
+        "bias": "bullish",
+        "tp": "23,121.60 / 23,165.00",
+        "sl": "23,060.00",
+        "spread": "Buy 23,100 CE + Sell 23,150 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23125,
+        "setup": "B2",
+        "type": "Day High Breakout Long",
+        "logic": "[B2] 5m breakout candle closing firmly above Day High (23,121.60) with volume expansion",
+        "bias": "bullish",
+        "tp": "23,165.00 / 23,200.00",
+        "sl": "23,085.00",
+        "spread": "Buy 23,100 CE + Sell 23,150 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23075,
+        "setup": "S1",
+        "type": "Overhead Supply Fade Short",
+        "logic": "[S1] Failed test of resistance with upper wick rejection and 5m close below 23,075",
+        "bias": "bearish",
+        "tp": "23,040.00 / 23,030.00",
+        "sl": "23,105.00",
+        "spread": "Buy 23,100 PE + Sell 23,050 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%"
+      },
+      {
+        "price": 23025,
+        "setup": "S2",
+        "type": "Day Low Breakdown Short",
+        "logic": "[S2] 5m breakdown close below Day Low 23,030.00 triggering long liquidation",
+        "bias": "bearish",
+        "tp": "22,975.00 / 22,940.00",
+        "sl": "23,060.00",
+        "spread": "Buy 23,000 PE + Sell 22,950 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+      },
+      {
+        "price": 23073.3,
+        "setup": "KB1",
+        "type": "Dynamic Pivot / ORB Midpoint",
+        "logic": "[KB1] 15M ORB Midpoint & dynamic session equilibrium",
+        "bias": "bullish",
+        "tp": "23,116.65 / 23,145.00",
+        "sl": "23,035.00"
+      },
+      {
+        "price": 23030,
+        "setup": "KB2",
+        "type": "Support / Day Low",
+        "logic": "[KB2] Session Day Low (23,030.00) & 15M ORB Low (23,030.00) defense shelf",
+        "bias": "bullish",
+        "tp": "23,085.00 / 23,120.00",
+        "sl": "22,995.00"
+      },
+      {
+        "price": 23000,
+        "setup": "KB3",
+        "type": "Heavy Put Writer Accumulation Floor",
+        "logic": "[KB3] Major round strike Put open interest accumulation & psychological defense",
+        "bias": "bullish",
+        "tp": "23,060.00 / 23,095.00",
+        "sl": "22,965.00"
+      },
+      {
+        "price": 22940,
+        "setup": "KB4",
+        "type": "Macro HTF Structural Demand Fortress",
+        "logic": "[KB4] Higher timeframe unfilled liquidity pool & institutional demand base",
+        "bias": "bullish",
+        "tp": "23,020.00 / 23,070.00",
+        "sl": "22,900.00"
+      },
+      {
+        "price": 23121.6,
+        "setup": "KS1",
+        "type": "Overhead Resistance / Day High",
+        "logic": "[KS1] Day High (23,121.60) & 15M ORB High (23,116.65) Call Wall supply zone",
+        "bias": "bearish",
+        "tp": "23,075.00 / 23,030.00",
+        "sl": "23,150.00"
+      },
+      {
+        "price": 23020,
+        "setup": "KS2",
+        "type": "Structural Breakdown Floor",
+        "logic": "[KS2] Decisive breakdown level below Day Low triggering stop cascades",
+        "bias": "bearish",
+        "tp": "22,975.00 / 22,940.00",
+        "sl": "23,055.00"
+      }
+    ],
+    "1332_as_is": [
+      {
+        "price": 23070,
+        "setup": "B1",
+        "type": "Support Reclaim / VWAP Mean-Reversion",
+        "logic": "[B1] Absorption probe holding above Day Low followed by confirmed 5m close back ABOVE 23,070 reclaiming VWAP and 15M EMAs",
+        "bias": "bullish",
+        "tp": "23,115.00 / 23,145.00",
+        "sl": "23,020.00",
+        "spread": "Buy 23,050 CE + Sell 23,100 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23125,
+        "setup": "B2",
+        "type": "Explosive Breakout / Day High Supply Wall",
+        "logic": "[B2] Sustained 5m close ABOVE 23,125 clearing Day High (23,121.60) with active futures volume confirming Call writer covering",
+        "bias": "bullish",
+        "tp": "23,180.00 / 23,220.00",
+        "sl": "23,070.00",
+        "spread": "Buy 23,100 CE + Sell 23,150 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23035,
+        "setup": "S1",
+        "type": "Resistance / VWAP Rejection Fade",
+        "logic": "[S1] Rejection at 23,060\u201323,070 (15M EMA9/VWAP) followed by confirmed 5m close below 23,035 fading toward Day Low",
+        "bias": "bearish",
+        "tp": "22,990.00 / 22,960.00",
+        "sl": "23,075.00",
+        "spread": "Buy 23,050 PE + Sell 23,000 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%"
+      },
+      {
+        "price": 23020,
+        "setup": "S2",
+        "type": "Day Low Breakdown / Liquidation Flush",
+        "logic": "[S2] Sustained 5m close BELOW Day Low 23,020.00 shattering 15M ORB Low with expanding red futures volume triggering 23,000 Put panic",
+        "bias": "bearish",
+        "tp": "22,960.00 / 22,920.00",
+        "sl": "23,060.00",
+        "spread": "Buy 23,000 PE + Sell 22,950 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+      }
+    ],
+    "1332_to_be": [
+      {
+        "price": 23070,
+        "setup": "B1",
+        "type": "Support Reclaim / VWAP Mean-Reversion",
+        "logic": "[B1] Absorption probe holding above Day Low followed by confirmed 5m close back ABOVE 23,070 reclaiming VWAP and 15M EMAs",
+        "bias": "bullish",
+        "tp": "23,115.00 / 23,145.00",
+        "sl": "23,020.00",
+        "spread": "Buy 23,050 CE + Sell 23,100 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23125,
+        "setup": "B2",
+        "type": "Explosive Breakout / Day High Supply Wall",
+        "logic": "[B2] Sustained 5m close ABOVE 23,125 clearing Day High (23,121.60) with active futures volume confirming Call writer covering",
+        "bias": "bullish",
+        "tp": "23,180.00 / 23,220.00",
+        "sl": "23,070.00",
+        "spread": "Buy 23,100 CE + Sell 23,150 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+      },
+      {
+        "price": 23035,
+        "setup": "S1",
+        "type": "Resistance / VWAP Rejection Fade",
+        "logic": "[S1] Rejection at 23,060\u201323,070 (15M EMA9/VWAP) followed by confirmed 5m close below 23,035 fading toward Day Low",
+        "bias": "bearish",
+        "tp": "22,990.00 / 22,960.00",
+        "sl": "23,075.00",
+        "spread": "Buy 23,050 PE + Sell 23,000 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%"
+      },
+      {
+        "price": 23020,
+        "setup": "S2",
+        "type": "Day Low Breakdown / Liquidation Flush",
+        "logic": "[S2] Sustained 5m close BELOW Day Low 23,020.00 shattering 15M ORB Low with expanding red futures volume triggering 23,000 Put panic",
+        "bias": "bearish",
+        "tp": "22,960.00 / 22,920.00",
+        "sl": "23,060.00",
+        "spread": "Buy 23,000 PE + Sell 22,950 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+      },
+      {
+        "price": 23070.0,
+        "setup": "KB1",
+        "type": "Support / Dynamic VWAP & 15M EMA Pivot",
+        "logic": "[KB1] Immediate dynamic support (Session VWAP 23,070.65 & 15M EMA9/21 / ORB Midpoint 23,073.32)",
+        "bias": "bullish",
+        "tp": "23,115.00 / 23,145.00",
+        "sl": "23,020.00"
+      },
+      {
+        "price": 23020.95,
+        "setup": "KB2",
+        "type": "Support / Primary Session Support Shelf",
+        "logic": "[KB2] Primary session support shelf (Day Low 23,020.95 & 15M ORB Low 23,030.00)",
+        "bias": "bullish",
+        "tp": "23,070.00 / 23,115.00",
+        "sl": "22,990.00"
+      },
+      {
+        "price": 23000.0,
+        "setup": "KB3",
+        "type": "Support / Heavy Put Writer Defense Floor",
+        "logic": "[KB3] Heavy Put writer accumulation floor (Key round strike defense with 21.47M total OI)",
+        "bias": "bullish",
+        "tp": "23,070.00 / 23,120.00",
+        "sl": "22,960.00"
+      },
+      {
+        "price": 22920.0,
+        "setup": "KB4",
+        "type": "Support / Macro Structural Demand Fortress",
+        "logic": "[KB4] Macro higher timeframe structural demand fortress and multi-day liquidity base",
+        "bias": "bullish",
+        "tp": "23,020.00 / 23,070.00",
+        "sl": "22,880.00"
+      },
+      {
+        "price": 23121.6,
+        "setup": "KS1",
+        "type": "Resistance / Day High & Call Writer Ceiling",
+        "logic": "[KS1] Immediate overhead resistance (Day High 23,121.60, 15M ORB High 23,116.65, and 23,100 Call Wall)",
+        "bias": "bearish",
+        "tp": "23,070.00 / 23,035.00",
+        "sl": "23,145.00"
+      },
+      {
+        "price": 23020.0,
+        "setup": "KS2",
+        "type": "Breakdown / Day Low Structural Failure Trigger",
+        "logic": "[KS2] Structural breakdown floor below Day Low (liquidation trigger shattering 15M ORB Low)",
+        "bias": "bearish",
+        "tp": "22,960.00 / 22,920.00",
+        "sl": "23,060.00"
+      }
+    ]
+  }
+}
