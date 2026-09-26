@@ -1460,20 +1460,34 @@
             if (!item) {
                 selectedBriefingTimestamp = null;
                 showToast("⚡ Returned to Latest", "Displaying latest active trading plan levels.");
+                if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                    const totalBars = currentCandlesArray.length;
+                    const fromIdx = Math.max(0, totalBars - 30);
+                    const toIdx = totalBars + 8;
+                    isProgrammaticScroll = true;
+                    chartInstance.timeScale().setVisibleLogicalRange({ from: fromIdx, to: toIdx });
+                    userLogicalRange = { from: fromIdx, to: toIdx };
+                    userHasInteracted = false;
+                    const resetBtn = document.getElementById('btn-reset-zoom');
+                    if (resetBtn) resetBtn.style.display = 'none';
+                    setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                }
             } else {
                 selectedBriefingTimestamp = item.timestamp || item.time;
                 showToast(`📌 Selected Briefing: ${item.label}`, "Chart levels, cards, and scorecard updated.");
 
                 if (chartInstance && item.time && currentCandlesArray && currentCandlesArray.length > 0) {
-                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - item.time) <= 900);
+                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - item.time) <= 7200);
                     if (idx !== -1) {
                         isProgrammaticScroll = true;
+                        const fromIdx = Math.max(0, idx - 12);
+                        const toIdx = Math.min(currentCandlesArray.length + 5, idx + 35);
                         chartInstance.timeScale().setVisibleLogicalRange({
-                            from: Math.max(0, idx - 15),
-                            to: Math.min(currentCandlesArray.length + 5, idx + 25)
+                            from: fromIdx,
+                            to: toIdx
                         });
                         userHasInteracted = true;
-                        userLogicalRange = { from: Math.max(0, idx - 15), to: Math.min(currentCandlesArray.length + 5, idx + 25) };
+                        userLogicalRange = { from: fromIdx, to: toIdx };
                         const resetBtn = document.getElementById('btn-reset-zoom');
                         if (resetBtn) resetBtn.style.display = 'flex';
                         setTimeout(() => { isProgrammaticScroll = false; }, 50);
@@ -1483,6 +1497,8 @@
 
             renderLevelsAndCards();
             renderVerticalLinesOverlay();
+            setTimeout(() => renderVerticalLinesOverlay(), 60);
+            setTimeout(() => renderVerticalLinesOverlay(), 200);
         }
 
         function formatRiskRewardPill(entryPriceStr, slPriceStr, tpStr) {
@@ -1742,9 +1758,19 @@
                     isProgrammaticScroll = true;
                     chartInstance.timeScale().setVisibleLogicalRange(userLogicalRange);
                     setTimeout(() => { isProgrammaticScroll = false; }, 50);
-                } else if (fitAllLevels) {
-                    chartInstance.timeScale().fitContent();
-                    isInitialLoad = false;
+                } else if (selectedBriefingTimestamp) {
+                    const briefingObj = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
+                    if (briefingObj && briefingObj.time && currentCandlesArray && currentCandlesArray.length > 0) {
+                        const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - briefingObj.time) <= 7200);
+                        if (idx !== -1) {
+                            isProgrammaticScroll = true;
+                            chartInstance.timeScale().setVisibleLogicalRange({
+                                from: Math.max(0, idx - 12),
+                                to: Math.min(currentCandlesArray.length + 5, idx + 35)
+                            });
+                            setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                        }
+                    }
                 } else {
                     if (currentCandlesArray && currentCandlesArray.length > 0) {
                         const totalBars = currentCandlesArray.length;
@@ -1762,6 +1788,7 @@
             }
             updateScrollbarFromChart();
             renderVerticalLinesOverlay();
+            setTimeout(() => renderVerticalLinesOverlay(), 60);
         }
 
         function extractAiBriefingTimes(dataArray, candlesList) {
@@ -1784,7 +1811,7 @@
                         let minDiff = Infinity;
                         candlesList.forEach(c => {
                             const diff = Math.abs(c.time - unixSec);
-                            if (diff < minDiff && diff <= 1800) {
+                            if (diff < minDiff && diff <= 14400) {
                                 minDiff = diff;
                                 targetTime = c.time;
                             }

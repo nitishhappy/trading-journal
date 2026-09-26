@@ -875,7 +875,7 @@
                         if (fitText) fitText.innerText = 'Zoom Candles';
                         showToast("Mode: Zoom Candles", "Chart Y-axis focused on visible candle price action.");
                     }
-                    reloadChartData(true);
+                    reloadChartData(false);
                 });
             }
 
@@ -1371,20 +1371,34 @@
             if (!item) {
                 selectedBriefingTimestamp = null;
                 showToast("⚡ Returned to Latest", "Displaying latest active trading plan levels.");
+                if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                    const totalBars = currentCandlesArray.length;
+                    const fromIdx = Math.max(0, totalBars - 35);
+                    const toIdx = totalBars + 8;
+                    isProgrammaticScroll = true;
+                    chartInstance.timeScale().setVisibleLogicalRange({ from: fromIdx, to: toIdx });
+                    userLogicalRange = { from: fromIdx, to: toIdx };
+                    userHasInteracted = false;
+                    const resetBtn = document.getElementById('btn-reset-zoom');
+                    if (resetBtn) resetBtn.style.display = 'none';
+                    setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                }
             } else {
                 selectedBriefingTimestamp = item.timestamp || item.time;
                 showToast(`📌 Selected Briefing: ${item.label}`, "Chart levels, cards, and scorecard updated.");
 
                 if (chartInstance && item.time && currentCandlesArray && currentCandlesArray.length > 0) {
-                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - item.time) <= 900);
+                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - item.time) <= 7200);
                     if (idx !== -1) {
                         isProgrammaticScroll = true;
+                        const fromIdx = Math.max(0, idx - 12);
+                        const toIdx = Math.min(currentCandlesArray.length + 5, idx + 35);
                         chartInstance.timeScale().setVisibleLogicalRange({
-                            from: Math.max(0, idx - 15),
-                            to: Math.min(currentCandlesArray.length + 5, idx + 25)
+                            from: fromIdx,
+                            to: toIdx
                         });
                         userHasInteracted = true;
-                        userLogicalRange = { from: Math.max(0, idx - 15), to: Math.min(currentCandlesArray.length + 5, idx + 25) };
+                        userLogicalRange = { from: fromIdx, to: toIdx };
                         const resetBtn = document.getElementById('btn-reset-zoom');
                         if (resetBtn) resetBtn.style.display = 'flex';
                         setTimeout(() => { isProgrammaticScroll = false; }, 50);
@@ -1394,6 +1408,8 @@
 
             renderLevelsAndCards();
             renderVerticalLinesOverlay();
+            setTimeout(() => renderVerticalLinesOverlay(), 60);
+            setTimeout(() => renderVerticalLinesOverlay(), 200);
         }
 
         function formatRiskRewardPill(entryPriceStr, slPriceStr, tpStr) {
@@ -1469,7 +1485,7 @@
                     let minDiff = Infinity;
                     currentCandlesArray.forEach(c => {
                         const diff = Math.abs(c.time - planSec);
-                        if (diff < minDiff && diff <= 900) { minDiff = diff; targetCandleTime = c.time; }
+                        if (diff < minDiff && diff <= 14400) { minDiff = diff; targetCandleTime = c.time; }
                     });
                 }
                 if (!targetCandleTime && raisedTimeStr) {
@@ -1478,7 +1494,7 @@
                         let minDiff = Infinity;
                         currentCandlesArray.forEach(c => {
                             const diff = Math.abs(c.time - planSec);
-                            if (diff < minDiff && diff <= 900) { minDiff = diff; targetCandleTime = c.time; }
+                            if (diff < minDiff && diff <= 14400) { minDiff = diff; targetCandleTime = c.time; }
                         });
                     }
                 }
@@ -1583,8 +1599,18 @@
             });
 
             if (currentCandlesArray && currentCandlesArray.length > 0) {
-                const latestSpot = currentCandlesArray[currentCandlesArray.length - 1].close;
-                updateProximityAndAutoSelect(latestSpot);
+                let spotPrice = currentCandlesArray[currentCandlesArray.length - 1].close;
+                if (selectedBriefingTimestamp && levelsData.anchorTimestamp) {
+                    const planSec = Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000);
+                    let closestCandle = null;
+                    let minDiff = Infinity;
+                    currentCandlesArray.forEach(c => {
+                        const diff = Math.abs(c.time - planSec);
+                        if (diff < minDiff && diff <= 14400) { minDiff = diff; closestCandle = c; }
+                    });
+                    if (closestCandle) spotPrice = closestCandle.close;
+                }
+                updateProximityAndAutoSelect(spotPrice);
             }
         }
 
@@ -1645,15 +1671,25 @@
                     isProgrammaticScroll = true;
                     chartInstance.timeScale().setVisibleLogicalRange(userLogicalRange);
                     setTimeout(() => { isProgrammaticScroll = false; }, 50);
-                } else if (fitAllLevels) {
-                    chartInstance.timeScale().fitContent();
-                    isInitialLoad = false;
+                } else if (selectedBriefingTimestamp) {
+                    const briefingObj = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
+                    if (briefingObj && briefingObj.time && currentCandlesArray && currentCandlesArray.length > 0) {
+                        const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - briefingObj.time) <= 7200);
+                        if (idx !== -1) {
+                            isProgrammaticScroll = true;
+                            chartInstance.timeScale().setVisibleLogicalRange({
+                                from: Math.max(0, idx - 12),
+                                to: Math.min(currentCandlesArray.length + 5, idx + 35)
+                            });
+                            setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                        }
+                    }
                 } else {
                     if (currentCandlesArray && currentCandlesArray.length > 0) {
                         const totalBars = currentCandlesArray.length;
                         isProgrammaticScroll = true;
                         chartInstance.timeScale().setVisibleLogicalRange({
-                            from: Math.max(0, totalBars - 30),
+                            from: Math.max(0, totalBars - 35),
                             to: totalBars + 8
                         });
                         setTimeout(() => { isProgrammaticScroll = false; }, 50);
@@ -1665,6 +1701,7 @@
             }
             updateScrollbarFromChart();
             renderVerticalLinesOverlay();
+            setTimeout(() => renderVerticalLinesOverlay(), 60);
         }
 
         function extractAiBriefingTimes(dataArray, candlesList) {
@@ -1687,7 +1724,8 @@
                         let minDiff = Infinity;
                         candlesList.forEach(c => {
                             const diff = Math.abs(c.time - unixSec);
-                            if (diff < minDiff && diff <= 1800) {
+                            // Allow up to 4 hours lookahead/lookbehind for pre-market briefings
+                            if (diff < minDiff && diff <= 14400) {
                                 minDiff = diff;
                                 targetTime = c.time;
                             }
@@ -1728,7 +1766,7 @@
                 if (x !== null && x >= 0 && x <= canvas.width) {
                     const isSelected = selectedBriefingTimestamp 
                         ? (selectedBriefingTimestamp === item.timestamp || selectedBriefingTimestamp === item.time)
-                        : false;
+                        : (item === aiBriefingTimes[0]);
                     const strokeColor = isSelected ? '#60a5fa' : '#a855f7';
                     const lineWidth = isSelected ? 2.5 : 1.5;
 

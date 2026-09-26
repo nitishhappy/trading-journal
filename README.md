@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.45 — 26 Sep 2026 — S&P 500 Pre-Market Briefing Snapping, Vertical Line Rendering & Multi-Day Level Sync
+- **Pre-Market AI Briefing Snapping (S&P 500 & NIFTY)**:
+  - Fixed pre-market briefing snapping in `extractAiBriefingTimes()`: pre-market plans generated before US cash market open (e.g. 06:05 PM IST vs 19:00 IST open) previously exceeded the strict 30-minute threshold (`diff <= 1800`), resulting in orphaned timestamps that returned `null` from `timeToCoordinate()`.
+  - Expanded snapping tolerance up to 4 hours (`diff <= 14400`) to accurately latch pre-market briefings to the session's opening candle (`1790343000`), restoring vertical dashed lines and top session badges (`⭐ 06:05 PM (Live)`).
+- **Decoupled Horizontal Zoom from "Fit All Levels" Toggle**:
+  - Removed `chartInstance.timeScale().fitContent()` from the `fitAllLevels` button listener and auto-refresh loop. "Fit All Levels" now purely controls the Y-axis price scale autoscale expansion without horizontally compressing 5 days of multi-day candle history onto a single screen.
+- **Synchronized Viewport & Level Cards on Historical Briefing Selection**:
+  - Enhanced `selectBriefingRun()` and `reloadChartData()` to lock the visible candle window to the selected briefing's candle index (`{ from: idx - 12, to: idx + 35 }`), ensuring levels and cards stay 100% in sync with the corresponding trading session.
+  - Selecting "Return to Latest" now smoothly restores the viewport to the active session without retaining historical offsets.
+  - Proximity calculations now evaluate candle close against the active plan's timestamp rather than distant weekend closing prices.
+
 ### v2.3.44 — 26 Sep 2026 — Fix Historical Briefing Vertical Line Selection & Card Rendering (NIFTY & S&P 500)
 - **Resolved Fatal `IST_OFFSET_SEC` ReferenceError**:
   - Fixed an unhandled `ReferenceError: IST_OFFSET_SEC is not defined` in `nifty_interactive_chart.html` and `sp500_interactive_chart.html` inside `getLatestDailyPlanLevels` and `getConfirmationPriceAction`.
