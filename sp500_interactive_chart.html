@@ -1394,10 +1394,11 @@
                 return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
             }
 
-            const parts = String(tpStr).split(/[\/|]/);
+            const rawParts = String(tpStr).split(/<br\s*\/?>|\n|[\/|]/i);
             const tpList = [];
-            parts.forEach(p => {
-                const cleaned = p.split(/[-–]/)[0].replace(/,/g, '').trim();
+            rawParts.forEach(p => {
+                const cleanPart = p.replace(/\*\*TP\d*:?\s*\*?/gi, '').replace(/TP\d*:?\s*/gi, '').trim();
+                const cleaned = cleanPart.split(/[-–]/)[0].replace(/,/g, '').trim();
                 const match = cleaned.match(/([0-9]+(?:\.[0-9]+)?)/);
                 if (match) {
                     const val = parseFloat(match[1]);

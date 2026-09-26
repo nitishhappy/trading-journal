@@ -1428,6 +1428,23 @@
             renderVerticalLinesOverlay();
         }
 
+        function formatTpDisplay(tpStr) {
+            if (!tpStr || tpStr === 'N/A' || tpStr === 'na') return 'N/A';
+            const rawParts = String(tpStr).split(/<br\s*\/?>|\n|[\/|]/i);
+            const cleaned = [];
+            rawParts.forEach(p => {
+                const cleanPart = p.replace(/\*\*TP\d*:?\s*\*?/gi, '').replace(/TP\d*:?\s*/gi, '').replace(/[*`]/g, '').trim();
+                const m = cleanPart.match(/(\$?[0-9,]+(?:\.[0-9]+)?)/);
+                if (m) cleaned.push(m[1].startsWith('$') ? m[1] : `$${m[1]}`);
+            });
+            return cleaned.length > 0 ? cleaned.join(' / ') : tpStr;
+        }
+
+        function formatSlDisplay(slStr) {
+            if (!slStr || slStr === 'N/A' || slStr === 'na') return 'N/A';
+            return String(slStr).replace(/[*`]/g, '').trim();
+        }
+
         function formatRiskRewardPill(entryPriceStr, slPriceStr, tpStr) {
             if (!entryPriceStr || !slPriceStr || !tpStr) {
                 return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
@@ -1445,10 +1462,11 @@
                 return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
             }
 
-            const parts = String(tpStr).split(/[\/|]/);
+            const rawParts = String(tpStr).split(/<br\s*\/?>|\n|[\/|]/i);
             const tpList = [];
-            parts.forEach(p => {
-                const cleaned = p.split(/[-–]/)[0].replace(/,/g, '').trim();
+            rawParts.forEach(p => {
+                const cleanPart = p.replace(/\*\*TP\d*:?\s*\*?/gi, '').replace(/TP\d*:?\s*/gi, '').trim();
+                const cleaned = cleanPart.split(/[-–]/)[0].replace(/,/g, '').trim();
                 const match = cleaned.match(/([0-9]+(?:\.[0-9]+)?)/);
                 if (match) {
                     const val = parseFloat(match[1]);
@@ -1588,8 +1606,8 @@
                         <div class="expand-logic-btn" id="expand-btn-gold-${idx}" onclick="toggleLogicExpand(event, 'gold', ${idx})">▼ Show Full Confirmation Logic</div>
                         <div class="card-targets">
                             <div style="display:flex; flex-direction:column; gap:3px; min-width:0; flex:1;">
-                                <div style="word-break:break-word; line-height:1.3;">TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></div>
-                                <div style="line-height:1.3;">SL: <strong class="sl-val">${lvl.sl || 'N/A'}</strong></div>
+                                <div style="word-break:break-word; line-height:1.3;">TP: <strong class="tp-val">${formatTpDisplay(lvl.tp)}</strong></div>
+                                <div style="line-height:1.3;">SL: <strong class="sl-val">${formatSlDisplay(lvl.sl)}</strong></div>
                             </div>
                             <div class="dist-pill rr-pill" id="dist-pill-gold-${idx}" title="Risk to Reward (R:R)">${formatRiskRewardPill(lvl.price, lvl.sl, lvl.tp)}</div>
                         </div>

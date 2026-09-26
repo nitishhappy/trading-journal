@@ -1470,10 +1470,11 @@
                 return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
             }
 
-            const parts = String(tpStr).split(/[\/|]/);
+            const rawParts = String(tpStr).split(/<br\s*\/?>|\n|[\/|]/i);
             const tpList = [];
-            parts.forEach(p => {
-                const cleaned = p.split(/[-–]/)[0].replace(/,/g, '').trim();
+            rawParts.forEach(p => {
+                const cleanPart = p.replace(/\*\*TP\d*:?\s*\*?/gi, '').replace(/TP\d*:?\s*/gi, '').trim();
+                const cleaned = cleanPart.split(/[-–]/)[0].replace(/,/g, '').trim();
                 const match = cleaned.match(/([0-9]+(?:\.[0-9]+)?)/);
                 if (match) {
                     const val = parseFloat(match[1]);
@@ -1657,7 +1658,9 @@
                 updateOHLCHeader();
             }
 
-            const rawPlanArray = (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : [];
+            const rawPlanArray = (window.btcDailyPlanSummary && window.btcDailyPlanSummary.length > 0)
+                ? window.btcDailyPlanSummary
+                : ((window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : []);
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, candles);
 
             renderLevelsAndCards();
@@ -2040,20 +2043,149 @@
             }
         }
 
+        function parseBtcLevelsFromMarkdown(text, timestamp, timeDisplay) {
+            if (!text) return [];
+            const levels = [];
+            const seen = new Set();
+
+            // 1. Parse 'Key Trading Levels Summary' table
+            const keyMatch = text.match(/###\s*Key\s*Trading\s*Levels\s*Summary[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            if (keyMatch) {
+                const lines = keyMatch[0].split('\n');
+                for (const line of lines) {
+                    if (!line.includes('|') || line.includes(':---') || line.includes('Logic / Significance')) continue;
+                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                    if (cols.length >= 6) {
+                        const rawPrice = cols[0].replace(/[^0-9.]/g, '');
+                        const tagMatch = cols[2].match(/\[(K?[BS]\d+)\]/i) || cols[3].match(/\[(K?[BS]\d+)\]/i);
+                        const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
+                        const isBullish = cols[0].includes('🟢') || cols[1].toLowerCase().includes('support') || /\[(KB\d+|B\d+)\]/i.test(tag);
+                        const bias = isBullish ? 'bullish' : 'bearish';
+                        const key = tag || (rawPrice + '_' + bias);
+                        if (rawPrice && !seen.has(key)) {
+                            seen.add(key);
+                            levels.push({
+                                source: 'AI',
+                                timestamp: timestamp,
+                                timeDisplay: timeDisplay,
+                                price: rawPrice,
+                                bias: bias,
+                                behavior: (tag ? tag + ': ' : '') + (cols[3] || cols[1]),
+                                tp: cols[4].replace(/[*_]/g, '').trim() || 'na',
+                                sl: cols[5].replace(/[*_]/g, '').trim() || 'na',
+                                status: 'na'
+                            });
+                        }
+                    }
+                }
+            }
+
+            // 2. Parse '5-Min / 15-Min Action Plan & Triggers' table
+            const actionMatch = text.match(/###\s*(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan\s*&\s*Triggers[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            if (actionMatch) {
+                const lines = actionMatch[0].split('\n');
+                for (const line of lines) {
+                    if (!line.includes('|') || line.includes(':---') || line.includes('Confirmation Price Action')) continue;
+                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                    if (cols.length >= 6) {
+                        const tagMatch = cols[0].match(/\[(K?[BS]\d+)\]/i);
+                        const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
+                        const rawPrice = cols[2].split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                        const isBullish = cols[1].includes('🟢') || cols[1].toLowerCase().includes('long') || /\[(KB\d+|B\d+)\]/i.test(tag);
+                        const bias = isBullish ? 'bullish' : 'bearish';
+                        const key = tag || (rawPrice + '_' + bias);
+                        if (rawPrice && !seen.has(key)) {
+                            seen.add(key);
+                            const cleanTp = cols[4].replace(/<br\s*\/?>/gi, ' / ').replace(/[*_]/g, '').trim();
+                            const cleanSl = cols[5].replace(/[*_]/g, '').trim();
+                            levels.push({
+                                source: 'AI',
+                                timestamp: timestamp,
+                                timeDisplay: timeDisplay,
+                                price: rawPrice,
+                                bias: bias,
+                                behavior: (tag ? tag + ': ' : '') + cols[3],
+                                tp: cleanTp || 'na',
+                                sl: cleanSl || 'na',
+                                status: 'na'
+                            });
+                        }
+                    }
+                }
+            }
+
+            return levels;
+        }
+
         function getBtcKeyLevels(targetTimestamp = null) {
             let levels = [];
             let timeDisplay = "06:33 PM, Sep 09";
             let anchorTimestamp = null;
 
-            if (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData) && window.btcDailyPlanData.length > 0) {
-                if (targetTimestamp) {
-                    const targetMs = new Date(targetTimestamp).getTime();
+            // Normalize target timestamp to milliseconds for distance matching
+            let targetMs = null;
+            if (targetTimestamp) {
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
+                    }
+                }
+            }
+
+            // 1. Try to extract directly from window.btcDailyPlanSummary (Markdown text)
+            // which contains un-pruned, complete briefing text for EVERY run.
+            if (window.btcDailyPlanSummary && Array.isArray(window.btcDailyPlanSummary) && window.btcDailyPlanSummary.length > 0) {
+                let matchedSummary = null;
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    window.btcDailyPlanSummary.forEach(s => {
+                        const sMs = new Date(s.timestamp).getTime();
+                        if (!isNaN(sMs)) {
+                            const diff = Math.min(
+                                Math.abs(sMs - targetMs),
+                                Math.abs(sMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                matchedSummary = s;
+                            }
+                        }
+                    });
+                } else {
+                    matchedSummary = window.btcDailyPlanSummary[0];
+                }
+
+                if (matchedSummary && matchedSummary.text) {
+                    const parsed = parseBtcLevelsFromMarkdown(matchedSummary.text, matchedSummary.timestamp, matchedSummary.timeDisplay);
+                    if (parsed && parsed.length > 0) {
+                        levels = parsed;
+                        timeDisplay = matchedSummary.timeDisplay || timeDisplay;
+                        anchorTimestamp = matchedSummary.timestamp;
+                    }
+                }
+            }
+
+            // 2. Fallback to window.btcDailyPlanData if summary did not produce levels
+            if (levels.length === 0 && window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData) && window.btcDailyPlanData.length > 0) {
+                if (targetMs !== null) {
                     const uniqueTs = [...new Set(window.btcDailyPlanData.map(i => i.timestamp))];
                     let bestTs = uniqueTs[0];
                     let bestDiff = Infinity;
                     uniqueTs.forEach(ts => {
-                        const diff = Math.abs(new Date(ts).getTime() - targetMs);
-                        if (diff < bestDiff) { bestDiff = diff; bestTs = ts; }
+                        const tsMs = new Date(ts).getTime();
+                        if (!isNaN(tsMs)) {
+                            const diff = Math.min(
+                                Math.abs(tsMs - targetMs),
+                                Math.abs(tsMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) { bestDiff = diff; bestTs = ts; }
+                        }
                     });
                     anchorTimestamp = bestTs;
                 } else {
@@ -2092,7 +2224,6 @@
                     return false;
                 });
 
-                // ✅ FIX: Collect ALL levels (KB, KS, B, S) — no pre-filtering by tag family.
                 // Ordered preference: KB/KS structural levels first, then B/S action setups.
                 const kbKsItems = latestItems.filter(item => /\[K[BS]\d+\]/i.test(item.behavior || ''));
                 const bsItems   = latestItems.filter(item => /\[(?!K)[BS]\d+\]/i.test(item.behavior || ''));
@@ -2164,7 +2295,7 @@
 
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
-            return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+            return behaviorStr.replace(/^(?:\[.*?\]\s*)+:\s*/, '').replace(/^(?:\[.*?\]\s*)+/, '');
         }
 
         function getConfirmationPriceAction(tag, behaviorFallback, summaryArray, targetTimestamp = null) {
@@ -2175,12 +2306,35 @@
 
             let targetSummary = summaryArray[0];
             if (targetTimestamp) {
-                const targetMs = new Date(targetTimestamp).getTime();
-                let bestDiff = Infinity;
-                summaryArray.forEach(s => {
-                    const diff = Math.abs(new Date(s.timestamp).getTime() - targetMs);
-                    if (diff < bestDiff) { bestDiff = diff; targetSummary = s; }
-                });
+                let targetMs = null;
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
+                    }
+                }
+
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    summaryArray.forEach(s => {
+                        const sMs = new Date(s.timestamp).getTime();
+                        if (!isNaN(sMs)) {
+                            const diff = Math.min(
+                                Math.abs(sMs - targetMs),
+                                Math.abs(sMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                targetSummary = s;
+                            }
+                        }
+                    });
+                }
             }
 
             const latestSummaryText = targetSummary?.text || '';
@@ -2196,6 +2350,7 @@
                     if (parts.length >= 5 && parts[4]) {
                         let confirmation = parts[4];
                         confirmation = confirmation.replace(/<br\s*\/?>/gi, ' ').replace(/\*\*/g, '').trim();
+                        confirmation = cleanLogicText(confirmation);
                         if (confirmation && confirmation.length > 8 && !confirmation.toLowerCase().includes('confirmation price action')) {
                             return confirmation;
                         }

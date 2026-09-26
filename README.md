@@ -178,6 +178,16 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.41 — 26 Sep 2026 — Interactive Charts & Sync Pipeline: Gold TP, SL, and Risk:Reward (R:R) Parsing Alignment
+- **Gold R:R Parser & Multi-Target Resolution**: Fixed a calculation distortion in `formatRiskRewardPill` where the regex erroneously matched the digit `1` from label prefixes like `**TP1:**` as the target price (\$1.00), yielding distorted single ratios like `R:R 1:659.2`. Hardened `formatRiskRewardPill` across all interactive charts (`gold_interactive_chart.html`, `btc_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`) to cleanly strip `TP\d*` labels, markdown bold asterisks, and split across `<br>`, `\n`, `/`, or `|`.
+- **Card Target Layout Alignment (`formatTpDisplay` & `formatSlDisplay`)**: Cleaned up the raw markdown and HTML breaks in Gold level cards, displaying clean slash-separated target prices (`$4,295.74 / $4,302.00 / $4,308.00`) and structured multi-target R:R pills (`TP1: 1:1.7`, `TP2: 1:2.6`, `TP3: 1:3.5`) matching Bitcoin's clean visual presentation.
+- **Upstream Sync Standardization (`sync_briefing_to_daily_plan.py`)**: Updated target extraction in the Python sync utility to join multiple target prices cleanly with ` / ` rather than raw `<br>` tags and bold labels.
+
+### v2.3.40 — 26 Sep 2026 — Bitcoin Interactive Chart: Full Historical Briefing Level Extraction via Markdown Parser
+- **Client-Side Markdown Table Parser (`parseBtcLevelsFromMarkdown`)**: Implemented client-side extraction of all 10 setup levels (`[KB1]`–`[KB4]`, `[KS1]`–`[KS2]`, `[B1]`–`[B2]`, `[S1]`–`[S2]`) directly from `window.btcDailyPlanSummary` briefing markdown texts. Solves the issue where global cross-run price deduplication in `btcDailyPlanData` left older briefings (e.g. 08:14 AM and 01:35 PM) with missing levels.
+- **Zero Backend Disruption**: Fully resolves historical level display client-side without altering backend Python deduplication logic or daily plan pruning scripts.
+- **Dynamic Level & Scorecard Synchronization**: Selecting any historical briefing run (via top pills or chart canvas vertical lines) extracts that run's complete set of key levels, target prices, stop losses, and confirmation price action logic, rendering all corresponding horizontal lines and side cards with independent scorecard tracking.
+
 ### v2.3.39 — 26 Sep 2026 — Interactive Charts: Minimal Scrollable Briefing Header & Vertical R:R Layout
 - **Dedicated Minimal Briefing Header Box**: Unified the Plan Raised timestamp badge, "⚡ Return to Latest" action, and briefing run selection pills into a compact `.briefing-header-box` (`flex-shrink: 0;`) across all 4 asset charts (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`). Prevents vertical compression and clipping when scrolling level cards.
 - **Enhanced Horizontal Runs Scroll**: Provided smooth, touch-friendly horizontal scrollbar styling with automatic `scrollIntoView()` whenever a historical briefing is selected from canvas vertical lines or pills.
