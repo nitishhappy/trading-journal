@@ -1657,7 +1657,9 @@
             }
 
             // Update AI Briefing timestamps
-            const rawPlanArray = (window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : [];
+            const rawPlanArray = (window.dailyPlanSummary && window.dailyPlanSummary.length > 0)
+                ? window.dailyPlanSummary
+                : ((window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : []);
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
 
             // 3. Render Levels, Cards & Scorecard
@@ -2062,26 +2064,163 @@
             }
         }
 
+        function parseNiftyLevelsFromMarkdown(text, timestamp, timeDisplay) {
+            if (!text) return [];
+            const levels = [];
+            const seen = new Set();
+
+            // 1. Table format (if present)
+            const actionMatch = text.match(/###\s*(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            const searchBlock = actionMatch ? actionMatch[0] : text;
+
+            const lines = searchBlock.split('\n');
+            for (const line of lines) {
+                const tagMatch = line.match(/\[([BS]\d+)\]/i);
+                if (!tagMatch) continue;
+                const tag = '[' + tagMatch[1].toUpperCase() + ']';
+                const isBullish = /\[(B\d+)\]/i.test(tag);
+                const bias = isBullish ? 'bullish' : 'bearish';
+
+                let rawPrice = '';
+                let tp = 'na';
+                let sl = 'na';
+                let behavior = '';
+
+                if (line.includes('|')) {
+                    const parts = line.split('|').map(p => p.trim());
+                    // If table row with 6+ cols:
+                    if (parts.length >= 6 && !parts.some(p => p.toLowerCase().includes('tp:'))) {
+                        rawPrice = parts[2].split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                        behavior = tag + ': ' + parts[3];
+                        tp = parts[4].replace(/<br\s*\/?>/gi, ' / ').replace(/[*_]/g, '').trim();
+                        sl = parts[5].replace(/[*_]/g, '').trim();
+                    } else {
+                        // Bullet format: - [B1] ... | TP: ... | SL: ... | ...
+                        parts.forEach(p => {
+                            const tpMatch = p.match(/TP:\s*([^|]+)/i);
+                            if (tpMatch) tp = tpMatch[1].replace(/[*_]/g, '').trim();
+                            const slMatch = p.match(/SL:\s*([^|]+)/i);
+                            if (slMatch) sl = slMatch[1].replace(/[*_]/g, '').trim();
+                        });
+
+                        // Extract price from trigger phrase
+                        const priceMatch = line.match(/close\s*(?:back\s*)?(?:ABOVE|BELOW)\s*(?:Day Low\s*)?([0-9,]+(?:\.[0-9]+)?)/i)
+                            || line.match(/(?:ABOVE|BELOW)\s*(?:Day Low\s*)?([0-9,]{5,}(?:\.[0-9]+)?)/i)
+                            || line.match(/([0-9,]{5,}(?:\.[0-9]+)?)/);
+
+                        if (priceMatch) {
+                            rawPrice = priceMatch[1].replace(/,/g, '');
+                        }
+
+                        // Clean behavior logic text
+                        const colonAfterParen = line.indexOf('):');
+                        let entryText = '';
+                        if (colonAfterParen !== -1) {
+                            entryText = line.substring(colonAfterParen + 2).trim();
+                        } else {
+                            entryText = line.replace(/^[-*]\s*\[[^\]]+\][^:]*:\s*/, '').trim();
+                        }
+                        const tpSplit = entryText.indexOf(' | TP:');
+                        if (tpSplit !== -1) {
+                            entryText = entryText.substring(0, tpSplit).trim();
+                        } else {
+                            const pIdx = entryText.indexOf(' |');
+                            if (pIdx !== -1) entryText = entryText.substring(0, pIdx).trim();
+                        }
+                        behavior = tag + ': ' + entryText;
+                    }
+                }
+
+                const key = tag || (rawPrice + '_' + bias);
+                if (rawPrice && !seen.has(key)) {
+                    seen.add(key);
+                    levels.push({
+                        source: 'AI',
+                        timestamp: timestamp,
+                        timeDisplay: timeDisplay,
+                        price: rawPrice,
+                        bias: bias,
+                        behavior: behavior,
+                        tp: tp,
+                        sl: sl,
+                        status: 'na'
+                    });
+                }
+            }
+
+            return levels;
+        }
+
         function getLatestDailyPlanLevels(targetTimestamp = null) {
             let levels = [];
             let timeDisplay = "10:35 AM, Sep 09";
             let anchorTimestamp = null;
 
-            if (window.dailyPlanData && Array.isArray(window.dailyPlanData) && window.dailyPlanData.length > 0) {
-                if (targetTimestamp) {
-                    const targetMs = typeof targetTimestamp === 'number' 
-                        ? (targetTimestamp > 1e11 ? targetTimestamp : targetTimestamp * 1000)
-                        : new Date(targetTimestamp).getTime();
+            // Normalize target timestamp to milliseconds for distance matching
+            let targetMs = null;
+            if (targetTimestamp) {
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
+                    }
+                }
+            }
 
+            // 1. Try to extract directly from window.dailyPlanSummary (Markdown text)
+            if (window.dailyPlanSummary && Array.isArray(window.dailyPlanSummary) && window.dailyPlanSummary.length > 0) {
+                let matchedSummary = null;
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    window.dailyPlanSummary.forEach(s => {
+                        const sMs = new Date(s.timestamp).getTime();
+                        if (!isNaN(sMs)) {
+                            const diff = Math.min(
+                                Math.abs(sMs - targetMs),
+                                Math.abs(sMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                matchedSummary = s;
+                            }
+                        }
+                    });
+                } else {
+                    matchedSummary = window.dailyPlanSummary[0];
+                }
+
+                if (matchedSummary && matchedSummary.text) {
+                    const parsed = parseNiftyLevelsFromMarkdown(matchedSummary.text, matchedSummary.timestamp, matchedSummary.timeDisplay);
+                    if (parsed && parsed.length > 0) {
+                        levels = parsed;
+                        timeDisplay = matchedSummary.timeDisplay || timeDisplay;
+                        anchorTimestamp = matchedSummary.timestamp;
+                    }
+                }
+            }
+
+            // 2. Fallback to window.dailyPlanData if summary did not produce levels
+            if (levels.length === 0 && window.dailyPlanData && Array.isArray(window.dailyPlanData) && window.dailyPlanData.length > 0) {
+                if (targetMs !== null) {
                     const uniqueTs = [...new Set(window.dailyPlanData.map(i => i.timestamp))];
                     let bestTs = uniqueTs[0];
                     let bestDiff = Infinity;
                     uniqueTs.forEach(ts => {
                         const tsMs = new Date(ts).getTime();
-                        const diff = Math.abs(tsMs - targetMs);
-                        if (diff < bestDiff) {
-                            bestDiff = diff;
-                            bestTs = ts;
+                        if (!isNaN(tsMs)) {
+                            const diff = Math.min(
+                                Math.abs(tsMs - targetMs),
+                                Math.abs(tsMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                bestTs = ts;
+                            }
                         }
                     });
                     anchorTimestamp = bestTs;
@@ -2180,7 +2319,7 @@
 
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
-            return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+            return behaviorStr.replace(/^(?:\[.*?\]\s*)+:\s*/, '').replace(/^(?:\[.*?\]\s*)+/, '');
         }
 
         function getConfirmationPriceAction(tag, behaviorFallback, summaryArray, targetTimestamp = null) {
@@ -2191,23 +2330,35 @@
 
             let summaryItem = summaryArray[0];
             if (targetTimestamp) {
-                const targetMs = typeof targetTimestamp === 'number'
-                    ? (targetTimestamp > 1e11 ? targetTimestamp : targetTimestamp * 1000)
-                    : new Date(targetTimestamp).getTime();
-
-                let bestItem = summaryArray[0];
-                let bestDiff = Infinity;
-                summaryArray.forEach(item => {
-                    if (item && item.timestamp) {
-                        const itemMs = new Date(item.timestamp).getTime();
-                        const diff = Math.abs(itemMs - targetMs);
-                        if (diff < bestDiff) {
-                            bestDiff = diff;
-                            bestItem = item;
-                        }
+                let targetMs = null;
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
                     }
-                });
-                summaryItem = bestItem;
+                }
+
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    summaryArray.forEach(item => {
+                        if (item && item.timestamp) {
+                            const itemMs = new Date(item.timestamp).getTime();
+                            const diff = Math.min(
+                                Math.abs(itemMs - targetMs),
+                                Math.abs(itemMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                summaryItem = item;
+                            }
+                        }
+                    });
+                }
             }
 
             const latestSummaryText = summaryItem?.text || '';
@@ -2227,6 +2378,7 @@
                     if (parts.length >= 5 && parts[4]) {
                         let confirmation = parts[4];
                         confirmation = confirmation.replace(/<br\s*\/?>/gi, ' ').replace(/\*\*/g, '').trim();
+                        confirmation = cleanLogicText(confirmation);
                         if (confirmation && confirmation.length > 8 && !confirmation.toLowerCase().includes('confirmation price action')) {
                             return confirmation;
                         }

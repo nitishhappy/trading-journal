@@ -1578,7 +1578,9 @@
             }
 
             // Update AI Briefing timestamps
-            const rawPlanArray = (window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData)) ? window.sp500DailyPlanData : [];
+            const rawPlanArray = (window.sp500DailyPlanSummary && window.sp500DailyPlanSummary.length > 0)
+                ? window.sp500DailyPlanSummary
+                : ((window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData)) ? window.sp500DailyPlanData : []);
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
 
             renderLevelsAndCards();
@@ -1926,26 +1928,150 @@
             }
         }
 
+        function parseSp500LevelsFromMarkdown(text, timestamp, timeDisplay) {
+            if (!text) return [];
+            const levels = [];
+            const seen = new Set();
+
+            // 1. Key Trading Levels Summary
+            const keyMatch = text.match(/###\s*Key\s*Trading\s*Levels\s*Summary[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            if (keyMatch) {
+                const lines = keyMatch[0].split('\n');
+                for (const line of lines) {
+                    if (!line.includes('|') || line.includes(':---') || line.includes('Logic / Significance')) continue;
+                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                    if (cols.length >= 6) {
+                        const rawPrice = cols[0].replace(/[^0-9.]/g, '');
+                        const tagMatch = cols[2].match(/\[(SP_K?[BS]\d+|K?[BS]\d+)\]/i) || cols[3].match(/\[(SP_K?[BS]\d+|K?[BS]\d+)\]/i);
+                        const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
+                        const isBullish = /\[(SP_KB\d+|KB\d+|SP_B\d+|B\d+)\]/i.test(tag) || cols[0].includes('🟢') || cols[1].toLowerCase().includes('support');
+                        const bias = isBullish ? 'bullish' : 'bearish';
+                        const key = tag || (rawPrice + '_' + bias);
+                        if (rawPrice && !seen.has(key)) {
+                            seen.add(key);
+                            levels.push({
+                                source: 'AI',
+                                timestamp: timestamp,
+                                timeDisplay: timeDisplay,
+                                price: rawPrice,
+                                bias: bias,
+                                behavior: (tag ? tag + ': ' : '') + (cols[3] || cols[1]),
+                                tp: cols[4].replace(/[*_]/g, '').trim() || 'na',
+                                sl: cols[5].replace(/[*_]/g, '').trim() || 'na',
+                                status: 'na'
+                            });
+                        }
+                    }
+                }
+            }
+
+            // 2. Action Plan & Triggers table
+            const actionMatch = text.match(/###\s*(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan\s*&\s*Triggers[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            if (actionMatch) {
+                const lines = actionMatch[0].split('\n');
+                for (const line of lines) {
+                    if (!line.includes('|') || line.includes(':---') || line.includes('Confirmation Price Action')) continue;
+                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                    if (cols.length >= 6) {
+                        const tagMatch = cols[0].match(/\[(SP_K?[BS]\d+|K?[BS]\d+)\]/i);
+                        const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
+                        const rawPrice = cols[2].split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                        const isBullish = /\[(SP_KB\d+|KB\d+|SP_B\d+|B\d+)\]/i.test(tag) || cols[1].includes('🟢') || cols[1].toLowerCase().includes('long');
+                        const bias = isBullish ? 'bullish' : 'bearish';
+                        const key = tag || (rawPrice + '_' + bias);
+                        if (rawPrice && !seen.has(key)) {
+                            seen.add(key);
+                            const cleanTp = cols[4].replace(/<br\s*\/?>/gi, ' / ').replace(/[*_]/g, '').trim();
+                            const cleanSl = cols[5].replace(/[*_]/g, '').trim();
+                            levels.push({
+                                source: 'AI',
+                                timestamp: timestamp,
+                                timeDisplay: timeDisplay,
+                                price: rawPrice,
+                                bias: bias,
+                                behavior: (tag ? tag + ': ' : '') + cols[3],
+                                tp: cleanTp || 'na',
+                                sl: cleanSl || 'na',
+                                status: 'na'
+                            });
+                        }
+                    }
+                }
+            }
+
+            return levels;
+        }
+
         function getSp500KeyLevels(targetTimestamp = null) {
             let levels = [];
             let timeDisplay = "06:02 PM, Sep 09";
             let anchorTimestamp = null;
 
-            if (window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData) && window.sp500DailyPlanData.length > 0) {
-                if (targetTimestamp) {
-                    const targetMs = typeof targetTimestamp === 'number'
-                        ? (targetTimestamp > 1e11 ? targetTimestamp : targetTimestamp * 1000)
-                        : new Date(targetTimestamp).getTime();
+            // Normalize target timestamp to milliseconds for distance matching
+            let targetMs = null;
+            if (targetTimestamp) {
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
+                    }
+                }
+            }
 
+            // 1. Try to extract directly from window.sp500DailyPlanSummary (Markdown text)
+            if (window.sp500DailyPlanSummary && Array.isArray(window.sp500DailyPlanSummary) && window.sp500DailyPlanSummary.length > 0) {
+                let matchedSummary = null;
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    window.sp500DailyPlanSummary.forEach(s => {
+                        const sMs = new Date(s.timestamp).getTime();
+                        if (!isNaN(sMs)) {
+                            const diff = Math.min(
+                                Math.abs(sMs - targetMs),
+                                Math.abs(sMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                matchedSummary = s;
+                            }
+                        }
+                    });
+                } else {
+                    matchedSummary = window.sp500DailyPlanSummary[0];
+                }
+
+                if (matchedSummary && matchedSummary.text) {
+                    const parsed = parseSp500LevelsFromMarkdown(matchedSummary.text, matchedSummary.timestamp, matchedSummary.timeDisplay);
+                    if (parsed && parsed.length > 0) {
+                        levels = parsed;
+                        timeDisplay = matchedSummary.timeDisplay || timeDisplay;
+                        anchorTimestamp = matchedSummary.timestamp;
+                    }
+                }
+            }
+
+            // 2. Fallback to window.sp500DailyPlanData if summary did not produce levels
+            if (levels.length === 0 && window.sp500DailyPlanData && Array.isArray(window.sp500DailyPlanData) && window.sp500DailyPlanData.length > 0) {
+                if (targetMs !== null) {
                     const uniqueTs = [...new Set(window.sp500DailyPlanData.map(i => i.timestamp))];
                     let bestTs = uniqueTs[0];
                     let bestDiff = Infinity;
                     uniqueTs.forEach(ts => {
                         const tsMs = new Date(ts).getTime();
-                        const diff = Math.abs(tsMs - targetMs);
-                        if (diff < bestDiff) {
-                            bestDiff = diff;
-                            bestTs = ts;
+                        if (!isNaN(tsMs)) {
+                            const diff = Math.min(
+                                Math.abs(tsMs - targetMs),
+                                Math.abs(tsMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                bestTs = ts;
+                            }
                         }
                     });
                     anchorTimestamp = bestTs;
@@ -1993,6 +2119,8 @@
                     const tag = extractTag(item.behavior);
                     if (tag && !seenTags.has(tag)) {
                         seenTags.add(tag);
+                        uniqueTagItems.push(item);
+                    } else if (!tag) {
                         uniqueTagItems.push(item);
                     }
                 });
@@ -2045,7 +2173,7 @@
 
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
-            return behaviorStr.replace(/^\[.*?\]\s*\[.*?\]:\s*/, '');
+            return behaviorStr.replace(/^(?:\[.*?\]\s*)+:\s*/, '').replace(/^(?:\[.*?\]\s*)+/, '');
         }
 
         function getConfirmationPriceAction(tag, behaviorFallback, summaryArray, targetTimestamp = null) {
@@ -2056,23 +2184,35 @@
 
             let summaryItem = summaryArray[0];
             if (targetTimestamp) {
-                const targetMs = typeof targetTimestamp === 'number'
-                    ? (targetTimestamp > 1e11 ? targetTimestamp : targetTimestamp * 1000)
-                    : new Date(targetTimestamp).getTime();
-
-                let bestItem = summaryArray[0];
-                let bestDiff = Infinity;
-                summaryArray.forEach(item => {
-                    if (item && item.timestamp) {
-                        const itemMs = new Date(item.timestamp).getTime();
-                        const diff = Math.abs(itemMs - targetMs);
-                        if (diff < bestDiff) {
-                            bestDiff = diff;
-                            bestItem = item;
-                        }
+                let targetMs = null;
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
                     }
-                });
-                summaryItem = bestItem;
+                }
+
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    summaryArray.forEach(item => {
+                        if (item && item.timestamp) {
+                            const itemMs = new Date(item.timestamp).getTime();
+                            const diff = Math.min(
+                                Math.abs(itemMs - targetMs),
+                                Math.abs(itemMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                summaryItem = item;
+                            }
+                        }
+                    });
+                }
             }
 
             const latestSummaryText = summaryItem?.text || '';
@@ -2088,6 +2228,7 @@
                     if (parts.length >= 5 && parts[4]) {
                         let confirmation = parts[4];
                         confirmation = confirmation.replace(/<br\s*\/?>/gi, ' ').replace(/\*\*/g, '').trim();
+                        confirmation = cleanLogicText(confirmation);
                         if (confirmation && confirmation.length > 8 && !confirmation.toLowerCase().includes('confirmation price action')) {
                             return confirmation;
                         }
