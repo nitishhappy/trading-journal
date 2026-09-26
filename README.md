@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.42 — 26 Sep 2026 — Universal Historical Briefing Level Extraction via Client-Side Markdown Parser (Gold, S&P 500, NIFTY)
+- **Universal Multi-Asset Markdown Parsers**: Extended the client-side markdown briefing parsing architecture from Bitcoin across all remaining assets:
+  - **Gold (`parseGoldLevelsFromMarkdown` in `gold_interactive_chart.html`)**: Extracts all tactical action plan setups (`[G_B1]`, `[G_B2]`, `[G_S1]`, `[G_S2]`) directly from `window.goldDailyPlanSummary` briefing texts.
+  - **S&P 500 (`parseSp500LevelsFromMarkdown` in `sp500_interactive_chart.html`)**: Extracts all 10 structural and action setups (`[SP_KB1]`–`[SP_KB4]`, `[SP_KS1]`–`[SP_KS2]`, `[SP_B1]`–`[SP_B2]`, `[SP_S1]`–`[SP_S2]`) directly from `window.sp500DailyPlanSummary`.
+  - **NIFTY (`parseNiftyLevelsFromMarkdown` in `nifty_interactive_chart.html`)**: Extracts all intraday tactical setups (`[B1]`, `[B2]`, `[S1]`, `[S2]`) directly from `window.dailyPlanSummary` bullet-point and table formats.
+- **Complete Historical Briefing Level Restoration**: Completely resolves the issue where global cross-run price deduplication in backend data files (`{asset}_daily_plan.js`) stripped persistent levels from older runs. Selecting any historical vertical briefing line or filter pill restores all levels, confirmation price action, and targets on both the chart canvas and right-panel cards.
+- **Zero Backend Scripts Touched**: Preserves existing `prune_daily_plan.py` and copilot python scripts with zero modifications.
+
 ### v2.3.41 — 26 Sep 2026 — Interactive Charts & Sync Pipeline: Gold TP, SL, and Risk:Reward (R:R) Parsing Alignment
 - **Gold R:R Parser & Multi-Target Resolution**: Fixed a calculation distortion in `formatRiskRewardPill` where the regex erroneously matched the digit `1` from label prefixes like `**TP1:**` as the target price (\$1.00), yielding distorted single ratios like `R:R 1:659.2`. Hardened `formatRiskRewardPill` across all interactive charts (`gold_interactive_chart.html`, `btc_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`) to cleanly strip `TP\d*` labels, markdown bold asterisks, and split across `<br>`, `\n`, `/`, or `|`.
 - **Card Target Layout Alignment (`formatTpDisplay` & `formatSlDisplay`)**: Cleaned up the raw markdown and HTML breaks in Gold level cards, displaying clean slash-separated target prices (`$4,295.74 / $4,302.00 / $4,308.00`) and structured multi-target R:R pills (`TP1: 1:1.7`, `TP2: 1:2.6`, `TP3: 1:3.5`) matching Bitcoin's clean visual presentation.
