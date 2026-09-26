@@ -10515,7 +10515,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 100.0,
     "triggered_rate": 20.0,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 26,
@@ -10529,7 +10529,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 100.0,
     "triggered_rate": 12.5,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 1,
@@ -10543,7 +10543,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 54.55,
     "triggered_rate": 23.91,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 1558,
@@ -10557,7 +10557,7 @@ window.predictionAccuracySummary = [
     "failed": 1,
     "win_rate": 50.0,
     "triggered_rate": 3.23,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 9,
@@ -10571,7 +10571,7 @@ window.predictionAccuracySummary = [
     "failed": 16,
     "win_rate": 42.86,
     "triggered_rate": 34.57,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 2,
@@ -10585,7 +10585,7 @@ window.predictionAccuracySummary = [
     "failed": 25,
     "win_rate": 41.86,
     "triggered_rate": 55.84,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 20,
@@ -10599,7 +10599,7 @@ window.predictionAccuracySummary = [
     "failed": 11,
     "win_rate": 35.29,
     "triggered_rate": 42.5,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 23,
@@ -10613,7 +10613,7 @@ window.predictionAccuracySummary = [
     "failed": 7,
     "win_rate": 30.0,
     "triggered_rate": 12.2,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 25,
@@ -10627,7 +10627,7 @@ window.predictionAccuracySummary = [
     "failed": 39,
     "win_rate": 17.02,
     "triggered_rate": 63.51,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3,
@@ -10641,7 +10641,7 @@ window.predictionAccuracySummary = [
     "failed": 25,
     "win_rate": 10.71,
     "triggered_rate": 50.0,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 68,
@@ -10655,7 +10655,7 @@ window.predictionAccuracySummary = [
     "failed": 24,
     "win_rate": 61.29,
     "triggered_rate": 51.41,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 69,
@@ -10669,7 +10669,7 @@ window.predictionAccuracySummary = [
     "failed": 13,
     "win_rate": 53.57,
     "triggered_rate": 19.53,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 71,
@@ -10683,7 +10683,7 @@ window.predictionAccuracySummary = [
     "failed": 26,
     "win_rate": 27.78,
     "triggered_rate": 42.11,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 70,
@@ -10697,7 +10697,7 @@ window.predictionAccuracySummary = [
     "failed": 29,
     "win_rate": 23.68,
     "triggered_rate": 41.44,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 67,
@@ -10711,7 +10711,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 226,
@@ -10725,7 +10725,7 @@ window.predictionAccuracySummary = [
     "failed": 12,
     "win_rate": 68.42,
     "triggered_rate": 40.86,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 225,
@@ -10739,7 +10739,7 @@ window.predictionAccuracySummary = [
     "failed": 19,
     "win_rate": 45.71,
     "triggered_rate": 42.17,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 223,
@@ -10753,7 +10753,7 @@ window.predictionAccuracySummary = [
     "failed": 27,
     "win_rate": 37.21,
     "triggered_rate": 46.24,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 224,
@@ -10767,7 +10767,7 @@ window.predictionAccuracySummary = [
     "failed": 17,
     "win_rate": 22.73,
     "triggered_rate": 23.66,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3756,
@@ -10781,7 +10781,7 @@ window.predictionAccuracySummary = [
     "failed": 6,
     "win_rate": 64.71,
     "triggered_rate": 36.96,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3757,
@@ -10795,7 +10795,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 54.55,
     "triggered_rate": 23.4,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3755,
@@ -10809,7 +10809,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 50.0,
     "triggered_rate": 45.45,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3758,
@@ -10823,7 +10823,7 @@ window.predictionAccuracySummary = [
     "failed": 3,
     "win_rate": 50.0,
     "triggered_rate": 13.33,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3760,
@@ -10837,7 +10837,7 @@ window.predictionAccuracySummary = [
     "failed": 9,
     "win_rate": 43.75,
     "triggered_rate": 38.1,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3761,
@@ -10851,7 +10851,7 @@ window.predictionAccuracySummary = [
     "failed": 4,
     "win_rate": 42.86,
     "triggered_rate": 31.82,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 8112,
@@ -10865,7 +10865,7 @@ window.predictionAccuracySummary = [
     "failed": 9,
     "win_rate": 40.0,
     "triggered_rate": 44.12,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 10404,
@@ -10879,7 +10879,7 @@ window.predictionAccuracySummary = [
     "failed": 8,
     "win_rate": 20.0,
     "triggered_rate": 30.3,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3754,
@@ -10893,7 +10893,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 5055,
@@ -10907,7 +10907,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3759,
@@ -10921,7 +10921,7 @@ window.predictionAccuracySummary = [
     "failed": 2,
     "win_rate": 0.0,
     "triggered_rate": 4.55,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   },
   {
     "id": 3762,
@@ -10935,6 +10935,6 @@ window.predictionAccuracySummary = [
     "failed": 1,
     "win_rate": 0.0,
     "triggered_rate": 6.67,
-    "updated_at": "2026-09-26T17:30:07.028792"
+    "updated_at": "2026-09-26T18:00:09.133673"
   }
 ];

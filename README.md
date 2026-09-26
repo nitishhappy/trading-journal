@@ -178,6 +178,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.38 — 26 Sep 2026 — Interactive Charts: Dynamic Risk:Reward (R:R) per Target Price (TP)
+- **Dynamic Risk:Reward Calculation per TP**: Replaced the live spot price distance/points column inside setup card target rows with dynamic Risk:Reward ratio calculations (`formatRiskRewardPill`) across all 4 interactive charts (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`).
+- **Multi-Target Precision**: Parses entry, stop-loss, and one or more target prices separated by `/` or `|` (e.g. `TP1: 1:1.5 | TP2: 1:2.8` or `R:R 1:1.5`), computing $\text{Reward} / \text{Risk}$ independently for each target level.
+- **Proximity Tick Decoupling**: Updated `updateProximityAndAutoSelect()` so that live candle/spot ticks calculate nearest levels and proximity badges without overwriting the static setup R:R pill.
+
 ### v2.3.37 — 26 Sep 2026 — Interactive Charts: Historical Briefing Selection, Multi-Asset Right-Panel Level Sync, & Scorecard Integration
 - **Universal Historical Briefing Vertical Line & Badge Selection**: Implemented interactive AI briefing run selection across all four interactive chart dashboards (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`). Users can click any vertical dashed briefing line or top badge on the canvas, or click the horizontal filter pills bar (`#briefing-runs-pills`) in the levels panel.
 - **Bi-Directional Chart & Right-Panel Level Sync**: Selecting any historical briefing run (e.g., 06:46 AM, 08:14 AM, 10:34 AM, etc.) immediately:
