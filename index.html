@@ -1165,26 +1165,6 @@
             </div>
         </div>
 
-        <!-- Top Toolbar: 5m Candle Reaction Checker -->
-        <div class="level-analysis-toolbar">
-            <div class="level-analysis-left">
-                <span class="level-toolbar-icon">⚡</span>
-                <span class="level-toolbar-title">Intraday 5m Reaction Analysis</span>
-                <div class="level-date-picker-wrap">
-                    <label for="inp-level-date">Date:</label>
-                    <input type="date" id="inp-level-date" class="level-date-input" />
-                </div>
-            </div>
-            <div class="level-analysis-right" style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <button id="btn-live-alerts" class="btn-live-alerts off" type="button" title="Enable background listener for real-time Entry/Exit pop-ups">
-                    <span class="btn-icon">🔴</span> Live Alerts Off
-                </button>
-                <button id="btn-level-analyze" class="btn-level-analyze" type="button">
-                    <span class="btn-icon">🔍</span> Check First Candle In/Out
-                </button>
-            </div>
-        </div>
-
         <div class="layout-wrapper-levels">
             <!-- LEFT COLUMN: Form and List -->
             <div class="left-col">
@@ -1203,6 +1183,68 @@
                     </h2>
                     <div id="tv-chart-body" class="collapsible-body" style="display:none; height: 550px; padding: 0.5rem;">
                         <div id="tv_chart_container" style="width: 100%; height: 100%; border-radius: 8px;"></div>
+                    </div>
+                </div>
+
+                <!-- EOD PERFORMANCE SCORECARD PANEL (Always visible) -->
+                <div class="panel">
+                    <div class="level-scorecard-panel" id="level-scorecard-panel" style="margin-top:0;">
+                        <div class="level-scorecard-header">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span style="font-size:1.15rem;">📊</span>
+                                <h3 style="margin:0; font-size:1rem; font-weight:700;">EOD Forecast Scorecard (Worked : Failed)</h3>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <button type="button" id="btn-scorecard-reset" class="btn-scorecard-reset" title="Reset all cumulative historical prediction stats">Reset Stats</button>
+                                <div class="scorecard-stats-pill" id="scorecard-total-pill">
+                                    Worked:Failed: <b id="scorecard-overall-ratio" style="color:var(--text); margin:0 4px;">0:0</b> (<span id="scorecard-overall-winrate" style="color:var(--success); font-weight:bold;">0%</span>)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scorecard-table-wrap">
+                            <table class="scorecard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Source / Channel</th>
+                                        <th>Worked (W)</th>
+                                        <th>Failed (F)</th>
+                                        <th>W : F Ratio</th>
+                                        <th>Win Rate %</th>
+                                        <th class="th-muted">NA / Ignored</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scorecard-tbody">
+                                    <!-- Dynamically generated rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAPPED LEVELS PANEL -->
+                <div class="panel">
+                    <h2 class="collapsible-header" id="levels-list-header">
+                        <span>Mapped Levels</span>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <input type="file" id="inp-level-upload" accept=".json" style="display:none;">
+                            <button id="btn-level-sync" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;" title="Sync latest levels from daily plan">🔄 Sync Plan</button>
+                            <button id="btn-level-upload" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Upload JSON</button>
+                            <button id="btn-level-clear" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Clear All</button>
+                            <select id="filter-level-source" style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;" title="Filter by source">
+                                <option value="">All Sources</option>
+                            </select>
+                            <span id="level-count" style="font-size: 0.9rem; color: var(--text-dim); font-weight: normal;">0 Levels</span>
+                            <span class="toggle-icon">▶</span>
+                        </div>
+                    </h2>
+                    
+                    <div id="levels-list-body" class="collapsible-body" style="display:none;">
+                        <div class="levels-container" id="levels-list">
+                            <div class="empty-state-levels" id="levels-empty-state">
+                                No levels mapped yet. Add a level above to build your trade plan.
+                            </div>
+                            <!-- Cards injected here -->
+                        </div>
                     </div>
                 </div>
 
@@ -1272,68 +1314,6 @@
                         <button id="btn-level-add" class="btn-add">+ Add Level to Plan</button>
                     </div>
                 </div>
-
-                <!-- MAPPED LEVELS PANEL -->
-                <div class="panel">
-                    <h2 class="collapsible-header" id="levels-list-header">
-                        <span>Mapped Levels</span>
-                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                            <input type="file" id="inp-level-upload" accept=".json" style="display:none;">
-                            <button id="btn-level-sync" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;" title="Sync latest levels from daily plan">🔄 Sync Plan</button>
-                            <button id="btn-level-upload" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Upload JSON</button>
-                            <button id="btn-level-clear" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">Clear All</button>
-                            <select id="filter-level-source" style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;" title="Filter by source">
-                                <option value="">All Sources</option>
-                            </select>
-                            <span id="level-count" style="font-size: 0.9rem; color: var(--text-dim); font-weight: normal;">0 Levels</span>
-                            <span class="toggle-icon">▶</span>
-                        </div>
-                    </h2>
-                    
-                    <div id="levels-list-body" class="collapsible-body" style="display:none;">
-                        <div class="levels-container" id="levels-list">
-                            <div class="empty-state-levels" id="levels-empty-state">
-                                No levels mapped yet. Add a level above to build your trade plan.
-                            </div>
-                            <!-- Cards injected here -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EOD PERFORMANCE SCORECARD PANEL (Always visible) -->
-                <div class="panel">
-                    <div class="level-scorecard-panel" id="level-scorecard-panel" style="margin-top:0;">
-                        <div class="level-scorecard-header">
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                <span style="font-size:1.15rem;">📊</span>
-                                <h3 style="margin:0; font-size:1rem; font-weight:700;">EOD Forecast Scorecard (Worked : Failed)</h3>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:10px;">
-                                <button type="button" id="btn-scorecard-reset" class="btn-scorecard-reset" title="Reset all cumulative historical prediction stats">Reset Stats</button>
-                                <div class="scorecard-stats-pill" id="scorecard-total-pill">
-                                    Worked:Failed: <b id="scorecard-overall-ratio" style="color:var(--text); margin:0 4px;">0:0</b> (<span id="scorecard-overall-winrate" style="color:var(--success); font-weight:bold;">0%</span>)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scorecard-table-wrap">
-                            <table class="scorecard-table">
-                                <thead>
-                                    <tr>
-                                        <th>Source / Channel</th>
-                                        <th>Worked (W)</th>
-                                        <th>Failed (F)</th>
-                                        <th>W : F Ratio</th>
-                                        <th>Win Rate %</th>
-                                        <th class="th-muted">NA / Ignored</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="scorecard-tbody">
-                                    <!-- Dynamically generated rows -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- RIGHT COLUMN: Summary & Visual Chart Map -->
@@ -1366,6 +1346,26 @@
                         <div class="empty-state-levels" id="chart-empty">Add numeric price levels to see the visual map.</div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Bottom Toolbar: 5m Candle Reaction Checker -->
+        <div class="level-analysis-toolbar" style="margin-top: 1rem;">
+            <div class="level-analysis-left">
+                <span class="level-toolbar-icon">⚡</span>
+                <span class="level-toolbar-title">Intraday 5m Reaction Analysis</span>
+                <div class="level-date-picker-wrap">
+                    <label for="inp-level-date">Date:</label>
+                    <input type="date" id="inp-level-date" class="level-date-input" />
+                </div>
+            </div>
+            <div class="level-analysis-right" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button id="btn-live-alerts" class="btn-live-alerts off" type="button" title="Enable background listener for real-time Entry/Exit pop-ups">
+                    <span class="btn-icon">🔴</span> Live Alerts Off
+                </button>
+                <button id="btn-level-analyze" class="btn-level-analyze" type="button">
+                    <span class="btn-icon">🔍</span> Check First Candle In/Out
+                </button>
             </div>
         </div>
     </div>
