@@ -77,14 +77,28 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-muted);
             border-radius: 5px;
-            padding: 3px 7px;
+            padding: 4px 8px;
             font-size: 11px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .icon-btn:hover {
             background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .icon-btn.amber {
+            background: rgba(245, 158, 11, 0.18);
+            border-color: rgba(245, 158, 11, 0.4);
+            color: #fbbf24;
+        }
+        .icon-btn.amber:hover {
+            background: rgba(245, 158, 11, 0.3);
             color: #fff;
         }
 
@@ -384,6 +398,189 @@
         }
 
         .cheat-box strong { color: #fbbf24; }
+
+        /* ======================================================== */
+        /* MODAL STYLES FOR CONFIG TABLE EDITOR */
+        /* ======================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .modal-overlay.hidden {
+            display: none !important;
+        }
+
+        .modal-card {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 620px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            animation: modalFadeIn 0.15s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: #1e293b;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-header h2 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .modal-body {
+            padding: 12px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .cfg-table-container {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background: var(--bg-card);
+        }
+
+        .cfg-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.76rem;
+        }
+
+        .cfg-table th {
+            background: #1e293b;
+            color: var(--text-muted);
+            padding: 7px 8px;
+            text-align: left;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cfg-table td {
+            padding: 5px 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cfg-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .cfg-table input {
+            width: 100%;
+            padding: 4px 6px;
+            font-size: 0.78rem;
+            border-radius: 4px;
+        }
+
+        .cfg-delete-btn {
+            background: transparent;
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fb7185;
+            border-radius: 4px;
+            padding: 3px 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.15s;
+        }
+
+        .cfg-delete-btn:hover {
+            background: var(--accent-red);
+            color: #fff;
+        }
+
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: #1e293b;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Toast notification */
+        #toast {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            background: #10b981;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            border-radius: 5px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+            z-index: 10000;
+            display: none;
+            animation: toastPop 0.2s ease;
+        }
+
+        @keyframes toastPop {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -392,6 +589,7 @@
     <div class="calc-header">
         <h1><span>🧮</span> Vantage Position Sizer</h1>
         <div class="header-actions">
+            <button class="icon-btn amber" onclick="openConfigModal()" title="View and customize Config Master Table">⚙️ Config Table</button>
             <button class="icon-btn" onclick="popoutWindow()" title="Open in dedicated mini floating window">⛶ Popout</button>
             <button class="icon-btn" onclick="resetDefaults()" title="Reset to BTC defaults">↺ Reset</button>
         </div>
@@ -405,17 +603,16 @@
         </div>
         <div class="accordion-body" id="body-sec1">
             <div class="form-grid">
-                <div class="form-group full-width">
-                    <label>Selected Asset Preset</label>
-                    <select id="assetSelect" onchange="onAssetChange()">
-                        <option value="BTC" selected>BTC — Bitcoin CFD</option>
-                        <option value="XAU">XAU — Gold Physical Spot</option>
-                        <option value="EURUSD">EURUSD — Forex Spot</option>
-                        <option value="USDJPY">USDJPY — Forex Spot</option>
-                        <option value="ETH">ETH — Ethereum CFD</option>
-                        <option value="GBPUSD">GBPUSD — Forex Spot</option>
-                        <option value="Custom">Custom Asset</option>
-                    </select>
+                <div class="form-group full-width" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 8px;">
+                    <div style="flex: 1;">
+                        <label>Selected Asset Preset</label>
+                        <select id="assetSelect" onchange="onAssetChange()" style="width: 100%;">
+                            <!-- Dynamically loaded from user presets -->
+                        </select>
+                    </div>
+                    <button type="button" class="icon-btn amber" onclick="openConfigModal()" style="height: 31px;" title="Edit Asset Presets">
+                        <span>⚙️</span> Manage Table
+                    </button>
                 </div>
                 <div class="form-group">
                     <label>Broker Platform</label>
@@ -505,7 +702,7 @@
                 <!-- 1. Order Entry -->
                 <div class="ticket-item">
                     <div class="ticket-label">
-                        <span>Order Entry Price</span>
+                        <span>Order Entry Price (Type in Vantage)</span>
                         <small id="entryNote">Type in Vantage Entry box</small>
                     </div>
                     <div class="ticket-value-row">
@@ -549,7 +746,7 @@
                     </div>
                 </div>
 
-                <!-- Key Payoff & Capital Metrics Grid -->
+                <!-- Key Payoff & Capital Metrics Grid (The other 5 items requested) -->
                 <div class="metrics-grid">
                     <div class="metric-cell">
                         <span class="m-title">Notional Trade Value</span>
@@ -639,20 +836,100 @@
         </div>
     </div>
 
-    <script>
-        // Preset configurations
-        const PRESETS = {
-            'BTC':    { lotStep: 0.01, decimals: 2, defaultSpread: 1706, entry: 85050.0, sl: 85110.0, tp: 84650.0 },
-            'XAU':    { lotStep: 0.01, decimals: 2, defaultSpread: 35,   entry: 4286.0,  sl: 4292.0,  tp: 4268.0 },
-            'EURUSD': { lotStep: 0.01, decimals: 5, defaultSpread: 18,   entry: 1.13900, sl: 1.14100, tp: 1.13300 },
-            'USDJPY': { lotStep: 0.01, decimals: 3, defaultSpread: 34,   entry: 157.300, sl: 157.600, tp: 156.400 },
-            'ETH':    { lotStep: 0.01, decimals: 2, defaultSpread: 247,  entry: 2715.0,  sl: 2730.0,  tp: 2670.0 },
-            'GBPUSD': { lotStep: 0.01, decimals: 5, defaultSpread: 31,   entry: 1.32420, sl: 1.32650, tp: 1.31800 },
-            'Custom': { lotStep: 0.01, decimals: 2, defaultSpread: 20,   entry: 100.0,   sl: 105.0,   tp: 90.0 }
-        };
+    <!-- ======================================================== -->
+    <!-- INTERACTIVE CONFIG MASTER TABLE MODAL -->
+    <!-- ======================================================== -->
+    <div id="config-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><span>⚙️</span> Broker & Asset Configuration Master Table</h2>
+                <button class="icon-btn" onclick="closeConfigModal()" title="Close without saving" style="padding: 2px 7px;">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 8px;">
+                    Customize broker settings, screen lot steps, and quote decimals. Saved automatically to browser memory.
+                </p>
+                <div class="cfg-table-container">
+                    <table class="cfg-table">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Broker</th>
+                                <th style="width: 85px;">Lot Step</th>
+                                <th style="width: 75px;">Decimals</th>
+                                <th style="width: 105px;">Default Spread</th>
+                                <th style="width: 45px; text-align: center;">Del</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cfgTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="addConfigRow()">➕ Add Asset</button>
+                <div style="display: flex; gap: 6px;">
+                    <button type="button" class="btn-secondary" onclick="resetConfigToFactory()" style="color: #fb7185;">↺ Reset</button>
+                    <button type="button" class="btn-primary" onclick="saveConfigFromModal()">💾 Save & Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Feedback Toast -->
+    <div id="toast">✓ Saved successfully</div>
+
+    <script>
+        // Factory presets (Defaults matching Vantage)
+        const FACTORY_PRESETS = [
+            { symbol: 'BTC', name: 'BTC — Bitcoin CFD', broker: 'Vantage', lotStep: 0.01, decimals: 2, defaultSpread: 1706, entry: 85050.0, sl: 85110.0, tp: 84650.0 },
+            { symbol: 'XAU', name: 'XAU — Gold Physical Spot', broker: 'Vantage', lotStep: 0.01, decimals: 2, defaultSpread: 35, entry: 4286.0, sl: 4292.0, tp: 4268.0 },
+            { symbol: 'EURUSD', name: 'EURUSD — Forex Spot', broker: 'Vantage', lotStep: 0.01, decimals: 5, defaultSpread: 18, entry: 1.13900, sl: 1.14100, tp: 1.13300 },
+            { symbol: 'USDJPY', name: 'USDJPY — Forex Spot', broker: 'Vantage', lotStep: 0.01, decimals: 3, defaultSpread: 34, entry: 157.300, sl: 157.600, tp: 156.400 },
+            { symbol: 'ETH', name: 'ETH — Ethereum CFD', broker: 'Vantage', lotStep: 0.01, decimals: 2, defaultSpread: 247, entry: 2715.0, sl: 2730.0, tp: 2670.0 },
+            { symbol: 'GBPUSD', name: 'GBPUSD — Forex Spot', broker: 'Vantage', lotStep: 0.01, decimals: 5, defaultSpread: 31, entry: 1.32420, sl: 1.32650, tp: 1.31800 },
+            { symbol: 'Custom', name: 'Custom Asset', broker: 'Manual', lotStep: 0.01, decimals: 2, defaultSpread: 20, entry: 100.0, sl: 105.0, tp: 90.0 }
+        ];
+
+        let userPresets = [];
         let currentDirection = 'SELL';
         let rawTradeableLots = 0.12;
+
+        function loadPresets() {
+            try {
+                const stored = localStorage.getItem('vantage_calc_presets');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return parsed;
+                    }
+                }
+            } catch (e) {
+                console.warn('[Vantage Calc] Failed to parse stored presets:', e);
+            }
+            return JSON.parse(JSON.stringify(FACTORY_PRESETS));
+        }
+
+        function savePresets(presets) {
+            localStorage.setItem('vantage_calc_presets', JSON.stringify(presets));
+        }
+
+        function renderAssetDropdown(selectedSym = null) {
+            const sel = document.getElementById('assetSelect');
+            const prevVal = selectedSym || sel.value || 'BTC';
+            sel.innerHTML = '';
+            userPresets.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.symbol;
+                opt.innerText = p.name || `${p.symbol} (${p.broker})`;
+                if (p.symbol === prevVal) opt.selected = true;
+                sel.appendChild(opt);
+            });
+            if (!sel.value && userPresets.length > 0) {
+                sel.value = userPresets[0].symbol;
+            }
+        }
 
         function setDirection(dir) {
             currentDirection = dir;
@@ -682,14 +959,15 @@
 
         function onAssetChange() {
             const sym = document.getElementById('assetSelect').value;
-            const p = PRESETS[sym];
+            const p = userPresets.find(x => x.symbol === sym);
             if (p) {
+                document.getElementById('brokerName').value = p.broker || 'Vantage';
                 document.getElementById('lotStep').value = p.lotStep;
                 document.getElementById('priceDecimals').value = p.decimals;
                 document.getElementById('spreadPoints').value = p.defaultSpread;
-                document.getElementById('entryPrice').value = p.entry.toFixed(p.decimals);
-                document.getElementById('slPrice').value = p.sl.toFixed(p.decimals);
-                document.getElementById('tpPrice').value = p.tp.toFixed(p.decimals);
+                if (p.entry) document.getElementById('entryPrice').value = p.entry.toFixed(p.decimals);
+                if (p.sl) document.getElementById('slPrice').value = p.sl.toFixed(p.decimals);
+                if (p.tp) document.getElementById('tpPrice').value = p.tp.toFixed(p.decimals);
             }
             calculate();
         }
@@ -831,16 +1109,134 @@
             onAssetChange();
         }
 
-        // Parse query params if opened from chart with prefilled data
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.style.display = 'block';
+            setTimeout(() => {
+                t.style.display = 'none';
+            }, 1800);
+        }
+
+        // ========================================================
+        // MODAL CONFIG TABLE MANAGER
+        // ========================================================
+        function openConfigModal() {
+            renderConfigTable();
+            document.getElementById('config-modal').classList.remove('hidden');
+        }
+
+        function closeConfigModal() {
+            document.getElementById('config-modal').classList.add('hidden');
+        }
+
+        function renderConfigTable() {
+            const tbody = document.getElementById('cfgTableBody');
+            tbody.innerHTML = '';
+            userPresets.forEach((p, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><input type="text" value="${p.symbol}" class="cfg-sym" style="font-weight: 700; color: #fbbf24;"></td>
+                    <td><input type="text" value="${p.broker || 'Vantage'}" class="cfg-broker"></td>
+                    <td><input type="number" value="${p.lotStep}" step="0.001" class="cfg-step" style="text-align: right;"></td>
+                    <td><input type="number" value="${p.decimals}" min="0" max="6" class="cfg-dec" style="text-align: right;"></td>
+                    <td><input type="number" value="${p.defaultSpread}" class="cfg-spread" style="text-align: right;"></td>
+                    <td style="text-align: center;"><button type="button" class="cfg-delete-btn" onclick="deleteConfigRow(${idx})" title="Delete row">🗑️</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function addConfigRow() {
+            const tbody = document.getElementById('cfgTableBody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="text" value="NEW" class="cfg-sym" style="font-weight: 700; color: #fbbf24;"></td>
+                <td><input type="text" value="Vantage" class="cfg-broker"></td>
+                <td><input type="number" value="0.01" step="0.001" class="cfg-step" style="text-align: right;"></td>
+                <td><input type="number" value="2" min="0" max="6" class="cfg-dec" style="text-align: right;"></td>
+                <td><input type="number" value="25" class="cfg-spread" style="text-align: right;"></td>
+                <td style="text-align: center;"><button type="button" class="cfg-delete-btn" onclick="this.closest('tr').remove()" title="Delete row">🗑️</button></td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        function deleteConfigRow(idx) {
+            userPresets.splice(idx, 1);
+            renderConfigTable();
+        }
+
+        function saveConfigFromModal() {
+            const tbody = document.getElementById('cfgTableBody');
+            const rows = tbody.querySelectorAll('tr');
+            const updated = [];
+
+            rows.forEach(tr => {
+                const sym = tr.querySelector('.cfg-sym').value.trim().toUpperCase();
+                const broker = tr.querySelector('.cfg-broker').value.trim() || 'Vantage';
+                const lotStep = parseFloat(tr.querySelector('.cfg-step').value) || 0.01;
+                const decimals = parseInt(tr.querySelector('.cfg-dec').value) || 2;
+                const defaultSpread = parseFloat(tr.querySelector('.cfg-spread').value) || 0;
+
+                if (sym) {
+                    const existing = userPresets.find(x => x.symbol === sym) || {};
+                    updated.push({
+                        symbol: sym,
+                        name: `${sym} — ${broker}`,
+                        broker: broker,
+                        lotStep: lotStep,
+                        decimals: decimals,
+                        defaultSpread: defaultSpread,
+                        entry: existing.entry || 100,
+                        sl: existing.sl || 105,
+                        tp: existing.tp || 90
+                    });
+                }
+            });
+
+            if (updated.length === 0) {
+                alert('At least one asset must remain in the config table.');
+                return;
+            }
+
+            userPresets = updated;
+            savePresets(userPresets);
+
+            const currSym = document.getElementById('assetSelect').value;
+            renderAssetDropdown(currSym);
+            closeConfigModal();
+            onAssetChange();
+            showToast('✓ Config Master Table saved!');
+        }
+
+        function resetConfigToFactory() {
+            if (confirm('Reset entire Config Master Table to Vantage default presets?')) {
+                userPresets = JSON.parse(JSON.stringify(FACTORY_PRESETS));
+                savePresets(userPresets);
+                renderConfigTable();
+                renderAssetDropdown('BTC');
+                onAssetChange();
+                showToast('✓ Reset to factory defaults');
+            }
+        }
+
+        // Initialize on page load
         window.addEventListener('DOMContentLoaded', () => {
+            userPresets = loadPresets();
+            renderAssetDropdown('BTC');
+
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('symbol')) {
                 const sym = urlParams.get('symbol').toUpperCase();
-                if (PRESETS[sym]) {
+                const exists = userPresets.find(x => x.symbol === sym);
+                if (exists) {
                     document.getElementById('assetSelect').value = sym;
                     onAssetChange();
                 }
+            } else {
+                onAssetChange();
             }
+
             if (urlParams.has('dir')) {
                 setDirection(urlParams.get('dir').toUpperCase());
             }

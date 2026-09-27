@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-8d5c461846";
+const CACHE_NAME = "trade-journal-fb0b495c54";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -64,6 +64,7 @@ const ASSETS = [
   "./gold_interactive_chart.html",
   "./btc_interactive_chart.html",
   "./sp500_interactive_chart.html",
+  "./vantage_position_calculator.html",
   "./js/workers/liveAlertWorker.js",
   // Firebase SDK scripts — precached so the app can boot fully offline
   // even on a visit where the network never responds in time.
@@ -77,7 +78,7 @@ const ASSETS = [
 // instead of waiting for a manual cache-version bump.
 const NETWORK_FIRST_FILES = [
   "index.html", "styles.css", "app.js", "manifest.json", "trade-security.js",
-  "nifty_interactive_chart.html", "gold_interactive_chart.html", "btc_interactive_chart.html", "sp500_interactive_chart.html",
+  "nifty_interactive_chart.html", "gold_interactive_chart.html", "btc_interactive_chart.html", "sp500_interactive_chart.html", "vantage_position_calculator.html",
   "js/state.js", "js/dom.js", "js/firebase-init.js",
   "js/utils/toast.js", "js/utils/theme.js", "js/utils/date.js",
   "js/utils/image.js", "js/utils/export.js", "js/utils/keyboard.js", "js/utils/lifecycle.js",
