@@ -969,10 +969,12 @@
                     if ("Notification" in window) {
                         Notification.requestPermission();
                     }
+                    lastEvaluatedClosedCandleTime = null;
+                    levelCrossingMemory = {};
                     toggleBtn.classList.add('active');
                     document.getElementById('alert-btn-text').innerText = 'Notifications ACTIVE';
                     triggerAlertSound(880, 'sine', 0.15);
-                    showToast("Alert System Activated", "Desktop notifications & audio chime enabled for level touches.");
+                    showToast("Alert System Activated", "Desktop alerts & chime active for strict 5M candle closes.");
                 } else {
                     toggleBtn.classList.remove('active');
                     document.getElementById('alert-btn-text').innerText = 'Enable Notifications';
@@ -2684,14 +2686,34 @@
         }
 
         let levelCrossingMemory = {};
+        let lastEvaluatedClosedCandleTime = null;
 
         function checkCandleCloseCrossings(candles, assetName) {
-            if (!alertsEnabled || !candles || candles.length < 2 || !activePriceLines || activePriceLines.length === 0) {
+            if (!alertsEnabled || !candles || candles.length < 3 || !activePriceLines || activePriceLines.length === 0) {
                 return;
             }
 
-            const latestCandle = candles[candles.length - 1];
-            const currClose = latestCandle.close;
+            const tf = '5M';
+            const currSym = '₹';
+
+            // candles[candles.length - 1] is active in-progress candle; candles[candles.length - 2] is strict finalized close
+            const closedCandle = candles[candles.length - 2];
+            if (!closedCandle) return;
+
+            if (lastEvaluatedClosedCandleTime === closedCandle.time) {
+                return;
+            }
+
+            const finalizedClose = closedCandle.close;
+
+            if (lastEvaluatedClosedCandleTime === null) {
+                lastEvaluatedClosedCandleTime = closedCandle.time;
+                activePriceLines.forEach(item => {
+                    const tag = item.tag || 'LEVEL';
+                    levelCrossingMemory[`${tag}_${item.price}`] = finalizedClose >= item.price ? 'above' : 'below';
+                });
+                return;
+            }
 
             activePriceLines.forEach(item => {
                 const lvlPrice = item.price;
@@ -2699,34 +2721,28 @@
                 const memoryKey = `${tag}_${lvlPrice}`;
                 const prevState = levelCrossingMemory[memoryKey];
 
-                let newState = prevState;
-                if (currClose >= lvlPrice) {
-                    newState = 'above';
-                } else {
-                    newState = 'below';
-                }
-
-                if (!prevState) {
-                    levelCrossingMemory[memoryKey] = newState;
-                    return;
-                }
+                let newState = finalizedClose >= lvlPrice ? 'above' : 'below';
 
                 if (prevState === 'below' && newState === 'above') {
                     levelCrossingMemory[memoryKey] = 'above';
-                    const title = `🚀 ${assetName} Candle Closed ABOVE`;
-                    const body = `${assetName} closed at ₹${currClose.toFixed(2)} ABOVE ${tag} level (₹${lvlPrice})`;
+                    const title = `🚀 ${assetName} ${tf} • Above [${tag}]`;
+                    const body = `Level: ${currSym}${lvlPrice} • Close: ${currSym}${finalizedClose.toFixed(2)}`;
                     triggerAlertSound(1046, 'sine', 0.25);
                     showToast(title, body);
                     dispatchDesktopNotification(title, body);
                 } else if (prevState === 'above' && newState === 'below') {
                     levelCrossingMemory[memoryKey] = 'below';
-                    const title = `🔻 ${assetName} Candle Closed BELOW`;
-                    const body = `${assetName} closed at ₹${currClose.toFixed(2)} BELOW ${tag} level (₹${lvlPrice})`;
+                    const title = `🔻 ${assetName} ${tf} • Below [${tag}]`;
+                    const body = `Level: ${currSym}${lvlPrice} • Close: ${currSym}${finalizedClose.toFixed(2)}`;
                     triggerAlertSound(440, 'sine', 0.25);
                     showToast(title, body);
                     dispatchDesktopNotification(title, body);
+                } else if (!prevState) {
+                    levelCrossingMemory[memoryKey] = newState;
                 }
             });
+
+            lastEvaluatedClosedCandleTime = closedCandle.time;
         }
 
         function dispatchDesktopNotification(title, body) {
