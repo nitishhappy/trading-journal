@@ -2159,4 +2159,23 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
     - *Bearish*: `🔻 {Asset} {TF} • Below [{Tag}]` (`Level: ${Price} • Close: ${Close}`)
 - **Files Modified**: `btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`, `sw.js`, `README.md`
 
+### v2.3.84 — 27 Sep 2026 — Main Navigation Bar: Tab Sequence Optimization & Clean Text Labels
+
+- **Ergonomic Navbar Sequence (`index.html`, `sw.js`, `version`)**:
+  - Reordered main navigation tabs to streamline active trading workflows:
+    1. `Dashboard`
+    2. `Revision`
+    3. `Levels` *(Promoted adjacent to Revision)*
+    4. `Sizer` *(Promoted adjacent to Levels)*
+    5. `Candle`
+    6. `Stocks`
+    7. `TV Alerts`
+    8. `AI Coach`
+    9. `Trade Log`
+    10. `AI Co-Pilot`
+    11. `Accuracy`
+  - **Emoji Icon Removal**: Cleaned up tab labels by removing leading emojis (`🤖 AI Co-Pilot` $\rightarrow$ `AI Co-Pilot`, `🎯 Accuracy` $\rightarrow$ `Accuracy`, `🧮 Sizer` $\rightarrow$ `Sizer`) for a sleek, distraction-free aesthetic.
+- **Files Modified**: `index.html`, `sw.js`, `version`, `README.md`
+
+
 
