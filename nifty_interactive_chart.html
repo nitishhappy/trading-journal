@@ -2057,25 +2057,29 @@
 
         // ================= EOD FORECAST SCORECARD & PROXIMITY ENGINE ================= //
         function recordLevelOutcome(levelId, newSource, newStatus) {
-            const src = (newSource || 'AI').toUpperCase();
+            const src = (newSource || 'BT').toUpperCase();
             const st = (newStatus || 'na').toLowerCase();
+            const statsKey = 'levelsScorecardHistory_NIFTY';
+            const logKey = 'levelsLoggedReviews_NIFTY';
 
             let scorecardStats = {};
             let levelReviewLog = {};
 
             try {
-                const savedStats = localStorage.getItem('levelsScorecardHistory');
+                let savedStats = localStorage.getItem(statsKey);
+                if (!savedStats) savedStats = localStorage.getItem('levelsScorecardHistory');
                 if (savedStats) scorecardStats = JSON.parse(savedStats);
             } catch (e) { scorecardStats = {}; }
 
             try {
-                const savedLog = localStorage.getItem('levelsLoggedReviews');
+                let savedLog = localStorage.getItem(logKey);
+                if (!savedLog) savedLog = localStorage.getItem('levelsLoggedReviews');
                 if (savedLog) levelReviewLog = JSON.parse(savedLog);
             } catch (e) { levelReviewLog = {}; }
 
             const prev = levelReviewLog[levelId];
             if (prev) {
-                const prevSrc = (prev.source || 'AI').toUpperCase();
+                const prevSrc = (prev.source || 'BT').toUpperCase();
                 const prevSt = (prev.status || 'na').toLowerCase();
                 if (scorecardStats[prevSrc] && scorecardStats[prevSrc][prevSt] !== undefined) {
                     scorecardStats[prevSrc][prevSt] = Math.max(0, scorecardStats[prevSrc][prevSt] - 1);
@@ -2087,22 +2091,31 @@
             }
 
             if (st !== 'na') {
-                scorecardStats[src][st] = (scorecardStats[src][st] || 0) + 1;
+                if (scorecardStats[src][st] !== undefined) {
+                    scorecardStats[src][st]++;
+                } else {
+                    scorecardStats[src][st] = 1;
+                }
                 levelReviewLog[levelId] = { source: src, status: st, updatedAt: new Date().toISOString() };
             } else {
                 delete levelReviewLog[levelId];
             }
 
-            localStorage.setItem('levelsScorecardHistory', JSON.stringify(scorecardStats));
-            localStorage.setItem('levelsLoggedReviews', JSON.stringify(levelReviewLog));
+            localStorage.setItem(statsKey, JSON.stringify(scorecardStats));
+            localStorage.setItem(logKey, JSON.stringify(levelReviewLog));
         }
 
         function getSavedOutcome(levelId) {
             try {
-                const savedLog = localStorage.getItem('levelsLoggedReviews');
+                let savedLog = localStorage.getItem('levelsLoggedReviews_NIFTY');
                 if (savedLog) {
                     const parsed = JSON.parse(savedLog);
-                    return parsed[levelId]?.status || 'na';
+                    if (parsed[levelId]?.status) return parsed[levelId].status;
+                }
+                const legacyLog = localStorage.getItem('levelsLoggedReviews');
+                if (legacyLog) {
+                    const parsedLegacy = JSON.parse(legacyLog);
+                    if (parsedLegacy[levelId]?.status) return parsedLegacy[levelId].status;
                 }
             } catch (e) {}
             return 'na';

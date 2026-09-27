@@ -1586,6 +1586,18 @@
             return items.join('');
         }
 
+        function getCanonicalSetupCategory(tag, behavior, bias) {
+            const beh = (behavior || tag || '').replace(/_/g, ' ').toUpperCase();
+            if (/\[\s*[A-Z0-9_]*KB\d*\s*\]/.test(beh) || /\bKB\d*\b/.test(beh)) return 'AI KB';
+            if (/\[\s*[A-Z0-9_]*KS\d*\s*\]/.test(beh) || /\bKS\d*\b/.test(beh)) return 'AI KS';
+            if (/\[\s*(?:[A-Z0-9_]*_)?B\d+\s*\]/.test(beh) || /\bB\d+\b/.test(beh)) return 'AI B';
+            if (/\[\s*(?:[A-Z0-9_]*_)?S\d+\s*\]/.test(beh) || /\bS\d+\b/.test(beh)) return 'AI S';
+            const b = (bias || '').toLowerCase();
+            if (b === 'bullish' || b === 'long' || b === 'buy') return 'AI B';
+            if (b === 'bearish' || b === 'short' || b === 'sell') return 'AI S';
+            return 'AI B';
+        }
+
         function renderLevelsAndCards() {
             levelsData = getBtcKeyLevels(selectedBriefingTimestamp);
 
@@ -1653,6 +1665,7 @@
                 const isBullish = lvl.bias === 'bullish';
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const tag = extractTag(lvl.behavior) || (isBullish ? `[KB${idx+1}]` : `[KS${idx+1}]`);
+                const category = getCanonicalSetupCategory(tag, lvl.behavior, lvl.bias);
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.btcDailyPlanSummary, levelsData.anchorTimestamp);
 
@@ -1702,11 +1715,11 @@
                             <div class="dist-pill rr-pill" id="dist-pill-btc-${idx}" title="Risk to Reward (R:R)">${formatRiskRewardPill(lvl.price, lvl.sl, lvl.tp)}</div>
                         </div>
                         <div class="card-outcome-bar">
-                            <span class="outcome-label">Scorecard (AI):</span>
+                            <span class="outcome-label">Scorecard (${category}):</span>
                             <div class="outcome-btn-group">
-                                <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" id="btn-worked-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', 'worked', ${idx})">✓ Worked</button>
-                                <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" id="btn-failed-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', 'failed', ${idx})">✗ Failed</button>
-                                <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', 'na', ${idx})">↺ Reset</button>
+                                <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" id="btn-worked-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
+                                <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" id="btn-failed-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
+                                <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'na', ${idx})">↺ Reset</button>
                             </div>
                         </div>
                     `;
@@ -1982,25 +1995,38 @@
 
         // ================= EOD FORECAST SCORECARD & PROXIMITY ENGINE ================= //
         function recordLevelOutcome(levelId, newSource, newStatus) {
-            const src = (newSource || 'AI').toUpperCase();
+            const canonicalTags = ['AI B', 'AI S', 'AI KB', 'AI KS'];
+            let src = (newSource || 'AI B').toUpperCase();
+            if (!canonicalTags.includes(src)) {
+                src = getCanonicalSetupCategory(src, src, '');
+            }
             const st = (newStatus || 'na').toLowerCase();
+            const statsKey = 'levelsScorecardHistory_BTC';
+            const logKey = 'levelsLoggedReviews_BTC';
 
             let scorecardStats = {};
             let levelReviewLog = {};
 
             try {
-                const savedStats = localStorage.getItem('levelsScorecardHistory');
+                let savedStats = localStorage.getItem(statsKey);
                 if (savedStats) scorecardStats = JSON.parse(savedStats);
             } catch (e) { scorecardStats = {}; }
 
             try {
-                const savedLog = localStorage.getItem('levelsLoggedReviews');
+                let savedLog = localStorage.getItem(logKey);
                 if (savedLog) levelReviewLog = JSON.parse(savedLog);
             } catch (e) { levelReviewLog = {}; }
 
+            canonicalTags.forEach(t => {
+                if (!scorecardStats[t]) scorecardStats[t] = { worked: 0, failed: 0, na: 0 };
+            });
+
             const prev = levelReviewLog[levelId];
             if (prev) {
-                const prevSrc = (prev.source || 'AI').toUpperCase();
+                let prevSrc = (prev.source || 'AI B').toUpperCase();
+                if (!canonicalTags.includes(prevSrc)) {
+                    prevSrc = getCanonicalSetupCategory(prevSrc, prevSrc, '');
+                }
                 const prevSt = (prev.status || 'na').toLowerCase();
                 if (scorecardStats[prevSrc] && scorecardStats[prevSrc][prevSt] !== undefined) {
                     scorecardStats[prevSrc][prevSt] = Math.max(0, scorecardStats[prevSrc][prevSt] - 1);
@@ -2012,33 +2038,43 @@
             }
 
             if (st !== 'na') {
-                scorecardStats[src][st] = (scorecardStats[src][st] || 0) + 1;
+                if (scorecardStats[src][st] !== undefined) {
+                    scorecardStats[src][st]++;
+                } else {
+                    scorecardStats[src][st] = 1;
+                }
                 levelReviewLog[levelId] = { source: src, status: st, updatedAt: new Date().toISOString() };
             } else {
                 delete levelReviewLog[levelId];
             }
 
-            localStorage.setItem('levelsScorecardHistory', JSON.stringify(scorecardStats));
-            localStorage.setItem('levelsLoggedReviews', JSON.stringify(levelReviewLog));
+            localStorage.setItem(statsKey, JSON.stringify(scorecardStats));
+            localStorage.setItem(logKey, JSON.stringify(levelReviewLog));
         }
 
         function getSavedOutcome(levelId) {
             try {
-                const savedLog = localStorage.getItem('levelsLoggedReviews');
+                let savedLog = localStorage.getItem('levelsLoggedReviews_BTC');
                 if (savedLog) {
                     const parsed = JSON.parse(savedLog);
-                    return parsed[levelId]?.status || 'na';
+                    if (parsed[levelId]?.status) return parsed[levelId].status;
+                }
+                // Fallback check in legacy log for migration continuity
+                const legacyLog = localStorage.getItem('levelsLoggedReviews');
+                if (legacyLog) {
+                    const parsedLegacy = JSON.parse(legacyLog);
+                    if (parsedLegacy[levelId]?.status) return parsedLegacy[levelId].status;
                 }
             } catch (e) {}
             return 'na';
         }
 
-        function toggleLevelOutcome(event, levelId, status, idx) {
+        function toggleLevelOutcome(event, levelId, source, status, idx) {
             if (event) event.stopPropagation();
-            recordLevelOutcome(levelId, 'AI', status);
+            recordLevelOutcome(levelId, source, status);
             updateCardOutcomeUI(idx, status);
             const label = status === 'worked' ? '🟢 WORKED' : (status === 'failed' ? '🔴 FAILED' : '⚪ RESET');
-            showToast(`Scorecard Logged (AI)`, `Level marked as ${label} in EOD Forecast Scorecard.`);
+            showToast(`Scorecard Logged (${source})`, `Level marked as ${label} in EOD Forecast Scorecard.`);
             triggerAlertSound(880, 'sine', 0.1);
         }
 

@@ -2177,5 +2177,18 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - **Emoji Icon Removal**: Cleaned up tab labels by removing leading emojis (`🤖 AI Co-Pilot` $\rightarrow$ `AI Co-Pilot`, `🎯 Accuracy` $\rightarrow$ `Accuracy`, `🧮 Sizer` $\rightarrow$ `Sizer`) for a sleek, distraction-free aesthetic.
 - **Files Modified**: `index.html`, `sw.js`, `version`, `README.md`
 
+### v2.3.85 — 28 Sep 2026 — Universal Interactive Chart & EOD Scorecard Cross-Tab Synchronization
 
-
+- **Per-Asset Storage Key Alignment (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `nifty_interactive_chart.html`)**:
+  - Replaced legacy global keys (`levelsScorecardHistory`, `levelsLoggedReviews`) with isolated per-asset keys matching `levels.js`:
+    - BTC: `levelsScorecardHistory_BTC` & `levelsLoggedReviews_BTC`
+    - Gold: `levelsScorecardHistory_GOLD` & `levelsLoggedReviews_GOLD`
+    - S&P 500: `levelsScorecardHistory_SP500` & `levelsLoggedReviews_SP500`
+    - Nifty: `levelsScorecardHistory_NIFTY` & `levelsLoggedReviews_NIFTY`
+- **Canonical Setup Category Mapping (`AI B`, `AI S`, `AI KB`, `AI KS`)**:
+  - Added `getCanonicalSetupCategory(tag, behavior, bias)` helper across BTC, Gold, and S&P 500 interactive charts.
+  - Dynamically resolves raw tags like `[S1]`, `[B1]`, `[KB1]`, `[KS1]`, `[SP_B1]`, `[G_KS1]` into canonical categories before recording outcomes and displaying on level card headers.
+- **Cross-Tab & Cross-Window Instant Scorecard Refresh (`js/ui/levels.js`)**:
+  - Added native `storage` event listener on `window` in `levels.js` so marking an outcome in any interactive chart tab immediately re-renders the EOD Forecast Scorecard on the Daily Levels view in real-time.
+  - Added retroactive legacy log migration in `loadScorecardHistory()` to automatically restore any historical reviews logged under legacy keys.
+- **Files Modified**: `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `nifty_interactive_chart.html`, `js/ui/levels.js`, `sw.js`, `version`, `README.md`

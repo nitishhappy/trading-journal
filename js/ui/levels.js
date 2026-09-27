@@ -222,7 +222,7 @@ if (viewLevels) {
         const currentSrc = (level?.source || '').trim().toUpperCase();
         if (['AI B', 'AI S', 'AI KB', 'AI KS'].includes(currentSrc)) return currentSrc;
 
-        const beh = (level?.behavior || '').toUpperCase();
+        const beh = (level?.behavior || '').replace(/_/g, ' ').toUpperCase();
 
         // 1. Key Buy (KB): [KB1], [SP_KB1], [G_KB1], KB1, etc.
         if (/\[\s*[A-Z0-9_]*KB\d*\s*\]/.test(beh) || /\bKB\d*\b/.test(beh)) return 'AI KB';
@@ -290,6 +290,36 @@ if (viewLevels) {
         }
 
         if (isAiAsset) {
+            // Check for un-migrated reviews from legacy log for this AI asset
+            const prefix = activeAsset.toLowerCase() + '_';
+            try {
+                const legacyLogRaw = localStorage.getItem('levelsLoggedReviews');
+                if (legacyLogRaw) {
+                    const legacyLog = JSON.parse(legacyLogRaw);
+                    Object.keys(legacyLog).forEach(lvlId => {
+                        if (lvlId.startsWith(prefix) && !levelReviewLog[lvlId]) {
+                            const entry = legacyLog[lvlId];
+                            if (entry && entry.status && entry.status !== 'na') {
+                                const resolvedCat = getCanonicalLevelTag({ source: entry.source, behavior: lvlId }, activeAsset);
+                                levelReviewLog[lvlId] = {
+                                    source: resolvedCat,
+                                    status: entry.status,
+                                    updatedAt: entry.updatedAt || new Date().toISOString()
+                                };
+                                if (!scorecardStats[resolvedCat]) {
+                                    scorecardStats[resolvedCat] = { worked: 0, failed: 0, na: 0 };
+                                }
+                                if (scorecardStats[resolvedCat][entry.status] !== undefined) {
+                                    scorecardStats[resolvedCat][entry.status]++;
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch (e) {
+                console.warn("[Levels] Error checking legacy log migration:", e);
+            }
+
             const canonicalTags = ['AI B', 'AI S', 'AI KB', 'AI KS'];
             canonicalTags.forEach(tag => {
                 if (!scorecardStats[tag]) {
@@ -3125,6 +3155,16 @@ window.toggleMaximizePanel = function(btn, event) {
             });
         }
     }
+
+    // Instant cross-tab/window synchronization with interactive charts
+    window.addEventListener('storage', (e) => {
+        const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const keys = getScorecardStorageKeys(activeAsset);
+        if (e.key === keys.statsKey || e.key === keys.logKey || e.key === 'levelsScorecardHistory' || e.key === 'levelsLoggedReviews') {
+            loadScorecardHistory(activeAsset);
+            renderScorecard();
+        }
+    });
 
     // Call init when module loads
     window.currentActiveAsset = 'NIFTY';
