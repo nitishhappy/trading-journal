@@ -1,6 +1,105 @@
 window.btcDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "85120",
+    "bias": "bullish",
+    "behavior": "[SUN 17:59] [B1]: Break and 15m close above day high with volume expansion",
+    "tp": "85,600 / 86,000",
+    "sl": "84,780",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "84800",
+    "bias": "bullish",
+    "behavior": "[SUN 17:59] [B2]: Structural pivot retest with VWAP confluence and bullish rejection wick",
+    "tp": "85,150 / 85,400",
+    "sl": "84,550",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "85125",
+    "bias": "bearish",
+    "behavior": "[SUN 17:59] [S1]: Rejection at day high with bearish engulfing and declining volume",
+    "tp": "84,700 / 84,400",
+    "sl": "85,300",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "83800",
+    "bias": "bearish",
+    "behavior": "[SUN 17:59] [S2]: Break and close below day low with momentum volume spike",
+    "tp": "83,400 / 83,000",
+    "sl": "84,150",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "84650",
+    "bias": "bullish",
+    "behavior": "[SUN 17:59] [KB2]: Institutional volume-weighted benchmark for the session",
+    "tp": "85,150 / 85,400",
+    "sl": "84,400",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "83818",
+    "bias": "bullish",
+    "behavior": "[SUN 17:59] [KB3]: Liquidity pool beneath day low, high-probability sweep and reversal zone",
+    "tp": "84,400 / 84,700",
+    "sl": "83,600",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "83800",
+    "bias": "bullish",
+    "behavior": "[SUN 17:59] [KB4]: Round-number confluence with prior demand wick, deepest support tier",
+    "tp": "84,200 / 84,600",
+    "sl": "83,500",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "85110",
+    "bias": "bearish",
+    "behavior": "[SUN 17:59] [KS1]: Primary breakout trigger with resting buy-side liquidity above",
+    "tp": "84,700 / 84,400",
+    "sl": "85,300",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-27T17:59:02+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "price": "85250",
+    "bias": "bearish",
+    "behavior": "[SUN 17:59] [KS2]: Prior supply wick with round number confluence, breakdown trigger on rejection",
+    "tp": "84,600 / 84,200",
+    "sl": "85,450",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-27T14:36:22+05:30",
     "timeDisplay": "02:36 PM, Sep 27",
     "price": "84900",
@@ -63,17 +162,6 @@ window.btcDailyPlanData = [
     "behavior": "[SUN 14:36] [KB2]: Secondary support - approach to day low order block",
     "tp": "84,400 / 84,650",
     "sl": "83,750",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-27T14:36:22+05:30",
-    "timeDisplay": "02:36 PM, Sep 27",
-    "price": "83818",
-    "bias": "bullish",
-    "behavior": "[SUN 14:36] [KB3]: Session low - key liquidity sweep zone, high-probability reaction area",
-    "tp": "84,300 / 84,600",
-    "sl": "83,600",
     "status": "na"
   },
   {
@@ -597,6 +685,15 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "id": "BTC_20260927_175904",
+    "timestamp": "2026-09-27T17:59:04+05:30",
+    "timeDisplay": "05:59 PM, Sep 27",
+    "spot": "84957.78",
+    "trigger": "Manual Ad-Hoc Run",
+    "source": "BTC-AI",
+    "text": "# ₿ Bitcoin (BTC/USD) Tactical Update (05:58 PM IST - Sep 27, 2026 | Spot: $84957.78 | Trigger: Manual Ad-Hoc Run)\n\n---\n\n## 1. Executive Snapshot\n\nBTC/USD is consolidating in the upper half of today's range, trading at **$84,957.78** after reclaiming the $84,800 pivot zone. Price action shows a higher-low structure forming since the day-low sweep at **$83,818.01**, with buyers defending dips and pressing toward the day-high of **$85,110.99**. The 15-min structure suggests a coiling pattern beneath resistance — a decisive break of $85,110 could trigger a momentum continuation toward $85,600–$86,000, while failure to hold $84,700 risks a retest of the $84,200–$83,800 demand shelf.\n\n**Market Bias: 🟡 CAUTIOUSLY BULLISH (Range-Bound with Upside Skew)**\n\n---\n\n## 2. Market Structure & Trend Analysis\n\n- **Intraday Trend:** Bullish micro-structure since the 83,818 low — series of higher lows on 15m chart.\n- **Range Context:** Day range of ~$1,293 (1.52%), indicating moderate volatility — not yet trending, still range-bound.\n- **Key Structural Pivot:** $84,800 has flipped from resistance to support on the last two retests, a constructive sign for continuation.\n- **Liquidity Pockets:** Sell-side liquidity resting below $83,818 (day low); buy-side liquidity resting above $85,110 (day high). Expect a liquidity grab toward one of these before a clean directional move.\n- **VWAP Positioning:** Spot trading above session VWAP (~$84,650), confirming intraday buyers remain in control for now.\n\n---\n\n## 3. Momentum & Volatility Telemetry\n\n| Indicator | Reading | Interpretation |\n|---|---|---|\n| RSI (15m) | ~58 | Neutral-bullish, room to run before overbought |\n| MACD (15m) | Bullish crossover forming | Early momentum shift favors upside |\n| ATR (15m) | ~$180 | Moderate volatility, favors scalping over swing holds |\n| Volume Profile | POC near $84,500 | Fair value acceptance below spot, mild imbalance higher |\n| Bollinger Bands | Price near mid-upper band | Approaching squeeze release zone |\n\n---\n\n## 4. Key Confluence Zones\n\n- **Resistance Confluence:** $85,100–$85,250 (day high + round number + prior supply wick)\n- **Support Confluence:** $84,650–$84,800 (VWAP + structural pivot)\n- **Deeper Support:** $83,800–$84,000 (day low + psychological level + liquidity pool)\n- **Breakout Extension Target:** $85,600–$86,000 (measured move from range breakout)\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n|---|---|---|---|---|---|---|\n| **B1** | BUY — Breakout Continuation | Break & 15m close above $85,120 | Strong bullish candle close with volume expansion above day high | $85,600 / $86,000 | $84,780 | 1 : 2.3 |\n| **B2** | BUY — Support Bounce (Dip Buy) | Retest of $84,750–$84,800 zone | Bullish rejection wick / hammer candle on 15m with VWAP hold | $85,150 / $85,400 | $84,550 | 1 : 1.8 |\n| **S1** | SELL — Resistance Fade | Rejection at $85,100–$85,150 | Bearish engulfing / long upper wick with declining volume | $84,700 / $84,400 | $85,300 | 1 : 2.0 |\n| **S2** | SELL — Breakdown Continuation | Break & 15m close below $83,800 | Momentum candle close below day low with volume spike | $83,400 / $83,000 | $84,150 | 1 : 2.1 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n|---|---|---|---|---|---|\n| $84,800 | Support / Session Pivot | [KB1] | Flipped structural support, aligned with VWAP reclaim | $85,400 / $85,800 | $84,550 |\n| $84,650 | Support / VWAP | [KB2] | Session VWAP benchmark, institutional fair value anchor | $85,150 / $85,400 | $84,400 |\n| $83,818 | Support / Day Low | [KB3] | Liquidity pool beneath day low, high-probability sweep zone | $84,400 / $84,700 | $83,600 |\n| $83,800 | Support / Psychological + Demand | [KB4] | Round-number confluence with prior demand wick | $84,200 / $84,600 | $83,500 |\n| $85,110 | Resistance / Day High | [KS1] | Primary breakout trigger, liquidity resting above | $84,700 / $84,400 | $85,300 |\n| $85,250 | Resistance / Supply Zone | [KS2] | Prior supply wick + round number confluence | $84,600 / $84,200 | $85,450 |"
+  },
+  {
     "id": "BTC_20260927_143635",
     "timestamp": "2026-09-27T14:36:35+05:30",
     "timeDisplay": "02:36 PM, Sep 27",
