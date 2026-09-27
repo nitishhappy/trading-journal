@@ -81,10 +81,70 @@
             gap: 0.4rem;
         }
 
+        .controls-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            max-width: 100%;
+            overflow: hidden;
+            gap: 4px;
+        }
+
         .controls-row {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.5rem;
             align-items: center;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            white-space: nowrap;
+            padding: 2px 2px;
+        }
+
+        .controls-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tabs-nav-btn {
+            flex: 0 0 28px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.15s ease;
+            z-index: 5;
+            user-select: none;
+            -webkit-user-select: none;
+            flex-shrink: 0;
+        }
+
+        .tabs-nav-btn:hover {
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .tabs-nav-btn:active {
+            transform: scale(0.9);
+        }
+
+        .tabs-nav-btn.at-edge {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .timer-badge {
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .btn {
@@ -100,6 +160,8 @@
             align-items: center;
             gap: 0.3rem;
             transition: all 0.2s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .btn:hover {
@@ -674,30 +736,42 @@
 <body>
     <div class="header">
         <h1>🪙 Gold</h1>
-        <div class="controls-row">
-            <div class="timer-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
-                <span>🔄</span> Auto Refresh: <span id="refresh-timer">15s</span>
+        <div class="controls-wrapper" id="controls-wrapper">
+            <button class="tabs-nav-btn tabs-nav-left at-edge" id="controls-scroll-left" aria-label="Scroll controls left" title="Scroll left">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <div class="controls-row" id="controls-row">
+                <button id="btn-toggle-fit" class="btn" title="Toggle between zoomed-in candle focus and fitting all levels">
+                    <span>🔍</span> <span id="fit-btn-text">Zoom Candles</span>
+                </button>
+                <button id="btn-reset-zoom" class="btn" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">
+                    <span>🎯</span> Snap to Live
+                </button>
+                <button id="btn-calc" class="btn" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+                    <span>🧮</span> Sizer
+                </button>
+                <button id="btn-add-vline" class="btn" title="Click chart to place a custom vertical line">
+                    <span>➕</span> Add Line
+                </button>
+                <button id="btn-toggle-vlines" class="btn active" title="Toggle AI Briefing & Custom Vertical Lines">
+                    <span>📍</span> <span id="vlines-btn-text">Lines ON</span>
+                </button>
+                <button id="btn-toggle-alerts" class="btn">
+                    <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
+                </button>
+                <button id="btn-manual-refresh" class="btn">
+                    <span>⚡</span> Refresh Data
+                </button>
+                <div class="timer-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-line: 1px solid rgba(245, 158, 11, 0.3); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
+                    <span>🔄</span> Auto Refresh: <span id="refresh-timer">15s</span>
+                </div>
             </div>
-            <button id="btn-toggle-fit" class="btn" title="Toggle between zoomed-in candle focus and fitting all levels">
-                <span>🔍</span> <span id="fit-btn-text">Zoom Candles</span>
-            </button>
-            <button id="btn-toggle-vlines" class="btn active" title="Toggle AI Briefing & Custom Vertical Lines">
-                <span>📍</span> <span id="vlines-btn-text">Lines ON</span>
-            </button>
-            <button id="btn-add-vline" class="btn" title="Click chart to place a custom vertical line">
-                <span>➕</span> Add Line
-            </button>
-            <button id="btn-manual-refresh" class="btn">
-                <span>⚡</span> Refresh Data
-            </button>
-            <button id="btn-reset-zoom" class="btn" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">
-                <span>🎯</span> Snap to Live
-            </button>
-            <button id="btn-toggle-alerts" class="btn">
-                <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
-            </button>
-            <button id="btn-calc" class="btn" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
-                <span>🧮</span> Sizer
+            <button class="tabs-nav-btn tabs-nav-right" id="controls-scroll-right" aria-label="Scroll controls right" title="Scroll right">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
             </button>
         </div>
     </div>
@@ -2597,6 +2671,59 @@
             }
             window.open(url, 'VantageCalc', `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes`);
         }
+
+        // Controls scrollbar & arrow buttons navigation
+        function updateControlsScrollButtons() {
+            const row = document.getElementById('controls-row');
+            const leftBtn = document.getElementById('controls-scroll-left');
+            const rightBtn = document.getElementById('controls-scroll-right');
+            if (!row || !leftBtn || !rightBtn) return;
+
+            const scrollLeft = Math.ceil(row.scrollLeft);
+            const scrollWidth = row.scrollWidth;
+            const clientWidth = row.clientWidth;
+
+            if (clientWidth === 0) return;
+
+            const maxScrollLeft = scrollWidth - clientWidth;
+            const hasOverflow = scrollWidth > clientWidth + 2;
+            const canScrollLeft = hasOverflow && scrollLeft > 2;
+            const canScrollRight = hasOverflow && scrollLeft < maxScrollLeft - 2;
+
+            leftBtn.classList.toggle('at-edge', !canScrollLeft);
+            rightBtn.classList.toggle('at-edge', !canScrollRight);
+        }
+
+        function scrollControls(offset) {
+            const row = document.getElementById('controls-row');
+            if (row) {
+                row.scrollBy({ left: offset, behavior: 'smooth' });
+                setTimeout(updateControlsScrollButtons, 250);
+            }
+        }
+
+        (function initControlsScroll() {
+            const row = document.getElementById('controls-row');
+            const leftBtn = document.getElementById('controls-scroll-left');
+            const rightBtn = document.getElementById('controls-scroll-right');
+            if (leftBtn) leftBtn.addEventListener('click', () => scrollControls(-180));
+            if (rightBtn) rightBtn.addEventListener('click', () => scrollControls(180));
+            if (row) {
+                row.addEventListener('scroll', updateControlsScrollButtons, { passive: true });
+                row.addEventListener('wheel', (e) => {
+                    if (e.deltaY !== 0 && row.scrollWidth > row.clientWidth) {
+                        e.preventDefault();
+                        row.scrollLeft += e.deltaY;
+                        updateControlsScrollButtons();
+                    }
+                }, { passive: false });
+
+                const observer = new MutationObserver(updateControlsScrollButtons);
+                observer.observe(row, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
+            }
+            window.addEventListener('resize', updateControlsScrollButtons);
+            setTimeout(updateControlsScrollButtons, 300);
+        })();
     </script>
 </body>
 </html>
