@@ -211,83 +211,161 @@ if (viewLevels) {
     }
 
     // ===================== PERSISTENT SCORECARD STATE ===================== //
-    // Scorecard stats persist across days with a single entry per source and survive "Clear All"
-    let scorecardStats = {}; // { "BT": { worked: 0, failed: 0, na: 0 }, ... }
-    let levelReviewLog = {}; // { [levelId]: { source: "BT", status: "worked" | "failed" | "na" } }
+    // Scorecard stats persist across days with dedicated isolated storage per asset
+    let scorecardStats = {}; // { "AI B": { worked: 0, failed: 0, na: 0 }, ... }
+    let levelReviewLog = {}; // { [levelId]: { source: "AI B", status: "worked" | "failed" | "na" } }
 
-    function loadScorecardHistory() {
+    function getCanonicalLevelTag(level, asset) {
+        const a = (asset || window.currentActiveAsset || 'NIFTY').toUpperCase();
+        if (a === 'NIFTY') return (level?.source || 'BT').toUpperCase();
+
+        const currentSrc = (level?.source || '').trim().toUpperCase();
+        if (['AI B', 'AI S', 'AI KB', 'AI KS'].includes(currentSrc)) return currentSrc;
+
+        const beh = (level?.behavior || '').toUpperCase();
+
+        // 1. Key Buy (KB): [KB1], [SP_KB1], [G_KB1], KB1, etc.
+        if (/\[\s*[A-Z0-9_]*KB\d*\s*\]/.test(beh) || /\bKB\d*\b/.test(beh)) return 'AI KB';
+
+        // 2. Key Sell (KS): [KS1], [SP_KS1], [G_KS1], KS1, etc.
+        if (/\[\s*[A-Z0-9_]*KS\d*\s*\]/.test(beh) || /\bKS\d*\b/.test(beh)) return 'AI KS';
+
+        // 3. Section 5 Buy (B): [B1], [G_B1], [SP_B1], B1:, etc.
+        if (/\[\s*(?:[A-Z0-9_]*_)?B\d+\s*\]/.test(beh) || /\bB\d+\b/.test(beh)) return 'AI B';
+
+        // 4. Section 5 Sell (S): [S1], [G_S1], [SP_S1], S1:, etc.
+        if (/\[\s*(?:[A-Z0-9_]*_)?S\d+\s*\]/.test(beh) || /\bS\d+\b/.test(beh)) return 'AI S';
+
+        // Fallback: check bias
+        const bias = (level?.bias || '').toLowerCase();
+        if (bias === 'bullish' || bias === 'long' || bias === 'buy') return 'AI B';
+        if (bias === 'bearish' || bias === 'short' || bias === 'sell') return 'AI S';
+
+        return 'AI B';
+    }
+
+    function getScorecardStorageKeys(asset) {
+        const a = (asset || window.currentActiveAsset || 'NIFTY').toUpperCase();
+        if (a === 'NIFTY') {
+            return {
+                statsKey: 'levelsScorecardHistory_NIFTY',
+                logKey: 'levelsLoggedReviews_NIFTY',
+                legacyStatsKey: 'levelsScorecardHistory',
+                legacyLogKey: 'levelsLoggedReviews'
+            };
+        }
+        return {
+            statsKey: `levelsScorecardHistory_${a}`,
+            logKey: `levelsLoggedReviews_${a}`
+        };
+    }
+
+    function loadScorecardHistory(assetOverride) {
+        const activeAsset = (assetOverride || window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const keys = getScorecardStorageKeys(activeAsset);
+
+        // Migrate legacy NIFTY data on first run
+        if (activeAsset === 'NIFTY' && !localStorage.getItem(keys.statsKey)) {
+            const legacyStats = localStorage.getItem(keys.legacyStatsKey);
+            if (legacyStats) localStorage.setItem(keys.statsKey, legacyStats);
+            const legacyLog = localStorage.getItem(keys.legacyLogKey);
+            if (legacyLog) localStorage.setItem(keys.logKey, legacyLog);
+        }
+
         try {
-            const savedStats = localStorage.getItem('levelsScorecardHistory');
-            if (savedStats) scorecardStats = JSON.parse(savedStats);
+            const savedStats = localStorage.getItem(keys.statsKey);
+            scorecardStats = savedStats ? JSON.parse(savedStats) : {};
         } catch (e) {
-            console.error("Error loading levelsScorecardHistory:", e);
+            console.error("Error loading scorecard stats for " + activeAsset, e);
             scorecardStats = {};
         }
 
         try {
-            const savedLog = localStorage.getItem('levelsLoggedReviews');
-            if (savedLog) levelReviewLog = JSON.parse(savedLog);
+            const savedLog = localStorage.getItem(keys.logKey);
+            levelReviewLog = savedLog ? JSON.parse(savedLog) : {};
         } catch (e) {
-            console.error("Error loading levelsLoggedReviews:", e);
+            console.error("Error loading level review log for " + activeAsset, e);
             levelReviewLog = {};
         }
 
-        // Ensure all sources from dailyPlanData exist in scorecardStats
-        const knownSources = new Set(['BT', 'SM', 'CETA']);
-        if (window.dailyPlanData && Array.isArray(window.dailyPlanData)) {
-            window.dailyPlanData.forEach(l => {
-                if (l.source) knownSources.add(l.source.toUpperCase());
+        if (isAiAsset) {
+            const canonicalTags = ['AI B', 'AI S', 'AI KB', 'AI KS'];
+            canonicalTags.forEach(tag => {
+                if (!scorecardStats[tag]) {
+                    scorecardStats[tag] = { worked: 0, failed: 0, na: 0 };
+                }
+            });
+            // Purge any foreign/legacy channel tags (e.g. BT, SM, CETA) from AI asset stats
+            Object.keys(scorecardStats).forEach(key => {
+                if (!canonicalTags.includes(key)) {
+                    delete scorecardStats[key];
+                }
+            });
+        } else {
+            const knownSources = new Set(['BT', 'SM', 'CETA']);
+            if (window.dailyPlanData && Array.isArray(window.dailyPlanData)) {
+                window.dailyPlanData.forEach(l => {
+                    if (l.source) knownSources.add(l.source.toUpperCase());
+                });
+            }
+            knownSources.forEach(src => {
+                if (!scorecardStats[src]) {
+                    scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
+                }
             });
         }
-        knownSources.forEach(src => {
-            if (!scorecardStats[src]) {
-                scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
-            }
-        });
-        saveScorecardHistory();
+        saveScorecardHistory(activeAsset);
     }
 
-    function saveScorecardHistory() {
+    function saveScorecardHistory(assetOverride) {
+        const activeAsset = (assetOverride || window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const keys = getScorecardStorageKeys(activeAsset);
         try {
-            localStorage.setItem('levelsScorecardHistory', JSON.stringify(scorecardStats));
-            localStorage.setItem('levelsLoggedReviews', JSON.stringify(levelReviewLog));
+            localStorage.setItem(keys.statsKey, JSON.stringify(scorecardStats));
+            localStorage.setItem(keys.logKey, JSON.stringify(levelReviewLog));
         } catch (e) {
-            console.error("Error saving levelsScorecardHistory:", e);
+            console.error("Error saving scorecard stats for " + activeAsset, e);
         }
     }
 
     function recordLevelOutcome(levelId, newSource, newStatus) {
-        const src = (newSource || 'BT').toUpperCase();
+        const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+
+        let src = (newSource || (isAiAsset ? 'AI B' : 'BT')).toUpperCase();
+        if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS'].includes(src)) {
+            src = getCanonicalLevelTag({ source: src, behavior: src }, activeAsset);
+        }
         const st = (newStatus || 'na').toLowerCase();
 
         // Check if levelId was previously recorded
         const prev = levelReviewLog[levelId];
         if (prev) {
-            const prevSrc = (prev.source || 'BT').toUpperCase();
+            let prevSrc = (prev.source || (isAiAsset ? 'AI B' : 'BT')).toUpperCase();
+            if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS'].includes(prevSrc)) {
+                prevSrc = getCanonicalLevelTag({ source: prevSrc, behavior: prevSrc }, activeAsset);
+            }
             const prevSt = (prev.status || 'na').toLowerCase();
 
-            // Decrement previous status from prev source if exists
             if (scorecardStats[prevSrc] && scorecardStats[prevSrc][prevSt] !== undefined) {
                 scorecardStats[prevSrc][prevSt] = Math.max(0, scorecardStats[prevSrc][prevSt] - 1);
             }
         }
 
-        // Ensure target source bucket exists
         if (!scorecardStats[src]) {
             scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
         }
 
-        // Increment new status
         if (scorecardStats[src][st] !== undefined) {
             scorecardStats[src][st]++;
         } else {
             scorecardStats[src][st] = 1;
         }
 
-        // Update review log
         levelReviewLog[levelId] = { source: src, status: st, updatedAt: new Date().toISOString() };
 
-        saveScorecardHistory();
+        saveScorecardHistory(activeAsset);
         renderScorecard();
     }
 
@@ -366,10 +444,12 @@ if (viewLevels) {
         const finalLevels = [];
         const seenSignatures = new Set();
 
+        const isAiAsset = (isGold || isBtc || isSp500);
+
         if (shouldSyncFromPlan && planLevels.length > 0) {
             localStorage.setItem(storageKey + '_sig', planSig);
             planLevels.forEach((lvl, idx) => {
-                const src = (lvl.source || 'BT').toUpperCase();
+                const src = isAiAsset ? getCanonicalLevelTag(lvl, window.currentActiveAsset) : (lvl.source || 'BT').toUpperCase();
                 const pr = lvl.price || lvl.rawPrice || '';
                 const beh = lvl.behavior || '';
                 const cleanBeh = beh.replace(/\[\d{1,2}:\d{2}\]/g, '').trim();
@@ -380,7 +460,7 @@ if (viewLevels) {
 
                 const restoredStatus = userStatusMap[sig] || lvl.status || 'na';
                 finalLevels.push({
-                    id: 'lvl-plan-' + idx + '-' + src.toLowerCase(),
+                    id: 'lvl-plan-' + idx + '-' + src.toLowerCase().replace(/\s+/g, '-'),
                     source: src,
                     price: pr,
                     bias: lvl.bias || 'neutral',
@@ -400,7 +480,7 @@ if (viewLevels) {
                     seenSignatures.add(sig);
                     finalLevels.push({
                         id: l.id,
-                        source: (l.source || 'CUSTOM').toUpperCase(),
+                        source: isAiAsset ? getCanonicalLevelTag(l, window.currentActiveAsset) : (l.source || 'CUSTOM').toUpperCase(),
                         price: pr,
                         bias: l.bias || 'neutral',
                         behavior: beh,
@@ -412,9 +492,10 @@ if (viewLevels) {
             });
         } else if (loaded.length > 0) {
             loaded.forEach((l, idx) => {
+                const src = isAiAsset ? getCanonicalLevelTag(l, window.currentActiveAsset) : (l.source || 'BT').toUpperCase();
                 finalLevels.push({
                     id: l.id || ('lvl-' + idx),
-                    source: (l.source || 'BT').toUpperCase(),
+                    source: src,
                     price: l.rawPrice || l.price || '',
                     bias: l.bias || 'neutral',
                     behavior: l.behavior || '',
@@ -1406,17 +1487,20 @@ if (viewLevels) {
     if (btnScorecardReset) {
         btnScorecardReset.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (confirm("Reset all historical source prediction statistics across all channels?")) {
+            const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+            if (confirm(`Reset all historical prediction statistics for ${activeAsset}?`)) {
                 scorecardStats = {};
                 levelReviewLog = {};
-                saveScorecardHistory();
+                saveScorecardHistory(activeAsset);
                 renderScorecard();
             }
         });
     }
 
     document.getElementById('btn-level-add').addEventListener('click', () => {
-        const source = (inpSource ? inpSource.value.trim() : '') || 'BT';
+        const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        let source = (inpSource ? inpSource.value.trim() : '') || (isAiAsset ? 'AI B' : 'BT');
         const price = inpPrice.value.trim();
         const bias = inpBias.value;
         const behavior = inpBehavior.value.trim();
@@ -1425,6 +1509,10 @@ if (viewLevels) {
 
         if (!price) { alert("Please enter a key price level."); return; }
         if (!behavior) { alert("Please describe the expected behavior."); return; }
+
+        if (isAiAsset) {
+            source = getCanonicalLevelTag({ source: source, behavior: behavior, bias: bias }, activeAsset);
+        }
 
         const levelId = 'lvl-' + Date.now();
         injectLevelCard(levelId, price, bias, behavior, tp, sl, source, 'na', true);
@@ -1440,13 +1528,21 @@ if (viewLevels) {
 
     // Make outcome status toggle globally accessible
     window.setLevelStatus = function(id, newStatus) {
+        const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const defaultSrc = isAiAsset ? 'AI B' : 'BT';
         const idx = allLevels.findIndex(l => l.id === id);
-        let src = 'BT';
+        let src = defaultSrc;
         if (idx !== -1) {
             allLevels[idx].status = newStatus;
-            src = allLevels[idx].source || 'BT';
+            src = allLevels[idx].source || defaultSrc;
         } else if (levelReviewLog[id]) {
-            src = levelReviewLog[id].source || 'BT';
+            src = levelReviewLog[id].source || defaultSrc;
+        }
+
+        if (isAiAsset) {
+            src = getCanonicalLevelTag({ source: src, behavior: allLevels[idx]?.behavior || '' }, activeAsset);
+            if (idx !== -1) allLevels[idx].source = src;
         }
 
         const card = document.getElementById(id);
@@ -1674,26 +1770,40 @@ if (viewLevels) {
     function updateSourceFilterOptions() {
         if (!filterSourceEl) return;
         const currentValue = filterSourceEl.value;
-        const sources = new Set();
-        allLevels.forEach(l => {
-            if (l.source) sources.add(l.source.toUpperCase());
-        });
-        // Keep "All Sources" as first option, rebuild the rest
-        filterSourceEl.innerHTML = '<option value="">All Sources</option>';
-        Array.from(sources).sort().forEach(src => {
-            const opt = document.createElement('option');
-            opt.value = src;
-            opt.textContent = src;
-            filterSourceEl.appendChild(opt);
-        });
+        const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+
+        filterSourceEl.innerHTML = isAiAsset ? '<option value="">All Tags</option>' : '<option value="">All Sources</option>';
+
+        if (isAiAsset) {
+            const canonicalTags = ['AI B', 'AI S', 'AI KB', 'AI KS'];
+            canonicalTags.forEach(tag => {
+                const opt = document.createElement('option');
+                opt.value = tag;
+                opt.textContent = tag;
+                filterSourceEl.appendChild(opt);
+            });
+        } else {
+            const sources = new Set();
+            allLevels.forEach(l => {
+                if (l.source) sources.add(l.source.toUpperCase());
+            });
+            Array.from(sources).sort().forEach(src => {
+                const opt = document.createElement('option');
+                opt.value = src;
+                opt.textContent = src;
+                filterSourceEl.appendChild(opt);
+            });
+        }
+
         // Restore previous selection if it still exists
-        if (currentValue && sources.has(currentValue)) {
+        if (currentValue) {
             filterSourceEl.value = currentValue;
         }
     }
 
     function applySourceFilter() {
-        const selected = filterSourceEl ? filterSourceEl.value : '';
+        const selected = filterSourceEl ? filterSourceEl.value.trim().toUpperCase() : '';
         const cards = document.querySelectorAll('.level-card');
         cards.forEach(card => {
             if (!selected) {
@@ -1720,16 +1830,27 @@ if (viewLevels) {
 
         tbody.innerHTML = '';
 
-        const sourceSet = new Set(Object.keys(scorecardStats));
-        allLevels.forEach(l => {
-            if (l.source) sourceSet.add(l.source.toUpperCase());
-        });
-        if (window.dailyPlanData && Array.isArray(window.dailyPlanData)) {
-            window.dailyPlanData.forEach(l => {
+        const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+
+        const thSource = document.querySelector('.scorecard-table th:first-child');
+        if (thSource) thSource.innerText = isAiAsset ? 'Tag / Setup' : 'Source / Channel';
+
+        let sources = [];
+        if (isAiAsset) {
+            sources = ['AI B', 'AI S', 'AI KB', 'AI KS'];
+        } else {
+            const sourceSet = new Set(Object.keys(scorecardStats));
+            allLevels.forEach(l => {
                 if (l.source) sourceSet.add(l.source.toUpperCase());
             });
+            if (window.dailyPlanData && Array.isArray(window.dailyPlanData)) {
+                window.dailyPlanData.forEach(l => {
+                    if (l.source) sourceSet.add(l.source.toUpperCase());
+                });
+            }
+            sources = Array.from(sourceSet).filter(Boolean).sort();
         }
-        const sources = Array.from(sourceSet).filter(Boolean).sort();
 
         // If no sources exist
         if (sources.length === 0) {
@@ -1768,9 +1889,15 @@ if (viewLevels) {
                 else winRateClass = 'stat-rate-low';
             }
 
+            let badgeSubtext = '';
+            if (src === 'AI B') badgeSubtext = ' <span style="font-size:0.7rem; color:var(--text-dim); font-weight:normal;">(Sec 5 Buy)</span>';
+            else if (src === 'AI S') badgeSubtext = ' <span style="font-size:0.7rem; color:var(--text-dim); font-weight:normal;">(Sec 5 Sell)</span>';
+            else if (src === 'AI KB') badgeSubtext = ' <span style="font-size:0.7rem; color:var(--text-dim); font-weight:normal;">(Key Buy)</span>';
+            else if (src === 'AI KS') badgeSubtext = ' <span style="font-size:0.7rem; color:var(--text-dim); font-weight:normal;">(Key Sell)</span>';
+
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><span class="source-badge" style="font-size:0.78rem;">${src}</span></td>
+                <td><span class="source-badge" style="font-size:0.78rem;">${src}</span>${badgeSubtext}</td>
                 <td><b class="stat-num-worked">${w}</b></td>
                 <td><b class="stat-num-failed">${f}</b></td>
                 <td><span class="stat-ratio font-mono">${w} : ${f}</span></td>
@@ -1792,10 +1919,11 @@ if (viewLevels) {
             else grandWRClass = 'stat-rate-low';
         }
 
+        const totalLabel = isAiAsset ? 'TOTAL / ALL TAGS' : 'TOTAL / ALL SOURCES';
         const totalTr = document.createElement('tr');
         totalTr.className = 'scorecard-total-row';
         totalTr.innerHTML = `
-            <td><b>TOTAL / ALL SOURCES</b></td>
+            <td><b>${totalLabel}</b></td>
             <td><b class="stat-num-worked">${grandWorked}</b></td>
             <td><b class="stat-num-failed">${grandFailed}</b></td>
             <td><b class="stat-ratio font-mono" style="font-size:0.95rem;">${grandWorked} : ${grandFailed}</b></td>
