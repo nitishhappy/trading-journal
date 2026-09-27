@@ -98,6 +98,7 @@
         <button class="main-tab" data-view="levels">Levels</button>
         <button class="main-tab" data-view="aico-pilot">🤖 AI Co-Pilot</button>
         <button class="main-tab" onclick="window.location.href='accuracy.html'">🎯 Accuracy</button>
+        <button class="main-tab" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="color: #fbbf24;">🧮 Sizer</button>
       </nav>
       <button class="tabs-nav-btn tabs-nav-right" id="tabs-scroll-right" aria-label="Scroll tabs right" title="Scroll right">
         <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1193,6 +1194,7 @@
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <span>Live Chart</span>
                             <a id="tv-external-link" href="nifty_interactive_chart.html" target="_blank" style="font-size: 0.8rem; color: var(--accent); text-decoration: none; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border);" onclick="event.stopPropagation();" title="Open Interactive Level Chart">↗ Web</a>
+                            <a id="tv-calc-link" href="vantage_position_calculator.html" target="_blank" style="font-size: 0.8rem; color: #fbbf24; text-decoration: none; background: rgba(245,158,11,0.15); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(245,158,11,0.4);" onclick="openVantagePositionCalculator(event); return false;" title="Open Vantage Position Size Calculator">🧮 Sizer</a>
                         </div>
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <button type="button" class="maximize-btn" title="Maximize Panel" onclick="toggleMaximizePanel(this, event)">⛶</button>
@@ -1940,6 +1942,16 @@
           .then(reg => console.log('SW registered, scope:', reg.scope))
           .catch(err => console.error('SW registration failed:', err));
       });
+    }
+  </script>
+  <script>
+    function openVantagePositionCalculator(e) {
+      if (e) e.stopPropagation();
+      const w = 460;
+      const h = 820;
+      const left = (screen.width - w) / 2;
+      const top = (screen.height - h) / 4;
+      window.open('vantage_position_calculator.html', 'VantageCalc', `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes`);
     }
   </script>
 </body>

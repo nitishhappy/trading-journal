@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vantage Position Size Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-card: #111827;
+            --bg-subcard: #1e293b;
+            --bg-input: #0f172a;
+            --border: #334155;
+            --border-highlight: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-amber: #f59e0b;
+            --accent-amber-bg: rgba(245, 158, 11, 0.12);
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --accent-green-bg: rgba(16, 185, 129, 0.15);
+            --accent-red: #f43f5e;
+            --accent-red-bg: rgba(244, 63, 94, 0.15);
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-ui: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-ui);
+            font-size: 13px;
+            line-height: 1.4;
+            padding: 12px;
+            user-select: none;
+            overflow-x: hidden;
+        }
+
+        /* Top Header */
+        .calc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+        }
+
+        .calc-header h1 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #fff;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-muted);
+            border-radius: 5px;
+            padding: 3px 7px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        /* Accordion Structure */
+        .accordion-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--bg-subcard);
+            cursor: pointer;
+            border-bottom: 1px solid transparent;
+            transition: background 0.15s ease;
+        }
+
+        .accordion-header:hover {
+            background: #253347;
+        }
+
+        .accordion-header.active {
+            border-bottom-color: var(--border);
+        }
+
+        .accordion-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chevron {
+            font-size: 10px;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+
+        .accordion-header.active .chevron {
+            transform: rotate(90deg);
+        }
+
+        .accordion-body {
+            display: none;
+            padding: 10px;
+        }
+
+        .accordion-body.open {
+            display: block;
+        }
+
+        /* Form Controls */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        input, select {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 8px;
+            border-radius: 5px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--border-highlight);
+            box-shadow: 0 0 0 1px var(--border-highlight);
+        }
+
+        /* Direction Toggle */
+        .dir-toggle {
+            display: flex;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 2px;
+            gap: 2px;
+        }
+
+        .dir-btn {
+            flex: 1;
+            padding: 5px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 0.78rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .dir-btn.active.buy {
+            background: var(--accent-green);
+            color: #000;
+        }
+
+        .dir-btn.active.sell {
+            background: var(--accent-red);
+            color: #fff;
+        }
+
+        /* Section 3: Actionable Order Ticket Styles */
+        .actionable-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 7px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .ticket-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 8px;
+            background: var(--accent-amber-bg);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        .ticket-item.volume {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .ticket-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ticket-label small {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .ticket-value-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ticket-value {
+            font-family: var(--font-mono);
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .ticket-value.gold { color: #fbbf24; }
+        .ticket-value.blue { color: #38bdf8; }
+
+        .copy-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            transition: all 0.15s ease;
+        }
+
+        .copy-btn:hover {
+            background: #1d4ed8;
+            transform: scale(1.03);
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+        }
+
+        /* Metric Grid inside Section 3 */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .metric-cell {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 5px;
+            padding: 6px 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-cell .m-title {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .metric-cell .m-val {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .metric-cell .m-val.green { color: #34d399; }
+        .metric-cell .m-val.red { color: #f87171; }
+        .metric-cell .m-val.gold { color: #fbbf24; }
+
+        /* Section 4: Bookkeeping Styles */
+        .bookkeeping-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.78rem;
+        }
+
+        .bookkeeping-row:last-child {
+            border-bottom: none;
+        }
+
+        .bk-label {
+            color: var(--text-muted);
+        }
+
+        .bk-val {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+        }
+        .status-ok { background: var(--accent-green-bg); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .status-warn { background: var(--accent-red-bg); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+
+        /* Section 5: Cheat Sheet */
+        .cheat-box {
+            font-size: 0.74rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 6px;
+            border-left: 3px solid var(--accent-amber);
+        }
+
+        .cheat-box strong { color: #fbbf24; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="calc-header">
+        <h1><span>🧮</span> Vantage Position Sizer</h1>
+        <div class="header-actions">
+            <button class="icon-btn" onclick="popoutWindow()" title="Open in dedicated mini floating window">⛶ Popout</button>
+            <button class="icon-btn" onclick="resetDefaults()" title="Reset to BTC defaults">↺ Reset</button>
+        </div>
+    </div>
+
+    <!-- SECTION 1: ASSET & ACCOUNT CONFIGURATION (COLLAPSED BY DEFAULT) -->
+    <div class="accordion-section">
+        <div class="accordion-header" id="hdr-sec1" onclick="toggleSection('sec1')">
+            <div class="accordion-title"><span>⚙️</span> 1. ASSET & ACCOUNT CONFIGURATION</div>
+            <span class="chevron" id="chv-sec1">▶</span>
+        </div>
+        <div class="accordion-body" id="body-sec1">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Selected Asset Preset</label>
+                    <select id="assetSelect" onchange="onAssetChange()">
+                        <option value="BTC" selected>BTC — Bitcoin CFD</option>
+                        <option value="XAU">XAU — Gold Physical Spot</option>
+                        <option value="EURUSD">EURUSD — Forex Spot</option>
+                        <option value="USDJPY">USDJPY — Forex Spot</option>
+                        <option value="ETH">ETH — Ethereum CFD</option>
+                        <option value="GBPUSD">GBPUSD — Forex Spot</option>
+                        <option value="Custom">Custom Asset</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Broker Platform</label>
+                    <input type="text" id="brokerName" value="Vantage" readonly style="opacity: 0.7;">
+                </div>
+                <div class="form-group">
+                    <label>Screen Lot Step</label>
+                    <input type="number" id="lotStep" value="0.01" step="0.001" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Price Decimals</label>
+                    <input type="number" id="priceDecimals" value="2" min="0" max="6" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Account Size (USD)</label>
+                    <input type="number" id="accountSize" value="1500" step="10" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Setup Capital (USD)</label>
+                    <input type="number" id="setupCapital" value="150" step="10" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Max Loss / Trade (USD)</label>
+                    <input type="number" id="maxLoss" value="10" step="1" oninput="calculate()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: CHART STRUCTURE & TRADE INPUTS (EXPANDED BY DEFAULT) -->
+    <div class="accordion-section">
+        <div class="accordion-header active" id="hdr-sec2" onclick="toggleSection('sec2')">
+            <div class="accordion-title"><span>📐</span> 2. CHART STRUCTURE & TRADE INPUTS</div>
+            <span class="chevron" id="chv-sec2">▶</span>
+        </div>
+        <div class="accordion-body open" id="body-sec2">
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Trade Direction</label>
+                    <div class="dir-toggle">
+                        <button type="button" class="dir-btn" id="btn-buy" onclick="setDirection('BUY')">BUY (LONG)</button>
+                        <button type="button" class="dir-btn active sell" id="btn-sell" onclick="setDirection('SELL')">SELL (SHORT)</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Chart Planned Entry</label>
+                    <input type="number" id="entryPrice" value="85050.00" step="0.01" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Chart SL Invalidation</label>
+                    <input type="number" id="slPrice" value="85110.00" step="0.01" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Chart TP Target Line</label>
+                    <input type="number" id="tpPrice" value="84650.00" step="0.01" oninput="calculate()">
+                </div>
+                <div class="form-group">
+                    <label>Screen Spread (Points)</label>
+                    <input type="number" id="spreadPoints" value="1706" step="1" oninput="calculate()" title="Type the exact number seen between Sell/Buy buttons">
+                </div>
+                <div class="form-group">
+                    <label>Effective Spread (USD)</label>
+                    <input type="text" id="effectiveSpread" value="17.06" readonly style="opacity: 0.8; font-family: var(--font-mono);">
+                </div>
+                <div class="form-group">
+                    <label>Broker Leverage</label>
+                    <select id="leverageSelect" onchange="calculate()">
+                        <option value="5">1:05 (5x)</option>
+                        <option value="1">1:1 (Cash)</option>
+                        <option value="50">1:50 (50x)</option>
+                        <option value="100">1:100 (100x)</option>
+                        <option value="500" selected>1:500 (500x Default)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: LIVE ORDER EXECUTION & PAYOFF METRICS (EXPANDED BY DEFAULT) -->
+    <div class="accordion-section">
+        <div class="accordion-header active" id="hdr-sec3" onclick="toggleSection('sec3')" style="background: #172554;">
+            <div class="accordion-title" style="color: #60a5fa;"><span>⚡</span> 3. LIVE ORDER EXECUTION & PAYOFF METRICS</div>
+            <span class="chevron" id="chv-sec3">▶</span>
+        </div>
+        <div class="accordion-body open" id="body-sec3">
+            <div class="actionable-card">
+                <!-- 1. Order Entry -->
+                <div class="ticket-item">
+                    <div class="ticket-label">
+                        <span>Order Entry Price</span>
+                        <small id="entryNote">Type in Vantage Entry box</small>
+                    </div>
+                    <div class="ticket-value-row">
+                        <span class="ticket-value" id="valOrderEntry">85,050.00</span>
+                    </div>
+                </div>
+
+                <!-- 2. Order Stop Loss (WITH COPY BUTTON) -->
+                <div class="ticket-item">
+                    <div class="ticket-label">
+                        <span>Order Stop Loss (Type in Vantage SL)</span>
+                        <small id="slNote">Adds spread so candle tests resistance</small>
+                    </div>
+                    <div class="ticket-value-row">
+                        <span class="ticket-value gold" id="valOrderSL">85,127.06</span>
+                        <button class="copy-btn" id="btn-copy-sl" onclick="copyValue('valOrderSL', 'btn-copy-sl')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <!-- 3. Order Take Profit (WITH COPY BUTTON) -->
+                <div class="ticket-item">
+                    <div class="ticket-label">
+                        <span>Order Take Profit (Type in Vantage TP)</span>
+                        <small id="tpNote">Adds spread so order fills on support touch!</small>
+                    </div>
+                    <div class="ticket-value-row">
+                        <span class="ticket-value gold" id="valOrderTP">84,667.06</span>
+                        <button class="copy-btn" id="btn-copy-tp" onclick="copyValue('valOrderTP', 'btn-copy-tp')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <!-- 4. Tradeable Lots (WITH COPY BUTTON) -->
+                <div class="ticket-item volume">
+                    <div class="ticket-label">
+                        <span style="color: #38bdf8;">Tradeable Lots (Type in Vantage Volume)</span>
+                        <small>Rounded to broker lot step</small>
+                    </div>
+                    <div class="ticket-value-row">
+                        <span class="ticket-value blue" id="valTradeableLots">0.12 Lots</span>
+                        <button class="copy-btn" id="btn-copy-vol" onclick="copyRawLot('btn-copy-vol')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <!-- Key Payoff & Capital Metrics Grid -->
+                <div class="metrics-grid">
+                    <div class="metric-cell">
+                        <span class="m-title">Notional Trade Value</span>
+                        <span class="m-val" id="valNotional">$10,206.00</span>
+                    </div>
+                    <div class="metric-cell">
+                        <span class="m-title">Required Margin (USD)</span>
+                        <span class="m-val gold" id="valReqMargin">$20.41</span>
+                    </div>
+                    <div class="metric-cell">
+                        <span class="m-title">Risk at SL (USD)</span>
+                        <span class="m-val red" id="valRiskSL">$9.25</span>
+                    </div>
+                    <div class="metric-cell">
+                        <span class="m-title">Profit at TP (USD)</span>
+                        <span class="m-val green" id="valProfitTP">$45.95</span>
+                    </div>
+                    <div class="metric-cell" style="grid-column: span 2;">
+                        <span class="m-title">Net Risk:Reward (R:R)</span>
+                        <span class="m-val gold" id="valNetRR" style="font-size: 1.05rem;">4.97 : 1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: ACCOUNT HEALTH & CAPITAL UTILIZATION (EXPANDED BY DEFAULT) -->
+    <div class="accordion-section">
+        <div class="accordion-header active" id="hdr-sec4" onclick="toggleSection('sec4')">
+            <div class="accordion-title"><span>🛡️</span> 4. ACCOUNT HEALTH & CAPITAL UTILIZATION</div>
+            <span class="chevron" id="chv-sec4">▶</span>
+        </div>
+        <div class="accordion-body open" id="body-sec4">
+            <div class="bookkeeping-row">
+                <span class="bk-label">Effective SL Risk Distance</span>
+                <span class="bk-val" id="valSLDist">77.06000 pts</span>
+            </div>
+            <div class="bookkeeping-row">
+                <span class="bk-label">Effective TP Reward Distance</span>
+                <span class="bk-val" id="valTPDist">382.94000 pts</span>
+            </div>
+            <div class="bookkeeping-row">
+                <span class="bk-label">Setup Capital Margin Utilization</span>
+                <span class="bk-val" id="valSetupUtil">13.61%</span>
+            </div>
+            <div class="bookkeeping-row">
+                <span class="bk-label">Account Margin Utilization</span>
+                <span class="bk-val" id="valAcctUtil">1.36%</span>
+            </div>
+            <div class="bookkeeping-row">
+                <span class="bk-label">Margin Feasibility Status</span>
+                <span id="valMarginStatus"><span class="status-badge status-ok">✅ MARGIN OK</span></span>
+            </div>
+            <div class="bookkeeping-row">
+                <span class="bk-label">Spread Friction Cost (USD)</span>
+                <span class="bk-val" id="valSpreadCost">$2.05</span>
+            </div>
+            <div class="bookkeeping-row">
+                <span class="bk-label">Spread Cost as % of Setup Capital</span>
+                <span class="bk-val" id="valSpreadPct">1.36%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 5: VANTAGE EXECUTION CHEAT SHEET (COLLAPSED BY DEFAULT) -->
+    <div class="accordion-section">
+        <div class="accordion-header" id="hdr-sec5" onclick="toggleSection('sec5')">
+            <div class="accordion-title"><span>📖</span> 5. VANTAGE EXECUTION CHEAT SHEET</div>
+            <span class="chevron" id="chv-sec5">▶</span>
+        </div>
+        <div class="accordion-body" id="body-sec5">
+            <div class="cheat-box">
+                <strong>SELL (Short) Execution:</strong><br>
+                • <strong>Entry:</strong> Fills at Bid (chart price). Zero spread at open.<br>
+                • <strong>Take Profit:</strong> Must add spread (<code>Support + Spread</code>) so order fills the instant the candle touches your support line!<br>
+                • <strong>Stop Loss:</strong> Add spread (<code>Resistance + Spread</code>) so Ask doesn't stop you out before testing resistance.
+            </div>
+            <div class="cheat-box">
+                <strong>BUY (Long) Execution:</strong><br>
+                • <strong>Entry:</strong> Fills at Ask (<code>Entry + Spread</code>). Trade opens in the red by spread.<br>
+                • <strong>SL & TP:</strong> Fill directly when the chart candle touches your line.
+            </div>
+            <div class="cheat-box">
+                <strong>Spread Conversion Math:</strong><br>
+                Points between buttons divided by <code>10^Decimals</code> (e.g. <code>1706 / 10^2 = 17.06 USD</code> for BTC).
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Preset configurations
+        const PRESETS = {
+            'BTC':    { lotStep: 0.01, decimals: 2, defaultSpread: 1706, entry: 85050.0, sl: 85110.0, tp: 84650.0 },
+            'XAU':    { lotStep: 0.01, decimals: 2, defaultSpread: 35,   entry: 4286.0,  sl: 4292.0,  tp: 4268.0 },
+            'EURUSD': { lotStep: 0.01, decimals: 5, defaultSpread: 18,   entry: 1.13900, sl: 1.14100, tp: 1.13300 },
+            'USDJPY': { lotStep: 0.01, decimals: 3, defaultSpread: 34,   entry: 157.300, sl: 157.600, tp: 156.400 },
+            'ETH':    { lotStep: 0.01, decimals: 2, defaultSpread: 247,  entry: 2715.0,  sl: 2730.0,  tp: 2670.0 },
+            'GBPUSD': { lotStep: 0.01, decimals: 5, defaultSpread: 31,   entry: 1.32420, sl: 1.32650, tp: 1.31800 },
+            'Custom': { lotStep: 0.01, decimals: 2, defaultSpread: 20,   entry: 100.0,   sl: 105.0,   tp: 90.0 }
+        };
+
+        let currentDirection = 'SELL';
+        let rawTradeableLots = 0.12;
+
+        function setDirection(dir) {
+            currentDirection = dir;
+            const btnBuy = document.getElementById('btn-buy');
+            const btnSell = document.getElementById('btn-sell');
+            if (dir === 'BUY') {
+                btnBuy.className = 'dir-btn active buy';
+                btnSell.className = 'dir-btn';
+            } else {
+                btnBuy.className = 'dir-btn';
+                btnSell.className = 'dir-btn active sell';
+            }
+            calculate();
+        }
+
+        function toggleSection(secId) {
+            const body = document.getElementById('body-' + secId);
+            const hdr = document.getElementById('hdr-' + secId);
+            if (body.classList.contains('open')) {
+                body.classList.remove('open');
+                hdr.classList.remove('active');
+            } else {
+                body.classList.add('open');
+                hdr.classList.add('active');
+            }
+        }
+
+        function onAssetChange() {
+            const sym = document.getElementById('assetSelect').value;
+            const p = PRESETS[sym];
+            if (p) {
+                document.getElementById('lotStep').value = p.lotStep;
+                document.getElementById('priceDecimals').value = p.decimals;
+                document.getElementById('spreadPoints').value = p.defaultSpread;
+                document.getElementById('entryPrice').value = p.entry.toFixed(p.decimals);
+                document.getElementById('slPrice').value = p.sl.toFixed(p.decimals);
+                document.getElementById('tpPrice').value = p.tp.toFixed(p.decimals);
+            }
+            calculate();
+        }
+
+        function calculate() {
+            const decimals = parseInt(document.getElementById('priceDecimals').value) || 2;
+            const lotStep = parseFloat(document.getElementById('lotStep').value) || 0.01;
+            const acctSize = parseFloat(document.getElementById('accountSize').value) || 1500;
+            const setupCap = parseFloat(document.getElementById('setupCapital').value) || 150;
+            const maxLoss = parseFloat(document.getElementById('maxLoss').value) || 10;
+            const leverage = parseFloat(document.getElementById('leverageSelect').value) || 500;
+
+            const entry = parseFloat(document.getElementById('entryPrice').value) || 0;
+            const sl = parseFloat(document.getElementById('slPrice').value) || 0;
+            const tp = parseFloat(document.getElementById('tpPrice').value) || 0;
+            const spreadPts = parseFloat(document.getElementById('spreadPoints').value) || 0;
+
+            // Effective spread = spreadPoints / 10^decimals
+            const priceSpread = spreadPts / Math.pow(10, decimals);
+            document.getElementById('effectiveSpread').value = priceSpread.toFixed(decimals > 2 ? decimals : 2);
+
+            let orderEntry = entry;
+            let orderSL = sl;
+            let orderTP = tp;
+            let slRiskDist = 0;
+            let tpRewardDist = 0;
+
+            if (currentDirection === 'BUY') {
+                orderEntry = entry + priceSpread; // Fills on Ask
+                orderSL = sl;                     // Stops on Bid touch
+                orderTP = tp;                     // Fills on Bid touch
+                slRiskDist = Math.abs(orderEntry - orderSL);
+                tpRewardDist = Math.abs(orderTP - orderEntry);
+
+                document.getElementById('entryNote').innerText = 'Fills on Ask (Entry + Spread)';
+                document.getElementById('slNote').innerText = 'Fills when candle touches line directly';
+                document.getElementById('tpNote').innerText = 'Fills when candle touches line directly';
+            } else {
+                orderEntry = entry;               // Fills on Bid
+                orderSL = sl + priceSpread;       // Adds spread so Ask doesn't trigger early
+                orderTP = tp + priceSpread;       // Adds spread so order fills the moment candle hits support!
+                slRiskDist = Math.abs(orderSL - orderEntry);
+                tpRewardDist = Math.abs(orderEntry - orderTP);
+
+                document.getElementById('entryNote').innerText = 'Type in Entry (Fills on Bid)';
+                document.getElementById('slNote').innerText = 'Adds spread so candle tests resistance';
+                document.getElementById('tpNote').innerText = 'Adds spread so order fills on support touch!';
+            }
+
+            // Raw risk lots & tradeable lots
+            const rawLots = slRiskDist > 0 ? (maxLoss / slRiskDist) : 0;
+            const tradeableLots = Math.floor(rawLots / lotStep) * lotStep;
+            rawTradeableLots = tradeableLots;
+
+            const notional = tradeableLots * orderEntry;
+            const reqMargin = leverage > 0 ? (notional / leverage) : notional;
+            const riskAtSL = tradeableLots * slRiskDist;
+            const profitAtTP = tradeableLots * tpRewardDist;
+            const netRR = slRiskDist > 0 ? (tpRewardDist / slRiskDist) : 0;
+
+            const setupUtil = setupCap > 0 ? ((reqMargin / setupCap) * 100) : 0;
+            const acctUtil = acctSize > 0 ? ((reqMargin / acctSize) * 100) : 0;
+            const spreadCost = tradeableLots * priceSpread;
+            const spreadPct = setupCap > 0 ? ((spreadCost / setupCap) * 100) : 0;
+
+            // Update Section 3
+            document.getElementById('valOrderEntry').innerText = orderEntry.toFixed(decimals);
+            document.getElementById('valOrderSL').innerText = orderSL.toFixed(decimals);
+            document.getElementById('valOrderTP').innerText = orderTP.toFixed(decimals);
+            document.getElementById('valTradeableLots').innerText = tradeableLots.toFixed(lotStep < 0.01 ? 3 : 2) + ' Lots';
+
+            document.getElementById('valNotional').innerText = '$' + notional.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('valReqMargin').innerText = '$' + reqMargin.toFixed(2);
+            document.getElementById('valRiskSL').innerText = '$' + riskAtSL.toFixed(2);
+            document.getElementById('valProfitTP').innerText = '$' + profitAtTP.toFixed(2);
+            document.getElementById('valNetRR').innerText = netRR.toFixed(2) + ' : 1';
+
+            // Update Section 4
+            document.getElementById('valSLDist').innerText = slRiskDist.toFixed(decimals) + ' pts';
+            document.getElementById('valTPDist').innerText = tpRewardDist.toFixed(decimals) + ' pts';
+            document.getElementById('valSetupUtil').innerText = setupUtil.toFixed(2) + '%';
+            document.getElementById('valAcctUtil').innerText = acctUtil.toFixed(2) + '%';
+            document.getElementById('valSpreadCost').innerText = '$' + spreadCost.toFixed(2);
+            document.getElementById('valSpreadPct').innerText = spreadPct.toFixed(2) + '%';
+
+            // Margin Feasibility Status
+            const statusContainer = document.getElementById('valMarginStatus');
+            if (tradeableLots === 0) {
+                statusContainer.innerHTML = '<span class="status-badge status-warn">⚠️ LOT < MIN STEP (' + lotStep + ')</span>';
+            } else if (reqMargin > acctSize) {
+                statusContainer.innerHTML = '<span class="status-badge status-warn">🚨 EXCEEDS TOTAL ACCOUNT</span>';
+            } else if (reqMargin > setupCap) {
+                statusContainer.innerHTML = '<span class="status-badge status-warn">⚠️ EXCEEDS SETUP CAPITAL</span>';
+            } else {
+                statusContainer.innerHTML = '<span class="status-badge status-ok">✅ MARGIN OK</span>';
+            }
+        }
+
+        function copyValue(elementId, btnId) {
+            const text = document.getElementById(elementId).innerText.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById(btnId);
+                const original = btn.innerHTML;
+                btn.innerHTML = '✓ Copied';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.classList.remove('copied');
+                }, 1400);
+            });
+        }
+
+        function copyRawLot(btnId) {
+            const lotStep = parseFloat(document.getElementById('lotStep').value) || 0.01;
+            const text = rawTradeableLots.toFixed(lotStep < 0.01 ? 3 : 2);
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById(btnId);
+                const original = btn.innerHTML;
+                btn.innerHTML = '✓ Copied';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.classList.remove('copied');
+                }, 1400);
+            });
+        }
+
+        function popoutWindow() {
+            const w = 460;
+            const h = 820;
+            const left = (screen.width - w) / 2;
+            const top = (screen.height - h) / 4;
+            window.open(window.location.href, 'VantageCalc', `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes`);
+        }
+
+        function resetDefaults() {
+            document.getElementById('assetSelect').value = 'BTC';
+            setDirection('SELL');
+            onAssetChange();
+        }
+
+        // Parse query params if opened from chart with prefilled data
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('symbol')) {
+                const sym = urlParams.get('symbol').toUpperCase();
+                if (PRESETS[sym]) {
+                    document.getElementById('assetSelect').value = sym;
+                    onAssetChange();
+                }
+            }
+            if (urlParams.has('dir')) {
+                setDirection(urlParams.get('dir').toUpperCase());
+            }
+            if (urlParams.has('entry')) {
+                document.getElementById('entryPrice').value = parseFloat(urlParams.get('entry'));
+            }
+            if (urlParams.has('sl')) {
+                document.getElementById('slPrice').value = parseFloat(urlParams.get('sl'));
+            }
+            if (urlParams.has('tp')) {
+                document.getElementById('tpPrice').value = parseFloat(urlParams.get('tp'));
+            }
+            calculate();
+        });
+    </script>
+</body>
+</html>

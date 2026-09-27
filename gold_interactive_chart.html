@@ -696,6 +696,9 @@
             <button id="btn-toggle-alerts" class="btn">
                 <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
             </button>
+            <button id="btn-calc" class="btn" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+                <span>🧮</span> Sizer
+            </button>
         </div>
     </div>
 
@@ -2580,6 +2583,19 @@
                     console.warn("[Chart Alert] Desktop notification failed:", e);
                 }
             }
+        }
+
+        function openVantagePositionCalculator(e) {
+            if (e) e.stopPropagation();
+            const w = 460;
+            const h = 820;
+            const left = (screen.width - w) / 2;
+            const top = (screen.height - h) / 4;
+            let url = 'vantage_position_calculator.html?symbol=XAU';
+            if (typeof currentLivePrice !== 'undefined' && currentLivePrice > 0) {
+                url += '&entry=' + currentLivePrice.toFixed(2);
+            }
+            window.open(url, 'VantageCalc', `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes`);
         }
     </script>
 </body>
