@@ -2057,10 +2057,12 @@
                     const cols = line.split('|').map(c => c.trim()).filter(Boolean);
                     if (cols.length >= 6) {
                         const rawPrice = cols[0].replace(/[^0-9.]/g, '');
-                        const tagMatch = cols[2].match(/\[(K?[BS]\d+)\]/i) || cols[3].match(/\[(K?[BS]\d+)\]/i);
+                        const tagMatch = cols[2].match(/\[?(K?[BS]\d+)\]?/i) || cols[3].match(/\[?(K?[BS]\d+)\]?/i);
                         const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
-                        const isBullish = cols[0].includes('🟢') || cols[1].toLowerCase().includes('support') || /\[(KB\d+|B\d+)\]/i.test(tag);
+                        const isBullish = cols[0].includes('🟢') || cols[1].toLowerCase().includes('support') || cols[1].toLowerCase().includes('demand') || cols[1].toLowerCase().includes('buy') || /\[(KB\d+|B\d+)\]/i.test(tag);
                         const bias = isBullish ? 'bullish' : 'bearish';
+                        const numPrice = parseFloat(rawPrice);
+                        if (isNaN(numPrice) || numPrice < 1000 || numPrice > 200000) continue;
                         const key = tag || (rawPrice + '_' + bias);
                         if (rawPrice && !seen.has(key)) {
                             seen.add(key);
@@ -2081,17 +2083,21 @@
             }
 
             // 2. Parse '5-Min / 15-Min Action Plan & Triggers' table
-            const actionMatch = text.match(/###\s*(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan\s*&\s*Triggers[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            const actionMatch = text.match(/#{2,4}\s*(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan\s*&\s*Triggers[\s\S]*?(?=\n\s*(?:#{2,4}|---|==|```)|$)/i);
             if (actionMatch) {
                 const lines = actionMatch[0].split('\n');
                 for (const line of lines) {
                     if (!line.includes('|') || line.includes(':---') || line.includes('Confirmation Price Action')) continue;
                     const cols = line.split('|').map(c => c.trim()).filter(Boolean);
                     if (cols.length >= 6) {
-                        const tagMatch = cols[0].match(/\[(K?[BS]\d+)\]/i);
+                        const tagMatch = cols[0].match(/\[?(K?[BS]\d+)\]?/i);
                         const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
-                        const rawPrice = cols[2].split(/[-–]/)[0].replace(/[^0-9.]/g, '');
-                        const isBullish = cols[1].includes('🟢') || cols[1].toLowerCase().includes('long') || /\[(KB\d+|B\d+)\]/i.test(tag);
+                        const cleanTrigger = cols[2].replace(/,/g, '');
+                        const priceMatch = cleanTrigger.match(/\$?([1-9][0-9]{3,5}(?:\.[0-9]+)?)/);
+                        const rawPrice = priceMatch ? priceMatch[1] : cleanTrigger.split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                        const numPrice = parseFloat(rawPrice);
+                        if (isNaN(numPrice) || numPrice < 1000 || numPrice > 200000) continue;
+                        const isBullish = cols[1].includes('🟢') || cols[1].toLowerCase().includes('long') || cols[1].toLowerCase().includes('buy') || /\[(KB\d+|B\d+)\]/i.test(tag);
                         const bias = isBullish ? 'bullish' : 'bearish';
                         const key = tag || (rawPrice + '_' + bias);
                         if (rawPrice && !seen.has(key)) {
