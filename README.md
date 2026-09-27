@@ -2097,3 +2097,38 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - **Touch & Swipe Protection**: Integrated stopPropagation and swipe touch bypasses (.youtube-preview-wrap) in revision swipe cards and feed tiles to prevent accidental card navigation or tile toggling during video playback.
   - **Service Worker Bypass**: Updated sw.js to ensure YouTube domains (youtube.com, youtu.be, ytimg.com, youtube-nocookie.com) bypass service worker interception.
 - **Files Modified**: README.md, js/utils/image.js, styles.css, index.html, js/ui/revision.js, js/ui/revision1.js, sw.js
+
+### v2.3.79 — 27 Sep 2026 — Vantage Forex & CFD Spread-Adjusted Position Calculator & Config Modal
+
+- **Vantage Position Size Calculator (`vantage_position_calculator.html`, `index.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sw.js`)**:
+  - **Standalone Interactive Sizer**: Built dedicated spread-adjusted position sizing calculator for Vantage MT5 instruments with dynamic leverage selection (`1:05`, `1:1`, `1:50`, `1:100`, `1:500`, default `1:500`), minimum lot step floor rounding (`0.01` for BTC/Gold), and real-world execution mechanics (Option A).
+  - **Option A Broker Level Formulas**: Automatic target and stop loss adjustments for broker execution friction (BUY fills at Ask `Entry + Spread`; SELL fills at Bid `Entry` with broker TP set to `Target + Spread` and SL set to `Stop + Spread`).
+  - **Interactive Config Master Table Modal (`⚙️ Config Table`)**: In-app modal table allowing users to add, edit, or delete custom assets, brokers, lot steps, decimals, and default spreads, backed by browser `localStorage` persistence and factory reset.
+  - **1-Click Copy Buttons**: One-click clipboard copy buttons for `Order Stop Loss`, `Order Take Profit`, and `Tradeable Lots`.
+  - **Universal App Access**: Integrated `🧮 Sizer` launcher buttons in the main navigation bar, Live Chart panel, and interactive chart toolbars.
+- **Files Modified / Added**: `vantage_position_calculator.html`, `index.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sw.js`, `version`, `README.md`
+
+### v2.3.80 — 27 Sep 2026 — Asset-Isolated EOD Forecast Scorecard & 4 Canonical AI Tags
+
+- **Levels View EOD Scorecard Isolation (`js/ui/levels.js`, `index.html`, `sw.js`)**:
+  - **Dedicated Per-Asset Sandboxing**: Completely isolated scorecard statistics and review logs into per-asset `localStorage` stores (`levelsScorecardHistory_BTC`, `levelsScorecardHistory_GOLD`, `levelsScorecardHistory_SP500`, `levelsScorecardHistory_NIFTY`), preventing YouTube channel data from cross-contaminating non-Nifty assets.
+  - **4 Canonical AI Setup Categories**: Automated level parsing to map setups into 4 clean categories:
+    - `AI B` (Section 5 Tactical Buys: `[B1]`, `[B2]`, etc.)
+    - `AI S` (Section 5 Tactical Sells: `[S1]`, `[S2]`, etc.)
+    - `AI KB` (Key Support Buys: `[KB1]`, `[KB2]`, etc.)
+    - `AI KS` (Key Resistance Sells: `[KS1]`, `[KS2]`, etc.)
+  - **Live Outcome Linking**: Marking levels as `Worked` or `Failed` directly updates the corresponding setup row and header ratio pill in real time.
+  - **Asset-Scoped Reset**: "Reset Stats" wipes only the active asset's ledger, leaving other assets intact.
+- **Files Modified**: `js/ui/levels.js`, `index.html`, `sw.js`, `version`, `README.md`
+
+### v2.3.81 — 27 Sep 2026 — Levels Tab Visual Hierarchy Realignment (Sequence A)
+
+- **Levels View UX Ergonomics (`index.html`, `sw.js`)**:
+  - **Toolbar Relocation**: Moved `[1] Intraday 5m Reaction Analysis` toolbar from the top of the page down to the very bottom, giving immediate visual prominence to charts and plan summaries upon opening the tab.
+  - **Left Column Reordering (Sequence A)**: Realigned panels in `.left-col` across all 4 assets:
+    1. `[2] Live Chart` (top)
+    2. `[5] 📊 EOD Forecast Scorecard` (promoted directly below the chart for instant win rate visibility)
+    3. `[4] 📋 Mapped Levels` (actionable levels cards)
+    4. `[3] ✍️ Plan a Trade` (collapsible manual entry form placed at bottom)
+- **Files Modified**: `index.html`, `sw.js`, `version`, `README.md`
+
