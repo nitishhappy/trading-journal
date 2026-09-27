@@ -2132,3 +2132,31 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
     4. `[3] ✍️ Plan a Trade` (collapsible manual entry form placed at bottom)
 - **Files Modified**: `index.html`, `sw.js`, `version`, `README.md`
 
+### v2.3.82 — 27 Sep 2026 — Interactive Charts: Scrollable Toolbar with Edge-Dimming Nav Buttons & Ergonomic Reordering
+
+- **Universal Scrollable Toolbar (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`)**:
+  - **Trade Journal Navigation Parity**: Implemented a responsive `.controls-wrapper` featuring left (`<`) and right (`>`) arrow buttons styled identically to the main Trade Journal tab bar (`.tabs-nav-btn`) with smooth `±180px` stepping, horizontal trackpad/mouse-wheel scroll translation, and `.at-edge` opacity dimming.
+  - **Dynamic Visibility Observer**: Integrated a lightweight `MutationObserver` on the button row to dynamically recalculate scroll boundaries whenever the `🎯 Snap to Live` button toggles between hidden and visible during user chart interactions.
+  - **Ergonomic Button Reordering**: Realigned the button bar across all 4 charts to place high-priority chart actions upfront and low-priority countdown telemetry at the end:
+    1. `🔍 Zoom Candles`
+    2. `🎯 Snap to Live`
+    3. `🧮 Sizer` *(added to Nifty & S&P 500 for universal layout consistency)*
+    4. `➕ Add Line`
+    5. `📍 Lines ON/OFF`
+    6. `🔔 Enable Notifications`
+    7. `⚡ Refresh Data` / `Refresh Now`
+    8. `🔄 Auto Refresh: XXs`
+- **Files Modified**: `btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`, `sw.js`, `README.md`
+
+### v2.3.83 — 27 Sep 2026 — Interactive Charts: Strict Timeframe Candle Close Alert Engine & Minimalist Format
+
+- **Strict Finalized Bar Close Crossing Engine**:
+  - **Causal Bar Completion Evaluation**: Upgraded crossing detection from live forming ticks (`candles[candles.length - 1]`) to strictly completed, finalized candle closes (`candles[candles.length - 2]`).
+  - **Wick False-Alarm Elimination**: The alert engine tracks `lastEvaluatedClosedCandleTime`, evaluating crossings strictly once per completed bar when a new candle timestamp opens. Intra-bar wicks and mid-candle fluctuations will no longer trigger false alarms.
+  - **Timeframe Awareness & Resync**: Automatically tracks active timeframe (`5M` or `15M`) across BTC, Gold, Nifty 50, and S&P 500, with state-resetting on timeframe switches and first activation to prevent historical false alarms.
+  - **Option 2 Minimalist Alert Design**: Streamlined alert messages across desktop notifications, audio chimes, and in-app toasts for instant 0.5s glanceability:
+    - *Bullish*: `🚀 {Asset} {TF} • Above [{Tag}]` (`Level: ${Price} • Close: ${Close}`)
+    - *Bearish*: `🔻 {Asset} {TF} • Below [{Tag}]` (`Level: ${Price} • Close: ${Close}`)
+- **Files Modified**: `btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`, `sw.js`, `README.md`
+
+
