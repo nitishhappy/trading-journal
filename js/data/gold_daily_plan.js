@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-28T08:17:51+05:30",
+    "timeDisplay": "08:17 AM, Sep 28",
+    "price": "4201.0",
+    "bias": "bullish",
+    "behavior": "[MON 08:17] [G_B1]: Asian Low SSL Sweep & SFP Demand Floor",
+    "tp": "$4,218.00 / $4,226.00 / $4,238.00",
+    "sl": "$4,194.50 (Below sweep low)",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-28T08:17:51+05:30",
+    "timeDisplay": "08:17 AM, Sep 28",
+    "price": "4225.0",
+    "bias": "bullish",
+    "behavior": "[MON 08:17] [G_B2]: Flipped Breaker Shelf Reclaim Breakout",
+    "tp": "$4,235.00 / $4,248.00 / $4,262.00",
+    "sl": "$4,218.00 (Below breakout shelf)",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-28T08:17:51+05:30",
+    "timeDisplay": "08:17 AM, Sep 28",
+    "price": "4221.0",
+    "bias": "bearish",
+    "behavior": "[MON 08:17] [G_S1]: 15M Bearish Displacement FVG Retest",
+    "tp": "$4,206.00 / $4,198.00 / $4,188.00",
+    "sl": "$4,228.50 (Above 15M FVG ceiling)",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-28T08:17:51+05:30",
+    "timeDisplay": "08:17 AM, Sep 28",
+    "price": "4203.5",
+    "bias": "bearish",
+    "behavior": "[MON 08:17] [G_S2]: Day Low Liquidity Breakdown",
+    "tp": "$4,194.00 / $4,185.00 / $4,172.00",
+    "sl": "$4,210.50 (Above lost breakdown shelf)",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-28T03:46:07+05:30",
     "timeDisplay": "03:46 AM, Sep 28",
     "price": "4261.0",
@@ -47,6 +91,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20260928_081754",
+    "timestamp": "2026-09-28T08:17:54+05:30",
+    "timeDisplay": "08:17 AM, Sep 28",
+    "spot": "4208.58",
+    "trigger": "Level Exhaustion Breakdown (GOLD Spot $4208.58 < Min Plan Target $4261.00 - Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (08:15 AM IST - Sep 28, 2026 | Spot: $4208.58 | Trigger: Level Exhaustion Breakdown (GOLD Spot $4208.58 < Min Plan Target $4261.00 - Buffer $3.00))\n\n---\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics & Desk Liquidity**: We are operating within the late Asia-Pacific / Tokyo afternoon session window (02:45 UTC / 08:15 AM IST), heading toward the European pre-market and early Frankfurt/London opening cross. Spot Gold (XAU/USD) has undergone a severe, impulsive institutional liquidation cascade, plummeting -$83.44 (-1.94%) from the **Session Day High of $4292.02** down to print a fresh **Session Day Low at $4205.20** before stabilizing marginally at **$4208.58**. This aggressive downward displacement sliced cleanly through prior structural plan floors ($4,270.00 and $4,261.00), triggering cascading stop-loss liquidations across Asian leveraged accounts. With interbank order books transitioning toward the high-volume London/New York session overlap, volatility is primed to remain elevated.\n* **DXY (US Dollar Index) Correlation**: The US Dollar Index (DXY) has staged a powerful early-week breakout, surging through 104.50 to test 104.75–104.85 with aggressive greenback accumulation across G10 FX pairs. The mechanical inverse correlation with dollar-denominated bullion is actively driving aggressive spot gold offloading. Until the DXY encounters structural resistance and prints an impulsive 15-minute rejection candle rolling back below 104.40, systemic headwinds will cap gold rallies. A further acceleration in DXY toward 105.00 risks dragging spot gold through the critical $4,200.00 psychological threshold.\n* **US 10-Year Benchmark Yields**: Benchmark US 10-Year Treasury yields (US10Y) have pushed higher toward 4.51%–4.53%, driving benchmark real rates to fresh multi-session peaks. The steepening yield curve is imposing intense carry friction on non-yielding physical bullion, incentivizing institutional desks to liquidate long hedges and rotate capital into high-yielding short-dated sovereign paper.\n* **Institutional Anti-Trap Guidance**: Live spot ($4,208.58) is hovering merely $3.38 above the session low ($4,205.20). Chasing short market orders at the bottom of an -$83+ single-session flush represents a catastrophic retail trap. Institutional desks frequently orchestrate liquidity sweeps below overnight lows (Judas Sweeps) to absorb retail breakout stops before engineering sharp mean-reversion short squeezes. High-probability execution requires disciplined patience: (1) Wait for a clean SSL probe below $4,205.20 into $4,198.00–$4,204.00 that rejects and prints an impulsive 5M green close back above $4,210.00 (`[G_B1]`), (2) A decisive 15-minute close reclaiming above $4,225.00 confirming structural recovery (`[G_B2]`), (3) A corrective relief bounce into the 15M Bearish FVG ($4,218.00–$4,224.00) confirming an impulsive 5M red rejection close back below $4,214.00 (`[G_S1]`), or (4) A sustained 15-minute close cleanly below $4,203.50 confirming high-momentum trend continuation (`[G_S2]`).\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Multi-Timeframe Market Structure (4H / 1H / 15M / 5M)**:\n  - **Higher Timeframe Extension Targets (4H/Daily Macro Supply)**: $4,292.02 / $4,302.00 – $4,310.00\n  - **Major Session Day High (External BSL Peak)**: $4,292.02\n  - **Flipped Prior Breakdown Floor (1H Supply Shelf)**: $4,261.00 – $4,265.00\n  - **Intermediate 1H Bearish Breaker Block**: $4,242.00 – $4,248.00\n  - **Flipped Breakdown Pivot / 15M Bearish Supply Shelf**: $4,225.00 – $4,228.00\n  - **15M Bearish Displacement Fair Value Gap (FVG)**: $4,218.00 – $4,224.00\n  - **Current Live Spot Price**: $4,208.58\n  - **Session Day Low (Immediate External SSL Anchor)**: $4,205.20\n  - **Institutional Round Number & SFP Demand Target**: $4,198.00 – $4,204.00\n  - **Unmitigated 4H Macro Demand Foundation**: $4,185.00 – $4,192.00\n* **Buy-Side Liquidity (BSL) Architecture**:\n  - **$4,218.00 – $4,224.00**: Resting buy-stops of aggressive short scalpers trailing stops inside the 15M FVG.\n  - **$4,228.00 – $4,235.00**: Intermediate swing high liquidity pool guarding the flipped supply shelf.\n  - **$4,261.00 – $4,265.00**: Major prior broken floor holding substantial clusters of trapped long inventory.\n  - **$4,292.02**: Major external session liquidity pool holding concentrated stop clusters of intraday swing bears.\n* **Sell-Side Liquidity (SSL) Architecture**:\n  - **$4,205.20**: Immediate Session Day Low harboring trailing stops of early Asian dip-buyers.\n  - **$4,198.00 – $4,204.00**: High-density resting stop pool beneath the major $4,200.00 psychological round milestone.\n  - **$4,185.00 – $4,192.00**: Deep 4H macro institutional liquidity foundation.\n* **Fair Value Gaps (FVG) & Order Blocks (OB)**:\n  - **15M Bearish Displacement FVG ($4,218.00 – $4,224.00)**: Formed during the explosive displacement candle that shattered the $4,230 shelf down to $4,205.20; serves as primary overhead institutional supply on any counter-trend relief rally.\n  - **Flipped 1H Bearish Breaker ($4,225.00 – $4,230.00)**: Former demand shelf now converted into a major structural resistance ceiling.\n  - **15M/1H Demand & Liquidity Sweep Pool ($4,195.00 – $4,202.00)**: Key institutional discount zone where smart money limit bids are positioned to absorb panic retail sell programs.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Designated Chop Zone**: **$4,205.00 – $4,216.00** (Width: $11.00, bounded between the immediate Day Low SSL floor at $4,205.20 and the lower threshold of the 15M Bearish FVG at $4,216.00).\n* **Structural Rationale**: Spot ($4,208.58) is compressing within this $11.00 corridor following the violent -$83+ drop. Initiating market orders inside this narrow band exposes traders to severe spread decay, algorithmic order book spoofing, and whipsaw risk as desks prepare for the London pre-market open.\n* **Tactical Directive**: **STRICT NO-TRADE ZONE**. Do NOT enter market orders within $4,205.00–$4,216.00. Await confirmed boundary resolution:\n  1. A liquidity sweep probe piercing below Day Low ($4,205.20) into $4,198.00–$4,204.00 that leaves lower absorption wicks (SFP) and confirms an impulsive 5M green close back above $4,210.00 (`[G_B1]`).\n  2. An impulsive 15-minute candle close cleanly above $4,225.00 with expanding green volume delta (`[G_B2]`).\n  3. A corrective relief retest into the 15M Bearish FVG ($4,218.00–$4,224.00) that prints upper rejection wicks and confirms an impulsive 5M red close back below $4,214.00 (`[G_S1]`).\n  4. An aggressive continuation breakdown closing an impulsive 15-minute candle cleanly below $4,203.50 with expanding red volume delta (`[G_S2]`).\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* 🚀 **Day Low SSL Sweep & SFP Liquidity Recovery Long ([G_B1] $4,198.00 – $4,204.00 Retest & Rebound)**: Price pierces below Day Low ($4,205.20) into the $4,198.00–$4,204.00 macro demand pocket, runs resting sell stops below $4,200, meets passive institutional limit absorption (prominent lower wicks / SFP), and confirms an impulsive 5M green displacement candle closing back above $4,210.00. Activates a high-probability mean-reversion long targeting $4,218.00, $4,226.00, and $4,238.00.\n* 💥 **Flipped Breaker Reclaim & Momentum Breakout Long ([G_B2] $4,225.00 Breakout)**: An impulsive 15-minute candle close cleanly above the flipped structural supply shelf at $4,225.00 with expanding positive green volume delta. Validates structural shift (CHoCH) on lower timeframes, triggering rapid short-covering toward $4,235.00, $4,248.00, and macro extension to $4,262.00.\n* ⚡ **Bearish FVG Retest & Supply Rejection Short ([G_S1] $4,218.00 – $4,224.00 Retest & Rejection)**: A corrective counter-trend rally into the 15M Bearish Displacement FVG ($4,218.00–$4,224.00) that exhausts buy delta, prints extended upper rejection wicks, and confirms an impulsive 5M red close back below $4,214.00 with expanding sell volume delta. Activates a high-probability trend-continuation short targeting $4,206.00, $4,198.00, and $4,188.00.\n* 🩸 **Day Low Continuation Breakdown Short ([G_S2] $4,203.50 Breakdown)**: An impulsive 15-minute candle close cleanly below $4,203.50 with surging red volume delta. Confirms sustained institutional liquidation below the Day Low ($4,205.20) and $4,200 round barrier, triggering an aggressive long-liquidation cascade targeting $4,194.00, $4,185.00, and $4,172.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4,198.00 – $4,204.00** Retest | Probe piercing below Day Low ($4,205.20) into $4,198.00–$4,204.00 prints absorption lower wicks (SFP) and confirms an impulsive 5M green close back above $4,210.00 | **TP1:** $4,218.00<br>**TP2:** $4,226.00<br>**TP3:** $4,238.00 | **$4,194.50** (Below sweep low) | 1:1.5 / 1:2.9 / 1:5.1 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,225.00** Breakout | Impulsive 15M candle close cleanly above flipped supply shelf ($4,225.00) with expanding positive green volume delta | **TP1:** $4,235.00<br>**TP2:** $4,248.00<br>**TP3:** $4,262.00 | **$4,218.00** (Below breakout shelf) | 1:1.4 / 1:3.3 / 1:5.3 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,218.00 – $4,224.00** Retest | Corrective relief bounce into 15M Bearish FVG ($4,218.00–$4,224.00) prints upper rejection wicks and confirms an impulsive 5M red close back below $4,214.00 with expanding sell volume delta | **TP1:** $4,206.00<br>**TP2:** $4,198.00<br>**TP3:** $4,188.00 | **$4,228.50** (Above 15M FVG ceiling) | 1:1.4 / 1:2.4 / 1:3.8 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4,203.50** Breakdown | Impulsive 15M candle close cleanly below Day Low ($4,205.20) / $4,203.50 with expanding red volume delta | **TP1:** $4,194.00<br>**TP2:** $4,185.00<br>**TP3:** $4,172.00 | **$4,210.50** (Above lost breakdown shelf) | 1:1.4 / 1:2.6 / 1:4.5 |\n\n---"
+  },
+  {
     "id": "GOLD_20260928_034609",
     "timestamp": "2026-09-28T03:46:09+05:30",
     "timeDisplay": "03:46 AM, Sep 28",
