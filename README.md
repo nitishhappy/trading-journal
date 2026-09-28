@@ -2218,3 +2218,25 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added native `storage` event listener on `window` in `levels.js` so marking an outcome in any interactive chart tab immediately re-renders the EOD Forecast Scorecard on the Daily Levels view in real-time.
   - Added retroactive legacy log migration in `loadScorecardHistory()` to automatically restore any historical reviews logged under legacy keys.
 - **Files Modified**: `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `nifty_interactive_chart.html`, `js/ui/levels.js`, `sw.js`, `version`, `README.md`
+
+### v2.3.86 — 29 Sep 2026 — Multi-Asset Interactive Chart Parity: Bottom Replay Bar, Price Sorting, Strict Action Colors & Robust Scorecard Sync
+
+- **Option A Bottom Replay Bar (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `nifty_interactive_chart.html`)**:
+  - Floating 4-button pill bar anchored at bottom center of the chart viewport:
+    - `[ ⏪ Start ]`: Instantly cuts candlestick history back to the timestamp of the selected AI Briefing vertical run.
+    - `[ ◀ Step ]`: Steps backward by 1 candle bar.
+    - `[ ▶ Play / ⏸ Pause ]`: Auto-plays developing candle bars forward at a steady 1.2s cadence.
+    - `[ Step ▶ ]`: Steps forward by 1 candle bar.
+  - Candle series telemetry, live OHLC header, proximity badges, and vertical line overlays automatically sync with the replay playback cursor.
+  - Snapping to live (`🎯 Snap to Live`) or selecting a briefing run automatically exits replay mode safely.
+- **Trigger Price Descending Sort & Scroll Lock**:
+  - Sorted right-side trading level cards in descending order of trigger price across BTC, Gold, S&P 500, and Nifty 50 so levels intuitively align from high to low.
+  - Preserved `levelsSection.scrollTop` across 15s auto-refresh ticks to prevent jarring scroll jumps while reviewing trade logic.
+- **Strict Setup Action Colors**:
+  - Forced bullish green (`#10b981`) for `[KB...]`, `[B...]`, buy, or long setups.
+  - Forced bearish red (`#f43f5e`) for `[KS...]`, `[S...]`, sell, or short setups.
+- **Scorecard Persistence ID Normalization & Attribute Selectors**:
+  - Standardized unique scorecard IDs (`{asset}_{tag}_{price}`) and replaced fragile index-based lookups with `data-level-id`, `data-pill`, `data-btn-worked`, and `data-btn-failed` attribute selectors.
+  - Added fuzzy key fallback normalization in `getSavedOutcome()` to ensure logged outcomes persist reliably across sessions and briefings.
+- **Files Modified**: `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `nifty_interactive_chart.html`, `README.md`
+

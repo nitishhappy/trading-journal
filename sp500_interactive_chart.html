@@ -330,6 +330,56 @@
             cursor: grabbing;
         }
 
+        /* ── Bottom Replay Toolbar (Option A) ── */
+        .replay-toolbar {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            border-radius: 8px;
+            padding: 4px 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+            user-select: none;
+        }
+
+        .replay-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #f8fafc;
+            border-radius: 5px;
+            padding: 5px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .replay-btn:hover {
+            background: rgba(96, 165, 250, 0.25);
+            border-color: #60a5fa;
+            color: #60a5fa;
+        }
+
+        .replay-btn.active-play {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            color: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
         .levels-section {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
@@ -809,6 +859,13 @@
             </div>
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
                 <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+                <!-- Bottom Replay Toolbar (Option A) -->
+                <div id="replay-toolbar" class="replay-toolbar">
+                    <button id="btn-replay-start" class="replay-btn" onclick="replayJumpToStart()" title="Jump to Briefing Start">⏪ Start</button>
+                    <button id="btn-replay-step-back" class="replay-btn" onclick="replayStepBack()" title="Step Back 1 Candle">◀ Step</button>
+                    <button id="btn-replay-play" class="replay-btn" onclick="replayTogglePlay()" title="Play / Pause Replay">▶ Play</button>
+                    <button id="btn-replay-step-forward" class="replay-btn" onclick="replayStepForward()" title="Step Forward 1 Candle">Step ▶</button>
+                </div>
             </div>
             <!-- Horizontal Scrollbar Track -->
             <div class="chart-scrollbar-container">
@@ -854,6 +911,13 @@
         let chartInstance = null;
         let countdownSeconds = 15;
         let isInitialLoad = true;
+
+        // ── Replay Mode State (Option A) ──
+        let allMasterCandles = [];
+        let isReplayMode = false;
+        let replayCurrentIndex = null;
+        let replayPlayTimer = null;
+        const REPLAY_SPEED_MS = 800;
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
@@ -1047,6 +1111,9 @@
         }
 
         function resetZoomToLive() {
+            if (isReplayMode) {
+                exitReplayMode();
+            }
             userHasInteracted = false;
             userLogicalRange = null;
             if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
@@ -1530,6 +1597,10 @@
         }
 
         function selectBriefingRun(item) {
+            pauseReplay();
+            if (isReplayMode) {
+                exitReplayMode();
+            }
             if (!item) {
                 selectedBriefingTimestamp = null;
                 showToast("⚡ Returned to Latest", "Displaying latest active trading plan levels.");
@@ -1660,6 +1731,15 @@
         function renderLevelsAndCards() {
             levelsData = getSp500KeyLevels(selectedBriefingTimestamp);
 
+            // Sort cards by trigger price descending (highest trigger price at top of cards list)
+            if (levelsData && Array.isArray(levelsData.levels)) {
+                levelsData.levels.sort((a, b) => {
+                    const pA = parseFloat(String(a.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '')) || 0;
+                    const pB = parseFloat(String(b.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '')) || 0;
+                    return pB - pA;
+                });
+            }
+
             const raisedTimeStr = levelsData.timeDisplay || "06:02 PM, Sep 09";
             const bBadge = document.getElementById('briefing-time-badge');
             if (bBadge) bBadge.innerText = `📌 Key Levels Raised: ${raisedTimeStr}`;
@@ -1710,6 +1790,8 @@
                 }
             }
 
+            const levelsSection = document.querySelector('.levels-section');
+            const savedScrollTop = levelsSection ? levelsSection.scrollTop : 0;
             const levelsListEl = document.getElementById('levels-list');
             if (levelsListEl) levelsListEl.innerHTML = '';
             
@@ -1721,14 +1803,22 @@
             activePriceLines = [];
 
             levelsData.levels.forEach((lvl, idx) => {
-                const isBullish = lvl.bias === 'bullish';
+                const tag = extractTag(lvl.behavior) || (lvl.bias === 'bullish' ? `[SP_B${idx+1}]` : `[SP_S${idx+1}]`);
+                let isBullish = lvl.bias === 'bullish';
+                if (/\[\s*(?:KB|B|SP_B)\d*\s*\]/i.test(tag) || /\b(BUY|LONG|BULLISH|SUPPORT|DEMAND)\b/i.test(lvl.behavior)) {
+                    isBullish = true;
+                } else if (/\[\s*(?:KS|S|SP_S)\d*\s*\]/i.test(tag) || /\b(SELL|SHORT|BEARISH|RESISTANCE|SUPPLY)\b/i.test(lvl.behavior)) {
+                    isBullish = false;
+                }
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
-                const tag = extractTag(lvl.behavior) || (isBullish ? `[SP_B${idx+1}]` : `[SP_S${idx+1}]`);
-                const category = getCanonicalSetupCategory(tag, lvl.behavior, lvl.bias);
+                const category = getCanonicalSetupCategory(tag, lvl.behavior, isBullish ? 'bullish' : 'bearish');
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.sp500DailyPlanSummary, levelsData.anchorTimestamp);
 
-                const levelUniqueId = `sp500_${tag.replace(/[\[\]]/g,'')}_${lvl.price}`;
+                // Normalized unique ID for Scorecard persistence
+                const cleanTag = tag.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+                const cleanPrice = String(lvl.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                const levelUniqueId = `sp500_${cleanTag}_${cleanPrice}`;
                 const savedOutcome = getSavedOutcome(levelUniqueId);
 
                 // ✅ Tag-aware line styles:
@@ -1754,6 +1844,7 @@
                 const card = document.createElement('div');
                 card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}`;
                 card.id = `card-sp500-${idx}`;
+                card.setAttribute('data-level-id', levelUniqueId);
                 card.innerHTML = `
                     <div class="card-header">
                         <span class="card-price ${isBullish ? 'bullish' : 'bearish'}">
@@ -1761,7 +1852,7 @@
                         </span>
                         <div style="display:flex;gap:0.3rem;align-items:center;">
                             <span class="proximity-badge" id="prox-badge-sp500-${idx}">🎯 NEAR BY</span>
-                            <span class="status-pill status-pill-${savedOutcome}" id="status-pill-sp500-${idx}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
+                            <span class="status-pill status-pill-${savedOutcome}" data-pill="${levelUniqueId}" id="status-pill-sp500-${idx}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
                             <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
                         </div>
                     </div>
@@ -1777,8 +1868,8 @@
                     <div class="card-outcome-bar">
                         <span class="outcome-label">Scorecard (${category}):</span>
                         <div class="outcome-btn-group">
-                            <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" id="btn-worked-sp500-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
-                            <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" id="btn-failed-sp500-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
+                            <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" data-btn-worked="${levelUniqueId}" id="btn-worked-sp500-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
+                            <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" data-btn-failed="${levelUniqueId}" id="btn-failed-sp500-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
                             <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'na', ${idx})">↺ Reset</button>
                         </div>
                     </div>
@@ -1792,6 +1883,10 @@
 
                 levelsListEl.appendChild(card);
             });
+
+            if (levelsSection && savedScrollTop > 0) {
+                levelsSection.scrollTop = savedScrollTop;
+            }
 
             if (currentCandlesArray && currentCandlesArray.length > 0) {
                 let spotPrice = currentCandlesArray[currentCandlesArray.length - 1].close;
@@ -1816,10 +1911,13 @@
                 const candles = await loadRealSp500Candles();
                 updateFeedStatusBadge(candles);
                 if (candles && candles.length > 0) {
-                    currentCandlesArray = candles;
-                    candleSeries.setData(candles);
-                    latestCandleTimestamp = candles[candles.length - 1].time;
-                    updateOHLCHeader();
+                    allMasterCandles = candles;
+                    if (!isReplayMode) {
+                        currentCandlesArray = candles;
+                        candleSeries.setData(candles);
+                        latestCandleTimestamp = candles[candles.length - 1].time;
+                        updateOHLCHeader();
+                    }
                 }
 
                 // Update AI Briefing timestamps
@@ -1908,6 +2006,174 @@
                 setTimeout(() => renderVerticalLinesOverlay(), 60);
             } catch (err) {
                 console.error("[SP500 Chart] reloadChartData error:", err);
+            }
+        }
+
+        // ================= OPTION A: BOTTOM REPLAY ENGINE ================= //
+        function getActiveBriefingRun() {
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
+            if (selectedBriefingTimestamp) {
+                const match = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
+                if (match) return match;
+            }
+            return aiBriefingTimes[0];
+        }
+
+        function getReplayStartIndex() {
+            if (!allMasterCandles || allMasterCandles.length === 0) return 0;
+            const targetRun = getActiveBriefingRun();
+            if (!targetRun || !targetRun.time) {
+                return Math.max(0, allMasterCandles.length - 30);
+            }
+            let idx = allMasterCandles.findIndex(c => Math.abs(c.time - targetRun.time) <= 7200);
+            if (idx === -1) {
+                let bestDiff = Infinity;
+                allMasterCandles.forEach((c, i) => {
+                    const diff = Math.abs(c.time - targetRun.time);
+                    if (diff < bestDiff) {
+                        bestDiff = diff;
+                        idx = i;
+                    }
+                });
+            }
+            return Math.max(0, idx !== -1 ? idx : 0);
+        }
+
+        function pauseReplay() {
+            if (replayPlayTimer) {
+                clearInterval(replayPlayTimer);
+                replayPlayTimer = null;
+            }
+            const playBtn = document.getElementById('btn-replay-play');
+            if (playBtn) {
+                playBtn.innerHTML = '▶ Play';
+                playBtn.classList.remove('active-play');
+            }
+        }
+
+        function exitReplayMode() {
+            pauseReplay();
+            if (isReplayMode) {
+                isReplayMode = false;
+                replayCurrentIndex = null;
+                if (allMasterCandles && allMasterCandles.length > 0) {
+                    currentCandlesArray = [...allMasterCandles];
+                    candleSeries.setData(currentCandlesArray);
+                    latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                    updateOHLCHeader();
+                    updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                    renderVerticalLinesOverlay();
+                }
+            }
+        }
+
+        function replayJumpToStart() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) {
+                showToast("⚠️ Replay Unavailable", "No candle history loaded yet.");
+                return;
+            }
+            isReplayMode = true;
+            replayCurrentIndex = getReplayStartIndex();
+            currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+            candleSeries.setData(currentCandlesArray);
+            latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+            updateOHLCHeader();
+            updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+            renderVerticalLinesOverlay();
+
+            if (chartInstance && chartInstance.timeScale) {
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: Math.max(0, replayCurrentIndex - 15),
+                    to: Math.min(allMasterCandles.length + 5, replayCurrentIndex + 25)
+                });
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            }
+            showToast("⏪ Replay: Started at Briefing Run", "Candles cut to vertical briefing run. Click ▶ Play or Step ▶ to progress.");
+        }
+
+        function replayStepBack() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+            }
+            if (replayCurrentIndex > 0) {
+                replayCurrentIndex--;
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                renderVerticalLinesOverlay();
+            }
+        }
+
+        function replayTogglePlay() {
+            if (replayPlayTimer) {
+                pauseReplay();
+                return;
+            }
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null || replayCurrentIndex >= allMasterCandles.length - 1) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+            }
+
+            const playBtn = document.getElementById('btn-replay-play');
+            if (playBtn) {
+                playBtn.innerHTML = '⏸ Pause';
+                playBtn.classList.add('active-play');
+            }
+
+            replayPlayTimer = setInterval(() => {
+                if (!allMasterCandles || replayCurrentIndex >= allMasterCandles.length - 1) {
+                    pauseReplay();
+                    showToast("🏁 Replay Completed", "Reached the latest real-time candle.");
+                    return;
+                }
+                replayCurrentIndex++;
+                const nextCandle = allMasterCandles[replayCurrentIndex];
+                currentCandlesArray.push(nextCandle);
+                candleSeries.update(nextCandle);
+                latestCandleTimestamp = nextCandle.time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(nextCandle.close);
+                renderVerticalLinesOverlay();
+            }, REPLAY_SPEED_MS);
+        }
+
+        function replayStepForward() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                renderVerticalLinesOverlay();
+                return;
+            }
+
+            if (replayCurrentIndex < allMasterCandles.length - 1) {
+                replayCurrentIndex++;
+                const nextCandle = allMasterCandles[replayCurrentIndex];
+                currentCandlesArray.push(nextCandle);
+                candleSeries.update(nextCandle);
+                latestCandleTimestamp = nextCandle.time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(nextCandle.close);
+                renderVerticalLinesOverlay();
+            } else {
+                showToast("🏁 Replay at Latest", "All available candles are already displayed.");
             }
         }
 
@@ -2116,12 +2382,24 @@
                 if (savedLog) {
                     const parsed = JSON.parse(savedLog);
                     if (parsed[levelId]?.status) return parsed[levelId].status;
+                    const normTarget = String(levelId).replace(/[^a-zA-Z0-9_]/g, '');
+                    for (const k in parsed) {
+                        if (k.replace(/[^a-zA-Z0-9_]/g, '') === normTarget && parsed[k]?.status) {
+                            return parsed[k].status;
+                        }
+                    }
                 }
                 // Fallback check in legacy log for migration continuity
                 const legacyLog = localStorage.getItem('levelsLoggedReviews');
                 if (legacyLog) {
                     const parsedLegacy = JSON.parse(legacyLog);
                     if (parsedLegacy[levelId]?.status) return parsedLegacy[levelId].status;
+                    const normTarget = String(levelId).replace(/[^a-zA-Z0-9_]/g, '');
+                    for (const k in parsedLegacy) {
+                        if (k.replace(/[^a-zA-Z0-9_]/g, '') === normTarget && parsedLegacy[k]?.status) {
+                            return parsedLegacy[k].status;
+                        }
+                    }
                 }
             } catch (e) {}
             return 'na';
@@ -2130,16 +2408,16 @@
         function toggleLevelOutcome(event, levelId, source, status, idx) {
             if (event) event.stopPropagation();
             recordLevelOutcome(levelId, source, status);
-            updateCardOutcomeUI(idx, status);
+            updateCardOutcomeUI(levelId, status);
             const label = status === 'worked' ? '🟢 WORKED' : (status === 'failed' ? '🔴 FAILED' : '⚪ RESET');
             showToast(`Scorecard Logged (${source})`, `Level marked as ${label} in EOD Forecast Scorecard.`);
             triggerAlertSound(880, 'sine', 0.1);
         }
 
-        function updateCardOutcomeUI(idx, status) {
-            const pill = document.getElementById(`status-pill-sp500-${idx}`);
-            const btnWorked = document.getElementById(`btn-worked-sp500-${idx}`);
-            const btnFailed = document.getElementById(`btn-failed-sp500-${idx}`);
+        function updateCardOutcomeUI(levelId, status) {
+            const pill = document.querySelector(`[data-pill="${levelId}"]`);
+            const btnWorked = document.querySelector(`[data-btn-worked="${levelId}"]`);
+            const btnFailed = document.querySelector(`[data-btn-failed="${levelId}"]`);
 
             if (btnWorked) btnWorked.classList.remove('active');
             if (btnFailed) btnFailed.classList.remove('active');
