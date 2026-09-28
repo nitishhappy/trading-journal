@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.49 — 29 Sep 2026 — Bitcoin Interactive Chart Briefing Replay Mode (Option A)
+- **Bottom Replay Controller Toolbar**:
+  - Implemented a floating playback toolbar at the bottom center of the Bitcoin interactive chart featuring 4 dedicated buttons: `[ ⏪ Start ]`, `[ ◀ Step ]`, `[ ▶ Play / ⏸ Pause ]`, and `[ Step ▶ ]`.
+  - Slices live/historical candle series starting from the selected or latest vertical AI briefing run, keeping levels, SMC cards, and scorecard anchored to that exact vertical run.
+  - Supports candle-by-candle stepping and smooth real-time auto playback (800ms per bar) via `candleSeries.update()`.
+  - Automatically preserves master candle history across live polling cycles and resets seamlessly when clicking `⚡ Snap to Live` or `⚡ Return to Latest`.
+
 ### v2.3.48 — 28 Sep 2026 — PWA Mobile Popup Popup State Persistence & Window.open Alignment
 - **Reverted Overlay & Restored Popup Opening**:
   - Maintained `window.open` popup window and `_blank` tab opening behavior for Position Sizer and Interactive Charts as preferred.

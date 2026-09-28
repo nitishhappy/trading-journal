@@ -329,6 +329,56 @@
             cursor: grabbing;
         }
 
+        /* ── Bottom Replay Toolbar (Option A) ── */
+        .replay-toolbar {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(247, 147, 26, 0.45);
+            border-radius: 8px;
+            padding: 4px 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+            user-select: none;
+        }
+
+        .replay-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #f8fafc;
+            border-radius: 5px;
+            padding: 5px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .replay-btn:hover {
+            background: rgba(247, 147, 26, 0.25);
+            border-color: #f7931a;
+            color: #f7931a;
+        }
+
+        .replay-btn.active-play {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            color: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
         .briefing-header-box {
             flex-shrink: 0;
             background: rgba(15, 23, 42, 0.6);
@@ -799,6 +849,13 @@
             </div>
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
                 <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+                <!-- Bottom Replay Toolbar (Option A) -->
+                <div id="replay-toolbar" class="replay-toolbar">
+                    <button id="btn-replay-start" class="replay-btn" onclick="replayJumpToStart()" title="Jump to Briefing Start">⏪ Start</button>
+                    <button id="btn-replay-step-back" class="replay-btn" onclick="replayStepBack()" title="Step Back 1 Candle">◀ Step</button>
+                    <button id="btn-replay-play" class="replay-btn" onclick="replayTogglePlay()" title="Play / Pause Replay">▶ Play</button>
+                    <button id="btn-replay-step-forward" class="replay-btn" onclick="replayStepForward()" title="Step Forward 1 Candle">Step ▶</button>
+                </div>
             </div>
             <!-- Horizontal Scrollbar Track -->
             <div class="chart-scrollbar-container">
@@ -844,6 +901,13 @@
         let countdownSeconds = 15;
         let isInitialLoad = true;
         let currentTf = '15m';
+
+        // ── Replay Mode State (Option A) ──
+        let allMasterCandles = []; // Full un-sliced candle cache
+        let isReplayMode = false;
+        let replayCurrentIndex = null;
+        let replayPlayTimer = null;
+        const REPLAY_SPEED_MS = 800; // 800ms per bar
 
         document.addEventListener('DOMContentLoaded', () => {
             checkEmbedMode();
@@ -1068,6 +1132,9 @@
         }
 
         function resetZoomToLive() {
+            if (isReplayMode) {
+                exitReplayMode();
+            }
             userHasInteracted = false;
             userLogicalRange = null;
             if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
@@ -1508,6 +1575,10 @@
         }
 
         function selectBriefingRun(item) {
+            pauseReplay();
+            if (isReplayMode) {
+                exitReplayMode();
+            }
             if (!item) {
                 selectedBriefingTimestamp = null;
                 showToast("⚡ Returned to Latest", "Displaying latest active trading plan levels.");
@@ -1771,10 +1842,13 @@
             updateFeedStatusBadge(candles);
 
             if (candles && candles.length > 0) {
-                currentCandlesArray = candles;
-                candleSeries.setData(candles);
-                latestCandleTimestamp = candles[candles.length - 1].time;
-                updateOHLCHeader();
+                allMasterCandles = candles;
+                if (!isReplayMode) {
+                    currentCandlesArray = candles;
+                    candleSeries.setData(candles);
+                    latestCandleTimestamp = candles[candles.length - 1].time;
+                    updateOHLCHeader();
+                }
             }
 
             const rawPlanArray = (window.btcDailyPlanSummary && window.btcDailyPlanSummary.length > 0)
@@ -1846,6 +1920,169 @@
             }
             updateScrollbarFromChart();
             renderVerticalLinesOverlay();
+        }
+
+        // ═════════════════════════════════════════════════════════════════════
+        // ── REPLAY MODE CONTROLLER (Option A: Briefing Run Replay) ──
+        // ═════════════════════════════════════════════════════════════════════
+        function getActiveBriefingRun() {
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
+            if (selectedBriefingTimestamp) {
+                return aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp) || aiBriefingTimes[aiBriefingTimes.length - 1];
+            }
+            // By default, use the latest / last vertical run
+            return aiBriefingTimes[aiBriefingTimes.length - 1];
+        }
+
+        function getReplayStartIndex() {
+            if (!allMasterCandles || allMasterCandles.length === 0) return 0;
+            const activeRun = getActiveBriefingRun();
+            if (!activeRun) return Math.max(0, allMasterCandles.length - 20);
+
+            const runTime = activeRun.time || (new Date(activeRun.timestamp).getTime() / 1000);
+            let closestIdx = -1;
+            let minDiff = Infinity;
+            for (let i = 0; i < allMasterCandles.length; i++) {
+                const diff = Math.abs(allMasterCandles[i].time - runTime);
+                if (diff < minDiff && diff <= 1800) {
+                    minDiff = diff;
+                    closestIdx = i;
+                }
+            }
+            return closestIdx !== -1 ? closestIdx : Math.max(0, allMasterCandles.length - 20);
+        }
+
+        function pauseReplay() {
+            if (replayPlayTimer) {
+                clearInterval(replayPlayTimer);
+                replayPlayTimer = null;
+            }
+            const playBtn = document.getElementById('btn-replay-play');
+            if (playBtn) {
+                playBtn.innerHTML = '▶ Play';
+                playBtn.classList.remove('active-play');
+            }
+        }
+
+        function exitReplayMode() {
+            pauseReplay();
+            isReplayMode = false;
+            replayCurrentIndex = null;
+            if (allMasterCandles && allMasterCandles.length > 0 && candleSeries) {
+                currentCandlesArray = [...allMasterCandles];
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                renderVerticalLinesOverlay();
+            }
+        }
+
+        function replayJumpToStart() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            isReplayMode = true;
+            replayCurrentIndex = getReplayStartIndex();
+            currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+            candleSeries.setData(currentCandlesArray);
+            latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+            updateOHLCHeader();
+            updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+            renderVerticalLinesOverlay();
+
+            if (chartInstance && chartInstance.timeScale) {
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: Math.max(0, replayCurrentIndex - 15),
+                    to: Math.min(allMasterCandles.length + 5, replayCurrentIndex + 25)
+                });
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            }
+            showToast("⏪ Replay: Started at Briefing Run", "Candles cut to vertical briefing run. Click ▶ Play or Step ▶ to progress.");
+        }
+
+        function replayStepBack() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+            }
+            if (replayCurrentIndex > 0) {
+                replayCurrentIndex--;
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                renderVerticalLinesOverlay();
+            }
+        }
+
+        function replayTogglePlay() {
+            if (replayPlayTimer) {
+                pauseReplay();
+                return;
+            }
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null || replayCurrentIndex >= allMasterCandles.length - 1) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+            }
+
+            const playBtn = document.getElementById('btn-replay-play');
+            if (playBtn) {
+                playBtn.innerHTML = '⏸ Pause';
+                playBtn.classList.add('active-play');
+            }
+
+            replayPlayTimer = setInterval(() => {
+                if (!allMasterCandles || replayCurrentIndex >= allMasterCandles.length - 1) {
+                    pauseReplay();
+                    showToast("🏁 Replay Completed", "Reached the latest real-time candle.");
+                    return;
+                }
+                replayCurrentIndex++;
+                const nextCandle = allMasterCandles[replayCurrentIndex];
+                currentCandlesArray.push(nextCandle);
+                candleSeries.update(nextCandle);
+                latestCandleTimestamp = nextCandle.time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(nextCandle.close);
+                renderVerticalLinesOverlay();
+            }, REPLAY_SPEED_MS);
+        }
+
+        function replayStepForward() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                renderVerticalLinesOverlay();
+                return;
+            }
+
+            if (replayCurrentIndex < allMasterCandles.length - 1) {
+                replayCurrentIndex++;
+                const nextCandle = allMasterCandles[replayCurrentIndex];
+                currentCandlesArray.push(nextCandle);
+                candleSeries.update(nextCandle);
+                latestCandleTimestamp = nextCandle.time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(nextCandle.close);
+                renderVerticalLinesOverlay();
+            } else {
+                showToast("🏁 Replay at Latest", "All available candles are already displayed.");
+            }
         }
 
         function extractAiBriefingTimes(dataArray, candlesList) {
