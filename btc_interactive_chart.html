@@ -1601,6 +1601,15 @@
         function renderLevelsAndCards() {
             levelsData = getBtcKeyLevels(selectedBriefingTimestamp);
 
+            // Sort cards by trigger price descending (highest trigger price at top of cards list)
+            if (levelsData && Array.isArray(levelsData.levels)) {
+                levelsData.levels.sort((a, b) => {
+                    const pA = parseFloat(String(a.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '')) || 0;
+                    const pB = parseFloat(String(b.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '')) || 0;
+                    return pB - pA;
+                });
+            }
+
             const raisedTimeStr = levelsData.timeDisplay || "06:33 PM, Sep 09";
             const bBadge = document.getElementById('briefing-time-badge');
             if (bBadge) bBadge.innerText = `📌 Key Levels Raised: ${raisedTimeStr}`;
@@ -1653,6 +1662,8 @@
             }
 
             // Render Horizontal Level Lines & Side Cards
+            const levelsSection = document.querySelector('.levels-section');
+            const savedScrollTop = levelsSection ? levelsSection.scrollTop : 0;
             const levelsListEl = document.getElementById('levels-list');
             if (levelsListEl) levelsListEl.innerHTML = '';
 
@@ -1662,15 +1673,22 @@
             activePriceLines = [];
 
             levelsData.levels.forEach((lvl, idx) => {
-                const isBullish = lvl.bias === 'bullish';
+                const tag = extractTag(lvl.behavior) || (lvl.bias === 'bullish' ? `[KB${idx+1}]` : `[KS${idx+1}]`);
+                let isBullish = lvl.bias === 'bullish';
+                if (/\[\s*(?:KB|B)\d*\s*\]/i.test(tag) || /\b(BUY|LONG|BULLISH|SUPPORT|DEMAND)\b/i.test(lvl.behavior)) {
+                    isBullish = true;
+                } else if (/\[\s*(?:KS|S)\d*\s*\]/i.test(tag) || /\b(SELL|SHORT|BEARISH|RESISTANCE|SUPPLY)\b/i.test(lvl.behavior)) {
+                    isBullish = false;
+                }
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
-                const tag = extractTag(lvl.behavior) || (isBullish ? `[KB${idx+1}]` : `[KS${idx+1}]`);
-                const category = getCanonicalSetupCategory(tag, lvl.behavior, lvl.bias);
+                const category = getCanonicalSetupCategory(tag, lvl.behavior, isBullish ? 'bullish' : 'bearish');
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.btcDailyPlanSummary, levelsData.anchorTimestamp);
 
-                // Unique ID for Scorecard persistence
-                const levelUniqueId = `btc_${tag.replace(/[\[\]]/g,'')}_${lvl.price}`;
+                // Unique ID for Scorecard persistence (normalized)
+                const cleanTag = tag.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+                const cleanPrice = String(lvl.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                const levelUniqueId = `btc_${cleanTag}_${cleanPrice}`;
                 const savedOutcome = getSavedOutcome(levelUniqueId);
 
                 const isActionSetup = /^\[(?!K)[BS]\d+\]$/i.test(tag);
@@ -1733,6 +1751,10 @@
                     levelsListEl.appendChild(card);
                 }
             });
+
+            if (levelsSection && savedScrollTop > 0) {
+                levelsSection.scrollTop = savedScrollTop;
+            }
 
             if (currentCandlesArray && currentCandlesArray.length > 0) {
                 const latestSpot = currentCandlesArray[currentCandlesArray.length - 1].close;
@@ -2058,12 +2080,24 @@
                 if (savedLog) {
                     const parsed = JSON.parse(savedLog);
                     if (parsed[levelId]?.status) return parsed[levelId].status;
+                    const normTarget = String(levelId).replace(/[^a-zA-Z0-9_]/g, '');
+                    for (const k in parsed) {
+                        if (k.replace(/[^a-zA-Z0-9_]/g, '') === normTarget && parsed[k]?.status) {
+                            return parsed[k].status;
+                        }
+                    }
                 }
                 // Fallback check in legacy log for migration continuity
                 const legacyLog = localStorage.getItem('levelsLoggedReviews');
                 if (legacyLog) {
                     const parsedLegacy = JSON.parse(legacyLog);
                     if (parsedLegacy[levelId]?.status) return parsedLegacy[levelId].status;
+                    const normTarget = String(levelId).replace(/[^a-zA-Z0-9_]/g, '');
+                    for (const k in parsedLegacy) {
+                        if (k.replace(/[^a-zA-Z0-9_]/g, '') === normTarget && parsedLegacy[k]?.status) {
+                            return parsedLegacy[k].status;
+                        }
+                    }
                 }
             } catch (e) {}
             return 'na';

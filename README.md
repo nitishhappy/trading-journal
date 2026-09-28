@@ -178,6 +178,16 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.47 — 28 Sep 2026 — Bitcoin Interactive Chart Card Sorting, Action Colors, Scroll Lock & Scorecard Persistence
+- **Trigger Price Card Sorting (BTC Chart)**:
+  - Sorted side cards in `renderLevelsAndCards()` by numeric trigger price in descending order (highest price first at top of list), matching the top-to-bottom layout of the chart's vertical Y-axis.
+- **Enforced Setup Action Colors (BTC Chart)**:
+  - Ensured `[KS1]`, `[KS2]`, `[S1]`, `[S2]` and all Sell/Short action setups strictly render as Bearish (Red `#f43f5e`), and `[KB1]`, `[KB2]`, `[B1]`, `[B2]` and Buy/Long action setups strictly render as Bullish (Green `#10b981`), replacing stale fallback biases.
+- **Cards Panel Scroll Position Preservation**:
+  - Saved `levelsSection.scrollTop` prior to clearing and re-rendering DOM cards in `renderLevelsAndCards()`, restoring user scroll position during automatic live candle updates.
+- **Scorecard Level Unique ID Normalization**:
+  - Standardized `levelUniqueId` generation by stripping non-alphanumeric characters from price strings (`replace(/[^0-9.]/g, '')`) and normalizing tags, adding key lookup fallback in `getSavedOutcome()` so tile selection states (`Worked` / `Failed`) persist across live price re-renders.
+
 ### v2.3.46 — 27 Sep 2026 — S&P 500 Vertical Line Snapping, Right Panel Synchronization & Resilient Offline Caching
 - **Vertical Line Snapping & Initial Session Visibility (S&P 500)**:
   - Fixed initial viewport range calculation so that Friday's 06:05 PM pre-market briefing vertical line (snapped to the 7:00 PM session open bar #312) is immediately visible on screen. Previously, the chart auto-zoomed strictly into the last 35 bars (10:30 PM–01:30 AM), leaving bar #312 43 bars off-screen to the left and giving the impression that vertical lines were missing.
