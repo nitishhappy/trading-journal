@@ -1944,112 +1944,25 @@
       });
     }
   </script>
-  <!-- ═══════ FULLSCREEN IFRAME OVERLAY (Sizer / Interactive Charts) ═══════ -->
-  <div id="iframe-overlay" style="
-    display: none;
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: 99999;
-    background: var(--bg, #0f172a);
-    flex-direction: column;
-  ">
-    <!-- Overlay top bar -->
-    <div id="iframe-overlay-bar" style="
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 6px 12px;
-      background: var(--panel-bg, #1e293b);
-      border-bottom: 1px solid var(--border, #334155);
-      min-height: 40px; flex-shrink: 0;
-    ">
-      <span id="iframe-overlay-title" style="font-size: 0.9rem; font-weight: 600; color: var(--text, #e2e8f0);"></span>
-      <button id="iframe-overlay-close" onclick="closeIframeOverlay()" style="
-        background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5);
-        color: #f87171; border-radius: 6px; padding: 4px 14px; font-size: 0.85rem;
-        cursor: pointer; font-weight: 600;
-      ">✕ Close</button>
-    </div>
-    <!-- Iframe container -->
-    <iframe id="iframe-overlay-frame" style="
-      flex: 1; width: 100%; border: none; background: var(--bg, #0f172a);
-    " sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
-  </div>
-
   <script>
-    /* ── Fullscreen iframe overlay system ── */
-    function openIframeOverlay(url, title, e) {
-      if (e) { e.preventDefault(); e.stopPropagation(); }
-      const overlay = document.getElementById('iframe-overlay');
-      const frame   = document.getElementById('iframe-overlay-frame');
-      const titleEl = document.getElementById('iframe-overlay-title');
-
-      titleEl.textContent = title || '';
-      frame.src = url;
-      overlay.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-
-      // Push history state so Android back button closes overlay instead of exiting app
-      if (!history.state || !history.state._iframeOverlay) {
-        history.pushState({ _iframeOverlay: true }, '');
-      }
-    }
-
-    function closeIframeOverlay() {
-      const overlay = document.getElementById('iframe-overlay');
-      const frame   = document.getElementById('iframe-overlay-frame');
-      if (overlay.style.display === 'none') return;
-
-      overlay.style.display = 'none';
-      frame.src = 'about:blank'; // free resources
-      document.body.style.overflow = '';
-
-      // Pop the history entry we pushed (if it's ours)
-      if (history.state && history.state._iframeOverlay) {
-        history.back();
-      }
-    }
-
-    // Handle Android back button: close overlay instead of navigating away
-    window.addEventListener('popstate', function(e) {
-      const overlay = document.getElementById('iframe-overlay');
-      if (overlay && overlay.style.display !== 'none') {
-        // Overlay is open → close it (don't go back further)
-        overlay.style.display = 'none';
-        document.getElementById('iframe-overlay-frame').src = 'about:blank';
-        document.body.style.overflow = '';
-      }
-    });
-
-    /* ── Legacy wrapper: Sizer button ── */
     function openVantagePositionCalculator(e) {
-      // Desktop: still use popup window for better UX
-      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
-                    || (navigator.standalone !== undefined)
-                    || window.matchMedia('(display-mode: standalone)').matches;
-
-      if (isMobile) {
-        openIframeOverlay('vantage_position_calculator.html', '🧮 Position Sizer', e);
-      } else {
-        if (e) e.stopPropagation();
-        const w = 460, h = 820;
-        const left = (screen.width - w) / 2;
-        const top = (screen.height - h) / 4;
-        window.open('vantage_position_calculator.html', 'VantageCalc',
-          `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes`);
+      if (e) e.stopPropagation();
+      if (typeof window.saveSessionState === 'function') {
+        window.saveSessionState();
       }
+      const w = 460;
+      const h = 820;
+      const left = (screen.width - w) / 2;
+      const top = (screen.height - h) / 4;
+      window.open('vantage_position_calculator.html', 'VantageCalc', `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes`);
     }
 
-    /* ── Interactive chart opener ── */
     function openInteractiveChart(url, title, e) {
-      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)
-                    || (navigator.standalone !== undefined)
-                    || window.matchMedia('(display-mode: standalone)').matches;
-
-      if (isMobile) {
-        openIframeOverlay(url, title || '📊 Interactive Chart', e);
-      } else {
-        // Desktop: open in new tab as before
-        if (e) { e.preventDefault(); e.stopPropagation(); }
-        window.open(url, '_blank');
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (typeof window.saveSessionState === 'function') {
+        window.saveSessionState();
       }
+      window.open(url, '_blank');
     }
   </script>
 </body>

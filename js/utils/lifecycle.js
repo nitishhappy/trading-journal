@@ -48,6 +48,8 @@ export function saveSessionState() {
   }
 }
 
+window.saveSessionState = saveSessionState;
+
 /**
  * Restore session state from localStorage after page load or app wake-up
  */

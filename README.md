@@ -178,13 +178,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
-### v2.3.48 — 28 Sep 2026 — PWA Mobile Sizer & Interactive Chart Overlay Fix
-- **Fullscreen Iframe Overlay System**:
-  - On mobile PWA (standalone mode), Sizer and Interactive Chart links now open inside a fullscreen in-app overlay (iframe modal) instead of using `window.open()` or `target="_blank"` navigation that caused the app to navigate away and restart on close.
-  - Overlay includes a titled top bar with ✕ Close button for easy dismissal.
-  - Android back-button support via `history.pushState` / `popstate` — pressing back closes the overlay instead of exiting the app.
-  - On desktop, behavior is unchanged (popup window for Sizer, new tab for Interactive Chart).
-  - Iframe resources are freed (`src = about:blank`) on overlay close to prevent memory leaks.
+### v2.3.48 — 28 Sep 2026 — PWA Mobile Popup Popup State Persistence & Window.open Alignment
+- **Reverted Overlay & Restored Popup Opening**:
+  - Maintained `window.open` popup window and `_blank` tab opening behavior for Position Sizer and Interactive Charts as preferred.
+  - Added pre-launch session state saving (`window.saveSessionState()`) prior to opening popups so active tabs, scroll position, and draft data are preserved when returning to the main PWA on mobile.
 
 ### v2.3.47.1 — 28 Sep 2026 — BTC Scorecard Tile Persistence Hotfix (data-level-id approach)
 - **Root Cause Fixed**: `updateCardOutcomeUI(idx, status)` was looking up DOM elements by fragile idx-position IDs (`btn-worked-btc-0`, `status-pill-btc-0`). After price-sort reshuffled card positions, the idx no longer reliably mapped to the same level, causing tile selection UI to reset on every re-render.
