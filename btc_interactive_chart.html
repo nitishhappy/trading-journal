@@ -1685,7 +1685,7 @@
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.btcDailyPlanSummary, levelsData.anchorTimestamp);
 
-                // Unique ID for Scorecard persistence (normalized)
+                // Unique ID for Scorecard persistence (normalized — stable across re-renders)
                 const cleanTag = tag.replace(/[^A-Z0-9]/gi, '').toUpperCase();
                 const cleanPrice = String(lvl.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '');
                 const levelUniqueId = `btc_${cleanTag}_${cleanPrice}`;
@@ -1712,6 +1712,7 @@
                     const card = document.createElement('div');
                     card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}`;
                     card.id = `card-btc-${idx}`;
+                    card.dataset.levelId = levelUniqueId;
                     card.innerHTML = `
                         <div class="card-header">
                             <span class="card-price ${isBullish ? 'bullish' : 'bearish'}">
@@ -1719,7 +1720,7 @@
                             </span>
                             <div style="display:flex;gap:0.3rem;align-items:center;">
                                 <span class="proximity-badge" id="prox-badge-btc-${idx}">🎯 NEAR BY</span>
-                                <span class="status-pill status-pill-${savedOutcome}" id="status-pill-btc-${idx}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
+                                <span class="status-pill status-pill-${savedOutcome}" data-pill="${levelUniqueId}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
                                 <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
                             </div>
                         </div>
@@ -1735,9 +1736,9 @@
                         <div class="card-outcome-bar">
                             <span class="outcome-label">Scorecard (${category}):</span>
                             <div class="outcome-btn-group">
-                                <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" id="btn-worked-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
-                                <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" id="btn-failed-btc-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
-                                <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'na', ${idx})">↺ Reset</button>
+                                <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" data-action="worked" data-level-id="${levelUniqueId}" data-category="${category}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
+                                <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" data-action="failed" data-level-id="${levelUniqueId}" data-category="${category}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
+                                <button class="outcome-btn btn-reset" data-action="na" data-level-id="${levelUniqueId}" data-category="${category}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'na', ${idx})">↺ Reset</button>
                             </div>
                         </div>
                     `;
@@ -2106,16 +2107,17 @@
         function toggleLevelOutcome(event, levelId, source, status, idx) {
             if (event) event.stopPropagation();
             recordLevelOutcome(levelId, source, status);
-            updateCardOutcomeUI(idx, status);
+            updateCardOutcomeUI(levelId, status);
             const label = status === 'worked' ? '🟢 WORKED' : (status === 'failed' ? '🔴 FAILED' : '⚪ RESET');
             showToast(`Scorecard Logged (${source})`, `Level marked as ${label} in EOD Forecast Scorecard.`);
             triggerAlertSound(880, 'sine', 0.1);
         }
 
-        function updateCardOutcomeUI(idx, status) {
-            const pill = document.getElementById(`status-pill-btc-${idx}`);
-            const btnWorked = document.getElementById(`btn-worked-btc-${idx}`);
-            const btnFailed = document.getElementById(`btn-failed-btc-${idx}`);
+        // updateCardOutcomeUI — uses levelUniqueId (data-level-id) for stable, idx-independent lookups
+        function updateCardOutcomeUI(levelId, status) {
+            const pill = document.querySelector(`[data-pill="${levelId}"]`);
+            const btnWorked = document.querySelector(`[data-level-id="${levelId}"][data-action="worked"]`);
+            const btnFailed = document.querySelector(`[data-level-id="${levelId}"][data-action="failed"]`);
 
             if (btnWorked) btnWorked.classList.remove('active');
             if (btnFailed) btnFailed.classList.remove('active');

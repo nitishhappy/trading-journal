@@ -186,6 +186,10 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
   - On desktop, behavior is unchanged (popup window for Sizer, new tab for Interactive Chart).
   - Iframe resources are freed (`src = about:blank`) on overlay close to prevent memory leaks.
 
+### v2.3.47.1 — 28 Sep 2026 — BTC Scorecard Tile Persistence Hotfix (data-level-id approach)
+- **Root Cause Fixed**: `updateCardOutcomeUI(idx, status)` was looking up DOM elements by fragile idx-position IDs (`btn-worked-btc-0`, `status-pill-btc-0`). After price-sort reshuffled card positions, the idx no longer reliably mapped to the same level, causing tile selection UI to reset on every re-render.
+- **Fix**: Replaced all idx-based DOM element ID lookups with `data-level-id="${levelUniqueId}"` and `data-pill="${levelUniqueId}"` attribute selectors on every card, pill, and outcome button. `updateCardOutcomeUI(levelId, status)` now uses `document.querySelector('[data-level-id="btc_KB1_84979"]')` for 100% stable identity across re-renders regardless of sort order changes.
+
 ### v2.3.47 — 28 Sep 2026 — Bitcoin Interactive Chart Card Sorting, Action Colors, Scroll Lock & Scorecard Persistence
 - **Trigger Price Card Sorting (BTC Chart)**:
   - Sorted side cards in `renderLevelsAndCards()` by numeric trigger price in descending order (highest price first at top of list), matching the top-to-bottom layout of the chart's vertical Y-axis.
