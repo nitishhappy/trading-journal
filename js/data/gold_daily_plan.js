@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-28T08:31:10+05:30",
+    "timeDisplay": "08:31 AM, Sep 28",
+    "price": "4194.5",
+    "bias": "bullish",
+    "behavior": "[MON 08:31] [G_B1]: Asian Low SSL Sweep & SFP Demand Floor",
+    "tp": "$4,206.00 / $4,214.00 / $4,225.00",
+    "sl": "$4,190.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-28T08:31:10+05:30",
+    "timeDisplay": "08:31 AM, Sep 28",
+    "price": "4212.0",
+    "bias": "bullish",
+    "behavior": "[MON 08:31] [G_B2]: Breaker Reclaim & Short-Covering Expansion",
+    "tp": "$4,222.00 / $4,234.00 / $4,248.00",
+    "sl": "$4,204.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-28T08:31:10+05:30",
+    "timeDisplay": "08:31 AM, Sep 28",
+    "price": "4207.0",
+    "bias": "bearish",
+    "behavior": "[MON 08:31] [G_S1]: Flipped Breaker Shelf & 15M Supply Rejection",
+    "tp": "$4,195.00 / $4,188.00 / $4,176.00",
+    "sl": "$4,212.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-28T08:31:10+05:30",
+    "timeDisplay": "08:31 AM, Sep 28",
+    "price": "4192.0",
+    "bias": "bearish",
+    "behavior": "[MON 08:31] [G_S2]: Day Low Liquidity Breakdown Continuation",
+    "tp": "$4,182.00 / $4,172.00 / $4,160.00",
+    "sl": "$4,198.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-28T08:17:51+05:30",
     "timeDisplay": "08:17 AM, Sep 28",
     "price": "4201.0",
@@ -91,6 +135,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20260928_083113",
+    "timestamp": "2026-09-28T08:31:13+05:30",
+    "timeDisplay": "08:31 AM, Sep 28",
+    "spot": "4197.45",
+    "trigger": "Level Exhaustion Breakdown (GOLD Spot $4197.45 < Min Plan Target $4201.00 - Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (08:30 AM IST - Sep 28, 2026 | Spot: $4197.45 | Trigger: Level Exhaustion Breakdown (GOLD Spot $4197.45 < Min Plan Target $4201.00 - Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **DXY (US Dollar Index) Pressure:** The US Dollar Index has staged a sharp early-week bid during the Asian handover, pressing yield-sensitive commodities lower. DXY holding resilience above its key 103.80 shelf has driven mechanical selling across precious metals.\n* **US 10-Year Treasury Yields:** US 10Y benchmarks spiked towards 4.22%, exerting renewed downward pressure on non-yielding physical bullion and triggering algorithmic stops below the $4,200 psychological barrier.\n* **Session Dynamics:** The Tokyo session witnessed aggressive institutional liquidation from the day's high of $4,292.02 down to test fresh session lows at $4,194.16. London pre-market liquidity positioning is now active; European desks will look to either engineer a Swing Failure Pattern (SFP) trap below $4,195 or initiate an acceleration wave ahead of NY session macro updates.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Sell-Side Liquidity (SSL) Run:** The rapid drop to $4,194.16 successfully swept resting Asian stops and flushed trailing liquidity under the $4,200 round level. Price is currently probing institutional liquidity pools situated between $4,190.00 and $4,195.00.\n* **Fair Value Gaps (FVG) & Order Blocks:**\n  * **Overhead Bearish 15M FVG:** Located between **$4,205.50 – $4,213.00**, created during the impulsive breakdown leg. Any early relief bounce into this zone acts as immediate resistance.\n  * **H4/Daily Demand Shelf:** A high-timeframe unmitigated mitigation block rests at **$4,182.00 – $4,190.00**. A failure to reclaim $4,200 exposes this deeper macro discount region.\n* **Market Structure Shift (CHoCH Watch):** Immediate 5-min internal market structure remains bearish. A clean 5-minute candle close back above **$4,204.00** is required to signal internal Change of Character (CHoCH) and confirm seller exhaustion.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Chop Range:** **$4,198.00 – $4,204.50**\n* **Trading Directive:** Do **NOT** initiate market orders within this 6.5-dollar compression corridor. This zone represents the churn region between the newly formed Day Low ($4,194.16) and the broken previous support shelf ($4,205.00). Entering inside this pocket exposes capital to spread friction and low-momentum liquidity harvesting.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Short-Covering Ignition ($4,212.00+):** A sustained 5-min body close above $4,212.00 clears the local bearish displacement block, forcing aggressive short-covering towards **$4,225.00** and the higher 15M FVG ceiling at **$4,235.00**.\n* **Bearish Cascade Acceleration ($4,192.00-):** A clean breakdown and 5-min close below the Day Low at $4,194.16 and the $4,192.00 shelf triggers stop-run cascading, opening an unhindered glide down to **$4,182.00** and **$4,172.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4,192.00 – $4,195.00** Retest | Liquidity sweep of Day Low ($4,194.16) followed by an immediate 5-min bullish pin bar / SFP close above $4,197.00. | **TP1:** $4,206.00<br>**TP2:** $4,214.00<br>**TP3:** $4,225.00 | **$4,190.50** | 1:2.4 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,212.00** Breakout | Decisive 5-min or 15-min bullish candle close above $4,212.00 with expanding volume, confirming short liquidation. | **TP1:** $4,222.00<br>**TP2:** $4,234.00<br>**TP3:** $4,248.00 | **$4,204.00** | 1:2.2 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,205.00 – $4,209.00** Retest | Rejection wick into the flipped breaker / 15M FVG shelf with a 5-min bearish engulfing close below $4,203.00. | **TP1:** $4,195.00<br>**TP2:** $4,188.00<br>**TP3:** $4,176.00 | **$4,212.50** | 1:2.3 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4,192.00** Breakdown | Impulsive 5-min candle body close below $4,192.00 with volume expansion, invalidating Asian demand. | **TP1:** $4,182.00<br>**TP2:** $4,172.00<br>**TP3:** $4,160.00 | **$4,198.50** | 1:2.1 |"
+  },
+  {
     "id": "GOLD_20260928_081754",
     "timestamp": "2026-09-28T08:17:54+05:30",
     "timeDisplay": "08:17 AM, Sep 28",
