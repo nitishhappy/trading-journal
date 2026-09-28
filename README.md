@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.48 — 28 Sep 2026 — PWA Mobile Sizer & Interactive Chart Overlay Fix
+- **Fullscreen Iframe Overlay System**:
+  - On mobile PWA (standalone mode), Sizer and Interactive Chart links now open inside a fullscreen in-app overlay (iframe modal) instead of using `window.open()` or `target="_blank"` navigation that caused the app to navigate away and restart on close.
+  - Overlay includes a titled top bar with ✕ Close button for easy dismissal.
+  - Android back-button support via `history.pushState` / `popstate` — pressing back closes the overlay instead of exiting the app.
+  - On desktop, behavior is unchanged (popup window for Sizer, new tab for Interactive Chart).
+  - Iframe resources are freed (`src = about:blank`) on overlay close to prevent memory leaks.
+
 ### v2.3.47 — 28 Sep 2026 — Bitcoin Interactive Chart Card Sorting, Action Colors, Scroll Lock & Scorecard Persistence
 - **Trigger Price Card Sorting (BTC Chart)**:
   - Sorted side cards in `renderLevelsAndCards()` by numeric trigger price in descending order (highest price first at top of list), matching the top-to-bottom layout of the chart's vertical Y-axis.
