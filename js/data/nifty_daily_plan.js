@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-29T14:30:44+05:30",
+    "timeDisplay": "02:30 PM, Sep 29",
+    "price": "22695",
+    "bias": "bullish",
+    "behavior": "[TUE 14:30] [B1]: 5-min close firmly ABOVE 22695.00 reclaiming intraday value with active futures volume confirming call writer absorption",
+    "tp": "22740 / 22780",
+    "sl": "22660",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-29T14:30:44+05:30",
+    "timeDisplay": "02:30 PM, Sep 29",
+    "price": "22715",
+    "bias": "bullish",
+    "behavior": "[TUE 14:30] [B2]: Sustained 5-min close ABOVE 22715.00 confirming range expansion past Day High resistance",
+    "tp": "22770 / 22820",
+    "sl": "22675",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-29T14:30:44+05:30",
+    "timeDisplay": "02:30 PM, Sep 29",
+    "price": "22645",
+    "bias": "bearish",
+    "behavior": "[TUE 14:30] [S1]: 5-min close firmly BELOW 22645.00 confirming breakdown of 22650 Put OI support with expanding futures volume",
+    "tp": "22600 / 22565",
+    "sl": "22680",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-29T14:30:44+05:30",
+    "timeDisplay": "02:30 PM, Sep 29",
+    "price": "22700",
+    "bias": "bearish",
+    "behavior": "[TUE 14:30] [S2]: Rejection candle with prominent upper wick printing in the 22695.00 - 22705.00 zone failing the 22700 call barrier",
+    "tp": "22640 / 22580",
+    "sl": "22725",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-29T12:10:51+05:30",
     "timeDisplay": "12:10 PM, Sep 29",
     "price": "22765",
@@ -91,6 +135,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260929_143048",
+    "timestamp": "2026-09-29T14:30:48+05:30",
+    "timeDisplay": "02:30 PM, Sep 29",
+    "spot": "22668.7",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22668.70 < Min Plan Target $22680.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:30 PM IST - Sep 29, 2026 | Spot: 22668.7 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22668.70 < Min Plan Target $22680.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 22650.00 - 22695.00 (Current Spot: 22668.70 sits directly within this neutral compression band).\n- FinNifty Expiry OI Impact (Tuesday 02:30 PM Gamma Window): Massive call open interest concentration at 22700 (paired with heavy FinNifty 24200/24250 call writing) is capping immediate upside momentum, while 22650 put writers are defending intraday shelf support. This creates rapid two-way premium decay, severe whipsaws, and false breakouts between 22650 and 22695 as 0DTE delta hedging triggers localized pin risk.\n- Action: Strictly NO option buying inside this 45-point corridor. Wait for confirmed structural breaks outside the perimeter.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Explosive Expansion] (Upside Breakout above 22710.00): A confirmed 5-minute candle close above 22710.00 forces panic short-covering from 22700 call writers, accelerating spot momentum toward 22753.25 (Day High) and 22790.00.\n- [Bearish Explosive Breakdown] (Downside Capitulation below 22645.00): A sustained 5-minute candle close below 22645.00 breaks the 22650 put open interest floor, triggering long unwinding toward 22600.00 and 22569.65 (Day Low liquidity sweep).\n- [Bullish Liquidity Sweep & Reclaim] (Demand Absorption below 22640.00): Quick sweep down into 22630.00 - 22640.00 followed by an immediate 5-minute close back above 22655.00 traps aggressive breakdown sellers for a mean-reversion squeeze back to 22700.00.\n- [Bearish Supply Wall Rejection] (Exhaustion Trap at 22695.00 - 22705.00): Failure to sustain above 22695.00 with prominent rejection wicks confirms institutional seller defense at the 22700 barrier, triggering a rollover back to 22650.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback Reversal / Reclaim): 5-min close firmly ABOVE 22695.00 reclaiming intraday value with active futures volume confirming call writer absorption. | TP: 22740.00 / 22780.00 | SL: 22660.00 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Breakout Expansion): Sustained 5-min close ABOVE 22715.00 confirming range expansion past Day High resistance. | TP: 22770.00 / 22820.00 | SL: 22675.00 | 💡 Buy 22700 CE + Sell 22750 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Put Wall Breakdown Continuation): 5-min close firmly BELOW 22645.00 confirming breakdown of 22650 Put OI support with expanding futures volume. | TP: 22600.00 / 22565.00 | SL: 22680.00 | 💡 Buy 22650 PE + Sell 22600 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Supply Wall Exhaustion Short): Rejection candle with prominent upper wick printing in the 22695.00 - 22705.00 zone failing the 22700 call barrier. | TP: 22640.00 / 22580.00 | SL: 22725.00 | 💡 Buy 22700 PE + Sell 22650 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20260929_121054",
     "timestamp": "2026-09-29T12:10:54+05:30",
     "timeDisplay": "12:10 PM, Sep 29",
