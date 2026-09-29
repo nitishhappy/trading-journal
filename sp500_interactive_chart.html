@@ -1309,9 +1309,9 @@
 
                 const totalBars = currentCandlesArray.length;
                 let fromIdx = Math.max(0, totalBars - 45);
-                if (aiBriefingTimes && aiBriefingTimes.length > 0) {
-                    const latestTime = aiBriefingTimes[0].time;
-                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestTime) <= 7200);
+                const latestRun = getLatestBriefingRun();
+                if (latestRun && latestRun.time) {
+                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestRun.time) <= 7200);
                     if (idx !== -1 && idx > totalBars - 120) {
                         fromIdx = Math.max(0, idx - 6);
                     }
@@ -1596,6 +1596,20 @@
             });
         }
 
+        function getLatestBriefingRun() {
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
+            let latest = aiBriefingTimes[0];
+            let maxTs = -Infinity;
+            aiBriefingTimes.forEach(run => {
+                const ts = run.timestamp ? new Date(run.timestamp).getTime() : (run.time * 1000);
+                if (ts > maxTs) {
+                    maxTs = ts;
+                    latest = run;
+                }
+            });
+            return latest;
+        }
+
         function selectBriefingRun(item) {
             pauseReplay();
             if (isReplayMode) {
@@ -1607,9 +1621,9 @@
                 if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
                     const totalBars = currentCandlesArray.length;
                     let fromIdx = Math.max(0, totalBars - 45);
-                    if (aiBriefingTimes && aiBriefingTimes.length > 0) {
-                        const latestTime = aiBriefingTimes[0].time;
-                        const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestTime) <= 7200);
+                    const latestRun = getLatestBriefingRun();
+                    if (latestRun && latestRun.time) {
+                        const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestRun.time) <= 7200);
                         if (idx !== -1 && idx > totalBars - 120) {
                             fromIdx = Math.max(0, idx - 6);
                         }
@@ -1982,9 +1996,9 @@
                         if (currentCandlesArray && currentCandlesArray.length > 0) {
                             const totalBars = currentCandlesArray.length;
                             let fromIdx = Math.max(0, totalBars - 45);
-                            if (aiBriefingTimes && aiBriefingTimes.length > 0) {
-                                const latestTime = aiBriefingTimes[0].time;
-                                const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestTime) <= 7200);
+                            const latestRun = getLatestBriefingRun();
+                            if (latestRun && latestRun.time) {
+                                const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestRun.time) <= 7200);
                                 if (idx !== -1 && idx > totalBars - 120) {
                                     fromIdx = Math.max(0, idx - 6);
                                 }
@@ -2016,7 +2030,7 @@
                 const match = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
                 if (match) return match;
             }
-            return aiBriefingTimes[0];
+            return getLatestBriefingRun();
         }
 
         function getReplayStartIndex() {
@@ -2211,6 +2225,7 @@
                     }
                 }
             });
+            result.sort((a, b) => a.time - b.time);
             return result;
         }
 
@@ -2232,6 +2247,7 @@
             if (!showVLines) return;
 
             const timeScale = chartInstance.timeScale();
+            const latestRun = getLatestBriefingRun();
 
             // 1. Draw AI Briefing Vertical Lines (Dashed Purple Lines, or Glowing Blue if Selected)
             aiBriefingTimes.forEach(item => {
@@ -2239,7 +2255,7 @@
                 if (x !== null && x >= 0 && x <= canvas.width) {
                     const isSelected = selectedBriefingTimestamp 
                         ? (selectedBriefingTimestamp === item.timestamp || selectedBriefingTimestamp === item.time)
-                        : (item === aiBriefingTimes[0]);
+                        : (latestRun && (item.timestamp === latestRun.timestamp || item.time === latestRun.time));
                     const strokeColor = isSelected ? '#60a5fa' : '#a855f7';
                     const lineWidth = isSelected ? 2.5 : 1.5;
 
@@ -2806,11 +2822,16 @@
             const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
             const filterFresh = (arr) => (arr || []).filter(c => c && c.time && c.time >= cutoffSec);
 
-            // 1. Server-side /api/marketCandles?symbol=SP500 (proxies Yahoo Finance server-side & Firestore)
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+            const marketCandlesUrl = isLocal
+                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=5m&limit=300&_t=${Date.now()}`
+                : `/api/marketCandles?symbol=SP500&timeframe=5m&limit=300&_t=${Date.now()}`;
+
+            // 1. Primary: Server-side /api/marketCandles?symbol=SP500
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 3500);
-                const res = await fetch(`/api/marketCandles?symbol=SP500&_t=${Date.now()}`, { 
+                const timeoutId = setTimeout(() => controller.abort(), 4500);
+                const res = await fetch(marketCandlesUrl, { 
                     cache: 'no-store',
                     signal: controller.signal
                 });
@@ -2826,24 +2847,26 @@
                 console.warn('[SP500 Chart] /api/marketCandles fetch failed or timed out:', e);
             }
 
-            // 2. Server-side /api/sp500Ohlc (with short timeout)
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 2000);
-                const res = await fetch(`/api/sp500Ohlc?token=4cfccc84fdff579e101d06092e62a3a0&timeframe=5m&limit=300&_t=${Date.now()}`, { 
-                    cache: 'no-store',
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-                if (res.ok) {
-                    const json = await res.json();
-                    const candles = filterFresh(json?.candles);
-                    if (candles.length > 0) {
-                        return candles;
+            // 2. Direct Vercel Cloud Fallback (if relative fetch in production failed)
+            if (!isLocal) {
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 4000);
+                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=5m&limit=300&_t=${Date.now()}`, {
+                        cache: 'no-store',
+                        signal: controller.signal
+                    });
+                    clearTimeout(timeoutId);
+                    if (cloudRes.ok) {
+                        const json = await cloudRes.json();
+                        const candles = filterFresh(json?.candles);
+                        if (candles.length > 0) {
+                            return candles;
+                        }
                     }
+                } catch (e) {
+                    console.warn('[SP500 Chart] Direct Vercel fallback failed:', e);
                 }
-            } catch (e) {
-                console.warn('[SP500 Chart] /api/sp500Ohlc fetch failed or timed out:', e);
             }
 
             // 3. Fallback: reload and read from window.sp500CandlesData

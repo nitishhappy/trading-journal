@@ -178,6 +178,19 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.50 — 30 Sep 2026 — SP500 Vertical Lines Fix & Nifty Latest-Run Consistency
+- **SP500 Interactive Chart — Missing Vertical Lines Fix**:
+  - Root cause: `aiBriefingTimes[0]` was assumed to be the latest briefing run, but extraction order doesn't guarantee newest-first. This caused the chart to scroll/highlight the wrong briefing, hiding vertical lines from view.
+  - Added `getLatestBriefingRun()` helper that finds the true latest run by timestamp comparison instead of array position.
+  - Updated `extractAiBriefingTimes()` to sort results chronologically (`result.sort((a, b) => a.time - b.time)`).
+  - Updated `renderVerticalLinesOverlay()`, `selectBriefingRun()`, `getActiveBriefingRun()`, initial bootstrap, and `reloadChartData()` scroll logic to all use `getLatestBriefingRun()`.
+  - Improved `loadRealSp500Candles()` with `isLocal` detection, `limit=300` parameter, and direct Vercel cloud fallback when relative fetch fails.
+  - Refreshed offline `sp500_candles.js` with 162 fresh candles (Sep 25–Sep 30).
+- **Nifty Interactive Chart — Latest-Run Consistency**:
+  - Applied same `getLatestBriefingRun()` helper pattern to Nifty chart.
+  - Fixed `getActiveBriefingRun()` fallback from `aiBriefingTimes[0]` to `getLatestBriefingRun()`.
+  - Deduplicated inline latest-run logic in `renderBriefingRunsPills()` to use the shared helper.
+
 ### v2.3.49 — 29 Sep 2026 — Bitcoin Interactive Chart Briefing Replay Mode (Option A)
 - **Bottom Replay Controller Toolbar**:
   - Implemented a floating playback toolbar at the bottom center of the Bitcoin interactive chart featuring 4 dedicated buttons: `[ ⏪ Start ]`, `[ ◀ Step ]`, `[ ▶ Play / ⏸ Pause ]`, and `[ Step ▶ ]`.

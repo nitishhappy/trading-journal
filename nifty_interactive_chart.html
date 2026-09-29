@@ -1583,15 +1583,7 @@
             container.style.display = 'flex';
 
             // Find true latest run (newest timestamp)
-            let latestRun = aiBriefingTimes[0];
-            let maxTs = -Infinity;
-            aiBriefingTimes.forEach(run => {
-                const ts = run.timestamp ? new Date(run.timestamp).getTime() : (run.time * 1000);
-                if (ts > maxTs) {
-                    maxTs = ts;
-                    latestRun = run;
-                }
-            });
+            let latestRun = getLatestBriefingRun() || aiBriefingTimes[0];
 
             // Sort chronologically (earliest -> latest)
             const sortedRuns = [...aiBriefingTimes].sort((a, b) => {
@@ -2003,13 +1995,24 @@
         }
 
         // ================= OPTION A: BOTTOM REPLAY ENGINE ================= //
+        function getLatestBriefingRun() {
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
+            let latest = aiBriefingTimes[0];
+            let maxTs = -Infinity;
+            aiBriefingTimes.forEach(run => {
+                const ts = run.timestamp ? new Date(run.timestamp).getTime() : (run.time * 1000);
+                if (ts > maxTs) { maxTs = ts; latest = run; }
+            });
+            return latest;
+        }
+
         function getActiveBriefingRun() {
             if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
             if (selectedBriefingTimestamp) {
                 const match = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
                 if (match) return match;
             }
-            return aiBriefingTimes[0];
+            return getLatestBriefingRun();
         }
 
         function getReplayStartIndex() {
