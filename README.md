@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.52 — 30 Sep 2026 — Fix Level Line Color Priority & Card Scroll Persistence (All Charts)
+- **Bug Fix — Wrong Line Colors**: `[KS1]` and `[S2]` levels were rendering GREEN instead of RED because behavior text containing words like "Buy-Side", "Demand", "long" (in "long liquidation") matched the bullish keyword regex before the tag-based check could override. Root cause: tag regex and behavior keyword regex were OR'd together in a single `if`, so a behavior keyword match for "buy/demand/long" would force GREEN even when the tag clearly said `[KS...]` or `[S...]`.
+- **Fix**: Split into a 4-tier priority cascade: (1) Tag = `[KB|B]` → GREEN, (2) Tag = `[KS|S]` → RED, (3) Behavior keywords (BUY/LONG/SUPPORT/DEMAND) → GREEN, (4) Behavior keywords (SELL/SHORT/RESISTANCE/SUPPLY) → RED. Tag always wins.
+- **Bug Fix — Card Scroll Position Reset**: Cards section was jumping to top on every 15s auto-refresh because `innerHTML = ''` caused the scroll container to collapse before `scrollTop` could be restored.
+- **Fix**: Added `requestAnimationFrame` callback to re-apply `scrollTop` after DOM reflow, ensuring scroll position survives across re-renders.
+- Applied to all 4 charts: **BTC**, **Gold**, **SP500**, **Nifty**.
+
 ### v2.3.51 — 30 Sep 2026 — Scorecard Per-Briefing-Run Isolation (All Charts)
 - **Bug Fix**: Scorecard Worked/Failed selections were bleeding across briefing runs. Marking S3 as "Worked" on the 01:02 PM run would persist when switching to the 01:30 PM run (and vice versa).
 - **Root Cause**: `levelUniqueId` was `{asset}_{tag}_{price}` — no briefing run identifier. Same level appearing in multiple runs shared the same persistence key.
