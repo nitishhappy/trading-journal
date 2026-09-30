@@ -1,6 +1,94 @@
 window.btcDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "82918.97",
+    "bias": "bullish",
+    "behavior": "[WED 20:31] [B1]: Day Low SSL sweep and reclaim with lower wick rejection",
+    "tp": "83,650.00 / 84,025.00",
+    "sl": "82,650.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "85599.92",
+    "bias": "bullish",
+    "behavior": "[WED 20:31] [B2]: Day High short-covering squeeze and breakout continuation",
+    "tp": "86,200.00 / 86,850.00",
+    "sl": "85,150.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "84027.21",
+    "bias": "bearish",
+    "behavior": "[WED 20:31] [S1]: Session VWAP and 15M Bearish FVG rejection bounce",
+    "tp": "83,388.00 / 82,920.00",
+    "sl": "84,200.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "82918.97",
+    "bias": "bearish",
+    "behavior": "[WED 20:31] [S2]: Day Low breakdown with institutional sell displacement",
+    "tp": "82,450.00 / 81,900.00",
+    "sl": "83,250.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "83653.72",
+    "bias": "bullish",
+    "behavior": "[WED 20:31] [KB1]: 200 EMA dynamic support confluence with 15M Bullish FVG",
+    "tp": "84,027.00",
+    "sl": "83,450.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "83388.14",
+    "bias": "bullish",
+    "behavior": "[WED 20:31] [KB2]: Volume Profile Point of Control (POC) high-density demand shelf",
+    "tp": "84,000.00",
+    "sl": "82,950.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "82738.08",
+    "bias": "bullish",
+    "behavior": "[WED 20:31] [KB4]: Higher-timeframe 4H Demand Base and deep liquidity floor",
+    "tp": "83,500.00",
+    "sl": "82,300.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T20:31:42+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "price": "85599.92",
+    "bias": "bearish",
+    "behavior": "[WED 20:31] [KS2]: Day High liquidity ceiling and potential double-top rejection zone",
+    "tp": "84,500.00",
+    "sl": "85,850.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-30T18:32:03+05:30",
     "timeDisplay": "06:32 PM, Sep 30",
     "price": "85020.9",
@@ -63,17 +151,6 @@ window.btcDailyPlanData = [
     "behavior": "[WED 18:32] [KB3]: Confluence of Intraday Session VWAP ($83,828.43) and 200 EMA ($83,611.73); macro intraday trend defense baseline",
     "tp": "84,800.00 / 85,500.00",
     "sl": "83,450.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-30T18:32:03+05:30",
-    "timeDisplay": "06:32 PM, Sep 30",
-    "price": "82918.97",
-    "bias": "bullish",
-    "behavior": "[WED 18:32] [KB4]: Intraday Day Low & Sell-Side Liquidity pool resting directly above the deeper 4H demand base ($82,738.08)",
-    "tp": "84,200.00 / 85,200.00",
-    "sl": "82,450.00",
     "status": "na"
   },
   {
@@ -223,33 +300,11 @@ window.btcDailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-30T13:31:17+05:30",
     "timeDisplay": "01:31 PM, Sep 30",
-    "price": "82918.97",
-    "bias": "bearish",
-    "behavior": "[WED 13:31] [S2]: Demand Floor Breakdown below Day Low with sell displacement",
-    "tp": "82,500 / 82,200",
-    "sl": "83,220",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-30T13:31:17+05:30",
-    "timeDisplay": "01:31 PM, Sep 30",
     "price": "83225.72",
     "bias": "bullish",
     "behavior": "[WED 13:31] [KB1]: Bullish Demand OB and primary intraday discount absorption zone",
     "tp": "83,700 / 83,820",
     "sl": "82,950",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-30T13:31:17+05:30",
-    "timeDisplay": "01:31 PM, Sep 30",
-    "price": "82738.08",
-    "bias": "bullish",
-    "behavior": "[WED 13:31] [KB3]: 4H Major Institutional Demand Base & macro mean reversion origin",
-    "tp": "83,500 / 84,000",
-    "sl": "82,350",
     "status": "na"
   },
   {
@@ -476,6 +531,15 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "id": "BTC_20260930_203145",
+    "timestamp": "2026-09-30T20:31:45+05:30",
+    "timeDisplay": "08:31 PM, Sep 30",
+    "spot": "83769.06",
+    "trigger": "US Session Decision Point (Post-Open Market Structure Review",
+    "source": "BTC-AI",
+    "text": "# ₿ Bitcoin (BTC/USD) Tactical Update (08:30 PM IST - Sep 30, 2026 | Spot: $83769.06 | Trigger: US Session Decision Point (Post-Open Market Structure Review))\n\n\n---\n\n================================================================================\n🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• **Daily Market Bias**: 🟢 BULLISH / ⚪ TACTICAL CHOP | **Bias Score**: +1.0 / +6.0 | **Confidence**: Neutral (Chop / Mean-Reversion)  \n• **Bias Invalidation Floor**: $77,500.00 (A sustained 15M close below $77,500.00 invalidates macro bullish bias)  \n\n📍 **Tactical Directives**:\n• **Primary Outlook**: Pullback & Liquidity Absorption. Following an aggressive London expansion to $85,599.92, spot has pulled back into the intraday equilibrium zone ($83,769.06). Macro bias remains constructive above $82,918.97 Day Low, favoring buy-on-dip setups at key demand order blocks while fading unconfirmed chop in the middle of the range.\n• **Execution**: Avoid longing directly into the overhead 15M Bearish FVG ($83,787.60–$84,107.00) and Session VWAP ($84,027.21). Wait for confirmation at range extremes or a high-volume breakout.\n\n---\n\n### 1. Market Structure & Session Bias\nBitcoin Spot (BTC/USD) is trading at **$83,769.06**, consolidating inside a broad intraday expansion structure (**Day High: $85,599.92 | Day Low: $82,918.97 | Prior Day Close: $83,403.48**). Spot is trading above prior day close (+0.44% intraday net gain), but sits below the 9 and 21 EMAs on the 15-minute timeframe following a sharp corrective down-leg from London session peaks.\n- **Intermarket Backdrop**: DXY sits at $101.234 (slight intraday strength presenting a short-term headwind), while S&P 500 Futures trade firm at $7,773.75 (+0.25%), mitigating broad macro risk-off pressure.\n- **Crypto-Native Telemetry**: Funding rates remain neutral at 0.0014%, Fear & Greed Index reads 71 (Greed), and an unfilled CME Gap rests above at $83,975.00 (gap size: ~187 points), providing an upside mean-reversion magnet.\n- **Crypto News Guard**: 🔴 HIGH IMPACT: Institutional ETF inflows remain strong (+$2.95B over 30 days), maintaining structural buy pressure beneath major discount levels.\n\n---\n\n### 2. SMC & Liquidity Zones\n- **Buy-Side Liquidity (BSL)**: Clustered above the London session peak and Day High at **$85,599.92**, with intermediate resting stops stacked at the top of the 15M Bearish FVG (**$84,107.00**) and **$84,514.20**.\n- **Sell-Side Liquidity (SSL)**: Concentrated tightly beneath the Day Low at **$82,918.97**, extending toward the macro 4H demand base at **$82,738.08**.\n- **Institutional Order Blocks & Key Structural Confluences**:\n  - *Bearish Mitigation / Resistance OB*: $84,033.93 – $84,107.00 (Confluence with Session VWAP at $84,027.21 and CME Gap fill at $83,975.00).\n  - *Bullish Demand OB*: $83,622.00 – $83,653.72 (Confluence with 200 EMA at $83,653.72 and 15M Bullish FVG).\n  - *Volume Profile POC*: $83,388.14 (High-volume acceptance shelf).\n- **Fair Value Gaps (FVG)**:\n  - *15M Bearish FVG*: $83,787.60 – $84,107.00 (Active overhead supply).\n  - *15M Bullish FVG*: $83,622.00 – $83,633.60 (Immediate discount reaction zone).\n\n---\n\n### 3. Live Intraday Chop Zone / No-Trade Zone\n- **Range**: **$83,650.00 – $84,100.00**\n- **Context**: Current spot ($83,769.06) is pinned directly between the 200 EMA ($83,653.72) and Session VWAP ($84,027.21). Micro-wicks and two-way absorption dominate this equilibrium bracket. Unconfirmed market orders inside this corridor carry poor risk-to-reward; traders should wait for price action to test structural edges.\n\n---\n\n### 4. High Momentum / Explosive Zones\n- **Upside Short-Covering Squeeze (> $85,600.00 Spot)**: A sustained 5m/15m candle close above $85,599.92 clears the daily liquidity ceiling, triggering stop-loss cascades from intraday top-callers toward $86,200.00 and $86,850.00.\n- **Downside Long-Liquidation Cascade (< $82,918.97 Spot)**: A sustained 5m close below the Day Low floor flushes late-long stops, accelerating price through the void toward $82,450.00 and $81,900.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[B1]** | 🟢 **Long (Demand Floor SSL Sweep)** | **$82,918.97** Reclaim | Liquidity sweep below $82,918.97 rejected with lower absorption wick, followed by a 5m close back ABOVE $83,050.00 | **TP1:** $83,650.00<br>**TP2:** $84,025.00 | **$82,650.00** | 1:2.8 |\n| **[B2]** | 🟢 **Long (High-Momentum Breakout)** | **$85,599.92** Breakout | Sustained 5m/15m candle close ABOVE $85,600.00 with expanding buy volume and no immediate upper wick rejection | **TP1:** $86,200.00<br>**TP2:** $86,850.00 | **$85,150.00** | 1:2.8 |\n| **[S1]** | 🔴 **Short (Bearish FVG Rejection)** | **$83,787.60–$84,107.00** Rejection | Corrective bounce into 15M FVG & VWAP ($84,027.21) rejected with upper wick, closing back BELOW $83,750.00 on 5m | **TP1:** $83,388.00<br>**TP2:** $82,920.00 | **$84,200.00** | 1:2.5 |\n| **[S2]** | 🔴 **Short (Demand Floor Breakdown)** | **$82,918.97** Breakdown | Sustained 5m close BELOW $82,918.97 with aggressive sell displacement and volume expansion | **TP1:** $82,450.00<br>**TP2:** $81,900.00 | **$83,250.00** | 1:3.0 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$83,630.00 – $83,653.72** | Support / Demand | **[KB1]** | 200 EMA confluence with 15M Bullish FVG; immediate dynamic intraday bounce floor | $84,027.00 | $83,450.00 |\n| **$83,388.14** | Support / High Volume Node | **[KB2]** | Volume Profile Point of Control (POC); high-density institutional accumulation base | $84,000.00 | $82,950.00 |\n| **$82,918.97** | Support / Liquidity Shelf | **[KB3]** | Intraday Day Low and primary Sell-Side Liquidity (SSL) accumulation pool | $83,650.00 | $82,650.00 |\n| **$82,738.08** | Support / Macro Demand | **[KB4]** | Higher-timeframe 4H Demand Base; final structural defense above $82k macro handle | $83,500.00 | $82,300.00 |\n| **$84,027.21 – $84,107.00** | Resistance / Supply Zone | **[KS1]** | Session VWAP, CME Gap target ($83,975), and 15M Bearish FVG upper boundary | $83,388.00 | $84,250.00 |\n| **$85,599.92** | Resistance / BSL Pool | **[KS2]** | Current Day High; major buy-side liquidity shelf and short squeeze trigger line | $84,500.00 | $85,850.00 |"
+  },
+  {
     "id": "BTC_20260930_183205",
     "timestamp": "2026-09-30T18:32:05+05:30",
     "timeDisplay": "06:32 PM, Sep 30",
