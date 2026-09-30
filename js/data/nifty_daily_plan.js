@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-30T13:30:51+05:30",
+    "timeDisplay": "01:30 PM, Sep 30",
+    "price": "22745",
+    "bias": "bullish",
+    "behavior": "[WED 13:30] [B1]: 5-minute bullish reversal candle confirming support holding at 22,740 - 22,745 with expanding volume",
+    "tp": "22,805 / 22,850",
+    "sl": "22,720",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T13:30:51+05:30",
+    "timeDisplay": "01:30 PM, Sep 30",
+    "price": "22810",
+    "bias": "bullish",
+    "behavior": "[WED 13:30] [B2]: Sustained 5-minute close ABOVE 22,810 with active futures volume confirming absorption",
+    "tp": "22,865 / 22,920",
+    "sl": "22,770",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T13:30:51+05:30",
+    "timeDisplay": "01:30 PM, Sep 30",
+    "price": "22805",
+    "bias": "bearish",
+    "behavior": "[WED 13:30] [S1]: 5-minute bearish rejection wick / engulfing at 22,805 - 22,810 showing buyer exhaustion",
+    "tp": "22,750 / 22,720",
+    "sl": "22,825",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T13:30:51+05:30",
+    "timeDisplay": "01:30 PM, Sep 30",
+    "price": "22735",
+    "bias": "bearish",
+    "behavior": "[WED 13:30] [S2]: Sustained 5-minute close BELOW 22,735 with surging futures selling volume confirming false breakout",
+    "tp": "22,680 / 22,660",
+    "sl": "22,765",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-30T13:02:55+05:30",
     "timeDisplay": "01:02 PM, Sep 30",
     "price": "22790",
@@ -190,6 +234,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260930_133054",
+    "timestamp": "2026-09-30T13:30:54+05:30",
+    "timeDisplay": "01:30 PM, Sep 30",
+    "spot": "22773.5",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:30 PM IST - Sep 30, 2026 | Spot: 22773.5 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n> ⚠️ **THETA CRUSH DAY**: India VIX is down -3.43%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- [Chop Range]: 22,745 - 22,810 (Spot Index). Spot is compressing between the retest of the 15M ORB High (22,736.65) and Day High (22,809.35). With volume tracking at 1x average and suppressed volatility, trading inside this 65-point band carries high premium erosion risk.\n- [Execution Discipline]: Do not take unconfirmed naked option positions between 22,745 and 22,810. Require boundary expansion with institutional volume confirmation before entering.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Above 22,810): Sustained 5-minute close above Day High (22,809.35) with expanding futures volume (>1.5x) triggers rapid short-covering acceleration toward 22,865 and 22,920.\n- [Bearish Breakdown] (Below 22,735): Decisive 5-minute close below the 15M ORB High (22,736.65) confirms a failed breakout trap, initiating long unwinding toward 22,680 and Day Low (22,659.80).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB Retest Bounce): 5-minute bullish reversal candle confirming support holding at 22,740 - 22,745 with expanding volume. | TP: 22,805 / 22,850 | SL: 22,720 | 💡 Buy 22750 CE + Sell 22800 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout): Sustained 5-minute close ABOVE 22,810 with active futures volume confirming absorption. | TP: 22,865 / 22,920 | SL: 22,770 | 💡 Buy 22800 CE + Sell 22850 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Supply Rejection): 5-minute bearish rejection wick / engulfing at 22,805 - 22,810 showing buyer exhaustion. | TP: 22,750 / 22,720 | SL: 22,825 | 💡 Buy 22800 PE + Sell 22750 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Breakdown Trap): Sustained 5-minute close BELOW 22,735 with surging futures selling volume confirming false breakout. | TP: 22,680 / 22,660 | SL: 22,765 | 💡 Buy 22750 PE + Sell 22700 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20260930_130258",
     "timestamp": "2026-09-30T13:02:58+05:30",
     "timeDisplay": "01:02 PM, Sep 30",
