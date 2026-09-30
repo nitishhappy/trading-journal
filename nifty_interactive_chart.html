@@ -1823,7 +1823,8 @@
                 const levelSource = (lvl.source || 'AI').toUpperCase();
                 const cleanTag = tag.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
                 const cleanPrice = String(lvl.price).replace(/[^0-9.]/g, '');
-                const levelUniqueId = `nifty_${cleanTag}_${cleanPrice}`;
+                const runSuffix = levelsData.anchorTimestamp ? '_' + Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000) : '';
+                const levelUniqueId = `nifty_${cleanTag}_${cleanPrice}${runSuffix}`;
                 const savedOutcome = getSavedOutcome(levelUniqueId);
 
                 // ✅ Tag-aware line styles:

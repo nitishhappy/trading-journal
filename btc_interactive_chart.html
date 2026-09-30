@@ -1759,7 +1759,8 @@
                 // Unique ID for Scorecard persistence (normalized — stable across re-renders)
                 const cleanTag = tag.replace(/[^A-Z0-9]/gi, '').toUpperCase();
                 const cleanPrice = String(lvl.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '');
-                const levelUniqueId = `btc_${cleanTag}_${cleanPrice}`;
+                const runSuffix = levelsData.anchorTimestamp ? '_' + Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000) : '';
+                const levelUniqueId = `btc_${cleanTag}_${cleanPrice}${runSuffix}`;
                 const savedOutcome = getSavedOutcome(levelUniqueId);
 
                 const isActionSetup = /^\[(?!K)[BS]\d+\]$/i.test(tag);

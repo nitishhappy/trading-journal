@@ -1832,7 +1832,8 @@
                 // Normalized unique ID for Scorecard persistence
                 const cleanTag = tag.replace(/[^A-Z0-9]/gi, '').toUpperCase();
                 const cleanPrice = String(lvl.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '');
-                const levelUniqueId = `sp500_${cleanTag}_${cleanPrice}`;
+                const runSuffix = levelsData.anchorTimestamp ? '_' + Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000) : '';
+                const levelUniqueId = `sp500_${cleanTag}_${cleanPrice}${runSuffix}`;
                 const savedOutcome = getSavedOutcome(levelUniqueId);
 
                 // ✅ Tag-aware line styles:

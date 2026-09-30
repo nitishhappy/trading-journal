@@ -178,6 +178,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.51 — 30 Sep 2026 — Scorecard Per-Briefing-Run Isolation (All Charts)
+- **Bug Fix**: Scorecard Worked/Failed selections were bleeding across briefing runs. Marking S3 as "Worked" on the 01:02 PM run would persist when switching to the 01:30 PM run (and vice versa).
+- **Root Cause**: `levelUniqueId` was `{asset}_{tag}_{price}` — no briefing run identifier. Same level appearing in multiple runs shared the same persistence key.
+- **Fix**: Appended `anchorTimestamp` epoch seconds to `levelUniqueId` → now `{asset}_{tag}_{price}_{runEpoch}`, ensuring each briefing run maintains independent scorecard state.
+- Applied consistently to all 4 charts: **Nifty**, **BTC**, **Gold**, **SP500**.
+
 ### v2.3.50 — 30 Sep 2026 — SP500 Vertical Lines Fix & Nifty Latest-Run Consistency
 - **SP500 Interactive Chart — Missing Vertical Lines Fix**:
   - Root cause: `aiBriefingTimes[0]` was assumed to be the latest briefing run, but extraction order doesn't guarantee newest-first. This caused the chart to scroll/highlight the wrong briefing, hiding vertical lines from view.
