@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-09-30T15:45:44+05:30",
+    "timeDisplay": "03:45 PM, Sep 30",
+    "price": "22665",
+    "bias": "bullish",
+    "behavior": "[WED 15:45] [B1]: 5-min close back above 22665.00 with active futures volume confirming day-low seller absorption",
+    "tp": "22735.00 / 22800.00",
+    "sl": "22620.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T15:45:44+05:30",
+    "timeDisplay": "03:45 PM, Sep 30",
+    "price": "22740",
+    "bias": "bullish",
+    "behavior": "[WED 15:45] [B2]: Sustained 15-min candle close above 22740.00 clearing opening supply",
+    "tp": "22810.00 / 22865.00",
+    "sl": "22695.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T15:45:44+05:30",
+    "timeDisplay": "03:45 PM, Sep 30",
+    "price": "22590",
+    "bias": "bearish",
+    "behavior": "[WED 15:45] [S1]: 5-min candle close below 22590.00 confirming breakdown of intraday demand shelf",
+    "tp": "22530.00 / 22475.00",
+    "sl": "22635.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-09-30T15:45:44+05:30",
+    "timeDisplay": "03:45 PM, Sep 30",
+    "price": "22665",
+    "bias": "bearish",
+    "behavior": "[WED 15:45] [S2]: Retest into 22660.00 - 22675.00 flipped resistance forming a bearish rejection structure",
+    "tp": "22595.00 / 22530.00",
+    "sl": "22705.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-09-30T14:46:02+05:30",
     "timeDisplay": "02:46 PM, Sep 30",
     "price": "22615",
@@ -8,17 +52,6 @@ window.dailyPlanData = [
     "behavior": "[WED 14:46] [B1]: 5m bullish pin bar or engulfing close above 22615 following a sweep of Day Low 22595.20",
     "tp": "22660 / 22700",
     "sl": "22585",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-30T14:46:02+05:30",
-    "timeDisplay": "02:46 PM, Sep 30",
-    "price": "22665",
-    "bias": "bullish",
-    "behavior": "[WED 14:46] [B2]: Sustained 5m close above 22665 confirming acceptance back inside the 15M Opening Range",
-    "tp": "22710 / 22740",
-    "sl": "22625",
     "status": "na"
   },
   {
@@ -223,17 +256,6 @@ window.dailyPlanData = [
     "source": "AI",
     "timestamp": "2026-09-30T10:15:50+05:30",
     "timeDisplay": "10:15 AM, Sep 30",
-    "price": "22740",
-    "bias": "bullish",
-    "behavior": "[WED 10:15] [B1]: Bullish rejection close above 22,740 following pullback to 15M ORB High (22,736.65) with volume absorption",
-    "tp": "22,780 / 22,820",
-    "sl": "22,718",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-09-30T10:15:50+05:30",
-    "timeDisplay": "10:15 AM, Sep 30",
     "price": "22765",
     "bias": "bullish",
     "behavior": "[WED 10:15] [B2]: Sustained 5m close ABOVE 22,765 confirming fresh high momentum expansion over Day High (22,755.75)",
@@ -289,6 +311,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20260930_154547",
+    "timestamp": "2026-09-30T15:45:47+05:30",
+    "timeDisplay": "03:45 PM, Sep 30",
+    "spot": "22620.45",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Sep 30, 2026 | Spot: 22620.45 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 22600.00 – 22660.00 Spot Index (Compressed 60-point band between Day Low liquidity shelf and 15M ORB Low resistance).\n- Context: Price closed near the lower boundary of the session after an intraday decline from Day High 22809.35. Within this 22600–22660 range, spot price action is rotational with muted institutional futures activity (1x 8-bar avg), creating heightened theta decay risk for directional naked buyers.\n- Boundary Rules: No directional entries inside 22600–22660 without an explicit 5-minute close outside the threshold boundaries.\n\n4. High Momentum / Explosive Zones:\n- Downside Liquidation Run ([Breakdown below 22590.00]): A clean 5-minute close below Day Low 22595.20 triggers trapped long stop-loss cascades and short-gamma expansion towards 22530.00 and 22475.00.\n- Upside Short Squeeze ([Reclaim above 22665.00]): Sustained 5-minute acceptance above the 15M ORB Low (22659.80) forces aggressive late-session short covering, opening a momentum extension towards 22735.00 (ORB High).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB Low Reclaim Reversal): 5-min close back above 22665.00 with active futures volume confirming day-low seller absorption. | TP: 22735.00 / 22800.00 | SL: 22620.00 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (ORB High Breakout Expansion): Sustained 15-min candle close above 22740.00 clearing opening supply. | TP: 22810.00 / 22865.00 | SL: 22695.00 | 💡 Buy 22700 CE + Sell 22750 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day Low Breakdown Continuation): 5-min candle close below 22590.00 confirming breakdown of intraday demand shelf. | TP: 22530.00 / 22475.00 | SL: 22635.00 | 💡 Buy 22600 PE + Sell 22550 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Pullback Exhaustion Rejection): Retest into 22660.00 – 22675.00 flipped resistance forming a bearish rejection structure. | TP: 22595.00 / 22530.00 | SL: 22705.00 | 💡 Buy 22650 PE + Sell 22600 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20260930_144604",
     "timestamp": "2026-09-30T14:46:04+05:30",
     "timeDisplay": "02:46 PM, Sep 30",
