@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-01T09:30:44+05:30",
+    "timeDisplay": "09:30 AM, Oct 01",
+    "price": "22525",
+    "bias": "bullish",
+    "behavior": "[THU 09:30] [B1]: Liquidity sweep of 22,508.05 followed by 5m bullish close back above 22,525",
+    "tp": "22,565 / 22,590",
+    "sl": "22,495",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T09:30:44+05:30",
+    "timeDisplay": "09:30 AM, Oct 01",
+    "price": "22595",
+    "bias": "bullish",
+    "behavior": "[THU 09:30] [B2]: Sustained 5m close ABOVE 22,595 with volume expansion confirming absorption",
+    "tp": "22,645 / 22,695",
+    "sl": "22,560",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T09:30:44+05:30",
+    "timeDisplay": "09:30 AM, Oct 01",
+    "price": "22565",
+    "bias": "bearish",
+    "behavior": "[THU 09:30] [S1]: Rejection at 22,565 with bearish wick confirming lower-high continuation",
+    "tp": "22,525 / 22,510",
+    "sl": "22,585",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T09:30:44+05:30",
+    "timeDisplay": "09:30 AM, Oct 01",
+    "price": "22505",
+    "bias": "bearish",
+    "behavior": "[THU 09:30] [S2]: Decisive 5m close BELOW 22,505 confirming institutional long liquidation",
+    "tp": "22,460 / 22,415",
+    "sl": "22,540",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-01T09:18:51+05:30",
     "timeDisplay": "09:18 AM, Oct 01",
     "price": "22680",
@@ -300,6 +344,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261001_093046",
+    "timestamp": "2026-10-01T09:30:46+05:30",
+    "timeDisplay": "09:30 AM, Oct 01",
+    "spot": "22538.7",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22538.70 < Min Plan Target $22590.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:30 AM IST - Oct 01, 2026 | Spot: 22538.7 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22538.70 < Min Plan Target $22590.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Spot range 22,525 – 22,565 represents the internal 15M ORB rotational equilibrium where option buyers face severe theta decay.\n- Spot is trapped between the mid-point resistance (22,550 – 22,565) and the 15M opening low liquidity shelf (22,508 – 22,525).\n- Volume proxy shows baseline 1x participation; aggressive market orders inside 22,525 – 22,565 carry low expected value and whipsaw vulnerability.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Upside ORB Breakout above 22,595): Sustained 5m candle close above 22,590.05 Day High with volume spike triggers short-covering targeting 22,645 and 22,695.\n- [Bearish Expansion] (Downside Liquidity Breakdown below 22,505): Clean 5m breakdown and close below 22,508.05 ORB Low triggers stop-runs and long unwinding targeting 22,460 and 22,415.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Reversal / ORB Low Sweep): 5m liquidity sweep of 22,508.05 followed by an immediate bullish rejection candle closing back above 22,525 with volume confirmation. | TP: 22,565 / 22,590 | SL: 22,495 | 💡 Buy 22500 CE + Sell 22550 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (ORB High Breakout & Expansion): Sustained 5m close ABOVE 22,595 with active futures volume confirming absorption of call open interest. | TP: 22,645 / 22,695 | SL: 22,560 | 💡 Buy 22550 CE + Sell 22600 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Mid-Band / Supply Rejection): Failure to cross 22,565 with a bearish rejection wick / CHoCH confirming lower-high continuation back toward ORB Low. | TP: 22,525 / 22,510 | SL: 22,585 | 💡 Buy 22550 PE + Sell 22500 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Low Breakdown Continuation): Decisive 5m close BELOW 22,505 with expanding volume, confirming institutional long liquidation. | TP: 22,460 / 22,415 | SL: 22,540 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261001_091853",
     "timestamp": "2026-10-01T09:18:53+05:30",
     "timeDisplay": "09:18 AM, Oct 01",
