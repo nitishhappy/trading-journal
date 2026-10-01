@@ -1,44 +1,44 @@
 window.dailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-10-01T10:31:25+05:30",
-    "timeDisplay": "10:31 AM, Oct 01",
+    "timestamp": "2026-10-01T11:24:58+05:30",
+    "timeDisplay": "11:24 AM, Oct 01",
     "price": "22550",
     "bias": "bullish",
-    "behavior": "[THU 10:31] [B1]: Retest of 22,530 - 22,540 followed by 5m bullish close back above 22,550",
+    "behavior": "[THU 11:24] [B1]: Retest of 22,530 - 22,540 followed by 5m bullish close back above 22,550",
     "tp": "22,585 / 22,610",
     "sl": "22,515",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-01T10:31:25+05:30",
-    "timeDisplay": "10:31 AM, Oct 01",
+    "timestamp": "2026-10-01T11:24:58+05:30",
+    "timeDisplay": "11:24 AM, Oct 01",
     "price": "22615",
     "bias": "bullish",
-    "behavior": "[THU 10:31] [B2]: Sustained 5m close ABOVE 22,615 with active futures volume confirming absorption",
+    "behavior": "[THU 11:24] [B2]: Sustained 5m close ABOVE 22,615 with active futures volume confirming absorption",
     "tp": "22,665 / 22,715",
     "sl": "22,575",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-01T10:31:25+05:30",
-    "timeDisplay": "10:31 AM, Oct 01",
+    "timestamp": "2026-10-01T11:24:58+05:30",
+    "timeDisplay": "11:24 AM, Oct 01",
     "price": "22585",
     "bias": "bearish",
-    "behavior": "[THU 10:31] [S1]: Rejection at 22,585 with bearish wick confirming lower-high rotation",
+    "behavior": "[THU 11:24] [S1]: Rejection at 22,585 with bearish wick confirming lower-high rotation",
     "tp": "22,540 / 22,515",
     "sl": "22,605",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-01T10:31:25+05:30",
-    "timeDisplay": "10:31 AM, Oct 01",
+    "timestamp": "2026-10-01T11:24:58+05:30",
+    "timeDisplay": "11:24 AM, Oct 01",
     "price": "22500",
     "bias": "bearish",
-    "behavior": "[THU 10:31] [S2]: Decisive 5m close BELOW 22,500 confirming institutional long liquidation",
+    "behavior": "[THU 11:24] [S2]: Decisive 5m close BELOW 22,500 confirming institutional long liquidation",
     "tp": "22,455 / 22,410",
     "sl": "22,535",
     "status": "na"
@@ -311,6 +311,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261001_112459",
+    "timestamp": "2026-10-01T11:24:59+05:30",
+    "timeDisplay": "11:24 AM, Oct 01",
+    "spot": "22554.35",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:23 AM IST - Oct 01, 2026 | Spot: 22554.35 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Spot range 22,540 – 22,575 represents the internal intraday rotational equilibrium where option buyers face acute theta decay.\n- Spot is trapped between overhead supply from the morning Day High / ORB High rejection (22,580 – 22,610) and internal buyer absorption above the 15M ORB Low (22,510 – 22,535).\n- Nifty Future volume proxy registers baseline 1.0x participation, indicating lack of institutional trend conviction within the 22,540 – 22,575 consolidation band.\n- As today is Thursday (Nifty Weekly Expiry), intense 22,550 straddle writing creates sticky pinning behavior inside this band; option buyers must refrain from market orders within this chop zone.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Day High Breakout above 22,615): Sustained 5m candle close above 22,610.60 Day High with expanding futures volume triggers short-covering of 22,600 CE positions, targeting 22,665 and 22,715.\n- [Bearish Expansion] (Day Low / ORB Breakdown below 22,500): Clean 5m breakdown and close below 22,508.05 Day Low with expanding futures volume triggers stop-runs and long unwinding, targeting 22,455 and 22,410.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Demand Reclamation / Equilibrium Defense): 5m retest and defense of 22,530 – 22,540 demand shelf followed by an immediate bullish close back above 22,550 with volume confirmation. | TP: 22,585 / 22,610 | SL: 22,515 | 💡 Buy 22550 CE + Sell 22600 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout & Expansion): Sustained 5m close ABOVE 22,615 with active futures volume confirming absorption of overhead call open interest. | TP: 22,665 / 22,715 | SL: 22,575 | 💡 Buy 22600 CE + Sell 22650 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Rejection / Lower High Rotation): Failure to cross 22,585 accompanied by a bearish rejection wick / CHoCH confirming lower-high continuation back toward 22,540. | TP: 22,540 / 22,515 | SL: 22,605 | 💡 Buy 22600 PE + Sell 22550 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low / ORB Breakdown Continuation): Decisive 5m close BELOW 22,500 with expanding futures volume confirming institutional long liquidation. | TP: 22,455 / 22,410 | SL: 22,535 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261001_103130",
     "timestamp": "2026-10-01T10:31:30+05:30",
     "timeDisplay": "10:31 AM, Oct 01",
