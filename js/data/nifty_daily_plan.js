@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-01T14:00:55+05:30",
+    "timeDisplay": "02:00 PM, Oct 01",
+    "price": "22275",
+    "bias": "bullish",
+    "behavior": "[THU 14:00] [B1]: Reclaim above 22,275.00 following Day Low sweep with expanding futures volume",
+    "tp": "22,330 / 22,385",
+    "sl": "22,235",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T14:00:55+05:30",
+    "timeDisplay": "02:00 PM, Oct 01",
+    "price": "22330",
+    "bias": "bullish",
+    "behavior": "[THU 14:00] [B2]: Sustained 5m close ABOVE 22,330.00 with active futures volume confirming supply absorption",
+    "tp": "22,390 / 22,445",
+    "sl": "22,280",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T14:00:55+05:30",
+    "timeDisplay": "02:00 PM, Oct 01",
+    "price": "22265",
+    "bias": "bearish",
+    "behavior": "[THU 14:00] [S1]: Pullback into 22,285-22,305 rejected with 5m close back BELOW 22,265.00",
+    "tp": "22,215 / 22,165",
+    "sl": "22,315",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T14:00:55+05:30",
+    "timeDisplay": "02:00 PM, Oct 01",
+    "price": "22235",
+    "bias": "bearish",
+    "behavior": "[THU 14:00] [S2]: Sustained 5m close firmly BELOW 22,235.00 with expanding red futures volume taking out Day Low",
+    "tp": "22,180 / 22,130",
+    "sl": "22,285",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-01T13:46:31+05:30",
     "timeDisplay": "01:46 PM, Oct 01",
     "price": "22325",
@@ -52,17 +96,6 @@ window.dailyPlanData = [
     "behavior": "[THU 13:33] [B1]: Sustained 5m close ABOVE 22,360 with expanding futures volume confirming overhead supply absorption",
     "tp": "22,410 / 22,460",
     "sl": "22,315",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-01T13:33:01+05:30",
-    "timeDisplay": "01:33 PM, Oct 01",
-    "price": "22330",
-    "bias": "bullish",
-    "behavior": "[THU 13:33] [B2]: Sweep under Day Low 22,301.30 swiftly reclaimed with confirmed 5m close ABOVE 22,330 and buy volume spike",
-    "tp": "22,390 / 22,440",
-    "sl": "22,290",
     "status": "na"
   },
   {
@@ -465,6 +498,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261001_140058",
+    "timestamp": "2026-10-01T14:00:58+05:30",
+    "timeDisplay": "02:00 PM, Oct 01",
+    "spot": "22246.3",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22246.30 < Min Plan Target $22270.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:00 PM IST - Oct 01, 2026 | Spot: 22246.3 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22246.30 < Min Plan Target $22270.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- [Chop Range]: 22,235.00 – 22,270.00 (Spot Index). Spot is compressing immediately beneath the broken prior Day Low (22,254.50) around the psychological 22,250 strike threshold. With active futures volume holding baseline at 1.0x (8-bar average), aggressive delta-neutral straddle hedging and rapid two-way liquidity probing create severe theta burn for naked option buyers.\n- [Execution Discipline]: STRICT NO-TRADE ZONE inside 22,235.00–22,270.00. Avoid initiating directional positions within this 35-point compression pocket. Await a confirmed 5-minute directional candle close outside these boundaries backed by expanding futures volume.\n\n4. High Momentum / Explosive Zones:\n- [Bearish Breakdown Flush] ([Sustained 5m close BELOW 22,235.00]): Confirms price acceptance below Day Low (22,254.50) and triggers capitulation of remaining 22,250 / 22,300 Put open interest defense, driving aggressive long unwinding and momentum cascading toward 22,180.00 and 22,130.00.\n- [Bullish Liquidity Sweep & Reclaim] ([5m rejection sweep under 22,245.00 followed by confirmed close ABOVE 22,275.00]): Traps aggressive breakdown sellers into a false-breakout bear trap beneath Day Low, triggering rapid short-covering acceleration back toward 22,330.00 and 22,385.00.\n- [Bullish Value Re-expansion] ([Sustained 5m close ABOVE 22,330.00]): Decisively clears the intraday supply shelf, forcing intraday Call writers to cover and driving momentum expansion toward 22,390.00 and 22,445.00.\n- [Bearish Pullback Shelf Rejection] ([5m rejection wick / failure in the 22,285.00 - 22,305.00 zone]): Inability to reclaim prior breakdown support with prominent upper wicks confirms seller absorption, initiating a rollover back down to retest 22,235.00 and fresh session lows.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day Low Sweep & Value Reclaim Long): 5-minute bullish reversal candle sweeping beneath Day Low (22,254.50) and confirming close back ABOVE 22,275.00 with expanding green futures volume. | TP: 22,330.00 / 22,385.00 | SL: 22,235.00 | 💡 Buy 22250 CE + Sell 22300 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Broken Shelf Absorption Breakout Long): Sustained 5-minute close ABOVE 22,330.00 with active futures volume confirming absorption of overhead supply. | TP: 22,390.00 / 22,445.00 | SL: 22,280.00 | 💡 Buy 22300 CE + Sell 22350 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Broken Pivot Pullback Rejection Short): Corrective pullback into 22,285.00–22,305.00 rejected with prominent upper wicks, followed by confirmed 5-minute close back BELOW 22,265.00. | TP: 22,215.00 / 22,165.00 | SL: 22,315.00 | 💡 Buy 22250 PE + Sell 22200 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5-minute close firmly BELOW 22,235.00 taking out Day Low (22,254.50) with expanding red futures volume confirming put floor capitulation. | TP: 22,180.00 / 22,130.00 | SL: 22,285.00 | 💡 Buy 22200 PE + Sell 22150 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261001_134633",
     "timestamp": "2026-10-01T13:46:33+05:30",
     "timeDisplay": "01:46 PM, Oct 01",
