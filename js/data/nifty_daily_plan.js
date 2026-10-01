@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-01T13:46:31+05:30",
+    "timeDisplay": "01:46 PM, Oct 01",
+    "price": "22325",
+    "bias": "bullish",
+    "behavior": "[THU 13:46] [B1]: Sweep below Day Low (22,273.65) followed by confirmed 5m close back ABOVE 22,325.00 with expanding futures volume",
+    "tp": "22,380 / 22,435",
+    "sl": "22,265",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T13:46:31+05:30",
+    "timeDisplay": "01:46 PM, Oct 01",
+    "price": "22380",
+    "bias": "bullish",
+    "behavior": "[THU 13:46] [B2]: Sustained 5m close ABOVE 22,380.00 with active futures volume confirming absorption of overhead supply",
+    "tp": "22,440 / 22,500",
+    "sl": "22,320",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T13:46:31+05:30",
+    "timeDisplay": "01:46 PM, Oct 01",
+    "price": "22290",
+    "bias": "bearish",
+    "behavior": "[THU 13:46] [S1]: Pullback into 22,325-22,345 rejected with upper wicks and 5m close back BELOW 22,290.00",
+    "tp": "22,240 / 22,190",
+    "sl": "22,340",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T13:46:31+05:30",
+    "timeDisplay": "01:46 PM, Oct 01",
+    "price": "22270",
+    "bias": "bearish",
+    "behavior": "[THU 13:46] [S2]: Sustained 5m close firmly BELOW 22,270.00 taking out Day Low (22,273.65) with expanding red futures volume",
+    "tp": "22,215 / 22,165",
+    "sl": "22,315",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-01T13:33:01+05:30",
     "timeDisplay": "01:33 PM, Oct 01",
     "price": "22360",
@@ -421,6 +465,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261001_134633",
+    "timestamp": "2026-10-01T13:46:33+05:30",
+    "timeDisplay": "01:46 PM, Oct 01",
+    "spot": "22293.4",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22293.40 < Min Plan Target $22300.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:45 PM IST - Oct 01, 2026 | Spot: 22293.4 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22293.40 < Min Plan Target $22300.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 22,275.00 – 22,325.00 (Spot Index). Following an aggressive continuation breakdown through the prior 22,300.00 target boundary down to a fresh session low at 22,273.65, spot price is consolidating within a tight 50-point friction corridor between 22,275.00 and 22,325.00. With active Nifty Futures volume tracking at 1.0x baseline (8-bar average), 22,300 Put writers are actively defending remaining positions while aggressive 22,300–22,350 Call writers cap relief attempts, producing sharp two-way micro-chop.\n- Rationale: Directional option buying inside this 50-point zone carries acute theta decay and false-breakout risk on expiry afternoon. Without institutional futures volume expansion (>1.5x), price wicks will whipsaw unpredictably between the 22,273.65 low defense and the broken 22,325.00 shelf.\n- Execution Directive: STRICT NO-TRADE ZONE for directional option buying inside 22,275.00–22,325.00. Maintain strict discipline and stand aside until a verified 5-minute directional candle closes cleanly outside these boundaries with active futures volume confirmation.\n\n4. High Momentum / Explosive Zones:\n- [Downside Long-Liquidation Cascade] ([Sustained 5m close BELOW 22,270.00]): Decisively takes out Day Low (22,273.65) and triggers total capitulation of 22,300 Put open interest, unlocking an accelerated liquidation flush into deep macro demand at 22,215.00 and 22,165.00.\n- [Bullish SFP & Day Low Reclaim Squeeze] ([5m liquidity sweep below 22,273.65 followed by confirmed close back ABOVE 22,325.00]): Traps late breakdown short sellers into a classic Swing Failure Pattern, triggering an aggressive short-covering squeeze toward 22,380.00 and 22,435.00.\n- [Bearish Breaker Shelf Rejection] ([5m upper-wick exhaustion rejection in the 22,325.00 - 22,345.00 zone followed by close back BELOW 22,290.00]): Confirms failure to absorb overhead supply at the broken floor, setting up a fast rollover back to test Day Low at 22,273.65.\n- [Macro Supply Wall Reclaim] ([Sustained 5m close ABOVE 22,380.00]): Clears the pre-breakdown consolidation base and forces intraday Call writers to cover aggressively, driving rapid expansion toward 22,440.00 and 22,500.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day Low SFP Liquidity Sweep Long): 5m liquidity sweep below Day Low (22,273.65) rejected with strong lower absorption wick, followed by a confirmed 5m candle close back ABOVE 22,325.00 with expanding green futures volume confirming trapped sellers. | TP: 22,380.00 / 22,435.00 | SL: 22,265.00 | 💡 Buy 22300 CE + Sell 22350 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Structural Reclaim & Short-Covering Long): Decisive and sustained 5m candle close ABOVE 22,380.00 accompanied by expanding active Nifty Futures volume confirming absorption of overhead supply. | TP: 22,440.00 / 22,500.00 | SL: 22,320.00 | 💡 Buy 22350 CE + Sell 22400 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Broken Floor Pullback Rejection Short): Corrective relief bounce into the 22,325.00–22,345.00 broken shelf rejected with upper exhaustion wicks, followed by a confirmed 5m candle close back BELOW 22,290.00. | TP: 22,240.00 / 22,190.00 | SL: 22,340.00 | 💡 Buy 22300 PE + Sell 22250 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m candle close firmly BELOW 22,270.00 taking out Day Low (22,273.65) with expanding red futures volume confirming put floor capitulation. | TP: 22,215.00 / 22,165.00 | SL: 22,315.00 | 💡 Buy 22250 PE + Sell 22200 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20261001_133303",
     "timestamp": "2026-10-01T13:33:03+05:30",
     "timeDisplay": "01:33 PM, Oct 01",
