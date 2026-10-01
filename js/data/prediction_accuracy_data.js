@@ -1,6 +1,174 @@
 // Auto-generated Real-time Prediction Accuracy Data
 window.predictionAccuracyLevels = [
   {
+    "id": 2856,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4139.23,
+    "price_raw": "4139.23",
+    "bias": "bullish",
+    "setup_tag": "G_S2",
+    "behavior": "[THU 11:01] [G_S2]: Day Low Liquidity Pool & Macro Demand (TP2)",
+    "tp": "4154.00 / 4142.00",
+    "sl": "4173.50",
+    "tp_val": 4154.0,
+    "sl_val": 4173.5,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
+    "id": 2855,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4154.0,
+    "price_raw": "4154.0",
+    "bias": "bullish",
+    "setup_tag": "G_S2",
+    "behavior": "[THU 11:01] [G_S2]: Intermediate Demand & Liquidity Pocket (TP1)",
+    "tp": "4154.00 / 4142.00",
+    "sl": "4173.50",
+    "tp_val": 4154.0,
+    "sl_val": 4173.5,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
+    "id": 2854,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4167.0,
+    "price_raw": "4167.0",
+    "bias": "bearish",
+    "setup_tag": "G_S2",
+    "behavior": "[THU 11:01] [G_S2]: Morning Impulse Structural Base & Breakdown Trigger",
+    "tp": "4154.00 / 4142.00",
+    "sl": "4173.50",
+    "tp_val": 4154.0,
+    "sl_val": 4173.5,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
+    "id": 2853,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4174.0,
+    "price_raw": "4174.0",
+    "bias": "bullish",
+    "setup_tag": "G_B1",
+    "behavior": "[THU 11:01] [G_B1]: Asian Breakout Breaker Block Retest / 15M FVG Demand",
+    "tp": "4187.00 / 4198.00",
+    "sl": "4167.50",
+    "tp_val": 4187.0,
+    "sl_val": 4167.5,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
+    "id": 2852,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4188.5,
+    "price_raw": "4188.5",
+    "bias": "bullish",
+    "setup_tag": "G_B2",
+    "behavior": "[THU 11:01] [G_B2]: Session High BSL Breakout Trigger",
+    "tp": "4200.00 / 4212.00",
+    "sl": "4182.00",
+    "tp_val": 4200.0,
+    "sl_val": 4182.0,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
+    "id": 2851,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4196.0,
+    "price_raw": "4196.0",
+    "bias": "bearish",
+    "setup_tag": "G_S1",
+    "behavior": "[THU 11:01] [G_S1]: Overhead Institutional Supply Rejection Zone",
+    "tp": "4182.00 / 4170.00",
+    "sl": "4203.50",
+    "tp_val": 4182.0,
+    "sl_val": 4203.5,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
+    "id": 2850,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4200.0,
+    "price_raw": "4200.0",
+    "bias": "bearish",
+    "setup_tag": "G_B2",
+    "behavior": "[THU 11:01] [G_B2]: Major Psychological Barrier & 4H Order Block Objective (TP1)",
+    "tp": "4200.00 / 4212.00",
+    "sl": "4182.00",
+    "tp_val": 4200.0,
+    "sl_val": 4182.0,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
+    "id": 2849,
+    "asset": "gold",
+    "timestamp": "2026-10-01T11:01:08+05:30",
+    "time_display": "11:01 AM, Oct 01",
+    "price": 4212.0,
+    "price_raw": "4212.0",
+    "bias": "bearish",
+    "setup_tag": "G_B2",
+    "behavior": "[THU 11:01] [G_B2]: HTF Extension & Macro Liquidity Target (TP2)",
+    "tp": "4200.00 / 4212.00",
+    "sl": "4182.00",
+    "tp_val": 4200.0,
+    "sl_val": 4182.0,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-10-01 05:31:09"
+  },
+  {
     "id": 2848,
     "asset": "nifty",
     "timestamp": "2026-10-01T10:31:25+05:30",
@@ -35,8 +203,8 @@ window.predictionAccuracyLevels = [
     "sl": "22,605",
     "tp_val": 22540.0,
     "sl_val": 22605.0,
-    "status": "waiting",
-    "entry_triggered_at": null,
+    "status": "active",
+    "entry_triggered_at": "2026-10-01T05:00:00+00:00",
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
@@ -77,8 +245,8 @@ window.predictionAccuracyLevels = [
     "sl": "22,515",
     "tp_val": 22585.0,
     "sl_val": 22515.0,
-    "status": "waiting",
-    "entry_triggered_at": null,
+    "status": "active",
+    "entry_triggered_at": "2026-10-01T05:15:00+00:00",
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
@@ -266,7 +434,7 @@ window.predictionAccuracyLevels = [
     "sl": "Impulsive 5M candle body close cleanly below $4153.50 with expanding red volume delta, confirming breakdown of the 50% Macro Equilibrium floor.",
     "tp_val": 4144.0,
     "sl_val": 5.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -287,7 +455,7 @@ window.predictionAccuracyLevels = [
     "sl": "Impulsive 5M candle body close cleanly below $4153.50 with expanding red volume delta, confirming breakdown of the 50% Macro Equilibrium floor.",
     "tp_val": 4144.0,
     "sl_val": 5.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -308,7 +476,7 @@ window.predictionAccuracyLevels = [
     "sl": "na",
     "tp_val": null,
     "sl_val": null,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -329,7 +497,7 @@ window.predictionAccuracyLevels = [
     "sl": "na",
     "tp_val": null,
     "sl_val": null,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -350,7 +518,7 @@ window.predictionAccuracyLevels = [
     "sl": "na",
     "tp_val": null,
     "sl_val": null,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -371,7 +539,7 @@ window.predictionAccuracyLevels = [
     "sl": "Liquidity probe sweeps Day High ($4170.22), prints extended upper rejection wick (SFP), and confirms an impulsive 5M red close back below $4166.50.",
     "tp_val": 4158.0,
     "sl_val": 4170.22,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -392,7 +560,7 @@ window.predictionAccuracyLevels = [
     "sl": "Strong 5M/15M candle body close cleanly above $4172.00 with expanding positive green volume delta into European pre-market trading.",
     "tp_val": 4180.0,
     "sl_val": 5.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -434,9 +602,9 @@ window.predictionAccuracyLevels = [
     "sl": "Strong 5M/15M candle body close cleanly above $4172.00 with expanding positive green volume delta into European pre-market trading.",
     "tp_val": 4180.0,
     "sl_val": 5.0,
-    "status": "waiting",
-    "entry_triggered_at": null,
-    "outcome_time": null,
+    "status": "failed",
+    "entry_triggered_at": "2026-10-01T05:00:00+00:00",
+    "outcome_time": "2026-10-01T05:00:00+00:00",
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
     "created_at": "2026-10-01 03:46:02"
@@ -10331,174 +10499,6 @@ window.predictionAccuracyLevels = [
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
     "created_at": "2026-09-27 02:32:17"
-  },
-  {
-    "id": 2251,
-    "asset": "btc",
-    "timestamp": "2026-09-27T08:02:14+05:30",
-    "time_display": "08:02 AM, Sep 27",
-    "price": 84560.47,
-    "price_raw": "84560.47",
-    "bias": "bearish",
-    "setup_tag": "KS1",
-    "behavior": "[SUN 08:02] [KS1]: Current Day High ($84,560.47) and 15M Bearish FVG ($84,564.0–$84,664.0); primary overhead liquidity barrier and squeeze gate toward CME Gap ($84,995.00)",
-    "tp": "84,420.06 / 84,266.99",
-    "sl": "84,720.00",
-    "tp_val": 84420.06,
-    "sl_val": 84720.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:32:17"
-  },
-  {
-    "id": 2250,
-    "asset": "btc",
-    "timestamp": "2026-09-27T08:02:14+05:30",
-    "time_display": "08:02 AM, Sep 27",
-    "price": 77500.0,
-    "price_raw": "77500.0",
-    "bias": "bullish",
-    "setup_tag": "KB4",
-    "behavior": "[SUN 08:02] [KB4]: Daily Market Bias Invalidation Floor ($77,500.00); macro trend baseline defending overall bullish structure",
-    "tp": "83,818.01 / 84,560.50",
-    "sl": "76,900.00",
-    "tp_val": 83818.01,
-    "sl_val": 76900.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:32:17"
-  },
-  {
-    "id": 2249,
-    "asset": "btc",
-    "timestamp": "2026-09-27T08:02:14+05:30",
-    "time_display": "08:02 AM, Sep 27",
-    "price": 83818.01,
-    "price_raw": "83818.01",
-    "bias": "bullish",
-    "setup_tag": "KB3",
-    "behavior": "[SUN 08:02] [KB3]: Current Day Low ($83,818.01); critical sell-side liquidity pool and structural bounce threshold",
-    "tp": "84,516.01 / 84,898.40",
-    "sl": "83,615.09",
-    "tp_val": 84516.01,
-    "sl_val": 83615.09,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:32:17"
-  },
-  {
-    "id": 2248,
-    "asset": "btc",
-    "timestamp": "2026-09-27T08:02:14+05:30",
-    "time_display": "08:02 AM, Sep 27",
-    "price": 84266.99,
-    "price_raw": "84266.99",
-    "bias": "bullish",
-    "setup_tag": "KB2",
-    "behavior": "[SUN 08:02] [KB2]: Session VWAP benchmark ($84,266.99) and 15M 200 EMA ($84,196.91); institutional volume-weighted trend anchor",
-    "tp": "84,560.50 / 84,995.00",
-    "sl": "84,050.00",
-    "tp_val": 84560.5,
-    "sl_val": 84050.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:32:17"
-  },
-  {
-    "id": 2247,
-    "asset": "btc",
-    "timestamp": "2026-09-27T08:02:14+05:30",
-    "time_display": "08:02 AM, Sep 27",
-    "price": 84420.06,
-    "price_raw": "84420.06",
-    "bias": "bullish",
-    "setup_tag": "KB1",
-    "behavior": "[SUN 08:02] [KB1]: 15M Bullish Demand OB ($84,330.44–$84,420.06) and Volume Profile POC ($84,319.17); immediate institutional bid absorption floor",
-    "tp": "84,560.50 / 84,995.00",
-    "sl": "84,196.91",
-    "tp_val": 84560.5,
-    "sl_val": 84196.91,
-    "status": "success",
-    "entry_triggered_at": "2026-09-27T02:45:00+00:00",
-    "outcome_time": "2026-09-27T05:35:00+00:00",
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:32:17"
-  },
-  {
-    "id": 2244,
-    "asset": "btc",
-    "timestamp": "2026-09-27T07:37:04+05:30",
-    "time_display": "07:37 AM, Sep 27",
-    "price": 84560.5,
-    "price_raw": "84560.5",
-    "bias": "bullish",
-    "setup_tag": "B2",
-    "behavior": "[SUN 07:37] [B2]: Sustained 5m/15m candle close ABOVE $84,560.50 with volume expansion clearing 15M Bearish FVG ($84,510.20–$84,610.20)",
-    "tp": "84,860.24 / 85,260.24",
-    "sl": "84,310.24",
-    "tp_val": 84860.24,
-    "sl_val": 84310.24,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:07:05"
-  },
-  {
-    "id": 2241,
-    "asset": "btc",
-    "timestamp": "2026-09-27T07:37:04+05:30",
-    "time_display": "07:37 AM, Sep 27",
-    "price": 84560.47,
-    "price_raw": "84560.47",
-    "bias": "bearish",
-    "setup_tag": "KS1",
-    "behavior": "[SUN 07:37] [KS1]: Current Day High ($84,560.47) and 15M Bearish FVG ($84,510.20–$84,610.20); primary overhead liquidity barrier and squeeze gate toward CME Gap ($84,995.00)",
-    "tp": "84,319.17 / 84,193.10",
-    "sl": "84,720.00",
-    "tp_val": 84319.17,
-    "sl_val": 84720.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:07:05"
-  },
-  {
-    "id": 2240,
-    "asset": "btc",
-    "timestamp": "2026-09-27T07:37:04+05:30",
-    "time_display": "07:37 AM, Sep 27",
-    "price": 77500.0,
-    "price_raw": "77500.0",
-    "bias": "bullish",
-    "setup_tag": "KB4",
-    "behavior": "[SUN 07:37] [KB4]: Daily Market Bias Invalidation Floor ($77,500.00); macro trend baseline defending overall bullish structure",
-    "tp": "83,818.01 / 84,560.50",
-    "sl": "76,900.00",
-    "tp_val": 83818.01,
-    "sl_val": 76900.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-09-27 02:07:05"
   }
 ];
 
@@ -10515,7 +10515,7 @@ window.predictionAccuracySummary = [
     "failed": 1,
     "win_rate": 66.67,
     "triggered_rate": 16.67,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 20,
@@ -10529,7 +10529,7 @@ window.predictionAccuracySummary = [
     "failed": 13,
     "win_rate": 50.0,
     "triggered_rate": 40.3,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 1558,
@@ -10543,7 +10543,7 @@ window.predictionAccuracySummary = [
     "failed": 1,
     "win_rate": 50.0,
     "triggered_rate": 2.3,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 33663,
@@ -10557,7 +10557,7 @@ window.predictionAccuracySummary = [
     "failed": 2,
     "win_rate": 50.0,
     "triggered_rate": 19.05,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 2,
@@ -10571,7 +10571,7 @@ window.predictionAccuracySummary = [
     "failed": 32,
     "win_rate": 47.54,
     "triggered_rate": 62.24,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 9,
@@ -10585,7 +10585,7 @@ window.predictionAccuracySummary = [
     "failed": 21,
     "win_rate": 43.24,
     "triggered_rate": 35.92,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 23,
@@ -10599,7 +10599,7 @@ window.predictionAccuracySummary = [
     "failed": 10,
     "win_rate": 41.18,
     "triggered_rate": 15.6,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 1,
@@ -10613,7 +10613,7 @@ window.predictionAccuracySummary = [
     "failed": 12,
     "win_rate": 40.0,
     "triggered_rate": 28.17,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 25,
@@ -10627,7 +10627,7 @@ window.predictionAccuracySummary = [
     "failed": 51,
     "win_rate": 15.0,
     "triggered_rate": 60.0,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3,
@@ -10641,7 +10641,7 @@ window.predictionAccuracySummary = [
     "failed": 34,
     "win_rate": 12.82,
     "triggered_rate": 50.65,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 77091,
@@ -10655,77 +10655,77 @@ window.predictionAccuracySummary = [
     "failed": 1,
     "win_rate": 0.0,
     "triggered_rate": 4.0,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 68,
     "asset": "gold",
     "setup_tag": "G_B1",
-    "total_predictions": 175,
-    "waiting": 2,
+    "total_predictions": 176,
+    "waiting": 1,
     "active": 12,
-    "inactive": 92,
+    "inactive": 94,
     "success": 40,
     "failed": 29,
     "win_rate": 57.97,
-    "triggered_rate": 46.29,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "triggered_rate": 46.02,
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 69,
     "asset": "gold",
     "setup_tag": "G_B2",
-    "total_predictions": 204,
-    "waiting": 2,
+    "total_predictions": 207,
+    "waiting": 3,
     "active": 8,
-    "inactive": 147,
+    "inactive": 148,
     "success": 27,
-    "failed": 20,
-    "win_rate": 57.45,
-    "triggered_rate": 26.96,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "failed": 21,
+    "win_rate": 56.25,
+    "triggered_rate": 27.05,
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 71,
     "asset": "gold",
     "setup_tag": "G_S2",
-    "total_predictions": 147,
-    "waiting": 2,
+    "total_predictions": 150,
+    "waiting": 3,
     "active": 13,
-    "inactive": 88,
+    "inactive": 90,
     "success": 15,
     "failed": 29,
     "win_rate": 34.09,
-    "triggered_rate": 38.78,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "triggered_rate": 38.0,
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 70,
     "asset": "gold",
     "setup_tag": "G_S1",
-    "total_predictions": 142,
+    "total_predictions": 143,
     "waiting": 1,
     "active": 9,
-    "inactive": 80,
+    "inactive": 81,
     "success": 12,
     "failed": 40,
     "win_rate": 23.08,
-    "triggered_rate": 42.96,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "triggered_rate": 42.66,
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 67,
     "asset": "gold",
     "setup_tag": "CHOP",
     "total_predictions": 59,
-    "waiting": 1,
+    "waiting": 0,
     "active": 0,
-    "inactive": 58,
+    "inactive": 59,
     "success": 0,
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 226,
@@ -10739,35 +10739,35 @@ window.predictionAccuracySummary = [
     "failed": 16,
     "win_rate": 64.44,
     "triggered_rate": 41.28,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 225,
     "asset": "nifty",
     "setup_tag": "S1",
     "total_predictions": 99,
-    "waiting": 1,
-    "active": 0,
+    "waiting": 0,
+    "active": 1,
     "inactive": 58,
     "success": 20,
     "failed": 20,
     "win_rate": 50.0,
-    "triggered_rate": 40.4,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "triggered_rate": 41.41,
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 223,
     "asset": "nifty",
     "setup_tag": "B1",
     "total_predictions": 110,
-    "waiting": 1,
-    "active": 0,
+    "waiting": 0,
+    "active": 1,
     "inactive": 56,
     "success": 21,
     "failed": 32,
     "win_rate": 39.62,
-    "triggered_rate": 48.18,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "triggered_rate": 49.09,
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 224,
@@ -10781,7 +10781,7 @@ window.predictionAccuracySummary = [
     "failed": 25,
     "win_rate": 16.67,
     "triggered_rate": 27.27,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3756,
@@ -10795,7 +10795,7 @@ window.predictionAccuracySummary = [
     "failed": 6,
     "win_rate": 68.42,
     "triggered_rate": 33.33,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3761,
@@ -10809,7 +10809,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 50.0,
     "triggered_rate": 30.3,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3762,
@@ -10823,7 +10823,7 @@ window.predictionAccuracySummary = [
     "failed": 2,
     "win_rate": 50.0,
     "triggered_rate": 16.0,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3755,
@@ -10837,7 +10837,7 @@ window.predictionAccuracySummary = [
     "failed": 9,
     "win_rate": 43.75,
     "triggered_rate": 48.48,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3760,
@@ -10851,7 +10851,7 @@ window.predictionAccuracySummary = [
     "failed": 9,
     "win_rate": 43.75,
     "triggered_rate": 38.1,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3757,
@@ -10865,7 +10865,7 @@ window.predictionAccuracySummary = [
     "failed": 8,
     "win_rate": 42.86,
     "triggered_rate": 24.14,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3758,
@@ -10879,7 +10879,7 @@ window.predictionAccuracySummary = [
     "failed": 4,
     "win_rate": 42.86,
     "triggered_rate": 12.5,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 8112,
@@ -10893,7 +10893,7 @@ window.predictionAccuracySummary = [
     "failed": 10,
     "win_rate": 37.5,
     "triggered_rate": 42.11,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 10404,
@@ -10907,7 +10907,7 @@ window.predictionAccuracySummary = [
     "failed": 8,
     "win_rate": 20.0,
     "triggered_rate": 30.3,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3754,
@@ -10921,7 +10921,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 5055,
@@ -10935,7 +10935,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   },
   {
     "id": 3759,
@@ -10949,6 +10949,6 @@ window.predictionAccuracySummary = [
     "failed": 2,
     "win_rate": 0.0,
     "triggered_rate": 5.45,
-    "updated_at": "2026-10-01T10:31:30.072808"
+    "updated_at": "2026-10-01T11:01:11.110718"
   }
 ];
