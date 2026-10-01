@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-01T13:01:25+05:30",
+    "timeDisplay": "01:01 PM, Oct 01",
+    "price": "22345",
+    "bias": "bullish",
+    "behavior": "[THU 13:01] [B1]: Sweep below 22,301.35 rejected with lower wick, followed by confirmed 5m close back ABOVE 22,345",
+    "tp": "22,395 / 22,445",
+    "sl": "22,295",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T13:01:25+05:30",
+    "timeDisplay": "01:01 PM, Oct 01",
+    "price": "22400",
+    "bias": "bullish",
+    "behavior": "[THU 13:01] [B2]: Sustained 5m close ABOVE 22,400 with active futures volume confirming absorption",
+    "tp": "22,455 / 22,505",
+    "sl": "22,350",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T13:01:25+05:30",
+    "timeDisplay": "01:01 PM, Oct 01",
+    "price": "22330",
+    "bias": "bearish",
+    "behavior": "[THU 13:01] [S1]: Pullback into 22,350 - 22,370 rejected with upper wicks, followed by 5m close back BELOW 22,330",
+    "tp": "22,295 / 22,250",
+    "sl": "22,380",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-01T13:01:25+05:30",
+    "timeDisplay": "01:01 PM, Oct 01",
+    "price": "22300",
+    "bias": "bearish",
+    "behavior": "[THU 13:01] [S2]: Sustained 5m close BELOW 22,300 taking out Day Low with expanding red futures volume",
+    "tp": "22,250 / 22,200",
+    "sl": "22,345",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-01T12:46:48+05:30",
     "timeDisplay": "12:46 PM, Oct 01",
     "price": "22460",
@@ -399,6 +443,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261001_130127",
+    "timestamp": "2026-10-01T13:01:27+05:30",
+    "timeDisplay": "01:01 PM, Oct 01",
+    "spot": "22318.05",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22318.05 < Min Plan Target $22400.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:00 PM IST - Oct 01, 2026 | Spot: 22318.05 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22318.05 < Min Plan Target $22400.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 22,300.00 – 22,345.00 (Spot Index). Spot is compressing immediately around Day Low (22,301.35) following the aggressive impulse breakdown through the 22,400.00 structural floor. With active Nifty Futures volume tracking at 1.0x baseline (8-bar average), market makers and 22,300 straddle writers are creating two-way rotational chop, absorbing early breakdown participants while probing for liquidity.\n- Rationale: Entering inside this compressed 45-point corridor carries high theta decay risk and false-wick traps for naked option buyers. The index has reached an oversold intraday extension, increasing the probability of sudden mean-reversion whipsaws until decisive institutional participation emerges.\n- Execution Directive: STRICT NO-TRADE ZONE for directional option buying inside 22,300.00–22,345.00. Maintain full discipline and stand aside until a verified 5-minute directional candle closes cleanly outside these boundaries with futures volume confirmation.\n\n4. High Momentum / Explosive Zones:\n- [Downside Long-Liquidation Cascade] ([Sustained 5m close BELOW 22,300.00]): Decisively takes out Day Low (22,301.35) and breaches remaining 22,300 Put open interest defense, unlocking an accelerated liquidation cascade into deep macro demand at 22,250.00 and 22,200.00.\n- [Bullish SFP & Day Low Reclaim Squeeze] ([5m liquidity sweep below 22,301.35 followed by confirmed close back ABOVE 22,345.00]): Traps aggressive breakdown sellers into a Swing Failure Pattern (Turtle Soup), igniting a sharp intraday short-covering squeeze back toward 22,395.00 and 22,445.00.\n- [Bullish Structural Floor Re-expansion] ([Sustained 5m close ABOVE 22,400.00]): Decisively reclaims the broken morning floor, forcing intraday Call writers to cover and driving acceleration toward 22,455.00 and 22,505.00.\n- [Bearish Breaker Shelf Rejection] ([5m upper-wick exhaustion rejection in the 22,350.00 - 22,370.00 zone]): Inability to sustain relief bounces accompanied by prominent upper wicks confirms seller absorption, setting up a rollover back toward Day Low.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day Low Liquidity Sweep & SFP Reversal Long): Sweep below Day Low (22,301.35) rejected with lower absorption wick, followed by a confirmed 5m candle close back ABOVE 22,345.00 with expanding futures volume confirming trapped sellers. | TP: 22,395.00 / 22,445.00 | SL: 22,295.00 | 💡 Buy 22300 CE + Sell 22350 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Broken Floor Absorption & Squeeze Breakout Long): Sustained 5m candle close ABOVE 22,400.00 accompanied by expanding active Nifty Futures volume confirming institutional absorption of overhead supply. | TP: 22,455.00 / 22,505.00 | SL: 22,350.00 | 💡 Buy 22400 CE + Sell 22450 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Breaker Shelf Pullback Rejection Short): Corrective relief bounce into the 22,350.00–22,370.00 supply breaker rejected with upper exhaustion wicks, followed by a confirmed 5m candle close back BELOW 22,330.00. | TP: 22,295.00 / 22,250.00 | SL: 22,380.00 | 💡 Buy 22350 PE + Sell 22300 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown Continuation Short): Sustained 5m candle close firmly BELOW 22,300.00 taking out Day Low (22,301.35) with expanding red futures volume confirming put floor capitulation. | TP: 22,250.00 / 22,200.00 | SL: 22,345.00 | 💡 Buy 22300 PE + Sell 22250 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20261001_124650",
     "timestamp": "2026-10-01T12:46:50+05:30",
     "timeDisplay": "12:46 PM, Oct 01",
