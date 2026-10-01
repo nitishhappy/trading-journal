@@ -1819,14 +1819,10 @@
             levelsData.levels.forEach((lvl, idx) => {
                 const tag = extractTag(lvl.behavior) || (lvl.bias === 'bullish' ? `[SP_B${idx+1}]` : `[SP_S${idx+1}]`);
                 let isBullish = lvl.bias === 'bullish';
-                // TAG takes absolute priority over behavior keywords
-                if (/\[\s*(?:KB|B|SP_B)\d*\s*\]/i.test(tag)) {
+                // Simple: tag contains B = buy (green), tag contains S = sell (red)
+                if (/B/i.test(tag)) {
                     isBullish = true;
-                } else if (/\[\s*(?:KS|S|SP_S)\d*\s*\]/i.test(tag)) {
-                    isBullish = false;
-                } else if (/\b(BUY|LONG|BULLISH|SUPPORT|DEMAND)\b/i.test(lvl.behavior)) {
-                    isBullish = true;
-                } else if (/\b(SELL|SHORT|BEARISH|RESISTANCE|SUPPLY)\b/i.test(lvl.behavior)) {
+                } else if (/S/i.test(tag)) {
                     isBullish = false;
                 }
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';

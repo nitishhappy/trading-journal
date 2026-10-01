@@ -178,6 +178,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.53 — 01 Oct 2026 — Simplified Level Color Logic (B=Green, S=Red)
+- **Bug Fix**: Previous regex-based color detection failed for tag formats like `[G_B1]`, `[SP_B1]`, `[B_B1]`, `[S_S1]` — only matched `[B1]`/`[KB1]`/`[S1]`/`[KS1]`. This caused Gold/SP500 levels to use wrong colors.
+- **Fix**: Replaced all complex regex cascades with dead-simple logic: tag contains `B` → GREEN (buy), tag contains `S` → RED (sell). Works for ALL tag formats across all assets.
+- Applied to all 4 charts: **BTC**, **Gold**, **SP500**, **Nifty**.
+
 ### v2.3.52 — 30 Sep 2026 — Fix Level Line Color Priority & Card Scroll Persistence (All Charts)
 - **Bug Fix — Wrong Line Colors**: `[KS1]` and `[S2]` levels were rendering GREEN instead of RED because behavior text containing words like "Buy-Side", "Demand", "long" (in "long liquidation") matched the bullish keyword regex before the tag-based check could override. Root cause: tag regex and behavior keyword regex were OR'd together in a single `if`, so a behavior keyword match for "buy/demand/long" would force GREEN even when the tag clearly said `[KS...]` or `[S...]`.
 - **Fix**: Split into a 4-tier priority cascade: (1) Tag = `[KB|B]` → GREEN, (2) Tag = `[KS|S]` → RED, (3) Behavior keywords (BUY/LONG/SUPPORT/DEMAND) → GREEN, (4) Behavior keywords (SELL/SHORT/RESISTANCE/SUPPLY) → RED. Tag always wins.

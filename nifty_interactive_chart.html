@@ -1812,12 +1812,8 @@
 
             levelsData.levels.forEach((lvl, idx) => {
                 const tag = extractTag(lvl.behavior) || (lvl.bias === 'bullish' ? `[B${idx+1}]` : `[S${idx+1}]`);
-                // STRICT ACTION SETUP COLORING: TAG takes absolute priority over behavior keywords
-                const isTagBuy = /\[(?:KB\d*|B\d+)\]/i.test(tag);
-                const isTagSell = /\[(?:KS\d*|S\d+)\]/i.test(tag);
-                const isBullish = isTagBuy ? true : (isTagSell ? false : 
-                    (/\b(buy|long)\b/i.test(lvl.behavior || '') ? true : 
-                    (/\b(sell|short)\b/i.test(lvl.behavior || '') ? false : lvl.bias === 'bullish')));
+                // Simple: tag contains B = buy (green), tag contains S = sell (red)
+                const isBullish = /B/i.test(tag) ? true : (/S/i.test(tag) ? false : lvl.bias === 'bullish');
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.dailyPlanSummary, levelsData.anchorTimestamp);
