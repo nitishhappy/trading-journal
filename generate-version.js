@@ -75,10 +75,12 @@ const FILES_TO_HASH = [
   "js/data/gold_candles.js",
   "js/data/nifty_candles.js",
   "js/data/sp500_candles.js",
+  "js/data/eurusd_candles.js",
   "nifty_interactive_chart.html",
   "gold_interactive_chart.html",
   "btc_interactive_chart.html",
   "sp500_interactive_chart.html",
+  "eurusd_interactive_chart.html",
 ];
 
 function computeHash() {

@@ -118,6 +118,8 @@ if (viewLevels) {
                 externalLink.href = `btc_interactive_chart.html?t=${cacheBust}`;
             } else if (currentAsset === 'SP500') {
                 externalLink.href = `sp500_interactive_chart.html?t=${cacheBust}`;
+            } else if (currentAsset === 'EURUSD') {
+                externalLink.href = `eurusd_interactive_chart.html?t=${cacheBust}`;
             } else {
                 externalLink.href = `https://in.tradingview.com/chart/?symbol=${linkSymbol}`;
             }

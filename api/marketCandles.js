@@ -25,7 +25,7 @@ const fetchUrl = (url) => {
   });
 };
 
-function parseYahooCandles(json) {
+function parseYahooCandles(json, digits = 2) {
   const result = json?.chart?.result?.[0];
   if (!result || !result.timestamp) return [];
   const times = result.timestamp;
@@ -35,10 +35,10 @@ function parseYahooCandles(json) {
     if (quote.open[i] != null && quote.close[i] != null && quote.high[i] != null && quote.low[i] != null) {
       candles.push({
         time: times[i],
-        open: Number(quote.open[i].toFixed(2)),
-        high: Number(quote.high[i].toFixed(2)),
-        low: Number(quote.low[i].toFixed(2)),
-        close: Number(quote.close[i].toFixed(2))
+        open: Number(quote.open[i].toFixed(digits)),
+        high: Number(quote.high[i].toFixed(digits)),
+        low: Number(quote.low[i].toFixed(digits)),
+        close: Number(quote.close[i].toFixed(digits))
       });
     }
   }
@@ -372,8 +372,64 @@ export default async function handler(req, res) {
       });
     }
 
+    // ── 5. EUR/USD CANDLES ────────────────────────────────────────────────
+    if (symInput === "EURUSD" || symInput === "EUR/USD" || symInput === "EUR_USD") {
+      let candles = [];
+      let source = "YAHOO_FINANCE";
+      const reqTf = (req.query.timeframe || req.query.tf || req.query.interval || "5m").toLowerCase();
+      const normTf = (reqTf === "15" || reqTf === "15m") ? "15m" : (reqTf === "60" || reqTf === "1h") ? "60m" : (reqTf === "d" || reqTf === "1d") ? "1d" : "5m";
+
+      // 1. Try Yahoo Finance for EURUSD=X (5-decimal precision)
+      try {
+        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?interval=${normTf}&range=5d`);
+        if (yahooJson) {
+          const yCandles = parseYahooCandles(yahooJson, 5);
+          if (yCandles && yCandles.length > 0) {
+            candles = yCandles;
+          }
+        }
+      } catch (e) {
+        console.error("api/marketCandles EURUSD Yahoo error:", e);
+      }
+
+      // 2. Fallback: Swissquote spot quote if candles are empty
+      if (candles.length === 0) {
+        try {
+          const sqData = await fetchUrl("https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/EUR/USD");
+          if (Array.isArray(sqData) && sqData.length > 0) {
+            const prices = sqData[0].spreadProfilePrices || [];
+            if (prices.length > 0) {
+              const premium = prices[0];
+              const spot = Number(((Number(premium.bid) + Number(premium.ask)) / 2).toFixed(5));
+              const nowSec = Math.floor(Date.now() / 1000);
+              candles = [{
+                time: nowSec,
+                open: spot,
+                high: spot,
+                low: spot,
+                close: spot,
+                volume: 1
+              }];
+              source = "SWISSQUOTE_BBO";
+            }
+          }
+        } catch (e) {
+          console.error("api/marketCandles EURUSD Swissquote fallback error:", e);
+        }
+      }
+
+      return res.status(200).json({
+        success: candles.length > 0,
+        symbol: "EURUSD",
+        source,
+        timeframe: normTf,
+        candles,
+        message: candles.length === 0 ? "No EURUSD candle data available." : undefined
+      });
+    }
+
     return res.status(400).json({
-      error: "Invalid or missing 'symbol' parameter. Supported symbols: NIFTY, GOLD, BTC, SP500"
+      error: "Invalid or missing 'symbol' parameter. Supported symbols: NIFTY, GOLD, BTC, SP500, EURUSD"
     });
 
   } catch (err) {

@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-fafe8efddb";
+const CACHE_NAME = "trade-journal-a94f103a57";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -60,11 +60,13 @@ const ASSETS = [
   "./js/data/gold_candles.js",
   "./js/data/nifty_candles.js",
   "./js/data/sp500_candles.js",
+  "./js/data/eurusd_candles.js",
   "./js/data/scanned_stocks.js",
   "./nifty_interactive_chart.html",
   "./gold_interactive_chart.html",
   "./btc_interactive_chart.html",
   "./sp500_interactive_chart.html",
+  "./eurusd_interactive_chart.html",
   "./vantage_position_calculator.html",
   "./js/workers/liveAlertWorker.js",
   // Firebase SDK scripts — precached so the app can boot fully offline
@@ -79,7 +81,7 @@ const ASSETS = [
 // instead of waiting for a manual cache-version bump.
 const NETWORK_FIRST_FILES = [
   "index.html", "styles.css", "app.js", "manifest.json", "trade-security.js",
-  "nifty_interactive_chart.html", "gold_interactive_chart.html", "btc_interactive_chart.html", "sp500_interactive_chart.html", "vantage_position_calculator.html",
+  "nifty_interactive_chart.html", "gold_interactive_chart.html", "btc_interactive_chart.html", "sp500_interactive_chart.html", "eurusd_interactive_chart.html", "vantage_position_calculator.html",
   "js/state.js", "js/dom.js", "js/firebase-init.js",
   "js/utils/toast.js", "js/utils/theme.js", "js/utils/date.js",
   "js/utils/image.js", "js/utils/export.js", "js/utils/keyboard.js", "js/utils/lifecycle.js",
@@ -95,7 +97,7 @@ const NETWORK_FIRST_FILES = [
   "js/ui/stocks.js",
   "js/ui/levels.js",
   "css/levels.css",
-  "js/data/sectors.js", "js/data/daily_plan.js", "js/data/nifty_daily_plan.js", "js/data/gold_daily_plan.js", "js/data/btc_daily_plan.js", "js/data/sp500_daily_plan.js", "js/data/eurusd_daily_plan.js", "js/data/scanned_stocks.js", "js/data/gold_candles.js", "js/data/nifty_candles.js", "js/data/sp500_candles.js",
+  "js/data/sectors.js", "js/data/daily_plan.js", "js/data/nifty_daily_plan.js", "js/data/gold_daily_plan.js", "js/data/btc_daily_plan.js", "js/data/sp500_daily_plan.js", "js/data/eurusd_daily_plan.js", "js/data/scanned_stocks.js", "js/data/gold_candles.js", "js/data/nifty_candles.js", "js/data/sp500_candles.js", "js/data/eurusd_candles.js",
   "js/utils/error-tracking.js", "css/tv-notifications.css",
   "js/workers/liveAlertWorker.js",
 ];

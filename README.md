@@ -178,18 +178,26 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
-### v2.3.54 — 05 Oct 2026 — EUR/USD AI Predictor, Watchdog & Multi-Asset PWA Integration
+### v2.3.54 — 05 Oct 2026 — EUR/USD AI Predictor, Interactive Live Chart & Telegram Controller Integration
 - **New Feature — EUR/USD AI Predictor & Watchdog Engine**:
   - Engineered dedicated `EURUSD Setup` pipeline mirroring Gold and Bitcoin architecture under `Utilities/EURUSD Setup`.
   - Built `eurusd_copilot_main.py` executing multi-timeframe analysis (5M, 15M, 1H, 1D), Asian Range (ARH/ARL) sweep tracking, Fair Value Gap (FVG) detection, and DXY (`DX-Y.NYB`) / 10Y Yield (`^TNX`) intermarket telemetry.
   - Implemented `eurusd_watchdog.py` 15-minute polling daemon with Forex session trigger windows (11:30 AM, 01:30 PM, 06:00 PM, 09:30 PM IST), $\pm 15\text{ pips}$ level exhaustion detection, and $> 35\text{ pips}$ extreme delta override.
   - Created `eurusd_intraday_briefing.ps1` prompt wrapper invoking AGY CLI with Dual-Horizon (Swing + Intraday Action Setups `[E_B1]`, `[E_B2]`, `[E_S1]`, `[E_S2]`).
   - Added `prune_eurusd_daily_plan.py` and `Run_EURUSD_AI_Now.bat` manual trigger.
+- **Interactive Live Chart (`eurusd_interactive_chart.html`)**:
+  - Built full TradingView Lightweight Charts dashboard for EUR/USD with 5-decimal precision (`precision: 5`, `minMove: 0.00001`), pip delta calculations, and custom dark/cyan palette.
+  - Sourced candlestick data via consolidated `/api/marketCandles?symbol=EURUSD` with local offline cache `js/data/eurusd_candles.js`.
+  - Added interactive level cards, per-run scorecard isolation (`levelsScorecardHistory_EURUSD`), and sound/notification crossing alerts.
+  - Connected `js/ui/levels.js` chart pop-out link to `eurusd_interactive_chart.html`.
 - **Trading Journal PWA Integration**:
-  - Integrated `js/data/eurusd_daily_plan.js` data store and registered in Service Worker (`sw.js`) and version generator (`generate-version.js`).
+  - Integrated `js/data/eurusd_daily_plan.js` and `js/data/eurusd_candles.js` data stores, registered in Service Worker (`sw.js`) and version generator (`generate-version.js`).
   - Added `💶 EUR/USD` asset button to `#view-levels` in `index.html` and wired full lifecycle in `js/ui/levels.js` (asset switching, cards, badges, real-time push alerts, 5-decimal precision formatting).
   - Added EUR/USD filtering and performance tracking in `accuracy.html` and integrated into `prediction_accuracy_db.py` and `evaluate_prediction_outcomes.py`.
   - Added live EUR/USD price feed to `api/livePrices.js` via Swissquote institutional BBO quotes and Yahoo Finance fallback.
+- **Telegram Controller Integration**:
+  - Registered `/run eurusd` in `telegram_controller/job_registry.py` and `controller.py`.
+  - Added EUR/USD to `/run all` sequential pipeline and updated documentation.
 
 ### v2.3.53 — 01 Oct 2026 — Simplified Level Color Logic (B=Green, S=Red)
 - **Bug Fix**: Previous regex-based color detection failed for tag formats like `[G_B1]`, `[SP_B1]`, `[B_B1]`, `[S_S1]` — only matched `[B1]`/`[KB1]`/`[S1]`/`[KS1]`. This caused Gold/SP500 levels to use wrong colors.

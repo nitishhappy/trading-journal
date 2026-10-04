@@ -1,0 +1,3102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUR/USD • Live Key Trading Levels Summary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="js/data/eurusd_daily_plan.js"></script>
+    <script src="js/data/eurusd_candles.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0b0f17;
+            --panel-bg: #151c28;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --border-color: rgba(59, 130, 246, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --bullish: #10b981;
+            --bearish: #f43f5e;
+            --eur-accent: #0284c7;
+            --eur-glow: rgba(2, 132, 199, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #082038, #0b0f17);
+            color: var(--text-main);
+            padding: 0.5rem;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.embed-mode {
+            padding: 0;
+            background: transparent;
+        }
+
+        body.embed-mode .header {
+            display: none;
+        }
+
+        body.embed-mode .main-container {
+            height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .controls-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            max-width: 100%;
+            overflow: hidden;
+            gap: 4px;
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            white-space: nowrap;
+            padding: 2px 2px;
+        }
+
+        .controls-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tabs-nav-btn {
+            flex: 0 0 28px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.15s ease;
+            z-index: 5;
+            user-select: none;
+            -webkit-user-select: none;
+            flex-shrink: 0;
+        }
+
+        .tabs-nav-btn:hover {
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .tabs-nav-btn:active {
+            transform: scale(0.9);
+        }
+
+        .tabs-nav-btn.at-edge {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .timer-badge {
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .btn {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #60a5fa;
+            transform: translateY(-1px);
+        }
+
+        .btn.active {
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 0 12px var(--eur-glow);
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 0.6rem;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 240px;
+            }
+        }
+
+        .chart-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            min-height: 0;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .chart-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .symbol-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timestamp-badge {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .feed-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feed-badge-live {
+            background: rgba(16, 185, 129, 0.18) !important;
+            color: #10b981 !important;
+            border: 1px solid rgba(16, 185, 129, 0.4) !important;
+        }
+
+        .feed-badge-unavailable {
+            background: rgba(244, 63, 94, 0.18) !important;
+            color: #f43f5e !important;
+            border: 1px solid rgba(244, 63, 94, 0.4) !important;
+        }
+
+        #chart-wrapper {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .ohlc-legend-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            user-select: none;
+        }
+
+        .ohlc-chg {
+            font-weight: 700;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+        }
+
+        .ohlc-chg.bullish {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .ohlc-chg.bearish {
+            color: #f43f5e;
+            background: rgba(244, 63, 94, 0.15);
+        }
+
+        .chart-scrollbar-container {
+            width: 100%;
+            padding: 6px 2px 2px 2px;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .scrollbar-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .scrollbar-thumb {
+            position: absolute;
+            top: 1px;
+            height: 6px;
+            background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+            border-radius: 3px;
+            cursor: grab;
+            transition: background 0.2s;
+        }
+
+        .scrollbar-thumb:hover, .scrollbar-thumb:active {
+            background: linear-gradient(90deg, #93c5fd, #c084fc);
+            cursor: grabbing;
+        }
+
+        /* ── Bottom Replay Toolbar (Option A) ── */
+        .replay-toolbar {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            border-radius: 8px;
+            padding: 4px 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+            user-select: none;
+        }
+
+        .replay-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #f8fafc;
+            border-radius: 5px;
+            padding: 5px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .replay-btn:hover {
+            background: rgba(96, 165, 250, 0.25);
+            border-color: #60a5fa;
+            color: #60a5fa;
+        }
+
+        .replay-btn.active-play {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            color: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .levels-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.75rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            min-height: 0;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel-briefing-highlight {
+            animation: panelGlow 1.2s ease;
+        }
+
+        @keyframes panelGlow {
+            0% { box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+            30% { box-shadow: 0 0 25px rgba(96, 165, 250, 0.75); border-color: rgba(96, 165, 250, 0.9); }
+            100% { box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--eur-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .level-card {
+            background: var(--card-bg);
+            border-left: 4px solid var(--text-muted);
+            border-radius: 8px;
+            padding: 0.95rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .level-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .level-card.bullish {
+            border-left-color: var(--bullish);
+        }
+
+        .level-card.bearish {
+            border-left-color: var(--bearish);
+        }
+
+        .level-card.selected-highlight {
+            border: 2px solid var(--eur-accent) !important;
+            border-left: 6px solid var(--eur-accent) !important;
+            background: rgba(59, 130, 246, 0.18) !important;
+            box-shadow: 0 0 20px var(--eur-glow) !important;
+            animation: pulseCard 1.5s infinite alternate;
+        }
+
+        @keyframes pulseCard {
+            0% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); }
+            100% { box-shadow: 0 0 22px rgba(59, 130, 246, 0.8); }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .card-price.bullish { color: var(--bullish); }
+        .card-price.bearish { color: var(--bearish); }
+
+        .tag-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .tag-pill.bullish { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .tag-pill.bearish { background: rgba(244, 63, 94, 0.2); color: #f43f5e; }
+
+        /* Level type badge: SETUP (E_B/SP_S solid) vs STRUCTURAL (E_KB/SP_KS dashed) */
+        .level-type-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .badge-setup {
+            background: rgba(56, 189, 248, 0.18);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+        .badge-structural {
+            background: rgba(100, 116, 139, 0.2);
+            color: #94a3b8;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+        }
+
+        .card-logic {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-logic.clamped {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-logic.expanded {
+            display: block;
+            overflow: visible;
+        }
+
+        .expand-logic-btn {
+            font-size: 0.72rem;
+            color: #60a5fa;
+            cursor: pointer;
+            margin-bottom: 0.6rem;
+            user-select: none;
+            font-weight: 600;
+        }
+
+        .expand-logic-btn:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+
+        .card-targets {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+            font-size: 0.76rem;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 0.45rem 0.6rem;
+            border-radius: 6px;
+            color: var(--text-muted);
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .tp-val { color: #34d399; }
+        .sl-val { color: #f87171; }
+
+        /* Visual Chart Map & Scorecard Enhancements */
+        .level-card.nearest-proximity {
+            border: 2px solid #38bdf8 !important;
+            border-left: 6px solid #38bdf8 !important;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.4) !important;
+        }
+
+        .proximity-badge {
+            background: rgba(56, 189, 248, 0.18);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            font-size: 0.62rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .dist-pill, .rr-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: #94a3b8;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.25rem 0.45rem;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 2px;
+            flex-shrink: 0;
+            max-width: 48%;
+            box-sizing: border-box;
+        }
+
+        .status-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .status-pill-worked { background: rgba(16, 185, 129, 0.25); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); }
+        .status-pill-failed { background: rgba(244, 63, 94, 0.25); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.5); }
+
+        .card-outcome-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.6rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .outcome-label {
+            font-size: 0.68rem;
+            color: #94a3b8;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .outcome-btn-group {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .outcome-btn {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 0.2rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .outcome-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .outcome-btn.btn-worked:hover, .outcome-btn.btn-worked.active {
+            background: rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            border-color: #10b981;
+        }
+
+        .outcome-btn.btn-failed:hover, .outcome-btn.btn-failed.active {
+            background: rgba(244, 63, 94, 0.3);
+            color: #fb7185;
+            border-color: #f43f5e;
+        }
+
+        .outcome-btn.btn-reset:hover {
+            background: rgba(148, 163, 184, 0.3);
+            color: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e293b;
+            border: 1px solid var(--eur-accent);
+            color: #f8fafc;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none;
+            flex-direction: column;
+            gap: 0.3rem;
+            z-index: 100;
+            max-width: 320px;
+        }
+
+        .toast-title {
+            font-weight: 700;
+            color: #60a5fa;
+            font-size: 0.9rem;
+        }
+
+        .toast-body {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .briefing-header-box {
+            flex-shrink: 0;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 6px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .briefing-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            min-height: 22px;
+        }
+
+        .briefing-badge {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-return-latest {
+            display: none;
+            padding: 2px 7px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid #3b82f6;
+            color: #60a5fa;
+            transition: all 0.2s ease;
+        }
+
+        .btn-return-latest:hover {
+            background: rgba(59, 130, 246, 0.35);
+        }
+
+        /* AI Briefing Runs Filter Pills */
+        .briefing-pills-bar {
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 2px 1px 4px 1px;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+            flex-shrink: 0;
+        }
+
+        .briefing-pills-bar::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .briefing-pills-bar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+
+        .briefing-pills-bar::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.4);
+            border-radius: 2px;
+        }
+
+        .briefing-pill-btn {
+            flex-shrink: 0;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #94a3b8;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            line-height: 1.25;
+            transition: all 0.2s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .briefing-pill-btn:hover {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border-color: #60a5fa;
+            transform: translateY(-1px);
+        }
+
+        .briefing-pill-btn.active {
+            background: rgba(59, 130, 246, 0.25);
+            color: #60a5fa;
+            border-color: #60a5fa;
+            font-weight: 700;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>💶 EUR/USD</h1>
+        <div class="controls-wrapper" id="controls-wrapper">
+            <button class="tabs-nav-btn tabs-nav-left at-edge" id="controls-scroll-left" aria-label="Scroll controls left" title="Scroll left">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <div class="controls-row" id="controls-row">
+                <button id="btn-toggle-fit" class="btn" title="Toggle between zoomed-in candle focus and fitting all levels">
+                    <span>🔍</span> <span id="fit-btn-text">Zoom Candles</span>
+                </button>
+                <button id="btn-reset-zoom" class="btn" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">
+                    <span>🎯</span> Snap to Live
+                </button>
+                <button id="btn-calc" class="btn" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
+                    <span>🧮</span> Sizer
+                </button>
+                <button id="btn-add-vline" class="btn" title="Click chart to place a custom vertical line">
+                    <span>➕</span> Add Line
+                </button>
+                <button id="btn-toggle-vlines" class="btn active" title="Toggle AI Briefing & Custom Vertical Lines">
+                    <span>📍</span> <span id="vlines-btn-text">Lines ON</span>
+                </button>
+                <button id="btn-toggle-alerts" class="btn">
+                    <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
+                </button>
+                <button id="btn-manual-refresh" class="btn">
+                    <span>⚡</span> Refresh Data
+                </button>
+                <div class="timer-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
+                    <span>🔄</span> Auto Refresh: <span id="refresh-timer">15s</span>
+                </div>
+            </div>
+            <button class="tabs-nav-btn tabs-nav-right" id="controls-scroll-right" aria-label="Scroll controls right" title="Scroll right">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="chart-section">
+            <div class="chart-toolbar">
+                <div class="symbol-title">
+                    <span>💶 EUR/USD (5M)</span>
+                    <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
+                    <div id="ohlc-legend" class="ohlc-legend-bar">
+                        <span id="ohlc-symbol" style="font-weight: 700; color: #38bdf8;">EUR/USD</span>
+                        <span>O: <strong id="ohlc-o">--</strong></span>
+                        <span>H: <strong id="ohlc-h">--</strong></span>
+                        <span>L: <strong id="ohlc-l">--</strong></span>
+                        <span>C: <strong id="ohlc-c">--</strong></span>
+                        <span id="ohlc-change-pill" class="ohlc-chg">--</span>
+                    </div>
+                </div>
+                <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</div>
+            </div>
+            <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
+                <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+                <!-- Bottom Replay Toolbar (Option A) -->
+                <div id="replay-toolbar" class="replay-toolbar">
+                    <button id="btn-replay-start" class="replay-btn" onclick="replayJumpToStart()" title="Jump to Briefing Start">⏪ Start</button>
+                    <button id="btn-replay-step-back" class="replay-btn" onclick="replayStepBack()" title="Step Back 1 Candle">◀ Step</button>
+                    <button id="btn-replay-play" class="replay-btn" onclick="replayTogglePlay()" title="Play / Pause Replay">▶ Play</button>
+                    <button id="btn-replay-step-forward" class="replay-btn" onclick="replayStepForward()" title="Step Forward 1 Candle">Step ▶</button>
+                </div>
+            </div>
+            <!-- Horizontal Scrollbar Track -->
+            <div class="chart-scrollbar-container">
+                <div class="scrollbar-track" id="scrollbar-track" title="Drag horizontal scrollbar or click track to scroll chart history">
+                    <div class="scrollbar-thumb" id="scrollbar-thumb"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="levels-section">
+            <div class="section-title">
+                <span>🎯 Key Trading Levels Summary</span>
+                <span id="levels-count" style="font-size: 0.8rem; color: #60a5fa;">0 Levels</span>
+            </div>
+            <div class="briefing-header-box">
+                <div class="briefing-meta-row">
+                    <div id="briefing-time-badge" class="briefing-badge">📌 Key Levels Raised: --</div>
+                    <button id="btn-return-latest" class="btn-return-latest" onclick="selectBriefingRun(null)">⚡ Return to Latest</button>
+                </div>
+                <div id="briefing-runs-pills" class="briefing-pills-bar"></div>
+            </div>
+            <div id="levels-list"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <div id="toast-title" class="toast-title">Notification</div>
+        <div id="toast-body" class="toast-body">Details here...</div>
+    </div>
+
+    <script>
+        const IST_OFFSET_SEC = 19800; // +5:30 IST offset in seconds
+        let alertsEnabled = false;
+        let fitAllLevels = false; // Default: FALSE = Zoom in on visible candles!
+        let showVLines = true;
+        let addVLineMode = false;
+        let userVLines = []; // array of unix timestamps
+        let aiBriefingTimes = []; // array of { time, label, timestamp, timeDisplay }
+        let selectedBriefingTimestamp = null; // null = Latest Live Run; string/number = specific historical briefing
+        let activePriceLines = [];
+        let levelsData = [];
+        let candleSeries = null;
+        let chartInstance = null;
+        let countdownSeconds = 15;
+        let isInitialLoad = true;
+
+        // ── Replay Mode State (Option A) ──
+        let allMasterCandles = [];
+        let isReplayMode = false;
+        let replayCurrentIndex = null;
+        let replayPlayTimer = null;
+        const REPLAY_SPEED_MS = 800;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkEmbedMode();
+            initChartApp();
+            setupEventListeners();
+            startAutoRefreshTimer();
+        });
+
+        function checkEmbedMode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('embed') === 'true') {
+                document.body.classList.add('embed-mode');
+            }
+        }
+
+        function startAutoRefreshTimer() {
+            setInterval(() => {
+                countdownSeconds--;
+                if (countdownSeconds <= 0) {
+                    countdownSeconds = 15;
+                    reloadChartData();
+                }
+                const timerEl = document.getElementById('refresh-timer');
+                if (timerEl) timerEl.innerText = `${countdownSeconds}s`;
+            }, 1000);
+
+            // 5-Minute Candle Bar Close Countdown Timer (300 seconds)
+            startBarCloseCountdown(300);
+        }
+
+        function startBarCloseCountdown(barDurationSec = 300) {
+            function tick() {
+                const nowSec = Math.floor(Date.now() / 1000);
+                const secRemaining = barDurationSec - (nowSec % barDurationSec);
+                const mins = Math.floor(secRemaining / 60);
+                const secs = secRemaining % 60;
+                const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                const badge = document.getElementById('bar-close-badge');
+                if (badge) {
+                    badge.innerText = `⏳ Bar Close: ${formatted}`;
+                    if (secRemaining <= 30) {
+                        badge.style.background = 'rgba(239, 68, 68, 0.2)';
+                        badge.style.borderColor = '#ef4444';
+                        badge.style.color = '#f87171';
+                    } else if (secRemaining <= 60) {
+                        badge.style.background = 'rgba(59, 130, 246, 0.25)';
+                        badge.style.borderColor = '#3b82f6';
+                        badge.style.color = '#60a5fa';
+                    } else {
+                        badge.style.background = 'rgba(59, 130, 246, 0.15)';
+                        badge.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                        badge.style.color = '#60a5fa';
+                    }
+                }
+            }
+            setInterval(tick, 1000);
+            tick();
+        }
+
+        function setupEventListeners() {
+            const toggleBtn = document.getElementById('btn-toggle-alerts');
+            const refreshBtn = document.getElementById('btn-manual-refresh');
+            const fitBtn = document.getElementById('btn-toggle-fit');
+            const vlinesBtn = document.getElementById('btn-toggle-vlines');
+            const addVLineBtn = document.getElementById('btn-add-vline');
+
+            if (vlinesBtn) {
+                vlinesBtn.addEventListener('click', () => {
+                    showVLines = !showVLines;
+                    const textEl = document.getElementById('vlines-btn-text');
+                    if (showVLines) {
+                        vlinesBtn.classList.add('active');
+                        if (textEl) textEl.innerText = 'Lines ON';
+                        showToast("Vertical Lines ON", "AI Briefing & Custom vertical lines visible.");
+                    } else {
+                        vlinesBtn.classList.remove('active');
+                        if (textEl) textEl.innerText = 'Lines OFF';
+                        showToast("Vertical Lines OFF", "Vertical markers hidden.");
+                    }
+                    renderVerticalLinesOverlay();
+                });
+            }
+
+            if (addVLineBtn) {
+                addVLineBtn.addEventListener('click', () => {
+                    addVLineMode = !addVLineMode;
+                    if (addVLineMode) {
+                        addVLineBtn.classList.add('active');
+                        showToast("📍 Placement Mode", "Click on any candle on the chart to drop a custom vertical line.");
+                    } else {
+                        addVLineBtn.classList.remove('active');
+                        showToast("Placement Mode Cancelled", "");
+                    }
+                });
+            }
+
+            if (fitBtn) {
+                fitBtn.addEventListener('click', () => {
+                    fitAllLevels = !fitAllLevels;
+                    const fitText = document.getElementById('fit-btn-text');
+                    if (fitAllLevels) {
+                        fitBtn.classList.add('active');
+                        if (fitText) fitText.innerText = 'Fit All Levels';
+                        showToast("Mode: Fit All Levels", "Chart Y-axis expanded to show all distant level lines.");
+                    } else {
+                        fitBtn.classList.remove('active');
+                        if (fitText) fitText.innerText = 'Zoom Candles';
+                        showToast("Mode: Zoom Candles", "Chart Y-axis focused on visible candle price action.");
+                    }
+                    reloadChartData(false);
+                });
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                alertsEnabled = !alertsEnabled;
+                if (alertsEnabled) {
+                    if ("Notification" in window) {
+                        Notification.requestPermission();
+                    }
+                    lastEvaluatedClosedCandleTime = null;
+                    levelCrossingMemory = {};
+                    toggleBtn.classList.add('active');
+                    document.getElementById('alert-btn-text').innerText = 'Notifications ACTIVE';
+                    triggerAlertSound(880, 'sine', 0.15);
+                    showToast("Alert System Activated", "Desktop alerts & chime active for strict 5M candle closes.");
+                } else {
+                    toggleBtn.classList.remove('active');
+                    document.getElementById('alert-btn-text').innerText = 'Enable Notifications';
+                    showToast("Alert System Disabled", "Notifications paused.");
+                }
+            });
+
+            refreshBtn.addEventListener('click', () => {
+                reloadChartData(true);
+                countdownSeconds = 15;
+                showToast("⚡ EUR/USD Key Levels Refreshed", "Loaded latest Key Trading Levels Summary & candles.");
+            });
+        }
+
+        let latestCandleTimestamp = null;
+        let userHasInteracted = false;
+        let userLogicalRange = null;
+        let currentCandlesArray = [];
+        let isProgrammaticScroll = false;
+        let isDraggingScrollbar = false;
+        let dragStartX = 0;
+        let dragStartLeft = 0;
+
+        function updateOHLCHeader(param) {
+            const legendO = document.getElementById('ohlc-o');
+            const legendH = document.getElementById('ohlc-h');
+            const legendL = document.getElementById('ohlc-l');
+            const legendC = document.getElementById('ohlc-c');
+            const legendChg = document.getElementById('ohlc-change-pill');
+            if (!legendO || !currentCandlesArray || currentCandlesArray.length === 0) return;
+
+            let candle = null;
+            if (param && param.time && param.seriesPrices && candleSeries) {
+                const priceData = param.seriesPrices.get(candleSeries);
+                if (priceData && priceData.open !== undefined) {
+                    candle = priceData;
+                }
+            }
+
+            if (!candle) {
+                candle = currentCandlesArray[currentCandlesArray.length - 1];
+            }
+
+            if (candle && candle.open !== undefined) {
+                const open = candle.open;
+                const high = candle.high;
+                const low = candle.low;
+                const close = candle.close;
+                const diff = close - open;
+                const pct = open !== 0 ? (diff / open) * 100 : 0;
+                const sign = diff >= 0 ? '+' : '';
+                const isBullish = diff >= 0;
+
+                const fmt = (val) => typeof val === 'number' ? val.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 5 }) : '--';
+
+                legendO.innerText = fmt(open);
+                legendH.innerText = fmt(high);
+                legendL.innerText = fmt(low);
+                legendC.innerText = fmt(close);
+
+                if (legendChg) {
+                    legendChg.innerText = `${sign}${(diff * 10000).toFixed(1)} pips (${sign}${pct.toFixed(2)}%)`;
+                    legendChg.className = `ohlc-chg ${isBullish ? 'bullish' : 'bearish'}`;
+                }
+            }
+        }
+
+        function resetZoomToLive() {
+            if (isReplayMode) {
+                exitReplayMode();
+            }
+            userHasInteracted = false;
+            userLogicalRange = null;
+            if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                const totalBars = currentCandlesArray.length;
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: Math.max(0, totalBars - 30),
+                    to: totalBars + 8
+                });
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            }
+            const resetBtn = document.getElementById('btn-reset-zoom');
+            if (resetBtn) resetBtn.style.display = 'none';
+            showToast("🎯 Live View Snapped", "Returned to current developing candles.");
+        }
+
+        function updateScrollbarFromChart(range) {
+            if (isDraggingScrollbar || !currentCandlesArray || currentCandlesArray.length === 0) return;
+            const track = document.getElementById('scrollbar-track');
+            const thumb = document.getElementById('scrollbar-thumb');
+            if (!track || !thumb) return;
+
+            if (!range && chartInstance) {
+                range = chartInstance.timeScale().getVisibleLogicalRange();
+            }
+            if (!range) return;
+
+            const totalBars = currentCandlesArray.length;
+            const visibleBars = Math.max(1, range.to - range.from);
+            const trackWidth = track.clientWidth;
+
+            const widthPct = Math.min(100, Math.max(8, (visibleBars / totalBars) * 100));
+            const maxFrom = Math.max(1, totalBars - visibleBars);
+            const clampedFrom = Math.max(0, Math.min(range.from, maxFrom));
+            const leftPct = (clampedFrom / maxFrom) * (100 - widthPct);
+
+            thumb.style.width = `${widthPct}%`;
+            thumb.style.left = `${Math.max(0, Math.min(leftPct, 100 - widthPct))}%`;
+        }
+
+        function initHorizontalScrollbar() {
+            const track = document.getElementById('scrollbar-track');
+            const thumb = document.getElementById('scrollbar-thumb');
+            if (!track || !thumb) return;
+
+            thumb.addEventListener('mousedown', (e) => {
+                isDraggingScrollbar = true;
+                dragStartX = e.clientX;
+                dragStartLeft = thumb.offsetLeft;
+                document.body.style.userSelect = 'none';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDraggingScrollbar || !chartInstance || !currentCandlesArray || currentCandlesArray.length === 0) return;
+                const deltaX = e.clientX - dragStartX;
+                const trackWidth = track.clientWidth;
+                const thumbWidth = thumb.clientWidth;
+                const maxLeft = trackWidth - thumbWidth;
+                if (maxLeft <= 0) return;
+
+                let newLeft = Math.max(0, Math.min(dragStartLeft + deltaX, maxLeft));
+                thumb.style.left = `${newLeft}px`;
+
+                const totalBars = currentCandlesArray.length;
+                const currentRange = chartInstance.timeScale().getVisibleLogicalRange();
+                const visibleBars = currentRange ? (currentRange.to - currentRange.from) : 30;
+
+                const leftRatio = newLeft / maxLeft;
+                const maxFrom = totalBars - visibleBars;
+                const targetFrom = Math.round(leftRatio * maxFrom);
+                const targetTo = targetFrom + visibleBars;
+
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({ from: targetFrom, to: targetTo });
+                userLogicalRange = { from: targetFrom, to: targetTo };
+                userHasInteracted = true;
+                const resetBtn = document.getElementById('btn-reset-zoom');
+                if (resetBtn) resetBtn.style.display = 'flex';
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDraggingScrollbar) {
+                    isDraggingScrollbar = false;
+                    document.body.style.userSelect = '';
+                }
+            });
+
+            track.addEventListener('click', (e) => {
+                if (e.target === thumb) return;
+                const rect = track.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const trackWidth = track.clientWidth;
+                const thumbWidth = thumb.clientWidth;
+                const maxLeft = trackWidth - thumbWidth;
+                if (maxLeft <= 0) return;
+
+                let newLeft = Math.max(0, Math.min(clickX - thumbWidth / 2, maxLeft));
+                thumb.style.left = `${newLeft}px`;
+
+                const totalBars = currentCandlesArray.length;
+                const currentRange = chartInstance.timeScale().getVisibleLogicalRange();
+                const visibleBars = currentRange ? (currentRange.to - currentRange.from) : 30;
+
+                const leftRatio = newLeft / maxLeft;
+                const maxFrom = totalBars - visibleBars;
+                const targetFrom = Math.round(leftRatio * maxFrom);
+                const targetTo = targetFrom + visibleBars;
+
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({ from: targetFrom, to: targetTo });
+                userLogicalRange = { from: targetFrom, to: targetTo };
+                userHasInteracted = true;
+                const resetBtn = document.getElementById('btn-reset-zoom');
+                if (resetBtn) resetBtn.style.display = 'flex';
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            });
+        }
+
+        function initChartApp() {
+            const container = document.getElementById('chart-wrapper');
+            
+            chartInstance = LightweightCharts.createChart(container, {
+                layout: {
+                    background: { type: 'solid', color: '#151c28' },
+                    textColor: '#94a3b8',
+                    fontFamily: 'Inter, sans-serif',
+                },
+                grid: {
+                    vertLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                    horzLines: { color: 'rgba(255, 255, 255, 0.05)' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    visible: true,
+                    borderColor: 'rgba(59, 130, 246, 0.2)',
+                    autoScale: true,
+                    scaleMargins: {
+                        top: 0.15,
+                        bottom: 0.15,
+                    },
+                },
+                timeScale: {
+                    borderColor: 'rgba(59, 130, 246, 0.2)',
+                    timeVisible: true,
+                    secondsVisible: false,
+                    rightOffset: 8,
+                    tickMarkFormatter: (time, tickMarkType, locale) => {
+                        const date = new Date(time * 1000);
+                        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        if (tickMarkType === 0) {
+                            return date.getFullYear().toString();
+                        } else if (tickMarkType === 1) {
+                            return `${months[date.getMonth()]} '${date.getFullYear().toString().slice(-2)}`;
+                        } else if (tickMarkType === 2) {
+                            const d = date.getDate().toString().padStart(2, '0');
+                            return `${d} ${months[date.getMonth()]}`;
+                        } else {
+                            const h = date.getHours().toString().padStart(2, '0');
+                            const m = date.getMinutes().toString().padStart(2, '0');
+                            return `${h}:${m}`;
+                        }
+                    }
+                },
+                localization: {
+                    priceFormatter: (p) => typeof p === 'number' ? p.toFixed(5) : '',
+                    timeFormatter: (time) => {
+                        const date = new Date(time * 1000);
+                        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        const d = date.getDate().toString().padStart(2, '0');
+                        const mon = months[date.getMonth()];
+                        let h = date.getHours();
+                        const m = date.getMinutes().toString().padStart(2, '0');
+                        const ampm = h >= 12 ? 'PM' : 'AM';
+                        h = h % 12;
+                        h = h ? h : 12;
+                        const formattedTime = `${d} ${mon}  ${h}:${m} ${ampm}`;
+                        if (latestCandleTimestamp && time === latestCandleTimestamp) {
+                            return `${formattedTime} (Developing)`;
+                        }
+                        return formattedTime;
+                    }
+                }
+            });
+
+            candleSeries = chartInstance.addCandlestickSeries({
+                upColor: '#10b981',
+                downColor: '#f43f5e',
+                borderVisible: false,
+                wickUpColor: '#10b981',
+                wickDownColor: '#f43f5e',
+                priceFormat: {
+                    type: 'price',
+                    precision: 5,
+                    minMove: 0.00001,
+                },
+            });
+
+            initHorizontalScrollbar();
+
+            // Immediate initial synchronous bootstrap from local cached data (0ms perceived load)
+            if (window.eurusdCandlesData && Array.isArray(window.eurusdCandlesData.timeframe5m) && window.eurusdCandlesData.timeframe5m.length > 0) {
+                currentCandlesArray = [...window.eurusdCandlesData.timeframe5m];
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+
+                const rawPlanArray = (window.eurusdDailyPlanSummary && window.eurusdDailyPlanSummary.length > 0)
+                    ? window.eurusdDailyPlanSummary
+                    : ((window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData)) ? window.eurusdDailyPlanData : []);
+                aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
+                renderLevelsAndCards();
+                updateFeedStatusBadge(currentCandlesArray);
+
+                const totalBars = currentCandlesArray.length;
+                let fromIdx = Math.max(0, totalBars - 45);
+                const latestRun = getLatestBriefingRun();
+                if (latestRun && latestRun.time) {
+                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestRun.time) <= 7200);
+                    if (idx !== -1 && idx > totalBars - 120) {
+                        fromIdx = Math.max(0, idx - 6);
+                    }
+                }
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: fromIdx,
+                    to: totalBars + 8
+                });
+                renderVerticalLinesOverlay();
+            }
+
+            reloadChartData();
+
+            // Subscribe Crosshair Movement to update OHLC Telemetry
+            chartInstance.subscribeCrosshairMove((param) => {
+                updateOHLCHeader(param);
+            });
+
+            // Subscribe TimeScale changes to redraw vertical line overlay smoothly & sync scrollbar
+            if (chartInstance && chartInstance.timeScale) {
+                const ts = chartInstance.timeScale();
+                if (typeof ts.subscribeVisibleLogicalRangeChange === 'function') {
+                    ts.subscribeVisibleLogicalRangeChange((range) => {
+                        renderVerticalLinesOverlay();
+                        updateScrollbarFromChart(range);
+                        if (range && !isProgrammaticScroll && currentCandlesArray && currentCandlesArray.length > 0) {
+                            userLogicalRange = range;
+                            const totalBars = currentCandlesArray.length;
+                            const isScrolledBack = range.to < totalBars - 2 || (range.to - range.from) < (totalBars - 5);
+                            userHasInteracted = true;
+                            const resetBtn = document.getElementById('btn-reset-zoom');
+                            if (resetBtn) resetBtn.style.display = isScrolledBack ? 'flex' : 'none';
+                        }
+                    });
+                }
+                if (typeof ts.subscribeVisibleTimeRangeChange === 'function') {
+                    ts.subscribeVisibleTimeRangeChange(() => {
+                        renderVerticalLinesOverlay();
+                    });
+                }
+            }
+
+            // Direct container click listener for touch devices & top badges
+            if (container) {
+                container.addEventListener('click', (e) => {
+                    if (!chartInstance || !showVLines || !aiBriefingTimes || aiBriefingTimes.length === 0) return;
+                    const rect = container.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+                    const timeScale = chartInstance.timeScale();
+
+                    for (let item of aiBriefingTimes) {
+                        const x = timeScale.timeToCoordinate(item.time);
+                        if (x !== null) {
+                            const badgeW = item.badgeW || 75;
+                            const badgeX = item.badgeX !== undefined ? item.badgeX : (x - badgeW / 2);
+                            const clickedBadge = mouseY <= 36 && mouseX >= badgeX - 8 && mouseX <= badgeX + badgeW + 8;
+                            const clickedLine = Math.abs(mouseX - x) <= 20;
+                            if (clickedBadge || clickedLine) {
+                                selectBriefingRun(item);
+                                break;
+                            }
+                        }
+                    }
+                });
+            }
+
+            // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction & Custom Vertical Line Placement!
+            chartInstance.subscribeClick((param) => {
+                if (!param || !param.point) return;
+
+                if (addVLineMode) {
+                    if (param.time) {
+                        userVLines.push(param.time);
+                        addVLineMode = false;
+                        const addBtn = document.getElementById('btn-add-vline');
+                        if (addBtn) addBtn.classList.remove('active');
+                        showToast("📍 Vertical Line Placed", `Custom vertical line dropped at clicked timestamp.`);
+                        renderVerticalLinesOverlay();
+                    }
+                    return;
+                }
+
+                // Check click on AI Briefing top badge or near vertical line
+                if (showVLines && aiBriefingTimes && aiBriefingTimes.length > 0) {
+                    const timeScale = chartInstance.timeScale();
+                    for (let item of aiBriefingTimes) {
+                        const x = timeScale.timeToCoordinate(item.time);
+                        const badgeW = item.badgeW || 75;
+                        const badgeX = item.badgeX !== undefined ? item.badgeX : ((x !== null) ? (x - badgeW / 2) : 0);
+                        const clickedBadge = param.point.y <= 36 && x !== null && param.point.x >= badgeX - 8 && param.point.x <= badgeX + badgeW + 8;
+                        const clickedLinePx = x !== null && Math.abs(param.point.x - x) <= 24;
+                        const clickedLineTime = (param.time && Math.abs(param.time - item.time) <= 900);
+                        if (clickedBadge || clickedLinePx || clickedLineTime) {
+                            selectBriefingRun(item);
+                            return;
+                        }
+                    }
+                }
+
+                const clickedPrice = candleSeries.coordinateToPrice(param.point.y);
+                if (!clickedPrice) return;
+
+                let closestLevelIdx = -1;
+                let minDistance = 9999;
+
+                activePriceLines.forEach((item) => {
+                    const dist = Math.abs(item.price - clickedPrice);
+                    if (dist < 0.0025 && dist < minDistance) {
+                        minDistance = dist;
+                        closestLevelIdx = item.index;
+                    }
+                });
+
+                if (closestLevelIdx !== -1) {
+                    highlightCard(closestLevelIdx);
+                    const matchedLevel = activePriceLines[closestLevelIdx];
+                    showToast(`Selected Line: ${matchedLevel.tag} ${matchedLevel.price}`, matchedLevel.levelObj.behavior);
+                    triggerAlertSound(880, 'sine', 0.1);
+                }
+            });
+
+            // Mouse hover pointer cursor for vertical lines & top badges
+            if (container) {
+                container.addEventListener('mousemove', (e) => {
+                    if (!chartInstance || !showVLines || !aiBriefingTimes || aiBriefingTimes.length === 0) return;
+                    const rect = container.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left;
+                    const mouseY = e.clientY - rect.top;
+                    const timeScale = chartInstance.timeScale();
+                    let isHoveringLine = false;
+
+                    aiBriefingTimes.forEach(item => {
+                        const x = timeScale.timeToCoordinate(item.time);
+                        if (x !== null) {
+                            const badgeW = item.badgeW || 75;
+                            const badgeX = item.badgeX !== undefined ? item.badgeX : (x - badgeW / 2);
+                            if ((mouseY <= 32 && mouseX >= badgeX - 4 && mouseX <= badgeX + badgeW + 4) || (Math.abs(mouseX - x) <= 8)) {
+                                isHoveringLine = true;
+                            }
+                        }
+                    });
+
+                    container.style.cursor = isHoveringLine ? 'pointer' : '';
+                });
+            }
+
+            // Responsive Resize via ResizeObserver & Window Resize
+            const resizeChart = () => {
+                if (container && chartInstance) {
+                    const w = container.clientWidth;
+                    const h = container.clientHeight;
+                    if (w > 0 && h > 0) {
+                        chartInstance.applyOptions({ width: w, height: h });
+                        renderVerticalLinesOverlay();
+                    }
+                }
+            };
+
+            // Side mouse wheel (horizontal wheel / tilt wheel) & Shift+Wheel support
+            if (container) {
+                container.addEventListener('wheel', (e) => {
+                    const isHorizontal = Math.abs(e.deltaX) > 0 || e.shiftKey;
+                    if (isHorizontal) {
+                        const delta = Math.abs(e.deltaX) > 0 ? e.deltaX : e.deltaY;
+                        if (Math.abs(delta) > 0 && chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const range = chartInstance.timeScale().getVisibleLogicalRange();
+                            if (range) {
+                                const totalBars = currentCandlesArray.length;
+                                const visibleBars = range.to - range.from;
+                                const shiftBars = Math.sign(delta) * Math.max(1, Math.round(Math.abs(delta) / 12));
+                                const maxFrom = Math.max(1, totalBars - visibleBars);
+                                const newFrom = Math.max(0, Math.min(range.from + shiftBars, maxFrom));
+                                const newTo = newFrom + visibleBars;
+                                isProgrammaticScroll = true;
+                                chartInstance.timeScale().setVisibleLogicalRange({ from: newFrom, to: newTo });
+                                userLogicalRange = { from: newFrom, to: newTo };
+                                userHasInteracted = true;
+                                const resetBtn = document.getElementById('btn-reset-zoom');
+                                if (resetBtn) resetBtn.style.display = 'flex';
+                                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                            }
+                        }
+                    }
+                }, { capture: true, passive: false });
+            }
+
+            const resizeObserver = new ResizeObserver(() => resizeChart());
+            resizeObserver.observe(container);
+            window.addEventListener('resize', resizeChart);
+            resizeChart();
+        }
+
+        function reloadCandlesScript() {
+            return new Promise((resolve) => {
+                const scriptId = 'dyn-eurusd-candles-script';
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/eurusd_candles.js?t=${Date.now()}`;
+                const timer = setTimeout(() => resolve(false), 2500);
+                script.onload = () => { clearTimeout(timer); resolve(true); };
+                script.onerror = () => { clearTimeout(timer); resolve(false); };
+                document.body.appendChild(script);
+            });
+        }
+
+        function reloadPlanDataScript(assetName) {
+            return new Promise((resolve) => {
+                const scriptId = `dyn-${assetName}-script`;
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/${assetName}_daily_plan.js?t=${Date.now()}`;
+                const timer = setTimeout(() => resolve(false), 2500);
+                script.onload = () => { clearTimeout(timer); resolve(true); };
+                script.onerror = () => { clearTimeout(timer); resolve(false); };
+                document.body.appendChild(script);
+            });
+        }
+
+        function renderBriefingRunsPills() {
+            const container = document.getElementById('briefing-runs-pills');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+            container.style.display = 'flex';
+
+            // Find true latest run (newest timestamp)
+            let latestRun = aiBriefingTimes[0];
+            let maxTs = -Infinity;
+            aiBriefingTimes.forEach(run => {
+                const ts = run.timestamp ? new Date(run.timestamp).getTime() : (run.time * 1000);
+                if (ts > maxTs) {
+                    maxTs = ts;
+                    latestRun = run;
+                }
+            });
+
+            // Sort chronologically (earliest -> latest)
+            const sortedRuns = [...aiBriefingTimes].sort((a, b) => {
+                const aTime = a.timestamp ? new Date(a.timestamp).getTime() : (a.time * 1000);
+                const bTime = b.timestamp ? new Date(b.timestamp).getTime() : (b.time * 1000);
+                return aTime - bTime;
+            });
+
+            sortedRuns.forEach((run) => {
+                const btn = document.createElement('button');
+                btn.className = 'briefing-pill-btn';
+                const isLatest = (run.timestamp === latestRun.timestamp) || (run.time === latestRun.time);
+                const isSelected = selectedBriefingTimestamp 
+                    ? (selectedBriefingTimestamp === run.timestamp || selectedBriefingTimestamp === run.time)
+                    : isLatest;
+
+                if (isSelected) {
+                    btn.classList.add('active');
+                    setTimeout(() => {
+                        btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+                    }, 50);
+                }
+                btn.innerHTML = `${isLatest ? '⚡' : '📌'} ${run.label}${isLatest ? ' (Live)' : ''}`;
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (isLatest && !selectedBriefingTimestamp) return;
+                    if (isLatest) {
+                        selectBriefingRun(null);
+                    } else {
+                        selectBriefingRun(run);
+                    }
+                });
+                container.appendChild(btn);
+            });
+        }
+
+        function getLatestBriefingRun() {
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
+            let latest = aiBriefingTimes[0];
+            let maxTs = -Infinity;
+            aiBriefingTimes.forEach(run => {
+                const ts = run.timestamp ? new Date(run.timestamp).getTime() : (run.time * 1000);
+                if (ts > maxTs) {
+                    maxTs = ts;
+                    latest = run;
+                }
+            });
+            return latest;
+        }
+
+        function selectBriefingRun(item) {
+            pauseReplay();
+            if (isReplayMode) {
+                exitReplayMode();
+            }
+            if (!item) {
+                selectedBriefingTimestamp = null;
+                showToast("⚡ Returned to Latest", "Displaying latest active trading plan levels.");
+                if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                    const totalBars = currentCandlesArray.length;
+                    let fromIdx = Math.max(0, totalBars - 45);
+                    const latestRun = getLatestBriefingRun();
+                    if (latestRun && latestRun.time) {
+                        const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestRun.time) <= 7200);
+                        if (idx !== -1 && idx > totalBars - 120) {
+                            fromIdx = Math.max(0, idx - 6);
+                        }
+                    }
+                    const toIdx = totalBars + 8;
+                    isProgrammaticScroll = true;
+                    chartInstance.timeScale().setVisibleLogicalRange({ from: fromIdx, to: toIdx });
+                    userLogicalRange = { from: fromIdx, to: toIdx };
+                    userHasInteracted = false;
+                    const resetBtn = document.getElementById('btn-reset-zoom');
+                    if (resetBtn) resetBtn.style.display = 'none';
+                    setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                }
+            } else {
+                selectedBriefingTimestamp = item.timestamp || item.time;
+                showToast(`📌 Selected Briefing: ${item.label}`, "Chart levels, cards, and scorecard updated.");
+
+                if (chartInstance && item.time && currentCandlesArray && currentCandlesArray.length > 0) {
+                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - item.time) <= 7200);
+                    if (idx !== -1) {
+                        isProgrammaticScroll = true;
+                        const fromIdx = Math.max(0, idx - 12);
+                        const toIdx = Math.min(currentCandlesArray.length + 5, idx + 40);
+                        chartInstance.timeScale().setVisibleLogicalRange({
+                            from: fromIdx,
+                            to: toIdx
+                        });
+                        userHasInteracted = true;
+                        userLogicalRange = { from: fromIdx, to: toIdx };
+                        const resetBtn = document.getElementById('btn-reset-zoom');
+                        if (resetBtn) resetBtn.style.display = 'flex';
+                        setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                    }
+                }
+            }
+
+            renderLevelsAndCards();
+            renderVerticalLinesOverlay();
+            setTimeout(() => renderVerticalLinesOverlay(), 60);
+            setTimeout(() => renderVerticalLinesOverlay(), 200);
+
+            // ✨ Bring Levels Section & Cards into view & highlight
+            const levelsSection = document.querySelector('.levels-section');
+            if (levelsSection) {
+                levelsSection.scrollTop = 0;
+                if (window.innerWidth <= 900) {
+                    levelsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                levelsSection.classList.add('panel-briefing-highlight');
+                setTimeout(() => levelsSection.classList.remove('panel-briefing-highlight'), 1200);
+            }
+            if (item) {
+                setTimeout(() => highlightCard(0), 100);
+            }
+        }
+
+        function formatRiskRewardPill(entryPriceStr, slPriceStr, tpStr) {
+            if (!entryPriceStr || !slPriceStr || !tpStr) {
+                return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
+            }
+
+            const entry = parseFloat(String(entryPriceStr).split(/[-–]/)[0].replace(/[^0-9.]/g, ''));
+            const sl = parseFloat(String(slPriceStr).split(/[-–]/)[0].replace(/[^0-9.]/g, ''));
+
+            if (isNaN(entry) || isNaN(sl)) {
+                return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
+            }
+
+            const risk = Math.abs(entry - sl);
+            if (risk <= 0) {
+                return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
+            }
+
+            const rawParts = String(tpStr).split(/<br\s*\/?>|\n|[\/|]/i);
+            const tpList = [];
+            rawParts.forEach(p => {
+                const cleanPart = p.replace(/\*\*TP\d*:?\s*\*?/gi, '').replace(/TP\d*:?\s*/gi, '').trim();
+                const cleaned = cleanPart.split(/[-–]/)[0].replace(/,/g, '').trim();
+                const match = cleaned.match(/([0-9]+(?:\.[0-9]+)?)/);
+                if (match) {
+                    const val = parseFloat(match[1]);
+                    if (!isNaN(val) && val > 0) tpList.push(val);
+                }
+            });
+
+            if (tpList.length === 0) {
+                return `<div style="color:#94a3b8; font-size:0.65rem; white-space:nowrap;">R:R --</div>`;
+            }
+
+            if (tpList.length === 1) {
+                const reward = Math.abs(tpList[0] - entry);
+                const rr = reward / risk;
+                const rrStr = (Math.round(rr * 10) / 10).toFixed(1);
+                return `<div style="display:flex; align-items:center; gap:4px; white-space:nowrap;"><span style="color:#94a3b8; font-size:0.62rem;">R:R</span> <strong style="color:#34d399; font-size:0.72rem;">1:${rrStr}</strong></div>`;
+            }
+
+            const items = tpList.map((tp, i) => {
+                const reward = Math.abs(tp - entry);
+                const rr = reward / risk;
+                const rrStr = (Math.round(rr * 10) / 10).toFixed(1);
+                return `<div style="display:flex; align-items:center; justify-content:space-between; gap:5px; width:100%; white-space:nowrap;"><span style="color:#94a3b8; font-size:0.62rem;">TP${i + 1}:</span> <strong style="color:#34d399; font-size:0.70rem;">1:${rrStr}</strong></div>`;
+            });
+
+            return items.join('');
+        }
+
+        function getCanonicalSetupCategory(tag, behavior, bias) {
+            const beh = (behavior || tag || '').replace(/_/g, ' ').toUpperCase();
+            if (/\[\s*[A-Z0-9_]*KB\d*\s*\]/.test(beh) || /\bKB\d*\b/.test(beh)) return 'AI KB';
+            if (/\[\s*[A-Z0-9_]*KS\d*\s*\]/.test(beh) || /\bKS\d*\b/.test(beh)) return 'AI KS';
+            if (/\[\s*(?:[A-Z0-9_]*_)?B\d+\s*\]/.test(beh) || /\bB\d+\b/.test(beh)) return 'AI B';
+            if (/\[\s*(?:[A-Z0-9_]*_)?S\d+\s*\]/.test(beh) || /\bS\d+\b/.test(beh)) return 'AI S';
+            const b = (bias || '').toLowerCase();
+            if (b === 'bullish' || b === 'long' || b === 'buy') return 'AI B';
+            if (b === 'bearish' || b === 'short' || b === 'sell') return 'AI S';
+            return 'AI B';
+        }
+
+        function renderLevelsAndCards() {
+            levelsData = getEurUsdKeyLevels(selectedBriefingTimestamp);
+
+            // Sort cards by trigger price descending (highest trigger price at top of cards list)
+            if (levelsData && Array.isArray(levelsData.levels)) {
+                levelsData.levels.sort((a, b) => {
+                    const pA = parseFloat(String(a.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '')) || 0;
+                    const pB = parseFloat(String(b.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '')) || 0;
+                    return pB - pA;
+                });
+            }
+
+            const raisedTimeStr = levelsData.timeDisplay || "06:02 PM, Sep 09";
+            const bBadge = document.getElementById('briefing-time-badge');
+            if (bBadge) bBadge.innerText = `📌 Key Levels Raised: ${raisedTimeStr}`;
+            const lCount = document.getElementById('levels-count');
+            if (lCount) lCount.innerText = `${levelsData.levels.length} Levels`;
+
+            const returnBtn = document.getElementById('btn-return-latest');
+            if (returnBtn) {
+                returnBtn.style.display = selectedBriefingTimestamp ? 'inline-flex' : 'none';
+            }
+
+            renderBriefingRunsPills();
+
+            if (currentCandlesArray && currentCandlesArray.length > 0 && candleSeries) {
+                let targetCandleTime = null;
+                if (levelsData.anchorTimestamp) {
+                    const planSec = Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000);
+                    let minDiff = Infinity;
+                    currentCandlesArray.forEach(c => {
+                        const diff = Math.abs(c.time - planSec);
+                        if (diff < minDiff && diff <= 14400) { minDiff = diff; targetCandleTime = c.time; }
+                    });
+                }
+                if (!targetCandleTime && raisedTimeStr) {
+                    const planSec = parseISTTimeToUnix(raisedTimeStr);
+                    if (planSec) {
+                        let minDiff = Infinity;
+                        currentCandlesArray.forEach(c => {
+                            const diff = Math.abs(c.time - planSec);
+                            if (diff < minDiff && diff <= 14400) { minDiff = diff; targetCandleTime = c.time; }
+                        });
+                    }
+                }
+
+                if (targetCandleTime) {
+                    candleSeries.setMarkers([
+                        {
+                            time: targetCandleTime,
+                            position: 'aboveBar',
+                            color: '#3b82f6',
+                            shape: 'arrowDown',
+                            text: `📌 EUR/USD Plan Raised (${raisedTimeStr.split(',')[0]})`,
+                            size: 2
+                        }
+                    ]);
+                } else {
+                    candleSeries.setMarkers([]);
+                }
+            }
+
+            const levelsSection = document.querySelector('.levels-section');
+            const savedScrollTop = levelsSection ? levelsSection.scrollTop : 0;
+            const levelsListEl = document.getElementById('levels-list');
+            if (levelsListEl) levelsListEl.innerHTML = '';
+            
+            if (candleSeries) {
+                activePriceLines.forEach(item => {
+                    if (item.line) candleSeries.removePriceLine(item.line);
+                });
+            }
+            activePriceLines = [];
+
+            levelsData.levels.forEach((lvl, idx) => {
+                const tag = extractTag(lvl.behavior) || (lvl.bias === 'bullish' ? `[E_B${idx+1}]` : `[SP_S${idx+1}]`);
+                let isBullish = lvl.bias === 'bullish';
+                // Simple: tag contains B = buy (green), tag contains S = sell (red)
+                if (/B/i.test(tag)) {
+                    isBullish = true;
+                } else if (/S/i.test(tag)) {
+                    isBullish = false;
+                }
+                const lineColor = isBullish ? '#10b981' : '#f43f5e';
+                const category = getCanonicalSetupCategory(tag, lvl.behavior, isBullish ? 'bullish' : 'bearish');
+                const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
+                const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.eurusdDailyPlanSummary, levelsData.anchorTimestamp);
+
+                // Normalized unique ID for Scorecard persistence
+                const cleanTag = tag.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+                const cleanPrice = String(lvl.price).split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                const runSuffix = levelsData.anchorTimestamp ? '_' + Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000) : '';
+                const levelUniqueId = `eurusd_${cleanTag}_${cleanPrice}${runSuffix}`;
+                const savedOutcome = getSavedOutcome(levelUniqueId);
+
+                // ✅ Tag-aware line styles:
+                const isActionSetup = /^\[(?!K)[BS]\d+\]$/i.test(tag);
+                const lineStyle     = (typeof LightweightCharts !== 'undefined' && LightweightCharts.LineStyle)
+                    ? (isActionSetup ? LightweightCharts.LineStyle.Solid : LightweightCharts.LineStyle.Dashed)
+                    : 0;
+                const lineWidth     = isActionSetup ? 2 : 1;
+
+                if (!isNaN(priceVal) && candleSeries) {
+                    const pLine = candleSeries.createPriceLine({
+                        price: priceVal,
+                        color: lineColor,
+                        lineWidth: lineWidth,
+                        lineStyle: lineStyle,
+                        axisLabelVisible: true,
+                        title: `${tag}`,
+                    });
+
+                    activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx });
+                }
+
+                const card = document.createElement('div');
+                card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}`;
+                card.id = `card-eurusd-${idx}`;
+                card.setAttribute('data-level-id', levelUniqueId);
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="card-price ${isBullish ? 'bullish' : 'bearish'}">
+                            ${isBullish ? '🟢' : '🔴'} $${lvl.price}
+                        </span>
+                        <div style="display:flex;gap:0.3rem;align-items:center;">
+                            <span class="proximity-badge" id="prox-badge-eurusd-${idx}">🎯 NEAR BY</span>
+                            <span class="status-pill status-pill-${savedOutcome}" data-pill="${levelUniqueId}" id="status-pill-eurusd-${idx}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
+                            <span class="tag-pill ${isBullish ? 'bullish' : 'bearish'}">${tag}</span>
+                        </div>
+                    </div>
+                    <div class="card-logic clamped" id="card-logic-eurusd-${idx}">${fullConfirmationLogic}</div>
+                    <div class="expand-logic-btn" id="expand-btn-eurusd-${idx}" onclick="toggleLogicExpand(event, 'eurusd', ${idx})">▼ Show Full Confirmation Logic</div>
+                    <div class="card-targets">
+                        <div style="display:flex; flex-direction:column; gap:3px; min-width:0; flex:1;">
+                            <div style="word-break:break-word; line-height:1.3;">TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></div>
+                            <div style="line-height:1.3;">SL: <strong class="sl-val">${lvl.sl || 'N/A'}</strong></div>
+                        </div>
+                        <div class="dist-pill rr-pill" id="dist-pill-eurusd-${idx}" title="Risk to Reward (R:R)">${formatRiskRewardPill(lvl.price, lvl.sl, lvl.tp)}</div>
+                    </div>
+                    <div class="card-outcome-bar">
+                        <span class="outcome-label">Scorecard (${category}):</span>
+                        <div class="outcome-btn-group">
+                            <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" data-btn-worked="${levelUniqueId}" id="btn-worked-eurusd-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
+                            <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" data-btn-failed="${levelUniqueId}" id="btn-failed-eurusd-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
+                            <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'na', ${idx})">↺ Reset</button>
+                        </div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    highlightCard(idx);
+                    showToast(`Selected Setup: ${tag} $${lvl.price}`, fullConfirmationLogic);
+                    triggerAlertSound(880, 'sine', 0.15);
+                });
+
+                levelsListEl.appendChild(card);
+            });
+
+            if (levelsSection && savedScrollTop > 0) {
+                levelsSection.scrollTop = savedScrollTop;
+                requestAnimationFrame(() => { levelsSection.scrollTop = savedScrollTop; });
+            }
+
+            if (currentCandlesArray && currentCandlesArray.length > 0) {
+                let spotPrice = currentCandlesArray[currentCandlesArray.length - 1].close;
+                if (selectedBriefingTimestamp && levelsData.anchorTimestamp) {
+                    const planSec = Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000);
+                    let closestCandle = null;
+                    let minDiff = Infinity;
+                    currentCandlesArray.forEach(c => {
+                        const diff = Math.abs(c.time - planSec);
+                        if (diff < minDiff && diff <= 14400) { minDiff = diff; closestCandle = c; }
+                    });
+                    if (closestCandle) spotPrice = closestCandle.close;
+                }
+                updateProximityAndAutoSelect(spotPrice);
+            }
+        }
+
+        async function reloadChartData(forceFit = false) {
+            try {
+                await reloadPlanDataScript('eurusd');
+
+                const candles = await loadRealEurUsdCandles();
+                updateFeedStatusBadge(candles);
+                if (candles && candles.length > 0) {
+                    allMasterCandles = candles;
+                    if (!isReplayMode) {
+                        currentCandlesArray = candles;
+                        candleSeries.setData(candles);
+                        latestCandleTimestamp = candles[candles.length - 1].time;
+                        updateOHLCHeader();
+                    }
+                }
+
+                // Update AI Briefing timestamps
+                const rawPlanArray = (window.eurusdDailyPlanSummary && window.eurusdDailyPlanSummary.length > 0)
+                    ? window.eurusdDailyPlanSummary
+                    : ((window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData)) ? window.eurusdDailyPlanData : []);
+                aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
+
+                renderLevelsAndCards();
+
+                // ✅ Autoscale Y-Axis: zoomed-in on candles by default, expands only if fitAllLevels is true
+                candleSeries.applyOptions({
+                    autoscaleInfoProvider: (original) => {
+                        const res = original();
+                        if (!fitAllLevels || !res || !res.priceRange) return res;
+
+                        let min = res.priceRange.minValue;
+                        let max = res.priceRange.maxValue;
+
+                        if (activePriceLines && activePriceLines.length > 0) {
+                            activePriceLines.forEach(item => {
+                                if (!isNaN(item.price)) {
+                                    if (item.price < min) min = item.price;
+                                    if (item.price > max) max = item.price;
+                                }
+                            });
+                        }
+
+                        const padding = (max - min) * 0.03;
+                        return {
+                            priceRange: {
+                                minValue: min - padding,
+                                maxValue: max + padding,
+                            },
+                        };
+                    },
+                });
+
+                if (currentCandlesArray && currentCandlesArray.length > 0) {
+                    checkCandleCloseCrossings(currentCandlesArray, 'EUR/USD');
+                }
+
+                if (chartInstance) {
+                    if (!forceFit && !isInitialLoad && userHasInteracted && userLogicalRange !== null) {
+                        isProgrammaticScroll = true;
+                        chartInstance.timeScale().setVisibleLogicalRange(userLogicalRange);
+                        setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                    } else if (selectedBriefingTimestamp) {
+                        const briefingObj = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
+                        if (briefingObj && briefingObj.time && currentCandlesArray && currentCandlesArray.length > 0) {
+                            const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - briefingObj.time) <= 7200);
+                            if (idx !== -1) {
+                                isProgrammaticScroll = true;
+                                chartInstance.timeScale().setVisibleLogicalRange({
+                                    from: Math.max(0, idx - 12),
+                                    to: Math.min(currentCandlesArray.length + 5, idx + 40)
+                                });
+                                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                            }
+                        }
+                    } else {
+                        if (currentCandlesArray && currentCandlesArray.length > 0) {
+                            const totalBars = currentCandlesArray.length;
+                            let fromIdx = Math.max(0, totalBars - 45);
+                            const latestRun = getLatestBriefingRun();
+                            if (latestRun && latestRun.time) {
+                                const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - latestRun.time) <= 7200);
+                                if (idx !== -1 && idx > totalBars - 120) {
+                                    fromIdx = Math.max(0, idx - 6);
+                                }
+                            }
+                            isProgrammaticScroll = true;
+                            chartInstance.timeScale().setVisibleLogicalRange({
+                                from: fromIdx,
+                                to: totalBars + 8
+                            });
+                            setTimeout(() => { isProgrammaticScroll = false; }, 50);
+                        } else {
+                            chartInstance.timeScale().fitContent();
+                        }
+                        isInitialLoad = false;
+                    }
+                }
+                updateScrollbarFromChart();
+                renderVerticalLinesOverlay();
+                setTimeout(() => renderVerticalLinesOverlay(), 60);
+            } catch (err) {
+                console.error("[EURUSD Chart] reloadChartData error:", err);
+            }
+        }
+
+        // ================= OPTION A: BOTTOM REPLAY ENGINE ================= //
+        function getActiveBriefingRun() {
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
+            if (selectedBriefingTimestamp) {
+                const match = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
+                if (match) return match;
+            }
+            return getLatestBriefingRun();
+        }
+
+        function getReplayStartIndex() {
+            if (!allMasterCandles || allMasterCandles.length === 0) return 0;
+            const targetRun = getActiveBriefingRun();
+            if (!targetRun || !targetRun.time) {
+                return Math.max(0, allMasterCandles.length - 30);
+            }
+            let idx = allMasterCandles.findIndex(c => Math.abs(c.time - targetRun.time) <= 7200);
+            if (idx === -1) {
+                let bestDiff = Infinity;
+                allMasterCandles.forEach((c, i) => {
+                    const diff = Math.abs(c.time - targetRun.time);
+                    if (diff < bestDiff) {
+                        bestDiff = diff;
+                        idx = i;
+                    }
+                });
+            }
+            return Math.max(0, idx !== -1 ? idx : 0);
+        }
+
+        function pauseReplay() {
+            if (replayPlayTimer) {
+                clearInterval(replayPlayTimer);
+                replayPlayTimer = null;
+            }
+            const playBtn = document.getElementById('btn-replay-play');
+            if (playBtn) {
+                playBtn.innerHTML = '▶ Play';
+                playBtn.classList.remove('active-play');
+            }
+        }
+
+        function exitReplayMode() {
+            pauseReplay();
+            if (isReplayMode) {
+                isReplayMode = false;
+                replayCurrentIndex = null;
+                if (allMasterCandles && allMasterCandles.length > 0) {
+                    currentCandlesArray = [...allMasterCandles];
+                    candleSeries.setData(currentCandlesArray);
+                    latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                    updateOHLCHeader();
+                    updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                    renderVerticalLinesOverlay();
+                }
+            }
+        }
+
+        function replayJumpToStart() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) {
+                showToast("⚠️ Replay Unavailable", "No candle history loaded yet.");
+                return;
+            }
+            isReplayMode = true;
+            replayCurrentIndex = getReplayStartIndex();
+            currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+            candleSeries.setData(currentCandlesArray);
+            latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+            updateOHLCHeader();
+            updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+            renderVerticalLinesOverlay();
+
+            if (chartInstance && chartInstance.timeScale) {
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: Math.max(0, replayCurrentIndex - 15),
+                    to: Math.min(allMasterCandles.length + 5, replayCurrentIndex + 25)
+                });
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            }
+            showToast("⏪ Replay: Started at Briefing Run", "Candles cut to vertical briefing run. Click ▶ Play or Step ▶ to progress.");
+        }
+
+        function replayStepBack() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+            }
+            if (replayCurrentIndex > 0) {
+                replayCurrentIndex--;
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                renderVerticalLinesOverlay();
+            }
+        }
+
+        function replayTogglePlay() {
+            if (replayPlayTimer) {
+                pauseReplay();
+                return;
+            }
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null || replayCurrentIndex >= allMasterCandles.length - 1) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+            }
+
+            const playBtn = document.getElementById('btn-replay-play');
+            if (playBtn) {
+                playBtn.innerHTML = '⏸ Pause';
+                playBtn.classList.add('active-play');
+            }
+
+            replayPlayTimer = setInterval(() => {
+                if (!allMasterCandles || replayCurrentIndex >= allMasterCandles.length - 1) {
+                    pauseReplay();
+                    showToast("🏁 Replay Completed", "Reached the latest real-time candle.");
+                    return;
+                }
+                replayCurrentIndex++;
+                const nextCandle = allMasterCandles[replayCurrentIndex];
+                currentCandlesArray.push(nextCandle);
+                candleSeries.update(nextCandle);
+                latestCandleTimestamp = nextCandle.time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(nextCandle.close);
+                renderVerticalLinesOverlay();
+            }, REPLAY_SPEED_MS);
+        }
+
+        function replayStepForward() {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (!isReplayMode || replayCurrentIndex === null) {
+                isReplayMode = true;
+                replayCurrentIndex = getReplayStartIndex();
+                currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+                candleSeries.setData(currentCandlesArray);
+                latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+                renderVerticalLinesOverlay();
+                return;
+            }
+
+            if (replayCurrentIndex < allMasterCandles.length - 1) {
+                replayCurrentIndex++;
+                const nextCandle = allMasterCandles[replayCurrentIndex];
+                currentCandlesArray.push(nextCandle);
+                candleSeries.update(nextCandle);
+                latestCandleTimestamp = nextCandle.time;
+                updateOHLCHeader();
+                updateProximityAndAutoSelect(nextCandle.close);
+                renderVerticalLinesOverlay();
+            } else {
+                showToast("🏁 Replay at Latest", "All available candles are already displayed.");
+            }
+        }
+
+        function extractAiBriefingTimes(dataArray, candlesList) {
+            if (!Array.isArray(dataArray)) return [];
+            const seen = new Set();
+            const result = [];
+            dataArray.forEach(item => {
+                if (!item) return;
+                const timeStr = item.timeDisplay || "";
+                const rawTs = item.timestamp || "";
+                let unixSec = null;
+                if (rawTs) {
+                    unixSec = Math.floor(new Date(rawTs).getTime() / 1000);
+                } else if (timeStr) {
+                    unixSec = parseISTTimeToUnix(timeStr);
+                }
+                if (unixSec) {
+                    let targetTime = unixSec;
+                    if (candlesList && candlesList.length > 0) {
+                        let minDiff = Infinity;
+                        candlesList.forEach(c => {
+                            const diff = Math.abs(c.time - unixSec);
+                            // Allow up to 4 hours lookahead/lookbehind for pre-market briefings
+                            if (diff < minDiff && diff <= 14400) {
+                                minDiff = diff;
+                                targetTime = c.time;
+                            }
+                        });
+                    }
+                    if (!seen.has(targetTime)) {
+                        seen.add(targetTime);
+                        const label = timeStr ? timeStr.split(',')[0].trim() : "Briefing";
+                        result.push({ time: targetTime, label: label, timestamp: rawTs, timeDisplay: timeStr });
+                    }
+                }
+            });
+            result.sort((a, b) => a.time - b.time);
+            return result;
+        }
+
+        function renderVerticalLinesOverlay() {
+            const canvas = document.getElementById('vlines-canvas');
+            if (!canvas || !chartInstance) return;
+
+            const wrapper = document.getElementById('chart-wrapper');
+            if (!wrapper) return;
+
+            if (canvas.width !== wrapper.clientWidth || canvas.height !== wrapper.clientHeight) {
+                canvas.width = wrapper.clientWidth;
+                canvas.height = wrapper.clientHeight;
+            }
+
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!showVLines) return;
+
+            const timeScale = chartInstance.timeScale();
+            const latestRun = getLatestBriefingRun();
+
+            // 1. Draw AI Briefing Vertical Lines (Dashed Purple Lines, or Glowing Blue if Selected)
+            aiBriefingTimes.forEach(item => {
+                const x = timeScale.timeToCoordinate(item.time);
+                if (x !== null && x >= 0 && x <= canvas.width) {
+                    const isSelected = selectedBriefingTimestamp 
+                        ? (selectedBriefingTimestamp === item.timestamp || selectedBriefingTimestamp === item.time)
+                        : (latestRun && (item.timestamp === latestRun.timestamp || item.time === latestRun.time));
+                    const strokeColor = isSelected ? '#60a5fa' : '#a855f7';
+                    const lineWidth = isSelected ? 2.5 : 1.5;
+
+                    ctx.beginPath();
+                    ctx.setLineDash([5, 4]);
+                    ctx.strokeStyle = strokeColor;
+                    ctx.lineWidth = lineWidth;
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height - 25);
+                    ctx.stroke();
+
+                    ctx.setLineDash([]);
+                    ctx.fillStyle = isSelected ? 'rgba(96, 165, 250, 0.35)' : 'rgba(168, 85, 247, 0.25)';
+                    ctx.strokeStyle = strokeColor;
+                    ctx.lineWidth = isSelected ? 2 : 1;
+                    const label = isSelected ? `⭐ ${item.label}` : `📌 ${item.label}`;
+                    ctx.font = isSelected ? '700 11px Inter, sans-serif' : '600 11px Inter, sans-serif';
+                    const textWidth = ctx.measureText(label).width;
+                    const badgeW = textWidth + 14;
+                    const badgeH = 20;
+                    const badgeX = Math.max(2, Math.min(canvas.width - badgeW - 2, x - badgeW / 2));
+
+                    item.badgeX = badgeX;
+                    item.badgeW = badgeW;
+
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(badgeX, 4, badgeW, badgeH, 4);
+                    } else {
+                        ctx.rect(badgeX, 4, badgeW, badgeH);
+                    }
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = isSelected ? '#ffffff' : '#e9d5ff';
+                    ctx.fillText(label, badgeX + 7, 18);
+                }
+            });
+
+            // 2. Draw User Custom Vertical Lines (Dashed Amber Lines)
+            userVLines.forEach((time, idx) => {
+                const x = timeScale.timeToCoordinate(time);
+                if (x !== null && x >= 0 && x <= canvas.width) {
+                    ctx.beginPath();
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.lineWidth = 1.5;
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height - 25);
+                    ctx.stroke();
+
+                    ctx.setLineDash([]);
+                    ctx.fillStyle = 'rgba(245, 158, 11, 0.25)';
+                    ctx.strokeStyle = '#f59e0b';
+                    ctx.lineWidth = 1;
+                    const label = `📍 Line #${idx + 1}`;
+                    ctx.font = '600 11px Inter, sans-serif';
+                    const textWidth = ctx.measureText(label).width;
+                    const badgeW = textWidth + 12;
+                    const badgeH = 20;
+                    const badgeX = Math.max(2, Math.min(canvas.width - badgeW - 2, x - badgeW / 2));
+
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(badgeX, 28, badgeW, badgeH, 4);
+                    } else {
+                        ctx.rect(badgeX, 28, badgeW, badgeH);
+                    }
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#fef3c7';
+                    ctx.fillText(label, badgeX + 6, 42);
+                }
+            });
+        }
+
+        // ================= EOD FORECAST SCORECARD & PROXIMITY ENGINE ================= //
+        function recordLevelOutcome(levelId, newSource, newStatus) {
+            const canonicalTags = ['AI B', 'AI S', 'AI KB', 'AI KS'];
+            let src = (newSource || 'AI B').toUpperCase();
+            if (!canonicalTags.includes(src)) {
+                src = getCanonicalSetupCategory(src, src, '');
+            }
+            const st = (newStatus || 'na').toLowerCase();
+            const statsKey = 'levelsScorecardHistory_EURUSD';
+            const logKey = 'levelsLoggedReviews_EURUSD';
+
+            let scorecardStats = {};
+            let levelReviewLog = {};
+
+            try {
+                let savedStats = localStorage.getItem(statsKey);
+                if (savedStats) scorecardStats = JSON.parse(savedStats);
+            } catch (e) { scorecardStats = {}; }
+
+            try {
+                let savedLog = localStorage.getItem(logKey);
+                if (savedLog) levelReviewLog = JSON.parse(savedLog);
+            } catch (e) { levelReviewLog = {}; }
+
+            canonicalTags.forEach(t => {
+                if (!scorecardStats[t]) scorecardStats[t] = { worked: 0, failed: 0, na: 0 };
+            });
+
+            const prev = levelReviewLog[levelId];
+            if (prev) {
+                let prevSrc = (prev.source || 'AI B').toUpperCase();
+                if (!canonicalTags.includes(prevSrc)) {
+                    prevSrc = getCanonicalSetupCategory(prevSrc, prevSrc, '');
+                }
+                const prevSt = (prev.status || 'na').toLowerCase();
+                if (scorecardStats[prevSrc] && scorecardStats[prevSrc][prevSt] !== undefined) {
+                    scorecardStats[prevSrc][prevSt] = Math.max(0, scorecardStats[prevSrc][prevSt] - 1);
+                }
+            }
+
+            if (!scorecardStats[src]) {
+                scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
+            }
+
+            if (st !== 'na') {
+                if (scorecardStats[src][st] !== undefined) {
+                    scorecardStats[src][st]++;
+                } else {
+                    scorecardStats[src][st] = 1;
+                }
+                levelReviewLog[levelId] = { source: src, status: st, updatedAt: new Date().toISOString() };
+            } else {
+                delete levelReviewLog[levelId];
+            }
+
+            localStorage.setItem(statsKey, JSON.stringify(scorecardStats));
+            localStorage.setItem(logKey, JSON.stringify(levelReviewLog));
+        }
+
+        function getSavedOutcome(levelId) {
+            try {
+                let savedLog = localStorage.getItem('levelsLoggedReviews_EURUSD');
+                if (savedLog) {
+                    const parsed = JSON.parse(savedLog);
+                    if (parsed[levelId]?.status) return parsed[levelId].status;
+                    const normTarget = String(levelId).replace(/[^a-zA-Z0-9_]/g, '');
+                    for (const k in parsed) {
+                        if (k.replace(/[^a-zA-Z0-9_]/g, '') === normTarget && parsed[k]?.status) {
+                            return parsed[k].status;
+                        }
+                    }
+                }
+                // Fallback check in legacy log for migration continuity
+                const legacyLog = localStorage.getItem('levelsLoggedReviews');
+                if (legacyLog) {
+                    const parsedLegacy = JSON.parse(legacyLog);
+                    if (parsedLegacy[levelId]?.status) return parsedLegacy[levelId].status;
+                    const normTarget = String(levelId).replace(/[^a-zA-Z0-9_]/g, '');
+                    for (const k in parsedLegacy) {
+                        if (k.replace(/[^a-zA-Z0-9_]/g, '') === normTarget && parsedLegacy[k]?.status) {
+                            return parsedLegacy[k].status;
+                        }
+                    }
+                }
+            } catch (e) {}
+            return 'na';
+        }
+
+        function toggleLevelOutcome(event, levelId, source, status, idx) {
+            if (event) event.stopPropagation();
+            recordLevelOutcome(levelId, source, status);
+            updateCardOutcomeUI(levelId, status);
+            const label = status === 'worked' ? '🟢 WORKED' : (status === 'failed' ? '🔴 FAILED' : '⚪ RESET');
+            showToast(`Scorecard Logged (${source})`, `Level marked as ${label} in EOD Forecast Scorecard.`);
+            triggerAlertSound(880, 'sine', 0.1);
+        }
+
+        function updateCardOutcomeUI(levelId, status) {
+            const pill = document.querySelector(`[data-pill="${levelId}"]`);
+            const btnWorked = document.querySelector(`[data-btn-worked="${levelId}"]`);
+            const btnFailed = document.querySelector(`[data-btn-failed="${levelId}"]`);
+
+            if (btnWorked) btnWorked.classList.remove('active');
+            if (btnFailed) btnFailed.classList.remove('active');
+
+            if (pill) {
+                pill.className = `status-pill status-pill-${status}`;
+                if (status === 'worked') {
+                    pill.innerText = '🟢 WORKED';
+                    pill.style.display = 'inline-block';
+                    if (btnWorked) btnWorked.classList.add('active');
+                } else if (status === 'failed') {
+                    pill.innerText = '🔴 FAILED';
+                    pill.style.display = 'inline-block';
+                    if (btnFailed) btnFailed.classList.add('active');
+                } else {
+                    pill.innerText = '';
+                    pill.style.display = 'none';
+                }
+            }
+        }
+
+        function updateProximityAndAutoSelect(latestPrice) {
+            if (!latestPrice || !activePriceLines || activePriceLines.length === 0) return;
+
+            let nearestIdx = -1;
+            let minDistance = Infinity;
+
+            activePriceLines.forEach((item) => {
+                const dist = Math.abs(item.price - latestPrice);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    nearestIdx = item.index;
+                }
+            });
+
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('nearest-proximity'));
+            document.querySelectorAll('.proximity-badge').forEach(b => b.style.display = 'none');
+
+            if (nearestIdx !== -1) {
+                const nearestCard = document.getElementById(`card-eurusd-${nearestIdx}`);
+                const proxBadge = document.getElementById(`prox-badge-eurusd-${nearestIdx}`);
+                if (nearestCard) nearestCard.classList.add('nearest-proximity');
+                if (proxBadge) proxBadge.style.display = 'inline-block';
+            }
+        }
+
+        function highlightCard(cardIdx) {
+            document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected-highlight'));
+            const targetCard = document.getElementById(`card-eurusd-${cardIdx}`);
+            if (targetCard) {
+                targetCard.classList.add('selected-highlight');
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                const logicEl = document.getElementById(`card-logic-eurusd-${cardIdx}`);
+                const btnEl = document.getElementById(`expand-btn-eurusd-${cardIdx}`);
+                if (logicEl && logicEl.classList.contains('clamped')) {
+                    logicEl.classList.remove('clamped');
+                    logicEl.classList.add('expanded');
+                    if (btnEl) btnEl.innerText = '▲ Collapse Logic';
+                }
+            }
+        }
+
+        function toggleLogicExpand(event, prefix, idx) {
+            if (event) event.stopPropagation();
+            const logicEl = document.getElementById(`card-logic-${prefix}-${idx}`);
+            const btnEl = document.getElementById(`expand-btn-${prefix}-${idx}`);
+            if (logicEl) {
+                if (logicEl.classList.contains('clamped')) {
+                    logicEl.classList.remove('clamped');
+                    logicEl.classList.add('expanded');
+                    if (btnEl) btnEl.innerText = '▲ Collapse Logic';
+                } else {
+                    logicEl.classList.remove('expanded');
+                    logicEl.classList.add('clamped');
+                    if (btnEl) btnEl.innerText = '▼ Show Full Confirmation Logic';
+                }
+            }
+        }
+
+        function parseEurUsdLevelsFromMarkdown(text, timestamp, timeDisplay) {
+            if (!text) return [];
+            const levels = [];
+            const seen = new Set();
+
+            // 1. Key Trading Levels Summary
+            const keyMatch = text.match(/###\s*Key\s*Trading\s*Levels\s*Summary[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            if (keyMatch) {
+                const lines = keyMatch[0].split('\n');
+                for (const line of lines) {
+                    if (!line.includes('|') || line.includes(':---') || line.includes('Logic / Significance')) continue;
+                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                    if (cols.length >= 6) {
+                        const rawPrice = cols[0].replace(/[^0-9.]/g, '');
+                        const tagMatch = cols[2].match(/\[(E_K?[BS]\d+|K?[BS]\d+)\]/i) || cols[3].match(/\[(E_K?[BS]\d+|K?[BS]\d+)\]/i);
+                        const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
+                        const isBullish = /\[(E_KB\d+|KB\d+|E_B\d+|B\d+)\]/i.test(tag) || cols[0].includes('🟢') || cols[1].toLowerCase().includes('support');
+                        const bias = isBullish ? 'bullish' : 'bearish';
+                        const key = tag || (rawPrice + '_' + bias);
+                        if (rawPrice && !seen.has(key)) {
+                            seen.add(key);
+                            levels.push({
+                                source: 'AI',
+                                timestamp: timestamp,
+                                timeDisplay: timeDisplay,
+                                price: rawPrice,
+                                bias: bias,
+                                behavior: (tag ? tag + ': ' : '') + (cols[3] || cols[1]),
+                                tp: cols[4].replace(/[*_]/g, '').trim() || 'na',
+                                sl: cols[5].replace(/[*_]/g, '').trim() || 'na',
+                                status: 'na'
+                            });
+                        }
+                    }
+                }
+            }
+
+            // 2. Action Plan & Triggers table
+            const actionMatch = text.match(/###\s*(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan\s*&\s*Triggers[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            if (actionMatch) {
+                const lines = actionMatch[0].split('\n');
+                for (const line of lines) {
+                    if (!line.includes('|') || line.includes(':---') || line.includes('Confirmation Price Action')) continue;
+                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                    if (cols.length >= 6) {
+                        const tagMatch = cols[0].match(/\[(E_K?[BS]\d+|K?[BS]\d+)\]/i);
+                        const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
+                        const rawPrice = cols[2].split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                        const isBullish = /\[(E_KB\d+|KB\d+|E_B\d+|B\d+)\]/i.test(tag) || cols[1].includes('🟢') || cols[1].toLowerCase().includes('long');
+                        const bias = isBullish ? 'bullish' : 'bearish';
+                        const key = tag || (rawPrice + '_' + bias);
+                        if (rawPrice && !seen.has(key)) {
+                            seen.add(key);
+                            const cleanTp = cols[4].replace(/<br\s*\/?>/gi, ' / ').replace(/[*_]/g, '').trim();
+                            const cleanSl = cols[5].replace(/[*_]/g, '').trim();
+                            levels.push({
+                                source: 'AI',
+                                timestamp: timestamp,
+                                timeDisplay: timeDisplay,
+                                price: rawPrice,
+                                bias: bias,
+                                behavior: (tag ? tag + ': ' : '') + cols[3],
+                                tp: cleanTp || 'na',
+                                sl: cleanSl || 'na',
+                                status: 'na'
+                            });
+                        }
+                    }
+                }
+            }
+
+            return levels;
+        }
+
+        function getEurUsdKeyLevels(targetTimestamp = null) {
+            let levels = [];
+            let timeDisplay = "06:02 PM, Sep 09";
+            let anchorTimestamp = null;
+
+            // Normalize target timestamp to milliseconds for distance matching
+            let targetMs = null;
+            if (targetTimestamp) {
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
+                    }
+                }
+            }
+
+            // 1. Try to extract directly from window.eurusdDailyPlanSummary (Markdown text)
+            if (window.eurusdDailyPlanSummary && Array.isArray(window.eurusdDailyPlanSummary) && window.eurusdDailyPlanSummary.length > 0) {
+                let matchedSummary = null;
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    window.eurusdDailyPlanSummary.forEach(s => {
+                        const sMs = new Date(s.timestamp).getTime();
+                        if (!isNaN(sMs)) {
+                            const diff = Math.abs(sMs - targetMs);
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                matchedSummary = s;
+                            }
+                        }
+                    });
+                } else {
+                    matchedSummary = window.eurusdDailyPlanSummary[0];
+                }
+
+                if (matchedSummary && matchedSummary.text) {
+                    const parsed = parseEurUsdLevelsFromMarkdown(matchedSummary.text, matchedSummary.timestamp, matchedSummary.timeDisplay);
+                    if (parsed && parsed.length > 0) {
+                        levels = parsed;
+                        timeDisplay = matchedSummary.timeDisplay || timeDisplay;
+                        anchorTimestamp = matchedSummary.timestamp;
+                    }
+                }
+            }
+
+            // 2. Fallback to window.eurusdDailyPlanData if summary did not produce levels
+            if (levels.length === 0 && window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData) && window.eurusdDailyPlanData.length > 0) {
+                if (targetMs !== null) {
+                    const uniqueTs = [...new Set(window.eurusdDailyPlanData.map(i => i.timestamp))];
+                    let bestTs = uniqueTs[0];
+                    let bestDiff = Infinity;
+                    uniqueTs.forEach(ts => {
+                        const tsMs = new Date(ts).getTime();
+                        if (!isNaN(tsMs)) {
+                            const diff = Math.abs(tsMs - targetMs);
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                bestTs = ts;
+                            }
+                        }
+                    });
+                    anchorTimestamp = bestTs;
+                } else {
+                    const latestSummaryTs = (window.eurusdDailyPlanSummary && Array.isArray(window.eurusdDailyPlanSummary) && window.eurusdDailyPlanSummary.length > 0)
+                        ? window.eurusdDailyPlanSummary[0].timestamp
+                        : null;
+
+                    if (latestSummaryTs) {
+                        const summaryMs = new Date(latestSummaryTs).getTime();
+                        const uniqueTs = [...new Set(window.eurusdDailyPlanData.map(i => i.timestamp))];
+                        let bestTs = uniqueTs[0];
+                        let bestDiff = Infinity;
+                        uniqueTs.forEach(ts => {
+                            const diff = Math.abs(new Date(ts).getTime() - summaryMs);
+                            if (diff < bestDiff) { bestDiff = diff; bestTs = ts; }
+                        });
+                        anchorTimestamp = bestTs;
+                    } else {
+                        anchorTimestamp = window.eurusdDailyPlanData[0]?.timestamp;
+                    }
+                }
+
+                timeDisplay = window.eurusdDailyPlanData.find(i => i.timestamp === anchorTimestamp)?.timeDisplay
+                    || window.eurusdDailyPlanSummary?.find(s => s.timestamp === anchorTimestamp)?.timeDisplay
+                    || window.eurusdDailyPlanSummary?.[0]?.timeDisplay
+                    || timeDisplay;
+
+                const anchorMs = anchorTimestamp ? new Date(anchorTimestamp).getTime() : null;
+                const latestItems = window.eurusdDailyPlanData.filter(item => {
+                    if (!item) return false;
+                    if (item.timestamp === anchorTimestamp) return true;
+                    if (anchorMs && item.timestamp) {
+                        const itemMs = new Date(item.timestamp).getTime();
+                        return Math.abs(itemMs - anchorMs) <= 60000;
+                    }
+                    return false;
+                });
+                const keySummaryItems = latestItems.filter(item => /\[SP_(KB|KS|B|S)\d\]/i.test(item.behavior || ''));
+                const itemsToFilter = keySummaryItems.length > 0 ? keySummaryItems : latestItems;
+
+                const uniqueTagItems = [];
+                const seenTags = new Set();
+                itemsToFilter.forEach(item => {
+                    const tag = extractTag(item.behavior);
+                    if (tag && !seenTags.has(tag)) {
+                        seenTags.add(tag);
+                        uniqueTagItems.push(item);
+                    } else if (!tag) {
+                        uniqueTagItems.push(item);
+                    }
+                });
+
+                levels = uniqueTagItems.length > 0 ? uniqueTagItems : itemsToFilter.slice(0, 4);
+            }
+
+            if (levels.length === 0) {
+                levels = [
+                    { price: "7689.69", bias: "bullish", behavior: "[WED 18:02] [E_KB2]: 48H Equilibrium Anchor & Institutional Fair Value Mean-Reversion Pivot", tp: "7715.00 / 7735.00", sl: "7678.00" },
+                    { price: "7695.00", bias: "bullish", behavior: "[WED 18:02] [E_B2]: High-Momentum BSL Breakout Trigger: Sustained 5M close above 7695.00", tp: "7715.00 / 7735.00", sl: "7684.00" },
+                    { price: "7666.99", bias: "bullish", behavior: "[WED 18:02] [E_B1]: Demand Floor SSL Sweep Reversal Long (SFP / Turtle Soup)", tp: "7689.69 / 7693.09", sl: "7660.00" },
+                    { price: "7756.76", bias: "bearish", behavior: "[WED 18:02] [SP_S1]: Overhead Supply OB / PDH Liquidity Ceiling: SFP Sweep Rejection", tp: "7715.00 / 7693.09", sl: "7764.00" },
+                    { price: "7664.00", bias: "bearish", behavior: "[WED 18:02] [SP_S2]: Downside Long-Liquidation Cascade Trigger below 7664.00", tp: "7645.00 / 7611.20", sl: "7674.00" }
+                ];
+            }
+
+            return { levels, timeDisplay, anchorTimestamp };
+        }
+
+        function parseISTTimeToUnix(timeDisplayStr) {
+            try {
+                const match = timeDisplayStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+                if (!match) return null;
+                let hrs = parseInt(match[1]);
+                const mins = parseInt(match[2]);
+                const ampm = match[3].toUpperCase();
+                if (ampm === 'PM' && hrs < 12) hrs += 12;
+                if (ampm === 'AM' && hrs === 12) hrs = 0;
+
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                const hrsStr = String(hrs).padStart(2, '0');
+                const minsStr = String(mins).padStart(2, '0');
+
+                const isoStr = `${year}-${month}-${day}T${hrsStr}:${minsStr}:00+05:30`;
+                return Math.floor(new Date(isoStr).getTime() / 1000);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function extractTag(behaviorStr) {
+            if (!behaviorStr) return '';
+            const match = behaviorStr.match(/\[(E_KB\d+|SP_KS\d+|E_B\d+|SP_S\d+|B\d+|S\d+)\]/i);
+            return match ? match[0].toUpperCase() : '';
+        }
+
+        function cleanLogicText(behaviorStr) {
+            if (!behaviorStr) return '';
+            return behaviorStr.replace(/^(?:\[.*?\]\s*)+:\s*/, '').replace(/^(?:\[.*?\]\s*)+/, '');
+        }
+
+        function getConfirmationPriceAction(tag, behaviorFallback, summaryArray, targetTimestamp = null) {
+            const fallbackText = cleanLogicText(behaviorFallback);
+            if (!tag || !summaryArray || !Array.isArray(summaryArray) || summaryArray.length === 0) {
+                return fallbackText;
+            }
+
+            let summaryItem = summaryArray[0];
+            if (targetTimestamp) {
+                let targetMs = null;
+                if (typeof targetTimestamp === 'number') {
+                    targetMs = targetTimestamp < 1e11 ? targetTimestamp * 1000 : targetTimestamp;
+                } else {
+                    const parsed = new Date(targetTimestamp).getTime();
+                    if (!isNaN(parsed)) {
+                        targetMs = parsed;
+                    } else {
+                        const num = parseFloat(targetTimestamp);
+                        if (!isNaN(num)) targetMs = num < 1e11 ? num * 1000 : num;
+                    }
+                }
+
+                if (targetMs !== null) {
+                    let bestDiff = Infinity;
+                    summaryArray.forEach(item => {
+                        if (item && item.timestamp) {
+                            const itemMs = new Date(item.timestamp).getTime();
+                            const diff = Math.min(
+                                Math.abs(itemMs - targetMs),
+                                Math.abs(itemMs + (IST_OFFSET_SEC * 1000) - targetMs)
+                            );
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                summaryItem = item;
+                            }
+                        }
+                    });
+                }
+            }
+
+            const latestSummaryText = summaryItem?.text || '';
+            if (!latestSummaryText) return fallbackText;
+
+            const cleanTagStr = tag.replace(/[\[\]]/g, '').trim();
+            if (!cleanTagStr) return fallbackText;
+
+            const lines = latestSummaryText.split('\n');
+            for (let line of lines) {
+                if (line.includes('|') && line.toLowerCase().includes(cleanTagStr.toLowerCase())) {
+                    const parts = line.split('|').map(p => p.trim());
+                    if (parts.length >= 5 && parts[4]) {
+                        let confirmation = parts[4];
+                        confirmation = confirmation.replace(/<br\s*\/?>/gi, ' ').replace(/\*\*/g, '').trim();
+                        confirmation = cleanLogicText(confirmation);
+                        if (confirmation && confirmation.length > 8 && !confirmation.toLowerCase().includes('confirmation price action')) {
+                            return confirmation;
+                        }
+                    }
+                }
+            }
+            return fallbackText;
+        }
+
+        async function loadRealEurUsdCandles() {
+            // Allow up to 5 days lookback so weekend review of Friday's session works seamlessly
+            const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
+            const filterFresh = (arr) => (arr || []).filter(c => c && c.time && c.time >= cutoffSec);
+
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+            const marketCandlesUrl = isLocal
+                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=5m&limit=300&_t=${Date.now()}`
+                : `/api/marketCandles?symbol=EURUSD&timeframe=5m&limit=300&_t=${Date.now()}`;
+
+            // 1. Primary: Server-side /api/marketCandles?symbol=EURUSD
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 4500);
+                const res = await fetch(marketCandlesUrl, { 
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                if (res.ok) {
+                    const json = await res.json();
+                    const candles = filterFresh(json?.candles);
+                    if (candles.length > 0) {
+                        return candles;
+                    }
+                }
+            } catch (e) {
+                console.warn('[EURUSD Chart] /api/marketCandles fetch failed or timed out:', e);
+            }
+
+            // 2. Direct Vercel Cloud Fallback (if relative fetch in production failed)
+            if (!isLocal) {
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 4000);
+                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=5m&limit=300&_t=${Date.now()}`, {
+                        cache: 'no-store',
+                        signal: controller.signal
+                    });
+                    clearTimeout(timeoutId);
+                    if (cloudRes.ok) {
+                        const json = await cloudRes.json();
+                        const candles = filterFresh(json?.candles);
+                        if (candles.length > 0) {
+                            return candles;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('[EURUSD Chart] Direct Vercel fallback failed:', e);
+                }
+            }
+
+            // 3. Fallback: reload and read from window.eurusdCandlesData
+            try {
+                if (typeof reloadCandlesScript === 'function') {
+                    await reloadCandlesScript();
+                }
+                if (window.eurusdCandlesData && Array.isArray(window.eurusdCandlesData.timeframe5m) && window.eurusdCandlesData.timeframe5m.length > 0) {
+                    console.log("[EURUSD Chart] Loaded candles from window.eurusdCandlesData cache");
+                    return [...window.eurusdCandlesData.timeframe5m];
+                }
+            } catch (e) {
+                console.warn('[EURUSD Chart] Fallback candle reload failed:', e);
+            }
+
+            // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
+            console.error("[EURUSD Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds. ZERO synthetic candles generated.");
+            return [];
+        }
+
+        function updateFeedStatusBadge(candles) {
+            const badge = document.getElementById('feed-status-badge');
+            if (!badge) return;
+
+            if (!candles || !Array.isArray(candles) || candles.length === 0) {
+                badge.innerText = '⚠️ DATA UNAVAILABLE';
+                badge.className = 'feed-badge feed-badge-unavailable';
+                return;
+            }
+
+            const latestCandleTime = candles[candles.length - 1].time;
+            const nowSec = Math.floor(Date.now() / 1000);
+            const ageMinutes = (nowSec - latestCandleTime) / 60;
+
+            if (ageMinutes <= 45) {
+                badge.innerText = '● LIVE API FEED';
+                badge.className = 'feed-badge feed-badge-live';
+            } else {
+                const candleDt = new Date(latestCandleTime * 1000);
+                const dateLabel = candleDt.toLocaleDateString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric' });
+                badge.innerText = `🔒 MARKET CLOSED (${dateLabel})`;
+                badge.className = 'feed-badge feed-badge-unavailable';
+            }
+        }
+
+        function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function showToast(title, body) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-body').innerText = body;
+            toast.style.display = 'flex';
+            setTimeout(() => { toast.style.display = 'none'; }, 4000);
+        }
+
+        let levelCrossingMemory = {};
+        let lastEvaluatedClosedCandleTime = null;
+
+        function checkCandleCloseCrossings(candles, assetName) {
+            if (!alertsEnabled || !candles || candles.length < 3 || !activePriceLines || activePriceLines.length === 0) {
+                return;
+            }
+
+            const tf = '5M';
+            const currSym = '';
+
+            // candles[candles.length - 1] is active in-progress candle; candles[candles.length - 2] is strict finalized close
+            const closedCandle = candles[candles.length - 2];
+            if (!closedCandle) return;
+
+            if (lastEvaluatedClosedCandleTime === closedCandle.time) {
+                return;
+            }
+
+            const finalizedClose = closedCandle.close;
+
+            if (lastEvaluatedClosedCandleTime === null) {
+                lastEvaluatedClosedCandleTime = closedCandle.time;
+                activePriceLines.forEach(item => {
+                    const tag = item.tag || 'LEVEL';
+                    levelCrossingMemory[`${tag}_${item.price}`] = finalizedClose >= item.price ? 'above' : 'below';
+                });
+                return;
+            }
+
+            activePriceLines.forEach(item => {
+                const lvlPrice = item.price;
+                const tag = item.tag || 'LEVEL';
+                const memoryKey = `${tag}_${lvlPrice}`;
+                const prevState = levelCrossingMemory[memoryKey];
+
+                let newState = finalizedClose >= lvlPrice ? 'above' : 'below';
+
+                if (prevState === 'below' && newState === 'above') {
+                    levelCrossingMemory[memoryKey] = 'above';
+                    const title = `🚀 ${assetName} ${tf} • Above [${tag}]`;
+                    const body = `Level: ${currSym}${lvlPrice} • Close: ${currSym}${finalizedClose.toFixed(5)}`;
+                    triggerAlertSound(1046, 'sine', 0.25);
+                    showToast(title, body);
+                    dispatchDesktopNotification(title, body);
+                } else if (prevState === 'above' && newState === 'below') {
+                    levelCrossingMemory[memoryKey] = 'below';
+                    const title = `🔻 ${assetName} ${tf} • Below [${tag}]`;
+                    const body = `Level: ${currSym}${lvlPrice} • Close: ${currSym}${finalizedClose.toFixed(5)}`;
+                    triggerAlertSound(440, 'sine', 0.25);
+                    showToast(title, body);
+                    dispatchDesktopNotification(title, body);
+                } else if (!prevState) {
+                    levelCrossingMemory[memoryKey] = newState;
+                }
+            });
+
+            lastEvaluatedClosedCandleTime = closedCandle.time;
+        }
+
+        function dispatchDesktopNotification(title, body) {
+            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                try {
+                    new Notification(title, {
+                        body: body,
+                        icon: './icons/icon-192.png'
+                    });
+                } catch (e) {
+                    console.warn("[Chart Alert] Desktop notification failed:", e);
+                }
+            }
+        }
+
+        function openVantagePositionCalculator(e) {
+            if (e) e.stopPropagation();
+            const w = 460;
+            const h = 820;
+            const left = (screen.width - w) / 2;
+            const top = (screen.height - h) / 4;
+            let url = 'vantage_position_calculator.html';
+            window.open(url, 'VantageCalc', `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes`);
+        }
+
+        // Controls scrollbar & arrow buttons navigation
+        function updateControlsScrollButtons() {
+            const row = document.getElementById('controls-row');
+            const leftBtn = document.getElementById('controls-scroll-left');
+            const rightBtn = document.getElementById('controls-scroll-right');
+            if (!row || !leftBtn || !rightBtn) return;
+
+            const scrollLeft = Math.ceil(row.scrollLeft);
+            const scrollWidth = row.scrollWidth;
+            const clientWidth = row.clientWidth;
+
+            if (clientWidth === 0) return;
+
+            const maxScrollLeft = scrollWidth - clientWidth;
+            const hasOverflow = scrollWidth > clientWidth + 2;
+            const canScrollLeft = hasOverflow && scrollLeft > 2;
+            const canScrollRight = hasOverflow && scrollLeft < maxScrollLeft - 2;
+
+            leftBtn.classList.toggle('at-edge', !canScrollLeft);
+            rightBtn.classList.toggle('at-edge', !canScrollRight);
+        }
+
+        function scrollControls(offset) {
+            const row = document.getElementById('controls-row');
+            if (row) {
+                row.scrollBy({ left: offset, behavior: 'smooth' });
+                setTimeout(updateControlsScrollButtons, 250);
+            }
+        }
+
+        (function initControlsScroll() {
+            const row = document.getElementById('controls-row');
+            const leftBtn = document.getElementById('controls-scroll-left');
+            const rightBtn = document.getElementById('controls-scroll-right');
+            if (leftBtn) leftBtn.addEventListener('click', () => scrollControls(-180));
+            if (rightBtn) rightBtn.addEventListener('click', () => scrollControls(180));
+            if (row) {
+                row.addEventListener('scroll', updateControlsScrollButtons, { passive: true });
+                row.addEventListener('wheel', (e) => {
+                    if (e.deltaY !== 0 && row.scrollWidth > row.clientWidth) {
+                        e.preventDefault();
+                        row.scrollLeft += e.deltaY;
+                        updateControlsScrollButtons();
+                    }
+                }, { passive: false });
+
+                const observer = new MutationObserver(updateControlsScrollButtons);
+                observer.observe(row, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
+            }
+            window.addEventListener('resize', updateControlsScrollButtons);
+            setTimeout(updateControlsScrollButtons, 300);
+        })();
+    </script>
+</body>
+</html>
