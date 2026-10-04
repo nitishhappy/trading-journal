@@ -91,14 +91,16 @@ if (viewLevels) {
             'NIFTY': 'NIFTY',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
-            'SP500': 'SP:SPX'
+            'SP500': 'SP:SPX',
+            'EURUSD': 'FX:EURUSD'
         };
         // Symbols for the in-app Widget (Unrestricted feeds / CFDs so the chart is visible in app)
         const widgetAssetMap = {
             'NIFTY': 'BSE:NIFTY50',
             'GOLD': 'OANDA:XAUUSD',
             'BTC': 'BINANCE:BTCUSDT',
-            'SP500': 'VANTAGE:SP500'
+            'SP500': 'VANTAGE:SP500',
+            'EURUSD': 'FX:EURUSD'
         };
         
         const linkSymbol = linkAssetMap[window.currentActiveAsset || 'NIFTY'] || 'NIFTY';
@@ -262,7 +264,7 @@ if (viewLevels) {
 
     function loadScorecardHistory(assetOverride) {
         const activeAsset = (assetOverride || window.currentActiveAsset || 'NIFTY').toUpperCase();
-        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
         const keys = getScorecardStorageKeys(activeAsset);
 
         // Migrate legacy NIFTY data on first run
@@ -361,10 +363,10 @@ if (viewLevels) {
 
     function recordLevelOutcome(levelId, newSource, newStatus) {
         const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
-        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
 
         let src = (newSource || (isAiAsset ? 'AI B' : 'BT')).toUpperCase();
-        if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS'].includes(src)) {
+        if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS', 'AI E_B', 'AI E_S'].includes(src)) {
             src = getCanonicalLevelTag({ source: src, behavior: src }, activeAsset);
         }
         const st = (newStatus || 'na').toLowerCase();
@@ -408,7 +410,8 @@ if (viewLevels) {
         const isGold = (window.currentActiveAsset === 'GOLD');
         const isBtc = (window.currentActiveAsset === 'BTC');
         const isSp500 = (window.currentActiveAsset === 'SP500');
-        const storageKey = isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData'));
+        const isEurUsd = (window.currentActiveAsset === 'EURUSD');
+        const storageKey = isEurUsd ? 'eurusdTradePlanData' : (isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData')));
         let loaded = [];
         const saved = localStorage.getItem(storageKey);
         if (saved) {
@@ -428,10 +431,11 @@ if (viewLevels) {
             const prStr = (l.rawPrice || l.price || '').toString();
             const num = parseFloat(prStr.replace(/[^0-9.]/g, ''));
             if (!isNaN(num) && num > 0) {
-                if (!isGold && !isBtc && !isSp500 && num < 10000) assetMismatch = true; // NIFTY levels should be > 10000
+                if (!isGold && !isBtc && !isSp500 && !isEurUsd && num < 10000) assetMismatch = true; // NIFTY levels should be > 10000
                 if (isGold && num > 10000) assetMismatch = true; // GOLD levels should be < 10000
                 if (isBtc && num < 10000) assetMismatch = true; // BTC levels should be > 10000
                 if (isSp500 && (num < 3000 || num > 15000)) assetMismatch = true; // SP500 levels range
+                if (isEurUsd && (num < 0.5 || num > 2.5)) assetMismatch = true; // EURUSD levels range
             }
             const sig = (prStr + '__' + (l.behavior || '')).trim().toLowerCase();
             if (l.status && l.status !== 'na') {
@@ -443,8 +447,8 @@ if (viewLevels) {
         });
 
         // Determine if we should sync from window.dailyPlanData (or goldDailyPlanData):
-        const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
-        const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+        const planLevelsSource = isEurUsd ? window.eurusdDailyPlanData : (isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData)));
+        const summarySource = isEurUsd ? window.eurusdDailyPlanSummary : (isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary)));
         const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
         const summaryData = (summarySource && Array.isArray(summarySource)) ? summarySource : [];
         const planSig = planLevels.map(p => `${p.source || ''}__${p.price || p.rawPrice || ''}__${p.bias || ''}__${p.behavior || ''}__${p.tp || ''}__${p.sl || ''}`).join('||') + '___SUM___' + summaryData.map(s => (s.text || '').substring(0, 80)).join('||');
@@ -474,7 +478,7 @@ if (viewLevels) {
         const finalLevels = [];
         const seenSignatures = new Set();
 
-        const isAiAsset = (isGold || isBtc || isSp500);
+        const isAiAsset = (isGold || isBtc || isSp500 || isEurUsd);
 
         if (shouldSyncFromPlan && planLevels.length > 0) {
             localStorage.setItem(storageKey + '_sig', planSig);
@@ -615,11 +619,13 @@ if (viewLevels) {
         else if (activeAsset === 'NIFTY') asset = 'Nifty';
         else if (activeAsset === 'BTC') asset = 'BTC';
         else if (activeAsset === 'SP500') asset = 'S&P 500';
+        else if (activeAsset === 'EURUSD') asset = 'EUR/USD';
         // Fallback to text matching
         else if (textLower.includes('nifty')) asset = 'Nifty';
         else if (textLower.includes('gold')) asset = 'Gold';
         else if (textLower.includes('btc') || textLower.includes('bitcoin')) asset = 'BTC';
         else if (textLower.includes('s&p') || textLower.includes('sp500')) asset = 'S&P 500';
+        else if (textLower.includes('eurusd') || textLower.includes('eur/usd')) asset = 'EUR/USD';
 
         // Assemble compact pane header: "[Time, Date] : [Trigger Reason] : [Level / Spot]"
         const parts = [];
@@ -993,7 +999,8 @@ if (viewLevels) {
         const isGold = (activeAsset === 'GOLD');
         const isBtc = (activeAsset === 'BTC');
         const isSp500 = (activeAsset === 'SP500');
-        const summaryData = isSp500 ? (window.sp500DailyPlanSummary || []) : (isBtc ? (window.btcDailyPlanSummary || []) : (isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || [])));
+        const isEurUsd = (activeAsset === 'EURUSD');
+        const summaryData = isEurUsd ? (window.eurusdDailyPlanSummary || []) : (isSp500 ? (window.sp500DailyPlanSummary || []) : (isBtc ? (window.btcDailyPlanSummary || []) : (isGold ? (window.goldDailyPlanSummary || []) : (window.dailyPlanSummary || []))));
         if (!Array.isArray(summaryData) || summaryData.length === 0) {
             summaryPanel.style.display = 'none';
             updateAssetTabBadges(options);
@@ -1103,9 +1110,10 @@ if (viewLevels) {
         const isGold = (assetKey === 'GOLD');
         const isBtc = (assetKey === 'BTC');
         const isSp500 = (assetKey === 'SP500');
+        const isEurUsd = (assetKey === 'EURUSD');
 
-        const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
-        const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+        const planLevelsSource = isEurUsd ? window.eurusdDailyPlanData : (isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData)));
+        const summarySource = isEurUsd ? window.eurusdDailyPlanSummary : (isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary)));
 
         return JSON.stringify({
             levels: planLevelsSource || [],
@@ -1159,9 +1167,10 @@ if (viewLevels) {
         const isGold = (assetKey === 'GOLD');
         const isBtc = (assetKey === 'BTC');
         const isSp500 = (assetKey === 'SP500');
+        const isEurUsd = (assetKey === 'EURUSD');
 
         if (!latestSummary) {
-            const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+            const summarySource = isEurUsd ? window.eurusdDailyPlanSummary : (isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary)));
             latestSummary = (summarySource && Array.isArray(summarySource) && summarySource.length > 0) ? summarySource[0] : null;
         }
 
@@ -1193,7 +1202,8 @@ if (viewLevels) {
             'NIFTY': '📈 NIFTY 50',
             'GOLD': '🪙 GOLD',
             'BTC': '₿ BITCOIN',
-            'SP500': '🇺🇸 S&P 500'
+            'SP500': '🇺🇸 S&P 500',
+            'EURUSD': '💶 EUR/USD'
         };
 
         const assetLabel = assetLabels[assetKey] || assetKey;
@@ -1235,7 +1245,8 @@ if (viewLevels) {
             { key: 'NIFTY', btnId: 'btn-asset-nifty' },
             { key: 'GOLD', btnId: 'btn-asset-gold' },
             { key: 'BTC', btnId: 'btn-asset-btc' },
-            { key: 'SP500', btnId: 'btn-asset-sp500' }
+            { key: 'SP500', btnId: 'btn-asset-sp500' },
+            { key: 'EURUSD', btnId: 'btn-asset-eurusd' }
         ];
 
         const currentActive = window.currentActiveAsset || 'NIFTY';
@@ -1257,7 +1268,8 @@ if (viewLevels) {
             const isGold = (asset.key === 'GOLD');
             const isBtc = (asset.key === 'BTC');
             const isSp500 = (asset.key === 'SP500');
-            const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+            const isEurUsd = (asset.key === 'EURUSD');
+            const summarySource = isEurUsd ? window.eurusdDailyPlanSummary : (isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary)));
             const latestSummary = (summarySource && Array.isArray(summarySource) && summarySource.length > 0) ? summarySource[0] : null;
             const summaryId = latestSummary?.id || (latestSummary?.timestamp ? `${latestSummary.timestamp}_${latestSummary.spot || ''}` : null);
 
@@ -1319,7 +1331,8 @@ if (viewLevels) {
         const isGold = (window.currentActiveAsset === 'GOLD');
         const isBtc = (window.currentActiveAsset === 'BTC');
         const isSp500 = (window.currentActiveAsset === 'SP500');
-        const storageKey = isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData'));
+        const isEurUsd = (window.currentActiveAsset === 'EURUSD');
+        const storageKey = isEurUsd ? 'eurusdTradePlanData' : (isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData')));
         localStorage.setItem(storageKey, JSON.stringify(allLevels));
     }
 
@@ -1340,7 +1353,8 @@ if (viewLevels) {
                 `./js/data/nifty_daily_plan.js?t=${now}`,
                 `./js/data/gold_daily_plan.js?t=${now}`,
                 `./js/data/btc_daily_plan.js?t=${now}`,
-                `./js/data/sp500_daily_plan.js?t=${now}`
+                `./js/data/sp500_daily_plan.js?t=${now}`,
+                `./js/data/eurusd_daily_plan.js?t=${now}`
             ];
 
             const fetchOpts = {
@@ -1360,7 +1374,9 @@ if (viewLevels) {
                 btc: window.btcDailyPlanData || [],
                 btcSummary: window.btcDailyPlanSummary || [],
                 sp500: window.sp500DailyPlanData || [],
-                sp500Summary: window.sp500DailyPlanSummary || []
+                sp500Summary: window.sp500DailyPlanSummary || [],
+                eurusd: window.eurusdDailyPlanData || [],
+                eurusdSummary: window.eurusdDailyPlanSummary || []
             });
 
             // Execute scripts in sequence so dedicated files (nifty_daily_plan.js, etc.) overwrite legacy defaults
@@ -1385,7 +1401,9 @@ if (viewLevels) {
                 btc: window.btcDailyPlanData || [],
                 btcSummary: window.btcDailyPlanSummary || [],
                 sp500: window.sp500DailyPlanData || [],
-                sp500Summary: window.sp500DailyPlanSummary || []
+                sp500Summary: window.sp500DailyPlanSummary || [],
+                eurusd: window.eurusdDailyPlanData || [],
+                eurusdSummary: window.eurusdDailyPlanSummary || []
             });
 
             const hasChanged = (oldSig !== newSig);
@@ -1420,7 +1438,7 @@ if (viewLevels) {
             btnSyncPlan.innerText = 'Syncing...';
             try {
                 const activeAsset = window.currentActiveAsset || 'NIFTY';
-                const storageKey = (activeAsset === 'SP500') ? 'sp500TradePlanData' : ((activeAsset === 'BTC') ? 'btcTradePlanData' : ((activeAsset === 'GOLD') ? 'goldTradePlanData' : 'dailyTradePlanData'));
+                const storageKey = (activeAsset === 'EURUSD') ? 'eurusdTradePlanData' : ((activeAsset === 'SP500') ? 'sp500TradePlanData' : ((activeAsset === 'BTC') ? 'btcTradePlanData' : ((activeAsset === 'GOLD') ? 'goldTradePlanData' : 'dailyTradePlanData')));
                 localStorage.removeItem(storageKey + '_cleared');
                 clearedSummaries[activeAsset] = false;
                 await autoSyncDailyPlan(true, false, true);
@@ -1493,10 +1511,11 @@ if (viewLevels) {
             const isGold = (activeAsset === 'GOLD');
             const isBtc = (activeAsset === 'BTC');
             const isSp500 = (activeAsset === 'SP500');
-            const storageKey = isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData'));
+            const isEurUsd = (activeAsset === 'EURUSD');
+            const storageKey = isEurUsd ? 'eurusdTradePlanData' : (isSp500 ? 'sp500TradePlanData' : (isBtc ? 'btcTradePlanData' : (isGold ? 'goldTradePlanData' : 'dailyTradePlanData')));
             
-            const planLevelsSource = isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData));
-            const summarySource = isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary));
+            const planLevelsSource = isEurUsd ? window.eurusdDailyPlanData : (isSp500 ? window.sp500DailyPlanData : (isBtc ? window.btcDailyPlanData : (isGold ? window.goldDailyPlanData : window.dailyPlanData)));
+            const summarySource = isEurUsd ? window.eurusdDailyPlanSummary : (isSp500 ? window.sp500DailyPlanSummary : (isBtc ? window.btcDailyPlanSummary : (isGold ? window.goldDailyPlanSummary : window.dailyPlanSummary)));
             const planLevels = (planLevelsSource && Array.isArray(planLevelsSource)) ? planLevelsSource : [];
             const summaryData = (summarySource && Array.isArray(summarySource)) ? summarySource : [];
             const currentPlanSig = planLevels.map(p => `${p.source || ''}__${p.price || p.rawPrice || ''}__${p.bias || ''}__${p.behavior || ''}__${p.tp || ''}__${p.sl || ''}`).join('||') + '___SUM___' + summaryData.map(s => (s.text || '').substring(0, 80)).join('||');
@@ -1529,7 +1548,7 @@ if (viewLevels) {
 
     document.getElementById('btn-level-add').addEventListener('click', () => {
         const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
-        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
         let source = (inpSource ? inpSource.value.trim() : '') || (isAiAsset ? 'AI B' : 'BT');
         const price = inpPrice.value.trim();
         const bias = inpBias.value;
@@ -1559,7 +1578,7 @@ if (viewLevels) {
     // Make outcome status toggle globally accessible
     window.setLevelStatus = function(id, newStatus) {
         const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
-        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
         const defaultSrc = isAiAsset ? 'AI B' : 'BT';
         const idx = allLevels.findIndex(l => l.id === id);
         let src = defaultSrc;
@@ -1801,12 +1820,12 @@ if (viewLevels) {
         if (!filterSourceEl) return;
         const currentValue = filterSourceEl.value;
         const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
-        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
 
         filterSourceEl.innerHTML = isAiAsset ? '<option value="">All Tags</option>' : '<option value="">All Sources</option>';
 
         if (isAiAsset) {
-            const canonicalTags = ['AI B', 'AI S', 'AI KB', 'AI KS'];
+            const canonicalTags = ['AI B', 'AI S', 'AI KB', 'AI KS', 'AI E_B', 'AI E_S'];
             canonicalTags.forEach(tag => {
                 const opt = document.createElement('option');
                 opt.value = tag;
@@ -1861,14 +1880,14 @@ if (viewLevels) {
         tbody.innerHTML = '';
 
         const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
-        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500');
+        const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
 
         const thSource = document.querySelector('.scorecard-table th:first-child');
         if (thSource) thSource.innerText = isAiAsset ? 'Tag / Setup' : 'Source / Channel';
 
         let sources = [];
         if (isAiAsset) {
-            sources = ['AI B', 'AI S', 'AI KB', 'AI KS'];
+            sources = ['AI B', 'AI S', 'AI KB', 'AI KS', 'AI E_B', 'AI E_S'];
         } else {
             const sourceSet = new Set(Object.keys(scorecardStats));
             allLevels.forEach(l => {
@@ -2817,17 +2836,33 @@ window.toggleMaximizePanel = function(btn, event) {
         let isGold = (window.currentActiveAsset === 'GOLD');
         let isBtc = (window.currentActiveAsset === 'BTC');
         let isSp500 = (window.currentActiveAsset === 'SP500');
+        let isEurUsd = (window.currentActiveAsset === 'EURUSD');
 
         try {
             const res = await fetch('/api/livePrices');
             if (res.ok) {
                 const data = await res.json();
                 if (data && data.success) {
-                    currentPrice = isSp500 ? (data.sp500 || data.gspc) : (isBtc ? (data.btcusd || data.btcusdt) : (isGold ? data.xauusd : data.nifty));
+                    currentPrice = isEurUsd ? data.eurusd : (isSp500 ? (data.sp500 || data.gspc) : (isBtc ? (data.btcusd || data.btcusdt) : (isGold ? data.xauusd : data.nifty)));
                 }
             }
         } catch (e) {
             console.error("Live price fetch failed:", e);
+        }
+
+        if (isEurUsd && !currentPrice) {
+            try {
+                const r = await fetch('https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/EUR/USD');
+                if (r.ok) {
+                    const d = await r.json();
+                    if (Array.isArray(d) && d.length > 0) {
+                        const prem = d[0].spreadProfilePrices?.find(p => p.spreadProfile === 'premium') || d[0].spreadProfilePrices?.[0];
+                        if (prem && prem.bid && prem.ask) {
+                            currentPrice = Number(((prem.bid + prem.ask) / 2).toFixed(5));
+                        }
+                    }
+                }
+            } catch(e) {}
         }
 
         if (isSp500 && !currentPrice) {
@@ -2864,7 +2899,7 @@ window.toggleMaximizePanel = function(btn, event) {
         const floaterTitle = document.getElementById('floater-title-text');
         
         if (floaterTitle) {
-            floaterTitle.innerText = isSp500 ? "S&P 500 LIVE" : (isBtc ? "BTC LIVE" : (isGold ? "GOLD LIVE" : "NIFTY LIVE"));
+            floaterTitle.innerText = isEurUsd ? "EUR/USD LIVE" : (isSp500 ? "S&P 500 LIVE" : (isBtc ? "BTC LIVE" : (isGold ? "GOLD LIVE" : "NIFTY LIVE")));
         }
         
         const prevPrice = currentMarketPrice;
@@ -2872,8 +2907,10 @@ window.toggleMaximizePanel = function(btn, event) {
         
         if (floater && floaterVal && !floater.classList.contains('user-closed')) {
             const oldPrice = parseFloat(floaterVal.innerText.replace(/,/g, '')) || 0;
-            const locale = (isGold || isBtc || isSp500) ? 'en-US' : 'en-IN';
-            const formattedPrice = currentPrice.toLocaleString(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const locale = (isGold || isBtc || isSp500 || isEurUsd) ? 'en-US' : 'en-IN';
+            const minDec = isEurUsd ? 4 : 2;
+            const maxDec = isEurUsd ? 5 : 2;
+            const formattedPrice = currentPrice.toLocaleString(locale, { minimumFractionDigits: minDec, maximumFractionDigits: maxDec });
             floaterVal.innerText = formattedPrice;
             if (oldPrice && currentPrice !== oldPrice) {
                 const cls = currentPrice > oldPrice ? 'tick-up' : 'tick-down';
@@ -2971,7 +3008,7 @@ window.toggleMaximizePanel = function(btn, event) {
 
                 const state = alertedLevels[lvl.id];
                 const isInside = (price <= lHigh && price >= lLow);
-                const assetName = isSp500 ? 'S&P 500' : (isBtc ? 'BTC' : (isGold ? 'GOLD' : 'Nifty'));
+                const assetName = isEurUsd ? 'EUR/USD' : (isSp500 ? 'S&P 500' : (isBtc ? 'BTC' : (isGold ? 'GOLD' : 'Nifty')));
 
                 // Trigger IN alert
                 if (isInside && !state.in) {
@@ -3112,6 +3149,7 @@ window.toggleMaximizePanel = function(btn, event) {
     const btnGold = document.getElementById('btn-asset-gold');
     const btnBtc = document.getElementById('btn-asset-btc');
     const btnSp500 = document.getElementById('btn-asset-sp500');
+    const btnEurUsd = document.getElementById('btn-asset-eurusd');
 
     if (btnNifty && btnGold) {
         btnNifty.addEventListener('click', () => {
@@ -3120,6 +3158,7 @@ window.toggleMaximizePanel = function(btn, event) {
             btnGold.className = 'btn-secondary';
             if (btnBtc) btnBtc.className = 'btn-secondary';
             if (btnSp500) btnSp500.className = 'btn-secondary';
+            if (btnEurUsd) btnEurUsd.className = 'btn-secondary';
             initLevels(false);
             autoSyncDailyPlan(false, false);
         });
@@ -3129,6 +3168,7 @@ window.toggleMaximizePanel = function(btn, event) {
             btnNifty.className = 'btn-secondary';
             if (btnBtc) btnBtc.className = 'btn-secondary';
             if (btnSp500) btnSp500.className = 'btn-secondary';
+            if (btnEurUsd) btnEurUsd.className = 'btn-secondary';
             initLevels(false);
             autoSyncDailyPlan(false, false);
         });
@@ -3139,6 +3179,7 @@ window.toggleMaximizePanel = function(btn, event) {
                 btnNifty.className = 'btn-secondary';
                 btnGold.className = 'btn-secondary';
                 if (btnSp500) btnSp500.className = 'btn-secondary';
+                if (btnEurUsd) btnEurUsd.className = 'btn-secondary';
                 initLevels(false);
                 autoSyncDailyPlan(false, false);
             });
@@ -3150,6 +3191,19 @@ window.toggleMaximizePanel = function(btn, event) {
                 btnNifty.className = 'btn-secondary';
                 btnGold.className = 'btn-secondary';
                 if (btnBtc) btnBtc.className = 'btn-secondary';
+                if (btnEurUsd) btnEurUsd.className = 'btn-secondary';
+                initLevels(false);
+                autoSyncDailyPlan(false, false);
+            });
+        }
+        if (btnEurUsd) {
+            btnEurUsd.addEventListener('click', () => {
+                window.currentActiveAsset = 'EURUSD';
+                btnEurUsd.className = 'btn-primary';
+                btnNifty.className = 'btn-secondary';
+                btnGold.className = 'btn-secondary';
+                if (btnBtc) btnBtc.className = 'btn-secondary';
+                if (btnSp500) btnSp500.className = 'btn-secondary';
                 initLevels(false);
                 autoSyncDailyPlan(false, false);
             });

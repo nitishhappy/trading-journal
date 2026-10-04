@@ -136,6 +136,28 @@ export default async function handler(req, res) {
       }
     }
 
+    // 5. Fetch EUR/USD Price
+    let eurusdPrice = null;
+    const eurUrl = "https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/EUR/USD";
+    const eurRes = await fetchUrl(eurUrl);
+    if (Array.isArray(eurRes) && eurRes.length > 0) {
+      const first = eurRes[0];
+      const prices = first.spreadProfilePrices;
+      if (Array.isArray(prices) && prices.length > 0) {
+        const premium = prices.find(p => p.spreadProfile === 'premium') || prices[0];
+        if (premium && premium.bid && premium.ask) {
+          eurusdPrice = Number(((premium.bid + premium.ask) / 2).toFixed(5));
+        }
+      }
+    }
+    if (!eurusdPrice) {
+      const eurYurl = "https://query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?interval=1m&range=1d";
+      const eurYres = await fetchUrl(eurYurl);
+      if (eurYres?.chart?.result?.[0]?.meta?.regularMarketPrice) {
+        eurusdPrice = Number(Number(eurYres.chart.result[0].meta.regularMarketPrice).toFixed(5));
+      }
+    }
+
     return res.status(200).json({
       success: true,
       nifty: niftyPrice,
@@ -143,6 +165,7 @@ export default async function handler(req, res) {
       sp500: sp500Price,
       btcusd: btcPrice,
       btcusdt: btcPrice,
+      eurusd: eurusdPrice,
       timestamp: Date.now()
     });
 
