@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-04T16:51:22+05:30",
+    "timeDisplay": "04:51 PM, Oct 04",
+    "price": "22400",
+    "bias": "bullish",
+    "behavior": "[SUN 16:51] [B1]: Bullish sweep of 22,380 followed by a 5m close back above 22,400 with futures volume surge",
+    "tp": "22,460 / 22,510",
+    "sl": "22,360",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-04T16:51:22+05:30",
+    "timeDisplay": "04:51 PM, Oct 04",
+    "price": "22510",
+    "bias": "bullish",
+    "behavior": "[SUN 16:51] [B2]: Sustained 5m close above 22,510 with expanding green futures volume confirming absorption",
+    "tp": "22,580 / 22,610",
+    "sl": "22,460",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-04T16:51:22+05:30",
+    "timeDisplay": "04:51 PM, Oct 04",
+    "price": "22460",
+    "bias": "bearish",
+    "behavior": "[SUN 16:51] [S1]: Bearish rejection or long-wick exhaustion candle at 22,460 with delta stalling",
+    "tp": "22,400 / 22,380",
+    "sl": "22,490",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-04T16:51:22+05:30",
+    "timeDisplay": "04:51 PM, Oct 04",
+    "price": "22380",
+    "bias": "bearish",
+    "behavior": "[SUN 16:51] [S2]: Clean 5m close below 22,380 confirming support failure with active red futures volume expansion",
+    "tp": "22,310 / 22,220",
+    "sl": "22,430",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-04T16:39:20+05:30",
     "timeDisplay": "04:39 PM, Oct 04",
     "price": "22455",
@@ -47,6 +91,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261004_165126",
+    "timestamp": "2026-10-04T16:51:26+05:30",
+    "timeDisplay": "04:51 PM, Oct 04",
+    "spot": "22421.95",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (04:50 PM IST - Oct 04, 2026 | Spot: 22421.95 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- Active Chop Range: 22,390.00 – 22,460.00 (Spot Index). Current spot price 22,421.95 is revolving at mid-range equilibrium between the 15M ORB Low (22,508.05) and Day Low (22,217.30).\n- Proxied Futures Volume: 1x 8-bar average indicates baseline rotational flow without institutional expansion; premium erosion remains elevated inside this 70-point band.\n- Strict No-Trade Mandate: Avoid aggressive directional naked call or put buying within 22,390.00 – 22,460.00; wait for decisive liquidity sweeps or boundary breaks.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze (Above 22,510.00 Spot): Sustained 5-minute close above 22,510.00 reclaims the 15M ORB Low, forcing intraday short liquidation toward 22,590.00 (ORB High) and 22,610.60 (Day High).\n- Long Unwinding Breakdown (Below 22,380.00 Spot): 5-minute break and hold below 22,380.00 triggers trapped buyer stops, accelerating momentum down toward 22,310.00 and 22,217.30 (Day Low).\n- Breakout Expansion (Above 22,615.00 Spot): Clean breakout above 22,610.60 releases unmitigated buy-side liquidity targeting 22,680.00 and 22,730.00.\n- Panic Flush / Capitulation (Below 22,215.00 Spot): Acceptance below 22,217.30 triggers institutional sell program expansion targeting 22,140.00 and 22,080.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Liquidity Sweep Reversal): Bullish sweep of 22,380.00 followed by an immediate 5-min pin bar or engulfing close back above 22,400.00 with futures volume surge. | TP: 22,460.00 / 22,510.00 | SL: 22,360.00 | 💡 Buy 22400 CE + Sell 22450 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (ORB Low Reclaim Breakout): Sustained 5-min close above 22,510.00 with expanding active green futures volume confirming absorption. | TP: 22,580.00 / 22,610.00 | SL: 22,460.00 | 💡 Buy 22500 CE + Sell 22550 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Chop Ceiling Exhaustion Rejection): Bearish rejection or long-wick exhaustion candle at 22,460.00 accompanied by delta stalling. | TP: 22,400.00 / 22,380.00 | SL: 22,490.00 | 💡 Buy 22450 PE + Sell 22400 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Breakdown Continuation): Clean 5-min close below 22,380.00 confirming support failure with active red futures volume expansion. | TP: 22,310.00 / 22,220.00 | SL: 22,430.00 | 💡 Buy 22400 PE + Sell 22350 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261004_163923",
     "timestamp": "2026-10-04T16:39:23+05:30",
     "timeDisplay": "04:39 PM, Oct 04",
