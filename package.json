@@ -2,7 +2,7 @@
   "name": "trade-journal-functions",
   "description": "Firebase Cloud Functions for Trade Journal AI Coach",
   "engines": {
-    "node": "20"
+    "node": "24.x"
   },
   "main": "index.js",
   "dependencies": {
