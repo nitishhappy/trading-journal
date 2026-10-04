@@ -80,3 +80,11 @@ window.sp500DailyPlanData = [
 window.sp500DailyPlanSummary = [
 
 ];
+
+window.eurusdDailyPlanData = [
+
+];
+
+window.eurusdDailyPlanSummary = [
+
+];

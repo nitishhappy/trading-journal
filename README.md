@@ -190,6 +190,8 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
   - Sourced candlestick data via consolidated `/api/marketCandles?symbol=EURUSD` with local offline cache `js/data/eurusd_candles.js`.
   - Added interactive level cards, per-run scorecard isolation (`levelsScorecardHistory_EURUSD`), and sound/notification crossing alerts.
   - Connected `js/ui/levels.js` chart pop-out link to `eurusd_interactive_chart.html`.
+  - **Pre-Market & Weekend Vertical Line Projection**: Fixed briefing line rendering where weekend/pre-market briefings with timestamps newer than historical candles failed to resolve `timeToCoordinate(time)`. Engineered dynamic `timeScale.logicalToCoordinate()` fallback allowing pre-session briefings (`01:00 AM`, `01:11 AM`) to project distinct interactive vertical lines with selection badges (`⭐ 01:11 AM (Live)` / `📌 01:00 AM`).
+  - **EUR/USD Tag Extractor Fix**: Patched `extractTag()` to recognize `[E_S1]`/`[E_S2]` tags cleanly, removing spurious `[SP_S2]` fallback labels on bearish cards.
 - **Trading Journal PWA Integration**:
   - Integrated `js/data/eurusd_daily_plan.js` and `js/data/eurusd_candles.js` data stores, registered in Service Worker (`sw.js`) and version generator (`generate-version.js`).
   - Added `💶 EUR/USD` asset button to `#view-levels` in `index.html` and wired full lifecycle in `js/ui/levels.js` (asset switching, cards, badges, real-time push alerts, 5-decimal precision formatting).
