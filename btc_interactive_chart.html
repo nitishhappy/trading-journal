@@ -1284,22 +1284,35 @@
                     timeVisible: true,
                     secondsVisible: false,
                     rightOffset: 8,
-                    tickMarkFormatter: (time) => {
+                    tickMarkFormatter: (time, tickMarkType, locale) => {
                         const date = new Date(time * 1000);
-                        const h = date.getUTCHours().toString().padStart(2, '0');
-                        const m = date.getUTCMinutes().toString().padStart(2, '0');
-                        return `${h}:${m}`;
+                        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        if (tickMarkType === 0) {
+                            return date.getUTCFullYear().toString();
+                        } else if (tickMarkType === 1) {
+                            return `${months[date.getUTCMonth()]} '${date.getUTCFullYear().toString().slice(-2)}`;
+                        } else if (tickMarkType === 2) {
+                            const d = date.getUTCDate().toString().padStart(2, '0');
+                            return `${d} ${months[date.getUTCMonth()]}`;
+                        } else {
+                            const h = date.getUTCHours().toString().padStart(2, '0');
+                            const m = date.getUTCMinutes().toString().padStart(2, '0');
+                            return `${h}:${m}`;
+                        }
                     }
                 },
                 localization: {
                     timeFormatter: (time) => {
                         const date = new Date(time * 1000);
+                        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        const d = date.getUTCDate().toString().padStart(2, '0');
+                        const mon = months[date.getUTCMonth()];
                         let h = date.getUTCHours();
                         const m = date.getUTCMinutes().toString().padStart(2, '0');
                         const ampm = h >= 12 ? 'PM' : 'AM';
                         h = h % 12;
                         h = h ? h : 12;
-                        const formattedTime = `${h}:${m} ${ampm}`;
+                        const formattedTime = `${d} ${mon}  ${h}:${m} ${ampm}`;
                         if (latestCandleTimestamp && time === latestCandleTimestamp) {
                             return `${formattedTime} (Developing)`;
                         }
