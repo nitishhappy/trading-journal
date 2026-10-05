@@ -3096,5 +3096,12 @@
             setTimeout(updateControlsScrollButtons, 300);
         })();
     </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg) try { reg.update(); } catch(e) {}
+            });
+        }
+    </script>
 </body>
 </html>

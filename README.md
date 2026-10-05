@@ -178,6 +178,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.58 — 05 Oct 2026 — PWA Service Worker Clean URL & Auto-Update Architecture Fix
+- **Bug Fix — Service Worker Clean URL Bypass & Proactive Revalidation**:
+  - Resolved cache-first lockup on Vercel clean URLs (`/btc_interactive_chart`, `/gold_interactive_chart`, etc.): `sw.js` previously only matched paths ending strictly with `.html`. On Vercel, requests to clean URLs caused `isAppShellFile` to evaluate to `false`, falling back to stale cache-first serving.
+  - Added clean URL variants and `event.request.mode === 'navigate'` to `sw.js`, guaranteeing all page navigations and interactive chart loads execute network-first.
+  - Injected proactive `reg.update()` triggers on `load` and `visibilitychange` across `index.html` and all 5 asset chart files (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, and `nifty_interactive_chart.html`).
+
 ### v2.3.57 — 05 Oct 2026 — Replay Toolbar Vertical Repositioning Above Time Axis (All 5 Interactive Charts)
 - **UI / UX — Replay Toolbar Elevation Above Time Axis**:
   - Relocated the floating candlestick replay toolbar (`⏪ Start`, `◀ Step`, `▶ Play`, `Step ▶`) from `bottom: 12px` to `bottom: 45px` across all 5 asset interactive charts (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, and `nifty_interactive_chart.html`).

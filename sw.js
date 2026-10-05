@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-dc7ff0dc1c";
+const CACHE_NAME = "trade-journal-1aa54a46a7";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -82,6 +82,7 @@ const ASSETS = [
 const NETWORK_FIRST_FILES = [
   "index.html", "styles.css", "app.js", "manifest.json", "trade-security.js",
   "nifty_interactive_chart.html", "gold_interactive_chart.html", "btc_interactive_chart.html", "sp500_interactive_chart.html", "eurusd_interactive_chart.html", "vantage_position_calculator.html",
+  "nifty_interactive_chart", "gold_interactive_chart", "btc_interactive_chart", "sp500_interactive_chart", "eurusd_interactive_chart", "vantage_position_calculator",
   "js/state.js", "js/dom.js", "js/firebase-init.js",
   "js/utils/toast.js", "js/utils/theme.js", "js/utils/date.js",
   "js/utils/image.js", "js/utils/export.js", "js/utils/keyboard.js", "js/utils/lifecycle.js",
@@ -219,7 +220,12 @@ self.addEventListener("fetch", (event) => {
   }
 
   const cleanUrl = url.split('?')[0].split('#')[0];
-  const isAppShellFile = NETWORK_FIRST_FILES.some((f) => cleanUrl.endsWith(f)) || cleanUrl.endsWith("/");
+  const isAppShellFile =
+    event.request.mode === "navigate" ||
+    cleanUrl.endsWith("/") ||
+    NETWORK_FIRST_FILES.some((f) => {
+      return cleanUrl.endsWith(f) || (f.endsWith(".html") && cleanUrl.endsWith(f.slice(0, -5)));
+    });
 
   if (isAppShellFile) {
     // Network-first: always try to get the freshest code.
