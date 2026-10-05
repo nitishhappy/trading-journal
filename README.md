@@ -2340,4 +2340,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Configured EOD Forecast Scorecard table on the Daily Levels dashboard (`index.html`) to display `AI_B1`, `AI_B2`, `AI_S1`, `AI_S2` as primary rows, while preserving non-empty legacy channel tags (`BT`, `SM`, `CETA`) and purging the generic `AI` tag.
 - **Files Modified**: `js/ui/levels.js`, `nifty_interactive_chart.html`, `README.md`
 
+### v2.3.89 — 05 Oct 2026 — Vantage Position Sizer Contract Size Multiplier & Lot Precision Fix
+
+- **Vantage Position Sizer Contract Size Architecture (`vantage_position_calculator.html`)**:
+  - Fixed position sizing calculation bug where standard CFD lot sizing assumed 1 unit per lot, causing Gold (XAU) to calculate 1.6 Lots instead of 0.01-0.02 Lots.
+  - Integrated `contractSize` (units per 1 standard lot) across all factory presets: Gold `XAU` (100 oz), Forex `EURUSD`/`GBPUSD`/`USDJPY` (100,000 units), `ETH` (10 ETH), and `BTC` (1 BTC).
+  - Added `Contract Size (Units/Lot)` input field to Section 1 Account & Asset Configuration.
+  - Added `Contract Sz` editable column to the Config Master Table modal with automatic localStorage backward compatibility and hydration.
+  - Updated calculation formulas: Risk per lot = `slRiskDist * contractSize`, Tradable lots = `floor(maxLoss / riskPerLot / lotStep) * lotStep`, Notional = `lots * contractSize * price`, and margin/cost metrics accordingly.
+  - Added informative sub-hint showing exact unrounded lots alongside rounded tradable lots, plus cheat sheet documentation on broker contract sizes.
+- **Files Modified**: `vantage_position_calculator.html`, `README.md`
+
+
 
