@@ -2900,8 +2900,18 @@ window.toggleMaximizePanel = function(btn, event) {
                         currentPrice = parseFloat(cbData.data.amount);
                     }
                 }
-            } catch (e) {
-                console.error("Coinbase BTC price fetch failed:", e);
+        // Final local fallback: use latest candle close if APIs are unavailable or CORS-blocked
+        if (!currentPrice) {
+            if (isEurUsd && window.eurusdCandles && window.eurusdCandles.length > 0) {
+                currentPrice = window.eurusdCandles[window.eurusdCandles.length - 1].close;
+            } else if (isGold && window.goldCandles && window.goldCandles.length > 0) {
+                currentPrice = window.goldCandles[window.goldCandles.length - 1].close;
+            } else if (isSp500 && window.sp500Candles && window.sp500Candles.length > 0) {
+                currentPrice = window.sp500Candles[window.sp500Candles.length - 1].close;
+            } else if (isBtc && window.btcCandles && window.btcCandles.length > 0) {
+                currentPrice = window.btcCandles[window.btcCandles.length - 1].close;
+            } else if (window.allCandles && window.allCandles.length > 0) {
+                currentPrice = window.allCandles[window.allCandles.length - 1].close;
             }
         }
         
