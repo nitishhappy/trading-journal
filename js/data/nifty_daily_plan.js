@@ -1,44 +1,44 @@
 window.dailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-10-05T13:45:47+05:30",
-    "timeDisplay": "01:45 PM, Oct 05",
+    "timestamp": "2026-10-05T13:47:51+05:30",
+    "timeDisplay": "01:47 PM, Oct 05",
     "price": "22540",
     "bias": "bullish",
-    "behavior": "[MON 13:45] [B1]: Bullish 5m rejection candle holding firmly above 22,540 with expanding green futures volume confirming absorption",
+    "behavior": "[MON 13:47] [B1]: Bullish 5m rejection candle holding firmly above 22,540 with expanding green futures volume confirming absorption",
     "tp": "22,600 / 22,620",
     "sl": "22,505",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-05T13:45:47+05:30",
-    "timeDisplay": "01:45 PM, Oct 05",
+    "timestamp": "2026-10-05T13:47:51+05:30",
+    "timeDisplay": "01:47 PM, Oct 05",
     "price": "22625",
     "bias": "bullish",
-    "behavior": "[MON 13:45] [B2]: Clean 5m candle close ABOVE 22,625 with surging futures volume (>1.5x) confirming breakout continuation",
+    "behavior": "[MON 13:47] [B2]: Clean 5m candle close ABOVE 22,625 with surging futures volume (>1.5x) confirming breakout continuation",
     "tp": "22,680 / 22,730",
     "sl": "22,580",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-05T13:45:47+05:30",
-    "timeDisplay": "01:45 PM, Oct 05",
+    "timestamp": "2026-10-05T13:47:51+05:30",
+    "timeDisplay": "01:47 PM, Oct 05",
     "price": "22615",
     "bias": "bearish",
-    "behavior": "[MON 13:45] [S1]: Liquidity sweep of Day High (22,620 - 22,625) followed by immediate 5m bearish engulfing close back below 22,600",
+    "behavior": "[MON 13:47] [S1]: Liquidity sweep of Day High (22,620 - 22,625) followed by immediate 5m bearish engulfing close back below 22,600",
     "tp": "22,560 / 22,520",
     "sl": "22,645",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-05T13:45:47+05:30",
-    "timeDisplay": "01:45 PM, Oct 05",
+    "timestamp": "2026-10-05T13:47:51+05:30",
+    "timeDisplay": "01:47 PM, Oct 05",
     "price": "22505",
     "bias": "bearish",
-    "behavior": "[MON 13:45] [S2]: Sustained 5m close BELOW 22,505 with expanding red futures volume breaking morning value floor",
+    "behavior": "[MON 13:47] [S2]: Sustained 5m close BELOW 22,505 with expanding red futures volume breaking morning value floor",
     "tp": "22,450 / 22,400",
     "sl": "22,545",
     "status": "na"
@@ -366,6 +366,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261005_134755",
+    "timestamp": "2026-10-05T13:47:55+05:30",
+    "timeDisplay": "01:47 PM, Oct 05",
+    "spot": "22559.6",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:46 PM IST - Oct 05, 2026 | Spot: 22559.6 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Spot No-Trade Boundary: 22,510 – 22,580 (Spot Index).\n- Inside this 70-point equilibrium corridor, price is trapped between the 15M ORB Low (22506.35) and 15M ORB High (22571.3) retest zone following the initial morning expansion.\n- Nifty Future Volume is tracking at 1.0x 8-bar average, indicating standard rotational distribution without institutional impulse; naked premium buying inside 22,510 – 22,580 carries severe time-decay penalty.\n\n4. High Momentum / Explosive Zones:\n- Bullish Squeeze Expansion (Sustained 5m close ABOVE 22,625): Breaches Day High (22,621.8) and clears local call seller inventory, triggering explosive short-covering acceleration toward 22,680 and 22,730.\n- Bearish Long Flush Cascade (Decisive 5m close BELOW 22,505): Violates 15M ORB Low support (22506.35) and institutional morning absorption floor, unlocking rapid long unwinding down to 22,450 and Day Low retest at 22,400.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Value Pullback Long): Bullish 5m rejection candle holding firmly above 22,540 with expanding green futures volume confirming absorption. | TP: 22,600 / 22,620 | SL: 22,505 | 💡 Buy 22550 CE + Sell 22600 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Momentum Breakout): Clean 5m candle close ABOVE 22,625 with surging futures volume (>1.5x) confirming breakout continuation. | TP: 22,680 / 22,730 | SL: 22,580 | 💡 Buy 22600 CE + Sell 22650 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Exhaustion Reversal): Liquidity sweep of Day High (22,620 - 22,625) followed by immediate 5m bearish engulfing close back below 22,600. | TP: 22,560 / 22,520 | SL: 22,645 | 💡 Buy 22600 PE + Sell 22550 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Low Breakdown Flush): Sustained 5m close BELOW 22,505 with expanding red futures volume breaking morning value floor. | TP: 22,450 / 22,400 | SL: 22,545 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261005_134550",
     "timestamp": "2026-10-05T13:45:50+05:30",
     "timeDisplay": "01:45 PM, Oct 05",
