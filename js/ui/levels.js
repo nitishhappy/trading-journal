@@ -2944,6 +2944,10 @@ window.toggleMaximizePanel = function(btn, event) {
                         currentPrice = parseFloat(cbData.data.amount);
                     }
                 }
+            } catch (e) {
+                console.error("Coinbase BTC price fetch failed:", e);
+            }
+        }
         // Final local fallback: use latest candle close if APIs are unavailable or CORS-blocked
         if (!currentPrice) {
             if (isEurUsd && window.eurusdCandles && window.eurusdCandles.length > 0) {

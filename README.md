@@ -2351,5 +2351,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added informative sub-hint showing exact unrounded lots alongside rounded tradable lots, plus cheat sheet documentation on broker contract sizes.
 - **Files Modified**: `vantage_position_calculator.html`, `README.md`
 
+### v2.3.90 — 05 Oct 2026 — Fix SyntaxError in levels.js Restoring App Module Loading & User Login
+
+- **Syntax Error & Login Blocker Patch (`js/ui/levels.js`)**:
+  - Restored missing `} catch (e) { ... }` block in `runSilentLiveEvaluation()` around Coinbase BTC price fetch.
+  - Resolves `Uncaught SyntaxError: Missing catch or finally after try` that broke ES module loading in `app.js` and blocked Firebase authentication, login screens, and UI initialization.
+- **Cleaned Obsolete Stylesheet Links (`index.html`)**:
+  - Removed 5 non-existent stylesheet link tags (`css/main.css`, `css/components.css`, `css/theme.css`, `css/checklist.css`, `css/aicoach.css`) eliminating 404 network errors in the DevTools console.
+- **Files Modified**: `js/ui/levels.js`, `index.html`, `README.md`
+
+
 
 
