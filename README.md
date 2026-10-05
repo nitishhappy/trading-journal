@@ -2322,3 +2322,13 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added fuzzy key fallback normalization in `getSavedOutcome()` to ensure logged outcomes persist reliably across sessions and briefings.
 - **Files Modified**: `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `nifty_interactive_chart.html`, `README.md`
 
+### v2.3.87 — 05 Oct 2026 — EUR/USD AI Briefing Runner Fix & Localhost Price Fallback
+
+- **EUR/USD AI Briefing Runner (`eurusd_intraday_briefing.ps1`)**:
+  - Replaced broken positional `agyExe print` invocation with the standard `run_agy_prompt.py` wrapper, resolving silent failure where briefings failed in 10s and left plans stuck at 01:11 AM.
+  - Fixed regex extraction in `eurusd_intraday_briefing.ps1` for markdown-formatted `Live Spot` and `Day High`/`Day Low` values.
+  - Synchronized fresh 09:46 AM EUR/USD tactical trading levels into `js/data/eurusd_daily_plan.js`.
+- **Localhost Fallback Handling (`js/ui/levels.js`)**:
+  - Added graceful fallback to latest candle close (`window.eurusdCandles`, `goldCandles`, `sp500Candles`, `btcCandles`) when testing on local Python HTTP servers where `/api/livePrices` returns 404 and external feeds are CORS-restricted.
+- **Files Modified**: `README.md`, `js/ui/levels.js`, `js/data/eurusd_daily_plan.js`
+
