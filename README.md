@@ -2360,6 +2360,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Removed 5 non-existent stylesheet link tags (`css/main.css`, `css/components.css`, `css/theme.css`, `css/checklist.css`, `css/aicoach.css`) eliminating 404 network errors in the DevTools console.
 - **Files Modified**: `js/ui/levels.js`, `index.html`, `README.md`
 
+### v2.3.91 — 05 Oct 2026 — Fix BTC Watchdog Infinite Trigger Loop & Lock Anchor Persistence
+
+- **BTC AI Watchdog Daemon Fix (`C:\Nitish\ClaudeApps\Utilities\Bitcoin Setup\btc_watchdog.py`)**:
+  - Relocated `write_lock_file_atomic()` execution before returning from `run_briefing_script()`.
+  - Resolved unreachable code bug where successful briefing runs returned `True` without updating `btc_watchdog_trigger.json`, causing the spot price anchor to remain permanently stuck at $84,500 and continuously firing emergency overrides every 15 minutes.
+  - Reset BTC lock file with current spot price (~$85,999) and active 60-minute cooldown window.
+  - Re-synced prediction accuracy stats for active levels in `js/data/prediction_accuracy_data.js`.
+- **Files Modified**: `Bitcoin Setup/btc_watchdog.py`, `js/data/prediction_accuracy_data.js`, `README.md`
+
+
 
 
 
