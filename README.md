@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.56 — 05 Oct 2026 — Collapsible Action Plan Triggers Sidebar (Default Collapsed) Across All 5 Interactive Charts
+- **Feature — Default Collapsed Sidebar & Full-Screen Candlestick Chart**:
+  - Configured the right-hand Action Plan Triggers / Key Levels sidebar to be collapsed by default across all 5 asset interactive charts (`gold_interactive_chart.html`, `nifty_interactive_chart.html`, `btc_interactive_chart.html`, `eurusd_interactive_chart.html`, and `sp500_interactive_chart.html`).
+  - Candlestick chart now opens full-width (`grid-template-columns: 1fr`) on initial page load, maximizing visible chart canvas area.
+  - Added multi-access toggle controls: top navigation button (`📋 Triggers` / `📋 Levels`), chart toolbar toggle button adjacent to the candle Bar Close countdown badge, and a collapse (`✕`) button directly inside the section header.
+  - Interactive auto-expand: Clicking any plotted price level line directly on the candlestick chart automatically expands the triggers sidebar and smoothly scrolls to the corresponding setup card.
+  - Embedded `ResizeObserver` listener with programmatic resize triggers ensuring responsive chart reflow and flawless vertical line canvas alignment during layout transitions.
+
 ### v2.3.55 — 05 Oct 2026 — Generation Timestamp Prefix for Mobile Summary Push Notifications (All 5 Assets)
 - **Feature — Timestamp Prefix on Mobile Summary Notifications**:
   - Enhanced mobile lock-screen & background push notifications so the body text starts with the exact generation timestamp: `HH:MM AM/PM <Asset> Summary synced` (e.g., `09:00 AM Gold Summary synced`, `07:30 AM BTC Summary synced`).

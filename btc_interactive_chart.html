@@ -184,12 +184,24 @@
             min-height: 0;
             width: 100%;
             overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .main-container.sidebar-collapsed {
+            grid-template-columns: 1fr !important;
+        }
+
+        .main-container.sidebar-collapsed .levels-section {
+            display: none !important;
         }
 
         @media (max-width: 900px) {
             .main-container {
                 grid-template-columns: 1fr;
                 grid-template-rows: 1fr 240px;
+            }
+            .main-container.sidebar-collapsed {
+                grid-template-rows: 1fr !important;
             }
         }
 
@@ -802,6 +814,9 @@
                 <button id="btn-calc" class="btn" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
                     <span>🧮</span> Sizer
                 </button>
+                <button id="btn-toggle-triggers" class="btn" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel">
+                    <span>📋</span> <span id="triggers-btn-text">Levels</span>
+                </button>
                 <button id="btn-add-vline" class="btn" title="Click chart to place a custom vertical line">
                     <span>➕</span> Add Line
                 </button>
@@ -826,7 +841,7 @@
         </div>
     </div>
 
-    <div class="main-container">
+    <div class="main-container sidebar-collapsed" id="main-container">
         <div class="chart-section">
             <div class="chart-toolbar">
                 <div class="symbol-title" style="display: flex; align-items: center; gap: 8px;">
@@ -845,7 +860,12 @@
                         <span id="ohlc-change-pill" class="ohlc-chg">--</span>
                     </div>
                 </div>
-                <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 15:00</div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 15:00</div>
+                    <button id="btn-toggle-sidebar" class="btn" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel" style="padding: 0.2rem 0.6rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px;">
+                        <span>📋</span> <span id="sidebar-toggle-text">Levels</span>
+                    </button>
+                </div>
             </div>
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
                 <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
@@ -868,7 +888,10 @@
         <div class="levels-section">
             <div class="section-title">
                 <span>🎯 Key Trading Levels Summary</span>
-                <span id="levels-count" style="font-size: 0.8rem; color: #f7931a;">0 Levels</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span id="levels-count" style="font-size: 0.8rem; color: #f7931a;">0 Levels</span>
+                    <button id="btn-close-sidebar" onclick="toggleTriggersPanel(false)" title="Collapse Levels Panel" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #cbd5e1; border-radius: 4px; padding: 2px 7px; cursor: pointer; font-size: 0.72rem; transition: all 0.2s;">✕</button>
+                </div>
             </div>
             <div class="briefing-header-box">
                 <div class="briefing-meta-row">
@@ -1429,7 +1452,7 @@
                 });
 
                 if (closestLevelIdx !== -1) {
-                    highlightCard(closestLevelIdx);
+                    highlightCard(closestLevelIdx, true);
                     const matchedLevel = activePriceLines[closestLevelIdx];
                     showToast(`Selected Line: ${matchedLevel.tag} $${matchedLevel.price}`, matchedLevel.levelObj.behavior);
                     triggerAlertSound(880, 'sine', 0.1);
@@ -2418,7 +2441,73 @@
         }
 
 
-        function highlightCard(cardIdx) {
+        function toggleTriggersPanel(forceState) {
+            const mainContainer = document.getElementById('main-container') || document.querySelector('.main-container');
+            if (!mainContainer) return;
+            
+            let isCollapsed;
+            if (typeof forceState === 'boolean') {
+                isCollapsed = !forceState;
+                if (isCollapsed) {
+                    mainContainer.classList.add('sidebar-collapsed');
+                } else {
+                    mainContainer.classList.remove('sidebar-collapsed');
+                }
+            } else {
+                isCollapsed = mainContainer.classList.toggle('sidebar-collapsed');
+            }
+            
+            updateTriggersToggleUI(isCollapsed);
+
+            setTimeout(() => {
+                const container = document.getElementById('chart-wrapper');
+                if (container && chartInstance) {
+                    const w = container.clientWidth;
+                    const h = container.clientHeight;
+                    if (w > 0 && h > 0) {
+                        chartInstance.applyOptions({ width: w, height: h });
+                        if (typeof renderVerticalLinesOverlay === 'function') {
+                            renderVerticalLinesOverlay();
+                        }
+                    }
+                }
+            }, 60);
+        }
+
+        function updateTriggersToggleUI(isCollapsed) {
+            const btnTop = document.getElementById('btn-toggle-triggers');
+            const topText = document.getElementById('triggers-btn-text');
+            const btnChart = document.getElementById('btn-toggle-sidebar');
+            const chartText = document.getElementById('sidebar-toggle-text');
+            
+            if (isCollapsed) {
+                if (btnTop) {
+                    btnTop.classList.remove('active');
+                    if (topText) topText.innerText = 'Levels';
+                }
+                if (btnChart) {
+                    btnChart.classList.remove('active');
+                    if (chartText) chartText.innerText = 'Levels';
+                }
+            } else {
+                if (btnTop) {
+                    btnTop.classList.add('active');
+                    if (topText) topText.innerText = 'Levels (Open)';
+                }
+                if (btnChart) {
+                    btnChart.classList.add('active');
+                    if (chartText) chartText.innerText = 'Close Levels';
+                }
+            }
+        }
+
+        function highlightCard(cardIdx, autoOpen = false) {
+            if (autoOpen) {
+                const mainContainer = document.getElementById('main-container') || document.querySelector('.main-container');
+                if (mainContainer && mainContainer.classList.contains('sidebar-collapsed')) {
+                    toggleTriggersPanel(true);
+                }
+            }
             document.querySelectorAll('.level-card').forEach(c => c.classList.remove('selected-highlight'));
             const targetCard = document.getElementById(`card-btc-${cardIdx}`);
             if (targetCard) {
