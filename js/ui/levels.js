@@ -221,7 +221,22 @@ if (viewLevels) {
 
     function getCanonicalLevelTag(level, asset) {
         const a = (asset || window.currentActiveAsset || 'NIFTY').toUpperCase();
-        if (a === 'NIFTY') return (level?.source || 'BT').toUpperCase();
+        if (a === 'NIFTY') {
+            const currentSrc = (level?.source || '').trim().toUpperCase();
+            if (['AI_B1', 'AI_B2', 'AI_S1', 'AI_S2'].includes(currentSrc)) return currentSrc;
+            if (['BT', 'SM', 'CETA'].includes(currentSrc)) return currentSrc;
+
+            const beh = (level?.behavior || '').replace(/_/g, ' ').toUpperCase();
+            if (/\[\s*B1\s*\]|\bB1\b/i.test(beh)) return 'AI_B1';
+            if (/\[\s*B2\s*\]|\bB2\b/i.test(beh)) return 'AI_B2';
+            if (/\[\s*S1\s*\]|\bS1\b/i.test(beh)) return 'AI_S1';
+            if (/\[\s*S2\s*\]|\bS2\b/i.test(beh)) return 'AI_S2';
+
+            const bias = (level?.bias || '').toLowerCase();
+            if (bias === 'bullish' || bias === 'long' || bias === 'buy') return 'AI_B1';
+            if (bias === 'bearish' || bias === 'short' || bias === 'sell') return 'AI_S1';
+            return (currentSrc && currentSrc !== 'AI') ? currentSrc : 'AI_B1';
+        }
 
         const currentSrc = (level?.source || '').trim().toUpperCase();
         if (['AI B', 'AI S', 'AI KB', 'AI KS'].includes(currentSrc)) return currentSrc;
@@ -336,6 +351,23 @@ if (viewLevels) {
                     delete scorecardStats[key];
                 }
             });
+        } else if (activeAsset === 'NIFTY') {
+            const canonicalNiftyTags = ['AI_B1', 'AI_B2', 'AI_S1', 'AI_S2'];
+            canonicalNiftyTags.forEach(tag => {
+                if (!scorecardStats[tag]) {
+                    scorecardStats[tag] = { worked: 0, failed: 0, na: 0 };
+                }
+            });
+            // Purge generic 'AI' tag only, keeping legacy tags like BT, SM, CETA
+            if (scorecardStats['AI']) {
+                delete scorecardStats['AI'];
+            }
+            const knownSources = new Set(['BT', 'SM', 'CETA']);
+            knownSources.forEach(src => {
+                if (!scorecardStats[src]) {
+                    scorecardStats[src] = { worked: 0, failed: 0, na: 0 };
+                }
+            });
         } else {
             const knownSources = new Set(['BT', 'SM', 'CETA']);
             if (window.dailyPlanData && Array.isArray(window.dailyPlanData)) {
@@ -367,8 +399,12 @@ if (viewLevels) {
         const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
         const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
 
-        let src = (newSource || (isAiAsset ? 'AI B' : 'BT')).toUpperCase();
-        if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS', 'AI E_B', 'AI E_S'].includes(src)) {
+        let src = (newSource || (isAiAsset ? 'AI B' : (activeAsset === 'NIFTY' ? 'AI_B1' : 'BT'))).toUpperCase();
+        if (activeAsset === 'NIFTY') {
+            if (!['AI_B1', 'AI_B2', 'AI_S1', 'AI_S2', 'BT', 'SM', 'CETA'].includes(src)) {
+                src = getCanonicalLevelTag({ source: src, behavior: src }, activeAsset);
+            }
+        } else if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS', 'AI E_B', 'AI E_S'].includes(src)) {
             src = getCanonicalLevelTag({ source: src, behavior: src }, activeAsset);
         }
         const st = (newStatus || 'na').toLowerCase();
@@ -376,8 +412,12 @@ if (viewLevels) {
         // Check if levelId was previously recorded
         const prev = levelReviewLog[levelId];
         if (prev) {
-            let prevSrc = (prev.source || (isAiAsset ? 'AI B' : 'BT')).toUpperCase();
-            if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS'].includes(prevSrc)) {
+            let prevSrc = (prev.source || (isAiAsset ? 'AI B' : (activeAsset === 'NIFTY' ? 'AI_B1' : 'BT'))).toUpperCase();
+            if (activeAsset === 'NIFTY') {
+                if (!['AI_B1', 'AI_B2', 'AI_S1', 'AI_S2', 'BT', 'SM', 'CETA'].includes(prevSrc)) {
+                    prevSrc = getCanonicalLevelTag({ source: prevSrc, behavior: prevSrc }, activeAsset);
+                }
+            } else if (isAiAsset && !['AI B', 'AI S', 'AI KB', 'AI KS'].includes(prevSrc)) {
                 prevSrc = getCanonicalLevelTag({ source: prevSrc, behavior: prevSrc }, activeAsset);
             }
             const prevSt = (prev.status || 'na').toLowerCase();
@@ -485,7 +525,7 @@ if (viewLevels) {
         if (shouldSyncFromPlan && planLevels.length > 0) {
             localStorage.setItem(storageKey + '_sig', planSig);
             planLevels.forEach((lvl, idx) => {
-                const src = isAiAsset ? getCanonicalLevelTag(lvl, window.currentActiveAsset) : (lvl.source || 'BT').toUpperCase();
+                const src = getCanonicalLevelTag(lvl, window.currentActiveAsset);
                 const pr = lvl.price || lvl.rawPrice || '';
                 const beh = lvl.behavior || '';
                 const cleanBeh = beh.replace(/\[\d{1,2}:\d{2}\]/g, '').trim();
@@ -516,7 +556,7 @@ if (viewLevels) {
                     seenSignatures.add(sig);
                     finalLevels.push({
                         id: l.id,
-                        source: isAiAsset ? getCanonicalLevelTag(l, window.currentActiveAsset) : (l.source || 'CUSTOM').toUpperCase(),
+                        source: (l.id && (l.id.startsWith('lvl-manual-') || l.id.startsWith('lvl-upload-'))) ? (l.source || 'CUSTOM').toUpperCase() : getCanonicalLevelTag(l, window.currentActiveAsset),
                         price: pr,
                         bias: l.bias || 'neutral',
                         behavior: beh,
@@ -528,7 +568,7 @@ if (viewLevels) {
             });
         } else if (loaded.length > 0) {
             loaded.forEach((l, idx) => {
-                const src = isAiAsset ? getCanonicalLevelTag(l, window.currentActiveAsset) : (l.source || 'BT').toUpperCase();
+                const src = getCanonicalLevelTag(l, window.currentActiveAsset);
                 finalLevels.push({
                     id: l.id || ('lvl-' + idx),
                     source: src,
@@ -1896,10 +1936,14 @@ if (viewLevels) {
         const isAiAsset = (activeAsset === 'BTC' || activeAsset === 'GOLD' || activeAsset === 'SP500' || activeAsset === 'EURUSD');
 
         const thSource = document.querySelector('.scorecard-table th:first-child');
-        if (thSource) thSource.innerText = isAiAsset ? 'Tag / Setup' : 'Source / Channel';
+        if (thSource) thSource.innerText = (isAiAsset || activeAsset === 'NIFTY') ? 'Tag / Setup' : 'Source / Channel';
 
         let sources = [];
-        if (isAiAsset) {
+        if (activeAsset === 'NIFTY') {
+            const canonicalNifty = ['AI_B1', 'AI_B2', 'AI_S1', 'AI_S2'];
+            const extraSources = Object.keys(scorecardStats).filter(k => k !== 'AI' && !canonicalNifty.includes(k) && (scorecardStats[k]?.worked > 0 || scorecardStats[k]?.failed > 0 || ['BT', 'SM', 'CETA'].includes(k)));
+            sources = [...canonicalNifty, ...extraSources];
+        } else if (isAiAsset) {
             sources = ['AI B', 'AI S', 'AI KB', 'AI KS', 'AI E_B', 'AI E_S'];
         } else {
             const sourceSet = new Set(Object.keys(scorecardStats));
@@ -1911,7 +1955,7 @@ if (viewLevels) {
                     if (l.source) sourceSet.add(l.source.toUpperCase());
                 });
             }
-            sources = Array.from(sourceSet).filter(Boolean).sort();
+            sources = Array.from(sourceSet).filter(k => k !== 'AI').sort();
         }
 
         // If no sources exist

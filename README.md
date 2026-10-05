@@ -2332,3 +2332,12 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added graceful fallback to latest candle close (`window.eurusdCandles`, `goldCandles`, `sp500Candles`, `btcCandles`) when testing on local Python HTTP servers where `/api/livePrices` returns 404 and external feeds are CORS-restricted.
 - **Files Modified**: `README.md`, `js/ui/levels.js`, `js/data/eurusd_daily_plan.js`
 
+### v2.3.88 — 05 Oct 2026 — Nifty EOD Scorecard Canonical Setups (AI_B1, AI_B2, AI_S1, AI_S2)
+
+- **Nifty Canonical Scorecard Setups (`js/ui/levels.js`, `nifty_interactive_chart.html`)**:
+  - Upgraded Nifty tag resolution to map Section 5 tactical setups into 4 canonical scorecard buckets: `AI_B1`, `AI_B2`, `AI_S1`, `AI_S2`.
+  - Updated Nifty interactive chart level cards to display `Scorecard (AI_B1):`, `Scorecard (AI_S1):`, etc., and record level outcomes under their respective setup tags.
+  - Configured EOD Forecast Scorecard table on the Daily Levels dashboard (`index.html`) to display `AI_B1`, `AI_B2`, `AI_S1`, `AI_S2` as primary rows, while preserving non-empty legacy channel tags (`BT`, `SM`, `CETA`) and purging the generic `AI` tag.
+- **Files Modified**: `js/ui/levels.js`, `nifty_interactive_chart.html`, `README.md`
+
+

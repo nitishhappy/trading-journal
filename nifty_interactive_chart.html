@@ -1765,6 +1765,16 @@
             return items.join('');
         }
 
+        function getCanonicalSetupCategory(tag, behavior, bias) {
+            const beh = (behavior || tag || '').replace(/_/g, ' ').toUpperCase();
+            if (/\[\s*B1\s*\]|\bB1\b/i.test(beh) || /\[\s*B1\s*\]|\bB1\b/i.test(tag)) return 'AI_B1';
+            if (/\[\s*B2\s*\]|\bB2\b/i.test(beh) || /\[\s*B2\s*\]|\bB2\b/i.test(tag)) return 'AI_B2';
+            if (/\[\s*S1\s*\]|\bS1\b/i.test(beh) || /\[\s*S1\s*\]|\bS1\b/i.test(tag)) return 'AI_S1';
+            if (/\[\s*S2\s*\]|\bS2\b/i.test(beh) || /\[\s*S2\s*\]|\bS2\b/i.test(tag)) return 'AI_S2';
+            const b = (bias || '').toLowerCase();
+            return (b === 'bullish' || b === 'long' || b === 'buy') ? 'AI_B1' : 'AI_S1';
+        }
+
         function renderLevelsAndCards() {
             const levelsSection = document.querySelector('.levels-section');
             const prevScrollTop = levelsSection ? levelsSection.scrollTop : 0;
@@ -1852,7 +1862,7 @@
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
                 const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.dailyPlanSummary, levelsData.anchorTimestamp);
 
-                const levelSource = (lvl.source || 'AI').toUpperCase();
+                const category = getCanonicalSetupCategory(tag, lvl.behavior, isBullish ? 'bullish' : 'bearish');
                 const cleanTag = tag.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
                 const cleanPrice = String(lvl.price).replace(/[^0-9.]/g, '');
                 const runSuffix = levelsData.anchorTimestamp ? '_' + Math.floor(new Date(levelsData.anchorTimestamp).getTime() / 1000) : '';
@@ -1903,11 +1913,11 @@
                         <div class="dist-pill rr-pill" id="dist-pill-nifty-${idx}" title="Risk to Reward (R:R)">${formatRiskRewardPill(lvl.price, lvl.sl, lvl.tp)}</div>
                     </div>
                     <div class="card-outcome-bar">
-                        <span class="outcome-label">Scorecard (${levelSource}):</span>
+                        <span class="outcome-label">Scorecard (${category}):</span>
                         <div class="outcome-btn-group">
-                            <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" id="btn-worked-nifty-${idx}" data-btn-worked="${levelUniqueId}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${levelSource}', 'worked', ${idx})">✓ Worked</button>
-                            <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" id="btn-failed-nifty-${idx}" data-btn-failed="${levelUniqueId}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${levelSource}', 'failed', ${idx})">✗ Failed</button>
-                            <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${levelSource}', 'na', ${idx})">↺ Reset</button>
+                            <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" id="btn-worked-nifty-${idx}" data-btn-worked="${levelUniqueId}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
+                            <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" id="btn-failed-nifty-${idx}" data-btn-failed="${levelUniqueId}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
+                            <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'na', ${idx})">↺ Reset</button>
                         </div>
                     </div>
                 `;
@@ -2348,7 +2358,11 @@
 
         // ================= EOD FORECAST SCORECARD & PROXIMITY ENGINE ================= //
         function recordLevelOutcome(levelId, newSource, newStatus) {
-            const src = (newSource || 'BT').toUpperCase();
+            const canonicalNifty = ['AI_B1', 'AI_B2', 'AI_S1', 'AI_S2'];
+            let src = (newSource || 'AI_B1').toUpperCase();
+            if (!canonicalNifty.includes(src) && !['BT', 'SM', 'CETA'].includes(src)) {
+                src = getCanonicalSetupCategory(src, src, '');
+            }
             const st = (newStatus || 'na').toLowerCase();
             const statsKey = 'levelsScorecardHistory_NIFTY';
             const logKey = 'levelsLoggedReviews_NIFTY';
@@ -2368,9 +2382,20 @@
                 if (savedLog) levelReviewLog = JSON.parse(savedLog);
             } catch (e) { levelReviewLog = {}; }
 
+            canonicalNifty.forEach(t => {
+                if (!scorecardStats[t]) scorecardStats[t] = { worked: 0, failed: 0, na: 0 };
+            });
+            // Purge generic 'AI' tag only
+            if (scorecardStats['AI']) {
+                delete scorecardStats['AI'];
+            }
+
             const prev = levelReviewLog[levelId];
             if (prev) {
-                const prevSrc = (prev.source || 'BT').toUpperCase();
+                let prevSrc = (prev.source || 'AI_B1').toUpperCase();
+                if (!canonicalNifty.includes(prevSrc) && !['BT', 'SM', 'CETA'].includes(prevSrc)) {
+                    prevSrc = getCanonicalSetupCategory(prevSrc, prevSrc, '');
+                }
                 const prevSt = (prev.status || 'na').toLowerCase();
                 if (scorecardStats[prevSrc] && scorecardStats[prevSrc][prevSt] !== undefined) {
                     scorecardStats[prevSrc][prevSt] = Math.max(0, scorecardStats[prevSrc][prevSt] - 1);
