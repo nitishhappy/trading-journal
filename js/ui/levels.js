@@ -1208,15 +1208,26 @@ if (viewLevels) {
             'EURUSD': '💶 EUR/USD'
         };
 
+        const cleanAssetNames = {
+            'NIFTY': 'Nifty',
+            'GOLD': 'Gold',
+            'BTC': 'BTC',
+            'SP500': 'SP500',
+            'EURUSD': 'EURUSD'
+        };
+
         const assetLabel = assetLabels[assetKey] || assetKey;
+        const assetClean = cleanAssetNames[assetKey] || assetKey;
         const nowStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-        const timeStr = latestSummary?.timeDisplay ? latestSummary.timeDisplay.split(',')[0].strip?.() || latestSummary.timeDisplay.split(',')[0] : nowStr;
-        const spotStr = latestSummary?.spot ? ` (Spot: $${latestSummary.spot})` : '';
+        let timeStr = latestSummary?.timeDisplay ? (latestSummary.timeDisplay.split(',')[0].trim?.() || latestSummary.timeDisplay.split(',')[0].trim()) : nowStr;
+        if (/^\d:\d\d\s*(?:AM|PM)$/i.test(timeStr)) {
+            timeStr = '0' + timeStr;
+        }
 
         const title = `${assetLabel} — ${timeStr}`;
         const notifTagId = latestSummary?.id || (latestSummary?.timestamp ? latestSummary.timestamp.replace(/[^a-zA-Z0-9]/g, '_') : 'latest');
         const options = {
-            body: `New Levels & Tactical Summary added${spotStr}`,
+            body: `${timeStr} ${assetClean} Summary synced`,
             icon: './icons/icon-192.png',
             badge: './icons/icon-192.png',
             tag: `summary-push-${assetKey.toLowerCase()}-${notifTagId}`,

@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.55 — 05 Oct 2026 — Generation Timestamp Prefix for Mobile Summary Push Notifications (All 5 Assets)
+- **Feature — Timestamp Prefix on Mobile Summary Notifications**:
+  - Enhanced mobile lock-screen & background push notifications so the body text starts with the exact generation timestamp: `HH:MM AM/PM <Asset> Summary synced` (e.g., `09:00 AM Gold Summary synced`, `07:30 AM BTC Summary synced`).
+  - Standardized notification body across all 5 asset classes: **Nifty**, **Gold**, **BTC**, **SP500**, and **EURUSD**.
+  - Engineered `extract_briefing_time_str()` in `Utilities/sync_briefing_to_daily_plan.py` parsing generation timestamps directly from markdown headers (`(07:30 AM IST ...)`), metadata blocks (`Generated: YYYY-MM-DD HH:MM:SS`), or filenames, with a zero-padded local time fallback (`%I:%M %p`).
+  - Synchronized in-app browser notification dispatch in `js/ui/levels.js` to format notifications consistently with identical time prefixes.
+  - Updated notification settings example and hint text in `index.html`.
+
 ### v2.3.54 — 05 Oct 2026 — EUR/USD AI Predictor, Interactive Live Chart & Telegram Controller Integration
 - **New Feature — EUR/USD AI Predictor & Watchdog Engine**:
   - Engineered dedicated `EURUSD Setup` pipeline mirroring Gold and Bitcoin architecture under `Utilities/EURUSD Setup`.
