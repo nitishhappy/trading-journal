@@ -178,6 +178,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.57 — 05 Oct 2026 — Replay Toolbar Vertical Repositioning Above Time Axis (All 5 Interactive Charts)
+- **UI / UX — Replay Toolbar Elevation Above Time Axis**:
+  - Relocated the floating candlestick replay toolbar (`⏪ Start`, `◀ Step`, `▶ Play`, `Step ▶`) from `bottom: 12px` to `bottom: 45px` across all 5 asset interactive charts (`btc_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, and `nifty_interactive_chart.html`).
+  - Completely unblocks the bottom time scale axis (timestamps, date markers, and crosshair time hover labels) on both desktop/laptop screens and mobile devices (Android PWA standalone mode).
+  - Preserves full click/touch target ergonomics while floating seamlessly within the 15% bottom scale margin of the Lightweight Charts canvas.
+
 ### v2.3.56 — 05 Oct 2026 — Collapsible Action Plan Triggers Sidebar (Default Collapsed) Across All 5 Interactive Charts
 - **Feature — Default Collapsed Sidebar & Full-Screen Candlestick Chart**:
   - Configured the right-hand Action Plan Triggers / Key Levels sidebar to be collapsed by default across all 5 asset interactive charts (`gold_interactive_chart.html`, `nifty_interactive_chart.html`, `btc_interactive_chart.html`, `eurusd_interactive_chart.html`, and `sp500_interactive_chart.html`).
