@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-06T10:46:53+05:30",
+    "timeDisplay": "10:46 AM, Oct 06",
+    "price": "22668",
+    "bias": "bullish",
+    "behavior": "[TUE 10:46] [B1]: 5m bullish rejection holding firmly above 22,665-22,670 flipped breakout shelf with active green volume",
+    "tp": "22,710 / 22,750",
+    "sl": "22,648",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-06T10:46:53+05:30",
+    "timeDisplay": "10:46 AM, Oct 06",
+    "price": "22705",
+    "bias": "bullish",
+    "behavior": "[TUE 10:46] [B2]: Sustained 5m close ABOVE 22,705 clearing 22,700 Call OI wall with active futures volume confirming institutional absorption",
+    "tp": "22,750 / 22,795",
+    "sl": "22,670",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-06T10:46:53+05:30",
+    "timeDisplay": "10:46 AM, Oct 06",
+    "price": "22700",
+    "bias": "bearish",
+    "behavior": "[TUE 10:46] [S1]: Rejection wick at 22,695\u201322,705 followed by 5m close back below 22,675 with heavy Call OI addition",
+    "tp": "22,635 / 22,600",
+    "sl": "22,715",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-06T10:46:53+05:30",
+    "timeDisplay": "10:46 AM, Oct 06",
+    "price": "22660",
+    "bias": "bearish",
+    "behavior": "[TUE 10:46] [S2]: Sustained 5m close BELOW 22,660 confirming bull trap above 22,670 with expanding red futures volume",
+    "tp": "22,628 / 22,585",
+    "sl": "22,685",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-06T10:35:26+05:30",
     "timeDisplay": "10:35 AM, Oct 06",
     "price": "22628.1",
@@ -63,17 +107,6 @@ window.dailyPlanData = [
     "behavior": "[TUE 10:33] [S1]: 5m bearish rejection candle at Day High (22,665-22,668) failing to sustain above 22,650 with heavy call OI addition",
     "tp": "22,630 / 22,590",
     "sl": "22,675",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-06T10:00:44+05:30",
-    "timeDisplay": "10:00 AM, Oct 06",
-    "price": "22668",
-    "bias": "bullish",
-    "behavior": "[TUE 10:00] [B2]: Sustained 5m close ABOVE 22,668 with active futures volume confirming absorption of 22,650-22,700 call writers",
-    "tp": "22,715 / 22,755",
-    "sl": "22,638",
     "status": "na"
   },
   {
@@ -289,6 +322,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261006_104656",
+    "timestamp": "2026-10-06T10:46:56+05:30",
+    "timeDisplay": "10:46 AM, Oct 06",
+    "spot": "22675.05",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $22675.05 > Max Plan Target $22670.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "> ⚠️ **THETA CRUSH DAY**: India VIX is down -4.74%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n# ⚡ NIFTY 50 Intraday Tactical Update (10:45 AM IST - Oct 06, 2026 | Spot: 22675.05 | Trigger: Level Exhaustion Breakout (NIFTY Spot $22675.05 > Max Plan Target $22670.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Active Chop Range: 22,665.00 – 22,695.00 (Spot Index). Spot is currently printing at 22,675.05 (Day High: 22,675.55), breaking out above the morning plan target (22,670.00) and entering the immediate pre-strike compression pocket directly below the 22,700 round-number psychological resistance.\n- Open Interest Dynamics (Tuesday FinNifty Expiry): Morning Call writers at 22,650 have been caught offside and are aggressively rolling coverage up to the 22,700 strike, where massive fresh Call OI addition is clustering. Concurrently, 22,650 Put writing is accelerating, transforming 22,650–22,665 into immediate short-term support. With FinNifty weekly expiry pinning flows active, the 22,665–22,695 corridor is becoming an institutional delta-neutral friction box.\n- Institutional Activity Status: Active Nifty Futures volume remains at baseline (1.0x 8-bar average). While the level exhaustion breakout above 22,670 has printed new highs, the lack of surging institutional volume (>1.3x) warns of absorption rather than an explosive runaway trend. With India VIX down -4.74%, option premiums are melting rapidly inside this 30-point holding band.\n- Tactical Directive: STRICT NO-TRADE ZONE for directional naked option buying inside 22,665.00 – 22,695.00. Do NOT chase breakouts directly into the 22,700 Call wall. Wait for either a clean 5-minute close above 22,705.00 to confirm institutional absorption of the 22,700 Call wall, or a confirmed rejection back below 22,660.00 signaling a bull trap back into the earlier morning range.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Short-Covering Squeeze Expansion] ([Sustained 5m close ABOVE 22,705.00 Spot]): Decisively clears the 22,700 round-number psychological supply barrier and forces trapped Tuesday FinNifty and Nifty 22,700 Call writers into rapid stop-covering panic, triggering accelerated gamma expansion toward 22,750.00 and 22,795.00.\n- [Bearish Bull-Trap Liquidation Flush] ([Sustained 5m close BELOW 22,660.00 Spot]): Decisively slips below the flipped Day High shelf (22,667.35 / 22,665.00), trapping breakout buyers above 22,670 and initiating rapid stop-loss unwinding back toward 22,628.00 (15M ORB High retest) and 22,585.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Breakout Shelf Retest & Demand Absorption Long): Pullback probe into 22,665–22,670 holding firmly above the prior resistance turned support shelf, followed by a confirmed 5m bullish rejection candle (hammer/pinbar) with active green futures volume confirming buyer absorption. | TP: 22,710 / 22,750 | SL: 22,648 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (22,700 Psychological Wall Breakout Long): Sustained 5-minute candle close ABOVE 22,705 clearing the 22,700 Call OI ceiling with active futures volume confirming institutional absorption and short-covering momentum. | TP: 22,750 / 22,795 | SL: 22,670 | 💡 Buy 22700 CE + Sell 22750 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (22,700 Call Wall Exhaustion Rejection Short): Push into 22,695–22,705 rejected with sharp upper exhaustion wicks, followed by a confirmed 5m close back BELOW 22,675 with heavy 22,700 Call OI addition and delta stalling. | TP: 22,635 / 22,600 | SL: 22,715 | 💡 Buy 22700 PE + Sell 22650 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Breakout Failure & Bull Trap Breakdown Short): Sustained 5-minute candle close BELOW 22,660 confirming a bull trap above the 22,670 breakout level, accompanied by expanding red futures volume (>1.2x avg) initiating rapid long liquidation. | TP: 22,628 / 22,585 | SL: 22,685 | 💡 Buy 22650 PE + Sell 22600 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20261006_103529",
     "timestamp": "2026-10-06T10:35:29+05:30",
     "timeDisplay": "10:35 AM, Oct 06",
