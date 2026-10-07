@@ -148,6 +148,7 @@ export const journalTradeImageFile = document.getElementById("journal-trade-imag
 export const journalTradeImageGrid = document.getElementById("journal-trade-image-grid");
 export const journalTradeStrategySelect = document.getElementById("journal-trade-strategy-select");
 export const journalTradeAddStrategyBtn = document.getElementById("journal-trade-add-strategy-btn");
+export const journalTradeNewStrategyBtn = document.getElementById("journal-trade-new-strategy-btn");
 export const journalTradeStrategyChips = document.getElementById("journal-trade-strategy-chips");
 export const journalTradeConceptSelect = document.getElementById("journal-trade-concept-select");
 export const journalTradeAddConceptBtn = document.getElementById("journal-trade-add-concept-btn");

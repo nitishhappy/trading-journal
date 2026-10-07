@@ -178,6 +178,16 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.67 — 07 Oct 2026 — Add Quick Strategy Creation & Fix Journal Grid CSS Selectors
+- **Feature — On-The-Fly Strategy Creation**:
+  - Added `+ New` button next to Strategy Tags dropdown in the Trade Modal.
+  - Allows traders to instantly define a new Strategy identifier (e.g. `S1_ORB_Breakout`) and optional Google Doc link without navigating away.
+  - Automatically persists the new strategy in Dashboard Firestore collection, populates the dropdown, and selects it for the trade.
+- **Bug Fix — Journal Multi-Column Grid DOM Class Alignment**:
+  - Resolved class mismatch where `#journal-obs-list` and `#journal-trades-list` had generic class `journal-list` instead of `journal-obs-list` and `journal-trades-list`.
+  - Added both ID and class selectors (`#journal-obs-list, .journal-obs-list` and `#journal-trades-list, .journal-trades-list`) to guarantee grid layout applies cleanly across all viewports.
+  - Observation cards now arrange in responsive multi-column note grid (`minmax(320px, 1fr)`) instead of stacking vertically full-width.
+
 ### v2.3.66 — 07 Oct 2026 — Redesign Journal UI to Responsive Multi-Column Grid with Prominent Trades
 - **UI / UX Redesign — Journal Multi-Column Responsive Grid**:
   - Replaced stretched single-column layout with responsive multi-column CSS grid matching Dashboard density and polish.

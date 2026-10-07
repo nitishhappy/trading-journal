@@ -20,7 +20,7 @@ import {
   journalTradeChartAddBtn, journalTradeChartsList,
   journalTradeChartPreviewBtn, journalTradeChartPreviewWrap, journalTradeImageZone,
   journalTradeImageFile, journalTradeImageGrid, journalTradeStrategySelect,
-  journalTradeAddStrategyBtn, journalTradeStrategyChips, journalTradeConceptSelect,
+  journalTradeAddStrategyBtn, journalTradeNewStrategyBtn, journalTradeStrategyChips, journalTradeConceptSelect,
   journalTradeAddConceptBtn, journalTradeNewConceptBtn, journalTradeConceptChips,
   journalTradeMistakeSelect, journalTradeAddMistakeBtn, journalTradeNewMistakeBtn,
   journalTradeMistakeChips, journalTradeDeleteBtn, journalTradeCancelBtn,
@@ -175,13 +175,43 @@ function bindJournalEvents() {
     });
   }
 
-  // Strategy Selector
+  // Strategy Selector & Quick Add
   if (journalTradeAddStrategyBtn && journalTradeStrategySelect) {
     journalTradeAddStrategyBtn.addEventListener("click", () => {
       const val = journalTradeStrategySelect.value;
       if (val && !selectedStrategies.includes(val)) {
         selectedStrategies.push(val);
         renderSelectedTags();
+      }
+    });
+  }
+  if (journalTradeNewStrategyBtn) {
+    journalTradeNewStrategyBtn.addEventListener("click", async () => {
+      const name = prompt("Enter new Strategy identifier/name (e.g. S1_ORB_Breakout):");
+      if (!name || !name.trim()) return;
+      const cleanName = name.trim();
+      const docLink = prompt("Enter Google Doc link for this strategy (optional):") || "";
+      try {
+        await saveObservation(null, {
+          entryType: "strategy",
+          entryName: cleanName,
+          docLink: docLink.trim(),
+          text: `Strategy: ${cleanName}`,
+          folder: "Technical",
+          priority: "medium",
+          tags: ["strategy", cleanName.toLowerCase()],
+          archived: false,
+          journalDate: state.selectedJournalDate
+        });
+        showToast(`Created strategy "${cleanName}" in Dashboard`);
+        if (!selectedStrategies.includes(cleanName)) {
+          selectedStrategies.push(cleanName);
+        }
+        populateTagSelects();
+        renderSelectedTags();
+      } catch (err) {
+        console.error(err);
+        showToast("Failed to create strategy");
       }
     });
   }
