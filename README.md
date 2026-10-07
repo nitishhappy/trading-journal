@@ -178,6 +178,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.69 — 07 Oct 2026 — Highlight Right Observations & Trades Summary Pill in Journal Header
+- **UI / UX Enhancement — Glowing Summary Pill**:
+  - Upgraded the right-hand side `.journal-day-meta` summary pill with a dual emerald/blue luminous glass gradient (`rgba(16, 185, 129, 0.12)` to `rgba(59, 130, 246, 0.15)`), cyan border, and ambient glow.
+  - Separated observation and trade counts into individually colored glowing badges: `💡 N Observations` in emerald (`#6ee7b7`) and `⚡ N Trades` in electric blue (`#93c5fd`).
+
 ### v2.3.68 — 07 Oct 2026 — Centered & Highlighted Date & Day Banner in Journal Header
 - **UI / UX Enhancement — Centered Date & Day Pill**:
   - Restructured `.journal-calendar-bar` into a balanced 3-column grid layout (Navigation on left, Centered Date Highlight, Meta Counts on right).
