@@ -1586,13 +1586,13 @@
           <div class="wysiwyg-editor" id="journal-trade-text-editor" contenteditable="true" data-placeholder="Enter trade execution details, emotion/psychology, lessons learned..."></div>
         </div>
 
-        <!-- Chart Link -->
-        <label>Chart Link (TradingView / Snapshot)</label>
+        <!-- Chart Links (Multiple Allowed) -->
+        <label>Chart Links (TradingView / Snapshot, multiple allowed)</label>
         <div style="display:flex; gap:8px; margin-bottom:6px;">
-          <input type="url" id="journal-trade-chart-input" placeholder="https://www.tradingview.com/x/... or snapshot URL" style="flex:1;" />
-          <button type="button" id="journal-trade-chart-preview-btn" class="btn-small">Preview</button>
+          <input type="url" id="journal-trade-chart-input" placeholder="Paste TradingView or chart link and tap Add" style="flex:1;" />
+          <button type="button" id="journal-trade-chart-add-btn" class="btn-small btn-small-primary">+ Add Link</button>
         </div>
-        <div id="journal-trade-chart-preview-wrap" class="hidden" style="margin-bottom:12px;"></div>
+        <div id="journal-trade-charts-list" class="journal-trade-charts-list" style="margin-bottom:12px; display:flex; flex-direction:column; gap:8px;"></div>
 
         <!-- Images (Paste / Upload) -->
         <label>Trade Images / Screenshots (Paste Ctrl+V or upload)</label>
