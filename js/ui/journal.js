@@ -17,6 +17,7 @@ import {
   journalTradesEmpty, journalTradesCount, journalTradeModal, journalTradeModalTitle,
   journalTradeBookmarkToggle, journalTradeModalClose, journalTradeModalDate,
   journalWysiwygToolbar, journalTradeTextEditor, journalTradeChartInput,
+  journalTradeChartAddBtn, journalTradeChartsList,
   journalTradeChartPreviewBtn, journalTradeChartPreviewWrap, journalTradeImageZone,
   journalTradeImageFile, journalTradeImageGrid, journalTradeStrategySelect,
   journalTradeAddStrategyBtn, journalTradeStrategyChips, journalTradeConceptSelect,
@@ -28,6 +29,7 @@ import {
 
 let editingTradeId = null;
 let modalImages = [];
+let modalChartUrls = [];
 let selectedStrategies = [];
 let selectedConcepts = [];
 let selectedMistakes = [];
@@ -153,13 +155,14 @@ function bindJournalEvents() {
     });
   }
 
-  // Chart link preview button
-  if (journalTradeChartPreviewBtn && journalTradeChartInput) {
-    journalTradeChartPreviewBtn.addEventListener("click", () => {
-      updateChartPreview(journalTradeChartInput.value.trim());
-    });
-    journalTradeChartInput.addEventListener("blur", () => {
-      updateChartPreview(journalTradeChartInput.value.trim());
+  // Multi-chart link adder
+  if (journalTradeChartAddBtn && journalTradeChartInput) {
+    journalTradeChartAddBtn.addEventListener("click", () => addChartLinkFromInput());
+    journalTradeChartInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        addChartLinkFromInput();
+      }
     });
   }
 
@@ -425,13 +428,21 @@ function createTradeCard(trade, index) {
     `;
   }
 
-  let chartHtml = "";
-  if (trade.chartUrl) {
-    chartHtml = `
-      <div class="journal-chart-preview-box">
-        <a href="${escapeHtml(trade.chartUrl)}" target="_blank" class="journal-chart-link-btn">
-          📈 View Chart: ${escapeHtml(trade.chartUrl)} ↗
-        </a>
+  const chartUrls = trade.chartUrls && trade.chartUrls.length > 0 ? trade.chartUrls : (trade.chartUrl ? [trade.chartUrl] : []);
+  let chartsHtml = "";
+  if (chartUrls.length > 0) {
+    chartsHtml = `
+      <div class="journal-charts-container" style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+        ${chartUrls.map((url, i) => `
+          <div class="journal-chart-preview-box">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px;">
+              <a href="${escapeHtml(url)}" target="_blank" class="journal-chart-link-btn" style="padding:0;">
+                📈 Chart ${chartUrls.length > 1 ? `#${i + 1}` : ""}: ${escapeHtml(url)} ↗
+              </a>
+            </div>
+            <div class="journal-card-chart-slot" data-url="${escapeHtml(url)}"></div>
+          </div>
+        `).join("")}
       </div>
     `;
   }
@@ -454,7 +465,7 @@ function createTradeCard(trade, index) {
       ${trade.textHtml || escapeHtml(trade.plainText || "(No notes entered)")}
     </div>
 
-    ${chartHtml}
+    ${chartsHtml}
     ${imagesHtml}
 
     <div class="journal-trade-tags">
@@ -463,6 +474,14 @@ function createTradeCard(trade, index) {
       ${mistakesHtml}
     </div>
   `;
+
+  // Build live chart preview thumbnails for each slot
+  card.querySelectorAll(".journal-card-chart-slot").forEach((slot) => {
+    const url = slot.dataset.url;
+    if (url) {
+      buildLinkPreviewIfApplicable(url, slot);
+    }
+  });
 
   // Attach card event listeners
   card.querySelector(".journal-bookmark-btn").addEventListener("click", async (e) => {
@@ -518,6 +537,7 @@ function createTradeCard(trade, index) {
 export function openTradeModal(id = null) {
   editingTradeId = id;
   modalImages = [];
+  modalChartUrls = [];
   selectedStrategies = [];
   selectedConcepts = [];
   selectedMistakes = [];
@@ -534,8 +554,9 @@ export function openTradeModal(id = null) {
     if (!trade) return;
     if (journalTradeModalTitle) journalTradeModalTitle.textContent = "Edit Trade Entry";
     if (journalTradeTextEditor) journalTradeTextEditor.innerHTML = trade.textHtml || escapeHtml(trade.plainText || "");
-    if (journalTradeChartInput) journalTradeChartInput.value = trade.chartUrl || "";
+    if (journalTradeChartInput) journalTradeChartInput.value = "";
     modalImages = [...(trade.images || [])];
+    modalChartUrls = trade.chartUrls && trade.chartUrls.length > 0 ? [...trade.chartUrls] : (trade.chartUrl ? [trade.chartUrl] : []);
     selectedStrategies = [...(trade.strategies || [])];
     selectedConcepts = [...(trade.concepts || [])];
     selectedMistakes = [...(trade.mistakes || [])];
@@ -555,8 +576,8 @@ export function openTradeModal(id = null) {
   }
 
   renderTradeModalImages();
+  renderTradeModalCharts();
   renderSelectedTags();
-  updateChartPreview(journalTradeChartInput ? journalTradeChartInput.value.trim() : "");
 
   if (journalTradeModal) {
     journalTradeModal.classList.remove("hidden");
@@ -570,10 +591,59 @@ function closeTradeModal() {
   if (journalTradeModal) journalTradeModal.classList.add("hidden");
   editingTradeId = null;
   modalImages = [];
+  modalChartUrls = [];
   selectedStrategies = [];
   selectedConcepts = [];
   selectedMistakes = [];
   isBookmarked = false;
+  if (journalTradeChartInput) journalTradeChartInput.value = "";
+  if (journalTradeChartsList) journalTradeChartsList.innerHTML = "";
+}
+
+function addChartLinkFromInput() {
+  if (!journalTradeChartInput) return;
+  const url = journalTradeChartInput.value.trim();
+  if (!url) return;
+  if (!modalChartUrls.includes(url)) {
+    modalChartUrls.push(url);
+    renderTradeModalCharts();
+  }
+  journalTradeChartInput.value = "";
+}
+
+function renderTradeModalCharts() {
+  if (!journalTradeChartsList) return;
+  journalTradeChartsList.innerHTML = "";
+  modalChartUrls.forEach((url, idx) => {
+    const item = document.createElement("div");
+    item.className = "journal-modal-chart-item";
+    item.innerHTML = `
+      <div class="journal-modal-chart-header">
+        <a href="${escapeHtml(url)}" target="_blank" class="journal-modal-chart-url" title="${escapeHtml(url)}">
+          📈 ${escapeHtml(url)} ↗
+        </a>
+        <button type="button" class="journal-modal-chart-remove" data-index="${idx}" title="Remove chart link">✕</button>
+      </div>
+      <div class="journal-modal-chart-preview">
+        <span style="font-size:11px; color:var(--text-dim);">Loading preview...</span>
+      </div>
+    `;
+
+    item.querySelector(".journal-modal-chart-remove").addEventListener("click", () => {
+      modalChartUrls.splice(idx, 1);
+      renderTradeModalCharts();
+    });
+
+    const previewContainer = item.querySelector(".journal-modal-chart-preview");
+    const rendered = buildLinkPreviewIfApplicable(url, previewContainer, () => {
+      previewContainer.innerHTML = `<span style="font-size:11px; color:var(--text-dim);">(No thumbnail available)</span>`;
+    });
+    if (!rendered) {
+      previewContainer.innerHTML = `<span style="font-size:11px; color:var(--text-dim);">(No thumbnail available)</span>`;
+    }
+
+    journalTradeChartsList.appendChild(item);
+  });
 }
 
 async function handleTradeImageFiles(files) {
@@ -607,26 +677,6 @@ function renderTradeModalImages() {
     });
     journalTradeImageGrid.appendChild(wrap);
   });
-}
-
-function updateChartPreview(url) {
-  if (!journalTradeChartPreviewWrap) return;
-  if (!url) {
-    journalTradeChartPreviewWrap.innerHTML = "";
-    journalTradeChartPreviewWrap.classList.add("hidden");
-    return;
-  }
-
-  journalTradeChartPreviewWrap.classList.remove("hidden");
-  journalTradeChartPreviewWrap.innerHTML = `<span style="font-size:12px; color:var(--text-dim);">Generating chart preview...</span>`;
-
-  const rendered = buildLinkPreviewIfApplicable(url, journalTradeChartPreviewWrap, () => {
-    journalTradeChartPreviewWrap.innerHTML = `<a href="${escapeHtml(url)}" target="_blank" style="font-size:12px; color:#60a5fa;">Open Chart Link ↗</a>`;
-  });
-
-  if (!rendered) {
-    journalTradeChartPreviewWrap.innerHTML = `<a href="${escapeHtml(url)}" target="_blank" style="font-size:12px; color:#60a5fa;">Open Chart Link ↗</a>`;
-  }
 }
 
 function populateTagSelects() {
@@ -717,9 +767,16 @@ function renderSelectedTags() {
 async function saveCurrentTrade() {
   const textHtml = journalTradeTextEditor ? journalTradeTextEditor.innerHTML.trim() : "";
   const plainText = journalTradeTextEditor ? journalTradeTextEditor.innerText.trim() : "";
-  const chartUrl = journalTradeChartInput ? journalTradeChartInput.value.trim() : "";
 
-  if (!plainText && !chartUrl && modalImages.length === 0 && selectedStrategies.length === 0 && selectedConcepts.length === 0 && selectedMistakes.length === 0) {
+  // Collect chart links from list plus any pending typed URL in input
+  const chartUrls = [...modalChartUrls];
+  const pendingInputUrl = journalTradeChartInput ? journalTradeChartInput.value.trim() : "";
+  if (pendingInputUrl && !chartUrls.includes(pendingInputUrl)) {
+    chartUrls.push(pendingInputUrl);
+  }
+  const chartUrl = chartUrls[0] || "";
+
+  if (!plainText && chartUrls.length === 0 && modalImages.length === 0 && selectedStrategies.length === 0 && selectedConcepts.length === 0 && selectedMistakes.length === 0) {
     showToast("Please enter trade notes, chart link, image, or tags");
     return;
   }
@@ -729,6 +786,7 @@ async function saveCurrentTrade() {
     textHtml,
     plainText,
     chartUrl,
+    chartUrls,
     images: modalImages,
     strategies: selectedStrategies,
     concepts: selectedConcepts,

@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.63 — 07 Oct 2026 — Multi-Chart Links Support in Journal Trade Entries
+- **Feature — Multiple Chart Links for Trades (T1)**:
+  - Upgraded Trade Modal with multi-chart link adder supporting unlimited TradingView / chart snapshot URLs.
+  - Added interactive list of added chart links with live thumbnails and quick-remove (`✕`) buttons.
+  - Supports Enter key submission directly in the URL input field.
+  - Updated day stream trade cards to display all linked charts with dedicated open buttons (`📈 Chart #1: ... ↗`) and inline embedded snapshot previews.
+  - Preserved backward compatibility with legacy single `chartUrl` records.
+
 ### v2.3.62 — 07 Oct 2026 — Fix Dashboard Observation Modal Visibility & Journal Stream Date Isolation
 - **Bug Fix — Dashboard Observation Modal DOM Trap Resolution**:
   - Restored missing closing `</div>` tag for `#view-aico-pilot` in `index.html`. Previously, the unclosed container caused `#obs-modal` and other modals to be rendered inside `#view-aico-pilot` (which has `display: none !important`), preventing the observation modal from opening on screen when clicking `+` or `✎ Edit`.
