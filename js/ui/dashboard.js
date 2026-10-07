@@ -1411,7 +1411,9 @@ function createObsEntry() {
 
   // Entry Type & conditional fields
   const radioChips = entry.querySelectorAll(".obs-type-chip");
-  const typeRadios = entry.querySelectorAll('input[name="obs-entry-type"]');
+  const typeRadios = entry.querySelectorAll('.obs-type-chip input[type="radio"]');
+  const uniqueGroupName = `obs-entry-type-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  typeRadios.forEach((r) => { r.name = uniqueGroupName; });
   const nameRow = entry.querySelector(".obs-name-row");
   const nameInput = entry.querySelector(".obs-name-input");
   const nameLabel = entry.querySelector(".obs-name-label");
@@ -1446,6 +1448,16 @@ function createObsEntry() {
     radio.addEventListener("change", () => updateTypeUI(radio.value));
   });
 
+  radioChips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const radio = chip.querySelector('input[type="radio"]');
+      if (radio && !radio.checked) {
+        radio.checked = true;
+        updateTypeUI(radio.value);
+      }
+    });
+  });
+
   if (docPreviewBtn) {
     docPreviewBtn.addEventListener("click", () => {
       const url = docInput ? docInput.value.trim() : "";
@@ -1459,7 +1471,7 @@ function createObsEntry() {
   }
 
   entry._setType = (type = "default", name = "", docLink = "") => {
-    const radio = entry.querySelector(`input[name="obs-entry-type"][value="${type}"]`);
+    const radio = entry.querySelector(`.obs-type-chip input[value="${type}"]`);
     if (radio) radio.checked = true;
     if (nameInput) nameInput.value = name;
     if (docInput) docInput.value = docLink;
@@ -1791,7 +1803,7 @@ async function saveModalObservation(addAnother) {
   const entry = obsModalBody.querySelector(".obs-entry");
   if (!entry) return;
 
-  const entryType = entry.querySelector('input[name="obs-entry-type"]:checked')?.value || 'default';
+  const entryType = entry.querySelector('.obs-type-chip input[type="radio"]:checked')?.value || 'default';
   const entryName = entry.querySelector('.obs-name-input')?.value.trim() || '';
   const docLink = entry.querySelector('.obs-doc-input')?.value.trim() || '';
 

@@ -330,24 +330,14 @@ export function renderJournalView() {
     journalDayTitle.textContent = isToday ? `Today • ${dateStr}` : dateStr;
   }
 
-  // Filter Observations for this day
+  // Filter Observations for this day (only entries explicitly logged for Journal)
   const dayObs = (state.observations || []).filter((o) => {
-    if (o.journalDate) return o.journalDate === state.selectedJournalDate;
-    if (o.createdAt) {
-      const d = o.createdAt.toDate ? o.createdAt.toDate() : new Date(o.createdAt);
-      return getLocalDateKey(d) === state.selectedJournalDate;
-    }
-    return false;
+    return o.journalDate === state.selectedJournalDate;
   });
 
   // Filter Trades for this day
   const dayTrades = (state.journalTrades || []).filter((t) => {
-    if (t.journalDate) return t.journalDate === state.selectedJournalDate;
-    if (t.createdAt) {
-      const d = t.createdAt.toDate ? t.createdAt.toDate() : new Date(t.createdAt);
-      return getLocalDateKey(d) === state.selectedJournalDate;
-    }
-    return false;
+    return t.journalDate === state.selectedJournalDate;
   });
 
   // Update counts

@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.62 — 07 Oct 2026 — Fix Dashboard Observation Modal Visibility & Journal Stream Date Isolation
+- **Bug Fix — Dashboard Observation Modal DOM Trap Resolution**:
+  - Restored missing closing `</div>` tag for `#view-aico-pilot` in `index.html`. Previously, the unclosed container caused `#obs-modal` and other modals to be rendered inside `#view-aico-pilot` (which has `display: none !important`), preventing the observation modal from opening on screen when clicking `+` or `✎ Edit`.
+  - Added unique group names and direct chip-click selection listeners for the Entry Type radio chips in `createObsEntry` to ensure smooth multi-type selection.
+- **Bug Fix — Journal Day Stream Isolation for Default Dashboard Entries**:
+  - Refined observation filtering in `js/ui/journal.js` to strictly require `o.journalDate === state.selectedJournalDate`.
+  - Standard dashboard entries (`entryType === 'default'`) without an explicit `journalDate` no longer bleed into the daily Journal stream.
+
 ### v2.3.61 — 07 Oct 2026 — Daily Realtime Trading Journal & Enhanced Dashboard Entry Classification
 - **Major Feature — Daily Journal Tab**:
   - Added new dedicated "Journal" tab positioned directly before "Levels" in navigation (`Dashboard` → `Revision` → `Journal` → `Levels` ...).
