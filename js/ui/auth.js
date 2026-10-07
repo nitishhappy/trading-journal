@@ -6,6 +6,7 @@ import {
 
 import { loadFolders, subscribeObservations, migrateInstaLearningToObservations, unsubscribeObservations } from '../services/observations.js';
 import { subscribeTrades, unsubscribeTrades } from '../services/trades.js';
+import { subscribeJournalTrades, unsubscribeJournalTrades } from '../services/journal.js';
 import { subscribeAiSummaries, unsubscribeAiSummaries } from '../services/ai.js';
 import { subscribeChecklistLogs, unsubscribeChecklists } from '../services/checklists.js';
 import { subscribeCandleChecklists, unsubscribeCandleChecklists } from '../services/candleChecklist.js';
@@ -78,6 +79,7 @@ auth.onAuthStateChanged((user) => {
     loadThemePreference();
     subscribeObservations();
     subscribeTrades();
+    subscribeJournalTrades();
     subscribeAiSummaries();
     migrateInstaLearningToObservations();
     subscribeChecklistLogs();
@@ -91,6 +93,7 @@ auth.onAuthStateChanged((user) => {
     checkBackupReminder();
     setTimeout(() => loadTradePasscodeStatus(), 50);
     setTimeout(() => restoreSessionState(), 100);
+    setTimeout(() => { if (typeof window.initJournal === 'function') window.initJournal(); }, 120);
     
     window.dispatchEvent(new CustomEvent('auth-changed', { detail: { loggedIn: true, user } }));
   } else {
@@ -100,6 +103,7 @@ auth.onAuthStateChanged((user) => {
     // Clear all states
     state.observations = [];
     state.trades = [];
+    state.journalTrades = [];
     state.checklistLogs = [];
     state.candleChecklistTemplates = [];
     state.candleChecklistRuns = [];
@@ -116,6 +120,7 @@ auth.onAuthStateChanged((user) => {
     // Unsubscribe database listeners
     unsubscribeObservations();
     unsubscribeTrades();
+    unsubscribeJournalTrades();
     unsubscribeAiSummaries();
     unsubscribeChecklists();
     unsubscribeCandleChecklists();

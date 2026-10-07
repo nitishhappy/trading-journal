@@ -178,6 +178,25 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.61 — 07 Oct 2026 — Daily Realtime Trading Journal & Enhanced Dashboard Entry Classification
+- **Major Feature — Daily Journal Tab**:
+  - Added new dedicated "Journal" tab positioned directly before "Levels" in navigation (`Dashboard` → `Revision` → `Journal` → `Levels` ...).
+  - Built calendar day parent selector defaulting to current date in IST (`Asia/Kolkata`) with previous/next day stepping, manual date picker, and "Today" quick-jump.
+  - Divided each calendar day into dual streams: Observations ($O_1, O_2, \dots$) and Trades ($T_1, T_2, \dots$).
+- **Feature — Trade Creation Workflow (T1)**:
+  - Built dedicated Trade Modal equipped with a dark-mode native WYSIWYG text editor supporting Bold (`Ctrl+B`), Italic (`Ctrl+I`), Underline (`Ctrl+U`), Bullet lists, Numbered lists, and format clearing.
+  - Full image support via file picker, drag & drop, and direct clipboard paste (`Ctrl+V`) with automatic compression.
+  - Chart link input with live preview thumbnail and direct link navigation.
+  - Multi-select tag support for Strategies ($S$), Concepts ($C$), and Mistakes ($M$) with inline on-the-fly creation for new Concepts and Mistakes directly into Dashboard.
+  - Trade bookmark toggle (⭐) for quick flagging.
+- **Enhancement — Dashboard Entry Modal Multi-Type Classification**:
+  - Upgraded Dashboard New Entry modal with an interactive type selector: `Default`, `Strategy`, `Concept`, and `Mistakes`.
+  - Non-default types inherit all standard observation capabilities (notes, links, images, tags, folders, priority) while expanding dedicated Identifier/Name input.
+  - Added Google Doc Link field for Strategies with an in-app preview modal viewer (`#doc-viewer-modal`) and direct external doc access.
+  - Updated card rendering with distinctive visual badges for Strategy, Concept, and Mistake items.
+- **Service Worker & Versioning**:
+  - Registered `css/journal.css`, `js/services/journal.js`, and `js/ui/journal.js` in `sw.js` and `generate-version.js`.
+
 ### v2.3.60 — 07 Oct 2026 — Decouple Chart Refresh from Key Levels Toolbar & Smart Plan Update Detection
 - **Bug Fix — Key Levels Toolbar Refresh Decoupling & Auto-Scroll Elimination**:
   - Implemented smart plan signature tracking (`lastRenderedPlanSignature`) across all 5 asset interactive charts (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`, and `eurusd_interactive_chart.html`): periodic 15s candle refreshes strictly update chart telemetry and bypass toolbar re-renders, while brand-new summaries immediately trigger an in-place toolbar update without auto-scrolling.

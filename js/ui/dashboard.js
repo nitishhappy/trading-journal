@@ -824,7 +824,7 @@ import { state } from '../state.js';
 import { db } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 import { getLocalDateKey, formatDateHeader, computeStreak } from '../utils/date.js';
-import { renderTile, escapeHtml, attachImagePaste, getImageFromClipboardEvent, resizeImageToBase64, buildLinkPreviewIfApplicable } from '../utils/image.js';
+import { renderTile, escapeHtml, attachImagePaste, getImageFromClipboardEvent, resizeImageToBase64, buildLinkPreviewIfApplicable, openGoogleDocViewer } from '../utils/image.js';
 import { saveObservation, deleteObservation, addCustomFolder, suggestCategory } from '../services/observations.js';
 import { openLightbox } from './common.js';
 
@@ -1409,6 +1409,63 @@ function createObsEntry() {
   const entry = frag.querySelector(".obs-entry");
   entry._images = [];
 
+  // Entry Type & conditional fields
+  const radioChips = entry.querySelectorAll(".obs-type-chip");
+  const typeRadios = entry.querySelectorAll('input[name="obs-entry-type"]');
+  const nameRow = entry.querySelector(".obs-name-row");
+  const nameInput = entry.querySelector(".obs-name-input");
+  const nameLabel = entry.querySelector(".obs-name-label");
+  const docRow = entry.querySelector(".obs-doc-row");
+  const docInput = entry.querySelector(".obs-doc-input");
+  const docPreviewBtn = entry.querySelector(".obs-doc-preview-btn");
+
+  const updateTypeUI = (type) => {
+    radioChips.forEach((chip) => {
+      const radio = chip.querySelector('input[type="radio"]');
+      chip.classList.toggle("active", radio && radio.value === type);
+    });
+
+    if (type === "default") {
+      if (nameRow) nameRow.classList.add("hidden");
+      if (docRow) docRow.classList.add("hidden");
+    } else {
+      if (nameRow) nameRow.classList.remove("hidden");
+      if (nameLabel) {
+        const titleMap = { strategy: "Strategy Name / ID", concept: "Concept Name / ID", mistake: "Mistake Name / ID" };
+        nameLabel.innerHTML = `${titleMap[type] || "Identifier / Name"} <span style="color:#ef4444;">*</span>`;
+      }
+      if (type === "strategy") {
+        if (docRow) docRow.classList.remove("hidden");
+      } else {
+        if (docRow) docRow.classList.add("hidden");
+      }
+    }
+  };
+
+  typeRadios.forEach((radio) => {
+    radio.addEventListener("change", () => updateTypeUI(radio.value));
+  });
+
+  if (docPreviewBtn) {
+    docPreviewBtn.addEventListener("click", () => {
+      const url = docInput ? docInput.value.trim() : "";
+      if (!url) {
+        showToast("Enter a Google Doc link first");
+        return;
+      }
+      const title = nameInput ? nameInput.value.trim() : "Strategy Document";
+      openGoogleDocViewer(url, title || "Strategy Document");
+    });
+  }
+
+  entry._setType = (type = "default", name = "", docLink = "") => {
+    const radio = entry.querySelector(`input[name="obs-entry-type"][value="${type}"]`);
+    if (radio) radio.checked = true;
+    if (nameInput) nameInput.value = name;
+    if (docInput) docInput.value = docLink;
+    updateTypeUI(type);
+  };
+
   populateFolderSelect(entry.querySelector(".obs-folder"), false);
 
   // Links
@@ -1659,14 +1716,20 @@ function renderEntryImages(container, entry) {
   });
 }
 
-export function openCreateModal() {
+export function openCreateModal(opts = {}) {
   state.editingObsId = null;
+  state.journalPendingDate = opts.journalDate || null;
   obsModalTitle.textContent = "New Observation";
   obsModalBody.innerHTML = "";
 
   const entry = createObsEntry();
   entry.querySelector(".obs-folder").value = state.activeFolder !== "all" ? state.activeFolder : state.folders[0];
   entry.querySelector(".obs-entry-header").classList.add("hidden");
+
+  if (opts.entryType && entry._setType) {
+    entry._setType(opts.entryType, opts.entryName || "", opts.docLink || "");
+  }
+
   obsModalBody.appendChild(entry);
 
   obsDeleteBtn.classList.add("hidden");
@@ -1674,7 +1737,14 @@ export function openCreateModal() {
   obsAddAnotherBtn.classList.remove("hidden");
 
   obsModal.classList.remove("hidden");
-  setTimeout(() => entry.querySelector(".obs-text").focus(), 100);
+  setTimeout(() => {
+    if (opts.entryType && opts.entryType !== "default") {
+      const nameInput = entry.querySelector(".obs-name-input");
+      if (nameInput) nameInput.focus();
+    } else {
+      entry.querySelector(".obs-text").focus();
+    }
+  }, 100);
 }
 
 export function openEditModal(id) {
@@ -1692,6 +1762,10 @@ export function openEditModal(id) {
   entry.querySelector(".obs-tags").value = (obs.tags || []).join(", ");
   entry.querySelector(".obs-image-pending").checked = !!obs.imagePending;
   entry.querySelector(".obs-entry-header").classList.add("hidden");
+
+  if (entry._setType) {
+    entry._setType(obs.entryType || "default", obs.entryName || "", obs.docLink || "");
+  }
 
   const links = obs.links && obs.links.length > 0 ? obs.links : (obs.link ? [obs.link] : []);
   renderEntryLinks(entry.querySelector(".obs-links-list"), links);
@@ -1717,6 +1791,15 @@ async function saveModalObservation(addAnother) {
   const entry = obsModalBody.querySelector(".obs-entry");
   if (!entry) return;
 
+  const entryType = entry.querySelector('input[name="obs-entry-type"]:checked')?.value || 'default';
+  const entryName = entry.querySelector('.obs-name-input')?.value.trim() || '';
+  const docLink = entry.querySelector('.obs-doc-input')?.value.trim() || '';
+
+  if (entryType !== 'default' && !entryName) {
+    showToast(`Please enter a name for this ${entryType}.`);
+    return;
+  }
+
   const text = entry.querySelector(".obs-text").value.trim();
   const folder = entry.querySelector(".obs-folder").value;
   const priority = entry.querySelector(".obs-priority").value;
@@ -1725,8 +1808,8 @@ async function saveModalObservation(addAnother) {
   const links = getEntryLinks(entry.querySelector(".obs-links-list"));
   const images = entry._images || [];
 
-  if (!text && links.length === 0 && images.length === 0) {
-    showToast("Enter a note, links, or upload an image.");
+  if (!text && links.length === 0 && images.length === 0 && !entryName) {
+    showToast("Enter a note, name, links, or upload an image.");
     return;
   }
 
@@ -1734,7 +1817,6 @@ async function saveModalObservation(addAnother) {
   const tags = tagsStr.split(",").map((t) => t.trim().toLowerCase()).filter(Boolean);
 
   // Category tag = the folder the user explicitly selected (not auto-suggested from keywords)
-  // Previously suggestCategory() was overriding the user's choice with a keyword match.
   const category = folder || null;
 
   const data = {
@@ -1747,8 +1829,15 @@ async function saveModalObservation(addAnother) {
     imagePending,
     images,
     category,
-    archived: false
+    archived: false,
+    entryType,
+    entryName: entryType !== 'default' ? entryName : '',
+    docLink: entryType === 'strategy' ? docLink : ''
   };
+
+  if (state.journalPendingDate && !state.editingObsId) {
+    data.journalDate = state.journalPendingDate;
+  }
 
   obsSaveBtn.disabled = true;
   obsSaveBtn.textContent = "Saving…";
@@ -1767,6 +1856,7 @@ async function saveModalObservation(addAnother) {
       newEntry.querySelector(".obs-text").focus();
     } else {
       obsModal.classList.add("hidden");
+      state.journalPendingDate = null;
     }
   } catch (err) {
     console.error(err);

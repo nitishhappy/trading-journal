@@ -21,6 +21,59 @@ export function extractDriveFileId(url) {
   return null;
 }
 
+export function extractGoogleDocId(url) {
+  if (!url) return null;
+  const match = url.match(/\/document\/d\/([a-zA-Z0-9_-]{10,})/i);
+  return match ? match[1] : null;
+}
+
+export function openGoogleDocViewer(url, title = "Strategy Document") {
+  if (!url) return;
+  const modal = document.getElementById("doc-viewer-modal");
+  const titleEl = document.getElementById("doc-viewer-title");
+  const iframe = document.getElementById("doc-viewer-iframe");
+  const extBtn = document.getElementById("doc-viewer-ext-link-btn");
+  const closeBtn = document.getElementById("doc-viewer-close");
+
+  if (!modal || !iframe) {
+    window.open(url, "_blank");
+    return;
+  }
+
+  if (titleEl) titleEl.textContent = title;
+  
+  const docId = extractGoogleDocId(url);
+  const embedUrl = docId ? `https://docs.google.com/document/d/${docId}/preview` : url;
+  iframe.src = embedUrl;
+
+  if (extBtn) {
+    extBtn.onclick = () => window.open(url, "_blank");
+  }
+
+  const closeModal = () => {
+    modal.classList.add("hidden");
+    iframe.src = "";
+  };
+
+  if (closeBtn) closeBtn.onclick = closeModal;
+  modal.onclick = (e) => {
+    if (e.target === modal) closeModal();
+  };
+
+  modal.classList.remove("hidden");
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".doc-preview-trigger");
+  if (btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    const docUrl = btn.dataset.doc;
+    const title = btn.dataset.title || "Strategy Document";
+    openGoogleDocViewer(docUrl, title);
+  }
+});
+
 export function isGoogleDriveUrl(url) {
   return !!url && /drive\.google\.com|docs\.google\.com/i.test(url);
 }
@@ -558,6 +611,20 @@ export function renderTile(obs) {
     .join("");
   const categoryHtml = obs.category ? `<span class="category-pill">${escapeHtml(obs.category)}</span>` : "";
 
+  let entryTypeHtml = "";
+  if (obs.entryType && obs.entryType !== "default") {
+    if (obs.entryType === "strategy") {
+      entryTypeHtml = `<span class="journal-tag-pill journal-tag-strategy" title="Strategy">🎯 ${escapeHtml(obs.entryName || 'Strategy')}</span>`;
+      if (obs.docLink) {
+        entryTypeHtml += `<button type="button" class="btn-small doc-preview-trigger" data-doc="${escapeHtml(obs.docLink)}" data-title="${escapeHtml(obs.entryName || 'Strategy Doc')}" style="padding:1px 6px; font-size:10px; margin-left:4px; cursor:pointer;">📄 Doc</button>`;
+      }
+    } else if (obs.entryType === "concept") {
+      entryTypeHtml = `<span class="journal-tag-pill journal-tag-concept" title="Concept">💡 ${escapeHtml(obs.entryName || 'Concept')}</span>`;
+    } else if (obs.entryType === "mistake") {
+      entryTypeHtml = `<span class="journal-tag-pill journal-tag-mistake" title="Mistake">⚠️ ${escapeHtml(obs.entryName || 'Mistake')}</span>`;
+    }
+  }
+
   return `
     <div class="tile priority-${escapeHtml(priority)}${isExpanded ? " expanded" : ""}" id="tile-${escapeHtml(obs.id)}" data-id="${escapeHtml(obs.id)}">
       <div class="tile-body${!hasImage && !hasLink ? " fill-text" : ""}">
@@ -571,6 +638,7 @@ export function renderTile(obs) {
             ? `<div class="tile-badge-row">${obs.imagePending ? `<span class="status-badge pending">Image pending</span>` : ""}${obs.archived ? `<span class="status-badge archived">Archived</span>` : ""}</div>`
             : ""
         }
+        ${entryTypeHtml ? `<div class="tile-entry-type-row" style="margin-bottom:6px;">${entryTypeHtml}</div>` : ""}
         ${!isExpanded ? mediaHtml : ""}
         <div class="tile-meta">
           <div class="tile-tags">${tagsHtml}${categoryHtml}</div>

@@ -46,6 +46,7 @@ export const tabsScrollLeftBtn = document.getElementById("tabs-scroll-left");
 export const tabsScrollRightBtn = document.getElementById("tabs-scroll-right");
 export const viewDashboard = document.getElementById("view-dashboard");
 export const viewRevision = document.getElementById("view-revision");
+export const viewJournal = document.getElementById("view-journal");
 export const viewStocks = document.getElementById("view-stocks");
 export const viewAiCoach = document.getElementById("view-aicoach");
 export const viewTradelog = document.getElementById("view-tradelog");
@@ -112,3 +113,55 @@ export const lightboxImg = document.getElementById("lightbox-img");
 export const lightboxClose = document.getElementById("lightbox-close");
 
 export const toastEl = document.getElementById("toast");
+
+// Journal View
+export const journalPrevDayBtn = document.getElementById("journal-prev-day-btn");
+export const journalDateInput = document.getElementById("journal-date-input");
+export const journalNextDayBtn = document.getElementById("journal-next-day-btn");
+export const journalTodayBtn = document.getElementById("journal-today-btn");
+export const journalDayTitle = document.getElementById("journal-day-title");
+export const journalDayMeta = document.getElementById("journal-day-meta");
+export const journalAddObsBtn = document.getElementById("journal-add-obs-btn");
+export const journalAddTradeBtn = document.getElementById("journal-add-trade-btn");
+export const journalObsList = document.getElementById("journal-obs-list");
+export const journalObsEmpty = document.getElementById("journal-obs-empty");
+export const journalObsCount = document.getElementById("journal-obs-count");
+export const journalTradesList = document.getElementById("journal-trades-list");
+export const journalTradesEmpty = document.getElementById("journal-trades-empty");
+export const journalTradesCount = document.getElementById("journal-trades-count");
+
+// Journal Trade Modal
+export const journalTradeModal = document.getElementById("journal-trade-modal");
+export const journalTradeModalTitle = document.getElementById("journal-trade-modal-title");
+export const journalTradeBookmarkToggle = document.getElementById("journal-trade-bookmark-toggle");
+export const journalTradeModalClose = document.getElementById("journal-trade-modal-close");
+export const journalTradeModalDate = document.getElementById("journal-trade-modal-date");
+export const journalWysiwygToolbar = document.getElementById("journal-wysiwyg-toolbar");
+export const journalTradeTextEditor = document.getElementById("journal-trade-text-editor");
+export const journalTradeChartInput = document.getElementById("journal-trade-chart-input");
+export const journalTradeChartPreviewBtn = document.getElementById("journal-trade-chart-preview-btn");
+export const journalTradeChartPreviewWrap = document.getElementById("journal-trade-chart-preview-wrap");
+export const journalTradeImageZone = document.getElementById("journal-trade-image-zone");
+export const journalTradeImageFile = document.getElementById("journal-trade-image-file");
+export const journalTradeImageGrid = document.getElementById("journal-trade-image-grid");
+export const journalTradeStrategySelect = document.getElementById("journal-trade-strategy-select");
+export const journalTradeAddStrategyBtn = document.getElementById("journal-trade-add-strategy-btn");
+export const journalTradeStrategyChips = document.getElementById("journal-trade-strategy-chips");
+export const journalTradeConceptSelect = document.getElementById("journal-trade-concept-select");
+export const journalTradeAddConceptBtn = document.getElementById("journal-trade-add-concept-btn");
+export const journalTradeNewConceptBtn = document.getElementById("journal-trade-new-concept-btn");
+export const journalTradeConceptChips = document.getElementById("journal-trade-concept-chips");
+export const journalTradeMistakeSelect = document.getElementById("journal-trade-mistake-select");
+export const journalTradeAddMistakeBtn = document.getElementById("journal-trade-add-mistake-btn");
+export const journalTradeNewMistakeBtn = document.getElementById("journal-trade-new-mistake-btn");
+export const journalTradeMistakeChips = document.getElementById("journal-trade-mistake-chips");
+export const journalTradeDeleteBtn = document.getElementById("journal-trade-delete-btn");
+export const journalTradeCancelBtn = document.getElementById("journal-trade-cancel-btn");
+export const journalTradeSaveBtn = document.getElementById("journal-trade-save-btn");
+
+// Google Doc Viewer Modal
+export const docViewerModal = document.getElementById("doc-viewer-modal");
+export const docViewerTitle = document.getElementById("doc-viewer-title");
+export const docViewerExtLinkBtn = document.getElementById("doc-viewer-ext-link-btn");
+export const docViewerClose = document.getElementById("doc-viewer-close");
+export const docViewerIframe = document.getElementById("doc-viewer-iframe");

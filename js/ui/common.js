@@ -2,7 +2,7 @@ import { state } from '../state.js';
 import { saveSessionState } from '../utils/lifecycle.js';
 import {
   mainTabs, mainTabsWrapper, tabsScrollLeftBtn, tabsScrollRightBtn,
-  viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, viewAiCoPilot, currentFolderLabel,
+  viewDashboard, viewRevision, viewJournal, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, viewAiCoPilot, currentFolderLabel,
   fullscreenBtn, lightbox, lightboxImg, lightboxClose
 } from '../dom.js';
 
@@ -115,7 +115,7 @@ mainTabs.addEventListener("click", (e) => {
   // Center active tab in scrollable container
   tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
-  [viewDashboard, viewRevision, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, viewAiCoPilot].forEach((v) => {
+  [viewDashboard, viewRevision, viewJournal, viewStocks, viewAiCoach, viewTradelog, viewCandleChecklist, viewTvNotifications, viewLevels, viewAiCoPilot].forEach((v) => {
     if (v) v.classList.add("hidden");
   });
 
@@ -126,6 +126,12 @@ mainTabs.addEventListener("click", (e) => {
   } else if (state.activeView === "revision") {
     viewRevision.classList.remove("hidden");
     currentFolderLabel.textContent = "Revision";
+  } else if (state.activeView === "journal") {
+    if (viewJournal) viewJournal.classList.remove("hidden");
+    currentFolderLabel.textContent = "Journal";
+    if (typeof window.renderJournalView === "function") {
+      window.renderJournalView();
+    }
   } else if (state.activeView === "stocks") {
     if (viewStocks) viewStocks.classList.remove("hidden");
     currentFolderLabel.textContent = "Stocks";

@@ -20,6 +20,7 @@ import './js/utils/lifecycle.js';
 // 4. Services (Firestore data layer — no side-effects beyond module-level var init)
 import './js/services/observations.js';
 import './js/services/trades.js';
+import './js/services/journal.js';
 import './js/services/checklists.js';
 import './js/services/candleTimers.js';
 import './js/services/ai.js';
@@ -33,6 +34,7 @@ import './js/ui/auth.js';         // Firebase auth state listener + login/signup
 import './js/ui/settings.js';     // settings panel, passcode, backup reminder
 import './js/ui/dashboard.js';    // observation feed, folder tabs, modal
 import './js/ui/revision.js';     // revision mode card swipe UI
+import './js/ui/journal.js';      // journal tab controller & trade modal
 import './js/ui/stocks.js';
 import './js/ui/aicoach.js';      // AI Coach feed + Groq key management
 import './js/ui/tradelog.js';     // trade log table + modal

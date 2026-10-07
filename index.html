@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/tv-notifications.css">
   <link rel="stylesheet" href="css/levels.css">
   <link rel="stylesheet" href="css/aico-pilot.css">
+  <link rel="stylesheet" href="css/journal.css">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -85,6 +86,7 @@
       <nav class="main-tabs" id="main-tabs">
         <button class="main-tab active" data-view="dashboard">Dashboard</button>
         <button class="main-tab" data-view="revision">Revision</button>
+        <button class="main-tab" data-view="journal">Journal</button>
         <button class="main-tab" data-view="levels">Levels</button>
         <button class="main-tab" data-view="tradelog">Trade Log</button>
         <button class="main-tab" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="color: #fbbf24;">Sizer</button>
@@ -204,6 +206,60 @@
         <p class="empty-mark">◇</p>
         <p id="revision-empty-text">All caught up for today.</p>
         <p class="empty-sub">Tap Reset to review again, or come back tomorrow.</p>
+      </div>
+    </div>
+
+    <!-- ===== JOURNAL VIEW ===== -->
+    <div id="view-journal" class="view hidden">
+      <!-- Calendar Day Selector Bar -->
+      <div class="journal-calendar-bar">
+        <div class="journal-calendar-nav">
+          <button id="journal-prev-day-btn" class="journal-nav-btn" title="Previous Trading Day">◀</button>
+          <input type="date" id="journal-date-input" class="journal-date-input" title="Choose Date (IST)" />
+          <button id="journal-next-day-btn" class="journal-nav-btn" title="Next Trading Day">▶</button>
+          <button id="journal-today-btn" class="journal-today-btn" title="Jump to Today (IST)">Today</button>
+        </div>
+        <div class="journal-day-info">
+          <span id="journal-day-title" class="journal-day-title">Today</span>
+          <span id="journal-day-meta" class="journal-day-meta">0 Observations • 0 Trades</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="journal-actions-row">
+        <button id="journal-add-obs-btn" class="journal-btn-obs">
+          <span>💡 + New Observation (O)</span>
+        </button>
+        <button id="journal-add-trade-btn" class="journal-btn-trade">
+          <span>⚡ + New Trade (T)</span>
+        </button>
+      </div>
+
+      <!-- Journal Day Stream -->
+      <div id="journal-day-stream" class="journal-stream">
+        <!-- Observations Section -->
+        <div class="journal-section" id="journal-obs-section">
+          <div class="journal-section-header">
+            <span class="journal-section-title">
+              <span>💡 Observations</span>
+              <span id="journal-obs-count" class="journal-badge-count">0</span>
+            </span>
+          </div>
+          <div id="journal-obs-list" class="journal-list"></div>
+          <div id="journal-obs-empty" class="journal-empty-box">No observations logged for this day. Click "+ New Observation" to add.</div>
+        </div>
+
+        <!-- Trades Section -->
+        <div class="journal-section" id="journal-trades-section">
+          <div class="journal-section-header">
+            <span class="journal-section-title">
+              <span>⚡ Trades</span>
+              <span id="journal-trades-count" class="journal-badge-count">0</span>
+            </span>
+          </div>
+          <div id="journal-trades-list" class="journal-list"></div>
+          <div id="journal-trades-empty" class="journal-empty-box">No trades logged for this day. Click "+ New Trade" to journal a realtime trade.</div>
+        </div>
       </div>
     </div>
 
@@ -1496,7 +1552,118 @@
         </div>
 
       </div>
+  <!-- ===================== JOURNAL TRADE MODAL (Create/Edit T1) ===================== -->
+  <div id="journal-trade-modal" class="modal-overlay hidden">
+    <div class="modal" style="max-width: 650px;">
+      <div class="modal-header">
+        <h2 id="journal-trade-modal-title">New Trade Entry</h2>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button type="button" id="journal-trade-bookmark-toggle" class="journal-bookmark-btn" title="Bookmark this trade">☆</button>
+          <button class="icon-btn" id="journal-trade-modal-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body" id="journal-trade-modal-body">
+        <div style="font-size:12px; color:var(--text-dim); margin-bottom:10px;">
+          Trading Day: <b id="journal-trade-modal-date" style="color:var(--text);"></b> (IST)
+        </div>
+
+        <!-- Free text WYSIWYG editor -->
+        <label>Trade Notes / Execution & Psychology</label>
+        <div class="wysiwyg-container">
+          <div class="wysiwyg-toolbar" id="journal-wysiwyg-toolbar">
+            <button type="button" class="wysiwyg-tool-btn" data-command="bold" title="Bold (Ctrl+B)"><b>B</b></button>
+            <button type="button" class="wysiwyg-tool-btn" data-command="italic" title="Italic (Ctrl+I)"><i>I</i></button>
+            <button type="button" class="wysiwyg-tool-btn" data-command="underline" title="Underline (Ctrl+U)"><u>U</u></button>
+            <div class="wysiwyg-divider"></div>
+            <button type="button" class="wysiwyg-tool-btn" data-command="insertUnorderedList" title="Bullet List">• ≡</button>
+            <button type="button" class="wysiwyg-tool-btn" data-command="insertOrderedList" title="Numbered List">1. ≡</button>
+            <div class="wysiwyg-divider"></div>
+            <button type="button" class="wysiwyg-tool-btn" data-command="removeFormat" title="Clear Formatting">⌫</button>
+          </div>
+          <div class="wysiwyg-editor" id="journal-trade-text-editor" contenteditable="true" data-placeholder="Enter trade execution details, emotion/psychology, lessons learned..."></div>
+        </div>
+
+        <!-- Chart Link -->
+        <label>Chart Link (TradingView / Snapshot)</label>
+        <div style="display:flex; gap:8px; margin-bottom:6px;">
+          <input type="url" id="journal-trade-chart-input" placeholder="https://www.tradingview.com/x/... or snapshot URL" style="flex:1;" />
+          <button type="button" id="journal-trade-chart-preview-btn" class="btn-small">Preview</button>
+        </div>
+        <div id="journal-trade-chart-preview-wrap" class="hidden" style="margin-bottom:12px;"></div>
+
+        <!-- Images (Paste / Upload) -->
+        <label>Trade Images / Screenshots (Paste Ctrl+V or upload)</label>
+        <div class="il-image-zone" id="journal-trade-image-zone">
+          <input type="file" id="journal-trade-image-file" accept="image/*" multiple />
+          <p class="il-image-hint">Tap to select, drag & drop, or paste (Ctrl+V)</p>
+        </div>
+        <div class="il-image-grid" id="journal-trade-image-grid" style="margin-bottom:14px;"></div>
+
+        <!-- Strategy Tags (S1) -->
+        <div class="trade-tag-group">
+          <label>Strategy Tags (S)</label>
+          <div class="trade-tag-select-row">
+            <select id="journal-trade-strategy-select" style="flex:1;">
+              <option value="">-- Select Strategy --</option>
+            </select>
+            <button type="button" id="journal-trade-add-strategy-btn" class="btn-small">+ Add</button>
+          </div>
+          <div id="journal-trade-strategy-chips" class="trade-tag-chips-wrap"></div>
+        </div>
+
+        <!-- Concept Tags (C1) -->
+        <div class="trade-tag-group">
+          <label>Concept Tags (C)</label>
+          <div class="trade-tag-select-row">
+            <select id="journal-trade-concept-select" style="flex:1;">
+              <option value="">-- Select Concept --</option>
+            </select>
+            <button type="button" id="journal-trade-add-concept-btn" class="btn-small">+ Add</button>
+            <button type="button" id="journal-trade-new-concept-btn" class="btn-small btn-small-primary" title="Create new concept in Dashboard">+ New</button>
+          </div>
+          <div id="journal-trade-concept-chips" class="trade-tag-chips-wrap"></div>
+        </div>
+
+        <!-- Mistake Tags (M1) -->
+        <div class="trade-tag-group">
+          <label>Mistake Tags (M)</label>
+          <div class="trade-tag-select-row">
+            <select id="journal-trade-mistake-select" style="flex:1;">
+              <option value="">-- Select Mistake --</option>
+            </select>
+            <button type="button" id="journal-trade-add-mistake-btn" class="btn-small">+ Add</button>
+            <button type="button" id="journal-trade-new-mistake-btn" class="btn-small btn-small-primary" title="Create new mistake in Dashboard">+ New</button>
+          </div>
+          <div id="journal-trade-mistake-chips" class="trade-tag-chips-wrap"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="journal-trade-delete-btn" class="btn-danger hidden">Delete</button>
+        <div class="modal-footer-right">
+          <button id="journal-trade-cancel-btn" class="btn-secondary">Cancel</button>
+          <button id="journal-trade-save-btn" class="btn-primary">Save Trade</button>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <!-- ===================== GOOGLE DOC VIEWER MODAL ===================== -->
+  <div id="doc-viewer-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="doc-viewer-title">Strategy Document</h2>
+        <div class="doc-viewer-header-actions">
+          <button type="button" id="doc-viewer-ext-link-btn" class="doc-ext-link-btn">Open in Google Docs ↗</button>
+          <button class="icon-btn" id="doc-viewer-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="doc-viewer-iframe" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 
   <!-- ===================== OBSERVATION MODAL (Create/Edit) ===================== -->
   <div id="obs-modal" class="modal-overlay hidden">
@@ -1538,7 +1705,43 @@
         </div>
       </div>
 
-      <label>Observation</label>
+      <!-- Entry Type Radios -->
+      <label style="font-weight:600; margin-bottom:6px; display:block;">Entry Type</label>
+      <div class="obs-type-radio-group">
+        <label class="obs-type-chip active">
+          <input type="radio" name="obs-entry-type" value="default" checked />
+          <span>Default</span>
+        </label>
+        <label class="obs-type-chip">
+          <input type="radio" name="obs-entry-type" value="strategy" />
+          <span>Strategy</span>
+        </label>
+        <label class="obs-type-chip">
+          <input type="radio" name="obs-entry-type" value="concept" />
+          <span>Concept</span>
+        </label>
+        <label class="obs-type-chip">
+          <input type="radio" name="obs-entry-type" value="mistake" />
+          <span>Mistakes</span>
+        </label>
+      </div>
+
+      <!-- Conditional Name field (for Strategy, Concept, Mistake) -->
+      <div class="obs-name-row obs-conditional-row hidden">
+        <label class="obs-name-label" style="font-weight:600; display:block; margin-bottom:4px;">Identifier / Name <span style="color:#ef4444;">*</span></label>
+        <input type="text" class="obs-name-input" placeholder="e.g. S1_ORB_Breakout, C1_Fib_Levels, M1_Chasing" />
+      </div>
+
+      <!-- Strategy Specific Google Doc Link -->
+      <div class="obs-doc-row obs-conditional-row hidden">
+        <label style="font-weight:600; display:block; margin-bottom:4px;">Strategy Google Doc Link</label>
+        <div style="display:flex; gap:8px;">
+          <input type="url" class="obs-doc-input" placeholder="https://docs.google.com/document/d/..." style="flex:1;" />
+          <button type="button" class="btn-small obs-doc-preview-btn">Preview Doc</button>
+        </div>
+      </div>
+
+      <label>Observation / Notes</label>
       <textarea class="obs-text" rows="5" placeholder="What did you notice today?"></textarea>
 
       <label>Web links (optional, multiple allowed)</label>
