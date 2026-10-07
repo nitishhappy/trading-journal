@@ -194,8 +194,9 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
   - Non-default types inherit all standard observation capabilities (notes, links, images, tags, folders, priority) while expanding dedicated Identifier/Name input.
   - Added Google Doc Link field for Strategies with an in-app preview modal viewer (`#doc-viewer-modal`) and direct external doc access.
   - Updated card rendering with distinctive visual badges for Strategy, Concept, and Mistake items.
-- **Service Worker & Versioning**:
+- **Service Worker, Module Exports & Versioning**:
   - Registered `css/journal.css`, `js/services/journal.js`, and `js/ui/journal.js` in `sw.js` and `generate-version.js`.
+  - Corrected module import path for `openLightbox` in `js/ui/journal.js` from `../ui/common.js` and re-exported it from `js/utils/image.js`, resolving browser module startup syntax error.
 
 ### v2.3.60 — 07 Oct 2026 — Decouple Chart Refresh from Key Levels Toolbar & Smart Plan Update Detection
 - **Bug Fix — Key Levels Toolbar Refresh Decoupling & Auto-Scroll Elimination**:

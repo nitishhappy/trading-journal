@@ -2,6 +2,7 @@ import { state } from '../state.js';
 import { formatTime } from './date.js';
 import { loadGoogleApiKey } from '../services/ai.js';
 import { openLightbox } from '../ui/common.js';
+export { openLightbox };
 
 export function escapeHtml(str) {
   if (str === null || str === undefined) return "";

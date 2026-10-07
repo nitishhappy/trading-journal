@@ -5,7 +5,8 @@
 import { state } from '../state.js';
 import { showToast } from '../utils/toast.js';
 import { getLocalDateKey, todayKey } from '../utils/date.js';
-import { escapeHtml, resizeImageToBase64, buildLinkPreviewIfApplicable, openGoogleDocViewer, renderTile, openLightbox } from '../utils/image.js';
+import { escapeHtml, resizeImageToBase64, buildLinkPreviewIfApplicable, openGoogleDocViewer, renderTile } from '../utils/image.js';
+import { openLightbox } from './common.js';
 import { saveJournalTrade, deleteJournalTrade, getStrategies, getConcepts, getMistakes } from '../services/journal.js';
 import { saveObservation } from '../services/observations.js';
 import { openCreateModal, openEditModal } from './dashboard.js';
