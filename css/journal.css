@@ -4,16 +4,26 @@
 
 /* --- Calendar Day Bar --- */
 .journal-calendar-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 16px;
+  gap: 16px;
+  background: linear-gradient(145deg, rgba(22, 27, 38, 0.95), rgba(15, 23, 42, 0.9));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 14px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 900px) {
+  .journal-calendar-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+  }
 }
 
 .journal-calendar-nav {
@@ -76,22 +86,45 @@
   color: #fff;
 }
 
-.journal-day-info {
+.journal-day-center-wrap {
   display: flex;
-  flex-direction: column;
-  text-align: right;
+  align-items: center;
+  justify-content: center;
 }
 
 .journal-day-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(124, 58, 237, 0.28));
+  border: 1.5px solid rgba(96, 165, 250, 0.55);
+  color: #eff6ff;
   font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 8px 24px;
+  border-radius: 30px;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.journal-day-meta-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .journal-day-meta {
-  font-size: 12px;
+  background: var(--surface-2, #1e2430);
+  border: 1px solid var(--border);
   color: var(--text-dim);
-  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 16px;
+  white-space: nowrap;
 }
 
 /* --- Action Buttons Row --- */

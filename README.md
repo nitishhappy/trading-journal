@@ -178,6 +178,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.68 — 07 Oct 2026 — Centered & Highlighted Date & Day Banner in Journal Header
+- **UI / UX Enhancement — Centered Date & Day Pill**:
+  - Restructured `.journal-calendar-bar` into a balanced 3-column grid layout (Navigation on left, Centered Date Highlight, Meta Counts on right).
+  - Designed glowing gradient pill badge (`#2563eb` & `#7c3aed` tint with ambient cyan glow) for the active Date & Day display (e.g. `Today • Wednesday, 7 Oct 2026`).
+  - Added responsive column collapse for smaller viewports while keeping the date centered.
+
 ### v2.3.67 — 07 Oct 2026 — Add Quick Strategy Creation & Fix Journal Grid CSS Selectors
 - **Feature — On-The-Fly Strategy Creation**:
   - Added `+ New` button next to Strategy Tags dropdown in the Trade Modal.
