@@ -964,6 +964,7 @@
         let chartInstance = null;
         let countdownSeconds = 15;
         let isInitialLoad = true;
+        let levelsRenderedOnce = false;
         let allMasterCandles = []; // Complete unfiltered candle series for Replay Mode
         let isReplayMode = false;
         let replayCurrentIndex = null;
@@ -1636,9 +1637,13 @@
 
                 if (isSelected) {
                     btn.classList.add('active');
+                    /*
+                    // [DISABLED: AUTO-SCROLL ON BRIEFING PILL]
+                    // To re-enable auto-scrolling to active briefing pill, uncomment below:
                     setTimeout(() => {
                         btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
                     }, 50);
+                    */
                 }
                 btn.innerHTML = `${isLatest ? '⚡' : '📌'} ${run.label}${isLatest ? ' (Live)' : ''}`;
                 btn.addEventListener('click', (e) => {
@@ -1703,15 +1708,23 @@
             // ✨ Bring Levels Section & Cards into view & highlight
             const levelsSection = document.querySelector('.levels-section');
             if (levelsSection) {
+                /*
+                // [DISABLED: AUTO-SCROLL ON BRIEFING SELECTION]
+                // To re-enable auto-scrolling levels section to top, uncomment below:
                 levelsSection.scrollTop = 0;
                 if (window.innerWidth <= 900) {
                     levelsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
+                */
                 levelsSection.classList.add('panel-briefing-highlight');
                 setTimeout(() => levelsSection.classList.remove('panel-briefing-highlight'), 1200);
             }
             if (item) {
+                /*
+                // [DISABLED: AUTO-FOCUS ON CARD 0]
+                // To re-enable auto-highlighting and scrolling to card 0, uncomment below:
                 setTimeout(() => highlightCard(0), 100);
+                */
             }
         }
 
@@ -1965,8 +1978,18 @@
                 : ((window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : []);
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
 
-            // 3. Render Levels, Cards & Scorecard
-            renderLevelsAndCards();
+            // 3. Render Levels, Cards & Scorecard (Initial load only; refresh/auto-refresh only affects chart)
+            if (!levelsRenderedOnce) {
+                renderLevelsAndCards();
+                levelsRenderedOnce = true;
+            } else {
+                /*
+                // [DISABLED: KEY LEVEL TOOLBAR AUTO-REFRESH]
+                // Refresh/auto-refresh should only affect chart, not key level toolbar.
+                // To re-enable toolbar re-rendering on periodic refresh, uncomment below:
+                renderLevelsAndCards();
+                */
+            }
 
             // ✅ Autoscale Y-Axis: zoomed-in on candles by default, expands only if fitAllLevels is true
             candleSeries.applyOptions({
@@ -2583,7 +2606,11 @@
             const targetCard = document.getElementById(`card-level-${cardIdx}`);
             if (targetCard) {
                 targetCard.classList.add('selected-highlight');
+                /*
+                // [DISABLED: AUTO-SCROLL TO CARD]
+                // To re-enable scrolling card into view when selected, uncomment below:
                 targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                */
                 const logicEl = document.getElementById(`card-logic-nifty-${cardIdx}`);
                 const btnEl = document.getElementById(`expand-btn-nifty-${cardIdx}`);
                 if (logicEl && logicEl.classList.contains('clamped')) {

@@ -924,6 +924,7 @@
         let chartInstance = null;
         let countdownSeconds = 5;
         let isInitialLoad = true;
+        let levelsRenderedOnce = false;
         let currentTf = '5m';
         let currentFeedSource = 'VANTAGE_MT5';
 
@@ -1571,9 +1572,13 @@
 
                 if (isSelected) {
                     btn.classList.add('active');
+                    /*
+                    // [DISABLED: AUTO-SCROLL ON BRIEFING PILL]
+                    // To re-enable auto-scrolling to active briefing pill, uncomment below:
                     setTimeout(() => {
                         btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
                     }, 50);
+                    */
                 }
                 btn.innerHTML = `${isLatest ? '⚡' : '📌'} ${run.label}${isLatest ? ' (Live)' : ''}`;
                 btn.addEventListener('click', (e) => {
@@ -1892,7 +1897,18 @@
                 : ((window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData)) ? window.goldDailyPlanData : []);
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, candles);
 
-            renderLevelsAndCards();
+            // 3. Render Levels, Cards & Scorecard (Initial load only; refresh/auto-refresh only affects chart)
+            if (!levelsRenderedOnce) {
+                renderLevelsAndCards();
+                levelsRenderedOnce = true;
+            } else {
+                /*
+                // [DISABLED: KEY LEVEL TOOLBAR AUTO-REFRESH]
+                // Refresh/auto-refresh should only affect chart, not key level toolbar.
+                // To re-enable toolbar re-rendering on periodic refresh, uncomment below:
+                renderLevelsAndCards();
+                */
+            }
 
             // ✅ Autoscale Y-Axis: zoomed-in on candles by default, expands only if fitAllLevels is true
             if (candleSeries) {
@@ -2510,7 +2526,11 @@
             const targetCard = document.getElementById(`card-gold-${cardIdx}`);
             if (targetCard) {
                 targetCard.classList.add('selected-highlight');
+                /*
+                // [DISABLED: AUTO-SCROLL TO CARD]
+                // To re-enable scrolling card into view when selected, uncomment below:
                 targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                */
                 const logicEl = document.getElementById(`card-logic-gold-${cardIdx}`);
                 const btnEl = document.getElementById(`expand-btn-gold-${cardIdx}`);
                 if (logicEl && logicEl.classList.contains('clamped')) {
