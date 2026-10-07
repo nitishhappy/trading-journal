@@ -804,6 +804,24 @@
             box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
         }
 
+        .briefing-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 3px;
+            padding: 1px 3px;
+            border-radius: 3px;
+            font-size: 0.72rem;
+            opacity: 0.65;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .briefing-copy-btn:hover {
+            opacity: 1;
+            background: rgba(56, 189, 248, 0.35);
+            transform: scale(1.15);
+        }
+
         /* Embedded Mode in Trade Journal Iframe */
         body.embed-mode {
             padding: 0 !important;
@@ -1606,6 +1624,33 @@
             });
         }
 
+        function copyBriefingDeepLink(run) {
+            const url = new URL(window.location.origin + window.location.pathname);
+            let dateStr = '';
+            if (run.timestamp) {
+                dateStr = run.timestamp.split('T')[0];
+            } else if (run.time) {
+                const d = new Date(run.time * 1000);
+                dateStr = d.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+            }
+            if (dateStr) url.searchParams.set('date', dateStr);
+            if (run.time) url.searchParams.set('ts', run.time);
+            if (run.timestamp) url.searchParams.set('briefing', run.timestamp);
+            else if (run.label) url.searchParams.set('label', run.label);
+            url.searchParams.set('summary', 'open');
+
+            const finalUrl = url.toString();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(finalUrl).then(() => {
+                    showToast("📋 Briefing Link Copied!", `Link with vertical line & summary copied to clipboard.`);
+                }).catch(() => {
+                    prompt("Copy this briefing link:", finalUrl);
+                });
+            } else {
+                prompt("Copy this briefing link:", finalUrl);
+            }
+        }
+
         function renderBriefingRunsPills() {
             const container = document.getElementById('briefing-runs-pills');
             if (!container) return;
@@ -1627,6 +1672,10 @@
                 return aTime - bTime;
             });
 
+            // Check if runs span multiple dates
+            const datesSet = new Set(sortedRuns.map(r => r.timestamp ? r.timestamp.split('T')[0] : (r.timeDisplay && r.timeDisplay.includes(',') ? r.timeDisplay.split(',')[1].trim() : '')));
+            const hasMultipleDates = datesSet.size > 1;
+
             sortedRuns.forEach((run) => {
                 const btn = document.createElement('button');
                 btn.className = 'briefing-pill-btn';
@@ -1637,15 +1686,13 @@
 
                 if (isSelected) {
                     btn.classList.add('active');
-                    /*
-                    // [DISABLED: AUTO-SCROLL ON BRIEFING PILL]
-                    // To re-enable auto-scrolling to active briefing pill, uncomment below:
-                    setTimeout(() => {
-                        btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
-                    }, 50);
-                    */
                 }
-                btn.innerHTML = `${isLatest ? '⚡' : '📌'} ${run.label}${isLatest ? ' (Live)' : ''}`;
+
+                let runDate = run.timeDisplay && run.timeDisplay.includes(',') ? run.timeDisplay.split(',')[1].trim() : '';
+                let pillText = (hasMultipleDates && runDate) ? `${run.label} (${runDate})` : run.label;
+
+                btn.innerHTML = `<span>${isLatest ? '⚡' : '📌'} ${pillText}${isLatest ? ' (Live)' : ''}</span><span class="briefing-copy-btn" title="Copy deep-link with vertical line & summary">🔗</span>`;
+
                 btn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     if (isLatest && !selectedBriefingTimestamp) return;
@@ -1655,8 +1702,77 @@
                         selectBriefingRun(run);
                     }
                 });
+
+                const copyBtn = btn.querySelector('.briefing-copy-btn');
+                if (copyBtn) {
+                    copyBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        copyBriefingDeepLink(run);
+                    });
+                }
+
                 container.appendChild(btn);
             });
+        }
+
+        let deepLinkHandled = false;
+        function handleDeepLinkOnStartup() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tsParam = urlParams.get('ts');
+            const briefingParam = urlParams.get('briefing') || urlParams.get('briefingTs') || urlParams.get('label');
+            const summaryParam = urlParams.get('summary');
+
+            if (!tsParam && !briefingParam && !summaryParam) return;
+            deepLinkHandled = true;
+
+            // 1. Auto-open Summary panel if summary=open, 1, or true
+            if (summaryParam === 'open' || summaryParam === '1' || summaryParam === 'true') {
+                const mainContainer = document.getElementById('main-container') || document.querySelector('.main-container');
+                if (mainContainer && mainContainer.classList.contains('sidebar-collapsed')) {
+                    toggleTriggersPanel(true);
+                }
+            }
+
+            // 2. Select Briefing or center on timestamp
+            const targetTs = tsParam ? parseInt(tsParam, 10) : null;
+            let matchedRun = null;
+
+            if (briefingParam && aiBriefingTimes && aiBriefingTimes.length > 0) {
+                const decoded = decodeURIComponent(briefingParam);
+                matchedRun = aiBriefingTimes.find(b => 
+                    (b.timestamp && b.timestamp === decoded) ||
+                    (b.label && b.label.toLowerCase() === decoded.toLowerCase()) ||
+                    (b.timeDisplay && b.timeDisplay.toLowerCase().includes(decoded.toLowerCase()))
+                );
+            }
+
+            if (!matchedRun && targetTs && aiBriefingTimes && aiBriefingTimes.length > 0) {
+                matchedRun = aiBriefingTimes.find(b => b.time === targetTs || Math.abs(b.time - targetTs) <= 300);
+            }
+
+            if (matchedRun) {
+                selectBriefingRun(matchedRun);
+            } else if (targetTs) {
+                if (!userVLines.includes(targetTs)) {
+                    userVLines.push(targetTs);
+                }
+                renderVerticalLinesOverlay();
+                if (chartInstance && currentCandlesArray && currentCandlesArray.length > 0) {
+                    const idx = currentCandlesArray.findIndex(c => Math.abs(c.time - targetTs) <= 600);
+                    if (idx !== -1) {
+                        isProgrammaticScroll = true;
+                        const fromIdx = Math.max(0, idx - 20);
+                        const toIdx = Math.min(currentCandlesArray.length + 5, idx + 20);
+                        chartInstance.timeScale().setVisibleLogicalRange({ from: fromIdx, to: toIdx });
+                        userLogicalRange = { from: fromIdx, to: toIdx };
+                        userHasInteracted = true;
+                        const resetBtn = document.getElementById('btn-reset-zoom');
+                        if (resetBtn) resetBtn.style.display = 'flex';
+                        setTimeout(() => { isProgrammaticScroll = false; }, 60);
+                    }
+                }
+                showToast("📍 Deep-Link Loaded", `Focused on timestamp: ${new Date(targetTs * 1000).toLocaleTimeString()}`);
+            }
         }
 
         function selectBriefingRun(item) {
@@ -2062,6 +2178,10 @@
             updateScrollbarFromChart();
             renderVerticalLinesOverlay();
             setTimeout(() => renderVerticalLinesOverlay(), 60);
+
+            if (!deepLinkHandled) {
+                handleDeepLinkOnStartup();
+            }
         }
 
         // ================= OPTION A: BOTTOM REPLAY ENGINE ================= //
@@ -2645,7 +2765,10 @@
         async function fetchRealtimeNiftyCandles() {
             try {
                 let planDate = '';
-                if (window.dailyPlanData && window.dailyPlanData[0] && window.dailyPlanData[0].timestamp) {
+                const urlDate = new URLSearchParams(window.location.search).get('date');
+                if (urlDate) {
+                    planDate = urlDate.trim();
+                } else if (window.dailyPlanData && window.dailyPlanData[0] && window.dailyPlanData[0].timestamp) {
                     planDate = window.dailyPlanData[0].timestamp.split('T')[0];
                 }
                 const dateParam = planDate ? `&date=${planDate}` : '';
@@ -2838,7 +2961,11 @@
                         }
                     });
                 } else {
-                    matchedSummary = window.dailyPlanSummary[0];
+                    const urlDate = new URLSearchParams(window.location.search).get('date');
+                    if (urlDate) {
+                        matchedSummary = window.dailyPlanSummary.find(s => s.timestamp && s.timestamp.startsWith(urlDate));
+                    }
+                    if (!matchedSummary) matchedSummary = window.dailyPlanSummary[0];
                 }
 
                 if (matchedSummary && matchedSummary.text) {

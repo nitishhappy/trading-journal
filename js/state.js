@@ -41,6 +41,9 @@ export const state = {
   stocks: [],
   stocksObservations: [],
   keepAppActiveMode: false,
+  journalTrades: [],
+  selectedJournalDate: null,
+  journalPendingDate: null,
 };
 
 // Bind to window for backward compatibility with trade-security.js and legacy code
