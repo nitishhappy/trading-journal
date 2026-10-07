@@ -2650,9 +2650,12 @@
                 }
                 const dateParam = planDate ? `&date=${planDate}` : '';
 
-                let res = await fetch(`/api/marketCandles?symbol=NIFTY${dateParam}&_t=${Date.now()}`, { cache: 'no-store' });
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+                const apiBase = isLocal ? 'https://trading-journal-sandy-three.vercel.app' : '';
+
+                let res = await fetch(`${apiBase}/api/marketCandles?symbol=NIFTY${dateParam}&_t=${Date.now()}`, { cache: 'no-store' });
                 if (!res.ok) {
-                    res = await fetch(`/api/niftyCandles?_t=${Date.now()}`, { cache: 'no-store' });
+                    res = await fetch(`${apiBase}/api/niftyCandles?_t=${Date.now()}`, { cache: 'no-store' });
                 }
                 if (res.ok) {
                     const json = await res.json();
