@@ -377,7 +377,11 @@ export function renderJournalView() {
   if (journalObsCount) journalObsCount.textContent = dayObs.length;
   if (journalTradesCount) journalTradesCount.textContent = dayTrades.length;
   if (journalDayMeta) {
-    journalDayMeta.textContent = `${dayObs.length} Observation${dayObs.length === 1 ? "" : "s"} • ${dayTrades.length} Trade${dayTrades.length === 1 ? "" : "s"}`;
+    journalDayMeta.innerHTML = `
+      <span class="journal-meta-pill-obs">💡 ${dayObs.length} Observation${dayObs.length === 1 ? "" : "s"}</span>
+      <span class="journal-meta-pill-sep">•</span>
+      <span class="journal-meta-pill-trade">⚡ ${dayTrades.length} Trade${dayTrades.length === 1 ? "" : "s"}</span>
+    `;
   }
 
   // Render Observations Section
