@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.65 — 07 Oct 2026 — NIFTY Interactive Chart Deep-Linking & 14-Day Reflection Retention
+- **Feature — Interactive Chart Deep-Linking**:
+  - Added `🔗` copy icon to all briefing run pills in `nifty_interactive_chart.html`.
+  - Generates full deep links (`?date=YYYY-MM-DD&ts=<timestamp>&briefing=<briefing_id>&summary=open`) that open the chart centered on the exact 5m candle, highlight the vertical line, auto-expand the Key Trading Levels summary panel, and activate the briefing cards.
+  - Added historical date candle query support (`?date=YYYY-MM-DD`) and custom timestamp centering.
+- **Data Retention — 14-Day Reflection History**:
+  - Extended NIFTY retention window in `prune_daily_plan.py` from 24 hours to 14 days.
+  - Updated level deduplication to preserve run-specific levels across multi-day sessions and increased summary cap to 80 items.
+
 ### v2.3.64 — 07 Oct 2026 — Fix TradingView Chart Image Previews in Journal Observations
 - **Bug Fix — Journal Observation Link Preview Hydration**:
   - Restored full DOM hydration for `.link-preview-mount` elements in Journal tab observation wraps.
