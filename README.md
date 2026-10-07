@@ -178,6 +178,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.59 — 07 Oct 2026 — Disable Auto-Focus on Nearest Level Card in Key Trading Levels Summary
+- **UI / UX — Interactive Charts Proximity Auto-Focus Disabled**:
+  - Disabled automatic proximity auto-focus and highlighting (`nearest-proximity` glowing border and proximity badge display) on the card nearest to current market price in the Key Trading Levels Summary panel across all 5 asset interactive charts (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`, and `eurusd_interactive_chart.html`).
+  - Preserved the full auto-focus logic inside explicit comment blocks with instructions for straightforward re-enabling if desired.
+
 ### v2.3.58 — 05 Oct 2026 — PWA Service Worker Clean URL & Auto-Update Architecture Fix
 - **Bug Fix — Service Worker Clean URL Bypass & Proactive Revalidation**:
   - Resolved cache-first lockup on Vercel clean URLs (`/btc_interactive_chart`, `/gold_interactive_chart`, etc.): `sw.js` previously only matched paths ending strictly with `.html`. On Vercel, requests to clean URLs caused `isAppShellFile` to evaluate to `false`, falling back to stale cache-first serving.

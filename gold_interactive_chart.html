@@ -2427,12 +2427,16 @@
             document.querySelectorAll('.level-card').forEach(c => c.classList.remove('nearest-proximity'));
             document.querySelectorAll('.proximity-badge').forEach(b => b.style.display = 'none');
 
+            /*
+            // [DISABLED: AUTO-FOCUS ON NEAREST LEVEL CARD]
+            // To re-enable auto-focusing on the nearest level card, uncomment the block below:
             if (nearestIdx !== -1) {
                 const nearestCard = document.getElementById(`card-gold-${nearestIdx}`);
                 const proxBadge = document.getElementById(`prox-badge-gold-${nearestIdx}`);
                 if (nearestCard) nearestCard.classList.add('nearest-proximity');
                 if (proxBadge) proxBadge.style.display = 'inline-block';
             }
+            */
         }
 
         function toggleTriggersPanel(forceState) {
