@@ -42,6 +42,8 @@ async function sendWebPushAlert(uid, title, body, tag) {
   }
 }
 
+const tokenCache = new Map();
+
 // POST /api/tvWebhook?token=SECRET
 module.exports = async (req, res) => {
   if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
@@ -51,15 +53,21 @@ module.exports = async (req, res) => {
   if (!token) return res.status(401).send("Missing token");
 
   let uid;
-  try {
-    const tokenDoc = await db.collection("webhookTokens").doc(token).get();
-    if (!tokenDoc.exists) {
-      return res.status(403).send("Invalid token");
+  const cachedToken = tokenCache.get(token);
+  if (cachedToken && cachedToken.expiresAt > Date.now()) {
+    uid = cachedToken.uid;
+  } else {
+    try {
+      const tokenDoc = await db.collection("webhookTokens").doc(token).get();
+      if (!tokenDoc.exists) {
+        return res.status(403).send("Invalid token");
+      }
+      uid = tokenDoc.data().uid;
+      tokenCache.set(token, { uid, expiresAt: Date.now() + 15 * 60 * 1000 });
+    } catch (err) {
+      console.error("tvWebhook: token validation error", err);
+      return res.status(500).send("Internal error");
     }
-    uid = tokenDoc.data().uid;
-  } catch (err) {
-    console.error("tvWebhook: token validation error", err);
-    return res.status(500).send("Internal error");
   }
 
   let data = {};

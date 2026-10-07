@@ -2974,7 +2974,7 @@
             // 1. Primary: Server-side /api/marketCandles?symbol=SP500
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 4500);
+                const timeoutId = setTimeout(() => controller.abort(), 12000);
                 const res = await fetch(marketCandlesUrl, { 
                     cache: 'no-store',
                     signal: controller.signal
@@ -2995,7 +2995,7 @@
             if (!isLocal) {
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 4000);
+                    const timeoutId = setTimeout(() => controller.abort(), 10000);
                     const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=5m&limit=300&_t=${Date.now()}`, {
                         cache: 'no-store',
                         signal: controller.signal

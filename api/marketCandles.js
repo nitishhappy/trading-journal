@@ -49,8 +49,7 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, max-age=0");
-  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Cache-Control", "public, max-age=10, s-maxage=10, stale-while-revalidate=30");
 
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "GET") return res.status(405).json({ error: "Method not allowed" });
@@ -199,25 +198,50 @@ export default async function handler(req, res) {
       if (db) {
         try {
           const limit = Math.min(parseInt(req.query.limit || "200", 10), 500);
-          const snapshot = await db.collection("gold_candles")
-            .where("timeframe", "==", normTf)
-            .get();
-
           const cutoffSec = Math.floor(Date.now() / 1000) - (48 * 3600);
           const rawCandles = [];
-          snapshot.forEach(doc => {
-            const data = doc.data();
-            if (data.timestamp >= cutoffSec) {
-              rawCandles.push({
-                time: data.timestamp,
-                open: data.open,
-                high: data.high,
-                low: data.low,
-                close: data.close,
-                volume: data.volume || 0
-              });
-            }
-          });
+
+          if (fbAdmin?.admin?.firestore?.FieldPath) {
+            const startDocId = `GOLD_${normTf}_${cutoffSec}`;
+            const endDocId = `GOLD_${normTf}_\uf8ff`;
+            const snapshot = await db.collection("gold_candles")
+              .where(fbAdmin.admin.firestore.FieldPath.documentId(), ">=", startDocId)
+              .where(fbAdmin.admin.firestore.FieldPath.documentId(), "<=", endDocId)
+              .get();
+
+            snapshot.forEach(doc => {
+              const data = doc.data();
+              if (data.timestamp && data.open !== undefined) {
+                rawCandles.push({
+                  time: data.timestamp,
+                  open: data.open,
+                  high: data.high,
+                  low: data.low,
+                  close: data.close,
+                  volume: data.volume || 0
+                });
+              }
+            });
+          }
+
+          if (rawCandles.length === 0) {
+            const legacySnapshot = await db.collection("gold_candles")
+              .where("timeframe", "==", normTf)
+              .get();
+            legacySnapshot.forEach(doc => {
+              const data = doc.data();
+              if (data.timestamp >= cutoffSec) {
+                rawCandles.push({
+                  time: data.timestamp,
+                  open: data.open,
+                  high: data.high,
+                  low: data.low,
+                  close: data.close,
+                  volume: data.volume || 0
+                });
+              }
+            });
+          }
 
           rawCandles.sort((a, b) => b.time - a.time);
           candles = rawCandles.slice(0, limit);
@@ -303,27 +327,50 @@ export default async function handler(req, res) {
       if (db) {
         try {
           const limit = Math.min(parseInt(req.query.limit || "100", 10), 500);
-
-          const snapshot = await db.collection("sp500_candles")
-            .where("timeframe", "==", normTf)
-            .get();
-
-          // 5-day lookback so weekend and closed market reviews retain the previous sessions
           const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
           const rawCandles = [];
-          snapshot.forEach(doc => {
-            const data = doc.data();
-            if (data.timestamp >= cutoffSec) {
-              rawCandles.push({
-                time: data.timestamp,
-                open: data.open,
-                high: data.high,
-                low: data.low,
-                close: data.close,
-                volume: data.volume || 0
-              });
-            }
-          });
+
+          if (fbAdmin?.admin?.firestore?.FieldPath) {
+            const startDocId = `SP500_${normTf}_${cutoffSec}`;
+            const endDocId = `SP500_${normTf}_\uf8ff`;
+            const snapshot = await db.collection("sp500_candles")
+              .where(fbAdmin.admin.firestore.FieldPath.documentId(), ">=", startDocId)
+              .where(fbAdmin.admin.firestore.FieldPath.documentId(), "<=", endDocId)
+              .get();
+
+            snapshot.forEach(doc => {
+              const data = doc.data();
+              if (data.timestamp && data.open !== undefined) {
+                rawCandles.push({
+                  time: data.timestamp,
+                  open: data.open,
+                  high: data.high,
+                  low: data.low,
+                  close: data.close,
+                  volume: data.volume || 0
+                });
+              }
+            });
+          }
+
+          if (rawCandles.length === 0) {
+            const legacySnapshot = await db.collection("sp500_candles")
+              .where("timeframe", "==", normTf)
+              .get();
+            legacySnapshot.forEach(doc => {
+              const data = doc.data();
+              if (data.timestamp >= cutoffSec) {
+                rawCandles.push({
+                  time: data.timestamp,
+                  open: data.open,
+                  high: data.high,
+                  low: data.low,
+                  close: data.close,
+                  volume: data.volume || 0
+                });
+              }
+            });
+          }
 
           rawCandles.sort((a, b) => b.time - a.time);
           candles = rawCandles.slice(0, limit);

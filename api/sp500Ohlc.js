@@ -48,23 +48,50 @@ module.exports = async (req, res) => {
     const rawTf = req.query.timeframe || req.query.tf || "5m";
     const timeframe = normalizeTimeframe(rawTf);
     const limit = Math.min(parseInt(req.query.limit || "200", 10), 1000);
-
-    const snapshot = await db.collection("sp500_candles")
-      .where("timeframe", "==", timeframe)
-      .get();
-
+    const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
     const rawCandles = [];
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      rawCandles.push({
-        time: data.timestamp,
-        open: data.open,
-        high: data.high,
-        low: data.low,
-        close: data.close,
-        volume: data.volume || 0
+
+    if (admin?.firestore?.FieldPath) {
+      const startDocId = `SP500_${timeframe}_${cutoffSec}`;
+      const endDocId = `SP500_${timeframe}_\uf8ff`;
+      const snapshot = await db.collection("sp500_candles")
+        .where(admin.firestore.FieldPath.documentId(), ">=", startDocId)
+        .where(admin.firestore.FieldPath.documentId(), "<=", endDocId)
+        .get();
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.timestamp && data.open !== undefined) {
+          rawCandles.push({
+            time: data.timestamp,
+            open: data.open,
+            high: data.high,
+            low: data.low,
+            close: data.close,
+            volume: data.volume || 0
+          });
+        }
       });
-    });
+    }
+
+    if (rawCandles.length === 0) {
+      const legacySnapshot = await db.collection("sp500_candles")
+        .where("timeframe", "==", timeframe)
+        .get();
+      legacySnapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.timestamp >= cutoffSec) {
+          rawCandles.push({
+            time: data.timestamp,
+            open: data.open,
+            high: data.high,
+            low: data.low,
+            close: data.close,
+            volume: data.volume || 0
+          });
+        }
+      });
+    }
 
     // Sort descending to slice latest candles, then sort ascending for return
     rawCandles.sort((a, b) => b.time - a.time);

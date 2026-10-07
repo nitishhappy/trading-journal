@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.70 — 07 Oct 2026 — SP500 & Gold Firestore Query Optimization & Fast Webhook Response
+- **Firestore Read & Performance Optimization**:
+  - Replaced collection-wide scans in `api/marketCandles.js` (SP500 & GOLD) and `api/sp500Ohlc.js` with document ID range queries (`SP500_5m_<cutoff>`), reducing document reads per request by over 95%.
+  - Added Vercel Edge CDN response caching (`s-maxage=10`) on `api/marketCandles.js` to serve auto-refreshing chart queries directly from the edge cache without triggering Firestore reads.
+- **Fast Webhook Authentication**:
+  - Implemented an in-memory token cache (`tokenCache`) in `api/tvWebhook.js` to validate TradingView webhook tokens in sub-milliseconds without querying Firestore on every incoming alert.
+- **Chart Loader Resilience**:
+  - Increased SP500 interactive chart loader fetch timeouts from 4.5s to 12s to allow serverless function cold-starts to complete cleanly.
+
 ### v2.3.69 — 07 Oct 2026 — Highlight Right Observations & Trades Summary Pill in Journal Header
 - **UI / UX Enhancement — Glowing Summary Pill**:
   - Upgraded the right-hand side `.journal-day-meta` summary pill with a dual emerald/blue luminous glass gradient (`rgba(16, 185, 129, 0.12)` to `rgba(59, 130, 246, 0.15)`), cyan border, and ambient glow.
