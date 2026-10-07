@@ -98,84 +98,95 @@
 .journal-actions-row {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .journal-btn-obs {
-  flex: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.25));
-  border: 1px solid rgba(59, 130, 246, 0.4);
-  color: #60a5fa;
-  padding: 12px 18px;
-  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.2));
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+  padding: 10px 20px;
+  border-radius: 20px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13.5px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .journal-btn-obs:hover {
-  background: rgba(59, 130, 246, 0.3);
-  border-color: #60a5fa;
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #6ee7b7;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 .journal-btn-trade {
-  flex: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  border: 1px solid #3b82f6;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border: 1px solid rgba(147, 197, 253, 0.5);
   color: #fff;
-  padding: 12px 18px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 13.5px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
   transition: all 0.2s ease;
 }
 
 .journal-btn-trade:hover {
-  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5);
 }
 
 /* --- Stream Sections & Cards --- */
 .journal-stream {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 32px;
 }
 
 .journal-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .journal-section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 8px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.journal-section-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.4) 0%, rgba(255, 255, 255, 0.06) 60%, transparent 100%);
 }
 
 .journal-section-title {
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-dim);
+  letter-spacing: 0.6px;
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -184,66 +195,150 @@
 .journal-badge-count {
   background: var(--surface-2);
   border: 1px solid var(--border);
-  padding: 2px 8px;
+  padding: 2px 10px;
   border-radius: 12px;
   font-size: 11px;
   font-weight: bold;
-  color: var(--text);
+  color: var(--primary, #60a5fa);
 }
 
 .journal-empty-box {
-  padding: 24px;
+  padding: 28px;
   text-align: center;
   color: var(--text-dim);
   background: var(--surface);
   border: 1px dashed var(--border);
-  border-radius: 10px;
-  font-size: 13px;
+  border-radius: 12px;
+  font-size: 13.5px;
 }
 
-/* --- Trade Card (T1, T2...) --- */
-.journal-trade-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
+/* --- Observations Grid Layout --- */
+.journal-obs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.journal-obs-wrap {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   position: relative;
-  transition: border-color 0.2s;
+}
+
+.journal-obs-card-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+.journal-obs-index-badge {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  color: #6ee7b7;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 14px;
+  letter-spacing: 0.5px;
+}
+
+.journal-obs-card-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  text-align: right;
+}
+
+.journal-obs-wrap .tile {
+  margin-bottom: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Constrain 16:9 preview stretching in Journal Observations */
+.journal-obs-wrap .link-preview-mount {
+  aspect-ratio: auto;
+  max-height: 240px;
+  background: var(--surface-2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.journal-obs-wrap .link-preview-mount img {
+  max-height: 240px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* --- Trades Grid Layout (Significantly Bigger Footprint) --- */
+.journal-trades-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+@media (max-width: 680px) {
+  .journal-trades-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.journal-trade-card {
+  background: linear-gradient(145deg, #172033, #0f172a);
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+  border-left: 5px solid #3b82f6;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(59, 130, 246, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .journal-trade-card:hover {
-  border-color: rgba(59, 130, 246, 0.5);
+  border-color: rgba(59, 130, 246, 0.65);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), 0 0 24px rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
 }
 
 .journal-trade-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .journal-trade-index-badge {
-  background: rgba(37, 99, 235, 0.2);
-  border: 1px solid #3b82f6;
-  color: #93c5fd;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 16px;
-  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.8px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
 }
 
-.journal-obs-index-badge {
-  background: rgba(16, 185, 129, 0.2);
-  border: 1px solid #10b981;
-  color: #6ee7b7;
+.journal-trade-time {
   font-size: 12px;
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 16px;
-  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
 }
 
 .journal-card-actions {
@@ -274,14 +369,18 @@
 
 /* WYSIWYG formatted content */
 .journal-trade-content {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--text);
   word-break: break-word;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 14px 16px;
 }
 
 .journal-trade-content p {
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
 }
 
 .journal-trade-content p:last-child {
@@ -289,66 +388,78 @@
 }
 
 .journal-trade-content ul, .journal-trade-content ol {
-  margin: 4px 0 8px 20px;
+  margin: 6px 0 10px 22px;
   padding: 0;
 }
 
 .journal-trade-content li {
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 /* Tags in Trade Card */
 .journal-trade-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
 }
 
 .journal-tag-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 11px;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
   font-weight: 600;
+  transition: all 0.15s ease;
 }
 
 .journal-tag-strategy {
-  background: rgba(139, 92, 246, 0.18);
-  border: 1px solid rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.2);
+  border: 1px solid rgba(139, 92, 246, 0.45);
   color: #c4b5fd;
   cursor: pointer;
 }
 
 .journal-tag-strategy:hover {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.35);
+  transform: translateY(-1px);
 }
 
 .journal-tag-concept {
-  background: rgba(14, 165, 233, 0.18);
-  border: 1px solid rgba(14, 165, 233, 0.4);
+  background: rgba(14, 165, 233, 0.2);
+  border: 1px solid rgba(14, 165, 233, 0.45);
   color: #7dd3fc;
 }
 
 .journal-tag-mistake {
-  background: rgba(239, 68, 68, 0.18);
-  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.45);
   color: #fca5a5;
 }
 
+/* Multi-Chart Grid for Trades */
+.journal-charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
 .journal-chart-preview-box {
-  margin-top: 6px;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background: var(--surface-2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
 }
 
 .journal-chart-preview-box img {
   width: 100%;
-  max-height: 240px;
+  max-height: 320px;
   object-fit: cover;
   display: block;
   cursor: zoom-in;
@@ -359,13 +470,16 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
+  font-weight: 600;
   color: #60a5fa;
   text-decoration: none;
-  padding: 6px 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .journal-chart-link-btn:hover {
   text-decoration: underline;
+  color: #93c5fd;
 }
 
 .journal-modal-chart-item {

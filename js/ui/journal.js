@@ -362,9 +362,9 @@ export function renderJournalView() {
         wrap.className = "journal-obs-wrap";
         wrap.style.position = "relative";
         wrap.innerHTML = `
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-            <span class="journal-obs-index-badge">O${idx + 1}</span>
-            <span style="font-size:12px; color:var(--text-dim);">${obs.entryName ? escapeHtml(obs.entryName) : "Observation"}</span>
+          <div class="journal-obs-card-badge-row">
+            <span class="journal-obs-index-badge">💡 O${idx + 1}</span>
+            <span class="journal-obs-card-title">${obs.entryName ? escapeHtml(obs.entryName) : "Observation"}</span>
           </div>
           ${renderTile(obs)}
         `;
@@ -458,13 +458,20 @@ function createTradeCard(trade, index) {
   card.className = "journal-trade-card";
   card.dataset.id = trade.id;
 
+  const createdTime = trade.createdAt
+    ? (trade.createdAt.toDate ? trade.createdAt.toDate() : new Date(trade.createdAt))
+    : null;
+  const timeStr = createdTime
+    ? createdTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    : "";
+
   const strategiesHtml = (trade.strategies || []).map(s => {
     // Check if strategy has docLink
     const stratObj = (state.observations || []).find(o => o.entryType === "strategy" && o.entryName === s);
     const docLink = stratObj ? stratObj.docLink : null;
     return `
       <span class="journal-tag-pill journal-tag-strategy" data-strat="${escapeHtml(s)}" data-doc="${escapeHtml(docLink || "")}">
-        🎯 ${escapeHtml(s)} ${docLink ? "📄" : ""}
+        🎯 ${escapeHtml(s)} ${docLink ? "📄 Doc ↗" : ""}
       </span>
     `;
   }).join("");
@@ -495,7 +502,7 @@ function createTradeCard(trade, index) {
   let chartsHtml = "";
   if (chartUrls.length > 0) {
     chartsHtml = `
-      <div class="journal-charts-container" style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+      <div class="journal-charts-container">
         ${chartUrls.map((url, i) => `
           <div class="journal-chart-preview-box">
             <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px;">
@@ -510,13 +517,18 @@ function createTradeCard(trade, index) {
     `;
   }
 
+  const tagsHtml = (strategiesHtml || conceptsHtml || mistakesHtml)
+    ? `<div class="journal-trade-tags">${strategiesHtml}${conceptsHtml}${mistakesHtml}</div>`
+    : "";
+
   card.innerHTML = `
     <div class="journal-trade-header">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span class="journal-trade-index-badge">T${index}</span>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="journal-trade-index-badge">⚡ Trade T${index}</span>
         <button type="button" class="journal-bookmark-btn ${trade.bookmarked ? "active" : ""}" title="Toggle bookmark">
           ${trade.bookmarked ? "★" : "☆"}
         </button>
+        ${timeStr ? `<span class="journal-trade-time">${timeStr}</span>` : ""}
       </div>
       <div class="journal-card-actions">
         <button class="tile-action-btn trade-edit-btn" title="Edit Trade">✎</button>
@@ -524,18 +536,14 @@ function createTradeCard(trade, index) {
       </div>
     </div>
 
+    ${tagsHtml}
+
     <div class="journal-trade-content">
       ${trade.textHtml || escapeHtml(trade.plainText || "(No notes entered)")}
     </div>
 
     ${chartsHtml}
     ${imagesHtml}
-
-    <div class="journal-trade-tags">
-      ${strategiesHtml}
-      ${conceptsHtml}
-      ${mistakesHtml}
-    </div>
   `;
 
   // Build live chart preview thumbnails for each slot

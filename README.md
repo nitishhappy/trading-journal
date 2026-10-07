@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.66 — 07 Oct 2026 — Redesign Journal UI to Responsive Multi-Column Grid with Prominent Trades
+- **UI / UX Redesign — Journal Multi-Column Responsive Grid**:
+  - Replaced stretched single-column layout with responsive multi-column CSS grid matching Dashboard density and polish.
+  - **Compact Observations Grid**: Renders observations in `minmax(320px, 1fr)` note cards with integrated `💡 O1` pill badges, clean borders, and constrained chart thumbnails (`max-height: 240px; object-fit: cover`) completely eliminating black void padding.
+  - **Prominent Large Trade Cards**: Gave trades a substantially larger visual footprint (`minmax(560px, 1fr)`) with an electric blue gradient card background, `⚡ Trade T1` glowing pill badges, execution timestamps, prominent bookmark stars, and responsive multi-chart galleries (`minmax(280px, 1fr)`).
+  - **Refined Action Bar & Section Headers**: Upgraded top actions to compact glowing pill buttons (`💡 + New Observation`, `⚡ + New Trade`) and added sleek horizontal gradient divider lines with count badges for each section.
+
 ### v2.3.65 — 07 Oct 2026 — NIFTY Interactive Chart Deep-Linking & 14-Day Reflection Retention
 - **Feature — Interactive Chart Deep-Linking**:
   - Added `🔗` copy icon to all briefing run pills in `nifty_interactive_chart.html`.
