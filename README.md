@@ -178,11 +178,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
-### v2.3.60 — 07 Oct 2026 — Decouple Chart Refresh from Key Levels Toolbar & Eliminate Auto-Scrolling
+### v2.3.60 — 07 Oct 2026 — Decouple Chart Refresh from Key Levels Toolbar & Smart Plan Update Detection
 - **Bug Fix — Key Levels Toolbar Refresh Decoupling & Auto-Scroll Elimination**:
-  - Decoupled 15s auto-refresh and manual refresh ticks so they strictly affect chart data (candles, OHLC telemetry, status badges) without re-rendering or resetting the Key Trading Levels toolbar cards across all 5 asset interactive charts (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`, and `eurusd_interactive_chart.html`).
-  - Eliminated auto-scrolling side effects caused by `btn.scrollIntoView()` in `renderBriefingRunsPills()`, `levelsSection.scrollTop = 0` / `highlightCard(0)` in `selectBriefingRun()`, and `targetCard.scrollIntoView()` in `highlightCard()`.
-  - All original logic has been preserved in explicit developer comment blocks for future re-enabling if needed.
+  - Implemented smart plan signature tracking (`lastRenderedPlanSignature`) across all 5 asset interactive charts (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`, and `eurusd_interactive_chart.html`): periodic 15s candle refreshes strictly update chart telemetry and bypass toolbar re-renders, while brand-new summaries immediately trigger an in-place toolbar update without auto-scrolling.
+  - Eliminated unwanted auto-scrolling side effects caused by `btn.scrollIntoView()` in `renderBriefingRunsPills()`, `levelsSection.scrollTop = 0` / `highlightCard(0)` in `selectBriefingRun()`, and `targetCard.scrollIntoView()` in `highlightCard()`.
+  - All original logic has been preserved in explicit developer comment blocks for straightforward re-enabling or reversion if needed.
 
 ### v2.3.59 — 07 Oct 2026 — Disable Auto-Focus on Nearest Level Card in Key Trading Levels Summary
 - **UI / UX — Interactive Charts Proximity Auto-Focus Disabled**:

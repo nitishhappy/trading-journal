@@ -934,7 +934,7 @@
         let chartInstance = null;
         let countdownSeconds = 15;
         let isInitialLoad = true;
-        let levelsRenderedOnce = false;
+        let lastRenderedPlanSignature = null;
 
         // ── Replay Mode State (Option A) ──
         let allMasterCandles = [];
@@ -2021,15 +2021,18 @@
                     : ((window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData)) ? window.eurusdDailyPlanData : []);
                 aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
 
-                // 3. Render Levels, Cards & Scorecard (Initial load only; refresh/auto-refresh only affects chart)
-                if (!levelsRenderedOnce) {
+                // Compute signature of current plan data to detect when a new summary is published
+                const currentPlanSignature = rawPlanArray.map(p => p.timestamp || p.timeDisplay || p.source || '').join('|') + `_${rawPlanArray.length}`;
+
+                // 3. Render Levels, Cards & Scorecard (Initial load OR when a brand-new summary arrives)
+                if (lastRenderedPlanSignature !== currentPlanSignature) {
                     renderLevelsAndCards();
-                    levelsRenderedOnce = true;
+                    lastRenderedPlanSignature = currentPlanSignature;
                 } else {
                     /*
-                    // [DISABLED: KEY LEVEL TOOLBAR AUTO-REFRESH]
-                    // Refresh/auto-refresh should only affect chart, not key level toolbar.
-                    // To re-enable toolbar re-rendering on periodic refresh, uncomment below:
+                    // [DISABLED: UNCONDITIONAL TOOLBAR RE-RENDER]
+                    // Refresh/auto-refresh without new summary only affects chart data.
+                    // To force toolbar re-rendering on every candle tick, uncomment below:
                     renderLevelsAndCards();
                     */
                 }
