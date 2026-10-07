@@ -178,6 +178,12 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.64 — 07 Oct 2026 — Fix TradingView Chart Image Previews in Journal Observations
+- **Bug Fix — Journal Observation Link Preview Hydration**:
+  - Restored full DOM hydration for `.link-preview-mount` elements in Journal tab observation wraps.
+  - Automatically loads and renders TradingView snapshot images (`tradingview.com/x/...`), Google Drive embeds, Instagram, and YouTube previews while hiding raw anchor text once the thumbnail loads.
+  - Wired up interactive lightbox clicking for observation images, star/bookmark toggling, copy-to-folder modal, Google Doc strategy viewer, and tile body expansion within the Journal tab.
+
 ### v2.3.63 — 07 Oct 2026 — Multi-Chart Links Support in Journal Trade Entries
 - **Feature — Multiple Chart Links for Trades (T1)**:
   - Upgraded Trade Modal with multi-chart link adder supporting unlimited TradingView / chart snapshot URLs.

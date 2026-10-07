@@ -9,7 +9,7 @@ import { escapeHtml, resizeImageToBase64, buildLinkPreviewIfApplicable, openGoog
 import { openLightbox } from './common.js';
 import { saveJournalTrade, deleteJournalTrade, getStrategies, getConcepts, getMistakes } from '../services/journal.js';
 import { saveObservation } from '../services/observations.js';
-import { openCreateModal, openEditModal } from './dashboard.js';
+import { openCreateModal, openEditModal, openCopyModal } from './dashboard.js';
 import {
   journalPrevDayBtn, journalDateInput, journalNextDayBtn, journalTodayBtn,
   journalDayTitle, journalDayMeta, journalAddObsBtn, journalAddTradeBtn,
@@ -368,8 +368,71 @@ export function renderJournalView() {
           </div>
           ${renderTile(obs)}
         `;
-        // Wire up tile action buttons
-        wrap.querySelector(".edit-obs-btn")?.addEventListener("click", () => openEditModal(obs.id));
+
+        // 1. Mount link previews (TradingView charts, Drive snapshots, Instagram, YouTube)
+        wrap.querySelectorAll(".link-preview-mount").forEach((mount) => {
+          const url = mount.dataset.url;
+          const link = mount.previousElementSibling;
+          const hasPreview = buildLinkPreviewIfApplicable(url, mount, () => {
+            if (link) link.classList.remove("hidden");
+          });
+          if (hasPreview && link) {
+            link.classList.add("hidden");
+          } else if (!hasPreview) {
+            mount.remove();
+          }
+        });
+
+        // 2. Wire up edit button
+        wrap.querySelector(".edit-obs-btn")?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openEditModal(obs.id);
+        });
+
+        // 3. Wire up copy button
+        wrap.querySelector(".copy-obs-btn")?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openCopyModal(obs.id);
+        });
+
+        // 4. Wire up star / bookmark toggle
+        wrap.querySelector(".starred")?.addEventListener("click", async (e) => {
+          e.stopPropagation();
+          const nextStar = !(obs.starred ?? false);
+          try {
+            await saveObservation(obs.id, { starred: nextStar });
+          } catch (err) {
+            console.error(err);
+          }
+        });
+
+        // 5. Wire up image grid clicks -> lightbox
+        wrap.querySelectorAll(".il-img").forEach((item) => {
+          item.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const imgIdx = parseInt(item.dataset.index, 10);
+            const images = obs.images && obs.images.length > 0 ? obs.images : (obs.imageBase64 ? [obs.imageBase64] : []);
+            if (images.length > 0) {
+              openLightbox(images, imgIdx);
+            }
+          });
+        });
+
+        // 6. Wire up doc preview trigger if present
+        wrap.querySelectorAll(".doc-preview-trigger").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openGoogleDocViewer(btn.dataset.doc, btn.dataset.title);
+          });
+        });
+
+        // 7. Expand / collapse tile body
+        wrap.querySelector(".tile-body")?.addEventListener("click", (e) => {
+          if (e.target.closest("a") || e.target.closest("button") || e.target.closest(".il-img") || e.target.closest("iframe") || e.target.closest(".link-preview-mount")) return;
+          state.expandedTileId = state.expandedTileId === obs.id ? null : obs.id;
+          renderJournalView();
+        });
+
         journalObsList.appendChild(wrap);
       });
     }
