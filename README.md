@@ -2466,7 +2466,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Resolved unreachable code bug where successful briefing runs returned `True` without updating `btc_watchdog_trigger.json`, causing the spot price anchor to remain permanently stuck at $84,500 and continuously firing emergency overrides every 15 minutes.
   - Reset BTC lock file with current spot price (~$85,999) and active 60-minute cooldown window.
   - Re-synced prediction accuracy stats for active levels in `js/data/prediction_accuracy_data.js`.
-- **Files Modified**: `Bitcoin Setup/btc_watchdog.py`, `js/data/prediction_accuracy_data.js`, `README.md`
+### v2.3.92 — 08 Oct 2026 — TradingView Style IST Vertical Session Break Separators Across Interactive Charts
+
+- **TradingView Session Breaks in IST (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`)**:
+  - Implemented automatic vertical session break separators on the interactive chart overlay canvas (`vlines-canvas`) rendered in IST time (UTC +05:30).
+  - Detects session transitions (IST day boundaries) across all candles in `currentCandlesArray` and draws TradingView-style 1px dotted vertical lines (`rgba(148, 163, 184, 0.35)`).
+  - Renders a clean IST day/date badge (e.g., `Mon, 25 Sep`) anchored at the bottom of each vertical separator.
+  - Session breaks remain active and visible unconditionally across chart pan/zoom operations.
+- **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`, `README.md`
+
 
 
 

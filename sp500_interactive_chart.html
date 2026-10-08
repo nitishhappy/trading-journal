@@ -2314,9 +2314,58 @@
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            const timeScale = chartInstance.timeScale();
+
+            // 0. Draw TradingView-Style Session Breaks (IST Time)
+            if (typeof currentCandlesArray !== 'undefined' && currentCandlesArray && currentCandlesArray.length > 0) {
+                let prevDayKey = null;
+                ctx.save();
+                for (let i = 0; i < currentCandlesArray.length; i++) {
+                    const candle = currentCandlesArray[i];
+                    if (!candle) continue;
+                    const cTime = candle.time;
+                    let sec = typeof cTime === 'number' ? cTime : (typeof cTime === 'object' && cTime ? (cTime.timestamp || null) : null);
+                    if (!sec) continue;
+
+                    // Convert UTC seconds timestamp + IST offset (+19800s) to IST Date
+                    const istDate = new Date((sec + 19800) * 1000);
+                    const dayKey = `${istDate.getUTCFullYear()}-${istDate.getUTCMonth()}-${istDate.getUTCDate()}`;
+
+                    if (prevDayKey !== null && dayKey !== prevDayKey) {
+                        let x = timeScale.timeToCoordinate(cTime);
+                        if ((x === null || isNaN(x)) && typeof timeScale.logicalToCoordinate === 'function') {
+                            x = timeScale.logicalToCoordinate(i);
+                        }
+                        if (x !== null && !isNaN(x) && x >= 0 && x <= canvas.width) {
+                            ctx.beginPath();
+                            ctx.setLineDash([3, 3]);
+                            ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(x, 0);
+                            ctx.lineTo(x, canvas.height - 20);
+                            ctx.stroke();
+
+                            const dayLabel = istDate.toLocaleDateString('en-IN', {
+                                weekday: 'short',
+                                day: '2-digit',
+                                month: 'short',
+                                timeZone: 'UTC'
+                            });
+                            ctx.setLineDash([]);
+                            ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
+                            ctx.font = '600 10px Inter, sans-serif';
+                            const textW = ctx.measureText(dayLabel).width;
+                            const labelX = Math.max(2, Math.min(canvas.width - textW - 2, x + 4));
+                            ctx.fillText(dayLabel, labelX, canvas.height - 6);
+                        }
+                    }
+                    prevDayKey = dayKey;
+                }
+                ctx.restore();
+            }
+
             if (!showVLines) return;
 
-            const timeScale = chartInstance.timeScale();
             const latestRun = getLatestBriefingRun();
 
             // 1. Draw AI Briefing Vertical Lines (Dashed Purple Lines, or Glowing Blue if Selected)
