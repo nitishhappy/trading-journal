@@ -2215,17 +2215,21 @@
                     const dayKey = `${istDate.getUTCFullYear()}-${istDate.getUTCMonth()}-${istDate.getUTCDate()}`;
 
                     if (prevDayKey !== null && dayKey !== prevDayKey) {
-                        let x = timeScale.timeToCoordinate(cTime);
-                        if ((x === null || isNaN(x)) && typeof timeScale.logicalToCoordinate === 'function') {
+                        let x = null;
+                        if (typeof timeScale.logicalToCoordinate === 'function') {
                             x = timeScale.logicalToCoordinate(i);
                         }
+                        if (x === null || isNaN(x)) {
+                            x = timeScale.timeToCoordinate(cTime);
+                        }
+
                         if (x !== null && !isNaN(x) && x >= 0 && x <= canvas.width) {
                             ctx.beginPath();
-                            ctx.setLineDash([3, 3]);
-                            ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
-                            ctx.lineWidth = 1;
+                            ctx.setLineDash([4, 4]);
+                            ctx.strokeStyle = 'rgba(148, 163, 184, 0.65)';
+                            ctx.lineWidth = 1.5;
                             ctx.moveTo(x, 0);
-                            ctx.lineTo(x, canvas.height - 20);
+                            ctx.lineTo(x, canvas.height - 24);
                             ctx.stroke();
 
                             const dayLabel = istDate.toLocaleDateString('en-IN', {
@@ -2234,12 +2238,29 @@
                                 month: 'short',
                                 timeZone: 'UTC'
                             });
-                            ctx.setLineDash([]);
-                            ctx.fillStyle = 'rgba(148, 163, 184, 0.55)';
+
                             ctx.font = '600 10px Inter, sans-serif';
                             const textW = ctx.measureText(dayLabel).width;
-                            const labelX = Math.max(2, Math.min(canvas.width - textW - 2, x + 4));
-                            ctx.fillText(dayLabel, labelX, canvas.height - 6);
+                            const badgeW = textW + 10;
+                            const badgeH = 18;
+                            const badgeX = Math.max(2, Math.min(canvas.width - badgeW - 2, x - badgeW / 2));
+                            const badgeY = canvas.height - 22;
+
+                            ctx.setLineDash([]);
+                            ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+                            ctx.strokeStyle = 'rgba(148, 163, 184, 0.5)';
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            if (ctx.roundRect) {
+                                ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 3);
+                            } else {
+                                ctx.rect(badgeX, badgeY, badgeW, badgeH);
+                            }
+                            ctx.fill();
+                            ctx.stroke();
+
+                            ctx.fillStyle = '#e2e8f0';
+                            ctx.fillText(dayLabel, badgeX + 5, badgeY + 13);
                         }
                     }
                     prevDayKey = dayKey;
