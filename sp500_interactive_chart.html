@@ -2316,9 +2316,10 @@
 
             const timeScale = chartInstance.timeScale();
 
-            // 0. Draw TradingView-Style Session Breaks (IST Time)
+            // 0. Draw TradingView-Style Session Breaks (IST Time - S&P 500 US Market Open ~19:00-20:00 IST)
             if (typeof currentCandlesArray !== 'undefined' && currentCandlesArray && currentCandlesArray.length > 0) {
-                let prevDayKey = null;
+                let prevIstHours = null;
+                let prevSec = null;
                 ctx.save();
                 for (let i = 0; i < currentCandlesArray.length; i++) {
                     const candle = currentCandlesArray[i];
@@ -2329,9 +2330,16 @@
 
                     // Convert UTC seconds timestamp + IST offset (+19800s) to IST Date
                     const istDate = new Date((sec + 19800) * 1000);
-                    const dayKey = `${istDate.getUTCFullYear()}-${istDate.getUTCMonth()}-${istDate.getUTCDate()}`;
+                    const istHours = istDate.getUTCHours();
+                    const istMins = istDate.getUTCMinutes();
 
-                    if (prevDayKey !== null && dayKey !== prevDayKey) {
+                    // Detect US Market Open candle (first candle at/after 18:30 IST following a session gap or off-hours)
+                    const isUSOpenCandle = (prevSec !== null) && (istHours >= 18) && (
+                        (prevIstHours !== null && prevIstHours < 12) || 
+                        ((sec - prevSec) > 14400)
+                    );
+
+                    if (isUSOpenCandle) {
                         let x = null;
                         if (typeof timeScale.logicalToCoordinate === 'function') {
                             x = timeScale.logicalToCoordinate(i);
@@ -2349,12 +2357,14 @@
                             ctx.lineTo(x, canvas.height - 24);
                             ctx.stroke();
 
-                            const dayLabel = istDate.toLocaleDateString('en-IN', {
+                            const dateStr = istDate.toLocaleDateString('en-IN', {
                                 weekday: 'short',
                                 day: '2-digit',
                                 month: 'short',
                                 timeZone: 'UTC'
                             });
+                            const timeStr = `${String(istHours).padStart(2, '0')}:${String(istMins).padStart(2, '0')}`;
+                            const dayLabel = `${dateStr} • ${timeStr} US Open`;
 
                             ctx.font = '600 10px Inter, sans-serif';
                             const textW = ctx.measureText(dayLabel).width;
@@ -2364,7 +2374,7 @@
                             const badgeY = canvas.height - 22;
 
                             ctx.setLineDash([]);
-                            ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+                            ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
                             ctx.strokeStyle = 'rgba(148, 163, 184, 0.5)';
                             ctx.lineWidth = 1;
                             ctx.beginPath();
@@ -2380,7 +2390,8 @@
                             ctx.fillText(dayLabel, badgeX + 5, badgeY + 13);
                         }
                     }
-                    prevDayKey = dayKey;
+                    prevIstHours = istHours;
+                    prevSec = sec;
                 }
                 ctx.restore();
             }

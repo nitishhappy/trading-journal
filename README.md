@@ -2483,6 +2483,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Retains vertical internal scrolling (`overflow-y: auto`) on `.revision-card` for long observations while keeping horizontal swipe gestures intact.
 - **Files Modified**: `js/ui/revision.js`, `README.md`
 
+### v2.3.95 — 08 Oct 2026 — Asset-Specific Session Break Timing Realignment
+
+- **Asset-Specific Session Break Timing (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`)**:
+  - **NIFTY 50**: Aligned session break trigger to the first candle of the trading day at/after **09:15 AM IST** (labeled `Mon, 25 Sep • 09:15 IST`).
+  - **GOLD & EURUSD**: Aligned session break trigger to **00:00 AM IST** Midnight day rollover (labeled `Mon, 25 Sep • 00:00 IST`).
+  - **BTC**: Aligned session break trigger to **00:00 AM IST** Midnight 24/7 rollover (labeled `Mon, 25 Sep • 00:00 IST`).
+  - **S&P 500 (US Equities)**: Realigned session break trigger to **US Market Open at 07:00 PM / 08:00 PM IST** (`19:00-20:00 IST` window), resolving invalid mid-session midnight breaks during US trading hours.
+- **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`, `README.md`
+
+
 
 
 

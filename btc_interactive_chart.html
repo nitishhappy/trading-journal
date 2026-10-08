@@ -2236,12 +2236,13 @@
                             ctx.lineTo(x, canvas.height - 24);
                             ctx.stroke();
 
-                            const dayLabel = istDate.toLocaleDateString('en-IN', {
+                            const dateStr = istDate.toLocaleDateString('en-IN', {
                                 weekday: 'short',
                                 day: '2-digit',
                                 month: 'short',
                                 timeZone: 'UTC'
                             });
+                            const dayLabel = `${dateStr} • 00:00 IST`;
 
                             ctx.font = '600 10px Inter, sans-serif';
                             const textW = ctx.measureText(dayLabel).width;
