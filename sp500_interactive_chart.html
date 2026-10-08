@@ -1890,12 +1890,15 @@
                 const levelUniqueId = `sp500_${cleanTag}_${cleanPrice}${runSuffix}`;
                 const savedOutcome = getSavedOutcome(levelUniqueId);
 
-                // ✅ Tag-aware line styles:
-                const isActionSetup = /^\[(?!K)[BS]\d+\]$/i.test(tag);
+                // Tag-aware line styles: Solid for B* & S*, Dotted for #B* & #S*
+                const rawTag        = (tag || '').replace(/^[\[\s]+|[\]\s]+$/g, '').trim();
+                const isSolid       = /^[BS]/i.test(rawTag);
+                const isDotted      = !isSolid && /[BS]/i.test(rawTag);
+
                 const lineStyle     = (typeof LightweightCharts !== 'undefined' && LightweightCharts.LineStyle)
-                    ? (isActionSetup ? LightweightCharts.LineStyle.Solid : LightweightCharts.LineStyle.Dashed)
-                    : 0;
-                const lineWidth     = isActionSetup ? 2 : 1;
+                    ? (isSolid ? LightweightCharts.LineStyle.Solid : (isDotted ? LightweightCharts.LineStyle.Dotted : LightweightCharts.LineStyle.Dashed))
+                    : (isSolid ? 0 : (isDotted ? 1 : 2));
+                const lineWidth     = isSolid ? 2 : 1;
 
                 if (!isNaN(priceVal) && candleSeries) {
                     const pLine = candleSeries.createPriceLine({

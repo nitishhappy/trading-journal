@@ -2492,6 +2492,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - **S&P 500 (US Equities)**: Realigned session break trigger to **US Market Open at 07:00 PM / 08:00 PM IST** (`19:00-20:00 IST` window), resolving invalid mid-session midnight breaks during US trading hours.
 - **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`, `README.md`
 
+### v2.3.96 — 08 Oct 2026 — Dynamic Price Line Styles: Solid for B* / S*, Dotted for Prefixed #B* / #S*
+
+- **Tag-Aware Line Styling (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`)**:
+  - Implemented intuitive string pattern matching for drawn level IDs/tags:
+    - **Solid Lines (`LineStyle.Solid`, width 2)**: For direct action level tags starting with `B` or `S` (e.g. `B1`, `B2`, `S1`, `BUY_1`, `SELL_ZONE`).
+    - **Dotted Lines (`LineStyle.Dotted`, width 1)**: For prefixed setup level tags containing non-empty prefix before `B` or `S` (e.g. `AI_B1`, `AI_S1`, `SM_B1`, `BT_S2`, `CETA_B1`, `#B1`).
+    - **Dashed Lines (`LineStyle.Dashed`, width 1)**: Fallback style for other key levels (e.g. `PDH`, `PDL`, `VWAP`).
+- **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`, `README.md`
+
+
 
 
 
