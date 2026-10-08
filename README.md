@@ -2501,6 +2501,13 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
     - **Dashed Lines (`LineStyle.Dashed`, width 1)**: Fallback style for other key levels (e.g. `PDH`, `PDL`, `VWAP`).
 - **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`, `README.md`
 
+### v2.3.97 — 09 Oct 2026 — Bitcoin SSL Long-Liquidation Cascade & BSL Short-Squeeze Integration (Option C)
+
+- **Bitcoin Leverage Liquidity Level Descriptions (`btc_interactive_chart.html`)**:
+  - Integrated explicit **Sell-Side Liquidity (SSL) — Long Liquidation Cascade Floor** (`[S2]`, `[KS2]`) and **Buy-Side Liquidity (BSL) — Short Squeeze Expansion Trigger** (`[B2]`, `[KB2]`) documentation in Bitcoin level cards and confirmation price action descriptions.
+- **Files Modified**: `btc_interactive_chart.html`, `README.md`
+
+
 
 
 
