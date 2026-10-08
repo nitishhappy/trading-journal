@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-08T14:31:19+05:30",
+    "timeDisplay": "02:31 PM, Oct 08",
+    "price": "22210",
+    "bias": "bullish",
+    "behavior": "[THU 14:31] [B1]: Sweep of 22,190 day low followed by reclaim of 22,210 with bullish reversal candle",
+    "tp": "22,260 / 22,310",
+    "sl": "22,175",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-08T14:31:19+05:30",
+    "timeDisplay": "02:31 PM, Oct 08",
+    "price": "22250",
+    "bias": "bullish",
+    "behavior": "[THU 14:31] [B2]: Sustained 5m close ABOVE 22,250 confirming absorption of intraday supply",
+    "tp": "22,320 / 22,380",
+    "sl": "22,205",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-08T14:31:19+05:30",
+    "timeDisplay": "02:31 PM, Oct 08",
+    "price": "22190",
+    "bias": "bearish",
+    "behavior": "[THU 14:31] [S1]: Clean 5m close BELOW 22,190 with active futures volume expansion",
+    "tp": "22,130 / 22,080",
+    "sl": "22,225",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-08T14:31:19+05:30",
+    "timeDisplay": "02:31 PM, Oct 08",
+    "price": "22255",
+    "bias": "bearish",
+    "behavior": "[THU 14:31] [S2]: Pullback into 22,245-22,260 rejected with bearish pin bar / engulfing candle",
+    "tp": "22,190 / 22,130",
+    "sl": "22,285",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-08T13:32:09+05:30",
     "timeDisplay": "01:32 PM, Oct 08",
     "price": "22255",
@@ -674,6 +718,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261008_143121",
+    "timestamp": "2026-10-08T14:31:21+05:30",
+    "timeDisplay": "02:31 PM, Oct 08",
+    "spot": "22217.2",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22217.20 < Min Plan Target $22225.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:30 PM IST - Oct 08, 2026 | Spot: 22217.2 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22217.20 < Min Plan Target $22225.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Intraday Consolidation Band: 22,200 – 22,245.\n- Price is currently stabilizing at 22,217.2 following a sustained drop from the day's high (22,599.05). With spot hovering just above the day low (22,190), chop and decay dominate inside the 22,200–22,245 corridor. Avoid fresh naked option buys inside this band until a clean breakout occurs.\n\n4. High Momentum / Explosive Zones:\n- Bearish Continuation / Capitulation Flush (Breakdown below 22,190): A clean 5-minute close below the day low at 22,190 with expanding futures volume will trigger stop-loss cascades and long unwinding, accelerating downward toward 22,130 and 22,080.\n- Bullish Mean-Reversion / Short-Covering Squeeze (Breakout above 22,250): A sustained 5-minute close above 22,250 forces trailing intraday short positions to cover ahead of the 03:00 PM window, sparking a swift squeeze into 22,320 and 22,380.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Liquidity Sweep & False Breakdown Reversal): Price sweeps below Day Low 22,190 but immediately reclaims 22,210 on strong futures volume with a bullish 5m reversal candle. | TP: 22,260 / 22,310 | SL: 22,175 | 💡 Buy 22200 CE + Sell 22250 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Late Short-Covering Expansion): Sustained 5-min close ABOVE 22,250 confirming absorption of overhead supply and trapping late breakout bears. | TP: 22,320 / 22,380 | SL: 22,205 | 💡 Buy 22250 CE + Sell 22300 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Breakdown Continuation Below Day Low): Clean 5-min body close BELOW 22,190 with active futures volume expansion confirming breakdown continuation. | TP: 22,130 / 22,080 | SL: 22,225 | 💡 Buy 22200 PE + Sell 22150 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Bear Flag Rejection at Resistance Wall): Pullback into 22,245 – 22,260 rejected with an upper wick / bearish rejection candle and declining buy volume. | TP: 22,190 / 22,130 | SL: 22,285 | 💡 Buy 22250 PE + Sell 22200 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261008_133211",
     "timestamp": "2026-10-08T13:32:11+05:30",
     "timeDisplay": "01:32 PM, Oct 08",
