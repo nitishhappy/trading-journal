@@ -466,16 +466,9 @@ function buildRevisionCardFromWorkingBackup(obs, isTop) {
   }
 
   const textEl = document.createElement("div");
-  textEl.className = "revision-card-text" + (isExpanded ? "" : " revision-card-text-clamped");
+  textEl.className = "revision-card-text";
   textEl.textContent = obs.text || "(no text)";
   if (!obs.text) textEl.style.color = "var(--text-dim)";
-  if (!isExpanded) {
-    // Inline clamp so long notes don't blow out card height in the stack view.
-    textEl.style.display = "-webkit-box";
-    textEl.style.webkitBoxOrient = "vertical";
-    textEl.style.webkitLineClamp = "4";
-    textEl.style.overflow = "hidden";
-  }
   card.appendChild(textEl);
 
   if (hasLink) {

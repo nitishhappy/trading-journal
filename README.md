@@ -2475,12 +2475,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Session breaks remain active and visible unconditionally across chart pan/zoom operations.
 - **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`, `README.md`
 
-### v2.3.93 — 08 Oct 2026 — High-Contrast Session Break Rendering & Service Worker Precache Fix
+### v2.3.94 — 08 Oct 2026 — Un-truncated Full Text Display in Revision Swipeable Cards
 
-- **Session Breaks Visual High Contrast & Logical Index Alignment (`nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`)**:
-  - Upgraded overlay rendering engine to prioritize `logicalToCoordinate(index)` for 100% exact pixel positioning of session breaks across bar indices.
-  - Enhanced line visibility with high-contrast slate dashed strokes (`rgba(148, 163, 184, 0.65)`, `1.5px` width) and dark rounded IST day/date pill badges (`rgba(15, 23, 42, 0.85)` background, `#e2e8f0` text).
-- **Files Modified**: `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`, `btc_interactive_chart.html`, `README.md`
+- **Revision Tab Card Text Truncation Patch (`js/ui/revision.js`)**:
+  - Removed `-webkit-line-clamp: 4` and `overflow: hidden` from `.revision-card-text` in swipeable cards.
+  - Ensures the full un-truncated text of notes is rendered directly inside the card container.
+  - Retains vertical internal scrolling (`overflow-y: auto`) on `.revision-card` for long observations while keeping horizontal swipe gestures intact.
+- **Files Modified**: `js/ui/revision.js`, `README.md`
+
 
 
 
