@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-08T09:31:09+05:30",
+    "timeDisplay": "09:31 AM, Oct 08",
+    "price": "22510",
+    "bias": "bullish",
+    "behavior": "[THU 09:31] [B1]: Liquidity sweep below Day Low 22475.75 with quick 5m reclaim above 22510 and confirmation above 22525",
+    "tp": "22565 / 22595",
+    "sl": "22470",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-08T09:31:09+05:30",
+    "timeDisplay": "09:31 AM, Oct 08",
+    "price": "22545",
+    "bias": "bullish",
+    "behavior": "[THU 09:31] [B2]: Sustained 5m close ABOVE 22545 with active futures volume confirming absorption",
+    "tp": "22595 / 22640",
+    "sl": "22510",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-08T09:31:09+05:30",
+    "timeDisplay": "09:31 AM, Oct 08",
+    "price": "22535",
+    "bias": "bearish",
+    "behavior": "[THU 09:31] [S1]: Pullback rejection at 22535-22545 with upper wicks and 5m close below 22515",
+    "tp": "22475 / 22430",
+    "sl": "22555",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-08T09:31:09+05:30",
+    "timeDisplay": "09:31 AM, Oct 08",
+    "price": "22475",
+    "bias": "bearish",
+    "behavior": "[THU 09:31] [S2]: Sustained 5m close BELOW Day Low 22475 with active futures volume confirming breakdown",
+    "tp": "22425 / 22380",
+    "sl": "22510",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-08T09:19:35+05:30",
     "timeDisplay": "09:19 AM, Oct 08",
     "price": "22570",
@@ -234,6 +278,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261008_093112",
+    "timestamp": "2026-10-08T09:31:12+05:30",
+    "timeDisplay": "09:31 AM, Oct 08",
+    "spot": "22504.1",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22504.10 < Min Plan Target $22540.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:30 AM IST - Oct 08, 2026 | Spot: 22504.1 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22504.10 < Min Plan Target $22540.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Spot Range 22480.00 – 22540.00: High-decay compression zone trapped between Day Low liquidity pool (22475.75) and broken plan floor pivot resistance (22540.00). Price is currently rotating around 22504.1 with baseline 1.0x futures volume, creating adverse theta decay for option buyers until a decisive boundary expansion occurs.\n- Premium Trap Corridor 22510.00 – 22530.00: Extreme chop midpoint. Strictly avoid naked option execution inside this 20-point zone due to rapid 5-minute rotational whipsaws.\n\n4. High Momentum / Explosive Zones:\n- Bearish Liquidity Cascade / Breakdown Flush (Sustained 5m close BELOW 22475.00 with expanding futures volume): Triggers aggressive long-unwinding and stop-run liquidation below Day Low / 15M ORB Low, accelerating downward momentum toward 22425.00 and 22380.00.\n- Bullish Squeeze / Absorption Expansion (Sustained 5m close ABOVE 22545.00 with expanding futures volume): Traps early breakdown PE buyers and triggers short-covering continuation back through the morning balance area toward 22595.00 (Day High) and 22640.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB Low Sweep & Liquidity Absorption): 5m liquidity sweep below Day Low 22475.75 followed by an immediate close back ABOVE 22510.00 and subsequent confirmation close above 22525.00. | TP: 22565.00 / 22595.00 | SL: 22470.00 | 💡 Buy 22500 CE + Sell 22550 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Breakout Reversal & Value Area Reclamation): Sustained 5m close ABOVE 22545.00 with active futures volume confirming institutional absorption of morning sellers. | TP: 22595.00 / 22640.00 | SL: 22510.00 | 💡 Buy 22550 CE + Sell 22600 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Pullback Rejection at Breakdown Pivot): Pullback into 22535.00 - 22545.00 resistance rejecting with upper wicks and a decisive 5m close BELOW 22515.00. | TP: 22475.00 / 22430.00 | SL: 22555.00 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Low Breakdown & Trend Continuation): Sustained 5m close BELOW Day Low 22475.00 with active futures volume confirming breakdown expansion. | TP: 22425.00 / 22380.00 | SL: 22510.00 | 💡 Buy 22450 PE + Sell 22400 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261008_091938",
     "timestamp": "2026-10-08T09:19:38+05:30",
     "timeDisplay": "09:19 AM, Oct 08",
