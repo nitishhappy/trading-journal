@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-09T10:46:46+05:30",
+    "timeDisplay": "10:46 AM, Oct 09",
+    "price": "4188.5",
+    "bias": "bullish",
+    "behavior": "[FRI 10:46] [G_B2]: Breakout Above Day High BSL",
+    "tp": "4198.50 / 4210.00",
+    "sl": "4182.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T10:46:46+05:30",
+    "timeDisplay": "10:46 AM, Oct 09",
+    "price": "4187.5",
+    "bias": "bearish",
+    "behavior": "[FRI 10:46] [G_S1]: Day High Liquidity Sweep & SFP Rejection",
+    "tp": "4174.00 / 4165.00",
+    "sl": "4193.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T10:46:46+05:30",
+    "timeDisplay": "10:46 AM, Oct 09",
+    "price": "4174.0",
+    "bias": "bullish",
+    "behavior": "[FRI 10:46] [G_B1]: 15M Bullish FVG & Demand Shelf Retest",
+    "tp": "4188.00 / 4198.00",
+    "sl": "4166.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T10:46:46+05:30",
+    "timeDisplay": "10:46 AM, Oct 09",
+    "price": "4168.0",
+    "bias": "bearish",
+    "behavior": "[FRI 10:46] [G_S2]: Asian Demand Shelf Structural Breakdown",
+    "tp": "4158.00 / 4146.00",
+    "sl": "4174.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-09T10:32:47+05:30",
     "timeDisplay": "10:32 AM, Oct 09",
     "price": "4187.0",
@@ -388,6 +432,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261009_104650",
+    "timestamp": "2026-10-09T10:46:50+05:30",
+    "timeDisplay": "10:46 AM, Oct 09",
+    "spot": "4187.19",
+    "trigger": "Structural Invalidation (+61.7 pts incremental shift from previous trigger 4125.46",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (10:45 AM IST - Oct 09, 2026 | Spot: 4187.19 | Trigger: Structural Invalidation (+61.7 pts incremental shift from previous trigger 4125.46))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics & Pre-London Capital Deployment (10:45 AM IST / 05:15 UTC):** Spot Gold (XAU/USD) trades aggressively at **4187.19**, recording an impulsive **+61.73 point** upward structural displacement from the prior reference pivot (**4125.46**). Having expanded from the Asian session baseline (Day Low: **4130.82**), price is probing directly into the Day High liquidity ceiling (**4188.11**). With London dealing desks preparing for early cash positioning ahead of the European open, institutional algorithms are actively hunting resting stops placed above previous session distribution peaks.\n* **DXY (US Dollar Index) Inverse Correlation:** The US Dollar Index (DXY) has experienced sharp intraday softening, breaking beneath its Asian range support into 101.40–101.50. This pronounced dollar liquidation has provided immediate mechanical upside elastic momentum for dollar-denominated bullion, forcing systematic short positions into cascading covers across major forex and spot bullion desks.\n* **US 10-Year Benchmark Treasury Yields:** US 10-Year Treasury Yields have eased toward 4.02%–4.04%, dampening the opportunity cost of holding non-yielding physical and spot assets. Intraday real yield compression continues to incentivize institutional asset managers to defend pullbacks and support bullish momentum expansion into overhead technical voids.\n* **Macro Catalyst Outlook & Desk Flow:** Institutional order books are maintaining an aggressive risk-allocation posture ahead of upcoming European economic releases and high-tier US macroeconomic data later today. Bullion dealers are pricing in elevated liquidity volatility around the upcoming London/New York session overlap, maintaining strong limit bids on any shallow corrective dips.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Market Structure & Range Distribution (M15 / H1):** On the 15-minute and 1-hour timeframes, Gold displays clear bullish institutional order flow characterized by sequential Break of Structure (BOS) prints and unfilled imbalance pockets. Within today's 57.29-point expansion range (**Day Low: 4130.82 | Day High: 4188.11**), the 50% equilibrium level sits at **4159.47**. Spot price at **4187.19** is currently trading in deep premium, pressing directly against the Day High Buy-Side Liquidity pool.\n* **Buy-Side Liquidity (BSL) Pools:**\n  * **Immediate Session BSL:** Concentrated buy-stop orders and breakout triggers clustered directly above the active Day High at **4188.11 – 4190.50**.\n  * **HTF Extension BSL:** Unmitigated swing highs and psychological round number liquidity resting at **4198.00** and **4210.00**.\n* **Sell-Side Liquidity (SSL) Pools:**\n  * **Internal Structural SSL:** Trailing stop-loss clusters accumulated underneath the Asian consolidation launch pad at **4170.00 – 4173.00**.\n  * **Deep Macro Session SSL:** Institutional liquidity pools resting below the 15M demand origin at **4150.00** and the absolute Day Low at **4130.82**.\n* **Fair Value Gaps (FVG) & Order Blocks (OB):**\n  * **15-Min Bullish Displacement FVG / Demand Shelf:** Carved out during the morning expansion between **4172.00 and 4176.50**, representing the primary institutional defense shelf on any mean-reversion retest.\n  * **Overhead Supply / HTF Distribution Block:** Situated between **4188.50 and 4194.00**, where smart money will either engineer a Swing Failure Pattern (SFP) trap or accept price into runaway breakout expansion.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Defined Corridor:** **4181.00 – 4187.50** (Width: 6.50 points)\n* **Trading Directive:** **STRICT STAND-ASIDE INSIDE THIS ZONE.**\n* **Rationale:** Spot price at 4187.19 is compressing directly beneath Day High resistance (4188.11). Entering market orders inside this 6.5-point corridor carries elevated risk of predatory two-way wick whipsaws, spread expansion, and false breakout traps prior to official London volume injection. Professional capital must remain sidelined until price either decisively breaks above 4188.50 or pulls back to mitigate discount demand.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Breakout Acceleration (> 4188.50):** A decisive 5-minute candle body close cleanly above the Day High (**4188.11**) sweeps institutional resting buy-stops, unleashing an explosive momentum vacuum into **4198.50** and **4210.00**.\n* **Bearish Liquidation Cascade (< 4168.00):** An impulsive 5M/15M candle body close cleanly beneath the **4170.00** demand shelf invalidates the morning momentum leg, triggering long-liquidation stop runs straight down into **4158.00** and **4146.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **4172.00 – 4176.00** Retest | Corrective low-volume pullback into 15M Bullish FVG showing lower-wick rejection, followed by a 5M bullish reversal candle closing back above 4178.00 with expanding buy volume. | **TP1:** 4188.00<br>**TP2:** 4198.00 | **4166.50** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **4188.50** Breakout | Decisive 5M/15M candle body close cleanly above Day High (4188.11) with expanding green volume and bullish delta, sustaining acceptance above 4188.50. | **TP1:** 4198.50<br>**TP2:** 4210.00 | **4182.50** | 1:2.3 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4187.50 – 4190.00** Sweep | Swing Failure Pattern (SFP) sweeping Day High liquidity (4188.11) with sharp upper-wick exhaustion, followed by a 5M bearish displacement candle closing back below 4184.00. | **TP1:** 4174.00<br>**TP2:** 4165.00 | **4193.50** | 1:2.5 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **4168.00** Breakdown | Impulsive 5M/15M candle body close cleanly beneath the 4170.00 demand shelf with expanding sell volume and red candle displacement, confirming structural failure. | **TP1:** 4158.00<br>**TP2:** 4146.00 | **4174.50** | 1:2.2 |"
+  },
+  {
     "id": "GOLD_20261009_103249",
     "timestamp": "2026-10-09T10:32:49+05:30",
     "timeDisplay": "10:32 AM, Oct 09",
