@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-09T15:54:26+05:30",
+    "timeDisplay": "03:54 PM, Oct 09",
+    "price": "22485",
+    "bias": "bullish",
+    "behavior": "[FRI 15:54] [B1]: Pullback into 22,480\u201322,495 holding with a 5m bullish hammer or rejection wick, confirmed by futures absorption volume",
+    "tp": "22,550 / 22,580",
+    "sl": "22,455",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T15:54:26+05:30",
+    "timeDisplay": "03:54 PM, Oct 09",
+    "price": "22585",
+    "bias": "bullish",
+    "behavior": "[FRI 15:54] [B2]: Sustained 5m close ABOVE 22,585 with active futures volume confirming absorption and taking out Day High",
+    "tp": "22,640 / 22,700",
+    "sl": "22,540",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T15:54:26+05:30",
+    "timeDisplay": "03:54 PM, Oct 09",
+    "price": "22575",
+    "bias": "bearish",
+    "behavior": "[FRI 15:54] [S1]: Rejection wick at 22,575\u201322,585 sweeping Day High liquidity and closing back below 22,560 with strong red 5m candle",
+    "tp": "22,500 / 22,480",
+    "sl": "22,595",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T15:54:26+05:30",
+    "timeDisplay": "03:54 PM, Oct 09",
+    "price": "22470",
+    "bias": "bearish",
+    "behavior": "[FRI 15:54] [S2]: Clean 5m close BELOW 22,475 with elevated red futures volume breaking intraday higher-low market structure",
+    "tp": "22,410 / 22,350",
+    "sl": "22,515",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-09T13:54:21+05:30",
     "timeDisplay": "01:54 PM, Oct 09",
     "price": "22450",
@@ -1026,6 +1070,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261009_155429",
+    "timestamp": "2026-10-09T15:54:29+05:30",
+    "timeDisplay": "03:54 PM, Oct 09",
+    "spot": "22520.45",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:53 PM IST - Oct 09, 2026 | Spot: 22520.45 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n> ⚠️ **THETA CRUSH DAY**: India VIX is down -6.02%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- Intraday Mean-Reversion Band: 22,485 – 22,550 (Spot Index). High risk of violent theta decay and consolidation whipsaws between intraday VWAP and the 22,550 call writing wall.\n- No-Trade Perimeter: Avoid initiating fresh directional option purchases inside the 22,500 – 22,535 cluster; low directional momentum with futures volume hovering at 1x baseline makes naked option buying mathematically unfavorable.\n- Expiry & Liquidity Influence: Aggressive straddle pinning observed around the 22,500 strike. Do not chase breakout wicks without sustained 5-minute bar closes outside this zone.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion Zone] (Spot > 22,585): A confirmed 5-minute close above Day High (22,580.75) triggers rapid short-covering panic among call writers, accelerating prices toward 22,640 and 22,700.\n- [Bearish Liquidation Zone] (Spot < 22,475): A decisive 5-minute close below the 22,475 demand shelf triggers long unwinding, opening a vacuum slide down toward 22,410 and 22,350.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Dip Buying into Demand Shelf): Pullback into 22,480–22,495 holding with a 5m bullish hammer or rejection wick, confirmed by futures absorption volume. | TP: 22,550 / 22,580 | SL: 22,455 | 💡 Buy 22,500 CE + Sell 22,550 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Breakout above Day High): Sustained 5m close ABOVE 22,585 with expanding futures volume taking out Day High liquidity. | TP: 22,640 / 22,700 | SL: 22,540 | 💡 Buy 22,550 CE + Sell 22,600 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Liquidity Sweep Rejection): Rejection wick at 22,575–22,585 sweeping Day High liquidity and closing back below 22,560 with strong red 5m candle. | TP: 22,500 / 22,480 | SL: 22,595 | 💡 Buy 22,550 PE + Sell 22,500 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Breakdown below Consolidation Base): Clean 5m close BELOW 22,475 with elevated red futures volume breaking intraday higher-low market structure. | TP: 22,410 / 22,350 | SL: 22,515 | 💡 Buy 22,500 PE + Sell 22,450 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261009_135424",
     "timestamp": "2026-10-09T13:54:24+05:30",
     "timeDisplay": "01:54 PM, Oct 09",
