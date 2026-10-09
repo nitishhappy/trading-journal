@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-09T13:54:21+05:30",
+    "timeDisplay": "01:54 PM, Oct 09",
+    "price": "22450",
+    "bias": "bullish",
+    "behavior": "[FRI 13:54] [B1]: Retest and bullish rejection from 22,450 demand zone with a 5m green reversal candle",
+    "tp": "22,510 / 22,540",
+    "sl": "22,415",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T13:54:21+05:30",
+    "timeDisplay": "01:54 PM, Oct 09",
+    "price": "22545",
+    "bias": "bullish",
+    "behavior": "[FRI 13:54] [B2]: Decisive 5m body close ABOVE 22,545 clearing Day High (22,538.40) with futures volume confirming institutional absorption",
+    "tp": "22,605 / 22,660",
+    "sl": "22,510",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T13:54:21+05:30",
+    "timeDisplay": "01:54 PM, Oct 09",
+    "price": "22515",
+    "bias": "bearish",
+    "behavior": "[FRI 13:54] [S1]: Breakdown and 5m close BELOW 22,515 confirming upper wick rejection at Day High 22,538.40",
+    "tp": "22,460 / 22,410",
+    "sl": "22,545",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T13:54:21+05:30",
+    "timeDisplay": "01:54 PM, Oct 09",
+    "price": "22490",
+    "bias": "bearish",
+    "behavior": "[FRI 13:54] [S2]: Decisive 5m close BELOW 22,490 micro-support with expanding sell volume triggering long unwinding",
+    "tp": "22,410 / 22,385",
+    "sl": "22,525",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-09T13:39:24+05:30",
     "timeDisplay": "01:39 PM, Oct 09",
     "price": "22485",
@@ -982,6 +1026,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261009_135424",
+    "timestamp": "2026-10-09T13:54:24+05:30",
+    "timeDisplay": "01:54 PM, Oct 09",
+    "spot": "22524",
+    "trigger": "SMC BSL Sweep (Upper Wick Rejection at Day High 22538.4",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:53 PM IST - Oct 09, 2026 | Spot: 22524 | Trigger: SMC BSL Sweep (Upper Wick Rejection at Day High 22538.4))\n\n> ⚠️ **VIX WARNING ENFORCED**: THETA CRUSH DAY: India VIX is down -5.04%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- Current spot price (22,524) is trapped inside the micro-consolidation corridor between 22,490 and 22,538.\n- The 22,490 – 22,538 range represents high theta-risk chop following an upper wick rejection at the Day High (22,538.40) into heavy call open interest at the 22,550/22,600 strikes.\n- Baseline futures volume (1.0x 8-bar average) confirms lack of aggressive institutional follow-through inside this corridor; option buying inside this zone guarantees rapid theta burn.\n- Strict no-trade directive: Do not deploy fresh directional capital until spot confirms a 5-minute directional close outside 22,490 – 22,545.\n\n4. High Momentum / Explosive Zones:\n- Bullish Expansion (Sustained 5m Close Above 22,545): Clears the Day High (22,538.40) Buy-Side Liquidity (BSL) pool with active futures volume expansion (>1.5x), triggering rapid short-covering toward 22,605 and 22,660.\n- Bearish Liquidity Flush (Sustained 5m Close Below 22,490): Confirms failure of the Day High sweep and a structural Change of Character (CHoCH), opening a fast long-unwinding cascade toward 22,410 and the morning 15M ORB High retest at 22,383.45.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback to Intraday Demand): Retest and bullish rejection from 22,450 demand zone with a 5m green reversal candle. | TP: 22,510 / 22,540 | SL: 22,415 | 💡 Buy 22450 CE + Sell 22500 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (BSL Breakout Continuation): Decisive 5m body close ABOVE 22,545 clearing Day High (22,538.40) with futures volume confirming institutional absorption. | TP: 22,605 / 22,660 | SL: 22,510 | 💡 Buy 22550 CE + Sell 22600 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (BSL Sweep Rejection Execution): Breakdown and 5m close BELOW 22,515 confirming upper wick rejection at Day High 22,538.40. | TP: 22,460 / 22,410 | SL: 22,545 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~1.83 | Risk: ~8.5% | TP1: +15.5% | TP2: +31.0%.\n- [S2] SELL Setup 2 (Structural Breakdown / CHoCH): Decisive 5m close BELOW 22,490 micro-support with expanding sell volume triggering long unwinding. | TP: 22,410 / 22,385 | SL: 22,525 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261009_133927",
     "timestamp": "2026-10-09T13:39:27+05:30",
     "timeDisplay": "01:39 PM, Oct 09",
