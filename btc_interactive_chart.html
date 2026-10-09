@@ -1579,7 +1579,8 @@
             const ageMinutes = (nowSec - latestCandleTime) / 60;
 
             if (ageMinutes <= 15) {
-                badge.innerText = `● BINANCE LIVE (${currentTf.toUpperCase()})`;
+                const srcLabel = (typeof currentFeedSource !== 'undefined' && currentFeedSource) ? currentFeedSource : 'BINANCE';
+                badge.innerText = `● ${srcLabel} LIVE (${currentTf.toUpperCase()})`;
                 badge.className = 'feed-badge feed-badge-live';
             } else {
                 badge.innerText = `⚠️ LAGGING (${Math.round(ageMinutes)}m ago)`;
@@ -3050,22 +3051,21 @@
 
 
         let btcCandlesLoadedTf = null;
+        let currentFeedSource = 'BINANCE';
 
         async function loadRealBtcCandles(levels, forceFullHistory = false) {
             const tfInterval = currentTf === '5m' ? '5m' : '15m';
             let candles = null;
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
             const needsFullHistory = forceFullHistory || 
                                      btcCandlesLoadedTf !== tfInterval || 
                                      !allMasterCandles || 
                                      allMasterCandles.length < 500;
 
-            // 1. Direct Binance BTCUSDT klines (uncached, CORS supported natively)
+            // 1. Direct Binance BTCUSDT klines (native CORS)
             try {
                 if (needsFullHistory) {
-                    // Target 15-21 days of continuous historical depth:
-                    // 15m: 2 batches of 1000 = 2000 candles (~20.8 days)
-                    // 5m:  4 batches of 1000 = 4000 candles (~13.9 days)
                     const batchesNeeded = tfInterval === '5m' ? 4 : 2;
                     let rawAll = [];
                     let oldestEnd = null;
@@ -3080,7 +3080,7 @@
                         oldestEnd = chunk[0][0];
                     }
 
-                    if (rawAll.length > 0) {
+                    if (rawAll.length >= 500) {
                         candles = rawAll.map(c => ({
                             time: Math.floor(c[0] / 1000) + IST_OFFSET_SEC,
                             open: parseFloat(parseFloat(c[1]).toFixed(2)),
@@ -3089,9 +3089,10 @@
                             close: parseFloat(parseFloat(c[4]).toFixed(2))
                         }));
                         btcCandlesLoadedTf = tfInterval;
+                        currentFeedSource = 'BINANCE';
                     }
-                } else {
-                    // Ultra-fast 15s auto-refresh delta (fetch latest 100 bars and merge with existing history)
+                } else if (allMasterCandles && allMasterCandles.length >= 500 && currentFeedSource === 'BINANCE') {
+                    // Ultra-fast 15s auto-refresh delta from Binance
                     const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=100&_t=${Date.now()}`, { cache: 'no-store' });
                     if (res.ok) {
                         const chunk = await res.json();
@@ -3111,41 +3112,28 @@
                     }
                 }
             } catch (e) {
-                console.warn("[BTC Chart] Direct Binance fetch failed, trying fallbacks:", e);
+                console.warn("[BTC Chart] Direct Binance fetch failed (likely ISP/geo block):", e);
             }
 
-            // 2. Direct Coinbase BTC-USD candles fallback
-            if (!candles || candles.length === 0) {
+            // 2. Server-side /api/marketCandles (Vercel proxy - unblocked, 1mo Yahoo/Binance depth)
+            if (!candles || candles.length < 500) {
+                const marketCandlesUrl = isLocal
+                    ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=BTC&timeframe=${tfInterval}&limit=2000&_t=${Date.now()}`
+                    : `/api/marketCandles?symbol=BTC&timeframe=${tfInterval}&limit=2000&_t=${Date.now()}`;
                 try {
-                    const granularity = currentTf === '5m' ? 300 : 900;
-                    const res = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=${granularity}&_t=${Date.now()}`, { cache: 'no-store' });
-                    if (res.ok) {
-                        const data = await res.json();
-                        if (Array.isArray(data) && data.length > 0) {
-                            candles = data.map(c => ({
-                                time: c[0] + IST_OFFSET_SEC,
-                                open: parseFloat(c[3].toFixed(2)),
-                                high: parseFloat(c[2].toFixed(2)),
-                                low: parseFloat(c[1].toFixed(2)),
-                                close: parseFloat(c[4].toFixed(2))
-                            })).sort((a, b) => a.time - b.time);
-                            btcCandlesLoadedTf = tfInterval;
-                        }
-                    }
-                } catch (e) {
-                    console.warn("[BTC Chart] Direct Coinbase fetch failed:", e);
-                }
-            }
-
-            // 3. Server-side /api/marketCandles fallback
-            if (!candles || candles.length === 0) {
-                try {
-                    const res = await fetch(`/api/marketCandles?symbol=BTC&timeframe=${currentTf}&limit=1000&_t=${Date.now()}`, { cache: 'no-store' });
+                    const res = await fetch(marketCandlesUrl, { cache: 'no-store' });
                     if (res.ok) {
                         const json = await res.json();
-                        if (json && json.candles && json.candles.length > 0) {
-                            candles = json.candles;
+                        if (json && Array.isArray(json.candles) && json.candles.length >= 100) {
+                            candles = json.candles.map(c => ({
+                                time: c.time + IST_OFFSET_SEC,
+                                open: c.open,
+                                high: c.high,
+                                low: c.low,
+                                close: c.close
+                            }));
                             btcCandlesLoadedTf = tfInterval;
+                            currentFeedSource = json.source ? `VERCEL_${json.source}` : 'VERCEL_API';
                         }
                     }
                 } catch (e) {
@@ -3153,12 +3141,59 @@
                 }
             }
 
+            // 3. Direct Coinbase multi-batch fallback (5 chained batches = 1,550 bars ~16.1 days)
+            if (!candles || candles.length < 500) {
+                try {
+                    const granularity = tfInterval === '5m' ? 300 : 900;
+                    const batchesNeeded = needsFullHistory ? 5 : 1;
+                    let cbAll = [];
+                    let currentEnd = null;
+
+                    for (let b = 0; b < batchesNeeded; b++) {
+                        let url = `https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=${granularity}&_t=${Date.now()}`;
+                        if (currentEnd) {
+                            const endIso = new Date(currentEnd * 1000).toISOString();
+                            const startIso = new Date((currentEnd - 300 * granularity) * 1000).toISOString();
+                            url += `&start=${startIso}&end=${endIso}`;
+                        }
+                        const res = await fetch(url, { cache: 'no-store' });
+                        if (!res.ok) break;
+                        const data = await res.json();
+                        if (!Array.isArray(data) || data.length === 0) break;
+                        const sorted = data.sort((a, b) => a[0] - b[0]);
+                        cbAll = sorted.concat(cbAll);
+                        currentEnd = sorted[0][0] - 1;
+                    }
+
+                    if (cbAll.length > 0) {
+                        const map = new Map();
+                        if (!needsFullHistory && allMasterCandles && allMasterCandles.length > 0) {
+                            allMasterCandles.forEach(c => map.set(c.time, c));
+                        }
+                        cbAll.forEach(c => {
+                            const t = c[0] + IST_OFFSET_SEC;
+                            map.set(t, {
+                                time: t,
+                                open: parseFloat(c[3].toFixed(2)),
+                                high: parseFloat(c[2].toFixed(2)),
+                                low: parseFloat(c[1].toFixed(2)),
+                                close: parseFloat(c[4].toFixed(2))
+                            });
+                        });
+                        candles = Array.from(map.values()).sort((a, b) => a.time - b.time);
+                        btcCandlesLoadedTf = tfInterval;
+                        currentFeedSource = 'COINBASE';
+                    }
+                } catch (e) {
+                    console.warn("[BTC Chart] Direct Coinbase multi-batch fetch failed:", e);
+                }
+            }
+
             if (candles && candles.length > 0) {
                 return candles;
             }
 
-            // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
-            console.error("[BTC Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds (Binance, Coinbase, /api/marketCandles). ZERO synthetic candles generated.");
+            console.error("[BTC Chart] F12 ERROR: Real market candle data unavailable from all upstream feeds. ZERO synthetic candles generated.");
             return [];
         }
 

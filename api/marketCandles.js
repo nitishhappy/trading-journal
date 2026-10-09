@@ -303,14 +303,22 @@ export default async function handler(req, res) {
         }));
       }
 
-      if (candles.length === 0) {
-        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?interval=${normTf}&range=1d`);
-        if (yahooJson) candles = parseYahooCandles(yahooJson);
+      let source = "BINANCE";
+      if (candles.length < 500) {
+        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?interval=${normTf}&range=1mo`);
+        if (yahooJson) {
+          const yCandles = parseYahooCandles(yahooJson);
+          if (yCandles && yCandles.length > 0) {
+            candles = yCandles;
+            source = "YAHOO_FINANCE";
+          }
+        }
       }
 
       return res.status(200).json({
         success: candles.length > 0,
         symbol: "BTC",
+        source,
         timeframe: normTf,
         candles,
         message: candles.length === 0 ? "No BTC candle data available." : undefined
