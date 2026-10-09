@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.71 — 09 Oct 2026 — High R:R Visualization for BTC Interactive Chart
+- **Interactive Chart High R:R Visualization (`btc_interactive_chart.html`)**:
+  - Implemented automatic Risk:Reward ratio calculation (`getLevelRiskReward`) for all BTC tactical setups strictly evaluated against TP1 conservative targets.
+  - Setups with **TP1 R:R $\ge 1:2.5$** are dynamically highlighted across the chart and side panel:
+    - **TradingView Canvas Price Lines**: Enhanced line thickness (3px) and axis title label with star badge and exact R:R ratio (e.g. `⭐ [B1] 1:3.9` or `⭐ [KB4] 1:3.3`).
+    - **Side Panel Cards**: Added prominent gold badge `⭐ 1:X.X`, amber gradient left-border glow, and gold-highlighted R:R target pill.
+    - Preserved binary directional color coding (Green for Bullish, Red for Bearish) to maintain execution clarity.
+
 ### v2.3.70 — 07 Oct 2026 — SP500 & Gold Firestore Query Optimization & Fast Webhook Response
 - **Firestore Read & Performance Optimization**:
   - Replaced collection-wide scans in `api/marketCandles.js` (SP500 & GOLD) and `api/sp500Ohlc.js` with document ID range queries (`SP500_5m_<cutoff>`), reducing document reads per request by over 95%.
