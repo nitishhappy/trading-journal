@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-09T13:39:24+05:30",
+    "timeDisplay": "01:39 PM, Oct 09",
+    "price": "22485",
+    "bias": "bullish",
+    "behavior": "[FRI 13:39] [B1]: 5-min bullish reversal candle closing above 22485 off the 22470-22485 demand shelf",
+    "tp": "22535 / 22575",
+    "sl": "22455",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T13:39:24+05:30",
+    "timeDisplay": "01:39 PM, Oct 09",
+    "price": "22535",
+    "bias": "bullish",
+    "behavior": "[FRI 13:39] [B2]: Sustained 5-min close ABOVE 22535 with active futures volume confirming absorption",
+    "tp": "22585 / 22625",
+    "sl": "22495",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T13:39:24+05:30",
+    "timeDisplay": "01:39 PM, Oct 09",
+    "price": "22520",
+    "bias": "bearish",
+    "behavior": "[FRI 13:39] [S1]: Wick sweep above 22534 followed by a 5-min bearish rejection closing below 22520",
+    "tp": "22475 / 22440",
+    "sl": "22550",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T13:39:24+05:30",
+    "timeDisplay": "01:39 PM, Oct 09",
+    "price": "22460",
+    "bias": "bearish",
+    "behavior": "[FRI 13:39] [S2]: Sustained 5-min close BELOW 22460 confirming breakdown of intraday consolidation base",
+    "tp": "22410 / 22370",
+    "sl": "22500",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-09T10:39:52+05:30",
     "timeDisplay": "10:39 AM, Oct 09",
     "price": "22516",
@@ -938,6 +982,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261009_133927",
+    "timestamp": "2026-10-09T13:39:27+05:30",
+    "timeDisplay": "01:39 PM, Oct 09",
+    "spot": "22508.25",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:38 PM IST - Oct 09, 2026 | Spot: 22508.25 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n> ⚠️ **THETA CRUSH DAY**: India VIX is down -4.71%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes. Use recommended spread structures to neutralize decay.\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict No-Trade Band: 22485.00 – 22530.00. Spot price is consolidating tightly inside this 45-point upper shelf following the morning impulse from 22294.75 to 22534.40. Taking fresh naked option entries within this band exposes positions to aggressive time decay.\n- OI Straddle Pinning: Call writers at 22550 and put writers at 22500 are locking spot in a narrow consolidation corridor. Range contraction ahead of the 02:00 PM European volume crossover means chop risk remains elevated until either boundary breaks decisively.\n\n4. High Momentum / Explosive Zones:\n- [Day High Short-Covering Squeeze] (Above 22535.00): A decisive 5-minute candle close above Day High 22534.40 triggers stop-loss cascades of intraday 22500-22550 CE sellers, unlocking an explosive expansion move toward 22585.00 and 22625.00.\n- [Long Unwinding Cascade] (Below 22460.00): A decisive 5-minute candle close below 22460.00 breaks the afternoon higher-low structure and VWAP defense, accelerating long liquidation down to 22410.00 and 22370.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Demand Shelf Retest & Rebound): 5-min bullish reversal candle closing above 22485.00 following a successful retest of the 22470.00-22485.00 demand shelf. | TP: 22535.00 / 22575.00 | SL: 22455.00 | 💡 Buy 22500 CE + Sell 22550 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout & Pre-Close Expansion): Sustained 5-min candle close ABOVE 22535.00 with active futures volume confirming institutional absorption. | TP: 22585.00 / 22625.00 | SL: 22495.00 | 💡 Buy 22500 CE + Sell 22550 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Liquidity Sweep & Trap): Sharp wick sweep above 22534.40 followed by an immediate 5-min bearish rejection closing below 22520.00. | TP: 22475.00 / 22440.00 | SL: 22550.00 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Intraday Base Breakdown & Flush): Sustained 5-min candle close BELOW 22460.00 confirming breakdown of consolidation base with expanding red volume. | TP: 22410.00 / 22370.00 | SL: 22500.00 | 💡 Buy 22450 PE + Sell 22400 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261009_103955",
     "timestamp": "2026-10-09T10:39:55+05:30",
     "timeDisplay": "10:39 AM, Oct 09",
