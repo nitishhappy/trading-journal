@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-09T11:16:42+05:30",
+    "timeDisplay": "11:16 AM, Oct 09",
+    "price": "4207.5",
+    "bias": "bullish",
+    "behavior": "[FRI 11:16] [G_B2]: Day High BSL Sweep & Breakout Acceleration Level",
+    "tp": "4218.00 / 4230.00",
+    "sl": "4201.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T11:16:42+05:30",
+    "timeDisplay": "11:16 AM, Oct 09",
+    "price": "4195.0",
+    "bias": "bullish",
+    "behavior": "[FRI 11:16] [G_B1]: Prior Breakout Flip Shelf & 15M FVG Demand Retest",
+    "tp": "4207.00 / 4218.00",
+    "sl": "4186.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T11:16:42+05:30",
+    "timeDisplay": "11:16 AM, Oct 09",
+    "price": "4208.0",
+    "bias": "bearish",
+    "behavior": "[FRI 11:16] [G_S1]: Day High Supply Rejection & SFP Exhaustion Zone",
+    "tp": "4192.00 / 4182.00",
+    "sl": "4212.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T11:16:42+05:30",
+    "timeDisplay": "11:16 AM, Oct 09",
+    "price": "4190.0",
+    "bias": "bearish",
+    "behavior": "[FRI 11:16] [G_S2]: Structural Flip Invalidation & Breakdown Trigger",
+    "tp": "4178.00 / 4165.00",
+    "sl": "4196.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-09T11:01:05+05:30",
     "timeDisplay": "11:01 AM, Oct 09",
     "price": "4202.0",
@@ -476,6 +520,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261009_111645",
+    "timestamp": "2026-10-09T11:16:45+05:30",
+    "timeDisplay": "11:16 AM, Oct 09",
+    "spot": "4202.56",
+    "trigger": "Structural Invalidation (+15.4 pts incremental shift from previous trigger 4187.19",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (11:15 AM IST - Oct 09, 2026 | Spot: 4202.56 | Trigger: Structural Invalidation (+15.4 pts incremental shift from previous trigger 4187.19))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics & Pre-London Capital Deployment (11:15 AM IST / 05:45 UTC):** Spot Gold (XAU/USD) is currently auctioning at **4202.56**, extending an aggressive intraday bull run with an incremental upward structural displacement of **+15.37 points** from the prior trigger pivot (**4187.19**). Price has breached the major institutional round-number psychological barrier of **$4200.00**, tagging a fresh session high at **4207.50** (expanded range: **Day Low 4130.82 to Day High 4207.50**). Ahead of the official European/London cash market open, institutional market makers are actively running buy-stops above key structural swing peaks, testing liquidity absorption in the upper price quadrant.\n* **DXY (US Dollar Index) Inverse Correlation:** The US Dollar Index (DXY) remains under pronounced selling pressure, sliding toward 101.25–101.35. Weakness in the greenback is generating consistent mechanical tailwinds for spot bullion, driving cross-currency capital rotation into precious metals as European dealers prepare their books.\n* **US 10-Year Benchmark Treasury Yields:** US 10-Year Treasury Yields continue their intraday drift lower toward 4.00%–4.02%. Declining real yields reduce the non-interest-bearing carry penalty of gold, reinforcing aggressive dip-buying by systematic macro funds and multi-asset trend-following algorithms.\n* **Macro Catalyst Outlook & Desk Flow:** Market participants are positioning ahead of key European balance and industrial prints, alongside high-impact US macro data releases scheduled during the London/New York overlap. Spot bullion dealing desks report heavy limit bid interest clustered around previous structural breakout shelves, while momentum desks are trailing stops tightly behind the current expansion leg.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Market Structure & Range Distribution (M15 / H1):** On the 15-minute and 1-hour charts, Gold maintains an undisputed bullish institutional order flow structure characterized by consecutive Break of Structure (BOS) prints and price acceptance above previous session supply. Across the active intraday range (**4130.82 – 4207.50**, spanning 76.68 points), the 50% discount/equilibrium boundary rests at **4169.16**. Trading at **4202.56**, spot price is consolidating in extreme premium directly beneath the freshly printed Day High.\n* **Buy-Side Liquidity (BSL) Pools:**\n  * **Immediate Session BSL:** Clustered stop-loss buy orders and breakout liquidity pools positioned directly above **4207.50 – 4210.00**.\n  * **HTF Extension BSL:** Unmitigated swing highs and extension targets resting at **4218.00** and **4230.00**.\n* **Sell-Side Liquidity (SSL) Pools:**\n  * **Internal Structural SSL:** Resting sell stops and trailing liquidity accumulated below the minor pullback shelf at **4192.00 – 4195.00**.\n  * **Macro Session SSL:** Deeper institutional stops positioned below the primary 15M demand origin at **4178.00** and the session low base at **4130.82**.\n* **Fair Value Gaps (FVG) & Order Blocks (OB):**\n  * **15-Min Bullish Displacement FVG / Flip Shelf:** The aggressive displacement through $4200 has established a newly mitigated Bullish FVG and breaker shelf between **4192.50 and 4196.00**, representing primary institutional demand on any corrective pullback.\n  * **Overhead Supply / HTF Liquidity Cap:** A distribution zone between **4207.50 and 4212.00**, where smart money algorithms may seek to engineer a Swing Failure Pattern (SFP) before London open or ignite a momentum expansion leg.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Defined Corridor:** **4198.00 – 4204.50** (Width: 6.50 points)\n* **Trading Directive:** **STRICT STAND-ASIDE INSIDE THIS ZONE.**\n* **Rationale:** Spot price (4202.56) is oscillating right around the $4200 psychological handle and directly beneath the morning high (4207.50). Trading within this tight 6.50-point corridor exposes positions to two-way wick traps, spread spikes, and false breakout fake-outs prior to the injection of London volume. Capital must remain flat until an impulsive breakout above 4207.50 or a clean retest of lower demand occurs.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Breakout Acceleration (> 4208.50):** An impulsive 5-minute candle body close firmly above **4207.50** sweeps resting Day High buy-stops, igniting an explosive momentum expansion targeting **4218.00** and **4230.00**.\n* **Bearish Liquidation Cascade (< 4190.00):** A decisive 5M/15M candle body close below the **4192.00 – 4195.00** prior resistance flip shelf invalidates the breakout, triggering cascading long liquidations down into **4178.00** and **4165.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **4192.00 – 4196.00** Retest | Corrective low-volume pullback into 15M Bullish FVG / Flip Shelf with lower-wick rejection, followed by a 5M bullish engulfing/CHoCH candle closing back above 4197.50 with expanding buy volume. | **TP1:** 4207.00<br>**TP2:** 4218.00 | **4186.50** | 1:2.2 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **4208.50** Breakout | Decisive 5M/15M candle body close cleanly above Day High (4207.50) with expanding volume and positive delta, sustaining acceptance above 4208.50 without upper rejection wicks. | **TP1:** 4218.00<br>**TP2:** 4230.00 | **4201.50** | 1:2.3 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4206.50 – 4209.50** Sweep | Swing Failure Pattern (SFP) sweeping Day High liquidity (4207.50) with sharp upper-wick exhaustion, followed by an impulsive 5M bearish displacement candle closing back below 4201.00. | **TP1:** 4192.00<br>**TP2:** 4182.00 | **4212.50** | 1:2.4 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **4190.00** Breakdown | Impulsive 5M/15M candle body close cleanly beneath the 4192.00 flip shelf with expanding sell volume and red candle displacement, confirming bull trap / auction failure. | **TP1:** 4178.00<br>**TP2:** 4165.00 | **4196.50** | 1:2.3 |"
+  },
+  {
     "id": "GOLD_20261009_110108",
     "timestamp": "2026-10-09T11:01:08+05:30",
     "timeDisplay": "11:01 AM, Oct 09",
