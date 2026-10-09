@@ -2543,7 +2543,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 - **S&P 500 Watchdog Catch-Up Guard (`C:\Nitish\ClaudeApps\Utilities\SP500 Setup\sp500_watchdog.py`)**:
   - Implemented smart first-run catch-up detection for S&P 500: if the laptop was asleep during the 07:00 PM – 07:14 PM IST opening bell window, the watchdog now automatically triggers a `"Smart Catch-Up Run (First US Session Run of the Day)"` the moment the machine wakes up in the evening.
   - Executed manual Ad-Hoc Copilot run generating and publishing today's S&P 500 AI Briefing & Levels (`SP_B1`, `SP_B2`, `SP_S1`, `SP_S2`) at Spot $7792.52.
-- **Files Modified**: `SP500 Setup/sp500_watchdog.py`, `js/data/sp500_daily_plan.js`, `README.md`
+### v2.3.99 — 09 Oct 2026 — Bitcoin Interactive Chart 15-21 Day Continuous Historical Depth Multi-Batch Fetching
+
+- **Bitcoin Interactive Chart Continuous Historical Depth (`btc_interactive_chart.html`, `api/marketCandles.js`)**:
+  - **Multi-Batch Historical Ingestion**: Upgraded `loadRealBtcCandles()` from a single 300-bar fetch (which only spanned ~3 days back to Oct 6th) to automated multi-batch fetching from Binance:
+    - **15M Timeframe**: Chained 2 batches of 1,000 candles (`limit=1000` + `endTime`), loading 2,000 bars representing **~20.8 continuous days** of price action.
+    - **5M Timeframe**: Chained 4 batches of 1,000 candles, loading 4,000 bars representing **~13.9 continuous days** of price action.
+  - **Lightweight Incremental Delta Auto-Refresh**: Configured the 15-second background auto-refresh to fetch a fast 100-candle delta and merge with in-memory historical cache, ensuring zero rate-limiting and instant rendering without re-fetching thousands of historical candles.
+  - **API Fallback Expansion**: Updated `/api/marketCandles.js` BTC handler to support `limit=1000` query parameter for deep historical retrieval.
+- **Files Modified**: `btc_interactive_chart.html`, `api/marketCandles.js`, `README.md`
+
 
 
 

@@ -291,7 +291,8 @@ export default async function handler(req, res) {
       let candles = [];
       const reqTf = (req.query.timeframe || req.query.tf || req.query.interval || "15m").toLowerCase();
       const normTf = (reqTf.includes("5m") && !reqTf.includes("15")) ? "5m" : "15m";
-      const binanceJson = await fetchUrl(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${normTf}&limit=100`);
+      const limit = Math.min(parseInt(req.query.limit || "1000", 10), 1000);
+      const binanceJson = await fetchUrl(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${normTf}&limit=${limit}`);
       if (Array.isArray(binanceJson) && binanceJson.length > 0) {
         candles = binanceJson.map(c => ({
           time: Math.floor(c[0] / 1000),

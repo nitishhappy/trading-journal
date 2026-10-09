@@ -1970,7 +1970,7 @@
             await reloadPlanDataScript('btc');
 
             const tempLevels = getBtcKeyLevels(selectedBriefingTimestamp);
-            const candles = await loadRealBtcCandles(tempLevels.levels);
+            const candles = await loadRealBtcCandles(tempLevels.levels, forceFit);
             updateFeedStatusBadge(candles);
 
             if (candles && candles.length > 0) {
@@ -3049,23 +3049,65 @@
         }
 
 
-        async function loadRealBtcCandles(levels) {
+        let btcCandlesLoadedTf = null;
+
+        async function loadRealBtcCandles(levels, forceFullHistory = false) {
             const tfInterval = currentTf === '5m' ? '5m' : '15m';
             let candles = null;
 
+            const needsFullHistory = forceFullHistory || 
+                                     btcCandlesLoadedTf !== tfInterval || 
+                                     !allMasterCandles || 
+                                     allMasterCandles.length < 500;
+
             // 1. Direct Binance BTCUSDT klines (uncached, CORS supported natively)
             try {
-                const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=300&_t=${Date.now()}`, { cache: 'no-store' });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
-                        candles = data.map(c => ({
+                if (needsFullHistory) {
+                    // Target 15-21 days of continuous historical depth:
+                    // 15m: 2 batches of 1000 = 2000 candles (~20.8 days)
+                    // 5m:  4 batches of 1000 = 4000 candles (~13.9 days)
+                    const batchesNeeded = tfInterval === '5m' ? 4 : 2;
+                    let rawAll = [];
+                    let oldestEnd = null;
+
+                    for (let b = 0; b < batchesNeeded; b++) {
+                        const endParam = oldestEnd ? `&endTime=${oldestEnd - 1}` : '';
+                        const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=1000${endParam}&_t=${Date.now()}`, { cache: 'no-store' });
+                        if (!res.ok) break;
+                        const chunk = await res.json();
+                        if (!Array.isArray(chunk) || chunk.length === 0) break;
+                        rawAll = chunk.concat(rawAll);
+                        oldestEnd = chunk[0][0];
+                    }
+
+                    if (rawAll.length > 0) {
+                        candles = rawAll.map(c => ({
                             time: Math.floor(c[0] / 1000) + IST_OFFSET_SEC,
                             open: parseFloat(parseFloat(c[1]).toFixed(2)),
                             high: parseFloat(parseFloat(c[2]).toFixed(2)),
                             low: parseFloat(parseFloat(c[3]).toFixed(2)),
                             close: parseFloat(parseFloat(c[4]).toFixed(2))
                         }));
+                        btcCandlesLoadedTf = tfInterval;
+                    }
+                } else {
+                    // Ultra-fast 15s auto-refresh delta (fetch latest 100 bars and merge with existing history)
+                    const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=100&_t=${Date.now()}`, { cache: 'no-store' });
+                    if (res.ok) {
+                        const chunk = await res.json();
+                        if (Array.isArray(chunk) && chunk.length > 0) {
+                            const newBars = chunk.map(c => ({
+                                time: Math.floor(c[0] / 1000) + IST_OFFSET_SEC,
+                                open: parseFloat(parseFloat(c[1]).toFixed(2)),
+                                high: parseFloat(parseFloat(c[2]).toFixed(2)),
+                                low: parseFloat(parseFloat(c[3]).toFixed(2)),
+                                close: parseFloat(parseFloat(c[4]).toFixed(2))
+                            }));
+                            const candleMap = new Map();
+                            allMasterCandles.forEach(c => candleMap.set(c.time, c));
+                            newBars.forEach(c => candleMap.set(c.time, c));
+                            candles = Array.from(candleMap.values()).sort((a, b) => a.time - b.time);
+                        }
                     }
                 }
             } catch (e) {
@@ -3087,6 +3129,7 @@
                                 low: parseFloat(c[1].toFixed(2)),
                                 close: parseFloat(c[4].toFixed(2))
                             })).sort((a, b) => a.time - b.time);
+                            btcCandlesLoadedTf = tfInterval;
                         }
                     }
                 } catch (e) {
@@ -3097,11 +3140,12 @@
             // 3. Server-side /api/marketCandles fallback
             if (!candles || candles.length === 0) {
                 try {
-                    const res = await fetch(`/api/marketCandles?symbol=BTC&timeframe=${currentTf}&_t=${Date.now()}`, { cache: 'no-store' });
+                    const res = await fetch(`/api/marketCandles?symbol=BTC&timeframe=${currentTf}&limit=1000&_t=${Date.now()}`, { cache: 'no-store' });
                     if (res.ok) {
                         const json = await res.json();
                         if (json && json.candles && json.candles.length > 0) {
                             candles = json.candles;
+                            btcCandlesLoadedTf = tfInterval;
                         }
                     }
                 } catch (e) {
