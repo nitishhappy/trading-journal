@@ -2507,6 +2507,14 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Integrated explicit **Sell-Side Liquidity (SSL) — Long Liquidation Cascade Floor** (`[S2]`, `[KS2]`) and **Buy-Side Liquidity (BSL) — Short Squeeze Expansion Trigger** (`[B2]`, `[KB2]`) documentation in Bitcoin level cards and confirmation price action descriptions.
 - **Files Modified**: `btc_interactive_chart.html`, `README.md`
 
+### v2.3.98 — 09 Oct 2026 — S&P 500 Watchdog Smart Catch-Up Guard & Automated Recovery
+
+- **S&P 500 Watchdog Catch-Up Guard (`C:\Nitish\ClaudeApps\Utilities\SP500 Setup\sp500_watchdog.py`)**:
+  - Implemented smart first-run catch-up detection for S&P 500: if the laptop was asleep during the 07:00 PM – 07:14 PM IST opening bell window, the watchdog now automatically triggers a `"Smart Catch-Up Run (First US Session Run of the Day)"` the moment the machine wakes up in the evening.
+  - Executed manual Ad-Hoc Copilot run generating and publishing today's S&P 500 AI Briefing & Levels (`SP_B1`, `SP_B2`, `SP_S1`, `SP_S2`) at Spot $7792.52.
+- **Files Modified**: `SP500 Setup/sp500_watchdog.py`, `js/data/sp500_daily_plan.js`, `README.md`
+
+
 
 
 
