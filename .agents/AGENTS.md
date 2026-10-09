@@ -25,6 +25,15 @@
 - **MANDATORY**: Whenever you are unable to complete a specified part of a task due to technical constraints, missing data, timeouts, or tool failures, **DO NOT silently skip it**.
 - You must explicitly call out what is being skipped and why, or ask for user intervention, before proceeding with a partial execution.
 
+### No Hardcoding & Asset Configuration Rule (Configurable Parameters)
+- **MANDATORY**: Never hardcode asset-specific parameters, numeric thresholds, multipliers, or ratios (such as R:R baselines, alert thresholds, or level offsets) directly into source code, scripts, HTML charts, or client-side JavaScript.
+- **Dedicated Asset Configs**: All asset parameters must be maintained in their respective asset configuration file (`config_<asset>.txt`) located within each asset's directory (e.g., `C:\Nitish\ClaudeApps\Utilities\<Asset Setup>\config_<asset>.txt`).
+- **Descriptive Documentation Required**: Every configuration file MUST include descriptive comments explaining:
+  - The purpose of each parameter
+  - The expected format / unit / threshold
+  - The downstream impact on charts, algorithms, or alerts
+- **Automated Client Bridges**: When client-side applications or static charts need access to desktop configurations, an automated bridge/sync mechanism (e.g., `sync_briefing_to_daily_plan.py` exporting to `rr_config.js`) must be maintained rather than falling back to unmanaged hardcoded values.
+
 ---
 
 ## Pre-Push Checklist (MUST FOLLOW)

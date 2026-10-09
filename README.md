@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.73 — 09 Oct 2026 — Agent Workflow Rule: No Hardcoding & Asset Configuration Invariant
+- **Permanent Agent Workflow Rule (`.agents/AGENTS.md`)**:
+  - Formalized the **No Hardcoding & Asset Configuration Rule** into the workspace agent instructions.
+  - Prohibits hardcoding numeric thresholds, R:R baselines, multipliers, or magic constants in source code, client charts, or scripts.
+  - Mandates storing asset parameters in dedicated, well-commented configuration files (`config_<asset>.txt`) in each asset's utility setup folder.
+  - Mandates maintaining automated sync bridges (e.g., `rr_config.js`) so client web applications consume configuration dynamically.
+
 ### v2.3.72 — 09 Oct 2026 — Multi-Asset Configurable High R:R Baseline & Universal Chart Highlighting
 - **Multi-Asset High R:R Config Architecture (`config_<asset>.txt`)**:
   - Established dedicated configuration files (`HIGH_RR_BASELINE=2.5`) across all asset directories in `C:\Nitish\ClaudeApps\Utilities`:
