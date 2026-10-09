@@ -178,6 +178,22 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.72 — 09 Oct 2026 — Multi-Asset Configurable High R:R Baseline & Universal Chart Highlighting
+- **Multi-Asset High R:R Config Architecture (`config_<asset>.txt`)**:
+  - Established dedicated configuration files (`HIGH_RR_BASELINE=2.5`) across all asset directories in `C:\Nitish\ClaudeApps\Utilities`:
+    - `Bitcoin Setup/config_btc.txt`
+    - `Gold Setup v2/config_gold.txt`
+    - `SP500 Setup/config_sp500.txt`
+    - `EURUSD Setup/config_eurusd.txt`
+    - `Nifty Predictions/config_nifty.txt` & `Nifty/config_nifty.txt`
+  - Automated continuous synchronization via `sync_briefing_to_daily_plan.py` generating `trading-journal/js/data/rr_config.js`.
+- **Universal Interactive Chart Visualization**:
+  - Extended configurable High R:R detection (strictly evaluated on TP1) across all 5 asset interactive charts (`btc`, `gold`, `sp500`, `eurusd`, `nifty`).
+  - Highlights qualifying setups with:
+    - 3px chart price lines and axis star tags (`⭐ [Tag] 1:X.X`).
+    - Side card header badges (`⭐ 1:X.X R:R`), gold left-border glow, and radiant target pills.
+  - Added multi-tier resolution: URL param (`?min_rr=...`) → localStorage (`rr_baseline_<asset>`) → `window.rrConfig` → default `2.5`.
+
 ### v2.3.71 — 09 Oct 2026 — High R:R Visualization for BTC Interactive Chart
 - **Interactive Chart High R:R Visualization (`btc_interactive_chart.html`)**:
   - Implemented automatic Risk:Reward ratio calculation (`getLevelRiskReward`) for all BTC tactical setups strictly evaluated against TP1 conservative targets.
