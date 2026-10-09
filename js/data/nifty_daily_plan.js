@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-09T10:39:52+05:30",
+    "timeDisplay": "10:39 AM, Oct 09",
+    "price": "22516",
+    "bias": "bullish",
+    "behavior": "[FRI 10:39] [B1]: Sustained 5m close ABOVE 22,516 with active futures volume confirming absorption of 22,500 CE call sellers",
+    "tp": "22,570 / 22,625",
+    "sl": "22,475",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T10:39:52+05:30",
+    "timeDisplay": "10:39 AM, Oct 09",
+    "price": "22395",
+    "bias": "bullish",
+    "behavior": "[FRI 10:39] [B2]: Pullback into 22,385\u201322,405 near 15M ORB High (22,383.45) with 5m bullish reversal candle confirmation",
+    "tp": "22,485 / 22,530",
+    "sl": "22,350",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T10:39:52+05:30",
+    "timeDisplay": "10:39 AM, Oct 09",
+    "price": "22440",
+    "bias": "bearish",
+    "behavior": "[FRI 10:39] [S1]: Sustained 5m close BELOW 22,440 triggering long unwinding back to 15M ORB High demand zone",
+    "tp": "22,390 / 22,350",
+    "sl": "22,475",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-09T10:39:52+05:30",
+    "timeDisplay": "10:39 AM, Oct 09",
+    "price": "22525",
+    "bias": "bearish",
+    "behavior": "[FRI 10:39] [S2]: Day High 22,516 sweep into 22,525 with sharp 5m rejection close back below 22,495",
+    "tp": "22,440 / 22,390",
+    "sl": "22,535",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-09T10:29:51+05:30",
     "timeDisplay": "10:29 AM, Oct 09",
     "price": "22210",
@@ -894,6 +938,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261009_103955",
+    "timestamp": "2026-10-09T10:39:55+05:30",
+    "timeDisplay": "10:39 AM, Oct 09",
+    "spot": "22487",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (10:38 AM IST - Oct 09, 2026 | Spot: 22487 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain Mapping))\n\n> ⚠️ **VIX WARNING ENFORCED**: THETA CRUSH DAY: India VIX is down -4.38%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- 22,440 – 22,516 Spot Range: Spot index is consolidating in a tight 76-point range between the intraday consolidation base (22,440) and Day High (22,515.95). With India VIX plunging -4.38% and futures volume at baseline (1x), holding naked long options inside this corridor guarantees severe theta burn.\n- Option Chain Concentration: Heavy Call writing buildup at 22,500 CE forms an immediate resistance ceiling, while 22,400–22,450 Put writers anchor the lower boundary. Trading inside 22,440 – 22,516 without confirmed volume breakout offers negative expected value.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Momentum Breakout] (Sustained 5m close ABOVE 22,516): Clears Day High (22,515.95) and forces immediate short-covering among trapped 22,500 CE call sellers, accelerating price toward 22,570 and 22,625.\n- [Bearish Breakdown Momentum] (Sustained 5m close BELOW 22,440): Breaks the intraday flag floor, triggering long unwinding from morning breakout buyers back toward the 15M ORB High retest zone (22,385 – 22,350).\n- [Liquidity Sweep Rejection] (False Breakout Wick into 22,520–22,530 rejected below 22,495): Traps late breakout longs above Day High with upper rejection wick, creating a rapid mean-reversion drop back to 22,440.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day High Breakout Expansion): Sustained 5-min close ABOVE 22,516 with active futures volume confirming absorption of 22,500 CE call sellers. | TP: 22,570 / 22,625 | SL: 22,475 | 💡 Buy 22,500 CE + Sell 22,550 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (ORB High Retest Demand Bounce): Price pulls back to 22,385 – 22,405 near 15M ORB High (22,383.45), prints a 5-min bullish reversal candle with futures volume uptick. | TP: 22,485 / 22,530 | SL: 22,350 | 💡 Buy 22,450 CE + Sell 22,500 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Consolidation Floor Breakdown): Sustained 5-min close BELOW 22,440 with red futures volume surge confirming long unwinding. | TP: 22,390 / 22,350 | SL: 22,475 | 💡 Buy 22,450 PE + Sell 22,400 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day High Liquidity Sweep Rejection): Price sweeps Day High 22,516 into 22,525 but immediately rejects and closes 5-min candle back below 22,495. | TP: 22,440 / 22,390 | SL: 22,535 | 💡 Buy 22,500 PE + Sell 22,450 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261009_102953",
     "timestamp": "2026-10-09T10:29:53+05:30",
     "timeDisplay": "10:29 AM, Oct 09",
