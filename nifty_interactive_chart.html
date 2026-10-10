@@ -636,6 +636,22 @@
             color: #fbbf24 !important;
         }
 
+        .btn-high-rr {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #94a3b8;
+        }
+        .btn-high-rr:hover {
+            border-color: rgba(245, 158, 11, 0.5);
+            color: #fbbf24;
+        }
+        .btn-high-rr.active {
+            background: rgba(245, 158, 11, 0.22) !important;
+            border-color: #f59e0b !important;
+            color: #fbbf24 !important;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+        }
+
         .status-pill {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
@@ -941,9 +957,12 @@
                         <span>C: <strong id="ohlc-c">--</strong></span>
                         <span id="ohlc-change-pill" class="ohlc-chg">--</span>
                     </div>
-                    <span id="bar-close-badge" class="timestamp-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</span>
                 </div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                    <button id="btn-high-rr-filter" class="btn btn-high-rr" onclick="toggleHighRROnly()" title="Filter to show only High Risk:Reward setups (TP1 R:R >= baseline)" style="padding: 0.2rem 0.65rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; border-radius: 6px; transition: all 0.2s;">
+                        <span>⭐</span> <span id="high-rr-filter-label">High R:R</span>
+                    </button>
+                    <span id="bar-close-badge" class="timestamp-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</span>
                     <button id="btn-toggle-sidebar" class="btn" onclick="toggleTriggersPanel()" title="Toggle Trading Levels Panel" style="padding: 0.2rem 0.6rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px;">
                         <span>📋</span> <span id="sidebar-toggle-text">Levels</span>
                     </button>
@@ -1022,6 +1041,7 @@
         const REPLAY_SPEED_MS = 1200;
 
         document.addEventListener('DOMContentLoaded', () => {
+            initHighRRFilter();
             checkEmbedMode();
             initChartApp();
             setupEventListeners();
@@ -1886,6 +1906,45 @@
             }
         }
 
+        let showHighRROnly = false;
+
+        function updateHighRRFilterUI() {
+            const btn = document.getElementById('btn-high-rr-filter');
+            const label = document.getElementById('high-rr-filter-label');
+            const baseline = getHighRRBaseline();
+            if (label) {
+                label.innerText = `High R:R (≥1:${baseline})`;
+            }
+            if (btn) {
+                if (showHighRROnly) {
+                    btn.classList.add('active');
+                    btn.title = `Currently showing ONLY High Risk:Reward setups (TP1 ≥ 1:${baseline}). Click to show all levels.`;
+                } else {
+                    btn.classList.remove('active');
+                    btn.title = `Filter to show ONLY High Risk:Reward setups (TP1 ≥ 1:${baseline}). Click to toggle.`;
+                }
+            }
+        }
+
+        function toggleHighRROnly() {
+            showHighRROnly = !showHighRROnly;
+            localStorage.setItem('filter_high_rr_only_nifty', showHighRROnly ? 'true' : 'false');
+            updateHighRRFilterUI();
+            renderLevelsAndCards();
+            showToast(
+                showHighRROnly ? "⭐ Filter: High R:R Only" : "📋 Filter: Showing All Levels",
+                showHighRROnly ? `Displaying setups with TP1 R:R ≥ 1:${getHighRRBaseline()}` : "Displaying all trade setups"
+            );
+        }
+
+        function initHighRRFilter() {
+            const saved = localStorage.getItem('filter_high_rr_only_nifty');
+            if (saved !== null) {
+                showHighRROnly = (saved === 'true');
+            }
+            updateHighRRFilterUI();
+        }
+
         function getHighRRBaseline() {
             const assetKey = 'nifty';
             const urlParams = new URLSearchParams(window.location.search);
@@ -2006,8 +2065,6 @@
             const raisedTimeStr = levelsData.timeDisplay || "10:35 AM, Sep 09";
             const bBadge = document.getElementById('briefing-time-badge');
             if (bBadge) bBadge.innerText = `📌 Plan Raised: ${raisedTimeStr}`;
-            const lCount = document.getElementById('levels-count');
-            if (lCount) lCount.innerText = `${levelsData.levels.length} Levels`;
 
             const returnBtn = document.getElementById('btn-return-latest');
             if (returnBtn) {
@@ -2069,6 +2126,7 @@
             }
             activePriceLines = [];
 
+            let matchingCount = 0;
             levelsData.levels.forEach((lvl, idx) => {
                 const tag = extractTag(lvl.behavior) || (lvl.bias === 'bullish' ? `[B${idx+1}]` : `[S${idx+1}]`);
                 // Simple: tag contains B = buy (green), tag contains S = sell (red)
@@ -2095,6 +2153,11 @@
 
                 const rrInfo        = getLevelRiskReward(lvl.price, lvl.sl, lvl.tp);
                 const isHighRR      = Boolean(rrInfo && rrInfo.isHighRR);
+
+                if (showHighRROnly && !isHighRR) {
+                    return;
+                }
+                matchingCount++;
 
                 // Configurable High R:R setups (>= baseline strictly TP1) get prominent 3px line width & star badge title
                 const lineWidth     = isHighRR ? 3 : (isSolid ? 2 : 1);
@@ -2155,6 +2218,27 @@
 
                 levelsListEl.appendChild(card);
             });
+
+            const lCount = document.getElementById('levels-count');
+            if (lCount) {
+                if (showHighRROnly) {
+                    lCount.innerText = `${matchingCount} High R:R Levels`;
+                } else {
+                    lCount.innerText = `${levelsData.levels.length} Levels`;
+                }
+            }
+
+            if (levelsListEl && levelsListEl.children.length === 0) {
+                if (showHighRROnly) {
+                    levelsListEl.innerHTML = `
+                        <div style="padding: 2.5rem 1rem; text-align: center; color: #94a3b8; font-size: 0.85rem;">
+                            <div style="font-size: 1.8rem; margin-bottom: 0.5rem;">⭐</div>
+                            <div>No High R:R setups (TP1 ≥ 1:${getHighRRBaseline()}) found in this briefing run.</div>
+                            <button class="btn btn-high-rr" onclick="toggleHighRROnly()" style="margin: 0.85rem auto 0; display: inline-flex; padding: 0.35rem 0.85rem; font-size: 0.78rem;">Show All Levels</button>
+                        </div>
+                    `;
+                }
+            }
 
             if (levelsSection) {
                 levelsSection.scrollTop = prevScrollTop;

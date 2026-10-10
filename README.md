@@ -2584,6 +2584,20 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added all companion `*_historical_briefings.js` files to `ASSETS` cache in `sw.js` for seamless offline viewing on mobile devices.
 - **Files Modified**: `api/marketCandles.js`, `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `js/data/*_historical_briefings.js`, `sw.js`, `README.md`
 
+### v2.4.03 — 10 Oct 2026 — Dynamic High Risk:Reward Setup Filter Across All Interactive Charts
+
+- **High R:R Filter Button in Toolbar (`btc`, `nifty`, `gold`, `sp500`, `eurusd`)**:
+  - Added dedicated `[⭐ High R:R (≥1:<baseline>)]` filter button directly adjacent to the bar close countdown badge in the top-right toolbar across all 5 asset interactive charts.
+  - Dynamically reflects asset configuration baselines from `js/data/rr_config.js` (`HIGH_RR_BASELINE=3.5` for BTC; `2.5` for NIFTY, GOLD, S&P 500, EUR/USD) with zero client hardcoding.
+- **Dynamic Price Line & Sidebar Card Filtering**:
+  - When toggled ON, the chart price lines and sidebar cards filter down strictly to setups where TP1 Risk-to-Reward $\ge \text{baseline}$.
+  - Updates the levels count indicator (e.g. `2 High R:R Levels` or `3 High R:R Setups`) and displays an intuitive empty-state CTA with a "Show All Levels" button if zero setups match in that specific briefing run.
+  - Auto-selects and tracks nearest proximity only among visible, matching high R:R setups.
+  - Persists filter state across sessions and page reloads via asset-scoped `localStorage` (`filter_high_rr_only_<asset>`).
+- **Scorecard Badge Dynamic Tooltips**:
+  - Updated card badges to dynamically display configured asset baselines in tooltips rather than static placeholders.
+- **Files Modified**: `btc_interactive_chart.html`, `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `js/data/rr_config.js`, `README.md`
+
 
 
 
