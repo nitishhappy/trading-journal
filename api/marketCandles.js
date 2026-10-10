@@ -67,7 +67,26 @@ export default async function handler(req, res) {
       const todayIst = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
       const targetDate = queryDate || todayIst;
 
-      let rawCandles = [];
+      let candles5m = [];
+      const isFullRange = (req.query.range === "1mo" || req.query.range === "30d" || !queryDate);
+
+      // 1. If full range requested (interactive chart mode), fetch 1-month 5m continuous candles from Yahoo ^NSEI
+      if (isFullRange) {
+        try {
+          const yUrl = "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?interval=5m&range=1mo";
+          const yJson = await fetchUrl(yUrl);
+          if (yJson) {
+            const parsed = parseYahooCandles(yJson);
+            if (parsed && parsed.length > 0) {
+              candles5m = parsed;
+            }
+          }
+        } catch (e) {
+          console.warn("api/marketCandles Yahoo ^NSEI fetch error:", e);
+        }
+      }
+
+      // 2. Fetch Upstox candles (for today's live session or specific targetDate)
       const fetchUpstox = (url) => {
         return new Promise((resolve) => {
           const r = https.get(url, {
@@ -90,96 +109,115 @@ export default async function handler(req, res) {
         });
       };
 
+      let rawUpstox = [];
       if (targetDate === todayIst) {
         const intradayUrl = `https://api.upstox.com/v2/historical-candle/intraday/${encInst}/1minute`;
-        rawCandles = await fetchUpstox(intradayUrl);
+        rawUpstox = await fetchUpstox(intradayUrl);
       }
 
-      if (!rawCandles || rawCandles.length === 0) {
+      if ((!rawUpstox || rawUpstox.length === 0) && queryDate) {
         const targetDt = new Date(`${targetDate}T12:00:00+05:30`);
-        // Upstox historical: {to_date}/{from_date}. Look back 5 days to cover weekends and holidays
         const lookbackDt = new Date(targetDt.getTime() - 5 * 24 * 60 * 60 * 1000);
         const lookbackDateStr = lookbackDt.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
 
         const histUrl1 = `https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${targetDate}/${targetDate}`;
-        rawCandles = await fetchUpstox(histUrl1);
+        rawUpstox = await fetchUpstox(histUrl1);
 
-        if (!rawCandles || rawCandles.length === 0) {
+        if (!rawUpstox || rawUpstox.length === 0) {
           const histUrl2 = `https://api.upstox.com/v2/historical-candle/${encInst}/1minute/${targetDate}/${lookbackDateStr}`;
-          rawCandles = await fetchUpstox(histUrl2);
+          rawUpstox = await fetchUpstox(histUrl2);
         }
       }
 
-      if (!rawCandles || rawCandles.length === 0) {
+      // If user passed a single date query, filter or resample Upstox for that single session
+      if (queryDate && rawUpstox && rawUpstox.length > 0) {
+        const filtered1m = rawUpstox
+          .filter(c => c && c[0] && c[0].startsWith(queryDate))
+          .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime());
+
+        if (filtered1m.length > 0) {
+          const dayCandles = [];
+          for (const c of filtered1m) {
+            const ts = c[0];
+            const dt = new Date(ts);
+            const minutes = dt.getMinutes();
+            const bucketMin = Math.floor(minutes / 5) * 5;
+            const bucketDt = new Date(dt);
+            bucketDt.setMinutes(bucketMin, 0, 0);
+
+            const timeStr = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: false });
+            const time12  = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true });
+            const timeSec = Math.floor(bucketDt.getTime() / 1000);
+
+            if (dayCandles.length === 0 || dayCandles[dayCandles.length - 1].timeStr !== timeStr) {
+              dayCandles.push({
+                time: timeSec,
+                timeStr,
+                time12,
+                timestamp: ts,
+                open: Number(c[1]),
+                high: Number(c[2]),
+                low: Number(c[3]),
+                close: Number(c[4]),
+                volume: Number(c[5] || 0)
+              });
+            } else {
+              const last = dayCandles[dayCandles.length - 1];
+              last.high = Math.max(last.high, Number(c[2]));
+              last.low  = Math.min(last.low, Number(c[3]));
+              last.close = Number(c[4]);
+              last.volume += Number(c[5] || 0);
+            }
+          }
+          return res.status(200).json({
+            success: true,
+            symbol: "NIFTY",
+            instrument,
+            date: queryDate,
+            isLatestTradingDay: queryDate === todayIst,
+            marketClosed: queryDate !== todayIst,
+            count: dayCandles.length,
+            dayHigh: Math.max(...dayCandles.map(c => c.high)),
+            dayLow: Math.min(...dayCandles.map(c => c.low)),
+            candles: dayCandles
+          });
+        }
+      }
+
+      // If Upstox had today's intraday bars, merge newer bars on top of Yahoo history
+      if (rawUpstox && rawUpstox.length > 0 && candles5m.length > 0) {
+        const lastYahooTime = candles5m[candles5m.length - 1].time;
+        for (const c of rawUpstox) {
+          const tSec = Math.floor(new Date(c[0]).getTime() / 1000);
+          if (tSec > lastYahooTime) {
+            candles5m.push({
+              time: tSec,
+              open: Number(c[1]),
+              high: Number(c[2]),
+              low: Number(c[3]),
+              close: Number(c[4]),
+              volume: Number(c[5] || 0)
+            });
+          }
+        }
+      }
+
+      if (candles5m.length === 0) {
         return res.status(200).json({
           success: false,
-          message: `No candles found for ${targetDate}.`,
+          message: `No NIFTY candles found for ${targetDate}.`,
           date: targetDate,
           candles: []
         });
-      }
-
-      // If user specified queryDate, use that; otherwise auto-detect latest session date from candles
-      let sessionDate = queryDate || "";
-      if (!sessionDate) {
-        const latestTs = rawCandles[0] && rawCandles[0][0];
-        sessionDate = latestTs ? latestTs.split("T")[0] : targetDate;
-      }
-
-      const filtered1m = rawCandles
-        .filter(c => c && c[0] && c[0].startsWith(sessionDate))
-        .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime());
-
-      if (filtered1m.length === 0) {
-        return res.status(200).json({
-          success: false,
-          message: `No candles found for ${sessionDate}.`,
-          date: sessionDate,
-          candles: []
-        });
-      }
-
-      const candles5m = [];
-      for (const c of filtered1m) {
-        const ts = c[0];
-        const dt = new Date(ts);
-        const minutes = dt.getMinutes();
-        const bucketMin = Math.floor(minutes / 5) * 5;
-        const bucketDt = new Date(dt);
-        bucketDt.setMinutes(bucketMin, 0, 0);
-
-        const timeStr = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: false });
-        const time12  = bucketDt.toLocaleTimeString("en-US", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", hour12: true });
-        const timeSec = Math.floor(bucketDt.getTime() / 1000);
-
-        if (candles5m.length === 0 || candles5m[candles5m.length - 1].timeStr !== timeStr) {
-          candles5m.push({
-            time: timeSec,
-            timeStr,
-            time12,
-            timestamp: ts,
-            open: Number(c[1]),
-            high: Number(c[2]),
-            low: Number(c[3]),
-            close: Number(c[4]),
-            volume: Number(c[5] || 0)
-          });
-        } else {
-          const last = candles5m[candles5m.length - 1];
-          last.high = Math.max(last.high, Number(c[2]));
-          last.low  = Math.min(last.low, Number(c[3]));
-          last.close = Number(c[4]);
-          last.volume += Number(c[5] || 0);
-        }
       }
 
       return res.status(200).json({
         success: true,
         symbol: "NIFTY",
         instrument,
-        date: sessionDate,
-        isLatestTradingDay: sessionDate === todayIst,
-        marketClosed: sessionDate !== todayIst,
+        date: targetDate,
+        isLatestTradingDay: targetDate === todayIst,
+        marketClosed: targetDate !== todayIst,
         count: candles5m.length,
         dayHigh: Math.max(...candles5m.map(c => c.high)),
         dayLow: Math.min(...candles5m.map(c => c.low)),
@@ -396,7 +434,8 @@ export default async function handler(req, res) {
       if (isStale) {
         try {
           const yahooInterval = (normTf === "15m") ? "15m" : (normTf === "1h") ? "60m" : (normTf === "1d") ? "1d" : "5m";
-          const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${yahooInterval}&range=5d`);
+          const yahooRange = req.query.range || "1mo";
+          const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${yahooInterval}&range=${yahooRange}`);
           if (yahooJson) {
             const yCandles = parseYahooCandles(yahooJson);
             if (yCandles && yCandles.length > 0) {
@@ -437,7 +476,8 @@ export default async function handler(req, res) {
 
       // 1. Try Yahoo Finance for EURUSD=X (5-decimal precision)
       try {
-        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?interval=${normTf}&range=5d`);
+        const yahooRange = req.query.range || "1mo";
+        const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?interval=${normTf}&range=${yahooRange}`);
         if (yahooJson) {
           const yCandles = parseYahooCandles(yahooJson, 5);
           if (yCandles && yCandles.length > 0) {

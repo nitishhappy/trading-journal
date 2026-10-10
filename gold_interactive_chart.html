@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="js/data/gold_daily_plan.js"></script>
+    <script src="js/data/gold_historical_briefings.js"></script>
     <script src="js/data/gold_candles.js"></script>
     <script src="js/data/rr_config.js"></script>
     <style>
@@ -1575,7 +1576,17 @@
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/${assetName}_daily_plan.js?t=${Date.now()}`;
-                script.onload = () => resolve(true);
+                script.onload = () => {
+                    const histId = `dyn-${assetName}-hist`;
+                    const oldHist = document.getElementById(histId);
+                    if (oldHist) oldHist.remove();
+                    const histScript = document.createElement('script');
+                    histScript.id = histId;
+                    histScript.src = `js/data/${assetName}_historical_briefings.js?t=${Date.now()}`;
+                    histScript.onload = () => resolve(true);
+                    histScript.onerror = () => resolve(true);
+                    document.body.appendChild(histScript);
+                };
                 script.onerror = () => resolve(false);
                 document.body.appendChild(script);
             });
@@ -1979,9 +1990,11 @@
                 }
             }
 
-            const rawPlanArray = (window.goldDailyPlanSummary && window.goldDailyPlanSummary.length > 0)
-                ? window.goldDailyPlanSummary
-                : ((window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData)) ? window.goldDailyPlanData : []);
+            const rawPlanArray = (window.goldHistoricalBriefings && window.goldHistoricalBriefings.length > 0)
+                ? window.goldHistoricalBriefings
+                : ((window.goldDailyPlanSummary && window.goldDailyPlanSummary.length > 0)
+                    ? window.goldDailyPlanSummary
+                    : ((window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData)) ? window.goldDailyPlanData : []));
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, candles);
 
             // Compute signature of current plan data to detect when a new summary is published
@@ -2813,12 +2826,16 @@
                 }
             }
 
-            // 1. Try to extract directly from window.goldDailyPlanSummary (Markdown text)
-            if (window.goldDailyPlanSummary && Array.isArray(window.goldDailyPlanSummary) && window.goldDailyPlanSummary.length > 0) {
+            // 1. Try to extract directly from window.goldHistoricalBriefings or window.goldDailyPlanSummary (Markdown text)
+            const summariesList = (window.goldHistoricalBriefings && window.goldHistoricalBriefings.length > 0)
+                ? window.goldHistoricalBriefings
+                : (window.goldDailyPlanSummary || []);
+
+            if (summariesList && Array.isArray(summariesList) && summariesList.length > 0) {
                 let matchedSummary = null;
                 if (targetMs !== null) {
                     let bestDiff = Infinity;
-                    window.goldDailyPlanSummary.forEach(s => {
+                    summariesList.forEach(s => {
                         const sMs = new Date(s.timestamp).getTime();
                         if (!isNaN(sMs)) {
                             const diff = Math.min(
@@ -2832,7 +2849,7 @@
                         }
                     });
                 } else {
-                    matchedSummary = window.goldDailyPlanSummary[0];
+                    matchedSummary = (window.goldDailyPlanSummary && window.goldDailyPlanSummary[0]) || summariesList[0];
                 }
 
                 if (matchedSummary && matchedSummary.text) {

@@ -997,6 +997,7 @@
 
     <!-- Read current daily plan data dynamically -->
     <script src="js/data/nifty_daily_plan.js"></script>
+    <script src="js/data/nifty_historical_briefings.js"></script>
 
     <script>
         const IST_OFFSET_SEC = 19800; // +5:30 IST offset in seconds
@@ -1649,7 +1650,17 @@
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/nifty_daily_plan.js?t=${Date.now()}`;
-                script.onload = () => resolve(true);
+                script.onload = () => {
+                    const histId = `dyn-${assetName}-hist`;
+                    const oldHist = document.getElementById(histId);
+                    if (oldHist) oldHist.remove();
+                    const histScript = document.createElement('script');
+                    histScript.id = histId;
+                    histScript.src = `js/data/nifty_historical_briefings.js?t=${Date.now()}`;
+                    histScript.onload = () => resolve(true);
+                    histScript.onerror = () => resolve(true);
+                    document.body.appendChild(histScript);
+                };
                 script.onerror = () => resolve(false);
                 document.body.appendChild(script);
             });
@@ -2174,9 +2185,11 @@
             }
 
             // Update AI Briefing timestamps
-            const rawPlanArray = (window.dailyPlanSummary && window.dailyPlanSummary.length > 0)
-                ? window.dailyPlanSummary
-                : ((window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : []);
+            const rawPlanArray = (window.niftyHistoricalBriefings && window.niftyHistoricalBriefings.length > 0)
+                ? window.niftyHistoricalBriefings
+                : ((window.dailyPlanSummary && window.dailyPlanSummary.length > 0)
+                    ? window.dailyPlanSummary
+                    : ((window.dailyPlanData && Array.isArray(window.dailyPlanData)) ? window.dailyPlanData : []));
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
 
             // Compute signature of current plan data to detect when a new summary is published
@@ -2923,10 +2936,8 @@
                 const urlDate = new URLSearchParams(window.location.search).get('date');
                 if (urlDate) {
                     planDate = urlDate.trim();
-                } else if (window.dailyPlanData && window.dailyPlanData[0] && window.dailyPlanData[0].timestamp) {
-                    planDate = window.dailyPlanData[0].timestamp.split('T')[0];
                 }
-                const dateParam = planDate ? `&date=${planDate}` : '';
+                const dateParam = planDate ? `&date=${planDate}` : '&range=1mo';
 
                 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
                 const apiBase = isLocal ? 'https://trading-journal-sandy-three.vercel.app' : '';
@@ -3097,12 +3108,16 @@
                 }
             }
 
-            // 1. Try to extract directly from window.dailyPlanSummary (Markdown text)
-            if (window.dailyPlanSummary && Array.isArray(window.dailyPlanSummary) && window.dailyPlanSummary.length > 0) {
+            // 1. Try to extract directly from window.niftyHistoricalBriefings or window.dailyPlanSummary (Markdown text)
+            const summariesList = (window.niftyHistoricalBriefings && window.niftyHistoricalBriefings.length > 0)
+                ? window.niftyHistoricalBriefings
+                : (window.dailyPlanSummary || []);
+
+            if (summariesList && Array.isArray(summariesList) && summariesList.length > 0) {
                 let matchedSummary = null;
                 if (targetMs !== null) {
                     let bestDiff = Infinity;
-                    window.dailyPlanSummary.forEach(s => {
+                    summariesList.forEach(s => {
                         const sMs = new Date(s.timestamp).getTime();
                         if (!isNaN(sMs)) {
                             const diff = Math.min(
@@ -3118,9 +3133,9 @@
                 } else {
                     const urlDate = new URLSearchParams(window.location.search).get('date');
                     if (urlDate) {
-                        matchedSummary = window.dailyPlanSummary.find(s => s.timestamp && s.timestamp.startsWith(urlDate));
+                        matchedSummary = summariesList.find(s => s.timestamp && s.timestamp.startsWith(urlDate));
                     }
-                    if (!matchedSummary) matchedSummary = window.dailyPlanSummary[0];
+                    if (!matchedSummary) matchedSummary = (window.dailyPlanSummary && window.dailyPlanSummary[0]) || summariesList[0];
                 }
 
                 if (matchedSummary && matchedSummary.text) {

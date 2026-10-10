@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="js/data/eurusd_daily_plan.js"></script>
+    <script src="js/data/eurusd_historical_briefings.js"></script>
     <script src="js/data/eurusd_candles.js"></script>
     <script src="js/data/rr_config.js"></script>
     <style>
@@ -1378,9 +1379,11 @@
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
                 updateOHLCHeader();
 
-                const rawPlanArray = (window.eurusdDailyPlanSummary && window.eurusdDailyPlanSummary.length > 0)
-                    ? window.eurusdDailyPlanSummary
-                    : ((window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData)) ? window.eurusdDailyPlanData : []);
+                const rawPlanArray = (window.eurusdHistoricalBriefings && window.eurusdHistoricalBriefings.length > 0)
+                    ? window.eurusdHistoricalBriefings
+                    : ((window.eurusdDailyPlanSummary && window.eurusdDailyPlanSummary.length > 0)
+                        ? window.eurusdDailyPlanSummary
+                        : ((window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData)) ? window.eurusdDailyPlanData : []));
                 aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
                 renderLevelsAndCards();
                 updateFeedStatusBadge(currentCandlesArray);
@@ -1610,8 +1613,19 @@
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/${assetName}_daily_plan.js?t=${Date.now()}`;
-                const timer = setTimeout(() => resolve(false), 2500);
-                script.onload = () => { clearTimeout(timer); resolve(true); };
+                const timer = setTimeout(() => resolve(false), 3000);
+                script.onload = () => {
+                    clearTimeout(timer);
+                    const histId = `dyn-${assetName}-hist`;
+                    const oldHist = document.getElementById(histId);
+                    if (oldHist) oldHist.remove();
+                    const histScript = document.createElement('script');
+                    histScript.id = histId;
+                    histScript.src = `js/data/${assetName}_historical_briefings.js?t=${Date.now()}`;
+                    histScript.onload = () => resolve(true);
+                    histScript.onerror = () => resolve(true);
+                    document.body.appendChild(histScript);
+                };
                 script.onerror = () => { clearTimeout(timer); resolve(false); };
                 document.body.appendChild(script);
             });
@@ -2101,9 +2115,11 @@
                 }
 
                 // Update AI Briefing timestamps
-                const rawPlanArray = (window.eurusdDailyPlanSummary && window.eurusdDailyPlanSummary.length > 0)
-                    ? window.eurusdDailyPlanSummary
-                    : ((window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData)) ? window.eurusdDailyPlanData : []);
+                const rawPlanArray = (window.eurusdHistoricalBriefings && window.eurusdHistoricalBriefings.length > 0)
+                    ? window.eurusdHistoricalBriefings
+                    : ((window.eurusdDailyPlanSummary && window.eurusdDailyPlanSummary.length > 0)
+                        ? window.eurusdDailyPlanSummary
+                        : ((window.eurusdDailyPlanData && Array.isArray(window.eurusdDailyPlanData)) ? window.eurusdDailyPlanData : []);
                 aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, currentCandlesArray);
 
                 // Compute signature of current plan data to detect when a new summary is published
@@ -2967,12 +2983,16 @@
                 }
             }
 
-            // 1. Try to extract directly from window.eurusdDailyPlanSummary (Markdown text)
-            if (window.eurusdDailyPlanSummary && Array.isArray(window.eurusdDailyPlanSummary) && window.eurusdDailyPlanSummary.length > 0) {
+            // 1. Try to extract directly from window.eurusdHistoricalBriefings or window.eurusdDailyPlanSummary (Markdown text)
+            const summariesList = (window.eurusdHistoricalBriefings && window.eurusdHistoricalBriefings.length > 0)
+                ? window.eurusdHistoricalBriefings
+                : (window.eurusdDailyPlanSummary || []);
+
+            if (summariesList && Array.isArray(summariesList) && summariesList.length > 0) {
                 let matchedSummary = null;
                 if (targetMs !== null) {
                     let bestDiff = Infinity;
-                    window.eurusdDailyPlanSummary.forEach(s => {
+                    summariesList.forEach(s => {
                         const sMs = new Date(s.timestamp).getTime();
                         if (!isNaN(sMs)) {
                             const diff = Math.abs(sMs - targetMs);
@@ -2983,7 +3003,7 @@
                         }
                     });
                 } else {
-                    matchedSummary = window.eurusdDailyPlanSummary[0];
+                    matchedSummary = (window.eurusdDailyPlanSummary && window.eurusdDailyPlanSummary[0]) || summariesList[0];
                 }
 
                 if (matchedSummary && matchedSummary.text) {
@@ -3176,19 +3196,19 @@
         }
 
         async function loadRealEurUsdCandles() {
-            // Allow up to 5 days lookback so weekend review of Friday's session works seamlessly
-            const cutoffSec = Math.floor(Date.now() / 1000) - (5 * 24 * 3600);
+            // Allow up to 35 days lookback for 1-month historical chart and briefings inspection
+            const cutoffSec = Math.floor(Date.now() / 1000) - (35 * 24 * 3600);
             const filterFresh = (arr) => (arr || []).filter(c => c && c.time && c.time >= cutoffSec);
 
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
             const marketCandlesUrl = isLocal
-                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=5m&limit=300&_t=${Date.now()}`
-                : `/api/marketCandles?symbol=EURUSD&timeframe=5m&limit=300&_t=${Date.now()}`;
+                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`
+                : `/api/marketCandles?symbol=EURUSD&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`;
 
             // 1. Primary: Server-side /api/marketCandles?symbol=EURUSD
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 4500);
+                const timeoutId = setTimeout(() => controller.abort(), 6500);
                 const res = await fetch(marketCandlesUrl, { 
                     cache: 'no-store',
                     signal: controller.signal
@@ -3209,8 +3229,8 @@
             if (!isLocal) {
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 4000);
-                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=5m&limit=300&_t=${Date.now()}`, {
+                    const timeoutId = setTimeout(() => controller.abort(), 5000);
+                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`, {
                         cache: 'no-store',
                         signal: controller.signal
                     });

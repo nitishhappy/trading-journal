@@ -2559,7 +2559,31 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - **Interactive Chart Vertical Lines & Badges**: The interactive chart now renders all 116 historical vertical dashed lines, time badges, and briefing selection pills across the full 20-day timeline.
   - **Isolated Levels Tab**: The main journal app's Levels Tab remains completely unaffected and lightweight, reading only the standard 24-hour tactical plan from `btc_daily_plan.js`.
   - **Copilot Auto-Sync**: Updated `btc_copilot_main.py` to automatically append each new briefing to `btc_historical_briefings.js` (retaining up to 200 runs / 30 days) during every copilot run.
-- **Files Modified**: `btc_interactive_chart.html`, `js/data/btc_historical_briefings.js`, `sw.js`, `generate-version.js`, `Bitcoin Setup/btc_copilot_main.py`, `README.md`
+### v2.4.02 — 10 Oct 2026 — 1-Month Unified Historical Depth Across All Interactive Charts (NIFTY, GOLD, SP500, EURUSD, BTC)
+
+- **Decoupled 2-Tier Architecture Across All 5 Assets**:
+  - Implemented uniform 1-month historical depth for all interactive charts (`NIFTY`, `GOLD`, `SP500`, `EURUSD`, `BTC`), completely decoupled from the main trade journal (`index.html`) Levels Tab to keep daily execution clean and lightweight.
+- **Dedicated Historical Briefings Datasets**:
+  - Extracted and compiled 30+ days of AI briefings from Git commits into dedicated companion files:
+    - `nifty_historical_briefings.js` (180 historical briefings)
+    - `gold_historical_briefings.js` (201 historical briefings)
+    - `sp500_historical_briefings.js` (141 historical briefings)
+    - `eurusd_historical_briefings.js` (6 historical briefings, full lifecycle since inception)
+    - `btc_historical_briefings.js` (116 historical briefings)
+- **Interactive Charts Multi-Day Timeline & Pill Navigation**:
+  - Upgraded `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, and `btc_interactive_chart.html` to load their companion historical datasets.
+  - Interactive charts render vertical dashed lines with time badges for all historical briefings across the entire month.
+  - Clicking any vertical line or briefing selection pill instantly parses and renders that exact run's historical support/resistance levels, order blocks, and trade cards.
+- **30-Day Candlestick Feeds & API Expansion**:
+  - **NIFTY**: Enhanced `api/marketCandles.js` to query Yahoo Finance `^NSEI` (1,501 5m bars = 1 full month), seamlessly merging live Upstox intraday bars on top for the active session.
+  - **GOLD**: Expanded Vantage MT5 SQLite export in `market_data_store.py` and `vantage_candle_exporter.py` from 200 bars to 2,800 15m bars (~30 days) and 3,500 5m bars directly into `gold_candles.js`.
+  - **S&P 500 & EUR/USD**: Expanded Yahoo Finance endpoints in `api/marketCandles.js` to default to `range=1mo` and extended client lookback cutoffs to 35 days.
+- **Automated Copilot Sync Hook**:
+  - Updated centralized `C:\Nitish\ClaudeApps\Utilities\sync_briefing_to_daily_plan.py` to automatically append new briefings into `*_historical_briefings.js` (retaining up to 200 runs / ~30-45 days) whenever a briefing is published for ANY asset.
+- **PWA Cache (`sw.js`)**:
+  - Added all companion `*_historical_briefings.js` files to `ASSETS` cache in `sw.js` for seamless offline viewing on mobile devices.
+- **Files Modified**: `api/marketCandles.js`, `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `js/data/*_historical_briefings.js`, `sw.js`, `README.md`
+
 
 
 
