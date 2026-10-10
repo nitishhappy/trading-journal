@@ -73,6 +73,7 @@ const FILES_TO_HASH = [
   "js/data/nifty_daily_plan.js",
   "js/data/gold_daily_plan.js",
   "js/data/btc_daily_plan.js",
+  "js/data/btc_historical_briefings.js",
   "js/data/sp500_daily_plan.js",
   "js/data/eurusd_daily_plan.js",
   "js/data/gold_candles.js",

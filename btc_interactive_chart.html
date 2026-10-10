@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="js/data/btc_daily_plan.js"></script>
+    <script src="js/data/btc_historical_briefings.js"></script>
     <script src="js/data/rr_config.js"></script>
     <style>
         :root {
@@ -1594,12 +1595,31 @@
                 const oldScript = document.getElementById(scriptId);
                 if (oldScript) oldScript.remove();
 
+                const histScriptId = `dyn-${assetName}-hist-script`;
+                const oldHistScript = document.getElementById(histScriptId);
+                if (oldHistScript) oldHistScript.remove();
+
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/${assetName}_daily_plan.js?t=${Date.now()}`;
-                script.onload = () => resolve(true);
-                script.onerror = () => resolve(false);
+
+                const histScript = document.createElement('script');
+                histScript.id = histScriptId;
+                histScript.src = `js/data/${assetName}_historical_briefings.js?t=${Date.now()}`;
+
+                let doneCount = 0;
+                const checkDone = () => {
+                    doneCount++;
+                    if (doneCount >= 2) resolve(true);
+                };
+
+                script.onload = checkDone;
+                script.onerror = checkDone;
+                histScript.onload = checkDone;
+                histScript.onerror = checkDone;
+
                 document.body.appendChild(script);
+                document.body.appendChild(histScript);
             });
         }
 
@@ -1984,9 +2004,11 @@
                 }
             }
 
-            const rawPlanArray = (window.btcDailyPlanSummary && window.btcDailyPlanSummary.length > 0)
-                ? window.btcDailyPlanSummary
-                : ((window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : []);
+            const rawPlanArray = (window.btcHistoricalBriefings && window.btcHistoricalBriefings.length > 0)
+                ? window.btcHistoricalBriefings
+                : ((window.btcDailyPlanSummary && window.btcDailyPlanSummary.length > 0)
+                    ? window.btcDailyPlanSummary
+                    : ((window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : []));
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, candles);
 
             // Compute signature of current plan data to detect when a new summary is published
@@ -2253,7 +2275,7 @@
                         let minDiff = Infinity;
                         candlesList.forEach(c => {
                             const diff = Math.abs(c.time - unixSec);
-                            if (diff < minDiff && diff <= 1800) {
+                            if (diff < minDiff && diff <= 3600) {
                                 minDiff = diff;
                                 targetTime = c.time;
                             }
@@ -2827,13 +2849,17 @@
                 }
             }
 
-            // 1. Try to extract directly from window.btcDailyPlanSummary (Markdown text)
+            // 1. Try to extract directly from window.btcHistoricalBriefings or window.btcDailyPlanSummary (Markdown text)
             // which contains un-pruned, complete briefing text for EVERY run.
-            if (window.btcDailyPlanSummary && Array.isArray(window.btcDailyPlanSummary) && window.btcDailyPlanSummary.length > 0) {
+            const summariesList = (window.btcHistoricalBriefings && window.btcHistoricalBriefings.length > 0)
+                ? window.btcHistoricalBriefings
+                : (window.btcDailyPlanSummary || []);
+
+            if (summariesList && Array.isArray(summariesList) && summariesList.length > 0) {
                 let matchedSummary = null;
                 if (targetMs !== null) {
                     let bestDiff = Infinity;
-                    window.btcDailyPlanSummary.forEach(s => {
+                    summariesList.forEach(s => {
                         const sMs = new Date(s.timestamp).getTime();
                         if (!isNaN(sMs)) {
                             const diff = Math.min(
@@ -2847,7 +2873,9 @@
                         }
                     });
                 } else {
-                    matchedSummary = window.btcDailyPlanSummary[0];
+                    matchedSummary = (window.btcDailyPlanSummary && window.btcDailyPlanSummary.length > 0) 
+                        ? window.btcDailyPlanSummary[0] 
+                        : summariesList[0];
                 }
 
                 if (matchedSummary && matchedSummary.text) {

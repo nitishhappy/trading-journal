@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-60ec034dd0";
+const CACHE_NAME = "trade-journal-c05d52508c";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -58,6 +58,7 @@ const ASSETS = [
   "./js/data/nifty_daily_plan.js",
   "./js/data/gold_daily_plan.js",
   "./js/data/btc_daily_plan.js",
+  "./js/data/btc_historical_briefings.js",
   "./js/data/sp500_daily_plan.js",
   "./js/data/eurusd_daily_plan.js",
   "./js/data/gold_candles.js",
@@ -101,7 +102,7 @@ const NETWORK_FIRST_FILES = [
   "js/ui/stocks.js",
   "js/ui/levels.js",
   "css/levels.css",
-  "js/data/sectors.js", "js/data/daily_plan.js", "js/data/nifty_daily_plan.js", "js/data/gold_daily_plan.js", "js/data/btc_daily_plan.js", "js/data/sp500_daily_plan.js", "js/data/eurusd_daily_plan.js", "js/data/scanned_stocks.js", "js/data/gold_candles.js", "js/data/nifty_candles.js", "js/data/sp500_candles.js", "js/data/eurusd_candles.js",
+  "js/data/sectors.js", "js/data/daily_plan.js", "js/data/nifty_daily_plan.js", "js/data/gold_daily_plan.js", "js/data/btc_daily_plan.js", "js/data/btc_historical_briefings.js", "js/data/sp500_daily_plan.js", "js/data/eurusd_daily_plan.js", "js/data/scanned_stocks.js", "js/data/gold_candles.js", "js/data/nifty_candles.js", "js/data/sp500_candles.js", "js/data/eurusd_candles.js",
   "js/utils/error-tracking.js", "css/tv-notifications.css",
   "js/workers/liveAlertWorker.js",
 ];

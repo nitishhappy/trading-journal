@@ -2552,7 +2552,15 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
     2. **Secondary (ISP Bypass)**: Unblocked server-side `/api/marketCandles?symbol=BTC` running on Vercel US infrastructure, loading up to 2,882 continuous bars (30 full days) via Yahoo Finance or Binance.
     3. **Tertiary**: Direct Coinbase multi-batch chained across 5 `start`/`end` ISO chunks (1,550 bars = 16.1 days).
   - **Dynamic Feed Attribution**: Telemetry badge now displays real active upstream feed (`● BINANCE LIVE`, `● VERCEL_YAHOO_FINANCE LIVE`, or `● COINBASE LIVE`).
-- **Files Modified**: `btc_interactive_chart.html`, `api/marketCandles.js`, `README.md`
+### v2.4.01 — 10 Oct 2026 — Dedicated Bitcoin Historical Briefings Dataset for Interactive Charts
+
+- **Dedicated Bitcoin Historical Briefings Feed (`js/data/btc_historical_briefings.js`, `btc_interactive_chart.html`, `C:\Nitish\ClaudeApps\Utilities\Bitcoin Setup\btc_copilot_main.py`)**:
+  - **Decoupled Historical Dataset**: Extracted and compiled 116 historical AI briefings dating back to Sept 20th into a dedicated `btc_historical_briefings.js` dataset for `btc_interactive_chart.html`.
+  - **Interactive Chart Vertical Lines & Badges**: The interactive chart now renders all 116 historical vertical dashed lines, time badges, and briefing selection pills across the full 20-day timeline.
+  - **Isolated Levels Tab**: The main journal app's Levels Tab remains completely unaffected and lightweight, reading only the standard 24-hour tactical plan from `btc_daily_plan.js`.
+  - **Copilot Auto-Sync**: Updated `btc_copilot_main.py` to automatically append each new briefing to `btc_historical_briefings.js` (retaining up to 200 runs / 30 days) during every copilot run.
+- **Files Modified**: `btc_interactive_chart.html`, `js/data/btc_historical_briefings.js`, `sw.js`, `generate-version.js`, `Bitcoin Setup/btc_copilot_main.py`, `README.md`
+
 
 
 
