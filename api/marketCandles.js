@@ -38,7 +38,8 @@ function parseYahooCandles(json, digits = 2) {
         open: Number(quote.open[i].toFixed(digits)),
         high: Number(quote.high[i].toFixed(digits)),
         low: Number(quote.low[i].toFixed(digits)),
-        close: Number(quote.close[i].toFixed(digits))
+        close: Number(quote.close[i].toFixed(digits)),
+        volume: quote.volume ? (quote.volume[i] || 0) : 0
       });
     }
   }
@@ -337,7 +338,8 @@ export default async function handler(req, res) {
           open: parseFloat(parseFloat(c[1]).toFixed(2)),
           high: parseFloat(parseFloat(c[2]).toFixed(2)),
           low: parseFloat(parseFloat(c[3]).toFixed(2)),
-          close: parseFloat(parseFloat(c[4]).toFixed(2))
+          close: parseFloat(parseFloat(c[4]).toFixed(2)),
+          volume: parseFloat(c[5]) || 0
         }));
       }
 

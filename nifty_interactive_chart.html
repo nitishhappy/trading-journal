@@ -652,6 +652,54 @@
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
         }
 
+        .indicators-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .btn-indicators {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #94a3b8;
+        }
+        .btn-indicators:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            color: #38bdf8;
+        }
+        .btn-indicators.active-indicator {
+            background: rgba(56, 189, 248, 0.12) !important;
+            border-color: rgba(56, 189, 248, 0.45) !important;
+            color: #38bdf8 !important;
+        }
+        .indicators-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            padding: 6px 4px;
+            min-width: 175px;
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(12px);
+            user-select: none;
+        }
+        .indicator-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            transition: background 0.15s;
+        }
+        .indicator-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
         .status-pill {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
@@ -956,9 +1004,27 @@
                         <span>L: <strong id="ohlc-l">--</strong></span>
                         <span>C: <strong id="ohlc-c">--</strong></span>
                         <span id="ohlc-change-pill" class="ohlc-chg">--</span>
+                        <span id="ohlc-ema9-pill" style="display: none; color: #38bdf8; font-weight: 600;">EMA: <strong id="ohlc-ema9">--</strong></span>
                     </div>
                 </div>
                 <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                    <div class="indicators-dropdown-wrapper">
+                        <button id="btn-indicators-menu" class="btn btn-indicators" onclick="toggleIndicatorsMenu(event)" title="Technical Indicators" style="padding: 0.2rem 0.6rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px;">
+                            <span>📊</span> <span>Indicators</span> <span id="indicators-arrow" style="font-size: 0.65rem; opacity: 0.7; transition: transform 0.2s;">▼</span>
+                        </button>
+                        <div id="indicators-dropdown-menu" class="indicators-dropdown-menu" style="display: none;" onclick="event.stopPropagation()">
+                            <div style="font-size: 0.68rem; font-weight: 700; color: #94a3b8; padding: 4px 8px 6px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 4px;">
+                                Indicators
+                            </div>
+                            <label class="indicator-item">
+                                <input type="checkbox" id="chk-ema9" onchange="toggleEMA9(this.checked)" style="accent-color: #38bdf8; cursor: pointer;">
+                                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <span style="display: inline-block; width: 12px; height: 3px; background: #38bdf8; border-radius: 2px;"></span>
+                                    9 EMA
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                     <button id="btn-high-rr-filter" class="btn btn-high-rr" onclick="toggleHighRROnly()" title="Filter to show only High Risk:Reward setups (TP1 R:R >= baseline)" style="padding: 0.2rem 0.65rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; border-radius: 6px; transition: all 0.2s;">
                         <span>⭐</span> <span id="high-rr-filter-label">High R:R</span>
                     </button>
@@ -1030,6 +1096,9 @@
         let activePriceLines = [];
         let levelsData = [];
         let candleSeries = null;
+        let emaSeries = null;
+        let showEMA9 = true;
+        let lastCalculatedEMAVal = null;
         let chartInstance = null;
         let countdownSeconds = 15;
         let isInitialLoad = true;
@@ -1041,6 +1110,7 @@
         const REPLAY_SPEED_MS = 1200;
 
         document.addEventListener('DOMContentLoaded', () => {
+            initIndicatorSettings();
             initHighRRFilter();
             checkEmbedMode();
             initChartApp();
@@ -1188,6 +1258,95 @@
         let dragStartX = 0;
         let dragStartLeft = 0;
 
+        function toggleIndicatorsMenu(event) {
+            if (event) event.stopPropagation();
+            const menu = document.getElementById('indicators-dropdown-menu');
+            const arrow = document.getElementById('indicators-arrow');
+            if (!menu) return;
+            const isHidden = menu.style.display === 'none' || menu.style.display === '';
+            menu.style.display = isHidden ? 'block' : 'none';
+            if (arrow) arrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('indicators-dropdown-menu');
+            const btn = document.getElementById('btn-indicators-menu');
+            if (menu && menu.style.display === 'block') {
+                if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
+                    menu.style.display = 'none';
+                    const arrow = document.getElementById('indicators-arrow');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+
+        function toggleEMA9(enabled) {
+            showEMA9 = enabled;
+            localStorage.setItem('indicator_ema9_enabled', enabled ? 'true' : 'false');
+            if (emaSeries) {
+                emaSeries.applyOptions({ visible: showEMA9 });
+                if (showEMA9 && currentCandlesArray && currentCandlesArray.length > 0) {
+                    emaSeries.setData(calculateEMAData(currentCandlesArray, 9));
+                }
+            }
+            updateIndicatorButtonUI();
+            updateOHLCHeader();
+            showToast(enabled ? "9 EMA Visible" : "9 EMA Hidden", enabled ? "9 EMA displayed on chart." : "9 EMA line hidden.");
+        }
+
+        function updateIndicatorButtonUI() {
+            const btn = document.getElementById('btn-indicators-menu');
+            const chkEma = document.getElementById('chk-ema9');
+            if (chkEma) chkEma.checked = showEMA9;
+            if (btn) {
+                if (showEMA9) {
+                    btn.classList.add('active-indicator');
+                } else {
+                    btn.classList.remove('active-indicator');
+                }
+            }
+        }
+
+        function initIndicatorSettings() {
+            const savedEma = localStorage.getItem('indicator_ema9_enabled');
+            showEMA9 = savedEma !== null ? (savedEma === 'true') : true;
+            updateIndicatorButtonUI();
+        }
+
+        function calculateEMAData(candles, period = 9) {
+            if (!candles || candles.length === 0) {
+                lastCalculatedEMAVal = null;
+                return [];
+            }
+            const k = 2 / (period + 1);
+            let prevEma = null;
+            const emaData = [];
+            for (let i = 0; i < candles.length; i++) {
+                const c = candles[i];
+                if (i < period - 1) {
+                    continue;
+                } else if (i === period - 1) {
+                    let sum = 0;
+                    for (let j = 0; j <= i; j++) sum += candles[j].close;
+                    prevEma = sum / period;
+                    emaData.push({ time: c.time, value: parseFloat(prevEma.toFixed(2)) });
+                } else {
+                    prevEma = (c.close - prevEma) * k + prevEma;
+                    emaData.push({ time: c.time, value: parseFloat(prevEma.toFixed(2)) });
+                }
+            }
+            lastCalculatedEMAVal = prevEma !== null ? parseFloat(prevEma.toFixed(2)) : null;
+            return emaData;
+        }
+
+        function updateIndicatorSeriesData(candles) {
+            if (!candles || candles.length === 0) return;
+            if (emaSeries) {
+                const emaData = calculateEMAData(candles, 9);
+                if (showEMA9) emaSeries.setData(emaData);
+            }
+        }
+
         function updateOHLCHeader(param) {
             const legendO = document.getElementById('ohlc-o');
             const legendH = document.getElementById('ohlc-h');
@@ -1228,6 +1387,25 @@
                 if (legendChg) {
                     legendChg.innerText = `${sign}${fmt(diff)} (${sign}${pct.toFixed(2)}%)`;
                     legendChg.className = `ohlc-chg ${isBullish ? 'bullish' : 'bearish'}`;
+                }
+
+                // Update 9 EMA in Telemetry Header
+                const emaPill = document.getElementById('ohlc-ema9-pill');
+                const emaValEl = document.getElementById('ohlc-ema9');
+                if (emaPill && emaValEl) {
+                    if (showEMA9) {
+                        emaPill.style.display = 'inline-block';
+                        let emaVal = null;
+                        if (param && param.seriesPrices && emaSeries) {
+                            emaVal = param.seriesPrices.get(emaSeries);
+                        }
+                        if (emaVal === undefined || emaVal === null) {
+                            emaVal = lastCalculatedEMAVal;
+                        }
+                        emaValEl.innerText = (typeof emaVal === 'number' && !isNaN(emaVal)) ? fmt(emaVal) : '--';
+                    } else {
+                        emaPill.style.display = 'none';
+                    }
                 }
             }
         }
@@ -1428,6 +1606,17 @@
                 borderVisible: false,
                 wickUpColor: '#10b981',
                 wickDownColor: '#f43f5e',
+            });
+
+            // 9 EMA Line Series
+            emaSeries = chartInstance.addLineSeries({
+                color: '#38bdf8',
+                lineWidth: 2,
+                title: '9 EMA',
+                priceLineVisible: false,
+                lastValueVisible: false,
+                crosshairMarkerVisible: true,
+                visible: showEMA9,
             });
 
             initHorizontalScrollbar();
@@ -2263,6 +2452,7 @@
                 if (!isReplayMode) {
                     currentCandlesArray = candles;
                     candleSeries.setData(candles);
+                    updateIndicatorSeriesData(candles);
                     latestCandleTimestamp = candles[candles.length - 1].time;
                     updateOHLCHeader();
                 }
@@ -2427,6 +2617,7 @@
                 if (allMasterCandles && allMasterCandles.length > 0) {
                     currentCandlesArray = [...allMasterCandles];
                     candleSeries.setData(currentCandlesArray);
+                    updateIndicatorSeriesData(currentCandlesArray);
                     latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
                     updateOHLCHeader();
                     updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2445,6 +2636,7 @@
             replayCurrentIndex = getReplayStartIndex();
             currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
             candleSeries.setData(currentCandlesArray);
+            updateIndicatorSeriesData(currentCandlesArray);
             latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
             updateOHLCHeader();
             updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2472,6 +2664,7 @@
                 replayCurrentIndex--;
                 currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
                 candleSeries.setData(currentCandlesArray);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2490,6 +2683,7 @@
                 replayCurrentIndex = getReplayStartIndex();
                 currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
                 candleSeries.setData(currentCandlesArray);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
             }
 
@@ -2509,6 +2703,7 @@
                 const nextCandle = allMasterCandles[replayCurrentIndex];
                 currentCandlesArray.push(nextCandle);
                 candleSeries.update(nextCandle);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = nextCandle.time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(nextCandle.close);
@@ -2524,6 +2719,7 @@
                 replayCurrentIndex = getReplayStartIndex();
                 currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
                 candleSeries.setData(currentCandlesArray);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2536,6 +2732,7 @@
                 const nextCandle = allMasterCandles[replayCurrentIndex];
                 currentCandlesArray.push(nextCandle);
                 candleSeries.update(nextCandle);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = nextCandle.time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(nextCandle.close);

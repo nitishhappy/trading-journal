@@ -2584,19 +2584,29 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
   - Added all companion `*_historical_briefings.js` files to `ASSETS` cache in `sw.js` for seamless offline viewing on mobile devices.
 - **Files Modified**: `api/marketCandles.js`, `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `js/data/*_historical_briefings.js`, `sw.js`, `README.md`
 
-### v2.4.03 — 10 Oct 2026 — Dynamic High Risk:Reward Setup Filter Across All Interactive Charts
+### v2.4.04 — 10 Oct 2026 — Technical Indicators Menu: 9 EMA & Volume Integration Across Interactive Charts
 
-- **High R:R Filter Button in Toolbar (`btc`, `nifty`, `gold`, `sp500`, `eurusd`)**:
-  - Added dedicated `[⭐ High R:R (≥1:<baseline>)]` filter button directly adjacent to the bar close countdown badge in the top-right toolbar across all 5 asset interactive charts.
-  - Dynamically reflects asset configuration baselines from `js/data/rr_config.js` (`HIGH_RR_BASELINE=3.5` for BTC; `2.5` for NIFTY, GOLD, S&P 500, EUR/USD) with zero client hardcoding.
-- **Dynamic Price Line & Sidebar Card Filtering**:
-  - When toggled ON, the chart price lines and sidebar cards filter down strictly to setups where TP1 Risk-to-Reward $\ge \text{baseline}$.
-  - Updates the levels count indicator (e.g. `2 High R:R Levels` or `3 High R:R Setups`) and displays an intuitive empty-state CTA with a "Show All Levels" button if zero setups match in that specific briefing run.
-  - Auto-selects and tracks nearest proximity only among visible, matching high R:R setups.
-  - Persists filter state across sessions and page reloads via asset-scoped `localStorage` (`filter_high_rr_only_<asset>`).
-- **Scorecard Badge Dynamic Tooltips**:
-  - Updated card badges to dynamically display configured asset baselines in tooltips rather than static placeholders.
-- **Files Modified**: `btc_interactive_chart.html`, `nifty_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `js/data/rr_config.js`, `README.md`
+- **Toolbar Indicators Dropdown (`[📊 Indicators ▾]`)**:
+  - Implemented a clean, modern dropdown menu in the top-right toolbar across all 5 asset interactive charts (`btc`, `gold`, `nifty`, `sp500`, `eurusd`).
+  - Features active indicator styling (sky-blue highlight when active) with smooth click outside dismissal.
+- **9 EMA Indicator (All 5 Assets)**:
+  - **Enabled by default** across all 5 interactive charts (`#38bdf8`, 2px smooth overlay).
+  - Calculated client-side from 5M candle close prices using recursive EMA mathematical formula.
+  - **Telemetry Pill**: Integrated dynamic `EMA: <val>` badge into the interactive OHLC header bar that updates on crosshair hover and live candle ticks.
+  - Preference persisted across sessions via `localStorage` (`indicator_ema9_enabled`).
+- **Volume Histogram (BTC & Gold Only)**:
+  - Scoped strictly to Bitcoin and Gold interactive charts where authentic market volume is available; omitted from Nifty, S&P 500, and EUR/USD.
+  - **Disabled by default** with user-toggleable checkbox in the Indicators dropdown.
+  - Overlay histogram series anchored to the bottom 18% of the chart canvas (`scaleMargins: { top: 0.82, bottom: 0 }`, overlay `priceScaleId: ''`) without impacting candle vertical scale.
+  - Dynamic bullish/bearish color coding (`#10b981` / `#f43f5e`) matching bar direction.
+  - **Telemetry Pill**: Displays dynamic `Vol: <formatted>` badge in the OHLC header bar.
+  - Preference persisted across sessions via `localStorage` (`indicator_volume_enabled_btc`, `indicator_volume_enabled_gold`).
+- **Replay Mode & Live Auto-Refresh Synchronization**:
+  - Fully synced across initial data bootstrap, live auto-refreshes (15s polling / delta feeds), and all 5 Replay Mode controls (Jump to Start, Step Back, Play/Pause, Step Forward, Exit Replay).
+- **Backend API Volume Field Parsing (`api/marketCandles.js`)**:
+  - Enhanced Yahoo Finance parser and Binance kline mapper to extract and forward candle volume metrics.
+- **Files Modified**: `api/marketCandles.js`, `btc_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `README.md`
+
 
 
 

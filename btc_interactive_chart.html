@@ -747,6 +747,54 @@
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
         }
 
+        .indicators-dropdown-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .btn-indicators {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #94a3b8;
+        }
+        .btn-indicators:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            color: #38bdf8;
+        }
+        .btn-indicators.active-indicator {
+            background: rgba(56, 189, 248, 0.12) !important;
+            border-color: rgba(56, 189, 248, 0.45) !important;
+            color: #38bdf8 !important;
+        }
+        .indicators-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            padding: 6px 4px;
+            min-width: 175px;
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(12px);
+            user-select: none;
+        }
+        .indicator-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            transition: background 0.15s;
+        }
+        .indicator-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
         .status-pill {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
@@ -906,9 +954,35 @@
                         <span>L: <strong id="ohlc-l">--</strong></span>
                         <span>C: <strong id="ohlc-c">--</strong></span>
                         <span id="ohlc-change-pill" class="ohlc-chg">--</span>
+                        <span id="ohlc-ema9-pill" style="display: none; color: #38bdf8; font-weight: 600;">EMA: <strong id="ohlc-ema9">--</strong></span>
+                        <span id="ohlc-vol-pill" style="display: none; color: #94a3b8; font-weight: 600;">Vol: <strong id="ohlc-vol">--</strong></span>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
+                    <div class="indicators-dropdown-wrapper">
+                        <button id="btn-indicators-menu" class="btn btn-indicators" onclick="toggleIndicatorsMenu(event)" title="Technical Indicators" style="padding: 0.2rem 0.6rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px;">
+                            <span>📊</span> <span>Indicators</span> <span id="indicators-arrow" style="font-size: 0.65rem; opacity: 0.7; transition: transform 0.2s;">▼</span>
+                        </button>
+                        <div id="indicators-dropdown-menu" class="indicators-dropdown-menu" style="display: none;" onclick="event.stopPropagation()">
+                            <div style="font-size: 0.68rem; font-weight: 700; color: #94a3b8; padding: 4px 8px 6px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 4px;">
+                                Indicators
+                            </div>
+                            <label class="indicator-item">
+                                <input type="checkbox" id="chk-ema9" onchange="toggleEMA9(this.checked)" style="accent-color: #38bdf8; cursor: pointer;">
+                                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <span style="display: inline-block; width: 12px; height: 3px; background: #38bdf8; border-radius: 2px;"></span>
+                                    9 EMA
+                                </span>
+                            </label>
+                            <label class="indicator-item">
+                                <input type="checkbox" id="chk-volume" onchange="toggleVolume(this.checked)" style="accent-color: #10b981; cursor: pointer;">
+                                <span style="display: inline-flex; align-items: center; gap: 6px;">
+                                    <span style="display: inline-block; width: 10px; height: 8px; background: #10b981; border-radius: 1px;"></span>
+                                    Volume
+                                </span>
+                            </label>
+                        </div>
+                    </div>
                     <button id="btn-high-rr-filter" class="btn btn-high-rr" onclick="toggleHighRROnly()" title="Filter to show only High Risk:Reward setups (TP1 R:R >= baseline)" style="padding: 0.2rem 0.65rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; border-radius: 6px; transition: all 0.2s;">
                         <span>⭐</span> <span id="high-rr-filter-label">High R:R</span>
                     </button>
@@ -971,6 +1045,11 @@
         let activePriceLines = [];
         let levelsData = [];
         let candleSeries = null;
+        let emaSeries = null;
+        let volumeSeries = null;
+        let showEMA9 = true;
+        let showVolume = false;
+        let lastCalculatedEMAVal = null;
         let chartInstance = null;
         let countdownSeconds = 15;
         let isInitialLoad = true;
@@ -985,6 +1064,7 @@
         const REPLAY_SPEED_MS = 800; // 800ms per bar
 
         document.addEventListener('DOMContentLoaded', () => {
+            initIndicatorSettings();
             initHighRRFilter();
             checkEmbedMode();
             initChartApp();
@@ -1163,6 +1243,138 @@
         let dragStartLeft = 0;
         const IST_OFFSET_SEC = 19800; // +5:30 IST offset in seconds for Binance UTC→IST axis alignment
 
+        function toggleIndicatorsMenu(event) {
+            if (event) event.stopPropagation();
+            const menu = document.getElementById('indicators-dropdown-menu');
+            const arrow = document.getElementById('indicators-arrow');
+            if (!menu) return;
+            const isHidden = menu.style.display === 'none' || menu.style.display === '';
+            menu.style.display = isHidden ? 'block' : 'none';
+            if (arrow) arrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('indicators-dropdown-menu');
+            const btn = document.getElementById('btn-indicators-menu');
+            if (menu && menu.style.display === 'block') {
+                if (!menu.contains(e.target) && (!btn || !btn.contains(e.target))) {
+                    menu.style.display = 'none';
+                    const arrow = document.getElementById('indicators-arrow');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                }
+            }
+        });
+
+        function toggleEMA9(enabled) {
+            showEMA9 = enabled;
+            localStorage.setItem('indicator_ema9_enabled', enabled ? 'true' : 'false');
+            if (emaSeries) {
+                emaSeries.applyOptions({ visible: showEMA9 });
+                if (showEMA9 && currentCandlesArray && currentCandlesArray.length > 0) {
+                    emaSeries.setData(calculateEMAData(currentCandlesArray, 9));
+                }
+            }
+            updateIndicatorButtonUI();
+            updateOHLCHeader();
+            showToast(enabled ? "9 EMA Visible" : "9 EMA Hidden", enabled ? "9 EMA displayed on chart." : "9 EMA line hidden.");
+        }
+
+        function toggleVolume(enabled) {
+            showVolume = enabled;
+            localStorage.setItem('indicator_volume_enabled_btc', enabled ? 'true' : 'false');
+            if (volumeSeries) {
+                volumeSeries.applyOptions({ visible: showVolume });
+                if (showVolume && currentCandlesArray && currentCandlesArray.length > 0) {
+                    volumeSeries.setData(prepareVolumeData(currentCandlesArray));
+                }
+            }
+            updateIndicatorButtonUI();
+            updateOHLCHeader();
+            showToast(enabled ? "Volume Visible" : "Volume Hidden", enabled ? "Volume histogram displayed." : "Volume overlay hidden.");
+        }
+
+        function updateIndicatorButtonUI() {
+            const btn = document.getElementById('btn-indicators-menu');
+            const chkEma = document.getElementById('chk-ema9');
+            const chkVol = document.getElementById('chk-volume');
+            if (chkEma) chkEma.checked = showEMA9;
+            if (chkVol) chkVol.checked = showVolume;
+            if (btn) {
+                if (showEMA9 || showVolume) {
+                    btn.classList.add('active-indicator');
+                } else {
+                    btn.classList.remove('active-indicator');
+                }
+            }
+        }
+
+        function initIndicatorSettings() {
+            const savedEma = localStorage.getItem('indicator_ema9_enabled');
+            showEMA9 = savedEma !== null ? (savedEma === 'true') : true;
+
+            const savedVol = localStorage.getItem('indicator_volume_enabled_btc');
+            showVolume = savedVol !== null ? (savedVol === 'true') : false;
+
+            updateIndicatorButtonUI();
+        }
+
+        function calculateEMAData(candles, period = 9) {
+            if (!candles || candles.length === 0) {
+                lastCalculatedEMAVal = null;
+                return [];
+            }
+            const k = 2 / (period + 1);
+            let prevEma = null;
+            const emaData = [];
+            for (let i = 0; i < candles.length; i++) {
+                const c = candles[i];
+                if (i < period - 1) {
+                    continue;
+                } else if (i === period - 1) {
+                    let sum = 0;
+                    for (let j = 0; j <= i; j++) sum += candles[j].close;
+                    prevEma = sum / period;
+                    emaData.push({ time: c.time, value: parseFloat(prevEma.toFixed(2)) });
+                } else {
+                    prevEma = (c.close - prevEma) * k + prevEma;
+                    emaData.push({ time: c.time, value: parseFloat(prevEma.toFixed(2)) });
+                }
+            }
+            lastCalculatedEMAVal = prevEma !== null ? parseFloat(prevEma.toFixed(2)) : null;
+            return emaData;
+        }
+
+        function prepareVolumeData(candles) {
+            if (!candles || candles.length === 0) return [];
+            return candles.map(c => {
+                const isUp = c.close >= c.open;
+                return {
+                    time: c.time,
+                    value: typeof c.volume === 'number' ? c.volume : 0,
+                    color: isUp ? 'rgba(16, 185, 129, 0.45)' : 'rgba(244, 63, 94, 0.45)'
+                };
+            });
+        }
+
+        function updateIndicatorSeriesData(candles) {
+            if (!candles || candles.length === 0) return;
+            if (emaSeries) {
+                const emaData = calculateEMAData(candles, 9);
+                if (showEMA9) emaSeries.setData(emaData);
+            }
+            if (volumeSeries) {
+                const volData = prepareVolumeData(candles);
+                if (showVolume) volumeSeries.setData(volData);
+            }
+        }
+
+        function formatVolumeNumber(v) {
+            if (typeof v !== 'number' || isNaN(v)) return '--';
+            if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+            if (v >= 1e3) return (v / 1e3).toFixed(2) + 'K';
+            return v >= 10 ? v.toFixed(1) : v.toFixed(2);
+        }
+
         function updateOHLCHeader(param) {
             const legendO = document.getElementById('ohlc-o');
             const legendH = document.getElementById('ohlc-h');
@@ -1203,6 +1415,44 @@
                 if (legendChg) {
                     legendChg.innerText = `${sign}${fmt(diff)} (${sign}${pct.toFixed(2)}%)`;
                     legendChg.className = `ohlc-chg ${isBullish ? 'bullish' : 'bearish'}`;
+                }
+
+                // Update 9 EMA in Telemetry Header
+                const emaPill = document.getElementById('ohlc-ema9-pill');
+                const emaValEl = document.getElementById('ohlc-ema9');
+                if (emaPill && emaValEl) {
+                    if (showEMA9) {
+                        emaPill.style.display = 'inline-block';
+                        let emaVal = null;
+                        if (param && param.seriesPrices && emaSeries) {
+                            emaVal = param.seriesPrices.get(emaSeries);
+                        }
+                        if (emaVal === undefined || emaVal === null) {
+                            emaVal = lastCalculatedEMAVal;
+                        }
+                        emaValEl.innerText = (typeof emaVal === 'number' && !isNaN(emaVal)) ? fmt(emaVal) : '--';
+                    } else {
+                        emaPill.style.display = 'none';
+                    }
+                }
+
+                // Update Volume in Telemetry Header
+                const volPill = document.getElementById('ohlc-vol-pill');
+                const volValEl = document.getElementById('ohlc-vol');
+                if (volPill && volValEl) {
+                    if (showVolume) {
+                        volPill.style.display = 'inline-block';
+                        let volVal = null;
+                        if (param && param.seriesPrices && volumeSeries) {
+                            volVal = param.seriesPrices.get(volumeSeries);
+                        }
+                        if (volVal === undefined || volVal === null) {
+                            volVal = candle && typeof candle.volume === 'number' ? candle.volume : null;
+                        }
+                        volValEl.innerText = (typeof volVal === 'number' && !isNaN(volVal)) ? formatVolumeNumber(volVal) : '--';
+                    } else {
+                        volPill.style.display = 'none';
+                    }
                 }
             }
         }
@@ -1403,6 +1653,32 @@
                 borderVisible: false,
                 wickUpColor: '#10b981',
                 wickDownColor: '#f43f5e',
+            });
+
+            // Volume Histogram Series (Overlay with priceScaleId: '')
+            volumeSeries = chartInstance.addHistogramSeries({
+                priceFormat: {
+                    type: 'volume',
+                },
+                priceScaleId: '', // Overlay series
+                visible: showVolume,
+            });
+            volumeSeries.priceScale().applyOptions({
+                scaleMargins: {
+                    top: 0.82,
+                    bottom: 0,
+                },
+            });
+
+            // 9 EMA Line Series
+            emaSeries = chartInstance.addLineSeries({
+                color: '#38bdf8',
+                lineWidth: 2,
+                title: '9 EMA',
+                priceLineVisible: false,
+                lastValueVisible: false,
+                crosshairMarkerVisible: true,
+                visible: showEMA9,
             });
 
             initHorizontalScrollbar();
@@ -2083,6 +2359,7 @@
                 if (!isReplayMode) {
                     currentCandlesArray = candles;
                     candleSeries.setData(candles);
+                    updateIndicatorSeriesData(candles);
                     latestCandleTimestamp = candles[candles.length - 1].time;
                     updateOHLCHeader();
                 }
@@ -2224,6 +2501,7 @@
             if (allMasterCandles && allMasterCandles.length > 0 && candleSeries) {
                 currentCandlesArray = [...allMasterCandles];
                 candleSeries.setData(currentCandlesArray);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2238,6 +2516,7 @@
             replayCurrentIndex = getReplayStartIndex();
             currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
             candleSeries.setData(currentCandlesArray);
+            updateIndicatorSeriesData(currentCandlesArray);
             latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
             updateOHLCHeader();
             updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2265,6 +2544,7 @@
                 replayCurrentIndex--;
                 currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
                 candleSeries.setData(currentCandlesArray);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2283,6 +2563,7 @@
                 replayCurrentIndex = getReplayStartIndex();
                 currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
                 candleSeries.setData(currentCandlesArray);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
             }
 
@@ -2302,6 +2583,7 @@
                 const nextCandle = allMasterCandles[replayCurrentIndex];
                 currentCandlesArray.push(nextCandle);
                 candleSeries.update(nextCandle);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = nextCandle.time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(nextCandle.close);
@@ -2317,6 +2599,7 @@
                 replayCurrentIndex = getReplayStartIndex();
                 currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
                 candleSeries.setData(currentCandlesArray);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
@@ -2329,6 +2612,7 @@
                 const nextCandle = allMasterCandles[replayCurrentIndex];
                 currentCandlesArray.push(nextCandle);
                 candleSeries.update(nextCandle);
+                updateIndicatorSeriesData(currentCandlesArray);
                 latestCandleTimestamp = nextCandle.time;
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(nextCandle.close);
@@ -3198,7 +3482,8 @@
                             open: parseFloat(parseFloat(c[1]).toFixed(2)),
                             high: parseFloat(parseFloat(c[2]).toFixed(2)),
                             low: parseFloat(parseFloat(c[3]).toFixed(2)),
-                            close: parseFloat(parseFloat(c[4]).toFixed(2))
+                            close: parseFloat(parseFloat(c[4]).toFixed(2)),
+                            volume: parseFloat(c[5]) || 0
                         }));
                         btcCandlesLoadedTf = tfInterval;
                         currentFeedSource = 'BINANCE';
@@ -3214,7 +3499,8 @@
                                 open: parseFloat(parseFloat(c[1]).toFixed(2)),
                                 high: parseFloat(parseFloat(c[2]).toFixed(2)),
                                 low: parseFloat(parseFloat(c[3]).toFixed(2)),
-                                close: parseFloat(parseFloat(c[4]).toFixed(2))
+                                close: parseFloat(parseFloat(c[4]).toFixed(2)),
+                                volume: parseFloat(c[5]) || 0
                             }));
                             const candleMap = new Map();
                             allMasterCandles.forEach(c => candleMap.set(c.time, c));
@@ -3242,7 +3528,8 @@
                                 open: c.open,
                                 high: c.high,
                                 low: c.low,
-                                close: c.close
+                                close: c.close,
+                                volume: typeof c.volume === 'number' ? c.volume : (parseFloat(c.volume) || 0)
                             }));
                             btcCandlesLoadedTf = tfInterval;
                             currentFeedSource = json.source ? `VERCEL_${json.source}` : 'VERCEL_API';
@@ -3289,7 +3576,8 @@
                                 open: parseFloat(c[3].toFixed(2)),
                                 high: parseFloat(c[2].toFixed(2)),
                                 low: parseFloat(c[1].toFixed(2)),
-                                close: parseFloat(c[4].toFixed(2))
+                                close: parseFloat(c[4].toFixed(2)),
+                                volume: parseFloat(c[5]) || 0
                             });
                         });
                         candles = Array.from(map.values()).sort((a, b) => a.time - b.time);
