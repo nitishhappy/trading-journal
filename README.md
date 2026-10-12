@@ -178,6 +178,20 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.75 — 12 Oct 2026 — Bitcoin Copilot: Stale Plan Heartbeat & Trigger Engine Architecture
+- **Stale Plan Watchdog Heartbeat (`config_btc.txt` & `btc_watchdog.py`)**:
+  - Implemented configurable `MAX_STALE_HOURS` parameter (default: 4.0h) in `config_btc.txt` with full descriptive documentation.
+  - Added an automated stale-plan heartbeat override in `btc_watchdog.py` that bypasses standard cooldowns to guarantee continuous 24/7 crypto markets never remain stale for > 4h.
+  - Automatically handles catch-up tactical briefings when the laptop wakes up from overnight sleep/hibernation or reboot.
+- **Active-Batch Level Exhaustion Filtering (`level_dedup_engine.py`)**:
+  - Updated `check_level_exhaustion_trigger` to filter plan levels by the latest active batch timestamp instead of scanning all 24h rolling historical entries.
+  - Prevents stale historical outer envelope levels from blocking valid real-time breakout/breakdown invalidation triggers.
+- **Structural Invalidation Baseline Anchor Persistence (`level_dedup_engine.py`)**:
+  - Resolved bug where continuous 24h assets without explicit `day_open` failed to commit their initial daily spot anchor when evaluated with `persist=False`.
+  - Guarantees `btc_structural_state.json` anchors properly each day and tracks genuine $\ge \$1,000$ structural shifts.
+- **Crypto-Native Session Trigger Windows (`config.py`)**:
+  - Added 05:30 IST (Daily UTC Candle Open & Overnight Settlement) and 16:30 IST (London Midday / Pre-US Handover) to bridge overnight and mid-day gaps.
+
 ### v2.3.74 — 12 Oct 2026 — Fix SyntaxError in EUR/USD and S&P 500 Interactive Chart Loaders & Outcome Glow
 - **Fix Data Loading Syntax Error (`eurusd_interactive_chart.html` & `sp500_interactive_chart.html`)**:
   - Corrected unclosed parentheses in the nested fallback ternary expression assigning `rawPlanArray` in `loadHistoricalData()`.
