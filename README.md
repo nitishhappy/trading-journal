@@ -178,8 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.74 — 12 Oct 2026 — Fix SyntaxError in EUR/USD and S&P 500 Interactive Chart Loaders & Outcome Glow
+- **Fix Data Loading Syntax Error (`eurusd_interactive_chart.html` & `sp500_interactive_chart.html`)**:
+  - Corrected unclosed parentheses in the nested fallback ternary expression assigning `rawPlanArray` in `loadHistoricalData()`.
+  - Resolved `Uncaught SyntaxError: Unexpected token ';'` preventing chart initialization and candle data rendering on live deployments.
+- **Unified Level Card Outcome Glow (`.has-outcome`)**:
+  - Added deep royal neon blue outcome glow styling across all interactive chart dashboards (`nifty`, `btc`, `gold`, `eurusd`, `sp500`) when a level is marked as worked or failed.
+
 ### v2.3.73 — 09 Oct 2026 — Agent Workflow Rule: No Hardcoding & Asset Configuration Invariant
-- **Permanent Agent Workflow Rule (`.agents/AGENTS.md`)**:
   - Formalized the **No Hardcoding & Asset Configuration Rule** into the workspace agent instructions.
   - Prohibits hardcoding numeric thresholds, R:R baselines, multipliers, or magic constants in source code, client charts, or scripts.
   - Mandates storing asset parameters in dedicated, well-commented configuration files (`config_<asset>.txt`) in each asset's utility setup folder.

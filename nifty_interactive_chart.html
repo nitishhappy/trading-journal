@@ -448,6 +448,25 @@
             border-left-color: var(--bearish);
         }
 
+        /* Outcome Glow (Worked / Failed) - Deep Royal Neon Blue */
+        .level-card.has-outcome {
+            border: 1.5px solid rgba(99, 102, 241, 0.65) !important;
+            border-left-width: 5px !important;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.55), inset 0 0 10px rgba(99, 102, 241, 0.15) !important;
+        }
+        .level-card.has-outcome:hover {
+            box-shadow: 0 0 24px rgba(99, 102, 241, 0.75), inset 0 0 12px rgba(99, 102, 241, 0.22) !important;
+        }
+        .level-card.bullish.has-outcome {
+            border-left-color: var(--bullish) !important;
+        }
+        .level-card.bearish.has-outcome {
+            border-left-color: var(--bearish) !important;
+        }
+        .level-card.high-rr.has-outcome {
+            border-left-color: #f59e0b !important;
+        }
+
         .level-card.selected-highlight {
             border: 2px solid var(--accent) !important;
             border-left: 6px solid var(--accent) !important;
@@ -2364,8 +2383,10 @@
                     activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx, isHighRR });
                 }
 
+                const hasOutcome    = (savedOutcome === 'worked' || savedOutcome === 'failed');
+
                 const card = document.createElement('div');
-                card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}${isHighRR ? ' high-rr' : ''}`;
+                card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}${isHighRR ? ' high-rr' : ''}${hasOutcome ? ' has-outcome' : ''}`;
                 card.id = `card-level-${idx}`;
                 card.setAttribute('data-level-id', levelUniqueId);
                 card.innerHTML = `
@@ -3057,9 +3078,18 @@
             const pill = document.querySelector(`[data-pill="${levelId}"]`);
             const btnWorked = document.querySelector(`[data-btn-worked="${levelId}"]`);
             const btnFailed = document.querySelector(`[data-btn-failed="${levelId}"]`);
+            const card = document.querySelector(`.level-card[data-level-id="${levelId}"]`) || pill?.closest('.level-card');
 
             if (btnWorked) btnWorked.classList.remove('active');
             if (btnFailed) btnFailed.classList.remove('active');
+
+            if (card) {
+                if (status === 'worked' || status === 'failed') {
+                    card.classList.add('has-outcome');
+                } else {
+                    card.classList.remove('has-outcome');
+                }
+            }
 
             if (pill) {
                 pill.className = `status-pill status-pill-${status}`;
