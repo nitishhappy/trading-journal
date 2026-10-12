@@ -1,6 +1,105 @@
 window.btcDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "82492.3",
+    "bias": "bullish",
+    "behavior": "[MON 18:52] [B1]: Day Low SSL sweep and reclaim with buying absorption",
+    "tp": "83,100 / 83,550",
+    "sl": "82,320",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "84261.63",
+    "bias": "bullish",
+    "behavior": "[MON 18:52] [B2]: Day High BSL breakout with institutional volume expansion",
+    "tp": "84,950 / 85,600",
+    "sl": "83,850",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "82634.1",
+    "bias": "bearish",
+    "behavior": "[MON 18:52] [S1]: 15M Bearish FVG relief bounce rejection",
+    "tp": "82,180 / 81,880",
+    "sl": "82,920",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "82480",
+    "bias": "bearish",
+    "behavior": "[MON 18:52] [S2]: Day Low demand shelf breakdown cascade",
+    "tp": "82,080 / 81,850",
+    "sl": "82,720",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "82333.4",
+    "bias": "bullish",
+    "behavior": "[MON 18:52] [KB2]: 15M Bullish Fair Value Gap discount mitigation zone",
+    "tp": "82,900 / 83,300",
+    "sl": "82,150",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "81880",
+    "bias": "bullish",
+    "behavior": "[MON 18:52] [KB3]: Institutional liquidity pocket below $82k round number",
+    "tp": "82,600 / 83,100",
+    "sl": "81,580",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "77500",
+    "bias": "bullish",
+    "behavior": "[MON 18:52] [KB4]: HTF Daily Bias Invalidation Floor and regime boundary",
+    "tp": "80,500 / 82,000",
+    "sl": "76,800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "83553.12",
+    "bias": "bearish",
+    "behavior": "[MON 18:52] [KS1]: Session VWAP confluent with Volume Profile POC",
+    "tp": "82,900 / 82,500",
+    "sl": "83,820",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T18:52:06+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "price": "82874.99",
+    "bias": "bearish",
+    "behavior": "[MON 18:52] [KS2]: Broken Demand OB flipped into dynamic resistance",
+    "tp": "82,200 / 81,850",
+    "sl": "83,150",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-12T18:45:50+05:30",
     "timeDisplay": "06:45 PM, Oct 12",
     "price": "82519.29",
@@ -8,17 +107,6 @@ window.btcDailyPlanData = [
     "behavior": "[MON 18:45] [B1]: Day Low SSL sweep reclaim with 15M bullish FVG absorption",
     "tp": "82,900 / 83,300",
     "sl": "82,380",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-12T18:45:50+05:30",
-    "timeDisplay": "06:45 PM, Oct 12",
-    "price": "84261.63",
-    "bias": "bullish",
-    "behavior": "[MON 18:45] [B2]: Day High breakout with institutional short-covering expansion",
-    "tp": "84,950 / 85,600",
-    "sl": "83,850",
     "status": "na"
   },
   {
@@ -388,6 +476,15 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "id": "BTC_20261012_185215",
+    "timestamp": "2026-10-12T18:52:15+05:30",
+    "timeDisplay": "06:52 PM, Oct 12",
+    "spot": "82569.33",
+    "trigger": "Stale Plan Refresh (20.0h elapsed >= 4.0h max gap",
+    "source": "BTC-AI",
+    "text": "# ₿ Bitcoin (BTC/USD) Tactical Update (06:49 PM IST - Oct 12, 2026 | Spot: $82569.33 | Trigger: Stale Plan Refresh (20.0h elapsed >= 4.0h max gap))\n\n================================================================================\n🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: 🟢 BULLISH | Bias Score: +1.0 / +6.0 | Confidence: Neutral (Chop)\n• Bias Invalidation Floor: $77,500.00 (A 15M close below $77,500.00 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Buy-on-Dip Expansion. Institutional momentum favors absorption at discount demand OBs followed by upside expansion.\n• Execution: Avoid counter-trend shorts during early session. Wait for 15M opening range filter before entries. Demand high-volume rejection at day lows ($82,492.30) or breakout above VWAP/Value Area.\n\n---\n\n### 1. Market Structure & Session Bias:\nBitcoin Spot (BTC/USD) is trading at **$82,569.33**, in a short-term bearish compression below the 9 & 21 EMAs on the 15M timeframe within the broader daily structure (Day High: **$84,261.63** | Day Low: **$82,492.30** | Prior Day Close: **$83,792.54** | Live Spot: **$82,569.33**). \n\nDuring this active session transition, intermarket dynamics (DXY at **$102.396** consolidating; S&P 500 Futures at **$7,865.25**) and crypto-native metrics (Funding Rate neutral at **0.0013%**; Fear & Greed Index at **69 [Greed]**; overhead CME Gap at **$82,760.00**, size: 276.63 pts) guide structural order flow. Spot sits directly above the Day Low ($82,492.30) following a persistent sell-off from Asian session highs, testing immediate sell-side liquidity.\n- Crypto News Guard: Clean Calendar\n\n---\n\n### 2. SMC & Liquidity Zones:\n- **Buy-Side Liquidity (BSL):** Concentrated above Day High ($84,261.63), local compression highs ($83,280.00), and the overhead CME Gap fill target at $82,760.00.\n- **Sell-Side Liquidity (SSL):** Clustered directly below the Day Low ($82,492.30) down into the 15M Bullish FVG pocket ($82,333.40–$82,433.40) and deeper macro liquidity shelves at $81,880.00.\n- **Order Blocks (OB) & Key Levels:** Prior Bullish Demand OB at $82,874.99–$83,171.41 (now acting as an overhead breaker zone); 200 EMA at $83,258.52; Session VWAP at $83,553.12; Volume Profile POC at $83,594.78.\n- **Fair Value Gaps (FVG):** \n  - 15M Bearish FVG: $82,483.40–$82,634.10 (immediate overhead friction zone).\n  - 15M Bullish FVG: $82,333.40–$82,433.40 (primary discount mitigation cushion).\n\n---\n\n### 3. Live Intraday Chop Zone / No-Trade Zone:\n- **Range:** $83,283.59 – $83,994.89 (Value Area) / $83,195.70 – $84,173.33 (Asian Session Equilibrium).\n- **Context:** Spot ($82,569.33) is currently hovering just above the day low shelf. Entering unconfirmed market orders between $82,550 and $82,800 is hazardous due to erratic micro-wicks inside the 15M Bearish FVG. Wait for confirmed liquidity sweeps or displacement breaks.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n- **Upside Short-Covering Squeeze (> $83,280.00 / > $84,261.63 Spot):** A sustained 5m/15m candle close above the 200 EMA ($83,258.52) clears local compression and triggers short-covering toward VWAP ($83,553.12). A clean breakout above Day High ($84,261.63) unleashes aggressive institutional expansion toward $85,000+.\n- **Downside Long-Liquidation Cascade (< $82,480.00 Spot):** A sustained 5m close below the Day Low demand shelf ($82,492.30) triggers cascading leveraged stop liquidations, accelerating price toward $82,080.00 and $81,850.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[B1]** | 🟢 **Long (Demand Floor SSL Sweep)** | **$82,492.30** Reclaim | Sweep below $82,492.30 rejected with lower wick, followed by 5m close back ABOVE $82,550.00 with buying volume absorption | **TP1:** $83,100.00<br>**TP2:** $83,550.00 | **$82,320.00** | 1:3.0 |\n| **[B2]** | 🟢 **Long (High-Momentum Breakout)** | **$84,261.63** Breakout | Sustained 5m/15m candle close ABOVE $84,261.63 with expanding institutional volume displacement | **TP1:** $84,950.00<br>**TP2:** $85,600.00 | **$83,850.00** | 1:2.2 |\n| **[S1]** | 🔴 **Short (Bearish FVG Rejection)** | **$82,634.10–$82,875.00** Rejection | Corrective relief bounce into FVG rejected with upper wick, followed by 5m close back BELOW $82,550.00 | **TP1:** $82,180.00<br>**TP2:** $81,880.00 | **$82,920.00** | 1:2.3 |\n| **[S2]** | 🔴 **Short (Demand Floor Breakdown)** | **$82,480.00** Breakdown | Sustained 5m close BELOW $82,492.30 with aggressive institutional sell displacement | **TP1:** $82,080.00<br>**TP2:** $81,850.00 | **$82,720.00** | 1:2.6 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$82,492.30** | Immediate Support / Day Low Floor | **[KB1]** | Live Day Low ($82,492.30) SSL liquidity shelf and psychological $82.5k round number | $83,100.00 / $83,550.00 | $82,320.00 |\n| **$82,333.40** | Discount Demand FVG | **[KB2]** | 15M Bullish Fair Value Gap ($82,333.40–$82,433.40) discount mitigation zone | $82,900.00 / $83,300.00 | $82,150.00 |\n| **$81,880.00** | Macro Demand Shelf | **[KB3]** | Institutional liquidity pocket below $82k round number and prior multi-day swing base | $82,600.00 / $83,100.00 | $81,580.00 |\n| **$77,500.00** | Macro Daily Invalidation Floor | **[KB4]** | HTF Daily Bias Invalidation Floor; structural break marks transition to macro bear regime | $80,500.00 / $82,000.00 | $76,800.00 |\n| **$83,553.12** | Primary Resistance / Value Confluence | **[KS1]** | Session VWAP ($83,553.12) confluent with Volume Profile POC ($83,594.78) and Value Area High | $82,900.00 / $82,500.00 | $83,820.00 |\n| **$82,874.99** | Breaker / Supply Zone | **[KS2]** | Prior broken Demand OB ($82,874.99–$83,171.41) flipped into dynamic resistance | $82,200.00 / $81,850.00 | $83,150.00 |"
+  },
+  {
     "id": "BTC_20261012_184819",
     "timestamp": "2026-10-12T18:48:19+05:30",
     "timeDisplay": "06:48 PM, Oct 12",
