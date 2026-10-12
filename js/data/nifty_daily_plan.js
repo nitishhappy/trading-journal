@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-12T10:00:57+05:30",
+    "timeDisplay": "10:00 AM, Oct 12",
+    "price": "22485",
+    "bias": "bullish",
+    "behavior": "[MON 10:00] [B1]: Confirmed 5-min bullish pin bar sweep below Day Low 22,472 with swift close back above 22,485",
+    "tp": "22,530 / 22,580",
+    "sl": "22,455",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T10:00:57+05:30",
+    "timeDisplay": "10:00 AM, Oct 12",
+    "price": "22535",
+    "bias": "bullish",
+    "behavior": "[MON 10:00] [B2]: Sustained 5-min candle close firmly ABOVE 22,535 with expanding active futures volume (>1.5x avg)",
+    "tp": "22,595 / 22,645",
+    "sl": "22,495",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T10:00:57+05:30",
+    "timeDisplay": "10:00 AM, Oct 12",
+    "price": "22515",
+    "bias": "bearish",
+    "behavior": "[MON 10:00] [S1]: 5-min rejection candle inside 22,515 - 22,525 failing to reclaim 15M ORB Low (22,512)",
+    "tp": "22,470 / 22,430",
+    "sl": "22,545",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T10:00:57+05:30",
+    "timeDisplay": "10:00 AM, Oct 12",
+    "price": "22470",
+    "bias": "bearish",
+    "behavior": "[MON 10:00] [S2]: Sustained 5-min candle close firmly BELOW Day Low 22,470 with active futures volume expansion",
+    "tp": "22,415 / 22,365",
+    "sl": "22,505",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-12T09:19:35+05:30",
     "timeDisplay": "09:19 AM, Oct 12",
     "price": "22530",
@@ -1114,6 +1158,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261012_100059",
+    "timestamp": "2026-10-12T10:00:59+05:30",
+    "timeDisplay": "10:00 AM, Oct 12",
+    "spot": "22507.45",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 22593.20",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (10:00 AM IST - Oct 12, 2026 | Spot: 22507.45 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 22593.20))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 22485.00 – 22530.00 (Spot Index).\n- Context: Price is tightly compressed between the broken 15M Opening Range Low (22512.00) acting as overhead resistance and the intermediate swing reaction base ahead of Day Low (22472.15).\n- Danger: Current Nifty Futures volume ratio is normal (1.0x 8-bar avg), reflecting low-conviction rotational chop. Option buying inside this 45-point corridor carries severe theta decay and two-sided whipsaw risk. Strict NO-TRADE zone until a clean directional breakout occurs.\n\n4. High Momentum / Explosive Zones:\n- [Downside Breakdown Expansion] (Sustained 5-Min Close Below 22470.00): Triggers institutional long unwinding and stop-loss cascading below Day Low (22472.15), opening an explosive vacuum towards 22415.00 and 22365.00.\n- [Upside Short-Covering Squeeze] (Sustained 5-Min Close Above 22535.00): Traps intraday aggressive breakout put buyers below the 15M ORB Low, igniting a fast short-covering expansion back towards the Day Open / VWAP region at 22595.00 and 22645.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Mean Reversion / Day Low Liquidity Sweep Long): Confirmed 5-min bullish pin bar sweep below Day Low 22472.15 with a swift, decisive close back above 22485.00. | TP: 22530.00 / 22580.00 | SL: 22455.00 | 💡 Buy 22500 CE + Sell 22550 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (ORB Low Reclaim & Momentum Squeeze Long): Sustained 5-min candle close firmly ABOVE 22535.00 with expanding active Nifty Futures volume (>1.5x avg). | TP: 22595.00 / 22645.00 | SL: 22495.00 | 💡 Buy 22550 CE + Sell 22600 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (15M ORB Low Rejection / Bear Flag Pullback Short): 5-min bearish rejection candle inside 22515.00 – 22525.00 failing to reclaim 15M ORB Low (22512.00) with visible upper wicks. | TP: 22470.00 / 22430.00 | SL: 22545.00 | 💡 Buy 22500 PE + Sell 22450 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown & Trend Continuation Short): Sustained 5-min candle close firmly BELOW Day Low 22470.00 accompanied by expanding active Nifty Futures volume. | TP: 22415.00 / 22365.00 | SL: 22505.00 | 💡 Buy 22450 PE + Sell 22400 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261012_091938",
     "timestamp": "2026-10-12T09:19:38+05:30",
     "timeDisplay": "09:19 AM, Oct 12",
