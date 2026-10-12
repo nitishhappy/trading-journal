@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-12T09:45:48+05:30",
+    "timeDisplay": "09:45 AM, Oct 12",
+    "price": "4184.5",
+    "bias": "bullish",
+    "behavior": "[MON 09:45] [G_B1]: Asian Low SSL Sweep & Liquidity Reversal Demand",
+    "tp": "$4,198.00 / $4,206.00",
+    "sl": "$4,178.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T09:45:48+05:30",
+    "timeDisplay": "09:45 AM, Oct 12",
+    "price": "4208.5",
+    "bias": "bullish",
+    "behavior": "[MON 09:45] [G_B2]: Breakout Level Above Imbalance Supply",
+    "tp": "$4,217.00 / $4,226.00",
+    "sl": "$4,202.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T09:45:48+05:30",
+    "timeDisplay": "09:45 AM, Oct 12",
+    "price": "4204.5",
+    "bias": "bearish",
+    "behavior": "[MON 09:45] [G_S1]: Broken Floor Retest / Bearish Mitigation FVG",
+    "tp": "$4,192.00 / $4,185.00",
+    "sl": "$4,209.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-12T09:45:48+05:30",
+    "timeDisplay": "09:45 AM, Oct 12",
+    "price": "4184.0",
+    "bias": "bearish",
+    "behavior": "[MON 09:45] [G_S2]: Asian Session Low Breakdown Trigger",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-12T06:32:15+05:30",
     "timeDisplay": "06:32 AM, Oct 12",
     "price": "4202.5",
@@ -47,6 +91,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261012_094549",
+    "timestamp": "2026-10-12T09:45:49+05:30",
+    "timeDisplay": "09:45 AM, Oct 12",
+    "spot": "4199.28",
+    "trigger": "Level Exhaustion Breakdown (GOLD Spot $4199.28 < Min Plan Target $4202.50 - Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (09:45 AM IST - Oct 12, 2026 | Spot: $4199.28 | Trigger: Level Exhaustion Breakdown (GOLD Spot $4199.28 < Min Plan Target $4202.50 - Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **DXY (US Dollar Index) Relative Strength:** The US Dollar Index is holding a firm bid above its local consolidation range, exerting persistent downward drag on physical bullion. Spot Gold has dropped beneath the pivotal $4,202.50 baseline as late-Asian session liquidity favored dollar holdings ahead of European trading.\n* **US 10-Year Treasury Yields:** US 10Y benchmark yields remain firm near session highs, elevating real yield hurdles and dampening non-yielding bullion demand across the London pre-market open.\n* **Session Liquidity Transition:** The market is completing the transition out of the Asian range. London market makers are positioning liquidity traps around the Asian Session Low ($4,184.78). Volume remains characteristically light until London desks become fully active (12:30–13:00 IST), setting up typical stop-hunt mechanics prior to high-volume directional continuation.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Market Structure Shift (MSS) / CHoCH:** The clean loss of the prior support floor at $4,202.50 on the 15-minute timeframe constitutes an intraday Change of Character (CHoCH) to the downside, turning the $4,203.00–$4,206.50 zone into an active bearish mitigation block.\n* **Sell-Side Liquidity (SSL) Pools:** Resting liquidity pools are stacked directly below the Asian Day Low at **$4,184.78**. A fast liquidity run into this level is the primary objective for institutional sellers before establishing any London reversal.\n* **Buy-Side Liquidity (BSL) Pools:** Equal highs and resting buy stops remain clustered at **$4,208.50** and the Day High at **$4,217.18**.\n* **Fair Value Gaps (FVGs):** A prominent 15-minute bearish imbalance (FVG) sits between **$4,203.50 and $4,207.00**, representing the prime supply area for corrective short entries.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Defined Boundaries:** **$4,195.00 – $4,203.00**\n* **Context & Rationale:** Price is oscillating inside the midpoint of the day's impulse leg after breaching the $4,202.50 target. Executing fresh directional trades inside this $8.00 spread carries a low probability profile due to low late-Asian volume and high probability of two-sided wicks. Do not initiate market orders inside this pocket; wait for extreme boundary interactions (sweep at the lows or confirmed retest rejection at supply).\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bearish Acceleration Trigger (< $4,184.00):** A decisive 15-minute close beneath the Asian Session Low ($4,184.78) will clear accumulated stops, triggering rapid momentum expansion toward the HTF 1H demand pocket at **$4,174.00 – $4,165.00**.\n* **Bullish Short-Covering Trigger (> $4,208.50):** Reclaiming the upper boundary of the bearish FVG with a solid 15-minute close will invalidate early session short sellers, prompting an explosive liquidity run targeting the Asian Session High ($4,217.18) and $4,226.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4,182.00 – $4,185.00** Sweep Retest | 5M sweep of Day Low ($4,184.78) followed by an immediate displacement close back above $4,187.00 with bullish volume | **TP1:** $4,198.00<br>**TP2:** $4,206.00 | **$4,178.50** | 1:2.6 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,208.50** Breakout | 15M candle body close above $4,208.50 clearing the supply FVG with strong bullish displacement | **TP1:** $4,217.00<br>**TP2:** $4,226.00 | **$4,202.00** | 1:2.7 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,203.00 – $4,206.50** Retest | 5M rejection wick or bearish engulfing pattern inside the broken $4,202.50 floor / supply FVG zone | **TP1:** $4,192.00<br>**TP2:** $4,185.00 | **$4,209.50** | 1:2.5 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4,184.00** Breakdown | Sustained 15M candle close below $4,184.00 with expanding red volume confirming SSL liquidation | **TP1:** $4,174.00<br>**TP2:** $4,165.00 | **$4,190.00** | 1:2.8 |"
+  },
+  {
     "id": "GOLD_20261012_063219",
     "timestamp": "2026-10-12T06:32:19+05:30",
     "timeDisplay": "06:32 AM, Oct 12",
