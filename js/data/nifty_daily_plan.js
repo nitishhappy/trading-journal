@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-13T14:46:10+05:30",
+    "timeDisplay": "02:46 PM, Oct 13",
+    "price": "22625",
+    "bias": "bullish",
+    "behavior": "[TUE 14:46] [B1]: Dip to 22,620 - 22,630 holding with 5m bullish rejection candle and volume absorption",
+    "tp": "22,660 / 22,695",
+    "sl": "22,595",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-13T14:46:10+05:30",
+    "timeDisplay": "02:46 PM, Oct 13",
+    "price": "22665",
+    "bias": "bullish",
+    "behavior": "[TUE 14:46] [B2]: Sustained 5m close ABOVE 22,665 with expanding futures volume confirming absorption",
+    "tp": "22,710 / 22,750",
+    "sl": "22,630",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-13T14:46:10+05:30",
+    "timeDisplay": "02:46 PM, Oct 13",
+    "price": "22650",
+    "bias": "bearish",
+    "behavior": "[TUE 14:46] [S1]: False breakout sweep above 22,665 with immediate 5m rejection closing back below 22,650",
+    "tp": "22,615 / 22,580",
+    "sl": "22,680",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-13T14:46:10+05:30",
+    "timeDisplay": "02:46 PM, Oct 13",
+    "price": "22610",
+    "bias": "bearish",
+    "behavior": "[TUE 14:46] [S2]: Decisive 5m close BELOW 22,610 violating intraday base with active futures selling volume",
+    "tp": "22,560 / 22,515",
+    "sl": "22,645",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-13T14:31:34+05:30",
     "timeDisplay": "02:31 PM, Oct 13",
     "price": "22565",
@@ -1642,6 +1686,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261013_144612",
+    "timestamp": "2026-10-13T14:46:12+05:30",
+    "timeDisplay": "02:46 PM, Oct 13",
+    "spot": "22653.3",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $22653.30 > Max Plan Target $22606.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:45 PM IST - Oct 13, 2026 | Spot: 22653.3 | Trigger: Level Exhaustion Breakout (NIFTY Spot $22653.30 > Max Plan Target $22606.00 + Buffer $5.00))\n\n> ⚠️ **THETA CRUSH DAY**: India VIX is down -8.07%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 22,620.00 – 22,665.00 (Spot Index).\n- Context: Price is consolidating near the day's high (22,660.35) following an exhaustion breakout above the prior max target (22,606.00). \n- Expiry Dynamics: Today being Tuesday (FinNifty Expiry), heavy gamma pinning and aggressive call writing around 22,650–22,700 strikes coupled with a -8.07% VIX collapse means premium decay inside this 45-point corridor will rapidly erode naked options.\n- No-Trade Directive: Avoid initiating fresh market orders inside 22,620–22,665. Wait for a decisive high-volume breakout or confirmed pullback test.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Sustained Spot Move Above 22,665.00): Triggers forced short-covering from 22,650/22,700 CE writers in the final 45 minutes, targeting rapid acceleration toward 22,710.00 and 22,750.00.\n- [Bearish Long Unwinding] (Decisive Spot Breakdown Below 22,615.00): Traps late breakout buyers above the prior 22,606 ceiling, setting off swift profit booking and delta unwinding toward 22,560.00 and 22,515.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback Reversal Long): Dip to 22,620.00 – 22,630.00 holding with a 5m bullish rejection candle and futures volume absorption. | TP: 22,660.00 / 22,695.00 | SL: 22,595.00 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Long): Sustained 5m close ABOVE 22,665.00 with expanding futures volume (>1.5x) confirming absorption. | TP: 22,710.00 / 22,750.00 | SL: 22,630.00 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Failed High / Liquidity Sweep Short): False breakout sweep above 22,665.00 followed by an immediate 5m rejection closing back below 22,650.00. | TP: 22,615.00 / 22,580.00 | SL: 22,680.00 | 💡 Buy 22650 PE + Sell 22600 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Breakdown Short): Decisive 5m close BELOW 22,610.00 violating the intraday base with active futures selling volume. | TP: 22,560.00 / 22,515.00 | SL: 22,645.00 | 💡 Buy 22600 PE + Sell 22550 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261013_143137",
     "timestamp": "2026-10-13T14:31:37+05:30",
     "timeDisplay": "02:31 PM, Oct 13",
