@@ -3513,13 +3513,15 @@
 
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
             const marketCandlesUrl = isLocal
-                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`
-                : `/api/marketCandles?symbol=EURUSD&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`;
+                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=5m&range=7d&limit=2000&_t=${Date.now()}`
+                : `/api/marketCandles?symbol=EURUSD&timeframe=5m&range=7d&limit=2000&_t=${Date.now()}`;
 
-            // 1. Primary: Server-side /api/marketCandles?symbol=EURUSD
+            let liveSpot = null;
+
+            // 1. Primary: Server-side /api/marketCandles?symbol=EURUSD (15s resilient timeout)
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 6500);
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
                 const res = await fetch(marketCandlesUrl, { 
                     cache: 'no-store',
                     signal: controller.signal
@@ -3528,20 +3530,23 @@
                 if (res.ok) {
                     const json = await res.json();
                     const candles = filterFresh(json?.candles);
-                    if (candles.length > 0) {
+                    if (candles.length > 5) {
                         return candles;
+                    }
+                    if (candles.length > 0) {
+                        liveSpot = candles[candles.length - 1].close;
                     }
                 }
             } catch (e) {
                 console.warn('[EURUSD Chart] /api/marketCandles fetch failed or timed out:', e);
             }
 
-            // 2. Direct Vercel Cloud Fallback (if relative fetch in production failed)
+            // 2. Direct Vercel Cloud Fallback (if relative fetch in production failed, 12s timeout)
             if (!isLocal) {
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 5000);
-                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`, {
+                    const timeoutId = setTimeout(() => controller.abort(), 12000);
+                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=EURUSD&timeframe=5m&range=7d&limit=2000&_t=${Date.now()}`, {
                         cache: 'no-store',
                         signal: controller.signal
                     });
@@ -3549,8 +3554,11 @@
                     if (cloudRes.ok) {
                         const json = await cloudRes.json();
                         const candles = filterFresh(json?.candles);
-                        if (candles.length > 0) {
+                        if (candles.length > 5) {
                             return candles;
+                        }
+                        if (candles.length > 0) {
+                            liveSpot = candles[candles.length - 1].close;
                         }
                     }
                 } catch (e) {
@@ -3558,14 +3566,34 @@
                 }
             }
 
-            // 3. Fallback: reload and read from window.eurusdCandlesData
+            // 3. Fallback: reload and read from window.eurusdCandlesData (optionally overlaying live spot)
             try {
                 if (typeof reloadCandlesScript === 'function') {
                     await reloadCandlesScript();
                 }
                 if (window.eurusdCandlesData && Array.isArray(window.eurusdCandlesData.timeframe5m) && window.eurusdCandlesData.timeframe5m.length > 0) {
+                    const base = [...window.eurusdCandlesData.timeframe5m];
+                    if (liveSpot && base.length > 0) {
+                        const nowSec = Math.floor(Date.now() / 1000);
+                        const currentBarTime = Math.floor(nowSec / 300) * 300;
+                        const last = base[base.length - 1];
+                        if (last.time === currentBarTime) {
+                            last.high = Math.max(last.high, liveSpot);
+                            last.low = Math.min(last.low, liveSpot);
+                            last.close = liveSpot;
+                        } else if (currentBarTime > last.time) {
+                            base.push({
+                                time: currentBarTime,
+                                open: liveSpot,
+                                high: liveSpot,
+                                low: liveSpot,
+                                close: liveSpot,
+                                volume: 0
+                            });
+                        }
+                    }
                     console.log("[EURUSD Chart] Loaded candles from window.eurusdCandlesData cache");
-                    return [...window.eurusdCandlesData.timeframe5m];
+                    return base;
                 }
             } catch (e) {
                 console.warn('[EURUSD Chart] Fallback candle reload failed:', e);

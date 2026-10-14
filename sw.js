@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-256a013139";
+const CACHE_NAME = "trade-journal-256a013140";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -247,14 +247,17 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => 
+          caches.match(event.request, { ignoreSearch: true })
+            .then((cached) => cached || new Response("", { status: 504, statusText: "Offline and not cached" }))
+        )
     );
     return;
   }
 
   // Cache-first for static assets (icons etc.) that rarely change
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
       if (cached) return cached;
       return fetch(event.request).then((response) => {
         if (event.request.method === "GET" && response.status === 200 && event.request.url.startsWith("http")) {
@@ -262,7 +265,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone).catch(() => {}));
         }
         return response;
-      }).catch(() => cached);
+      }).catch(() => cached || new Response("", { status: 504, statusText: "Offline and not cached" }));
     })
   );
 });
