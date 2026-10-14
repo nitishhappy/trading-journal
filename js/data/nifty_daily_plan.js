@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-14T15:46:22+05:30",
+    "timeDisplay": "03:46 PM, Oct 14",
+    "price": "22665",
+    "bias": "bullish",
+    "behavior": "[WED 15:46] [B1]: Sustained 5m close ABOVE 22,665.00 with active futures volume confirming absorption of breakdown sellers",
+    "tp": "22,720.00 / 22,755.00",
+    "sl": "22,625.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T15:46:22+05:30",
+    "timeDisplay": "03:46 PM, Oct 14",
+    "price": "22760",
+    "bias": "bullish",
+    "behavior": "[WED 15:46] [B2]: Decisive 5m close ABOVE 22,760.00 backed by institutional volume expansion confirming Day High sweep continuation",
+    "tp": "22,820.00 / 22,880.00",
+    "sl": "22,710.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T15:46:22+05:30",
+    "timeDisplay": "03:46 PM, Oct 14",
+    "price": "22660",
+    "bias": "bearish",
+    "behavior": "[WED 15:46] [S1]: 5m bearish rejection candle formed at 22,660.00 \u2013 22,665.00 with expanding red futures volume confirming lower-high supply defense",
+    "tp": "22,600.00 / 22,560.00",
+    "sl": "22,695.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T15:46:22+05:30",
+    "timeDisplay": "03:46 PM, Oct 14",
+    "price": "22555",
+    "bias": "bearish",
+    "behavior": "[WED 15:46] [S2]: Decisive 5m close BELOW 22,555.00 breaking Day Low (22,558.95) with expanding futures selling volume",
+    "tp": "22,500.00 / 22,440.00",
+    "sl": "22,605.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-14T13:46:09+05:30",
     "timeDisplay": "01:46 PM, Oct 14",
     "price": "22580",
@@ -1937,50 +1981,6 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-07T15:46:10+05:30",
-    "timeDisplay": "03:46 PM, Oct 07",
-    "price": "22580",
-    "bias": "bullish",
-    "behavior": "[WED 15:46] [B1]: 5m bullish engulfing close above 22,580 after sweeping the 22,546-22,560 demand base with futures volume confirmation",
-    "tp": "22,650 / 22,690",
-    "sl": "22,535",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-07T15:46:10+05:30",
-    "timeDisplay": "03:46 PM, Oct 07",
-    "price": "22718",
-    "bias": "bullish",
-    "behavior": "[WED 15:46] [B2]: Sustained 5m close ABOVE 22,718 with active futures volume (>1.5x) confirming short covering",
-    "tp": "22,770 / 22,830",
-    "sl": "22,670",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-07T15:46:10+05:30",
-    "timeDisplay": "03:46 PM, Oct 07",
-    "price": "22670",
-    "bias": "bearish",
-    "behavior": "[WED 15:46] [S1]: 5m bearish rejection candle closing below 22,670 after failed test of the 22,695-22,718 overhead supply",
-    "tp": "22,610 / 22,560",
-    "sl": "22,735",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-07T15:46:10+05:30",
-    "timeDisplay": "03:46 PM, Oct 07",
-    "price": "22546",
-    "bias": "bearish",
-    "behavior": "[WED 15:46] [S2]: Sustained 5m close BELOW 22,546 with active red futures volume (>1.4x) confirming long unwinding",
-    "tp": "22,480 / 22,420",
-    "sl": "22,590",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-07T13:47:06+05:30",
     "timeDisplay": "01:47 PM, Oct 07",
     "price": "22615",
@@ -2126,6 +2126,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261014_154625",
+    "timestamp": "2026-10-14T15:46:25+05:30",
+    "timeDisplay": "03:46 PM, Oct 14",
+    "spot": "22622.7",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Oct 14, 2026 | Spot: 22622.7 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict No-Trade Band (22,600.00 – 22,665.00): Spot price is consolidating inside the afternoon shelf between the psychological round-number support at 22,600 and the 15M ORB Low breakdown level at 22,663.80. Premium decay is elevated inside this 65-point compression zone.\n- Intraday Indecision Pocket (22,620.00 – 22,640.00): Price closed at 22,622.70 directly around the session volume point of control. Executing naked option purchases inside this equilibrium range carries high theta erosion risk with minimal directional follow-through.\n\n4. High Momentum / Explosive Zones:\n- Bullish Reclaim Acceleration (Sustained 5m close ABOVE 22,665.00): A decisive close back inside the 15-minute Opening Range forces immediate intraday short-covering, driving spot momentum toward 22,720.00 and the Day High at 22,757.95.\n- Bullish Squeeze Extension (Decisive 5m close ABOVE 22,760.00): Expanding active futures volume confirming a clean absorption breakout above Day High triggers an aggressive momentum expansion toward 22,820.00.\n- Bearish Rejection Defense (Failure and 5m bearish rejection candle at 22,660.00 – 22,665.00): Supply absorption failure at the breakdown retest level initiates an impulsive rotational sell-off toward 22,600.00 and 22,560.00.\n- Bearish Liquidity Flush (Decisive 5m close BELOW 22,555.00): A break below Day Low (22,558.95) flushes resting stop liquidity, unleashing rapid institutional long unwinding toward 22,500.00 and 22,440.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB Low Reclaim & Mean Reversion Long): Sustained 5m close ABOVE 22,665.00 with active futures volume confirming absorption of breakdown sellers. | TP: 22,720.00 / 22,755.00 | SL: 22,625.00 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout & Liquidity Expansion Long): Decisive 5m close ABOVE 22,760.00 backed by institutional volume expansion confirming Day High sweep continuation. | TP: 22,820.00 / 22,880.00 | SL: 22,710.00 | 💡 Buy 22750 CE + Sell 22800 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Breakdown Retest Rejection Short): 5m bearish rejection candle formed at 22,660.00 – 22,665.00 with expanding red futures volume confirming lower-high supply defense. | TP: 22,600.00 / 22,560.00 | SL: 22,695.00 | 💡 Buy 22650 PE + Sell 22600 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown & Long Unwinding Short): Decisive 5m close BELOW 22,555.00 breaking Day Low (22,558.95) with expanding futures selling volume. | TP: 22,500.00 / 22,440.00 | SL: 22,605.00 | 💡 Buy 22550 PE + Sell 22500 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261014_134611",
     "timestamp": "2026-10-14T13:46:11+05:30",
     "timeDisplay": "01:46 PM, Oct 14",
