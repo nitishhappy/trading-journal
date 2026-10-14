@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-14T13:32:16+05:30",
+    "timeDisplay": "01:32 PM, Oct 14",
+    "price": "22605",
+    "bias": "bullish",
+    "behavior": "[WED 13:32] [B1]: Bullish rejection wick after sweeping 22,558.95 with confirmed 5m close back above 22,605.00 and futures absorption",
+    "tp": "22,655 / 22,695",
+    "sl": "22,545",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T13:32:16+05:30",
+    "timeDisplay": "01:32 PM, Oct 14",
+    "price": "22665",
+    "bias": "bullish",
+    "behavior": "[WED 13:32] [B2]: Sustained 5m close firmly ABOVE 22,665.00 reclaiming 15M ORB floor with active futures volume confirming institutional absorption",
+    "tp": "22,720 / 22,755",
+    "sl": "22,615",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T13:32:16+05:30",
+    "timeDisplay": "01:32 PM, Oct 14",
+    "price": "22590",
+    "bias": "bearish",
+    "behavior": "[WED 13:32] [S1]: Exhaustion rejection wick into 22,620 - 22,640 pullback followed by confirmed 5m close below 22,590.00 with rising call OI",
+    "tp": "22,530 / 22,480",
+    "sl": "22,640",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T13:32:16+05:30",
+    "timeDisplay": "01:32 PM, Oct 14",
+    "price": "22550",
+    "bias": "bearish",
+    "behavior": "[WED 13:32] [S2]: Decisive 5m close BELOW 22,550.00 taking out Day Low (22,558.95) with expanding futures selling volume",
+    "tp": "22,490 / 22,430",
+    "sl": "22,600",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-14T13:17:19+05:30",
     "timeDisplay": "01:17 PM, Oct 14",
     "price": "22590",
@@ -2038,6 +2082,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261014_133219",
+    "timestamp": "2026-10-14T13:32:19+05:30",
+    "timeDisplay": "01:32 PM, Oct 14",
+    "spot": "22587",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:30 PM IST - Oct 14, 2026 | Spot: 22587 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Intraday Boundary (22,560.00 - 22,620.00 Spot): Spot Nifty is hovering at 22,587.00 after rebounding mildly from the session low (22,558.95) and remaining capped well below the 15M ORB floor (22,663.80). Price action within this 60-point pocket (22,560.00 - 22,620.00) represents a low-conviction compression zone bracketed between the Day Low liquidity shelf and overhead 5m/15m exponential moving averages. Proxied active Nifty Futures volume ratio is steady at 1.0x (8-bar avg), confirming that institutions are in pre-closing inventory positioning mode rather than aggressive aggressive directional allocation. Purchasing naked premium inside 22,560.00 - 22,620.00 entails elevated risk of rapid theta decay and chop whipsaws.\n- Option Chain (OI) Shifts & Pre-Closing Alignment: Heavy Call open interest concentration persists across 22,600, 22,650, and 22,700 strikes, creating a descending ceiling that caps relief bounces. On the downside, 22,550 and 22,500 Put writers are holding preliminary defensive shelves, turning 22,560 - 22,620 into a pin-risk chop box until an institutional volume catalyst forces an exit. Respect this neutral zone and trade strictly on confirmed outer boundary breaks.\n\n4. High Momentum / Explosive Zones:\n- [Bearish Breakdown Expansion Flush] (Decisive 5m close BELOW 22,550.00 Spot): Breaches fresh session lows below 22,558.95 and triggers capitulation selling from trapped 22,550/22,600 Put writers, accelerating an intraday flush toward 22,490.00 and 22,430.00.\n- [Bullish Liquidity Sweep & Reclaim Squeeze] (Liquidity sweep below 22,558.95 followed by an immediate 5m close back ABOVE 22,605.00 Spot): Sweeps resting sell-side stops and traps late breakdown shorts, fueling a rapid mean-reversion short-covering burst toward 22,655.00 and 22,695.00.\n- [Pullback Supply Retest & Rejection Flush] (Pullback rally into 22,620.00 - 22,640.00 followed by a 5m bearish rejection candle closing below 22,590.00 Spot): Re-tests broken intraday value structure (now resistance), offering high-probability trend continuation selling toward 22,530.00 and 22,480.00.\n- [Structural 15M ORB Floor Reclaim Expansion] (Sustained 5m close firmly ABOVE 22,665.00 Spot): Reclaims the 15M ORB Low (22,663.80) and forces aggressive intraday Call writers to cover, igniting an extended pre-closing expansion toward 22,720.00 and 22,755.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Demand Shelf Liquidity Sweep & Reclaim Long): Bullish rejection wick after sweeping Day Low (22,558.95) with a confirmed 5m close back above 22,605.00 and active futures volume confirming absorption. | TP: 22,655.00 / 22,695.00 | SL: 22,545.00 | 💡 Buy 22600 CE + Sell 22650 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Structural ORB Floor Reclaim Long): Sustained 5m close firmly ABOVE 22,665.00 reclaiming the 15M ORB floor with active futures volume confirming institutional absorption (>1.2x avg). | TP: 22,720.00 / 22,755.00 | SL: 22,615.00 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Retest Rejection Short): Exhaustion rejection wick into 22,620.00 - 22,640.00 pullback followed by a confirmed 5m close back below 22,590.00 with rising call OI. | TP: 22,530.00 / 22,480.00 | SL: 22,640.00 | 💡 Buy 22600 PE + Sell 22550 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown Continuation Short): Decisive 5m close BELOW 22,550.00 taking out Day Low (22,558.95) with expanding futures selling volume (>1.2x avg). | TP: 22,490.00 / 22,430.00 | SL: 22,600.00 | 💡 Buy 22550 PE + Sell 22500 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261014_131724",
     "timestamp": "2026-10-14T13:17:24+05:30",
     "timeDisplay": "01:17 PM, Oct 14",
