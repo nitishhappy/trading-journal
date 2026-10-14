@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-14T13:30:42+05:30",
+    "timeDisplay": "01:30 PM, Oct 14",
+    "price": "4141.5",
+    "bias": "bullish",
+    "behavior": "[WED 13:30] [G_B1]: Asian Low SSL Sweep & Demand OB Recovery",
+    "tp": "4158.00 / 4169.00",
+    "sl": "4136.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T13:30:42+05:30",
+    "timeDisplay": "01:30 PM, Oct 14",
+    "price": "4171.5",
+    "bias": "bullish",
+    "behavior": "[WED 13:30] [G_B2]: High-Momentum Breakout Above Asian High",
+    "tp": "4182.00 / 4195.00",
+    "sl": "4163.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T13:30:42+05:30",
+    "timeDisplay": "01:30 PM, Oct 14",
+    "price": "4166.0",
+    "bias": "bearish",
+    "behavior": "[WED 13:30] [G_S1]: 15M Supply Block & FVG Rejection",
+    "tp": "4152.00 / 4143.50",
+    "sl": "4171.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T13:30:42+05:30",
+    "timeDisplay": "01:30 PM, Oct 14",
+    "price": "4142.0",
+    "bias": "bearish",
+    "behavior": "[WED 13:30] [G_S2]: Asian Low Breakdown Acceleration Zone",
+    "tp": "4132.00 / 4122.00",
+    "sl": "4148.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-14T13:22:10+05:30",
     "timeDisplay": "01:22 PM, Oct 14",
     "price": "4143.0",
@@ -8,17 +52,6 @@ window.goldDailyPlanData = [
     "behavior": "[WED 13:22] [G_B1]: Asian Low SSL Sweep & Reclaim",
     "tp": "na",
     "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-14T13:22:10+05:30",
-    "timeDisplay": "01:22 PM, Oct 14",
-    "price": "4171.5",
-    "bias": "bullish",
-    "behavior": "[WED 13:22] [G_B2]: Breakout Above Day High BSL",
-    "tp": "4182.00 / 4195.00",
-    "sl": "Decisive 5M/15M candle body close cleanly above Day High (4170.39) with expanding green volume and positive delta, sustaining acceptance above 4171.50.",
     "status": "na"
   },
   {
@@ -344,6 +377,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261014_133046",
+    "timestamp": "2026-10-14T13:30:46+05:30",
+    "timeDisplay": "01:30 PM, Oct 14",
+    "spot": "4149.06",
+    "trigger": "Scheduled 01:30 PM Update (London Open & Asian Range Sweep",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (01:30 PM IST - Oct 14, 2026 | Spot: 4149.06 | Trigger: Scheduled 01:30 PM Update (London Open & Asian Range Sweep))\n\n### 1. Global Macro & Forex Mechanics:\n* **DXY (US Dollar Index) Dynamics:** The US Dollar Index trades firm near intraday highs, applying localized downward pressure on bullion. Ahead of the London open, European currency pairs are exhibiting minor distribution, keeping XAU/USD capped below the Asian High of 4170.39.\n* **US 10-Year Treasury Yields:** US yields are holding steady with slight upward drift, dampening non-yielding gold momentum during European transition hours.\n* **Session Mechanics (London Open / Pre-NY):** Price action during the Asian session established an initial balance range between 4143.08 (Asian Low) and 4170.39 (Asian High). The current dip toward 4149.06 marks an early European test of the lower value area, with institutional participants looking to engineer liquidity below the Asian lows before establishing directional volume.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL):** Concentrated at 4170.50 (Asian Session High) and extending into the 4182.00–4190.00 HTF 4H supply cluster.\n* **Sell-Side Liquidity (SSL):** Positioned immediately below 4143.00 (Asian Session Low) down to the 4135.00 psychological demand zone.\n* **Order Blocks & Imbalances (FVG):**\n  * **Bearish FVG (15M):** Located at 4162.00 – 4166.50, acting as primary overhead resistance.\n  * **Bullish Demand OB (1H):** Sits in the 4138.00 – 4143.00 bracket, representing an unmitigated sweep-and-recover origin zone.\n* **Market Structure:** Neutral-to-bearish intraday drift within a broader multi-session consolidation. A clean sweep of 4143.00 followed by an aggressive displacement candle will indicate smart-money accumulation.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Boundaries:** **4148.00 – 4162.00**\n* **Context:** This 14-point mid-range zone represents equilibrium (EQ) between the Asian low and high. Trading within this pocket exposes participants to low-volume chop, spread expansion, and false breakouts typical of the early London handover. Wait for sweeps of the perimeter boundaries.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Acceleration Zone:** Clean breakout and 15M candle close above **4171.00** opens an impulsive run toward 4185.00 and 4198.00 via short-covering and BSL activation.\n* **Bearish Acceleration Zone:** Displacement break and close below **4142.00** triggers cascading stop runs toward 4130.00 and 4120.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **4140.00 – 4143.00** Retest | Sweep of Asian low (4143.08) followed by 5M bullish CHoCH close back above 4144.50 with expanding volume | **TP1:** 4158.00<br>**TP2:** 4169.00 | **4136.00** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **4171.50** Breakout | 15M candle close above 4170.50 followed by shallow pullback retest holding above 4168.00 | **TP1:** 4182.00<br>**TP2:** 4195.00 | **4163.50** | 1:2.0 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4164.00 – 4168.00** Retest | Rejection wick at 15M FVG/Supply block with 5M bearish engulfing close below 4163.00 | **TP1:** 4152.00<br>**TP2:** 4143.50 | **4171.50** | 1:2.1 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **4142.00** Breakdown | 15M candle displacement close below 4142.50 with sustained selling volume under Asian low | **TP1:** 4132.00<br>**TP2:** 4122.00 | **4148.50** | 1:2.0 |"
+  },
+  {
     "id": "GOLD_20261014_132212",
     "timestamp": "2026-10-14T13:22:12+05:30",
     "timeDisplay": "01:22 PM, Oct 14",
