@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-14T07:12:33+05:30",
+    "timeDisplay": "07:12 AM, Oct 14",
+    "price": "22680",
+    "bias": "bullish",
+    "behavior": "[WED 07:12] [B1]: Bullish rejection on a 5m candle at 22,670-22,680 demand retest with futures volume confirmation",
+    "tp": "22,730 / 22,780",
+    "sl": "22,640",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T07:12:33+05:30",
+    "timeDisplay": "07:12 AM, Oct 14",
+    "price": "22730",
+    "bias": "bullish",
+    "behavior": "[WED 07:12] [B2]: Clean 5m candle close ABOVE 22,730 holding day highs with expanding futures volume (>1.2x avg)",
+    "tp": "22,780 / 22,830",
+    "sl": "22,690",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T07:12:33+05:30",
+    "timeDisplay": "07:12 AM, Oct 14",
+    "price": "22695",
+    "bias": "bearish",
+    "behavior": "[WED 07:12] [S1]: Rejection wick at 22,725-22,735 followed by a decisive 5m close back below 22,695 with drying bull volume",
+    "tp": "22,650 / 22,610",
+    "sl": "22,735",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T07:12:33+05:30",
+    "timeDisplay": "07:12 AM, Oct 14",
+    "price": "22640",
+    "bias": "bearish",
+    "behavior": "[WED 07:12] [S2]: Decisive 5m close BELOW 22,640 breakdown floor with expanding futures sell volume",
+    "tp": "22,580 / 22,520",
+    "sl": "22,680",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-13T15:46:08+05:30",
     "timeDisplay": "03:46 PM, Oct 13",
     "price": "22680",
@@ -1818,6 +1862,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261014_071235",
+    "timestamp": "2026-10-14T07:12:35+05:30",
+    "timeDisplay": "07:12 AM, Oct 14",
+    "spot": "22721.95",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (07:11 AM IST - Oct 14, 2026 | Spot: 22721.95 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- 22,660 - 22,710 (Immediate Consolidation & Mean-Reversion Band): Spot trades right at the session high (22,721.95) following a +433.50-point trend move off the 22,288.45 day low. The 22,660 - 22,710 corridor represents an intraday equilibrium pocket where price tends to consolidate before committing to the next directional expansion. Executing naked long options inside this boundary carries significant chop and theta decay risk.\n- Open Interest & Strike Pinning Dynamics: Heavy Call Open Interest buildup across the 22,700 - 22,750 strikes creates initial supply resistance, while aggressive Put writing has emerged at 22,650 and 22,600 to form an intraday support shelf. The concentration of open contracts between 22,670 and 22,715 points to range containment until institutional futures volume breaks the boundary.\n\n4. High Momentum / Explosive Zones:\n- Bullish Momentum Expansion (Sustained 5m Close Above 22,730): Triggers institutional momentum continuation and secondary short-covering above the Day High (22,721.95) into open overhead liquidity targeting 22,780 and 22,830.\n- Bearish Liquidity Flush (Decisive 5m Close Below 22,640): Triggers intraday profit booking and long unwinding below the consolidation base toward fair value liquidity zones at 22,580 and 22,520.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Retest & Value Absorption): Bullish rejection on a 5m candle at 22,670-22,680 demand retest with futures volume confirmation. | TP: 22,730 / 22,780 | SL: 22,640 | 💡 Buy 22700 CE + Sell 22750 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Continuation): Clean 5m candle close ABOVE 22,730 holding day highs with expanding futures volume (>1.2x avg). | TP: 22,780 / 22,830 | SL: 22,690 | 💡 Buy 22750 CE + Sell 22800 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Exhaustion Reversal / False Breakout): Rejection wick at 22,725-22,735 followed by a decisive 5m close back below 22,695 with drying bull volume. | TP: 22,650 / 22,610 | SL: 22,735 | 💡 Buy 22700 PE + Sell 22650 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Breakdown / Liquidity Flush): Decisive 5m close BELOW 22,640 breakdown floor with expanding futures sell volume. | TP: 22,580 / 22,520 | SL: 22,680 | 💡 Buy 22650 PE + Sell 22600 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261013_154611",
     "timestamp": "2026-10-13T15:46:11+05:30",
     "timeDisplay": "03:46 PM, Oct 13",
