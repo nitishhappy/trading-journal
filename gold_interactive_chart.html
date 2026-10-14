@@ -875,6 +875,12 @@
             border-color: #f43f5e;
         }
 
+        .outcome-btn.btn-invalid:hover, .outcome-btn.btn-invalid.active {
+            background: rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+            border-color: #f59e0b;
+        }
+
         .outcome-btn.btn-reset:hover {
             background: rgba(148, 163, 184, 0.3);
             color: #f8fafc;
@@ -2240,6 +2246,11 @@
                 const levelUniqueId = `gold_${cleanTag}_${cleanPrice}${runSuffix}`;
                 const savedOutcome = getSavedOutcome(levelUniqueId);
 
+                // If marked as Invalid, hide both the chart price line and panel card
+                if (savedOutcome === 'invalid') {
+                    return;
+                }
+
                 // Tag-aware line styles: Solid for B* & S*, Dotted for #B* & #S*
                 const rawTag        = (tag || '').replace(/^[\[\s]+|[\]\s]+$/g, '').trim();
                 const isSolid       = /^[BS]/i.test(rawTag);
@@ -2271,7 +2282,7 @@
                         title: lineTitle,
                     });
 
-                    activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx, isHighRR });
+                    activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx, isHighRR, levelUniqueId });
                 }
 
                 if (levelsListEl) {
@@ -2306,6 +2317,7 @@
                             <div class="outcome-btn-group">
                                 <button class="outcome-btn btn-worked ${savedOutcome==='worked'?'active':''}" data-btn-worked="${levelUniqueId}" id="btn-worked-gold-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'worked', ${idx})">✓ Worked</button>
                                 <button class="outcome-btn btn-failed ${savedOutcome==='failed'?'active':''}" data-btn-failed="${levelUniqueId}" id="btn-failed-gold-${idx}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'failed', ${idx})">✗ Failed</button>
+                                <button class="outcome-btn btn-invalid ${savedOutcome==='invalid'?'active':''}" id="btn-invalid-gold-${idx}" data-btn-invalid="${levelUniqueId}" data-action="invalid" data-level-id="${levelUniqueId}" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'invalid', ${idx})">🚫 Invalid</button>
                                 <button class="outcome-btn btn-reset" onclick="toggleLevelOutcome(event, '${levelUniqueId}', '${category}', 'na', ${idx})">↺ Reset</button>
                             </div>
                         </div>
@@ -2910,10 +2922,12 @@
             }
 
             if (st !== 'na') {
-                if (scorecardStats[src][st] !== undefined) {
-                    scorecardStats[src][st]++;
-                } else {
-                    scorecardStats[src][st] = 1;
+                if (st !== 'invalid') {
+                    if (scorecardStats[src][st] !== undefined) {
+                        scorecardStats[src][st]++;
+                    } else {
+                        scorecardStats[src][st] = 1;
+                    }
                 }
                 levelReviewLog[levelId] = { source: src, status: st, updatedAt: new Date().toISOString() };
             } else {
@@ -2957,8 +2971,9 @@
             if (event) event.stopPropagation();
             recordLevelOutcome(levelId, source, status);
             updateCardOutcomeUI(levelId, status);
-            const label = status === 'worked' ? '🟢 WORKED' : (status === 'failed' ? '🔴 FAILED' : '⚪ RESET');
-            showToast(`Scorecard Logged (${source})`, `Level marked as ${label} in EOD Forecast Scorecard.`);
+            const label = status === 'worked' ? '🟢 WORKED' : (status === 'failed' ? '🔴 FAILED' : (status === 'invalid' ? '🚫 INVALID' : '⚪ RESET'));
+            const desc = status === 'invalid' ? `Level marked as ${label} and hidden from chart & panel.` : `Level marked as ${label} in EOD Forecast Scorecard.`;
+            showToast(`Scorecard Logged (${source})`, desc);
             triggerAlertSound(880, 'sine', 0.1);
         }
 
@@ -2966,10 +2981,31 @@
             const pill = document.querySelector(`[data-pill="${levelId}"]`);
             const btnWorked = document.querySelector(`[data-btn-worked="${levelId}"]`);
             const btnFailed = document.querySelector(`[data-btn-failed="${levelId}"]`);
+            const btnInvalid = document.querySelector(`[data-btn-invalid="${levelId}"], [data-level-id="${levelId}"][data-action="invalid"]`);
             const card = document.querySelector(`.level-card[data-level-id="${levelId}"]`) || pill?.closest('.level-card');
 
             if (btnWorked) btnWorked.classList.remove('active');
             if (btnFailed) btnFailed.classList.remove('active');
+            if (btnInvalid) btnInvalid.classList.remove('active');
+
+            if (status === 'invalid') {
+                const lineIdx = activePriceLines.findIndex(item => item.levelUniqueId === levelId || item.index === Number(card?.id?.split('-')?.pop()));
+                if (lineIdx !== -1) {
+                    if (activePriceLines[lineIdx].line && candleSeries) {
+                        candleSeries.removePriceLine(activePriceLines[lineIdx].line);
+                    }
+                    activePriceLines.splice(lineIdx, 1);
+                }
+                if (card) {
+                    card.style.display = 'none';
+                }
+                const lCount = document.getElementById('levels-count');
+                if (lCount) {
+                    const visibleCards = document.querySelectorAll('.levels-section .level-card:not([style*="display: none"])');
+                    lCount.innerText = `${visibleCards.length} Levels`;
+                }
+                return;
+            }
 
             if (card) {
                 if (status === 'worked' || status === 'failed') {
