@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-14T07:01:21+05:30",
+    "timeDisplay": "07:01 AM, Oct 14",
+    "price": "4167.5",
+    "bias": "bullish",
+    "behavior": "[WED 07:01] [G_B2]: High-Momentum Breakout Above Asian High BSL",
+    "tp": "4,176.00 / 4,185.00",
+    "sl": "4,161.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T07:01:21+05:30",
+    "timeDisplay": "07:01 AM, Oct 14",
+    "price": "4153.5",
+    "bias": "bullish",
+    "behavior": "[WED 07:01] [G_B1]: Asian 15M Bullish FVG Demand Retest",
+    "tp": "4,165.00 / 4,174.00",
+    "sl": "4,148.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T07:01:21+05:30",
+    "timeDisplay": "07:01 AM, Oct 14",
+    "price": "4176.5",
+    "bias": "bearish",
+    "behavior": "[WED 07:01] [G_S1]: 1H Bearish Order Block Supply Rejection",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-14T07:01:21+05:30",
+    "timeDisplay": "07:01 AM, Oct 14",
+    "price": "4146.5",
+    "bias": "bearish",
+    "behavior": "[WED 07:01] [G_S2]: High-Momentum Breakdown Below Day Low SSL",
+    "tp": "4,138.00 / 4,130.00",
+    "sl": "15-minute body close below 4,147.56 Day Low, followed by a failed retest converting 4,148.00 into resistance.",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-13T23:02:36+05:30",
     "timeDisplay": "11:02 PM, Oct 13",
     "price": "4150.0",
@@ -344,6 +388,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261014_070124",
+    "timestamp": "2026-10-14T07:01:24+05:30",
+    "timeDisplay": "07:01 AM, Oct 14",
+    "spot": "4165.51",
+    "trigger": "Manual Ad-Hoc Run",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (07:00 AM IST - Oct 14, 2026 | Spot: 4165.51 | Trigger: Manual Ad-Hoc Run)\n\n### 1. Global Macro & Forex Mechanics:\n* **DXY (US Dollar Index) Correlation:** The US Dollar Index is consolidating with a mild downward tilt around 103.20 following benign inflation data. Gold spot is maintaining an inverse beta bid, with physical spot absorbing liquidity near session highs.\n* **US 10-Year Treasury Yields:** Yields hover near 4.02%, unable to gain upward traction. The suppression of real yields continues to provide an underlying structural tailwind for non-yielding bullion.\n* **Session Liquidity Dynamics:** The Asian session has ground higher within an $18.52 daily range ($4,147.56 – $4,166.08). Price is hovering less than $0.60 below the session high. As European early desks prepare to go live ahead of London open (01:30 PM IST / 08:00 AM BST), institutional participants typically engineer either a pre-London buy-side liquidity run or an induced false-breakout trap to source counterpart liquidity before the main trend move.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL):** Concentrated tightly above Day High **$4,166.08** up to **$4,170.00**. A sustained sweep will trigger buy stops toward the higher-timeframe 1H Bearish Order Block resting at **$4,176.00 – $4,182.00**.\n* **Sell-Side Liquidity (SSL):** Placed below the Asian morning base and Day Low at **$4,147.56**, with internal structural sell stops resting at **$4,154.00 – $4,156.00**.\n* **Fair Value Gaps (FVG) & Order Blocks (OB):**\n  * *Bullish 15M FVG:* Formed between **$4,152.00 – $4,155.50** during the Asian markup. This represents prime discounted institutional demand for long continuation.\n  * *Bearish 1H OB / Premium Supply:* Located at **$4,175.00 – $4,183.00**, marking the supply origin of the previous macro distribution leg.\n* **Structural Flow (CHoCH / BOS):** 5-minute and 15-minute order flow remains bullishly aligned with consecutive Higher Lows. A break and 15M close below **$4,152.00** would constitute an intraday Change of Character (CHoCH) toward the lower Asian range boundary.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Boundary:** **$4,160.00 – $4,166.00**\n* **Rationale:** Spot is hovering directly under the Day High ($4,166.08). Entering market long positions directly into un-swept resistance risks getting trapped in an Asian liquidity sweep / \"turtle soup\" reversal. Concurrently, blind shorting against strong morning order flow carries low expectancy. Remain flat within this $6 band until liquidity is swept or confirmed momentum prints.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion Zone (> $4,167.50):** An impulsive 5-minute candle close above $4,167.50 clears Asian resting BSL, triggering rapid algorithmic short covering toward **$4,176.00** and **$4,185.00**.\n* **Bearish Flush Zone (< $4,146.50):** A decisive 15-minute break below Day Low ($4,147.56) sweeps resting sell stops and exposes an intraday imbalance air pocket toward **$4,138.00** and **$4,130.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **4,152.00 – 4,155.00** Retest | Price pulls back into the 15M Bullish FVG; prints a 5M bullish pin bar or engulfing close holding above internal support. | **TP1:** 4,165.00<br>**TP2:** 4,174.00 | **4,148.50** | 1:2.6 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **4,167.50** Breakout | 5-minute candle closes firmly above Day High (4,166.08) with expanding tick volume and 15M continuation hold above 4,167.00. | **TP1:** 4,176.00<br>**TP2:** 4,185.00 | **4,161.00** | 1:2.2 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4,175.00 – 4,178.50** Retest | Price sweeps BSL into the 1H Bearish Order Block, prints a 5M bearish rejection wick, and fails to accept higher prices. | **TP1:** 4,166.00<br>**TP2:** 4,158.00 | **4,183.50** | 1:2.1 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **4,146.50** Breakdown | 15-minute body close below 4,147.56 Day Low, followed by a failed retest converting 4,148.00 into resistance. | **TP1:** 4,138.00<br>**TP2:** 4,130.00 | **4,153.00** | 1:2.3 |"
+  },
+  {
     "id": "GOLD_20261013_230240",
     "timestamp": "2026-10-13T23:02:40+05:30",
     "timeDisplay": "11:02 PM, Oct 13",
