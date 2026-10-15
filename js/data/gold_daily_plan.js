@@ -1,6 +1,72 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-16T01:31:07+05:30",
+    "timeDisplay": "01:31 AM, Oct 16",
+    "price": "4178.5",
+    "bias": "bullish",
+    "behavior": "[FRI 01:31] [G_B2]: High-Momentum Breakout Long above Day High",
+    "tp": "$4,188.00 / $4,198.00",
+    "sl": "$4,173.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:31:07+05:30",
+    "timeDisplay": "01:31 AM, Oct 16",
+    "price": "4169.0",
+    "bias": "bullish",
+    "behavior": "[FRI 01:31] [G_B1]: Retest of 4170 Breakout Anchor & 5M FVG Demand",
+    "tp": "$4,178.00 / $4,188.00",
+    "sl": "$4,164.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:31:07+05:30",
+    "timeDisplay": "01:31 AM, Oct 16",
+    "price": "4180.5",
+    "bias": "bearish",
+    "behavior": "[FRI 01:31] [G_S1]: High-Probability Short SFP Sweep Rejection at 4180 Liquidity",
+    "tp": "$4,169.00 / $4,160.00",
+    "sl": "$4,184.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:31:07+05:30",
+    "timeDisplay": "01:31 AM, Oct 16",
+    "price": "4164.0",
+    "bias": "bearish",
+    "behavior": "[FRI 01:31] [G_S2]: High-Momentum Breakdown Short below Micro-Structural Floor",
+    "tp": "$4,154.00 / $4,144.00",
+    "sl": "$4,169.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:31:07+05:30",
+    "timeDisplay": "01:31 AM, Oct 16",
+    "price": "4188.0",
+    "bias": "bullish",
+    "behavior": "[FRI 01:31] [G_B2]: HTF Extension Target 1",
+    "tp": "$4,188.00 / $4,198.00",
+    "sl": "$4,173.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:31:07+05:30",
+    "timeDisplay": "01:31 AM, Oct 16",
+    "price": "4158.0",
+    "bias": "bullish",
+    "behavior": "[FRI 01:31] [G_B1]: 15M Bullish Order Block Base",
+    "tp": "$4,178.00 / $4,188.00",
+    "sl": "$4,164.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-16T00:49:12+05:30",
     "timeDisplay": "12:49 AM, Oct 16",
     "price": "4170.0",
@@ -234,6 +300,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261016_013109",
+    "timestamp": "2026-10-16T01:31:09+05:30",
+    "timeDisplay": "01:31 AM, Oct 16",
+    "spot": "4176.66",
+    "trigger": "Level Exhaustion Breakout (GOLD Spot $4176.66 > Max Plan Target $4170.00 + Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (01:30 AM IST - Oct 16, 2026 | Spot: $4176.66 | Trigger: Level Exhaustion Breakout (GOLD Spot $4176.66 > Max Plan Target $4170.00 + Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics & Liquidity Flow**: At 01:30 AM IST (4:00 PM EDT), the market is navigating the New York post-settlement and fixing window. Liquidity tends to thin following the high-volume London/New York overlap, amplifying directional momentum on institutional rebalancing flows.\n* **DXY & US Yield Confluence**: The US Dollar Index (DXY) faces sustained overhead pressure below key resistance, while US 10-Year Treasury Yields continue to rotate softer. This inverse macro yield dynamic provides tailwinds for non-yielding bullion, fueling the late-session impulse and propelling Gold through the previous tactical cap at $4,170.00.\n* **Macro Risk Premium**: Safe-haven demand and geopolitical hedge allocations remain elevated, generating structural dip-buying interest across all major intraday liquidity pools.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL) Sweep**: Price has driven aggressively into fresh highs at $4,177.28, exhausting previous plan targets ($4,170.00) and sweeping resting buy-stop liquidity above the New York afternoon high.\n* **Fair Value Gaps (FVGs)**: A distinct 5-minute and 15-minute Bullish Imbalance / FVG rests between **$4,168.00 and $4,171.50**, which acted as the ignition launchpad for the latest leg up. This represents the immediate demand cushion on any mean-reversion retest.\n* **Order Block (OB) Anchor**: The primary institutional Order Block resides lower at **$4,158.00 – $4,162.00**, representing the unmitigated base formed during the mid-session consolidation before the expansion.\n* **Market Structure (BOS vs. SFP)**: The current breakout above $4,170.00 constitutes a valid 15-minute Break of Structure (BOS). However, because price is pressing directly against the session high ($4,177.28), confirmation is required to distinguish between genuine trend continuation and an exhaustion Swing Failure Pattern (SFP) ahead of the Asian session roll.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Range**: **$4,172.00 – $4,177.00**\n* **Rationale**: This $5.00 corridor sits directly between the stretched Day High ($4,177.28) and the upper boundary of the breakout origin ($4,172.00). Entering market orders inside this pocket entails poor risk/reward: buying here risks purchasing the absolute top into potential SFP supply, while shorting without confirmation fights strong directional trend momentum. Wait for price to cleanly break out or pull back to key mitigation levels.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion (> $4,178.50)**: A sustained 5-minute candle close above $4,178.50 opens blue-sky discovery toward the psychological round-number magnets at **$4,188.00** and **$4,198.00**.\n* **Bearish Liquidity Unwind (< $4,164.00)**: A decisive break below the $4,164.00 structural higher-low traps late breakout buyers, likely triggering rapid long unwinding down toward the 15M Order Block at **$4,154.00** and **$4,145.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4,168.00 – $4,171.00** Retest | Pullback into the 4,168–4,171 breakout cushion, sweeping shallow sell stops, followed by a 5-min bullish pinbar or engulfing close confirming mitigation. | **TP1:** $4,178.00<br>**TP2:** $4,188.00 | **$4,164.50** | 1:2.4 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,178.50** Breakout | Clean 5-minute candle close firmly above the Day High ($4,177.28) with expanding volume and no immediate upper wick rejection. | **TP1:** $4,188.00<br>**TP2:** $4,198.00 | **$4,173.00** | 1:2.0 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection (SFP)** | **$4,178.00 – $4,182.00** Retest | Sweep of the $4,177.28 Day High into $4,180.00 psychological liquidity followed by immediate sharp rejection (long upper wick SFP) and a 5-min close back below $4,175.50. | **TP1:** $4,169.00<br>**TP2:** $4,160.00 | **$4,184.50** | 1:2.1 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4,164.00** Breakdown | Impulsive 5-minute displacement candle closing decisively below $4,164.00 with expanding sell volume, confirming loss of the micro-breakout base. | **TP1:** $4,154.00<br>**TP2:** $4,144.00 | **$4,169.50** | 1:2.2 |"
+  },
+  {
     "id": "GOLD_20261016_004914",
     "timestamp": "2026-10-16T00:49:14+05:30",
     "timeDisplay": "12:49 AM, Oct 16",
