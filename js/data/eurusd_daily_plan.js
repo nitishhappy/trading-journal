@@ -1,58 +1,58 @@
 window.eurusdDailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-10-14T07:19:00+05:30",
-    "timeDisplay": "07:19 AM, Oct 14",
-    "price": "1.12020",
+    "timestamp": "2026-10-16T00:48:57+05:30",
+    "timeDisplay": "12:48 AM, Oct 16",
+    "price": "1.11980",
     "bias": "bullish",
-    "behavior": "[WED 07:19] [E_B1]: Asian Low Liquidity Sweep & SFP Recovery Zone",
-    "tp": "1.12095 / 1.12180",
-    "sl": "1.11955",
+    "behavior": "[FRI 00:48] [E_B1]: Asian Low Liquidity Sweep & SFP Recovery Zone",
+    "tp": "1.12120 / 1.12220",
+    "sl": "1.11920",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-14T07:19:00+05:30",
-    "timeDisplay": "07:19 AM, Oct 14",
-    "price": "1.12110",
+    "timestamp": "2026-10-16T00:48:57+05:30",
+    "timeDisplay": "12:48 AM, Oct 16",
+    "price": "1.12280",
     "bias": "bullish",
-    "behavior": "[WED 07:19] [E_B2]: London Supply Reclaim & Breakout Pivot",
-    "tp": "1.12250 / 1.12380",
-    "sl": "1.12040",
+    "behavior": "[FRI 00:48] [E_B2]: London Supply Reclaim & Breakout Pivot",
+    "tp": "1.12410 / 1.12550",
+    "sl": "1.12190",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-14T07:19:00+05:30",
-    "timeDisplay": "07:19 AM, Oct 14",
-    "price": "1.12085",
+    "timestamp": "2026-10-16T00:48:57+05:30",
+    "timeDisplay": "12:48 AM, Oct 16",
+    "price": "1.12150",
     "bias": "bearish",
-    "behavior": "[WED 07:19] [E_S1]: 15M Supply FVG & Breaker Block Rejection",
-    "tp": "1.12010 / 1.11970",
-    "sl": "1.12135",
+    "behavior": "[FRI 00:48] [E_S1]: 15M Supply FVG & Breaker Block Rejection",
+    "tp": "1.12075 / 1.11980",
+    "sl": "1.12210",
     "status": "na"
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-14T07:19:00+05:30",
-    "timeDisplay": "07:19 AM, Oct 14",
-    "price": "1.11960",
+    "timestamp": "2026-10-16T00:48:57+05:30",
+    "timeDisplay": "12:48 AM, Oct 16",
+    "price": "1.11940",
     "bias": "bearish",
-    "behavior": "[WED 07:19] [E_S2]: Session Low Liquidation Breakdown Trigger",
-    "tp": "1.11820 / 1.11720",
-    "sl": "1.12040",
+    "behavior": "[FRI 00:48] [E_S2]: Session Low Liquidation Breakdown Trigger",
+    "tp": "1.11780 / 1.11410",
+    "sl": "1.12030",
     "status": "na"
   }
 ];
 
 window.eurusdDailyPlanSummary = [
 {
-    "id": "EURUSD_20261014_071903",
-    "timestamp": "2026-10-14T07:19:03+05:30",
-    "timeDisplay": "07:19 AM, Oct 14",
-    "spot": "1.1205",
+    "id": "EURUSD_20261016_004900",
+    "timestamp": "2026-10-16T00:49:00+05:30",
+    "timeDisplay": "12:49 AM, Oct 16",
+    "spot": "1.12084",
     "trigger": "Manual Ad-Hoc Run",
     "source": "EURUSD-AI",
-    "text": "# 💶 EUR/USD Tactical Update (07:18 AM IST - Oct 14, 2026 | Spot: 1.1205 | Trigger: Manual Ad-Hoc Run)\n\n### 1. Global Macro & Forex Mechanics:\n- **DXY Inverse Correlation & Dollar Trajectory**: The US Dollar Index (DXY) prints at `102.156` (+0.003), hovering in a tight consolidation regime. With DXY demonstrating near-zero intraday directional velocity, EUR/USD remains inversely pinned near the `1.12050` equilibrium. Any DXY rejection off overhead resistance (`102.300`) will provide the required liquidity tailwind for EUR/USD expansion toward the 1H 200 EMA (`1.12252`). Conversely, sustained DXY acceptance above `102.250` will apply mechanical pressure down to institutional discount.\n- **US 10-Year Benchmark Yield vs. Eurozone Dynamics**: US 10-Year Treasury yields are trading firm at `5.217%`. The persistent yield spread continues to limit runaway bullish momentum on transatlantic pairs; however, resilient European macroeconomic stabilization and market pricing of parity adjustments maintain structural support on major dips.\n- **Session Order Flow & Institutional Trap Potential**: Current price action sits within the late Asian session quiet window (`07:18 AM IST`), preceding the Frankfurt opening bell (`10:30 AM IST`) and London open (`12:30 PM IST`). With the entire Asian session confined to a razor-thin 7.5-pip range (`1.12020 - 1.12095`), institutional algorithmic engines are intentionally accumulating liquidity. Watch for the classic London **Judas Swing**—an aggressive false sweep below the Asian Range Low (`1.12020` / Day Low `1.11995`) to engineer sell-stop liquidity into the 1H Demand FVG (`1.11970 - 1.12007`) before expanding upward into the London/New York overlap.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n- **Asian Session Range (ARH & ARL)**:\n  - **Asian Range High (ARH)**: `1.12095` (confluent with the session Day High `1.12095`).\n  - **Asian Range Low (ARL)**: `1.12020` (interim low before testing Day Low `1.11995`).\n  - **Asian Midpoint / Equilibrium**: `1.12058`.\n  - **Sweep Status**: Price is currently compressing right around equilibrium (`1.12050`), completely inside the Asian boundary without an engineered sweep of either extreme.\n- **Liquidity Pools (BSL & SSL)**:\n  - **Buy-Side Liquidity (BSL)**: Clustered directly above `1.12095` (ARH / Day High) and `1.12150` (equal highs from previous distribution).\n  - **Sell-Side Liquidity (SSL)**: Resting beneath `1.12020` (ARL), `1.11995` (Day Low / Volume Area Low), and resting trail stops below the 15M 200 EMA at `1.11927`.\n- **Institutional Fair Value Gaps (FVG) & Order Blocks**:\n  - **1H Demand FVG**: `1.11970 - 1.12007` (3.7 pips wide, perfectly encapsulating the Volume Profile POC `1.12009` and VAL `1.11997`).\n  - **Deep Macro Demand FVG (1H)**: `1.11632 - 1.11719` (8.7 pips, resting just above Daily S1 `1.11415`).\n  - **Overhead Bearish Breaker / Resistance**: 1H 200 EMA at `1.12252`.\n- **Equilibrium & Discount vs. Premium Evaluation**:\n  - **50% Equilibrium**: `1.12058`.\n  - **Premium Zone**: Above `1.12065` up into ARH `1.12095`—unfavorable for chasing long entries.\n  - **Discount Zone**: Below `1.12020` down into the 1H Demand FVG (`1.11970 - 1.12007`)—prime institutional mitigation and accumulation zone.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Exact Pip Bounds**: `1.12020` to `1.12065` (4.5 pips width).\n- **Execution Mandate**: Absolute execution freeze inside this boundary. The 15M EMA9 (`1.12067`) and EMA21 (`1.12047`) are intertwined flat, Volume Profile POC is sitting dead center at `1.12009`, and ATR is suppressed at `2.0` pips. Entering inside this box guarantees retail spread decay, slippage, and stop hunts.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n1. **Breakout Long Above Session Supply (`> 1.12110`)**: Triggered upon London expansion clearing ARH/PDH (`1.12095 / 1.12057`), targeting rapid institutional short-covering toward `1.12250`.\n2. **Liquidity Sweep Recovery Long Below Session Discount (`< 1.11995` -> Reclaim `1.12020`)**: Engineered Judas run taking out Asian stops into the 1H FVG (`1.11970 - 1.12007`) followed by a rapid 5M displacement candle closing back inside the range.\n3. **Supply FVG Rejection Short (`1.12085 - 1.12110`)**: Swing Failure Pattern (SFP) or upper wick rejection at ARH with immediate bearish displacement below `1.12060`.\n4. **Breakdown Short Below Session Floor (`< 1.11960`)**: Structural failure through the 1H Demand FVG and VAL (`1.11970`), liquidating early longs toward the 15M 200 EMA (`1.11927`) and Classic Pivot (`1.11736`).\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[E_B1]** | Sweep Recovery Long (Bullish) | `1.12020` | Liquidity sweep of Day Low (`1.11995`) into Demand FVG (`1.11970-1.12007`) followed by a 5M bullish engulfing candle closing above `1.12020` | `1.12095` / `1.12180` | `1.11955` | 1:2.6 |\n| **[E_B2]** | Breakout Long (Bullish) | `1.12110` | Clean 15M body close above ARH (`1.12095`) and PDH (`1.12057`) with expanding volume and retest holding `1.12090` | `1.12250` / `1.12380` | `1.12040` | 1:2.1 |\n| **[E_S1]** | Supply Rejection Short (Bearish) | `1.12085` | SFP wick sweep of `1.12095` failing to sustain, followed by 5M bearish market structure shift (MSS) breaking below `1.12060` | `1.12010` / `1.11970` | `1.12135` | 1:2.3 |\n| **[E_S2]** | Breakdown Short (Bearish) | `1.11960` | 15M displacement candle closing firmly below the 1H FVG floor (`1.11970`) and VAL (`1.11997`), with retest failure | `1.11820` / `1.11720` | `1.12040` | 1:2.5 |\n\n---\n\n### 6. Higher Timeframe (HTF) Swing Horizon & Outlook:\n- **Daily / 4-Hour Trend Alignment**: Structurally **BULLISH**. Price continues to print higher macro lows above Previous Day Low (`1.11549`) and the 1H EMA50 (`1.11937`). The path of least resistance on the 4H chart remains titled toward the upside, seeking institutional re-balancing against historical imbalances.\n- **Macro Liquidity Target**: Multi-day buy-side liquidity pool and psychological resistance target resting at `1.12450 - 1.12500` (Weekly High cluster), with dynamic intermediate resistance at the 1H 200 EMA (`1.12252`).\n- **Structural Swing Invalidation**: A daily session close below the classic Daily Pivot and macro FVG threshold at `1.11630` structurally invalidates the bullish order flow, turning multi-day posture net neutral/bearish toward `1.11415`."
+    "text": "# 💶 EUR/USD Tactical Update (12:47 AM IST - Oct 16, 2026 | Spot: 1.12084 | Trigger: Manual Ad-Hoc Run)\n\n### 1. Global Macro & Forex Mechanics:\n- **DXY (US Dollar Index) Correlation**: The US Dollar Index sits at `102.061` (+0.003), reflecting tight range-bound consolidation with a mild bullish undertone. As EUR/USD trades in direct negative correlation, the lack of dollar weakness acts as an immediate overhead cap, preventing unconfirmed bullish expansion unless DXY slips back below `101.950`.\n- **US 10-Year Treasury Yields vs Eurozone Dynamics**: US 10-Year Benchmark Yields remain elevated at `5.085%`. This persistent sovereign yield advantage continues to support the greenback across transatlantic pairs, limiting structural Euro rallies to liquidity grabs unless ECB policy catalysts or Eurozone macroeconomic data provide counter-momentum.\n- **Current Session Order Flow & Traps**: At 00:47 IST, the market operates in the late New York to Asian transition window. Trading volume is algorithmically driven and prone to false expansion breakouts, spread widening, and liquidity traps. Price is currently trapped between institutional inventory rebalancing and low-liquidity rotational flows.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n- **Asian Session Range (ARH & ARL)**:\n  - **Asian Range High (ARH)**: `1.12271`\n  - **Asian Range Low (ARL)**: `1.11970`\n  - **Session Midpoint (Equilibrium)**: `1.12120` (Total range: `30.1` pips)\n  - Current Spot (`1.12084`) is testing the lower boundary of the session value area, positioned just beneath the 50% equilibrium mark.\n- **Liquidity Pools (BSL / SSL)**:\n  - **Buy-Side Liquidity (BSL)**: Primed above Day High (`1.12221`), ARH / Value Area High (`1.12271`), and the daily R1 structural ceiling (`1.12413`).\n  - **Sell-Side Liquidity (SSL)**: Concentrated tightly beneath the Asian Session Low (`1.11970`), the 15M/1H EMA200 cluster (`1.11992`), and extending toward the Previous Day Low (`1.11141`).\n- **Fair Value Gaps (FVGs) & Order Blocks**:\n  - **Mitigation & Support**: Spot is currently inside the active 1H Demand FVG (`1.12057 – 1.12095`), which provides immediate support above Value Area Low (`1.12075`).\n  - **Overhead Imbalances**: A dense cluster of 15M Supply FVGs spans `1.12082 – 1.12171` and `1.12120 – 1.12145`, coinciding with the Previous Day High (`1.12145`) and Volume Profile POC (`1.12116`).\n- **50% Equilibrium & Premium/Discount Analysis**:\n  - The structural 50% equilibrium sits at `1.12120`. Sub-`1.12120` territory is institutional Discount; however, bulls must first clear the tangled 15M EMA9/21 cross (`1.12138 – 1.12140`) to transition discount buying into sustained momentum.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Exact Pip Bounds**: `1.12075` to `1.12150` (Span: `7.5` pips).\n- **Rationale**: This zone is bracketed by the Volume Profile Value Area Low (`1.12075`) and the POC / 15M EMA confluence (`1.12116 – 1.12145`). Executing market orders inside this narrow corridor exposes trades to erratic mean-reversion whipsaws and low-volatility spread decay. Execution must wait for clear boundary expansion.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n- **Breakout Long Above Session Supply**: A confirmed 15M candle close above `1.12271` (ARH / VAH) unlocks an unmitigated run into the `1.12413` (Classic R1) institutional liquidity pocket.\n- **Liquidity Sweep Recovery Long Below Session Discount**: An aggressive stop-hunt sweep piercing beneath `1.11970` (ARL) down to `1.11930 – 1.11950`, followed by an immediate Swing Failure Pattern (SFP) recovery above `1.11980`, triggers a sharp short-covering squeeze toward `1.12120`.\n- **Supply FVG Rejection Short**: A retest of the overhead 15M Supply FVG / POC zone (`1.12140 – 1.12170`) that prints long rejection upper wicks and a bearish delta flip targets a clean slide to `1.12075` and `1.11980`.\n- **Breakdown Short Below Session Floor**: A decisive 15M body close beneath `1.11970 / 1.11950` (ARL + 15M EMA200) initiates rapid long liquidation targeting the Classic Daily Pivot at `1.11777` and secondary support at `1.11409`.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[E_B1]** | Bullish (Sweep Recovery) | `1.11980` | Sweep below ARL `1.11970` followed by 5M SFP pin-bar close back above `1.11980` | `1.12120` / `1.12220` | `1.11920` | 1:2.3 / 1:4.0 |\n| **[E_B2]** | Bullish (Breakout Long) | `1.12280` | 15M full-body candle close above ARH/VAH `1.12271` with holding retest | `1.12410` / `1.12550` | `1.12190` | 1:1.4 / 1:3.0 |\n| **[E_S1]** | Bearish (Supply Rejection) | `1.12150` | Rejection wick into 15M FVG (`1.12140–1.12170`) followed by 5M bearish engulfing | `1.12075` / `1.11980` | `1.12210` | 1:1.3 / 1:2.8 |\n| **[E_S2]** | Bearish (Breakdown Short) | `1.11940` | Clean 15M candle close below ARL `1.11970` with negative delta expansion | `1.11780` / `1.11410` | `1.12030` | 1:1.8 / 1:5.9 |\n\n---\n\n### 6. Higher Timeframe (HTF) Swing Horizon & Outlook:\n- **Daily / 4-Hour Trend Alignment**: Neutral-to-Consolidative. Price is coiling inside the broad structural boundary between the Previous Day Low (`1.11141`) and the Daily R1 resistance ceiling (`1.12413`). On the 1H timeframe, EMA50 (`1.11996`) and EMA200 (`1.12151`) are pinching, signaling an imminent volatility compression expansion.\n- **Macro Liquidity Targets**:\n  - **Upside**: Clean Buy-Side Liquidity pool resting at `1.12413` (Classic R1) and swing high cluster at `1.12550`.\n  - **Downside**: Major multi-session Sell-Side Liquidity pool resting beneath `1.11409` (Daily S1) down to Previous Day Low at `1.11141`.\n- **Structural Invalidation Level**: A 4-Hour candle close below `1.11777` (Classic Daily Pivot) invalidates the swing bullish thesis and shifts macro order flow into a multi-day distribution leg toward `1.11141`. Conversely, a 4-Hour close above `1.12413` establishes structural bullish continuation toward `1.13000`."
   }
 ];
