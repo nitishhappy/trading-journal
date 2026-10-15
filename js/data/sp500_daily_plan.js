@@ -1,13 +1,79 @@
 window.sp500DailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-10-16T00:50:48+05:30",
-    "timeDisplay": "12:50 AM, Oct 16",
+    "timestamp": "2026-10-16T01:02:09+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
+    "price": "7740.0",
+    "bias": "bullish",
+    "behavior": "[FRI 01:02] [SP_B1]: Immediate 5M FVG & Breakout Retest Shelf",
+    "tp": "7755.00 / 7770.00",
+    "sl": "7732.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:02:09+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
+    "price": "7753.0",
+    "bias": "bullish",
+    "behavior": "[FRI 01:02] [SP_B2]: Current Session High BSL; Sustained Break Triggers Run to PDH",
+    "tp": "7768.00 / 7789.00",
+    "sl": "7744.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:02:09+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
     "price": "7722.0",
     "bias": "bullish",
-    "behavior": "[FRI 00:50] [SP_B1]: 15M Demand OB / FVG confluence shelf with lower-wick buying absorption",
-    "tp": "7742.00 / 7758.00",
-    "sl": "7711.00",
+    "behavior": "[FRI 01:02] [SP_KB2]: 15M Institutional Order Block & Mid-Session Base",
+    "tp": "7745.00 / 7760.00",
+    "sl": "7712.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:02:09+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
+    "price": "7707.0",
+    "bias": "bullish",
+    "behavior": "[FRI 01:02] [SP_KB3]: 48H Equilibrium Baseline & Trend Continuation Floor",
+    "tp": "7730.00 / 7750.00",
+    "sl": "7695.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:02:09+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
+    "price": "7669.66",
+    "bias": "bullish",
+    "behavior": "[FRI 01:02] [SP_KB4]: Session Low & Institutional Liquidity Sweep Origin",
+    "tp": "7710.00 / 7740.00",
+    "sl": "7656.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:02:09+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
+    "price": "7775.0",
+    "bias": "bearish",
+    "behavior": "[FRI 01:02] [SP_S1]: Liquidity Sweep Rejection above 7,770 into 15M Supply",
+    "tp": "7752.00 / 7740.00",
+    "sl": "7783.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T01:02:09+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
+    "price": "7735.0",
+    "bias": "bearish",
+    "behavior": "[FRI 01:02] [SP_KS2]: Local Higher-Low Invalidation; Loss Triggers Mean Reversion to 7,722",
+    "tp": "7722.00 / 7707.00",
+    "sl": "7745.00",
     "status": "na"
   },
   {
@@ -30,17 +96,6 @@ window.sp500DailyPlanData = [
     "behavior": "[FRI 00:50] [SP_KB3]: 15M Fair Value Gap & internal liquidity pool above PDL",
     "tp": "7715.00 / 7735.00",
     "sl": "7675.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-16T00:50:48+05:30",
-    "timeDisplay": "12:50 AM, Oct 16",
-    "price": "7669.66",
-    "bias": "bullish",
-    "behavior": "[FRI 00:50] [SP_KB4]: Previous Day Low and major Sell-Side Liquidity (SSL) absorption origin",
-    "tp": "7705.00 / 7735.00",
-    "sl": "7656.00",
     "status": "na"
   },
   {
@@ -245,6 +300,15 @@ window.sp500DailyPlanData = [
 
 window.sp500DailyPlanSummary = [
 {
+    "id": "SP500_20261016_010210",
+    "timestamp": "2026-10-16T01:02:10+05:30",
+    "timeDisplay": "01:02 AM, Oct 16",
+    "spot": "7751.59",
+    "trigger": "Level Exhaustion Breakout (SP500 Spot $7751.59 > Max Plan Target $7745.15 + Buffer $5.00",
+    "source": "SP500-AI",
+    "text": "---\n\n# 🇺🇸 S&P 500 (^GSPC) Tactical Update (01:00 AM IST - Oct 16, 2026 | Spot: $7751.59 | Trigger: Level Exhaustion Breakout (SP500 Spot $7751.59 > Max Plan Target $7745.15 + Buffer $5.00))\n\n### 1. Global Macro & US Intermarket Dynamics:\n- **Volatility Compression (VIX @ 15.0)**: Subdued implied volatility indicates an institutional environment favoring orderly trend continuation rather than panic-driven whipsaws. The continuous bid in equities without sharp volatility spikes signals institutional capital accumulation.\n- **Dollar & Rates Confluence (DXY @ 104.0 | US 10Y @ 4.30%)**: The US Dollar Index remains stable near 104.0, while benchmark 10-year Treasury yields consolidate around 4.30%. This neutral backdrop removes headwinds from large-cap tech and multi-sector index heavyweights.\n- **US Macro Calendar**: Clean macroeconomic calendar with no scheduled high-impact FOMC or CPI releases during late US cash session trading, allowing pure technical and institutional order-flow mechanics to govern price discovery.\n\n### 2. SMC & Session Liquidity Confluence:\n- **Structural Expansion (BOS)**: Following a session low at $7,669.66, price generated an aggressive Break of Structure (BOS) above the 48H Equilibrium ($7,707.00 - $7,722.00 zone) and breached the prior plan maximum target ($7,745.15), printing a fresh session high at $7,752.38.\n- **Buy-Side Liquidity (BSL) Targets**: Immediate overhead buy-side liquidity sits at the session high ($7,752.38 - $7,755.00). Beyond this shelf, liquidity pools are concentrated at $7,770.00 and Previous Day High (PDH) at $7,789.15.\n- **Sell-Side Liquidity (SSL) & Imbalance Shelves**: Unmitigated 5-minute Fair Value Gaps (FVG) and displacement candles exist between $7,738.00 and $7,742.00. Deep institutional demand resides at the 15M Order Block near $7,722.00 - $7,726.00.\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Defined Range**: **$7,742.00 to $7,752.00**\n- **Rationale**: Immediate consolidation right below the fresh session high ($7,752.38) represents high-friction distribution/re-accumulation. Taking market orders within this 10-point band risks chop and false breakout wicks. Wait for clear pullback absorption into $7,738 - $7,742 or an authoritative displacement close above $7,753.00.\n\n### 4. High Momentum / Explosive Zones:\n- **Bullish Expansion Zone (> $7,753.00)**: A 5-minute candle closing firmly above $7,753.00 with expanding volume triggers a momentum cascade targeting $7,768.00 and $7,789.00 (PDH sweep).\n- **Bearish Liquidation Flush (< $7,735.00)**: A failure of the $7,738 - $7,742 demand shelf and breakdown below $7,735.00 confirms trapped late breakout buyers, triggering a rapid corrective slide toward $7,722.00 (mid-session VWAP/OB base).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | High-Probability Long / Pullback Absorption | $7,740.00 | 5M bullish rejection wick or displacement bounce out of the $7,738.00–$7,742.00 FVG retest zone | $7,755.00 / $7,770.00 | $7,732.00 | 1:2.3 |\n| **[SP_B2]** | High-Momentum Breakout Long / Day High Expansion | $7,753.00 | Decisive 5M candle body close above $7,753.00 clearing session high liquidity | $7,768.00 / $7,789.00 | $7,744.00 | 1:2.8 |\n| **[SP_S1]** | High-Probability Short / Supply Rejection | $7,775.00 | Liquidity sweep of $7,770.00+ followed by an immediate 5M bearish engulfing / CHoCH close back below $7,768.00 | $7,752.00 / $7,740.00 | $7,783.00 | 1:2.8 |\n| **[SP_S2]** | High-Momentum Breakdown Short / Long Liquidation | $7,735.00 | Decisive 5M close below $7,735.00 confirming failure of the breakout shelf | $7,722.00 / $7,707.00 | $7,744.00 | 1:2.2 |\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$7,740.00** | Support / Demand Zone | [SP_KB1] | Immediate 5M FVG & Breakout Retest Shelf | $7,755.00 / $7,770.00 | $7,732.00 |\n| **$7,722.00** | Structural Support | [SP_KB2] | 15M Institutional Order Block & Mid-Session Base | $7,745.00 / $7,760.00 | $7,712.00 |\n| **$7,707.00** | Major Support / Equilibrium | [SP_KB3] | 48H Equilibrium Baseline & Trend Continuation Floor | $7,730.00 / $7,750.00 | $7,695.00 |\n| **$7,669.66** | Macro Demand / Swing Base | [SP_KB4] | Session Low & Institutional Liquidity Sweep Origin | $7,710.00 / $7,740.00 | $7,656.00 |\n| **$7,753.00** | Breakout Resistance / Day High | [SP_KS1] | Current Session High BSL; Sustained Break Triggers Run to PDH | $7,770.00 / $7,789.00 | $7,744.00 |\n| **$7,735.00** | Breakdown Floor / SSL Trigger | [SP_KS2] | Local Higher-Low Invalidation; Loss Triggers Mean Reversion to 7,722 | $7,722.00 / $7,707.00 | $7,745.00 |"
+  },
+  {
     "id": "SP500_20261016_005056",
     "timestamp": "2026-10-16T00:50:56+05:30",
     "timeDisplay": "12:50 AM, Oct 16",
