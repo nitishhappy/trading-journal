@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-16T11:16:00+05:30",
+    "timeDisplay": "11:16 AM, Oct 16",
+    "price": "23075",
+    "bias": "bullish",
+    "behavior": "[FRI 11:16] [B1]: Bullish rejection / hammer on 5m chart re-testing 23,070 - 23,080 with expanding green futures volume",
+    "tp": "23,145 / 23,195",
+    "sl": "23,035",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T11:16:00+05:30",
+    "timeDisplay": "11:16 AM, Oct 16",
+    "price": "23150",
+    "bias": "bullish",
+    "behavior": "[FRI 11:16] [B2]: Decisive 5m close above Day High 23,150 backed by active futures volume surge confirming absorption",
+    "tp": "23,220 / 23,275",
+    "sl": "23,105",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T11:16:00+05:30",
+    "timeDisplay": "11:16 AM, Oct 16",
+    "price": "23120",
+    "bias": "bearish",
+    "behavior": "[FRI 11:16] [S1]: Swift sweep of 23,150 followed by immediate 5m bearish engulfing close back below 23,120",
+    "tp": "23,060 / 23,010",
+    "sl": "23,165",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-16T11:16:00+05:30",
+    "timeDisplay": "11:16 AM, Oct 16",
+    "price": "23030",
+    "bias": "bearish",
+    "behavior": "[FRI 11:16] [S2]: Decisive 5m close below 23,030 confirming failed breakout and trapping early morning breakout buyers",
+    "tp": "22,960 / 22,910",
+    "sl": "23,075",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-16T11:01:09+05:30",
     "timeDisplay": "11:01 AM, Oct 16",
     "price": "23080",
@@ -2346,6 +2390,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261016_111604",
+    "timestamp": "2026-10-16T11:16:04+05:30",
+    "timeDisplay": "11:16 AM, Oct 16",
+    "spot": "23088.8",
+    "trigger": "Structural Invalidation (+140.0 pts incremental shift from previous trigger 22948.80",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:15 AM IST - Oct 16, 2026 | Spot: 23088.8 | Trigger: Structural Invalidation (+140.0 pts incremental shift from previous trigger 22948.80))\n\n3. Live Chop Zone / No-Trade Zone:\n- Inside 23,060 - 23,115 (Chop Zone): Range contraction area following the morning surge above the 15M ORB High (23,076.55). Spot is oscillating between immediate re-test support (23,060) and overhead session supply (23,115).\n- Option gamma friction: Heavy premium oscillation between 23,050 and 23,100 strikes. Avoid naked option buying within this 55-point band due to rapid intraday decay and whipsaw risk until volume expansion signals direction.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Above Day High 23,150): Sustained 5-min candle close above 23,150 backed by >1.2x futures volume surge confirms short-covering expansion targeting 23,220 and 23,275.\n- [Bearish Breakdown] (Below Consolidation Floor 23,030): Decisive 5-min close below 23,030 invalidates the breakout above 15M ORB High and initiates long-unwinding momentum down toward 22,960 and 22,910 (Day Low).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Breakout Retest): Bullish rejection / hammer on 5m chart re-testing 23,070 - 23,080 with expanding green futures volume. | TP: 23,145 / 23,195 | SL: 23,035 | 💡 Buy 23100 CE + Sell 23150 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Momentum Breakout): Decisive 5m close above Day High 23,150 backed by active futures volume surge confirming absorption. | TP: 23,220 / 23,275 | SL: 23,105 | 💡 Buy 23150 CE + Sell 23200 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Liquidity Sweep Reversal): Swift sweep of 23,150 followed by immediate 5m bearish engulfing close back below 23,120. | TP: 23,060 / 23,010 | SL: 23,165 | 💡 Buy 23100 PE + Sell 23050 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Breakdown / Trap Confirmation): Decisive 5m close below 23,030 confirming failed breakout and trapping early morning breakout buyers. | TP: 22,960 / 22,910 | SL: 23,075 | 💡 Buy 23050 PE + Sell 23000 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261016_110115",
     "timestamp": "2026-10-16T11:01:15+05:30",
     "timeDisplay": "11:01 AM, Oct 16",
