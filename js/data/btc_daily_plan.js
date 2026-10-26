@@ -1,6 +1,94 @@
 window.btcDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "79302",
+    "bias": "bullish",
+    "behavior": "[MON 09:29] [B1]: Liquidity sweep of Day Low ($79,302.20) with absorption reclaim",
+    "tp": "79,845 / 80,500",
+    "sl": "79,150",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "80620",
+    "bias": "bullish",
+    "behavior": "[MON 09:29] [B2]: High-momentum breakout above Asian Day High ($80,620.50)",
+    "tp": "80,925 / 81,350",
+    "sl": "80,300",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "79750",
+    "bias": "bearish",
+    "behavior": "[MON 09:29] [S1]: Bearish 15M FVG ($79,707.40-$79,798.20) supply rejection",
+    "tp": "79,302 / 79,050",
+    "sl": "79,880",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "79302",
+    "bias": "bearish",
+    "behavior": "[MON 09:29] [S2]: Demand floor breakdown below Day Low ($79,302.20)",
+    "tp": "79,050 / 78,650",
+    "sl": "79,520",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "79430",
+    "bias": "bullish",
+    "behavior": "[MON 09:29] [KB1]: 15M Bullish FVG mitigation floor & current live spot absorption level",
+    "tp": "79,845 / 80,500",
+    "sl": "79,250",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "78982",
+    "bias": "bullish",
+    "behavior": "[MON 09:29] [KB3]: 4H institutional discount demand block & secondary stop hunt terminal",
+    "tp": "79,600 / 80,100",
+    "sl": "78,650",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "77500",
+    "bias": "bullish",
+    "behavior": "[MON 09:29] [KB4]: HTF Daily Bias Invalidation floor; structural barrier for bull trend",
+    "tp": "79,200 / 80,000",
+    "sl": "76,950",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "price": "80620",
+    "bias": "bearish",
+    "behavior": "[MON 09:29] [KS2]: Current Day High & Asian range top Buy-Side Liquidity (BSL) ceiling",
+    "tp": "79,845 / 79,500",
+    "sl": "80,780",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-26T09:25:51+05:30",
     "timeDisplay": "09:25 AM, Oct 26",
     "price": "79496.16",
@@ -102,6 +190,15 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "id": "BTC_20261026_092930",
+    "timestamp": "2026-10-26T09:29:30+05:30",
+    "timeDisplay": "09:29 AM, Oct 26",
+    "spot": "79430.01",
+    "trigger": "Manual Ad-Hoc Run",
+    "source": "BTC-AI",
+    "text": "# ₿ Bitcoin (BTC/USD) Tactical Update (09:26 AM IST - Oct 26, 2026 | Spot: $79430.01 | Trigger: Manual Ad-Hoc Run)\n\n\n---\n\n### 🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK\n- **Daily Market Bias:** 🟢 BULLISH | **Bias Score:** +1.0 / +6.0 | **Confidence:** Neutral (Chop / Asian Accumulation)\n- **Bias Invalidation Floor:** $77,500.00 (A sustained 15M close below $77,500.00 structurally invalidates HTF bullish premise)\n- **Tactical Directives:**\n  - **Primary Outlook:** Buy-on-Dip Expansion. Institutional momentum favors absorption at discount demand shelves ($79,300–$79,430) before rotation toward Asian session VWAP ($79,843.64) and Value Area High.\n  - **Execution Guard:** Do not chase market orders inside the local chop zone ($79,342–$80,150). Prioritize liquidity sweep reversals at Day Low or confirmed momentum breakouts above Asian range highs.\n\n---\n\n### 1. Market Structure & Session Bias\nBitcoin Spot (BTC/USD) trades at $79,430.01, printing a short-term corrective posture beneath the intraday 9 EMA and 21 EMA following rejection from the daily peak at $80,620.46. Price is currently testing the lower quadrant of the Asian session range ($79,302.20 – $80,606.52), resting directly on top of the 15M Bullish Fair Value Gap ($79,317.40–$79,430.00). Intermarket tailwinds remain supportive with the US Dollar Index softening to 101.626 and S&P 500 futures steady at 7,670.50. Neutral crypto funding (0.0060%) and a balanced Fear & Greed index (50) indicate healthy spot-led price discovery without speculative overheating.\n\n---\n\n### 2. SMC & Liquidity Zones\n- **Buy-Side Liquidity (BSL):** Clustered above the Asian session swing highs at $80,620.50, extending into the 15M Bearish FVG ceiling ($79,707.40–$79,798.20) and macro liquidity pools up to $80,925.00.\n- **Sell-Side Liquidity (SSL):** Concentrated tightly below the active Day Low ($79,302.20), beneath which resting retail stop clusters trail into the macro 4H demand base at $78,982.00.\n- **Order Blocks (OB) & Institutional Anchors:** \n  - *Bullish Demand OB:* $79,496.16 – $79,719.86 (retest absorption zone)\n  - *Session VWAP:* $79,843.64 (mean reversion pivot)\n  - *Intraday 200 EMA:* $80,507.29 (structural trend hurdle)\n  - *Volume Profile POC:* $79,532.90\n- **Fair Value Gaps (FVG):** 15M Bearish FVG at $79,707.40–$79,798.20; 15M Bullish FVG at $79,317.40–$79,430.00.\n\n---\n\n### 3. Live Intraday Chop Zone / No-Trade Zone\n- **Chop Range:** $79,342.31 – $80,149.56 (Intraday Value Area) / $79,302.20 – $80,606.52 (Asian Session Range)\n- **Context:** Spot ($79,430.01) is compressing near local equilibrium. Low Asian session volume combined with overlapping fair value gaps creates treacherous conditions for naked breakout trading. Premature market orders inside this band risk adverse wick sweeps. Wait for boundary confirmation.\n\n---\n\n### 4. High Momentum / Explosive Zones\n- **Upside Short-Covering Squeeze (> $80,620.50 Spot):** A confirmed 5M/15M candle close above $80,620.50 triggers systemic short liquidation across perpetual venues, initiating an aggressive momentum expansion toward $80,925.00 and $81,350.00.\n- **Downside Long-Liquidation Cascade (< $79,302.20 Spot):** A displacement breakdown closing below $79,302.20 triggers stop runs on late Asian longs, driving a rapid descent toward $79,050.00 and the $78,650.00 demand pocket.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[B1]** | 🟢 **Long (Demand Floor SSL Sweep)** | **$79,302.20** Reclaim | Liquidity sweep below $79,302.20 rejected with lower absorption wick, followed by a 5m close back ABOVE $79,430.00 | **TP1:** $79,845.00<br>**TP2:** $80,500.00 | **$79,150.00** | 1:2.4 |\n| **[B2]** | 🟢 **Long (High-Momentum Breakout)** | **$80,620.50** Breakout | Sustained 5m/15m candle close ABOVE $80,620.50 with expanding buy volume displacement | **TP1:** $80,925.00<br>**TP2:** $81,350.00 | **$80,300.00** | 1:2.3 |\n| **[S1]** | 🔴 **Short (Bearish FVG Rejection)** | **$79,707.40 – $79,798.20** Rejection | Corrective relief rally into Bearish FVG rejected with upper wick, followed by 5m close back BELOW $79,500.00 | **TP1:** $79,302.20<br>**TP2:** $79,050.00 | **$79,880.00** | 1:2.5 |\n| **[S2]** | 🔴 **Short (Demand Floor Breakdown)** | **$79,302.20** Breakdown | Sustained 5m candle close BELOW $79,302.20 with institutional red volume displacement | **TP1:** $79,050.00<br>**TP2:** $78,650.00 | **$79,520.00** | 1:2.6 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$79,430.00** | Support / Demand Zone | [KB1] | 15M Bullish FVG mitigation floor & current live spot absorption level | $79,845.00 / $80,500.00 | $79,250.00 |\n| **$79,302.20** | Support / Liquidity Shelf | [KB2] | Current Day Low & key Sell-Side Liquidity (SSL) sweep trigger | $79,845.00 / $80,200.00 | $79,150.00 |\n| **$78,982.00** | Macro Demand Block | [KB3] | 4H institutional discount demand block & secondary stop hunt terminal | $79,600.00 / $80,100.00 | $78,650.00 |\n| **$77,500.00** | Structural Invalidation | [KB4] | HTF Daily Bias Invalidation floor; structural barrier for bull trend | $79,200.00 / $80,000.00 | $76,950.00 |\n| **$79,750.00** | Resistance / FVG Supply | [KS1] | Unmitigated 15M Bearish FVG midpoint ($79,707.40–$79,798.20) & Session VWAP lead-in | $79,302.20 / $79,050.00 | $79,880.00 |\n| **$80,620.50** | Major Swing Resistance | [KS2] | Current Day High & Asian range top Buy-Side Liquidity (BSL) ceiling | $79,845.00 / $79,500.00 | $80,780.00 |"
+  },
+  {
     "id": "BTC_20261026_092618",
     "timestamp": "2026-10-26T09:26:18+05:30",
     "timeDisplay": "09:26 AM, Oct 26",
