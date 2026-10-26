@@ -1,6 +1,83 @@
 window.sp500DailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-26T22:33:17+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "price": "7684.0",
+    "bias": "bullish",
+    "behavior": "[MON 22:33] [SP_B2]: High-Momentum BSL Breakout Trigger: Sustained 5M close above 7,684.00 targets 7,702.13 and 7,723.39",
+    "tp": "7702.13 / 7723.39",
+    "sl": "7672.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T22:33:17+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "price": "7670.92",
+    "bias": "bullish",
+    "behavior": "[MON 22:33] [SP_KB1]: 48H Equilibrium Midpoint; critical structural balance line",
+    "tp": "7684.00 / 7702.13",
+    "sl": "7658.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T22:33:17+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "price": "7653.39",
+    "bias": "bullish",
+    "behavior": "[MON 22:33] [SP_KB2]: 15M Bullish FVG base and intermediate institutional support shelf",
+    "tp": "7670.92 / 7684.00",
+    "sl": "7642.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T22:33:17+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "price": "7639.7",
+    "bias": "bullish",
+    "behavior": "[MON 22:33] [SP_B1]: Demand OB Floor & SSL Sweep Zone: Look for lower-wick rejection absorption",
+    "tp": "7670.92 / 7698.00",
+    "sl": "7628.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T22:33:17+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "price": "7615.0",
+    "bias": "bullish",
+    "behavior": "[MON 22:33] [SP_KB4]: HTF 1H FVG Imbalance Floor & Macro Institutional Liquidity Base",
+    "tp": "7640.00 / 7670.00",
+    "sl": "7602.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T22:33:17+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "price": "7702.13",
+    "bias": "bearish",
+    "behavior": "[MON 22:33] [SP_KS1]: Session High & Overhead Supply OB; primary institutional distribution ceiling",
+    "tp": "7684.00 / 7670.92",
+    "sl": "7713.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T22:33:17+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "price": "7653.39",
+    "bias": "bearish",
+    "behavior": "[MON 22:33] [SP_KS2]: Intraday Invalidation Floor; clean loss triggers liquidation cascade to Day Low",
+    "tp": "7639.70 / 7615.00",
+    "sl": "7665.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-26T20:50:17+05:30",
     "timeDisplay": "08:50 PM, Oct 26",
     "price": "7714.33",
@@ -19,39 +96,6 @@ window.sp500DailyPlanData = [
     "behavior": "[MON 20:50] [SP_KB1]: Breached Previous Day High; primary retest shelf for continuation longs",
     "tp": "7714.33 / 7731.33",
     "sl": "7688.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T20:50:17+05:30",
-    "timeDisplay": "08:50 PM, Oct 26",
-    "price": "7670.92",
-    "bias": "bullish",
-    "behavior": "[MON 20:50] [SP_KB2]: 48H Equilibrium Midpoint & Value Area core support",
-    "tp": "7698.34 / 7714.33",
-    "sl": "7659.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T20:50:17+05:30",
-    "timeDisplay": "08:50 PM, Oct 26",
-    "price": "7639.7",
-    "bias": "bullish",
-    "behavior": "[MON 20:50] [SP_B1]: Demand OB Floor & SSL Sweep Zone: Look for lower-wick rejection absorption",
-    "tp": "7670.92 / 7698.34",
-    "sl": "7629.70",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T20:50:17+05:30",
-    "timeDisplay": "08:50 PM, Oct 26",
-    "price": "7615.0",
-    "bias": "bullish",
-    "behavior": "[MON 20:50] [SP_KB4]: HTF 1H FVG Imbalance Floor & Institutional Liquidity Anchor",
-    "tp": "7640.00 / 7670.00",
-    "sl": "7602.00",
     "status": "na"
   },
   {
@@ -278,6 +322,15 @@ window.sp500DailyPlanData = [
 
 window.sp500DailyPlanSummary = [
 {
+    "id": "SP500_20261026_223319",
+    "timestamp": "2026-10-26T22:33:19+05:30",
+    "timeDisplay": "10:33 PM, Oct 26",
+    "spot": "7668.39",
+    "trigger": "Structural Invalidation (-30.9 pts incremental shift from previous trigger 7699.33",
+    "source": "SP500-AI",
+    "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (10:30 PM IST - Oct 26, 2026 | Spot: $7668.39 | Trigger: Structural Invalidation (-30.9 pts incremental shift from previous trigger 7699.33))\n\n### 1. Global Macro & US Intermarket Dynamics:\n* **Index Spot Retracement & Equilibrium Test:** Direct S&P 500 spot index (`^GSPC`) has undergone an intraday structural pullback of -30.94 points from its previous trigger peak at $7,699.33, currently trading at $7,668.39. This shift brings price back to retest the 48-Hour Equilibrium ($7,670.92) after failing to sustain acceptance above the session high of $7,702.13.\n* **Futures & Intermarket Alignment:** E-mini S&P 500 Futures (`ES`) trade at 7,706.75, maintaining a modest premium over spot, while Nasdaq 100 Futures (`NQ`) retrace to 29,420.25, indicating short-term profit taking across mega-cap tech following the early-session surge.\n* **Macro Volatility & Rates Environment:** CBOE VIX sits at 18.61 (Moderate Volatility / Balanced regime), reflecting controlled two-way institutional hedging rather than panicky liquidation. The US Dollar Index (DXY) prints at 101.94, acting as an intraday headwind, while the US 10-Year Treasury Yield (TNX) holds around 4.98%.\n* **US Macro News Guard:** Economic calendar remains clean of high-impact macroeconomic releases for the remainder of the session. Price action is predominantly technical, dictated by order book depth, institutional liquidity rebalancing, and FVG mitigation into US afternoon trading.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Market Structure & Range Position:** The active 48-Hour Swing Range spans from Day Low $7,639.70 to Day High $7,702.13, establishing the 50% Equilibrium midpoint at $7,670.92. Spot at $7,668.39 is transitioning directly at the boundary of the **Discount Zone**, presenting favorable risk:reward parameters for liquidity-absorption long setups provided structural support holds.\n* **Buy-Side Liquidity (BSL):** Resting pools of buy-stop liquidity sit above the flipped intraday resistance shelf at $7,684.00, with major institutional resting liquidity anchored at Day High ($7,702.13) and London swing highs ($7,719.33).\n* **Sell-Side Liquidity (SSL):** Immediate sell stops cluster beneath the intermediate structural shelf of $7,653.39. Deeper sell-side liquidity rests below the Day Low ($7,639.70), marking the primary session demand base and structural invalidation floor.\n* **Fair Value Gaps (FVG) & Order Blocks:** A 15-minute bullish Fair Value Gap between $7,658.00 and $7,670.00 is currently being mitigated. Concurrently, an unmitigated 15M Bearish Order Block caps upside extensions between $7,695.00 and $7,702.00.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Corridor:** **7,660.39 – 7,676.39** (Immediate 16-point consolidation box centered on current spot $7,668.39 and the 48H Equilibrium $7,670.92).\n* **Tactical Directive:** Inside this equilibrium band, market makers oscillate price to trap early directional breakout traders and churn options premium. Strictly avoid initiation of new direct index market orders inside 7,660.39 – 7,676.39. Wait for a confirmed 5M breakout close above 7,684.00 or a confirmed breakdown close below 7,653.39.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* 🟢 **Upside Momentum Expansion (> 7,684.00):** A decisive 5-minute candle close above 7,684.00 confirms institutional absorption of the intraday pullback, triggering short-covering momentum back toward 7,702.13 (Day High) and 7,723.39.\n* 🔴 **Downside Long-Liquidation Cascade (< 7,653.39):** A sustained 5-minute close below 7,653.39 invalidates the 15M FVG demand base, prompting an accelerated cascade toward Day Low ($7,639.70) and the macro demand shelf at 7,615.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | Bullish Reversal / Demand Sweep | 7,639.70 | 5M lower-wick liquidity sweep & absorption of Day Low/SSL with bullish volume delta | 7,670.92 / 7,698.00 | 7,628.00 | 1:2.7 |\n| **[SP_B2]** | Bullish Momentum Breakout | 7,684.00 | Decisive 5M candle close above 7,684.00 with expanding buy volume | 7,702.13 / 7,723.39 | 7,672.00 | 1:2.5 |\n| **[SP_S1]** | Bearish Supply Rejection / SFP | 7,702.13 | Swing Failure Pattern (SFP) sweep of Day High rejecting back below 7,694.00 | 7,684.00 / 7,670.92 | 7,713.00 | 1:2.6 |\n| **[SP_S2]** | Bearish Breakdown Cascade | 7,653.39 | Sustained 5M candle close below 7,653.39 with expanding red volume | 7,639.70 / 7,615.00 | 7,665.00 | 1:2.4 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **7,670.92** | Equilibrium Pivot | [SP_KB1] | 48H Equilibrium Midpoint; critical structural balance line | 7,684.00 / 7,702.13 | 7,658.00 |\n| **7,653.39** | Demand Buffer | [SP_KB2] | 15M Bullish FVG base and intermediate institutional support shelf | 7,670.92 / 7,684.00 | 7,642.00 |\n| **7,639.70** | Major Demand Base | [SP_KB3] | Day Low & Session SSL Anchor; prime institutional liquidity sweep zone | 7,670.92 / 7,698.00 | 7,628.00 |\n| **7,615.00** | Macro Demand Floor | [SP_KB4] | HTF 1H FVG Imbalance Floor & Macro Institutional Liquidity Base | 7,640.00 / 7,670.00 | 7,602.00 |\n| **7,702.13** | Overhead Supply Wall | [SP_KS1] | Session High & Overhead Supply OB; primary institutional distribution ceiling | 7,684.00 / 7,670.92 | 7,713.00 |\n| **7,653.39** | Breakdown Floor | [SP_KS2] | Intraday Invalidation Floor; clean loss triggers liquidation cascade to Day Low | 7,639.70 / 7,615.00 | 7,665.00 |"
+  },
+  {
     "id": "SP500_20261026_205021",
     "timestamp": "2026-10-26T20:50:21+05:30",
     "timeDisplay": "08:50 PM, Oct 26",
