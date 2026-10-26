@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-26T10:17:10+05:30",
+    "timeDisplay": "10:17 AM, Oct 26",
+    "price": "22665",
+    "bias": "bullish",
+    "behavior": "[MON 10:17] [B1]: Pullback into 22,630.00 \u2013 22,655.00 demand shelf with confirmed 5m bullish close ABOVE 22,665.00",
+    "tp": "22,710.00 / 22,760.00",
+    "sl": "22,625.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T10:17:10+05:30",
+    "timeDisplay": "10:17 AM, Oct 26",
+    "price": "22710",
+    "bias": "bullish",
+    "behavior": "[MON 10:17] [B2]: Sustained 5m close ABOVE 22,710.00 clearing Day High (22,706.15) with active futures volume confirming absorption",
+    "tp": "22,765.00 / 22,815.00",
+    "sl": "22,665.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T10:17:10+05:30",
+    "timeDisplay": "10:17 AM, Oct 26",
+    "price": "22660",
+    "bias": "bearish",
+    "behavior": "[MON 10:17] [S1]: Rejection from 22,700.00 \u2013 22,710.00 supply wall with confirmed 5m close BELOW 22,660.00",
+    "tp": "22,610.00 / 22,570.00",
+    "sl": "22,715.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-26T10:17:10+05:30",
+    "timeDisplay": "10:17 AM, Oct 26",
+    "price": "22610",
+    "bias": "bearish",
+    "behavior": "[MON 10:17] [S2]: Sustained 5m close firmly BELOW 22,610.00 with expanding red futures volume breaking morning shelf",
+    "tp": "22,560.00 / 22,525.00",
+    "sl": "22,660.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-26T10:01:47+05:30",
     "timeDisplay": "10:01 AM, Oct 26",
     "price": "22605",
@@ -1543,6 +1587,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261026_101721",
+    "timestamp": "2026-10-26T10:17:21+05:30",
+    "timeDisplay": "10:17 AM, Oct 26",
+    "spot": "22686.4",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $22686.40 > Max Plan Target $22650.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (10:15 AM IST - Oct 26, 2026 | Spot: 22686.4 | Trigger: Level Exhaustion Breakout (NIFTY Spot $22686.40 > Max Plan Target $22650.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Filter: 22,660.00 – 22,705.00 Spot corridor. Spot is hovering at 22,686.40 directly beneath Day High (22,706.15) and compressing into the psychological 22,700 Call open interest wall following an aggressive +299.05 point morning trend expansion from Day Low (22,387.35) and a clean breakout above the 15M ORB High (22,524.40).\n- Proxied Volume Dynamics: Proxied active Nifty Futures volume ratio is clocking at 1.0x (8-bar average), indicating orderly liquidity absorption and equilibrium at highs rather than a climactic runaway volume spike.\n- Intraday Open Interest Friction: Aggressive short-covering below 22,650 has migrated the intraday Put writing anchor up to 22,650 (now serving as immediate dynamic support). Concurrently, fresh Call writing is actively defending the 22,700 and 22,750 strikes. Price action inside the 22,660.00 – 22,705.00 pocket represents high-risk compression where two-way pinning and theta erosion punish premature option buyers. Strict NO-TRADE zone until a decisive 5-minute candle closes outside this band.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Day High Breakout Expansion] (Sustained 5m close ABOVE 22,710.00 Spot): Decisive breakout clearing Day High (22,706.15) and the 22,700 Call supply wall with active futures volume confirming absorption (>1.2x 8-bar avg) triggers immediate short-covering acceleration toward 22,765.00 and 22,815.00.\n- [Demand Retest Absorption Long] (Pullback into 22,630.00 – 22,655.00 Spot followed by 5m bullish close ABOVE 22,665.00): Retests the previous breakout resistance shelf as dynamic support alongside the 22,650 Put defense base, absorbing sell liquidity for a high-probability continuation push back toward 22,710.00 and 22,760.00.\n- [Supply Wall Exhaustion Reversal] (Bearish rejection wick at 22,700.00 – 22,710.00 with confirmed 5m close BELOW 22,660.00 Spot): Rejection at the 22,700 Call barrier trapping late breakout buyers, sparking intraday long liquidation back toward 22,610.00 and 22,570.00.\n- [Demand Shelf Breakdown Flush] (Sustained 5m close BELOW 22,610.00 Spot): Slices below the morning upper consolidation base with expanding red futures volume (>1.3x avg), triggering accelerated profit booking toward 22,560.00 and the broken 15M ORB High retest at 22,525.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Demand Retest & Support Absorption Long): Price pulls back into the 22,630.00 – 22,655.00 demand shelf (retesting broken 22,650 ceiling from above) and prints a confirmed 5m bullish close firmly ABOVE 22,665.00 with active futures volume confirming absorption. | TP: 22,710.00 / 22,760.00 | SL: 22,625.00 | 💡 Buy 22650 CE + Sell 22700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Short-Covering Breakout Long): Sustained 5m close firmly ABOVE 22,710.00 clearing Day High (22,706.15) with active futures volume confirming institutional absorption (>1.2x 8-bar avg). | TP: 22,765.00 / 22,815.00 | SL: 22,665.00 | 💡 Buy 22700 CE + Sell 22750 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Wall Rejection / Bull Trap Reversal): Price tests 22,700.00 – 22,710.00 supply ceiling, prints an upper rejection wick, and closes decisively on a 5m candle BELOW 22,660.00 trapping late breakout longs. | TP: 22,610.00 / 22,570.00 | SL: 22,715.00 | 💡 Buy 22700 PE + Sell 22650 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Demand Shelf Breakdown Short): Sustained 5m close firmly BELOW 22,610.00 backed by expanding red futures volume (>1.3x 8-bar avg) breaking morning high structure. | TP: 22,560.00 / 22,525.00 | SL: 22,660.00 | 💡 Buy 22650 PE + Sell 22600 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261026_100149",
     "timestamp": "2026-10-26T10:01:49+05:30",
     "timeDisplay": "10:01 AM, Oct 26",
