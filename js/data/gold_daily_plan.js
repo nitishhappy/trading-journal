@@ -1,6 +1,83 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-27T22:01:12+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "price": "4088.0",
+    "bias": "bullish",
+    "behavior": "[TUE 22:01] [G_B2]: 4H Macro Extension Target & Psychological Supply Ceiling (SL: 4056.50 | TP: 4088.00)",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T22:01:12+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "price": "4065.5",
+    "bias": "bullish",
+    "behavior": "[TUE 22:01] [G_B2]: High-Momentum Breakout Above $4,064.65 Intraday High BSL (SL: 4056.50 | TP1: 4078.00, TP2: 4088.00)",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T22:01:12+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "price": "4063.5",
+    "bias": "bearish",
+    "behavior": "[TUE 22:01] [G_S1]: Intraday High ($4,064.65) BSL Sweep & London Close Exhaustion Zone ($4,061.50-$4,065.50) (SL: 4070.50 | TP1: 4049.50, TP2: 4040.00)",
+    "tp": "$4,049.50 / $4,040.00",
+    "sl": "Liquidity sweep wick above $4,064.65 Day High (or double-top failure at $4,063.50) with a 5M bearish engulfing close back below $4,060.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T22:01:12+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "price": "4052.0",
+    "bias": "neutral",
+    "behavior": "[TUE 22:01] Chop Zone: Post-London Close Equilibrium & Compression No-Trade Band ($4,046.00 - $4,058.00)",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T22:01:12+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "price": "4039.0",
+    "bias": "bullish",
+    "behavior": "[TUE 22:01] [G_B1]: NY Overlap 15M Bullish Order Block & FVG Retest Zone ($4,036.00-$4,042.00) (SL: 4031.00 | TP1: 4053.00, TP2: 4064.00)",
+    "tp": "$4,053.00 / $4,064.00",
+    "sl": "$4,031.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T22:01:12+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "price": "4034.0",
+    "bias": "bearish",
+    "behavior": "[TUE 22:01] [G_S2]: High-Momentum Breakdown Below 15M Demand OB Floor (SL: 4043.00 | TP1: 4021.00, TP2: 4012.00)",
+    "tp": "$4,021.00 / $4,012.00",
+    "sl": "Decisive 15M candle close below the $4,036.00 Demand OB floor and $4,034.00 structural pivot, confirming NY late-session long unwinding",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T22:01:12+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "price": "3989.22",
+    "bias": "bullish",
+    "behavior": "[TUE 22:01] Support: Major Intraday Session Low & Resting Sell-Side Liquidity (SSL) Floor",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-27T21:16:00+05:30",
     "timeDisplay": "09:16 PM, Oct 27",
     "price": "4045.0",
@@ -8,17 +85,6 @@ window.goldDailyPlanData = [
     "behavior": "[TUE 21:16] [G_B1]: Flipped Structural Breaker & 15M FVG Retest (SL: 4036.00 | TP: 4059.00 / 4067.00)",
     "tp": "$4,059.00 / $4,067.00",
     "sl": "$4,036.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-27T21:16:00+05:30",
-    "timeDisplay": "09:16 PM, Oct 27",
-    "price": "4065.5",
-    "bias": "bullish",
-    "behavior": "[TUE 21:16] [G_B2]: High-Momentum Breakout Above $4,064.38 Day High BSL (SL: 4056.50 | TP: 4078.00 / 4088.00)",
-    "tp": "$4,078.00 / $4,088.00",
-    "sl": "$4,056.50",
     "status": "na"
   },
   {
@@ -353,17 +419,6 @@ window.goldDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-27T18:00:50+05:30",
-    "timeDisplay": "06:00 PM, Oct 27",
-    "price": "3989.22",
-    "bias": "bullish",
-    "behavior": "[TUE 18:00] Support: Day Low & Major Sell-Side Liquidity Pool",
-    "tp": "na",
-    "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-27T14:18:48+05:30",
     "timeDisplay": "02:18 PM, Oct 27",
     "price": "3994.0",
@@ -575,6 +630,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261027_220114",
+    "timestamp": "2026-10-27T22:01:14+05:30",
+    "timeDisplay": "10:01 PM, Oct 27",
+    "spot": "4057.60",
+    "trigger": "Scheduled 10:00 PM Update (London Close Exhaustion",
+    "source": "AI-Gold",
+    "text": "> ⚠️ **ASSUMPTIONS**: Live XAU/USD spot structural analysis is derived from the provided spot price ($4,057.60), intraday range ($3,989.22 – $4,064.65), standard London Close / NY Session overlap liquidity mechanics, and minimum 1:2.0 Risk:Reward parameters.\n\n# 🪙 Gold (XAU/USD) Tactical Update (10:00 PM IST - Oct 27, 2026 | Spot: $4,057.60 | Trigger: Scheduled 10:00 PM Update (London Close Exhaustion))\n\n### 1. Global Macro & Forex Mechanics:\n* **London Close & NY Mid-Session Dynamics:** Gold (XAU/USD) has staged a powerful **$75.43 intraday expansion** off the **$3,989.22** session low, pressing right into the **$4,064.65** daily peak as European/London desks square books (10:00 PM IST / 16:30 UTC). With spot holding at **$4,057.60** (top 10% of the daily range), institutional order flow reflects strong sovereign and NY real-money bid absorption.\n* **DXY & US 10-Year Yield Correlation:** The sustained bid above the psychological **$4,000.00** handle indicates muted US Dollar Index (DXY) follow-through and stabilization in US 10-Year real yields during the New York morning transition. However, post-London Close liquidity thinning typically triggers either a compressed bull-flag consolidation between **$4,042.00 – $4,058.00** or a stop-hunt sweep of the **$4,064.65** high before mean-reverting into the NY afternoon FVG.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL) & Overhead Supply:** Immediate resting BSL sits directly above the intraday high at **$4,064.65 – $4,066.00**. A clean sweep and displacement above **$4,065.00** opens the path toward the 4H Psychological Extension & Unmitigated Supply Zone at **$4,078.00 – $4,088.00**. Conversely, a wick rejection through **$4,064.65** into **$4,066.50** followed by a 5M bearish Market Structure Shift (CHoCH) signals a classic London Close distribution trap.\n* **Bullish Fair Value Gaps (FVG) & Order Blocks (OB):**\n  * **Primary Intraday Demand (15M Bullish OB + FVG):** **$4,036.00 – $4,042.00** marks the origin of the late London/NY overlap impulse leg. First-touch mitigation here offers the highest-probability continuation long (`[G_B1]`).\n  * **Secondary Structural Flip Zone:** **$4,020.00 – $4,026.00** represents the mid-range equilibrium (50% fib of the $3,989.22–$4,064.65 range at **$4,026.93**) and 1H breaker support. A decisive 15M close below **$4,034.00** invalidates immediate bullish continuation and targets this deeper liquidity pool.\n  * **Major Sell-Side Liquidity (SSL):** Resting beneath the session low at **$3,989.22**.\n\n| Level | Type | Logic/Significance |\n| :--- | :--- | :--- |\n| 🔴 **$4,088.00** | HTF Resistance | `[G_B2]` 4H Macro Extension Target & Psychological Supply Ceiling |\n| 🔴 **$4,078.00** | Resistance | `[G_B2]` Primary NY Afternoon Breakout Expansion Target |\n| 🔴 **$4,061.50 – $4,065.50** | BSL / Supply Zone | `[G_S1]` Intraday High ($4,064.65) Liquidity Sweep & London Close Exhaustion Zone |\n| ⚪ **$4,046.00 – $4,058.00** | Chop Zone | Post-London Close Equilibrium / Compression Band (No-Trade Zone) |\n| 🟢 **$4,036.00 – $4,042.00** | 15M Demand OB / FVG | `[G_B1]` NY Overlap Bullish Order Block & Imbalance Mitigation Zone |\n| 🔴 **$4,034.00** | Breakdown Trigger | `[G_S2]` 15M Structural Support Floor (Loss Triggers Unwind to Equilibrium) |\n| 🟢 **$3,989.22** | Session SSL Floor | Intraday Low & Deep Sell-Side Liquidity Pool |\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **No-Trade Equilibrium Band: $4,046.00 – $4,058.00.**\n* **Tactical Directive:** Spot is currently hovering at **$4,057.60** right at the upper boundary of the post-London Close consolidation pocket after a ~$75 directional run. Initiating unconfirmed market orders inside **$4,046.00 – $4,058.00** exposes positions to two-way algorithmic whipsaws as London liquidity exits. Wait exclusively for either a pullback into the **$4,036.00 – $4,042.00** 15M Demand FVG or a confirmed test/sweep of the **$4,064.65** session high.\n\n### 4. High Momentum / Explosive Zones:\n* **Upside Breakout Vacuum ($4,065.50+):** A high-volume 5M/15M candle close above **$4,065.50** (clearing the $4,064.65 Day High BSL without immediate rejection) triggers late-session short covering, creating a low-resistance vacuum straight toward **$4,078.00** and **$4,088.00**.\n* **Downside Air-Pocket Breakdown (<$4,034.00):** Because price expanded rapidly during the NY open, an unmitigated 15M inefficiency gap sits beneath **$4,034.00**. If sellers force a 15M body close below **$4,034.00**, long-liquidation stops will rapidly drag price down through the 50% equilibrium (**$4,026.90**) toward **$4,021.00** and **$4,012.00**.\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4,036.00 – $4,042.00** Retest | 5M/15M bullish pin-bar sweep or bullish engulfing CHoCH inside the NY Overlap 15M Order Block / FVG (**$4,039.00** entry reference) | **TP1:** $4,053.00<br>**TP2:** $4,064.00 | **$4,031.00** | 1:2.0+ |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,065.50** Breakout | Clean 5M/15M candle body close above the **$4,064.65** Day High BSL followed by a successful hold above **$4,063.00** on retest | **TP1:** $4,078.00<br>**TP2:** $4,088.00 | **$4,056.50** | 1:2.5 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,061.50 – $4,065.50** Retest | Liquidity sweep wick above **$4,064.65** Day High (or double-top failure at **$4,063.50**) with a 5M bearish engulfing close back below **$4,060.50** | **TP1:** $4,049.50<br>**TP2:** $4,040.00 | **$4,070.50** | 1:2.1 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4,034.00** Breakdown | Decisive 15M candle close below the **$4,036.00** Demand OB floor and **$4,034.00** structural pivot, confirming NY late-session long unwinding | **TP1:** $4,021.00<br>**TP2:** $4,012.00 | **$4,043.00** | 1:2.4 |\n\n``"
+  },
+  {
     "id": "GOLD_20261027_211605",
     "timestamp": "2026-10-27T21:16:05+05:30",
     "timeDisplay": "09:16 PM, Oct 27",
