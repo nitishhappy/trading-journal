@@ -178,6 +178,23 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.76 — 27 Oct 2026 — Gold Interactive Chart: Eliminate Missing Intraday Bars & Multi-Layer Local/Cloud Backfill
+- **Cross-Origin Local Vantage MT5 Feed Bridge (gold_interactive_chart.html & cors_pwa_server.py)**:
+  - Added a CORS + Chrome Private Network Access (Access-Control-Allow-Private-Network: true) local static server (cors_pwa_server.py) on 127.0.0.1:8080, supervised by master_server_daemon.py and health_watchdog.py.
+  - Updated 
+eloadCandlesScript() in gold_interactive_chart.html so that even when running inside the installed Desktop PWA (https://trading-journal-sandy-three.vercel.app), it probes http://127.0.0.1:8080/js/data/gold_candles.js and streams live 3-second Vantage MT5 XAUUSD bars directly from the laptop.
+- **Vantage MT5 Continuous Exporter & Wake Backfill (antage_candle_exporter.py & master_server_daemon.py)**:
+  - Integrated antage_candle_exporter.py into master_server_daemon.py so it starts automatically on laptop boot/wake and stays alive.
+  - Detects sleep/wake gaps (> 10 mins) and immediately backfills 1,500 5M bars (~5.2 days) and 1,000 15M bars (~10.4 days) from Vantage MT5 into market_data.db and js/data/gold_candles.js.
+- **Firestore Batch OHLC Sync (pi/tvWebhook.js, antage_candle_exporter.py, market_data_store.py)**:
+  - Added ohlcOnly: true batch ingestion mode to /api/tvWebhook (normalizing IST-shifted local timestamps to true UTC epoch and committing candles5m and candles15m in a single Firestore batch without firing push notifications).
+  - Both antage_candle_exporter.py and market_data_store.py (export_gold_candles_js) automatically push the latest 60 5M and 40 15M bars to Firestore gold_candles.
+- **Cloud Gap Backfill & Anti-Stretch Candle Guard (gold_interactive_chart.html & pi/marketCandles.js)**:
+  - Fixed loadRealGoldCandles() in gold_interactive_chart.html so /api/marketCandles?symbol=GOLD is always called whenever intermediate bars are missing between lastBaseTime and currentBarTime, instead of skipping backfill when /api/livePrices succeeds.
+  - Prevented Step 4 from stretching a stale historical close (e.g. 14:15 close) as the open of a post-gap bar (17:45), eliminating artificial giant green/red candles after sleep gaps.
+  - Upgraded /api/marketCandles.js (GOLD handler) to backfill any Firestore gaps (> 2 bars behind) using 5-day 5M/15M Yahoo GC=F bars dynamically basis-adjusted to live Swissquote XAU/USD Spot.
+
+
 ### v2.3.75 — 12 Oct 2026 — Bitcoin Copilot: Stale Plan Heartbeat & Trigger Engine Architecture
 - **Stale Plan Watchdog Heartbeat (`config_btc.txt` & `btc_watchdog.py`)**:
   - Implemented configurable `MAX_STALE_HOURS` parameter (default: 4.0h) in `config_btc.txt` with full descriptive documentation.
