@@ -3473,6 +3473,8 @@
         }
 
 
+        let isLocalFeedConnected = false;
+
         function reloadCandlesScript() {
             return new Promise((resolve) => {
                 const scriptId = 'dyn-gold-candles-script';
@@ -3482,90 +3484,166 @@
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/gold_candles.js?t=${Date.now()}`;
-                script.onload = () => resolve(true);
+                script.onload = async () => {
+                    const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                    if (!isLocalHost) {
+                        // Probe Local Port 8080 CORS server (running on the same laptop) for real-time Vantage MT5 candles
+                        try {
+                            const ctrl = new AbortController();
+                            const tid = setTimeout(() => ctrl.abort(), 1500);
+                            const res = await fetch(`http://127.0.0.1:8080/js/data/gold_candles.js?t=${Date.now()}`, {
+                                cache: 'no-store',
+                                mode: 'cors',
+                                signal: ctrl.signal
+                            });
+                            clearTimeout(tid);
+                            if (res.ok) {
+                                const txt = await res.text();
+                                const startIdx = txt.indexOf('{', txt.indexOf('root.goldCandlesData'));
+                                const endIdx = txt.lastIndexOf('}');
+                                if (startIdx !== -1 && endIdx > startIdx) {
+                                    const localData = JSON.parse(txt.slice(startIdx, endIdx + 1));
+                                    if (localData && Array.isArray(localData.timeframe5m) && localData.timeframe5m.length > 0) {
+                                        const localLast = localData.timeframe5m[localData.timeframe5m.length - 1].time;
+                                        const curLast = (window.goldCandlesData?.timeframe5m?.length > 0)
+                                            ? window.goldCandlesData.timeframe5m[window.goldCandlesData.timeframe5m.length - 1].time
+                                            : 0;
+                                        if (localLast >= curLast) {
+                                            window.goldCandlesData = localData;
+                                            isLocalFeedConnected = true;
+                                        }
+                                    }
+                                }
+                            } else {
+                                isLocalFeedConnected = false;
+                            }
+                        } catch (_) {
+                            isLocalFeedConnected = false;
+                        }
+                    } else {
+                        isLocalFeedConnected = true;
+                    }
+                    resolve(true);
+                };
                 script.onerror = () => resolve(false);
                 document.body.appendChild(script);
             });
         }
 
         async function loadRealGoldCandles(levels) {
-            // Dynamically refresh local Vantage MT5 candle store
+            // Dynamically refresh local Vantage MT5 candle store (including 127.0.0.1:8080 bridge)
             await reloadCandlesScript();
 
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
             const tfKey = currentTf === '15m' ? 'timeframe15m' : 'timeframe5m';
             const barSec = currentTf === '15m' ? 900 : 300;
+            const nowSec = Math.floor(Date.now() / 1000);
+            const currentBarTime = (Math.floor(nowSec / barSec) * barSec) + IST_OFFSET_SEC;
 
-            // 1. Primary Feed: Vantage MT5 from window.goldCandlesData (gold_market_data.db)
-            if (window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]) && window.goldCandlesData[tfKey].length > 0) {
-                const candles = window.goldCandlesData[tfKey];
-                const latestCandleTime = candles[candles.length - 1].time - IST_OFFSET_SEC;
-                const nowSec = Math.floor(Date.now() / 1000);
+            let baseCandles = (window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]) && window.goldCandlesData[tfKey].length > 0)
+                ? window.goldCandlesData[tfKey].map(c => ({...c}))
+                : [];
+
+            // 1. Primary Feed: Live Vantage MT5 from localhost or local 8080 CORS bridge
+            if (baseCandles.length > 0) {
+                const latestCandleTime = baseCandles[baseCandles.length - 1].time - IST_OFFSET_SEC;
                 const ageMinutes = (nowSec - latestCandleTime) / 60;
 
-                // On localhost, Vantage exporter runs live. If age is within 5 minutes on localhost:
-                if (isLocal && ageMinutes <= 5) {
+                if ((isLocal || isLocalFeedConnected) && ageMinutes <= 5) {
                     currentFeedSource = window.goldCandlesData.source || 'VANTAGE_MT5';
-                    return candles;
+                    return baseCandles;
                 }
             }
 
-            // 2. Real-Time Spot Ingestion from Swissquote (via CORS-enabled server endpoints)
+            // 2. Check if baseCandles has any missing bars (gap > 1 bar) or is empty -> Backfill from /api/marketCandles
+            const lastBaseTime = baseCandles.length > 0 ? baseCandles[baseCandles.length - 1].time : 0;
+            const hasMissingBars = baseCandles.length === 0 || (currentBarTime - lastBaseTime) > barSec;
             let liveSpot = null;
 
-            // A. Fetch from /api/livePrices (direct Swissquote proxy on backend, with CORS *)
-            const livePricesUrl = isLocal
-                ? 'https://trading-journal-sandy-three.vercel.app/api/livePrices'
-                : '/api/livePrices';
-            try {
-                const lpRes = await fetch(`${livePricesUrl}?_t=${Date.now()}`, { cache: 'no-store' });
-                if (lpRes.ok) {
-                    const lpJson = await lpRes.json();
-                    if (lpJson && typeof lpJson.xauusd === 'number' && lpJson.xauusd > 0) {
-                        liveSpot = lpJson.xauusd;
-                    }
-                }
-            } catch (e) {
-                console.warn('[Gold Chart] /api/livePrices fetch note:', e);
-            }
-
-            // B. Fallback to /api/marketCandles?symbol=GOLD
-            if (!liveSpot) {
+            if (hasMissingBars) {
                 const marketCandlesUrl = isLocal
-                    ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&_t=${Date.now()}`
-                    : `/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&_t=${Date.now()}`;
+                    ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&limit=500&_t=${Date.now()}`
+                    : `/api/marketCandles?symbol=GOLD&timeframe=${currentTf}&limit=500&_t=${Date.now()}`;
                 try {
                     const mcRes = await fetch(marketCandlesUrl, { cache: 'no-store' });
                     if (mcRes.ok) {
                         const mcJson = await mcRes.json();
+                        if (mcJson && typeof mcJson.liveSpot === 'number' && mcJson.liveSpot > 0) {
+                            liveSpot = mcJson.liveSpot;
+                        }
                         if (mcJson && Array.isArray(mcJson.candles) && mcJson.candles.length > 0) {
-                            if (mcJson.candles.length > 5) {
-                                currentFeedSource = mcJson.source || 'VANTAGE_MT5';
-                                return mcJson.candles;
+                            // Normalize cloud candle timestamps to IST-shifted chart epoch (+19800s)
+                            const cloudCandles = mcJson.candles.map(c => ({
+                                time: (c.time <= nowSec + 3600) ? (c.time + IST_OFFSET_SEC) : c.time,
+                                open: Number(c.open),
+                                high: Number(c.high),
+                                low: Number(c.low),
+                                close: Number(c.close),
+                                volume: Number(c.volume || 0)
+                            }));
+
+                            if (baseCandles.length === 0) {
+                                baseCandles = cloudCandles;
+                            } else {
+                                const existingTimes = new Set(baseCandles.map(c => c.time));
+                                for (const cc of cloudCandles) {
+                                    if (cc.time > lastBaseTime && !existingTimes.has(cc.time)) {
+                                        baseCandles.push(cc);
+                                        existingTimes.add(cc.time);
+                                    } else if (cc.time === lastBaseTime) {
+                                        // Update the last bar in case it was still forming when snapshot was saved
+                                        const lastIdx = baseCandles.length - 1;
+                                        baseCandles[lastIdx].high = Math.max(baseCandles[lastIdx].high, cc.high);
+                                        baseCandles[lastIdx].low = Math.min(baseCandles[lastIdx].low, cc.low);
+                                        baseCandles[lastIdx].close = cc.close;
+                                    }
+                                }
+                                baseCandles.sort((a, b) => a.time - b.time);
                             }
-                            liveSpot = mcJson.candles[mcJson.candles.length - 1].close;
+
+                            if (!liveSpot && cloudCandles.length > 0) {
+                                liveSpot = cloudCandles[cloudCandles.length - 1].close;
+                            }
+                            if (mcJson.source === 'VANTAGE_MT5') {
+                                currentFeedSource = 'VANTAGE_MT5';
+                            }
                         }
                     }
                 } catch (e) {
-                    console.warn('[Gold Chart] /api/marketCandles fallback note:', e);
+                    console.warn('[Gold Chart] /api/marketCandles backfill note:', e);
                 }
             }
 
-            // 3. Anchor & Synthesize Live Forming Candle from Swissquote Spot
-            if (liveSpot && window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]) && window.goldCandlesData[tfKey].length > 0) {
-                const baseCandles = window.goldCandlesData[tfKey].map(c => ({...c}));
-                const nowSec = Math.floor(Date.now() / 1000);
-                const currentBarTime = (Math.floor(nowSec / barSec) * barSec) + IST_OFFSET_SEC;
+            // 3. Fetch latest real-time spot from /api/livePrices if not already fetched
+            if (!liveSpot) {
+                const livePricesUrl = isLocal
+                    ? 'https://trading-journal-sandy-three.vercel.app/api/livePrices'
+                    : '/api/livePrices';
+                try {
+                    const lpRes = await fetch(`${livePricesUrl}?_t=${Date.now()}`, { cache: 'no-store' });
+                    if (lpRes.ok) {
+                        const lpJson = await lpRes.json();
+                        if (lpJson && typeof lpJson.xauusd === 'number' && lpJson.xauusd > 0) {
+                            liveSpot = lpJson.xauusd;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('[Gold Chart] /api/livePrices fetch note:', e);
+                }
+            }
+
+            // 4. Anchor & Update Live Forming Candle from Swissquote Spot
+            if (liveSpot && baseCandles.length > 0) {
                 const lastCandle = baseCandles[baseCandles.length - 1];
 
                 if (lastCandle && lastCandle.time === currentBarTime) {
-                    // Update active candle tick
                     lastCandle.high = Math.max(lastCandle.high, liveSpot);
                     lastCandle.low = Math.min(lastCandle.low, liveSpot);
                     lastCandle.close = liveSpot;
                 } else if (lastCandle && currentBarTime > lastCandle.time) {
-                    // New bar has opened
-                    const openPrice = lastCandle.close;
+                    // Only carry over lastCandle.close as openPrice if lastCandle was the immediately preceding bar
+                    const isConsecutiveBar = (currentBarTime - lastCandle.time) <= barSec * 2;
+                    const openPrice = isConsecutiveBar ? lastCandle.close : liveSpot;
                     baseCandles.push({
                         time: currentBarTime,
                         open: openPrice,
@@ -3575,14 +3653,16 @@
                         volume: 1
                     });
                 }
-                currentFeedSource = 'SWISSQUOTE_BBO';
+                if (!isLocalFeedConnected && currentFeedSource !== 'VANTAGE_MT5') {
+                    currentFeedSource = 'SWISSQUOTE_BBO';
+                }
                 return baseCandles;
             }
 
-            // 4. Offline Base Fallback (if cloud API is completely unreachable)
-            if (window.goldCandlesData && Array.isArray(window.goldCandlesData[tfKey]) && window.goldCandlesData[tfKey].length > 0) {
+            // 5. Offline Base Fallback (if cloud API is completely unreachable)
+            if (baseCandles.length > 0) {
                 currentFeedSource = 'VANTAGE_OFFLINE';
-                return window.goldCandlesData[tfKey];
+                return baseCandles;
             }
 
             // ⚠️ ZERO SYNTHETIC CANDLE PROTOCOL: Log error to F12 DevTools console
@@ -3596,7 +3676,7 @@
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
             if (localLink) {
-                localLink.style.display = (!isLocal) ? 'inline-flex' : 'none';
+                localLink.style.display = (!isLocal && !isLocalFeedConnected) ? 'inline-flex' : 'none';
             }
 
             if (!badge) return;
