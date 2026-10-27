@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-27T12:46:26+05:30",
+    "timeDisplay": "12:46 PM, Oct 27",
+    "price": "22800",
+    "bias": "bullish",
+    "behavior": "[TUE 12:46] [B1]: Orderly re-test of 22,790 - 22,800 holding above support shelf with rising futures volume",
+    "tp": "22,860 / 22,910",
+    "sl": "22,770",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T12:46:26+05:30",
+    "timeDisplay": "12:46 PM, Oct 27",
+    "price": "22835",
+    "bias": "bullish",
+    "behavior": "[TUE 12:46] [B2]: Sustained 5m close ABOVE 22,835 Day High with active futures volume confirming absorption",
+    "tp": "22,885 / 22,935",
+    "sl": "22,795",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T12:46:26+05:30",
+    "timeDisplay": "12:46 PM, Oct 27",
+    "price": "22815",
+    "bias": "bearish",
+    "behavior": "[TUE 12:46] [S1]: Rejection sweep of Day High 22,829.75 failing to sustain and closing back below 22,815",
+    "tp": "22,765 / 22,720",
+    "sl": "22,845",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T12:46:26+05:30",
+    "timeDisplay": "12:46 PM, Oct 27",
+    "price": "22785",
+    "bias": "bearish",
+    "behavior": "[TUE 12:46] [S2]: Confirmed 5m close BELOW 22,785 confirming exhaustion bull-trap breakdown",
+    "tp": "22,745 / 22,695",
+    "sl": "22,825",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-27T12:01:17+05:30",
     "timeDisplay": "12:01 PM, Oct 27",
     "price": "22750",
@@ -1367,6 +1411,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261027_124629",
+    "timestamp": "2026-10-27T12:46:29+05:30",
+    "timeDisplay": "12:46 PM, Oct 27",
+    "spot": "22817.9",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $22817.90 > Max Plan Target $22805.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (12:45 PM IST - Oct 27, 2026 | Spot: 22817.9 | Trigger: Level Exhaustion Breakout (NIFTY Spot $22817.90 > Max Plan Target $22805.00 + Buffer $5.00))\n\n> ⚠️ **THETA CRUSH DAY**: India VIX is down -3.44%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Boundaries: 22795.00 — 22835.00 (Centered near current spot auction 22817.90).\n- Tactical Directive: Strict stand-down zone. Price has executed an exhaustion breakout above the morning maximum target (22805.00) and is now compressing in a 40-point horizontal band directly beneath the session peak (Day High: 22829.75) and above the 22795.00 support shelf. Being Tuesday (FinNifty Expiry), heavy call and put writing across 22800 and 22850 strikes is inducing severe gamma pinning and theta decay. With Nifty active futures volume running at 1.0x baseline, order flow is rotational. Trading inside this range exposes option buyers to rapid premium erosion; wait for a confirmed structural break outside this band before deploying capital.\n\n4. High Momentum / Explosive Zones:\n- Upper Momentum Zone (Expansion above 22835.00): A decisive 5-minute candle close above Day High 22829.75 and 22835.00 with expanding futures volume confirms institutional absorption of 22800/22850 call writers, triggering a short-covering squeeze targeting 22885.00 and 22935.00.\n- Lower Momentum Zone (Breakdown below 22785.00): A sustained 5-minute impulse close below 22785.00 invalidates the breakout shelf, trapping late longs above 22805.00 and accelerating long unwinding into FinNifty expiry delta rebalancing down towards 22745.00 (15M ORB High) and 22695.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback Support Shelf Reclaim): Controlled pullback into 22790.00 — 22800.00 printing a 5-minute bullish reversal candle closing back above 22810.00 with rising green futures volume. | TP: 22860.00, 22910.00 | SL: 22770.00 | 💡 Buy 22800 CE + Sell 22850 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Breakout Expansion): Sustained 5-minute candle body close firmly above Day High at 22835.00 with expanding futures volume confirming institutional absorption. | TP: 22885.00, 22935.00 | SL: 22795.00 | 💡 Buy 22850 CE + Sell 22900 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High SFP Liquidity Sweep): Liquidity sweep piercing Day High 22829.75 that fails to sustain, printing a 5-minute bearish reversal candle closing back below 22815.00. | TP: 22765.00, 22720.00 | SL: 22845.00 | 💡 Buy 22850 PE + Sell 22800 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Exhaustion Trap Breakdown): Decisive 5-minute candle close firmly below 22785.00 confirming failure of the level exhaustion breakout and trapping high-side longs. | TP: 22745.00, 22695.00 | SL: 22825.00 | 💡 Buy 22800 PE + Sell 22750 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261027_120121",
     "timestamp": "2026-10-27T12:01:21+05:30",
     "timeDisplay": "12:01 PM, Oct 27",
