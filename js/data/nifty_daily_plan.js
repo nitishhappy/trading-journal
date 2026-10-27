@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-27T13:01:16+05:30",
+    "timeDisplay": "01:01 PM, Oct 27",
+    "price": "22765",
+    "bias": "bullish",
+    "behavior": "[TUE 13:01] [B1]: Bullish reversal confirmation above 22,765 holding 15M ORB High support",
+    "tp": "22,800 / 22,825",
+    "sl": "22,735",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T13:01:16+05:30",
+    "timeDisplay": "01:01 PM, Oct 27",
+    "price": "22805",
+    "bias": "bullish",
+    "behavior": "[TUE 13:01] [B2]: Sustained 5m close ABOVE 22,805 clearing 22,800 CE OI wall with volume expansion",
+    "tp": "22,845 / 22,880",
+    "sl": "22,775",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T13:01:16+05:30",
+    "timeDisplay": "01:01 PM, Oct 27",
+    "price": "22775",
+    "bias": "bearish",
+    "behavior": "[TUE 13:01] [S1]: Failure to reclaim 22,800 CE resistance with breakdown below 22,775",
+    "tp": "22,750 / 22,720",
+    "sl": "22,805",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T13:01:16+05:30",
+    "timeDisplay": "01:01 PM, Oct 27",
+    "price": "22745",
+    "bias": "bearish",
+    "behavior": "[TUE 13:01] [S2]: Sustained 5m close BELOW 22,745 trapping morning buyers with rising volume",
+    "tp": "22,700 / 22,660",
+    "sl": "22,780",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-27T12:46:26+05:30",
     "timeDisplay": "12:46 PM, Oct 27",
     "price": "22800",
@@ -1411,6 +1455,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261027_130120",
+    "timestamp": "2026-10-27T13:01:20+05:30",
+    "timeDisplay": "01:01 PM, Oct 27",
+    "spot": "22777.85",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $22777.85 < Min Plan Target $22785.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:00 PM IST - Oct 27, 2026 | Spot: 22777.85 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $22777.85 < Min Plan Target $22785.00 - Buffer $5.00))\n\n> ⚠️ **THETA CRUSH DAY: India VIX is down -3.03%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.**\n\n3. Live Chop Zone / No-Trade Zone:\n- **Spot Chop Range**: **22,750 – 22,795**. Price is currently compressing between the 15M Opening Range High (22,746.40) and the heavy 22,800 Call Open Interest wall.\n- **FinNifty Tuesday Expiry Pinning Effect**: Tuesday FinNifty weekly expiry is inducing delta pinning and heavy straddle writing across the 22,800 strike. Aggressive CE addition at 22,800 combined with PE additions at 22,750 is choking range expansion.\n- **Volume & Volatility State**: Active Nifty Futures volume ratio is flat at **1.0x (8-bar avg)** with India VIX contracting **-3.03%**. Mean-reversion scalps inside this 45-point corridor carry high risk of severe theta decay. Avoid initiation inside 22,750 – 22,795.\n\n4. High Momentum / Explosive Zones:\n- Bullish Momentum Expansion (Sustained 5m Close Above 22,805): Triggers short covering across 22,800 CE writers, driving swift momentum toward Day High 22,829.75 and HTF liquidity target 22,865.00.\n- Bearish Liquidity Flush (Sustained 5m Close Below 22,745): Triggers long unwinding as morning breakout participants trapped above the 15M ORB High (22,746.40) are forced to liquidate, expanding swiftly toward 22,700.00 and 22,660.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Retest Support): Bullish reversal pin bar / green candle close holding above 22,750 with confirmation above 22,765. | TP: 22,800 / 22,825 | SL: 22,735 | 💡 Buy 22750 CE + Sell 22800 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Short Covering Breakout): Sustained 5m close ABOVE 22,805 with futures volume expanding >1.3x absorbing 22,800 CE OI wall. | TP: 22,845 / 22,880 | SL: 22,775 | 💡 Buy 22800 CE + Sell 22850 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (22,800 Rejection Short): Bearish rejection / failure to sustain above 22,795 with confirmed breakdown below 22,775. | TP: 22,750 / 22,720 | SL: 22,805 | 💡 Buy 22800 PE + Sell 22750 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Breakdown Flush): Sustained 5m close BELOW 22,745 breaking 15M ORB High with rising red futures volume. | TP: 22,700 / 22,660 | SL: 22,780 | 💡 Buy 22750 PE + Sell 22700 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261027_124629",
     "timestamp": "2026-10-27T12:46:29+05:30",
     "timeDisplay": "12:46 PM, Oct 27",
