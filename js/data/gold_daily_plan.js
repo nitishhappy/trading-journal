@@ -1,6 +1,72 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-27T18:00:50+05:30",
+    "timeDisplay": "06:00 PM, Oct 27",
+    "price": "4032.0",
+    "bias": "bearish",
+    "behavior": "[TUE 18:00] [G_S1]: HTF 4H Supply Order Block & BSL Pool",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T18:00:50+05:30",
+    "timeDisplay": "06:00 PM, Oct 27",
+    "price": "4026.0",
+    "bias": "bullish",
+    "behavior": "[TUE 18:00] [G_B2]: Breakout Level Above Day High (4025.53)",
+    "tp": "4034.00 / 4042.00",
+    "sl": "5M candle close firmly above Day High 4025.53 with expanding tick volume; enter on immediate retest hold.",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T18:00:50+05:30",
+    "timeDisplay": "06:00 PM, Oct 27",
+    "price": "4016.0",
+    "bias": "neutral",
+    "behavior": "[TUE 18:00] [Chop]: Upper Boundary of Internal Chop Zone",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T18:00:50+05:30",
+    "timeDisplay": "06:00 PM, Oct 27",
+    "price": "4012.0",
+    "bias": "bullish",
+    "behavior": "[TUE 18:00] [G_B1]: 15M Bullish FVG & London Breakout Retest",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T18:00:50+05:30",
+    "timeDisplay": "06:00 PM, Oct 27",
+    "price": "4009.5",
+    "bias": "bearish",
+    "behavior": "[TUE 18:00] [G_S2]: Structural Demand Floor Breakdown Trigger",
+    "tp": "4001.00 / 3991.00",
+    "sl": "Impulsive 5M candle close below the 4010.50 structural demand floor; enter on weak pullback rejection.",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T18:00:50+05:30",
+    "timeDisplay": "06:00 PM, Oct 27",
+    "price": "3989.22",
+    "bias": "bullish",
+    "behavior": "[TUE 18:00] Support: Day Low & Major Sell-Side Liquidity Pool",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-27T14:18:48+05:30",
     "timeDisplay": "02:18 PM, Oct 27",
     "price": "3994.0",
@@ -179,17 +245,6 @@ window.goldDailyPlanData = [
     "source": "AI",
     "timestamp": "2026-10-26T22:01:53+05:30",
     "timeDisplay": "10:01 PM, Oct 26",
-    "price": "4012.0",
-    "bias": "bullish",
-    "behavior": "[MON 22:01] [G_B1]: Discount Demand Retest & M15 FVG Mitigation",
-    "tp": "4,024.00 / 4,032.00",
-    "sl": "4,004.50",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T22:01:53+05:30",
-    "timeDisplay": "10:01 PM, Oct 26",
     "price": "4027.5",
     "bias": "bullish",
     "behavior": "[MON 22:01] [G_B2]: Breakout Above Day High BSL Trigger",
@@ -353,17 +408,6 @@ window.goldDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-26T18:46:14+05:30",
-    "timeDisplay": "06:46 PM, Oct 26",
-    "price": "4026.0",
-    "bias": "bullish",
-    "behavior": "[MON 18:46] [G_B2]: Breakout Level Above Session High",
-    "tp": "$4,036.00 / $4,048.00",
-    "sl": "$4,019.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-26T18:02:31+05:30",
     "timeDisplay": "06:02 PM, Oct 26",
     "price": "4024.5",
@@ -410,6 +454,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261027_180052",
+    "timestamp": "2026-10-27T18:00:52+05:30",
+    "timeDisplay": "06:00 PM, Oct 27",
+    "spot": "4021.54",
+    "trigger": "Scheduled 06:00 PM Update (New York Pre-Market & US Data",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (06:00 PM IST - Oct 27, 2026 | Spot: 4021.54 | Trigger: Scheduled 06:00 PM Update (New York Pre-Market & US Data))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics (London/NY Overlap Transition):** London morning trading established a solid base above the psychological 4000.00 handle, pushing price toward the current day high at 4025.53. As we transition into the early New York pre-market (06:00 PM IST / 08:30 AM EDT), institutional order flow is positioning ahead of incoming US macro data releases.\n* **DXY & US Yield Confluence:** The US Dollar Index (DXY) is testing intraday resistance near 104.20, showing slight signs of exhaustion. Concurrently, US 10-Year Treasury Yields are hovering near 4.18%. Gold's resilience holding above 4018.00 reflects underlying structural bid pressure, indicating sustained inverse correlation strength if DXY prints a rejection lower.\n* **Macro Catalyst Outlook:** Market participants are pricing in New York opening volatility with potential Fed speaker commentary and tier-2 US economic prints. A continuation above 4025.50 requires clean volume confirmation to avoid a pre-market bull trap.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL):** Clean buy stops are resting directly above the Day High at **4025.53**, extending up to **4032.00** (HTF 4H supply wick). An aggressive sweep above 4025.53 followed by an immediate rejection would indicate smart money distributing into retail breakout buys.\n* **Sell-Side Liquidity (SSL):** Intraday liquidity rests below the London session consolidation low at **4012.00**, with deeper external SSL pools parked beneath the Day Low at **3989.22**.\n* **Fair Value Gaps (FVG) & Order Blocks (OB):**\n  * **Bullish 15M FVG:** Located between **4010.50 – 4015.00**, aligning with the London breakout retest zone.\n  * **Bearish 15M / 1H FVG / Supply OB:** Situated between **4028.00 – 4035.00**, representing an unmitigated 4H distribution block.\n* **Market Structure:** 15-minute structure remains bullish with higher highs and higher lows, but 5-minute price action is compressing tightly right below Day High resistance, signaling an impending expansion move.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Range:** **4016.00 – 4024.00** (8.00 pt chop pocket)\n* **Rationale:** Price is currently trading at 4021.54, directly in the middle of the local session high (4025.53) and internal liquidity support (4015.00). Entering positions inside this corridor risks heavy slippage and stop-hunting from two-sided pre-NY whipsaws.\n* **Directive:** Stand down inside 4016.00 – 4024.00. Wait strictly for an external liquidity grab or a verified impulse candle close outside this band.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Breakout Expansion (> 4026.00):** A decisive 5M body close above Day High 4025.53 triggers aggressive short-covering into 4032.00 and 4040.00.\n* **Bearish Breakdown Expansion (< 4010.00):** A clean 5M break and close below the 4010.50 FVG floor exposes rapid sell-side cascading toward 4002.00 and 3990.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **4010.50 – 4014.00** Retest | SSL sweep of 4016.00 into 15M FVG, followed by a 5M bullish engulfing or CHoCH candle close back above 4015.00. | **TP1:** 4024.00<br>**TP2:** 4032.00 | **4005.50** | 1:2.0 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **4026.00** Breakout | 5M candle close firmly above Day High 4025.53 with expanding tick volume; enter on immediate retest hold. | **TP1:** 4034.00<br>**TP2:** 4042.00 | **4020.00** | 1:2.3 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4028.00 – 4032.00** Retest | BSL sweep above 4025.53 into HTF Supply OB, followed by an immediate long-wick pin bar or 5M bearish displacement below 4024.00. | **TP1:** 4018.00<br>**TP2:** 4011.00 | **4035.50** | 1:2.1 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **4009.50** Breakdown | Impulsive 5M candle close below the 4010.50 structural demand floor; enter on weak pullback rejection. | **TP1:** 4001.00<br>**TP2:** 3991.00 | **4015.50** | 1:2.1 |"
+  },
+  {
     "id": "GOLD_20261027_141851",
     "timestamp": "2026-10-27T14:18:51+05:30",
     "timeDisplay": "02:18 PM, Oct 27",

@@ -290,35 +290,104 @@ export default async function handler(req, res) {
         }
       }
 
-      // 2. Fallback: Swissquote BBO Spot Anchor (never synthetic, never Binance PAXG discount)
-      if (candles.length === 0) {
+      // 2. Fetch live Swissquote BBO Spot & Backfill any missing bars if laptop/MT5 was asleep
+      let liveSpot = null;
+      let feedSource = candles.length > 1 ? "VANTAGE_MT5" : "SWISSQUOTE_BBO";
+      try {
+        const sqData = await fetchUrl("https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD");
+        if (Array.isArray(sqData) && sqData.length > 0) {
+          const prices = sqData[0].spreadProfilePrices || [];
+          if (prices.length > 0) {
+            const premium = prices.find(p => p.spreadProfile === "premium") || prices[0];
+            liveSpot = Number(((Number(premium.bid) + Number(premium.ask)) / 2).toFixed(2));
+          }
+        }
+      } catch (e) {
+        console.error("api/marketCandles Swissquote spot error:", e);
+      }
+
+      const nowSec = Math.floor(Date.now() / 1000);
+      const barSec = normTf === "15m" ? 900 : 300;
+      const lastFsTime = candles.length > 0 ? candles[candles.length - 1].time : 0;
+
+      // If Firestore has fewer than 10 bars or is behind by >1 bar (laptop asleep), backfill missing bars using Spot-Basis-Adjusted GC=F
+      if (candles.length < 10 || (nowSec - lastFsTime) > barSec * 2) {
         try {
-          const sqData = await fetchUrl("https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD");
-          if (Array.isArray(sqData) && sqData.length > 0) {
-            const prices = sqData[0].spreadProfilePrices || [];
-            if (prices.length > 0) {
-              const premium = prices[0];
-              const spot = Number(((Number(premium.bid) + Number(premium.ask)) / 2).toFixed(2));
-              const nowSec = Math.floor(Date.now() / 1000);
-              candles = [{
-                time: nowSec,
-                open: spot,
-                high: spot,
-                low: spot,
-                close: spot,
-                volume: 1
-              }];
+          const yUrl = `https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=${normTf}&range=5d`;
+          const yJson = await fetchUrl(yUrl);
+          const yCandles = yJson ? parseYahooCandles(yJson, 2) : [];
+          if (yCandles.length > 0) {
+            const lastYClose = yCandles[yCandles.length - 1].close;
+            const anchorSpot = liveSpot || (candles.length > 0 ? candles[candles.length - 1].close : lastYClose);
+            const basisOffset = anchorSpot - lastYClose;
+
+            const adjYCandles = yCandles.map(yc => ({
+              time: Math.floor(yc.time / barSec) * barSec,
+              open: Number((yc.open + basisOffset).toFixed(2)),
+              high: Number((yc.high + basisOffset).toFixed(2)),
+              low: Number((yc.low + basisOffset).toFixed(2)),
+              close: Number((yc.close + basisOffset).toFixed(2)),
+              volume: yc.volume || 0
+            }));
+
+            if (candles.length === 0) {
+              candles = adjYCandles.slice(-500);
+              feedSource = "SWISSQUOTE_BBO";
+            } else {
+              const existingTimes = new Set(candles.map(c => c.time));
+              for (const yc of adjYCandles) {
+                if (yc.time > lastFsTime && !existingTimes.has(yc.time)) {
+                  candles.push(yc);
+                  existingTimes.add(yc.time);
+                }
+              }
+              candles.sort((a, b) => a.time - b.time);
             }
           }
         } catch (e) {
-          console.error("api/marketCandles Swissquote fallback error:", e);
+          console.error("api/marketCandles Gold gap-fill error:", e);
+        }
+      }
+
+      // 3. Overlay live Swissquote spot onto current forming bar
+      if (liveSpot) {
+        const currentBarTime = Math.floor(nowSec / barSec) * barSec;
+        if (candles.length === 0) {
+          candles = [{
+            time: currentBarTime,
+            open: liveSpot,
+            high: liveSpot,
+            low: liveSpot,
+            close: liveSpot,
+            volume: 1
+          }];
+        } else {
+          const last = candles[candles.length - 1];
+          if (last.time === currentBarTime) {
+            last.high = Math.max(last.high, liveSpot);
+            last.low = Math.min(last.low, liveSpot);
+            last.close = liveSpot;
+          } else if (currentBarTime > last.time) {
+            // Only open from last.close if it was the immediately preceding bar; otherwise open at liveSpot
+            const isConsecutive = (currentBarTime - last.time) <= barSec * 2;
+            const openPrice = isConsecutive ? last.close : liveSpot;
+            candles.push({
+              time: currentBarTime,
+              open: openPrice,
+              high: Math.max(openPrice, liveSpot),
+              low: Math.min(openPrice, liveSpot),
+              close: liveSpot,
+              volume: 1
+            });
+          }
         }
       }
 
       return res.status(200).json({
         success: candles.length > 0,
         symbol: "GOLD",
-        source: candles.length === 1 ? "SWISSQUOTE_BBO" : "VANTAGE_MT5",
+        source: feedSource,
+        liveSpot,
         timeframe: normTf,
         candles,
         message: candles.length === 0 ? "No Spot Gold candle data available from Vantage MT5 or Swissquote." : undefined

@@ -95,6 +95,60 @@ module.exports = async (req, res) => {
   const isSp500 = cleanedSym === "SP500" || cleanedSym === "^GSPC" || cleanedSym === "SPX" || cleanedSym === "SPX500" || cleanedSym === "S&P500";
   const isGold = cleanedSym === "GOLD" || cleanedSym === "XAUUSD" || cleanedSym === "XAU";
 
+  // ── Batch OHLC Sync (Silent Vantage MT5 / Local Store -> Firestore) ──
+  if (data.ohlcOnly === true && (isSp500 || isGold)) {
+    try {
+      const targetAsset = isGold ? "GOLD" : "SP500";
+      const collName = isGold ? "gold_candles" : "sp500_candles";
+      const nowSec = Math.floor(Date.now() / 1000);
+      const batch = db.batch();
+      let count = 0;
+
+      const enqueueBars = (barsArray, tfStr) => {
+        if (!Array.isArray(barsArray)) return;
+        const normTf = normalizeTimeframe(tfStr);
+        for (const b of barsArray) {
+          if (!b || b.open === undefined || b.close === undefined) continue;
+          let rawT = Number(b.timestamp || b.time || 0);
+          if (!rawT) continue;
+          // If timestamp is IST-shifted (+19800s ahead of UTC), normalize to true UTC epoch
+          if (rawT > nowSec + 3600) {
+            rawT -= 19800;
+          }
+          const docId = `${targetAsset}_${normTf}_${rawT}`;
+          const docRef = db.collection(collName).doc(docId);
+          batch.set(docRef, {
+            symbol: targetAsset,
+            timeframe: normTf,
+            timestamp: rawT,
+            isoTimestamp: new Date(rawT * 1000).toISOString(),
+            open: Number(b.open),
+            high: Number(b.high),
+            low: Number(b.low),
+            close: Number(b.close),
+            volume: Number(b.volume || 0),
+            source: isGold ? "VANTAGE_MT5" : "TRADINGVIEW",
+            updatedAt: admin.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+          count++;
+        }
+      };
+
+      enqueueBars(data.candles5m, "5m");
+      enqueueBars(data.candles15m, "15m");
+      if (Array.isArray(data.candles)) {
+        enqueueBars(data.candles, resolvedTimeframe || "5m");
+      }
+      if (count > 0) {
+        await batch.commit();
+      }
+      return res.status(200).json({ ok: true, synced: count });
+    } catch (e) {
+      console.error("tvWebhook: Batch OHLC sync error:", e);
+      return res.status(500).json({ ok: false, error: e.message });
+    }
+  }
+
   if ((isSp500 || isGold) && data.open !== undefined && data.high !== undefined && data.low !== undefined && data.close !== undefined) {
     try {
       const openVal = parseFloat(data.open);
