@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-27T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Oct 27",
+    "price": "22665",
+    "bias": "bullish",
+    "behavior": "[TUE 13:31] [B1]: 5m sweep below Day Low 22,653.2 followed by an immediate close back above 22,665 with a strong lower rejection wick",
+    "tp": "22,715 / 22,745",
+    "sl": "22,640",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Oct 27",
+    "price": "22720",
+    "bias": "bullish",
+    "behavior": "[TUE 13:31] [B2]: Sustained 5m close ABOVE 22,720 with active futures volume confirming absorption of 22,700 CE writers",
+    "tp": "22,765 / 22,820",
+    "sl": "22,685",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Oct 27",
+    "price": "22650",
+    "bias": "bearish",
+    "behavior": "[TUE 13:31] [S1]: Sustained 5m close BELOW 22,650 with expanding futures volume confirming fresh long unwinding",
+    "tp": "22,600 / 22,540",
+    "sl": "22,680",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Oct 27",
+    "price": "22715",
+    "bias": "bearish",
+    "behavior": "[TUE 13:31] [S2]: 5m bearish rejection candle at 22,715 - 22,725 failing to cross intraday VWAP",
+    "tp": "22,655 / 22,610",
+    "sl": "22,745",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-27T13:16:16+05:30",
     "timeDisplay": "01:16 PM, Oct 27",
     "price": "22680",
@@ -1499,6 +1543,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261027_133113",
+    "timestamp": "2026-10-27T13:31:13+05:30",
+    "timeDisplay": "01:31 PM, Oct 27",
+    "spot": "22681.8",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:30 PM IST - Oct 27, 2026 | Spot: 22681.8 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 22,655 - 22,715 (Spot Index).\n- Context: Spot is consolidating near the session floor (Day Low: 22,653.2) following the morning selloff from Day High (22,829.75).\n- Expiry Dynamics: Today is Tuesday (FinNifty Expiry), driving aggressive gamma pin behavior and strike compression across the 22,650 - 22,700 band. Heavy 22,700 CE open interest additions are capping immediate upside, while 22,650 PE put writers are holding defending bids, creating a tight theta-decay trap.\n- Volume Confirmation: Active Nifty Future volume is tracking at 1.0x 8-bar baseline, confirming absorption without directional continuation inside this band.\n- Action: Absolute NO-TRADE zone for naked option buyers. Do not initiate directional intraday trades within 22,655 - 22,715 until a structural 5-minute candle body closes outside these boundaries.\n\n4. High Momentum / Explosive Zones:\n- Downside Breakdown ([Sustained 5m close below 22,650]): A decisive break below Day Low (22,653.2) and the 15M ORB Low will trigger stops of 22,650 PE writers, prompting long unwinding and an accelerated liquidity sweep toward 22,590 and 22,530 macro demand.\n- Upside Short-Covering Squeeze ([Sustained 5m close above 22,720]): A break above 22,720 clears intraday VWAP resistance and traps aggressive 22,700 CE intraday call writers, fueling a short-covering squeeze into 22,765 and 22,820.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day Low Liquidity Sweep & Reclaim): 5m sweep below Day Low 22,653.2 followed by an immediate close back above 22,665 with a strong lower rejection wick. | TP: 22,715 / 22,745 | SL: 22,640 | 💡 Buy 22,650 CE + Sell 22,700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Short-Covering Breakout Above Chop Ceiling): Sustained 5m close ABOVE 22,720 with active futures volume confirming absorption of 22,700 CE writers. | TP: 22,765 / 22,820 | SL: 22,685 | 💡 Buy 22,700 CE + Sell 22,750 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day Low Breakdown Continuation): Sustained 5m close BELOW 22,650 with expanding futures volume confirming fresh long unwinding. | TP: 22,600 / 22,540 | SL: 22,680 | 💡 Buy 22,650 PE + Sell 22,600 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Failed Retest / Supply Rejection): 5m bearish rejection candle (shooting star/bearish engulfing) at 22,715 - 22,725 failing to cross intraday VWAP. | TP: 22,655 / 22,610 | SL: 22,745 | 💡 Buy 22,700 PE + Sell 22,650 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261027_131621",
     "timestamp": "2026-10-27T13:16:21+05:30",
     "timeDisplay": "01:16 PM, Oct 27",
