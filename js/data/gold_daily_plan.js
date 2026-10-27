@@ -1,6 +1,72 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-27T11:20:26+05:30",
+    "timeDisplay": "11:20 AM, Oct 27",
+    "price": "4004.5",
+    "bias": "bullish",
+    "behavior": "[TUE 11:20] [G_B1]: Asian Low SSL Sweep & Reclaim Demand Level",
+    "tp": "$4,013.00 / $4,021.50",
+    "sl": "$3,997.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T11:20:26+05:30",
+    "timeDisplay": "11:20 AM, Oct 27",
+    "price": "4026.5",
+    "bias": "bullish",
+    "behavior": "[TUE 11:20] [G_B2]: Breakout Above Day High BSL Trigger",
+    "tp": "$4,036.00 / $4,048.00",
+    "sl": "$4,019.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T11:20:26+05:30",
+    "timeDisplay": "11:20 AM, Oct 27",
+    "price": "4016.0",
+    "bias": "bearish",
+    "behavior": "[TUE 11:20] [G_S1]: 15M Bearish FVG & Breakdown Origin Supply Shelf",
+    "tp": "$4,006.00 / $3,998.00",
+    "sl": "$4,021.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T11:20:26+05:30",
+    "timeDisplay": "11:20 AM, Oct 27",
+    "price": "3998.5",
+    "bias": "bearish",
+    "behavior": "[TUE 11:20] [G_S2]: Breakdown Below $4,000 Milestone Shelf",
+    "tp": "$3,988.00 / $3,978.00",
+    "sl": "$4,005.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T11:20:26+05:30",
+    "timeDisplay": "11:20 AM, Oct 27",
+    "price": "4000.04",
+    "bias": "bullish",
+    "behavior": "[TUE 11:20] Support: Macro Day Low SSL Benchmark Shelf",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-27T11:20:26+05:30",
+    "timeDisplay": "11:20 AM, Oct 27",
+    "price": "4025.53",
+    "bias": "bearish",
+    "behavior": "[TUE 11:20] Resistance: Macro Day High BSL Benchmark Shelf",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-27T09:37:02+05:30",
     "timeDisplay": "09:37 AM, Oct 27",
     "price": "4010.0",
@@ -118,17 +184,6 @@ window.goldDailyPlanData = [
     "behavior": "[MON 20:36] Pivot: [G_SPOT] Current Spot Price / Pre-Breakout Consolidation",
     "tp": "na",
     "sl": "na",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T20:18:00+05:30",
-    "timeDisplay": "08:18 PM, Oct 26",
-    "price": "4026.5",
-    "bias": "bullish",
-    "behavior": "[MON 20:18] [G_B2]: Breakout Above Day High BSL",
-    "tp": "$4,038.00 / $4,050.00",
-    "sl": "Strong 5M/15M candle body close above Day High ($4,025.43) with expanding volume; shallow retest holding firmly above $4,024.00.",
     "status": "na"
   },
   {
@@ -311,6 +366,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261027_112028",
+    "timestamp": "2026-10-27T11:20:28+05:30",
+    "timeDisplay": "11:20 AM, Oct 27",
+    "spot": "4005.92",
+    "trigger": "Structural Invalidation (-15.8 pts incremental shift from previous trigger $4021.76",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (11:17 AM IST - Oct 27, 2026 | Spot: $4005.92 | Trigger: Structural Invalidation (-15.8 pts incremental shift from previous trigger $4021.76))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics & Liquidity Transition:** Gold is currently trading in the late Asian session and heading into the European pre-market open (12:30 PM – 01:30 PM IST). Asian range consolidation experienced an aggressive downward directional expansion, dumping -$15.8 points from the morning trigger of $4,021.76 straight into the critical $4,000.00 psychological round number handle.\n* **DXY (US Dollar Index) & Yield Alignment:** The US Dollar Index (DXY) staged an intraday bounce toward 104.20, pressuring bullion across the board. Simultaneously, US 10-Year Treasury Yields are holding steady near 4.24%, creating a temporary yield drag that prompted systematic algorithmic dumping of spot metals ahead of the London volume surge.\n* **Macro Catalyst Outlook:** Market participants are positioning ahead of upcoming US preliminary GDP and core PCE inflation data releases later this week. In the absence of immediate top-tier Asian data drops, order book mechanics are entirely driven by institutional stop-hunting and liquidity probing around round-number milestone barriers.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Sell-Side Liquidity (SSL) Probing:** Price has carved a session Day Low at **$4,000.04**, directly kissing the massive institutional liquidity pool resting beneath the $4,000.00 major benchmark. Retail long stops and trailing liquidity are heavily clustered between $3,998.00 and $4,000.00.\n* **Fair Value Gaps (FVG) & Imbalance Zones:** The rapid 15-minute selloff from $4,021.76 to $4,005.92 left an unmitigated Bearish Fair Value Gap (FVG) on the 15M chart between **$4,014.00 and $4,018.50**. This zone represents premium supply and will act as primary resistance on any relief rally.\n* **Order Block (OB) & Structure:** \n  - **Macro Equilibrium (EQ):** The 50% Daily Equilibrium rests at **$4,012.78**. Spot trading at $4,005.92 positions Gold firmly in deep discount territory.\n  - **Overhead Supply:** The 1H consolidation shelf breakdown point at **$4,018.00 – $4,022.00** acts as a mitigated distribution block, capping upside unless cleared by impulsive institutional buying.\n  - **Underlying Demand Base:** A major higher timeframe (4H) unmitigated Bullish Demand Base is rooted at **$3,982.00 – $3,988.00**, serving as the macro floor should the $4,000.00 shelf fail to hold.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Defined Corridor:** **$4,006.00 – $4,012.50** (Intraday Equilibrium Compression).\n* **Tactical Directive:** Spot price ($4,005.92) is hovering right at the doorstep of this rotational band. Inside this 6.5-point corridor, price action is subject to low-volume Asian chop, random two-sided wicks, and bid-ask spread traps. \n* **Execution Rule:** **STRICTLY STAND ASIDE** inside this zone. Do NOT enter market buy or sell orders while price is rotating between the Day Low bounce and the 50% Daily Equilibrium ($4,012.78).\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion Trigger ($4,013.50 Reclaim & $4,026.00 Day High Breakout):** \n  - A decisive 5M close above $4,013.50 clears local chop and triggers a rapid mean-reversion squeeze toward the 15M FVG at $4,018.00 – $4,021.00.\n  - A sustained 15M breakout above **$4,026.00** (clearing Day High $4,025.53) will trigger massive Buy-Side Liquidity (BSL) stop runs, accelerating momentum toward **$4,036.00** and **$4,048.00**.\n* **Bearish Liquidation Cascade ($3,998.50 Breakdown):**\n  - If the $4,000.00 psychological support collapses with a solid 5M body close beneath **$3,998.50**, long margin liquidations will cascade, unleashing high-velocity selling toward the **$3,988.00** and **$3,978.00** institutional demand pockets.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$3,998.00 – $4,002.00** Retest / Reclaim | False breakdown / wick sweep of $4,000.04 Day Low followed by a 5-minute bullish close back above $4,004.50 (Turtle Soup) | **TP1:** $4,013.00<br>**TP2:** $4,021.50 | **$3,997.00** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,026.50** Breakout | 15-minute candle body close firmly above Day High ($4,025.53) with expanding bullish volume | **TP1:** $4,036.00<br>**TP2:** $4,048.00 | **$4,019.50** | 1:2.1 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,014.00 – $4,018.00** Retest | Bearish rejection wick / shooting star or M5 CHoCH on retest of 15M FVG and broken 1H shelf | **TP1:** $4,006.00<br>**TP2:** $3,998.00 | **$4,021.50** | 1:2.5 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3,998.50** Breakdown | Impulsive 5-minute close below $3,998.50 confirming complete loss of $4,000 milestone shelf | **TP1:** $3,988.00<br>**TP2:** $3,978.00 | **$4,005.50** | 1:2.2 |"
+  },
+  {
     "id": "GOLD_20261027_093735",
     "timestamp": "2026-10-27T09:37:35+05:30",
     "timeDisplay": "09:37 AM, Oct 27",
