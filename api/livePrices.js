@@ -87,6 +87,37 @@ export default async function handler(req, res) {
       }
     }
 
+    // 1b. Fetch Sensex Price (BSE_INDEX|SENSEX + Yahoo ^BSESN fallback)
+    const sensexInst = encodeURIComponent("BSE_INDEX|SENSEX");
+    let sensexCandles = [];
+    const sensexIntraRes = await fetchUrl(`https://api.upstox.com/v2/historical-candle/intraday/${sensexInst}/1minute`);
+    if (sensexIntraRes?.data?.candles && sensexIntraRes.data.candles.length > 0) {
+      sensexCandles = sensexIntraRes.data.candles;
+    }
+    if (sensexCandles.length === 0) {
+      const lookbackDt = new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000);
+      const lookbackStr = lookbackDt.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+      const sensexHistRes = await fetchUrl(`https://api.upstox.com/v2/historical-candle/${sensexInst}/1minute/${todayIst}/${lookbackStr}`);
+      if (sensexHistRes?.data?.candles && sensexHistRes.data.candles.length > 0) {
+        sensexCandles = sensexHistRes.data.candles;
+      }
+    }
+    let sensexPrice = null;
+    if (sensexCandles.length > 0) {
+      const sortedSx = sensexCandles
+        .filter(c => c && c[0])
+        .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime());
+      if (sortedSx.length > 0) {
+        sensexPrice = Number(sortedSx[sortedSx.length - 1][4]);
+      }
+    }
+    if (!sensexPrice) {
+      const sxYres = await fetchUrl("https://query1.finance.yahoo.com/v8/finance/chart/%5EBSESN?interval=1m&range=1d");
+      if (sxYres?.chart?.result?.[0]?.meta?.regularMarketPrice) {
+        sensexPrice = Number(sxYres.chart.result[0].meta.regularMarketPrice);
+      }
+    }
+
     // 2. Fetch XAU/USD Price
     const xauUrl = "https://forex-data-feed.swissquote.com/public-quotes/bboquotes/instrument/XAU/USD";
     const xauRes = await fetchUrl(xauUrl);
@@ -161,6 +192,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       nifty: niftyPrice,
+      sensex: sensexPrice,
       xauusd: xauusdPrice,
       sp500: sp500Price,
       btcusd: btcPrice,

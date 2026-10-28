@@ -60,9 +60,12 @@ export default async function handler(req, res) {
     const queryDate = req.query.date ? req.query.date.trim() : "";
     const instrument = req.query.instrument || "";
 
-    // ── 1. NIFTY 50 CANDLES ────────────────────────────────────────────────
-    if (symInput === "NIFTY" || symInput === "NIFTY50" || (instrument && instrument.includes("Nifty"))) {
-      const resolvedInstrument = instrument || "NSE_INDEX|Nifty 50";
+    // ── 1. NIFTY 50 & BSE SENSEX CANDLES ───────────────────────────────────
+    const isSensexReq = (symInput === "SENSEX" || symInput === "BSESN" || (instrument && instrument.toUpperCase().includes("SENSEX")));
+    if (isSensexReq || symInput === "NIFTY" || symInput === "NIFTY50" || (instrument && instrument.includes("Nifty"))) {
+      const resolvedSymbol = isSensexReq ? "SENSEX" : "NIFTY";
+      const resolvedInstrument = instrument || (isSensexReq ? "BSE_INDEX|SENSEX" : "NSE_INDEX|Nifty 50");
+      const yahooTicker = isSensexReq ? "%5EBSESN" : "%5ENSEI";
       const encInst = encodeURIComponent(resolvedInstrument);
       const now = new Date();
       const todayIst = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
@@ -71,10 +74,10 @@ export default async function handler(req, res) {
       let candles5m = [];
       const isFullRange = (req.query.range === "1mo" || req.query.range === "30d" || !queryDate);
 
-      // 1. If full range requested (interactive chart mode), fetch 1-month 5m continuous candles from Yahoo ^NSEI
+      // 1. If full range requested (interactive chart mode), fetch 1-month 5m continuous candles from Yahoo
       if (isFullRange) {
         try {
-          const yUrl = "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?interval=5m&range=1mo";
+          const yUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${yahooTicker}?interval=5m&range=1mo`;
           const yJson = await fetchUrl(yUrl);
           if (yJson) {
             const parsed = parseYahooCandles(yJson);
@@ -172,7 +175,7 @@ export default async function handler(req, res) {
           }
           return res.status(200).json({
             success: true,
-            symbol: "NIFTY",
+            symbol: resolvedSymbol,
             instrument,
             date: queryDate,
             isLatestTradingDay: queryDate === todayIst,
@@ -206,7 +209,7 @@ export default async function handler(req, res) {
       if (candles5m.length === 0) {
         return res.status(200).json({
           success: false,
-          message: `No NIFTY candles found for ${targetDate}.`,
+          message: `No ${resolvedSymbol} candles found for ${targetDate}.`,
           date: targetDate,
           candles: []
         });
@@ -214,7 +217,7 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         success: true,
-        symbol: "NIFTY",
+        symbol: resolvedSymbol,
         instrument,
         date: targetDate,
         isLatestTradingDay: targetDate === todayIst,

@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.78 — 28 Oct 2026 — BSE SENSEX Levels Tab & End-to-End AI Copilot Integration
+- **BSE SENSEX Asset Tab in Levels View (`index.html`, `js/ui/levels.js`, `sensex_interactive_chart.html`)**:
+  - Added the `📊 SENSEX` asset selector button immediately next to `📉 NIFTY` in the Levels view with live badge counters and proximity alerts.
+  - Built `sensex_interactive_chart.html` (Lightweight Charts 5M dashboard for `BSE:SENSEX`) with AI setup overlays (`AI_B1`, `AI_B2`, `AI_S1`, `AI_S2`), High R:R badges, Historical Briefings drawer, and Scorecard integration (`levelsScorecardHistory_SENSEX`).
+  - Configured Sensex to strictly use the AI setup tags (`AI_B1`, `AI_B2`, `AI_S1`, `AI_S2`) and dynamic parameter thresholds synced from `config_sensex.txt` (`STRIKE_INTERVAL=100`, `SPREAD_WIDTH=200`, `LEVEL_PROXIMITY_MARGIN=50`, `PRICE_RENDER_DELTA=15`).
+- **Live Price & Candle Serverless APIs (`api/livePrices.js`, `api/marketCandles.js`, `vercel.json`)**:
+  - Extended `/api/livePrices` and `/api/marketCandles?symbol=SENSEX` (plus `/api/sensexCandles` rewrite) to stream real-time `BSE_INDEX|SENSEX` data from Upstox v2 with Yahoo Finance (`^BSESN`) fallback.
+- **Desktop AI Copilot, Watchdog & Daily Market Bias (`Sensex Setup/*`, `Daily Market Bias/Sensex/*`, `sync_briefing_to_daily_plan.py`)**:
+  - Added `config_sensex.txt` with descriptive documentation and automated client bridge exporting `window.rrConfig` and `window.assetParamsConfig` to `js/data/rr_config.js`.
+  - Created `sensex_premarket_briefing.ps1` (09:16 AM full 7-section briefing), `sensex_intraday_briefing.ps1` (truncated tactical rest-run with 200-pt Next-Week option spreads), `sensex_watchdog.py` (15m intraday poller), `sensex_bias_engine.py`, `inject_sensex_bias.py`, and manual `.bat` launchers.
+
 ### v2.3.76 — 27 Oct 2026 — Gold Interactive Chart: Eliminate Missing Intraday Bars & Multi-Layer Local/Cloud Backfill
 - **Cross-Origin Local Vantage MT5 Feed Bridge (gold_interactive_chart.html & cors_pwa_server.py)**:
   - Added a CORS + Chrome Private Network Access (Access-Control-Allow-Private-Network: true) local static server (cors_pwa_server.py) on 127.0.0.1:8080, supervised by master_server_daemon.py and health_watchdog.py.

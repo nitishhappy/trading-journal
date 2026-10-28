@@ -6,6 +6,10 @@
       "destination": "/api/marketCandles?symbol=NIFTY"
     },
     {
+      "source": "/api/sensexCandles",
+      "destination": "/api/marketCandles?symbol=SENSEX"
+    },
+    {
       "source": "/api/goldCandles",
       "destination": "/api/marketCandles?symbol=GOLD"
     },
