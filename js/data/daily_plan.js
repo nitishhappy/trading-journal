@@ -88,3 +88,11 @@ window.eurusdDailyPlanData = [
 window.eurusdDailyPlanSummary = [
 
 ];
+
+window.sensexDailyPlanData = [
+
+];
+
+window.sensexDailyPlanSummary = [
+
+];
