@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-28T14:01:02+05:30",
+    "timeDisplay": "02:01 PM, Oct 28",
+    "price": "22780",
+    "bias": "bullish",
+    "behavior": "[WED 14:01] [B2]: Sustained 5m close ABOVE 22,780 Spot (clearing 22,778.05 Day High) with >1.5x futures volume expansion",
+    "tp": "22,840 / 22,895",
+    "sl": "22,740",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-28T14:01:02+05:30",
+    "timeDisplay": "02:01 PM, Oct 28",
+    "price": "22690",
+    "bias": "bullish",
+    "behavior": "[WED 14:01] [B1]: Pullback defense of 15M ORB High (22,691.50) with a 5m bullish rejection close above 22,695",
+    "tp": "22,750 / 22,780",
+    "sl": "22,655",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-28T14:01:02+05:30",
+    "timeDisplay": "02:01 PM, Oct 28",
+    "price": "22670",
+    "bias": "bearish",
+    "behavior": "[WED 14:01] [S1]: Decisive 5m close BELOW 22,670 Spot confirming failed breakout above 15M ORB High",
+    "tp": "22,610 / 22,555",
+    "sl": "22,710",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-28T14:01:02+05:30",
+    "timeDisplay": "02:01 PM, Oct 28",
+    "price": "22550",
+    "bias": "bearish",
+    "behavior": "[WED 14:01] [S2]: High-momentum 5m close BELOW 22,550 Spot (15M ORB Low 22,551.90) with expanding sell volume",
+    "tp": "22,495 / 22,440",
+    "sl": "22,590",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-28T13:46:14+05:30",
     "timeDisplay": "01:46 PM, Oct 28",
     "price": "22695",
@@ -1235,6 +1279,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261028_140104",
+    "timestamp": "2026-10-28T14:01:04+05:30",
+    "timeDisplay": "02:01 PM, Oct 28",
+    "spot": "22705.35",
+    "trigger": "Structural Invalidation (+156.1 pts incremental shift from previous trigger 22549.20",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:00 PM IST - Oct 28, 2026 | Spot: 22705.35 | Trigger: Structural Invalidation (+156.1 pts incremental shift from previous trigger 22549.20))\n\n3. Live Chop Zone / No-Trade Zone:\n- Spot Range 22,675 to 22,735: Price has surged +156.1 points from the prior 22,549.20 trigger to reclaim the 15M ORB High (22,691.50), peaking at 22,778.05 before entering a mid-session consolidation near 22,705.35. With proxied Nifty Futures volume normalizing at 1x the 8-bar average, the 60-point pocket between 22,675 and 22,735 represents an active two-way equilibrium and gamma-pinning zone. Avoid initiating fresh naked directional positions inside this band until a decisive boundary break occurs.\n\n4. High Momentum / Explosive Zones:\n- Bullish Short-Covering Expansion (Above 22,780 Spot): A decisive 5-minute candle close above the intraday high of 22,778.05 (22,780 Spot trigger) backed by >1.5x futures volume expansion will trap intraday call writers positioned at the 22,750/22,800 strikes, fueling a rapid momentum extension toward 22,840 and 22,895.\n- Intraday Bull-Trap Unwind (Below 22,670 Spot): A 5-minute breakdown and close back below 22,670 (losing the 15M ORB High support at 22,691.50) will invalidate the breakout acceptance and trigger rapid long liquidation back through the ORB range toward 22,610 and the 15M ORB Low at 22,551.90.\n- Macro Liquidity Flush (Below 22,550 Spot): A clean 5-minute breakdown below the 15M ORB Low (22,551.90) will accelerate institutional selling pressure directly toward the Day Low (22,497.70) and the 22,440 demand zone.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Retest & Bullish Absorption): Wait for a controlled pullback into the 22,685–22,692 Spot zone (15M ORB High retest) followed by a 5-min bullish rejection/engulfing close back above 22,695 with rising futures volume. | TP: 22,750 / 22,780 | SL: 22,655 | 💡 Buy 22,700 CE + Sell 22,750 CE (Next Wk) | R:R: ~2.12 | Risk: ~8.0% | TP1: +17.5% | TP2: +34.0%.\n- [B2] BUY Setup 2 (Day High Supply Breakout): Enter on a sustained 5-min candle close firmly above 22,780 Spot (clearing Day High 22,778.05) with futures volume expanding above 1.5x the 8-bar average. | TP: 22,840 / 22,895 | SL: 22,740 | 💡 Buy 22,750 CE + Sell 22,800 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Failed ORB Breakout / Mean-Reversion Short): Enter on a decisive 5-min candle close below 22,670 Spot (confirming rejection back inside the 15M ORB below 22,691.50) with expanding red futures volume. | TP: 22,610 / 22,555 | SL: 22,710 | 💡 Buy 22,700 PE + Sell 22,650 PE (Next Wk) | R:R: ~1.85 | Risk: ~8.5% | TP1: +16.5% | TP2: +31.0%.\n- [S2] SELL Setup 2 (15M ORB Low Structural Breakdown): Enter on a high-momentum 5-min close below 22,550 Spot (breaching the 15M ORB Low at 22,551.90) with strong institutional sell volume. | TP: 22,495 / 22,440 | SL: 22,590 | 💡 Buy 22,550 PE + Sell 22,500 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20261028_134619",
     "timestamp": "2026-10-28T13:46:19+05:30",
     "timeDisplay": "01:46 PM, Oct 28",
