@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-29T17:31:30+05:30",
+    "timeDisplay": "05:31 PM, Oct 29",
+    "price": "4014.0",
+    "bias": "bullish",
+    "behavior": "[THU 17:31] [G_B1]: Day Low ($4,015.82) SSL Sweep & 4H Demand OB Reclaim (Entry: 4012-4015.8 | SL: 4006 | TP1: 4034 | TP2: 4048 | R:R 1:2.5)",
+    "tp": "$4,034.00 / $4,048.00",
+    "sl": "$4,006.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T17:31:30+05:30",
+    "timeDisplay": "05:31 PM, Oct 29",
+    "price": "4037.0",
+    "bias": "bullish",
+    "behavior": "[THU 17:31] [G_B2]: High-Momentum Reclaim Above Broken $4,036.91 Structure (Trigger: 4037 | SL: 4029 | TP1: 4057 | TP2: 4072 | R:R 1:2.5)",
+    "tp": "$4,057.00 / $4,072.00",
+    "sl": "$4,029.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T17:31:30+05:30",
+    "timeDisplay": "05:31 PM, Oct 29",
+    "price": "4035.0",
+    "bias": "bearish",
+    "behavior": "[THU 17:31] [G_S1]: Bearish Breaker Block & 15M FVG Supply Rejection (Zone: 4033-4037 | SL: 4043 | TP1: 4015 | TP2: 4002 | R:R 1:2.5)",
+    "tp": "$4,015.00 / $4,002.00",
+    "sl": "$4,043.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T17:31:30+05:30",
+    "timeDisplay": "05:31 PM, Oct 29",
+    "price": "4015.0",
+    "bias": "bearish",
+    "behavior": "[THU 17:31] [G_S2]: High-Momentum Breakdown Below $4,015.82 Intraday Low (Trigger: 4015 | SL: 4023 | TP1: 3995 | TP2: 3980 | R:R 1:2.5)",
+    "tp": "$3,995.00 / $3,980.00",
+    "sl": "$4,023.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-29T13:31:10+05:30",
     "timeDisplay": "01:31 PM, Oct 29",
     "price": "4082.67",
@@ -190,6 +234,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261029_173134",
+    "timestamp": "2026-10-29T17:31:34+05:30",
+    "timeDisplay": "05:31 PM, Oct 29",
+    "spot": "4020.11",
+    "trigger": "Structural Invalidation (-16.8 pts incremental shift from previous trigger 4036.91",
+    "source": "AI-Gold",
+    "text": "> ⚠️ **ASSUMPTIONS**:\n> - **Market Context**: Live XAU/USD Spot at **$4,020.11**, Intraday Range **$4,015.82 – $4,082.67**, triggered by a **-16.80 pt structural invalidation** below the prior **$4,036.91** pivot during the London–New York transition window (05:30 PM IST).\n> - **R:R Configuration**: Baseline Risk:Reward threshold loaded from [`config_gold.txt`](file:///C:/Nitish/ClaudeApps/Utilities/Gold%20Setup%20v2/config_gold.txt) (`HIGH_RR_BASELINE=2.5` on TP1).\n\n# 🪙 Gold (XAU/USD) Tactical Update (05:30 PM IST - Oct 29, 2026 | Spot: $4,020.11 | Trigger: Structural Invalidation (-16.8 pts incremental shift from previous trigger 4036.91))\n\n### 1. Global Macro & Forex Mechanics:\n* **London / New York Pre-Open Overlap Dynamics:** Entering the 05:30 PM IST pre-NY window, XAU/USD has experienced sustained sell-side liquidation from the **$4,082.67** session peak down to an intraday trough of **$4,015.82** (-66.85 pts top-to-bottom range expansion), slicing cleanly through the prior **$4,036.91** structural support.\n* **DXY & US 10-Year Yield Pressure:** Pre-NY institutional positioning reflects firming US Dollar Index (DXY) bids and resilient US 10-Year Treasury yields ahead of New York cash equity and macro data releases. Institutional flows are actively repricing intraday bullion premiums lower, converting former London mid-range demand into overhead distribution supply.\n* **Session Transition Flow:** With spot hovering at **$4,020.11**—just 4.29 pts above the **$4,015.82** intraday low—New York opening liquidity (05:30 PM – 07:00 PM IST) will determine whether algorithms engineer a Sell-Side Liquidity (SSL) stop-run below **$4,015.82** for mean reversion or initiate a macro breakdown toward the **$4,000.00** psychological magnet.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Bearish Structure Break (BOS) & Breaker Block ($4,033.00 – $4,037.00):** The decisive 15M/1H displacement below **$4,036.91** flipped that former support shelf into an institutional **Bearish Breaker Block**, reinforced by an unmitigated 15M Fair Value Gap (FVG) spanning **$4,028.50 – $4,035.00**.\n* **Resting Sell-Side Liquidity (SSL) Pool ($4,015.82 & $4,000.00):** A dense cluster of retail long stop-losses rests directly beneath the intraday low at **$4,015.82**, with a secondary 4H Bullish Order Block sitting at **$4,012.00 – $4,015.80** and major psychological liquidity resting at **$4,000.00**.\n* **Buy-Side Liquidity (BSL) Overhead:** Unmitigated intraday highs and trailing short stops are stacked above **$4,037.00** (breakdown origin), **$4,057.00** (London mid-distribution pivot), and **$4,082.67** (Day High).\n\n| Level (XAU/USD) | Type | Logic / SMC Significance |\n| :--- | :--- | :--- |\n| 🔴 **$4,082.67** | Major Resistance (BSL) | Intraday High & Primary Buy-Side Liquidity Ceiling |\n| 🔴 **$4,057.00** | Resistance / Supply | 1H Bearish Order Block & London Mid-Session Breakdown Origin |\n| 🔴 **$4,033.00 – $4,037.00** | Bearish Breaker / Supply | **[G_S1] / [G_B2]** Broken $4,036.91 Pivot + 15M Bearish FVG Confluence |\n| ⚪ **$4,018.50 – $4,028.00** | Chop / No-Trade Zone | Low-R:R Compression Pocket Between Day Low Proximity & 15M FVG |\n| 🟢 **$4,012.00 – $4,015.80** | Support / SSL Sweep | **[G_B1] / [G_S2]** Intraday Low ($4,015.82) SSL Sweep + 4H Demand OB |\n| 🔴 **$3,995.00 – $4,000.00** | Macro Psychological Support | Deep 4H Sell-Side Liquidity Magnet & Institutional Round-Number Floor |\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Active No-Trade Range: `$4,018.50 – $4,028.00`**\n* **Structural Rationale:** Spot (**$4,020.11**) is currently compressed inside the bottom quarter of today's 66.85-point sell-off, trapped between the un-swept **$4,015.82** intraday low and the underside of the 15M Bearish FVG (**$4,028.50**). Initiating unconfirmed market orders inside `$4,018.50 – $4,028.00` exposes traders to high-frequency NY-open whipsaws and poor stop-loss placement. Wait strictly for price to test the outer liquidity boundaries (**$4,015.80** or **$4,033.00+**).\n\n### 4. High Momentum / Explosive Zones:\n* **Downside Breakdown Vacuum (Below `$4,015.00`):** A high-volume 15M candle close below **$4,015.00** (clearing the **$4,015.82** Day Low without immediate bullish absorption) opens a clean liquidity vacuum straight toward the **$4,000.00** psychological threshold and **$3,995.00** 4H demand base.\n* **Upside Short-Covering Squeeze (Above `$4,037.00`):** If NY cash flows aggressively absorb supply and force a 15M body close back above **$4,037.00** (reclaiming the broken **$4,036.91** trigger), trapped late-session bears will be forced to cover across the 15M FVG vacuum toward **$4,057.00** and **$4,072.00**.\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4,012.00 – $4,015.80** Retest | Sweep of **$4,015.82** Day Low into 4H Demand followed by a 5M/15M bullish CHoCH & pin-bar reclaim above **$4,016.00**. | **TP1:** $4,034.00<br>**TP2:** $4,048.00 | **$4,006.00** | 1:2.5 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,037.00** Breakout | Strong 15M displacement candle closing firmly above **$4,037.00** (reclaiming broken **$4,036.91** structure) + bullish FVG hold. | **TP1:** $4,057.00<br>**TP2:** $4,072.00 | **$4,029.00** | 1:2.5 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,033.00 – $4,037.00** Retest | Corrective NY pullback into the **$4,036.91** Bearish Breaker & 15M FVG printing a 5M bearish engulfing / lower-high rejection. | **TP1:** $4,015.00<br>**TP2:** $4,002.00 | **$4,043.00** | 1:2.5 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4,015.00** Breakdown | Decisive 15M candle close below **$4,015.00** (clean break of **$4,015.82** Day Low) with failed bullish retest of **$4,016.00**. | **TP1:** $3,995.00<br>**TP2:** $3,980.00 | **$4,023.00** | 1:2.5 |\n\n``"
+  },
+  {
     "id": "GOLD_20261029_133113",
     "timestamp": "2026-10-29T13:31:13+05:30",
     "timeDisplay": "01:31 PM, Oct 29",
