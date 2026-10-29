@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-29T14:46:07+05:30",
+    "timeDisplay": "02:46 PM, Oct 29",
+    "price": "22860",
+    "bias": "bullish",
+    "behavior": "[THU 14:46] [B1]: 5-min bullish rejection of 22,855-22,865 Spot demand zone (flipped from 22,851.20 trigger) with steady futures volume",
+    "tp": "22,925 / 22,953",
+    "sl": "22,825",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T14:46:07+05:30",
+    "timeDisplay": "02:46 PM, Oct 29",
+    "price": "22955",
+    "bias": "bullish",
+    "behavior": "[THU 14:46] [B2]: Sustained 5-min close ABOVE 22,955 Spot (clearing 22,953.10 Day High) with Nifty Future volume > 1.5x 8-bar avg",
+    "tp": "23,005 / 23,045",
+    "sl": "22,920",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T14:46:07+05:30",
+    "timeDisplay": "02:46 PM, Oct 29",
+    "price": "22950",
+    "bias": "bearish",
+    "behavior": "[THU 14:46] [S1]: 5-min bearish rejection candle at 22,950-22,955 Spot with stalling futures volume and close below 22,930",
+    "tp": "22,890 / 22,855",
+    "sl": "22,970",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T14:46:07+05:30",
+    "timeDisplay": "02:46 PM, Oct 29",
+    "price": "22890",
+    "bias": "bearish",
+    "behavior": "[THU 14:46] [S2]: Decisive 5-min close BELOW 22,890 Spot with expanding red futures volume triggering late-session long unwinding",
+    "tp": "22,845 / 22,805",
+    "sl": "22,925",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-29T14:31:44+05:30",
     "timeDisplay": "02:31 PM, Oct 29",
     "price": "22905",
@@ -1543,6 +1587,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261029_144614",
+    "timestamp": "2026-10-29T14:46:14+05:30",
+    "timeDisplay": "02:46 PM, Oct 29",
+    "spot": "22936.65",
+    "trigger": "Structural Invalidation (+85.5 pts incremental shift from previous trigger 22851.20",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:45 PM IST - Oct 29, 2026 | Spot: 22936.65 | Trigger: Structural Invalidation (+85.5 pts incremental shift from previous trigger 22851.20))\n\n> ⚠️ **THETA CRUSH DAY: India VIX is down -6.34%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.**\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Intraday Equilibrium (22,895 – 22,945 Spot): Price has surged +85.5 pts from the prior 22,851.20 trigger and is currently consolidating just beneath the intraday high of 22,953.10 with Nifty Future volume at 1.0x the 8-bar average. Avoid initiating naked directional entries inside this 50-point compression pocket where -6.34% VIX crush rapidly erodes option premiums.\n- Late-Session Pinning Risk (22,900 – 22,950 Strikes): With less than 45 minutes left before the 3:30 PM close, aggressive short-straddle strangle pinning around 22,900–22,950 Spot creates whip-saw traps unless either 22,955 breaks with volume expansion or 22,890 gives way.\n\n4. High Momentum / Explosive Zones:\n- Bullish Short-Covering Squeeze (Breakout Above 22,955 Spot): A decisive 5-minute candle close above Day High 22,953.10 / 22,955 with Nifty Futures volume exceeding 1.5x the 8-bar average will trap late 22,950–23,000 call writers, fueling a rapid sprint toward the psychological 23,000–23,045 resistance zone.\n- Bullish Pullback Mitigation (22,850 – 22,865 Spot Demand): The former structural breakout pivot at 22,851.20 now acts as an institutional Fair Value Gap (FVG) and Order Block support; a liquidity sweep and bullish 5-minute rejection here offers a high-probability continuation reload.\n- Bearish Mean-Reversion Flush (Breakdown Below 22,890 Spot): A 5-minute close below 22,890 (vwap/micro higher-low structure) with expanding red futures volume will unwind late afternoon longs quickly back toward the 22,850–22,810 pocket.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback Mitigation to Prior Breakout Zone): 5-min bullish pin-bar or engulfing close rejecting the 22,855–22,865 Spot demand zone with steady futures volume holding above 22,850. | TP: 22,925 / 22,953 | SL: 22,825 | 💡 Buy 22,850 CE + Sell 22,900 CE (Next Wk) | R:R: ~2.10 | Risk: ~8.0% | TP1: +18.5% | TP2: +34.0%.\n- [B2] BUY Setup 2 (Day High Momentum Breakout): Sustained 5-min close ABOVE 22,955 Spot with Nifty Future volume > 1.5x 8-bar avg confirming call-writer short covering into the close. | TP: 23,005 / 23,045 | SL: 22,920 | 💡 Buy 22,950 CE + Sell 23,000 CE (Next Wk) | R:R: ~2.40 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Exhaustion / Double-Top Fade): 5-min bearish shooting star or engulfing rejection at 22,950–22,955 Spot accompanied by stalling futures volume and a close back below 22,930. | TP: 22,890 / 22,855 | SL: 22,970 | 💡 Buy 22,950 PE + Sell 22,900 PE (Next Wk) | R:R: ~1.85 | Risk: ~8.5% | TP1: +16.0% | TP2: +31.0%.\n- [S2] SELL Setup 2 (Intraday Structure Breakdown): Decisive 5-min close BELOW 22,890 Spot with expanding red futures volume triggering late-session profit booking. | TP: 22,845 / 22,805 | SL: 22,925 | 💡 Buy 22,900 PE + Sell 22,850 PE (Next Wk) | R:R: ~2.30 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261029_143212",
     "timestamp": "2026-10-29T14:32:12+05:30",
     "timeDisplay": "02:32 PM, Oct 29",
