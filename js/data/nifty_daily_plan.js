@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-29T15:46:05+05:30",
+    "timeDisplay": "03:46 PM, Oct 29",
+    "price": "22905",
+    "bias": "bullish",
+    "behavior": "[THU 15:46] [B1]: Bullish 5m pin-bar or engulfing bounce off 22,895\u201322,905 Spot support with >1.2x futures volume",
+    "tp": "22,960 / 23,010",
+    "sl": "22,865",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T15:46:05+05:30",
+    "timeDisplay": "03:46 PM, Oct 29",
+    "price": "22965",
+    "bias": "bullish",
+    "behavior": "[THU 15:46] [B2]: Sustained 5m/15m close ABOVE 22,965 Spot with >1.5x futures volume confirming 23,000 CE short-covering",
+    "tp": "23,030 / 23,085",
+    "sl": "22,920",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T15:46:05+05:30",
+    "timeDisplay": "03:46 PM, Oct 29",
+    "price": "22945",
+    "bias": "bearish",
+    "behavior": "[THU 15:46] [S1]: Liquidity sweep of 22,962\u201322,970 followed by a 5m bearish rejection close back BELOW 22,945 Spot",
+    "tp": "22,900 / 22,870",
+    "sl": "22,985",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-29T15:46:05+05:30",
+    "timeDisplay": "03:46 PM, Oct 29",
+    "price": "22880",
+    "bias": "bearish",
+    "behavior": "[THU 15:46] [S2]: Decisive 5m close BELOW 22,880 Spot with >1.4x red futures volume targeting unmitigated morning FVG",
+    "tp": "22,815 / 22,760",
+    "sl": "22,920",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-29T15:26:16+05:30",
     "timeDisplay": "03:26 PM, Oct 29",
     "price": "22905",
@@ -1631,6 +1675,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261029_154609",
+    "timestamp": "2026-10-29T15:46:09+05:30",
+    "timeDisplay": "03:46 PM, Oct 29",
+    "spot": "22936.75",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Oct 29, 2026 | Spot: 22936.75 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n> ⚠️ **ASSUMPTIONS**: Option spread risk/reward metrics (~0.88 to ~2.50), bounded SL risk (~7.8%–9.3%), and net theta decay (~₹0.30/hr for next-week 50-pt bull/bear spreads) are modeled estimates based on standard Black-Scholes Delta/Gamma approximations around Spot 22,936.75.\n\n**THETA CRUSH DAY: India VIX is down -6.95%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.**\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Intraday Chop Boundary: 22,910.00 to 22,961.95 (Spot). NIFTY has rallied strongly (+280 pts from the 22,656.75 Day Low and 15M ORB base) and is ending the session consolidating right underneath the 22,961.95 Day High with normalized futures volume (1.0x 8-bar average).\n- EOD Theta & Settlement Trap: With India VIX down -6.95% and closing VWAP settlement active at 03:45 PM IST, initiating fresh naked options inside 22,910–22,962 carries extreme theta decay and overnight gap risk. Avoid all mid-range entries inside this 52-point pocket.\n\n4. High Momentum / Explosive Zones:\n- Bullish Short-Covering Expansion (Above 22,965.00 Spot): A decisive 5-minute close (or opening 15-minute ORB breakout tomorrow) above the 22,961.95 Day High will trap late-day 22,950/23,000 CE writers, triggering a rapid gamma squeeze toward the psychological 23,020.00 and 23,075.00 Spot zones.\n- Bearish Mean-Reversion Pocket (Below 22,880.00 Spot): A structural breakdown below the late-afternoon higher-low base at 22,880.00 Spot will expose the unmitigated intraday rally FVG down toward 22,820.00 and 22,765.00 (just above the 22,745.75 15M ORB High).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (VWAP / Higher-Low Pullback Retest): Wait for a controlled pullback into 22,895.00 - 22,905.00 Spot followed by a 5-min bullish pin-bar / engulfing close above 22,905.00 with active futures volume (>1.2x avg). | TP: 22,960.00 / 23,010.00 | SL: 22,865.00 | 💡 Buy 22,900 CE + Sell 22,950 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Ignition Breakout): Wait for a decisive 5-min / 15-min candle close firmly ABOVE 22,965.00 Spot with expanding futures volume (>1.5x 8-bar avg) confirming absorption of overhead 23,000 CE supply. | TP: 23,030.00 / 23,085.00 | SL: 22,920.00 | 💡 Buy 22,950 CE + Sell 23,000 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Exhaustion / Double-Top Sweep): If Spot sweeps 22,961.95 - 22,970.00 and prints a sharp 5-min bearish rejection wick closing back BELOW 22,945.00 on declining buy volume. | TP: 22,900.00 / 22,870.00 | SL: 22,985.00 | 💡 Buy 22,950 PE + Sell 22,900 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Intraday Structure Breakdown & FVG Fill): Wait for a decisive 5-min close BELOW 22,880.00 Spot with expanding red futures volume (>1.4x avg) to ride the fast unwinding pocket toward the morning breakout base. | TP: 22,815.00 / 22,760.00 | SL: 22,920.00 | 💡 Buy 22,900 PE + Sell 22,850 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261029_152619",
     "timestamp": "2026-10-29T15:26:19+05:30",
     "timeDisplay": "03:26 PM, Oct 29",
