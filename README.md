@@ -2679,3 +2679,18 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 
 
 
+
+### Centralized Master Configuration (`js/config.js`) & Asset Bridge Synchronization (2026-10-30)
+- **Single Source of Truth (`js/config.js`)**:
+  - Centralized all system-level defaults, asset thresholds, R:R baselines, candle close repeat timers, security policies, and sequence rules into `js/config.js`.
+  - Thoroughly documented with in-file comments explaining operational flow, load order, and consumption patterns across the app.
+  - Zero-latency synchronous loading via `<script src="js/config.js"></script>`, ensuring instantaneous availability before charts or DOM modules render.
+  - Preserved backward-compatibility aliases (`window.rrConfig` and `window.assetParamsConfig`) so legacy scripts continue functioning seamlessly.
+- **App & Service Integration**:
+  - `candleTimers.js`: `DEFAULT_CANDLE_TIMER_SETTINGS` now reads defaults directly from `window.APP_CONFIG.candleTimers`.
+  - `trade-security.js`: Passcode lockout duration, 5-tap secret toggle threshold, and reset timers read from `window.APP_CONFIG.security`.
+  - `settings.js`: Trade log inactivity timer reads from `window.APP_CONFIG.security.inactivityTimeoutMs`.
+  - Standalone Charts (`btc`, `eurusd`, `gold`, `nifty`, `sensex`, `sp500`): Updated to load `js/config.js` alongside `rr_config.js`.
+- **Automated Desktop Bridge Synchronization**:
+  - Enhanced `Utilities/sync_briefing_to_daily_plan.py` (`sync_rr_configs`) to synchronize asset thresholds and R:R baselines from desktop `config_<asset>.txt` into both `js/data/rr_config.js` and `js/config.js`.
+- **Files Modified / Added**: `js/config.js` (NEW), `js/data/rr_config.js`, `index.html`, `js/services/candleTimers.js`, `js/ui/settings.js`, `trade-security.js`, `btc_interactive_chart.html`, `eurusd_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `sp500_interactive_chart.html`, `README.md`.

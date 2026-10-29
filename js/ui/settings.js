@@ -449,11 +449,12 @@ export function loadTradePasscodeStatus() {
 export function resetTradeInactivityTimer() {
   if (state.tradeLocked || !state.tradePasscode) return;
   clearTimeout(state.tradeInactivityTimer);
+  const timeoutMs = (typeof window !== 'undefined' && window.APP_CONFIG?.security?.inactivityTimeoutMs) || 5000;
   state.tradeInactivityTimer = setTimeout(() => {
     if (state.activeView === "tradelog" && !state.tradeLocked && state.tradePasscode) {
       showTradeLock();
     }
-  }, 5000); // 5 seconds inactivity timeout
+  }, timeoutMs);
 }
 
 // Reset timer on active log interactions

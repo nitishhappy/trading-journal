@@ -23,9 +23,10 @@
   // State persists in localStorage.
   // ===================================================================
 
-  const SECRET_TAP_THRESHOLD = 5;
-  const SECRET_TAP_RESET_MS = 2000;
-  const TRADELOG_HIDDEN_KEY = "tradelog_tab_hidden";
+  // Configured via Central APP_CONFIG (js/config.js) with fallbacks
+  const SECRET_TAP_THRESHOLD = (window.APP_CONFIG && window.APP_CONFIG.security && window.APP_CONFIG.security.secretTapCount) || 5;
+  const SECRET_TAP_RESET_MS = (window.APP_CONFIG && window.APP_CONFIG.security && window.APP_CONFIG.security.secretTapWindowMs) || 2000;
+  const TRADELOG_HIDDEN_KEY = (window.APP_CONFIG && window.APP_CONFIG.security && window.APP_CONFIG.security.tradeLogHiddenKey) || "tradelog_tab_hidden";
 
   var secretTapCount = 0;
   var secretTapTimer = null;
@@ -117,7 +118,7 @@
   // State stored in Firestore: users/{uid}/settings/tradePasscodeLockout
   // ===================================================================
 
-  var PASSCODE_LOCKOUT_MS = 60 * 60 * 1000;
+  var PASSCODE_LOCKOUT_MS = (window.APP_CONFIG && window.APP_CONFIG.security && window.APP_CONFIG.security.passcodeLockoutDurationMs) || (60 * 60 * 1000);
 
   window._tradePasscodeFailedAttempts = 0;
   window._tradePasscodeLockedUntil = null;

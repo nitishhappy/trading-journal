@@ -26,3 +26,9 @@ window.assetParamsConfig = {
         "WATCHDOG_EXTREME_DELTA": 330
     }
 };
+
+// Two-way synchronization with Central APP_CONFIG master
+if (typeof window !== "undefined" && window.APP_CONFIG) {
+    window.APP_CONFIG.rrConfig = window.rrConfig;
+    window.APP_CONFIG.assetParamsConfig = window.assetParamsConfig;
+}

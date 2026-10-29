@@ -2,25 +2,28 @@
 import { db } from '../firebase-init.js';
 import { state } from '../state.js';
 
-export const DEFAULT_CANDLE_TIMER_SETTINGS = {
-  enabled: true,
-  activeDays: [1, 2, 3, 4, 5], // 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri
-  fromTime: "09:15",
-  toTime: "15:30",
-  anchorTime: "09:15",
-  sound5m: "chime",
-  sound15m: "radar",
-  volume5m: 0.8,
-  volume15m: 0.8,
-  mute5m: false,
-  mute15m: false,
-  enable5m: true,
-  enable15m: true,
-  specialTimes: ["09:15", "10:00", "15:00"],
-  specialSound: "special",
-  specialVolume: 0.9,
-  specialMute: false
-};
+// Defaults pulled from Central APP_CONFIG (js/config.js) with inline fallback
+export const DEFAULT_CANDLE_TIMER_SETTINGS = (typeof window !== 'undefined' && window.APP_CONFIG && window.APP_CONFIG.candleTimers)
+  ? { ...window.APP_CONFIG.candleTimers }
+  : {
+      enabled: true,
+      activeDays: [1, 2, 3, 4, 5], // 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri
+      fromTime: "09:15",
+      toTime: "15:30",
+      anchorTime: "09:15",
+      sound5m: "chime",
+      sound15m: "radar",
+      volume5m: 0.8,
+      volume15m: 0.8,
+      mute5m: false,
+      mute15m: false,
+      enable5m: true,
+      enable15m: true,
+      specialTimes: ["09:15", "10:00", "15:00"],
+      specialSound: "special",
+      specialVolume: 0.9,
+      specialMute: false
+    };
 
 const LOCAL_STORAGE_KEY = 'candle_timer_settings_cache';
 
