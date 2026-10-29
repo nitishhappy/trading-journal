@@ -31,6 +31,26 @@ db.enablePersistence({ synchronizeTabs: true })
     }
   });
 
+/**
+ * Wraps a Firestore write promise (.set / .update / .add / .delete) so the UI
+ * never hangs indefinitely on "Saving..." when offline or when Firestore hits
+ * quota backoff (resource-exhausted). With IndexedDB persistence enabled,
+ * Firestore queues the write locally and triggers onSnapshot listeners
+ * immediately, while the network promise waits for server acknowledgment.
+ */
+export function withOptimisticWrite(writePromise, fallbackResult = undefined, timeoutMs = 2000) {
+  // Prevent unhandled rejection if the background sync fails later
+  writePromise.catch((err) => {
+    console.warn("[Firestore] Background write sync warning:", err?.code || err?.message || err);
+  });
+
+  const waitMs = navigator.onLine ? timeoutMs : 150;
+  return Promise.race([
+    writePromise,
+    new Promise((resolve) => setTimeout(() => resolve(fallbackResult), waitMs))
+  ]);
+}
+
 export function updateOfflineBadge() {
   const badge = document.getElementById("offline-badge");
   if (!badge) return;

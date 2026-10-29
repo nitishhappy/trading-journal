@@ -43,6 +43,8 @@ async function sendWebPushAlert(uid, title, body, tag) {
 }
 
 const tokenCache = new Map();
+const candleWriteCache = new Map();
+let lastCleanupRunMs = 0;
 
 // POST /api/tvWebhook?token=SECRET
 module.exports = async (req, res) => {
@@ -107,7 +109,9 @@ module.exports = async (req, res) => {
       const enqueueBars = (barsArray, tfStr) => {
         if (!Array.isArray(barsArray)) return;
         const normTf = normalizeTimeframe(tfStr);
-        for (const b of barsArray) {
+        // Cap to at most the last 2 bars per timeframe to prevent exhausting Firestore daily write quota
+        const recentBars = barsArray.slice(-2);
+        for (const b of recentBars) {
           if (!b || b.open === undefined || b.close === undefined) continue;
           let rawT = Number(b.timestamp || b.time || 0);
           if (!rawT) continue;
@@ -116,6 +120,15 @@ module.exports = async (req, res) => {
             rawT -= 19800;
           }
           const docId = `${targetAsset}_${normTf}_${rawT}`;
+          const ohlcSig = `${Number(b.open)}_${Number(b.high)}_${Number(b.low)}_${Number(b.close)}`;
+          if (candleWriteCache.get(docId) === ohlcSig) {
+            continue;
+          }
+          candleWriteCache.set(docId, ohlcSig);
+          if (candleWriteCache.size > 500) {
+            const firstKey = candleWriteCache.keys().next().value;
+            candleWriteCache.delete(firstKey);
+          }
           const docRef = db.collection(collName).doc(docId);
           batch.set(docRef, {
             symbol: targetAsset,
@@ -219,51 +232,55 @@ module.exports = async (req, res) => {
       console.error("tvWebhook push error:", e);
     }
 
-    // 2. Garbage Collection & Daily 4:00 PM IST Cleanup
-    try {
-      const now = new Date();
-      const istTimeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: false });
-      const istHour = parseInt(istTimeString.split(':')[0], 10);
-      const todayIstStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
-      const todayIstMidnight = new Date(`${todayIstStr}T00:00:00+05:30`);
+    // 2. Garbage Collection & Daily 4:00 PM IST Cleanup (throttled to once every 30 mins)
+    const shouldRunCleanup = (Date.now() - lastCleanupRunMs) > 30 * 60 * 1000;
+    if (shouldRunCleanup) {
+      lastCleanupRunMs = Date.now();
+      try {
+        const now = new Date();
+        const istTimeString = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata', hour12: false });
+        const istHour = parseInt(istTimeString.split(':')[0], 10);
+        const todayIstStr = now.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+        const todayIstMidnight = new Date(`${todayIstStr}T00:00:00+05:30`);
 
-      let cleanupCutoff;
-      if (istHour >= 16) {
-        cleanupCutoff = todayIstMidnight;
-      } else {
-        cleanupCutoff = new Date(todayIstMidnight.getTime() - 24 * 60 * 60 * 1000);
-      }
+        let cleanupCutoff;
+        if (istHour >= 16) {
+          cleanupCutoff = todayIstMidnight;
+        } else {
+          cleanupCutoff = new Date(todayIstMidnight.getTime() - 24 * 60 * 60 * 1000);
+        }
 
-      const oldSnaps = await db.collection("users").doc(uid).collection("tvNotifications")
-        .where("receivedAt", "<", cleanupCutoff)
-        .get();
-      
-      if (!oldSnaps.empty) {
-        const batch = db.batch();
-        oldSnaps.docs.forEach(doc => batch.delete(doc.ref));
-        await batch.commit();
-      }
-    } catch (err) {
-      console.error("tvWebhook: cleanup error", err);
-    }
-
-    // 3. Auto-clean sequence trigger logs (> 7 days) if enabled in user preferences
-    try {
-      const prefsDoc = await db.collection("users").doc(uid).collection("settings").doc("preferences").get();
-      const autoCleanEnabled = prefsDoc.exists ? (prefsDoc.data().triggerLogAutoClean !== false) : true;
-      if (autoCleanEnabled) {
-        const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-        const oldLogsSnaps = await db.collection("users").doc(uid).collection("sequenceTriggerLogs")
-          .where("triggeredAt", "<", sevenDaysAgo)
+        const oldSnaps = await db.collection("users").doc(uid).collection("tvNotifications")
+          .where("receivedAt", "<", cleanupCutoff)
           .get();
-        if (!oldLogsSnaps.empty) {
+        
+        if (!oldSnaps.empty) {
           const batch = db.batch();
-          oldLogsSnaps.docs.forEach(doc => batch.delete(doc.ref));
+          oldSnaps.docs.forEach(doc => batch.delete(doc.ref));
           await batch.commit();
         }
+      } catch (err) {
+        console.error("tvWebhook: cleanup error", err);
       }
-    } catch (err) {
-      console.error("tvWebhook: trigger logs auto-clean error", err);
+
+      // 3. Auto-clean sequence trigger logs (> 7 days) if enabled in user preferences
+      try {
+        const prefsDoc = await db.collection("users").doc(uid).collection("settings").doc("preferences").get();
+        const autoCleanEnabled = prefsDoc.exists ? (prefsDoc.data().triggerLogAutoClean !== false) : true;
+        if (autoCleanEnabled) {
+          const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+          const oldLogsSnaps = await db.collection("users").doc(uid).collection("sequenceTriggerLogs")
+            .where("triggeredAt", "<", sevenDaysAgo)
+            .get();
+          if (!oldLogsSnaps.empty) {
+            const batch = db.batch();
+            oldLogsSnaps.docs.forEach(doc => batch.delete(doc.ref));
+            await batch.commit();
+          }
+        }
+      } catch (err) {
+        console.error("tvWebhook: trigger logs auto-clean error", err);
+      }
     }
 
     // 4. Run sequence engine

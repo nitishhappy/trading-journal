@@ -1,4 +1,4 @@
-import { db, auth } from '../firebase-init.js';
+import { db, auth, withOptimisticWrite } from '../firebase-init.js';
 import { state } from '../state.js';
 
 let unsubscribeRules = null;
@@ -30,29 +30,34 @@ export async function createSequenceRule(name, steps, enabled = true) {
   const uid = state.currentUser?.uid;
   if (!uid) throw new Error('Not logged in');
 
-  await db.collection('users').doc(uid)
-    .collection('sequenceRules')
-    .add({
+  const nowTs = firebase.firestore.Timestamp.now();
+  const docRef = db.collection('users').doc(uid).collection('sequenceRules').doc();
+  await withOptimisticWrite(
+    docRef.set({
       name,
       steps,
       enabled,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+      createdAt: nowTs,
+      updatedAt: nowTs
+    }),
+    docRef
+  );
 }
 
 export async function updateSequenceRule(id, name, steps, enabled) {
   const uid = state.currentUser?.uid;
   if (!uid) throw new Error('Not logged in');
 
-  await db.collection('users').doc(uid)
-    .collection('sequenceRules').doc(id)
-    .update({
-      name,
-      steps,
-      enabled,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+  await withOptimisticWrite(
+    db.collection('users').doc(uid)
+      .collection('sequenceRules').doc(id)
+      .update({
+        name,
+        steps,
+        enabled,
+        updatedAt: firebase.firestore.Timestamp.now()
+      })
+  );
 }
 
 export async function deleteSequenceRule(id) {

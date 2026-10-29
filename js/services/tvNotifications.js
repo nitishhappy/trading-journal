@@ -29,6 +29,19 @@ export async function cleanPreviousDayTvNotifications() {
       cleanupCutoff = new Date(todayIstMidnight.getTime() - 24 * 60 * 60 * 1000);
     }
 
+    // Check in-memory state first to avoid polling Firestore every 60s when nothing is expired
+    const cutoffMs = cleanupCutoff.getTime();
+    const hasExpiredInMemory = (state.tvNotifications || []).some((n) => {
+      if (!n.receivedAt) return false;
+      const ms = typeof n.receivedAt.toMillis === 'function'
+        ? n.receivedAt.toMillis()
+        : new Date(n.receivedAt).getTime();
+      return ms < cutoffMs;
+    });
+    if (!hasExpiredInMemory && state.tvNotifications && state.tvNotifications.length > 0) {
+      return;
+    }
+
     const snap = await db.collection('users').doc(uid)
       .collection('tvNotifications')
       .where('receivedAt', '<', cleanupCutoff)

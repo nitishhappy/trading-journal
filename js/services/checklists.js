@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { db } from '../firebase-init.js';
+import { db, withOptimisticWrite } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 
 export let clLogsUnsubscribe = null;
@@ -27,31 +27,38 @@ export function checklistRef() {
 
 export function saveChecklistLog(id, logData) {
   const ref = db.collection("users").doc(state.currentUser.uid).collection("checklistLogs");
+  const nowTs = firebase.firestore.Timestamp.now();
   if (id) {
-    return ref.doc(id).update({
-      ...logData,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+    return withOptimisticWrite(
+      ref.doc(id).update({
+        ...logData,
+        updatedAt: nowTs
+      })
+    );
   } else {
-    return ref.add({
-      ...logData,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+    const docRef = ref.doc();
+    return withOptimisticWrite(
+      docRef.set({
+        ...logData,
+        createdAt: nowTs,
+        updatedAt: nowTs
+      }),
+      docRef
+    );
   }
 }
 
 export function deleteChecklistLog(id) {
   const ref = db.collection("users").doc(state.currentUser.uid).collection("checklistLogs");
-  return ref.doc(id).delete();
+  return withOptimisticWrite(ref.doc(id).delete());
 }
 
 export function saveChecklist(id, data) {
-  return checklistRef().doc(id).set(data);
+  return withOptimisticWrite(checklistRef().doc(id).set(data));
 }
 
 export function deleteChecklist(id) {
-  return checklistRef().doc(id).delete();
+  return withOptimisticWrite(checklistRef().doc(id).delete());
 }
 
 export function unsubscribeChecklists() {

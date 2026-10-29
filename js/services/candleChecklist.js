@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { db } from '../firebase-init.js';
+import { db, withOptimisticWrite } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 
 export let templatesUnsubscribe = null;
@@ -47,46 +47,54 @@ export function subscribeCandleChecklists() {
 export function saveCandleTemplate(id, data) {
   if (!state.currentUser) return Promise.reject("No user logged in");
   const ref = db.collection("users").doc(state.currentUser.uid).collection("candleChecklistTemplates");
+  const nowTs = firebase.firestore.Timestamp.now();
   const payload = {
     ...data,
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    updatedAt: nowTs
   };
   if (id) {
-    return ref.doc(id).update(payload);
+    return withOptimisticWrite(ref.doc(id).update(payload));
   } else {
-    payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-    return ref.add(payload);
+    const docRef = ref.doc();
+    payload.createdAt = nowTs;
+    return withOptimisticWrite(docRef.set(payload), docRef);
   }
 }
 
 // Delete template
 export function deleteCandleTemplate(id) {
   if (!state.currentUser) return Promise.reject("No user logged in");
-  return db.collection("users").doc(state.currentUser.uid)
-    .collection("candleChecklistTemplates").doc(id).delete();
+  return withOptimisticWrite(
+    db.collection("users").doc(state.currentUser.uid)
+      .collection("candleChecklistTemplates").doc(id).delete()
+  );
 }
 
 // Save run
 export function saveCandleRun(id, data) {
   if (!state.currentUser) return Promise.reject("No user logged in");
   const ref = db.collection("users").doc(state.currentUser.uid).collection("candleChecklistRuns");
+  const nowTs = firebase.firestore.Timestamp.now();
   const payload = {
     ...data,
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    updatedAt: nowTs
   };
   if (id) {
-    return ref.doc(id).update(payload);
+    return withOptimisticWrite(ref.doc(id).update(payload));
   } else {
-    payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-    return ref.add(payload);
+    const docRef = ref.doc();
+    payload.createdAt = nowTs;
+    return withOptimisticWrite(docRef.set(payload), docRef);
   }
 }
 
 // Delete run
 export function deleteCandleRun(id) {
   if (!state.currentUser) return Promise.reject("No user logged in");
-  return db.collection("users").doc(state.currentUser.uid)
-    .collection("candleChecklistRuns").doc(id).delete();
+  return withOptimisticWrite(
+    db.collection("users").doc(state.currentUser.uid)
+      .collection("candleChecklistRuns").doc(id).delete()
+  );
 }
 
 export function unsubscribeCandleChecklists() {

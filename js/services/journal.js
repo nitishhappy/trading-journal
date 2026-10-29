@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { db } from '../firebase-init.js';
+import { db, withOptimisticWrite } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 
 export let journalTradesUnsubscribe = null;
@@ -31,23 +31,40 @@ export function unsubscribeJournalTrades() {
 export function saveJournalTrade(id, data) {
   if (!state.currentUser) return Promise.reject(new Error("User not authenticated"));
   const ref = db.collection("users").doc(state.currentUser.uid).collection("journal_trades");
+  const nowTs = firebase.firestore.Timestamp.now();
   if (id) {
-    return ref.doc(id).update({
+    const payload = {
       ...data,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+      updatedAt: nowTs
+    };
+    const idx = state.journalTrades.findIndex((t) => t.id === id);
+    if (idx !== -1) {
+      state.journalTrades[idx] = { ...state.journalTrades[idx], ...payload };
+      window.dispatchEvent(new CustomEvent('journal-trades-updated'));
+    }
+    return withOptimisticWrite(ref.doc(id).update(payload));
   } else {
-    return ref.add({
+    const docRef = ref.doc();
+    const payload = {
       ...data,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+      createdAt: nowTs,
+      updatedAt: nowTs
+    };
+    if (!state.journalTrades.some((t) => t.id === docRef.id)) {
+      state.journalTrades.push({ id: docRef.id, ...payload });
+      window.dispatchEvent(new CustomEvent('journal-trades-updated'));
+    }
+    return withOptimisticWrite(docRef.set(payload), docRef);
   }
 }
 
 export function deleteJournalTrade(id) {
   if (!state.currentUser) return Promise.reject(new Error("User not authenticated"));
-  return db.collection("users").doc(state.currentUser.uid).collection("journal_trades").doc(id).delete();
+  state.journalTrades = state.journalTrades.filter((t) => t.id !== id);
+  window.dispatchEvent(new CustomEvent('journal-trades-updated'));
+  return withOptimisticWrite(
+    db.collection("users").doc(state.currentUser.uid).collection("journal_trades").doc(id).delete()
+  );
 }
 
 export function getStrategies() {

@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.79 — 29 Oct 2026 — Fix Observation / Journal / Strategy Save Hang & Eliminate Firestore Quota Drain
+- **Optimistic IndexedDB-Backed Firestore Writes (`js/firebase-init.js`, `js/services/observations.js`, `js/services/journal.js`, `js/services/trades.js`, `js/services/candleChecklist.js`, `js/services/checklists.js`, `js/services/sequenceRules.js`, `js/services/stocks.js`)**:
+  - Added `withOptimisticWrite()` in `js/firebase-init.js` and replaced server-blocking `.add()` calls with pre-allocated `ref.doc().set()` using client `firebase.firestore.Timestamp.now()` plus immediate in-memory state updates.
+  - Prevents `"Saving..."` buttons and modals in Dashboard Observations, Journal Trades, Quick Strategy/Concept/Mistake creation, Trade Log, and Checklists from hanging indefinitely when offline or when Firestore enters `resource-exhausted` backoff.
+- **Eliminate Runaway Firestore Write Quota Drain (`api/tvWebhook.js`, `vantage_candle_exporter.py`, `market_data_store.py`, `js/services/tvNotifications.js`)**:
+  - Updated `vantage_candle_exporter.py` and `market_data_store.py` so cloud sync only pushes the latest 2 bars on a 5M candle boundary (every 5 minutes) instead of pushing 100 bars every 60 seconds (reducing writes from ~144,000/day to <300/day, well within Firebase Spark's 20,000/day limit).
+  - Added server-side capping (`slice(-2)`), in-memory OHLC deduplication (`candleWriteCache`), and 30-minute cleanup throttling in `api/tvWebhook.js`.
+  - Added in-memory expiration pre-check in `cleanPreviousDayTvNotifications()` (`js/services/tvNotifications.js`) to avoid unnecessary 60-second Firestore queries.
+
 ### v2.3.78 — 28 Oct 2026 — BSE SENSEX Levels Tab & End-to-End AI Copilot Integration
 - **BSE SENSEX Asset Tab in Levels View (`index.html`, `js/ui/levels.js`, `sensex_interactive_chart.html`)**:
   - Added the `📊 SENSEX` asset selector button immediately next to `📉 NIFTY` in the Levels view with live badge counters and proximity alerts.
@@ -2371,9 +2380,9 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 
 
 
--   f i x ( s p 5 0 0 ) :   m o v e   7   P M   a d h o c   A I   c o p i l o t   b r i e f i n g   f r o m   d a i l y _ p l a n . j s   t o   d e d i c a t e d   s p 5 0 0 _ d a i l y _ p l a n . j s   t o   f i x   m i s s i n g   u p d a t e   i n   U I 
- 
- 
+- fix(sp500): move 7 PM adhoc AI copilot briefing from daily_plan.js to dedicated sp500_daily_plan.js to fix missing update in UI
+
+
 
 ### v2.3.78 — 25 Sep 2026 — YouTube Video & Shorts Embed Support in Observations & Revision
 

@@ -1,5 +1,5 @@
 import { state } from '../state.js';
-import { db } from '../firebase-init.js';
+import { db, withOptimisticWrite } from '../firebase-init.js';
 import { showToast } from '../utils/toast.js';
 
 export let stocksUnsubscribe = null;
@@ -82,13 +82,15 @@ export function updateStock(stockId, fields) {
                    .collection("stocks")
                    .doc(stockId);
 
-  return docRef.update({
-    ...fields,
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-  }).catch((err) => {
-    console.error("Update stock error:", err);
-    showToast("Failed to update stock");
-  });
+  return withOptimisticWrite(
+    docRef.update({
+      ...fields,
+      updatedAt: firebase.firestore.Timestamp.now()
+    }).catch((err) => {
+      console.error("Update stock error:", err);
+      showToast("Failed to update stock");
+    })
+  );
 }
 
 // Batch update stock fields (from auto-sync)
@@ -197,13 +199,15 @@ export function saveStocksObservations(bullets) {
                 .collection("settings")
                 .doc("stocks_observations");
 
-  return ref.set({
-    bullets: bullets,
-    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-  }, { merge: true }).catch((err) => {
-    console.error("Save stocks observations error:", err);
-    showToast("Failed to save observations");
-  });
+  return withOptimisticWrite(
+    ref.set({
+      bullets: bullets,
+      updatedAt: firebase.firestore.Timestamp.now()
+    }, { merge: true }).catch((err) => {
+      console.error("Save stocks observations error:", err);
+      showToast("Failed to save observations");
+    })
+  );
 }
 
 // One-time cleanup for duplicates and normalizing sources
