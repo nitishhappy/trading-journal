@@ -104,16 +104,6 @@
 },
 
     // --------------------------------------------------------------------------
-    // 5. SMC SEQUENCE ENGINE & PATTERN TIMEOUTS
-    // --------------------------------------------------------------------------
-    // Governs sequence state lifecycles and automated cleanup.
-    // --------------------------------------------------------------------------
-    sequenceRules: {
-      defaultTimeoutMultiplier: 6,     // Max candle bars before pending pattern times out
-      autoCleanHours: 24               // Max age in hours before completed/expired states purge
-    },
-
-    // --------------------------------------------------------------------------
     // 6. DEFAULT NOTIFICATION PREFERENCES
     // --------------------------------------------------------------------------
     // Initial states for browser pop-up and lock-screen Web Push notifications.
