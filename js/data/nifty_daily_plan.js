@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T15:46:01+05:30",
+    "timeDisplay": "03:46 PM, Oct 30",
+    "price": "23025",
+    "bias": "bullish",
+    "behavior": "[FRI 15:46] [B1]: Retest and defense of 23,015-23,030 demand cluster with bullish rejection candle",
+    "tp": "23,080 / 23,115",
+    "sl": "22,990",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T15:46:01+05:30",
+    "timeDisplay": "03:46 PM, Oct 30",
+    "price": "23120",
+    "bias": "bullish",
+    "behavior": "[FRI 15:46] [B2]: Sustained 5m close ABOVE 23,120 with active futures volume confirming absorption",
+    "tp": "23,180 / 23,240",
+    "sl": "23,070",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T15:46:01+05:30",
+    "timeDisplay": "03:46 PM, Oct 30",
+    "price": "23115",
+    "bias": "bearish",
+    "behavior": "[FRI 15:46] [S1]: Failed sweep of 23,118.1 Day High with immediate bearish displacement below 23,090",
+    "tp": "23,050 / 23,015",
+    "sl": "23,140",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T15:46:01+05:30",
+    "timeDisplay": "03:46 PM, Oct 30",
+    "price": "22995",
+    "bias": "bearish",
+    "behavior": "[FRI 15:46] [S2]: Decisive 5m close BELOW 22,995 confirming breakdown towards 15M ORB value area",
+    "tp": "22,950 / 22,905",
+    "sl": "23,040",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T14:01:06+05:30",
     "timeDisplay": "02:01 PM, Oct 30",
     "price": "22980",
@@ -1719,6 +1763,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261030_154603",
+    "timestamp": "2026-10-30T15:46:03+05:30",
+    "timeDisplay": "03:46 PM, Oct 30",
+    "spot": "23053.1",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Oct 30, 2026 | Spot: 23053.1 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,025 – 23,075 (Strict 50-point sideways consolidation band around current spot 23,053.1).\n- Risk Characteristics: Mid-range churn between the intraday VWAP support cluster (23,020–23,030) and local lower-high supply (23,075–23,085).\n- Tactical Directive: Avoid naked option buying inside this equilibrium zone due to premium erosion and lack of directional volume confirmation (Futures Volume at 1.0x baseline).\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Above 23,120): Sustained 5-minute close above Day High (23,118.1) triggers short-covering continuation towards 23,180 and 23,240.\n- [Bearish Breakdown] (Below 22,995): Decisive breakdown below the 23,000 psychological base opens rapid mean-reversion unwinding towards the 15M ORB High at 22,980.35 and 22,920.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Defense / Dip Reversal): Price retests 23,015–23,030 demand zone, rejecting lower prices with a 5m bullish pin bar/engulfing candle above 23,035. | TP: 23,080 / 23,115 | SL: 22,990 | 💡 Buy 23050 CE + Sell 23100 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Breakout Continuation): Sustained 5m close ABOVE 23,120 with expanding Nifty Futures volume confirming institutional absorption. | TP: 23,180 / 23,240 | SL: 23,070 | 💡 Buy 23100 CE + Sell 23150 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Failed Day High Liquidity Sweep): Price sweeps into 23,115–23,125 without volume expansion and prints an immediate 5m bearish rejection/close back below 23,090. | TP: 23,050 / 23,015 | SL: 23,140 | 💡 Buy 23100 PE + Sell 23050 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Psychological 23,000 Breakdown): Clean 5m candle close BELOW 22,995 confirming long unwinding towards the opening range value area. | TP: 22,950 / 22,905 | SL: 23,040 | 💡 Buy 23000 PE + Sell 22950 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261030_140108",
     "timestamp": "2026-10-30T14:01:08+05:30",
     "timeDisplay": "02:01 PM, Oct 30",
