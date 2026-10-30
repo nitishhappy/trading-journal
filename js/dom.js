@@ -119,6 +119,7 @@ export const journalPrevDayBtn = document.getElementById("journal-prev-day-btn")
 export const journalDateInput = document.getElementById("journal-date-input");
 export const journalNextDayBtn = document.getElementById("journal-next-day-btn");
 export const journalTodayBtn = document.getElementById("journal-today-btn");
+export const journalAllBtn = document.getElementById("journal-all-btn");
 export const journalDayTitle = document.getElementById("journal-day-title");
 export const journalDayMeta = document.getElementById("journal-day-meta");
 export const journalAddObsBtn = document.getElementById("journal-add-obs-btn");
@@ -129,6 +130,13 @@ export const journalObsCount = document.getElementById("journal-obs-count");
 export const journalTradesList = document.getElementById("journal-trades-list");
 export const journalTradesEmpty = document.getElementById("journal-trades-empty");
 export const journalTradesCount = document.getElementById("journal-trades-count");
+export const journalDayStream = document.getElementById("journal-day-stream");
+export const journalAllStream = document.getElementById("journal-all-stream");
+export const journalAllDatesList = document.getElementById("journal-all-dates-list");
+export const journalAllDatesCount = document.getElementById("journal-all-dates-count");
+export const journalAllEmpty = document.getElementById("journal-all-empty");
+export const journalExpandAllBtn = document.getElementById("journal-expand-all-btn");
+export const journalCollapseAllBtn = document.getElementById("journal-collapse-all-btn");
 
 // Journal Trade Modal
 export const journalTradeModal = document.getElementById("journal-trade-modal");

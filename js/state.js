@@ -44,6 +44,7 @@ export const state = {
   journalTrades: [],
   selectedJournalDate: null,
   journalPendingDate: null,
+  journalViewMode: "day",
 };
 
 // Bind to window for backward compatibility with trade-security.js and legacy code

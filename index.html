@@ -218,6 +218,7 @@
           <input type="date" id="journal-date-input" class="journal-date-input" title="Choose Date (IST)" />
           <button id="journal-next-day-btn" class="journal-nav-btn" title="Next Trading Day">▶</button>
           <button id="journal-today-btn" class="journal-today-btn" title="Jump to Today (IST)">Today</button>
+          <button id="journal-all-btn" class="journal-all-btn" title="View All Entries (Grouped by Date)">All</button>
         </div>
         <div class="journal-day-center-wrap">
           <span id="journal-day-title" class="journal-day-title">Today</span>
@@ -262,6 +263,21 @@
           <div id="journal-trades-list" class="journal-trades-list"></div>
           <div id="journal-trades-empty" class="journal-empty-box">No trades logged for this day. Click "+ New Trade" to journal a realtime trade.</div>
         </div>
+      </div>
+
+      <!-- Journal All Dates Stream (Collapsible Accordion by Date) -->
+      <div id="journal-all-stream" class="journal-stream hidden">
+        <div class="journal-all-toolbar">
+          <div class="journal-all-toolbar-info">
+            <span id="journal-all-dates-count" class="journal-all-dates-count">Showing all recorded trading days</span>
+          </div>
+          <div class="journal-all-toolbar-actions">
+            <button id="journal-expand-all-btn" class="journal-accordion-toggle-btn" type="button">▼ Expand All</button>
+            <button id="journal-collapse-all-btn" class="journal-accordion-toggle-btn" type="button">▲ Collapse All</button>
+          </div>
+        </div>
+        <div id="journal-all-dates-list" class="journal-all-dates-list"></div>
+        <div id="journal-all-empty" class="journal-empty-box hidden">No journal trades or observations recorded yet. Click "+ New Trade" or "+ New Observation" to start journaling.</div>
       </div>
     </div>
 

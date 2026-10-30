@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.80 — 30 Oct 2026 — Journal Tab: "All Entries" Timeline Feed with Collapsible Dates
+- **"All Entries" Timeline View (`index.html`, `css/journal.css`, `js/ui/journal.js`, `js/dom.js`, `js/state.js`)**:
+  - Added an `[ All ]` toggle button to the Journal calendar navigation bar alongside `◀`, `Date Picker`, `▶`, and `[ Today ]`.
+  - When in "All" mode, renders all historical Journal Trades and Journal Observations grouped chronologically by date in reverse order (newest trading days first).
+  - Implemented collapsible accordion date headers (`📅 <Date>`) with live count badges (`💡 X Obs • ⚡ Y Trades`), expand/collapse chevron animation, and individual state persistence.
+  - Added "Expand All" and "Collapse All" global toolbar controls for effortless one-click navigation across the entire journal history.
+  - Added `Focus Day ↗` button on each date card header, enabling instant single-day focus switching right back to Day View for that specific date.
+  - Preserved single-day navigation workflow: clicking `[ Today ]`, `◀`, `▶`, or choosing a date in the date picker automatically returns to the focused single-day view.
+
 ### v2.3.79 — 29 Oct 2026 — Fix Observation / Journal / Strategy Save Hang & Eliminate Firestore Quota Drain
 - **Optimistic IndexedDB-Backed Firestore Writes (`js/firebase-init.js`, `js/services/observations.js`, `js/services/journal.js`, `js/services/trades.js`, `js/services/candleChecklist.js`, `js/services/checklists.js`, `js/services/sequenceRules.js`, `js/services/stocks.js`)**:
   - Added `withOptimisticWrite()` in `js/firebase-init.js` and replaced server-blocking `.add()` calls with pre-allocated `ref.doc().set()` using client `firebase.firestore.Timestamp.now()` plus immediate in-memory state updates.

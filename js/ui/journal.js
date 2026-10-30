@@ -12,6 +12,8 @@ import { saveObservation } from '../services/observations.js';
 import { openCreateModal, openEditModal, openCopyModal } from './dashboard.js';
 import {
   journalPrevDayBtn, journalDateInput, journalNextDayBtn, journalTodayBtn,
+  journalAllBtn, journalDayStream, journalAllStream, journalAllDatesList,
+  journalAllDatesCount, journalAllEmpty, journalExpandAllBtn, journalCollapseAllBtn,
   journalDayTitle, journalDayMeta, journalAddObsBtn, journalAddTradeBtn,
   journalObsList, journalObsEmpty, journalObsCount, journalTradesList,
   journalTradesEmpty, journalTradesCount, journalTradeModal, journalTradeModalTitle,
@@ -34,6 +36,7 @@ let selectedStrategies = [];
 let selectedConcepts = [];
 let selectedMistakes = [];
 let isBookmarked = false;
+const collapsedDateGroups = new Set();
 
 // Initialize selected journal date in IST
 export function initJournal() {
@@ -50,31 +53,60 @@ export function initJournal() {
 function bindJournalEvents() {
   // Calendar day navigation
   if (journalPrevDayBtn) {
-    journalPrevDayBtn.addEventListener("click", () => changeJournalDate(-1));
+    journalPrevDayBtn.addEventListener("click", () => {
+      state.journalViewMode = "day";
+      changeJournalDate(-1);
+    });
   }
   if (journalNextDayBtn) {
-    journalNextDayBtn.addEventListener("click", () => changeJournalDate(1));
+    journalNextDayBtn.addEventListener("click", () => {
+      state.journalViewMode = "day";
+      changeJournalDate(1);
+    });
   }
   if (journalTodayBtn) {
     journalTodayBtn.addEventListener("click", () => {
+      state.journalViewMode = "day";
       state.selectedJournalDate = todayKey();
       if (journalDateInput) journalDateInput.value = state.selectedJournalDate;
+      renderJournalView();
+    });
+  }
+  if (journalAllBtn) {
+    journalAllBtn.addEventListener("click", () => {
+      state.journalViewMode = "all";
       renderJournalView();
     });
   }
   if (journalDateInput) {
     journalDateInput.addEventListener("change", (e) => {
       if (e.target.value) {
+        state.journalViewMode = "day";
         state.selectedJournalDate = e.target.value;
         renderJournalView();
       }
+    });
+  }
+  if (journalExpandAllBtn) {
+    journalExpandAllBtn.addEventListener("click", () => {
+      collapsedDateGroups.clear();
+      document.querySelectorAll(".journal-date-group").forEach(el => el.classList.remove("collapsed"));
+    });
+  }
+  if (journalCollapseAllBtn) {
+    journalCollapseAllBtn.addEventListener("click", () => {
+      document.querySelectorAll(".journal-date-group").forEach(el => {
+        const d = el.dataset.date;
+        if (d) collapsedDateGroups.add(d);
+        el.classList.add("collapsed");
+      });
     });
   }
 
   // Action buttons
   if (journalAddObsBtn) {
     journalAddObsBtn.addEventListener("click", () => {
-      openCreateModal({ journalDate: state.selectedJournalDate });
+      openCreateModal({ journalDate: state.journalViewMode === "all" ? todayKey() : state.selectedJournalDate });
     });
   }
   if (journalAddTradeBtn) {
@@ -347,21 +379,96 @@ function changeJournalDate(offsetDays) {
   renderJournalView();
 }
 
-export function renderJournalView() {
-  if (!state.selectedJournalDate) state.selectedJournalDate = todayKey();
-
-  // Update calendar day title
-  const dateObj = new Date(state.selectedJournalDate + "T12:00:00Z");
-  const isToday = state.selectedJournalDate === todayKey();
-  const dateStr = dateObj.toLocaleDateString("en-IN", {
-    weekday: "long",
-    day: "numeric",
-    month: "short",
-    year: "numeric"
-  });
-  if (journalDayTitle) {
-    journalDayTitle.textContent = isToday ? `Today • ${dateStr}` : dateStr;
+function getEntryDateKey(entry) {
+  if (entry.journalDate) return entry.journalDate;
+  if (entry.createdAt) {
+    const d = entry.createdAt.toDate ? entry.createdAt.toDate() : new Date(entry.createdAt);
+    if (!isNaN(d.getTime())) return getLocalDateKey(d);
   }
+  return null;
+}
+
+export function createObsCard(obs, idx) {
+  const wrap = document.createElement("div");
+  wrap.className = "journal-obs-wrap";
+  wrap.style.position = "relative";
+  wrap.innerHTML = `
+    <div class="journal-obs-card-badge-row">
+      <span class="journal-obs-index-badge">💡 O${idx + 1}</span>
+      <span class="journal-obs-card-title">${obs.entryName ? escapeHtml(obs.entryName) : "Observation"}</span>
+    </div>
+    ${renderTile(obs)}
+  `;
+
+  // 1. Mount link previews (TradingView charts, Drive snapshots, Instagram, YouTube)
+  wrap.querySelectorAll(".link-preview-mount").forEach((mount) => {
+    const url = mount.dataset.url;
+    const link = mount.previousElementSibling;
+    const hasPreview = buildLinkPreviewIfApplicable(url, mount, () => {
+      if (link) link.classList.remove("hidden");
+    });
+    if (hasPreview && link) {
+      link.classList.add("hidden");
+    } else if (!hasPreview) {
+      mount.remove();
+    }
+  });
+
+  // 2. Wire up edit button
+  wrap.querySelector(".edit-obs-btn")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openEditModal(obs.id);
+  });
+
+  // 3. Wire up copy button
+  wrap.querySelector(".copy-obs-btn")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openCopyModal(obs.id);
+  });
+
+  // 4. Wire up star / bookmark toggle
+  wrap.querySelector(".starred")?.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    const nextStar = !(obs.starred ?? false);
+    try {
+      await saveObservation(obs.id, { starred: nextStar });
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
+  // 5. Wire up image grid clicks -> lightbox
+  wrap.querySelectorAll(".il-img").forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const imgIdx = parseInt(item.dataset.index, 10);
+      const images = obs.images && obs.images.length > 0 ? obs.images : (obs.imageBase64 ? [obs.imageBase64] : []);
+      if (images.length > 0) {
+        openLightbox(images, imgIdx);
+      }
+    });
+  });
+
+  // 6. Wire up doc preview trigger if present
+  wrap.querySelectorAll(".doc-preview-trigger").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openGoogleDocViewer(btn.dataset.doc, btn.dataset.title);
+    });
+  });
+
+  // 7. Expand / collapse tile body
+  wrap.querySelector(".tile-body")?.addEventListener("click", (e) => {
+    if (e.target.closest("a") || e.target.closest("button") || e.target.closest(".il-img") || e.target.closest("iframe") || e.target.closest(".link-preview-mount")) return;
+    state.expandedTileId = state.expandedTileId === obs.id ? null : obs.id;
+    renderJournalView();
+  });
+
+  return wrap;
+}
+
+function renderSingleDayView() {
+  if (!state.selectedJournalDate) state.selectedJournalDate = todayKey();
 
   // Filter Observations for this day (only entries explicitly logged for Journal)
   const dayObs = (state.observations || []).filter((o) => {
@@ -392,81 +499,7 @@ export function renderJournalView() {
     } else {
       journalObsEmpty.classList.add("hidden");
       dayObs.forEach((obs, idx) => {
-        const wrap = document.createElement("div");
-        wrap.className = "journal-obs-wrap";
-        wrap.style.position = "relative";
-        wrap.innerHTML = `
-          <div class="journal-obs-card-badge-row">
-            <span class="journal-obs-index-badge">💡 O${idx + 1}</span>
-            <span class="journal-obs-card-title">${obs.entryName ? escapeHtml(obs.entryName) : "Observation"}</span>
-          </div>
-          ${renderTile(obs)}
-        `;
-
-        // 1. Mount link previews (TradingView charts, Drive snapshots, Instagram, YouTube)
-        wrap.querySelectorAll(".link-preview-mount").forEach((mount) => {
-          const url = mount.dataset.url;
-          const link = mount.previousElementSibling;
-          const hasPreview = buildLinkPreviewIfApplicable(url, mount, () => {
-            if (link) link.classList.remove("hidden");
-          });
-          if (hasPreview && link) {
-            link.classList.add("hidden");
-          } else if (!hasPreview) {
-            mount.remove();
-          }
-        });
-
-        // 2. Wire up edit button
-        wrap.querySelector(".edit-obs-btn")?.addEventListener("click", (e) => {
-          e.stopPropagation();
-          openEditModal(obs.id);
-        });
-
-        // 3. Wire up copy button
-        wrap.querySelector(".copy-obs-btn")?.addEventListener("click", (e) => {
-          e.stopPropagation();
-          openCopyModal(obs.id);
-        });
-
-        // 4. Wire up star / bookmark toggle
-        wrap.querySelector(".starred")?.addEventListener("click", async (e) => {
-          e.stopPropagation();
-          const nextStar = !(obs.starred ?? false);
-          try {
-            await saveObservation(obs.id, { starred: nextStar });
-          } catch (err) {
-            console.error(err);
-          }
-        });
-
-        // 5. Wire up image grid clicks -> lightbox
-        wrap.querySelectorAll(".il-img").forEach((item) => {
-          item.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const imgIdx = parseInt(item.dataset.index, 10);
-            const images = obs.images && obs.images.length > 0 ? obs.images : (obs.imageBase64 ? [obs.imageBase64] : []);
-            if (images.length > 0) {
-              openLightbox(images, imgIdx);
-            }
-          });
-        });
-
-        // 6. Wire up doc preview trigger if present
-        wrap.querySelectorAll(".doc-preview-trigger").forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            openGoogleDocViewer(btn.dataset.doc, btn.dataset.title);
-          });
-        });
-
-        // 7. Expand / collapse tile body
-        wrap.querySelector(".tile-body")?.addEventListener("click", (e) => {
-          if (e.target.closest("a") || e.target.closest("button") || e.target.closest(".il-img") || e.target.closest("iframe") || e.target.closest(".link-preview-mount")) return;
-          state.expandedTileId = state.expandedTileId === obs.id ? null : obs.id;
-          renderJournalView();
-        });
-
+        const wrap = createObsCard(obs, idx);
         journalObsList.appendChild(wrap);
       });
     }
@@ -484,6 +517,177 @@ export function renderJournalView() {
         journalTradesList.appendChild(card);
       });
     }
+  }
+}
+
+function renderAllDaysCollapsibleView() {
+  if (!journalAllDatesList) return;
+  journalAllDatesList.innerHTML = "";
+
+  // Collect all unique dates with entries
+  const dateMap = new Map();
+
+  (state.journalTrades || []).forEach(t => {
+    const d = getEntryDateKey(t);
+    if (d) {
+      if (!dateMap.has(d)) dateMap.set(d, { trades: [], obs: [] });
+      dateMap.get(d).trades.push(t);
+    }
+  });
+
+  (state.observations || []).forEach(o => {
+    const d = getEntryDateKey(o);
+    if (d) {
+      if (!dateMap.has(d)) dateMap.set(d, { trades: [], obs: [] });
+      dateMap.get(d).obs.push(o);
+    }
+  });
+
+  const sortedDates = Array.from(dateMap.keys()).sort((a, b) => b.localeCompare(a));
+  let totalTradesCount = 0;
+  let totalObsCount = 0;
+
+  dateMap.forEach(group => {
+    totalTradesCount += group.trades.length;
+    totalObsCount += group.obs.length;
+  });
+
+  if (journalDayMeta) {
+    journalDayMeta.innerHTML = `
+      <span class="journal-meta-pill-obs">💡 ${totalObsCount} Observation${totalObsCount === 1 ? "" : "s"}</span>
+      <span class="journal-meta-pill-sep">•</span>
+      <span class="journal-meta-pill-trade">⚡ ${totalTradesCount} Trade${totalTradesCount === 1 ? "" : "s"}</span>
+    `;
+  }
+
+  if (sortedDates.length === 0) {
+    if (journalAllEmpty) journalAllEmpty.classList.remove("hidden");
+    if (journalAllDatesCount) journalAllDatesCount.textContent = "No recorded journal entries found.";
+    return;
+  }
+
+  if (journalAllEmpty) journalAllEmpty.classList.add("hidden");
+  if (journalAllDatesCount) {
+    journalAllDatesCount.textContent = `Showing all ${sortedDates.length} recorded day${sortedDates.length === 1 ? "" : "s"} (${totalObsCount} Observations, ${totalTradesCount} Trades)`;
+  }
+
+  sortedDates.forEach(dateStr => {
+    const group = dateMap.get(dateStr);
+    const dateObj = new Date(dateStr + "T12:00:00Z");
+    const isToday = dateStr === todayKey();
+    const formattedDate = dateObj.toLocaleDateString("en-IN", {
+      weekday: "long",
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
+    const titleText = isToday ? `Today • ${formattedDate}` : formattedDate;
+    const isCollapsed = collapsedDateGroups.has(dateStr);
+
+    const groupEl = document.createElement("div");
+    groupEl.className = `journal-date-group ${isCollapsed ? "collapsed" : ""}`;
+    groupEl.dataset.date = dateStr;
+
+    groupEl.innerHTML = `
+      <div class="journal-date-group-header">
+        <div class="journal-date-group-title-wrap">
+          <span class="journal-date-chevron">▼</span>
+          <span class="journal-date-group-title">${escapeHtml(titleText)}</span>
+          <span class="journal-date-group-badge">
+            ${group.obs.length > 0 ? `💡 ${group.obs.length} Obs` : ""}
+            ${group.obs.length > 0 && group.trades.length > 0 ? " • " : ""}
+            ${group.trades.length > 0 ? `⚡ ${group.trades.length} Trade${group.trades.length === 1 ? "" : "s"}` : ""}
+          </span>
+        </div>
+        <div class="journal-date-group-actions">
+          <button class="journal-date-jump-btn" type="button" title="Open this single day">Focus Day ↗</button>
+        </div>
+      </div>
+      <div class="journal-date-group-body"></div>
+    `;
+
+    // Click on header toggles accordion
+    const header = groupEl.querySelector(".journal-date-group-header");
+    header.addEventListener("click", (e) => {
+      if (e.target.closest(".journal-date-jump-btn")) return;
+      if (collapsedDateGroups.has(dateStr)) {
+        collapsedDateGroups.delete(dateStr);
+        groupEl.classList.remove("collapsed");
+      } else {
+        collapsedDateGroups.add(dateStr);
+        groupEl.classList.add("collapsed");
+      }
+    });
+
+    // Jump to single day button
+    const jumpBtn = groupEl.querySelector(".journal-date-jump-btn");
+    jumpBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      state.journalViewMode = "day";
+      state.selectedJournalDate = dateStr;
+      if (journalDateInput) journalDateInput.value = dateStr;
+      renderJournalView();
+    });
+
+    const bodyEl = groupEl.querySelector(".journal-date-group-body");
+
+    // Observations subgroup
+    if (group.obs.length > 0) {
+      const obsSubgroup = document.createElement("div");
+      obsSubgroup.className = "journal-date-subgroup";
+      obsSubgroup.innerHTML = `<div class="journal-date-subgroup-title">💡 Observations (${group.obs.length})</div>`;
+      group.obs.forEach((obs, idx) => {
+        obsSubgroup.appendChild(createObsCard(obs, idx));
+      });
+      bodyEl.appendChild(obsSubgroup);
+    }
+
+    // Trades subgroup
+    if (group.trades.length > 0) {
+      const tradesSubgroup = document.createElement("div");
+      tradesSubgroup.className = "journal-date-subgroup";
+      tradesSubgroup.innerHTML = `<div class="journal-date-subgroup-title">⚡ Trades (${group.trades.length})</div>`;
+      group.trades.forEach((trade, idx) => {
+        tradesSubgroup.appendChild(createTradeCard(trade, idx + 1));
+      });
+      bodyEl.appendChild(tradesSubgroup);
+    }
+
+    journalAllDatesList.appendChild(groupEl);
+  });
+}
+
+export function renderJournalView() {
+  if (!state.selectedJournalDate) state.selectedJournalDate = todayKey();
+
+  if (state.journalViewMode === "all") {
+    if (journalAllBtn) journalAllBtn.classList.add("active");
+    if (journalTodayBtn) journalTodayBtn.classList.remove("active");
+    if (journalDateInput) journalDateInput.classList.add("dimmed");
+    if (journalDayTitle) journalDayTitle.textContent = "All Journal Posts • Timeline";
+    if (journalDayStream) journalDayStream.classList.add("hidden");
+    if (journalAllStream) journalAllStream.classList.remove("hidden");
+    renderAllDaysCollapsibleView();
+  } else {
+    if (journalAllBtn) journalAllBtn.classList.remove("active");
+    if (journalDateInput) journalDateInput.classList.remove("dimmed");
+    if (journalDayStream) journalDayStream.classList.remove("hidden");
+    if (journalAllStream) journalAllStream.classList.add("hidden");
+
+    // Update calendar day title
+    const dateObj = new Date(state.selectedJournalDate + "T12:00:00Z");
+    const isToday = state.selectedJournalDate === todayKey();
+    const dateStr = dateObj.toLocaleDateString("en-IN", {
+      weekday: "long",
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
+    if (journalDayTitle) {
+      journalDayTitle.textContent = isToday ? `Today • ${dateStr}` : dateStr;
+    }
+
+    renderSingleDayView();
   }
 }
 
@@ -650,8 +854,9 @@ export function openTradeModal(id = null) {
 
   populateTagSelects();
 
+  const defaultDate = state.journalViewMode === "all" ? todayKey() : (state.selectedJournalDate || todayKey());
   if (journalTradeModalDate) {
-    journalTradeModalDate.textContent = state.selectedJournalDate || todayKey();
+    journalTradeModalDate.textContent = defaultDate;
   }
 
   if (id) {
@@ -886,8 +1091,11 @@ async function saveCurrentTrade() {
     return;
   }
 
+  const existingTrade = editingTradeId ? (state.journalTrades || []).find(t => t.id === editingTradeId) : null;
+  const targetJournalDate = existingTrade?.journalDate || (state.journalViewMode === "all" ? todayKey() : (state.selectedJournalDate || todayKey()));
+
   const tradeData = {
-    journalDate: state.selectedJournalDate || todayKey(),
+    journalDate: targetJournalDate,
     textHtml,
     plainText,
     chartUrl,
