@@ -1,6 +1,72 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T19:02:08+05:30",
+    "timeDisplay": "07:02 PM, Oct 30",
+    "price": "3936.0",
+    "bias": "bullish",
+    "behavior": "[FRI 19:02] [G_B1]: Day Low SSL Sweep & 1H Bullish Demand Reversal",
+    "tp": "3954.00 / 3968.00",
+    "sl": "3928.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:02:08+05:30",
+    "timeDisplay": "07:02 PM, Oct 30",
+    "price": "3962.0",
+    "bias": "bullish",
+    "behavior": "[FRI 19:02] [G_B2]: Breakdown Shelf Reclaim & Bullish Momentum Breakout",
+    "tp": "3979.00 / 3992.00",
+    "sl": "3953.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:02:08+05:30",
+    "timeDisplay": "07:02 PM, Oct 30",
+    "price": "3957.0",
+    "bias": "bearish",
+    "behavior": "[FRI 19:02] [G_S1]: 15M Bearish FVG & Broken Shelf Breaker Supply Rejection",
+    "tp": "3941.00 / 3928.00",
+    "sl": "3963.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:02:08+05:30",
+    "timeDisplay": "07:02 PM, Oct 30",
+    "price": "3934.5",
+    "bias": "bearish",
+    "behavior": "[FRI 19:02] [G_S2]: Day Low Clean Breakdown & Liquidation Expansion",
+    "tp": "3918.50 / 3905.00",
+    "sl": "3942.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:02:08+05:30",
+    "timeDisplay": "07:02 PM, Oct 30",
+    "price": "4028.72",
+    "bias": "bearish",
+    "behavior": "[FRI 19:02] Resistance: Day High Extreme Buy-Side Liquidity (BSL) Ceiling",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:02:08+05:30",
+    "timeDisplay": "07:02 PM, Oct 30",
+    "price": "3937.14",
+    "bias": "neutral",
+    "behavior": "[FRI 19:02] Support: Current Day Low Immediate Sell-Side Liquidity (SSL) Floor",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T18:01:41+05:30",
     "timeDisplay": "06:01 PM, Oct 30",
     "price": "3957.0",
@@ -41,17 +107,6 @@ window.goldDailyPlanData = [
     "behavior": "[FRI 18:01] [G_S2]: Day Low Clean Breakdown Trigger & Downside Expansion",
     "tp": "3942.00 / 3928.00",
     "sl": "3963.50",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T18:01:41+05:30",
-    "timeDisplay": "06:01 PM, Oct 30",
-    "price": "4028.72",
-    "bias": "bearish",
-    "behavior": "[FRI 18:01] Resistance: Day High Extreme Buy-Side Liquidity (BSL) Ceiling",
-    "tp": "na",
-    "sl": "na",
     "status": "na"
   },
   {
@@ -531,6 +586,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261030_190210",
+    "timestamp": "2026-10-30T19:02:10+05:30",
+    "timeDisplay": "07:02 PM, Oct 30",
+    "spot": "3946.20",
+    "trigger": "Level Exhaustion Breakdown (GOLD Spot $3946.20 < Min Plan Target $3956.50 - Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (07:00 PM IST - Oct 30, 2026 | Spot: 3946.20 | Trigger: Level Exhaustion Breakdown (GOLD Spot $3946.20 < Min Plan Target $3956.50 - Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics & New York / London Overlap:** Spot Gold (XAU/USD) has entered the peak institutional volatility window (07:00 PM IST / 13:30 GMT) where the London afternoon session collides with the New York opening bell. The aggressive breakdown through the prior support floor ($3956.50) printed a fresh Day Low at **3937.14**, marking an extensive 91-point institutional distribution cycle from the Day High (**4028.72**).\n* **DXY & US Treasury Yield Pressure:** The US Dollar Index (DXY) continues to press intraday highs, driven by algorithmic capital reallocation into greenback liquidity. Concurrently, US 10-Year Benchmark Treasury Yields remain elevated, creating persistent yield-bearing headwinds that penalize non-yielding bullion on any attempted relief bounces.\n* **Macro Catalyst & Liquidity Flows:** Following the opening flurry of US economic data releases, systematic trading programs triggered rapid stop runs below the Asian/London base. With New York floor participants stepping in, high volume turnover around the $3940–$3950 handle is establishing local price discovery before the next directional expansion leg.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Sell-Side Liquidity (SSL) Sweep:** The downward impulse decisively swept resting retail stops resting beneath the previous intraday shelf ($3959.00), probing deep liquidity down to **3937.14**. This flush penetrated directly into the top edge of a higher-timeframe (1H/4H) Institutional Bullish Order Block spanning **3930.00 – 3937.00**, producing immediate delta absorption wicks on the 5-minute timeframe.\n* **Overhead Fair Value Gaps (FVG) & Breaker Supply:** The sharp displacement from $3962.00 down to $3937.14 engineered an unmitigated 15-minute Bearish FVG between **3955.00 and 3961.50**. Prior structural support at **3956.50 – 3960.00** has now decisively inverted into a prime Bearish Breaker block.\n* **Market Structure Bias:** On the 5-minute and 15-minute charts, market structure remains bearish characterized by clean Lower Lows and Lower Highs. For buyers, an intraday Change of Character (CHoCH) requires a firm 5M body close above **3952.50**. Until then, pullbacks into the broken shelf remain vulnerable to institutional reload supply.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Defined Range:** **3942.00 – 3952.00**\n* **Market Friction Context:** Spot ($3946.20) is oscillating mid-structure inside this 10-point compression band—floating midway between the freshly minted Day Low ($3937.14) and the underside of the broken breaker supply ($3955.00). \n* **Execution Directive:** Strictly avoid initiating market orders within this corridor. Entering shorts at the lower boundary carries severe risk of short-squeeze wicks, while blind longs face immediate rejection into overhead 15M supply. Await confirmed boundary reactions.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Downside Liquidation Flush (< 3935.00):** A decisive 15-minute candle close below **3935.00** will confirm failure of the 1H Bullish Order Block, triggering systematic long-liquidation cascading through resting stops toward **3922.00** and the **3908.00** psychological liquidity pool.\n* **Upside Short-Covering Squeeze (> 3962.00):** A sustained 15-minute body close above the breakdown origin at **3962.00** will invalidate the local bearish imbalance, forcing an aggressive short-covering squeeze through the overhead air pocket toward **3976.00** and **3990.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **3934.00 – 3938.00** Retest | Liquidity sweep of Day Low (`3937.14`) into 1H Bullish OB followed by a sharp rejection wick and a 5M bullish CHoCH close back above **3942.50** | **TP1:** 3954.00<br>**TP2:** 3968.00 | **3928.50** | 1:2.0 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **3962.00** Breakout | Impulsive 15M candle body close firmly above **3962.00** reclaiming the breakdown origin with expanding buy volume | **TP1:** 3979.00<br>**TP2:** 3992.00 | **3953.50** | 1:2.0 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **3955.00 – 3959.00** Retest | Corrective rally into the 15M Bearish FVG / Breaker block with upper shadow wick rejection and 5M bearish engulfing close below **3953.00** | **TP1:** 3941.00<br>**TP2:** 3928.00 | **3963.50** | 1:2.0 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **3934.50** Breakdown | Clean 15M candle body close below **3935.00** confirming structural breakdown of Day Low (`3937.14`) with expanding sell imbalance | **TP1:** 3918.50<br>**TP2:** 3905.00 | **3942.50** | 1:2.0 |"
+  },
+  {
     "id": "GOLD_20261030_180143",
     "timestamp": "2026-10-30T18:01:43+05:30",
     "timeDisplay": "06:01 PM, Oct 30",
