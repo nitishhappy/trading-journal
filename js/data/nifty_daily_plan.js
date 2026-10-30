@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T11:45:54+05:30",
+    "timeDisplay": "11:45 AM, Oct 30",
+    "price": "23005",
+    "bias": "bullish",
+    "behavior": "[FRI 11:45] [B1]: Bullish rejection candle on 5m chart inside 22,990 - 23,010 holding firmly above 15M ORB High",
+    "tp": "23,065 / 23,110",
+    "sl": "22,970",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T11:45:54+05:30",
+    "timeDisplay": "11:45 AM, Oct 30",
+    "price": "23065",
+    "bias": "bullish",
+    "behavior": "[FRI 11:45] [B2]: 5-minute close decisively above 23,065.35 accompanied by expanding futures volume ratio (>1.2x)",
+    "tp": "23,115 / 23,160",
+    "sl": "23,025",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T11:45:54+05:30",
+    "timeDisplay": "11:45 AM, Oct 30",
+    "price": "23060",
+    "bias": "bearish",
+    "behavior": "[FRI 11:45] [S1]: Bearish engulfing or shooting star at 23,060 - 23,070 with immediate 5m close back below 23,035",
+    "tp": "22,990 / 22,950",
+    "sl": "23,085",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T11:45:54+05:30",
+    "timeDisplay": "11:45 AM, Oct 30",
+    "price": "22980",
+    "bias": "bearish",
+    "behavior": "[FRI 11:45] [S2]: Decisive 5-minute close below 22,980.00 with rising red futures volume confirming breakdown of ORB support",
+    "tp": "22,920 / 22,880",
+    "sl": "23,015",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T11:30:55+05:30",
     "timeDisplay": "11:30 AM, Oct 30",
     "price": "23045",
@@ -1587,6 +1631,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261030_114557",
+    "timestamp": "2026-10-30T11:45:57+05:30",
+    "timeDisplay": "11:45 AM, Oct 30",
+    "spot": "23044.85",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 22964.50",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:45 AM IST - Oct 30, 2026 | Spot: 23044.85 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 22964.50))\n\n3. Live Chop Zone / No-Trade Zone:\n- Intraday Churn & Retest Band: 23,015.00 – 23,055.00 (Spot Index). Price is currently drifting within this 40-point pocket following the breakout above the 23,000 round milestone, directly below the Day High (23,065.35).\n- Volume Absorption Filter: Nifty Futures volume is trading at 1.0x (8-bar baseline average), showing consolidation rather than active aggressive expansion. Initiating fresh naked long or short positions inside this zone carries high theta decay risk with low directional follow-through.\n- Invalidation Boundary: Avoid aggressive option buying while price oscillates between the 23,015 support shelf and 23,055 resistance ceiling without a 5-minute directional candle close.\n\n4. High Momentum / Explosive Zones:\n- Bullish Expansion (Upside Breakout): Above 23,065.35 (Day High). A sustained 5-minute close above 23,065.35 with active futures volume expansion confirms call writer unwinding at the 23,050/23,100 strike cluster, triggering rapid expansion toward 23,115.00 and 23,160.00.\n- Bearish Liquidity Flush (Downside Breakdown): Below 22,980.00 (15M ORB High & Breakout Shelf). A 5-minute close breaking below 22,980.00 invalidates the morning trend structure and traps late breakout buyers, creating a swift long liquidation move down toward 22,920.00 and 22,905.00 (Day Low).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback & ORB Expansion Retest): Bullish rejection candle (hammer or pinbar) on 5m chart inside 22,990.00 – 23,010.00 holding firmly above the 15M ORB High. | TP: 23,065.00 / 23,110.00 | SL: 22,970.00 | 💡 Buy 23000 CE + Sell 23050 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Momentum Breakout): 5-minute close decisively above 23,065.35 accompanied by expanding futures volume ratio (>1.2x). | TP: 23,115.00 / 23,160.00 | SL: 23,025.00 | 💡 Buy 23050 CE + Sell 23100 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Rejection & Exhaustion Trap): Bearish engulfing or shooting star pattern at 23,060.00 – 23,070.00 with immediate 5m close back below 23,035.00. | TP: 22,990.00 / 22,950.00 | SL: 23,085.00 | 💡 Buy 23050 PE + Sell 23000 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Structural Invalidation Breakdown): Decisive 5-minute close below 22,980.00 with rising red futures volume confirming breakdown of morning ORB support. | TP: 22,920.00 / 22,880.00 | SL: 23,015.00 | 💡 Buy 23000 PE + Sell 22950 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261030_113057",
     "timestamp": "2026-10-30T11:30:57+05:30",
     "timeDisplay": "11:30 AM, Oct 30",
