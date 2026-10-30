@@ -104,31 +104,6 @@
 },
 
     // --------------------------------------------------------------------------
-    // 3. CANDLE CLOSE TIMERS & REPEAT ALARMS
-    // --------------------------------------------------------------------------
-    // Governs repeat 5m & 15m candle close chimes, session bounds, and milestone alerts.
-    // --------------------------------------------------------------------------
-    candleTimers: {
-      enabled: true,
-      activeDays: [1, 2, 3, 4, 5],     // 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri
-      fromTime: "09:15",               // Market session open (IST)
-      toTime: "15:30",                 // Market session close (IST)
-      anchorTime: "09:15",             // Candle synchronization anchor time
-      sound5m: "chime",                // Audio profile for 5-minute candle close
-      sound15m: "radar",               // Audio profile for 15-minute candle close
-      volume5m: 0.8,
-      volume15m: 0.8,
-      mute5m: false,
-      mute15m: false,
-      enable5m: true,
-      enable15m: true,
-      specialTimes: ["09:15", "10:00", "15:00"], // Key milestone announcements
-      specialSound: "special",
-      specialVolume: 0.9,
-      specialMute: false
-    },
-
-    // --------------------------------------------------------------------------
     // 4. SECURITY & PRIVACY GATES
     // --------------------------------------------------------------------------
     // Used by `trade-security.js` and `js/ui/settings.js` to protect private journals.
