@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T11:30:55+05:30",
+    "timeDisplay": "11:30 AM, Oct 30",
+    "price": "23045",
+    "bias": "bullish",
+    "behavior": "[FRI 11:30] [B1]: Sustained 5m close ABOVE 23045 with active futures volume confirming extension beyond morning range",
+    "tp": "23090 / 23130",
+    "sl": "23015",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T11:30:55+05:30",
+    "timeDisplay": "11:30 AM, Oct 30",
+    "price": "23005",
+    "bias": "bullish",
+    "behavior": "[FRI 11:30] [B2]: Dip-to-demand retest at 23000 - 23010 holding with bullish wick rejection",
+    "tp": "23060 / 23100",
+    "sl": "22980",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T11:30:55+05:30",
+    "timeDisplay": "11:30 AM, Oct 30",
+    "price": "23045",
+    "bias": "bearish",
+    "behavior": "[FRI 11:30] [S1]: Quick sweep above 23045 rejecting back below 23030 with long upper shadow",
+    "tp": "22995 / 22960",
+    "sl": "23055",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T11:30:55+05:30",
+    "timeDisplay": "11:30 AM, Oct 30",
+    "price": "23000",
+    "bias": "bearish",
+    "behavior": "[FRI 11:30] [S2]: Sustained 5m close below 23000 psychological support triggering stop-loss cascade",
+    "tp": "22950 / 22910",
+    "sl": "23025",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T11:17:08+05:30",
     "timeDisplay": "11:17 AM, Oct 30",
     "price": "22980",
@@ -1543,6 +1587,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261030_113057",
+    "timestamp": "2026-10-30T11:30:57+05:30",
+    "timeDisplay": "11:30 AM, Oct 30",
+    "spot": "23039.05",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23039.05 > Max Plan Target $23025.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:30 AM IST - Oct 30, 2026 | Spot: 23039.05 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23039.05 > Max Plan Target $23025.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range (23015.00 - 23045.00): Current spot price (23039.05) is pressing directly against the Day High (23042.20). Entering naked trades inside this tight 30-point bracket carries severe theta burn and whipsaw risk until a decisive 5-minute directional candle closes outside the boundary.\n- Structural Context: Price has broken out cleanly above the 15-minute Opening Range High (22980.35) and surpassed the prior daily maximum target (23025.00). Open interest accumulation around the 23050 Call strike presents overhead friction, making consolidation between 23015 and 23045 the baseline holding pattern before the next directional leg.\n\n4. High Momentum / Explosive Zones:\n- Bullish Expansion (Above 23045.00 Spot): A decisive 5-minute candle close above 23045.00 accompanied by expanding Nifty futures volume confirms short-covering absorption, clearing a direct runway toward 23090.00 and 23130.00.\n- Bearish Mean Reversion (Below 23000.00 Spot): A breakdown and 5-minute close below the 23000.00 psychological support triggers long unwinding, accelerating a rapid liquidity flush toward the ORB High retest zone at 22980.00 and 22940.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day High Expansion Breakout): Sustained 5-minute close ABOVE 23045.00 with active futures volume confirming extension beyond the morning high. | TP: 23090.00 / 23130.00 | SL: 23015.00 | 💡 Buy 23050 CE + Sell 23100 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Demand Retest Pullback): Price pulls back into the 23000.00 - 23010.00 support zone and prints a bullish 5-minute wick rejection or absorption bar. | TP: 23060.00 / 23100.00 | SL: 22980.00 | 💡 Buy 23000 CE + Sell 23050 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Liquidity Sweep Trap): Quick false sweep above 23045.00 that immediately fails and closes back below 23030.00 on the 5-minute timeframe with an upper rejection wick. | TP: 22995.00 / 22960.00 | SL: 23055.00 | 💡 Buy 23050 PE + Sell 23000 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Long Unwinding Breakdown): Sustained 5-minute close BELOW 23000.00 confirming failure to hold morning gains and triggering stop cascades. | TP: 22950.00 / 22910.00 | SL: 23025.00 | 💡 Buy 23000 PE + Sell 22950 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261030_111710",
     "timestamp": "2026-10-30T11:17:10+05:30",
     "timeDisplay": "11:17 AM, Oct 30",
