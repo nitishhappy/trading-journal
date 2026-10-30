@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T14:16:01+05:30",
+    "timeDisplay": "02:16 PM, Oct 30",
+    "price": "3968.0",
+    "bias": "bullish",
+    "behavior": "[FRI 14:16] [G_B1]: Asian Low SSL Sweep & 15M Bullish OB",
+    "tp": "3,990.00 / 4,005.00",
+    "sl": "3,962.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T14:16:01+05:30",
+    "timeDisplay": "02:16 PM, Oct 30",
+    "price": "3998.0",
+    "bias": "bullish",
+    "behavior": "[FRI 14:16] [G_B2]: Mid-Range Breakout & 1H FVG Expansion",
+    "tp": "4,012.00 / 4,028.00",
+    "sl": "3,989.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T14:16:01+05:30",
+    "timeDisplay": "02:16 PM, Oct 30",
+    "price": "4012.0",
+    "bias": "bearish",
+    "behavior": "[FRI 14:16] [G_S1]: Premium 1H Bearish OB & Supply Rejection",
+    "tp": "3,992.00 / 3,975.00",
+    "sl": "4,021.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T14:16:01+05:30",
+    "timeDisplay": "02:16 PM, Oct 30",
+    "price": "3982.0",
+    "bias": "bearish",
+    "behavior": "[FRI 14:16] [G_S2]: Intraday Shelf Breakdown towards Session Lows",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T13:31:41+05:30",
     "timeDisplay": "01:31 PM, Oct 30",
     "price": "3965.0",
@@ -118,17 +162,6 @@ window.goldDailyPlanData = [
     "behavior": "[FRI 12:16] [G_S1]: Flipped Breaker & 15M Bearish FVG Retest Rejection",
     "tp": "3986.00 / 3974.00",
     "sl": "4006.50",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T12:16:43+05:30",
-    "timeDisplay": "12:16 PM, Oct 30",
-    "price": "3982.0",
-    "bias": "bearish",
-    "behavior": "[FRI 12:16] [G_S2]: High-Momentum Breakdown Short Below Day Low",
-    "tp": "3970.00 / 3958.00",
-    "sl": "3990.00",
     "status": "na"
   },
   {
@@ -432,6 +465,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261030_141603",
+    "timestamp": "2026-10-30T14:16:03+05:30",
+    "timeDisplay": "02:16 PM, Oct 30",
+    "spot": "3989.02",
+    "trigger": "Extreme Price Shift ($15.22 >= $15.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (02:15 PM IST - Oct 30, 2026 | Spot: 3989.02 | Trigger: Extreme Price Shift ($15.22 >= $15.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **London / New York Overlap Transition**: Price action is rotating through the active European morning session heading into the early London/NY overlap. Following a sharp $15.22 momentum displacement, order flow is consolidating in the lower quadrant of the daily range ($3,965.11 – $4,028.72).\n* **DXY (US Dollar Index) Correlation**: The US Dollar Index is holding firm near session highs, applying capped upside resistance on bullion. Sustained Dollar strength will require Gold buyers to absorb institutional supply before pressing back toward the $4,010+ psychological threshold.\n* **US 10-Year Treasury Yields**: Real yields remain steady, dampening aggressive chase buying at mid-range equilibrium ($3,990 – $3,995). Institutional participants are awaiting North American macro cash opens for directional liquidity injection.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Sell-Side Liquidity (SSL) Pools**: Clustered aggressively beneath the session low at **$3,965.11** and extended down to **$3,960.00**. A stop run below this base represents the primary candidate for an institutional liquidity sweep into HTF 4H bullish mitigation.\n* **Buy-Side Liquidity (BSL) Pools**: Resting above local session swing highs at **$4,012.00** and the Day High at **$4,028.72**. Unmitigated buy stops remain untouched overhead.\n* **Fair Value Gaps (FVGs) & Order Blocks**:\n  * **15M / 1H Bullish FVG**: Located between **$3,968.00 – $3,974.00**, acting as the first dynamic demand barrier against downward continuation.\n  * **1H Bearish Order Block (OB)**: Formed between **$4,008.00 – $4,016.00**, marking the origin of the preceding sharp sell displacement.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Chop Zone Range**: **$3,984.00 – $3,994.00**\n* **Context**: Current spot price ($3,989.02) is oscillating around the intraday volume-weighted median. Taking market executions inside this 10-dollar corridor carries a high risk of whipsaw from low-delta micro rotations. All entries must wait for perimeter tests.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Momentum Acceleration**: Above **$3,998.00** (Clean displacement through the $4,000 round handle will trigger short-covering accelerations into the $4,012 – $4,028 liquidity band).\n* **Bearish Momentum Cascade**: Below **$3,982.00** (Failure to defend this shelf confirms continuation of the impulsive drop, accelerating price toward the $3,965.11 Day Low SSL pool).\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **3,968.00 – 3,974.00** Retest | 5M liquidity sweep below Asian low with rapid displacement close back above 3,974.00 + Bullish MSS | **TP1:** 3,990.00<br>**TP2:** 4,005.00 | **3,962.00** | 1:2.0 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **3,998.00** Breakout | Sustained 5M candle close above 3,998.00 with expanding volume, flipping prior resistance into dynamic support | **TP1:** 4,012.00<br>**TP2:** 4,028.00 | **3,989.00** | 1:2.0 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4,008.00 – 4,015.00** Retest | 5M/15M rejection wick into Bearish Order Block with Bearish FVG displacement breaking sub-structure | **TP1:** 3,992.00<br>**TP2:** 3,975.00 | **4,021.00** | 1:2.0 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **3,982.00** Breakdown | Clean 5M body close below 3,982.00 shelf, confirming rejection at equilibrium and targeting SSL run | **TP1:** 3,965.00<br>**TP2:** 3,950.00 | **3,990.50** | 1:2.0 |"
+  },
+  {
     "id": "GOLD_20261030_133143",
     "timestamp": "2026-10-30T13:31:43+05:30",
     "timeDisplay": "01:31 PM, Oct 30",
