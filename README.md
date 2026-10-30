@@ -178,6 +178,11 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.82 — 30 Oct 2026 — Fix SyntaxError in dashboard.js Legacy Comment Block
+- **Module Parsing Fix (`js/ui/dashboard.js`)**:
+  - Removed accidental uncommented block closure `});` at line 144 within the legacy commented-out block of `js/ui/dashboard.js` that caused `Uncaught SyntaxError: Unexpected token '}'`.
+  - Re-validated all JS files via `node -c` to ensure clean ES module compilation across the app.
+
 ### v2.3.81 — 30 Oct 2026 — Journal Tab: Collapsible Observation & Trade Subgroups & Strict Journal-Only Filter
 - **Collapsible Observation & Trade Section Headers (`index.html`, `css/journal.css`, `js/ui/journal.js`, `js/dom.js`)**:
   - Added collapsible headers for both Observations and Trades across Day View and All Dates timeline view with interactive indicator chevrons (`▶` / `▼`).
