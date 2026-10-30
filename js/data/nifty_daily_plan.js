@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T13:30:56+05:30",
+    "timeDisplay": "01:30 PM, Oct 30",
+    "price": "23035",
+    "bias": "bullish",
+    "behavior": "[FRI 13:30] [B1]: 5-minute bullish rejection wick holding above 23030-23040 with active futures volume",
+    "tp": "23090 / 23120",
+    "sl": "22995",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T13:30:56+05:30",
+    "timeDisplay": "01:30 PM, Oct 30",
+    "price": "23120",
+    "bias": "bullish",
+    "behavior": "[FRI 13:30] [B2]: Sustained 5m close ABOVE 23120 clearing Day High (23118.1) with expanding futures volume",
+    "tp": "23180 / 23220",
+    "sl": "23075",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T13:30:56+05:30",
+    "timeDisplay": "01:30 PM, Oct 30",
+    "price": "23115",
+    "bias": "bearish",
+    "behavior": "[FRI 13:30] [S1]: 5-minute failure wick or bearish engulfing rejecting off 23100-23118 Day High resistance",
+    "tp": "23040 / 23000",
+    "sl": "23135",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T13:30:56+05:30",
+    "timeDisplay": "01:30 PM, Oct 30",
+    "price": "23030",
+    "bias": "bearish",
+    "behavior": "[FRI 13:30] [S2]: Confirmed 5m close BELOW 23030 triggering long unwinding toward 15M ORB High",
+    "tp": "22980 / 22920",
+    "sl": "23070",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T12:01:04+05:30",
     "timeDisplay": "12:01 PM, Oct 30",
     "price": "23115",
@@ -1675,6 +1719,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261030_133059",
+    "timestamp": "2026-10-30T13:30:59+05:30",
+    "timeDisplay": "01:30 PM, Oct 30",
+    "spot": "23058.7",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:30 PM IST - Oct 30, 2026 | Spot: 23058.7 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23030.00 – 23090.00 Spot Index range.\n- Context: Price is currently consolidating at 23058.7 after a strong morning expansion off Day Low (22905.10) to Day High (23118.10). Nifty Futures volume ratio is steady at 1x baseline, indicating balanced institutional participation inside this 60-point mid-session band.\n- Action: Avoid initiating new directional naked option buys inside this band; premium decay will grind down positions until a directional structural break occurs.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Sustained breakout ABOVE 23120.00 Spot): Clears Day High (23118.10) and triggers short-covering from 23100 Call writers toward 23180.00 and 23220.00.\n- [Bearish Breakdown] (Sustained breakdown BELOW 23030.00 Spot): Violates the afternoon consolidation shelf and initiates long unwinding toward the 15M ORB High retest zone at 22980.00 and 22920.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Re-test & FVG Absorption): 5-minute bullish reversal or rejection wick holding firmly above 23030.00–23040.00 with expanding futures volume. | TP: 23090.00 / 23120.00 | SL: 22995.00 | 💡 Buy 23050 CE + Sell 23100 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Continuation): Clean 5-minute candle close ABOVE 23120.00 Spot with active futures volume confirming absorption of Day High supply. | TP: 23180.00 / 23220.00 | SL: 23075.00 | 💡 Buy 23100 CE + Sell 23150 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Rejection at Day High): 5-minute failure wick or bearish engulfing candle rejecting off the 23100.00–23118.00 resistance zone. | TP: 23040.00 / 23000.00 | SL: 23135.00 | 💡 Buy 23100 PE + Sell 23050 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Intraday Shelf Breakdown): Confirmed 5-minute close BELOW 23030.00 Spot with expanding futures volume confirming long unwinding into afternoon trade. | TP: 22980.00 / 22920.00 | SL: 23070.00 | 💡 Buy 23050 PE + Sell 23000 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20261030_120107",
     "timestamp": "2026-10-30T12:01:07+05:30",
     "timeDisplay": "12:01 PM, Oct 30",
