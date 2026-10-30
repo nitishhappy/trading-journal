@@ -1,6 +1,72 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T17:30:56+05:30",
+    "timeDisplay": "05:30 PM, Oct 30",
+    "price": "3960.0",
+    "bias": "bullish",
+    "behavior": "[FRI 17:30] [G_B1]: SSL Sweep & Demand Reversal Zone",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T17:30:56+05:30",
+    "timeDisplay": "05:30 PM, Oct 30",
+    "price": "3984.0",
+    "bias": "bullish",
+    "behavior": "[FRI 17:30] [G_B2]: Structural Invalidation Reclaim Trigger",
+    "tp": "3998.00 / 4015.00",
+    "sl": "15M body close above 3984.00 with expanding volume and clean 5M bullish FVG creation",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T17:30:56+05:30",
+    "timeDisplay": "05:30 PM, Oct 30",
+    "price": "3981.0",
+    "bias": "bearish",
+    "behavior": "[FRI 17:30] [G_S1]: 15M Bearish FVG Supply Rejection",
+    "tp": "3965.00 / 3952.00",
+    "sl": "Bearish rejection candle / pin bar on 5M tapping into the 15M Bearish FVG with delta absorption",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T17:30:56+05:30",
+    "timeDisplay": "05:30 PM, Oct 30",
+    "price": "3963.0",
+    "bias": "bearish",
+    "behavior": "[FRI 17:30] [G_S2]: Day Low Clean Breakdown Trigger",
+    "tp": "3950.00 / 3938.00",
+    "sl": "5M/15M body close firmly below Day Low (3964.13) with sustained red volume impulse",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T17:30:56+05:30",
+    "timeDisplay": "05:30 PM, Oct 30",
+    "price": "4028.72",
+    "bias": "bearish",
+    "behavior": "[FRI 17:30] Resistance: Day High Extreme Liquidity Ceiling",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T17:30:56+05:30",
+    "timeDisplay": "05:30 PM, Oct 30",
+    "price": "3964.13",
+    "bias": "neutral",
+    "behavior": "[FRI 17:30] Support: Day Low Immediate SSL Benchmark",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T14:16:01+05:30",
     "timeDisplay": "02:16 PM, Oct 30",
     "price": "3968.0",
@@ -465,6 +531,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261030_173058",
+    "timestamp": "2026-10-30T17:30:58+05:30",
+    "timeDisplay": "05:30 PM, Oct 30",
+    "spot": "3965.89",
+    "trigger": "Structural Invalidation (-16.8 pts incremental shift from previous trigger 3982.68",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (05:30 PM IST - Oct 30, 2026 | Spot: 3965.89 | Trigger: Structural Invalidation (-16.8 pts incremental shift from previous trigger 3982.68))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Alignment & Momentum:** As London heads into its afternoon session and the New York pre-market opens, institutional positioning is actively pricing in rate expectations and liquidating intraday commodity longs. The break below 3982.68 confirms an aggressive supply-driven displacement during the session transition.\n* **DXY (US Dollar Index) & Yield Confluence:** The US Dollar Index (DXY) has reclaimed key intraday highs, applying sustained pressure across precious metals. Concurrently, the US 10-Year Treasury Yield maintains a firm bid, suppressing zero-yielding bullion demand and forcing Gold into a heavy structural discount testing the day's base.\n* **Macro Risk Posture:** Gold is trading with a pronounced intraday risk-off discount against the USD. Liquidity has decisively rotated out of defensive bullion holdings ahead of early New York economic data releases.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Sell-Side Liquidity (SSL) Threat:** Spot is trading at **3965.89**, sitting directly above the Day Low at **3964.13**. This concentration of resting stop-loss orders from early London buyers represents the immediate institutional liquidity pool.\n* **Fair Value Gap (FVG) & Order Block Mitigation:** The sharp descent from the 3982.68 trigger has carved a prominent 15-minute Bearish Fair Value Gap between **3978.50 and 3983.00**. This zone now acts as primary institutional overhead supply on any corrective pullbacks.\n* **Higher Timeframe (1H/4H) Market Structure:** Gold remains in an intraday downtrend following rejection off the **4028.72 Day High**. A clean sweep or breakdown of 3964.13 exposes the next higher timeframe liquidity demand block residing between **3950.00 – 3955.00**.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Chop Zone Boundaries:** **3966.50 – 3976.00**\n* **Execution Directive:** Strictly avoid taking new trend continuation positions inside this 9.5-point corridor. Price action within this pocket is subject to low-conviction rotational noise and spread slippage between the newly established bearish breakdown point and the vulnerable Day Low shelf. Wait for definitive expansion outside these parameters.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Downside Liquidity Run (< 3963.00):** A sustained 5-minute close below **3963.00** triggers an aggressive cascade of triggered stop orders and long unwinding, accelerating a high-speed continuation leg toward **3950.00** and **3938.00**.\n* **Upside Short Squeeze (> 3984.00):** A decisive displacement and 15-minute body close above **3984.00** invalidates the current intraday bearish structure, trapping late momentum shorts and driving a rapid mean-reversion squeeze toward **3998.00** and **4015.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **3958.00 – 3962.00** Retest | Rejection wick below 3964.13 SSL followed by 5M bullish MSS close above 3966.00 | **TP1:** 3978.00<br>**TP2:** 3992.00 | **3954.00** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **3984.00** Breakout | 15M body close above 3984.00 with expanding volume and clean 5M bullish FVG creation | **TP1:** 3998.00<br>**TP2:** 4015.00 | **3974.00** | 1:2.1 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **3978.00 – 3983.00** Retest | Bearish rejection candle / pin bar on 5M tapping into the 15M Bearish FVG with delta absorption | **TP1:** 3965.00<br>**TP2:** 3952.00 | **3988.50** | 1:2.1 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **3963.00** Breakdown | 5M/15M body close firmly below Day Low (3964.13) with sustained red volume impulse | **TP1:** 3950.00<br>**TP2:** 3938.00 | **3969.50** | 1:2.0 |"
+  },
+  {
     "id": "GOLD_20261030_141603",
     "timestamp": "2026-10-30T14:16:03+05:30",
     "timeDisplay": "02:16 PM, Oct 30",
