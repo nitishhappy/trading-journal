@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T13:31:12+05:30",
+    "timeDisplay": "01:31 PM, Oct 30",
+    "price": "74625",
+    "bias": "bullish",
+    "behavior": "[FRI 13:31] [B1]: Quick Judas sweep of 74,602 SSL followed by 5m reclaim above 74,625 targeting Micro-EQ and BSL",
+    "tp": "74,672 / 74,740",
+    "sl": "74,580",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T13:31:12+05:30",
+    "timeDisplay": "01:31 PM, Oct 30",
+    "price": "74745",
+    "bias": "bullish",
+    "behavior": "[FRI 13:31] [B2]: Sustained 5m close ABOVE 74,745 with institutional absorption confirming Day High expansion",
+    "tp": "74,850 / 75,000",
+    "sl": "74,670",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T13:31:12+05:30",
+    "timeDisplay": "01:31 PM, Oct 30",
+    "price": "74715",
+    "bias": "bearish",
+    "behavior": "[FRI 13:31] [S1]: Stop-hunt wick above 74,742 rejected back below 74,715 trapping breakout buyers",
+    "tp": "74,672 / 74,602",
+    "sl": "74,765",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T13:31:12+05:30",
+    "timeDisplay": "01:31 PM, Oct 30",
+    "price": "74595",
+    "bias": "bearish",
+    "behavior": "[FRI 13:31] [S2]: Sustained 5m close BELOW 74,595 confirming breakdown of 1H consolidation shelf",
+    "tp": "74,515 / 74,412",
+    "sl": "74,670",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T11:46:15+05:30",
     "timeDisplay": "11:46 AM, Oct 30",
     "price": "74350",
@@ -223,6 +267,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261030_133114",
+    "timestamp": "2026-10-30T13:31:14+05:30",
+    "timeDisplay": "01:31 PM, Oct 30",
+    "spot": "74571.96",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (01:30 PM IST - Oct 30, 2026 | Spot: 74571.96 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Active Chop Corridor: 74,602.25 to 74,741.81 (Immediate 1H Consolidation Shelf). Price is currently rotating tightly around the 50% Micro-Equilibrium anchor at 74,672.03.\n- Friday Expiry Gamma Pin Warning: Heavy call writing at the 74,700–74,800 strikes and concentrated put writing at 74,500–74,600 are creating intense multi-strike gamma compression during the 13:30–14:30 pre-closing window.\n- Premium Decay Vortex: Zero edge exists for naked directional option buying between 74,620 and 74,710. Avoid entries inside this corridor to protect against theta burn and mechanical stop runs.\n- Macro Invalidation Bounds: Only an institutional 5-minute candle close outside the shelf extremes (above 74,742 or below 74,600) confirms directional expansion toward macro targets.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion Breakout] (Sustained 5M Close Above 74,742): Triple-tap Buy-Side Liquidity (BSL) pool at 74,741.81 cleared with institutional volume expansion, initiating aggressive short-covering gamma acceleration towards 74,850 and the 75,000 round-number psychological barrier.\n- [Bearish Breakdown Expansion] (Sustained 5M Close Below 74,600): Immediate violation of the double-bottom Sell-Side Liquidity (SSL) shelf at 74,602.25 triggers institutional long unwinding down into the Bullish Parabolic Ignition Order Block (74,511.79 – 74,514.93) and Macro 50% Daily Equilibrium (74,412.31).\n- [Bullish Spring Reversal] (Judas Sweep Reclaim of 74,602): Swift downside liquidity probe below 74,602.25 that instantly rejects and reclaims 74,625 on a 5-minute closing basis, trapping retail breakdown sellers and triggering a mean-reversion squeeze back to Micro-EQ 74,672 and Day High 74,742.\n- [Bearish SFP Exhaustion] (Stop-Hunt Rejection at 74,742): An intraday stop-hunt spike above 74,741.81 that fails to sustain and closes back below 74,715 with an extended upper rejection wick, trapping breakout buyers and catalyzing a liquidation slide back toward 74,602.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Judas Sweep & Spring Reclaim): Price sweeps SSL at 74,602.25 and prints an immediate 5-minute bullish close back above 74,625. | TP: 74,672 / 74,740 | SL: 74,580 | 💡 Buy 74,600 CE + Sell 74,800 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Momentum Breakout): Sustained 5-minute candle close ABOVE 74,745 with expanding institutional volume and positive delta. | TP: 74,850 / 75,000 | SL: 74,670 | 💡 Buy 74,700 CE + Sell 74,900 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Swing Failure Pattern at Day High): Stop-hunt probe above 74,741.81 that sharply rejects and closes back below 74,715. | TP: 74,672 / 74,602 | SL: 74,765 | 💡 Buy 74,700 PE + Sell 74,500 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (1H Shelf Breakdown Acceleration): Sustained 5-minute candle close BELOW 74,595 confirming institutional breakdown of the 74,602 shelf. | TP: 74,515 / 74,412 | SL: 74,670 | 💡 Buy 74,600 PE + Sell 74,400 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261030_114617",
     "timestamp": "2026-10-30T11:46:17+05:30",
     "timeDisplay": "11:46 AM, Oct 30",
