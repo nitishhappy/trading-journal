@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T06:31:02+05:30",
+    "timeDisplay": "06:31 AM, Oct 30",
+    "price": "4004.0",
+    "bias": "bullish",
+    "behavior": "[FRI 06:31] [G_B1]: SSL Sweep Reclaim & Psychological Handle",
+    "tp": "4015.00 / 4026.00",
+    "sl": "3995.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T06:31:02+05:30",
+    "timeDisplay": "06:31 AM, Oct 30",
+    "price": "4018.5",
+    "bias": "bullish",
+    "behavior": "[FRI 06:31] [G_B2]: High-Momentum Breakout Above 15M FVG",
+    "tp": "4028.50 / 4038.00",
+    "sl": "4011.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T06:31:02+05:30",
+    "timeDisplay": "06:31 AM, Oct 30",
+    "price": "4016.0",
+    "bias": "bearish",
+    "behavior": "[FRI 06:31] [G_S1]: Bearish Order Block & FVG Retest Rejection",
+    "tp": "4004.00 / 3996.00",
+    "sl": "4021.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T06:31:02+05:30",
+    "timeDisplay": "06:31 AM, Oct 30",
+    "price": "3998.0",
+    "bias": "bearish",
+    "behavior": "[FRI 06:31] [G_S2]: Breakdown Below Day Low & 4000 Structural Base",
+    "tp": "3986.00 / 3975.00",
+    "sl": "4006.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T01:32:36+05:30",
     "timeDisplay": "01:32 AM, Oct 30",
     "price": "4011.0",
@@ -388,6 +432,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261030_063105",
+    "timestamp": "2026-10-30T06:31:05+05:30",
+    "timeDisplay": "06:31 AM, Oct 30",
+    "spot": "4003.3",
+    "trigger": "Structural Invalidation (-19.6 pts incremental shift from previous trigger 4022.91",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (06:30 AM IST - Oct 30, 2026 | Spot: 4003.3 | Trigger: Structural Invalidation (-19.6 pts incremental shift from previous trigger 4022.91))\n\n### 1. Global Macro & Forex Mechanics:\n* **DXY (US Dollar Index) Dynamic:** The US Dollar Index has staged a sharp recovery during the late New York close and Asian session open, pressing toward 104.40. This firm dollar tone is placing heavy downside pressure on bullion spot pricing, triggering the -19.6 pts structural drop from the 4022.91 trigger handle.\n* **US 10-Year Treasury Yields:** US 10-Year Benchmark Yields remain elevated at 4.28%, discouraging unhedged non-yielding gold accumulation and accelerating spot liquidation into the Asian session.\n* **Session Liquidity Cycle:** As the Tokyo and early Asian sessions get underway, gold is probing critical sell-side liquidity at the psychological 4000.00 benchmark. High-impact volatility and institutional participation will remain subdued until European liquidity injection and London open (01:30 PM IST), followed by the London/New York overlap (06:30 PM – 09:30 PM IST).\n* **Upcoming Macro Catalyst:** Markets are pricing in upcoming US Core PCE deflator and labor prints, forcing institutional macro books to defend liquidity pools while de-risking extended long exposure.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Sell-Side Liquidity (SSL) & Major Floor:** Current spot (4003.30) sits directly above the Day Low (4001.48) and the monumental 4000.00 psychological round barrier. Institutional stops and retail trailing stops are heavily clustered in the 3995.00 – 4001.00 sub-range.\n* **Buy-Side Liquidity (BSL) & Supply Imbalance:** Overhead liquidity pools rest at 4016.50 – 4018.00 (15M Bearish Order Block & FVG created during the overnight flush) and 4028.72 (Day High / Asian high sweep zone).\n* **Fair Value Gap (FVG) Confluence:** An unmitigated 15-minute Bearish FVG spans between 4013.50 and 4018.00. Any reactive bounce will face immediate institutional selling within this premium discount boundary.\n* **Market Structure Shift (MSS):** The immediate 5-minute and 15-minute trend structure is strictly bearish with consecutive lower highs and lower lows. A confirmed Market Structure Shift (MSS) requires a 15M body close above 4018.50.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Defined Range:** **4003.00 – 4012.00**\n* **Execution Directive:** Strictly avoid initiation inside this 9-point band. Price is hovering just above the 4001.48 Day Low where spread expansion, low Asian volume, and false fake-out wicks are most prevalent. Wait for a definitive sweep and displacement outside this chop boundary before committing capital.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Explosive Downside Accelerator (< 3998.00):** A decisive 15-minute breakdown and body close below the 4000.00 / 3998.00 threshold will trigger a severe long-liquidation cascade, targeting unmitigated demand pockets at 3986.00 and 3975.00.\n* **Explosive Short-Covering Squeeze (> 4018.50):** If price reclaims the 15M FVG origin at 4018.50 with aggressive delta displacement, rapid short-covering will trigger an acceleration toward 4028.72 and 4038.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **4003.00 – 4005.00** Retest | Liquidity sweep below 4001.48 / 4000.00 followed by a quick 5M bullish pin-bar and reclaim above 4004.00 with expanding green volume. | **TP1:** 4015.00<br>**TP2:** 4026.00 | **3995.00** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **4018.50** Breakout | 15M candle body close firmly above 4018.50 with displacement, clearing the overhead 15M bearish FVG. | **TP1:** 4028.50<br>**TP2:** 4038.00 | **4011.50** | 1:2.4 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **4014.50 – 4017.50** Retest | Re-entry into the 15M Bearish Order Block/FVG rejected with upper wicks and a 5M bearish engulfing candle. | **TP1:** 4004.00<br>**TP2:** 3996.00 | **4021.50** | 1:2.2 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **3998.00** Breakdown | Clean 5M/15M body close below 3998.00, shattering the 4000 psychological handle with expanding sell delta. | **TP1:** 3986.00<br>**TP2:** 3975.00 | **4006.00** | 1:2.1 |"
+  },
+  {
     "id": "GOLD_20261030_013238",
     "timestamp": "2026-10-30T01:32:38+05:30",
     "timeDisplay": "01:32 AM, Oct 30",

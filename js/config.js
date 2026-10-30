@@ -104,18 +104,6 @@
 },
 
     // --------------------------------------------------------------------------
-    // 6. DEFAULT NOTIFICATION PREFERENCES
-    // --------------------------------------------------------------------------
-    // Initial states for browser pop-up and lock-screen Web Push notifications.
-    // --------------------------------------------------------------------------
-    notifications: {
-      summaryNotificationsEnabled: true,  // Daily briefing / tactical sync pop-ups
-      alertNotificationsEnabled: false,    // TradingView & live external alerts
-      sequenceNotificationsEnabled: true,  // SMC sequence completion alerts
-      copilotNotificationsEnabled: false   // AI Co-Pilot background run notifications
-    },
-
-    // --------------------------------------------------------------------------
     // 7. USER INTERFACE & GENERAL PREFERENCES
     // --------------------------------------------------------------------------
     ui: {
