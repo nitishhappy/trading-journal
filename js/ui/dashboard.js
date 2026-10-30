@@ -138,8 +138,22 @@
 //   fabAdd.addEventListener("click", () => openCreateModal());
 // }
 
-// if (obsModalClose) obsModalClose.addEventListener("click", () => obsModal.classList.add("hidden"));
-// if (obsCancelBtn) obsCancelBtn.addEventListener("click", () => obsModal.classList.add("hidden"));
+// if (obsModalClose) obsModalClose.addEventListener("click", () => {
+  obsModal.classList.add("hidden");
+  state.journalPendingDate = null;
+});
+// if (obsCancelBtn) obsCancelBtn.addEventListener("click", () => {
+  obsModal.classList.add("hidden");
+  state.journalPendingDate = null;
+});
+if (obsModal) {
+  obsModal.addEventListener("click", (e) => {
+    if (e.target === obsModal) {
+      obsModal.classList.add("hidden");
+      state.journalPendingDate = null;
+    }
+  });
+}
 // if (obsSaveBtn) {
 //   obsSaveBtn.addEventListener("click", () => saveModalObservation(false));
 // }
@@ -960,8 +974,22 @@ if (fabAdd) {
   fabAdd.addEventListener("click", () => openCreateModal());
 }
 
-if (obsModalClose) obsModalClose.addEventListener("click", () => obsModal.classList.add("hidden"));
-if (obsCancelBtn) obsCancelBtn.addEventListener("click", () => obsModal.classList.add("hidden"));
+if (obsModalClose) obsModalClose.addEventListener("click", () => {
+  obsModal.classList.add("hidden");
+  state.journalPendingDate = null;
+});
+if (obsCancelBtn) obsCancelBtn.addEventListener("click", () => {
+  obsModal.classList.add("hidden");
+  state.journalPendingDate = null;
+});
+if (obsModal) {
+  obsModal.addEventListener("click", (e) => {
+    if (e.target === obsModal) {
+      obsModal.classList.add("hidden");
+      state.journalPendingDate = null;
+    }
+  });
+}
 if (obsSaveBtn) {
   obsSaveBtn.addEventListener("click", () => saveModalObservation(false));
 }

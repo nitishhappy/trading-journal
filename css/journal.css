@@ -1027,4 +1027,41 @@
   gap: 6px;
   padding-bottom: 6px;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s ease;
+}
+
+.journal-date-subgroup-title:hover {
+  color: #fff;
+}
+
+.journal-date-subgroup.collapsed .journal-subgroup-items {
+  display: none !important;
+}
+
+.journal-sub-chevron {
+  display: inline-block;
+  font-size: 11px;
+  width: 14px;
+  text-align: center;
+  color: #93c5fd;
+  user-select: none;
+}
+
+.journal-section.collapsed #journal-obs-list,
+.journal-section.collapsed #journal-obs-empty,
+.journal-section.collapsed #journal-trades-list,
+.journal-section.collapsed #journal-trades-empty {
+  display: none !important;
+}
+
+.journal-section-header {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.15s ease;
+}
+
+.journal-section-header:hover {
+  opacity: 0.85;
 }

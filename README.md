@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.81 — 30 Oct 2026 — Journal Tab: Collapsible Observation & Trade Subgroups & Strict Journal-Only Filter
+- **Collapsible Observation & Trade Section Headers (`index.html`, `css/journal.css`, `js/ui/journal.js`, `js/dom.js`)**:
+  - Added collapsible headers for both Observations and Trades across Day View and All Dates timeline view with interactive indicator chevrons (`▶` / `▼`).
+  - Observations are collapsed by default to prioritize focus on realtime trades.
+  - Global "Expand All" and "Collapse All" toolbar buttons now also synchronize sub-section expand/collapse states.
+- **Strict Journal-Only Observation Filtering & Date Isolation (`js/ui/journal.js`, `js/ui/dashboard.js`)**:
+  - Fixed observation grouping logic by replacing timestamp fallback with strict `isJournalObs()` validation (requiring an explicit `journalDate` string). General Dashboard observations no longer leak into Journal views.
+  - Added modal cleanup in `js/ui/dashboard.js` (`obsModalClose`, `obsCancelBtn`, backdrop click) to ensure `state.journalPendingDate` is reliably reset.
+
 ### v2.3.80 — 30 Oct 2026 — Journal Tab: "All Entries" Timeline Feed with Collapsible Dates
 - **"All Entries" Timeline View (`index.html`, `css/journal.css`, `js/ui/journal.js`, `js/dom.js`, `js/state.js`)**:
   - Added an `[ All ]` toggle button to the Journal calendar navigation bar alongside `◀`, `Date Picker`, `▶`, and `[ Today ]`.

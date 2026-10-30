@@ -240,10 +240,11 @@
 
       <!-- Journal Day Stream -->
       <div id="journal-day-stream" class="journal-stream">
-        <!-- Observations Section -->
-        <div class="journal-section" id="journal-obs-section">
-          <div class="journal-section-header">
+        <!-- Observations Section (Collapsed by default) -->
+        <div class="journal-section collapsed" id="journal-obs-section">
+          <div class="journal-section-header" id="journal-obs-header" style="cursor: pointer;" title="Click to expand/collapse Observations">
             <span class="journal-section-title">
+              <span class="journal-sub-chevron" id="journal-obs-chevron">▶</span>
               <span>💡 Observations</span>
               <span id="journal-obs-count" class="journal-badge-count">0</span>
             </span>
@@ -254,8 +255,9 @@
 
         <!-- Trades Section -->
         <div class="journal-section" id="journal-trades-section">
-          <div class="journal-section-header">
+          <div class="journal-section-header" id="journal-trades-header" style="cursor: pointer;" title="Click to expand/collapse Trades">
             <span class="journal-section-title">
+              <span class="journal-sub-chevron" id="journal-trades-chevron">▼</span>
               <span>⚡ Trades</span>
               <span id="journal-trades-count" class="journal-badge-count">0</span>
             </span>

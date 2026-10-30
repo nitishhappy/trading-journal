@@ -15,8 +15,11 @@ import {
   journalAllBtn, journalDayStream, journalAllStream, journalAllDatesList,
   journalAllDatesCount, journalAllEmpty, journalExpandAllBtn, journalCollapseAllBtn,
   journalDayTitle, journalDayMeta, journalAddObsBtn, journalAddTradeBtn,
-  journalObsList, journalObsEmpty, journalObsCount, journalTradesList,
-  journalTradesEmpty, journalTradesCount, journalTradeModal, journalTradeModalTitle,
+  journalObsSection, journalObsHeader, journalObsChevron,
+  journalObsList, journalObsEmpty, journalObsCount,
+  journalTradesSection, journalTradesHeader, journalTradesChevron,
+  journalTradesList, journalTradesEmpty, journalTradesCount,
+  journalTradeModal, journalTradeModalTitle,
   journalTradeBookmarkToggle, journalTradeModalClose, journalTradeModalDate,
   journalWysiwygToolbar, journalTradeTextEditor, journalTradeChartInput,
   journalTradeChartAddBtn, journalTradeChartsList,
@@ -87,10 +90,33 @@ function bindJournalEvents() {
       }
     });
   }
+  // Day View section header toggles
+  if (journalObsHeader && journalObsSection) {
+    journalObsHeader.addEventListener("click", () => {
+      journalObsSection.classList.toggle("collapsed");
+      if (journalObsChevron) {
+        journalObsChevron.textContent = journalObsSection.classList.contains("collapsed") ? "▶" : "▼";
+      }
+    });
+  }
+  if (journalTradesHeader && journalTradesSection) {
+    journalTradesHeader.addEventListener("click", () => {
+      journalTradesSection.classList.toggle("collapsed");
+      if (journalTradesChevron) {
+        journalTradesChevron.textContent = journalTradesSection.classList.contains("collapsed") ? "▶" : "▼";
+      }
+    });
+  }
+
   if (journalExpandAllBtn) {
     journalExpandAllBtn.addEventListener("click", () => {
       collapsedDateGroups.clear();
       document.querySelectorAll(".journal-date-group").forEach(el => el.classList.remove("collapsed"));
+      document.querySelectorAll(".journal-date-subgroup").forEach(el => {
+        el.classList.remove("collapsed");
+        const chev = el.querySelector(".journal-sub-chevron");
+        if (chev) chev.textContent = "▼";
+      });
     });
   }
   if (journalCollapseAllBtn) {
@@ -99,6 +125,11 @@ function bindJournalEvents() {
         const d = el.dataset.date;
         if (d) collapsedDateGroups.add(d);
         el.classList.add("collapsed");
+      });
+      document.querySelectorAll(".journal-date-subgroup").forEach(el => {
+        el.classList.add("collapsed");
+        const chev = el.querySelector(".journal-sub-chevron");
+        if (chev) chev.textContent = "▶";
       });
     });
   }
@@ -379,10 +410,17 @@ function changeJournalDate(offsetDays) {
   renderJournalView();
 }
 
-function getEntryDateKey(entry) {
-  if (entry.journalDate) return entry.journalDate;
-  if (entry.createdAt) {
-    const d = entry.createdAt.toDate ? entry.createdAt.toDate() : new Date(entry.createdAt);
+// Strict check: only observations created explicitly for the Journal tab have a journalDate string
+export function isJournalObs(o) {
+  return typeof o.journalDate === "string" && o.journalDate.trim().length > 0;
+}
+
+export function getTradeDateKey(t) {
+  if (t.journalDate && typeof t.journalDate === "string" && t.journalDate.trim().length > 0) {
+    return t.journalDate.trim();
+  }
+  if (t.createdAt) {
+    const d = t.createdAt.toDate ? t.createdAt.toDate() : new Date(t.createdAt);
     if (!isNaN(d.getTime())) return getLocalDateKey(d);
   }
   return null;
@@ -470,14 +508,14 @@ export function createObsCard(obs, idx) {
 function renderSingleDayView() {
   if (!state.selectedJournalDate) state.selectedJournalDate = todayKey();
 
-  // Filter Observations for this day (only entries explicitly logged for Journal)
+  // Filter Observations for this day (strictly only entries explicitly logged for Journal)
   const dayObs = (state.observations || []).filter((o) => {
-    return o.journalDate === state.selectedJournalDate;
+    return isJournalObs(o) && o.journalDate.trim() === state.selectedJournalDate;
   });
 
   // Filter Trades for this day
   const dayTrades = (state.journalTrades || []).filter((t) => {
-    return t.journalDate === state.selectedJournalDate;
+    return getTradeDateKey(t) === state.selectedJournalDate;
   });
 
   // Update counts
@@ -528,7 +566,7 @@ function renderAllDaysCollapsibleView() {
   const dateMap = new Map();
 
   (state.journalTrades || []).forEach(t => {
-    const d = getEntryDateKey(t);
+    const d = getTradeDateKey(t);
     if (d) {
       if (!dateMap.has(d)) dateMap.set(d, { trades: [], obs: [] });
       dateMap.get(d).trades.push(t);
@@ -536,11 +574,10 @@ function renderAllDaysCollapsibleView() {
   });
 
   (state.observations || []).forEach(o => {
-    const d = getEntryDateKey(o);
-    if (d) {
-      if (!dateMap.has(d)) dateMap.set(d, { trades: [], obs: [] });
-      dateMap.get(d).obs.push(o);
-    }
+    if (!isJournalObs(o)) return; // Strictly only observations created explicitly for the Journal!
+    const d = o.journalDate.trim();
+    if (!dateMap.has(d)) dateMap.set(d, { trades: [], obs: [] });
+    dateMap.get(d).obs.push(o);
   });
 
   const sortedDates = Array.from(dateMap.keys()).sort((a, b) => b.localeCompare(a));
@@ -631,25 +668,57 @@ function renderAllDaysCollapsibleView() {
 
     const bodyEl = groupEl.querySelector(".journal-date-group-body");
 
-    // Observations subgroup
+    // Observations subgroup (COLLAPSED BY DEFAULT)
     if (group.obs.length > 0) {
       const obsSubgroup = document.createElement("div");
-      obsSubgroup.className = "journal-date-subgroup";
-      obsSubgroup.innerHTML = `<div class="journal-date-subgroup-title">💡 Observations (${group.obs.length})</div>`;
+      obsSubgroup.className = "journal-date-subgroup collapsed";
+      obsSubgroup.innerHTML = `
+        <div class="journal-date-subgroup-title" title="Click to expand/collapse Observations">
+          <span class="journal-sub-chevron">▶</span>
+          <span>💡 Observations (${group.obs.length})</span>
+        </div>
+        <div class="journal-subgroup-items"></div>
+      `;
+      const itemsContainer = obsSubgroup.querySelector(".journal-subgroup-items");
       group.obs.forEach((obs, idx) => {
-        obsSubgroup.appendChild(createObsCard(obs, idx));
+        itemsContainer.appendChild(createObsCard(obs, idx));
       });
+
+      // Subgroup title click handler
+      const subTitle = obsSubgroup.querySelector(".journal-date-subgroup-title");
+      const subChev = obsSubgroup.querySelector(".journal-sub-chevron");
+      subTitle.addEventListener("click", () => {
+        obsSubgroup.classList.toggle("collapsed");
+        subChev.textContent = obsSubgroup.classList.contains("collapsed") ? "▶" : "▼";
+      });
+
       bodyEl.appendChild(obsSubgroup);
     }
 
-    // Trades subgroup
+    // Trades subgroup (EXPANDED BY DEFAULT, COLLAPSIBLE ON CLICK)
     if (group.trades.length > 0) {
       const tradesSubgroup = document.createElement("div");
       tradesSubgroup.className = "journal-date-subgroup";
-      tradesSubgroup.innerHTML = `<div class="journal-date-subgroup-title">⚡ Trades (${group.trades.length})</div>`;
+      tradesSubgroup.innerHTML = `
+        <div class="journal-date-subgroup-title" title="Click to expand/collapse Trades">
+          <span class="journal-sub-chevron">▼</span>
+          <span>⚡ Trades (${group.trades.length})</span>
+        </div>
+        <div class="journal-subgroup-items"></div>
+      `;
+      const itemsContainer = tradesSubgroup.querySelector(".journal-subgroup-items");
       group.trades.forEach((trade, idx) => {
-        tradesSubgroup.appendChild(createTradeCard(trade, idx + 1));
+        itemsContainer.appendChild(createTradeCard(trade, idx + 1));
       });
+
+      // Subgroup title click handler
+      const subTitle = tradesSubgroup.querySelector(".journal-date-subgroup-title");
+      const subChev = tradesSubgroup.querySelector(".journal-sub-chevron");
+      subTitle.addEventListener("click", () => {
+        tradesSubgroup.classList.toggle("collapsed");
+        subChev.textContent = tradesSubgroup.classList.contains("collapsed") ? "▶" : "▼";
+      });
+
       bodyEl.appendChild(tradesSubgroup);
     }
 
