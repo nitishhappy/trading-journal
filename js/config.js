@@ -104,19 +104,6 @@
 },
 
     // --------------------------------------------------------------------------
-    // 4. SECURITY & PRIVACY GATES
-    // --------------------------------------------------------------------------
-    // Used by `trade-security.js` and `js/ui/settings.js` to protect private journals.
-    // --------------------------------------------------------------------------
-    security: {
-      inactivityTimeoutMs: 5000,       // Inactivity delay before locking trade log tab (5s)
-      secretTapCount: 5,               // Rapid tap count on topbar title to toggle Trade Log visibility
-      secretTapWindowMs: 2000,         // Time window in ms for the 5-tap sequence (2s)
-      passcodeLockoutDurationMs: 3600000, // 1 hour lockout upon failed passcode entry
-      tradeLogHiddenKey: "tradelog_tab_hidden"
-    },
-
-    // --------------------------------------------------------------------------
     // 5. SMC SEQUENCE ENGINE & PATTERN TIMEOUTS
     // --------------------------------------------------------------------------
     // Governs sequence state lifecycles and automated cleanup.
