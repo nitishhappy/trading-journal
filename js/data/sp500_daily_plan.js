@@ -1,6 +1,72 @@
 window.sp500DailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-10-30T19:04:58+05:30",
+    "timeDisplay": "07:04 PM, Oct 30",
+    "price": "7622.0",
+    "bias": "bullish",
+    "behavior": "[FRI 19:04] [SP_B1]: Liquidity sweep below 7,623.50 followed by immediate rejection wick and 5M bullish displacement close back above 7,625.00",
+    "tp": "7645.00 / 7660.00",
+    "sl": "7614.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:04:58+05:30",
+    "timeDisplay": "07:04 PM, Oct 30",
+    "price": "7635.0",
+    "bias": "bullish",
+    "behavior": "[FRI 19:04] [SP_B2]: Decisive 5M/15M candle close breaking above opening range high (7,633.81) with expanding green volume entering gap void",
+    "tp": "7655.00 / 7675.00",
+    "sl": "7624.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:04:58+05:30",
+    "timeDisplay": "07:04 PM, Oct 30",
+    "price": "7665.0",
+    "bias": "bearish",
+    "behavior": "[FRI 19:04] [SP_S1]: Push into overhead 7,660.00\u20137,668.00 ES-correlated supply block showing long upper wicks and a 5M bearish engulfing close",
+    "tp": "7640.00 / 7625.00",
+    "sl": "7676.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:04:58+05:30",
+    "timeDisplay": "07:04 PM, Oct 30",
+    "price": "7619.0",
+    "bias": "bearish",
+    "behavior": "[FRI 19:04] [SP_S2]: Confirmed 5M displacement candle closing below 7,620.00 with expanding sell volume triggering long-liquidation cascade",
+    "tp": "7600.00 / 7585.00",
+    "sl": "7629.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:04:58+05:30",
+    "timeDisplay": "07:04 PM, Oct 30",
+    "price": "7600.0",
+    "bias": "bullish",
+    "behavior": "[FRI 19:04] [SP_KB3]: Round-number institutional benchmark & deep structural support floor",
+    "tp": "7625.00 / 7645.00",
+    "sl": "7588.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-10-30T19:04:58+05:30",
+    "timeDisplay": "07:04 PM, Oct 30",
+    "price": "7691.0",
+    "bias": "bearish",
+    "behavior": "[FRI 19:04] [SP_KS2]: Previous Day Low (7,690.94) acting as heavy breaker supply on retest",
+    "tp": "7665.00 / 7640.00",
+    "sl": "7703.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T18:04:31+05:30",
     "timeDisplay": "06:04 PM, Oct 30",
     "price": "7668.0",
@@ -234,6 +300,15 @@ window.sp500DailyPlanData = [
 
 window.sp500DailyPlanSummary = [
 {
+    "id": "SP500_20261030_190500",
+    "timestamp": "2026-10-30T19:05:00+05:30",
+    "timeDisplay": "07:05 PM, Oct 30",
+    "spot": "7625.50",
+    "trigger": "Scheduled 07:00 PM IST Update (US RTH Opening Bell & ORB",
+    "source": "SP500-AI",
+    "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (07:00 PM IST - Oct 30, 2026 | Spot: $7,625.50 | Trigger: Scheduled 07:00 PM IST Update (US RTH Opening Bell & ORB))\n\n### 1. Global Macro & US Intermarket Dynamics:\n- **Cash Open Gap-Down Impulse**: The Regular Trading Hours (RTH) cash session opened with a severe opening gap-down at 7,631.07 vs. yesterday's close of 7,720.39 (~90-point cash discount). Early 1-minute to 5-minute price discovery is pressing into a session low of 7,623.57 with immediate resistance at the opening high of 7,633.81.\n- **Volatility Regime (VIX @ 18.68)**: The CBOE Volatility Index remains elevated near 18.70, reflecting persistent institutional hedging and expanding the expected opening range breakout (ORB) volatility corridor. Elevated implied volatility mandates wide stop buffers and strict avoidance of unconfirmed mean-reversion trades.\n- **US Dollar Index (DXY @ 101.90)**: The US Dollar Index is holding steady near 101.90, displaying neutral-to-soft intraday positioning. While dollar stabilization removes an aggressive headwind for multinational equities, broader index participation is dominated by tech/growth de-risking.\n- **10Y Treasury Yield (TNX @ 4.927%)**: Benchmark 10-year yields are consolidating near 4.93%, easing slightly from the psychological 5.00% barrier. While this provides minor relief, elevated debt service yields continue to compress equity index valuation multiples.\n- **Equity Futures Confluence (ES @ 7,669.25 | NQ @ 28,789.25)**: ES futures are attempting to stabilize around the 7,665.00–7,670.00 region, while NQ remains heavy near 28,790.00. Cash spot trading at 7,625.50 indicates direct discount pricing into deep macro demand pools.\n- **US Macro News Guard**: Clean calendar across all major US economic releases for the remainder of the session. Market direction will be strictly dictated by RTH 15-Minute Opening Range (07:00 PM – 07:15 PM IST / 09:30 AM – 09:45 AM EDT) liquidity dynamics.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n- **Session Reference Levels & Gap Structure**:\n  - **Previous Day High (PDH)**: **7,732.21**\n  - **Previous Day Low (PDL)**: **7,690.94**\n  - **Previous Day Close (PDC)**: **7,720.39**\n  - **Current Day High (ORB High)**: **7,633.81**\n  - **Current Day Low (ORB Low)**: **7,623.57**\n  - **48H Equilibrium**: **7,711.58** (Discount zone active below 7,660.00)\n- **Institutional Liquidity & Order Block Mechanics**:\n  - **Massive Virgin Fair Value Gap (FVG: 7,635.00 – 7,690.00)**: The aggressive opening gap has left a 55-point overhead liquidity vacuum between the opening bell high (7,633.81) and the previous day low floor (7,690.94). Any sustained reclamation of 7,635.00 triggers aggressive short-covering into this imbalance.\n  - **15-Minute Opening Range Filter (ORB)**: With spot probing 7,623.57–7,633.81, the priority is monitoring whether smart money absorbs liquidity at the 7,620.00 demand floor or initiates an algorithmic continuation breakdown toward 7,600.00.\n  - **Liquidity Pools**:\n    - **Buy-Side Liquidity (BSL)**: Resting above 7,634.00 (ORB High), 7,665.00 (ES parity pivot), and 7,690.94 (PDL breaker).\n    - **Sell-Side Liquidity (SSL)**: Resting below 7,623.57 (Opening Low), 7,615.00 (structural swing stops), and 7,600.00 (psychological institutional milestone).\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Compression Corridor**: **7,624.00 – 7,633.00** (~9 Index Points).\n- **Execution Guardrails**: The price corridor defined by the immediate 15-minute Opening Range (7,623.57 – 7,633.81) is experiencing erratic tick churn and algorithmic spread widening.\n- **Tactical Directive**: **STRICT NO-TRADE ZONE** inside 7,624.00–7,633.00 until the 15-minute opening candle closes firmly (07:15 PM IST / 09:45 AM EDT). Trading inside this opening noise carries extreme risk of whipsaw stop runs. Wait for confirmed boundary displacement.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n- **Bullish Momentum Acceleration Level (Above 7,635.00)**:\n  - A decisive 5M candle close clearing above 7,635.00 sweeps initial opening shorts, triggering a rapid short-squeeze into the untraded opening gap void, targeting 7,652.00 and 7,668.00 in high-velocity expansion.\n- **Bearish Liquidation Cascade Level (Below 7,620.00)**:\n  - A sustained 5M close breaching 7,620.00 completes an opening breakdown, cascading stop-loss selling toward the round-number institutional psychological magnet at 7,600.00 and 7,585.00.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | Bullish / Demand Sweep Absorption Long | **7,622.00** | Liquidity sweep below 7,623.50 followed by immediate rejection wick and 5M bullish displacement close back above 7,625.00 | 7,645.00 / 7,660.00 | 7,614.00 | 1:2.8 |\n| **[SP_B2]** | Bullish / Opening Range Breakout (ORB) Long | **7,635.00** | Decisive 5M/15M candle close breaking above opening range high (7,633.81) with expanding green volume entering gap void | 7,655.00 / 7,675.00 | 7,624.00 | 1:2.7 |\n| **[SP_S1]** | Bearish / Gap Rejection & Supply Short | **7,665.00** | Push into overhead 7,660.00–7,668.00 ES-correlated supply block showing long upper wicks and a 5M bearish engulfing close | 7,640.00 / 7,625.00 | 7,676.00 | 1:2.6 |\n| **[SP_S2]** | Bearish / Opening Range Breakdown Short | **7,619.00** | Confirmed 5M displacement candle closing below 7,620.00 with expanding sell volume triggering long-liquidation cascade | 7,600.00 / 7,585.00 | 7,629.00 | 1:2.9 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **7,622.00** | Key Demand Sweep Floor | **[SP_KB1]** | Opening low sweep zone & institutional intraday absorption support | 7,645.00 / 7,660.00 | 7,614.00 |\n| **7,635.00** | ORB High Breakout Pivot | **[SP_KB2]** | 15M opening range high clearance triggering gap-fill short-covering | 7,655.00 / 7,675.00 | 7,624.00 |\n| **7,600.00** | Major Psychological Demand | **[SP_KB3]** | Round-number institutional benchmark & deep structural support floor | 7,625.00 / 7,645.00 | 7,588.00 |\n| **7,585.00** | Macro Discount Liquidity Pool | **[SP_KB4]** | Multi-week swing discount threshold and high-volume demand node | 7,615.00 / 7,635.00 | 7,572.00 |\n| **7,665.00** | Intermediate Supply Resistance | **[SP_KS1]** | Pre-market ES futures parity ceiling and initial gap-fill obstacle | 7,640.00 / 7,625.00 | 7,676.00 |\n| **7,691.00** | Major Breaker Ceiling / PDL | **[SP_KS2]** | Previous Day Low (7,690.94) acting as heavy breaker supply on retest | 7,665.00 / 7,640.00 | 7,703.00 |"
+  },
+  {
     "id": "SP500_20261030_180433",
     "timestamp": "2026-10-30T18:04:33+05:30",
     "timeDisplay": "06:04 PM, Oct 30",
