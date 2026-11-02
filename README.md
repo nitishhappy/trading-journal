@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.85 - 03 Nov 2026 - Fix Telemetry Badge ID Collision & Correct Market Hours Timestamp Offset
+- **Telemetry Badge Collision Fix (`nifty_interactive_chart.html`)**:
+  - Resolved DOM id collision where `#feed-status-badge` was being overwritten by `updateFeedStatusBadge(candles)` with `MARKET CLOSED`.
+  - Promoted `#vault-telemetry-badge` to the chart title bar directly alongside `NSE:NIFTY50 (5M)` so `💻 Local Vault (4,050 Bars)` / `☁️ Cloud Feed (30D)` is immediately visible without scrolling.
+  - Decoupled market open/closed status (`#market-status-badge`) from storage telemetry (`#vault-telemetry-badge`).
+- **Nifty Market Hours Timestamp Fix (`js/data/nifty_candles.js`, `market_data_store.py`)**:
+  - Removed duplicate `+ IST_OFFSET_SEC` (+19,800s) from `export_nifty_candles_js()` in `market_data_store.py`.
+  - Re-exported 4,050 continuous candles, ensuring exact NSE trading hours alignment from 09:15 AM to 03:25 PM with zero post-market drift.
+
 ### v2.3.84 - 03 Nov 2026 - Local SQLite Candle Vault Integration & Seamless Dual-Mode Environment Bridge for Nifty Interactive Chart
 - **Nifty Local SQLite Vault Integration (`nifty_interactive_chart.html`, `market_data_store.py`, `sync_briefing_to_daily_plan.py`)**:
   - Implemented `export_nifty_candles_js()` in `common_ai_ticker_utilities/market_data_store.py` to continuously export up to 5,000 5-minute and 15-minute candles (~3 months of continuous data from `nifty_market_data.db`) into `trading-journal/js/data/nifty_candles.js`.

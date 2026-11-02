@@ -1007,9 +1007,7 @@
                 <div class="timer-badge">
                     <span>🔄</span> Auto Refresh: <span id="refresh-timer">60s</span>
                 </div>
-                <div id="feed-status-badge" class="timer-badge" style="color: #94a3b8; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12);" title="Checking candle feed source...">
-                    <span>📡</span> <span id="feed-status-text">Checking Feed...</span>
-                </div>
+
             </div>
             <button class="tabs-nav-btn tabs-nav-right" id="controls-scroll-right" aria-label="Scroll controls right" title="Scroll right">
                 <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1025,7 +1023,8 @@
             <div class="chart-toolbar">
                 <div class="symbol-title">
                     <span>NSE:NIFTY50 (5M)</span>
-                    <span id="feed-status-badge" class="feed-badge">● UPSTOX REALTIME API</span>
+                    <span id="market-status-badge" class="feed-badge">● UPSTOX REALTIME API</span>
+                    <span id="vault-telemetry-badge" class="feed-badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); font-weight: 600;" title="Sourced directly from local SQLite database (nifty_market_data.db)">💻 Local Vault (4,050 Bars)</span>
                     <div id="ohlc-legend" class="ohlc-legend-bar">
                         <span id="ohlc-symbol" style="font-weight: 700; color: #38bdf8;">NSE:NIFTY50</span>
                         <span>O: <strong id="ohlc-o">--</strong></span>
@@ -1855,7 +1854,7 @@
         }
 
         function updateFeedStatusBadge(candles) {
-            const badge = document.getElementById('feed-status-badge');
+            const badge = document.getElementById('market-status-badge') || document.getElementById('feed-status-badge');
             if (!badge) return;
 
             if (!candles || !Array.isArray(candles) || candles.length === 0) {
@@ -1880,21 +1879,20 @@
         }
 
         function updateFeedBadge(mode, count = 0) {
-            const badge = document.getElementById('feed-status-badge');
-            const textEl = document.getElementById('feed-status-text');
+            const badge = document.getElementById('vault-telemetry-badge');
             if (!badge) return;
             if (mode === 'local') {
                 badge.style.color = '#22c55e';
                 badge.style.background = 'rgba(34, 197, 94, 0.15)';
                 badge.style.borderColor = 'rgba(34, 197, 94, 0.3)';
                 badge.title = 'Sourced directly from local SQLite database (nifty_market_data.db) with multi-month retention.';
-                if (textEl) textEl.innerText = `Local Vault (${count.toLocaleString()} Bars)`;
+                badge.innerHTML = `💻 Local Vault (${count.toLocaleString()} Bars)`;
             } else {
                 badge.style.color = '#38bdf8';
                 badge.style.background = 'rgba(56, 189, 248, 0.15)';
                 badge.style.borderColor = 'rgba(56, 189, 248, 0.3)';
                 badge.title = 'Sourced from Vercel / Yahoo 30-day continuous rolling feed.';
-                if (textEl) textEl.innerText = `Cloud Feed (30D)`;
+                badge.innerHTML = `☁️ Cloud Feed (30D)`;
             }
         }
 
