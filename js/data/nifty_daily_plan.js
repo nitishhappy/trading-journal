@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T09:47:54+05:30",
+    "timeDisplay": "09:47 AM, Nov 02",
+    "price": "23305",
+    "bias": "bullish",
+    "behavior": "[MON 09:47] [B1]: Retest of 23,285.00 - 23,295.00 prior ORB High zone that holds with a 5m close above 23,305.00 (futures vol >= 1.2x)",
+    "tp": "23,350 / 23,390",
+    "sl": "23,275",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:47:54+05:30",
+    "timeDisplay": "09:47 AM, Nov 02",
+    "price": "23330",
+    "bias": "bullish",
+    "behavior": "[MON 09:47] [B2]: Sustained 5m close firmly ABOVE 23,330.00 with active futures volume expansion (>=1.5x avg)",
+    "tp": "23,380 / 23,430",
+    "sl": "23,290",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:47:54+05:30",
+    "timeDisplay": "09:47 AM, Nov 02",
+    "price": "23280",
+    "bias": "bearish",
+    "behavior": "[MON 09:47] [S1]: Rejection above 23,325.00 followed by a 5m close back below 23,280.00 with expanding red futures volume",
+    "tp": "23,240 / 23,215",
+    "sl": "23,315",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:47:54+05:30",
+    "timeDisplay": "09:47 AM, Nov 02",
+    "price": "23210",
+    "bias": "bearish",
+    "behavior": "[MON 09:47] [S2]: High-momentum 5m close firmly BELOW 23,210.00 breaking 23,211.80 Day Low with heavy futures volume (>=1.5x avg)",
+    "tp": "23,160 / 23,110",
+    "sl": "23,245",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T09:26:59+05:30",
     "timeDisplay": "09:26 AM, Nov 02",
     "price": "23225",
@@ -1629,50 +1673,6 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-26T09:47:12+05:30",
-    "timeDisplay": "09:47 AM, Oct 26",
-    "price": "22410",
-    "bias": "bullish",
-    "behavior": "[MON 09:47] [B1]: Spot sweeps sell-side liquidity below 22,387.35 and prints a strong 5m reclaim close ABOVE 22,410 with expanding green futures volume",
-    "tp": "22,465 / 22,520",
-    "sl": "22,375",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T09:47:12+05:30",
-    "timeDisplay": "09:47 AM, Oct 26",
-    "price": "22525",
-    "bias": "bullish",
-    "behavior": "[MON 09:47] [B2]: Sustained 5m close ABOVE Day High 22,525 with active futures volume confirming absorption",
-    "tp": "22,585 / 22,635",
-    "sl": "22,485",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T09:47:12+05:30",
-    "timeDisplay": "09:47 AM, Oct 26",
-    "price": "22495",
-    "bias": "bearish",
-    "behavior": "[MON 09:47] [S1]: Rejection from 22,520-22,525 trap zone with decisive 5m close BELOW 22,495",
-    "tp": "22,445 / 22,390",
-    "sl": "22,535",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T09:47:12+05:30",
-    "timeDisplay": "09:47 AM, Oct 26",
-    "price": "22385",
-    "bias": "bearish",
-    "behavior": "[MON 09:47] [S2]: Decisive 5m close BELOW 22,385 with expanding red futures volume breaking morning structure",
-    "tp": "22,330 / 22,275",
-    "sl": "22,425",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-26T09:32:15+05:30",
     "timeDisplay": "09:32 AM, Oct 26",
     "price": "23080",
@@ -1807,6 +1807,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261102_094756",
+    "timestamp": "2026-11-02T09:47:56+05:30",
+    "timeDisplay": "09:47 AM, Nov 02",
+    "spot": "23318.05",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23318.05 > Max Plan Target $23295.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:45 AM IST - Nov 02, 2026 | Spot: 23318.05 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23318.05 > Max Plan Target $23295.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Intraday Breakout Vacuum & Compression Pocket (23,295.00 - 23,330.00): Following the morning breakout above the 15-minute Opening Range High (23,292.55) to current spot (23,318.05), price is entering a digestion band right around the 23,300 strike zone. Nifty Futures volume is running at baseline (1.0x 8-bar average), indicating that institutional participation is absorbing supply rather than violently expanding. Entering unconfirmed market orders within this 35-point pocket exposes option buyers to rapid two-way premium decay and consolidation wicks. Stand aside until either a clean retest or momentum extension prints.\n- Sub-ORB High Mean Reversion Buffer (23,250.00 - 23,290.00): In the event of a false breakout slip back beneath 23,292.55, this zone represents an equilibrium chop corridor where price may oscillate before finding clear directional follow-through.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Day-High Continuation] (Sustained 5m close above 23,330.00): A decisive 5-minute candle close above 23,330.00 backed by expanding Nifty Futures volume (>=1.5x 8-bar avg) will trigger an immediate gamma squeeze as trapped 23,300 CE writers rush to cover, rapidly accelerating momentum toward 23,380.00 and 23,430.00.\n- [Bullish Retest & Breakout Defense] (Retest of 23,285.00 - 23,295.00 ORB High zone with 5m bullish reclaim above 23,305.00): Price pulls back to test the prior 15M ORB High (23,292.55), absorbs profit-taking, and prints a strong bullish rejection candle closing back above 23,305.00 with futures volume >= 1.2x avg, offering a high-probability continuation long toward 23,350.00 and 23,390.00.\n- [Bearish Failed Breakout & Bull-Trap Reversal] (Rejection above 23,325.00 followed by 5m close below 23,280.00): Price fails to sustain above the morning high, printing long upper wicks, and falls back below 23,280.00 on expanding red futures volume, trapping breakout longs and initiating a sharp rotational unwinding toward 23,240.00 and 23,215.00.\n- [Bearish Day Low Breakdown Flush] (Decisive 5m close below 23,210.00): A severe trend reversal slicing below the morning low of 23,211.80 with heavy futures volume (>=1.5x avg) triggers panic liquidation and put expansion down toward 23,160.00 and 23,110.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB Breakout Retest & Demand Defense): Retest of the 23,285.00 - 23,295.00 prior ORB High zone that holds and prints a strong 5-min bullish candle closing above 23,305.00 with Nifty Futures volume >= 1.2x avg. | TP: 23,350.00 / 23,390.00 | SL: 23,275.00 | 💡 Buy 23300 CE + Sell 23350 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Momentum Extension): Enter on a strong 5-min candle closing firmly ABOVE 23,330.00 (expanding beyond the 23,318.05 morning high) backed by expanding Nifty Futures volume >= 1.5x avg. | TP: 23,380.00 / 23,430.00 | SL: 23,290.00 | 💡 Buy 23350 CE + Sell 23400 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Failed Breakout Rejection & Bull Trap): Price rejects from 23,325.00 - 23,335.00 and prints a 5-min bearish candle closing back BELOW 23,280.00 with expanding red Nifty Futures volume. | TP: 23,240.00 / 23,215.00 | SL: 23,315.00 | 💡 Buy 23300 PE + Sell 23250 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown & Trend Flush): High-momentum 5-min candle closing firmly BELOW 23,210.00 (decisively breaking 23,211.80 Day Low) with heavy Nifty Futures volume >= 1.5x avg. | TP: 23,160.00 / 23,110.00 | SL: 23,245.00 | 💡 Buy 23200 PE + Sell 23150 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261102_092702",
     "timestamp": "2026-11-02T09:27:02+05:30",
     "timeDisplay": "09:27 AM, Nov 02",
