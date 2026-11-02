@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T14:46:05+05:30",
+    "timeDisplay": "02:46 PM, Nov 02",
+    "price": "23300",
+    "bias": "bullish",
+    "behavior": "[MON 14:46] [B1]: Bullish rejection / wick confirmation on 5m chart holding above the 23,295-23,305 retest shelf",
+    "tp": "23,360 / 23,400",
+    "sl": "23,275",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T14:46:05+05:30",
+    "timeDisplay": "02:46 PM, Nov 02",
+    "price": "23365",
+    "bias": "bullish",
+    "behavior": "[MON 14:46] [B2]: Sustained 5m close ABOVE 23,365 with active futures volume confirming Day High absorption",
+    "tp": "23,415 / 23,460",
+    "sl": "23,325",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T14:46:05+05:30",
+    "timeDisplay": "02:46 PM, Nov 02",
+    "price": "23360",
+    "bias": "bearish",
+    "behavior": "[MON 14:46] [S1]: Bearish engulfing or rejection wick at Day High 23,355-23,365 resistance band",
+    "tp": "23,300 / 23,265",
+    "sl": "23,385",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T14:46:05+05:30",
+    "timeDisplay": "02:46 PM, Nov 02",
+    "price": "23285",
+    "bias": "bearish",
+    "behavior": "[MON 14:46] [S2]: Decisive 5m close BELOW 23,285 breaking back into prior morning range with expanding futures volume",
+    "tp": "23,230 / 23,190",
+    "sl": "23,320",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T13:31:26+05:30",
     "timeDisplay": "01:31 PM, Nov 02",
     "price": "23225",
@@ -1939,6 +1983,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261102_144608",
+    "timestamp": "2026-11-02T14:46:08+05:30",
+    "timeDisplay": "02:46 PM, Nov 02",
+    "spot": "23321.15",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23321.15 > Max Plan Target $23295.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:45 PM IST - Nov 02, 2026 | Spot: 23321.15 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23321.15 > Max Plan Target $23295.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23295.00 – 23340.00 Spot Index zone.\n- Logic: Nifty has extended beyond the morning 15M ORB High (23292.55) and printed a Day High of 23360.50 before cooling off. Between 23295 (the breakout retest support) and 23340 (intraday consolidation resistance below Day High), option decay is high with 23300 and 23350 straddle/strangle writing dominating open interest. Trading inside this 45-point band carries poor risk-to-reward and high theta decay risk into the closing hour.\n- Action: Strictly NO fresh entries inside 23295 – 23340. Wait for clean structural expansion above 23365 or a breakdown below 23285.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Momentum Expansion] (Above 23365.00 Spot): A decisive 5-minute candle close above Day High (23360.50) with expanding Nifty Futures volume will trigger trailing call stops and short-covering acceleration toward 23415 and 23460.\n- [Bearish Liquidation Flush] (Below 23285.00 Spot): A clean 5-minute candle close below the broken ORB High/retest floor at 23285 will trap late breakout buyers and initiate long unwinding momentum down into 23230 and 23190.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Retest Bounce): 5-min bullish rejection candle (hammer / bullish pin bar) holding firmly above the 23295 - 23305 retest shelf with green futures volume. | TP: 23360 / 23400 | SL: 23275 | 💡 Buy 23300 CE + Sell 23350 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout): Sustained 5-min candle close ABOVE 23365.00 with active futures volume confirming institutional absorption of the 23360.50 Day High. | TP: 23415 / 23460 | SL: 23325 | 💡 Buy 23350 CE + Sell 23400 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Exhaustion Reversal): Bearish rejection or shooting star candle at 23355 - 23365 confirming an intraday double-top failure with dry futures volume. | TP: 23300 / 23265 | SL: 23385 | 💡 Buy 23350 PE + Sell 23300 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Failed Breakout Breakdown): Decisive 5-min candle close BELOW 23285.00 reclaiming the old morning range and confirming a false breakout trap. | TP: 23230 / 23190 | SL: 23320 | 💡 Buy 23300 PE + Sell 23250 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261102_133132",
     "timestamp": "2026-11-02T13:31:32+05:30",
     "timeDisplay": "01:31 PM, Nov 02",
