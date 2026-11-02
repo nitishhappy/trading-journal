@@ -3320,6 +3320,21 @@ window.toggleMaximizePanel = function(btn, event) {
             runSilentLiveEvaluation({ forceScroll: !hasAutoScrolledOnLoad });
             startLevelsPolling();
             autoSyncDailyPlan(false, false);
+            const currentAsset = window.currentActiveAsset || 'NIFTY';
+            const activeMap = {
+                'NIFTY': btnNifty,
+                'SENSEX': btnSensex,
+                'GOLD': btnGold,
+                'BTC': btnBtc,
+                'SP500': btnSp500,
+                'EURUSD': btnEurUsd
+            };
+            const currentBtn = activeMap[currentAsset] || btnNifty;
+            if (currentBtn && typeof currentBtn.scrollIntoView === 'function') {
+                setTimeout(() => {
+                    currentBtn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+                }, 100);
+            }
         } else {
             isLevelsViewActive = false;
             if (!isLiveAlertsOn) {
@@ -3338,8 +3353,15 @@ window.toggleMaximizePanel = function(btn, event) {
     function setActiveAssetButton(activeBtn) {
         [btnNifty, btnSensex, btnGold, btnBtc, btnSp500, btnEurUsd].forEach(b => {
             if (!b) return;
+            const hadDot = b.classList.contains('btn-tab-updated');
             b.className = (b === activeBtn) ? 'btn-primary' : 'btn-secondary';
+            if (hadDot && b !== activeBtn) {
+                b.classList.add('btn-tab-updated');
+            }
         });
+        if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
+            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+        }
     }
 
     if (btnNifty && btnGold) {

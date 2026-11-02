@@ -4793,3 +4793,45 @@ button, a, input, select, textarea, .collapsible-header, .tab, .main-tab, .dash-
   background: rgba(0, 0, 0, 0.1);
 }
 
+/* ===================== Levels Asset Toolbar ===================== */
+.levels-asset-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 15px;
+  padding: 8px 10px;
+  background: var(--surface-2);
+  border-radius: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.levels-asset-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+.levels-asset-toolbar button {
+  width: auto;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 860px) {
+  .levels-asset-toolbar {
+    justify-content: center;
+  }
+}
+
+

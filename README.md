@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.94 - 03 Nov 2026 - Modernized Option B Chart Header & Dedicated Bell Button Across All 6 Interactive Charts
+- **Full Rollout to All 6 Asset Charts**:
+  - Implemented the modern Option B header and expandable floating glass tools pill across all 6 interactive charts: `nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, and `eurusd_interactive_chart.html`.
+  - Ultra-slim 38px top header featuring typographic price ticker (`Current Price` + `Points Gain` + `% Gain`), zero indicator clutter in the OHLC bar, and sleek monochromatic status capsule (`● Live / Closed • MM:SS`) with telemetry popover.
+- **Dedicated Notifications Bell Button & Vivid Accent Aesthetics**:
+  - Dedicated `Notifications` bell button next to Sizer with pure SVG bell icon (Green `#10b981` when notifications are active, Red `#f43f5e` when paused).
+  - Warm mustard orange `Sizer` button (`#fbbf24`), rich purple `Levels` button (`#c084fc`, active `#8b5cf6`), and vivid cyan `Snap` button (`#38bdf8`) with rich purple glows for active tools.
+- **AI Briefing Pin Clearance & Asset Formatting**:
+  - Floating tools pill positioned at `top: 32px; left: 12px;` to safely clear the AI Briefing vertical pins rendered at `y = 4..24px`.
+  - Strict preservation of asset-specific numeric precision (Indian INR formatting for Nifty/Sensex, USD currency prefix for BTC/Gold/S&P, 4-5 decimals for Forex EUR/USD) and dual timeframe selectors (5M/15M) on BTC and Gold.
+
 ### v2.3.93 - 03 Nov 2026 - Custom Dark TradingView Calendar Component & Standalone Chart Jump (All 6 Interactive Charts)
 - **Standalone Chart Viewport Jump (Non-Replay)**:
   - Added standalone chart jumping via `📍 Jump to Date` and standalone `📅 Jump` pill: smoothly navigates and centers the chart timescale on any historical date and time without slicing candles or forcing replay mode, keeping developing live candles and full context intact.
