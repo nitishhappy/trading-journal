@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T13:31:26+05:30",
+    "timeDisplay": "01:31 PM, Nov 02",
+    "price": "23225",
+    "bias": "bullish",
+    "behavior": "[MON 13:31] [B1]: Price sweeps Day Low (23,210.65) into 23,205\u201323,215, rejects lower prices with a bullish 5m close back above 23,225",
+    "tp": "23,275 / 23,295",
+    "sl": "23,195",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T13:31:26+05:30",
+    "timeDisplay": "01:31 PM, Nov 02",
+    "price": "23295",
+    "bias": "bullish",
+    "behavior": "[MON 13:31] [B2]: Sustained 5m close ABOVE 23,295 with active futures volume confirming absorption of morning ORB ceiling",
+    "tp": "23,360 / 23,410",
+    "sl": "23,255",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T13:31:26+05:30",
+    "timeDisplay": "01:31 PM, Nov 02",
+    "price": "23275",
+    "bias": "bearish",
+    "behavior": "[MON 13:31] [S1]: Price tests 23,285\u201323,295 near 15M ORB High, shows upper wick rejection, and closes back below 23,275",
+    "tp": "23,235 / 23,215",
+    "sl": "23,310",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T13:31:26+05:30",
+    "timeDisplay": "01:31 PM, Nov 02",
+    "price": "23205",
+    "bias": "bearish",
+    "behavior": "[MON 13:31] [S2]: Clean, sustained 5m close BELOW 23,205 breaking Day Low (23,210.65) and 15M ORB Low with expanding futures volume (> 1.3x)",
+    "tp": "23,150 / 23,100",
+    "sl": "23,245",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T13:01:36+05:30",
     "timeDisplay": "01:01 PM, Nov 02",
     "price": "23305",
@@ -1895,6 +1939,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261102_133132",
+    "timestamp": "2026-11-02T13:31:32+05:30",
+    "timeDisplay": "01:31 PM, Nov 02",
+    "spot": "23238",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:30 PM IST - Nov 02, 2026 | Spot: 23238 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Spot Range 23,215 – 23,285: Spot price (23,238) is rotating in the lower-mid quadrant of the morning 15M Opening Range (23,211.80 – 23,292.55). Within this 70-point corridor, price action is dominated by two-way premium decay, lack of directional volume commitment (1.0x futures volume), and mean-reverting pin action.\n- Tactical Directive: Strictly avoid initiating naked directional option buys inside 23,215 – 23,285. Premature entries within this bracket face severe theta decay and false intraday wicks; wait patiently for decisive boundary triggers.\n\n4. High Momentum / Explosive Zones:\n- Downside Breakdown / Long Unwinding Expansion (Sustained 5m close below 23,205): A clean breach of Day Low (23,210.65) and the 15M ORB Low triggers panic stop-loss runs and long unwinding, opening a high-speed drop toward 23,150 and 23,100.\n- Upside Breakout / Short-Covering Squeeze (Sustained 5m close above 23,295): Institutional absorption above the 15M ORB High (23,292.55) forces call-side intraday gamma covering, propelling a rapid push toward Day High (23,360.50) and 23,410.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Support Sweep Reversal Long): Price sweeps Day Low (23,210.65) into 23,205–23,215, rejects lower prices with a strong 5m bullish candle, and closes back above 23,225 with futures volume > 1.2x. | TP: 23,275 / 23,295 | SL: 23,195 | 💡 Buy 23250 CE + Sell 23300 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (ORB High Breakout Long): Sustained 5m close ABOVE 23,295 with active futures volume confirming absorption, breaking out of the 15M ORB ceiling (23,292.55). | TP: 23,360 / 23,410 | SL: 23,255 | 💡 Buy 23300 CE + Sell 23350 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (ORB High Rejection / Supply Fade Short): Price tests 23,285–23,295 near the 15M ORB High, forms a clear upper-wick rejection, and closes back below 23,275 with delta exhaustion. | TP: 23,235 / 23,215 | SL: 23,310 | 💡 Buy 23250 PE + Sell 23200 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown Short): Clean, sustained 5m close BELOW 23,205 breaking Day Low (23,210.65) and 15M ORB Low with expanding futures volume (> 1.3x) confirming long unwinding cascade. | TP: 23,150 / 23,100 | SL: 23,245 | 💡 Buy 23200 PE + Sell 23150 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261102_130139",
     "timestamp": "2026-11-02T13:01:39+05:30",
     "timeDisplay": "01:01 PM, Nov 02",
