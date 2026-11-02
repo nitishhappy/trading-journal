@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.90 - 03 Nov 2026 - Modernize & Refine Interactive Chart: Monochromatic Glass Aesthetic & Pin Clearance
+- **Monochromatic Professional Aesthetic (
+ifty_interactive_chart.html)**:
+  - Eliminated rainbow button styling and consumer emojis across the top header and floating toolbar. All buttons now share a cohesive, high-end slate/zinc palette (#94a3b8) with subtle transparent glass hover states.
+  - Replaced the heavy boxed border around the price ticker with seamless, clean typography (22,947.55  +12.95 (+0.06%)).
+  - Redesigned the status capsule into an understated, borderless indicator (● Closed • 04:57), eliminating the stamped red box effect.
+- **Chart Pin Clearance & Toolbar Optimization (
+ifty_interactive_chart.html)**:
+  - Relocated the floating tools pill from 	op: 10px to 	op: 32px, completely clearing the top 0-28px canvas zone so it never occludes or collides with the purple AI Briefing pins (10:31 AM, etc.).
+  - Compacted button labels (streamlined High R:R without long baseline text strings) and unified trigger aesthetics.
+
 ### v2.3.89 - 03 Nov 2026 - Configure Dedicated Multi-Asset Candle Export Limits (Rolling 5,000 Bars Window)
 - **Asset Config Managed Candle Rolling Window (`market_data_store.py`, `config_<asset>.txt`, `js/data/<asset>_candles.js`)**:
   - Implemented `get_candle_export_limit(asset, timeframe)` in `market_data_store.py` that dynamically reads `CANDLE_EXPORT_LIMIT_5M` and `CANDLE_EXPORT_LIMIT_15M` directly from each asset's configuration file (`config_<asset>.txt`).

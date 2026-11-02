@@ -52,26 +52,25 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.35rem;
-            padding: 0.25rem 0.6rem;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(15, 23, 42, 0.6);
+            margin-bottom: 0.25rem;
+            padding: 0.25rem 0.65rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(15, 23, 42, 0.4);
             backdrop-filter: blur(8px);
             border-radius: 8px;
             flex-shrink: 0;
-            min-height: 42px;
+            min-height: 40px;
         }
 
         .header h1 {
-            font-size: 1.05rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #60a5fa, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #f8fafc;
             display: flex;
             align-items: center;
             gap: 0.35rem;
             margin: 0;
+            letter-spacing: -0.01em;
         }
 
         .header-left {
@@ -84,98 +83,143 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.45rem;
             flex-shrink: 0;
             position: relative;
         }
 
         .timeframe-pill {
-            font-size: 0.68rem;
-            font-weight: 700;
+            font-size: 0.62rem;
+            font-weight: 600;
             font-family: 'JetBrains Mono', monospace;
-            background: rgba(56, 189, 248, 0.15);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.35);
-            padding: 0.1rem 0.35rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.05rem 0.3rem;
             border-radius: 4px;
-            margin-left: 0.2rem;
-            -webkit-text-fill-color: #38bdf8;
+            letter-spacing: 0.02em;
         }
 
         .ticker-price {
-            font-size: 0.95rem;
-            font-weight: 800;
+            font-size: 1rem;
+            font-weight: 700;
             color: #f8fafc;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Status Capsule in Top Header */
+        /* Clean Monochromatic Status Capsule */
         .status-capsule {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 3px 9px;
+            padding: 3px 8px;
             cursor: pointer;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            transition: all 0.2s ease;
+            font-size: 0.7rem;
+            transition: all 0.15s ease;
             user-select: none;
         }
 
         .status-capsule:hover {
-            border-color: rgba(255, 255, 255, 0.28);
-            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.07);
         }
 
         .status-dot {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: #10b981;
-            box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+            background: #64748b;
             flex-shrink: 0;
+            transition: background 0.3s;
         }
 
         .capsule-text {
-            font-weight: 700;
-            color: #10b981;
-            font-size: 0.7rem;
-            letter-spacing: 0.03em;
+            font-weight: 600;
+            color: #94a3b8;
+            font-size: 0.68rem;
+            letter-spacing: 0.02em;
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
         }
 
         .capsule-divider {
             color: #475569;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
         }
 
         .capsule-timer {
-            color: #94a3b8;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.68rem;
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+        }
+
+        /* Header action buttons */
+        .btn-header {
+            background: rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: 600;
-            font-size: 0.7rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-header:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-header.btn-levels-primary {
+            background: rgba(99, 102, 241, 0.15);
+            color: #c7d2fe;
+            border: 1px solid rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-header.btn-levels-primary:hover {
+            background: rgba(99, 102, 241, 0.25);
+            border-color: rgba(99, 102, 241, 0.5);
+            color: #fff;
+        }
+
+        .btn-header.btn-levels-primary.active {
+            background: #6366f1;
+            color: #fff;
+            border-color: #6366f1;
         }
 
         /* Telemetry Popover */
         .telemetry-popover {
             position: absolute;
-            top: calc(100% + 8px);
+            top: calc(100% + 6px);
             right: 0;
-            width: 290px;
+            width: 280px;
             background: rgba(15, 23, 42, 0.96);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
             padding: 10px 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
             z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            font-size: 0.75rem;
+            gap: 7px;
+            font-size: 0.74rem;
             animation: fadeInPopover 0.15s ease-out;
         }
 
@@ -188,10 +232,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
         }
 
         .tel-label {
@@ -212,15 +256,16 @@
 
         .btn-sm {
             padding: 0.25rem 0.5rem;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             flex: 1;
             justify-content: center;
         }
 
-        /* Floating Chart Tools Pill (Option B) */
+        /* Floating Chart Tools Pill (Option B Refined)
+           Positioned at top: 32px so it NEVER collides with the AI Briefing pins (y = 4..24px) */
         .floating-chart-tools {
             position: absolute;
-            top: 10px;
+            top: 32px;
             left: 12px;
             z-index: 25;
             user-select: none;
@@ -230,57 +275,58 @@
         .floating-pill-container {
             display: inline-flex;
             align-items: center;
-            background: rgba(15, 23, 42, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            border-radius: 20px;
-            padding: 3px 6px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 2px 4px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .floating-pill-trigger {
             background: transparent;
             border: none;
-            color: #cbd5e1;
-            font-size: 0.76rem;
+            color: #94a3b8;
+            font-size: 0.72rem;
             font-weight: 600;
-            padding: 4px 8px;
-            border-radius: 14px;
+            padding: 3px 8px;
+            border-radius: 12px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             transition: all 0.15s ease;
         }
 
         .floating-pill-trigger:hover {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.08);
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .tools-arrow {
-            font-size: 0.65rem;
-            color: #94a3b8;
+            font-size: 0.6rem;
+            color: #64748b;
             transition: transform 0.2s ease;
         }
 
         .floating-tools-expanded {
             display: flex;
             align-items: center;
-            gap: 4px;
-            padding-left: 6px;
-            border-left: 1px solid rgba(255, 255, 255, 0.12);
-            margin-left: 4px;
+            gap: 3px;
+            padding-left: 4px;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            margin-left: 2px;
         }
 
+        /* Sleek monochromatic buttons inside the floating pill */
         .btn-tool {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #94a3b8;
             font-size: 0.72rem;
-            font-weight: 600;
+            font-weight: 500;
             padding: 3px 8px;
             border-radius: 12px;
             cursor: pointer;
@@ -292,40 +338,39 @@
         }
 
         .btn-tool:hover {
-            background: rgba(139, 92, 246, 0.25);
-            border-color: rgba(139, 92, 246, 0.5);
-            color: #fff;
+            background: rgba(255, 255, 255, 0.06);
+            color: #f8fafc;
         }
 
         .btn-tool.active {
-            background: rgba(139, 92, 246, 0.4);
-            border-color: #8b5cf6;
-            color: #fff;
-            box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            border-color: rgba(255, 255, 255, 0.15);
+            font-weight: 600;
         }
 
         .btn-tool-close {
             background: transparent;
             border: none;
-            color: #94a3b8;
+            color: #64748b;
             cursor: pointer;
             font-size: 0.72rem;
-            padding: 2px 6px;
-            border-radius: 10px;
+            padding: 2px 5px;
+            border-radius: 8px;
             margin-left: 2px;
             transition: all 0.15s;
         }
 
         .btn-tool-close:hover {
-            color: #f43f5e;
-            background: rgba(244, 63, 94, 0.15);
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .tool-divider {
             width: 1px;
-            height: 14px;
-            background: rgba(255, 255, 255, 0.12);
-            margin: 0 2px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 1px;
         }
 
         .controls-wrapper {
@@ -538,23 +583,21 @@
 
         .ohlc-legend-bar {
             display: inline-flex;
-            align-items: center;
-            gap: 0.65rem;
+            align-items: baseline;
+            gap: 0.45rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            color: #cbd5e1;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 0.2rem 0.55rem;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: transparent;
+            border: none;
+            padding: 0;
             user-select: none;
         }
 
         .ohlc-chg {
-            font-weight: 700;
-            padding: 0.1rem 0.35rem;
+            font-weight: 600;
+            font-size: 0.74rem;
+            padding: 0.08rem 0.35rem;
             border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .ohlc-chg.bullish {
@@ -1232,7 +1275,7 @@
 
     <div class="header">
         <div class="header-left">
-            <h1>📈 NIFTY 50 <span class="timeframe-pill">5M</span></h1>
+            <h1>NIFTY 50 <span class="timeframe-pill">5M</span></h1>
             <div id="ohlc-legend" class="ohlc-legend-bar">
                 <span id="ticker-price" class="ticker-price">--</span>
                 <span id="ohlc-change-pill" class="ohlc-chg">--</span>
@@ -1246,10 +1289,10 @@
         </div>
 
         <div class="header-right">
-            <!-- Feed & Telemetry Capsule -->
-            <div class="status-capsule" id="status-capsule" onclick="toggleTelemetryDropdown(event)" title="Click to view feed and database telemetry">
+            <!-- Sleek Monochromatic Feed & Telemetry Capsule -->
+            <div class="status-capsule" id="status-capsule" onclick="toggleTelemetryDropdown(event)" title="Click for data feed & SQLite vault telemetry">
                 <span id="market-status-dot" class="status-dot"></span>
-                <span id="market-status-badge" class="capsule-text">LIVE</span>
+                <span id="market-status-badge" class="capsule-text">Live</span>
                 <span class="capsule-divider">•</span>
                 <span id="bar-close-badge" class="capsule-timer" title="5M Candle Close Countdown">05:00</span>
             </div>
@@ -1258,58 +1301,57 @@
             <div id="telemetry-popover" class="telemetry-popover" style="display:none;" onclick="event.stopPropagation()">
                 <div class="telemetry-item">
                     <span class="tel-label">Live Feed:</span>
-                    <span id="feed-status-detail" class="tel-val" style="color:#10b981; font-weight:700;">● UPSTOX REALTIME API</span>
+                    <span id="feed-status-detail" class="tel-val">Upstox Realtime</span>
                 </div>
                 <div class="telemetry-item">
                     <span class="tel-label">Vault Storage:</span>
-                    <span id="vault-telemetry-badge" class="tel-val" style="color:#22c55e;">💻 Local Vault (4,050 Bars)</span>
+                    <span id="vault-telemetry-badge" class="tel-val" style="color:#22c55e;">Local Vault (4,050 Bars)</span>
                 </div>
                 <div class="telemetry-item">
                     <span class="tel-label">Auto Refresh:</span>
                     <span class="tel-val" style="color:#cbd5e1;">Every 15s (<span id="refresh-timer">15s</span>)</span>
                 </div>
                 <div class="telemetry-actions">
-                    <button id="btn-manual-refresh" class="btn btn-sm">⚡ Refresh Now</button>
-                    <button id="btn-toggle-alerts" class="btn btn-sm">🔔 <span id="alert-btn-text">Enable Notifications</span></button>
+                    <button id="btn-manual-refresh" class="btn-header btn-sm">Refresh Now</button>
+                    <button id="btn-toggle-alerts" class="btn-header btn-sm"><span id="alert-btn-text">Enable Notifications</span></button>
                 </div>
             </div>
 
-            <!-- Sizer Button -->
-            <button id="btn-calc" class="btn" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
-                <span>🧮</span> Sizer
+            <!-- Sizer Button (clean text, no emoji, monochromatic) -->
+            <button id="btn-calc" class="btn-header" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator">
+                Sizer
             </button>
 
-            <!-- Primary Levels Button -->
-            <button id="btn-toggle-triggers" class="btn" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(59, 130, 246, 0.35)); color: #e0e7ff; border-color: rgba(139, 92, 246, 0.6); font-weight: 700;">
-                <span>📋</span> <span id="triggers-btn-text">Levels</span>
+            <!-- Primary Levels Button (subtle indigo accent) -->
+            <button id="btn-toggle-triggers" class="btn-header btn-levels-primary" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel">
+                <span id="triggers-btn-text">Levels</span>
             </button>
         </div>
     </div>
 
     <div class="main-container sidebar-collapsed" id="main-container">
         <!-- Chart Canvas Area -->
-        <div class="chart-section" style="padding: 0.4rem;">
+        <div class="chart-section" style="padding: 0.35rem;">
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
                 
-                <!-- Option B: Expandable Floating Glass Pill (Inside Chart Canvas) -->
+                <!-- Option B: Expandable Floating Glass Pill (Positioned at top: 32px below AI Briefing pins) -->
                 <div id="floating-chart-tools" class="floating-chart-tools">
                     <div class="floating-pill-container" id="floating-pill-container">
                         <button id="btn-chart-tools-trigger" class="floating-pill-trigger" onclick="toggleChartToolsPill(event)" title="Click to expand chart tools">
-                            <span>🛠️</span>
-                            <span class="trigger-label">Chart Tools</span>
+                            <span class="trigger-label">Tools</span>
                             <span id="tools-pill-arrow" class="tools-arrow">▼</span>
                         </button>
                         
                         <div id="floating-tools-expanded" class="floating-tools-expanded" style="display: none;">
                             <button id="btn-toggle-fit" class="btn-tool" title="Toggle between zoomed-in candle focus and fitting all levels">
-                                <span>🔍</span> <span id="fit-btn-text">Fit</span>
+                                <span id="fit-btn-text">Fit</span>
                             </button>
-                            <button id="btn-reset-zoom" class="btn-tool" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">
-                                <span>🎯</span> Snap
+                            <button id="btn-reset-zoom" class="btn-tool" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none;">
+                                Snap
                             </button>
                             <div class="indicators-dropdown-wrapper">
                                 <button id="btn-indicators-menu" class="btn-tool" onclick="toggleIndicatorsMenu(event)" title="Technical Indicators">
-                                    <span>📊</span> <span>Indicators</span> <span id="indicators-arrow" style="font-size: 0.65rem; opacity: 0.7;">▼</span>
+                                    <span>Indicators</span> <span id="indicators-arrow" style="font-size: 0.6rem; opacity: 0.7;">▼</span>
                                 </button>
                                 <div id="indicators-dropdown-menu" class="indicators-dropdown-menu" style="display: none;" onclick="event.stopPropagation()">
                                     <div style="font-size: 0.68rem; font-weight: 700; color: #94a3b8; padding: 4px 8px 6px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 4px;">
@@ -1324,15 +1366,15 @@
                                     </label>
                                 </div>
                             </div>
-                            <button id="btn-high-rr-filter" class="btn-tool" onclick="toggleHighRROnly()" title="Filter to show only High Risk:Reward setups (TP1 R:R >= baseline)">
-                                <span>⭐</span> <span id="high-rr-filter-label">High R:R</span>
+                            <button id="btn-high-rr-filter" class="btn-tool" onclick="toggleHighRROnly()" title="Filter High Risk:Reward setups (TP1 R:R >= baseline)">
+                                <span id="high-rr-filter-label">High R:R</span>
                             </button>
                             <div class="tool-divider"></div>
                             <button id="btn-add-vline" class="btn-tool" title="Click chart to place a custom vertical line">
-                                <span>📍</span> Add Line
+                                Add Line
                             </button>
                             <button id="btn-toggle-vlines" class="btn-tool active" title="Toggle AI Briefing & Custom Vertical Lines">
-                                <span>📐</span> <span id="vlines-btn-text">Lines ON</span>
+                                <span id="vlines-btn-text">Lines ON</span>
                             </button>
                             <button class="btn-tool-close" onclick="toggleChartToolsPill(event)" title="Collapse Tools">
                                 ✕
@@ -1341,7 +1383,7 @@
                     </div>
                 </div>
 
-                <canvas id="vlines-canvas"  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+                <canvas id="vlines-canvas"   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
                 <!-- Option A: Replay Floating Bar (Bottom of Chart) -->
                 <div id="chart-replay-bar" class="chart-replay-bar">
                     <button id="btn-replay-start" class="chart-replay-btn" onclick="replayJumpToStart()" title="Cut chart back to Briefing Run">⏪ Start</button>
@@ -2160,13 +2202,12 @@
             if (!badge) return;
 
             if (!candles || !Array.isArray(candles) || candles.length === 0) {
-                badge.innerText = 'UNAVAILABLE';
-                badge.className = 'capsule-text feed-badge-unavailable';
+                badge.innerText = 'Offline';
                 if (dot) {
                     dot.style.background = '#f43f5e';
                     dot.style.boxShadow = 'none';
                 }
-                if (detail) detail.innerText = '⚠️ Data Unavailable';
+                if (detail) detail.innerText = 'Data Unavailable';
                 return;
             }
 
@@ -2175,23 +2216,21 @@
             const ageMinutes = (nowSec - latestCandleTime) / 60;
 
             if (ageMinutes <= 45) {
-                badge.innerText = 'LIVE';
-                badge.className = 'capsule-text feed-badge-live';
+                badge.innerText = 'Live';
                 if (dot) {
                     dot.style.background = '#10b981';
                     dot.style.boxShadow = '0 0 6px rgba(16, 185, 129, 0.7)';
                 }
-                if (detail) detail.innerText = '● UPSTOX REALTIME API';
+                if (detail) detail.innerText = 'Upstox Realtime API';
             } else {
                 const candleDt = new Date(latestCandleTime * 1000);
                 const dateLabel = candleDt.toLocaleDateString('en-US', { timeZone: 'Asia/Kolkata', month: 'short', day: 'numeric' });
-                badge.innerText = 'CLOSED';
-                badge.className = 'capsule-text feed-badge-unavailable';
+                badge.innerText = 'Closed';
                 if (dot) {
-                    dot.style.background = '#f43f5e';
+                    dot.style.background = '#64748b';
                     dot.style.boxShadow = 'none';
                 }
-                if (detail) detail.innerText = `🔒 Market Closed (${dateLabel})`;
+                if (detail) detail.innerText = `Market Closed (${dateLabel})`;
             }
         }
 
@@ -2501,7 +2540,7 @@
             const label = document.getElementById('high-rr-filter-label');
             const baseline = getHighRRBaseline();
             if (label) {
-                label.innerText = `High R:R (≥1:${baseline})`;
+                label.innerText = 'High R:R';
             }
             if (btn) {
                 if (showHighRROnly) {
