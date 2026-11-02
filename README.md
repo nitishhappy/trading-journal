@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.89 - 03 Nov 2026 - Configure Dedicated Multi-Asset Candle Export Limits (Rolling 5,000 Bars Window)
+- **Asset Config Managed Candle Rolling Window (`market_data_store.py`, `config_<asset>.txt`, `js/data/<asset>_candles.js`)**:
+  - Implemented `get_candle_export_limit(asset, timeframe)` in `market_data_store.py` that dynamically reads `CANDLE_EXPORT_LIMIT_5M` and `CANDLE_EXPORT_LIMIT_15M` directly from each asset's configuration file (`config_<asset>.txt`).
+  - Added descriptive documented parameters `CANDLE_EXPORT_LIMIT_5M=5000` (~3.25 months of 5m bars) and `CANDLE_EXPORT_LIMIT_15M=2500` (~5 months of 15m bars) across all asset setups (`config_nifty.txt`, `config_sensex.txt`, `config_btc.txt`, `config_sp500.txt`, `config_gold.txt`).
+  - Enforced `ORDER BY epoch DESC LIMIT <limit>` with chronological `.sort_values(by="epoch")` across all 5 candle exporters (`export_nifty_candles_js`, `export_sensex_candles_js`, `export_sp500_candles_js`, `export_btc_candles_js`, `export_gold_candles_js`).
+  - Protects Vercel static CDN payload and Android mobile PWA memory by capping client bundles strictly under 600 KB while allowing the local SQLite database to retain an unlimited 100K+ bar historical vault indefinitely on laptop.
+
 ### v2.3.88 - 03 Nov 2026 - Declutter Interactive Chart Header: Option B Expandable Floating Pill & Clean Ticker
 - **Decluttered Single-Row Header (
 ifty_interactive_chart.html)**:
