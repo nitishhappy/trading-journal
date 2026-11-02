@@ -6,6 +6,7 @@
     <title>BITCOIN (BTC/USD) • Live Key Trading Levels Summary</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="js/data/btc_candles.js"></script>
     <script src="js/data/btc_daily_plan.js"></script>
     <script src="js/data/btc_historical_briefings.js"></script>
     <script src="js/config.js"></script>
@@ -973,6 +974,7 @@
                         <button id="btn-tf-15m" class="btn active" style="padding: 0.15rem 0.55rem; font-size: 0.72rem; min-height: 22px;">15M</button>
                     </div>
                     <span id="feed-status-badge" class="feed-badge feed-badge-live">● BINANCE LIVE (15M)</span>
+                    <span id="vault-telemetry-badge" class="feed-badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); font-weight: 600;" title="Sourced directly from local SQLite database (btc_market_data.db)">💻 Local Vault (5,000 Bars)</span>
                     <div id="ohlc-legend" class="ohlc-legend-bar">
                         <span id="ohlc-symbol" style="font-weight: 700; color: #f7931a;">BTC/USD</span>
                         <span>O: <strong id="ohlc-o">--</strong></span>
@@ -1928,6 +1930,60 @@
                 badge.innerText = `⚠️ LAGGING (${Math.round(ageMinutes)}m ago)`;
                 badge.className = 'feed-badge feed-badge-unavailable';
             }
+        }
+
+        function updateFeedBadge(mode, count = 0) {
+            const badge = document.getElementById('vault-telemetry-badge');
+            if (!badge) return;
+            if (mode === 'local') {
+                badge.style.color = '#22c55e';
+                badge.style.background = 'rgba(34, 197, 94, 0.15)';
+                badge.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+                badge.title = 'Sourced directly from local SQLite database (btc_market_data.db) with multi-month retention.';
+                badge.innerHTML = `💻 Local Vault (${count.toLocaleString()} Bars)`;
+            } else {
+                badge.style.color = '#38bdf8';
+                badge.style.background = 'rgba(56, 189, 248, 0.15)';
+                badge.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+                badge.title = 'Sourced from Vercel / Binance 30-day continuous rolling feed.';
+                badge.innerHTML = `☁️ Cloud Feed (30D)`;
+            }
+        }
+
+        function reloadCandlesScript() {
+            return new Promise((resolve) => {
+                const scriptId = 'dyn-btc-candles-script';
+                const oldScript = document.getElementById(scriptId);
+                if (oldScript) oldScript.remove();
+
+                const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `js/data/btc_candles.js?t=${Date.now()}`;
+                script.onload = async () => {
+                    if (!isLocalHost) {
+                        try {
+                            const ctrl = new AbortController();
+                            const tid = setTimeout(() => ctrl.abort(), 1200);
+                            const res = await fetch(`http://127.0.0.1:8080/js/data/btc_candles.js?t=${Date.now()}`, {
+                                cache: 'no-store',
+                                mode: 'cors',
+                                signal: ctrl.signal
+                            });
+                            clearTimeout(tid);
+                            if (res.ok) {
+                                const text = await res.text();
+                                const exec = new Function(text);
+                                exec.call(window);
+                            }
+                        } catch (_) {}
+                    }
+                    resolve(true);
+                };
+                script.onerror = () => resolve(false);
+                document.body.appendChild(script);
+            });
         }
 
         function reloadPlanDataScript(assetName) {
@@ -3555,6 +3611,45 @@
                                      btcCandlesLoadedTf !== tfInterval || 
                                      !allMasterCandles || 
                                      allMasterCandles.length < 500;
+
+            // 0. Primary: Local Vault (SQLite btc_market_data.db via btc_candles.js)
+            try {
+                if (typeof reloadCandlesScript === 'function') {
+                    await reloadCandlesScript();
+                }
+                if (window.btcCandlesData && Array.isArray(window.btcCandlesData.timeframe5m) && window.btcCandlesData.timeframe5m.length > 500) {
+                    const vaultCandles = tfInterval === '15m' && Array.isArray(window.btcCandlesData.timeframe15m) && window.btcCandlesData.timeframe15m.length > 0
+                        ? window.btcCandlesData.timeframe15m
+                        : window.btcCandlesData.timeframe5m;
+                    updateFeedBadge('local', vaultCandles.length);
+                    currentFeedSource = 'LOCAL_DB';
+
+                    // Merge latest forming delta from Binance
+                    try {
+                        const binRes = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=5&_t=${Date.now()}`, { cache: 'no-store' });
+                        if (binRes.ok) {
+                            const binJson = await binRes.json();
+                            if (Array.isArray(binJson) && binJson.length > 0) {
+                                const newBars = binJson.map(c => ({
+                                    time: Math.floor(c[0] / 1000) + IST_OFFSET_SEC,
+                                    open: parseFloat(parseFloat(c[1]).toFixed(2)),
+                                    high: parseFloat(parseFloat(c[2]).toFixed(2)),
+                                    low: parseFloat(parseFloat(c[3]).toFixed(2)),
+                                    close: parseFloat(parseFloat(c[4]).toFixed(2)),
+                                    volume: parseFloat(c[5]) || 0
+                                }));
+                                const candleMap = new Map();
+                                vaultCandles.forEach(c => candleMap.set(c.time, c));
+                                newBars.forEach(c => candleMap.set(c.time, c));
+                                return Array.from(candleMap.values()).sort((a, b) => a.time - b.time);
+                            }
+                        }
+                    } catch (_) {}
+                    return [...vaultCandles];
+                }
+            } catch (_ve) {
+                console.warn('[BTC Chart] Local vault note:', _ve);
+            }
 
             // 1. Direct Binance BTCUSDT klines (native CORS)
             try {

@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.87 - 03 Nov 2026 - Extend Local SQLite Candle Vault & Dual-Mode Environment Bridge to BTC, S&P 500, and Sensex
+- **Multi-Asset Local SQLite Vault Integration (`btc_interactive_chart.html`, `sp500_interactive_chart.html`, `sensex_interactive_chart.html`, `market_data_store.py`)**:
+  - **Bitcoin (BTC/USD)**: Implemented `export_btc_candles_js()` exporting up to 5,000 5-minute and 2,500 15-minute continuous bars from `btc_market_data.db` (which holds 19,187 candles from August 2026) into `js/data/btc_candles.js`. Wired dual-mode Port 8080 bridge + `#vault-telemetry-badge` in `btc_interactive_chart.html`.
+  - **S&P 500**: Implemented `export_sp500_candles_js()` exporting 2,436 5-minute continuous bars from `sp500_market_data.db` into `js/data/sp500_candles.js`. Wired dual-mode bridge + `#vault-telemetry-badge` in `sp500_interactive_chart.html`.
+  - **BSE Sensex**: Initialized dedicated local SQLite database (`sensex_market_data.db`) seeded with 1,499 continuous 5-minute bars. Implemented `export_sensex_candles_js()` and wired dual-mode bridge + `#vault-telemetry-badge` in `sensex_interactive_chart.html`.
+  - **Automated Multi-Asset Briefing Hook (`sync_briefing_to_daily_plan.py`)**: Every briefing sync run now automatically updates and exports candle stores for all active assets.
+
 ### v2.3.86 - 03 Nov 2026 - Fix Mismatched Level Card Confirmation Wording in Interactive Charts
 - **Historical Level Card Wording Fix (`nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`)**:
   - Resolved bug where historical trading plan cards (e.g., Oct 06, Oct 07) displayed outdated static trigger logic from an unrelated briefing (Oct 26) due to unbounded distance matching in `getConfirmationPriceAction()`.

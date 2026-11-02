@@ -983,6 +983,7 @@
                 <div class="symbol-title">
                     <span>🇺🇸 S&P 500 (5M)</span>
                     <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
+                    <span id="vault-telemetry-badge" class="feed-badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); font-weight: 600;" title="Sourced directly from local SQLite database (sp500_market_data.db)">💻 Local Vault (2,436 Bars)</span>
                     <div id="ohlc-legend" class="ohlc-legend-bar">
                         <span id="ohlc-symbol" style="font-weight: 700; color: #60a5fa;">S&P 500</span>
                         <span>O: <strong id="ohlc-o">--</strong></span>
@@ -1833,18 +1834,56 @@
             resizeChart();
         }
 
+        function updateFeedBadge(mode, count = 0) {
+            const badge = document.getElementById('vault-telemetry-badge');
+            if (!badge) return;
+            if (mode === 'local') {
+                badge.style.color = '#22c55e';
+                badge.style.background = 'rgba(34, 197, 94, 0.15)';
+                badge.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+                badge.title = 'Sourced directly from local SQLite database (sp500_market_data.db) with multi-month retention.';
+                badge.innerHTML = `💻 Local Vault (${count.toLocaleString()} Bars)`;
+            } else {
+                badge.style.color = '#38bdf8';
+                badge.style.background = 'rgba(56, 189, 248, 0.15)';
+                badge.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+                badge.title = 'Sourced from Vercel / Yahoo 30-day continuous rolling feed.';
+                badge.innerHTML = `☁️ Cloud Feed (30D)`;
+            }
+        }
+
         function reloadCandlesScript() {
             return new Promise((resolve) => {
                 const scriptId = 'dyn-sp500-candles-script';
                 const oldScript = document.getElementById(scriptId);
                 if (oldScript) oldScript.remove();
 
+                const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/sp500_candles.js?t=${Date.now()}`;
-                const timer = setTimeout(() => resolve(false), 2500);
-                script.onload = () => { clearTimeout(timer); resolve(true); };
-                script.onerror = () => { clearTimeout(timer); resolve(false); };
+                script.onload = async () => {
+                    if (!isLocalHost) {
+                        try {
+                            const ctrl = new AbortController();
+                            const tid = setTimeout(() => ctrl.abort(), 1200);
+                            const res = await fetch(`http://127.0.0.1:8080/js/data/sp500_candles.js?t=${Date.now()}`, {
+                                cache: 'no-store',
+                                mode: 'cors',
+                                signal: ctrl.signal
+                            });
+                            clearTimeout(tid);
+                            if (res.ok) {
+                                const text = await res.text();
+                                const exec = new Function(text);
+                                exec.call(window);
+                            }
+                        } catch (_) {}
+                    }
+                    resolve(true);
+                };
+                script.onerror = () => resolve(false);
                 document.body.appendChild(script);
             });
         }
@@ -3526,6 +3565,37 @@
             const marketCandlesUrl = isLocal
                 ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`
                 : `/api/marketCandles?symbol=SP500&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`;
+
+            // 0. Primary: Local Vault (SQLite sp500_market_data.db via sp500_candles.js)
+            try {
+                if (typeof reloadCandlesScript === 'function') {
+                    await reloadCandlesScript();
+                }
+                if (window.sp500CandlesData && Array.isArray(window.sp500CandlesData.timeframe5m) && window.sp500CandlesData.timeframe5m.length > 200) {
+                    updateFeedBadge('local', window.sp500CandlesData.timeframe5m.length);
+                    console.log(`[SP500 Chart] Loaded ${window.sp500CandlesData.timeframe5m.length} candles from local SQLite vault`);
+
+                    // Merge latest forming bar
+                    try {
+                        const apiBase = isLocal ? 'https://trading-journal-sandy-three.vercel.app' : '';
+                        const liveRes = await fetch(`${apiBase}/api/marketCandles?symbol=SP500&limit=5&_t=${Date.now()}`, { cache: 'no-store' });
+                        if (liveRes.ok) {
+                            const liveJson = await liveRes.json();
+                            if (liveJson && Array.isArray(liveJson.candles) && liveJson.candles.length > 0) {
+                                const baseMap = new Map();
+                                window.sp500CandlesData.timeframe5m.forEach(c => baseMap.set(c.time, c));
+                                liveJson.candles.forEach(c => {
+                                    if (c && c.time) baseMap.set(c.time, c);
+                                });
+                                return Array.from(baseMap.values()).sort((a, b) => a.time - b.time);
+                            }
+                        }
+                    } catch (_) {}
+                    return [...window.sp500CandlesData.timeframe5m];
+                }
+            } catch (_ve) {
+                console.warn('[SP500 Chart] Local vault note:', _ve);
+            }
 
             // 1. Primary: Server-side /api/marketCandles?symbol=SP500
             try {
