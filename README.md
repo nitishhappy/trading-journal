@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.83 - 03 Nov 2026 - Fix Candle Hover & Click OHLC Header Values Across All Interactive Charts
+- **Interactive Chart Telemetry Header Fix (`nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`)**:
+  - Resolved TradingView Lightweight Charts `v4.1.1` breaking API migration where `param.seriesPrices` was deprecated and removed in favor of `param.seriesData`.
+  - Updated `updateOHLCHeader(param)` across all 6 asset charts to inspect `param.seriesData` with fallback to `param.seriesPrices` and direct timestamp matching (`currentCandlesArray.find(c => c.time === param.time)`).
+  - Updated EMA 9 and Volume series extraction to read from `param.seriesData.get(...)` (`.value` or `.close`), ensuring dynamic indicator values update alongside the hovered candle.
+  - Wired `updateOHLCHeader(param)` directly into `chartInstance.subscribeClick` across all charts so clicking or tapping on any candle (on desktop and Android mobile PWA) immediately updates the header values.
+
 ### v2.3.82 — 30 Oct 2026 — Fix SyntaxError in dashboard.js Legacy Comment Block
 - **Module Parsing Fix (`js/ui/dashboard.js`)**:
   - Removed accidental uncommented block closure `});` at line 144 within the legacy commented-out block of `js/ui/dashboard.js` that caused `Uncaught SyntaxError: Unexpected token '}'`.

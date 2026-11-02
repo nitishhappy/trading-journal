@@ -1336,10 +1336,20 @@
             if (!legendO || !currentCandlesArray || currentCandlesArray.length === 0) return;
 
             let candle = null;
-            if (param && param.time && param.seriesPrices && candleSeries) {
-                const priceData = param.seriesPrices.get(candleSeries);
-                if (priceData && priceData.open !== undefined) {
-                    candle = priceData;
+            if (param && param.time) {
+                if (param.seriesData && candleSeries && param.seriesData.has(candleSeries)) {
+                    const priceData = param.seriesData.get(candleSeries);
+                    if (priceData && priceData.open !== undefined) {
+                        candle = priceData;
+                    }
+                } else if (param.seriesPrices && candleSeries && typeof param.seriesPrices.get === 'function') {
+                    const priceData = param.seriesPrices.get(candleSeries);
+                    if (priceData && priceData.open !== undefined) {
+                        candle = priceData;
+                    }
+                }
+                if (!candle && currentCandlesArray && currentCandlesArray.length > 0) {
+                    candle = currentCandlesArray.find(c => c.time === param.time);
                 }
             }
 
@@ -1376,8 +1386,12 @@
                     if (showEMA9) {
                         emaPill.style.display = 'inline-block';
                         let emaVal = null;
-                        if (param && param.seriesPrices && emaSeries) {
-                            emaVal = param.seriesPrices.get(emaSeries);
+                        if (param && param.seriesData && emaSeries && param.seriesData.has(emaSeries)) {
+                            const emaObj = param.seriesData.get(emaSeries);
+                            emaVal = (emaObj && typeof emaObj.value === 'number') ? emaObj.value : emaObj;
+                        } else if (param && param.seriesPrices && emaSeries && typeof param.seriesPrices.get === 'function') {
+                            const emaObj = param.seriesPrices.get(emaSeries);
+                            emaVal = (emaObj && typeof emaObj.value === 'number') ? emaObj.value : emaObj;
                         }
                         if (emaVal === undefined || emaVal === null) {
                             emaVal = lastCalculatedEMAVal;
@@ -1693,6 +1707,7 @@
             // ✨ CHART CLICK EVENT LISTENER: Line -> Card Interaction & Custom Vertical Line Placement!
             chartInstance.subscribeClick((param) => {
                 if (!param || !param.point) return;
+                updateOHLCHeader(param);
 
                 if (addVLineMode) {
                     if (param.time) {
