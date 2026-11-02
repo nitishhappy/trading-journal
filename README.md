@@ -178,6 +178,15 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.84 - 03 Nov 2026 - Local SQLite Candle Vault Integration & Seamless Dual-Mode Environment Bridge for Nifty Interactive Chart
+- **Nifty Local SQLite Vault Integration (`nifty_interactive_chart.html`, `market_data_store.py`, `sync_briefing_to_daily_plan.py`)**:
+  - Implemented `export_nifty_candles_js()` in `common_ai_ticker_utilities/market_data_store.py` to continuously export up to 5,000 5-minute and 15-minute candles (~3 months of continuous data from `nifty_market_data.db`) into `trading-journal/js/data/nifty_candles.js`.
+  - Added automated export hook in `sync_nifty_candles()` and `sync_briefing_to_daily_plan.py` to keep local candle datasets continuously refreshed on every briefing run.
+  - Upgraded `nifty_interactive_chart.html` with intelligent dual-mode environment switching:
+    - **Local Vault Mode**: When running on laptop (localhost or local Port 8080 CORS server), chart connects to local SQLite vault containing 4,050+ continuous candles (dating back to August 2026) and merges today's live Upstox ticks, enabling infinite historical replay without broker 30-day cutoffs.
+    - **Cloud Mobile Mode**: When running on Android phone PWA via Vercel (where port 8080 is unreachable), the probe cleanly aborts in 1.2s and serves the lightweight rolling 30-day cloud feed from `/api/marketCandles`.
+  - Added real-time telemetry badge (`#feed-status-badge`) in chart header clearly displaying active connection: `💻 Local Vault (4,050+ Bars)` or `☁️ Cloud Feed (30D)`.
+
 ### v2.3.83 - 03 Nov 2026 - Fix Candle Hover & Click OHLC Header Values Across All Interactive Charts
 - **Interactive Chart Telemetry Header Fix (`nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`)**:
   - Resolved TradingView Lightweight Charts `v4.1.1` breaking API migration where `param.seriesPrices` was deprecated and removed in favor of `param.seriesData`.

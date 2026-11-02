@@ -1007,6 +1007,9 @@
                 <div class="timer-badge">
                     <span>🔄</span> Auto Refresh: <span id="refresh-timer">60s</span>
                 </div>
+                <div id="feed-status-badge" class="timer-badge" style="color: #94a3b8; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12);" title="Checking candle feed source...">
+                    <span>📡</span> <span id="feed-status-text">Checking Feed...</span>
+                </div>
             </div>
             <button class="tabs-nav-btn tabs-nav-right" id="controls-scroll-right" aria-label="Scroll controls right" title="Scroll right">
                 <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1876,16 +1879,56 @@
             }
         }
 
+        function updateFeedBadge(mode, count = 0) {
+            const badge = document.getElementById('feed-status-badge');
+            const textEl = document.getElementById('feed-status-text');
+            if (!badge) return;
+            if (mode === 'local') {
+                badge.style.color = '#22c55e';
+                badge.style.background = 'rgba(34, 197, 94, 0.15)';
+                badge.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+                badge.title = 'Sourced directly from local SQLite database (nifty_market_data.db) with multi-month retention.';
+                if (textEl) textEl.innerText = `Local Vault (${count.toLocaleString()} Bars)`;
+            } else {
+                badge.style.color = '#38bdf8';
+                badge.style.background = 'rgba(56, 189, 248, 0.15)';
+                badge.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+                badge.title = 'Sourced from Vercel / Yahoo 30-day continuous rolling feed.';
+                if (textEl) textEl.innerText = `Cloud Feed (30D)`;
+            }
+        }
+
         function reloadCandlesScript() {
             return new Promise((resolve) => {
                 const scriptId = 'dyn-nifty-candles-script';
                 const oldScript = document.getElementById(scriptId);
                 if (oldScript) oldScript.remove();
 
+                const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
                 const script = document.createElement('script');
                 script.id = scriptId;
                 script.src = `js/data/nifty_candles.js?t=${Date.now()}`;
-                script.onload = () => resolve(true);
+                script.onload = async () => {
+                    if (!isLocalHost) {
+                        try {
+                            const ctrl = new AbortController();
+                            const tid = setTimeout(() => ctrl.abort(), 1200);
+                            const res = await fetch(`http://127.0.0.1:8080/js/data/nifty_candles.js?t=${Date.now()}`, {
+                                cache: 'no-store',
+                                mode: 'cors',
+                                signal: ctrl.signal
+                            });
+                            clearTimeout(tid);
+                            if (res.ok) {
+                                const text = await res.text();
+                                const exec = new Function(text);
+                                exec.call(window);
+                            }
+                        } catch (_) {}
+                    }
+                    resolve(true);
+                };
                 script.onerror = () => resolve(false);
                 document.body.appendChild(script);
             });
@@ -3292,8 +3335,51 @@
             }
         }
 
-        // Fetch Realtime OHLC Candles from /api/marketCandles?symbol=NIFTY, /api/niftyCandles, or window.niftyCandlesData
+        // Fetch Realtime OHLC Candles from Local Vault (SQLite nifty_market_data.db via nifty_candles.js) or Cloud API (/api/marketCandles)
         async function fetchRealtimeNiftyCandles() {
+            const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+
+            // 1. Probe local Port 8080 CORS server or local script for full SQLite vault (4,000+ bars)
+            try {
+                if (typeof reloadCandlesScript === 'function') {
+                    await reloadCandlesScript();
+                }
+                if (window.niftyCandlesData && Array.isArray(window.niftyCandlesData.timeframe5m) && window.niftyCandlesData.timeframe5m.length > 500) {
+                    updateFeedBadge('local', window.niftyCandlesData.timeframe5m.length);
+                    console.log(`[Nifty Chart] Loaded ${window.niftyCandlesData.timeframe5m.length} candles from local SQLite vault`);
+
+                    // Try to fetch latest today's live intraday candle to merge with local historical base
+                    try {
+                        const apiBase = isLocalHost ? 'https://trading-journal-sandy-three.vercel.app' : '';
+                        const liveRes = await fetch(`${apiBase}/api/marketCandles?symbol=NIFTY&_t=${Date.now()}`, { cache: 'no-store' });
+                        if (liveRes.ok) {
+                            const liveJson = await liveRes.json();
+                            if (liveJson && liveJson.candles && Array.isArray(liveJson.candles) && liveJson.candles.length > 0) {
+                                const latestLiveCandles = liveJson.candles.map(c => {
+                                    let timeSec = typeof c.time === 'number' ? c.time : (typeof c[0] === 'number' ? c[0] : Math.floor(new Date(c.time || c[0]).getTime() / 1000));
+                                    let open = parseFloat(c.open || c[1]);
+                                    let high = parseFloat(c.high || c[2]);
+                                    let low = parseFloat(c.low || c[3]);
+                                    let close = parseFloat(c.close || c[4]);
+                                    return (!isNaN(timeSec) && !isNaN(close)) ? { time: timeSec, open, high, low, close } : null;
+                                }).filter(Boolean);
+
+                                if (latestLiveCandles.length > 0) {
+                                    const baseMap = new Map();
+                                    window.niftyCandlesData.timeframe5m.forEach(c => baseMap.set(c.time, c));
+                                    latestLiveCandles.forEach(c => baseMap.set(c.time, c));
+                                    return Array.from(baseMap.values()).sort((a, b) => a.time - b.time);
+                                }
+                            }
+                        }
+                    } catch (_le) {}
+                    return [...window.niftyCandlesData.timeframe5m];
+                }
+            } catch (e) {
+                console.warn("[Nifty Chart] Local candle vault note:", e);
+            }
+
+            // 2. Cloud Fallback (Vercel PWA / Android Mobile)
             try {
                 let planDate = '';
                 const urlDate = new URLSearchParams(window.location.search).get('date');
@@ -3301,9 +3387,7 @@
                     planDate = urlDate.trim();
                 }
                 const dateParam = planDate ? `&date=${planDate}` : '&range=1mo';
-
-                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
-                const apiBase = isLocal ? 'https://trading-journal-sandy-three.vercel.app' : '';
+                const apiBase = isLocalHost ? 'https://trading-journal-sandy-three.vercel.app' : '';
 
                 let res = await fetch(`${apiBase}/api/marketCandles?symbol=NIFTY${dateParam}&_t=${Date.now()}`, { cache: 'no-store' });
                 if (!res.ok) {
@@ -3340,24 +3424,14 @@
                         .filter(c => c !== null)
                         .sort((a, b) => a.time - b.time);
 
-                        if (formatted.length > 0) return formatted;
+                        if (formatted.length > 0) {
+                            updateFeedBadge('cloud', formatted.length);
+                            return formatted;
+                        }
                     }
                 }
             } catch (e) {
                 console.warn("[Candle Feed Error] Could not fetch Nifty candles from API:", e);
-            }
-
-            // Fallback: Check local / cached canopy data from window.niftyCandlesData
-            try {
-                if (typeof reloadCandlesScript === 'function') {
-                    await reloadCandlesScript();
-                }
-                if (window.niftyCandlesData && Array.isArray(window.niftyCandlesData.timeframe5m) && window.niftyCandlesData.timeframe5m.length > 0) {
-                    console.log("[Nifty Chart] Loaded candles from window.niftyCandlesData cache");
-                    return [...window.niftyCandlesData.timeframe5m];
-                }
-            } catch (e) {
-                console.warn("[Nifty Chart] Fallback candle store error:", e);
             }
 
             return null;
