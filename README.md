@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.92 - 03 Nov 2026 - Collapsible Floating Replay Bar & TradingView-Style Date/Time Picker (All 6 Interactive Charts)
+- **Collapsible Floating Replay Toolbar by Default**:
+  - Floating Replay Toolbar (`nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`) now collapses by default into a sleek, compact trigger pill (`⏪ Replay ▲`) right above the chart time axis.
+  - Clicking the trigger pill smoothly expands the full replay toolbar (`📅 Jump`, `⏪ Start`, `◀ Step`, `▶ Play`, `Step ▶`, `✕`), while clicking `✕` collapses it back anytime to keep the chart view clean and unobstructed.
+  - Active playback indicator: When replaying candles in the background while collapsed, the trigger pill displays `⏪ Replaying ▲`.
+- **TradingView-Inspired Date & Time Picker ("📅 Jump")**:
+  - Added a dedicated Date & Time jump button directly in the floating toolbar across all 6 interactive charts.
+  - Opens a dark glassmorphic popover with HTML5 native `datetime-local` input (full mobile & desktop calendar/clock wheels), dynamic `min`/`max` bounds reflecting available candle history, and quick preset shortcuts (`📍 Briefing`, `🌅 Day Open`, `🎯 Live`).
+  - Supports keyboard shortcuts (Enter to jump, Escape to close) and auto-closes when clicking outside.
+  - Slices candles and updates chart series, technical indicators, OHLC header, and auto-scrolls to the selected candle.
+
 ### v2.3.91 - 03 Nov 2026 - Restore Vivid Accent Aesthetics & Dedicated Notifications Bell Header Button
 - **Dedicated Notifications Bell Button (
 ifty_interactive_chart.html)**:

@@ -345,54 +345,220 @@
             cursor: grabbing;
         }
 
-        /* ── Bottom Replay Toolbar (Option A) ── */
-        .replay-toolbar {
+                /* ── Replay Floating Container & Collapsible Bar (Bottom of Chart) ── */
+        .replay-floating-container {
             position: absolute;
             bottom: 45px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 50;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 6px;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(96, 165, 250, 0.45);
-            border-radius: 8px;
-            padding: 4px 8px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+            z-index: 35;
             user-select: none;
         }
-
-        .replay-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            color: #f8fafc;
-            border-radius: 5px;
-            padding: 5px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.76rem;
+        .replay-trigger-pill {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            border-radius: 20px;
+            padding: 4px 12px;
+            color: #e2e8f0;
+            font-size: 0.72rem;
             font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             transition: all 0.2s ease;
-            white-space: nowrap;
         }
-
-        .replay-btn:hover {
-            background: rgba(96, 165, 250, 0.25);
-            border-color: #60a5fa;
-            color: #60a5fa;
-        }
-
-        .replay-btn.active-play {
+        .replay-trigger-pill:hover {
             background: rgba(16, 185, 129, 0.25);
             border-color: #10b981;
-            color: #10b981;
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+        .replay-trigger-arrow {
+            font-size: 0.6rem;
+            opacity: 0.8;
+            transition: transform 0.2s ease;
+        }
+        .replay-toolbar {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            border-radius: 20px;
+            padding: 4px 8px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            user-select: none;
+        }
+        .replay-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f1f5f9;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        .replay-btn:hover {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .replay-btn:active {
+            transform: translateY(1px);
+        }
+        .replay-btn.active-play {
+            background: #10b981 !important;
+            color: #fff !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+        }
+        .replay-btn.btn-collapse {
+            background: transparent;
+            border-color: transparent;
+            color: #94a3b8;
+            padding: 4px 6px;
+            font-size: 0.75rem;
+        }
+        .replay-btn.btn-collapse:hover {
+            background: rgba(244, 63, 94, 0.2);
+            border-color: rgba(244, 63, 94, 0.4);
+            color: #f43f5e;
+        }
+
+        /* ── Date/Time Popover (TradingView inspired) ── */
+        .replay-datepicker-popover {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f172a;
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            border-radius: 12px;
+            padding: 10px 12px;
+            width: 270px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            z-index: 100;
+            backdrop-filter: blur(16px);
+        }
+        .popover-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .popover-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            letter-spacing: 0.02em;
+        }
+        .popover-close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 0.75rem;
+            cursor: pointer;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        .popover-close-btn:hover {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.15);
+        }
+        .popover-label {
+            display: block;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+        .replay-datetime-input {
+            width: 100%;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 6px;
+            color: #f8fafc;
+            padding: 6px 8px;
+            font-size: 0.78rem;
+            font-family: inherit;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        .replay-datetime-input:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.45);
+        }
+        .replay-datetime-input::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            opacity: 0.85;
+        }
+        .replay-datetime-input::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+        .popover-quick-actions {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+        .popover-quick-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #cbd5e1;
+            border-radius: 4px;
+            padding: 4px 2px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .popover-quick-btn:hover {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            color: #fff;
+        }
+        .popover-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .popover-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+        .popover-submit-btn:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
         }
 
         .levels-section {
@@ -1023,12 +1189,45 @@
             </div>
             <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
                 <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
-                <!-- Bottom Replay Toolbar (Option A) -->
-                <div id="replay-toolbar" class="replay-toolbar">
-                    <button id="btn-replay-start" class="replay-btn" onclick="replayJumpToStart()" title="Jump to Briefing Start">⏪ Start</button>
-                    <button id="btn-replay-step-back" class="replay-btn" onclick="replayStepBack()" title="Step Back 1 Candle">◀ Step</button>
-                    <button id="btn-replay-play" class="replay-btn" onclick="replayTogglePlay()" title="Play / Pause Replay">▶ Play</button>
-                    <button id="btn-replay-step-forward" class="replay-btn" onclick="replayStepForward()" title="Step Forward 1 Candle">Step ▶</button>
+                                <!-- Replay Floating Container (Option A) -->
+                <div id="chart-replay-container" class="replay-floating-container">
+                    <!-- Collapsed Trigger Pill (Visible by default) -->
+                    <button id="btn-replay-expand" class="replay-trigger-pill" onclick="toggleReplayToolbar(true)" title="Click to open Replay Toolbar">
+                        <span>⏪ Replay</span>
+                        <span class="replay-trigger-arrow">▲</span>
+                    </button>
+
+                    <!-- Expanded Toolbar (Hidden by default) -->
+                    <div id="replay-toolbar" class="replay-toolbar" style="display: none;">
+                        <!-- Date & Time Picker Popover (TradingView inspired) -->
+                        <div id="replay-datepicker-popover" class="replay-datepicker-popover" style="display: none;">
+                            <div class="popover-header">
+                                <span class="popover-title">📅 Go to Date & Time</span>
+                                <button type="button" class="popover-close-btn" onclick="toggleReplayDatePicker(false)" title="Close Date/Time Picker">✕</button>
+                            </div>
+                            <div class="popover-body">
+                                <label class="popover-label" for="replay-datetime-input">Select Date & Time:</label>
+                                <div class="popover-input-row">
+                                    <input type="datetime-local" id="replay-datetime-input" class="replay-datetime-input" step="60">
+                                </div>
+                                <div class="popover-quick-actions">
+                                    <button type="button" class="popover-quick-btn" onclick="quickJumpReplay('briefing')" title="Jump to AI Briefing Run">📍 Briefing</button>
+                                    <button type="button" class="popover-quick-btn" onclick="quickJumpReplay('dayopen')" title="Jump to Day Session Open">🌅 Day Open</button>
+                                    <button type="button" class="popover-quick-btn" onclick="quickJumpReplay('latest')" title="Snap to Latest Live Candle">🎯 Live</button>
+                                </div>
+                                <div class="popover-footer">
+                                    <button type="button" class="popover-submit-btn" onclick="applyReplayDateTimeJump()">Go to Date</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="btn-replay-datetime" class="replay-btn" onclick="toggleReplayDatePicker(event)" title="Go to Date & Time (TradingView style)">📅 Jump</button>
+                        <button id="btn-replay-start" class="replay-btn" onclick="replayJumpToStart()" title="Cut chart back to Briefing Run">⏪ Start</button>
+                        <button id="btn-replay-step-back" class="replay-btn" onclick="replayStepBack()" title="Step Back 1 Candle">◀ Step</button>
+                        <button id="btn-replay-play" class="replay-btn" onclick="replayTogglePlay()" title="Auto Play/Pause Candles">▶ Play</button>
+                        <button id="btn-replay-step-forward" class="replay-btn" onclick="replayStepForward()" title="Step Forward 1 Candle">Step ▶</button>
+                        <button id="btn-replay-collapse" class="replay-btn btn-collapse" onclick="toggleReplayToolbar(false)" title="Collapse Replay Toolbar">✕</button>
+                    </div>
                 </div>
             </div>
             <!-- Horizontal Scrollbar Track -->
@@ -2586,6 +2785,191 @@
             return Math.max(0, idx !== -1 ? idx : 0);
         }
 
+                // ── COLLAPSIBLE REPLAY TOOLBAR & DATE/TIME CONTROLLER (TradingView Style) ──
+        function toggleReplayToolbar(show) {
+            const trigger = document.getElementById('btn-replay-expand');
+            const bar = document.getElementById('chart-replay-bar') || document.getElementById('replay-toolbar');
+            const popover = document.getElementById('replay-datepicker-popover');
+            if (show) {
+                if (trigger) trigger.style.display = 'none';
+                if (bar) bar.style.display = 'inline-flex';
+            } else {
+                if (bar) bar.style.display = 'none';
+                if (trigger) trigger.style.display = 'inline-flex';
+                if (popover) popover.style.display = 'none';
+            }
+        }
+
+        function toggleReplayDatePicker(event) {
+            if (event && event.stopPropagation) event.stopPropagation();
+            const popover = document.getElementById('replay-datepicker-popover');
+            if (!popover) return;
+            const isHidden = popover.style.display === 'none' || popover.style.display === '';
+            if (isHidden) {
+                initReplayDatePickerValues();
+                popover.style.display = 'block';
+            } else {
+                popover.style.display = 'none';
+            }
+        }
+
+        function formatEpochToInputLocal(epochSec) {
+            if (!epochSec || isNaN(epochSec)) return '';
+            const d = new Date(epochSec * 1000);
+            const pad = (n) => String(n).padStart(2, '0');
+            const year = d.getFullYear();
+            const month = pad(d.getMonth() + 1);
+            const day = pad(d.getDate());
+            const hours = pad(d.getHours());
+            const mins = pad(d.getMinutes());
+            return `${year}-${month}-${day}T${hours}:${mins}`;
+        }
+
+        function initReplayDatePickerValues() {
+            const input = document.getElementById('replay-datetime-input');
+            if (!input || !allMasterCandles || allMasterCandles.length === 0) return;
+
+            const firstCandle = allMasterCandles[0];
+            const lastCandle = allMasterCandles[allMasterCandles.length - 1];
+            input.min = formatEpochToInputLocal(firstCandle.time);
+            input.max = formatEpochToInputLocal(lastCandle.time);
+
+            let targetTime = lastCandle.time;
+            if (isReplayMode && replayCurrentIndex !== null && allMasterCandles[replayCurrentIndex]) {
+                targetTime = allMasterCandles[replayCurrentIndex].time;
+            } else {
+                const activeRun = typeof getActiveBriefingRun === 'function' ? getActiveBriefingRun() : null;
+                if (activeRun && activeRun.time) {
+                    targetTime = activeRun.time;
+                }
+            }
+            input.value = formatEpochToInputLocal(targetTime);
+        }
+
+        function applyReplayDateTimeJump() {
+            const input = document.getElementById('replay-datetime-input');
+            if (!input || !input.value) {
+                if (typeof showToast === 'function') showToast("⚠️ Select Date & Time", "Please choose a valid date and time.");
+                return;
+            }
+            const selectedDate = new Date(input.value);
+            const targetEpoch = Math.floor(selectedDate.getTime() / 1000);
+            if (isNaN(targetEpoch)) {
+                if (typeof showToast === 'function') showToast("⚠️ Invalid Date", "Could not parse selected date.");
+                return;
+            }
+            replayJumpToTimestamp(targetEpoch);
+            toggleReplayDatePicker(false);
+        }
+
+        function replayJumpToTimestamp(targetEpoch) {
+            pauseReplay();
+            if (!allMasterCandles || allMasterCandles.length === 0) {
+                if (typeof showToast === 'function') showToast("⚠️ Replay Unavailable", "No candle history loaded yet.");
+                return;
+            }
+
+            let targetIdx = -1;
+            for (let i = allMasterCandles.length - 1; i >= 0; i--) {
+                if (allMasterCandles[i].time <= targetEpoch) {
+                    targetIdx = i;
+                    break;
+                }
+            }
+            if (targetIdx === -1) {
+                targetIdx = 0;
+            }
+
+            isReplayMode = true;
+            replayCurrentIndex = targetIdx;
+            currentCandlesArray = allMasterCandles.slice(0, replayCurrentIndex + 1);
+            candleSeries.setData(currentCandlesArray);
+            if (typeof updateIndicatorSeriesData === 'function') updateIndicatorSeriesData(currentCandlesArray);
+            latestCandleTimestamp = currentCandlesArray[currentCandlesArray.length - 1].time;
+            if (typeof updateOHLCHeader === 'function') updateOHLCHeader();
+            if (typeof updateProximityAndAutoSelect === 'function') {
+                updateProximityAndAutoSelect(currentCandlesArray[currentCandlesArray.length - 1].close);
+            }
+            if (typeof renderVerticalLinesOverlay === 'function') renderVerticalLinesOverlay();
+
+            if (chartInstance && chartInstance.timeScale) {
+                isProgrammaticScroll = true;
+                chartInstance.timeScale().setVisibleLogicalRange({
+                    from: Math.max(0, replayCurrentIndex - 15),
+                    to: Math.min(allMasterCandles.length + 5, replayCurrentIndex + 25)
+                });
+                setTimeout(() => { isProgrammaticScroll = false; }, 50);
+            }
+
+            const jumpedCandle = allMasterCandles[replayCurrentIndex];
+            const d = new Date(jumpedCandle.time * 1000);
+            const dateFormatted = d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }) + ' ' +
+                                  d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            if (typeof showToast === 'function') {
+                showToast("📅 Replay Jumped", `Replay set to ${dateFormatted} (${replayCurrentIndex + 1}/${allMasterCandles.length} bars)`);
+            }
+
+            const trigger = document.getElementById('btn-replay-expand');
+            if (trigger) {
+                trigger.innerHTML = '<span>⏪ Replaying</span> <span class="replay-trigger-arrow">▲</span>';
+            }
+        }
+
+        function quickJumpReplay(type) {
+            if (!allMasterCandles || allMasterCandles.length === 0) return;
+            if (type === 'briefing') {
+                const activeRun = typeof getActiveBriefingRun === 'function' ? getActiveBriefingRun() : null;
+                if (activeRun && activeRun.time) {
+                    replayJumpToTimestamp(activeRun.time);
+                    toggleReplayDatePicker(false);
+                    return;
+                }
+                replayJumpToStart();
+                toggleReplayDatePicker(false);
+            } else if (type === 'dayopen') {
+                const lastCandle = allMasterCandles[allMasterCandles.length - 1];
+                const lastDate = new Date(lastCandle.time * 1000);
+                const dayStr = lastDate.toDateString();
+                const firstDayCandle = allMasterCandles.find(c => new Date(c.time * 1000).toDateString() === dayStr);
+                if (firstDayCandle) {
+                    replayJumpToTimestamp(firstDayCandle.time);
+                } else {
+                    replayJumpToTimestamp(lastCandle.time);
+                }
+                toggleReplayDatePicker(false);
+            } else if (type === 'latest') {
+                exitReplayMode();
+                toggleReplayDatePicker(false);
+                if (typeof showToast === 'function') showToast("🎯 Live View", "Returned to live real-time candles.");
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const input = document.getElementById('replay-datetime-input');
+                const popover = document.getElementById('replay-datepicker-popover');
+                if (popover && popover.style.display !== 'none' && document.activeElement === input) {
+                    applyReplayDateTimeJump();
+                }
+            } else if (e.key === 'Escape') {
+                const popover = document.getElementById('replay-datepicker-popover');
+                if (popover && popover.style.display !== 'none') {
+                    toggleReplayDatePicker(false);
+                }
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const popover = document.getElementById('replay-datepicker-popover');
+            const dtBtn = document.getElementById('btn-replay-datetime');
+            if (popover && popover.style.display !== 'none') {
+                if (!popover.contains(e.target) && (!dtBtn || !dtBtn.contains(e.target))) {
+                    toggleReplayDatePicker(false);
+                }
+            }
+        });
+
         function pauseReplay() {
             if (replayPlayTimer) {
                 clearInterval(replayPlayTimer);
@@ -2600,6 +2984,10 @@
 
         function exitReplayMode() {
             pauseReplay();
+            const trigger = document.getElementById('btn-replay-expand');
+            if (trigger) {
+                trigger.innerHTML = '<span>⏪ Replay</span> <span class="replay-trigger-arrow">▲</span>';
+            }
             if (isReplayMode) {
                 isReplayMode = false;
                 replayCurrentIndex = null;
@@ -2617,6 +3005,10 @@
 
         function replayJumpToStart() {
             pauseReplay();
+            const trigger = document.getElementById('btn-replay-expand');
+            if (trigger) {
+                trigger.innerHTML = '<span>⏪ Replaying</span> <span class="replay-trigger-arrow">▲</span>';
+            }
             if (!allMasterCandles || allMasterCandles.length === 0) {
                 showToast("⚠️ Replay Unavailable", "No candle history loaded yet.");
                 return;
