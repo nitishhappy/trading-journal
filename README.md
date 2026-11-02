@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.97 - 03 Nov 2026 - Instant 1-Click Calendar Date Jump to First Bar & Detached DOM Bubbling Fix (All 6 Charts)
+- **Instant 1-Click Calendar Date Jump to First Bar**:
+  - Selecting any date tile in the custom TradingView calendar now **immediately executes the jump** to that date without requiring additional clicks.
+  - If hours and minutes are omitted (blank), executeCustomJump() automatically resolves to the **first possible bar** of that day via getFirstCandleOnDate(year, month, day) (e.g. 09:15 AM for Indian indices, 09:30 AM for S&P 500, 00:00 for 24/7 markets) and smoothly scrolls the chart timescale to that bar.
+  - The date picker popover only dismisses *after* the chart jump has been successfully executed.
+- **Detached DOM Element Bubbling Fix**:
+  - Resolved root cause where 
+enderTvCalendarGrid() re-rendered the day cells (gridEl.innerHTML = '') on click, detaching the clicked tile from the DOM while the click event was still bubbling. When document.addEventListener('click') fired, popover.contains(e.target) returned alse for the detached element, immediately hiding the popover without taking action.
+  - Added event.stopPropagation() to #replay-datepicker-popover, month navigation buttons, and individual calendar day tiles.
+  - Added detached DOM element guard if (!document.body.contains(e.target)) return; in the document outside-click listener.
+
 ### v2.3.96 - 03 Nov 2026 - First Bar Auto-Detection on Date Selection & Persistent In-DOM Calendar (All 6 Charts)
 - **First Bar Auto-Detection When Time Is Not Provided**:
   - Implemented `getFirstCandleOnDate(year, month, day)`: When a date is selected and no time is entered (or left blank), the standalone jump and replay jump automatically locate and focus on the **very first possible candle bar** of that session (e.g. 09:15:00 for Indian indices, 00:00:00 for 24/7 markets).
@@ -195,6 +206,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
   - Enforced `flex: 0 0 auto` and `white-space: nowrap` across all asset buttons so they never squash or truncate, allowing smooth horizontal swipe across all 6 assets (NIFTY, SENSEX, GOLD, BTC, S&P 500, EUR/USD).
   - Added programmatic smooth scroll-into-view on asset button selection and on switching to the Levels view, guaranteeing the active asset is always in view.
   - Preserved unread notification badges and glow effects during asset switches.
+
+### v2.3.95 - 03 Nov 2026 - Mobile Responsive Option B Header Across All 6 Interactive Charts
+- **Two-Line Left Lockup on Mobile (< 640px)**:
+  - Resolved mobile viewport overlap where asset title, price ticker, status capsule, and Sizer collided on screens under 420px.
+  - Organized `.header-left` into an ultra-clean 2-line lockup: Line 1 displays Asset Title (`NIFTY 50`, `SENSEX`, etc.) + Timeframe pill (`5M`) with `white-space: nowrap`; Line 2 displays the financial price ticker and percentage gain.
+  - Compact action buttons: Scaled right-hand action group (`Sizer`, `Bell`, `Levels`) to fit cleanly alongside the ticker without wrapping or overflow.
+  - Streamlined Status Capsule on narrow screens (< 480px): Retains the live emerald/gray dot and candle close countdown (`● 02:18`), shifting text into the tap popover for maximum horizontal breathing room.
 
 ### v2.3.94 - 03 Nov 2026 - Modernized Option B Chart Header & Dedicated Bell Button Across All 6 Interactive Charts
 - **Full Rollout to All 6 Asset Charts**:

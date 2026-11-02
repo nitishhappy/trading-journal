@@ -297,6 +297,106 @@
             box-shadow: 0 0 12px rgba(139, 92, 246, 0.55);
         }
 
+        /* Mobile Responsive Header (Option B: Two-Line Left Lockup) */
+        @media (max-width: 640px) {
+            .header {
+                padding: 0.25rem 0.5rem;
+                min-height: 44px;
+                align-items: center;
+            }
+
+            .header-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.15rem;
+                min-width: 0;
+                flex: 1 1 auto;
+            }
+
+            .header h1 {
+                font-size: 0.82rem;
+                white-space: nowrap;
+                gap: 0.25rem;
+                line-height: 1.1;
+            }
+
+            .timeframe-pill {
+                font-size: 0.58rem;
+                padding: 0.02rem 0.25rem;
+            }
+
+            .tf-selector {
+                padding: 1px;
+                gap: 1px;
+            }
+
+            .btn-tf {
+                padding: 0.05rem 0.35rem;
+                font-size: 0.6rem;
+            }
+
+            .ohlc-legend-bar {
+                display: flex;
+                align-items: baseline;
+                gap: 0.3rem;
+                line-height: 1.1;
+            }
+
+            .ticker-price {
+                font-size: 0.86rem;
+                white-space: nowrap;
+            }
+
+            .ohlc-chg {
+                font-size: 0.66rem;
+                padding: 0.04rem 0.25rem;
+                white-space: nowrap;
+            }
+
+            .header-right {
+                gap: 0.3rem;
+                flex-shrink: 0;
+            }
+
+            .status-capsule {
+                padding: 2px 6px;
+                font-size: 0.65rem;
+                gap: 3px;
+            }
+
+            .capsule-text {
+                font-size: 0.62rem;
+            }
+
+            .capsule-timer {
+                font-size: 0.62rem;
+            }
+
+            .btn-header {
+                padding: 0.2rem 0.45rem;
+                font-size: 0.7rem;
+            }
+
+            .btn-header.btn-alerts-bell {
+                padding: 0.2rem 0.38rem;
+            }
+
+            .floating-chart-tools {
+                top: 30px;
+                left: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .capsule-text, .capsule-divider {
+                display: none;
+            }
+            .status-capsule {
+                padding: 3px 6px;
+            }
+        }
+
+
         /* Telemetry Popover */
         .telemetry-popover {
             position: absolute;
@@ -1793,10 +1893,10 @@
                 </div>
 
                 <canvas id="vlines-canvas"  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
-                                                                <!-- Replay Floating Container (Option A) -->
+                                                                                <!-- Replay Floating Container (Option A) -->
                 <div id="chart-replay-container" class="replay-floating-container">
                     <!-- Date & Time Picker Popover (TradingView inspired Custom Dark Calendar) -->
-                    <div id="replay-datepicker-popover" class="replay-datepicker-popover" style="display: none;">
+                    <div id="replay-datepicker-popover" class="replay-datepicker-popover" style="display: none;" onclick="event.stopPropagation()">
                         <div class="popover-header">
                             <span class="popover-title">📅 Go to Date & Time</span>
                             <button type="button" class="popover-close-btn" onclick="toggleReplayDatePicker(false)" title="Close Date/Time Picker">✕</button>
@@ -1804,9 +1904,9 @@
                         <div class="tv-cal-card">
                             <!-- Month & Year Navigation -->
                             <div class="tv-cal-month-nav">
-                                <button type="button" class="tv-cal-nav-btn" onclick="tvCalPrevMonth()" title="Previous Month">‹</button>
+                                <button type="button" class="tv-cal-nav-btn" onclick="tvCalPrevMonth(event)" title="Previous Month">‹</button>
                                 <span id="tv-cal-month-year" class="tv-cal-month-title">November 2026</span>
-                                <button type="button" class="tv-cal-nav-btn" onclick="tvCalNextMonth()" title="Next Month">›</button>
+                                <button type="button" class="tv-cal-nav-btn" onclick="tvCalNextMonth(event)" title="Next Month">›</button>
                             </div>
 
                             <!-- Weekdays Header -->
@@ -1818,7 +1918,7 @@
                             <div id="tv-cal-days-grid" class="tv-cal-days-grid"></div>
 
                             <!-- Selected Date & First Bar Hint -->
-                            <div id="tv-cal-selected-hint" class="tv-cal-selected-hint">Selected Date: --</div>
+                            <div id="tv-cal-selected-hint" class="tv-cal-selected-hint">Click a date to jump to its First Bar</div>
 
                             <!-- Time Selection Row -->
                             <div class="tv-cal-time-row">
@@ -3451,7 +3551,7 @@
             return Math.max(0, idx !== -1 ? idx : 0);
         }
 
-                                // ── COLLAPSIBLE REPLAY TOOLBAR & CUSTOM TRADINGVIEW CALENDAR CONTROLLER ──
+                                        // ── COLLAPSIBLE REPLAY TOOLBAR & CUSTOM TRADINGVIEW CALENDAR CONTROLLER ──
         let tvCalSelectedDate = new Date();
         let tvCalViewYear = tvCalSelectedDate.getFullYear();
         let tvCalViewMonth = tvCalSelectedDate.getMonth();
@@ -3542,7 +3642,6 @@
             tvCalViewYear = tvCalSelectedDate.getFullYear();
             tvCalViewMonth = tvCalSelectedDate.getMonth();
 
-            // Clear time inputs by default so selecting a date naturally jumps to FIRST BAR unless specified
             const hInput = document.getElementById('tv-cal-hours');
             const mInput = document.getElementById('tv-cal-mins');
             if (hInput) {
@@ -3558,7 +3657,8 @@
             updateSelectedDateHint();
         }
 
-        function tvCalPrevMonth() {
+        function tvCalPrevMonth(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
             tvCalViewMonth--;
             if (tvCalViewMonth < 0) {
                 tvCalViewMonth = 11;
@@ -3567,7 +3667,8 @@
             renderTvCalendarGrid();
         }
 
-        function tvCalNextMonth() {
+        function tvCalNextMonth(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
             tvCalViewMonth++;
             if (tvCalViewMonth > 11) {
                 tvCalViewMonth = 0;
@@ -3592,11 +3693,12 @@
             updateSelectedDateHint();
         }
 
-        function tvCalSelectDay(year, month, day, triggerJump = false) {
+        function tvCalSelectDay(year, month, day, triggerJump = true) {
             tvCalSelectedDate = new Date(year, month, day);
             renderTvCalendarGrid();
             updateSelectedDateHint();
 
+            // Clicking a date immediately jumps to that date (First Bar if time omitted)!
             if (triggerJump) {
                 executeCustomJump(false);
             }
@@ -3627,8 +3729,12 @@
                 cell.innerText = d;
                 const prevM = tvCalViewMonth === 0 ? 11 : tvCalViewMonth - 1;
                 const prevY = tvCalViewMonth === 0 ? tvCalViewYear - 1 : tvCalViewYear;
-                cell.onclick = () => { tvCalViewMonth = prevM; tvCalViewYear = prevY; tvCalSelectDay(prevY, prevM, d); };
-                cell.ondblclick = () => { tvCalViewMonth = prevM; tvCalViewYear = prevY; tvCalSelectDay(prevY, prevM, d, true); };
+                cell.onclick = (e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    tvCalViewMonth = prevM;
+                    tvCalViewYear = prevY;
+                    tvCalSelectDay(prevY, prevM, d, true);
+                };
                 gridEl.appendChild(cell);
             }
 
@@ -3650,8 +3756,10 @@
                     cell.classList.add('selected');
                 }
 
-                cell.onclick = () => tvCalSelectDay(tvCalViewYear, tvCalViewMonth, d);
-                cell.ondblclick = () => tvCalSelectDay(tvCalViewYear, tvCalViewMonth, d, true);
+                cell.onclick = (e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    tvCalSelectDay(tvCalViewYear, tvCalViewMonth, d, true);
+                };
                 gridEl.appendChild(cell);
             }
 
@@ -3663,8 +3771,12 @@
                 cell.innerText = d;
                 const nextM = tvCalViewMonth === 11 ? 0 : tvCalViewMonth + 1;
                 const nextY = tvCalViewMonth === 11 ? tvCalViewYear + 1 : tvCalViewYear;
-                cell.onclick = () => { tvCalViewMonth = nextM; tvCalViewYear = nextY; tvCalSelectDay(nextY, nextM, d); };
-                cell.ondblclick = () => { tvCalViewMonth = nextM; tvCalViewYear = nextY; tvCalSelectDay(nextY, nextM, d, true); };
+                cell.onclick = (e) => {
+                    if (e && e.stopPropagation) e.stopPropagation();
+                    tvCalViewMonth = nextM;
+                    tvCalViewYear = nextY;
+                    tvCalSelectDay(nextY, nextM, d, true);
+                };
                 gridEl.appendChild(cell);
             }
         }
@@ -3856,11 +3968,15 @@
             const dtBtn = document.getElementById('btn-replay-datetime');
             const standBtn = document.getElementById('btn-standalone-jump');
             if (popover && popover.style.display !== 'none') {
-                if (!popover.contains(e.target) &&
-                    (!dtBtn || !dtBtn.contains(e.target)) &&
-                    (!standBtn || !standBtn.contains(e.target))) {
-                    toggleReplayDatePicker(false);
+                if (popover.contains(e.target) ||
+                    (dtBtn && dtBtn.contains(e.target)) ||
+                    (standBtn && standBtn.contains(e.target))) {
+                    return;
                 }
+                if (!document.body.contains(e.target)) {
+                    return;
+                }
+                toggleReplayDatePicker(false);
             }
         });
         function pauseReplay() {
