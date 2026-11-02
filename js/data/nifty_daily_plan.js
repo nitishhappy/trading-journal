@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T10:46:04+05:30",
+    "timeDisplay": "10:46 AM, Nov 02",
+    "price": "23320",
+    "bias": "bullish",
+    "behavior": "[MON 10:46] [B1]: Pullback retest of 23315-23325 support shelf with bullish confirmation candle",
+    "tp": "23375 / 23415",
+    "sl": "23290",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T10:46:04+05:30",
+    "timeDisplay": "10:46 AM, Nov 02",
+    "price": "23360",
+    "bias": "bullish",
+    "behavior": "[MON 10:46] [B2]: Sustained 5m close ABOVE 23360 confirming short-covering acceleration towards 23410+",
+    "tp": "23410 / 23460",
+    "sl": "23325",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T10:46:04+05:30",
+    "timeDisplay": "10:46 AM, Nov 02",
+    "price": "23385",
+    "bias": "bearish",
+    "behavior": "[MON 10:46] [S1]: 5m bearish rejection at 23375-23390 supply ceiling signaling buyer exhaustion",
+    "tp": "23330 / 23300",
+    "sl": "23405",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T10:46:04+05:30",
+    "timeDisplay": "10:46 AM, Nov 02",
+    "price": "23290",
+    "bias": "bearish",
+    "behavior": "[MON 10:46] [S2]: Sustained 5m close BELOW 23290 confirming failed breakout and triggering long unwinding",
+    "tp": "23240 / 23210",
+    "sl": "23325",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T10:31:07+05:30",
     "timeDisplay": "10:31 AM, Nov 02",
     "price": "23310",
@@ -1585,50 +1629,6 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-26T10:46:01+05:30",
-    "timeDisplay": "10:46 AM, Oct 26",
-    "price": "22600",
-    "bias": "bullish",
-    "behavior": "[MON 10:46] [B1]: Retest of 22580 - 22600 demand zone with lower wick rejection and 5m green close above 22610",
-    "tp": "22680 / 22720",
-    "sl": "22540",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T10:46:01+05:30",
-    "timeDisplay": "10:46 AM, Oct 26",
-    "price": "22710",
-    "bias": "bullish",
-    "behavior": "[MON 10:46] [B2]: Sustained 5m close ABOVE 22710 with active futures volume confirming absorption",
-    "tp": "22770 / 22830",
-    "sl": "22660",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T10:46:01+05:30",
-    "timeDisplay": "10:46 AM, Oct 26",
-    "price": "22670",
-    "bias": "bearish",
-    "behavior": "[MON 10:46] [S1]: Failed sweep above 22695 - 22710 followed by 5m close below 22670 with expanding sell volume",
-    "tp": "22610 / 22550",
-    "sl": "22725",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-26T10:46:01+05:30",
-    "timeDisplay": "10:46 AM, Oct 26",
-    "price": "22520",
-    "bias": "bearish",
-    "behavior": "[MON 10:46] [S2]: Sustained 5m close BELOW 22520 confirming ORB High loss and long liquidation",
-    "tp": "22450 / 22390",
-    "sl": "22570",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-26T10:30:55+05:30",
     "timeDisplay": "10:30 AM, Oct 26",
     "price": "22625",
@@ -1851,6 +1851,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261102_104606",
+    "timestamp": "2026-11-02T10:46:06+05:30",
+    "timeDisplay": "10:46 AM, Nov 02",
+    "spot": "23350.45",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23350.45 > Max Plan Target $23340.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (10:45 AM IST - Nov 02, 2026 | Spot: 23350.45 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23350.45 > Max Plan Target $23340.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- 23325 - 23355: Immediate Consolidation & Absorption Band — Following the breakout above the prior session high (23344.05) to 23350.45, index action within this 30-point pocket represents initial call absorption and straddle writing. Avoid aggressive market execution inside this zone until either a successful retest prints or an expansion candle closes outside it.\n- 23265 - 23295: Mid-Range Buffer & Prior ORB High Band — Any rotational decline into the 15M ORB High (23292.55) without clear rejection represents low-velocity chop where option buyer premium decay accelerates.\n\n4. High Momentum / Explosive Zones:\n- Bullish Momentum Expansion (Sustained 5m Close Above 23360): Spot closing and holding firmly above 23360 triggers aggressive short covering from 23350/23400 Call writers, opening rapid upside acceleration towards 23410 and 23460 with active futures volume absorption.\n- Bearish Liquidity Sweep & Breakdown (Sustained 5m Close Below 23315): Failure to sustain above the breakout shelf with a close below 23315 traps late breakout buyers, creating a fast long-unwinding cascade down towards 23292 (15M ORB High) and 23245.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback / Breakout Shelf Retest): 5m bullish rejection candle (hammer or strong green close) holding the 23315 - 23325 support shelf with futures volume confirming absorption. | TP: 23375 / 23415 | SL: 23290 | 💡 Buy 23300 CE + Sell 23350 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Momentum Continuation Breakout): Sustained 5m close ABOVE 23360 with institutional futures volume expansion confirming short covering. | TP: 23410 / 23460 | SL: 23325 | 💡 Buy 23350 CE + Sell 23400 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Rejection / False Breakout Fade): 5m bearish rejection (shooting star or bear engulfing) at 23375 - 23390 supply ceiling failing to make new highs. | TP: 23330 / 23300 | SL: 23405 | 💡 Buy 23400 PE + Sell 23350 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Deep Long Liquidation Breakdown): Sustained 5m close BELOW 23290 (15M ORB High) confirming a complete breakout trap and opening range failure. | TP: 23240 / 23210 | SL: 23325 | 💡 Buy 23300 PE + Sell 23250 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261102_103112",
     "timestamp": "2026-11-02T10:31:12+05:30",
     "timeDisplay": "10:31 AM, Nov 02",
