@@ -178,6 +178,16 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.91 - 03 Nov 2026 - Restore Vivid Accent Aesthetics & Dedicated Notifications Bell Header Button
+- **Dedicated Notifications Bell Button (
+ifty_interactive_chart.html)**:
+  - Restored the notifications toggle button directly on the primary header next to Sizer, displaying strictly an SVG bell icon with zero text.
+  - Dynamically switches state between Green Bell when notifications are active (#10b981 glow) and Red Bell when notifications are off (#f43f5e).
+- **Restored Vivid Distinctive Accents (
+ifty_interactive_chart.html)**:
+  - Re-introduced mustard orange accent on Sizer (#fbbf24), rich purple on Levels (#c084fc), and vivid cyan on Snap (#38bdf8).
+  - Standardized the active toggle state on all interactive tools (Lines ON, High R:R, Fit) to an illuminated royal purple accent glow (#8b5cf6).
+
 ### v2.3.90 - 03 Nov 2026 - Modernize & Refine Interactive Chart: Monochromatic Glass Aesthetic & Pin Clearance
 - **Monochromatic Professional Aesthetic (
 ifty_interactive_chart.html)**:

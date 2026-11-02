@@ -164,9 +164,9 @@
 
         /* Header action buttons */
         .btn-header {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
             color: #cbd5e1;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 0.25rem 0.65rem;
             border-radius: 6px;
             font-size: 0.75rem;
@@ -176,30 +176,84 @@
             align-items: center;
             gap: 4px;
             transition: all 0.15s ease;
+            user-select: none;
         }
 
         .btn-header:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
             color: #fff;
         }
 
+        /* Sizer Button: Distinctive Mustard Orange Accent */
+        .btn-header.btn-sizer {
+            background: rgba(245, 158, 11, 0.16);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.38);
+            font-weight: 600;
+        }
+
+        .btn-header.btn-sizer:hover {
+            background: rgba(245, 158, 11, 0.28);
+            border-color: rgba(245, 158, 11, 0.6);
+            color: #fff;
+        }
+
+        /* Notifications Bell Button: Pure Bell Icon (Red Off, Green On) */
+        .btn-header.btn-alerts-bell {
+            padding: 0.25rem 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-header.btn-alerts-bell.alert-off {
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            color: #f43f5e;
+        }
+
+        .btn-header.btn-alerts-bell.alert-off:hover {
+            background: rgba(244, 63, 94, 0.22);
+            border-color: rgba(244, 63, 94, 0.6);
+            color: #fb7185;
+        }
+
+        .btn-header.btn-alerts-bell.alert-on {
+            background: rgba(16, 185, 129, 0.18);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-header.btn-alerts-bell.alert-on:hover {
+            background: rgba(16, 185, 129, 0.28);
+            border-color: rgba(16, 185, 129, 0.7);
+            color: #34d399;
+        }
+
+        /* Levels Button: Rich Purple Accent */
         .btn-header.btn-levels-primary {
-            background: rgba(99, 102, 241, 0.15);
-            color: #c7d2fe;
-            border: 1px solid rgba(99, 102, 241, 0.35);
+            background: rgba(139, 92, 246, 0.2);
+            color: #c084fc;
+            border: 1px solid rgba(139, 92, 246, 0.45);
+            font-weight: 700;
         }
 
         .btn-header.btn-levels-primary:hover {
-            background: rgba(99, 102, 241, 0.25);
-            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(139, 92, 246, 0.32);
+            border-color: rgba(139, 92, 246, 0.65);
             color: #fff;
         }
 
         .btn-header.btn-levels-primary.active {
-            background: #6366f1;
+            background: #8b5cf6;
             color: #fff;
-            border-color: #6366f1;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.55);
         }
 
         /* Telemetry Popover */
@@ -342,11 +396,32 @@
             color: #f8fafc;
         }
 
+        .btn-tool.btn-snap {
+            background: rgba(56, 189, 248, 0.18) !important;
+            color: #38bdf8 !important;
+            border: 1px solid rgba(56, 189, 248, 0.45) !important;
+            font-weight: 600 !important;
+        }
+
+        .btn-tool.btn-snap:hover {
+            background: rgba(56, 189, 248, 0.3) !important;
+            border-color: rgba(56, 189, 248, 0.7) !important;
+            color: #fff !important;
+        }
+
+        /* Purple Active State for Toggled Tools */
         .btn-tool.active {
-            background: rgba(255, 255, 255, 0.12);
-            color: #f8fafc;
-            border-color: rgba(255, 255, 255, 0.15);
-            font-weight: 600;
+            background: rgba(139, 92, 246, 0.28) !important;
+            color: #e9d5ff !important;
+            border: 1px solid rgba(168, 85, 247, 0.55) !important;
+            box-shadow: 0 0 8px rgba(139, 92, 246, 0.4) !important;
+            font-weight: 600 !important;
+        }
+
+        .btn-tool.active:hover {
+            background: rgba(139, 92, 246, 0.4) !important;
+            border-color: #a855f7 !important;
+            color: #fff !important;
         }
 
         .btn-tool-close {
@@ -1312,17 +1387,23 @@
                     <span class="tel-val" style="color:#cbd5e1;">Every 15s (<span id="refresh-timer">15s</span>)</span>
                 </div>
                 <div class="telemetry-actions">
-                    <button id="btn-manual-refresh" class="btn-header btn-sm">Refresh Now</button>
-                    <button id="btn-toggle-alerts" class="btn-header btn-sm"><span id="alert-btn-text">Enable Notifications</span></button>
+                    <button id="btn-manual-refresh" class="btn-header btn-sm">⚡ Refresh Now</button>
                 </div>
             </div>
 
-            <!-- Sizer Button (clean text, no emoji, monochromatic) -->
-            <button id="btn-calc" class="btn-header" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator">
+            <!-- Sizer Button (Mustard orange accent) -->
+            <button id="btn-calc" class="btn-header btn-sizer" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator">
                 Sizer
             </button>
 
-            <!-- Primary Levels Button (subtle indigo accent) -->
+            <!-- Enable Notifications Button (Bell icon only: Red off, Green on) -->
+            <button id="btn-toggle-alerts" class="btn-header btn-alerts-bell alert-off" title="Notifications: OFF (Click to Enable)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                </svg>
+            </button>
+
+            <!-- Primary Levels Button (Purple accent) -->
             <button id="btn-toggle-triggers" class="btn-header btn-levels-primary" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel">
                 <span id="triggers-btn-text">Levels</span>
             </button>
@@ -1346,7 +1427,7 @@
                             <button id="btn-toggle-fit" class="btn-tool" title="Toggle between zoomed-in candle focus and fitting all levels">
                                 <span id="fit-btn-text">Fit</span>
                             </button>
-                            <button id="btn-reset-zoom" class="btn-tool" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none;">
+                            <button id="btn-reset-zoom" class="btn-tool btn-snap" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none;">
                                 Snap
                             </button>
                             <div class="indicators-dropdown-wrapper">
@@ -1591,14 +1672,16 @@
                     }
                     lastEvaluatedClosedCandleTime = null;
                     levelCrossingMemory = {};
-                    toggleBtn.classList.add('active');
-                    document.getElementById('alert-btn-text').innerText = 'Notifications ACTIVE';
+                    toggleBtn.classList.remove('alert-off');
+                    toggleBtn.classList.add('alert-on');
+                    toggleBtn.title = "Notifications: ACTIVE (Click to Disable)";
                     triggerAlertSound(880, 'sine', 0.15);
-                    showToast("Alert System Activated", "Desktop alerts & chime active for strict 5M candle closes.");
+                    showToast("🔔 Notifications ACTIVE", "Desktop alerts & chime active for 5M candle closes.");
                 } else {
-                    toggleBtn.classList.remove('active');
-                    document.getElementById('alert-btn-text').innerText = 'Enable Notifications';
-                    showToast("Alert System Disabled", "Notifications paused.");
+                    toggleBtn.classList.remove('alert-on');
+                    toggleBtn.classList.add('alert-off');
+                    toggleBtn.title = "Notifications: OFF (Click to Enable)";
+                    showToast("🔕 Notifications OFF", "Alert notifications paused.");
                 }
             });
         }
