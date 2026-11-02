@@ -178,6 +178,17 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.88 - 03 Nov 2026 - Declutter Interactive Chart Header: Option B Expandable Floating Pill & Clean Ticker
+- **Decluttered Single-Row Header (
+ifty_interactive_chart.html)**:
+  - Eliminated the second stacked .chart-toolbar and consolidated navigation into an ultra-slim 38px top header bar, reclaiming ~54px of vertical height for the price chart canvas.
+  - Simplified the price readout to strictly display **Current Price**, **Points Gain**, and **Percentage Gain** (e.g. 24,168.00  +18.50 (+0.42%)). Completely removed redundant O:, H:, L:, C: text and detached technical indicator values from the price bar.
+  - Consolidated system feed status, 5M bar close countdown, SQLite local vault telemetry, and auto-refresh timer into an interactive capsule (● LIVE • 04:12) with a clean click popover for secondary actions.
+- **In-Chart Expandable Floating Glass Pill (
+ifty_interactive_chart.html)**:
+  - Moved chart view/navigation controls (Fit, Snap, Indicators ▾, ⭐ High R:R, Add Line, Lines ON) into a floating glassmorphic pill docked inside the chart canvas.
+  - Collapsed into an unobtrusive [🛠️ Chart Tools ▾] badge by default that expands on click into full icon controls with auto-close on outside click.
+
 ### v2.3.87 - 03 Nov 2026 - Extend Local SQLite Candle Vault & Dual-Mode Environment Bridge to BTC, S&P 500, and Sensex
 - **Multi-Asset Local SQLite Vault Integration (`btc_interactive_chart.html`, `sp500_interactive_chart.html`, `sensex_interactive_chart.html`, `market_data_store.py`)**:
   - **Bitcoin (BTC/USD)**: Implemented `export_btc_candles_js()` exporting up to 5,000 5-minute and 2,500 15-minute continuous bars from `btc_market_data.db` (which holds 19,187 candles from August 2026) into `js/data/btc_candles.js`. Wired dual-mode Port 8080 bridge + `#vault-telemetry-badge` in `btc_interactive_chart.html`.
