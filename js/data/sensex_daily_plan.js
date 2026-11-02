@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T09:29:26+05:30",
+    "timeDisplay": "09:29 AM, Nov 02",
+    "price": "75240",
+    "bias": "bullish",
+    "behavior": "[MON 09:29] [B1]: Liquidity probe below 75,200 into 75,120\u201375,150 followed by 5m bullish reclaim above 75,240 targeting Day High",
+    "tp": "75,360 / 75,480",
+    "sl": "75,150",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:29:26+05:30",
+    "timeDisplay": "09:29 AM, Nov 02",
+    "price": "75370",
+    "bias": "bullish",
+    "behavior": "[MON 09:29] [B2]: Sustained 5m close ABOVE 75,370 clearing 15M ORB High (75,366.06) with institutional absorption",
+    "tp": "75,500 / 75,650",
+    "sl": "75,260",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:29:26+05:30",
+    "timeDisplay": "09:29 AM, Nov 02",
+    "price": "75320",
+    "bias": "bearish",
+    "behavior": "[MON 09:29] [S1]: Stop-hunt probe above 75,366.06 Day High rejected back below 75,320 trapping breakout buyers",
+    "tp": "75,230 / 75,120",
+    "sl": "75,390",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:29:26+05:30",
+    "timeDisplay": "09:29 AM, Nov 02",
+    "price": "75090",
+    "bias": "bearish",
+    "behavior": "[MON 09:29] [S2]: Decisive 5m close BELOW 75,090 confirming breakdown of Day Low and 15M ORB shelf (75,097.50)",
+    "tp": "74,950 / 74,800",
+    "sl": "75,180",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-10-30T15:47:47+05:30",
     "timeDisplay": "03:47 PM, Oct 30",
     "price": "74450",
@@ -311,6 +355,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261102_092931",
+    "timestamp": "2026-11-02T09:29:31+05:30",
+    "timeDisplay": "09:29 AM, Nov 02",
+    "spot": "75218.21",
+    "trigger": "Bullish Level Exhaustion (+473.2 pts above max plan level 74745",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (09:25 AM IST - Nov 02, 2026 | Spot: 75218.21 | Trigger: Bullish Level Exhaustion (+473.2 pts above max plan level 74745))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Boundaries: 75,160.00 — 75,280.00 Spot (Centered around Macro 50% Daily Equilibrium 75,231.78 and the 75,200 strike magnet).\n- Tactical Directive: Strict stand-down corridor. Following the parabolic opening gap and surge (+473.2 pts above previous max plan level 74,745), Spot is currently compressing inside a 120-point rotational shelf between 15M ORB Low (75,097.50) and 15M ORB High (75,366.06). Heavy two-way straddle writing centered at the 75,200 CE and PE strikes creates severe theta decay and false-break whipsaw traps. Taking directional naked option trades inside this middle pocket carries adverse risk-to-reward.\n- Structural Invalidation Thresholds: Clean directional momentum expansion is strictly gated by a confirmed institutional 5-minute candle body close outside the 15M Opening Range boundaries—either clearing Day High at 75,366.06 or breaking Day Low at 75,097.50.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Day High Breakout Expansion] (Sustained 5M Close Above 75,370.00): A decisive 5-minute candle body close above Day High and 15M ORB High (75,366.06) clears resting Buy-Side Liquidity (BSL), forcing 75,300 and 75,400 call writers into short-covering gamma acceleration targeting 75,500.00 and 75,650.00.\n- [Bearish 15M ORB Floor Breakdown] (Sustained 5M Close Below 75,090.00): A clean 5-minute candle body close below Day Low and 15M ORB Low (75,097.50) violates resting Sell-Side Liquidity (SSL), triggering an aggressive long-unwinding cascade down into the 74,950.00 demand base and 74,800.00 psychological support.\n- [Bullish Equilibrium Sweep Reclaim] (Judas Sweep Reclaim of 75,240.00): A swift downside probe beneath 75,200 into the 75,120.00–75,150.00 discount pocket that instantly rejects and prints a 5-minute bullish reversal close back above 75,240.00, trapping breakdown sellers and driving a mean-reversion squeeze back toward 75,360.00.\n- [Bearish SFP Day High Exhaustion] (Stop-Hunt Probe Above 75,366.06 with Rejection Below 75,320.00): An intraday stop-hunt wick piercing above 75,366.06 that fails to sustain and prints a 5-minute bearish rejection close back below 75,320.00, trapping breakout buyers and initiating a liquidation slide toward 75,230.00 and 75,120.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Equilibrium Discount Sweep Reclaim): Liquidity sweep into 75,120.00–75,150.00 holding above Day Low (75,097.50) followed by a confirmed 5-minute bullish reversal close back above 75,240.00. | TP: 75,360.00 / 75,480.00 | SL: 75,150.00 | 💡 Buy 75,200 CE + Sell 75,400 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Expansion): Sustained 5-minute candle body close ABOVE 75,370.00 clearing the 15M ORB High (75,366.06) with institutional volume expansion. | TP: 75,500.00 / 75,650.00 | SL: 75,260.00 | 💡 Buy 75,400 CE + Sell 75,600 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High SFP Exhaustion Rejection): Stop-hunt probe above 75,366.06 rejected back below 75,320.00 with a confirmed 5-minute bearish close. | TP: 75,230.00 / 75,120.00 | SL: 75,390.00 | 💡 Buy 75,300 PE + Sell 75,100 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (15M ORB Floor Breakdown Acceleration): Decisive 5-minute candle body close BELOW 75,090.00 confirming breakdown of Day Low (75,097.50) and 15M ORB shelf. | TP: 74,950.00 / 74,800.00 | SL: 75,180.00 | 💡 Buy 75,100 PE + Sell 74,900 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261030_154749",
     "timestamp": "2026-10-30T15:47:49+05:30",
     "timeDisplay": "03:47 PM, Oct 30",
