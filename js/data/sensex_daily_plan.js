@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T09:30:34+05:30",
+    "timeDisplay": "09:30 AM, Nov 02",
+    "price": "75370",
+    "bias": "bullish",
+    "behavior": "[MON 09:30] [B1]: Sustained 5m close ABOVE 75,370 with institutional absorption confirming breakout",
+    "tp": "75,500 / 75,650",
+    "sl": "75,260",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:30:34+05:30",
+    "timeDisplay": "09:30 AM, Nov 02",
+    "price": "75120",
+    "bias": "bullish",
+    "behavior": "[MON 09:30] [B2]: Dip into 75,100 - 75,120 followed by bullish pin bar closing back above 75,150",
+    "tp": "75,280 / 75,360",
+    "sl": "75,060",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:30:34+05:30",
+    "timeDisplay": "09:30 AM, Nov 02",
+    "price": "75090",
+    "bias": "bearish",
+    "behavior": "[MON 09:30] [S1]: Decisive 5m close BELOW 75,090 with expanding sell volume",
+    "tp": "74,950 / 74,800",
+    "sl": "75,200",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T09:30:34+05:30",
+    "timeDisplay": "09:30 AM, Nov 02",
+    "price": "75360",
+    "bias": "bearish",
+    "behavior": "[MON 09:30] [S2]: Failed breakout above 75,370 with sharp rejection candle closing below 75,330",
+    "tp": "75,200 / 75,100",
+    "sl": "75,410",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T09:29:26+05:30",
     "timeDisplay": "09:29 AM, Nov 02",
     "price": "75240",
@@ -355,6 +399,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261102_093037",
+    "timestamp": "2026-11-02T09:30:37+05:30",
+    "timeDisplay": "09:30 AM, Nov 02",
+    "spot": "75242.26",
+    "trigger": "Bullish Level Exhaustion (+497.3 pts above max plan level 74745",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (09:29 AM IST - Nov 02, 2026 | Spot: 75242.26 | Trigger: Bullish Level Exhaustion (+497.3 pts above max plan level 74745))\n\n3. Live Chop Zone / No-Trade Zone:\n- Primary Intraday Chop Corridor: 75,180 - 75,300. Price is currently revolving around the Macro 50% Daily Equilibrium (75,231.78) following the initial 15M opening swing.\n- Microstructure No-Trade Range: 75,150 - 75,280. Low edge-to-spread ratio inside the morning 15M ORB (75,097.50 - 75,366.06); theta decay risk is elevated for aggressive option buying within this pocket.\n- Invalidation / Acceptance Anchor: No directional breakout positions should be initiated between 75,180 and 75,300 until a clean 5-minute candle closes outside the 15M ORB boundary with institutional volume participation.\n\n4. High Momentum / Explosive Zones:\n- Bullish Momentum Expansion (Sustained breakout above Day High 75,366.06): Acceptance above 75,370 triggers short-covering acceleration towards 75,500 and 75,650 as call-side gamma traps unwind.\n- Bearish Liquidity Sweep & Reversal (Rejection at 75,350 - 75,370 liquidity pool): Inability to sustain above the 15M ORB High leading to an immediate mean-reversion drop back toward 75,230 and 75,120.\n- Bearish Momentum Flush (Decisive breakdown below Day Low 75,097.50): Acceptance below 75,090 activates long unwinding towards 74,950 and psychological round support at 74,800.\n- Bullish Absorption Dip (Liquidity sweep into 75,100 - 75,120): Sweep of the morning lows followed by a sharp reclamation back above 75,150 targeting 75,280 and 75,360.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Breakout Continuation): Sustained 5m close ABOVE 75,370 with volume confirmation. | TP: 75,500 / 75,650 | SL: 75,260 | 💡 Buy 75400 CE + Sell 75600 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (ORB Low Liquidity Sweep Reclamation): Dip into 75,100 - 75,120 followed by a bullish reversal candle closing back above 75,150. | TP: 75,280 / 75,360 | SL: 75,060 | 💡 Buy 75100 CE + Sell 75300 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (ORB Low Breakdown Flush): Decisive 5m close BELOW 75,090 with expanding red volume. | TP: 74,950 / 74,800 | SL: 75,200 | 💡 Buy 75100 PE + Sell 74900 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Day High Liquidity Grab Rejection): Failed breakout above 75,370 with sharp upper wick rejection closing back below 75,330. | TP: 75,200 / 75,100 | SL: 75,410 | 💡 Buy 75300 PE + Sell 75100 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261102_092931",
     "timestamp": "2026-11-02T09:29:31+05:30",
     "timeDisplay": "09:29 AM, Nov 02",
