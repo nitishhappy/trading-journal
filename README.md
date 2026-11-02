@@ -178,6 +178,13 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.86 - 03 Nov 2026 - Fix Mismatched Level Card Confirmation Wording in Interactive Charts
+- **Historical Level Card Wording Fix (`nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `gold_interactive_chart.html`, `btc_interactive_chart.html`, `sp500_interactive_chart.html`, `eurusd_interactive_chart.html`)**:
+  - Resolved bug where historical trading plan cards (e.g., Oct 06, Oct 07) displayed outdated static trigger logic from an unrelated briefing (Oct 26) due to unbounded distance matching in `getConfirmationPriceAction()`.
+  - Added direct fast-path return when `lvl.behavior` already contains authentic, descriptive confirmation logic parsed directly from that day's plan (0ms instant rendering with zero redundant loops).
+  - Passed unified historical briefings arrays (`<asset>HistoricalBriefings || <asset>DailyPlanSummary`) to `getConfirmationPriceAction()` instead of rolling daily summaries only.
+  - Enforced a strict 4-hour maximum matching window (`MAX_DIFF_MS = 14400000`) so historical dates never latch onto distant briefings from weeks away.
+
 ### v2.3.85 - 03 Nov 2026 - Fix Telemetry Badge ID Collision & Correct Market Hours Timestamp Offset
 - **Telemetry Badge Collision Fix (`nifty_interactive_chart.html`)**:
   - Resolved DOM id collision where `#feed-status-badge` was being overwritten by `updateFeedStatusBadge(candles)` with `MARKET CLOSED`.

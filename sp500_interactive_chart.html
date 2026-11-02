@@ -2258,7 +2258,8 @@
                 const lineColor = isBullish ? '#10b981' : '#f43f5e';
                 const category = getCanonicalSetupCategory(tag, lvl.behavior, isBullish ? 'bullish' : 'bearish');
                 const priceVal = parseFloat(String(lvl.price).split('-')[0].replace(/[^0-9.]/g, ''));
-                const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, window.sp500DailyPlanSummary, levelsData.anchorTimestamp);
+                const sp500SummariesList = (window.sp500HistoricalBriefings && window.sp500HistoricalBriefings.length > 0) ? window.sp500HistoricalBriefings : (window.sp500DailyPlanSummary || []);
+                const fullConfirmationLogic = getConfirmationPriceAction(tag, lvl.behavior, sp500SummariesList, levelsData.anchorTimestamp);
 
                 // Normalized unique ID for Scorecard persistence
                 const cleanTag = tag.replace(/[^A-Z0-9]/gi, '').toUpperCase();
@@ -3449,11 +3450,15 @@
 
         function getConfirmationPriceAction(tag, behaviorFallback, summaryArray, targetTimestamp = null) {
             const fallbackText = cleanLogicText(behaviorFallback);
+            // If the level already has a rich, authentic confirmation logic string, use it directly (0ms instant)
+            if (fallbackText && fallbackText.length >= 25) {
+                return fallbackText;
+            }
             if (!tag || !summaryArray || !Array.isArray(summaryArray) || summaryArray.length === 0) {
                 return fallbackText;
             }
 
-            let summaryItem = summaryArray[0];
+            let summaryItem = null;
             if (targetTimestamp) {
                 let targetMs = null;
                 if (typeof targetTimestamp === 'number') {
@@ -3477,14 +3482,17 @@
                                 Math.abs(itemMs - targetMs),
                                 Math.abs(itemMs + (IST_OFFSET_SEC * 1000) - targetMs)
                             );
-                            if (diff < bestDiff) {
+                            if (diff < bestDiff && diff <= 14400000) {
                                 bestDiff = diff;
                                 summaryItem = item;
                             }
                         }
                     });
                 }
+            } else {
+                summaryItem = summaryArray[0];
             }
+            if (!summaryItem) return fallbackText;
 
             const latestSummaryText = summaryItem?.text || '';
             if (!latestSummaryText) return fallbackText;
