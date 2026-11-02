@@ -178,6 +178,24 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.96 - 03 Nov 2026 - First Bar Auto-Detection on Date Selection & Persistent In-DOM Calendar (All 6 Charts)
+- **First Bar Auto-Detection When Time Is Not Provided**:
+  - Implemented `getFirstCandleOnDate(year, month, day)`: When a date is selected and no time is entered (or left blank), the standalone jump and replay jump automatically locate and focus on the **very first possible candle bar** of that session (e.g. 09:15:00 for Indian indices, 00:00:00 for 24/7 markets).
+  - Dynamic visual target hint: Right below the day grid, a live chip indicates the target: `Target: 02 Nov 2026 • First Bar (09:15 AM)` with real-time feedback when typing hours/minutes or clicking session chips.
+  - Added a dedicated `First Bar` time chip and enabled double-clicking any calendar day tile to instantly jump to that date's first bar.
+- **Persistent In-DOM Calendar Interaction**:
+  - Entire custom calendar component renders strictly inside the DOM hierarchy within `#replay-datepicker-popover`.
+  - Clicks on calendar day tiles, month navigation chevrons, time steppers, or chips are self-contained, completely eliminating premature popover dismissal and ensuring seamless jump execution.
+
+### v2.3.95 - 03 Nov 2026 - Mobile-Friendly Responsive Asset Toolbar in Levels View
+- **Root Cause Resolution for Negative-Axis Flex Overflow**:
+  - Fixed mobile overflow bug where `justify-content: center` centered overflowing items symmetrically, pushing the leftmost button (`NIFTY`) into negative coordinate space (`x < 0`) which browser scrolling cannot reach.
+  - Replaced restrictive inline styles with `.levels-asset-toolbar` utilizing `justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;` with responsive centering on desktop screens (`min-width: 860px`).
+- **Touch-Friendly Pill Sizing & Active Asset Auto-Scroll**:
+  - Enforced `flex: 0 0 auto` and `white-space: nowrap` across all asset buttons so they never squash or truncate, allowing smooth horizontal swipe across all 6 assets (NIFTY, SENSEX, GOLD, BTC, S&P 500, EUR/USD).
+  - Added programmatic smooth scroll-into-view on asset button selection and on switching to the Levels view, guaranteeing the active asset is always in view.
+  - Preserved unread notification badges and glow effects during asset switches.
+
 ### v2.3.94 - 03 Nov 2026 - Modernized Option B Chart Header & Dedicated Bell Button Across All 6 Interactive Charts
 - **Full Rollout to All 6 Asset Charts**:
   - Implemented the modern Option B header and expandable floating glass tools pill across all 6 interactive charts: `nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`, `sp500_interactive_chart.html`, and `eurusd_interactive_chart.html`.

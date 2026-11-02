@@ -717,7 +717,7 @@
             cursor: grabbing;
         }
 
-                        /* ── Replay Floating Container & Collapsible Bar (Bottom of Chart) ── */
+                                /* ── Replay Floating Container & Collapsible Bar (Bottom of Chart) ── */
         .replay-floating-container {
             position: absolute;
             bottom: 45px;
@@ -832,11 +832,11 @@
             bottom: calc(100% + 8px);
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(15, 23, 42, 0.96);
+            background: rgba(15, 23, 42, 0.97);
             border: 1px solid rgba(139, 92, 246, 0.45);
             border-radius: 14px;
             padding: 10px 12px;
-            width: 280px;
+            width: 288px;
             box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.06);
             z-index: 100;
             backdrop-filter: blur(16px);
@@ -922,7 +922,7 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .tv-cal-day {
             height: 26px;
@@ -955,12 +955,30 @@
             box-shadow: 0 0 10px rgba(139, 92, 246, 0.45);
         }
 
+        .tv-cal-selected-hint {
+            font-size: 0.66rem;
+            font-weight: 600;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 5px;
+            padding: 3px 6px;
+            text-align: center;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .tv-cal-selected-hint strong {
+            color: #f1f5f9;
+        }
+
         .tv-cal-time-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 6px;
-            padding: 6px 0;
+            padding: 5px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -975,13 +993,13 @@
             gap: 3px;
         }
         .tv-cal-time-num {
-            width: 34px;
+            width: 32px;
             height: 24px;
             background: rgba(30, 41, 59, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 4px;
             color: #f8fafc;
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-weight: 700;
             text-align: center;
             outline: none;
@@ -1016,6 +1034,11 @@
             background: rgba(139, 92, 246, 0.25);
             border-color: #8b5cf6;
             color: #fff;
+        }
+        .tv-cal-time-chip.active-chip {
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .tv-cal-shortcuts {
@@ -1786,7 +1809,7 @@
                 </div>
 
                 <canvas id="vlines-canvas"   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
-                                                <!-- Replay Floating Container (Option A) -->
+                                                                <!-- Replay Floating Container (Option A) -->
                 <div id="chart-replay-container" class="replay-floating-container">
                     <!-- Date & Time Picker Popover (TradingView inspired Custom Dark Calendar) -->
                     <div id="replay-datepicker-popover" class="replay-datepicker-popover" style="display: none;">
@@ -1810,15 +1833,19 @@
                             <!-- Days Grid -->
                             <div id="tv-cal-days-grid" class="tv-cal-days-grid"></div>
 
+                            <!-- Selected Date & First Bar Hint -->
+                            <div id="tv-cal-selected-hint" class="tv-cal-selected-hint">Selected Date: --</div>
+
                             <!-- Time Selection Row -->
                             <div class="tv-cal-time-row">
                                 <span class="tv-cal-time-label">⏱️ Time:</span>
                                 <div class="tv-cal-time-inputs">
-                                    <input type="number" id="tv-cal-hours" min="0" max="23" class="tv-cal-time-num" value="09" title="Hours (00-23)">
+                                    <input type="number" id="tv-cal-hours" min="0" max="23" class="tv-cal-time-num" placeholder="HH" title="Hours (00-23, or leave blank for First Bar)">
                                     <span class="tv-cal-time-colon">:</span>
-                                    <input type="number" id="tv-cal-mins" min="0" max="59" step="5" class="tv-cal-time-num" value="15" title="Minutes (00-59)">
+                                    <input type="number" id="tv-cal-mins" min="0" max="59" step="5" class="tv-cal-time-num" placeholder="MM" title="Minutes (00-59, or leave blank for First Bar)">
                                 </div>
                                 <div class="tv-cal-time-chips">
+                                    <button type="button" class="tv-cal-time-chip active-chip" onclick="tvCalClearTime()" title="Jump to First Bar on selected date">First Bar</button>
                                     <button type="button" class="tv-cal-time-chip" onclick="tvCalSetTime(9, 15)">09:15</button>
                                     <button type="button" class="tv-cal-time-chip" onclick="tvCalSetTime(12, 0)">12:00</button>
                                     <button type="button" class="tv-cal-time-chip" onclick="tvCalSetTime(15, 30)">15:30</button>
@@ -3520,7 +3547,7 @@
             return Math.max(0, idx !== -1 ? idx : 0);
         }
 
-                        // ── COLLAPSIBLE REPLAY TOOLBAR & CUSTOM TRADINGVIEW CALENDAR CONTROLLER ──
+                                // ── COLLAPSIBLE REPLAY TOOLBAR & CUSTOM TRADINGVIEW CALENDAR CONTROLLER ──
         let tvCalSelectedDate = new Date();
         let tvCalViewYear = tvCalSelectedDate.getFullYear();
         let tvCalViewMonth = tvCalSelectedDate.getMonth();
@@ -3552,6 +3579,52 @@
             }
         }
 
+        function getFirstCandleOnDate(year, month, day) {
+            if (!allMasterCandles || allMasterCandles.length === 0) return null;
+            // Strict match for same calendar date
+            for (let i = 0; i < allMasterCandles.length; i++) {
+                const c = allMasterCandles[i];
+                const d = new Date(c.time * 1000);
+                if (d.getFullYear() === year && d.getMonth() === month && d.getDate() === day) {
+                    return { candle: c, index: i };
+                }
+            }
+            // If holiday / weekend / gap, return first candle after start of that day
+            const startOfDaySec = Math.floor(new Date(year, month, day, 0, 0, 0).getTime() / 1000);
+            for (let i = 0; i < allMasterCandles.length; i++) {
+                if (allMasterCandles[i].time >= startOfDaySec) {
+                    return { candle: allMasterCandles[i], index: i };
+                }
+            }
+            return { candle: allMasterCandles[allMasterCandles.length - 1], index: allMasterCandles.length - 1 };
+        }
+
+        function updateSelectedDateHint() {
+            const hintEl = document.getElementById('tv-cal-selected-hint');
+            if (!hintEl) return;
+            const y = tvCalSelectedDate.getFullYear();
+            const m = tvCalSelectedDate.getMonth();
+            const d = tvCalSelectedDate.getDate();
+
+            const hInput = document.getElementById('tv-cal-hours');
+            const mInput = document.getElementById('tv-cal-mins');
+            const hasTime = hInput && mInput && hInput.value.trim() !== '' && mInput.value.trim() !== '';
+
+            const dateStr = tvCalSelectedDate.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+            if (hasTime) {
+                const h = String(parseInt(hInput.value, 10) || 0).padStart(2, '0');
+                const min = String(parseInt(mInput.value, 10) || 0).padStart(2, '0');
+                hintEl.innerHTML = `Target: <strong>${dateStr} ${h}:${min}</strong>`;
+            } else {
+                const first = getFirstCandleOnDate(y, m, d);
+                let firstTimeStr = 'First Bar';
+                if (first && first.candle) {
+                    firstTimeStr = 'First Bar (' + new Date(first.candle.time * 1000).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }) + ')';
+                }
+                hintEl.innerHTML = `Target: <strong>${dateStr}</strong> • <span style="color:#38bdf8;">${firstTimeStr}</span>`;
+            }
+        }
+
         function initTvCalendarState() {
             let targetTime = Math.floor(Date.now() / 1000);
             if (allMasterCandles && allMasterCandles.length > 0) {
@@ -3565,12 +3638,20 @@
             tvCalViewYear = tvCalSelectedDate.getFullYear();
             tvCalViewMonth = tvCalSelectedDate.getMonth();
 
+            // Clear time inputs by default so selecting a date naturally jumps to FIRST BAR unless specified
             const hInput = document.getElementById('tv-cal-hours');
             const mInput = document.getElementById('tv-cal-mins');
-            if (hInput) hInput.value = String(tvCalSelectedDate.getHours()).padStart(2, '0');
-            if (mInput) mInput.value = String(tvCalSelectedDate.getMinutes()).padStart(2, '0');
+            if (hInput) {
+                hInput.value = '';
+                hInput.oninput = () => updateSelectedDateHint();
+            }
+            if (mInput) {
+                mInput.value = '';
+                mInput.oninput = () => updateSelectedDateHint();
+            }
 
             renderTvCalendarGrid();
+            updateSelectedDateHint();
         }
 
         function tvCalPrevMonth() {
@@ -3591,16 +3672,30 @@
             renderTvCalendarGrid();
         }
 
+        function tvCalClearTime() {
+            const hInput = document.getElementById('tv-cal-hours');
+            const mInput = document.getElementById('tv-cal-mins');
+            if (hInput) hInput.value = '';
+            if (mInput) mInput.value = '';
+            updateSelectedDateHint();
+        }
+
         function tvCalSetTime(h, m) {
             const hInput = document.getElementById('tv-cal-hours');
             const mInput = document.getElementById('tv-cal-mins');
             if (hInput) hInput.value = String(h).padStart(2, '0');
             if (mInput) mInput.value = String(m).padStart(2, '0');
+            updateSelectedDateHint();
         }
 
-        function tvCalSelectDay(year, month, day) {
+        function tvCalSelectDay(year, month, day, triggerJump = false) {
             tvCalSelectedDate = new Date(year, month, day);
             renderTvCalendarGrid();
+            updateSelectedDateHint();
+
+            if (triggerJump) {
+                executeCustomJump(false);
+            }
         }
 
         function renderTvCalendarGrid() {
@@ -3629,6 +3724,7 @@
                 const prevM = tvCalViewMonth === 0 ? 11 : tvCalViewMonth - 1;
                 const prevY = tvCalViewMonth === 0 ? tvCalViewYear - 1 : tvCalViewYear;
                 cell.onclick = () => { tvCalViewMonth = prevM; tvCalViewYear = prevY; tvCalSelectDay(prevY, prevM, d); };
+                cell.ondblclick = () => { tvCalViewMonth = prevM; tvCalViewYear = prevY; tvCalSelectDay(prevY, prevM, d, true); };
                 gridEl.appendChild(cell);
             }
 
@@ -3651,6 +3747,7 @@
                 }
 
                 cell.onclick = () => tvCalSelectDay(tvCalViewYear, tvCalViewMonth, d);
+                cell.ondblclick = () => tvCalSelectDay(tvCalViewYear, tvCalViewMonth, d, true);
                 gridEl.appendChild(cell);
             }
 
@@ -3663,6 +3760,7 @@
                 const nextM = tvCalViewMonth === 11 ? 0 : tvCalViewMonth + 1;
                 const nextY = tvCalViewMonth === 11 ? tvCalViewYear + 1 : tvCalViewYear;
                 cell.onclick = () => { tvCalViewMonth = nextM; tvCalViewYear = nextY; tvCalSelectDay(nextY, nextM, d); };
+                cell.ondblclick = () => { tvCalViewMonth = nextM; tvCalViewYear = nextY; tvCalSelectDay(nextY, nextM, d, true); };
                 gridEl.appendChild(cell);
             }
         }
@@ -3670,21 +3768,41 @@
         function executeCustomJump(asReplay = false) {
             const hInput = document.getElementById('tv-cal-hours');
             const mInput = document.getElementById('tv-cal-mins');
-            const h = parseInt(hInput ? hInput.value : 9, 10) || 0;
-            const m = parseInt(mInput ? mInput.value : 15, 10) || 0;
+            const hVal = hInput ? hInput.value.trim() : '';
+            const mVal = mInput ? mInput.value.trim() : '';
 
-            const targetDate = new Date(tvCalSelectedDate.getFullYear(), tvCalSelectedDate.getMonth(), tvCalSelectedDate.getDate(), h, m, 0);
-            const targetEpoch = Math.floor(targetDate.getTime() / 1000);
+            const y = tvCalSelectedDate.getFullYear();
+            const m = tvCalSelectedDate.getMonth();
+            const d = tvCalSelectedDate.getDate();
+
+            let targetEpoch = null;
+            let targetIdx = -1;
+
+            // If user did NOT provide time, jump to FIRST POSSIBLE BAR on that date!
+            if (hVal === '' || mVal === '') {
+                const first = getFirstCandleOnDate(y, m, d);
+                if (first && first.candle) {
+                    targetEpoch = first.candle.time;
+                    targetIdx = first.index;
+                } else {
+                    targetEpoch = Math.floor(new Date(y, m, d, 0, 0, 0).getTime() / 1000);
+                }
+            } else {
+                const h = Math.max(0, Math.min(23, parseInt(hVal, 10) || 0));
+                const min = Math.max(0, Math.min(59, parseInt(mVal, 10) || 0));
+                const targetDate = new Date(y, m, d, h, min, 0);
+                targetEpoch = Math.floor(targetDate.getTime() / 1000);
+            }
 
             if (asReplay) {
-                replayJumpToTimestamp(targetEpoch);
+                replayJumpToTimestamp(targetEpoch, targetIdx);
             } else {
-                standaloneJumpToTimestamp(targetEpoch);
+                standaloneJumpToTimestamp(targetEpoch, targetIdx);
             }
             toggleReplayDatePicker(false);
         }
 
-        function standaloneJumpToTimestamp(targetEpoch) {
+        function standaloneJumpToTimestamp(targetEpoch, forcedIdx = -1) {
             if (!allMasterCandles || allMasterCandles.length === 0) {
                 if (typeof showToast === 'function') showToast("⚠️ Jump Unavailable", "No candle history loaded yet.");
                 return;
@@ -3694,14 +3812,16 @@
                 exitReplayMode();
             }
 
-            let targetIdx = -1;
-            for (let i = allMasterCandles.length - 1; i >= 0; i--) {
-                if (allMasterCandles[i].time <= targetEpoch) {
-                    targetIdx = i;
-                    break;
+            let targetIdx = forcedIdx;
+            if (targetIdx === -1 || targetIdx >= allMasterCandles.length) {
+                for (let i = allMasterCandles.length - 1; i >= 0; i--) {
+                    if (allMasterCandles[i].time <= targetEpoch) {
+                        targetIdx = i;
+                        break;
+                    }
                 }
+                if (targetIdx === -1) targetIdx = 0;
             }
-            if (targetIdx === -1) targetIdx = 0;
 
             if (chartInstance && chartInstance.timeScale) {
                 isProgrammaticScroll = true;
@@ -3721,7 +3841,7 @@
             }
 
             const d = new Date(jumpedCandle.time * 1000);
-            const dateFormatted = d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }) + ' ' +
+            const dateFormatted = d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
                                   d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
 
             if (typeof showToast === 'function') {
@@ -3729,22 +3849,24 @@
             }
         }
 
-        function replayJumpToTimestamp(targetEpoch) {
+        function replayJumpToTimestamp(targetEpoch, forcedIdx = -1) {
             pauseReplay();
             if (!allMasterCandles || allMasterCandles.length === 0) {
                 if (typeof showToast === 'function') showToast("⚠️ Replay Unavailable", "No candle history loaded yet.");
                 return;
             }
 
-            let targetIdx = -1;
-            for (let i = allMasterCandles.length - 1; i >= 0; i--) {
-                if (allMasterCandles[i].time <= targetEpoch) {
-                    targetIdx = i;
-                    break;
+            let targetIdx = forcedIdx;
+            if (targetIdx === -1 || targetIdx >= allMasterCandles.length) {
+                for (let i = allMasterCandles.length - 1; i >= 0; i--) {
+                    if (allMasterCandles[i].time <= targetEpoch) {
+                        targetIdx = i;
+                        break;
+                    }
                 }
-            }
-            if (targetIdx === -1) {
-                targetIdx = 0;
+                if (targetIdx === -1) {
+                    targetIdx = 0;
+                }
             }
 
             isReplayMode = true;
@@ -3770,7 +3892,7 @@
 
             const jumpedCandle = allMasterCandles[replayCurrentIndex];
             const d = new Date(jumpedCandle.time * 1000);
-            const dateFormatted = d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }) + ' ' +
+            const dateFormatted = d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
                                   d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
 
             if (typeof showToast === 'function') {
@@ -3797,10 +3919,9 @@
             } else if (type === 'dayopen') {
                 const lastCandle = allMasterCandles[allMasterCandles.length - 1];
                 const lastDate = new Date(lastCandle.time * 1000);
-                const dayStr = lastDate.toDateString();
-                const firstDayCandle = allMasterCandles.find(c => new Date(c.time * 1000).toDateString() === dayStr);
-                if (firstDayCandle) {
-                    standaloneJumpToTimestamp(firstDayCandle.time);
+                const first = getFirstCandleOnDate(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate());
+                if (first && first.candle) {
+                    standaloneJumpToTimestamp(first.candle.time, first.index);
                 } else {
                     standaloneJumpToTimestamp(lastCandle.time);
                 }
