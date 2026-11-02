@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T10:31:11+05:30",
+    "timeDisplay": "10:31 AM, Nov 02",
+    "price": "75240",
+    "bias": "bullish",
+    "behavior": "[MON 10:31] [B1]: Bullish sweep of 75209 equal lows reclaimed with 5m close above 75240",
+    "tp": "75350 / 75440",
+    "sl": "75180",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T10:31:11+05:30",
+    "timeDisplay": "10:31 AM, Nov 02",
+    "price": "75502",
+    "bias": "bullish",
+    "behavior": "[MON 10:31] [B2]: Sustained 5m close above 75502 Day High with volume absorption",
+    "tp": "75650 / 75800",
+    "sl": "75420",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T10:31:11+05:30",
+    "timeDisplay": "10:31 AM, Nov 02",
+    "price": "75450",
+    "bias": "bearish",
+    "behavior": "[MON 10:31] [S1]: Stop hunt into 75488-75502 followed by rejection close below 75450",
+    "tp": "75350 / 75210",
+    "sl": "75525",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T10:31:11+05:30",
+    "timeDisplay": "10:31 AM, Nov 02",
+    "price": "75200",
+    "bias": "bearish",
+    "behavior": "[MON 10:31] [S2]: Decisive 5m close below 75200 confirming breakdown of 1H shelf equal lows",
+    "tp": "75095 / 74900",
+    "sl": "75280",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T09:30:34+05:30",
     "timeDisplay": "09:30 AM, Nov 02",
     "price": "75370",
@@ -399,6 +443,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261102_103114",
+    "timestamp": "2026-11-02T10:31:14+05:30",
+    "timeDisplay": "10:31 AM, Nov 02",
+    "spot": "75435.14",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 02, 2026 | Spot: 75435.14 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Micro-Chop Boundary (75290.00 - 75450.00): Price is compressing between the 1H shelf High (75487.53) and the 15M ORB High / Micro-EQ (75348.35 - 75366.06). Premature entries inside this 160-point pocket suffer severe theta decay against 75300 and 75400 straddle positions.\n- Capital Preservation Directive: Strictly avoid naked option buying within 75290 - 75450. Await confirmed liquidity sweeps into structural extremes (75488+ BSL or 75209- SSL) before triggering tactical execution.\n\n4. High Momentum / Explosive Zones:\n- Bullish Expansion (Above 75502.00): A decisive 5M candle close above Day High (75501.90) and the 75487.53 BSL double-top cluster sweeps morning Call writer stops, triggering rapid short-covering acceleration toward 75650.00 and 75800.00.\n- Bearish Liquidity Flush (Below 75200.00): A sustained 5M close below the triple equal-low shelf at 75209.16 cascades stop-loss sell orders, igniting a high-velocity momentum flush toward Macro Day Low (75097.50) and 74900.00.\n- Bullish Judas Sweep & Spring Reclaim (Probe below 75209.16 with quick reclaim above 75240.00): Stop-run below the 75209 equal lows absorbed by institutional bid volume, trapping late breakdown sellers and sparking a rapid mean-reversion squeeze toward 75350.00 and 75440.00.\n- Bearish SFP Stop-Hunt Rejection (Probe above 75487.53 - 75501.90 with rejection close below 75450.00): Liquidity grab into Day High resting buy stops followed by an immediate bearish rejection traps breakout longs and triggers a fast liquidation back to 75350.00 and 75240.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Judas Sweep Spring Reclaim): 5M probe below 75209.16 sweeps SSL liquidity, followed by a strong bullish 5M close back above 75240.00 with expanding volume. | TP: 75350.00 / 75440.00 / 75485.00 | SL: 75180.00 | 💡 Buy 75200 CE + Sell 75400 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Bullish Breakout Expansion): Strong 5M candle close firmly above 75502.00 with institutional volume absorption clearing BSL pool. | TP: 75650.00 / 75800.00 | SL: 75420.00 | 💡 Buy 75500 CE + Sell 75700 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Bearish SFP Rejection at Day High BSL): Probe into 75488.00 - 75502.00 that rejects with a distinct upper wick and closes 5M candle back below 75450.00. | TP: 75350.00 / 75250.00 / 75210.00 | SL: 75525.00 | 💡 Buy 75500 PE + Sell 75300 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Bearish Breakdown below 1H Shelf & SSL): Sustained 5M candle close below 75200.00 confirming breakdown and long liquidation beneath 75209.16 shelf. | TP: 75095.00 / 74900.00 | SL: 75280.00 | 💡 Buy 75200 PE + Sell 75000 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "SENSEX_20261102_093037",
     "timestamp": "2026-11-02T09:30:37+05:30",
     "timeDisplay": "09:30 AM, Nov 02",
