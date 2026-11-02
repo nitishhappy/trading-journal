@@ -178,6 +178,14 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.93 - 03 Nov 2026 - Custom Dark TradingView Calendar Component & Standalone Chart Jump (All 6 Interactive Charts)
+- **Standalone Chart Viewport Jump (Non-Replay)**:
+  - Added standalone chart jumping via `📍 Jump to Date` and standalone `📅 Jump` pill: smoothly navigates and centers the chart timescale on any historical date and time without slicing candles or forcing replay mode, keeping developing live candles and full context intact.
+  - The collapsed floating toolbar now presents a dual trigger group: `[📅 Jump]` (for 1-click standalone chart date navigation anytime) and `[⏪ Replay ▲]` (for expanding the full replay toolbar).
+- **Custom Dark Glassmorphic TradingView Calendar Component**:
+  - Replaced the browser-default native white/blue 90's calendar widget with a 100% bespoke, dark glassmorphism TradingView-grade calendar & time picker component matching each asset's color palette.
+  - Features month/year navigation (`‹ November 2026 ›`), Monday-to-Sunday 7-column day tiles with active day selection and today indicators, hour/minute steppers, one-click asset-specific session time chips (e.g. 09:15, 12:00, 15:30), quick presets (`📍 Briefing`, `🌅 Day Open`, `🎯 Live`), and distinct dual action buttons: `📍 Jump to Date` (standalone navigation) and `⏪ Replay` (replay slice & run).
+
 ### v2.3.92 - 03 Nov 2026 - Collapsible Floating Replay Bar & TradingView-Style Date/Time Picker (All 6 Interactive Charts)
 - **Collapsible Floating Replay Toolbar by Default**:
   - Floating Replay Toolbar (`nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `btc_interactive_chart.html`, `gold_interactive_chart.html`, `eurusd_interactive_chart.html`, `sp500_interactive_chart.html`) now collapses by default into a sleek, compact trigger pill (`⏪ Replay ▲`) right above the chart time axis.

@@ -55,33 +55,437 @@
             background: transparent;
         }
 
-        body.embed-mode .header {
-            display: none;
-        }
-
-        body.embed-mode .main-container {
-            height: 100vh;
-        }
-
-        .header {
+        body.embed-mode         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.4rem;
-            padding-bottom: 0.4rem;
-            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 0.25rem;
+            padding: 0.25rem 0.65rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
             flex-shrink: 0;
+            min-height: 40px;
         }
 
         .header h1 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #38bdf8, #0284c7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #f8fafc;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.35rem;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-width: 0;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .timeframe-pill {
+            font-size: 0.62rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.05rem 0.3rem;
+            border-radius: 4px;
+            letter-spacing: 0.02em;
+        }
+
+        .tf-selector {
+            display: inline-flex;
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-left: 0.2rem;
+        }
+
+        .btn-tf {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 0.1rem 0.45rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-tf:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-tf.active {
+            background: rgba(99, 102, 241, 0.25);
+            color: #c7d2fe;
+            font-weight: 700;
+        }
+
+        .ticker-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f8fafc;
+            letter-spacing: -0.02em;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Clean Monochromatic Status Capsule */
+        .status-capsule {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 3px 8px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .status-capsule:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #64748b;
+            flex-shrink: 0;
+            transition: background 0.3s;
+        }
+
+        .capsule-text {
+            font-weight: 600;
+            color: #94a3b8;
+            font-size: 0.68rem;
+            letter-spacing: 0.02em;
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+        }
+
+        .capsule-divider {
+            color: #475569;
+            font-size: 0.6rem;
+        }
+
+        .capsule-timer {
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.68rem;
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+        }
+
+        /* Header action buttons */
+        .btn-header {
+            background: rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .btn-header:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        /* Sizer Button: Distinctive Mustard Orange Accent */
+        .btn-header.btn-sizer {
+            background: rgba(245, 158, 11, 0.16);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.38);
+            font-weight: 600;
+        }
+
+        .btn-header.btn-sizer:hover {
+            background: rgba(245, 158, 11, 0.28);
+            border-color: rgba(245, 158, 11, 0.6);
+            color: #fff;
+        }
+
+        /* Notifications Bell Button: Pure Bell Icon (Red Off, Green On) */
+        .btn-header.btn-alerts-bell {
+            padding: 0.25rem 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-header.btn-alerts-bell.alert-off {
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            color: #f43f5e;
+        }
+
+        .btn-header.btn-alerts-bell.alert-off:hover {
+            background: rgba(244, 63, 94, 0.22);
+            border-color: rgba(244, 63, 94, 0.6);
+            color: #fb7185;
+        }
+
+        .btn-header.btn-alerts-bell.alert-on {
+            background: rgba(16, 185, 129, 0.18);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-header.btn-alerts-bell.alert-on:hover {
+            background: rgba(16, 185, 129, 0.28);
+            border-color: rgba(16, 185, 129, 0.7);
+            color: #34d399;
+        }
+
+        /* Levels Button: Rich Purple Accent */
+        .btn-header.btn-levels-primary {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c084fc;
+            border: 1px solid rgba(139, 92, 246, 0.45);
+            font-weight: 700;
+        }
+
+        .btn-header.btn-levels-primary:hover {
+            background: rgba(139, 92, 246, 0.32);
+            border-color: rgba(139, 92, 246, 0.65);
+            color: #fff;
+        }
+
+        .btn-header.btn-levels-primary.active {
+            background: #8b5cf6;
+            color: #fff;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.55);
+        }
+
+        /* Telemetry Popover */
+        .telemetry-popover {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            width: 280px;
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 10px 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            font-size: 0.74rem;
+            animation: fadeInPopover 0.15s ease-out;
+        }
+
+        @keyframes fadeInPopover {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .telemetry-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+        }
+
+        .tel-label {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .tel-val {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .telemetry-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.7rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Floating Chart Tools Pill (Positioned at top: 32px to clear AI Briefing pins) */
+        .floating-chart-tools {
+            position: absolute;
+            top: 32px;
+            left: 12px;
+            z-index: 25;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .floating-pill-container {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 2px 4px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .floating-pill-trigger {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .floating-pill-trigger:hover {
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .tools-arrow {
+            font-size: 0.6rem;
+            color: #64748b;
+            transition: transform 0.2s ease;
+        }
+
+        .floating-tools-expanded {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding-left: 4px;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            margin-left: 2px;
+        }
+
+        .btn-tool {
+            background: transparent;
+            border: 1px solid transparent;
+            color: #94a3b8;
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .btn-tool:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #f8fafc;
+        }
+
+        /* Vivid Cyan Snap Button */
+        .btn-tool.btn-snap {
+            background: rgba(56, 189, 248, 0.18) !important;
+            color: #38bdf8 !important;
+            border: 1px solid rgba(56, 189, 248, 0.45) !important;
+            font-weight: 600 !important;
+        }
+
+        .btn-tool.btn-snap:hover {
+            background: rgba(56, 189, 248, 0.3) !important;
+            border-color: rgba(56, 189, 248, 0.7) !important;
+            color: #fff !important;
+        }
+
+        /* Purple Active State for Toggled Tools */
+        .btn-tool.active {
+            background: rgba(139, 92, 246, 0.28) !important;
+            color: #e9d5ff !important;
+            border: 1px solid rgba(168, 85, 247, 0.55) !important;
+            box-shadow: 0 0 8px rgba(139, 92, 246, 0.4) !important;
+            font-weight: 600 !important;
+        }
+
+        .btn-tool.active:hover {
+            background: rgba(139, 92, 246, 0.4) !important;
+            border-color: #a855f7 !important;
+            color: #fff !important;
+        }
+
+        .btn-tool-close {
+            background: transparent;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 0.72rem;
+            padding: 2px 5px;
+            border-radius: 8px;
+            margin-left: 2px;
+            transition: all 0.15s;
+        }
+
+        .btn-tool-close:hover {
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .tool-divider {
+            width: 1px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 1px;
         }
 
         .controls-wrapper {
@@ -284,23 +688,21 @@
 
         .ohlc-legend-bar {
             display: inline-flex;
-            align-items: center;
-            gap: 0.65rem;
+            align-items: baseline;
+            gap: 0.45rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            color: #cbd5e1;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 0.2rem 0.55rem;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: transparent;
+            border: none;
+            padding: 0;
             user-select: none;
         }
 
         .ohlc-chg {
-            font-weight: 700;
-            padding: 0.1rem 0.35rem;
+            font-weight: 600;
+            font-size: 0.74rem;
+            padding: 0.08rem 0.35rem;
             border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .ohlc-chg.bullish {
@@ -345,7 +747,7 @@
             cursor: grabbing;
         }
 
-                /* ── Replay Floating Container & Collapsible Bar (Bottom of Chart) ── */
+                        /* ── Replay Floating Container & Collapsible Bar (Bottom of Chart) ── */
         .replay-floating-container {
             position: absolute;
             bottom: 45px;
@@ -356,6 +758,11 @@
             align-items: center;
             z-index: 35;
             user-select: none;
+        }
+        .replay-trigger-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         .replay-trigger-pill {
             background: rgba(15, 23, 42, 0.9);
@@ -379,6 +786,14 @@
             color: #fff;
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+        .replay-trigger-pill.jump-pill {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(15, 23, 42, 0.88);
+        }
+        .replay-trigger-pill.jump-pill:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.25);
         }
         .replay-trigger-arrow {
             font-size: 0.6rem;
@@ -441,20 +856,21 @@
             color: #f43f5e;
         }
 
-        /* ── Date/Time Popover (TradingView inspired) ── */
+        /* ── Modern Custom TradingView Dark Calendar ── */
         .replay-datepicker-popover {
             position: absolute;
             bottom: calc(100% + 8px);
             left: 50%;
             transform: translateX(-50%);
-            background: #0f172a;
+            background: rgba(15, 23, 42, 0.96);
             border: 1px solid rgba(59, 130, 246, 0.45);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 10px 12px;
-            width: 270px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            width: 280px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.06);
             z-index: 100;
             backdrop-filter: blur(16px);
+            user-select: none;
         }
         .popover-header {
             display: flex;
@@ -478,55 +894,173 @@
             cursor: pointer;
             padding: 2px 5px;
             border-radius: 4px;
+            transition: all 0.15s ease;
         }
         .popover-close-btn:hover {
             color: #f87171;
             background: rgba(248, 113, 113, 0.15);
         }
-        .popover-label {
-            display: block;
-            font-size: 0.7rem;
-            color: #94a3b8;
-            margin-bottom: 5px;
-        }
-        .replay-datetime-input {
-            width: 100%;
-            background: rgba(30, 41, 59, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 6px;
-            color: #f8fafc;
-            padding: 6px 8px;
-            font-size: 0.78rem;
-            font-family: inherit;
-            outline: none;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
-        .replay-datetime-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.45);
-        }
-        .replay-datetime-input::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
-            opacity: 0.85;
-        }
-        .replay-datetime-input::-webkit-calendar-picker-indicator:hover {
-            opacity: 1;
-        }
-        .popover-quick-actions {
+
+        .tv-cal-month-nav {
             display: flex;
-            gap: 4px;
-            margin-top: 8px;
-            margin-bottom: 10px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
         }
-        .popover-quick-btn {
-            flex: 1;
+        .tv-cal-month-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #f8fafc;
+            letter-spacing: 0.01em;
+        }
+        .tv-cal-nav-btn {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.12);
             color: #cbd5e1;
+            width: 24px;
+            height: 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            line-height: 1;
+            transition: all 0.15s ease;
+        }
+        .tv-cal-nav-btn:hover {
+            background: rgba(59, 130, 246, 0.25);
+            border-color: #3b82f6;
+            color: #fff;
+        }
+
+        .tv-cal-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .tv-cal-weekdays span {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        .tv-cal-days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+        .tv-cal-day {
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .tv-cal-day:hover {
+            background: rgba(59, 130, 246, 0.25);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .tv-cal-day.other-month {
+            color: #475569;
+            opacity: 0.45;
+        }
+        .tv-cal-day.today {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+        .tv-cal-day.selected {
+            background: #3b82f6 !important;
+            color: #fff !important;
+            font-weight: 700 !important;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.45);
+        }
+
+        .tv-cal-time-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            padding: 6px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .tv-cal-time-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+        .tv-cal-time-inputs {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .tv-cal-time-num {
+            width: 34px;
+            height: 24px;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 4px;
-            padding: 4px 2px;
+            color: #f8fafc;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            padding: 0;
+            font-family: inherit;
+        }
+        .tv-cal-time-num:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.45);
+        }
+        .tv-cal-time-colon {
+            color: #94a3b8;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+        .tv-cal-time-chips {
+            display: flex;
+            gap: 3px;
+        }
+        .tv-cal-time-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .tv-cal-time-chip:hover {
+            background: rgba(59, 130, 246, 0.25);
+            border-color: #3b82f6;
+            color: #fff;
+        }
+
+        .tv-cal-shortcuts {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+            margin-bottom: 8px;
+        }
+        .tv-cal-shortcut-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            border-radius: 4px;
+            padding: 3px 2px;
             font-size: 0.65rem;
             font-weight: 500;
             cursor: pointer;
@@ -534,30 +1068,51 @@
             white-space: nowrap;
             text-align: center;
         }
-        .popover-quick-btn:hover {
+        .tv-cal-shortcut-btn:hover {
             background: rgba(59, 130, 246, 0.25);
             border-color: #3b82f6;
             color: #fff;
         }
-        .popover-footer {
+
+        .tv-cal-actions {
             display: flex;
-            justify-content: flex-end;
+            gap: 6px;
         }
-        .popover-submit-btn {
-            width: 100%;
+        .tv-cal-btn-jump {
+            flex: 1.3;
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             border: none;
             border-radius: 6px;
             color: #fff;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: 6px 12px;
+            padding: 6px 10px;
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
-        .popover-submit-btn:hover {
+        .tv-cal-btn-jump:hover {
             filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+        .tv-cal-btn-replay {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #f1f5f9;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 6px 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .tv-cal-btn-replay:hover {
+            background: rgba(59, 130, 246, 0.25);
+            border-color: #3b82f6;
+            color: #fff;
             transform: translateY(-1px);
         }
 
@@ -1099,128 +1654,192 @@
 </head>
 <body>
     <div class="header">
-        <h1>💶 EUR/USD</h1>
-        <div class="controls-wrapper" id="controls-wrapper">
-            <button class="tabs-nav-btn tabs-nav-left at-edge" id="controls-scroll-left" aria-label="Scroll controls left" title="Scroll left">
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-            </button>
-            <div class="controls-row" id="controls-row">
-                <button id="btn-toggle-fit" class="btn" title="Toggle between zoomed-in candle focus and fitting all levels">
-                    <span>🔍</span> <span id="fit-btn-text">Zoom Candles</span>
-                </button>
-                <button id="btn-reset-zoom" class="btn" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);">
-                    <span>🎯</span> Snap to Live
-                </button>
-                <button id="btn-calc" class="btn" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">
-                    <span>🧮</span> Sizer
-                </button>
-                <button id="btn-toggle-triggers" class="btn" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel">
-                    <span>📋</span> <span id="triggers-btn-text">Levels</span>
-                </button>
-                <button id="btn-add-vline" class="btn" title="Click chart to place a custom vertical line">
-                    <span>➕</span> Add Line
-                </button>
-                <button id="btn-toggle-vlines" class="btn active" title="Toggle AI Briefing & Custom Vertical Lines">
-                    <span>📍</span> <span id="vlines-btn-text">Lines ON</span>
-                </button>
-                <button id="btn-toggle-alerts" class="btn">
-                    <span>🔔</span> <span id="alert-btn-text">Enable Notifications</span>
-                </button>
-                <button id="btn-manual-refresh" class="btn">
-                    <span>⚡</span> Refresh Data
-                </button>
-                <div class="timer-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); padding: 0.3rem 0.65rem; border-radius: 6px; font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
-                    <span>🔄</span> Auto Refresh: <span id="refresh-timer">15s</span>
+        <div class="header-left">
+            <h1>EUR/USD <span class="timeframe-pill">5M</span></h1>
+            <div id="ohlc-legend" class="ohlc-legend-bar">
+                <span id="ticker-price" class="ticker-price">--</span>
+                <span id="ohlc-change-pill" class="ohlc-chg">--</span>
+                <!-- Hidden spans for backward compatibility with scripts searching for these IDs -->
+                <span id="ohlc-o" style="display:none;"></span>
+                <span id="ohlc-h" style="display:none;"></span>
+                <span id="ohlc-l" style="display:none;"></span>
+                <span id="ohlc-c" style="display:none;"></span>
+                <span id="ohlc-ema9-pill" style="display:none;"><strong id="ohlc-ema9"></strong></span>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <!-- Sleek Monochromatic Feed & Telemetry Capsule -->
+            <div class="status-capsule" id="status-capsule" onclick="toggleTelemetryDropdown(event)" title="Click for data feed & SQLite vault telemetry">
+                <span id="market-status-dot" class="status-dot"></span>
+                <span id="market-status-badge" class="capsule-text">Live</span>
+                <span class="capsule-divider">•</span>
+                <span id="bar-close-badge" class="capsule-timer" title="Candle Close Countdown">05:00</span>
+            </div>
+
+            <!-- Telemetry Dropdown / Popover -->
+            <div id="telemetry-popover" class="telemetry-popover" style="display:none;" onclick="event.stopPropagation()">
+                <div class="telemetry-item">
+                    <span class="tel-label">Live Feed:</span>
+                    <span id="feed-status-detail" class="tel-val">Yahoo Forex Live Feed</span>
+                </div>
+                
+                <div class="telemetry-item">
+                    <span class="tel-label">Auto Refresh:</span>
+                    <span class="tel-val" style="color:#cbd5e1;">Every 15s (<span id="refresh-timer">15s</span>)</span>
+                </div>
+                <div class="telemetry-actions">
+                    <button id="btn-manual-refresh" class="btn-header btn-sm">⚡ Refresh Now</button>
                 </div>
             </div>
-            <button class="tabs-nav-btn tabs-nav-right" id="controls-scroll-right" aria-label="Scroll controls right" title="Scroll right">
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
+
+            <!-- Sizer Button (Mustard orange accent) -->
+            <button id="btn-calc" class="btn-header btn-sizer" onclick="openVantagePositionCalculator(event)" title="Open Vantage Position Size Calculator">
+                Sizer
+            </button>
+
+            <!-- Enable Notifications Button (Bell icon only: Red off, Green on) -->
+            <button id="btn-toggle-alerts" class="btn-header btn-alerts-bell alert-off" title="Notifications: OFF (Click to Enable)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
                 </svg>
+            </button>
+
+            <!-- Primary Levels Button (Purple accent) -->
+            <button id="btn-toggle-triggers" class="btn-header btn-levels-primary" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel">
+                <span id="triggers-btn-text">Levels</span>
             </button>
         </div>
     </div>
 
     <div class="main-container sidebar-collapsed" id="main-container">
-        <div class="chart-section">
-            <div class="chart-toolbar">
-                <div class="symbol-title">
-                    <span>💶 EUR/USD (5M)</span>
-                    <span id="feed-status-badge" class="feed-badge feed-badge-live">● LIVE API FEED</span>
-                    <div id="ohlc-legend" class="ohlc-legend-bar">
-                        <span id="ohlc-symbol" style="font-weight: 700; color: #38bdf8;">EUR/USD</span>
-                        <span>O: <strong id="ohlc-o">--</strong></span>
-                        <span>H: <strong id="ohlc-h">--</strong></span>
-                        <span>L: <strong id="ohlc-l">--</strong></span>
-                        <span>C: <strong id="ohlc-c">--</strong></span>
-                        <span id="ohlc-change-pill" class="ohlc-chg">--</span>
-                        <span id="ohlc-ema9-pill" style="display: none; color: #38bdf8; font-weight: 600;">EMA: <strong id="ohlc-ema9">--</strong></span>
-                    </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <div class="indicators-dropdown-wrapper">
-                        <button id="btn-indicators-menu" class="btn btn-indicators" onclick="toggleIndicatorsMenu(event)" title="Technical Indicators" style="padding: 0.2rem 0.6rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px;">
-                            <span>📊</span> <span>Indicators</span> <span id="indicators-arrow" style="font-size: 0.65rem; opacity: 0.7; transition: transform 0.2s;">▼</span>
+        <!-- Chart Canvas Area -->
+        <div class="chart-section" style="padding: 0.35rem;">
+            <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
+                
+                <!-- Option B: Expandable Floating Glass Pill (Positioned at top: 32px below AI Briefing pins) -->
+                <div id="floating-chart-tools" class="floating-chart-tools">
+                    <div class="floating-pill-container" id="floating-pill-container">
+                        <button id="btn-chart-tools-trigger" class="floating-pill-trigger" onclick="toggleChartToolsPill(event)" title="Click to expand chart tools">
+                            <span class="trigger-label">Tools</span>
+                            <span id="tools-pill-arrow" class="tools-arrow">▼</span>
                         </button>
-                        <div id="indicators-dropdown-menu" class="indicators-dropdown-menu" style="display: none;" onclick="event.stopPropagation()">
-                            <div style="font-size: 0.68rem; font-weight: 700; color: #94a3b8; padding: 4px 8px 6px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 4px;">
-                                Indicators
+                        
+                        <div id="floating-tools-expanded" class="floating-tools-expanded" style="display: none;">
+                            <button id="btn-toggle-fit" class="btn-tool" title="Toggle between zoomed-in candle focus and fitting all levels">
+                                <span id="fit-btn-text">Fit</span>
+                            </button>
+                            <button id="btn-reset-zoom" class="btn-tool btn-snap" onclick="resetZoomToLive()" title="Reset Zoom to Latest Live Candles" style="display:none;">
+                                Snap
+                            </button>
+                            <div class="indicators-dropdown-wrapper">
+                                <button id="btn-indicators-menu" class="btn-tool" onclick="toggleIndicatorsMenu(event)" title="Technical Indicators">
+                                    <span>Indicators</span> <span id="indicators-arrow" style="font-size: 0.6rem; opacity: 0.7;">▼</span>
+                                </button>
+                                <div id="indicators-dropdown-menu" class="indicators-dropdown-menu" style="display: none;" onclick="event.stopPropagation()">
+                                    <div style="font-size: 0.68rem; font-weight: 700; color: #94a3b8; padding: 4px 8px 6px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 4px;">
+                                        Indicators
+                                    </div>
+                                    <label class="indicator-item">
+                                        <input type="checkbox" id="chk-ema9" onchange="toggleEMA9(this.checked)" style="accent-color: #38bdf8; cursor: pointer;">
+                                        <span style="display: inline-flex; align-items: center; gap: 6px;">
+                                            <span style="display: inline-block; width: 12px; height: 3px; background: #38bdf8; border-radius: 2px;"></span>
+                                            9 EMA
+                                        </span>
+                                    </label>
+                                </div>
                             </div>
-                            <label class="indicator-item">
-                                <input type="checkbox" id="chk-ema9" onchange="toggleEMA9(this.checked)" style="accent-color: #38bdf8; cursor: pointer;">
-                                <span style="display: inline-flex; align-items: center; gap: 6px;">
-                                    <span style="display: inline-block; width: 12px; height: 3px; background: #38bdf8; border-radius: 2px;"></span>
-                                    9 EMA
-                                </span>
-                            </label>
+                            <button id="btn-high-rr-filter" class="btn-tool" onclick="toggleHighRROnly()" title="Filter High Risk:Reward setups (TP1 R:R >= baseline)">
+                                <span id="high-rr-filter-label">High R:R</span>
+                            </button>
+                            <div class="tool-divider"></div>
+                            <button id="btn-add-vline" class="btn-tool" title="Click chart to place a custom vertical line">
+                                Add Line
+                            </button>
+                            <button id="btn-toggle-vlines" class="btn-tool active" title="Toggle AI Briefing & Custom Vertical Lines">
+                                <span id="vlines-btn-text">Lines ON</span>
+                            </button>
+                            <button class="btn-tool-close" onclick="toggleChartToolsPill(event)" title="Collapse Tools">
+                                ✕
+                            </button>
                         </div>
                     </div>
-                    <button id="btn-high-rr-filter" class="btn btn-high-rr" onclick="toggleHighRROnly()" title="Filter to show only High Risk:Reward setups (TP1 R:R >= baseline)" style="padding: 0.2rem 0.65rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; border-radius: 6px; transition: all 0.2s;">
-                        <span>⭐</span> <span id="high-rr-filter-label">High R:R</span>
-                    </button>
-                    <div class="timestamp-badge" id="bar-close-badge" style="font-family: 'JetBrains Mono', monospace;">⏳ Bar Close: 05:00</div>
-                    <button id="btn-toggle-sidebar" class="btn" onclick="toggleTriggersPanel()" title="Toggle Key Trading Levels Panel" style="padding: 0.2rem 0.6rem; font-size: 0.75rem; display: inline-flex; align-items: center; gap: 4px;">
-                        <span>📋</span> <span id="sidebar-toggle-text">Levels</span>
-                    </button>
                 </div>
-            </div>
-            <div id="chart-wrapper" style="position: relative; flex: 1; width: 100%; height: 100%;">
-                <canvas id="vlines-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
-                                <!-- Replay Floating Container (Option A) -->
+
+                <canvas id="vlines-canvas"  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;"></canvas>
+                                                <!-- Replay Floating Container (Option A) -->
                 <div id="chart-replay-container" class="replay-floating-container">
-                    <!-- Collapsed Trigger Pill (Visible by default) -->
-                    <button id="btn-replay-expand" class="replay-trigger-pill" onclick="toggleReplayToolbar(true)" title="Click to open Replay Toolbar">
-                        <span>⏪ Replay</span>
-                        <span class="replay-trigger-arrow">▲</span>
-                    </button>
+                    <!-- Date & Time Picker Popover (TradingView inspired Custom Dark Calendar) -->
+                    <div id="replay-datepicker-popover" class="replay-datepicker-popover" style="display: none;">
+                        <div class="popover-header">
+                            <span class="popover-title">📅 Go to Date & Time</span>
+                            <button type="button" class="popover-close-btn" onclick="toggleReplayDatePicker(false)" title="Close Date/Time Picker">✕</button>
+                        </div>
+                        <div class="tv-cal-card">
+                            <!-- Month & Year Navigation -->
+                            <div class="tv-cal-month-nav">
+                                <button type="button" class="tv-cal-nav-btn" onclick="tvCalPrevMonth()" title="Previous Month">‹</button>
+                                <span id="tv-cal-month-year" class="tv-cal-month-title">November 2026</span>
+                                <button type="button" class="tv-cal-nav-btn" onclick="tvCalNextMonth()" title="Next Month">›</button>
+                            </div>
+
+                            <!-- Weekdays Header -->
+                            <div class="tv-cal-weekdays">
+                                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                            </div>
+
+                            <!-- Days Grid -->
+                            <div id="tv-cal-days-grid" class="tv-cal-days-grid"></div>
+
+                            <!-- Time Selection Row -->
+                            <div class="tv-cal-time-row">
+                                <span class="tv-cal-time-label">⏱️ Time:</span>
+                                <div class="tv-cal-time-inputs">
+                                    <input type="number" id="tv-cal-hours" min="0" max="23" class="tv-cal-time-num" value="09" title="Hours (00-23)">
+                                    <span class="tv-cal-time-colon">:</span>
+                                    <input type="number" id="tv-cal-mins" min="0" max="59" step="5" class="tv-cal-time-num" value="15" title="Minutes (00-59)">
+                                </div>
+                                <div class="tv-cal-time-chips">
+                                    <button type="button" class="tv-cal-time-chip" onclick="tvCalSetTime(0, 0)">00:00</button>
+                                    <button type="button" class="tv-cal-time-chip" onclick="tvCalSetTime(8, 0)">08:00</button>
+                                    <button type="button" class="tv-cal-time-chip" onclick="tvCalSetTime(14, 0)">14:00</button>
+                                    <button type="button" class="tv-cal-time-chip" onclick="tvCalSetTime(20, 0)">20:00</button>
+                                </div>
+                            </div>
+
+                            <!-- Quick Shortcuts Row -->
+                            <div class="tv-cal-shortcuts">
+                                <button type="button" class="tv-cal-shortcut-btn" onclick="quickJumpAction('briefing')" title="Jump to AI Briefing Run">📍 Briefing</button>
+                                <button type="button" class="tv-cal-shortcut-btn" onclick="quickJumpAction('dayopen')" title="Jump to Day Session Open">🌅 Day Open</button>
+                                <button type="button" class="tv-cal-shortcut-btn" onclick="quickJumpAction('latest')" title="Snap to Latest Live Candle">🎯 Live</button>
+                            </div>
+
+                            <!-- Action Buttons: Standalone Jump vs Replay -->
+                            <div class="tv-cal-actions">
+                                <button type="button" class="tv-cal-btn-jump" onclick="executeCustomJump(false)" title="Scroll chart directly to this date & time (Keeps live candles intact)">
+                                    📍 Jump to Date
+                                </button>
+                                <button type="button" class="tv-cal-btn-replay" onclick="executeCustomJump(true)" title="Cut chart to this date & time and start Replay Mode">
+                                    ⏪ Replay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Collapsed Trigger Group (Visible by default) -->
+                    <div id="replay-trigger-group" class="replay-trigger-group">
+                        <button id="btn-standalone-jump" class="replay-trigger-pill jump-pill" onclick="toggleReplayDatePicker(event)" title="Jump to Date & Time (Standalone Jump)">
+                            <span>📅 Jump</span>
+                        </button>
+                        <button id="btn-replay-expand" class="replay-trigger-pill" onclick="toggleReplayToolbar(true)" title="Open Replay Toolbar">
+                            <span>⏪ Replay</span>
+                            <span class="replay-trigger-arrow">▲</span>
+                        </button>
+                    </div>
 
                     <!-- Expanded Toolbar (Hidden by default) -->
                     <div id="replay-toolbar" class="replay-toolbar" style="display: none;">
-                        <!-- Date & Time Picker Popover (TradingView inspired) -->
-                        <div id="replay-datepicker-popover" class="replay-datepicker-popover" style="display: none;">
-                            <div class="popover-header">
-                                <span class="popover-title">📅 Go to Date & Time</span>
-                                <button type="button" class="popover-close-btn" onclick="toggleReplayDatePicker(false)" title="Close Date/Time Picker">✕</button>
-                            </div>
-                            <div class="popover-body">
-                                <label class="popover-label" for="replay-datetime-input">Select Date & Time:</label>
-                                <div class="popover-input-row">
-                                    <input type="datetime-local" id="replay-datetime-input" class="replay-datetime-input" step="60">
-                                </div>
-                                <div class="popover-quick-actions">
-                                    <button type="button" class="popover-quick-btn" onclick="quickJumpReplay('briefing')" title="Jump to AI Briefing Run">📍 Briefing</button>
-                                    <button type="button" class="popover-quick-btn" onclick="quickJumpReplay('dayopen')" title="Jump to Day Session Open">🌅 Day Open</button>
-                                    <button type="button" class="popover-quick-btn" onclick="quickJumpReplay('latest')" title="Snap to Latest Live Candle">🎯 Live</button>
-                                </div>
-                                <div class="popover-footer">
-                                    <button type="button" class="popover-submit-btn" onclick="applyReplayDateTimeJump()">Go to Date</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button id="btn-replay-datetime" class="replay-btn" onclick="toggleReplayDatePicker(event)" title="Go to Date & Time (TradingView style)">📅 Jump</button>
+                        <button id="btn-replay-datetime" class="replay-btn" onclick="toggleReplayDatePicker(event)" title="Go to Date & Time">📅 Jump</button>
                         <button id="btn-replay-start" class="replay-btn" onclick="replayJumpToStart()" title="Cut chart back to Briefing Run">⏪ Start</button>
                         <button id="btn-replay-step-back" class="replay-btn" onclick="replayStepBack()" title="Step Back 1 Candle">◀ Step</button>
                         <button id="btn-replay-play" class="replay-btn" onclick="replayTogglePlay()" title="Auto Play/Pause Candles">▶ Play</button>
@@ -1328,25 +1947,71 @@
                 const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
                 const badge = document.getElementById('bar-close-badge');
                 if (badge) {
-                    badge.innerText = `⏳ Bar Close: ${formatted}`;
+                    badge.innerText = formatted;
+                    badge.title = `Candle Bar Close: ${formatted}`;
                     if (secRemaining <= 30) {
-                        badge.style.background = 'rgba(239, 68, 68, 0.2)';
-                        badge.style.borderColor = '#ef4444';
                         badge.style.color = '#f87171';
                     } else if (secRemaining <= 60) {
-                        badge.style.background = 'rgba(59, 130, 246, 0.25)';
-                        badge.style.borderColor = '#3b82f6';
-                        badge.style.color = '#60a5fa';
+                        badge.style.color = '#fbbf24';
                     } else {
-                        badge.style.background = 'rgba(59, 130, 246, 0.15)';
-                        badge.style.borderColor = 'rgba(59, 130, 246, 0.3)';
-                        badge.style.color = '#60a5fa';
+                        badge.style.color = '#94a3b8';
                     }
                 }
             }
             setInterval(tick, 1000);
             tick();
         }
+
+                function toggleChartToolsPill(e) {
+            if (e) e.stopPropagation();
+            const expanded = document.getElementById('floating-tools-expanded');
+            const arrow = document.getElementById('tools-pill-arrow');
+            if (!expanded) return;
+            const isHidden = expanded.style.display === 'none' || expanded.style.display === '';
+            if (isHidden) {
+                expanded.style.display = 'flex';
+                if (arrow) {
+                    arrow.textContent = '▲';
+                    arrow.style.transform = 'rotate(180deg)';
+                }
+            } else {
+                expanded.style.display = 'none';
+                if (arrow) {
+                    arrow.textContent = '▼';
+                    arrow.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        function toggleTelemetryDropdown(e) {
+            if (e) e.stopPropagation();
+            const pop = document.getElementById('telemetry-popover');
+            if (!pop) return;
+            pop.style.display = (pop.style.display === 'none' || pop.style.display === '') ? 'flex' : 'none';
+        }
+
+        document.addEventListener('click', (e) => {
+            const pop = document.getElementById('telemetry-popover');
+            const capsule = document.getElementById('status-capsule');
+            if (pop && pop.style.display === 'flex') {
+                if (!pop.contains(e.target) && !capsule.contains(e.target)) {
+                    pop.style.display = 'none';
+                }
+            }
+            const toolsExpanded = document.getElementById('floating-tools-expanded');
+            const toolsContainer = document.getElementById('floating-chart-tools');
+            if (toolsExpanded && toolsExpanded.style.display === 'flex') {
+                const indMenu = document.getElementById('indicators-dropdown-menu');
+                if (toolsContainer && !toolsContainer.contains(e.target) && (!indMenu || !indMenu.contains(e.target))) {
+                    toolsExpanded.style.display = 'none';
+                    const arrow = document.getElementById('tools-pill-arrow');
+                    if (arrow) {
+                        arrow.textContent = '▼';
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                }
+            }
+        });
 
         function setupEventListeners() {
             const toggleBtn = document.getElementById('btn-toggle-alerts');
@@ -1410,21 +2075,17 @@
                     }
                     lastEvaluatedClosedCandleTime = null;
                     levelCrossingMemory = {};
-                    toggleBtn.classList.add('active');
-                    document.getElementById('alert-btn-text').innerText = 'Notifications ACTIVE';
+                    toggleBtn.classList.remove('alert-off');
+                    toggleBtn.classList.add('alert-on');
+                    toggleBtn.title = "Notifications: ACTIVE (Click to Disable)";
                     triggerAlertSound(880, 'sine', 0.15);
-                    showToast("Alert System Activated", "Desktop alerts & chime active for strict 5M candle closes.");
+                    showToast("🔔 Notifications ACTIVE", `Desktop alerts active for 5M candle closes.`);
                 } else {
-                    toggleBtn.classList.remove('active');
-                    document.getElementById('alert-btn-text').innerText = 'Enable Notifications';
-                    showToast("Alert System Disabled", "Notifications paused.");
+                    toggleBtn.classList.remove('alert-on');
+                    toggleBtn.classList.add('alert-off');
+                    toggleBtn.title = "Notifications: OFF (Click to Enable)";
+                    showToast("🔕 Notifications OFF", "Alert notifications paused.");
                 }
-            });
-
-            refreshBtn.addEventListener('click', () => {
-                reloadChartData(true);
-                countdownSeconds = 15;
-                showToast("⚡ EUR/USD Key Levels Refreshed", "Loaded latest Key Trading Levels Summary & candles.");
             });
         }
 
@@ -1527,12 +2188,9 @@
         }
 
         function updateOHLCHeader(param) {
-            const legendO = document.getElementById('ohlc-o');
-            const legendH = document.getElementById('ohlc-h');
-            const legendL = document.getElementById('ohlc-l');
-            const legendC = document.getElementById('ohlc-c');
+            const legendPrice = document.getElementById('ticker-price') || document.getElementById('ohlc-c');
             const legendChg = document.getElementById('ohlc-change-pill');
-            if (!legendO || !currentCandlesArray || currentCandlesArray.length === 0) return;
+            if (!legendPrice || !currentCandlesArray || currentCandlesArray.length === 0) return;
 
             let candle = null;
             if (param && param.time) {
@@ -1568,38 +2226,18 @@
 
                 const fmt = (val) => typeof val === 'number' ? val.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 5 }) : '--';
 
-                legendO.innerText = fmt(open);
-                legendH.innerText = fmt(high);
-                legendL.innerText = fmt(low);
-                legendC.innerText = fmt(close);
+                legendPrice.innerText = fmt(close);
 
                 if (legendChg) {
-                    legendChg.innerText = `${sign}${(diff * 10000).toFixed(1)} pips (${sign}${pct.toFixed(2)}%)`;
+                    legendChg.innerText = `${sign}${fmt(diff)} (${sign}${pct.toFixed(2)}%)`;
                     legendChg.className = `ohlc-chg ${isBullish ? 'bullish' : 'bearish'}`;
                 }
 
-                // Update 9 EMA in Telemetry Header
-                const emaPill = document.getElementById('ohlc-ema9-pill');
-                const emaValEl = document.getElementById('ohlc-ema9');
-                if (emaPill && emaValEl) {
-                    if (showEMA9) {
-                        emaPill.style.display = 'inline-block';
-                        let emaVal = null;
-                        if (param && param.seriesData && emaSeries && param.seriesData.has(emaSeries)) {
-                            const emaObj = param.seriesData.get(emaSeries);
-                            emaVal = (emaObj && typeof emaObj.value === 'number') ? emaObj.value : emaObj;
-                        } else if (param && param.seriesPrices && emaSeries && typeof param.seriesPrices.get === 'function') {
-                            const emaObj = param.seriesPrices.get(emaSeries);
-                            emaVal = (emaObj && typeof emaObj.value === 'number') ? emaObj.value : emaObj;
-                        }
-                        if (emaVal === undefined || emaVal === null) {
-                            emaVal = lastCalculatedEMAVal;
-                        }
-                        emaValEl.innerText = (typeof emaVal === 'number' && !isNaN(emaVal)) ? fmt(emaVal) : '--';
-                    } else {
-                        emaPill.style.display = 'none';
-                    }
-                }
+                // Preserve hidden elements for backward compatibility if present
+                const legendO = document.getElementById('ohlc-o'); if (legendO) legendO.innerText = fmt(open);
+                const legendH = document.getElementById('ohlc-h'); if (legendH) legendH.innerText = fmt(high);
+                const legendL = document.getElementById('ohlc-l'); if (legendL) legendL.innerText = fmt(low);
+                const legendC = document.getElementById('ohlc-c'); if (legendC) legendC.innerText = fmt(close);
             }
         }
 
@@ -2246,7 +2884,7 @@
             const label = document.getElementById('high-rr-filter-label');
             const baseline = getHighRRBaseline();
             if (label) {
-                label.innerText = `High R:R (≥1:${baseline})`;
+                label.innerText = 'High R:R';
             }
             if (btn) {
                 if (showHighRROnly) {
@@ -2772,17 +3410,21 @@
             return Math.max(0, idx !== -1 ? idx : 0);
         }
 
-                // ── COLLAPSIBLE REPLAY TOOLBAR & DATE/TIME CONTROLLER (TradingView Style) ──
+                        // ── COLLAPSIBLE REPLAY TOOLBAR & CUSTOM TRADINGVIEW CALENDAR CONTROLLER ──
+        let tvCalSelectedDate = new Date();
+        let tvCalViewYear = tvCalSelectedDate.getFullYear();
+        let tvCalViewMonth = tvCalSelectedDate.getMonth();
+
         function toggleReplayToolbar(show) {
-            const trigger = document.getElementById('btn-replay-expand');
+            const triggerGroup = document.getElementById('replay-trigger-group');
             const bar = document.getElementById('chart-replay-bar') || document.getElementById('replay-toolbar');
             const popover = document.getElementById('replay-datepicker-popover');
             if (show) {
-                if (trigger) trigger.style.display = 'none';
+                if (triggerGroup) triggerGroup.style.display = 'none';
                 if (bar) bar.style.display = 'inline-flex';
             } else {
                 if (bar) bar.style.display = 'none';
-                if (trigger) trigger.style.display = 'inline-flex';
+                if (triggerGroup) triggerGroup.style.display = 'inline-flex';
                 if (popover) popover.style.display = 'none';
             }
         }
@@ -2793,60 +3435,188 @@
             if (!popover) return;
             const isHidden = popover.style.display === 'none' || popover.style.display === '';
             if (isHidden) {
-                initReplayDatePickerValues();
+                initTvCalendarState();
                 popover.style.display = 'block';
             } else {
                 popover.style.display = 'none';
             }
         }
 
-        function formatEpochToInputLocal(epochSec) {
-            if (!epochSec || isNaN(epochSec)) return '';
-            const d = new Date(epochSec * 1000);
-            const pad = (n) => String(n).padStart(2, '0');
-            const year = d.getFullYear();
-            const month = pad(d.getMonth() + 1);
-            const day = pad(d.getDate());
-            const hours = pad(d.getHours());
-            const mins = pad(d.getMinutes());
-            return `${year}-${month}-${day}T${hours}:${mins}`;
-        }
-
-        function initReplayDatePickerValues() {
-            const input = document.getElementById('replay-datetime-input');
-            if (!input || !allMasterCandles || allMasterCandles.length === 0) return;
-
-            const firstCandle = allMasterCandles[0];
-            const lastCandle = allMasterCandles[allMasterCandles.length - 1];
-            input.min = formatEpochToInputLocal(firstCandle.time);
-            input.max = formatEpochToInputLocal(lastCandle.time);
-
-            let targetTime = lastCandle.time;
-            if (isReplayMode && replayCurrentIndex !== null && allMasterCandles[replayCurrentIndex]) {
-                targetTime = allMasterCandles[replayCurrentIndex].time;
-            } else {
-                const activeRun = typeof getActiveBriefingRun === 'function' ? getActiveBriefingRun() : null;
-                if (activeRun && activeRun.time) {
-                    targetTime = activeRun.time;
+        function initTvCalendarState() {
+            let targetTime = Math.floor(Date.now() / 1000);
+            if (allMasterCandles && allMasterCandles.length > 0) {
+                if (isReplayMode && replayCurrentIndex !== null && allMasterCandles[replayCurrentIndex]) {
+                    targetTime = allMasterCandles[replayCurrentIndex].time;
+                } else {
+                    targetTime = allMasterCandles[allMasterCandles.length - 1].time;
                 }
             }
-            input.value = formatEpochToInputLocal(targetTime);
+            tvCalSelectedDate = new Date(targetTime * 1000);
+            tvCalViewYear = tvCalSelectedDate.getFullYear();
+            tvCalViewMonth = tvCalSelectedDate.getMonth();
+
+            const hInput = document.getElementById('tv-cal-hours');
+            const mInput = document.getElementById('tv-cal-mins');
+            if (hInput) hInput.value = String(tvCalSelectedDate.getHours()).padStart(2, '0');
+            if (mInput) mInput.value = String(tvCalSelectedDate.getMinutes()).padStart(2, '0');
+
+            renderTvCalendarGrid();
         }
 
-        function applyReplayDateTimeJump() {
-            const input = document.getElementById('replay-datetime-input');
-            if (!input || !input.value) {
-                if (typeof showToast === 'function') showToast("⚠️ Select Date & Time", "Please choose a valid date and time.");
-                return;
+        function tvCalPrevMonth() {
+            tvCalViewMonth--;
+            if (tvCalViewMonth < 0) {
+                tvCalViewMonth = 11;
+                tvCalViewYear--;
             }
-            const selectedDate = new Date(input.value);
-            const targetEpoch = Math.floor(selectedDate.getTime() / 1000);
-            if (isNaN(targetEpoch)) {
-                if (typeof showToast === 'function') showToast("⚠️ Invalid Date", "Could not parse selected date.");
-                return;
+            renderTvCalendarGrid();
+        }
+
+        function tvCalNextMonth() {
+            tvCalViewMonth++;
+            if (tvCalViewMonth > 11) {
+                tvCalViewMonth = 0;
+                tvCalViewYear++;
             }
-            replayJumpToTimestamp(targetEpoch);
+            renderTvCalendarGrid();
+        }
+
+        function tvCalSetTime(h, m) {
+            const hInput = document.getElementById('tv-cal-hours');
+            const mInput = document.getElementById('tv-cal-mins');
+            if (hInput) hInput.value = String(h).padStart(2, '0');
+            if (mInput) mInput.value = String(m).padStart(2, '0');
+        }
+
+        function tvCalSelectDay(year, month, day) {
+            tvCalSelectedDate = new Date(year, month, day);
+            renderTvCalendarGrid();
+        }
+
+        function renderTvCalendarGrid() {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const titleEl = document.getElementById('tv-cal-month-year');
+            if (titleEl) {
+                titleEl.innerText = `${monthNames[tvCalViewMonth]} ${tvCalViewYear}`;
+            }
+
+            const gridEl = document.getElementById('tv-cal-days-grid');
+            if (!gridEl) return;
+            gridEl.innerHTML = '';
+
+            const firstDay = new Date(tvCalViewYear, tvCalViewMonth, 1);
+            let startDayOfWeek = firstDay.getDay() - 1;
+            if (startDayOfWeek < 0) startDayOfWeek = 6;
+
+            const daysInMonth = new Date(tvCalViewYear, tvCalViewMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(tvCalViewYear, tvCalViewMonth, 0).getDate();
+
+            for (let i = startDayOfWeek - 1; i >= 0; i--) {
+                const d = daysInPrevMonth - i;
+                const cell = document.createElement('div');
+                cell.className = 'tv-cal-day other-month';
+                cell.innerText = d;
+                const prevM = tvCalViewMonth === 0 ? 11 : tvCalViewMonth - 1;
+                const prevY = tvCalViewMonth === 0 ? tvCalViewYear - 1 : tvCalViewYear;
+                cell.onclick = () => { tvCalViewMonth = prevM; tvCalViewYear = prevY; tvCalSelectDay(prevY, prevM, d); };
+                gridEl.appendChild(cell);
+            }
+
+            const today = new Date();
+            const isThisMonth = today.getFullYear() === tvCalViewYear && today.getMonth() === tvCalViewMonth;
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const cell = document.createElement('div');
+                cell.className = 'tv-cal-day';
+                cell.innerText = d;
+
+                if (isThisMonth && today.getDate() === d) {
+                    cell.classList.add('today');
+                }
+
+                if (tvCalSelectedDate.getFullYear() === tvCalViewYear &&
+                    tvCalSelectedDate.getMonth() === tvCalViewMonth &&
+                    tvCalSelectedDate.getDate() === d) {
+                    cell.classList.add('selected');
+                }
+
+                cell.onclick = () => tvCalSelectDay(tvCalViewYear, tvCalViewMonth, d);
+                gridEl.appendChild(cell);
+            }
+
+            const totalRendered = startDayOfWeek + daysInMonth;
+            const remaining = (totalRendered <= 35 ? 35 : 42) - totalRendered;
+            for (let d = 1; d <= remaining; d++) {
+                const cell = document.createElement('div');
+                cell.className = 'tv-cal-day other-month';
+                cell.innerText = d;
+                const nextM = tvCalViewMonth === 11 ? 0 : tvCalViewMonth + 1;
+                const nextY = tvCalViewMonth === 11 ? tvCalViewYear + 1 : tvCalViewYear;
+                cell.onclick = () => { tvCalViewMonth = nextM; tvCalViewYear = nextY; tvCalSelectDay(nextY, nextM, d); };
+                gridEl.appendChild(cell);
+            }
+        }
+
+        function executeCustomJump(asReplay = false) {
+            const hInput = document.getElementById('tv-cal-hours');
+            const mInput = document.getElementById('tv-cal-mins');
+            const h = parseInt(hInput ? hInput.value : 9, 10) || 0;
+            const m = parseInt(mInput ? mInput.value : 15, 10) || 0;
+
+            const targetDate = new Date(tvCalSelectedDate.getFullYear(), tvCalSelectedDate.getMonth(), tvCalSelectedDate.getDate(), h, m, 0);
+            const targetEpoch = Math.floor(targetDate.getTime() / 1000);
+
+            if (asReplay) {
+                replayJumpToTimestamp(targetEpoch);
+            } else {
+                standaloneJumpToTimestamp(targetEpoch);
+            }
             toggleReplayDatePicker(false);
+        }
+
+        function standaloneJumpToTimestamp(targetEpoch) {
+            if (!allMasterCandles || allMasterCandles.length === 0) {
+                if (typeof showToast === 'function') showToast("⚠️ Jump Unavailable", "No candle history loaded yet.");
+                return;
+            }
+
+            if (isReplayMode) {
+                exitReplayMode();
+            }
+
+            let targetIdx = -1;
+            for (let i = allMasterCandles.length - 1; i >= 0; i--) {
+                if (allMasterCandles[i].time <= targetEpoch) {
+                    targetIdx = i;
+                    break;
+                }
+            }
+            if (targetIdx === -1) targetIdx = 0;
+
+            if (chartInstance && chartInstance.timeScale) {
+                isProgrammaticScroll = true;
+                const fromIdx = Math.max(0, targetIdx - 15);
+                const toIdx = Math.min(allMasterCandles.length + 5, targetIdx + 20);
+                chartInstance.timeScale().setVisibleLogicalRange({ from: fromIdx, to: toIdx });
+                userLogicalRange = { from: fromIdx, to: toIdx };
+                userHasInteracted = true;
+                const resetBtn = document.getElementById('btn-reset-zoom');
+                if (resetBtn) resetBtn.style.display = 'flex';
+                setTimeout(() => { isProgrammaticScroll = false; }, 60);
+            }
+
+            const jumpedCandle = allMasterCandles[targetIdx];
+            if (typeof updateOHLCHeader === 'function') {
+                updateOHLCHeader({ time: jumpedCandle.time, open: jumpedCandle.open, high: jumpedCandle.high, low: jumpedCandle.low, close: jumpedCandle.close });
+            }
+
+            const d = new Date(jumpedCandle.time * 1000);
+            const dateFormatted = d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }) + ' ' +
+                                  d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            if (typeof showToast === 'function') {
+                showToast("📍 Chart Jumped", `Focused on ${dateFormatted} (Bar ${targetIdx + 1}/${allMasterCandles.length})`);
+            }
         }
 
         function replayJumpToTimestamp(targetEpoch) {
@@ -2903,12 +3673,12 @@
             }
         }
 
-        function quickJumpReplay(type) {
+        function quickJumpAction(type) {
             if (!allMasterCandles || allMasterCandles.length === 0) return;
             if (type === 'briefing') {
                 const activeRun = typeof getActiveBriefingRun === 'function' ? getActiveBriefingRun() : null;
                 if (activeRun && activeRun.time) {
-                    replayJumpToTimestamp(activeRun.time);
+                    standaloneJumpToTimestamp(activeRun.time);
                     toggleReplayDatePicker(false);
                     return;
                 }
@@ -2920,24 +3690,23 @@
                 const dayStr = lastDate.toDateString();
                 const firstDayCandle = allMasterCandles.find(c => new Date(c.time * 1000).toDateString() === dayStr);
                 if (firstDayCandle) {
-                    replayJumpToTimestamp(firstDayCandle.time);
+                    standaloneJumpToTimestamp(firstDayCandle.time);
                 } else {
-                    replayJumpToTimestamp(lastCandle.time);
+                    standaloneJumpToTimestamp(lastCandle.time);
                 }
                 toggleReplayDatePicker(false);
             } else if (type === 'latest') {
                 exitReplayMode();
+                if (typeof resetZoomToLive === 'function') resetZoomToLive();
                 toggleReplayDatePicker(false);
-                if (typeof showToast === 'function') showToast("🎯 Live View", "Returned to live real-time candles.");
             }
         }
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                const input = document.getElementById('replay-datetime-input');
                 const popover = document.getElementById('replay-datepicker-popover');
-                if (popover && popover.style.display !== 'none' && document.activeElement === input) {
-                    applyReplayDateTimeJump();
+                if (popover && popover.style.display !== 'none') {
+                    executeCustomJump(false);
                 }
             } else if (e.key === 'Escape') {
                 const popover = document.getElementById('replay-datepicker-popover');
@@ -2950,13 +3719,15 @@
         document.addEventListener('click', (e) => {
             const popover = document.getElementById('replay-datepicker-popover');
             const dtBtn = document.getElementById('btn-replay-datetime');
+            const standBtn = document.getElementById('btn-standalone-jump');
             if (popover && popover.style.display !== 'none') {
-                if (!popover.contains(e.target) && (!dtBtn || !dtBtn.contains(e.target))) {
+                if (!popover.contains(e.target) &&
+                    (!dtBtn || !dtBtn.contains(e.target)) &&
+                    (!standBtn || !standBtn.contains(e.target))) {
                     toggleReplayDatePicker(false);
                 }
             }
         });
-
         function pauseReplay() {
             if (replayPlayTimer) {
                 clearInterval(replayPlayTimer);
@@ -4062,7 +4833,7 @@
 
             if (!candles || !Array.isArray(candles) || candles.length === 0) {
                 badge.innerText = '⚠️ DATA UNAVAILABLE';
-                badge.className = 'feed-badge feed-badge-unavailable';
+                badge.className = 'capsule-text feed-badge-unavailable'; const dot = document.getElementById('market-status-dot'); if (dot) { dot.style.background = '#64748b'; dot.style.boxShadow = 'none'; }
                 return;
             }
 
@@ -4071,13 +4842,13 @@
             const ageMinutes = (nowSec - latestCandleTime) / 60;
 
             if (ageMinutes <= 45) {
-                badge.innerText = '● LIVE API FEED';
-                badge.className = 'feed-badge feed-badge-live';
+                badge.innerText = 'Live';
+                badge.className = 'capsule-text feed-badge-live'; const dot = document.getElementById('market-status-dot'); if (dot) { dot.style.background = '#10b981'; dot.style.boxShadow = '0 0 6px rgba(16, 185, 129, 0.7)'; }
             } else {
                 const candleDt = new Date(latestCandleTime * 1000);
                 const dateLabel = candleDt.toLocaleDateString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric' });
-                badge.innerText = `🔒 MARKET CLOSED (${dateLabel})`;
-                badge.className = 'feed-badge feed-badge-unavailable';
+                badge.innerText = 'Closed';
+                badge.className = 'capsule-text feed-badge-unavailable'; const dot = document.getElementById('market-status-dot'); if (dot) { dot.style.background = '#64748b'; dot.style.boxShadow = 'none'; }
             }
         }
 
