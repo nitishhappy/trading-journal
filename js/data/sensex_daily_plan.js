@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-02T15:46:29+05:30",
+    "timeDisplay": "03:46 PM, Nov 02",
+    "price": "75590",
+    "bias": "bullish",
+    "behavior": "[MON 15:46] [B1]: Retest and bullish rejection around 75,550 - 75,590 micro-equilibrium shelf",
+    "tp": "75,800 / 75,940",
+    "sl": "75,490",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T15:46:29+05:30",
+    "timeDisplay": "03:46 PM, Nov 02",
+    "price": "75720",
+    "bias": "bullish",
+    "behavior": "[MON 15:46] [B2]: Sustained 5m close ABOVE 75,700-75,720 confirming fresh range expansion",
+    "tp": "75,940 / 76,150",
+    "sl": "75,600",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T15:46:29+05:30",
+    "timeDisplay": "03:46 PM, Nov 02",
+    "price": "75640",
+    "bias": "bearish",
+    "behavior": "[MON 15:46] [S1]: Rejection from day highs with bearish displacement below 75,640",
+    "tp": "75,460 / 75,340",
+    "sl": "75,760",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-02T15:46:29+05:30",
+    "timeDisplay": "03:46 PM, Nov 02",
+    "price": "75330",
+    "bias": "bearish",
+    "behavior": "[MON 15:46] [S2]: Sustained 5m close BELOW 75,330 breaking parabolic ignition base and daily EQ",
+    "tp": "75,100 / 74,980",
+    "sl": "75,460",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T13:31:05+05:30",
     "timeDisplay": "01:31 PM, Nov 02",
     "price": "75100",
@@ -487,6 +531,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261102_154636",
+    "timestamp": "2026-11-02T15:46:36+05:30",
+    "timeDisplay": "03:46 PM, Nov 02",
+    "spot": "75692.78",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (03:45 PM IST - Nov 02, 2026 | Spot: 75692.78 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict intraday compression bracket sits between 75,592.73 (50% Micro-EQ Anchor) and 75,692.78 (Day High / EOD close shelf).\n- Trading inside 75,590 - 75,690 carries high premium decay risk and muted directional edge ahead of overnight re-pricing.\n- Range consolidation shelf low at 75,245.68 to 50% swing equilibrium at 75,458.95 represents secondary rotational chop where directional momentum stalls.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Range Expansion] (Sustained 5M/15M close ABOVE 75,720): Clean displacement above Day High (75,692.78) unpins fresh upside momentum targeting the 1H consolidation shelf high at 75,939.78 and the 76,000 major psychological milestone.\n- [Bearish Mean-Reversion] (Bearish rejection & close BELOW 75,550): Loss of the 75,592.73 micro-equilibrium shelf triggers fast corrective long unwinding down toward the 50% swing equilibrium at 75,458.95 and the 75,361.94 ignition zone.\n- [Institutional Breakdown] (Impulsive displacement BELOW 75,330): Decisive violation of the Parabolic Ignition Order Block (75,337.14 - 75,361.94) and 50% Daily Equilibrium (75,335.45) unleashes heavy downside momentum targeting 75,097.50 (15M ORB Low) and 74,978.12 (Session Low).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Bullish Dip Mitigation): Bullish retest and reversal rejection candle confirming support between 75,550 - 75,590 (Micro-EQ shelf). | TP: 75,800 / 75,940 | SL: 75,490 | 💡 Buy 75600 CE + Sell 75800 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (High-Momentum Breakout): Sustained 5-minute candle close ABOVE 75,720 with expanding volume confirming trend continuation. | TP: 75,940 / 76,150 | SL: 75,600 | 💡 Buy 75700 CE + Sell 75900 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Rejection / Mean Reversion): Bearish displacement and 5-minute close BELOW 75,640 following an exhaustion test of the day high. | TP: 75,460 / 75,340 | SL: 75,760 | 💡 Buy 75700 PE + Sell 75500 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Ignition Base Breakdown): Decisive 5-minute close BELOW 75,330 breaking daily equilibrium and the parabolic ignition base. | TP: 75,100 / 74,980 | SL: 75,460 | 💡 Buy 75300 PE + Sell 75100 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261102_133108",
     "timestamp": "2026-11-02T13:31:08+05:30",
     "timeDisplay": "01:31 PM, Nov 02",
