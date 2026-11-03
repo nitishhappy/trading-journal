@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T22:02:07+05:30",
+    "timeDisplay": "10:02 PM, Nov 03",
+    "price": "3922.0",
+    "bias": "bullish",
+    "behavior": "[TUE 22:02] [G_B1]: Discount Demand & Internal SSL Sweep Retest",
+    "tp": "3940.00 / 3952.00",
+    "sl": "3914.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T22:02:07+05:30",
+    "timeDisplay": "10:02 PM, Nov 03",
+    "price": "3952.0",
+    "bias": "bullish",
+    "behavior": "[TUE 22:02] [G_B2]: High-Momentum Breakout Above London Supply",
+    "tp": "3964.00 / 3971.10",
+    "sl": "3944.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T22:02:07+05:30",
+    "timeDisplay": "10:02 PM, Nov 03",
+    "price": "3950.0",
+    "bias": "bearish",
+    "behavior": "[TUE 22:02] [G_S1]: 15M Bearish FVG & Supply Rejection",
+    "tp": "3934.00 / 3922.00",
+    "sl": "3957.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T22:02:07+05:30",
+    "timeDisplay": "10:02 PM, Nov 03",
+    "price": "3918.0",
+    "bias": "bearish",
+    "behavior": "[TUE 22:02] [G_S2]: High-Momentum Breakdown Below Demand Shelf",
+    "tp": "3905.00 / 3895.45",
+    "sl": "3926.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T20:48:02+05:30",
     "timeDisplay": "08:48 PM, Nov 03",
     "price": "3925.0",
@@ -19,17 +63,6 @@ window.goldDailyPlanData = [
     "behavior": "[TUE 20:48] [G_B2]: High-Momentum Breakout Above Pullback Supply",
     "tp": "3970.00 / 3982.00",
     "sl": "Strong 15M candle body close firmly above 3955.00 with surging volume, absorbing the overhead FVG supply",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T20:48:02+05:30",
-    "timeDisplay": "08:48 PM, Nov 03",
-    "price": "3950.0",
-    "bias": "bearish",
-    "behavior": "[TUE 20:48] [G_S1]: 15M Bearish FVG / Breakdown Origin Retest",
-    "tp": "3932.00 / 3922.00",
-    "sl": "Retest of the 15M Bearish FVG showing long upper rejection wicks and a 5M close back below 3945.00",
     "status": "na"
   },
   {
@@ -575,6 +608,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261103_220209",
+    "timestamp": "2026-11-03T22:02:09+05:30",
+    "timeDisplay": "10:02 PM, Nov 03",
+    "spot": "3934.09",
+    "trigger": "Scheduled 10:00 PM Update (London Close Exhaustion",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (10:00 PM IST - Nov 03, 2026 | Spot: 3934.09 | Trigger: Scheduled 10:00 PM Update (London Close Exhaustion))\n\n### 1. Global Macro & Forex Mechanics:\n* **London / New York Session Transition:** With the London 16:00 fix (21:30 IST) completed, European interbank liquidity has fully unwound. Trading has shifted into the late New York afternoon session where institutional macro book rebalancing tapers off, leading to thinner aggregate order-book depth and heightened sensitivity to algorithmic liquidity sweeps.\n* **US Dollar Index (DXY) Correlation:** DXY is consolidating in a tight consolidation band following the NY morning data release. The greenback’s intraday deceleration is keeping bullion well-anchored around its central pivot, preventing aggressive multi-dollar trend runaway in either direction without an external catalyst.\n* **US 10-Year Yields & Real Rates:** US Treasury 10-year yields remain stable near session midpoints, providing a neutral backdrop for non-yielding assets. Capital flows into gold are currently driven by tactical SMC rebalancing rather than broad macro flight-to-safety or rate-divergence trades.\n* **Volume & Volatility Cycle:** Expect lower base volume with sharp episodic wick spikes between 22:00 and 23:30 IST as remaining NY desks square books ahead of the Asia-Pacific handover.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Equilibrium Positioning:** Day High sits at **3971.10** and Day Low at **3895.45** (75.65-point daily range). The 50% Daily Equilibrium ($EQ$) is **3933.28**. At current spot **3934.09**, Gold is trading directly on this equilibrium axis, confirming that price is in rotational consolidation rather than directional discovery.\n* **Buy-Side Liquidity (BSL) Pools:**\n  * **3950.00 – 3952.00:** London session afternoon rejection shelf and 1H Bearish Fair Value Gap (FVG).\n  * **3971.10:** Daily High and major resting buy-stop pool.\n* **Sell-Side Liquidity (SSL) Pools:**\n  * **3920.00 – 3922.00:** NY session demand floor and internal swing lows.\n  * **3895.45:** Daily Low and major sell-stop liquidity reserve.\n* **Institutional Order Blocks & Imbalances:**\n  * **Premium Supply Block (3948.00 – 3955.00):** 15M/1H Bearish Order Block formed during the London post-lunch distribution.\n  * **Discount Demand Block (3918.00 – 3924.00):** Unmitigated 15M Bullish Order Block that sponsored the NY morning rally.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Zone Boundaries:** **3928.00 – 3942.00**\n* **Execution Rationale:** This 14-dollar band constitutes the dead-center 50% equilibrium bracket. Inside this range, price is subject to low-volume rotational oscillation, overlapping candles, and two-way wick traps without institutional displacement.\n* **Rule:** Do NOT initiate breakout, momentum, or market orders within **3928.00 – 3942.00**. Option buyers and margin scalpers will be chopped by spread expansion and lack of follow-through. Await clear deviation to range extremes or an established 15M candle close outside.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion Trigger (Above 3952.00):**\n  * A sustained 15M displacement close above 3952.00 absorbs the London supply block and triggers a short-covering squeeze through resting buy-stops, accelerating momentum directly toward **3964.00** and the **3971.10** Day High BSL.\n* **Bearish Expansion Trigger (Below 3918.00):**\n  * A decisive 15M candle close below 3918.00 violates the internal NY demand floor, turning the shelf into resistance and triggering long liquidations down toward **3905.00** and the **3895.45** Day Low SSL.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **3920.00 – 3924.00** Retest | Sweep of internal SSL into the 15M Bullish OB followed by a 5M bullish displacement close back above 3926.00 with expanding buy volume. | **TP1:** 3940.00<br>**TP2:** 3952.00 | **3914.00** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **3952.00** Breakout | 15M candle body close firmly above 3952.00 with zero upper wick exhaustion, confirming absorption of the 1H Bearish FVG. | **TP1:** 3964.00<br>**TP2:** 3971.10 | **3944.00** | 1:2.4 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **3948.00 – 3952.00** Retest | Tap into the 15M Bearish FVG showing upper wick exhaustion (shooting star/pin bar) and a 5M close back below 3944.00 confirming Market Structure Shift. | **TP1:** 3934.00<br>**TP2:** 3922.00 | **3957.00** | 1:2.5 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **3918.00** Breakdown | 15M full body candle close decisively below 3918.00, confirming institutional displacement and failure of NY demand. | **TP1:** 3905.00<br>**TP2:** 3895.45 | **3926.00** | 1:2.8 |"
+  },
+  {
     "id": "GOLD_20261103_204805",
     "timestamp": "2026-11-03T20:48:05+05:30",
     "timeDisplay": "08:48 PM, Nov 03",
