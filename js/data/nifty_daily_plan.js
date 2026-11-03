@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T11:02:33+05:30",
+    "timeDisplay": "11:02 AM, Nov 03",
+    "price": "23640",
+    "bias": "bullish",
+    "behavior": "[TUE 11:02] [B1]: Orderly retracement into 23635.00 - 23645.00 with 5m bullish rejection wick/pin-bar confirming buyer absorption above prior resistance",
+    "tp": "23685.00 / 23735.00",
+    "sl": "23610.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T11:02:33+05:30",
+    "timeDisplay": "11:02 AM, Nov 03",
+    "price": "23680",
+    "bias": "bullish",
+    "behavior": "[TUE 11:02] [B2]: Sustained 5m close ABOVE 23680.00 with active Nifty Futures volume expanding clearing Day High (23675.30)",
+    "tp": "23740.00 / 23790.00",
+    "sl": "23645.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T11:02:33+05:30",
+    "timeDisplay": "11:02 AM, Nov 03",
+    "price": "23640",
+    "bias": "bearish",
+    "behavior": "[TUE 11:02] [S1]: Rejection at 23675.30 Day High followed by a confirmed 5m close BELOW 23640.00 trapping breakout buyers into FinNifty expiry pin",
+    "tp": "23595.00 / 23550.00",
+    "sl": "23675.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T11:02:33+05:30",
+    "timeDisplay": "11:02 AM, Nov 03",
+    "price": "23595",
+    "bias": "bearish",
+    "behavior": "[TUE 11:02] [S2]: Sustained 5m close BELOW 23595.00 with expanding red futures volume confirming breakdown of the 23600 PE anchor shelf",
+    "tp": "23540.00 / 23485.00",
+    "sl": "23630.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T10:31:07+05:30",
     "timeDisplay": "10:31 AM, Nov 03",
     "price": "23620",
@@ -2203,6 +2247,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261103_110236",
+    "timestamp": "2026-11-03T11:02:36+05:30",
+    "timeDisplay": "11:02 AM, Nov 03",
+    "spot": "23661.2",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23661.20 > Max Plan Target $23655.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:00 AM IST - Nov 03, 2026 | Spot: 23661.2 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23661.20 > Max Plan Target $23655.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Spot Corridor: 23640.00 – 23675.00 Spot Index zone (Width: ~35 points).\n- Spot price (23661.2) is consolidating immediately below the freshly minted Day High (23675.30) and above the morning breakout extension boundary (23640.00).\n- Tuesday FinNifty Expiry OI Impact: Aggressive intraday straddle and strangle writing across the 23650 and 23700 strikes alongside FinNifty expiry positioning is creating heavy gamma pinning friction. The 23650 CE writers are under pressure but defending the 23675–23700 supply wall, while aggressive 23650 PE writing has emerged to lock in an intraday pin. This dense concentration creates sharp two-way whip and elevated theta decay within the 23640–23675 pocket.\n- Tactical Directive: STRICT NO-TRADE ZONE inside 23640.00 – 23675.00. Do not execute market orders or chase micro-candles inside this band. Await a confirmed 5-minute candle close outside the boundaries with active Nifty Futures volume confirmation before executing directional setups.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Day High Expansion] (Sustained 5m Close Above 23680.00): A decisive 5-minute close above Day High (23675.30) and the 23680 hurdle with active Nifty Futures volume expanding (>1.3x 8-bar avg) will trigger forced capitulation among 23700 CE writers, releasing an explosive short-covering rally toward 23740.00 and 23790.00.\n- [Bullish Dip Absorption] (Pullback & Lower-Wick Rejection at 23635.00 - 23645.00): An orderly retest of the broken 23640 demand shelf with diminishing sell volume and a sharp 5-minute bullish hammer/pin bar confirming buyer defense offers high-speed continuation momentum back toward 23680.00 and 23730.00.\n- [Bearish False Breakout Trap] (Day High Rejection & 5m Close Below 23640.00): Failure to sustain near Day High followed by a confirmed 5-minute close back below 23640.00 traps late breakout retail longs, sparking a swift unwinding flush toward 23595.00 and 23550.00.\n- [Bearish Value Floor Breakdown] (Sustained 5m Close Below 23595.00): Decisive breakdown below the 23600 strike support shelf with expanding red futures volume confirms complete failure of the morning trend expansion, initiating an accelerated selloff toward 23540.00 and 23485.00 (15M ORB Low).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Breakout Retest Absorption Long): Orderly retracement into 23635.00 - 23645.00 with 5m bullish rejection wick/pin-bar confirming buyer absorption above prior resistance. | TP: 23685.00 / 23735.00 | SL: 23610.00 | 💡 Buy 23650 CE + Sell 23700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Expansion Long): Sustained 5m close ABOVE 23680.00 with active Nifty Futures volume expanding (>1.3x 8-bar avg) clearing Day High (23675.30). | TP: 23740.00 / 23790.00 | SL: 23645.00 | 💡 Buy 23700 CE + Sell 23750 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Failed Breakout / Re-Entry Short): Rejection at 23675.30 Day High followed by a confirmed 5m close BELOW 23640.00 trapping breakout buyers into FinNifty expiry pin. | TP: 23595.00 / 23550.00 | SL: 23675.00 | 💡 Buy 23650 PE + Sell 23600 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Strike Floor Breakdown Short): Sustained 5m close BELOW 23595.00 with expanding red futures volume confirming breakdown of the 23600 PE anchor shelf. | TP: 23540.00 / 23485.00 | SL: 23630.00 | 💡 Buy 23600 PE + Sell 23550 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261103_103109",
     "timestamp": "2026-11-03T10:31:09+05:30",
     "timeDisplay": "10:31 AM, Nov 03",
