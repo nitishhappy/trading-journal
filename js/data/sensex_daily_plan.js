@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T15:46:44+05:30",
+    "timeDisplay": "03:46 PM, Nov 03",
+    "price": "77114",
+    "bias": "bullish",
+    "behavior": "[TUE 15:46] [B1]: Confirmed 5M close ABOVE 77,114 clearing the 1H/2H Swing High and unlocking expansion towards 77,350/77,500",
+    "tp": "77,350 / 77,500",
+    "sl": "76,980",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T15:46:44+05:30",
+    "timeDisplay": "03:46 PM, Nov 03",
+    "price": "76615",
+    "bias": "bullish",
+    "behavior": "[TUE 15:46] [B2]: Liquidity sweep of 76,559 Equal Lows followed by a 5M bullish reclaim above 76,615 (Bullish Ignition Base)",
+    "tp": "76,835 / 77,000",
+    "sl": "76,510",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T15:46:44+05:30",
+    "timeDisplay": "03:46 PM, Nov 03",
+    "price": "76820",
+    "bias": "bearish",
+    "behavior": "[TUE 15:46] [S1]: Confirmed 5M close BELOW 76,820 breaking the 2H Swing Equilibrium anchor towards 76,615/76,530",
+    "tp": "76,615 / 76,530",
+    "sl": "76,930",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T15:46:44+05:30",
+    "timeDisplay": "03:46 PM, Nov 03",
+    "price": "77100",
+    "bias": "bearish",
+    "behavior": "[TUE 15:46] [S2]: Swing High SFP rejection wick into 77,100 - 77,114 followed by 5M close back below 77,020",
+    "tp": "76,835 / 76,650",
+    "sl": "77,160",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T13:31:14+05:30",
     "timeDisplay": "01:31 PM, Nov 03",
     "price": "76730",
@@ -707,6 +751,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261103_154647",
+    "timestamp": "2026-11-03T15:46:47+05:30",
+    "timeDisplay": "03:46 PM, Nov 03",
+    "spot": "76917.85",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (03:45 PM IST - Nov 03, 2026 | Spot: 76917.85 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Compression: 76,820.00 – 76,920.00 (Encompassing the 1H/2H Equilibrium corridor 76,822.08 – 76,836.62 and Day High compression shelf at 76,917.85).\n- Structural Logic: Spot closed at the peak of the day's session (76,917.85) directly beneath the 1H/2H swing resistance boundary at 77,113.91. Oscillations between the micro-equilibrium pivot (76,836.62) and 76,920.00 represent tight end-of-day distribution where two-sided premium decay is elevated.\n- Execution Caution: Zero fresh directional option buying inside 76,820.00 – 76,920.00; wait for decisive expansion outside the consolidation shelf before committing intraday capital.\n\n4. High Momentum / Explosive Zones:\n- Bullish Parabolic Breakout (Above 77,114): A sustained 5M/15M candle close above the 1H/2H swing range ceiling (77,113.91) sweeps Buy-Side Liquidity (BSL), triggering short-covering momentum towards 77,350 and 77,500.\n- Bearish Liquidity Flush (Below 76,820): A confirmed 5M breakdown below the 2H Swing Equilibrium anchor (76,822.08) confirms distribution, cascading into the Parabolic Ignition Base at 76,613.69 and 76,559.33.\n- Judas Sweep & Spring Reclaim (Probe of 76,530 – 76,574): A stop-run piercing below the 4-tap Equal Lows (SSL at 76,559.33) that swiftly rejects and reclaims 76,613.69 offers an explosive institutional spring long targeting 76,836 and 77,000.\n- Swing High SFP Rejection (At 77,100 – 77,114): A liquidity sweep above 77,100 that prints a sharp rejection wick and closes back inside the shelf triggers an aggressive mean-reversion sell-off back towards 76,836.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (High-Momentum Breakout): Confirmed 5M close ABOVE 77,114 with expanding institutional volume clearing the 1H/2H Swing High. | TP: 77,350 / 77,500 | SL: 76,980 | 💡 Buy 77,100 CE + Sell 77,300 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Ignition OB & SSL Sweep Reclaim): Liquidity sweep of 76,559 Equal Lows followed by a 5M bullish reclaim above 76,615 (Bullish Ignition Base). | TP: 76,835 / 77,000 | SL: 76,510 | 💡 Buy 76,600 CE + Sell 76,800 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Breakdown Continuation): Confirmed 5M close BELOW 76,820 (Micro-EQ / Chop Anchor violation) with bearish momentum. | TP: 76,615 / 76,530 | SL: 76,930 | 💡 Buy 76,800 PE + Sell 76,600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (HTF Swing High Supply Exhaustion): Exhaustion wick / SFP rejection at 77,100 - 77,114 followed by a 5M close back below 77,020. | TP: 76,835 / 76,650 | SL: 77,160 | 💡 Buy 77,100 PE + Sell 76,900 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261103_133118",
     "timestamp": "2026-11-03T13:31:18+05:30",
     "timeDisplay": "01:31 PM, Nov 03",
