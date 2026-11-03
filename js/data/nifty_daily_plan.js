@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T11:46:06+05:30",
+    "timeDisplay": "11:46 AM, Nov 03",
+    "price": "23630",
+    "bias": "bullish",
+    "behavior": "[TUE 11:46] [B1]: 5m bullish rejection/wick formation testing the 23628\u201323635 ORB High zone with rising futures buy volume",
+    "tp": "23685 / 23740",
+    "sl": "23605",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T11:46:06+05:30",
+    "timeDisplay": "11:46 AM, Nov 03",
+    "price": "23680",
+    "bias": "bullish",
+    "behavior": "[TUE 11:46] [B2]: Sustained 5m candle close ABOVE 23680 with active futures volume confirming absorption of 23700 call writers",
+    "tp": "23740 / 23800",
+    "sl": "23640",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T11:46:06+05:30",
+    "timeDisplay": "11:46 AM, Nov 03",
+    "price": "23675",
+    "bias": "bearish",
+    "behavior": "[TUE 11:46] [S1]: 5m bearish rejection candle failing at 23675\u201323680 accompanied by call OI addition and falling futures delta",
+    "tp": "23625 / 23580",
+    "sl": "23695",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T11:46:06+05:30",
+    "timeDisplay": "11:46 AM, Nov 03",
+    "price": "23625",
+    "bias": "bearish",
+    "behavior": "[TUE 11:46] [S2]: Sustained 5m candle close BELOW 23625 confirming failure of ORB breakout and initiating long unwinding",
+    "tp": "23560 / 23500",
+    "sl": "23660",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T11:02:33+05:30",
     "timeDisplay": "11:02 AM, Nov 03",
     "price": "23640",
@@ -2247,6 +2291,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261103_114608",
+    "timestamp": "2026-11-03T11:46:08+05:30",
+    "timeDisplay": "11:46 AM, Nov 03",
+    "spot": "23668.15",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 23582.25",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:45 AM IST - Nov 03, 2026 | Spot: 23668.15 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 23582.25))\n\n3. Live Chop Zone / No-Trade Zone:\n- 23630 – 23675 (Consolidation Band between 15M ORB High and Day High): Spot price is hovering between the resolved 15M Opening Range High (23628.30) and the Day High resistance (23675.30). Entering naked options inside this 45-point corridor carries high chop risk with theta bleed.\n- FinNifty Expiry OI Pinning Effect: Being Tuesday (FinNifty Weekly Expiry), heavy straddle writing and open interest accumulation around the 23650 PE and 23700 CE strikes are causing premium compression. Directional buyers must wait for a clean expansion outside this corridor rather than trading inside the ping-pong zone.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Short-Covering Expansion] (Sustained breakout ABOVE 23680): A clean 5-minute spot close above 23680 forces immediate delta-hedging and unwinding from 23700 Call writers, triggering explosive expansion toward 23740 and 23800.\n- [Bearish Long-Unwinding Breakdown] (Sustained rejection BELOW 23625): A firm 5-minute spot close back inside the 15M ORB below 23625 traps breakout buyers, triggering a rapid liquidity sweep down toward 23560 and 23500.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback & ORB High Retest Defense): 5m bullish rejection candle (lower wick) testing the 23628–23635 ORB High support with rising Nifty futures buy volume. | TP: 23685 / 23740 | SL: 23605 | 💡 Buy 23650 CE + Sell 23700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (High-Momentum Breakout & Day High Expansion): Sustained 5m candle close ABOVE 23680 with active futures volume confirming absorption of 23700 call writers. | TP: 23740 / 23800 | SL: 23640 | 💡 Buy 23650 CE + Sell 23700 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Rejection & Exhaustion Trap): 5m bearish engulfing or shooting star rejecting 23675–23680 accompanied by call OI buildup and declining futures delta. | TP: 23625 / 23580 | SL: 23695 | 💡 Buy 23650 PE + Sell 23600 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Re-entry & Structural Breakdown): Sustained 5m candle close BELOW 23625 confirming failed breakout and triggering long unwinding back to VWAP/mid-range. | TP: 23560 / 23500 | SL: 23660 | 💡 Buy 23650 PE + Sell 23600 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261103_110236",
     "timestamp": "2026-11-03T11:02:36+05:30",
     "timeDisplay": "11:02 AM, Nov 03",
