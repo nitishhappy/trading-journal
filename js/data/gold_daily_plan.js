@@ -1,6 +1,28 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T18:30:46+05:30",
+    "timeDisplay": "06:30 PM, Nov 03",
+    "price": "3932.00",
+    "bias": "neutral",
+    "behavior": "[TUE 18:30] **TP1:** 3954.00<br>**TP2:** 3964.00: **3932.00**",
+    "tp": "1:2.2",
+    "status": "na",
+    "sl": ""
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T18:30:46+05:30",
+    "timeDisplay": "06:30 PM, Nov 03",
+    "price": "3958.00",
+    "bias": "bearish",
+    "behavior": "[TUE 18:30] \ud83d\udd34 **High-Probability Short / Supply Rejection**: **3958.00 \u2013 3964.00** Retest",
+    "tp": "Rejection of Day High BSL with upper wick exhaustion, followed by a 5M bearish market structure break (MSB) below 3954.00.",
+    "sl": "**TP1:** 3945.00<br>**TP2:** 3932.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T18:01:58+05:30",
     "timeDisplay": "06:01 PM, Nov 03",
     "price": "3895.45",
@@ -663,6 +685,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261103_183048",
+    "timestamp": "2026-11-03T18:30:48+05:30",
+    "timeDisplay": "06:30 PM, Nov 03",
+    "spot": "3930.26",
+    "trigger": "Structural Invalidation (+18.7 pts incremental shift from previous trigger 3911.57",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (06:30 PM IST - Nov 03, 2026 | Spot: 3930.26 | Trigger: Structural Invalidation (+18.7 pts incremental shift from previous trigger 3911.57))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamic:** Peak London/New York session overlap. Institutional liquidity is at maximum volume velocity with US morning participation accelerating order flow through spot gold books.\n* **DXY Correlation:** The US Dollar Index (DXY) is testing key intraday resistance near 104.20; intraday consolidation in DXY allows spot gold to stabilize after rebounding from the 3895.45 session low. Any sudden rejection in DXY will accelerate gold's upward expansion toward the day's high (3964.41).\n* **US 10-Year Treasury Yields:** Yields are hovering near 4.28%, showing signs of distribution on lower timeframes. Stable-to-softening yields reduce the opportunity cost of holding non-yielding bullion, reinforcing dip-buying interest above the 3920 liquidity pocket.\n* **Macro Catalyst Watch:** Focus remains on incoming US labor and PMI metrics due later in the session. Heightened volatility and wider spread slippage are expected during data releases.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Higher Timeframe Structure:** Gold maintains a structural bullish recovery on the 1H/4H chart after sweeping external Sell-Side Liquidity (SSL) at 3895.45. The shift past 3911.57 confirmed an intraday Change of Character (CHoCH) and structural invalidation of the previous bear leg.\n* **Order Blocks & Fair Value Gaps (FVGs):**\n  * **Bullish Demand FVG (15M):** 3918.00 – 3924.50 aligned with the New York pre-market mitigation zone.\n  * **Bearish Supply Order Block (1H):** 3955.00 – 3964.41 guarding Day High Buy-Side Liquidity (BSL).\n* **Liquidity Targets:**\n  * **BSL Pool:** Concentrated resting buy stops above the double-top formation at 3948.50 and Day High at 3964.41.\n  * **SSL Pool:** Clean liquidity resting below the London morning structural swing low at 3915.00 and Day Low at 3895.45.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Range:** **3926.00 – 3938.00** (Current Spot: 3930.26).\n* **Rationale:** Midpoint equilibrium of today's 3895.45 – 3964.41 range. Price is oscillating inside a low-conviction compression corridor with converging 9/21 EMAs on the 5-minute timeframe. Executing market orders inside this pocket risks whipsaws, spread expansion, and repeated stop hunts.\n* **Rule:** Do not take speculative continuation trades inside 3926.00 – 3938.00. Wait for clean expansion outside the boundaries or deep boundary liquidity retests.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Momentum Acceleration (> 3942.00):** A decisive 5M close above 3942.00 clears the local structural swing high, triggering an algorithmic short-squeeze toward 3955.00 and 3964.41 (Day High BSL pool).\n* **Bearish Momentum Acceleration (< 3915.00):** A 15M candle body close below 3915.00 invalidates intraday discount support, initiating aggressive long liquidation into the 3902.00 FVG and 3895.45 swing low.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **3918.00 – 3922.00** Retest | Sweep of London low into 15M FVG followed by a strong 5M bullish pin-bar or engulfing close back above 3924.00. | **TP1:** 3935.00<br>**TP2:** 3948.00 | **3912.50** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **3942.00** Breakout | 5M candle body close firmly above 3942.00 with expanding tick volume and 9 EMA trending upwards. | **TP1:** 3954.00<br>**TP2:** 3964.00 | **3932.00** | 1:2.2 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **3958.00 – 3964.00** Retest | Rejection of Day High BSL with upper wick exhaustion, followed by a 5M bearish market structure break (MSB) below 3954.00. | **TP1:** 3945.00<br>**TP2:** 3932.00 | **3969.50** | 1:2.4 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **3915.00** Breakdown | Sustained 15M candle body close below 3915.00 with impulse volume confirming transition from discount to macro sell-off. | **TP1:** 3902.00<br>**TP2:** 3895.00 | **3923.50** | 1:2.3 |\n\n``json:app-data\n{\n  \"bias\": \"🟢 BULLISH BIAS (Above 3922.00)\",\n  \"summary\": \"Gold trades at 3930.26 during the London/New York session overlap following an intraday structural invalidation and recovery off the 3895.45 low. Equilibrium chop persists between 3926.00 and 3938.00. Primary plan favors dip buys near the 3918.00-3922.00 demand FVG ([G_B1]) targeting 3935.00/3948.00, or momentum longs above 3942.00 ([G_B2]) targeting Day High 3964.00. Bearish entries activate on rejection at Day High supply 3958.00-3964.00 ([G_S1]) or a breakdown below 3915.00 ([G_S2]).\",\n  \"levels\": [\n    {\"price\": 3918.00, \"type\": \"Support\", \"logic\": \"[G_B1] Liquidity Sweep & 15M Demand FVG Retest\", \"bias\": \"bullish\"},\n    {\"price\": 3942.00, \"type\": \"Resistance\", \"logic\": \"[G_B2] High-Momentum Breakout Trigger Above Range\", \"bias\": \"bullish\"},\n    {\"price\": 3964.00, \"type\": \"Resistance\", \"logic\": \"[G_S1] Day High Supply & BSL Exhaustion Reversal\", \"bias\": \"bearish\"},\n    {\"price\": 3915.00, \"type\": \"Support\", \"logic\": \"[G_S2] High-Momentum Breakdown Below London Swing Low\", \"bias\": \"bearish\"}\n  ]\n}\n``"
+  },
+  {
     "id": "GOLD_20261103_180200",
     "timestamp": "2026-11-03T18:02:00+05:30",
     "timeDisplay": "06:02 PM, Nov 03",
