@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T09:19:28+05:30",
+    "timeDisplay": "09:19 AM, Nov 03",
+    "price": "23520",
+    "bias": "bullish",
+    "behavior": "[TUE 09:19] [B1]: Pullback probe into 23,510-23,530 Spot holding 15M demand shelf with 5m bullish rejection and volume absorption",
+    "tp": "23,580 / 23,630",
+    "sl": "23,475",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:19:28+05:30",
+    "timeDisplay": "09:19 AM, Nov 03",
+    "price": "23610",
+    "bias": "bullish",
+    "behavior": "[TUE 09:19] [B2]: Sustained 5m close ABOVE 23,610 Spot with active futures volume confirming 23,600 CE short-covering",
+    "tp": "23,670 / 23,720",
+    "sl": "23,555",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:19:28+05:30",
+    "timeDisplay": "09:19 AM, Nov 03",
+    "price": "23605",
+    "bias": "bearish",
+    "behavior": "[TUE 09:19] [S1]: Liquidity sweep of 23,605-23,625 followed by 5m bearish rejection close back BELOW 23,580 Spot",
+    "tp": "23,540 / 23,490",
+    "sl": "23,645",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:19:28+05:30",
+    "timeDisplay": "09:19 AM, Nov 03",
+    "price": "23480",
+    "bias": "bearish",
+    "behavior": "[TUE 09:19] [S2]: Decisive 5m close BELOW 23,480 Spot with expanding red futures volume breaking morning structure",
+    "tp": "23,420 / 23,370",
+    "sl": "23,530",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-02T15:49:51+05:30",
     "timeDisplay": "03:49 PM, Nov 02",
     "price": "23415",
@@ -2027,6 +2071,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261103_091930",
+    "timestamp": "2026-11-03T09:19:30+05:30",
+    "timeDisplay": "09:19 AM, Nov 03",
+    "spot": "3938.70",
+    "trigger": "Intraday Tactical Refresh",
+    "source": "AI Pre-Market Briefing",
+    "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: 🟢 BULLISH | Bias Score: +4.0 / +6.0 | Confidence: High (78%)\n• Bias Invalidation Floor: 23365.80 (A 15M close below 23365.80 invalidates bias)\n\n🧠 5-Pillar Rationale & Calibrated Score Breakdown (90-Day Empirical Calibration):\n1. Overnight & GIFT Nifty (+1.5): Bullish Gap Up (+0.60%)\n2. Market Structure (+1.5 - HIGHEST IMPACT): Bullish BOS (Closed above D-2 High 23118.1)\n3. SMC Equilibrium (-1.0): Premium Equilibrium (> 22906.4)\n4. Moving Average Slope (+1.0): Bullish MA Alignment (Price > 9 EMA > 21 EMA)\n5. Closing Bar Strength (+1.0): Bullish Closing Strength (Closed in top 100% of range)\n\n📍 Tactical Directives:\n• Primary Outlook: Buy-on-Dip Expansion. Institutional bias favors absorption at discount demand OBs followed by upside expansion.\n• Execution: Avoid counter-trend shorts during opening 15m. Wait for 15M ORB filter before entries.\n\n1. Global Market Sentiment:\n- US Equity Markets: US indices settled mixed overnight as investors absorbed corporate earnings and treasury yield stabilization. The S&P 500 closed at 7,541.40 (-2.32% multi-day consolidation from peak), the Nasdaq Composite held near 25,164.36 (-3.89% recent tech repricing), and the Dow Jones Industrial Average closed at 51,983.98 (-0.68%).\n- Asian Regional Indices: Asian equities are demonstrating resilient performance this morning. Japan's Nikkei 225 is trading near 63,081.86 (-0.33%), while Hong Kong's Hang Seng index rebounded firmly to 23,485.84 (+0.82%), signaling selective risk-on appetite across Asian emerging markets.\n- Overall Risk Tone: Constructive with selective rotation. Institutional capital is allocating into defensive growth and domestic consumption themes while navigating global geopolitical commentary.\n\n2. Overnight Market Moves:\n- GIFT Nifty / Overnight Futures: GIFT Nifty signaled a strong gap-up opening around 23,580–23,600 (+0.60% / +141 points relative to Monday's Spot close of 23,440.80).\n- Gold (XAU/USD Physical Spot): Physical Gold spot trades near $3,938.70/oz (holding steady following recent record consolidation near $3,970), indicating continued structural hedge allocation.\n- US Dollar Index & USD/INR: The US Dollar Index (DXY) hovers around 104.15, while USD/INR spot eased mildly to 94.63 (down from 94.90), relieving currency pressure on domestic import costs.\n- Crude Oil: Brent / WTI Crude oil trades around $96.71/bbl (+0.26%), stabilizing within a well-defined consolidation channel without immediate shock risks.\n\n3. Major News & Macro Events:\n- Global Geopolitical & Macro Updates: Markets are tracking global trade policy updates and upcoming central bank rate decisions. Energy markets remain range-bound despite headline geopolitical tensions.\n- Domestic Macro & Institutional Flow: Strong domestic corporate quarterly earnings and continuous domestic institutional investor (DII) inflows continue to absorb selective foreign institutional investor (FII) reallocations.\n- Scheduled Economic Catalysts: Key global manufacturing PMI readings and US employment indicators scheduled across the week will guide broader multi-session directional momentum.\n\n4. NIFTY Structure & Key Levels Analysis:\n- Previous Session Review: NIFTY 50 Spot witnessed an aggressive directional expansion on Monday, Nov 02, opening at 23,222.30, testing a session low of 23,207.05, and rallying +233.75 points to close at the exact session high of 23,440.80 (closing in the top 100% of the daily range).\n- Current Market Structure: On the daily timeframe, NIFTY confirmed a decisive Bullish Break of Structure (BOS) by breaking above the D-2 swing high of 23,118.10. The opening gap above 23,550 positions the spot index directly into the psychological resistance zone between 23,600 and 23,650, where call open interest is densely concentrated.\n- Higher Timeframe (1H / Daily) Extreme Extension Targets:\n- HTF Bullish Extension Ceiling: 23,750.00 – 23,820.00 (Major weekly liquidity pool and structural multi-month swing resistance).\n- HTF Bearish Extension Demand: 23,050.00 – 22,980.00 (Macro daily demand shelf and previous breakout origin).\n- Key Support & Resistance Levels:\n\n| Level | Type (Support/Resistance/Liquidity) | Logic & Significance |\n| :--- | :--- | :--- |\n| 🔴 23,750.00 | Resistance / HTF Extension Target | Major weekly liquidity target and upper supply mitigation barrier. |\n| 🔴 23,650.00 | Resistance / Institutional Supply Zone | Secondary call writer barrier and intraday exhaustion extension. |\n| 🔴 23,610.00 | Resistance / Psychological Call Wall | Intraday hurdle; absorption here triggers forced short covering. |\n| ⚪ 23,567.00 | Neutral / Morning Equilibrium Pivot | Post-gap balance level separating immediate continuation from gap fill. |\n| 🟢 23,520.00 | Support / 15M Demand Order Block | Opening range pullback shelf and first discount defense zone. |\n| 🟢 23,480.00 | Support / Morning Liquidity Floor | Intraday low defense; decisive break opens gap-fill acceleration. |\n| 🟢 23,440.80 | Support / Previous Day Close (PDC) | Monday close; major daily structural shelf and gap-fill boundary. |\n| 🟢 23,365.80 | Support / Bias Invalidation Floor | Calibrated 15M structural invalidation floor for bullish bias. |\n\n5. SMC & Session Liquidity Confluence:\n- Liquidity Architecture: Buy-Side Liquidity (BSL) rests stacked above 23,610 up to 23,650, where call stop-losses and breakout buy-stops reside. Sell-Side Liquidity (SSL) is parked beneath the morning opening base at 23,480 and the major Previous Day Close shelf at 23,440.80.\n- Order Blocks (OB) & Fair Value Gaps (FVG): A distinct 15M Bullish Order Block sits at 23,500–23,525, accompanied by an opening 5M FVG between 23,450 and 23,510 created by today's opening gap. On the overhead side, a premium mitigation block spans 23,605–23,635.\n- BOS / CHoCH Triggers: A sustained 15-minute close above 23,610 confirms bullish continuation BOS targeting 23,670/23,720. Conversely, a sustained 15-minute close below 23,480 signals an intraday Change of Character (CHoCH) toward the PDC gap fill at 23,440.\n- Premium vs. Discount Equilibrium: Across the broader 2-day expansion range (23,207.05 to 23,607.30), the 50% equilibrium sits at 23,407.18. With current spot trading in premium territory (>23,550), long trades offer higher mathematical expectancy when entered on pullbacks into discount structure rather than chasing at highs.\n\n6. 5-Min / 15-Min Action Plan & Index Triggers:\n- BUY/SELL Confirmation Rules: Long entries require lower-wick rejection holding above support with expanding green futures volume (>1.2x 8-bar avg), OR a decisive 5-minute close above 23,610 Spot with institutional absorption. Short entries require upper exhaustion wicks at resistance with delta divergence, or a sustained 5m close below 23,480 with expanding red volume.\n- 15-Minute Opening Range Filter Rule: NEVER execute a reversal entry on the 3rd 5-minute candle (09:25 AM). You MUST allow the full 15-minute Opening Range (09:15–09:30 AM) to complete. For Reversal Longs (CE), price must close firmly ABOVE the 15-minute ORB High with expanding futures volume. For Reversal Shorts (PE), price must close firmly BELOW the 15-minute ORB Low with expanding futures volume.\n- Extreme Gap Contingency Plan (>100–150 pts Gap Up / Down): On a Massive Gap-Up (>100 pts), do NOT chase naked calls into overhead 23,600+ supply; wait for the 15-minute ORB to establish, and if an exhaustion pin-bar forms, trade a gap-fade pullback toward 23,520. On a Massive Gap-Down, do NOT panic short into HTF support; wait for a liquidity sweep followed by a 15-minute reclaim above key demand for a mean-reversion long bounce.\n- Live Chop Zone / No-Trade Zone:\n- Intraday Boundary (23,540.00 – 23,590.00 Spot): Dense straddle writing across 23,550 and 23,600 strikes creates rapid theta erosion. Strict no-trade territory for naked option buyers inside this 50-point pocket; wait for clear boundary breakout or edge rejection.\n- High Momentum / Explosive Zones:\n- [Bullish Squeeze Expansion] (Sustained 5m close ABOVE 23,610.00 Spot): Decisively absorbs the 23,600 Call wall and triggers trailing short covering toward 23,670.00 and 23,720.00.\n- [Bearish Liquidation Flush] (Sustained 5m close BELOW 23,480.00 Spot): Violates morning demand and triggers long liquidation accelerating down into 23,440.00 and 23,390.00.\n- [Failed Sweep Bullish Reversal] (Liquidity trap below 23,500 followed by immediate 5m reclaim ABOVE 23,525): Squeezes early breakdown sellers back toward 23,580 and 23,610.\n- [Failed Sweep Bearish Rejection] (False breakout above 23,610 followed by immediate 5m close back BELOW 23,580): Traps late breakout buyers and triggers a sharp pullback toward 23,520 and 23,480.\n- Action Plan (BUY/SELL Setups):\n- [B1] BUY Setup 1 (Discount Demand Pullback & Dip Absorption): Pullback into 23,510.00 – 23,530.00 Spot holding above 15M demand shelf with 5-minute bullish rejection candle and expanding green futures volume. | TP: 23,580.00 / 23,630.00 | SL: 23,475.00 | 💡 Buy 23500 CE + Sell 23550 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Psychological Supply Wall Breakout Expansion): Sustained 5m close ABOVE 23,610.00 Spot clearing morning highs with active futures volume confirming institutional absorption of 23,600 Call writers. | TP: 23,670.00 / 23,720.00 | SL: 23,555.00 | 💡 Buy 23600 CE + Sell 23650 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Call Wall Liquidity Sweep & Supply Exhaustion): Sweep of 23,605.00 – 23,625.00 rejected with upper exhaustion wicks, followed by a confirmed 5m close back BELOW 23,580.00 with delta stalling. | TP: 23,540.00 / 23,490.00 | SL: 23,645.00 | 💡 Buy 23600 PE + Sell 23550 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Morning Demand Breakdown & Gap Fill Flush): Decisive 5m close BELOW 23,480.00 Spot with expanding red futures volume breaking morning structure and targeting Previous Day Close gap fill. | TP: 23,420.00 / 23,370.00 | SL: 23,530.00 | 💡 Buy 23500 PE + Sell 23450 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n7. Risk Warning & Session Traps:\n- Gap-Up Premium Decay & Low VIX: India VIX remains in the low-to-moderate 14.5–15.5 zone. Chasing calls at elevated opening prices risks steep theta decay if price enters mid-range consolidation; enforce strict 15-minute time stops if momentum stalls.\n- Institutional Supply Clustering at 23,600: Heavy Call open interest across 23,600 and 23,650 presents immediate overhead supply. Entering fresh breakouts without confirmed futures volume absorption carries heightened trap probability.\n- Gap-Fill Pullback Volatility: Any failure to maintain structure above 23,480 can trigger rapid mean-reversion toward 23,440.80. Prioritize defined-risk next-week spreads over naked weekly options.\n\n``"
+  },
+  {
     "id": "NIFTY_20261102_154954",
     "timestamp": "2026-11-02T15:49:54+05:30",
     "timeDisplay": "03:49 PM, Nov 02",
