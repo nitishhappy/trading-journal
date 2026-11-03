@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T12:01:49+05:30",
+    "timeDisplay": "12:01 PM, Nov 03",
+    "price": "23670",
+    "bias": "bullish",
+    "behavior": "[TUE 12:01] [B1]: Orderly retracement into 23665-23675 with 5m bullish pin-bar/rejection wick confirming buyer absorption",
+    "tp": "23720.00 / 23765.00",
+    "sl": "23645.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T12:01:49+05:30",
+    "timeDisplay": "12:01 PM, Nov 03",
+    "price": "23705",
+    "bias": "bullish",
+    "behavior": "[TUE 12:01] [B2]: Sustained 5m close ABOVE 23705.00 with expanding futures volume confirming absorption of 23700 CE writers",
+    "tp": "23765.00 / 23815.00",
+    "sl": "23670.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T12:01:49+05:30",
+    "timeDisplay": "12:01 PM, Nov 03",
+    "price": "23685",
+    "bias": "bearish",
+    "behavior": "[TUE 12:01] [S1]: 5m liquidity sweep of 23699.30 Day High failing back below 23685 with CE OI accumulation",
+    "tp": "23635.00 / 23590.00",
+    "sl": "23715.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T12:01:49+05:30",
+    "timeDisplay": "12:01 PM, Nov 03",
+    "price": "23660",
+    "bias": "bearish",
+    "behavior": "[TUE 12:01] [S2]: Sustained 5m close BELOW 23660.00 with red futures volume expansion confirming trend exhaustion",
+    "tp": "23610.00 / 23565.00",
+    "sl": "23695.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T11:46:06+05:30",
     "timeDisplay": "11:46 AM, Nov 03",
     "price": "23630",
@@ -1981,50 +2025,6 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-27T12:01:17+05:30",
-    "timeDisplay": "12:01 PM, Oct 27",
-    "price": "22750",
-    "bias": "bullish",
-    "behavior": "[TUE 12:01] [B1]: Pullback to 22,750-22,755 (15M ORB High retest) with 5m bullish confirmation",
-    "tp": "22,805 / 22,850",
-    "sl": "22,735",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-27T12:01:17+05:30",
-    "timeDisplay": "12:01 PM, Oct 27",
-    "price": "22805",
-    "bias": "bullish",
-    "behavior": "[TUE 12:01] [B2]: Sustained 5m close ABOVE Day High 22,805 confirming 22,800 CE short-covering",
-    "tp": "22,855 / 22,895",
-    "sl": "22,775",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-27T12:01:17+05:30",
-    "timeDisplay": "12:01 PM, Oct 27",
-    "price": "22770",
-    "bias": "bearish",
-    "behavior": "[TUE 12:01] [S1]: Rejection at 22,800-22,805 resistance with 5m breakdown below 22,770",
-    "tp": "22,745 / 22,710",
-    "sl": "22,795",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-27T12:01:17+05:30",
-    "timeDisplay": "12:01 PM, Oct 27",
-    "price": "22745",
-    "bias": "bearish",
-    "behavior": "[TUE 12:01] [S2]: Sustained 5m close BELOW 22,745 (15M ORB High invalidation) triggering flush",
-    "tp": "22,695 / 22,655",
-    "sl": "22,775",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-27T09:36:19+05:30",
     "timeDisplay": "09:36 AM, Oct 27",
     "price": "22710",
@@ -2291,6 +2291,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261103_120151",
+    "timestamp": "2026-11-03T12:01:51+05:30",
+    "timeDisplay": "12:01 PM, Nov 03",
+    "spot": "23692.85",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23692.85 > Max Plan Target $23680.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (12:00 PM IST - Nov 03, 2026 | Spot: 23692.85 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23692.85 > Max Plan Target $23680.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Intraday Chop Pocket (23670.00 – 23705.00 Spot): Spot price is currently pressing directly against the psychological 23700 strike resistance and current Day High (23699.30). With today being FinNifty weekly expiry, heavy 23700 Call Open Interest (OI) is undergoing intense hedging flows against aggressive intraday underlying spot buyers.\n- FinNifty Expiry Pin Risk: Option writers are actively fighting to pin gamma around the 23700 strike boundary, causing two-way wick expansions and elevated theta decay. Scalping or entering fresh long positions inside 23670–23705 exposes option buyers to high chop risk until a decisive 5-minute directional breakout or rejection confirms.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Short-Covering Squeeze] (Above 23705.00 Spot): A sustained 5-minute candle close ABOVE 23705.00 will trigger a massive short-covering cascade as 23700 Call writers are forced to panic-unwind their positions. Proxied active Nifty Futures volume expanding above 1.2x will accelerate spot prices swiftly toward 23755.00 and 23810.00.\n- [Bearish Long Unwinding Flush] (Below 23665.00 Spot): A confirmed 5-minute close BELOW 23665.00 confirms that the rally into 23699.30 was a liquidity sweep of morning stops. Trapped late breakout buyers will trigger rapid long unwinding, driving a fast mean-reversion flush down toward 23615.00 and the 15M ORB High shelf (23628.30).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback & Retest Long): Orderly retracement into the 23665.00–23675.00 zone followed by a confirmed 5m bullish rejection wick/pin-bar with declining red seller volume. | TP: 23720.00 / 23765.00 | SL: 23645.00 | 💡 Buy 23650 CE + Sell 23700 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Breakout Long): Sustained 5m candle close ABOVE 23705.00 with expanding Nifty Futures buying volume confirming institutional absorption of 23700 CE writers. | TP: 23765.00 / 23815.00 | SL: 23670.00 | 💡 Buy 23700 CE + Sell 23750 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Rejection at 23700 Wall): 5m liquidity sweep of Day High (23699.30–23705.00) that sharply fails and closes back BELOW 23685.00 with surging CE OI addition and negative futures delta. | TP: 23635.00 / 23590.00 | SL: 23715.00 | 💡 Buy 23700 PE + Sell 23650 PE (Next Wk) | R:R: ~1.85 | Risk: ~8.5% | TP1: +15.5% | TP2: +30.8%.\n- [S2] SELL Setup 2 (Breakdown Short below Shelf): Sustained 5m candle close BELOW 23660.00 accompanied by expanding red futures volume, confirming exhaustion and initiation of intraday long liquidation. | TP: 23610.00 / 23565.00 | SL: 23695.00 | 💡 Buy 23650 PE + Sell 23600 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261103_114608",
     "timestamp": "2026-11-03T11:46:08+05:30",
     "timeDisplay": "11:46 AM, Nov 03",
