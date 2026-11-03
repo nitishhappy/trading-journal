@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T09:30:58+05:30",
+    "timeDisplay": "09:30 AM, Nov 03",
+    "price": "23635",
+    "bias": "bullish",
+    "behavior": "[TUE 09:30] [B1]: Sustained 5m close ABOVE 23635.00 with active futures volume confirming absorption of 23600 CE writers",
+    "tp": "23680.00 / 23730.00",
+    "sl": "23595.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:30:58+05:30",
+    "timeDisplay": "09:30 AM, Nov 03",
+    "price": "23580",
+    "bias": "bullish",
+    "behavior": "[TUE 09:30] [B2]: Retest and bullish rejection at 23575.00-23585.00 with declining seller volume confirming higher-low structure",
+    "tp": "23630.00 / 23680.00",
+    "sl": "23545.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:30:58+05:30",
+    "timeDisplay": "09:30 AM, Nov 03",
+    "price": "23605",
+    "bias": "bearish",
+    "behavior": "[TUE 09:30] [S1]: 5m sweep of 23630 rejecting back below 23605.00 trapping breakout buyers into FinNifty expiry pin",
+    "tp": "23560.00 / 23510.00",
+    "sl": "23635.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:30:58+05:30",
+    "timeDisplay": "09:30 AM, Nov 03",
+    "price": "23570",
+    "bias": "bearish",
+    "behavior": "[TUE 09:30] [S2]: Sustained 5m close BELOW 23570.00 confirming breakdown of 23600 PE support toward ORB Low",
+    "tp": "23510.00 / 23485.00",
+    "sl": "23610.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T09:29:23+05:30",
     "timeDisplay": "09:29 AM, Nov 03",
     "price": "23400",
@@ -2115,6 +2159,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261103_093101",
+    "timestamp": "2026-11-03T09:31:01+05:30",
+    "timeDisplay": "09:31 AM, Nov 03",
+    "spot": "23619.25",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23619.25 > Max Plan Target $23455.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:30 AM IST - Nov 03, 2026 | Spot: 23619.25 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23619.25 > Max Plan Target $23455.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23580.00 – 23630.00 (Current Spot: 23619.25 hovering near 15M ORB High / Day High at 23628.30).\n- Tuesday FinNifty Expiry OI Impact: Heavy straddle accumulation at the 23600 strike creates violent two-way theta decay pin risk. Directional option buying inside 23580–23630 carries severe whip-saw risk until 23600 call or put writers are forced into unhedged delta covering.\n- Rule: Avoid entering aggressive naked option positions inside this 50-point corridor. Wait for confirmed structural breaks outside the boundaries.\n\n4. High Momentum / Explosive Zones:\n- Bullish Squeeze Expansion (Above 23635.00): A decisive 5-minute candle close above 23635.00 triggers aggressive short-covering from trapped 23600 CE writers, unlocking momentum towards 23680.00 and 23730.00.\n- Bearish Liquidity Flush (Below 23570.00): A decisive 5-minute close below 23570.00 invalidates morning dip-buyers, triggering long unwinding back down through 23510.00 toward the 15M ORB Low at 23482.80.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Breakout Continuation): Sustained 5-min close ABOVE 23635.00 with active futures volume confirming institutional absorption of 23600 call writers. | TP: 23680.00 / 23730.00 | SL: 23595.00 | 💡 Buy 23600 CE + Sell 23650 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Pullback & Demand Defense): Retest and bullish rejection pinbar off 23575.00–23585.00 with diminishing seller volume, confirming higher-low structure. | TP: 23630.00 / 23680.00 | SL: 23545.00 | 💡 Buy 23600 CE + Sell 23650 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (ORB High Liquidity Sweep Rejection): Price wicks above 23630.00, fails to sustain, and prints a strong 5-min bearish close back BELOW 23605.00 trapping breakout retail buyers. | TP: 23560.00 / 23510.00 | SL: 23635.00 | 💡 Buy 23650 PE + Sell 23600 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Value Floor Breakdown): Decisive 5-min close BELOW 23570.00 confirming breakdown of 23600 put writer support and initiation of mean reversion. | TP: 23510.00 / 23485.00 | SL: 23610.00 | 💡 Buy 23600 PE + Sell 23550 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20261103_092927",
     "timestamp": "2026-11-03T09:29:27+05:30",
     "timeDisplay": "09:29 AM, Nov 03",
