@@ -1,6 +1,116 @@
 window.btcDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "76538.8",
+    "bias": "bullish",
+    "behavior": "[TUE 08:02] [B1]: Asian Low SSL sweep reclaim with lower wick rejection",
+    "tp": "77,200.00 / 77,500.00",
+    "sl": "76,420.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "77184.2",
+    "bias": "bullish",
+    "behavior": "[TUE 08:02] [B2]: Day High BSL breakout with sustained volume expansion",
+    "tp": "77,550.00 / 77,950.00",
+    "sl": "76,950.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "76980.2",
+    "bias": "bearish",
+    "behavior": "[TUE 08:02] [S1]: 15M Bearish FVG mitigation rejection with upper wick",
+    "tp": "76,650.00 / 76,450.00",
+    "sl": "77,120.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "76538.8",
+    "bias": "bearish",
+    "behavior": "[TUE 08:02] [S2]: Asian Low breakdown with displacement below demand shelf",
+    "tp": "76,250.00 / 75,900.00",
+    "sl": "76,800.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "76912.26",
+    "bias": "bullish",
+    "behavior": "[TUE 08:02] [KB1]: 15M Bullish Order Block top and local VWAP confluence zone",
+    "tp": "77,184.00 / 77,500.00",
+    "sl": "76,780.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "76748.54",
+    "bias": "bullish",
+    "behavior": "[TUE 08:02] [KB2]: Asian session Point of Control (POC) anchored inside bullish 15M FVG",
+    "tp": "77,100.00 / 77,400.00",
+    "sl": "76,620.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "76538.79",
+    "bias": "bullish",
+    "behavior": "[TUE 08:02] [KB3]: Asian Day Low and primary Sell-Side Liquidity (SSL) sweep floor",
+    "tp": "77,000.00 / 77,300.00",
+    "sl": "76,400.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "76369.22",
+    "bias": "bullish",
+    "behavior": "[TUE 08:02] [KB4]: Macro 4H institutional demand shelf and liquidity accumulation base",
+    "tp": "76,850.00 / 77,200.00",
+    "sl": "76,150.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "77184.17",
+    "bias": "bearish",
+    "behavior": "[TUE 08:02] [KS1]: Day High, Buy-Side Liquidity (BSL) pool, and primary breakout threshold",
+    "tp": "76,850.00 / 76,550.00",
+    "sl": "77,320.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T08:02:04+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "price": "77491.54",
+    "bias": "bearish",
+    "behavior": "[TUE 08:02] [KS2]: 15M 200 EMA dynamic mean resistance and macro liquidity ceiling",
+    "tp": "77,100.00 / 76,800.00",
+    "sl": "77,650.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T07:17:07+05:30",
     "timeDisplay": "07:17 AM, Nov 03",
     "price": "76820.00",
@@ -432,6 +542,15 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "id": "BTC_20261103_080206",
+    "timestamp": "2026-11-03T08:02:06+05:30",
+    "timeDisplay": "08:02 AM, Nov 03",
+    "spot": "76977.83",
+    "trigger": "Asian Session Review (Tokyo/Sydney Overnight Moves",
+    "source": "BTC-AI",
+    "text": "# ₿ Bitcoin (BTC/USD) Tactical Update (08:00 AM IST - Nov 03, 2026 | Spot: $76977.83 | Trigger: Asian Session Review (Tokyo/Sydney Overnight Moves))\n\n================================================================================\n🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• **Daily Market Bias**: 🟢 BULLISH | **Bias Score**: +1.0 / +6.0 | **Confidence**: Neutral (Chop)\n• **Bias Invalidation Floor**: $77,500.00 (A 15M close below $76,538.80 / failure to hold structure invalidates intraday bull continuation)\n\n📍 **Tactical Directives**:\n• **Primary Outlook**: Buy-on-Dip Expansion within Asian Range. Spot is hovering at local equilibrium ($76,977.83) just beneath the overnight Asian high ($77,184.17). Institutional flow favors liquidity sweeps of discount demand order blocks before expansion.\n• **Execution**: Avoid counter-trend breakout longs inside the chop zone ($76,667–$76,990). Wait for clean confirmation at range boundaries or 15M opening range filter breakouts before entering.\n\n---\n\n### 1. Market Structure & Session Bias\nBitcoin Spot (BTC/USD) is trading at **$76,977.83**, sustaining intraday bullish structure above the 9 and 21 EMAs on the 15-minute timeframe. \n- **Session Range**: Day High: **$77,184.17** | Day Low: **$76,538.79** | Prior Day Close: **$76,860.23** | Live Spot: **$76,977.83**.\n- **Macro & Intermarket Backdrop**: US Dollar Index (DXY) sits at 101.854 (providing modest overhead pressure), while S&P 500 Futures are stable at 7,579.25. Crypto native telemetry reflects a balanced Funding Rate at 0.0088%, Fear & Greed Index at 26 (Fear), and an overhead inactive CME Gap at $77,025.00 (55.78 pt pocket).\n- **Crypto News Guard**: 🔴 Caution remains active following headlines regarding Binance withdrawal flow monitoring, though price action shows resilient absorption above the $76,860 prior close.\n\n---\n\n### 2. SMC & Liquidity Zones\n- **Buy-Side Liquidity (BSL)**: Concentrated tightly above the Asian session high at **$77,184.17**, leading directly into the 15M Bearish FVG shelf ($77,195.80–$77,295.80) and major swing liquidity at **$78,734.62**.\n- **Sell-Side Liquidity (SSL)**: Clustered below the Asian low at **$76,538.79**, down into the deep 4H macro demand pool ($76,369.22–$76,500.00).\n- **Order Blocks (OB) & Institutional Pivots**: \n  - 15M Bullish Demand OB: **$76,912.26 – $76,894.00**\n  - Session VWAP: **$76,836.20**\n  - Volume Profile POC: **$76,748.54**\n  - Dynamic Resistance: 200 EMA at **$77,491.54**\n- **Fair Value Gaps (FVG)**:\n  - Bearish 15M FVG: **$76,910.30 – $76,980.20** (currently being mitigated by live spot)\n  - Bullish 15M FVG: **$76,747.70 – $76,914.40**\n\n---\n\n### 3. Live Intraday Chop Zone / No-Trade Zone\n- **Range**: **$76,667.87 – $76,990.56** (Value Area Equilibrium).\n- **Context**: Current spot price ($76,977.83) sits at the upper perimeter of the value area and inside the 15M bearish FVG. Micro-wicks and low liquidity sweeps during the Asian morning session make unconfirmed middle-of-the-range trades high risk. Refrain from market orders inside this pocket.\n\n---\n\n### 4. High Momentum / Explosive Zones\n- **Upside Short-Covering Squeeze (> $77,184.20 Spot)**: A confirmed 5m/15m close above $77,184 clears overnight stops and is mathematically poised to trigger a rapid short-covering surge toward $77,369 and $77,769.\n- **Downside Long-Liquidation Cascade (< $76,538.80 Spot)**: A sustained 5m displacement below $76,538 sweeps Asian session resting stops, triggering an institutional cascade toward $76,369 and $76,169.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[B1]** | 🟢 **Long (Demand Floor SSL Sweep)** | **$76,538.80** Reclaim | Liquidity sweep below $76,538.80 rejected with long lower wick, followed by a 5m close back ABOVE $76,894.00 | **TP1:** $77,200.00<br>**TP2:** $77,500.00 | **$76,420.00** | 1:2.4 |\n| **[B2]** | 🟢 **Long (High-Momentum Breakout)** | **$77,184.20** Breakout | Sustained 5m/15m close ABOVE $77,184.20 with expanding volume delta | **TP1:** $77,550.00<br>**TP2:** $77,950.00 | **$76,950.00** | 1:2.5 |\n| **[S1]** | 🔴 **Short (Bearish FVG Rejection)** | **$76,980.20** Rejection | Test of $76,980.20 upper FVG boundary rejected with upper wick, followed by 5m close BELOW $76,910.00 | **TP1:** $76,650.00<br>**TP2:** $76,450.00 | **$77,120.00** | 1:2.2 |\n| **[S2]** | 🔴 **Short (Demand Floor Breakdown)** | **$76,538.80** Breakdown | Sustained 5m displacement candle close BELOW $76,538.80 with red volume expansion | **TP1:** $76,250.00<br>**TP2:** $75,900.00 | **$76,800.00** | 1:2.6 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$76,912.26** | Support / Demand OB | **[KB1]** | 15M Bullish Order Block top and local VWAP confluence zone | **$77,184.00 / $77,500.00** | **$76,780.00** |\n| **$76,748.54** | Support / High Volume POC | **[KB2]** | Asian session Point of Control (POC) anchored inside bullish 15M FVG | **$77,100.00 / $77,400.00** | **$76,620.00** |\n| **$76,538.79** | Support / Session Low | **[KB3]** | Asian Day Low and primary Sell-Side Liquidity (SSL) sweep floor | **$77,000.00 / $77,300.00** | **$76,400.00** |\n| **$76,369.22** | Major Macro Support | **[KB4]** | Macro 4H institutional demand shelf and liquidity accumulation base | **$76,850.00 / $77,200.00** | **$76,150.00** |\n| **$77,184.17** | Resistance / Session High | **[KS1]** | Day High, Buy-Side Liquidity (BSL) pool, and primary breakout threshold | **$76,850.00 / $76,550.00** | **$77,320.00** |\n| **$77,491.54** | Resistance / Dynamic 200 EMA | **[KS2]** | 15M 200 EMA dynamic mean resistance and macro liquidity ceiling | **$77,100.00 / $76,800.00** | **$77,650.00** |"
+  },
+  {
     "id": "BTC_20261103_071709",
     "timestamp": "2026-11-03T07:17:09+05:30",
     "timeDisplay": "07:17 AM, Nov 03",
