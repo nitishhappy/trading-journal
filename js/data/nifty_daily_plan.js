@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T09:29:23+05:30",
+    "timeDisplay": "09:29 AM, Nov 03",
+    "price": "23400",
+    "bias": "bullish",
+    "behavior": "[TUE 09:29] [B1]: Retracement to 23,390-23,400 with 5m bullish rejection candle confirming buyer defense",
+    "tp": "23,455 / 23,510",
+    "sl": "23,365",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:29:23+05:30",
+    "timeDisplay": "09:29 AM, Nov 03",
+    "price": "23455",
+    "bias": "bullish",
+    "behavior": "[TUE 09:29] [B2]: Sustained 5m close ABOVE 23,455 clearing call writing wall with futures volume expansion",
+    "tp": "23,515 / 23,565",
+    "sl": "23,415",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:29:23+05:30",
+    "timeDisplay": "09:29 AM, Nov 03",
+    "price": "23380",
+    "bias": "bearish",
+    "behavior": "[TUE 09:29] [S1]: Sustained 5m close BELOW 23,380 triggering long liquidation towards value retest",
+    "tp": "23,320 / 23,295",
+    "sl": "23,425",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:29:23+05:30",
+    "timeDisplay": "09:29 AM, Nov 03",
+    "price": "23290",
+    "bias": "bearish",
+    "behavior": "[TUE 09:29] [S2]: Confirmed 5m close BELOW 23,290 ORB High with aggressive institutional futures selling",
+    "tp": "23,230 / 23,205",
+    "sl": "23,330",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T09:19:28+05:30",
     "timeDisplay": "09:19 AM, Nov 03",
     "price": "23520",
@@ -2071,6 +2115,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261103_092927",
+    "timestamp": "2026-11-03T09:29:27+05:30",
+    "timeDisplay": "09:29 AM, Nov 03",
+    "spot": "23440.8",
+    "trigger": "Manual Ad-Hoc Update",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:28 AM IST - Nov 03, 2026 | Spot: 23440.8 | Trigger: Manual Ad-Hoc Update)\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23,405.00 – 23,445.00 Spot (40-point compression band directly below psychological 23,450 resistance).\n- FinNifty Expiry OI Impact (Tuesday Dynamics): Heavy straddle and strangle writing across 23,400–23,450 strikes alongside FinNifty expiry positioning is creating localized gamma pinning. Premium decay is accelerated within this band; avoid taking naked directional entries inside this cluster until absorption confirms a directional push.\n- Invalidation / Action Rule: Stand aside inside 23,405–23,445. No new option buying within this pocket as bidirectional whip and high theta erosion will degrade naked contracts without directional follow-through.\n\n4. High Momentum / Explosive Zones:\n- Upside Breakout / Short-Covering Squeeze (Above 23,455 Spot): A sustained 5-minute close above 23,455 will trap aggressive 23,450 and 23,500 CE intraday call writers, triggering a fast momentum expansion towards 23,510 and 23,560.\n- Downside Breakdown / Long Liquidation (Below 23,380 Spot): A decisive breakdown below the immediate intraday demand shelf at 23,380 with rising futures volume will trigger long unwinding, driving rapid mean reversion towards 23,320 and the 15M ORB High retest zone at 23,292.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback & Value Re-Accumulation): Wait for an orderly intraday retracement towards 23,390–23,400 support shelf, entering long on a confirmed 5m bullish hammer/engulfing close with futures volume absorption. | TP: 23,455 / 23,510 | SL: 23,365 | 💡 Buy 23400 CE + Sell 23450 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Breakout / Supply Absorption): Enter on a decisive 5m close ABOVE 23,455 Spot backed by expanding Nifty futures volume (>1.2x 8-bar avg) confirming absorption of FinNifty expiry call supply. | TP: 23,515 / 23,565 | SL: 23,415 | 💡 Buy 23450 CE + Sell 23500 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Mean Reversion Breakdown): Enter short on a sustained 5m close BELOW 23,380 Spot following failure to reclaim day high, confirming shift from trend expansion to mean reversion. | TP: 23,320 / 23,295 | SL: 23,425 | 💡 Buy 23400 PE + Sell 23350 PE (Next Wk) | R:R: ~1.85 | Risk: ~8.5% | TP1: +15.5% | TP2: +28.0%.\n- [S2] SELL Setup 2 (ORB Retest Failure / Panic Unwinding): Enter short on a confirmed 5m close BELOW 23,290 Spot (15M ORB High breakdown) with institutional red futures volume expansion. | TP: 23,230 / 23,205 | SL: 23,330 | 💡 Buy 23300 PE + Sell 23250 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261103_091930",
     "timestamp": "2026-11-03T09:19:30+05:30",
     "timeDisplay": "09:19 AM, Nov 03",
