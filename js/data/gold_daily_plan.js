@@ -1,13 +1,68 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
-    "timestamp": "2026-11-03T09:01:04+05:30",
-    "timeDisplay": "09:01 AM, Nov 03",
+    "timestamp": "2026-11-03T09:17:21+05:30",
+    "timeDisplay": "09:17 AM, Nov 03",
     "price": "3964.41",
     "bias": "bearish",
-    "behavior": "[TUE 09:01] Resistance: [G_BSL] Asian Session High Buy-Side Liquidity Pool",
+    "behavior": "[TUE 09:17] Resistance: [G_BSL] Day High Buy-Side Liquidity Pool",
     "tp": "na",
     "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:17:21+05:30",
+    "timeDisplay": "09:17 AM, Nov 03",
+    "price": "3942.5",
+    "bias": "bullish",
+    "behavior": "[TUE 09:17] [G_B2]: High-Momentum Breakout Long Trigger & 15M FVG Ceiling",
+    "tp": "$3954.50 / $3964.00",
+    "sl": "$3937.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:17:21+05:30",
+    "timeDisplay": "09:17 AM, Nov 03",
+    "price": "3938.0",
+    "bias": "bearish",
+    "behavior": "[TUE 09:17] [G_S1]: Prior Asian Support Flipped Supply & Bearish Breaker",
+    "tp": "$3924.00 / $3914.00",
+    "sl": "$3943.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:17:21+05:30",
+    "timeDisplay": "09:17 AM, Nov 03",
+    "price": "3925.01",
+    "bias": "neutral",
+    "behavior": "[TUE 09:17] Support: [G_SSL] Day Low Sell-Side Liquidity Shelf",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:17:21+05:30",
+    "timeDisplay": "09:17 AM, Nov 03",
+    "price": "3924.5",
+    "bias": "bullish",
+    "behavior": "[TUE 09:17] [G_B1]: Liquidity Sweep Recovery Demand Zone",
+    "tp": "$3938.50 / $3950.00",
+    "sl": "$3919.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T09:17:21+05:30",
+    "timeDisplay": "09:17 AM, Nov 03",
+    "price": "3923.5",
+    "bias": "bearish",
+    "behavior": "[TUE 09:17] [G_S2]: High-Momentum Breakdown Short Trigger",
+    "tp": "$3912.00 / $3900.00",
+    "sl": "$3929.00",
     "status": "na"
   },
   {
@@ -509,6 +564,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261103_091723",
+    "timestamp": "2026-11-03T09:17:23+05:30",
+    "timeDisplay": "09:17 AM, Nov 03",
+    "spot": "3929.21",
+    "trigger": "Structural Invalidation (-16.5 pts incremental shift from previous trigger 3945.71",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (09:15 AM IST - Nov 03, 2026 | Spot: 3929.21 | Trigger: Structural Invalidation (-16.5 pts incremental shift from previous trigger 3945.71))\n\n### 1. Global Macro & Forex Mechanics:\n* **Asian Session Liquidity Flush & London Pre-Market Transition:** Spot Gold ($XAU/USD$) experienced an aggressive downward displacement during the late Asian session, collapsing -16.5 points from the previous trigger anchor of **$3945.71** down to a fresh **Day Low of $3925.01** before stabilizing at **$3929.21** (**Day High: $3964.41 | Day Low: $3925.01**). As London interbank desks prepare their pre-market opening books, institutional liquidity is probing lower discount bands to absorb resting sell-stops.\n* **DXY (US Dollar Index) Correlation:** The US Dollar Index (DXY) staged an intraday bounce, exerting short-term pressure on dollar-denominated bullion. However, DXY is approaching overhead resistance near its London session supply ceiling; any failure to sustain higher highs in the dollar will alleviate downward pressure on Gold and invite responsive dip-buying.\n* **US 10-Year Treasury Yields:** Benchmark US 10-Year yields have plateaued around multi-day ranges. Stable real yields prevent an uncontrolled collapse in bullion, but institutional buyers require clear evidence of yield softening during London morning trade before initiating aggressive upside continuation programs.\n* **Forex Order Flow Dynamics:** The impulsive sell-off from $3945.71 swept intermediate swing lows without significant pullback, creating an extended intraday imbalance. Pre-London algorithms often initiate mean-reversion retests of broken structural shelves before European cash open volume establishes true directional conviction.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL) Clusters:**\n  * **Day High BSL Pool ($3964.41):** Major overhead liquidity ceiling established during early Asian hours.\n  * **Interim Swing Supply ($3942.50 – $3948.50):** Unmitigated 15-minute Bearish Order Block and displacement origin where the -16.5 point breakdown was initiated.\n* **Sell-Side Liquidity (SSL) & Demand Mitigation:**\n  * **Day Low SSL Shelf ($3925.01):** Immediate resting sell-side stops reside just beneath the current Day Low. A clean sweep followed by a reclaim presents an optimal setup for smart money accumulation.\n  * **Higher Timeframe 1H/4H Discount Demand ($3912.00 – $3918.00):** Sits below the current Day Low and serves as the next macro mitigation zone if breakdown momentum persists.\n* **Fair Value Gaps (FVG) & Breaker Blocks:**\n  * The rapid slide from $3945.71 to $3925.01 printed a clean 15-minute Bearish Fair Value Gap between **$3936.00 – $3941.50**. Prior support at **$3935.00 – $3938.00** has now transitioned into an active Bearish Breaker Block, acting as overhead supply.\n* **Market Structure State:** 15-minute structure shifted to a temporary bearish Change of Character (CHoCH) upon violating $3934.50. Spot at $3929.21 is consolidating near the bottom of this impulse, testing whether the Day Low is an engineered liquidity run or sustained trend continuation.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Active No-Trade Range:** **$3927.00 – $3935.00**\n* **Context:** This 8-point corridor represents equilibrium chop between immediate Day Low support ($3925.01) and the underside of the broken structural breaker at $3935.00.\n* **Tactical Warning:** Initiating market orders inside this pocket exposes capital to low-volume wicks, algorithmic spread widening, and whipsaws ahead of London session opening volume. Avoid trading inside this zone and wait for edge tests at support mitigation or confirmed boundary breaks.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Short-Covering Squeeze (> $3942.50):** A decisive 15-minute candle close reclaiming $3942.50 invalidates the immediate bearish displacement leg. This traps late breakout short sellers, triggering rapid stop-loss slippage and algorithmic momentum buying with acceleration toward **$3954.00** and **$3964.41**.\n* **Bearish Liquidation Cascade (< $3923.50):** A decisive 15-minute candle body close below $3923.50 completely flushes the Day Low ($3925.01) SSL pool, forcing discount dip buyers to liquidate and driving an explosive downward cascade toward **$3912.00** and **$3900.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$3923.00 – $3926.50** Retest | 5m liquidity sweep below Day Low ($3925.01) followed by immediate absorption wick and displacement close back above $3928.50 with expanding buyer volume. | **TP1:** $3938.50<br>**TP2:** $3950.00 | **$3919.50** | 1:2.1 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3942.50** Breakout | Decisive 15m candle body close firmly above $3942.50 clearing the 15m Bearish FVG with follow-through volume holding above $3940.00 on retest. | **TP1:** $3954.50<br>**TP2:** $3964.00 | **$3937.00** | 1:2.2 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$3936.00 – $3940.00** Retest | Pullback into broken Breaker / 15m Bearish FVG, printing a 5m bearish rejection pin-bar or engulfing candle closing back below $3934.00. | **TP1:** $3924.00<br>**TP2:** $3914.00 | **$3943.50** | 1:2.0 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3923.50** Breakdown | Impulsive 15m candle body close below $3923.50 confirming clean Day Low displacement with heavy sell-side delta and rejection upon pullback. | **TP1:** $3912.00<br>**TP2:** $3900.00 | **$3929.00** | 1:2.1 |"
+  },
+  {
     "id": "GOLD_20261103_090106",
     "timestamp": "2026-11-03T09:01:06+05:30",
     "timeDisplay": "09:01 AM, Nov 03",
