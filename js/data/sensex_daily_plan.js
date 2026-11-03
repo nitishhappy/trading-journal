@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-03T13:31:14+05:30",
+    "timeDisplay": "01:31 PM, Nov 03",
+    "price": "76730",
+    "bias": "bullish",
+    "behavior": "[TUE 13:31] [B1]: Sustained 5m close ABOVE Day High 76,726 with volume ignition targeting gamma expansion",
+    "tp": "76,850 / 77,000",
+    "sl": "76,630",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T13:31:14+05:30",
+    "timeDisplay": "01:31 PM, Nov 03",
+    "price": "76635",
+    "bias": "bullish",
+    "behavior": "[TUE 13:31] [B2]: Pullback into broken 1H shelf high 76,635-76,615 showing long-tail rejection and bullish absorption",
+    "tp": "76,730 / 76,850",
+    "sl": "76,570",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T13:31:14+05:30",
+    "timeDisplay": "01:31 PM, Nov 03",
+    "price": "76730",
+    "bias": "bearish",
+    "behavior": "[TUE 13:31] [S1]: Quick probe above 76,726 Day High that fails to hold and prints a sharp 5m bearish close below 76,690",
+    "tp": "76,550 / 76,460",
+    "sl": "76,760",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-03T13:31:14+05:30",
+    "timeDisplay": "01:31 PM, Nov 03",
+    "price": "76460",
+    "bias": "bearish",
+    "behavior": "[TUE 13:31] [S2]: Decisive 15m candle close BELOW 76,460 equal lows initiating institutional long liquidation towards daily equilibrium",
+    "tp": "76,380 / 76,250",
+    "sl": "76,530",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-03T10:32:07+05:30",
     "timeDisplay": "10:32 AM, Nov 03",
     "price": "76420",
@@ -663,6 +707,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261103_133118",
+    "timestamp": "2026-11-03T13:31:18+05:30",
+    "timeDisplay": "01:31 PM, Nov 03",
+    "spot": "76699.67",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (01:30 PM IST - Nov 03, 2026 | Spot: 76699.67 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Corridor: 76,540.00 – 76,640.00 (Anchored between 1H Shelf Micro-EQ at 76,548.22 and the 5-tap Equal Highs / Bearish Supply Base cluster at 76,636.08).\n- Risk Characteristics: Inside this 100-point corridor, price action remains highly rotational with high theta decay and false intraday breakouts. Naked option buyers face severe chop risk until a structural break occurs.\n- Institutional Boundary Directive: Stand aside on fresh directional positions within 76,540 – 76,640. Trade strictly upon confirmed expansion outside Day High (76,726.10) or breakdown through the 1H Shelf Base (76,460.36).\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze (Clean 5M/15M Close ABOVE 76,726.10 Day High): Triggers institutional buy-stop runs and forced gamma unwinding among Call writers at the 76,700/76,800 strikes, clearing a swift runway toward 76,850 and 77,000 round-number resistance.\n- Mean Reversion SFP Trap (Liquidity Sweep Probe ABOVE 76,726.10 followed by immediate 5M Bearish Close back BELOW 76,690.00): Confirms a Buy-Side Liquidity (BSL) sweep trap; prompts an aggressive liquidation flush targeting the 1H Shelf EQ at 76,548.22 and the demand base at 76,460.36.\n- Long Liquidation Flush (Decisive 15M Close BELOW 76,460.36 Equal Lows): Triggers Sell-Side Liquidity (SSL) runs beneath the multi-tap floor, initiating a rapid downside slide toward Macro 50% Daily Equilibrium at 76,379.92 and the 15M ORB High at 76,421.48.\n- Judas Sweep & Spring Reclaim (Spike BELOW 76,460.36 swiftly reclaimed with an engulfing 5M green close ABOVE 76,500.00): Traps late breakout short-sellers and sets up a high-probability mean reversion rally back to 76,636.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day High Expansion Breakout): Sustained 5M candle close firmly ABOVE Day High 76,726.10 with volume ignition. | TP: 76,850 / 77,000 | SL: 76,630 | 💡 Buy 76,700 CE + Sell 76,900 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Broken Resistance Shelf Retest): Pullback into 76,635 – 76,615 showing long lower-wick absorption and a bullish reversal 5M candle. | TP: 76,730 / 76,850 | SL: 76,570 | 💡 Buy 76,600 CE + Sell 76,800 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Liquidity Sweep / SFP): Price probes ABOVE 76,726.10 but immediately fails, printing a sharp 5M bearish close back BELOW 76,690.00. | TP: 76,550 / 76,460 | SL: 76,760 | 💡 Buy 76,700 PE + Sell 76,500 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Consolidation Floor Breakdown): Decisive 15M candle close BELOW the 76,460.36 equal lows shelf with expanding red volume. | TP: 76,380 / 76,250 | SL: 76,530 | 💡 Buy 76,500 PE + Sell 76,300 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261103_103210",
     "timestamp": "2026-11-03T10:32:10+05:30",
     "timeDisplay": "10:32 AM, Nov 03",
