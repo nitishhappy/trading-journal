@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T11:33:22+05:30",
+    "timeDisplay": "11:33 AM, Nov 04",
+    "price": "3985.0",
+    "bias": "bullish",
+    "behavior": "[WED 11:33] [G_B1]: 15M Bullish FVG & Demand Shelf Retest",
+    "tp": "$4,005.00 / $4,018.00",
+    "sl": "$3,976.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T11:33:22+05:30",
+    "timeDisplay": "11:33 AM, Nov 04",
+    "price": "4010.5",
+    "bias": "bullish",
+    "behavior": "[WED 11:33] [G_B2]: Breakout Above Day High BSL",
+    "tp": "$4,022.00 / $4,035.00",
+    "sl": "$4,002.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T11:33:22+05:30",
+    "timeDisplay": "11:33 AM, Nov 04",
+    "price": "4008.0",
+    "bias": "bearish",
+    "behavior": "[WED 11:33] [G_S1]: Day High Liquidity Sweep Rejection",
+    "tp": "$3,990.00 / $3,980.00",
+    "sl": "$4,013.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T11:33:22+05:30",
+    "timeDisplay": "11:33 AM, Nov 04",
+    "price": "3978.0",
+    "bias": "bearish",
+    "behavior": "[WED 11:33] [G_S2]: Structural Breakdown Below FVG Base",
+    "tp": "$3,965.00 / $3,952.00",
+    "sl": "$3,984.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T09:46:34+05:30",
     "timeDisplay": "09:46 AM, Nov 04",
     "price": "3938.0",
@@ -465,6 +509,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261104_113329",
+    "timestamp": "2026-11-04T11:33:29+05:30",
+    "timeDisplay": "11:33 AM, Nov 04",
+    "spot": "3997.70",
+    "trigger": "Level Exhaustion Breakout (GOLD Spot $3997.70 > Max Plan Target $3965.00 + Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (11:30 AM IST - Nov 04, 2026 | Spot: $3997.70 | Trigger: Level Exhaustion Breakout (GOLD Spot $3997.70 > Max Plan Target $3965.00 + Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **DXY (US Dollar Index) Divergence:** The US Dollar Index (DXY) has faced sharp intraday selling pressure, sliding toward the 103.40 handle. The broad inverse correlation is fully active, fueling a powerful bid into spot bullion as non-yielding assets catch massive institutional inflows.\n* **US 10-Year Treasury Yields:** Benchmark US 10-Year yields have eased back under 4.28%, reducing the carry cost of physical Gold and triggering systematic algorithmic rebalancing across macro commodity trading advisors (CTAs).\n* **Forex Session Overlap Outlook:** Asian session price action delivered an aggressive unidirectional squeeze through historical resistance levels ($3,965.00). As European desks and early London market makers begin positioning, expect heightened volatility and potential liquidity distribution sweeps around the psychological $4,000.00 benchmark ahead of the New York session macro schedule.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL) Clearance:** Spot Gold aggressively cleared all resting buy stops above the prior swing ceiling ($3,965.00), extending to print a fresh Day High at **$4,009.51**. Unmitigated BSL now rests strictly above $4,010.00 into uncharted blue-sky territory ($4,020 – $4,035).\n* **Sell-Side Liquidity (SSL) Pools:** Resting sell liquidity is concentrated beneath the internal session swing shelves at **$3,988.00** and deeper at **$3,965.00** (prior resistance turned structural breaker).\n* **Fair Value Gaps (FVG) & Order Blocks (OB):** The impulsive 15-minute expansion candle left a prominent Bullish Fair Value Gap between **$3,980.50 and $3,988.00**. Below that, a high-conviction 1H Bullish Order Block resides at **$3,960.00 – $3,966.00**. \n* **Market Structure Shift:** The structure remains firmly bullish on 1H/4H frames (higher highs, higher lows). The current 5M pullback from $4,009.51 to $3,997.70 represents healthy internal discount-seeking within a dominant expansion leg.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Range:** **$3,990.00 – $4,002.00**\n* **Rationale:** This is the immediate equilibrium churn surrounding the psychological $4,000.00 round number. Institutional algorithms frequently produce two-sided wick expansions and false breakout traps inside this 12-dollar pocket during mid-day Asian/early European transition. Avoid initiating new breakout trades inside this zone; wait for tests of the outer extremes.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Upside Acceleration Zone (> $4,010.50):** A decisive 5M candle close above $4,010.50 sweeps Day High BSL and enters a vacuum of resting liquidity, targeting rapid momentum moves toward **$4,022.00** and **$4,035.00**.\n* **Downside Liquidation Cascade (< $3,978.00):** A structural breakdown below the 15M FVG shelf ($3,978.00) will trap late momentum buyers, triggering a swift mean-reversion cascade toward **$3,965.00** and **$3,952.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$3,982.00 – $3,988.00** Retest | Pullback into the 15M Bullish FVG with lower wick rejection, followed by a 5M bullish displacement candle closing above $3,991.00. | **TP1:** $4,005.00<br>**TP2:** $4,018.00 | **$3,976.00** | 1:2.5 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,010.50** Breakout | Strong 5M close above the Day High ($4,009.51) with expanding volume and no immediate upper wick wick rejection. | **TP1:** $4,022.00<br>**TP2:** $4,035.00 | **$4,002.00** | 1:2.4 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,005.00 – $4,009.50** Retest | Sweep of the Day High followed by a 5M Swing Failure Pattern (SFP) and impulsive bearish displacement closing back under $4,001.00. | **TP1:** $3,990.00<br>**TP2:** $3,980.00 | **$4,013.50** | 1:2.1 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3,978.00** Breakdown | Sustained 5M candle body close below the $3,978.00 FVG base, confirming structural breakdown and long liquidation. | **TP1:** $3,965.00<br>**TP2:** $3,952.00 | **$3,984.50** | 1:2.0 |"
+  },
+  {
     "id": "GOLD_20261104_094636",
     "timestamp": "2026-11-04T09:46:36+05:30",
     "timeDisplay": "09:46 AM, Nov 04",
