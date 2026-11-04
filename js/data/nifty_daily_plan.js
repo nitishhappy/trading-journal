@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T13:03:25+05:30",
+    "timeDisplay": "01:03 PM, Nov 04",
+    "price": "23815",
+    "bias": "bullish",
+    "behavior": "[WED 13:03] [B1]: 5m retest and decisive bounce off the 23810.00\u201323820.00 demand shelf with expanding green futures volume confirmation",
+    "tp": "23875.00 / 23920.00",
+    "sl": "23780.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:03:25+05:30",
+    "timeDisplay": "01:03 PM, Nov 04",
+    "price": "23870",
+    "bias": "bullish",
+    "behavior": "[WED 13:03] [B2]: Sustained 5m close ABOVE 23870.00 with futures volume ratio expanding >1.2x confirming institutional absorption of overhead supply",
+    "tp": "23945.00 / 23990.00",
+    "sl": "23830.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:03:25+05:30",
+    "timeDisplay": "01:03 PM, Nov 04",
+    "price": "23860",
+    "bias": "bearish",
+    "behavior": "[WED 13:03] [S1]: Upper wick rejection candle at 23860.00\u201323870.00 followed by a 5m bearish close back below 23825.00 trapping late longs",
+    "tp": "23770.00 / 23720.00",
+    "sl": "23865.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:03:25+05:30",
+    "timeDisplay": "01:03 PM, Nov 04",
+    "price": "23800",
+    "bias": "bearish",
+    "behavior": "[WED 13:03] [S2]: Sustained 5m close BELOW 23800.00 breaking the intraday higher-low sequence with expanding red futures volume",
+    "tp": "23740.00 / 23695.00",
+    "sl": "23845.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T12:01:34+05:30",
     "timeDisplay": "12:01 PM, Nov 04",
     "price": "23720",
@@ -2555,6 +2599,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261104_130337",
+    "timestamp": "2026-11-04T13:03:37+05:30",
+    "timeDisplay": "01:03 PM, Nov 04",
+    "spot": "23834.15",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23834.15 > Max Plan Target $23820.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:00 PM IST - Nov 04, 2026 | Spot: 23834.15 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23834.15 > Max Plan Target $23820.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 23810.00 – 23860.00 (50-point intraday consolidation corridor following the level exhaustion breakout above 23820.00).\n- Price Action Condition: Spot index oscillating tightly between the newly established support at 23810.00 and local intraday supply at 23860.00 with muted institutional volume participation.\n- Option Buyer Risk: Severe two-way premium decay, false breakout traps, and rapid theta erosion within this range; strictly preserve capital until a decisive breakout occurs.\n\n4. High Momentum / Explosive Zones:\n- Bullish Continuation ([Sustained 5m Close Above 23870.00]): Immediate momentum push targeting liquidity pools at 23920.00 and the Day High at 23946.35.\n- Bullish Squeeze Extension ([Decisive 5m Close Above 23950.00]): Triggering a high-speed short-covering squeeze and stop-run towards 23990.00 and 24030.00.\n- Bearish Reversal Sweep ([Rejection Above 23860.00 with 5m Close Below 23810.00]): Liquidity sweep of late breakout buyers leading to a sharp mean-reversion drop into 23760.00.\n- Bearish Momentum Breakdown ([Sustained 5m Close Below 23800.00]): Structural breakdown triggering long unwinding down into 23740.00 and the Day Low region at 23696.15.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback & Support Reclaim Long): 5m retest and decisive bounce off the 23810.00–23820.00 demand shelf with expanding green futures volume confirmation. | TP: 23875.00 / 23920.00 | SL: 23780.00 | 💡 Buy 23800 CE + Sell 23850 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (High-Momentum Supply Breakout Long): Sustained 5m close ABOVE 23870.00 with futures volume ratio expanding >1.2x confirming institutional absorption of overhead supply. | TP: 23945.00 / 23990.00 | SL: 23830.00 | 💡 Buy 23850 CE + Sell 23900 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Overhead Supply Rejection / Trap Short): Upper wick rejection candle at 23860.00–23870.00 followed by a 5m bearish close back below 23825.00 trapping late longs. | TP: 23770.00 / 23720.00 | SL: 23865.00 | 💡 Buy 23850 PE + Sell 23800 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Structural Breakdown Short): Sustained 5m close BELOW 23800.00 breaking the intraday higher-low sequence with expanding red futures volume. | TP: 23740.00 / 23695.00 | SL: 23845.00 | 💡 Buy 23800 PE + Sell 23750 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261104_120141",
     "timestamp": "2026-11-04T12:01:41+05:30",
     "timeDisplay": "12:01 PM, Nov 04",
