@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T15:47:51+05:30",
+    "timeDisplay": "03:47 PM, Nov 04",
+    "price": "23945",
+    "bias": "bullish",
+    "behavior": "[WED 15:47] [B1]: Pullback into 23,940.00 - 23,945.00 ORB High flip zone with 5m bullish rejection candle closing above 23,950.00",
+    "tp": "24,000 / 24,050",
+    "sl": "23,915",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T15:47:51+05:30",
+    "timeDisplay": "03:47 PM, Nov 04",
+    "price": "24005",
+    "bias": "bullish",
+    "behavior": "[WED 15:47] [B2]: Sustained 5m close ABOVE 24,005.00 (clearing 23,960.60 Day High and 24,000 wall) with expanding futures volume (>=1.5x avg)",
+    "tp": "24,060 / 24,120",
+    "sl": "23,960",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T15:47:51+05:30",
+    "timeDisplay": "03:47 PM, Nov 04",
+    "price": "23930",
+    "bias": "bearish",
+    "behavior": "[WED 15:47] [S1]: Decisive 5m close BELOW 23,930.00 confirming bull-trap rejection below 23,942.50 ORB High",
+    "tp": "23,870 / 23,820",
+    "sl": "23,970",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T15:47:51+05:30",
+    "timeDisplay": "03:47 PM, Nov 04",
+    "price": "23820",
+    "bias": "bearish",
+    "behavior": "[WED 15:47] [S2]: High-momentum 5m close BELOW 23,820.00 with expanding futures volume targeting lower range liquidity",
+    "tp": "23,750 / 23,696.15",
+    "sl": "23,865",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T14:47:03+05:30",
     "timeDisplay": "02:47 PM, Nov 04",
     "price": "23880",
@@ -2687,6 +2731,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261104_154757",
+    "timestamp": "2026-11-04T15:47:57+05:30",
+    "timeDisplay": "03:47 PM, Nov 04",
+    "spot": "23960.6",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Nov 04, 2026 | Spot: 23960.6 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n> ⚠️ **VIX WARNING ENFORCED**: THETA CRUSH DAY: India VIX is down -3.50%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n3. Live Chop Zone / No-Trade Zone:\n- Upper Compression & ORB High Flip Band (23,942.50 - 23,970.00): NIFTY Spot is pressing against its intraday high at 23,960.60, hovering directly above the 15M Opening Range High (23,942.50). With active Nifty Futures volume running steady at 1.0x the 8-bar average and India VIX sliding -3.50%, option premiums are vulnerable to theta decay. Initiating random long or short positions inside this tight 23,942.50–23,970.00 range without a confirmed impulse breakout exposes traders to choppy whipsaws.\n- Mid-Range Vacuum & Equilibrium Buffer (23,820.00 - 23,880.00): If price pulls back sharply below 23,930.00, it enters the morning impulse gap. The 23,820.00–23,880.00 intermediate zone represents rotational churn territory where directional edge is minimal unless outer boundaries are cleanly tested.\n\n4. High Momentum / Explosive Zones:\n- Bullish Day High & 24,000 Wall Expansion (Sustained 5m close above 23,975.00 / 24,005.00): A decisive 5-minute candle close clearing 23,975.00 and taking out the 24,000 psychological strike with expanding Nifty Futures volume (>= 1.5x 8-bar avg) will trigger rapid short-covering from trapped call writers, igniting momentum toward 24,060.00 and 24,120.00.\n- Bullish ORB High Retest & Liquidity Defense (Pullback and 5m rejection at 23,940.00 - 23,945.00): A controlled dip into the 15M ORB High breakout level (23,942.50) that prints a 5-minute bullish hammer or engulfing close accompanied by institutional absorption volume confirms support defense for a swift bounce back toward 24,000.00.\n- Bearish Bull-Trap & ORB High Breakdown (Decisive 5m close below 23,930.00): A failure to sustain above the 15M ORB High (23,942.50) followed by a high-volume 5-minute close below 23,930.00 confirms an intraday exhaustion trap, triggering long-unwinding toward 23,870.00 and 23,820.00.\n- Bearish Mid-Range Breakdown Flush (High-momentum 5m close below 23,820.00): A high-volume flush breaking through the 23,820.00 structural shelf will accelerate selling down to the 23,750.00 demand pool and the 23,696.15 Day Low.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Flip & Demand Retest): Wait for a controlled dip into 23,940.00 - 23,945.00 followed by a 5-min bullish rejection candle closing back above 23,950.00 with Nifty Futures volume >= 1.2x avg. | TP: 24,000.00 / 24,050.00 | SL: 23,915.00 | 💡 Buy 23,950 CE + Sell 24,000 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High & 24,000 Breakout Expansion): Enter on a strong 5-min candle close firmly above 24,005.00 (clearing 23,960.60 Day High and 24,000 psychological wall) backed by Nifty Futures volume expansion >= 1.5x avg. | TP: 24,060.00 / 24,120.00 | SL: 23,960.00 | 💡 Buy 24,000 CE + Sell 24,050 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Failed ORB Breakout & Liquidity Sweep Reversal): Enter on a decisive 5-min candle close below 23,930.00 (confirming acceptance back below the 23,942.50 ORB High) with expanding red futures volume. | TP: 23,870.00 / 23,820.00 | SL: 23,970.00 | 💡 Buy 23,950 PE + Sell 23,900 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Mid-Range Breakdown & Deep Flush): Enter on a high-momentum 5-min candle close below 23,820.00 with Nifty Futures volume >= 1.5x avg targeting lower range liquidity. | TP: 23,750.00 / 23,696.15 | SL: 23,865.00 | 💡 Buy 23,850 PE + Sell 23,800 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261104_144721",
     "timestamp": "2026-11-04T14:47:21+05:30",
     "timeDisplay": "02:47 PM, Nov 04",
