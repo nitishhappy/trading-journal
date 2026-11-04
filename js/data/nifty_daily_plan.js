@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T10:31:22+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "23865",
+    "bias": "bullish",
+    "behavior": "[WED 10:31] [B1]: 5-min candle closes firmly ABOVE 23,865 with active futures volume > 1.2x confirming absorption of intraday sellers",
+    "tp": "23,920 / 23,945",
+    "sl": "23,825",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:31:22+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "23950",
+    "bias": "bullish",
+    "behavior": "[WED 10:31] [B2]: Sustained 5-min close ABOVE 23,950 following tight compression beneath Day High",
+    "tp": "24,010 / 24,060",
+    "sl": "23,905",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:31:22+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "23760",
+    "bias": "bearish",
+    "behavior": "[WED 10:31] [S1]: 5-min candle closes firmly BELOW 23,760 with expanding red futures volume breaking morning value",
+    "tp": "23,710 / 23,695",
+    "sl": "23,800",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:31:22+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "23690",
+    "bias": "bearish",
+    "behavior": "[WED 10:31] [S2]: Clean 5-min close BELOW 23,690 confirming breakdown through the 15M ORB Low and session support",
+    "tp": "23,630 / 23,570",
+    "sl": "23,735",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T09:46:18+05:30",
     "timeDisplay": "09:46 AM, Nov 04",
     "price": "23880",
@@ -1893,50 +1937,6 @@ window.dailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-28T10:31:46+05:30",
-    "timeDisplay": "10:31 AM, Oct 28",
-    "price": "22520",
-    "bias": "bullish",
-    "behavior": "[WED 10:31] [B1]: Liquidity sweep of 22,490-22,497.70 followed by a 5m bullish rejection close ABOVE 22,520 with active futures volume",
-    "tp": "22,565 / 22,615",
-    "sl": "22,480",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-28T10:31:46+05:30",
-    "timeDisplay": "10:31 AM, Oct 28",
-    "price": "22560",
-    "bias": "bullish",
-    "behavior": "[WED 10:31] [B2]: Sustained 5m close ABOVE 22,560 reclaiming 15M ORB Low (22,551.90) with expanding green futures volume (>1.2x avg)",
-    "tp": "22,620 / 22,675",
-    "sl": "22,520",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-28T10:31:46+05:30",
-    "timeDisplay": "10:31 AM, Oct 28",
-    "price": "22530",
-    "bias": "bearish",
-    "behavior": "[WED 10:31] [S1]: Relief bounce into 22,545-22,555 flipped supply shelf followed by a 5m bearish rejection close BELOW 22,530",
-    "tp": "22,490 / 22,445",
-    "sl": "22,565",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-28T10:31:46+05:30",
-    "timeDisplay": "10:31 AM, Oct 28",
-    "price": "22490",
-    "bias": "bearish",
-    "behavior": "[WED 10:31] [S2]: Decisive 5m close BELOW 22,490 breaking Day Low (22,497.70) with expanding red futures volume (>1.3x avg)",
-    "tp": "22,435 / 22,385",
-    "sl": "22,530",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-28T09:33:08+05:30",
     "timeDisplay": "09:33 AM, Oct 28",
     "price": "22565",
@@ -2467,6 +2467,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261104_103125",
+    "timestamp": "2026-11-04T10:31:25+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "spot": "23817.45",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (10:30 AM IST - Nov 04, 2026 | Spot: 23817.45 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Inside 23,780 – 23,850: Spot price (23,817.45) is oscillating directly around the 50% equilibrium of the day's range (23,696.15 – 23,946.35). With Nifty Future volume tracking at normal 1x 8-bar baseline, option straddle/strangle sellers dominate this band across 23,800 strikes, creating severe theta decay and two-sided whipsaws.\n- Mean-Reversion Traps: Any intra-range breakouts that fail to clear 23,850 on the upside or 23,780 on the downside lack structural institutional momentum. Avoid executing naked directional trades inside this middle zone.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Expansion (Above 23,865): A decisive 5-minute close above 23,865 with volume expansion triggers fast short-covering toward the Day High / ORB High cluster at 23,942.50 – 23,946.35.\n- Downside Long-Unwinding Panic (Below 23,760): Sustained 5-minute acceptance below 23,760 initiates trapped long liquidation pushing rapidly toward the Day Low / ORB Low support at 23,696.15.\n- Explosive Range Breakout (Above 23,950): Clean breakout beyond the Day High sweeps resting liquidity for a fast expansion rally toward 24,010 – 24,060.\n- Explosive Range Breakdown (Below 23,690): Decisive breakdown below the Day Low releases sell stops for an accelerated slide into 23,630 – 23,570.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Bullish Equilibrium Breakout): 5-min candle closes firmly ABOVE 23,865 with active futures volume > 1.2x confirming absorption of intraday sellers. | TP: 23,920 / 23,945 | SL: 23,825 | 💡 Buy 23800 CE + Sell 23850 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Liquidity Expansion): Sustained 5-min close ABOVE 23,950 following tight compression beneath Day High. | TP: 24,010 / 24,060 | SL: 23,905 | 💡 Buy 23900 CE + Sell 23950 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Bearish Equilibrium Breakdown): 5-min candle closes firmly BELOW 23,760 with expanding red futures volume breaking morning value. | TP: 23,710 / 23,695 | SL: 23,800 | 💡 Buy 23850 PE + Sell 23800 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Day Low Liquidity Flush): Clean 5-min close BELOW 23,690 confirming breakdown through the 15M ORB Low and session support. | TP: 23,630 / 23,570 | SL: 23,735 | 💡 Buy 23700 PE + Sell 23650 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n``"
+  },
+  {
     "id": "NIFTY_20261104_094622",
     "timestamp": "2026-11-04T09:46:22+05:30",
     "timeDisplay": "09:46 AM, Nov 04",
