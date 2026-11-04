@@ -178,6 +178,18 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.98 - 04 Nov 2026 - Interactive Chart Persistent Notification Preference & Mobile PWA Delivery Fix (All 6 Charts)
+- **Persistent Notification Preferences (`localStorage`)**:
+  - Resolved root cause where `alertsEnabled` was only stored in an in-memory variable (`let alertsEnabled = false;`) without `localStorage` persistence, causing alert notifications to be reset to disabled every time the chart was reloaded, refreshed, or restored by the mobile browser.
+  - Added `initAlertsSettings()` running on `DOMContentLoaded` before chart initialization, reading both asset-specific (`chart_alerts_enabled_<asset>`) and global (`interactive_chart_alerts_enabled`) keys from `localStorage`.
+  - Added `updateAlertsButtonUI()` ensuring the bell icon reflects the active state (`alert-on` green highlight vs `alert-off` red outline) and tooltip title immediately on load and on click.
+- **Android / Mobile PWA ServiceWorker Notification Dispatch**:
+  - Fixed `dispatchDesktopNotification()` where calling `new Notification()` threw `TypeError: Illegal constructor` in mobile Chrome / Android PWA standalone mode.
+  - Now dispatches via `navigator.serviceWorker.getRegistration().then(reg => reg.showNotification(title, options))` with fallback to `new Notification()` on desktop.
+- **AudioContext Autoplay Policy & Permission Handling**:
+  - Implemented `getChartAudioContext()` to reuse and resume an unlocked AudioContext instance upon user click of the alert button, preventing subsequent candle crossing chimes from being blocked by browser autoplay policies.
+  - Added explicit notification permission check/request handling with user-facing toasts if notifications are blocked in browser site settings.
+
 ### v2.3.97 - 03 Nov 2026 - Instant 1-Click Calendar Date Jump to First Bar & Detached DOM Bubbling Fix (All 6 Charts)
 - **Instant 1-Click Calendar Date Jump to First Bar**:
   - Selecting any date tile in the custom TradingView calendar now **immediately executes the jump** to that date without requiring additional clicks.

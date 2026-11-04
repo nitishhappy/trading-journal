@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T12:31:02+05:30",
+    "timeDisplay": "12:31 PM, Nov 04",
+    "price": "4018.0",
+    "bias": "bullish",
+    "behavior": "[WED 12:31] [G_B1]: Breakout Retest & 15M Bullish FVG Demand Shelf",
+    "tp": "$4,028.00 / $4,038.00",
+    "sl": "$4,011.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T12:31:02+05:30",
+    "timeDisplay": "12:31 PM, Nov 04",
+    "price": "4030.0",
+    "bias": "bullish",
+    "behavior": "[WED 12:31] [G_B2]: High-Momentum Breakout Above Session Peak",
+    "tp": "$4,042.00 / $4,055.00",
+    "sl": "$4,023.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T12:31:02+05:30",
+    "timeDisplay": "12:31 PM, Nov 04",
+    "price": "4040.0",
+    "bias": "bearish",
+    "behavior": "[WED 12:31] [G_S1]: HTF Extension Exhaustion & Liquidity Sweep Zone",
+    "tp": "$4,026.00 / $4,016.00",
+    "sl": "$4,047.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T12:31:02+05:30",
+    "timeDisplay": "12:31 PM, Nov 04",
+    "price": "4012.0",
+    "bias": "bearish",
+    "behavior": "[WED 12:31] [G_S2]: Structural Demand Breakdown & Long Unwinding Flush",
+    "tp": "$4,001.00 / $3,988.00",
+    "sl": "$4,019.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T11:47:01+05:30",
     "timeDisplay": "11:47 AM, Nov 04",
     "price": "4012.0",
@@ -575,6 +619,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261104_123114",
+    "timestamp": "2026-11-04T12:31:14+05:30",
+    "timeDisplay": "12:31 PM, Nov 04",
+    "spot": "4028.39",
+    "trigger": "Level Exhaustion Breakout (GOLD Spot $4028.39 > Max Plan Target $4024.00 + Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (12:30 PM IST - Nov 04, 2026 | Spot: 4028.39 | Trigger: Level Exhaustion Breakout (GOLD Spot $4028.39 > Max Plan Target $4024.00 + Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **London / Pre-Market Liquidity Pipeline:** Gold is experiencing an aggressive upward expansion during late Asian / early European trading hours, surging from the Asian session base of $3,919.85 to print fresh highs at $4,028.39. This push has forcefully invalidated the previous daily maximum resistance band of $4,024.00.\n* **DXY & US 10-Year Yield Dynamics:** The US Dollar Index (DXY) is exhibiting downward structural displacement towards key intraday support, accompanied by softening US Treasury yields. The ongoing compression in real yields is providing high-velocity tailwinds for spot bullion.\n* **Macro Catalyst Expectations:** Market participants are positioning ahead of upcoming New York session economic releases, triggering pre-emptive institutional order-flow allocations and short-covering momentum into unhedged upside territory.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL) Clearance:** Spot Gold swept buy-side liquidity above the overnight swing high ($4,020.00) and accelerated rapidly through the $4,024.00 threshold, hunting buy stops and forcing systematic liquidity sweeps.\n* **Order Blocks & Fair Value Gaps (FVG):** The impulsive 15-minute expansion candle leaves behind a significant Bullish Fair Value Gap (FVG) between **$4,015.00 and $4,021.50**, which serves as primary institutional discount demand on any pullback.\n* **Sell-Side Liquidity (SSL) Pools:** Below current price action, sell-side liquidity pools reside below the consolidation shelf at **$4,012.00** and deeper at **$3,985.00**. These represent prime invalidation and short-acceleration triggers if structural failure occurs.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Chop Band:** **$4,022.00 – $4,029.00**\n* **Rationale:** Direct chasing at the absolute peak of an extended vertical impulsive leg ($4,028.39) offers highly unfavorable risk-to-reward. Bids placed inside this band are prone to high-frequency micro-reversals and spread manipulation ahead of the formal London cash open.\n* **Directive:** Do not initiate market execution orders inside this compressed range. Await either a clean pullback-retest of the $4,016.00 – $4,020.00 FVG base or a decisive 5-minute close above $4,030.00.\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Breakout Acceleration ($4,030.00+):** A decisive 5-minute candle body close above $4,030.00 triggers explosive blue-sky trend expansion toward **$4,042.00** and **$4,055.00**, powered by systemic gamma hedging and algorithmic stop runs.\n* **Bearish Liquidity Flush Sub-$4,012.00:** A swift loss and 15-minute close below the structural consolidation pivot at $4,012.00 triggers immediate long-unwinding into the deeper imbalance pocket down to **$4,000.00 – $3,988.00**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4,016.00 – $4,020.00** Retest | Rejection wick into 15m Bullish FVG with 5m bullish engulfing reversal close | **TP1:** $4,028.00<br>**TP2:** $4,038.00 | **$4,011.00** | 1:2.0+ |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4,030.00** Breakout | 5-minute body close above $4,030.00 with expanding tick volume and minimal upper wick | **TP1:** $4,042.00<br>**TP2:** $4,055.00 | **$4,023.00** | 1:2.0+ |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4,038.00 – $4,042.00** Sweep | Liquidity grab above psychological $4,038.00 followed by rapid 5m bearish displacement back inside range | **TP1:** $4,026.00<br>**TP2:** $4,016.00 | **$4,047.00** | 1:2.0+ |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4,012.00** Breakdown | Sustained 15-minute close below $4,012.00 shelf with consecutive red candles | **TP1:** $4,001.00<br>**TP2:** $3,988.00 | **$4,019.50** | 1:2.0+ |"
+  },
+  {
     "id": "GOLD_20261104_114705",
     "timestamp": "2026-11-04T11:47:05+05:30",
     "timeDisplay": "11:47 AM, Nov 04",

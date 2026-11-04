@@ -2033,7 +2033,29 @@
         let replayPlayTimer = null;
         const REPLAY_SPEED_MS = 800;
 
+                function updateAlertsButtonUI() {
+            const toggleBtn = document.getElementById('btn-toggle-alerts');
+            if (!toggleBtn) return;
+            if (alertsEnabled) {
+                toggleBtn.classList.remove('alert-off');
+                toggleBtn.classList.add('alert-on');
+                toggleBtn.title = "Notifications: ACTIVE (Click to Disable)";
+            } else {
+                toggleBtn.classList.remove('alert-on');
+                toggleBtn.classList.add('alert-off');
+                toggleBtn.title = "Notifications: OFF (Click to Enable)";
+            }
+        }
+
+        function initAlertsSettings() {
+            const savedAssetAlerts = localStorage.getItem('chart_alerts_enabled_eurusd');
+            const savedGlobalAlerts = localStorage.getItem('interactive_chart_alerts_enabled');
+            alertsEnabled = savedAssetAlerts !== null ? (savedAssetAlerts === 'true') : (savedGlobalAlerts === 'true');
+            updateAlertsButtonUI();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            initAlertsSettings();
             initIndicatorSettings();
             initHighRRFilter();
             checkEmbedMode();
@@ -2193,26 +2215,37 @@
                 });
             }
 
-            toggleBtn.addEventListener('click', () => {
-                alertsEnabled = !alertsEnabled;
-                if (alertsEnabled) {
-                    if ("Notification" in window) {
-                        Notification.requestPermission();
+            if (toggleBtn) {
+                updateAlertsButtonUI();
+                toggleBtn.addEventListener('click', async () => {
+                    alertsEnabled = !alertsEnabled;
+                    localStorage.setItem('chart_alerts_enabled_eurusd', alertsEnabled ? 'true' : 'false');
+                    localStorage.setItem('interactive_chart_alerts_enabled', alertsEnabled ? 'true' : 'false');
+                    updateAlertsButtonUI();
+                    if (alertsEnabled) {
+                        if ('Notification' in window) {
+                            if (Notification.permission === 'default') {
+                                try {
+                                    const permission = await Notification.requestPermission();
+                                    if (permission !== 'granted') {
+                                        showToast('⚠️ Notifications Blocked', 'Browser notifications permission was not granted. Please allow notifications in site settings.');
+                                    }
+                                } catch (e) {
+                                    console.warn('[Alerts] requestPermission failed:', e);
+                                }
+                            } else if (Notification.permission === 'denied') {
+                                showToast('⚠️ Notifications Blocked', 'Browser notifications are blocked. Please unblock in browser site settings.');
+                            }
+                        }
+                        lastEvaluatedClosedCandleTime = null;
+                        levelCrossingMemory = {};
+                        triggerAlertSound(880, 'sine', 0.15);
+                        showToast('🔔 Notifications ACTIVE', `Desktop alerts active for 5M candle closes.`);
+                    } else {
+                        showToast('🔕 Notifications OFF', 'Alert notifications paused.');
                     }
-                    lastEvaluatedClosedCandleTime = null;
-                    levelCrossingMemory = {};
-                    toggleBtn.classList.remove('alert-off');
-                    toggleBtn.classList.add('alert-on');
-                    toggleBtn.title = "Notifications: ACTIVE (Click to Disable)";
-                    triggerAlertSound(880, 'sine', 0.15);
-                    showToast("🔔 Notifications ACTIVE", `Desktop alerts active for 5M candle closes.`);
-                } else {
-                    toggleBtn.classList.remove('alert-on');
-                    toggleBtn.classList.add('alert-off');
-                    toggleBtn.title = "Notifications: OFF (Click to Enable)";
-                    showToast("🔕 Notifications OFF", "Alert notifications paused.");
-                }
-            });
+                });
+            }
         }
 
         let latestCandleTimestamp = null;
@@ -5088,9 +5121,28 @@
             }
         }
 
+        let chartAudioCtx = null;
+        function getChartAudioContext() {
+            try {
+                if (!chartAudioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContextClass) {
+                        chartAudioCtx = new AudioContextClass();
+                    }
+                }
+                if (chartAudioCtx && chartAudioCtx.state === 'suspended') {
+                    chartAudioCtx.resume().catch(() => {});
+                }
+                return chartAudioCtx;
+            } catch (e) {
+                return null;
+            }
+        }
+
         function triggerAlertSound(freq = 880, type = 'sine', duration = 0.2) {
             try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const audioCtx = getChartAudioContext();
+                if (!audioCtx) return;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = type;
@@ -5173,15 +5225,32 @@
         }
 
         function dispatchDesktopNotification(title, body) {
-            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-                try {
-                    new Notification(title, {
-                        body: body,
-                        icon: './icons/icon-192.png'
+            if (typeof Notification === 'undefined' || Notification.permission !== 'granted') {
+                return;
+            }
+            const options = {
+                body: body,
+                icon: './icons/icon-192.png',
+                badge: './icons/icon-192.png',
+                tag: `chart-alert-${Date.now()}`,
+                vibrate: [200, 100, 200]
+            };
+            try {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistration().then(reg => {
+                        if (reg && typeof reg.showNotification === 'function') {
+                            reg.showNotification(title, options);
+                        } else {
+                            try { new Notification(title, options); } catch (err) {}
+                        }
+                    }).catch(() => {
+                        try { new Notification(title, options); } catch (err) {}
                     });
-                } catch (e) {
-                    console.warn("[Chart Alert] Desktop notification failed:", e);
+                } else {
+                    new Notification(title, options);
                 }
+            } catch (e) {
+                console.warn('[Chart Alert] Desktop notification failed:', e);
             }
         }
 
