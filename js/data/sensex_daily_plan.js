@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T09:31:22+05:30",
+    "timeDisplay": "09:31 AM, Nov 04",
+    "price": "77365",
+    "bias": "bullish",
+    "behavior": "[WED 09:31] [B1]: Sustained 5m close firmly ABOVE Day High 77365 with expanding volume",
+    "tp": "77500 / 77650",
+    "sl": "77260",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T09:31:22+05:30",
+    "timeDisplay": "09:31 AM, Nov 04",
+    "price": "77150",
+    "bias": "bullish",
+    "behavior": "[WED 09:31] [B2]: Retest and bullish rejection at flipped resistance shelf 77114-77180",
+    "tp": "77360 / 77500",
+    "sl": "77030",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T09:31:22+05:30",
+    "timeDisplay": "09:31 AM, Nov 04",
+    "price": "77300",
+    "bias": "bearish",
+    "behavior": "[WED 09:31] [S1]: False breakout above 77361 closing back below 77300 confirming liquidity grab",
+    "tp": "77150 / 77000",
+    "sl": "77390",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T09:31:22+05:30",
+    "timeDisplay": "09:31 AM, Nov 04",
+    "price": "76980",
+    "bias": "bearish",
+    "behavior": "[WED 09:31] [S2]: Sustained 15m close BELOW Macro 50% EQ 76983 triggering long liquidation",
+    "tp": "76820 / 76610",
+    "sl": "77080",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T09:20:56+05:30",
     "timeDisplay": "09:20 AM, Nov 04",
     "price": "77114",
@@ -795,6 +839,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261104_093128",
+    "timestamp": "2026-11-04T09:31:28+05:30",
+    "timeDisplay": "09:31 AM, Nov 04",
+    "spot": "77345.39",
+    "trigger": "Bullish Level Exhaustion (+231.4 pts above max plan level 77114",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (09:30 AM IST - Nov 04, 2026 | Spot: 77345.39 | Trigger: Bullish Level Exhaustion (+231.4 pts above max plan level 77114))\n\n3. Live Chop Zone / No-Trade Zone:\n- [Macro Chop Zone Anchor]: 76822.08 - 77113.91 (Macro 50% Daily Equilibrium at 76983.09 and prior 1H consolidation shelf high at 77113.91). Rotational movement within this pocket carries high chop risk following the initial parabolic expansion.\n- [Intraday No-Trade Buffer]: 77113.91 - 77250.00. Unconfirmed pullbacks into the broken resistance zone without clear price rejection or structural confirmation represent a dangerous low-momentum trap.\n- [Bullish Structure Invalidation Point]: Acceptance and sustained 15-min close back below 76983.09 invalidates morning trend structure and re-opens the range toward 76822.08.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion Breakout] (Above 77361.33): Sustained 5-min candle close above Day High / 15M ORB High (77361.33) triggers short-covering momentum into unmapped psychological levels at 77500 and 77650.\n- [Pullback Demand Absorption] (77114 - 77180): Retest of the broken 1H shelf high (77113.91) holding with buyer absorption and bullish pin-bar/FVG reclamation targeting new session highs.\n- [Liquidity Sweep SFP Reversal] (Rejection at 77361.33): Wick above 77361.33 followed by an immediate 5-min close back below 77300 signaling an institutional trap and initiating mean reversion to 77114.\n- [Bearish Breakdown Expansion] (Below 76983.09): Sustained 15-min close below Macro 50% Equilibrium (76983.09) triggers long unwinding toward 76822.08 and the ignition origin at 76604.85.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Breakout Continuation): Sustained 5-min candle close firmly ABOVE Day High 77365 with expanding volume confirming continuation. | TP: 77500 / 77650 | SL: 77260 | 💡 Buy 77300 CE + Sell 77500 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Broken Shelf Pullback & Spring): Retest of the flipped resistance shelf at 77114 - 77180 showing clear bullish rejection / green hammer candle. | TP: 77360 / 77500 | SL: 77030 | 💡 Buy 77200 CE + Sell 77400 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (High Liquidity Sweep SFP): Sharp sweep of Day High 77361 followed by a 5-min bearish engulfing close back below 77300 confirming a buyer trap. | TP: 77150 / 77000 | SL: 77390 | 💡 Buy 77300 PE + Sell 77100 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Macro Equilibrium Breakdown): Sustained 15-min candle close BELOW Macro 50% Equilibrium 76983 confirming failure of the morning impulse. | TP: 76820 / 76610 | SL: 77080 | 💡 Buy 77000 PE + Sell 76800 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261104_092104",
     "timestamp": "2026-11-04T09:21:04+05:30",
     "timeDisplay": "09:21 AM, Nov 04",
