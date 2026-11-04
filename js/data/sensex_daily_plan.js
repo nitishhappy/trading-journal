@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T10:31:35+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "77170",
+    "bias": "bullish",
+    "behavior": "[WED 10:31] [B1]: Bullish rejection candle closing back ABOVE 77,170 following a liquidity sweep of Equal Lows (SSL)",
+    "tp": "77,280 / 77,390",
+    "sl": "77,090",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:31:35+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "77395",
+    "bias": "bullish",
+    "behavior": "[WED 10:31] [B2]: Sustained 5m close ABOVE Buy-Side Liquidity pool (BSL: 77,395 / Day High 77,396) with volume expansion",
+    "tp": "77,550 / 77,700",
+    "sl": "77,290",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:31:35+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "77395",
+    "bias": "bearish",
+    "behavior": "[WED 10:31] [S1]: Bearish Swing Failure Pattern (SFP) rejection failing to hold ABOVE 77,395 and closing back BELOW 77,350",
+    "tp": "77,280 / 77,170",
+    "sl": "77,430",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:31:35+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "price": "77170",
+    "bias": "bearish",
+    "behavior": "[WED 10:31] [S2]: Sustained 5m close BELOW 77,170 shelf support, targeting Macro 50% Equilibrium and Demand base",
+    "tp": "77,000 / 76,850",
+    "sl": "77,250",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T09:31:22+05:30",
     "timeDisplay": "09:31 AM, Nov 04",
     "price": "77365",
@@ -839,6 +883,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261104_103143",
+    "timestamp": "2026-11-04T10:31:43+05:30",
+    "timeDisplay": "10:31 AM, Nov 04",
+    "spot": "77015.39",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 04, 2026 | Spot: 77015.39 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict Intraday No-Trade Anchor: 77,170.00 – 77,394.00 (Immediate 1H Consolidation Shelf anchored by 50% Micro-Equilibrium at 77,282.24).\n- Price action oscillating within this 224-point balance zone carries severe option decay risks and false expansion whipsaws due to dual-sided liquidity accumulation.\n- Strict discipline dictates waiting for a verified liquidity sweep probe or a confirmed 5-minute directional breakout outside 77,170.00 or 77,394.00 before deploying option buying capital.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion Breakout] (Upside BSL Clearance): Sustained 5-minute candle close ABOVE 77,395.00 (Day High 77,396.04 / Triple Equal Highs pool) triggers aggressive call short-covering towards 77,550.00 and 77,700.00 unmitigated liquidity.\n- [Bearish Impulse Breakdown] (Downside Shelf Breach): Sustained 5-minute candle close BELOW 77,170.00 (Double Equal Lows SSL) triggers rapid long unwinding down into Macro 50% Equilibrium (77,000.45) and the 76,976.84 swing discount zone.\n- [Bullish Spring Sweep] (Judas Low Reclaim): A rapid liquidity sweep probe below 77,170.00 that swiftly prints an absorption wick and reclaims back above 77,170.00 sparks a violent short-squeeze back toward Micro-EQ 77,282.00.\n- [Bearish SFP Exhaustion] (Buy-Side Liquidity Trap): A stop-hunt spike through 77,395.00 followed by an immediate close back below 77,350.00 traps breakout buyers and unleashes sharp mean-reversion selling toward 77,170.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Liquidity Sweep & Spring Reclaim): Bullish rejection candle closing back ABOVE 77,170.00 following a liquidity sweep of Equal Lows (SSL: 77,170.12). | TP: 77,280 / 77,390 | SL: 77,090 | 💡 Buy 77100 CE + Sell 77300 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Bullish Expansion Breakout): Sustained 5-minute close ABOVE Buy-Side Liquidity pool (BSL: 77,395.00 / Day High 77,396.04) with volume expansion. | TP: 77,550 / 77,700 | SL: 77,290 | 💡 Buy 77400 CE + Sell 77600 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Liquidity Sweep & SFP at Equal Highs): Bearish Swing Failure Pattern (SFP) rejection failing to hold ABOVE 77,395.00 and closing back BELOW 77,350.00. | TP: 77,280 / 77,170 | SL: 77,430 | 💡 Buy 77400 PE + Sell 77200 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Shelf Breakdown & Trend Continuation): Sustained 5-minute close BELOW 77,170.00 shelf support, targeting Macro 50% Equilibrium and Demand base. | TP: 77,000 / 76,850 | SL: 77,250 | 💡 Buy 77100 PE + Sell 76900 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261104_093128",
     "timestamp": "2026-11-04T09:31:28+05:30",
     "timeDisplay": "09:31 AM, Nov 04",
