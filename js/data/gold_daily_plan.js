@@ -1,6 +1,105 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4058.0",
+    "bias": "bearish",
+    "behavior": "[WED 13:46] [G_B2]: HTF 4H Extension Target / Upper Institutional Liquidity",
+    "tp": "$4048.00 / $4058.00",
+    "sl": "$4033.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4048.0",
+    "bias": "bearish",
+    "behavior": "[WED 13:46] [G_B2]: Target 1 / Overhead FVG Supply",
+    "tp": "$4048.00 / $4058.00",
+    "sl": "$4033.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4044.0",
+    "bias": "bearish",
+    "behavior": "[WED 13:46] [G_S1]: Supply Purge & Bearish CHoCH Rejection Zone",
+    "tp": "$4030.00 / $4022.00",
+    "sl": "$4049.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4038.5",
+    "bias": "bullish",
+    "behavior": "[WED 13:46] [G_B2]: Day High Breakout Trigger / Buy-Side Liquidity Pool",
+    "tp": "$4048.00 / $4058.00",
+    "sl": "$4033.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4032.55",
+    "bias": "neutral",
+    "behavior": "[WED 13:46] Pivot: Current Live Spot Price / Mid-Session Pivot",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4026.0",
+    "bias": "bearish",
+    "behavior": "[WED 13:46] [G_S2]: 15M FVG Floor & Breakdown Trigger",
+    "tp": "$4018.00 / $4010.00",
+    "sl": "$4031.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4022.0",
+    "bias": "bullish",
+    "behavior": "[WED 13:46] [G_B1]: 15M FVG Retest / Liquidity Sweep Recovery Floor",
+    "tp": "$4032.00 / $4038.50",
+    "sl": "$4016.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "4010.0",
+    "bias": "bullish",
+    "behavior": "[WED 13:46] [G_S2]: Target 2 / 1H Institutional Demand Base",
+    "tp": "$4018.00 / $4010.00",
+    "sl": "$4031.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T13:46:34+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "price": "3919.85",
+    "bias": "bullish",
+    "behavior": "[WED 13:46] Support: Day Low / Major Macro Demand Floor",
+    "tp": "na",
+    "sl": "na",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T13:32:27+05:30",
     "timeDisplay": "01:32 PM, Nov 04",
     "price": "4023.50",
@@ -542,6 +641,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261104_134637",
+    "timestamp": "2026-11-04T13:46:37+05:30",
+    "timeDisplay": "01:46 PM, Nov 04",
+    "spot": "4032.55",
+    "trigger": "Level Exhaustion Breakout (GOLD Spot $4032.55 > Max Plan Target $4028.50 + Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (01:45 PM IST - Nov 04, 2026 | Spot: $4032.55 | Trigger: Level Exhaustion Breakout (GOLD Spot $4032.55 > Max Plan Target $4028.50 + Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **Session Dynamics (London Opening Transition):** Asian session saw relentless trend expansion driving XAU/USD from session lows of $3919.85 up to a high of $4038.48 (+118.63 pts). As European desk participants enter during the 01:30–02:00 PM IST window, early institutional positioning is consolidating right below the session peak, absorbing intraday profit-taking.\n* **DXY & Yield Inversion:** The US Dollar Index (DXY) is facing acute downward pressure and heavy rejection at resistance, while US 10-Year Treasury Yields are softening. This inverse correlation reinforces macro spot accumulation across bullion desks.\n* **Macro Catalyst Radar:** Bullion desks are pricing in upcoming high-impact US macro data releases scheduled for the London/New York session overlap. Strong physical and institutional safe-haven demand continues to maintain buy-side pressure above historical milestone boundaries.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Buy-Side Liquidity (BSL):** Resting buy stops are tightly clustered just above the Day High at **$4038.50 – $4042.00**. A decisive purge here will target higher-timeframe 4-Hour liquidity pools between **$4048.00 and $4058.00**.\n* **Sell-Side Liquidity (SSL):** Clean structural lows and trailing stops are resting below the Asian late-session shelf at **$4026.00**, with deeper untracked liquidity sitting at the 1-Hour demand block between **$4010.00 and $4015.00**.\n* **Fair Value Gaps (FVG) & Order Blocks:**\n  * **15-Min Bullish FVG:** Located between **$4020.00 and $4025.50**, offering institutional discount support on any London session opening pullback.\n  * **1-Hour Bullish Breaker / Demand:** Situated at **$4010.00 – $4015.00**, representing the anchor of the pre-London markup.\n  * **4-Hour Institutional Supply Pool:** Looming overhead between **$4045.00 and $4055.00**, where sellers are expected to stage defensive barrier capping.\n* **Market Structure:** Trend structure is bullish across 15M/1H charts with sequential Break of Structure (BOS). Spot price ($4032.55) is currently lingering in local premium territory, meaning market orders carry poor R:R—execution demands waiting for high-probability pullback mitigation or confirmed breakout expansion.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Defined Boundary:** **$4028.00 – $4036.00**\n* **Context & Mechanics:** This $8-dollar band represents mid-range compression directly under the Day High ($4038.48) and directly above the micro intraday retest base ($4028.00). Entering positions within this corridor exposes traders to bidirectional algorithmic liquidity sweeps, spread widening, and chop ahead of European full-session volume injection. Execution should strictly occur at range extremes.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Acceleration Zone (> $4038.50):** A decisive 5-minute candle close above $4038.50 breaches Day High liquidity and triggers rapid short-covering acceleration toward **$4048.00** and **$4058.00**.\n* **Bearish Liquidation Flush (< $4026.00):** A sustained breakdown and close below $4026.00 invalidates the 15-minute FVG, releasing long-unwinding momentum toward the **$4018.00** and **$4010.00** institutional demand levels.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Liquidity Sweep Recovery** | **$4020.00 – $4024.00** Retest | Liquidity sweep of Asian micro-lows into 15M FVG followed by a strong 5M bullish reversal pin-bar or engulfing candle closing above $4025.00 | **TP1:** $4032.00<br>**TP2:** $4038.50 | **$4016.00** | 1:2.3 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4038.50** Breakout | 5M candle body close firmly above Day High with volume expansion and sustained prints above $4039.00 | **TP1:** $4048.00<br>**TP2:** $4058.00 | **$4033.50** | 1:2.0 |\n| **[G_S1]** | 🔴 **High-Probability Short / Supply Rejection** | **$4042.00 – $4046.00** Retest | False breakout / liquidity purge above $4038.50 into 4H supply block followed by an immediate 5M bearish CHoCH close back below $4037.00 | **TP1:** $4030.00<br>**TP2:** $4022.00 | **$4049.00** | 1:2.2 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4026.00** Breakdown | Sustained 5M candle close below $4026.00 confirming 15M FVG invalidation and initiating long-liquidation acceleration | **TP1:** $4018.00<br>**TP2:** $4010.00 | **$4031.50** | 1:2.2 |"
+  },
+  {
     "id": "GOLD_20261104_133239",
     "timestamp": "2026-11-04T13:32:39+05:30",
     "timeDisplay": "01:32 PM, Nov 04",
