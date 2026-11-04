@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T09:32:20+05:30",
+    "timeDisplay": "09:32 AM, Nov 04",
+    "price": "23950",
+    "bias": "bullish",
+    "behavior": "[WED 09:32] [B1]: Sustained 5m close firmly ABOVE 23950 with active futures volume confirming absorption",
+    "tp": "24000.00 / 24060.00",
+    "sl": "23890.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T09:32:20+05:30",
+    "timeDisplay": "09:32 AM, Nov 04",
+    "price": "23900",
+    "bias": "bullish",
+    "behavior": "[WED 09:32] [B2]: Retest of broken 15M ORB shelf 23865-23900 confirmed by 5m bullish hammer reclaim",
+    "tp": "23980.00 / 24050.00",
+    "sl": "23830.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T09:32:20+05:30",
+    "timeDisplay": "09:32 AM, Nov 04",
+    "price": "23920",
+    "bias": "bearish",
+    "behavior": "[WED 09:32] [S1]: Failed breakout above 23950 with 5m close back below 23920 confirming trap",
+    "tp": "23865.00 / 23810.00",
+    "sl": "23990.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T09:32:20+05:30",
+    "timeDisplay": "09:32 AM, Nov 04",
+    "price": "23810",
+    "bias": "bearish",
+    "behavior": "[WED 09:32] [S2]: Sustained 15m close BELOW polarity flip 23810 confirming impulse failure",
+    "tp": "23740.00 / 23696.00",
+    "sl": "23860.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T09:24:08+05:30",
     "timeDisplay": "09:24 AM, Nov 04",
     "price": "23810",
@@ -2379,6 +2423,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261104_093224",
+    "timestamp": "2026-11-04T09:32:24+05:30",
+    "timeDisplay": "09:32 AM, Nov 04",
+    "spot": "23943.95",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $23943.95 > Max Plan Target $23865.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:30 AM IST - Nov 04, 2026 | Spot: 23943.95 | Trigger: Level Exhaustion Breakout (NIFTY Spot $23943.95 > Max Plan Target $23865.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- [Intraday Compression Anchor]: 23865.00 - 23920.00 (The broken morning resistance shelf and mid-run consolidation zone). Re-entering this pocket without clear directional momentum carries elevated chop risk following the initial impulsive expansion.\n- [No-Trade Churn Buffer]: 23920.00 - 23945.00. Current spot auction zone hovering right around session highs where chasing extended green candles directly ahead of the round 24000 call wall carries high adverse-excursion risk.\n- [Bullish Structure Invalidation Level]: 23810.85 (Yesterday's closing polarity flip and 15M structure anchor). Acceptance and a sustained 15-minute close back below 23810.85 invalidates the morning breakout and re-opens the range back toward 23740.00.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Short-Covering Squeeze] (Above 23950.00): Sustained 5-min candle close firmly above 23950.00 accelerates forced Call unwinding toward the 24000 institutional Call wall and 24060/24100 macro extension targets.\n- [Pullback Demand Absorption] (23865.00 - 23900.00): Retest of the broken 15M ORB High and morning supply shelf (23865.00) holding with buyer absorption and bullish pin-bar/hammer targeting fresh session highs.\n- [Liquidity Sweep SFP Exhaustion] (Rejection above 23950.00 - 23980.00): Wick above 23950.00 that fails to sustain and closes back below 23920.00 within 5 minutes, confirming an institutional buyer trap and initiating mean reversion to 23865.00.\n- [Bearish Long-Liquidation Cascade] (Below 23810.00): Sustained 15-min close below yesterday's high polarity flip (23810.85) triggers long unwinding toward 23740.00 and the morning low at 23696.15.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (High-Momentum ORB Breakout Continuation): Sustained 5m candle close firmly ABOVE 23950.00 with active futures volume confirming absorption of overhead supply. | TP: 24000.00 / 24060.00 | SL: 23890.00 | 💡 Buy 23950 CE + Sell 24000 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Broken Resistance Pullback Reclaim): Orderly pullback test into 23865.00 - 23900.00 holding firmly above the prior ORB ceiling, confirmed by a 5m bullish hammer/engulfing candle closing back above 23910.00 with expanding futures volume. | TP: 23980.00 / 24050.00 | SL: 23830.00 | 💡 Buy 23900 CE + Sell 23950 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Call Wall SFP Liquidity Sweep Fade): Sharp wick piercing 23950.00 - 23980.00 that quickly rejects, confirmed by a 5m bearish reversal candle closing back below 23920.00. | TP: 23865.00 / 23810.00 | SL: 23990.00 | 💡 Buy 23950 PE + Sell 23900 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Structural Breakdown Continuation): Sustained 15m candle close firmly BELOW 23810.00 with expanding red futures volume confirming opening impulse exhaustion. | TP: 23740.00 / 23696.00 | SL: 23860.00 | 💡 Buy 23800 PE + Sell 23750 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261104_092412",
     "timestamp": "2026-11-04T09:24:12+05:30",
     "timeDisplay": "09:24 AM, Nov 04",
