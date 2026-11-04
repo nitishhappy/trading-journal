@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T10:46:17+05:30",
+    "timeDisplay": "10:46 AM, Nov 04",
+    "price": "23810",
+    "bias": "bullish",
+    "behavior": "[WED 10:46] [B1]: Bullish rejection wick from 23,800-23,810 demand floor with 5m close back above 23,825 confirming absorption",
+    "tp": "23,865 / 23,910",
+    "sl": "23,785",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:46:17+05:30",
+    "timeDisplay": "10:46 AM, Nov 04",
+    "price": "23865",
+    "bias": "bullish",
+    "behavior": "[WED 10:46] [B2]: Sustained 5m close ABOVE 23,865 with active futures volume confirming absorption above chop ceiling",
+    "tp": "23,920 / 23,946",
+    "sl": "23,835",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:46:17+05:30",
+    "timeDisplay": "10:46 AM, Nov 04",
+    "price": "23855",
+    "bias": "bearish",
+    "behavior": "[WED 10:46] [S1]: Bearish rejection at 23,855-23,865 supply wall with 5m close back below 23,840",
+    "tp": "23,805 / 23,760",
+    "sl": "23,880",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T10:46:17+05:30",
+    "timeDisplay": "10:46 AM, Nov 04",
+    "price": "23795",
+    "bias": "bearish",
+    "behavior": "[WED 10:46] [S2]: Sustained 5m close BELOW 23,795 with active futures volume confirming breakdown of ORB mid-range support",
+    "tp": "23,740 / 23,696",
+    "sl": "23,825",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T10:31:22+05:30",
     "timeDisplay": "10:31 AM, Nov 04",
     "price": "23865",
@@ -2467,6 +2511,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261104_104621",
+    "timestamp": "2026-11-04T10:46:21+05:30",
+    "timeDisplay": "10:46 AM, Nov 04",
+    "spot": "23828.65",
+    "trigger": "Structural Invalidation (-89.0 pts incremental shift from previous trigger 23917.65",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (10:45 AM IST - Nov 04, 2026 | Spot: 23828.65 | Trigger: Structural Invalidation (-89.0 pts incremental shift from previous trigger 23917.65))\n\n3. Live Chop Zone / No-Trade Zone:\n- 23805 – 23855 (Spot Range): Mid-range equilibrium and 15M ORB median balance pocket where price is digesting the initial morning swing between Day Low (23696.15) and Day High (23946.35).\n- Institutional Activity Status: Active Nifty Futures volume ratio is tracking flat at 1.0x baseline, signaling lack of aggressive expansion inside this 50-point corridor.\n- Directive: Strict no-trade zone for naked breakout option buyers. Premium erosion dominates inside 23805–23855; wait for candle closes outside this threshold before committing directional size.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion] (Above 23865): A 5-minute candle close above 23865 with futures volume expanding above 1.5x triggers an intraday short-covering rotation back toward 23920 and the Day High liquidity pool at 23946.35.\n- [Bearish Expansion] (Below 23795): A 5-minute candle close below 23795 confirms structural failure of the ORB mid-point, unlocking fast long unwinding acceleration toward 23740 and Day Low at 23696.15.\n- [Extreme Trend Continuation] (Beyond 23950 / 23690): Sustained acceptance above Day High (23946.35) opens blue-sky extension toward 24020+, whereas breakdown below Day Low (23696.15) triggers institutional cascading stops down to 23620.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback Absorption Long): Bullish rejection / hammer wick confirming support at 23800-23810 with a 5-minute close back above 23825. | TP: 23865 / 23910 | SL: 23785 | 💡 Buy 23800 CE + Sell 23850 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Chop Breakout Long): Sustained 5-minute close ABOVE 23865 with active futures volume confirming absorption above the chop boundary. | TP: 23920 / 23946 | SL: 23835 | 💡 Buy 23850 CE + Sell 23900 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Wall Rejection Short): Bearish rejection / shooting star wick at 23855-23865 supply ceiling with a 5-minute close back below 23840. | TP: 23805 / 23760 | SL: 23880 | 💡 Buy 23850 PE + Sell 23800 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (ORB Mid Breakdown Short): Sustained 5-minute close BELOW 23795 with expanding futures volume confirming breakdown of ORB mid-range support. | TP: 23740 / 23696 | SL: 23825 | 💡 Buy 23800 PE + Sell 23750 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261104_103125",
     "timestamp": "2026-11-04T10:31:25+05:30",
     "timeDisplay": "10:31 AM, Nov 04",
