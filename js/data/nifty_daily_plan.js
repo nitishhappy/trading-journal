@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T23:40:18+05:30",
+    "timeDisplay": "11:40 PM, Nov 04",
+    "price": "23895.0",
+    "bias": "bullish",
+    "behavior": "[WED 23:40] [B1]: \u2605 PRIMARY (Equal Lows 23892.60): 5m/15m reclaim close above 23895.00 after liquidity sweep",
+    "tp": "23930.00 / 23960.60",
+    "sl": "23870.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T23:40:18+05:30",
+    "timeDisplay": "11:40 PM, Nov 04",
+    "price": "23965.0",
+    "bias": "bullish",
+    "behavior": "[WED 23:40] [B2]: BACKUP (Macro Day High 23960.60): 15m candle close above 23965.00 clearing 24000 Call Wall front-runners",
+    "tp": "24000.00 / 24030.00",
+    "sl": "23940.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T23:40:18+05:30",
+    "timeDisplay": "11:40 PM, Nov 04",
+    "price": "23955.0",
+    "bias": "bearish",
+    "behavior": "[WED 23:40] [S1]: \u2605 PRIMARY (Macro Day High 23960.60): 5m/15m rejection close below 23955.00 after Day High probe",
+    "tp": "23920.00 / 23892.60",
+    "sl": "23980.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T23:40:18+05:30",
+    "timeDisplay": "11:40 PM, Nov 04",
+    "price": "23890.0",
+    "bias": "bearish",
+    "behavior": "[WED 23:40] [S2]: BACKUP (1H Shelf Low 23892.60): 15m candle close below 23890.00 taking out Equal Lows",
+    "tp": "23854.80 / 23828.38",
+    "sl": "23915.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T15:47:51+05:30",
     "timeDisplay": "03:47 PM, Nov 04",
     "price": "23945",
@@ -2731,6 +2775,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261104_234021",
+    "timestamp": "2026-11-04T23:40:21+05:30",
+    "timeDisplay": "11:40 PM, Nov 04",
+    "spot": "23960.60",
+    "trigger": "Nifty v2 Production Verification Run",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (11:39 PM IST - Nov 04, 2026 | Spot: 23960.60 | Trigger: Nifty v2 Production Verification Run)\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Equilibrium (23915.00 to 23955.00): Current price is oscillating tightly around the 1H Consolidation Shelf 50% Micro-EQ (23926.60) and the Bullish Ignition Base (23911.70). Trading within this band offers poor risk-to-reward and high theta decay exposure.\n- Post-Close Session Lockout: The active market session is closed (23:39 IST, 0.0 trading hours remaining). No fresh intraday option buying is permitted under current market conditions.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze Expansion (Sustained 15m candle close above Macro Day High 23960.60): Acceptance above 23960.60 threatens the massive 24000 CALL OI wall (8,829,275 contracts), triggering forced dealer delta hedging and short-covering acceleration toward 24000.00 and 24030.00.\n- Long Liquidation & Stop-Run Flush (Decisive 15m candle close below 1H Shelf Low 23892.60): A clean breakdown below the triple-tapped Equal Lows (SSL) cluster triggers stops and pressures the 23900 PUT additions (5,023,785 contracts), igniting a fast liquidation impulse toward the 2H Swing Low (23854.80) and Macro 50% Daily Equilibrium (23828.38).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | Equal Lows 23892.60 pullback/sweep long): Wait for a liquidity sweep below 23892.60 followed by a 5m/15m candle close back above 23895.00. | TP: 23930.00 / 23960.60 | SL: 23870.00 | 💡 Buy 23850 CE (09-Nov) @ ~Rs 154 (Delta 0.59, IV 11.1%) | Prem SL ~Rs 139 (-10%) | TP1 ~Rs 175 (+14%) | TP2 ~Rs 195 (+27%) | Option R:R 1:1.4 / 1:2.8 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 960\n- [B2] BUY Setup 2 (BACKUP | Macro Day High 23960.60 breakout long): Wait for a decisive 15m candle body close above 23965.00. | TP: 24000.00 / 24030.00 | SL: 23940.00 | 💡 Buy 23950 CE (09-Nov) @ ~Rs 149 (Delta 0.55, IV 12.1%) | Prem SL ~Rs 135 (-9%) | TP1 ~Rs 168 (+13%) | TP2 ~Rs 186 (+25%) | Option R:R 1:1.4 / 1:2.7 | Theta ~-Rs 2.7/hr | Risk/lot ~Rs 894\n- [S1] SELL Setup 1 (★ PRIMARY | Macro Day High 23960.60 rejection/sweep short): Wait for an intraday probe above 23960.60 that rejects with a 5m/15m candle close below 23955.00. | TP: 23920.00 / 23892.60 | SL: 23980.00 | 💡 Buy 24000 PE (09-Nov) @ ~Rs 220 (Delta 0.51, IV 19.2%) | Prem SL ~Rs 207 (-6%) | TP1 ~Rs 238 (+8%) | TP2 ~Rs 253 (+15%) | Option R:R 1:1.3 / 1:2.5 | Theta ~-Rs 3.4/hr | Risk/lot ~Rs 862\n- [S2] SELL Setup 2 (BACKUP | 1H Shelf Low 23892.60 breakdown short): Wait for a sustained 15m candle body close below 23890.00. | TP: 23854.80 / 23828.38 | SL: 23915.00 | 💡 Buy 23900 PE (09-Nov) @ ~Rs 192 (Delta 0.49, IV 18.3%) | Prem SL ~Rs 180 (-7%) | TP1 ~Rs 209 (+9%) | TP2 ~Rs 223 (+16%) | Option R:R 1:1.4 / 1:2.5 | Theta ~-Rs 3.2/hr | Risk/lot ~Rs 815"
+  },
+  {
     "id": "NIFTY_20261104_154757",
     "timestamp": "2026-11-04T15:47:57+05:30",
     "timeDisplay": "03:47 PM, Nov 04",
