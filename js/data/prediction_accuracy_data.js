@@ -1,6 +1,90 @@
 // Auto-generated Real-time Prediction Accuracy Data
 window.predictionAccuracyLevels = [
   {
+    "id": 3501,
+    "asset": "nifty",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "time_display": "02:47 PM, Nov 04",
+    "price": 23875.0,
+    "price_raw": "23875",
+    "bias": "bearish",
+    "setup_tag": "S2",
+    "behavior": "[WED 14:47] [S2]: Confirmed 5m close BELOW 23,875 confirming intraday failure",
+    "tp": "23,825.00 / 23,770.00",
+    "sl": "23,910.00",
+    "tp_val": 23825.0,
+    "sl_val": 23910.0,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-04 09:17:06"
+  },
+  {
+    "id": 3500,
+    "asset": "nifty",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "time_display": "02:47 PM, Nov 04",
+    "price": 23946.0,
+    "price_raw": "23946",
+    "bias": "bearish",
+    "setup_tag": "S1",
+    "behavior": "[WED 14:47] [S1]: Session high sweep above 23,946.35 rejected back below 23,935.00",
+    "tp": "23,885.00 / 23,840.00",
+    "sl": "23,960.00",
+    "tp_val": 23885.0,
+    "sl_val": 23960.0,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-04 09:17:06"
+  },
+  {
+    "id": 3499,
+    "asset": "nifty",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "time_display": "02:47 PM, Nov 04",
+    "price": 23950.0,
+    "price_raw": "23950",
+    "bias": "bullish",
+    "setup_tag": "B2",
+    "behavior": "[WED 14:47] [B2]: Confirmed 5m close ABOVE 23,950 with futures volume confirming absorption",
+    "tp": "23,995.00 / 24,045.00",
+    "sl": "23,915.00",
+    "tp_val": 23995.0,
+    "sl_val": 23915.0,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-04 09:17:06"
+  },
+  {
+    "id": 3498,
+    "asset": "nifty",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "time_display": "02:47 PM, Nov 04",
+    "price": 23880.0,
+    "price_raw": "23880",
+    "bias": "bullish",
+    "setup_tag": "B1",
+    "behavior": "[WED 14:47] [B1]: Dip-buying retest at 23,880-23,890 with bullish price action confirmation",
+    "tp": "23,940.00 / 23,980.00",
+    "sl": "23,855.00",
+    "tp_val": 23940.0,
+    "sl_val": 23855.0,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-04 09:17:06"
+  },
+  {
     "id": 3497,
     "asset": "btc",
     "timestamp": "2026-11-04T14:02:42+05:30",
@@ -161,8 +245,8 @@ window.predictionAccuracyLevels = [
     "sl": "78,242.30",
     "tp_val": 78792.3,
     "sl_val": 78242.3,
-    "status": "waiting",
-    "entry_triggered_at": null,
+    "status": "active",
+    "entry_triggered_at": "2026-11-04T08:35:00+00:00",
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
@@ -518,9 +602,9 @@ window.predictionAccuracyLevels = [
     "sl": "$4033.50",
     "tp_val": 4048.0,
     "sl_val": 4033.5,
-    "status": "waiting",
-    "entry_triggered_at": null,
-    "outcome_time": null,
+    "status": "failed",
+    "entry_triggered_at": "2026-11-04T09:05:00+00:00",
+    "outcome_time": "2026-11-04T09:05:00+00:00",
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
     "created_at": "2026-11-04 08:16:36"
@@ -539,8 +623,8 @@ window.predictionAccuracyLevels = [
     "sl": "$4049.00",
     "tp_val": 4030.0,
     "sl_val": 4049.0,
-    "status": "waiting",
-    "entry_triggered_at": null,
+    "status": "active",
+    "entry_triggered_at": "2026-11-04T09:10:00+00:00",
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
@@ -791,7 +875,7 @@ window.predictionAccuracyLevels = [
     "sl": "23,840",
     "tp_val": 23740.0,
     "sl_val": 23840.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -812,7 +896,7 @@ window.predictionAccuracyLevels = [
     "sl": "23,875",
     "tp_val": 23790.0,
     "sl_val": 23875.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -833,7 +917,7 @@ window.predictionAccuracyLevels = [
     "sl": "23,910",
     "tp_val": 24010.0,
     "sl_val": 23910.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -854,7 +938,7 @@ window.predictionAccuracyLevels = [
     "sl": "23,805",
     "tp_val": 23895.0,
     "sl_val": 23805.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -10415,90 +10499,6 @@ window.predictionAccuracyLevels = [
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
     "created_at": "2026-11-02 05:16:05"
-  },
-  {
-    "id": 2941,
-    "asset": "nifty",
-    "timestamp": "2026-11-02T10:46:04+05:30",
-    "time_display": "10:46 AM, Nov 02",
-    "price": 23385.0,
-    "price_raw": "23385",
-    "bias": "bearish",
-    "setup_tag": "S1",
-    "behavior": "[MON 10:46] [S1]: 5m bearish rejection at 23375-23390 supply ceiling signaling buyer exhaustion",
-    "tp": "23330 / 23300",
-    "sl": "23405",
-    "tp_val": 23330.0,
-    "sl_val": 23405.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-02 05:16:05"
-  },
-  {
-    "id": 2940,
-    "asset": "nifty",
-    "timestamp": "2026-11-02T10:46:04+05:30",
-    "time_display": "10:46 AM, Nov 02",
-    "price": 23360.0,
-    "price_raw": "23360",
-    "bias": "bullish",
-    "setup_tag": "B2",
-    "behavior": "[MON 10:46] [B2]: Sustained 5m close ABOVE 23360 confirming short-covering acceleration towards 23410+",
-    "tp": "23410 / 23460",
-    "sl": "23325",
-    "tp_val": 23410.0,
-    "sl_val": 23325.0,
-    "status": "failed",
-    "entry_triggered_at": "2026-11-02T05:20:00+00:00",
-    "outcome_time": "2026-11-02T05:25:00+00:00",
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-02 05:16:05"
-  },
-  {
-    "id": 2939,
-    "asset": "nifty",
-    "timestamp": "2026-11-02T10:46:04+05:30",
-    "time_display": "10:46 AM, Nov 02",
-    "price": 23320.0,
-    "price_raw": "23320",
-    "bias": "bullish",
-    "setup_tag": "B1",
-    "behavior": "[MON 10:46] [B1]: Pullback retest of 23315-23325 support shelf with bullish confirmation candle",
-    "tp": "23375 / 23415",
-    "sl": "23290",
-    "tp_val": 23375.0,
-    "sl_val": 23290.0,
-    "status": "failed",
-    "entry_triggered_at": "2026-11-02T05:50:00+00:00",
-    "outcome_time": "2026-11-02T06:20:00+00:00",
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-02 05:16:05"
-  },
-  {
-    "id": 2938,
-    "asset": "sensex",
-    "timestamp": "2026-11-02T10:31:11+05:30",
-    "time_display": "10:31 AM, Nov 02",
-    "price": 75200.0,
-    "price_raw": "75200",
-    "bias": "bearish",
-    "setup_tag": "S2",
-    "behavior": "[MON 10:31] [S2]: Decisive 5m close below 75200 confirming breakdown of 1H shelf equal lows",
-    "tp": "75095 / 74900",
-    "sl": "75280",
-    "tp_val": 75095.0,
-    "sl_val": 75280.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-02 05:01:11"
   }
 ];
 
@@ -10508,14 +10508,14 @@ window.predictionAccuracySummary = [
     "asset": "btc",
     "setup_tag": "B2",
     "total_predictions": 143,
-    "waiting": 1,
-    "active": 2,
+    "waiting": 0,
+    "active": 3,
     "inactive": 96,
     "success": 21,
     "failed": 23,
     "win_rate": 47.73,
-    "triggered_rate": 32.17,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "triggered_rate": 32.87,
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 60,
@@ -10529,7 +10529,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 37.5,
     "triggered_rate": 6.56,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 318,
@@ -10543,7 +10543,7 @@ window.predictionAccuracySummary = [
     "failed": 7,
     "win_rate": 36.36,
     "triggered_rate": 19.3,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 9,
@@ -10557,7 +10557,7 @@ window.predictionAccuracySummary = [
     "failed": 35,
     "win_rate": 33.96,
     "triggered_rate": 43.44,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 1,
@@ -10571,7 +10571,7 @@ window.predictionAccuracySummary = [
     "failed": 47,
     "win_rate": 31.88,
     "triggered_rate": 48.61,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3,
@@ -10585,7 +10585,7 @@ window.predictionAccuracySummary = [
     "failed": 20,
     "win_rate": 31.03,
     "triggered_rate": 37.97,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 2,
@@ -10599,7 +10599,7 @@ window.predictionAccuracySummary = [
     "failed": 53,
     "win_rate": 30.26,
     "triggered_rate": 78.57,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 59,
@@ -10613,7 +10613,7 @@ window.predictionAccuracySummary = [
     "failed": 16,
     "win_rate": 27.27,
     "triggered_rate": 18.03,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 62,
@@ -10627,7 +10627,7 @@ window.predictionAccuracySummary = [
     "failed": 58,
     "win_rate": 25.64,
     "triggered_rate": 56.52,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 119,
@@ -10641,7 +10641,7 @@ window.predictionAccuracySummary = [
     "failed": 13,
     "win_rate": 18.75,
     "triggered_rate": 26.67,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 7461,
@@ -10655,7 +10655,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 512,
@@ -10669,7 +10669,7 @@ window.predictionAccuracySummary = [
     "failed": 2,
     "win_rate": 66.67,
     "triggered_rate": 66.67,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 509,
@@ -10683,7 +10683,7 @@ window.predictionAccuracySummary = [
     "failed": 4,
     "win_rate": 42.86,
     "triggered_rate": 77.78,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 510,
@@ -10697,7 +10697,7 @@ window.predictionAccuracySummary = [
     "failed": 4,
     "win_rate": 42.86,
     "triggered_rate": 77.78,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 511,
@@ -10711,7 +10711,7 @@ window.predictionAccuracySummary = [
     "failed": 7,
     "win_rate": 12.5,
     "triggered_rate": 88.89,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 8904,
@@ -10725,7 +10725,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 100.0,
     "triggered_rate": 4.69,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 338,
@@ -10739,21 +10739,21 @@ window.predictionAccuracySummary = [
     "failed": 13,
     "win_rate": 45.83,
     "triggered_rate": 15.57,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 336,
     "asset": "gold",
     "setup_tag": "G_B2",
     "total_predictions": 183,
-    "waiting": 3,
-    "active": 9,
+    "waiting": 2,
+    "active": 8,
     "inactive": 98,
-    "success": 32,
-    "failed": 41,
-    "win_rate": 43.84,
-    "triggered_rate": 44.81,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "success": 33,
+    "failed": 42,
+    "win_rate": 44.0,
+    "triggered_rate": 45.36,
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 335,
@@ -10767,21 +10767,21 @@ window.predictionAccuracySummary = [
     "failed": 24,
     "win_rate": 35.14,
     "triggered_rate": 27.08,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 337,
     "asset": "gold",
     "setup_tag": "G_S1",
     "total_predictions": 144,
-    "waiting": 1,
-    "active": 7,
+    "waiting": 0,
+    "active": 8,
     "inactive": 60,
     "success": 23,
     "failed": 53,
     "win_rate": 30.26,
-    "triggered_rate": 57.64,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "triggered_rate": 58.33,
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 50518,
@@ -10795,63 +10795,63 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 19,
     "asset": "nifty",
     "setup_tag": "B1",
-    "total_predictions": 148,
+    "total_predictions": 149,
     "waiting": 1,
     "active": 0,
-    "inactive": 67,
+    "inactive": 68,
     "success": 41,
     "failed": 39,
     "win_rate": 51.25,
-    "triggered_rate": 54.05,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "triggered_rate": 53.69,
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 20,
     "asset": "nifty",
     "setup_tag": "B2",
-    "total_predictions": 148,
+    "total_predictions": 149,
     "waiting": 1,
     "active": 1,
-    "inactive": 83,
+    "inactive": 84,
     "success": 30,
     "failed": 33,
     "win_rate": 47.62,
-    "triggered_rate": 43.24,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "triggered_rate": 42.95,
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 22,
     "asset": "nifty",
     "setup_tag": "S2",
-    "total_predictions": 146,
+    "total_predictions": 147,
     "waiting": 1,
     "active": 0,
-    "inactive": 92,
+    "inactive": 93,
     "success": 20,
     "failed": 33,
     "win_rate": 37.74,
-    "triggered_rate": 36.3,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "triggered_rate": 36.05,
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 21,
     "asset": "nifty",
     "setup_tag": "S1",
-    "total_predictions": 140,
+    "total_predictions": 141,
     "waiting": 1,
     "active": 0,
-    "inactive": 62,
+    "inactive": 63,
     "success": 28,
     "failed": 49,
     "win_rate": 36.36,
-    "triggered_rate": 55.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "triggered_rate": 54.61,
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 107077,
@@ -10865,7 +10865,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 107078,
@@ -10879,7 +10879,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 107079,
@@ -10893,7 +10893,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 107080,
@@ -10907,7 +10907,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3265,
@@ -10921,7 +10921,7 @@ window.predictionAccuracySummary = [
     "failed": 15,
     "win_rate": 53.12,
     "triggered_rate": 51.61,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3267,
@@ -10935,7 +10935,7 @@ window.predictionAccuracySummary = [
     "failed": 9,
     "win_rate": 50.0,
     "triggered_rate": 50.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3269,
@@ -10949,7 +10949,7 @@ window.predictionAccuracySummary = [
     "failed": 2,
     "win_rate": 50.0,
     "triggered_rate": 6.15,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 4169,
@@ -10963,7 +10963,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 44.44,
     "triggered_rate": 16.36,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3271,
@@ -10977,7 +10977,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 44.44,
     "triggered_rate": 39.13,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3268,
@@ -10991,7 +10991,7 @@ window.predictionAccuracySummary = [
     "failed": 12,
     "win_rate": 40.0,
     "triggered_rate": 34.48,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3273,
@@ -11005,7 +11005,7 @@ window.predictionAccuracySummary = [
     "failed": 19,
     "win_rate": 32.14,
     "triggered_rate": 50.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3266,
@@ -11019,7 +11019,7 @@ window.predictionAccuracySummary = [
     "failed": 23,
     "win_rate": 30.3,
     "triggered_rate": 49.25,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3272,
@@ -11033,7 +11033,7 @@ window.predictionAccuracySummary = [
     "failed": 17,
     "win_rate": 26.09,
     "triggered_rate": 38.98,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 3270,
@@ -11047,7 +11047,7 @@ window.predictionAccuracySummary = [
     "failed": 8,
     "win_rate": 20.0,
     "triggered_rate": 29.41,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   },
   {
     "id": 66306,
@@ -11061,6 +11061,6 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-04T14:02:45.676469"
+    "updated_at": "2026-11-04T14:47:21.873735"
   }
 ];

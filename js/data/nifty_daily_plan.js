@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "timeDisplay": "02:47 PM, Nov 04",
+    "price": "23880",
+    "bias": "bullish",
+    "behavior": "[WED 14:47] [B1]: Dip-buying retest at 23,880-23,890 with bullish price action confirmation",
+    "tp": "23,940.00 / 23,980.00",
+    "sl": "23,855.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "timeDisplay": "02:47 PM, Nov 04",
+    "price": "23950",
+    "bias": "bullish",
+    "behavior": "[WED 14:47] [B2]: Confirmed 5m close ABOVE 23,950 with futures volume confirming absorption",
+    "tp": "23,995.00 / 24,045.00",
+    "sl": "23,915.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "timeDisplay": "02:47 PM, Nov 04",
+    "price": "23946",
+    "bias": "bearish",
+    "behavior": "[WED 14:47] [S1]: Session high sweep above 23,946.35 rejected back below 23,935.00",
+    "tp": "23,885.00 / 23,840.00",
+    "sl": "23,960.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-04T14:47:03+05:30",
+    "timeDisplay": "02:47 PM, Nov 04",
+    "price": "23875",
+    "bias": "bearish",
+    "behavior": "[WED 14:47] [S2]: Confirmed 5m close BELOW 23,875 confirming intraday failure",
+    "tp": "23,825.00 / 23,770.00",
+    "sl": "23,910.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T13:34:11+05:30",
     "timeDisplay": "01:34 PM, Nov 04",
     "price": "23845",
@@ -2643,6 +2687,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261104_144721",
+    "timestamp": "2026-11-04T14:47:21+05:30",
+    "timeDisplay": "02:47 PM, Nov 04",
+    "spot": "23913.05",
+    "trigger": "Structural Invalidation (+84.4 pts incremental shift from previous trigger 23828.65",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:45 PM IST - Nov 04, 2026 | Spot: 23913.05 | Trigger: Structural Invalidation (+84.4 pts incremental shift from previous trigger 23828.65))\n\n3. Live Chop Zone / No-Trade Zone:\n- **Spot Range: 23,880.00 – 23,945.00**: High-friction intraday consolidation band situated directly beneath the session high (23,946.35) and 15M ORB High (23,942.50).\n- **Behavior & Trap Risk**: Premium erosion zone characterized by rotational mean-reversion, lower directional follow-through, and false breakout wicks against the upper session boundary.\n- **Directive**: Strict NO-TRADE zone for naked option buyers inside this band; execute solely on confirmed boundary breaks or liquidity sweep rejections.\n\n4. High Momentum / Explosive Zones:\n- Bullish Expansion (Above 23,950.00 Spot): Sustained 5-minute close above Day High (23,946.35) triggers rapid short-covering acceleration targeting 23,995.00 and 24,045.00.\n- Bearish Breakdown (Below 23,875.00 Spot): Clean breakdown and 5-minute close below the intraday consolidation shelf unleashes long unwinding targeting 23,825.00 and 23,770.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Dip-Buying on Intraday Shelf Retest): Bullish pin bar or strong engulfing candle retesting 23,880.00–23,890.00 with expanding futures volume. | TP: 23,940.00 / 23,980.00 | SL: 23,855.00 | 💡 Buy 23900 CE + Sell 23950 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Breakout Above Session High): Confirmed 5-minute candle close ABOVE 23,950.00 with futures volume ratio > 1.2x average confirming absorption. | TP: 23,995.00 / 24,045.00 | SL: 23,915.00 | 💡 Buy 23950 CE + Sell 24000 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Session High Liquidity Sweep Rejection): False breakout above 23,946.35 followed immediately by a sharp 5-minute close back below 23,935.00 with heavy upper selling wick. | TP: 23,885.00 / 23,840.00 | SL: 23,960.00 | 💡 Buy 23900 PE + Sell 23850 PE (Next Wk) | R:R: ~1.85 | Risk: ~8.5% | TP1: +15.5% | TP2: +30.0%.\n- [S2] SELL Setup 2 (Structural Breakdown Continuation): Sustained 5-minute candle close BELOW 23,875.00 confirming structural failure of the afternoon base. | TP: 23,825.00 / 23,770.00 | SL: 23,910.00 | 💡 Buy 23850 PE + Sell 23800 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "NIFTY_20261104_133433",
     "timestamp": "2026-11-04T13:34:33+05:30",
     "timeDisplay": "01:34 PM, Nov 04",
