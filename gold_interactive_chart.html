@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -4635,7 +4635,7 @@
                     if (cols.length >= 6) {
                         const tagMatch = cols[0].match(/\[(G_K?[BS]\d+|K?[BS]\d+)\]/i);
                         const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
-                        const rawPrice = cols[2].split(/[-–]/)[0].replace(/[^0-9.]/g, '');
+                        const rawPrice = (cols[2].replace(/,/g, '').match(/\d+(?:\.\d+)?/) || [''])[0];
                         const isBullish = /\[(G_KB\d+|KB\d+|G_B\d+|B\d+)\]/i.test(tag) || cols[1].includes('🟢') || cols[1].toLowerCase().includes('long');
                         const bias = isBullish ? 'bullish' : 'bearish';
                         const key = tag || (rawPrice + '_' + bias);
@@ -4649,7 +4649,7 @@
                                 timeDisplay: timeDisplay,
                                 price: rawPrice,
                                 bias: bias,
-                                behavior: (tag ? tag + ': ' : '') + cols[3],
+                                behavior: (tag ? tag + ': ' : '') + cols[3].replace(/\*\*/g, ''),
                                 tp: cleanTp || 'na',
                                 sl: cleanSl || 'na',
                                 status: 'na'
