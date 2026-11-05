@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-05T10:17:58+05:30",
+    "timeDisplay": "10:17 AM, Nov 05",
+    "price": "78650",
+    "bias": "bullish",
+    "behavior": "[THU 10:17] [B1]: [09:15-11:30 / 11:30-13:30 IST] 5m reclaim close above 78650 after sweeping 78600 Max Pain and 78520 ORB Low",
+    "tp": "78800.00 / 78910.00",
+    "sl": "78550.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-05T10:17:58+05:30",
+    "timeDisplay": "10:17 AM, Nov 05",
+    "price": "79020",
+    "bias": "bullish",
+    "behavior": "[THU 10:17] [B2]: [After 1:30 PM IST] Sustained 5m close ABOVE 79020 clearing 79000 Call Wall and Day High with short-covering fuel",
+    "tp": "79250.00 / 79500.00",
+    "sl": "78880.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-05T10:17:58+05:30",
+    "timeDisplay": "10:17 AM, Nov 05",
+    "price": "78880",
+    "bias": "bearish",
+    "behavior": "[THU 10:17] [S1]: [09:15-11:30 / 11:30-13:30 IST] 5m rejection close below 78880 after liquidity probe into 78999 Equal Highs / 79000 Call Wall",
+    "tp": "78700.00 / 78600.00",
+    "sl": "78960.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-05T10:17:58+05:30",
+    "timeDisplay": "10:17 AM, Nov 05",
+    "price": "78500",
+    "bias": "bearish",
+    "behavior": "[THU 10:17] [S2]: [After 1:30 PM IST] Sustained 5m close BELOW 78500 breaking 78520 Day Low and 78500 Put Floor with unwinding",
+    "tp": "78300.00 / 78000.00",
+    "sl": "78620.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T15:48:08+05:30",
     "timeDisplay": "03:48 PM, Nov 04",
     "price": "77200",
@@ -971,6 +1015,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261105_101802",
+    "timestamp": "2026-11-05T10:18:02+05:30",
+    "timeDisplay": "10:18 AM, Nov 05",
+    "spot": "78718.12",
+    "trigger": "Bullish Level Exhaustion (+1298.1 pts above max plan level 77420",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (10:15 AM IST - Nov 05, 2026 | Spot: 78718.12 | Trigger: Bullish Level Exhaustion (+1298.1 pts above max plan level 77420))\n\n3. Live Chop Zone / No-Trade Zone:\n- Intraday Equilibrium Band (78600.00 to 78800.00): Price is oscillating between the live Max Pain strike (78600) and the Macro 50% Daily Equilibrium (78760.88), constrained by the 15M ORB midpoint. Chasing rotations inside this 200-point corridor carries poor risk-to-reward.\n- Bearish Supply Overhang (78910.94 to 79001.19): Heavy CALL writing (+5.10M OI added today at 79000, 7.09M total) and the Parabolic Ignition Order Block (78910.94) create an immediate ceiling. Avoid aggressive breakout longs before clear absorption.\n- 0-DTE Expiry Theta Crush: Severe time-decay accelerates through the 09:15–11:30 AM morning range discovery; Out-of-the-Money (OTM) strikes will experience rapid premium decay even during sideways consolidation.\n- Gamma-Pinning Zone: Heavy Open Interest concentration between the 78500 Put Floor (4.38M OI) and 79000 Call Wall (7.09M OI), centered around the 78600 Max Pain strike, creates strong mean-reversion magnets and rotational whipsaws between 11:30 AM and 1:30 PM IST.\n- Post-1:30 PM Squeeze Volatility & Risk Protocol: Do not initiate naked lottery trades. Breaches of the 79000 Call Wall or 78500 Put Floor after 1:30 PM IST can trigger explosive gamma moves or violent whipsaws. Wait for confirmed candle closes, stick strictly to predefined stops, and reduce position sizing on expiry day.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Gamma Squeeze ([After 1:30 PM IST] Sustained 5m close ABOVE 79020.00): A decisive 5-minute candle close clearing Day High (79001.19) and the 79000 CALL OI wall (7.09M OI) will force aggressive dealer short-covering, triggering an explosive expansion toward 79250.00 and 79500.00.\n- Long-Liquidation Cascade ([After 11:30 AM IST] Decisive 5m close BELOW 78500.00): A sustained breakdown below the 15M ORB Low / Day Low (78520.56) and the 78500 PUT floor (4.38M OI) triggers long-unwinding stops, accelerating downward momentum toward 78300.00 and 78000.00.\n- Liquidity Sweep SFP at Equal Highs ([Morning Discovery / Midday] Stop-Hunt Wick above 78999.90 rejected back below 78910.00): A probe taking out the double-tapped Equal Highs (BSL) liquidity pool followed by an immediate close below 78910.00 confirms a Swing Failure Pattern (SFP), sparking a fast mean-reversion flush down toward 78760.00 and 78600.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (0-DTE Max Pain / Put Floor Reclaim Long [Phase: 09:15-11:30 IST / 11:30-13:30 IST]): Wait for a liquidity sweep below 78600.00 / 78520.56 followed by a confirmed 5m close back above 78650.00. | TP: 78800.00 / 78910.00 | SL: 78550.00 | 💡 Buy 78600 CE + Sell 78800 CE (0-DTE Today) | R:R: ~2.40 | Risk: ~18.0% (Theta Sensitive) | TP1: +28.0% | TP2: +48.0%.\n- [B2] BUY Setup 2 (Gamma Squeeze Breakout Long [Phase: 13:30-15:15 IST]): Wait for a decisive 5m candle close above 79020.00 with Call OI unwinding at the 79000 strike. | TP: 79250.00 / 79500.00 | SL: 78880.00 | 💡 Buy 79000 CE + Sell 79200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (0-DTE Equal Highs SFP / Supply Fade Short [Phase: 09:15-11:30 IST / 11:30-13:30 IST]): Wait for a liquidity probe into 78999.90–79001.19 rejecting with a 5m close back below 78880.00. | TP: 78700.00 / 78600.00 | SL: 78960.00 | 💡 Buy 78800 PE + Sell 78600 PE (0-DTE Today) | R:R: ~2.35 | Risk: ~17.5% (Theta Sensitive) | TP1: +26.0% | TP2: +45.0%.\n- [S2] SELL Setup 2 (Put Floor Breakdown Short [Phase: 13:30-15:15 IST]): Wait for a sustained 5m close below 78500.00 confirming breakdown of Day Low and Put Floor. | TP: 78300.00 / 78000.00 | SL: 78620.00 | 💡 Buy 78500 PE + Sell 78300 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261104_154811",
     "timestamp": "2026-11-04T15:48:11+05:30",
     "timeDisplay": "03:48 PM, Nov 04",
