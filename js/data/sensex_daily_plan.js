@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-06T15:47:24+05:30",
+    "timeDisplay": "03:47 PM, Nov 06",
+    "price": "80780",
+    "bias": "bullish",
+    "behavior": "[FRI 15:47] [B1]: Bullish defense of 80,650 - 80,750 ignition base with 5m reclaim of 80,780",
+    "tp": "81,000 / 81,380",
+    "sl": "80,600",
+    "status": "na",
+    "spread": "Buy 80800 CE + Sell 81000 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T15:47:24+05:30",
+    "timeDisplay": "03:47 PM, Nov 06",
+    "price": "80940",
+    "bias": "bullish",
+    "behavior": "[FRI 15:47] [B2]: Sustained 5m close ABOVE 80,940 absorbing overhead supply towards 81,387 shelf high",
+    "tp": "81,200 / 81,387",
+    "sl": "80,780",
+    "status": "na",
+    "spread": "Buy 80900 CE + Sell 81100 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T15:47:24+05:30",
+    "timeDisplay": "03:47 PM, Nov 06",
+    "price": "80820",
+    "bias": "bearish",
+    "behavior": "[FRI 15:47] [S1]: 5m bearish rejection wick failing above 80,875 and closing back BELOW 80,820",
+    "tp": "80,650 / 80,490",
+    "sl": "80,960",
+    "status": "na",
+    "spread": "Buy 80800 PE + Sell 80600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T15:47:24+05:30",
+    "timeDisplay": "03:47 PM, Nov 06",
+    "price": "80580",
+    "bias": "bearish",
+    "behavior": "[FRI 15:47] [S2]: Sustained 5m close BELOW 80,580 confirming institutional loss of ignition order block",
+    "tp": "80,350 / 80,165",
+    "sl": "80,720",
+    "status": "na",
+    "spread": "Buy 80600 PE + Sell 80400 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-06T15:03:08+05:30",
     "timeDisplay": "03:03 PM, Nov 06",
     "price": "80520",
@@ -1021,50 +1069,6 @@ window.sensexDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-30T15:47:47+05:30",
-    "timeDisplay": "03:47 PM, Oct 30",
-    "price": "74450",
-    "bias": "bullish",
-    "behavior": "[FRI 15:47] [B1]: Controlled pullback holding Macro Daily Equilibrium followed by 5m bullish close above 74,450",
-    "tp": "74,550 / 74,610",
-    "sl": "74,380",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T15:47:47+05:30",
-    "timeDisplay": "03:47 PM, Oct 30",
-    "price": "74615",
-    "bias": "bullish",
-    "behavior": "[FRI 15:47] [B2]: Sustained 5m close ABOVE 74,615 clearing triple-tap Equal Highs with institutional absorption",
-    "tp": "74,740 / 74,850",
-    "sl": "74,520",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T15:47:47+05:30",
-    "timeDisplay": "03:47 PM, Oct 30",
-    "price": "74490",
-    "bias": "bearish",
-    "behavior": "[FRI 15:47] [S1]: Stop-hunt probe into 74,498\u201374,511 Bearish Supply Base rejected back below 74,490 trapping breakout buyers",
-    "tp": "74,410 / 74,350",
-    "sl": "74,535",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T15:47:47+05:30",
-    "timeDisplay": "03:47 PM, Oct 30",
-    "price": "74290",
-    "bias": "bearish",
-    "behavior": "[FRI 15:47] [S2]: Decisive 5m close BELOW 74,290 confirming breakdown of 1H consolidation shelf exposing Day Low",
-    "tp": "74,200 / 74,085",
-    "sl": "74,360",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-30T13:31:12+05:30",
     "timeDisplay": "01:31 PM, Oct 30",
     "price": "74625",
@@ -1287,6 +1291,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261106_154727",
+    "timestamp": "2026-11-06T15:47:27+05:30",
+    "timeDisplay": "03:47 PM, Nov 06",
+    "spot": "80793.29",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (03:45 PM IST - Nov 06, 2026 | Spot: 80793.29 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Active Chop Corridor: 80,720.00 to 80,940.00 Spot. BSE SENSEX closed the session consolidating tightly around the 50% Swing Equilibrium at 80,776.71 and the 50% Micro-Equilibrium chop anchor at 80,938.61 within the immediate 1H shelf (80,489.55 to 81,387.67).\n- Post-Close Settlement & Gamma Neutralization: With the cash market closed, spot sits at 80,793.29 just below the Day High (80,874.32), hovering directly over the Bullish Parabolic Ignition Order Block (80,590.00 – 80,771.17).\n- No-Trade Boundary for Next Session Open: Zero mechanical edge exists for initiating market-on-open directional trades inside 80,720 to 80,900. Traders must avoid aggressive breakout chasing within this shelf and wait for an institutional opening range break outside 80,580 or 80,940.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Supply Absorption Breakout] (Sustained 5M Close Above 80,940): Decisive breakout above the 50% Micro-EQ anchor (80,938.61) clearing the session high cluster and unlocking high-velocity expansion into the 1H shelf high at 81,200 and 81,387.67.\n- [Bearish Ignition Order Block Breakdown] (Sustained 5M Close Below 80,580): A clean breakdown below the Parabolic Bullish Ignition Base (80,590.00 – 80,771.17) and 1H shelf low at 80,489.55, triggering systematic long-liquidation toward 80,350 and the 2H swing low envelope at 80,165.75.\n- [Bullish Ignition Base Defense Reclaim] (Liquidity Tap & 5M Reclaim Above 80,780): A shallow morning dip into the top of the Bullish Ignition Base (80,650 – 80,750) that instantly finds responsive buyers and closes firmly back above 80,780, initiating a rotational squeeze to Day High 80,874 and 81,000.\n- [Bearish Swing Failure Pattern Exhaustion] (Failed Sweep Above 80,900 Reversing Below 80,820): An early spike above today's Day High (80,874.32) that fails to sustain institutional absorption and closes back below 80,820, trapping early breakout buyers and forcing a mean-reversion slide toward 80,650.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Bullish Ignition Base Defense): Price pulls back into the 80,650 – 80,750 Bullish Ignition Base and prints a 5-minute bullish reversal close back above 80,780. | TP: 81,000 / 81,380 | SL: 80,600 | 💡 Buy 80800 CE + Sell 81000 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Micro-EQ Breakout Continuation): Decisive 5-minute candle close firmly ABOVE 80,940 confirming institutional absorption of the 1H shelf supply. | TP: 81,200 / 81,387 | SL: 80,780 | 💡 Buy 80900 CE + Sell 81100 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Supply Rejection & SFP at Highs): Probe above 80,875 that sharply rejects and prints a 5-minute bearish close back BELOW 80,820. | TP: 80,650 / 80,490 | SL: 80,960 | 💡 Buy 80800 PE + Sell 80600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Ignition Base Breakdown): Decisive 5-minute candle close BELOW 80,580 confirming loss of the parabolic ignition order block. | TP: 80,350 / 80,165 | SL: 80,720 | 💡 Buy 80600 PE + Sell 80400 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261106_150310",
     "timestamp": "2026-11-06T15:03:10+05:30",
     "timeDisplay": "03:03 PM, Nov 06",
