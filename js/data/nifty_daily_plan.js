@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-06T13:17:02+05:30",
+    "timeDisplay": "01:17 PM, Nov 06",
+    "price": "24650.0",
+    "bias": "bullish",
+    "behavior": "[FRI 13:17] [B1]: \u2605 PRIMARY (1H Shelf Low / Equal Lows SSL): Judas sweep of 24647.05 and 5m close reclaiming above 24650.00",
+    "tp": "24686.80 / 24726.55",
+    "sl": "24622.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T13:17:02+05:30",
+    "timeDisplay": "01:17 PM, Nov 06",
+    "price": "24732.0",
+    "bias": "bullish",
+    "behavior": "[FRI 13:17] [B2]: BACKUP (Macro Day High): Decisive 5m/15m candle-body close above 24726.55",
+    "tp": "24800.00 / 24867.55",
+    "sl": "24704.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T13:17:02+05:30",
+    "timeDisplay": "01:17 PM, Nov 06",
+    "price": "24722.0",
+    "bias": "bearish",
+    "behavior": "[FRI 13:17] [S1]: \u2605 PRIMARY (Macro Day High): Liquidity sweep of 24726.55 and 5m close rejecting below 24722.00",
+    "tp": "24686.80 / 24647.05",
+    "sl": "24750.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T13:17:02+05:30",
+    "timeDisplay": "01:17 PM, Nov 06",
+    "price": "24642.0",
+    "bias": "bearish",
+    "behavior": "[FRI 13:17] [S2]: BACKUP (1H Shelf Low): Decisive 5m candle-body close below 24647.05 and 2H Swing-EQ 24648.65",
+    "tp": "24604.65 / 24579.90",
+    "sl": "24670.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-06T12:40:08+05:30",
     "timeDisplay": "12:40 PM, Nov 06",
     "price": "24618.0",
@@ -2907,6 +2951,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261106_131704",
+    "timestamp": "2026-11-06T13:17:04+05:30",
+    "timeDisplay": "01:17 PM, Nov 06",
+    "spot": "24703.55",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $24719.90 > Max Plan Target $24712.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:15 PM IST - Nov 06, 2026 | Spot: 24703.55 | Trigger: Level Exhaustion Breakout (NIFTY Spot $24719.90 > Max Plan Target $24712.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Live Chop Anchor (24686.80 - 50% Micro-EQ): The internal zone between 24680.00 and 24715.00 is an aggressive intraday equilibrium where ATM 24700 straddle writing dominates (13.00M Call OI vs 7.11M Put OI added at 24650), causing rapid premium decay (~4.9 Rs/hr theta).\n- Strict No-Trade Zone (24660.00 to 24715.00): Mid-range execution inside the 1H consolidation shelf (24647.05 - 24726.55) provides zero edge for directional option buyers; option purchasing is strictly forbidden until price interacts with shelf boundary liquidity.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Ignition (Sustained 5m candle close above Macro Day High 24726.55): Triggers immediate short-covering panic among 24700 Call writers (13.00M OI) and 24750 writers, accelerating spot momentum toward the 24800.00 Call OI wall.\n- Downside Long-Unwinding Flush (Decisive 5m candle close below 1H Shelf Low 24647.05 & 2H Swing-EQ 24648.65): Triggers stop-loss cascade from retail longs accumulated at Equal Lows (SSL), forcing a swift momentum drop into the Bullish Ignition Order Block (24604.65 - 24608.35).\n- Judas Liquidity Sweep Trap (Sweep wick below 24647.05 SSL followed by an immediate 5m reclaim): Traps breakout sellers under the 1H shelf and engineers a rapid mean-reversion short squeeze back toward 50% Micro-EQ (24686.80) and 24726.55.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | 1H Shelf Low / Equal Lows (SSL) pullback/sweep long): Wait for Judas sweep below Equal Lows (24647.05) and enter on 5m candle close reclaiming above 24650.00. | TP: 24686.80 / 24726.55 | SL: 24622.00 | 💡 Buy 24650 CE (09-Nov) @ ~Rs 158 (Delta 0.52, IV 16.7%) | Prem SL ~Rs 143 (-9%) | TP1 ~Rs 177 (+12%) | TP2 ~Rs 200 (+26%) | Option R:R 1:1.3 / 1:2.8 | Theta ~-Rs 4.6/hr | Risk/lot ~Rs 969\n- [B2] BUY Setup 2 (BACKUP | Macro Day High breakout long): Enter on decisive 5m/15m candle-body close above Macro Day High at 24732.00. | TP: 24800.00 / 24867.55 | SL: 24704.00 | 💡 Buy 24700 CE (09-Nov) @ ~Rs 184 (Delta 0.55, IV 17.6%) | Prem SL ~Rs 168 (-9%) | TP1 ~Rs 222 (+21%) | TP2 ~Rs 266 (+45%) | Option R:R 1:2.4 / 1:5.2 | Theta ~-Rs 4.9/hr | Risk/lot ~Rs 1,030\n- [S1] SELL Setup 1 (★ PRIMARY | Macro Day High rejection/sweep short): Wait for liquidity sweep of Macro Day High (24726.55) and enter on 5m candle close rejecting back below 24722.00. | TP: 24686.80 / 24647.05 | SL: 24750.00 | 💡 Buy 24750 PE (09-Nov) @ ~Rs 157 (Delta 0.51, IV 16.5%) | Prem SL ~Rs 142 (-9%) | TP1 ~Rs 175 (+11%) | TP2 ~Rs 198 (+26%) | Option R:R 1:1.2 / 1:2.8 | Theta ~-Rs 3.9/hr | Risk/lot ~Rs 950\n- [S2] SELL Setup 2 (BACKUP | 1H Shelf Low breakdown short): Enter on decisive 5m candle-body close below 1H Shelf Low and 2H Swing-EQ at 24642.00. | TP: 24604.65 / 24579.90 | SL: 24670.00 | 💡 Buy 24650 PE (09-Nov) @ ~Rs 149 (Delta 0.49, IV 16.8%) | Prem SL ~Rs 135 (-9%) | TP1 ~Rs 168 (+12%) | TP2 ~Rs 181 (+21%) | Option R:R 1:1.3 / 1:2.3 | Theta ~-Rs 4.0/hr | Risk/lot ~Rs 913"
+  },
+  {
     "id": "NIFTY_20261106_124010",
     "timestamp": "2026-11-06T12:40:10+05:30",
     "timeDisplay": "12:40 PM, Nov 06",
