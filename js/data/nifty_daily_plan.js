@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-06T14:16:06+05:30",
+    "timeDisplay": "02:16 PM, Nov 06",
+    "price": "24782.0",
+    "bias": "bullish",
+    "behavior": "[FRI 14:16] [B1]: \u2605 PRIMARY (1H Micro-EQ): 5m bullish reclaim close after sweep of 24776.58",
+    "tp": "24839.90 / 24900.00",
+    "sl": "24755.00",
+    "status": "na",
+    "spread": "Buy 24750 CE (09-Nov) @ ~Rs 189 (Delta 0.55, IV 18.3%) | Prem SL ~Rs 174 (-8%) | TP1 ~Rs 221 (+17%) | TP2 ~Rs 259 (+37%) | Option R:R 1:2.1 / 1:4.6 | Theta ~-Rs 5.1/hr | Risk/lot ~Rs 997"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T14:16:06+05:30",
+    "timeDisplay": "02:16 PM, Nov 06",
+    "price": "24845.0",
+    "bias": "bullish",
+    "behavior": "[FRI 14:16] [B2]: BACKUP (1H Shelf High): 5m impulsive close above Day High 24839.90",
+    "tp": "24885.00 / 24920.00",
+    "sl": "24818.00",
+    "status": "na",
+    "spread": "Buy 24800 CE (09-Nov) @ ~Rs 195 (Delta 0.56, IV 18.1%) | Prem SL ~Rs 179 (-8%) | TP1 ~Rs 217 (+11%) | TP2 ~Rs 238 (+23%) | Option R:R 1:1.4 / 1:2.8 | Theta ~-Rs 5.1/hr | Risk/lot ~Rs 1,019"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T14:16:06+05:30",
+    "timeDisplay": "02:16 PM, Nov 06",
+    "price": "24832.0",
+    "bias": "bearish",
+    "behavior": "[FRI 14:16] [S1]: \u2605 PRIMARY (Day High / 1H Shelf High): 5m bearish rejection close below 24839.90 post-sweep",
+    "tp": "24776.58 / 24713.25",
+    "sl": "24858.00",
+    "status": "na",
+    "spread": "Buy 24850 PE (09-Nov) @ ~Rs 162 (Delta 0.50, IV 17.6%) | Prem SL ~Rs 149 (-8%) | TP1 ~Rs 191 (+18%) | TP2 ~Rs 228 (+41%) | Option R:R 1:2.1 / 1:4.9 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 874"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T14:16:06+05:30",
+    "timeDisplay": "02:16 PM, Nov 06",
+    "price": "24708.0",
+    "bias": "bearish",
+    "behavior": "[FRI 14:16] [S2]: BACKUP (1H Shelf Low): 5m impulsive close below 24713.25",
+    "tp": "24674.20 / 24647.05",
+    "sl": "24736.00",
+    "status": "na",
+    "spread": "Buy 24750 PE (09-Nov) @ ~Rs 176 (Delta 0.52, IV 17.9%) | Prem SL ~Rs 161 (-9%) | TP1 ~Rs 194 (+10%) | TP2 ~Rs 209 (+19%) | Option R:R 1:1.2 / 1:2.2 | Theta ~-Rs 4.3/hr | Risk/lot ~Rs 980"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-06T14:02:25+05:30",
     "timeDisplay": "02:02 PM, Nov 06",
     "price": "24735.0",
@@ -3087,6 +3135,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261106_141608",
+    "timestamp": "2026-11-06T14:16:08+05:30",
+    "timeDisplay": "02:16 PM, Nov 06",
+    "spot": "24805.65",
+    "trigger": "Structural Invalidation (+182.8 pts incremental shift from previous trigger 24622.50",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:15 PM IST - Nov 06, 2026 | Spot: 24805.65 | Trigger: Structural Invalidation (+182.8 pts incremental shift from previous trigger 24622.50))\n\n3. Live Chop Zone / No-Trade Zone:\n- Micro-Chop Compression (24776.58 to 24839.90): Spot is oscillating inside the upper quadrant of the 1H Consolidation Shelf, directly bounded by 50% Micro-EQ (24776.58) below and Day High / 1H Shelf High (24839.90) above. This coincides with high-concentration open interest positioning at the 24800 strike (10.8M Call OI vs 8.49M Put OI added today). Entering trades within this 63-point zone without an established sweep or confirmed candle-body close exposes buyers to severe intraday theta decay (~5.0 Rs/hr).\n- Execution Discipline: Stand aside while price churns between 24776.58 and 24839.90. Only initiate positions on a clean liquidity sweep-and-reclaim at the boundaries or on an impulsive candle close outside the compression envelope.\n\n4. High Momentum / Explosive Zones:\n- Bullish Expansion (Above 24839.90): A decisive 5m candle close above the 1H Consolidation Shelf High and Macro Day High (24839.90) triggers short-covering from the 24800/24850 Call writers, unlocking an explosive continuation drive toward 24885.00 and the psychological 25000 Major Call OI Wall.\n- Bearish Acceleration (Below 24713.25): A sustained 5m candle close below the 1H Consolidation Shelf Low (24713.25) invalidates afternoon support, triggering long liquidation through the 2H Swing-EQ (24743.47) down into the Parabolic Ignition Order Block Base (24674.20 - 24676.00).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | 1H Micro-EQ pullback/sweep long): Wait for a liquidity sweep into 50% Micro-EQ (24776.58) followed by a completed 5m bullish reclaim close at 24782.00. | TP: 24839.90 / 24900.00 | SL: 24755.00 | 💡 Buy 24750 CE (09-Nov) @ ~Rs 189 (Delta 0.55, IV 18.3%) | Prem SL ~Rs 174 (-8%) | TP1 ~Rs 221 (+17%) | TP2 ~Rs 259 (+37%) | Option R:R 1:2.1 / 1:4.6 | Theta ~-Rs 5.1/hr | Risk/lot ~Rs 997\n- [B2] BUY Setup 2 (BACKUP | 1H Shelf High breakout long): Wait for an impulsive 5m candle close firmly above Day High / 1H Shelf High at 24845.00. | TP: 24885.00 / 24920.00 | SL: 24818.00 | 💡 Buy 24800 CE (09-Nov) @ ~Rs 195 (Delta 0.56, IV 18.1%) | Prem SL ~Rs 179 (-8%) | TP1 ~Rs 217 (+11%) | TP2 ~Rs 238 (+23%) | Option R:R 1:1.4 / 1:2.8 | Theta ~-Rs 5.1/hr | Risk/lot ~Rs 1,019\n- [S1] SELL Setup 1 (★ PRIMARY | Day High / 1H Shelf High rejection/sweep short): Wait for a liquidity sweep above Day High (24839.90) followed by a completed 5m bearish rejection close back below at 24832.00. | TP: 24776.58 / 24713.25 | SL: 24858.00 | 💡 Buy 24850 PE (09-Nov) @ ~Rs 162 (Delta 0.50, IV 17.6%) | Prem SL ~Rs 149 (-8%) | TP1 ~Rs 191 (+18%) | TP2 ~Rs 228 (+41%) | Option R:R 1:2.1 / 1:4.9 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 874\n- [S2] SELL Setup 2 (BACKUP | 1H Shelf Low breakdown short): Wait for an impulsive 5m candle close firmly below 1H Consolidation Shelf Low at 24708.00. | TP: 24674.20 / 24647.05 | SL: 24736.00 | 💡 Buy 24750 PE (09-Nov) @ ~Rs 176 (Delta 0.52, IV 17.9%) | Prem SL ~Rs 161 (-9%) | TP1 ~Rs 194 (+10%) | TP2 ~Rs 209 (+19%) | Option R:R 1:1.2 / 1:2.2 | Theta ~-Rs 4.3/hr | Risk/lot ~Rs 980"
+  },
+  {
     "id": "NIFTY_20261106_140227",
     "timestamp": "2026-11-06T14:02:27+05:30",
     "timeDisplay": "02:02 PM, Nov 06",
