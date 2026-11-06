@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-06T15:16:30+05:30",
+    "timeDisplay": "03:16 PM, Nov 06",
+    "price": "24898.0",
+    "bias": "bullish",
+    "behavior": "[FRI 15:16] [B1]: \u2605 PRIMARY (Parabolic Ignition Base): 5m bullish rejection wick off 24893.75 base with close above 24898.00",
+    "tp": "24935.00 / 24955.00",
+    "sl": "24872.00",
+    "status": "na",
+    "spread": "Buy 24850 CE (09-Nov) @ ~Rs 228 (Delta 0.55, IV 21.7%) | Prem SL ~Rs 213 (-7%) | TP1 ~Rs 248 (+9%) | TP2 ~Rs 260 (+14%) | Option R:R 1:1.3 / 1:2.1 | Theta ~-Rs 6.1/hr | Risk/lot ~Rs 989"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T15:16:30+05:30",
+    "timeDisplay": "03:16 PM, Nov 06",
+    "price": "24953.0",
+    "bias": "bullish",
+    "behavior": "[FRI 15:16] [B2]: BACKUP (Equal Highs): 5m candle close firmly above 24949.85 Equal Highs targeting 25000 Call Wall",
+    "tp": "24988.00 / 25010.00",
+    "sl": "24927.00",
+    "status": "na",
+    "spread": "Buy 24950 CE (09-Nov) @ ~Rs 198 (Delta 0.52, IV 21.0%) | Prem SL ~Rs 184 (-7%) | TP1 ~Rs 216 (+9%) | TP2 ~Rs 228 (+15%) | Option R:R 1:1.2 / 1:2.1 | Theta ~-Rs 5.9/hr | Risk/lot ~Rs 925"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T15:16:30+05:30",
+    "timeDisplay": "03:16 PM, Nov 06",
+    "price": "24945.0",
+    "bias": "bearish",
+    "behavior": "[FRI 15:16] [S1]: \u2605 PRIMARY (Equal Highs): Sweep above 24949.85 BSL followed by 5m candle close back below 24945.00",
+    "tp": "24905.00 / 24870.00",
+    "sl": "24975.00",
+    "status": "na",
+    "spread": "Buy 24950 PE (09-Nov) @ ~Rs 151 (Delta 0.49, IV 17.2%) | Prem SL ~Rs 136 (-10%) | TP1 ~Rs 171 (+13%) | TP2 ~Rs 190 (+26%) | Option R:R 1:1.3 / 1:2.6 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 970"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T15:16:30+05:30",
+    "timeDisplay": "03:16 PM, Nov 06",
+    "price": "24890.0",
+    "bias": "bearish",
+    "behavior": "[FRI 15:16] [S2]: BACKUP (Parabolic Ignition Base): 5m candle close decisively below 24893.75 ignition base",
+    "tp": "24855.00 / 24832.00",
+    "sl": "24916.00",
+    "status": "na",
+    "spread": "Buy 24900 PE (09-Nov) @ ~Rs 155 (Delta 0.49, IV 17.4%) | Prem SL ~Rs 142 (-9%) | TP1 ~Rs 172 (+11%) | TP2 ~Rs 185 (+19%) | Option R:R 1:1.3 / 1:2.2 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 860"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-06T14:48:23+05:30",
     "timeDisplay": "02:48 PM, Nov 06",
     "price": "24826.0",
@@ -3183,6 +3231,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261106_151633",
+    "timestamp": "2026-11-06T15:16:33+05:30",
+    "timeDisplay": "03:16 PM, Nov 06",
+    "spot": "24941.10",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $24938.90 > Max Plan Target $24872.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:15 PM IST - Nov 06, 2026 | Spot: 24941.10 | Trigger: Level Exhaustion Breakout (NIFTY Spot $24938.90 > Max Plan Target $24872.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Inside the 1H Consolidation Shelf compression corridor between the 50% Micro-EQ (24868.88) and the Parabolic Ignition Base (24893.75), where directional follow-through is muted.\n- Rotational churn between 24910.00 and 24940.00 directly under the Equal Highs pool prior to explicit candle confirmation.\n- Any unconfirmed chop after 15:20 IST; closing-hour scalp window mandates hard flat exits ahead of 15:25 IST.\n\n4. High Momentum / Explosive Zones:\n- [Bearish SFP Sweep Reversal] ([Liquidity sweep above Equal Highs 24949.85]): A stop-run poke through the 2-tap Buy-Side Liquidity cluster at 24949.85 followed by an immediate close back below 24945.00 can trigger swift late-session mean reversion toward 24905.00.\n- [Bullish Extension Scalp] ([5M candle close above Equal Highs 24949.85]): Acceptance above 24949.85 initiates an aggressive squeeze of intraday Call writers toward the primary 25000 Call OI Wall (12.8M OI).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | Parabolic Ignition Base pullback/sweep long): 5m bullish rejection wick off 24893.75 with close back above 24898.00. | TP: 24935.00 / 24955.00 | SL: 24872.00 | 💡 Buy 24850 CE (09-Nov) @ ~Rs 228 (Delta 0.55, IV 21.7%) | Prem SL ~Rs 213 (-7%) | TP1 ~Rs 248 (+9%) | TP2 ~Rs 260 (+14%) | Option R:R 1:1.3 / 1:2.1 | Theta ~-Rs 6.1/hr | Risk/lot ~Rs 989\n- [B2] BUY Setup 2 (BACKUP | Equal Highs breakout long): 5m candle close firmly above Equal Highs 24949.85 at 24953.00 targeting 25000 Call Wall. | TP: 24988.00 / 25010.00 | SL: 24927.00 | 💡 Buy 24950 CE (09-Nov) @ ~Rs 198 (Delta 0.52, IV 21.0%) | Prem SL ~Rs 184 (-7%) | TP1 ~Rs 216 (+9%) | TP2 ~Rs 228 (+15%) | Option R:R 1:1.2 / 1:2.1 | Theta ~-Rs 5.9/hr | Risk/lot ~Rs 925\n- [S1] SELL Setup 1 (★ PRIMARY | Equal Highs rejection/sweep short): Sweep above Day High 24949.85 followed by 5m candle close back below 24945.00. | TP: 24905.00 / 24870.00 | SL: 24975.00 | 💡 Buy 24950 PE (09-Nov) @ ~Rs 151 (Delta 0.49, IV 17.2%) | Prem SL ~Rs 136 (-10%) | TP1 ~Rs 171 (+13%) | TP2 ~Rs 190 (+26%) | Option R:R 1:1.3 / 1:2.6 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 970\n- [S2] SELL Setup 2 (BACKUP | Parabolic Ignition Base breakdown short): 5m candle close decisively below Parabolic Ignition Base 24893.75 at 24890.00. | TP: 24855.00 / 24832.00 | SL: 24916.00 | 💡 Buy 24900 PE (09-Nov) @ ~Rs 155 (Delta 0.49, IV 17.4%) | Prem SL ~Rs 142 (-9%) | TP1 ~Rs 172 (+11%) | TP2 ~Rs 185 (+19%) | Option R:R 1:1.3 / 1:2.2 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 860"
+  },
+  {
     "id": "NIFTY_20261106_144825",
     "timestamp": "2026-11-06T14:48:25+05:30",
     "timeDisplay": "02:48 PM, Nov 06",
