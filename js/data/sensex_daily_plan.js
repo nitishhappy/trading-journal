@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-06T13:32:10+05:30",
+    "timeDisplay": "01:32 PM, Nov 06",
+    "price": "79900.0",
+    "bias": "bullish",
+    "behavior": "[FRI 13:32] [B1]: \u2605 PRIMARY (1H Shelf Low / SSL Sweep): Judas sweep below 79880.72 and 5m close reclaiming above 79900.00",
+    "tp": "80008.00 / 80135.00",
+    "sl": "79820.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T13:32:10+05:30",
+    "timeDisplay": "01:32 PM, Nov 06",
+    "price": "80232.0",
+    "bias": "bullish",
+    "behavior": "[FRI 13:32] [B2]: BACKUP (Macro Day High Breakout): Decisive 5m/15m candle close firmly ABOVE 80231.60 with institutional volume expansion",
+    "tp": "80350.00 / 80500.00",
+    "sl": "80150.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T13:32:10+05:30",
+    "timeDisplay": "01:32 PM, Nov 06",
+    "price": "80160.0",
+    "bias": "bearish",
+    "behavior": "[FRI 13:32] [S1]: \u2605 PRIMARY (Day High SFP Rejection): False breakout spike above 80231.60 followed by immediate 5m close back BELOW 80160.00",
+    "tp": "80008.00 / 79880.00",
+    "sl": "80260.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T13:32:10+05:30",
+    "timeDisplay": "01:32 PM, Nov 06",
+    "price": "79880.0",
+    "bias": "bearish",
+    "behavior": "[FRI 13:32] [S2]: BACKUP (1H Shelf Floor Breakdown): Decisive 5m candle-body close BELOW 79880.00 and 2H Swing-EQ 79882.34",
+    "tp": "79750.00 / 79630.00",
+    "sl": "79960.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-06T11:06:30+05:30",
     "timeDisplay": "11:06 AM, Nov 06",
     "price": "79480",
@@ -1147,6 +1191,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261106_133212",
+    "timestamp": "2026-11-06T13:32:12+05:30",
+    "timeDisplay": "01:32 PM, Nov 06",
+    "spot": "80158.08",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (01:30 PM IST - Nov 06, 2026 | Spot: 80158.08 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Live Chop Anchor (80007.98 - 50% Micro-EQ): The internal zone between 79950.00 and 80100.00 represents a high-density intraday equilibrium where ATM 80000 and 80100 straddle writing dominates during the 13:30 - 15:30 Institutional Power Hour, resulting in severe theta erosion and whipsaw price action.\n- Strict No-Trade Zone (79980.00 to 80135.00): Mid-range execution inside the 1H consolidation shelf (79880.72 - 80135.24) carries poor risk-to-reward for directional option buyers; positions should strictly be avoided until price tests and resolves around the shelf boundaries.\n\n4. High Momentum / Explosive Zones:\n- Upside Short-Covering Ignition (Sustained 5m candle close above Macro Day High 80231.60): Triggers rapid short-covering panic among 80100 and 80200 Call writers entering the pre-closing auction, accelerating spot momentum toward 80350.00 and the 80500.00 psychological resistance milestone.\n- Downside Long-Unwinding Flush (Decisive 5m candle close below 1H Shelf Low 79880.72 & 2H Swing-EQ 79882.34): Breaches equal low support and trips stops from intraday longs, triggering an explosive liquidity cascade down into the Parabolic Ignition Order Block (79748.36 - 79749.44) and 79629.44.\n- Judas Liquidity Sweep Trap (Sweep wick below 79880.72 SSL followed by an immediate 5m reclaim above 79900.00): Traps breakout sellers under the 1H shelf floor, engineering a violent mean-reversion short squeeze back toward 50% Micro-EQ (80007.98) and 80135.00.\n- Swing Failure Pattern Overhead (Rejection probe above 80231.60 with immediate 5m close back below 80160.00): Traps late breakout buyers at new highs, triggering swift pre-closing profit taking back toward 80008.00 and 79880.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | 1H Shelf Low / Equal Lows Judas Sweep Reclaim Long): Wait for liquidity probe beneath Equal Lows (79880.72) and enter on 5m candle close firmly reclaiming above 79900.00. | TP: 80008.00 / 80135.00 | SL: 79820.00 | 💡 Buy 79900 CE + Sell 80100 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (BACKUP | Day High Expansion Breakout Long): Enter on decisive 5m/15m candle close firmly ABOVE Macro Day High 80231.60 with institutional volume expansion. | TP: 80350.00 / 80500.00 | SL: 80150.00 | 💡 Buy 80200 CE + Sell 80400 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (★ PRIMARY | Day High Swing Failure Pattern / Rejection Short): False breakout wick above 80231.60 followed by immediate 5m candle close back BELOW 80160.00 confirming buyer trap. | TP: 80008.00 / 79880.00 | SL: 80260.00 | 💡 Buy 80200 PE + Sell 80000 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (BACKUP | 1H Shelf Floor & Swing-EQ Breakdown Short): Enter on decisive 5m candle-body close BELOW 79880.00 and 2H Swing-EQ 79882.34 confirming trend breakdown. | TP: 79750.00 / 79630.00 | SL: 79960.00 | 💡 Buy 79800 PE + Sell 79600 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261106_110637",
     "timestamp": "2026-11-06T11:06:37+05:30",
     "timeDisplay": "11:06 AM, Nov 06",
