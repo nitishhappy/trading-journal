@@ -3468,6 +3468,7 @@
                         <div style="display:flex; flex-direction:column; gap:3px; min-width:0; flex:1;">
                             <div style="word-break:break-word; line-height:1.3;">TP: <strong class="tp-val">${lvl.tp || 'N/A'}</strong></div>
                             <div style="line-height:1.3;">SL: <strong class="sl-val">${lvl.sl || 'N/A'}</strong></div>
+                            ${lvl.spread ? `<div style="margin-top:3px; padding-top:3px; border-top:1px dashed rgba(148,163,184,0.2); font-size:0.68rem; color:#fde047; line-height:1.35; word-break:break-word;">💡 ${lvl.spread}</div>` : ''}
                         </div>
                         <div class="dist-pill rr-pill${isHighRR ? ' high-rr' : ''}" id="dist-pill-nifty-${idx}" title="Risk to Reward (R:R)">${formatRiskRewardPill(lvl.price, lvl.sl, lvl.tp)}</div>
                     </div>
@@ -4869,8 +4870,33 @@
             const levels = [];
             const seen = new Set();
 
-            // 1. Table format (if present)
-            const actionMatch = text.match(/###\s*(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
+            // Helper: match authoritative v2 json:app-data level from window.dailyPlanData for this timestamp + tag
+            const targetMs = timestamp ? new Date(timestamp).getTime() : null;
+            function findAuthoritativePlanLevel(tagStr) {
+                if (!window.dailyPlanData || !Array.isArray(window.dailyPlanData)) return null;
+                const cleanTag = tagStr.replace(/[\[\]]/g, '').toUpperCase();
+                let bestMatch = null;
+                let bestDiff = Infinity;
+                for (const item of window.dailyPlanData) {
+                    if (!item || !item.behavior) continue;
+                    const itemTag = (extractTag(item.behavior) || '').replace(/[\[\]]/g, '').toUpperCase();
+                    if (itemTag !== cleanTag) continue;
+                    if (targetMs && item.timestamp) {
+                        const itemMs = new Date(item.timestamp).getTime();
+                        if (!isNaN(itemMs)) {
+                            const diff = Math.abs(itemMs - targetMs);
+                            if (diff <= 180000 && diff < bestDiff) {
+                                bestDiff = diff;
+                                bestMatch = item;
+                            }
+                        }
+                    }
+                }
+                return bestMatch;
+            }
+
+            // 1. Table format or Section 5 block
+            const actionMatch = text.match(/(?:###?\s*)?(?:\d+\.\s*)?5-Min\s*\/\s*15-Min\s*Action\s*Plan[\s\S]*?(?=\n\s*(?:###|---|==|```)|$)/i);
             const searchBlock = actionMatch ? actionMatch[0] : text;
 
             const lines = searchBlock.split('\n');
@@ -4885,35 +4911,39 @@
                 let tp = 'na';
                 let sl = 'na';
                 let behavior = '';
+                let spread = '';
 
                 if (line.includes('|')) {
                     const parts = line.split('|').map(p => p.trim());
                     // If table row with 6+ cols:
                     if (parts.length >= 6 && !parts.some(p => p.toLowerCase().includes('tp:'))) {
-                        rawPrice = parts[2].split(/[-–]/)[0].replace(/[^0-9.]/g, '');
-                        behavior = tag + ': ' + parts[3];
+                        rawPrice = (parts[2].replace(/,/g, '').match(/\d+(?:\.\d+)?/) || [''])[0];
+                        behavior = tag + ': ' + parts[3].replace(/\*\*/g, '');
                         tp = parts[4].replace(/<br\s*\/?>/gi, ' / ').replace(/[*_]/g, '').trim();
                         sl = parts[5].replace(/[*_]/g, '').trim();
                     } else {
-                        // Bullet format: - [B1] ... | TP: ... | SL: ... | ...
+                        // Bullet format: - [B1] BUY Setup 1 (★ PRIMARY | ...): [Entry]. | TP: ... | SL: ... | 💡 Buy ...
                         parts.forEach(p => {
-                            const tpMatch = p.match(/TP:\s*([^|]+)/i);
+                            const tpMatch = p.match(/^TP:\s*([^|]+)/i);
                             if (tpMatch) tp = tpMatch[1].replace(/[*_]/g, '').trim();
-                            const slMatch = p.match(/SL:\s*([^|]+)/i);
+                            const slMatch = p.match(/^SL:\s*([^|]+)/i);
                             if (slMatch) sl = slMatch[1].replace(/[*_]/g, '').trim();
                         });
 
-                        // Extract price from trigger phrase
-                        const priceMatch = line.match(/close\s*(?:back\s*)?(?:ABOVE|BELOW)\s*(?:Day Low\s*)?([0-9,]+(?:\.[0-9]+)?)/i)
-                            || line.match(/(?:ABOVE|BELOW)\s*(?:Day Low\s*)?([0-9,]{5,}(?:\.[0-9]+)?)/i)
-                            || line.match(/([0-9,]{5,}(?:\.[0-9]+)?)/);
-
-                        if (priceMatch) {
-                            rawPrice = priceMatch[1].replace(/,/g, '');
+                        const spreadMatch = line.match(/💡\s*(.+)$/);
+                        if (spreadMatch) {
+                            spread = spreadMatch[1].trim().replace(/\.$/, '');
                         }
 
-                        // Clean behavior logic text
+                        // Extract setup descriptor inside (...) before ):
+                        let setupTitle = '';
+                        const openParen = line.indexOf('(');
                         const colonAfterParen = line.indexOf('):');
+                        if (openParen !== -1 && colonAfterParen !== -1 && colonAfterParen > openParen) {
+                            setupTitle = line.substring(openParen + 1, colonAfterParen).trim();
+                        }
+
+                        // Clean behavior logic text (strictly after `):` and before `| TP:`)
                         let entryText = '';
                         if (colonAfterParen !== -1) {
                             entryText = line.substring(colonAfterParen + 2).trim();
@@ -4927,7 +4957,31 @@
                             const pIdx = entryText.indexOf(' |');
                             if (pIdx !== -1) entryText = entryText.substring(0, pIdx).trim();
                         }
-                        behavior = tag + ': ' + entryText;
+
+                        // 1. Prefer authoritative price from window.dailyPlanData (json:app-data)
+                        const authLvl = findAuthoritativePlanLevel(tag);
+                        if (authLvl && authLvl.price) {
+                            rawPrice = String(authLvl.price).replace(/,/g, '').trim();
+                            if ((!tp || tp === 'na') && authLvl.tp) tp = authLvl.tp;
+                            if ((!sl || sl === 'na') && authLvl.sl) sl = authLvl.sl;
+                            if (!spread && authLvl.spread) spread = authLvl.spread;
+                        }
+
+                        // 2. Fallback: extract trigger price strictly from entryText (NEVER from setupTitle)
+                        if (!rawPrice) {
+                            const atMatch = entryText.match(/\bat\s+(?:or\s+(?:above|below)\s+)?([0-9,]{5,}(?:\.[0-9]+)?)/i)
+                                || entryText.match(/closing\s+(?:back\s+)?(?:firmly\s+|decisively\s+|cleanly\s+)?(?:above|below)\s+(?:[^0-9]*?)?([0-9,]{5,}(?:\.[0-9]+)?)/i)
+                                || entryText.match(/reclaim(?:ing)?\s+(?:close\s+)?(?:at\s+or\s+)?(?:above|below)?\s*([0-9,]{5,}(?:\.[0-9]+)?)/i)
+                                || entryText.match(/close\s+(?:back\s+)?(?:firmly\s+|decisively\s+|cleanly\s+)?(?:above|below)\s+(?:Day\s+(?:High|Low)\s+)?([0-9,]{5,}(?:\.[0-9]+)?)/i)
+                                || entryText.match(/(?:ABOVE|BELOW)\s+(?:Day\s+(?:High|Low)\s+)?([0-9,]{5,}(?:\.[0-9]+)?)/i)
+                                || entryText.match(/([0-9,]{5,}(?:\.[0-9]+)?)/);
+                            if (atMatch) {
+                                rawPrice = atMatch[1].replace(/,/g, '');
+                            }
+                        }
+
+                        const prefixLabel = setupTitle ? `(${setupTitle}) ` : '';
+                        behavior = tag + ': ' + prefixLabel + entryText;
                     }
                 }
 
@@ -4943,6 +4997,7 @@
                         behavior: behavior,
                         tp: tp,
                         sl: sl,
+                        spread: spread,
                         status: 'na'
                     });
                 }
@@ -5127,7 +5182,9 @@
 
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
-            return behaviorStr.replace(/^(?:\[.*?\]\s*)+:\s*/, '').replace(/^(?:\[.*?\]\s*)+/, '');
+            return behaviorStr
+                .replace(/^(?:\[(?:[A-Za-z]{3}\s+\d{1,2}:\d{2}|(?:G_|SP_|E_)?K?[BS]\d+)\]\s*:?\s*)+/i, '')
+                .trim();
         }
 
         function getConfirmationPriceAction(tag, behaviorFallback, summaryArray, targetTimestamp = null) {

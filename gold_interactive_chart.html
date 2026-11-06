@@ -2911,11 +2911,16 @@
             }
             container.style.display = 'flex';
 
-            const runsReversed = [...aiBriefingTimes].reverse();
-            runsReversed.forEach((run, idx) => {
+            let latestRun = getLatestBriefingRun() || aiBriefingTimes[0];
+            const sortedRuns = [...aiBriefingTimes].sort((a, b) => {
+                const aTime = a.timestamp ? new Date(a.timestamp).getTime() : (a.time * 1000);
+                const bTime = b.timestamp ? new Date(b.timestamp).getTime() : (b.time * 1000);
+                return aTime - bTime;
+            });
+            sortedRuns.forEach((run) => {
                 const btn = document.createElement('button');
                 btn.className = 'briefing-pill-btn';
-                const isLatest = idx === 0;
+                const isLatest = (run.timestamp === latestRun.timestamp) || (run.time === latestRun.time);
                 const isSelected = selectedBriefingTimestamp 
                     ? (selectedBriefingTimestamp === run.timestamp || selectedBriefingTimestamp === run.time)
                     : isLatest;
@@ -3461,12 +3466,24 @@
         // ═════════════════════════════════════════════════════════════════════
         // ── REPLAY MODE CONTROLLER (Option A: Briefing Run Replay) ──
         // ═════════════════════════════════════════════════════════════════════
+        function getLatestBriefingRun() {
+            if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
+            let latest = aiBriefingTimes[0];
+            let maxTs = -Infinity;
+            aiBriefingTimes.forEach(run => {
+                const ts = run.timestamp ? new Date(run.timestamp).getTime() : (run.time * 1000);
+                if (ts > maxTs) { maxTs = ts; latest = run; }
+            });
+            return latest;
+        }
+
         function getActiveBriefingRun() {
             if (!aiBriefingTimes || aiBriefingTimes.length === 0) return null;
             if (selectedBriefingTimestamp) {
-                return aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp) || aiBriefingTimes[aiBriefingTimes.length - 1];
+                const match = aiBriefingTimes.find(b => b.timestamp === selectedBriefingTimestamp || b.time === selectedBriefingTimestamp);
+                if (match) return match;
             }
-            return aiBriefingTimes[aiBriefingTimes.length - 1];
+            return getLatestBriefingRun();
         }
 
         function getReplayStartIndex() {
@@ -4635,7 +4652,25 @@
                     if (cols.length >= 6) {
                         const tagMatch = cols[0].match(/\[(G_K?[BS]\d+|K?[BS]\d+)\]/i);
                         const tag = tagMatch ? '[' + tagMatch[1].toUpperCase() + ']' : '';
-                        const rawPrice = (cols[2].replace(/,/g, '').match(/\d+(?:\.\d+)?/) || [''])[0];
+                        let rawPrice = (cols[2].replace(/,/g, '').match(/\d+(?:\.\d+)?/) || [''])[0];
+                        if (tag && window.goldDailyPlanData && Array.isArray(window.goldDailyPlanData) && timestamp) {
+                            const targetMs = new Date(timestamp).getTime();
+                            const cleanTag = tag.replace(/[\[\]]/g, '').toUpperCase();
+                            let bestDiff = Infinity;
+                            for (const item of window.goldDailyPlanData) {
+                                if (!item || !item.behavior || !item.price) continue;
+                                const itemTag = (extractTag(item.behavior) || '').replace(/[\[\]]/g, '').toUpperCase();
+                                if (itemTag !== cleanTag) continue;
+                                const itemMs = item.timestamp ? new Date(item.timestamp).getTime() : NaN;
+                                if (!isNaN(targetMs) && !isNaN(itemMs)) {
+                                    const diff = Math.abs(itemMs - targetMs);
+                                    if (diff <= 180000 && diff < bestDiff) {
+                                        bestDiff = diff;
+                                        rawPrice = String(item.price).replace(/[^0-9.]/g, '');
+                                    }
+                                }
+                            }
+                        }
                         const isBullish = /\[(G_KB\d+|KB\d+|G_B\d+|B\d+)\]/i.test(tag) || cols[1].includes('🟢') || cols[1].toLowerCase().includes('long');
                         const bias = isBullish ? 'bullish' : 'bearish';
                         const key = tag || (rawPrice + '_' + bias);
@@ -4831,7 +4866,9 @@
 
         function cleanLogicText(behaviorStr) {
             if (!behaviorStr) return '';
-            return behaviorStr.replace(/^(?:\[.*?\]\s*)+:\s*/, '').replace(/^(?:\[.*?\]\s*)+/, '');
+            return behaviorStr
+                .replace(/^(?:\[(?:[A-Za-z]{3}\s+\d{1,2}:\d{2}|(?:G_|SP_|E_)?K?[BS]\d+)\]\s*:?\s*)+/i, '')
+                .trim();
         }
 
         function getConfirmationPriceAction(tag, behaviorFallback, summaryArray, targetTimestamp = null) {
