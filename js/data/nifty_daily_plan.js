@@ -1,6 +1,50 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-06T11:06:10+05:30",
+    "timeDisplay": "11:06 AM, Nov 06",
+    "price": "24535",
+    "bias": "bullish",
+    "behavior": "[FRI 11:06] [B1]: Dip into 24,500-24,535 Put floor with 5m bullish rejection closing above 24,535",
+    "tp": "24,600 / 24,660",
+    "sl": "24,480",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T11:06:10+05:30",
+    "timeDisplay": "11:06 AM, Nov 06",
+    "price": "24705",
+    "bias": "bullish",
+    "behavior": "[FRI 11:06] [B2]: Sustained 5m close ABOVE 24,705 clearing 24,700 Call Wall & Day High with expanding volume",
+    "tp": "24,780 / 24,850",
+    "sl": "24,650",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T11:06:10+05:30",
+    "timeDisplay": "11:06 AM, Nov 06",
+    "price": "24660",
+    "bias": "bearish",
+    "behavior": "[FRI 11:06] [S1]: Rejection from 24,660-24,700 resistance zone with 5m close below 24,640",
+    "tp": "24,560 / 24,500",
+    "sl": "24,715",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T11:06:10+05:30",
+    "timeDisplay": "11:06 AM, Nov 06",
+    "price": "24480",
+    "bias": "bearish",
+    "behavior": "[FRI 11:06] [S2]: Sustained 15m close BELOW 24,480 confirming unwinding of 24,500 Put writers",
+    "tp": "24,400 / 24,320",
+    "sl": "24,535",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-04T23:40:18+05:30",
     "timeDisplay": "11:40 PM, Nov 04",
     "price": "23895.0",
