@@ -1,6 +1,50 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-06T10:31:10+05:30",
+    "timeDisplay": "10:31 AM, Nov 06",
+    "price": "79650",
+    "bias": "bullish",
+    "behavior": "[FRI 10:31] [B1]: Retest and bullish absorption hold above the 79,650-79,700 base with expanding green volume",
+    "tp": "79,960 / 80,100",
+    "sl": "79,550",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T10:31:10+05:30",
+    "timeDisplay": "10:31 AM, Nov 06",
+    "price": "80000",
+    "bias": "bullish",
+    "behavior": "[FRI 10:31] [B2]: Decisive 5M close firmly ABOVE 80,000 clearing Day High liquidity with strong momentum candle",
+    "tp": "80,150 / 80,300",
+    "sl": "79,850",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T10:31:10+05:30",
+    "timeDisplay": "10:31 AM, Nov 06",
+    "price": "79900",
+    "bias": "bearish",
+    "behavior": "[FRI 10:31] [S1]: False breakout probe above 79,960 followed by immediate 5M bearish close back below 79,900",
+    "tp": "79,650 / 79,480",
+    "sl": "80,040",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-06T10:31:10+05:30",
+    "timeDisplay": "10:31 AM, Nov 06",
+    "price": "79600",
+    "bias": "bearish",
+    "behavior": "[FRI 10:31] [S2]: Sustained 5M candle close BELOW 79,600 confirming failure of the morning ignition base",
+    "tp": "79,480 / 79,300",
+    "sl": "79,720",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-06T10:09:59+05:30",
     "timeDisplay": "10:09 AM, Nov 06",
     "price": "79680",
@@ -925,50 +969,6 @@ window.sensexDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-10-30T10:31:05+05:30",
-    "timeDisplay": "10:31 AM, Oct 30",
-    "price": "74140",
-    "bias": "bullish",
-    "behavior": "[FRI 10:31] [B1]: Bullish rejection re-testing 74,085 - 74,105 holding 74,000 demand wall with 5m close above 74,140",
-    "tp": "74,250 / 74,300",
-    "sl": "74,050",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T10:31:05+05:30",
-    "timeDisplay": "10:31 AM, Oct 30",
-    "price": "74310",
-    "bias": "bullish",
-    "behavior": "[FRI 10:31] [B2]: Sustained 5m close ABOVE 74,310 with institutional absorption confirming breakout expansion",
-    "tp": "74,420 / 74,550",
-    "sl": "74,230",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T10:31:05+05:30",
-    "timeDisplay": "10:31 AM, Oct 30",
-    "price": "74390",
-    "bias": "bearish",
-    "behavior": "[FRI 10:31] [S1]: Liquidity sweep of Day High 74,422.42 failing to hold and closing back below 74,390",
-    "tp": "74,260 / 74,180",
-    "sl": "74,470",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-10-30T10:31:05+05:30",
-    "timeDisplay": "10:31 AM, Oct 30",
-    "price": "74075",
-    "bias": "bearish",
-    "behavior": "[FRI 10:31] [S2]: Confirmed 5m close BELOW 74,075 invalidating Day Low and triggering long unwinding cascade",
-    "tp": "73,980 / 73,850",
-    "sl": "74,150",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-10-30T09:18:15+05:30",
     "timeDisplay": "09:18 AM, Oct 30",
     "price": "74000",
@@ -1103,6 +1103,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261106_103113",
+    "timestamp": "2026-11-06T10:31:13+05:30",
+    "timeDisplay": "10:31 AM, Nov 06",
+    "spot": "79939.51",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 06, 2026 | Spot: 79939.51 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Dead-Zone (79,650 – 79,880): The zone between the 1H Micro-Equilibrium (79,625.38) and the sub-peak shelf (79,880) represents a low-expansion contraction corridor where premium erosion is elevated.\n- 50% Daily Equilibrium Magnet (79,487.76): Oscillations around 79,480–79,520 (near the 15M ORB High of 79,523.61) are prone to rotational whipsaws without directional follow-through.\n- Immediate Pre-80,000 Trap Buffer (79,920 – 79,960): Chasing longs directly into the double-tap Day High liquidity pool (79,958.71–79,959.48) exposes option buyers to sudden rejection spikes before clear structural breakout confirmation.\n\n4. High Momentum / Explosive Zones:\n- Breakout Expansion (Sustained 5M close above 80,000): Clearing the psychological barrier of 80,000 and the Buy-Side Liquidity (BSL) pool at 79,959 triggers accelerated short-covering toward 80,150 and 80,300.\n- Liquidity Sweep Reversal (Failed spike above 79,960 followed by rejection below 79,900): A classic Swing Failure Pattern (SFP) trapping late breakout longs will induce rapid long unwinding toward 79,650.\n- Breakdown Acceleration (Decisive 5M close below 79,600): Piercing through the Parabolic Ignition Order Block (79,601.38–79,633.50) triggers rapid mean-reversion expansion targeting 79,480 (Macro 50% EQ) and 79,300.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Ignition Shelf Pullback Long): Retest and bullish absorption hold above the 79,650–79,700 base with expanding green volume. | TP: 79,960 / 80,100 | SL: 79,550 | 💡 Buy 79900 CE + Sell 80100 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Psychological 80,000 Expansion Breakout): Decisive 5M close firmly ABOVE 80,000 clearing Day High liquidity with strong momentum candle. | TP: 80,150 / 80,300 | SL: 79,850 | 💡 Buy 80000 CE + Sell 80200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High SFP & Stop-Hunt Rejection Short): False breakout probe above 79,960 followed by immediate 5M bearish close back below 79,900. | TP: 79,650 / 79,480 | SL: 80,040 | 💡 Buy 79900 PE + Sell 79700 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Ignition Order Block Failure Breakdown): Sustained 5M candle close BELOW 79,600 confirming failure of the morning ignition base. | TP: 79,480 / 79,300 | SL: 79,720 | 💡 Buy 79600 PE + Sell 79400 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261106_101017",
     "timestamp": "2026-11-06T10:10:17+05:30",
     "timeDisplay": "10:10 AM, Nov 06",
