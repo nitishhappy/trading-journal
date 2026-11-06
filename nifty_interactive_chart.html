@@ -3422,15 +3422,19 @@
 
                 const rrInfo        = getLevelRiskReward(lvl.price, lvl.sl, lvl.tp);
                 const isHighRR      = Boolean(rrInfo && rrInfo.isHighRR);
+                const isPrimary     = /\bPRIMARY\b/i.test(lvl.behavior || '') || /\bPRIMARY\b/i.test(fullConfirmationLogic || '');
+                const isBackup      = !isPrimary && (/\bBACKUP\b/i.test(lvl.behavior || '') || /\bBACKUP\b/i.test(fullConfirmationLogic || ''));
+                const isProminent   = isHighRR || isPrimary;
 
-                if (showHighRROnly && !isHighRR) {
+                if (showHighRROnly && !isProminent) {
                     return;
                 }
                 matchingCount++;
 
-                // Configurable High R:R setups (>= baseline strictly TP1) get prominent 3px line width & star badge title
-                const lineWidth     = isHighRR ? 3 : (isSolid ? 2 : 1);
-                const lineTitle     = isHighRR ? `⭐ ${tag} 1:${rrInfo.rr1Str}` : `${tag}`;
+                // High R:R or v2 PRIMARY setups get prominent 3px line width & star badge title
+                const lineWidth     = isProminent ? 3 : (isSolid ? 2 : 1);
+                const rrSuffix      = (rrInfo && rrInfo.rr1Str) ? ` 1:${rrInfo.rr1Str}` : '';
+                const lineTitle     = isHighRR ? `⭐ ${tag}${rrSuffix}` : (isPrimary ? `★ ${tag}${rrSuffix}` : `${tag}`);
 
                 if (!isNaN(priceVal) && candleSeries) {
                     const pLine = candleSeries.createPriceLine({
@@ -3441,13 +3445,13 @@
                         axisLabelVisible: true,
                         title: lineTitle,
                     });
-                    activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx, isHighRR, levelUniqueId });
+                    activePriceLines.push({ price: priceVal, tag, levelObj: lvl, line: pLine, index: idx, isHighRR: isProminent, levelUniqueId });
                 }
 
                 const hasOutcome    = (savedOutcome === 'worked' || savedOutcome === 'failed');
 
                 const card = document.createElement('div');
-                card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}${isHighRR ? ' high-rr' : ''}${hasOutcome ? ' has-outcome' : ''}`;
+                card.className = `level-card ${isBullish ? 'bullish' : 'bearish'}${isProminent ? ' high-rr' : ''}${hasOutcome ? ' has-outcome' : ''}`;
                 card.id = `card-level-${idx}`;
                 card.setAttribute('data-level-id', levelUniqueId);
                 card.innerHTML = `
@@ -3456,6 +3460,7 @@
                             ${isBullish ? '🟢' : '🔴'} ₹${lvl.price}
                         </span>
                         <div style="display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap;justify-content:flex-end;">
+                            ${isPrimary ? `<span class="high-rr-badge" title="v2 Primary High-Probability Setup">★ PRIMARY</span>` : (isBackup ? `<span style="font-size:0.62rem;padding:0.12rem 0.42rem;border-radius:4px;background:rgba(148,163,184,0.14);color:#cbd5e1;border:1px solid rgba(148,163,184,0.3);font-weight:600;" title="v2 Secondary / Backup Setup">BACKUP</span>` : '')}
                             ${isHighRR ? `<span class="high-rr-badge" title="High Risk:Reward Ratio (Strictly TP1 >= 1:${rrInfo.baseline})">⭐ 1:${rrInfo.rr1Str}</span>` : ''}
                             <span class="proximity-badge" id="prox-badge-nifty-${idx}">🎯 NEAR BY</span>
                             <span class="status-pill status-pill-${savedOutcome}" id="status-pill-nifty-${idx}" data-pill="${levelUniqueId}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
