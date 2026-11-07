@@ -3326,9 +3326,13 @@
                 }
                 matchingCount++;
 
-                // High R:R setups (>= baseline strictly TP1) get prominent 3px line width & star badge title
-                const lineWidth     = isHighRR ? 3 : (isSolid ? 2 : 1);
-                const lineTitle     = isHighRR ? `⭐ ${tag} 1:${rrInfo.rr1Str}` : `${tag}`;
+                // High R:R or ★ PRIMARY setups get prominent 3px line width & star badge title
+                const isPrimarySetup = /PRIMARY|A\+/i.test(lvl.behavior || '') || /PRIMARY|A\+/i.test(fullConfirmationLogic || '');
+                const isBackupSetup  = /BACKUP/i.test(lvl.behavior || '') || /BACKUP/i.test(fullConfirmationLogic || '');
+                const lineWidth      = (isPrimarySetup || isHighRR) ? 3 : (isSolid ? 2 : 1);
+                const lineTitle      = isPrimarySetup
+                    ? `★ ${tag}${rrInfo ? ' 1:' + rrInfo.rr1Str : ''}`
+                    : (isHighRR ? `⭐ ${tag} 1:${rrInfo.rr1Str}` : `${tag}`);
 
                 if (!isNaN(priceVal) && candleSeries) {
                     const pLine = candleSeries.createPriceLine({
@@ -3356,6 +3360,7 @@
                                 ${isBullish ? '🟢' : '🔴'} $${lvl.price}
                             </span>
                             <div style="display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap;justify-content:flex-end;">
+                                ${isPrimarySetup ? `<span class="high-rr-badge" style="background:rgba(16,185,129,0.18);border-color:rgba(16,185,129,0.55);color:#34d399;" title="Primary A+ High-Conviction Setup">★ PRIMARY</span>` : (isBackupSetup ? `<span class="status-pill" style="background:rgba(148,163,184,0.15);border:1px solid rgba(148,163,184,0.35);color:#cbd5e1;font-size:0.62rem;padding:0.1rem 0.38rem;border-radius:4px;" title="Secondary / Backup Setup">BACKUP</span>` : '')}
                                 ${isHighRR ? `<span class="high-rr-badge" title="High Risk:Reward Ratio (Strictly TP1 >= 1:${rrInfo.baseline})">⭐ 1:${rrInfo.rr1Str}</span>` : ''}
                                 <span class="proximity-badge" id="prox-badge-btc-${idx}">🎯 NEAR BY</span>
                                 <span class="status-pill status-pill-${savedOutcome}" data-pill="${levelUniqueId}" style="display:${savedOutcome === 'na' ? 'none' : 'inline-block'}">${savedOutcome === 'worked' ? '🟢 WORKED' : (savedOutcome === 'failed' ? '🔴 FAILED' : '')}</span>
@@ -3442,11 +3447,25 @@
                 }
             }
 
-            const rawPlanArray = (window.btcHistoricalBriefings && window.btcHistoricalBriefings.length > 0)
-                ? window.btcHistoricalBriefings
-                : ((window.btcDailyPlanSummary && window.btcDailyPlanSummary.length > 0)
-                    ? window.btcDailyPlanSummary
-                    : ((window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : []));
+            const rawPlanArray = (() => {
+                const merged = [];
+                const seenTs = new Set();
+                const addItems = (arr) => {
+                    if (!Array.isArray(arr)) return;
+                    arr.forEach(item => {
+                        if (item && item.timestamp && !seenTs.has(item.timestamp)) {
+                            seenTs.add(item.timestamp);
+                            merged.push(item);
+                        }
+                    });
+                };
+                addItems(window.btcDailyPlanSummary);
+                addItems(window.btcHistoricalBriefings);
+                if (merged.length > 0) {
+                    return merged.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+                }
+                return (window.btcDailyPlanData && Array.isArray(window.btcDailyPlanData)) ? window.btcDailyPlanData : [];
+            })();
             aiBriefingTimes = extractAiBriefingTimes(rawPlanArray, candles);
 
             // Compute signature of current plan data to detect when a new summary is published
@@ -4665,6 +4684,24 @@
             }
         }
 
+        function findAuthoritativePlanLevel(tag, timestamp) {
+            if (!tag || !window.btcDailyPlanData || !Array.isArray(window.btcDailyPlanData)) return null;
+            const cleanTag = tag.replace(/[\[\]\s]/g, '').toUpperCase();
+            const targetMs = timestamp ? new Date(timestamp).getTime() : null;
+            for (const item of window.btcDailyPlanData) {
+                if (!item || !item.behavior) continue;
+                const itemTag = extractTag(item.behavior).replace(/[\[\]\s]/g, '').toUpperCase();
+                if (itemTag !== cleanTag) continue;
+                if (targetMs && item.timestamp) {
+                    const iMs = new Date(item.timestamp).getTime();
+                    if (!isNaN(iMs) && Math.abs(iMs - targetMs) <= 180000) return item;
+                } else if (!timestamp) {
+                    return item;
+                }
+            }
+            return null;
+        }
+
         function parseBtcLevelsFromMarkdown(text, timestamp, timeDisplay) {
             if (!text) return [];
             const levels = [];
@@ -4724,18 +4761,20 @@
                         const key = tag || (rawPrice + '_' + bias);
                         if (rawPrice && !seen.has(key)) {
                             seen.add(key);
+                            const auth = findAuthoritativePlanLevel(tag, timestamp);
                             const cleanTp = cols[4].replace(/<br\s*\/?>/gi, ' / ').replace(/[*_]/g, '').trim();
                             const cleanSl = cols[5].replace(/[*_]/g, '').trim();
+                            const finalPrice = (auth && auth.price) ? String(auth.price).replace(/[^0-9.]/g, '') : rawPrice;
                             levels.push({
                                 source: 'AI',
                                 timestamp: timestamp,
                                 timeDisplay: timeDisplay,
-                                price: rawPrice,
-                                bias: bias,
+                                price: finalPrice || rawPrice,
+                                bias: (auth && auth.bias) ? auth.bias : bias,
                                 behavior: (tag ? tag + ': ' : '') + cols[3],
-                                tp: cleanTp || 'na',
-                                sl: cleanSl || 'na',
-                                status: 'na'
+                                tp: cleanTp || (auth && auth.tp) || 'na',
+                                sl: cleanSl || (auth && auth.sl) || 'na',
+                                status: (auth && auth.status) ? auth.status : 'na'
                             });
                         }
                     }
@@ -4768,9 +4807,22 @@
 
             // 1. Try to extract directly from window.btcHistoricalBriefings or window.btcDailyPlanSummary (Markdown text)
             // which contains un-pruned, complete briefing text for EVERY run.
-            const summariesList = (window.btcHistoricalBriefings && window.btcHistoricalBriefings.length > 0)
-                ? window.btcHistoricalBriefings
-                : (window.btcDailyPlanSummary || []);
+            const summariesList = (() => {
+                const merged = [];
+                const seenTs = new Set();
+                const addItems = (arr) => {
+                    if (!Array.isArray(arr)) return;
+                    arr.forEach(s => {
+                        if (s && s.timestamp && !seenTs.has(s.timestamp)) {
+                            seenTs.add(s.timestamp);
+                            merged.push(s);
+                        }
+                    });
+                };
+                addItems(window.btcDailyPlanSummary);
+                addItems(window.btcHistoricalBriefings);
+                return merged.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+            })();
 
             if (summariesList && Array.isArray(summariesList) && summariesList.length > 0) {
                 let matchedSummary = null;
@@ -5021,15 +5073,57 @@
                     await reloadCandlesScript();
                 }
                 if (window.btcCandlesData && Array.isArray(window.btcCandlesData.timeframe5m) && window.btcCandlesData.timeframe5m.length > 500) {
-                    const vaultCandles = tfInterval === '15m' && Array.isArray(window.btcCandlesData.timeframe15m) && window.btcCandlesData.timeframe15m.length > 0
-                        ? window.btcCandlesData.timeframe15m
-                        : window.btcCandlesData.timeframe5m;
+                    const tf5 = window.btcCandlesData.timeframe5m;
+                    const tf15 = Array.isArray(window.btcCandlesData.timeframe15m) ? window.btcCandlesData.timeframe15m : [];
+                    let vaultCandles = tf5;
+
+                    if (tfInterval === '15m') {
+                        const last5mTime = tf5[tf5.length - 1]?.time || 0;
+                        const last15mTime = tf15.length > 0 ? (tf15[tf15.length - 1]?.time || 0) : 0;
+                        // Self-heal: if 15m vault lags 5m vault by more than 30 minutes, aggregate 5m -> 15m on the fly
+                        if (tf15.length > 0 && (last5mTime - last15mTime) <= 1800) {
+                            vaultCandles = tf15;
+                        } else {
+                            const bucketMap = new Map();
+                            tf15.forEach(c => bucketMap.set(c.time, { ...c }));
+                            tf5.forEach(c => {
+                                const utcSec = c.time - IST_OFFSET_SEC;
+                                const bucketStart = (Math.floor(utcSec / 900) * 900) + IST_OFFSET_SEC;
+                                if (!bucketMap.has(bucketStart)) {
+                                    bucketMap.set(bucketStart, {
+                                        time: bucketStart,
+                                        open: c.open,
+                                        high: c.high,
+                                        low: c.low,
+                                        close: c.close,
+                                        volume: c.volume || 0
+                                    });
+                                } else {
+                                    const b = bucketMap.get(bucketStart);
+                                    if (c.high > b.high) b.high = c.high;
+                                    if (c.low < b.low) b.low = c.low;
+                                    b.close = c.close;
+                                    b.volume = parseFloat(((b.volume || 0) + (c.volume || 0)).toFixed(4));
+                                }
+                            });
+                            vaultCandles = Array.from(bucketMap.values()).sort((a, b) => a.time - b.time);
+                        }
+                    }
+
                     updateFeedBadge('local', vaultCandles.length);
                     currentFeedSource = 'LOCAL_DB';
 
-                    // Merge latest forming delta from Binance
+                    // Dynamically calculate how many bars are needed since the last vault bar
+                    const lastVaultBarTime = vaultCandles.length > 0 ? vaultCandles[vaultCandles.length - 1].time : 0;
+                    const lastVaultUtcSec = lastVaultBarTime > IST_OFFSET_SEC ? (lastVaultBarTime - IST_OFFSET_SEC) : 0;
+                    const nowUtcSec = Math.floor(Date.now() / 1000);
+                    const barSec = tfInterval === '5m' ? 300 : 900;
+                    const gapBars = lastVaultUtcSec > 0 ? Math.ceil(Math.max(0, nowUtcSec - lastVaultUtcSec) / barSec) + 5 : 200;
+                    const dynamicLimit = Math.min(1000, Math.max(15, gapBars));
+
+                    // Merge latest forming delta from Binance (or Vercel /api/marketCandles if Binance is blocked)
                     try {
-                        const binRes = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=5&_t=${Date.now()}`, { cache: 'no-store' });
+                        const binRes = await fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tfInterval}&limit=${dynamicLimit}&_t=${Date.now()}`, { cache: 'no-store' });
                         if (binRes.ok) {
                             const binJson = await binRes.json();
                             if (Array.isArray(binJson) && binJson.length > 0) {
@@ -5048,6 +5142,35 @@
                             }
                         }
                     } catch (_) {}
+
+                    // If vault is still stale (> 1 hour behind wall-clock) and direct Binance failed, merge via /api/marketCandles
+                    if (nowUtcSec - lastVaultUtcSec > 3600) {
+                        try {
+                            const mcUrl = isLocal
+                                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=BTC&timeframe=${tfInterval}&limit=${Math.min(2000, dynamicLimit)}&_t=${Date.now()}`
+                                : `/api/marketCandles?symbol=BTC&timeframe=${tfInterval}&limit=${Math.min(2000, dynamicLimit)}&_t=${Date.now()}`;
+                            const mcRes = await fetch(mcUrl, { cache: 'no-store' });
+                            if (mcRes.ok) {
+                                const mcJson = await mcRes.json();
+                                if (mcJson && Array.isArray(mcJson.candles) && mcJson.candles.length > 0) {
+                                    const candleMap = new Map();
+                                    vaultCandles.forEach(c => candleMap.set(c.time, c));
+                                    mcJson.candles.forEach(c => {
+                                        const t = c.time + IST_OFFSET_SEC;
+                                        candleMap.set(t, {
+                                            time: t,
+                                            open: c.open,
+                                            high: c.high,
+                                            low: c.low,
+                                            close: c.close,
+                                            volume: typeof c.volume === 'number' ? c.volume : (parseFloat(c.volume) || 0)
+                                        });
+                                    });
+                                    return Array.from(candleMap.values()).sort((a, b) => a.time - b.time);
+                                }
+                            }
+                        } catch (_) {}
+                    }
                     return [...vaultCandles];
                 }
             } catch (_ve) {
