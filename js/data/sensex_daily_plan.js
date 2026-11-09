@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-09T14:18:46+05:30",
+    "timeDisplay": "02:18 PM, Nov 09",
+    "price": "80940.0",
+    "bias": "bullish",
+    "behavior": "[MON 14:18] [B1]: Pullback into Macro 50% Equilibrium 80929.36 with confirmed 5m bullish reversal close above 80940.00",
+    "tp": "81150.00 / 81339.41",
+    "sl": "80850.00",
+    "status": "na",
+    "spread": "Buy 80900 CE + Sell 81100 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T14:18:46+05:30",
+    "timeDisplay": "02:18 PM, Nov 09",
+    "price": "81060.0",
+    "bias": "bullish",
+    "behavior": "[MON 14:18] [B2]: Decisive 5m candle close above 81050.00 confirming momentum breakout toward Day High",
+    "tp": "81220.00 / 81339.41",
+    "sl": "80960.00",
+    "status": "na",
+    "spread": "Buy 81000 CE + Sell 81200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T14:18:46+05:30",
+    "timeDisplay": "02:18 PM, Nov 09",
+    "price": "80980.0",
+    "bias": "bearish",
+    "behavior": "[MON 14:18] [S1]: Exhaustion probe above 81050.00 followed by 5m bearish rejection close below 80980.00",
+    "tp": "80850.00 / 80732.20",
+    "sl": "81080.00",
+    "status": "na",
+    "spread": "Buy 81000 PE + Sell 80800 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T14:18:46+05:30",
+    "timeDisplay": "02:18 PM, Nov 09",
+    "price": "80810.0",
+    "bias": "bearish",
+    "behavior": "[MON 14:18] [S2]: Decisive 5m candle close below Order Block base 80824.00 confirming breakdown at 80810.00",
+    "tp": "80650.00 / 80543.48",
+    "sl": "80910.00",
+    "status": "na",
+    "spread": "Buy 80800 PE + Sell 80600 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-09T13:32:58+05:30",
     "timeDisplay": "01:32 PM, Nov 09",
     "price": "80700",
@@ -1387,6 +1435,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261109_141852",
+    "timestamp": "2026-11-09T14:18:52+05:30",
+    "timeDisplay": "02:18 PM, Nov 09",
+    "spot": "81007.22",
+    "trigger": "Extreme Directional Surge (382 pts move >= 330 pts threshold",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (02:15 PM IST - Nov 09, 2026 | Spot: 81007.22 | Trigger: Extreme Directional Surge (382 pts move >= 330 pts threshold))\n\n3. Live Chop Zone / No-Trade Zone:\n- Intraday Equilibrium Compression Band (80880.00 - 80960.00): Price has surged into the upper boundary above the Macro 50% Daily Equilibrium (80929.36) and the 1H consolidation shelf high (80920.92). Trading inside this 80-point pocket presents high risk of false re-tests and rapid premium decay. Avoid initiating new naked positions within this zone.\n- Institutional Power Hour Volatility (13:30 - 15:30 IST): High-speed institutional auction rotations are underway following the +382 pt directional impulse. Expect rapid bid-ask widening and liquidity probes around psychological round figures (81000.00). Wait for complete 5m candle closes outside the band before committing capital.\n- Order Block Retest Friction: The bearish supply base between 80824.84 and 80827.88 has been broken to the upside. Any sudden corrective slip back into this origin pocket will likely chop between 80820.00 and 80920.00 until the closing auction establishes definitive institutional balance.\n- False Breakout Trap Warning: With spot hovering just above 81000.00, premature breakout entries into unconfirmed wicks toward 81100.00 risk sudden bull traps. Only trade momentum on high-volume candle body closes.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze Expansion ([After 1:30 PM IST: 5m candle close ABOVE 81050.00]): Triggers rapid acceleration through overhead Buy-Side Liquidity (BSL), forcing intraday short covers toward the 81180.00 - 81220.00 liquidity pocket and the Macro Day High at 81339.41.\n- Long-Unwinding Breakdown Expansion ([After 1:30 PM IST: 5m candle close BELOW 80820.00]): Invalidates the recent surge base, accelerating sell stops down through the 50% Micro-EQ anchor (80732.20) and testing the 1H Shelf Low at 80543.48.\n- Liquidity Sweep SFP Mean Reversion ([After 1:30 PM IST: 5m sweep probe above 81120.00 or below 80900.00 with immediate candle reclaim]): Sets up a rapid mean-reversion counter-rotation back toward the Macro 50% Equilibrium at 80929.36.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Macro EQ Pullback Re-test Long): Wait for a shallow pullback into the 80920.00 - 80930.00 support zone followed by a completed 5m bullish reversal candle closing above 80940.00. | TP: 81150.00 / 81339.41 | SL: 80850.00 | 💡 Buy 80900 CE + Sell 81100 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Explosive Round-Number Breakout Long): Wait for a decisive 5m candle close firmly above 81050.00 confirming institutional expansion. | TP: 81220.00 / 81339.41 | SL: 80960.00 | 💡 Buy 81000 CE + Sell 81200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Overhead Resistance Exhaustion / SFP Short): Wait for an intraday exhaustion probe toward 81120.00 followed by a confirmed 5m bearish rejection close back below 80980.00. | TP: 80850.00 / 80732.20 | SL: 81080.00 | 💡 Buy 81000 PE + Sell 80800 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Base Failure / Breakdown Short): Wait for a decisive 5m candle close below the broken supply base anchor at 80820.00 confirming breakdown at 80810.00. | TP: 80650.00 / 80543.48 | SL: 80910.00 | 💡 Buy 80800 PE + Sell 80600 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261109_133302",
     "timestamp": "2026-11-09T13:33:02+05:30",
     "timeDisplay": "01:33 PM, Nov 09",
