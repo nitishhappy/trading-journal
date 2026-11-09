@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-09T18:46:32+05:30",
+    "timeDisplay": "06:46 PM, Nov 09",
+    "price": "4102.5",
+    "bias": "bullish",
+    "behavior": "[MON 18:46] [G_B1]: Ignition base sweep of $4101.88 SSL with 5M reclaim close",
+    "tp": "$4114.50 / $4134.50",
+    "sl": "$4095.80",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T18:46:32+05:30",
+    "timeDisplay": "06:46 PM, Nov 09",
+    "price": "4136.5",
+    "bias": "bullish",
+    "behavior": "[MON 18:46] [G_B2]: Asian High breakout acceptance with full 15M body close",
+    "tp": "$4154.50 / $4164.80",
+    "sl": "$4129.70",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T18:46:32+05:30",
+    "timeDisplay": "06:46 PM, Nov 09",
+    "price": "4132.5",
+    "bias": "bearish",
+    "behavior": "[MON 18:46] [G_S1]: Asian High $4135.74 SFP sweep with 5M CHoCH close back below",
+    "tp": "$4115.80 / $4103.20",
+    "sl": "$4139.20",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T18:46:32+05:30",
+    "timeDisplay": "06:46 PM, Nov 09",
+    "price": "4095.5",
+    "bias": "bearish",
+    "behavior": "[MON 18:46] [G_S2]: Ignition base breakdown with 15M body close targeting London Low",
+    "tp": "$4080.80 / $4064.80",
+    "sl": "$4102.30",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-09T18:32:05+05:30",
     "timeDisplay": "06:32 PM, Nov 09",
     "price": "4096.0",
@@ -311,6 +355,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261109_184635",
+    "timestamp": "2026-11-09T18:46:35+05:30",
+    "timeDisplay": "06:46 PM, Nov 09",
+    "spot": "4120.87",
+    "trigger": "Structural Invalidation (+15.1 pts incremental shift from previous trigger 4105.81",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (06:45 PM IST - Nov 09, 2026 | Spot: 4120.87 | Trigger: Structural Invalidation (+15.1 pts incremental shift from previous trigger 4105.81))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY):** DXY 101.823 (Bearish Trend below 9/21 EMA providing persistent structural tailwind for bullion)\n* **US 10-Year Yield (US10Y):** 4.86% (Rising yields exerting localized intraday headwind and capping runaway expansion)\n* **Gold vs. Silver (XAU/XAG) SMT Status:** No divergence detected with Gold and Silver advancing in directional sync\n* **Active Session Context:** New York Killzone & COMEX Open (17:30 - 21:30 IST) operating under Peak Volatility regime with US order flow driving primary liquidity runs\n\n### 2. SMC & Session Liquidity Confluence:\n* **Module 1 (3-Session Liquidity Clock):** Asian session established a Strong Bullish Trend Engine ($72.27 range, 65.8% body) leaving Asian High ($4135.74) and Asian Low ($4063.47) as untouched macro magnets; London High ($4114.68) has been cleared in New York (peak $4127.06) while London Low ($4087.99) sits untouched as primary downside liquidity fuel.\n* **Module 2 (HTF 4H CRT & PDH/PDL):** Bullish trend intact with Spot holding above 4H 9-EMA ($4095.57) and 21-EMA ($4084.47); PDH ($4072.91) broken to the upside and PDL ($4062.51) swept and reclaimed earlier in the session.\n* **Module 3 (Inducement vs. Deep OTE):** Retail inducement sits between $4103.62 and $4094.21 where premature dip buyers face sweep risk; institutional round-number magnets cluster at $4110.00 and $4120.00 below, and $4130.00 and $4140.00 above.\n* **Module 4 & 5 (ATR & Order Flow Structure):** Live 15M ATR is $4.59 with typical stop hunts overshooting by +$3.67 to +$6.43; bullish ignition base at $4097.11 - $4097.12 anchors the dynamic demand foundation.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Active Chop Range:** $4108.44 (50% Micro-EQ) to $4120.00 (Immediate Spot Compression Shelf)\n* **Danger Zone Rationale:** Mid-range consolidation between the 1H shelf ceiling ($4115.00) and current spot float ($4120.87) exhibits compressed order book depth prone to dual-sided retail stops.\n* **Strict Tactical Directive:** Avoid executing market orders inside this neutral corridor; require an explicit liquidity purge of equal lows ($4101.88) or a confirmed expansion through the Asian High ($4135.74).\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion Velocity Zone:** Above $4135.74 (Purge of Day High and Asian High unleashing buy-stop cascade toward Asian Fib 1.272 at $4155.40 and 1.414 at $4165.66)\n* **Bearish Liquidation Velocity Zone:** Below $4096.00 (Breakdown of the $4097.11 ignition base accelerating long-liquidation toward London Low at $4087.99 and Deep Discount OTE at $4077.86)\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$4102.50** (Sweep $4097.12 - $4101.88) | **★ A+ PRIMARY [Ignition Base Sweep & Reclaim]:** Enter on 5M close > $4102.50 after sweeping $4101.88 SSL with lower-wick absorption. | **TP1:** $4114.50 / **TP2:** $4134.50 | **$4095.80** | 1:2.8 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4136.50** Breakout | **⚠️ BACKUP [Asian High Breakout & Expansion]:** Enter on 15M close > $4136.50 with zero upper-wick exhaustion and DXY weakness. | **TP1:** $4154.50 / **TP2:** $4164.80 | **$4129.70** | 1:3.4 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$4132.50** (Sweep $4134.09 - $4135.74) | **★ A+ PRIMARY [Asian High SFP & 4H CRT Reversal]:** Enter on 5M close < $4132.50 after sweeping $4135.74 BSL with upper-wick rejection. | **TP1:** $4115.80 / **TP2:** $4103.20 | **$4139.20** | 1:3.4 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4095.50** Breakdown | **⚠️ BACKUP [Ignition Base Breakdown & Liquidation]:** Enter on 15M close < $4095.50 slicing support with expanding volume. | **TP1:** $4080.80 / **TP2:** $4064.80 | **$4102.30** | 1:3.3 |"
+  },
+  {
     "id": "GOLD_20261109_183207",
     "timestamp": "2026-11-09T18:32:07+05:30",
     "timeDisplay": "06:32 PM, Nov 09",
