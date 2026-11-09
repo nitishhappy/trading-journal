@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-09T13:32:58+05:30",
+    "timeDisplay": "01:32 PM, Nov 09",
+    "price": "80700",
+    "bias": "bullish",
+    "behavior": "[MON 13:32] [B1]: Judas sweep of Equal Lows 80,633 with 5m close reclaiming ABOVE 80,700 confirming spring defense",
+    "tp": "80,880 / 80,920",
+    "sl": "80,580",
+    "status": "na",
+    "spread": "Buy 80700 CE + Sell 80900 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T13:32:58+05:30",
+    "timeDisplay": "01:32 PM, Nov 09",
+    "price": "80930",
+    "bias": "bullish",
+    "behavior": "[MON 13:32] [B2]: Decisive 5m close firmly ABOVE 80,930 absorbing 50% Daily Equilibrium and Equal Highs",
+    "tp": "81,150 / 81,340",
+    "sl": "80,780",
+    "status": "na",
+    "spread": "Buy 80900 CE + Sell 81100 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T13:32:58+05:30",
+    "timeDisplay": "01:32 PM, Nov 09",
+    "price": "80770",
+    "bias": "bearish",
+    "behavior": "[MON 13:32] [S1]: Failed probe into 80,820-80,880 ignition shelf with 5m bearish rejection close back BELOW 80,770",
+    "tp": "80,630 / 80,520",
+    "sl": "80,880",
+    "status": "na",
+    "spread": "Buy 80800 PE + Sell 80600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T13:32:58+05:30",
+    "timeDisplay": "01:32 PM, Nov 09",
+    "price": "80510",
+    "bias": "bearish",
+    "behavior": "[MON 13:32] [S2]: Decisive 5m close BELOW 80,510 confirming breakdown of Equal Lows shelf and Macro Day Low",
+    "tp": "80,350 / 80,200",
+    "sl": "80,650",
+    "status": "na",
+    "spread": "Buy 80500 PE + Sell 80300 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-09T10:34:43+05:30",
     "timeDisplay": "10:34 AM, Nov 09",
     "price": "80780",
@@ -1339,6 +1387,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261109_133302",
+    "timestamp": "2026-11-09T13:33:02+05:30",
+    "timeDisplay": "01:33 PM, Nov 09",
+    "spot": "80624.8",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (01:30 PM IST - Nov 09, 2026 | Spot: 80624.8 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Active Chop Corridor (80,630.00 to 80,780.00 Spot): Spot price (80624.80) is currently oscillating directly at the lower boundary of the immediate 1H consolidation shelf (80633.42 to 80920.92) and below the 15M ORB Low (80714.05). Entering the Institutional Power Hour (13:30 - 15:30 IST), straddle writing around the 80600 and 80700 strikes introduces severe chop and compression directly beneath the 50% Micro-Equilibrium chop anchor at 80777.17.\n- Strict No-Trade Zone (80,650.00 to 80,770.00): Executing market orders inside this internal range carries negative edge due to two-sided inventory absorption and theta decay. Aggressive positions must be avoided until clear liquidity extraction occurs outside this band.\n- Liquidity Traps & Equilibrium Anchors (80,633.42 & 80,920.92): Triple-tap Equal Lows (SSL) clustered near 80633.42 present a high probability of a pre-closing Judas Sweep stop-run into Macro Day Low (80519.31) before any viable spring reclaim. Concurrently, double-tap Equal Highs (BSL) at 80920.92 right below the 50% Daily Equilibrium (80929.36) act as overhead magnet liquidity subject to Stop-Hunt SFP traps.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Equal Lows Liquidity Sweep & Spring Reclaim] (Liquidity Tap Below 80633 with 5M Reclaim Above 80700): A sharp probe flushing stops below the triple-tap Equal Lows (80633.42) into Day Low demand (80520 - 80630) that finds institutional absorption and prints a swift 5-minute bullish reversal candle closing back above 80700.00, triggering an explosive short-covering squeeze toward 80777.17 (Micro-EQ) and 80920.00.\n- [Bullish Macro Equilibrium & BSL Absorption Breakout] (Sustained 5M Close Above 80930): Decisive breakout clearing the 1H shelf high, Equal Highs (80920.92), and 50% Daily Equilibrium (80929.36), triggering rapid short gamma unwinding from 81000 Call writers toward the 2H swing envelope at 81213.26 and the Macro Day High / 15M ORB High at 81339.41.\n- [Bearish Lower High Rejection & Trap] (Failed Probe into 80820 - 80880 with 5M Close Below 80770): A corrective mean-reversion bounce toward the Parabolic Ignition Base (80817.51 - 80836.00) that runs out of buying momentum and prints an aggressive rejection wick closing back below 80770.00, trapping intraday pullback buyers and rotating back down to test the 80633.42 Equal Lows.\n- [Bearish Day Low Liquidity Flush Breakdown] (Decisive 5M Close Below 80510): An institutional expansion breaking cleanly below the Macro Day Low (80519.31) and the triple-tap Equal Lows shelf, unleashing cascading long-liquidation momentum targeting the 80350.00 and 80200.00 macro liquidity pools.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Bullish Equal Lows Liquidity Sweep & Spring Reclaim): Price sweeps below 80,633.42 into Day Low demand (80,520.00 - 80,630.00) and prints a decisive 5-minute bullish reversal candle closing back ABOVE 80,700.00. | TP: 80,880.00 / 80,920.00 | SL: 80,580.00 | 💡 Buy 80700 CE + Sell 80900 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Macro 50% Equilibrium & BSL Breakout Expansion): Decisive 5-minute candle close firmly ABOVE 80,930.00 with expanding institutional buy volume confirming absorption of Equal Highs (80,920.92) and 50% Daily Equilibrium (80,929.36). | TP: 81,150.00 / 81,340.00 | SL: 80,780.00 | 💡 Buy 80900 CE + Sell 81100 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Micro-EQ Rejection & Failed Auction): Corrective rally into the 80,820.00 - 80,880.00 Bullish Ignition Base that fails to sustain volume and prints a 5-minute bearish rejection close back BELOW 80,770.00. | TP: 80,630.00 / 80,520.00 | SL: 80,880.00 | 💡 Buy 80800 PE + Sell 80600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Day Low Liquidity Cascade Breakdown): Decisive 5-minute candle-body close BELOW 80,510.00 confirming institutional loss of the triple-tap Equal Lows (80,633.42) and Macro Day Low (80,519.31). | TP: 80,350.00 / 80,200.00 | SL: 80,650.00 | 💡 Buy 80500 PE + Sell 80300 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261109_103444",
     "timestamp": "2026-11-09T10:34:44+05:30",
     "timeDisplay": "10:34 AM, Nov 09",
