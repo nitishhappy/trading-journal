@@ -1294,6 +1294,61 @@
                     </div>
                 </div>
 
+                <!-- AI TRADE DECISIONS LOG PANEL (Default Collapsed) -->
+                <div class="panel" id="ai-trade-decisions-panel">
+                    <h2 class="collapsible-header" id="ai-decisions-header">
+                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                            <span>🤖 AI Trade Decisions Log</span>
+                            <span id="ai-decisions-count-badge" style="font-size:0.75rem; padding:2px 8px; border-radius:12px; background:var(--surface-2); border:1px solid var(--border); color:var(--text-dim); font-family:'JetBrains Mono', monospace; font-weight:600;">0 runs</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                            <div class="scorecard-stats-pill" id="ai-decisions-summary-pill" style="font-size:0.74rem; padding:3px 9px;">
+                                YES TP:SL: <b id="ai-decisions-tpsl-ratio" style="color:var(--text); margin:0 3px;">0:0</b> | Net Pts: <b id="ai-decisions-net-pts" style="color:var(--success); font-family:'JetBrains Mono', monospace;">+0.0</b>
+                            </div>
+                            <button type="button" id="btn-ai-decisions-scan" style="background:rgba(139,92,246,0.16); border:1px solid rgba(139,92,246,0.45); color:#c084fc; padding:4px 9px; border-radius:4px; font-size:0.73rem; font-weight:600; cursor:pointer;" title="Scan today's 5M candles for 1st directional close & 30m+ cooldown triggers">⚡ Scan 5M Closes</button>
+                            <button type="button" id="btn-ai-decisions-clear" style="background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:4px 8px; border-radius:4px; font-size:0.72rem; cursor:pointer;" title="Clear logged AI trade decisions">Clear</button>
+                            <span class="toggle-icon" id="ai-decisions-toggle-icon">▶</span>
+                        </div>
+                    </h2>
+
+                    <div id="ai-decisions-body" class="collapsible-body" style="display:none;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--border);">
+                            <div style="font-size:0.76rem; color:var(--text-dim);">
+                                Triggers on <b>1st 5M close</b> (above Buy / below Sell) or after <b id="ai-cooldown-label">30m</b> cooldown from last AI call • Marks <b>TP</b> as soon as <b>TP1</b> is hit.
+                            </div>
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <select id="filter-ai-decision" style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">
+                                    <option value="ALL">All Decisions (YES &amp; NO)</option>
+                                    <option value="YES">✅ YES (Taken Trades)</option>
+                                    <option value="NO">⛔ NO (Filtered / Skipped)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="scorecard-table-wrap" style="max-height:420px; overflow-y:auto;">
+                            <table class="scorecard-table" id="ai-decisions-table">
+                                <thead>
+                                    <tr>
+                                        <th>Time / Level</th>
+                                        <th>Trade Decision</th>
+                                        <th>Type</th>
+                                        <th>Outcome (TP1 / SL)</th>
+                                        <th>Points Captured / Lost</th>
+                                        <th style="text-align:left; min-width:220px;">Logic Behind Decision</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ai-decisions-tbody">
+                                    <tr>
+                                        <td colspan="6" style="text-align:center; color:var(--text-dim); padding:1.25rem;">
+                                            No 5M level close AI evaluations logged yet. Keep the chart open during market hours or click <b>⚡ Scan 5M Closes</b> to evaluate today's session.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- MAPPED LEVELS PANEL -->
                 <div class="panel">
                     <h2 class="collapsible-header" id="levels-list-header">
@@ -2159,6 +2214,7 @@
   <script src="./js/data/eurusd_daily_plan.js?v=20261005"></script>
   <script src="./js/data/scanned_stocks.js?v=20260803"></script>
   <script src="./js/data/ml_coherence_data.js?v=20260818_2"></script>
+  <script src="./js/services/niftyAiDecisions.js?v=20261110"></script>
   <script src="./js/ui/aico-pilot.js?v=20260818_2"></script>
   <script type="module" src="app.js"></script>
   <script type="module" src="trade-security.js"></script>

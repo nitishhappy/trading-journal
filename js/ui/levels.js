@@ -63,6 +63,14 @@ if (viewLevels) {
         togglePanel('levels-list-body', this);
     });
 
+    const aiDecisionsHeader = document.getElementById('ai-decisions-header');
+    if (aiDecisionsHeader) {
+        aiDecisionsHeader.addEventListener('click', function(e) {
+            if (e.target.id === 'btn-ai-decisions-scan' || e.target.id === 'btn-ai-decisions-clear') return;
+            togglePanel('ai-decisions-body', this);
+        });
+    }
+
     // ===================== TRADINGVIEW CHART =====================
     let tvWidget = null;
     let isTvChartOpen = false;
@@ -3110,6 +3118,12 @@ window.toggleMaximizePanel = function(btn, event) {
             renderChart();
         }
 
+        // Update AI Trade Decision TP1/SL outcomes and floating points on NIFTY ticks
+        if (!isSensex && !isGold && !isBtc && !isSp500 && !isEurUsd && window.NiftyAiDecisions) {
+            window.NiftyAiDecisions.evaluatePendingOutcomes({ currentPrice });
+            renderAiTradeDecisionsLog();
+        }
+
         let insideLevels = [];
         let aboveLevels = [];
         let belowLevels = [];
@@ -3411,6 +3425,272 @@ window.toggleMaximizePanel = function(btn, event) {
         }
     }
 
+    // ===================== AI TRADE DECISIONS LOG (5M CLOSE ENGINE) =====================
+    function renderAiTradeDecisionsLog() {
+        const tbody = document.getElementById('ai-decisions-tbody');
+        const countBadge = document.getElementById('ai-decisions-count-badge');
+        const tpslRatioEl = document.getElementById('ai-decisions-tpsl-ratio');
+        const netPtsEl = document.getElementById('ai-decisions-net-pts');
+        const cooldownLabelEl = document.getElementById('ai-cooldown-label');
+        const filterSelect = document.getElementById('filter-ai-decision');
+
+        if (!tbody || !window.NiftyAiDecisions) return;
+
+        if (cooldownLabelEl && typeof window.NiftyAiDecisions.getCooldownMinutes === 'function') {
+            cooldownLabelEl.textContent = `${window.NiftyAiDecisions.getCooldownMinutes()}m`;
+        }
+
+        const allEntries = window.NiftyAiDecisions.loadDecisionsLog() || [];
+        if (countBadge) countBadge.textContent = allEntries.length;
+
+        // Calculate summary stats across all resolved records (especially YES decisions)
+        const yesResolved = allEntries.filter(r => r.decision === 'YES' && (r.outcome === 'TP' || r.outcome === 'SL'));
+        const allResolved = allEntries.filter(r => r.outcome === 'TP' || r.outcome === 'SL');
+        const statPool = yesResolved.length > 0 ? yesResolved : allResolved;
+        const tpCount = statPool.filter(r => r.outcome === 'TP').length;
+        const slCount = statPool.filter(r => r.outcome === 'SL').length;
+        const netPoints = Number(statPool.reduce((acc, r) => acc + (Number(r.points) || 0), 0).toFixed(1));
+
+        if (tpslRatioEl) {
+            if (tpCount + slCount > 0) {
+                const winPct = Math.round((tpCount / (tpCount + slCount)) * 100);
+                tpslRatioEl.textContent = `${tpCount} TP / ${slCount} SL (${winPct}%)`;
+                tpslRatioEl.style.display = 'inline-block';
+            } else {
+                tpslRatioEl.style.display = 'none';
+            }
+        }
+
+        if (netPtsEl) {
+            if (tpCount + slCount > 0) {
+                const sign = netPoints > 0 ? '+' : '';
+                netPtsEl.textContent = `Net: ${sign}${netPoints} pts`;
+                netPtsEl.style.display = 'inline-block';
+                netPtsEl.style.color = netPoints >= 0 ? '#34d399' : '#f87171';
+                netPtsEl.style.background = netPoints >= 0 ? 'rgba(16, 185, 129, 0.16)' : 'rgba(239, 68, 68, 0.16)';
+                netPtsEl.style.borderColor = netPoints >= 0 ? 'rgba(16, 185, 129, 0.35)' : 'rgba(239, 68, 68, 0.35)';
+            } else {
+                netPtsEl.style.display = 'none';
+            }
+        }
+
+        const filterMode = filterSelect ? filterSelect.value : 'ALL';
+        const filtered = allEntries.filter(r => {
+            if (filterMode === 'YES') return r.decision === 'YES';
+            if (filterMode === 'NO') return r.decision === 'NO';
+            if (filterMode === 'TP') return r.outcome === 'TP';
+            if (filterMode === 'SL') return r.outcome === 'SL';
+            if (filterMode === 'PENDING') return r.outcome === 'PENDING';
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" style="padding: 20px; text-align: center; color: #64748b; font-style: italic;">
+                        ${allEntries.length === 0
+                            ? 'No 5M level-close AI evaluations logged yet. Evaluations trigger automatically when a 5M candle closes across a level (or click <strong>⚡ Scan 5M Session</strong>).'
+                            : 'No AI trade decisions match the selected filter.'}
+                    </td>
+                </tr>`;
+            return;
+        }
+
+        tbody.innerHTML = filtered.map(entry => {
+            const isYes = entry.decision === 'YES';
+            const decisionBadge = isYes
+                ? `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(16,185,129,0.18); color:#34d399; border:1px solid rgba(16,185,129,0.4);">✅ YES</span>`
+                : `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(239,68,68,0.18); color:#f87171; border:1px solid rgba(239,68,68,0.4);">⛔ NO</span>`;
+
+            const isBuy = entry.type === 'BUY';
+            const typeBadge = isBuy
+                ? `<span style="display:inline-block; padding:3px 8px; border-radius:6px; font-weight:700; font-size:0.73rem; background:rgba(59,130,246,0.16); color:#60a5fa; border:1px solid rgba(59,130,246,0.35);">▲ BUY</span>`
+                : `<span style="display:inline-block; padding:3px 8px; border-radius:6px; font-weight:700; font-size:0.73rem; background:rgba(249,115,22,0.16); color:#fb923c; border:1px solid rgba(249,115,22,0.35);">▼ SELL</span>`;
+
+            let outcomeHtml = '';
+            if (entry.outcome === 'TP') {
+                outcomeHtml = `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(16,185,129,0.2); color:#10b981; border:1px solid rgba(16,185,129,0.45);">🎯 TP (TP1 Hit)</span>`;
+                if (entry.resolvedTimeIst) {
+                    outcomeHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">at ${entry.resolvedTimeIst}</div>`;
+                }
+            } else if (entry.outcome === 'SL') {
+                outcomeHtml = `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(239,68,68,0.2); color:#ef4444; border:1px solid rgba(239,68,68,0.45);">🛑 SL Hit</span>`;
+                if (entry.resolvedTimeIst) {
+                    outcomeHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">at ${entry.resolvedTimeIst}</div>`;
+                }
+            } else {
+                outcomeHtml = `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:600; font-size:0.72rem; background:rgba(234,179,8,0.15); color:#facc15; border:1px solid rgba(234,179,8,0.35);">⏳ PENDING</span>`;
+            }
+
+            let pointsHtml = '<span style="color:#64748b;">—</span>';
+            if (typeof entry.points === 'number' && (entry.outcome === 'TP' || entry.outcome === 'SL')) {
+                const sign = entry.points > 0 ? '+' : '';
+                const color = entry.points >= 0 ? '#10b981' : '#ef4444';
+                pointsHtml = `<span style="font-weight:700; font-size:0.84rem; color:${color};">${sign}${entry.points.toFixed(1)} pts</span>`;
+                if (entry.tp1Price && entry.slPrice) {
+                    pointsHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">TP1: ${Math.round(entry.tp1Price)} | SL: ${Math.round(entry.slPrice)}</div>`;
+                }
+            } else if (typeof entry.floatingPoints === 'number') {
+                const sign = entry.floatingPoints > 0 ? '+' : '';
+                const color = entry.floatingPoints >= 0 ? '#34d399' : '#f87171';
+                pointsHtml = `<span style="font-weight:600; font-size:0.78rem; color:${color}; opacity:0.85;">${sign}${entry.floatingPoints.toFixed(1)} pts (live)</span>`;
+                if (entry.tp1Price && entry.slPrice) {
+                    pointsHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">TP1: ${Math.round(entry.tp1Price)} | SL: ${Math.round(entry.slPrice)}</div>`;
+                }
+            }
+
+            const chartBtn = entry.screenshotDataUrl
+                ? `<button type="button" onclick="window.previewAiDecisionChart('${entry.id}')" style="margin-left:6px; padding:2px 6px; font-size:0.68rem; border-radius:4px; background:rgba(99,102,241,0.16); color:#a5b4fc; border:1px solid rgba(99,102,241,0.35); cursor:pointer;">🖼️ Chart</button>`
+                : '';
+
+            const safeLogic = String(entry.logic || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const triggerLabel = entry.triggerReason === 'COOLDOWN_30M_CLOSE' ? '⏱️ 30m Cooldown Close' : '⚡ First 5M Close';
+
+            return `
+                <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.12);">
+                    <td style="padding: 9px 10px; vertical-align: top;">
+                        <div style="font-weight: 700; color: #f8fafc;">${entry.candleTimeIst || '--:--'} <span style="font-size:0.7rem; color:#64748b;">(${entry.candleDateIst || ''})</span></div>
+                        <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 2px;">
+                            <strong style="color:#818cf8;">[${entry.levelTag || 'LVL'}]</strong> @ ${Number(entry.levelPrice || 0).toFixed(0)}
+                            <span style="color:#94a3b8;">(Close: ${Number(entry.closePrice || 0).toFixed(1)})</span>
+                        </div>
+                        <div style="font-size: 0.67rem; color: #64748b; margin-top: 2px;">${triggerLabel}</div>
+                    </td>
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                        ${decisionBadge}
+                        ${entry.confidence ? `<div style="font-size:0.67rem; color:#94a3b8; margin-top:3px;">Conf: ${entry.confidence}</div>` : ''}
+                    </td>
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                        ${typeBadge}
+                    </td>
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                        ${outcomeHtml}
+                    </td>
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                        ${pointsHtml}
+                    </td>
+                    <td style="padding: 9px 10px; vertical-align: top; color: #e2e8f0; line-height: 1.4;">
+                        <div>${safeLogic}</div>
+                        <div style="font-size:0.68rem; color:#64748b; margin-top:4px; display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                            <span>Model: ${entry.modelUsed || 'gemini-flash'}</span>
+                            ${chartBtn}
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    window.previewAiDecisionChart = function(decisionId) {
+        if (!window.NiftyAiDecisions) return;
+        const list = window.NiftyAiDecisions.loadDecisionsLog() || [];
+        const item = list.find(r => r.id === decisionId);
+        if (!item || !item.screenshotDataUrl) return;
+
+        let modal = document.getElementById('ai-decision-chart-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'ai-decision-chart-modal';
+            modal.style.cssText = 'position:fixed; inset:0; z-index:99999; background:rgba(2,6,23,0.85); display:flex; align-items:center; justify-content:center; padding:16px;';
+            document.body.appendChild(modal);
+        }
+        modal.innerHTML = `
+            <div style="background:#0f172a; border:1px solid rgba(148,163,184,0.25); border-radius:12px; max-width:780px; width:100%; padding:14px; box-shadow:0 20px 50px rgba(0,0,0,0.6);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div style="font-weight:700; color:#f8fafc; font-size:0.9rem;">
+                        🤖 [${item.levelTag}] ${item.type} @ ${item.closePrice} (${item.candleTimeIst}) — Decision: ${item.decision} (${item.outcome})
+                    </div>
+                    <button type="button" onclick="document.getElementById('ai-decision-chart-modal').style.display='none'" style="background:transparent; border:none; color:#94a3b8; font-size:1.2rem; cursor:pointer;">✕</button>
+                </div>
+                <img src="${item.screenshotDataUrl}" alt="5M Chart Snapshot" style="width:100%; border-radius:8px; border:1px solid rgba(148,163,184,0.2);" />
+                <div style="margin-top:10px; font-size:0.8rem; color:#cbd5e1; line-height:1.45;">
+                    <strong>AI Logic:</strong> ${String(item.logic || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+                </div>
+            </div>
+        `;
+        modal.style.display = 'flex';
+    };
+
+    const filterAiDecisionEl = document.getElementById('filter-ai-decision');
+    if (filterAiDecisionEl) {
+        filterAiDecisionEl.addEventListener('change', () => renderAiTradeDecisionsLog());
+    }
+
+    const btnAiDecisionsClear = document.getElementById('btn-ai-decisions-clear');
+    if (btnAiDecisionsClear) {
+        btnAiDecisionsClear.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm('Clear all logged AI 5M level-close trade decisions and reset 30m cooldown history?')) {
+                if (window.NiftyAiDecisions) {
+                    window.NiftyAiDecisions.clearDecisionsLog();
+                }
+                renderAiTradeDecisionsLog();
+            }
+        });
+    }
+
+    const btnAiDecisionsScan = document.getElementById('btn-ai-decisions-scan');
+    if (btnAiDecisionsScan) {
+        btnAiDecisionsScan.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            if (!window.NiftyAiDecisions) return;
+
+            // Ensure collapsible body is open so user sees progress
+            const body = document.getElementById('ai-decisions-body');
+            const header = document.getElementById('ai-decisions-header');
+            if (body && body.classList.contains('collapsed')) {
+                togglePanel('ai-decisions-body', header);
+            }
+
+            const origText = btnAiDecisionsScan.innerHTML;
+            btnAiDecisionsScan.disabled = true;
+            btnAiDecisionsScan.innerHTML = '⏳ Scanning 5M...';
+
+            try {
+                let candles5m = (window.niftyCandlesData && Array.isArray(window.niftyCandlesData.timeframe5m))
+                    ? window.niftyCandlesData.timeframe5m
+                    : (Array.isArray(window.allCandles) ? window.allCandles : []);
+
+                if (!candles5m || candles5m.length === 0) {
+                    try {
+                        const r = await fetch('/api/fetch5mCandles?symbol=%5ENSEI');
+                        if (r.ok) {
+                            const d = await r.json();
+                            if (Array.isArray(d.candles)) candles5m = d.candles;
+                        }
+                    } catch (err) {}
+                }
+
+                const levelsToScan = (Array.isArray(allLevels) && allLevels.length > 0)
+                    ? allLevels
+                    : (Array.isArray(window.dailyPlanData) ? window.dailyPlanData : []);
+
+                const created = await window.NiftyAiDecisions.scanSessionCandlesForLevels({
+                    candles5m,
+                    levels: levelsToScan
+                });
+
+                renderAiTradeDecisionsLog();
+                import('../utils/toast.js').then(m => m.showToast(`🤖 Scanned 5M session: ${created.length} new AI trade evaluation(s) logged.`));
+            } catch (scanErr) {
+                console.error('AI 5M Session Scan Error:', scanErr);
+            } finally {
+                btnAiDecisionsScan.disabled = false;
+                btnAiDecisionsScan.innerHTML = origText;
+            }
+        });
+    }
+
+    window.addEventListener('nifty-ai-decisions-updated', () => {
+        renderAiTradeDecisionsLog();
+    });
+
+    window.addEventListener('message', (e) => {
+        if (e.data && e.data.type === 'NIFTY_AI_DECISIONS_UPDATED') {
+            renderAiTradeDecisionsLog();
+        }
+    });
+
     // Instant cross-tab/window synchronization with interactive charts
     window.addEventListener('storage', (e) => {
         const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
@@ -3419,7 +3699,12 @@ window.toggleMaximizePanel = function(btn, event) {
             loadScorecardHistory(activeAsset);
             renderScorecard();
         }
+        if (e.key === 'niftyAiTradeDecisionsLog_v1') {
+            renderAiTradeDecisionsLog();
+        }
     });
+
+    renderAiTradeDecisionsLog();
 
     // Call init when module loads
     window.currentActiveAsset = 'NIFTY';

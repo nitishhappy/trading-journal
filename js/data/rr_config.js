@@ -14,7 +14,8 @@ window.assetParamsConfig = {
         "PRICE_RENDER_DELTA": 5,
         "MIN_VALID_PRICE": 10000,
         "SPREAD_WIDTH": 50,
-        "STRIKE_INTERVAL": 50
+        "STRIKE_INTERVAL": 50,
+        "AI_EVAL_COOLDOWN_MINS": 30
     },
     "sensex": {
         "LEVEL_PROXIMITY_MARGIN": 50,

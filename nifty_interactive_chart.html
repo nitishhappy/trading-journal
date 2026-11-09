@@ -9,6 +9,7 @@
     <script src="js/data/nifty_candles.js"></script>
     <script src="js/config.js"></script>
     <script src="js/data/rr_config.js"></script>
+    <script src="js/services/niftyAiDecisions.js"></script>
     <style>
         :root {
             --bg-dark: #0f172a;
@@ -4233,6 +4234,7 @@
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(nextCandle.close);
                 renderVerticalLinesOverlay();
+                checkCandleCloseCrossings(currentCandlesArray, 'Nifty', true);
             }, REPLAY_SPEED_MS);
         }
 
@@ -4262,6 +4264,7 @@
                 updateOHLCHeader();
                 updateProximityAndAutoSelect(nextCandle.close);
                 renderVerticalLinesOverlay();
+                checkCandleCloseCrossings(currentCandlesArray, 'Nifty', true);
             } else {
                 showToast("🏁 Replay at Latest", "All available candles are already displayed.");
             }
@@ -5372,8 +5375,30 @@
         let levelCrossingMemory = {};
         let lastEvaluatedClosedCandleTime = null;
 
-        function checkCandleCloseCrossings(candles, assetName) {
-            if (!alertsEnabled || !candles || candles.length < 3 || !activePriceLines || activePriceLines.length === 0) {
+        function checkCandleCloseCrossings(candles, assetName, isReplayStep = false) {
+            if (!candles || candles.length < 3 || !activePriceLines || activePriceLines.length === 0) {
+                return;
+            }
+
+            // Always run AI Trade Decisions Evaluator & Outcome Resolver (First Close OR 30m+ Cooldown)
+            if (window.NiftyAiDecisions) {
+                const targetIdx = isReplayStep ? (candles.length - 1) : (candles.length - 2);
+                window.NiftyAiDecisions.checkAndTriggerLevelCloseAi(candles, activePriceLines, chartInstance, {
+                    closedCandleIndex: targetIdx,
+                    onDecisionLogged: (rec) => {
+                        const decIcon = rec.decision === 'YES' ? '✅ TAKE TRADE' : '⛔ SKIP TRADE';
+                        const title = `🤖 AI (${rec.tag} ${rec.tradeType}): ${decIcon}`;
+                        const body = `Close: ₹${rec.entryPrice} | TP1: ₹${rec.tp1Price} | SL: ₹${rec.slPrice} — ${rec.logic}`;
+                        showToast(title, body);
+                        if (alertsEnabled) {
+                            triggerAlertSound(rec.decision === 'YES' ? 1046 : 520, 'sine', 0.25);
+                            dispatchDesktopNotification(title, body);
+                        }
+                    }
+                });
+            }
+
+            if (!alertsEnabled) {
                 return;
             }
 
@@ -5381,7 +5406,7 @@
             const currSym = '₹';
 
             // candles[candles.length - 1] is active in-progress candle; candles[candles.length - 2] is strict finalized close
-            const closedCandle = candles[candles.length - 2];
+            const closedCandle = isReplayStep ? candles[candles.length - 1] : candles[candles.length - 2];
             if (!closedCandle) return;
 
             if (lastEvaluatedClosedCandleTime === closedCandle.time) {

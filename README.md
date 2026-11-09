@@ -2873,3 +2873,19 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 - **Automated Desktop Bridge Synchronization**:
   - Enhanced `Utilities/sync_briefing_to_daily_plan.py` (`sync_rr_configs`) to synchronize asset thresholds and R:R baselines from desktop `config_<asset>.txt` into both `js/data/rr_config.js` and `js/config.js`.
 - **Files Modified / Added**: `js/config.js` (NEW), `js/data/rr_config.js`, `index.html`, `js/services/candleTimers.js`, `js/ui/settings.js`, `trade-security.js`, `btc_interactive_chart.html`, `eurusd_interactive_chart.html`, `gold_interactive_chart.html`, `nifty_interactive_chart.html`, `sensex_interactive_chart.html`, `sp500_interactive_chart.html`, `README.md`.
+
+
+### v2.4.05 — 10 Nov 2026 — NIFTY 5M Level-Close Multimodal AI Trade Decision Engine & Review Log
+
+- **Directional 5M Close Trigger + 30-Minute Cooldown (`js/services/niftyAiDecisions.js`)**:
+  - Extends NIFTY's 5-minute level-crossing monitor (`checkCandleCloseCrossings` in `nifty_interactive_chart.html` and session scanner in `levels.js`) to detect when a 5M candle closes **above** a Buy level (`[B1]`, `[B2]`, `[KB1]`, `[KB2]`) or **below** a Sell level (`[S1]`, `[S2]`, `[KS1]`, `[KS2]`).
+  - Triggers an AI trade evaluation on the **first 5M close** across the level, or after a configurable **30-minute cooldown** (`AI_EVAL_COOLDOWN_MINS=30` in `config_nifty.txt`, bridged to `js/data/rr_config.js` and `js/config.js`) from the last AI call on that level.
+- **Multimodal Chart Screenshot + SMC Telemetry Evaluation (`api/evaluateNiftyTrade.js`)**:
+  - Captures a PNG snapshot of the current 5M chart (`chart.takeScreenshot()` or offscreen 5M canvas with 9 EMA, Entry, TP1, and SL overlays) alongside full market telemetry: 5M candle body/wick anatomy, 9 EMA distance, 15M ORB range, Day High/Low, TP1/SL R:R ratio, and the original briefing thesis.
+  - Evaluates via Gemini Flash Vision (`gemini-3-flash-preview` / `gemini-3.6-flash` / `gemini-3.5-flash`) with an automatic deterministic SMC candle-anatomy fallback when offline.
+- **Automated Outcome Resolution (TP on TP1 Hit / SL) & Points Tracking**:
+  - Automatically monitors subsequent 5M candles and live ticks to mark `Outcome` as **`TP`** as soon as **`TP1`** is hit, or **`SL`** if Stop Loss is hit first.
+  - Calculates and logs **`Points Captured / Lost`** (`+pts` on TP1 hit, `-pts` on SL hit, plus live floating points while `PENDING`).
+- **Default-Collapsed Review Section in Levels Tab (`index.html`, `js/ui/levels.js`)**:
+  - Added `#ai-trade-decisions-panel` (`🤖 AI 5M Level-Close Trade Decisions`, collapsed by default) inside the **Levels** tab with columns: `Time / Level`, `Trade Decision (YES/NO)`, `Type (BUY/SELL)`, `Outcome (TP1 / SL)`, `Points Captured / Lost`, and `Logic Behind Decision` (with interactive `🖼️ Chart` snapshot modal and `⚡ Scan 5M Session` button).
+- **Files Modified / Added**: `api/evaluateNiftyTrade.js` (NEW), `js/services/niftyAiDecisions.js` (NEW), `nifty_interactive_chart.html`, `index.html`, `js/ui/levels.js`, `js/data/rr_config.js`, `js/config.js`, `README.md`.
