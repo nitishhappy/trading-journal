@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-09T12:31:15+05:30",
+    "timeDisplay": "12:31 PM, Nov 09",
+    "price": "4098.5",
+    "bias": "bullish",
+    "behavior": "[MON 12:31] [G_B1]: 1H Shelf SSL Judas Sweep Reclaim entering on 5M close > $4098.50 after sweeping $4097.54 SSL into $4094.21 Daily EQ",
+    "tp": "$4106.50 / $4115.50",
+    "sl": "$4092.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T12:31:15+05:30",
+    "timeDisplay": "12:31 PM, Nov 09",
+    "price": "4111.0",
+    "bias": "bullish",
+    "behavior": "[MON 12:31] [G_B2]: BSL Cluster Liquidity Acceptance entering on 15M close > $4111.00 clearing 4-tap $4110.06 highs",
+    "tp": "$4119.50 / $4128.50",
+    "sl": "$4104.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T12:31:15+05:30",
+    "timeDisplay": "12:31 PM, Nov 09",
+    "price": "4109.5",
+    "bias": "bearish",
+    "behavior": "[MON 12:31] [G_S1]: Premium OTE Stop-Hunt SFP entering on 5M CHoCH close < $4109.50 after sweeping $4110.06 BSL into $4110.56-$4117.02 OTE",
+    "tp": "$4100.50 / $4091.50",
+    "sl": "$4116.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-09T12:31:15+05:30",
+    "timeDisplay": "12:31 PM, Nov 09",
+    "price": "4096.0",
+    "bias": "bearish",
+    "behavior": "[MON 12:31] [G_S2]: 1H Shelf Floor Breakdown entering on 15M close < $4096.00 breaking $4097.54 support and $4094.21 Daily EQ",
+    "tp": "$4088.00 / $4078.00",
+    "sl": "$4102.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-09T10:03:13+05:30",
     "timeDisplay": "10:03 AM, Nov 09",
     "price": "4106.5",
@@ -47,6 +91,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261109_123118",
+    "timestamp": "2026-11-09T12:31:18+05:30",
+    "timeDisplay": "12:31 PM, Nov 09",
+    "spot": "4105.81",
+    "trigger": "Structural Invalidation (-19.7 pts incremental shift from previous trigger 4125.48",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (12:30 PM IST - Nov 09, 2026 | Spot: $4105.81 | Trigger: Structural Invalidation (-19.7 pts incremental shift from previous trigger 4125.48))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY) Trajectory:** DXY trades at 102.06 in a confirmed bearish trend below its 9/21 EMAs, providing a sustained macro tailwind for Gold upside expansion.\n* **US 10-Year Treasury Yields:** US10Y yields stand at 4.86% and remain elevated, providing an intraday friction headwind that caps aggressive runaway momentum into London open.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** 🟢 Bullish SMT Divergence is active across the European open where Silver swept its session low while Gold defended a structural higher low, confirming underlying institutional accumulation.\n* **Macro Range Constraints:** Spot trades at $4105.81, rotating between Macro Day High ($4134.09) and Day Low ($4054.33), with the Macro 50% Daily Equilibrium anchored at $4094.21.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Asian Session Structure & Classification:** Asian High was $4132.74, Low was $4060.47 (Range: $72.27, Bullish Body: 65.8%). Asia closed as a Strong Bullish Trend Engine (Body >= 60%), indicating London statistically breaks with Asia 81.8% of the time toward Asian Fib 1.272 ($4152.40).\n* **Untouched Liquidity Pools:** Asian High ($4132.74) and Asian Low ($4060.47) remain completely untouched liquidity magnets. London High ($4108.03) and London Low ($4106.60) currently form the immediate operational boundaries.\n* **Higher Timeframe 4H CRT Alignment:** Bullish posture remains intact with Spot trading above the 4H 9-EMA ($4088.68) and 21-EMA ($4079.72). Price is currently tracking inside the Previous 4H Candle Range ($4112.61 - $4132.43) below the 4H Midpoint EQ ($4122.52).\n* **Microstructure Traps & OTE Pools:** Retail Buy-Side Liquidity (BSL) has clustered at $4110.06 with 4 consecutive taps, setting up an engineered Stop-Hunt SFP pool into Deep Premium OTE ($4110.56 - $4117.02). Conversely, Sell-Side Liquidity (SSL) is engineered at $4097.54 (2 taps), creating a Judas Sweep trap above the 50% Daily Equilibrium ($4094.21).\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Immediate Compression Corridor:** $4100.00 to $4108.00 defines the intraday no-trade slaughterhouse, bounded by the 1H Consolidation Shelf ($4097.54 - $4110.06) and the London 50% Micro-Equilibrium at $4103.80.\n* **Inducement Trap Bounds:** The zone between $4103.62 and $4094.21 represents shallow retail inducement designed to bait premature limit buyers before SSL liquidity at $4097.54 is swept.\n* **Execution Prohibition:** Avoid entering market orders while price oscillates inside the 2H Swing Equilibrium ($4106.70). Trading without a confirmed session sweep wick and 5M/15M reclaim inside this zone carries severe whipsaw risk.\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion Threshold:** A decisive 15-minute body close above $4111.00 clearing the 4-tap BSL cluster ($4110.06) triggers explosive momentum toward the 4H Midpoint EQ ($4122.52) and untouched Asian High ($4132.74).\n* **Bearish Acceleration Threshold:** A decisive 15-minute close below $4096.00 invalidating the 1H shelf ($4097.54) and Daily Equilibrium ($4094.21) triggers rapid long liquidation into the True Deep Discount OTE corridor ($4071.40 - $4077.86).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$4098.50** (Sweep $4097.54-$4094.21) | **★ A+ PRIMARY [1H Shelf SSL Judas Sweep Reclaim]:** Enter on 5M close > $4098.50 after sweeping $4097.54 SSL into $4094.21 Daily EQ with lower-wick absorption. | **TP1:** $4106.50 / **TP2:** $4115.50 | **$4092.00** | 1:2.6 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4111.00** Breakout | **⚠️ BACKUP [BSL Cluster Liquidity Acceptance]:** Enter on 15M body close > $4111.00 slicing 4-tap $4110.06 highs with zero upper wick and expanding volume. | **TP1:** $4119.50 / **TP2:** $4128.50 | **$4104.50** | 1:2.7 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$4109.50** (Sweep $4110.06-$4113.50) | **★ A+ PRIMARY [Premium OTE Stop-Hunt SFP]:** Enter on 5M CHoCH close < $4109.50 after sweeping $4110.06 BSL into $4110.56-$4117.02 OTE with upper-wick rejection. | **TP1:** $4100.50 / **TP2:** $4091.50 | **$4116.00** | 1:2.8 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4096.00** Breakdown | **⚠️ BACKUP [1H Shelf Floor Breakdown]:** Enter on 15M body close < $4096.00 slicing $4097.54 support and $4094.21 Daily EQ with red volume expansion. | **TP1:** $4088.00 / **TP2:** $4078.00 | **$4102.50** | 1:2.8 |"
+  },
+  {
     "id": "GOLD_20261109_100316",
     "timestamp": "2026-11-09T10:03:16+05:30",
     "timeDisplay": "10:03 AM, Nov 09",
