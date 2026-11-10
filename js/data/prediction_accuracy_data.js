@@ -1,6 +1,90 @@
 // Auto-generated Real-time Prediction Accuracy Data
 window.predictionAccuracyLevels = [
   {
+    "id": 4260,
+    "asset": "gold",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "time_display": "09:32 AM, Nov 10",
+    "price": 4096.0,
+    "price_raw": "4096.0",
+    "bias": "bearish",
+    "setup_tag": "G_S2",
+    "behavior": "[TUE 09:32] [G_S2]: Equal Lows Breakdown: Enter on 15M body close < $4096.00 slicing through $4098.00 triple-tap SSL with heavy selling pressure",
+    "tp": "$4086.00 / $4075.00",
+    "sl": "$4102.50",
+    "tp_val": 4086.0,
+    "sl_val": 4102.5,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-10 04:02:02"
+  },
+  {
+    "id": 4259,
+    "asset": "gold",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "time_display": "09:32 AM, Nov 10",
+    "price": 4113.0,
+    "price_raw": "4113.0",
+    "bias": "bearish",
+    "setup_tag": "G_S1",
+    "behavior": "[TUE 09:32] [G_S1]: Bearish Supply Base SFP: Enter on 5M CHoCH close < $4113.00 after sweeping $4114.58 BSL into the ignition order block",
+    "tp": "$4102.50 / $4097.50",
+    "sl": "$4119.80",
+    "tp_val": 4102.5,
+    "sl_val": 4119.8,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-10 04:02:02"
+  },
+  {
+    "id": 4258,
+    "asset": "gold",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "time_display": "09:32 AM, Nov 10",
+    "price": 4116.0,
+    "price_raw": "4116.0",
+    "bias": "bullish",
+    "setup_tag": "G_B2",
+    "behavior": "[TUE 09:32] [G_B2]: Bearish Supply Base Breakout: Enter on 15M body close > $4116.00 clearing $4114.58 supply base with expanding volume",
+    "tp": "$4127.00 / $4136.50",
+    "sl": "$4109.50",
+    "tp_val": 4127.0,
+    "sl_val": 4109.5,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-10 04:02:02"
+  },
+  {
+    "id": 4257,
+    "asset": "gold",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "time_display": "09:32 AM, Nov 10",
+    "price": 4101.5,
+    "price_raw": "4101.5",
+    "bias": "bullish",
+    "setup_tag": "G_B1",
+    "behavior": "[TUE 09:32] [G_B1]: Deep OTE SSL Spring Reclaim: Enter on 5M close > $4101.50 after sweeping $4098.00 SSL with lower-wick absorption",
+    "tp": "$4112.50 / $4127.50",
+    "sl": "$4094.80",
+    "tp_val": 4112.5,
+    "sl_val": 4094.8,
+    "status": "waiting",
+    "entry_triggered_at": null,
+    "outcome_time": null,
+    "max_favorable_excursion": 0.0,
+    "max_adverse_excursion": 0.0,
+    "created_at": "2026-11-10 04:02:02"
+  },
+  {
     "id": 4256,
     "asset": "sensex",
     "timestamp": "2026-11-10T09:18:27+05:30",
@@ -182,7 +266,7 @@ window.predictionAccuracyLevels = [
     "sl": "$4102.50",
     "tp_val": 4088.0,
     "sl_val": 4102.5,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -203,7 +287,7 @@ window.predictionAccuracyLevels = [
     "sl": "$4120.50",
     "tp_val": 4102.0,
     "sl_val": 4120.5,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -224,7 +308,7 @@ window.predictionAccuracyLevels = [
     "sl": "$4115.00",
     "tp_val": 4130.5,
     "sl_val": 4115.0,
-    "status": "waiting",
+    "status": "inactive",
     "entry_triggered_at": null,
     "outcome_time": null,
     "max_favorable_excursion": 0.0,
@@ -10415,90 +10499,6 @@ window.predictionAccuracyLevels = [
     "max_favorable_excursion": 0.0,
     "max_adverse_excursion": 0.0,
     "created_at": "2026-11-05 15:20:16"
-  },
-  {
-    "id": 3727,
-    "asset": "sp500",
-    "timestamp": "2026-11-05T20:50:15+05:30",
-    "time_display": "08:50 PM, Nov 05",
-    "price": 7544.47,
-    "price_raw": "7544.47",
-    "bias": "bullish",
-    "setup_tag": "SP_B1",
-    "behavior": "[THU 20:50] [SP_B1]: Liquidity sweep recovery of session low with volume absorption",
-    "tp": "7585.00 / 7630.02",
-    "sl": "7535.00",
-    "tp_val": 7585.0,
-    "sl_val": 7535.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-05 15:20:16"
-  },
-  {
-    "id": 3725,
-    "asset": "btc",
-    "timestamp": "2026-11-05T20:47:52+05:30",
-    "time_display": "08:47 PM, Nov 05",
-    "price": 77984.0,
-    "price_raw": "77984",
-    "bias": "bearish",
-    "setup_tag": "KS1",
-    "behavior": "[THU 20:47] [KS1]: 15M Bearish FVG upper bound and CME Gap ($77,955.00)",
-    "tp": "76,800",
-    "sl": "78,450",
-    "tp_val": 76800.0,
-    "sl_val": 78450.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-05 15:17:52"
-  },
-  {
-    "id": 3724,
-    "asset": "btc",
-    "timestamp": "2026-11-05T20:47:52+05:30",
-    "time_display": "08:47 PM, Nov 05",
-    "price": 74800.0,
-    "price_raw": "74800",
-    "bias": "bullish",
-    "setup_tag": "KB4",
-    "behavior": "[THU 20:47] [KB4]: Multi-week volume shelf and psychological floor",
-    "tp": "76,500",
-    "sl": "74,100",
-    "tp_val": 76500.0,
-    "sl_val": 74100.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-05 15:17:52"
-  },
-  {
-    "id": 3723,
-    "asset": "btc",
-    "timestamp": "2026-11-05T20:47:52+05:30",
-    "time_display": "08:47 PM, Nov 05",
-    "price": 75607.0,
-    "price_raw": "75607",
-    "bias": "bullish",
-    "setup_tag": "KB3",
-    "behavior": "[THU 20:47] [KB3]: Macro 4H unmitigated bullish order block ($75,607–$76,000)",
-    "tp": "77,200",
-    "sl": "74,950",
-    "tp_val": 77200.0,
-    "sl_val": 74950.0,
-    "status": "inactive",
-    "entry_triggered_at": null,
-    "outcome_time": null,
-    "max_favorable_excursion": 0.0,
-    "max_adverse_excursion": 0.0,
-    "created_at": "2026-11-05 15:17:52"
   }
 ];
 
@@ -10515,7 +10515,7 @@ window.predictionAccuracySummary = [
     "failed": 30,
     "win_rate": 44.44,
     "triggered_rate": 32.53,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 9,
@@ -10529,7 +10529,7 @@ window.predictionAccuracySummary = [
     "failed": 39,
     "win_rate": 37.1,
     "triggered_rate": 43.97,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 318,
@@ -10543,7 +10543,7 @@ window.predictionAccuracySummary = [
     "failed": 7,
     "win_rate": 36.36,
     "triggered_rate": 16.18,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 60,
@@ -10557,7 +10557,7 @@ window.predictionAccuracySummary = [
     "failed": 6,
     "win_rate": 33.33,
     "triggered_rate": 6.38,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3,
@@ -10571,7 +10571,7 @@ window.predictionAccuracySummary = [
     "failed": 24,
     "win_rate": 31.43,
     "triggered_rate": 39.33,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 1,
@@ -10585,7 +10585,7 @@ window.predictionAccuracySummary = [
     "failed": 58,
     "win_rate": 30.12,
     "triggered_rate": 49.7,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 62,
@@ -10599,7 +10599,7 @@ window.predictionAccuracySummary = [
     "failed": 64,
     "win_rate": 29.67,
     "triggered_rate": 57.23,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 2,
@@ -10613,7 +10613,7 @@ window.predictionAccuracySummary = [
     "failed": 65,
     "win_rate": 26.97,
     "triggered_rate": 80.91,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 59,
@@ -10627,7 +10627,7 @@ window.predictionAccuracySummary = [
     "failed": 19,
     "win_rate": 24.0,
     "triggered_rate": 17.61,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 119,
@@ -10641,7 +10641,7 @@ window.predictionAccuracySummary = [
     "failed": 15,
     "win_rate": 16.67,
     "triggered_rate": 25.35,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 7461,
@@ -10655,7 +10655,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 512,
@@ -10669,7 +10669,7 @@ window.predictionAccuracySummary = [
     "failed": 2,
     "win_rate": 66.67,
     "triggered_rate": 66.67,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 509,
@@ -10683,7 +10683,7 @@ window.predictionAccuracySummary = [
     "failed": 4,
     "win_rate": 42.86,
     "triggered_rate": 77.78,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 510,
@@ -10697,7 +10697,7 @@ window.predictionAccuracySummary = [
     "failed": 4,
     "win_rate": 42.86,
     "triggered_rate": 77.78,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 511,
@@ -10711,7 +10711,7 @@ window.predictionAccuracySummary = [
     "failed": 7,
     "win_rate": 12.5,
     "triggered_rate": 88.89,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 8904,
@@ -10725,63 +10725,63 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 100.0,
     "triggered_rate": 4.55,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 338,
     "asset": "gold",
     "setup_tag": "G_S2",
-    "total_predictions": 212,
+    "total_predictions": 213,
     "waiting": 1,
     "active": 2,
-    "inactive": 167,
+    "inactive": 168,
     "success": 21,
     "failed": 21,
     "win_rate": 50.0,
-    "triggered_rate": 20.75,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "triggered_rate": 20.66,
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 336,
     "asset": "gold",
     "setup_tag": "G_B2",
-    "total_predictions": 228,
+    "total_predictions": 229,
     "waiting": 1,
     "active": 8,
-    "inactive": 134,
+    "inactive": 135,
     "success": 37,
     "failed": 48,
     "win_rate": 43.53,
-    "triggered_rate": 40.79,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "triggered_rate": 40.61,
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 335,
     "asset": "gold",
     "setup_tag": "G_B1",
-    "total_predictions": 188,
-    "waiting": 0,
+    "total_predictions": 189,
+    "waiting": 1,
     "active": 4,
     "inactive": 126,
     "success": 21,
     "failed": 37,
     "win_rate": 36.21,
-    "triggered_rate": 32.98,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "triggered_rate": 32.8,
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 337,
     "asset": "gold",
     "setup_tag": "G_S1",
-    "total_predictions": 188,
+    "total_predictions": 189,
     "waiting": 1,
     "active": 7,
-    "inactive": 90,
+    "inactive": 91,
     "success": 28,
     "failed": 62,
     "win_rate": 31.11,
-    "triggered_rate": 51.6,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "triggered_rate": 51.32,
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 50518,
@@ -10795,7 +10795,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 20,
@@ -10809,7 +10809,7 @@ window.predictionAccuracySummary = [
     "failed": 38,
     "win_rate": 51.28,
     "triggered_rate": 45.61,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 19,
@@ -10823,7 +10823,7 @@ window.predictionAccuracySummary = [
     "failed": 44,
     "win_rate": 50.56,
     "triggered_rate": 52.05,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 22,
@@ -10837,7 +10837,7 @@ window.predictionAccuracySummary = [
     "failed": 38,
     "win_rate": 36.67,
     "triggered_rate": 35.5,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 21,
@@ -10851,7 +10851,7 @@ window.predictionAccuracySummary = [
     "failed": 62,
     "win_rate": 35.42,
     "triggered_rate": 58.9,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 107077,
@@ -10865,7 +10865,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 107078,
@@ -10879,7 +10879,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 107079,
@@ -10893,7 +10893,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 107080,
@@ -10907,7 +10907,7 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 4169,
@@ -10921,7 +10921,7 @@ window.predictionAccuracySummary = [
     "failed": 5,
     "win_rate": 54.55,
     "triggered_rate": 14.29,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3265,
@@ -10935,7 +10935,7 @@ window.predictionAccuracySummary = [
     "failed": 18,
     "win_rate": 48.57,
     "triggered_rate": 47.95,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3267,
@@ -10949,7 +10949,7 @@ window.predictionAccuracySummary = [
     "failed": 16,
     "win_rate": 44.83,
     "triggered_rate": 54.72,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3269,
@@ -10963,7 +10963,7 @@ window.predictionAccuracySummary = [
     "failed": 3,
     "win_rate": 40.0,
     "triggered_rate": 5.62,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3268,
@@ -10977,7 +10977,7 @@ window.predictionAccuracySummary = [
     "failed": 17,
     "win_rate": 39.29,
     "triggered_rate": 34.15,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3272,
@@ -10991,7 +10991,7 @@ window.predictionAccuracySummary = [
     "failed": 17,
     "win_rate": 34.62,
     "triggered_rate": 38.24,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3271,
@@ -11005,7 +11005,7 @@ window.predictionAccuracySummary = [
     "failed": 12,
     "win_rate": 33.33,
     "triggered_rate": 46.15,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3273,
@@ -11019,7 +11019,7 @@ window.predictionAccuracySummary = [
     "failed": 26,
     "win_rate": 27.78,
     "triggered_rate": 50.7,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3266,
@@ -11033,7 +11033,7 @@ window.predictionAccuracySummary = [
     "failed": 34,
     "win_rate": 24.44,
     "triggered_rate": 50.56,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 3270,
@@ -11047,7 +11047,7 @@ window.predictionAccuracySummary = [
     "failed": 13,
     "win_rate": 13.33,
     "triggered_rate": 28.85,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   },
   {
     "id": 66306,
@@ -11061,6 +11061,6 @@ window.predictionAccuracySummary = [
     "failed": 0,
     "win_rate": 0.0,
     "triggered_rate": 0.0,
-    "updated_at": "2026-11-10T09:18:29.412164"
+    "updated_at": "2026-11-10T09:32:04.363992"
   }
 ];

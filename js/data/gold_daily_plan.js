@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "timeDisplay": "09:32 AM, Nov 10",
+    "price": "4101.5",
+    "bias": "bullish",
+    "behavior": "[TUE 09:32] [G_B1]: Deep OTE SSL Spring Reclaim: Enter on 5M close > $4101.50 after sweeping $4098.00 SSL with lower-wick absorption",
+    "tp": "$4112.50 / $4127.50",
+    "sl": "$4094.80",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "timeDisplay": "09:32 AM, Nov 10",
+    "price": "4116.0",
+    "bias": "bullish",
+    "behavior": "[TUE 09:32] [G_B2]: Bearish Supply Base Breakout: Enter on 15M body close > $4116.00 clearing $4114.58 supply base with expanding volume",
+    "tp": "$4127.00 / $4136.50",
+    "sl": "$4109.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "timeDisplay": "09:32 AM, Nov 10",
+    "price": "4113.0",
+    "bias": "bearish",
+    "behavior": "[TUE 09:32] [G_S1]: Bearish Supply Base SFP: Enter on 5M CHoCH close < $4113.00 after sweeping $4114.58 BSL into the ignition order block",
+    "tp": "$4102.50 / $4097.50",
+    "sl": "$4119.80",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-10T09:32:01+05:30",
+    "timeDisplay": "09:32 AM, Nov 10",
+    "price": "4096.0",
+    "bias": "bearish",
+    "behavior": "[TUE 09:32] [G_S2]: Equal Lows Breakdown: Enter on 15M body close < $4096.00 slicing through $4098.00 triple-tap SSL with heavy selling pressure",
+    "tp": "$4086.00 / $4075.00",
+    "sl": "$4102.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-10T09:17:07+05:30",
     "timeDisplay": "09:17 AM, Nov 10",
     "price": "4099.5",
@@ -619,6 +663,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261110_093204",
+    "timestamp": "2026-11-10T09:32:04+05:30",
+    "timeDisplay": "09:32 AM, Nov 10",
+    "spot": "4111.25",
+    "trigger": "Structural Invalidation (-16.6 pts incremental shift from previous trigger 4127.89",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (09:30 AM IST - Nov 10, 2026 | Spot: 4111.25 | Trigger: Structural Invalidation (-16.6 pts incremental shift from previous trigger 4127.89))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY):** DXY prints at 101.672 in an established intraday bearish trend below its 9-EMA and 21-EMA, delivering structural macro tailwinds for gold.\n* **US 10-Year Treasury Yield (US10Y):** Yields soften to 4.86%, easing opportunity cost pressures on non-yielding metals and reinforcing underlying institutional bid interest.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** No divergence detected between Gold and Silver as both assets trade in synchronized lockstep, confirming that prevailing order flow is genuine broad-market volume rather than single-asset manipulation.\n* **Intermarket Sentiment & Session Friction:** While DXY and bond yields provide a dovish macro backdrop, Asian Session institutional price action is printing a strong bearish trend engine that dominates immediate order books until key Fibonacci inflection zones are met.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Module 1 - Asian Session Liquidity Engine:** Asian range spans $29.11 between High $4138.45 and Low $4109.34 with an 85.0% bearish candle body. Classified as a Strong Bearish Trend Engine, historical distribution indicates London session continues the Asian directional drive 81.8% of the time, warning against counter-trend fading prior to the Asian 1.272 downside extension at $4101.42 and 1.414 extension at $4097.29.\n* **Module 2 - HTF 4H Candle Range Theory (CRT) & Bias:** 4H structure remains Bearish with live spot ($4111.25) tracking below the 4H 9-EMA ($4120.68) and 21-EMA ($4123.80). Previous Day High ($4135.02) was swept and firmly rejected via a Bearish CRT Turtle Soup, while Previous Day Low ($4051.84) remains an active untouched macro liquidity magnet far below.\n* **Module 3 - Inducement (IDM) vs. Deep OTE Mapping:** Retail buyers chasing intraday pullbacks face a shallow IDM trap between $4123.56 and $4128.32 (Daily 50% Equilibrium), whereas true institutional Deep Premium OTE sits higher at $4136.59 to $4139.86. On the downside, true Deep Discount OTE aligns between $4116.78 and $4120.05 once liquidity washes out.\n* **Institutional Round-Number Magnets:** Key round levels cluster at $4100.00 and $4110.00 below, and $4120.00 and $4130.00 above, with the major $50 institutional anchor situated at $4100.00.\n* **Microstructure Traps & Parabolic Order Blocks:** Equal Lows (SSL) are clustered tightly at $4098.00 across 3 consecutive taps, presenting a massive liquidity pool primed for a Judas Sweep probe. Overhead, the Bearish Supply Base and Parabolic Ignition Order Block at $4114.58 marks the exact origin of the recent -$10.69 rapid selloff.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Immediate Consolidation Shelf:** The bracket between $4098.00 and $4105.46 with 50% Micro-Equilibrium at $4101.73 acts as a high-friction compression band.\n* **Deadband Corridor:** The immediate pocket between $4104.00 and $4112.00 represents an off-peak transition zone between the 2H Swing Equilibrium ($4106.29) and the $4114.58 supply base. All market orders inside this corridor are strictly restricted to avoid rotational chop.\n* **Dynamic Volatility & Stop Protection Protocol:** Live 15M ATR is $7.22, with typical stop-hunt overshoot wicks extending +$5.78 to +$10.11 beyond extremes. Blind limit orders at raw support/resistance are strictly forbidden; trades must wait for the sweep wick and 5M/15M reclaim close first, applying the mandatory $6.00 to $7.50 stop corridor.\n\n### 4. High Momentum / Explosive Zones:\n* **Downside Liquidity Vacuum:** A decisive 15M breakdown below $4097.00 flushes the triple-tap $4098.00 SSL pool and the Asian 1.414 extension ($4097.29), initiating an accelerated stop-run cascade targeting the $4086.00 liquidity pocket and $4075.00 macro shelf.\n* **Upside Short-Covering Ignition:** A sustained 15M candle close above the $4114.58 Bearish Ignition Order Block invalidates immediate sell-side control, triggering rapid short-covering toward the Daily 50% Equilibrium ($4128.32) and the untouched Asian High ($4138.45).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$4101.50** (Sweep $4095.00 to $4098.00) | **★ A+ PRIMARY [Deep OTE SSL Spring Reclaim]:** Enter on 5M close > $4101.50 after sweeping $4098.00 SSL with lower-wick absorption. | **TP1:** $4112.50 / **TP2:** $4127.50 | **$4094.80** | 1:2.5 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$4116.00** Breakout | **⚠️ BACKUP [Bearish Supply Base Breakout]:** Enter on 15M body close > $4116.00 clearing the $4114.58 supply base with expanding volume. | **TP1:** $4127.00 / **TP2:** $4136.50 | **$4109.50** | 1:2.3 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$4113.00** (Sweep $4114.58 to $4116.50) | **★ A+ PRIMARY [Bearish Supply Base SFP]:** Enter on 5M CHoCH close < $4113.00 after sweeping $4114.58 BSL into the ignition order block. | **TP1:** $4102.50 / **TP2:** $4097.50 | **$4119.80** | 1:2.3 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$4096.00** Breakdown | **⚠️ BACKUP [Equal Lows Breakdown]:** Enter on 15M body close < $4096.00 slicing through $4098.00 triple-tap SSL with heavy selling pressure. | **TP1:** $4086.00 / **TP2:** $4075.00 | **$4102.50** | 1:2.4 |"
+  },
+  {
     "id": "GOLD_20261110_091709",
     "timestamp": "2026-11-10T09:17:09+05:30",
     "timeDisplay": "09:17 AM, Nov 10",
