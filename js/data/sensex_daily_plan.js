@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-10T10:32:55+05:30",
+    "timeDisplay": "10:32 AM, Nov 10",
+    "price": "81000",
+    "bias": "bullish",
+    "behavior": "[TUE 10:32] [B1]: Controlled pullback into Bullish Ignition Base (80,965 - 80,988) followed by 5m bullish close above 81,000",
+    "tp": "81,200 / 81,320",
+    "sl": "80,890",
+    "status": "na",
+    "spread": "Buy 81000 CE + Sell 81200 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-10T10:32:55+05:30",
+    "timeDisplay": "10:32 AM, Nov 10",
+    "price": "81200",
+    "bias": "bullish",
+    "behavior": "[TUE 10:32] [B2]: Sustained 5m close ABOVE 81,200 with institutional absorption confirming breakout of 1H shelf ceiling",
+    "tp": "81,350 / 81,480",
+    "sl": "81,080",
+    "status": "na",
+    "spread": "Buy 81200 CE + Sell 81400 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-10T10:32:55+05:30",
+    "timeDisplay": "10:32 AM, Nov 10",
+    "price": "81190",
+    "bias": "bearish",
+    "behavior": "[TUE 10:32] [S1]: Liquidity probe sweeping above 81,192.47 followed by 5m bearish rejection close back below 81,190",
+    "tp": "81,020 / 80,920",
+    "sl": "81,290",
+    "status": "na",
+    "spread": "Buy 81200 PE + Sell 81000 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-10T10:32:55+05:30",
+    "timeDisplay": "10:32 AM, Nov 10",
+    "price": "80920",
+    "bias": "bearish",
+    "behavior": "[TUE 10:32] [S2]: Decisive 5m candle close firmly BELOW Macro 50% Daily Equilibrium (80,920.18) triggering discount liquidation",
+    "tp": "80,720 / 80,520",
+    "sl": "81,030",
+    "status": "na",
+    "spread": "Buy 80900 PE + Sell 80700 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-10T09:18:27+05:30",
     "timeDisplay": "09:18 AM, Nov 10",
     "price": "81020",
@@ -1005,50 +1053,6 @@ window.sensexDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-11-03T10:32:07+05:30",
-    "timeDisplay": "10:32 AM, Nov 03",
-    "price": "76420",
-    "bias": "bullish",
-    "behavior": "[TUE 10:32] [B1]: Pullback into 76380 - 76425 zone with 5m bullish pin bar / rejection wick confirming support",
-    "tp": "76505 / 76620",
-    "sl": "76340",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T10:32:07+05:30",
-    "timeDisplay": "10:32 AM, Nov 03",
-    "price": "76510",
-    "bias": "bullish",
-    "behavior": "[TUE 10:32] [B2]: Sustained 5m close ABOVE 76510 with institutional volume confirming absorption of 76500 Call wall",
-    "tp": "76650 / 76780",
-    "sl": "76430",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T10:32:07+05:30",
-    "timeDisplay": "10:32 AM, Nov 03",
-    "price": "76425",
-    "bias": "bearish",
-    "behavior": "[TUE 10:32] [S1]: Rejection at 76503.87 followed by 5m close BELOW 76425 falling back into 1H shelf",
-    "tp": "76330 / 76240",
-    "sl": "76510",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T10:32:07+05:30",
-    "timeDisplay": "10:32 AM, Nov 03",
-    "price": "76240",
-    "bias": "bearish",
-    "behavior": "[TUE 10:32] [S2]: Sustained 5m close BELOW 76240 with expanding volume breaking 1H consolidation floor",
-    "tp": "76120 / 76035",
-    "sl": "76325",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-11-03T09:31:37+05:30",
     "timeDisplay": "09:31 AM, Nov 03",
     "price": "76240",
@@ -1579,6 +1583,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261110_103257",
+    "timestamp": "2026-11-10T10:32:57+05:30",
+    "timeDisplay": "10:32 AM, Nov 10",
+    "spot": "81106.65",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 10, 2026 | Spot: 81106.65 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Active Chop Corridor: 81,040.00 to 81,170.00 Spot. Price is oscillating tightly within the upper quadrant of the immediate 1H consolidation shelf (80,827.14 – 81,192.47) and anchored around the 50% Micro-Equilibrium pivot at 81,009.80.\n- Intraday Option Straddle Pinning: Heavy balanced open interest writing at the 81,100 strike creates two-sided gamma compression and rapid theta decay during the morning price discovery phase. Zero statistical edge exists for entering directional naked options inside this 130-point compression band.\n- Liquidity Vacuum & Trap Architecture: Trapped between the Bullish Parabolic Ignition Base (80,964.54 – 80,988.03) below and the 1H shelf ceiling (81,192.47) above, rotational intra-shelf micro-swings generate frequent false breakouts and stop-runs without institutional continuation.\n- Structural Invalidation Thresholds: High-probability directional expansion is strictly gated by an institutional 5-minute candle body close outside this corridor—either breaking above the shelf ceiling at 81,192.47 or cleanly breaking below Macro 50% Daily Equilibrium at 80,920.18.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Shelf Breakout Expansion] (Sustained 5M Close Above 81,200.00 Spot): A clean 5-minute candle body close above the 1H consolidation shelf ceiling (81,192.47) absorbs overhead 81,100/81,200 CE writing resistance and triggers aggressive short-covering gamma acceleration towards Day High 81,319.50 and the 81,450.00 / 81,500.00 psychological expansion band.\n- [Discount Demand Ignition Base Reclaim] (Controlled Pullback to 80,965.00 – 80,990.00 & 5M Bullish Close Above 81,000.00 Spot): A structured mean-reversion dip into the Parabolic Bullish Ignition Base (80,964.54 – 80,988.03) that absorbs selling pressure and prints a confirmed 5-minute bullish reversal candle back above 81,000.00 sparks dip-buyer expansion back toward 81,200.00 and 81,320.00.\n- [Bearish Shelf Ceiling Liquidity Sweep] (Judas Sweep Above 81,192.47 with 5M Rejection Close Below 81,190.00 Spot): A stop-hunt probe sweeping above 81,192.47 that fails to build institutional volume and prints an upper rejection wick closing back below 81,190.00 traps breakout buyers, catalyzing a swift rotational flush back toward 81,020.00 and 80,920.00.\n- [Bearish Macro Equilibrium Breakdown] (Decisive 5M Close Below Macro 50% Daily Equilibrium 80,920.00 Spot): A decisive 5-minute candle close firmly below 80,920.00 (Macro Daily EQ: 80,920.18) slices through resting Sell-Side Liquidity (SSL), triggering institutional long unwinding towards 15M ORB Low 80,717.91, 2H Swing Low 80,680.07, and Day Low 80,520.85.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Discount Demand Pullback & Reclaim): Controlled pullback into the Bullish Ignition Base (80,965.00 – 80,988.00) holding above 50% Micro-EQ followed by a confirmed 5-minute bullish reversal close back above 81,000.00. | TP: 81,200.00 / 81,320.00 | SL: 80,890.00 | 💡 Buy 81000 CE + Sell 81200 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (1H Shelf Breakout Continuation): Decisive 5-minute candle body close firmly ABOVE 81,200.00 clearing the 1H consolidation shelf ceiling (81,192.47) with expanding buy volume. | TP: 81,350.00 / 81,480.00 | SL: 81,080.00 | 💡 Buy 81200 CE + Sell 81400 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (1H Shelf Ceiling Liquidity Sweep): Stop-hunt probe sweeping above 81,192.47 toward Day High followed by a sharp 5-minute bearish rejection close back below 81,190.00. | TP: 81,020.00 / 80,920.00 | SL: 81,290.00 | 💡 Buy 81200 PE + Sell 81000 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Macro Daily Equilibrium Breakdown): Decisive 5-minute candle close firmly BELOW Macro 50% Daily Equilibrium (80,920.00) confirming loss of the 2H swing anchor. | TP: 80,720.00 / 80,520.00 | SL: 81,030.00 | 💡 Buy 80900 PE + Sell 80700 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261110_091829",
     "timestamp": "2026-11-10T09:18:29+05:30",
     "timeDisplay": "09:18 AM, Nov 10",
