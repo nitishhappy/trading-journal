@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-11T10:32:14+05:30",
+    "timeDisplay": "10:32 AM, Nov 11",
+    "price": "82340.0",
+    "bias": "bullish",
+    "behavior": "[WED 10:32] [B1]: 5m candle reclaims and closes firmly above 82340.00 (1H Micro-EQ)",
+    "tp": "82,427 / 82,520",
+    "sl": "82,220",
+    "status": "na",
+    "spread": "Buy 82300 CE + Sell 82500 CE (Next Wk) | R:R: ~2.65 | Risk: ~7.9% | TP1: +19.8% | TP2: +35.5%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T10:32:14+05:30",
+    "timeDisplay": "10:32 AM, Nov 11",
+    "price": "82520.0",
+    "bias": "bullish",
+    "behavior": "[WED 10:32] [B2]: Sustained 5m close ABOVE 82,520 with institutional absorption confirming breakout",
+    "tp": "82,750 / 82,950",
+    "sl": "82,400",
+    "status": "na",
+    "spread": "Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T10:32:14+05:30",
+    "timeDisplay": "10:32 AM, Nov 11",
+    "price": "82480.0",
+    "bias": "bearish",
+    "behavior": "[WED 10:32] [S1]: 5m candle wicks above 82,520 to sweep BSL and rejects back below 82,480",
+    "tp": "82,338 / 82,156",
+    "sl": "82,560",
+    "status": "na",
+    "spread": "Buy 82500 PE + Sell 82300 PE (Next Wk) | R:R: ~2.58 | Risk: ~8.8% | TP1: +18.8% | TP2: +33.6%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T10:32:14+05:30",
+    "timeDisplay": "10:32 AM, Nov 11",
+    "price": "81969.0",
+    "bias": "bearish",
+    "behavior": "[WED 10:32] [S2]: 5m/15m candle closes decisively below Day Low (81,969.91)",
+    "tp": "81,673 / 81,450",
+    "sl": "82,120",
+    "status": "na",
+    "spread": "Buy 82000 PE + Sell 81800 PE (Next Wk) | R:R: ~2.72 | Risk: ~8.1% | TP1: +19.3% | TP2: +34.8%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-11T10:17:43+05:30",
     "timeDisplay": "10:17 AM, Nov 11",
     "price": "82150",
@@ -1639,6 +1687,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261111_103217",
+    "timestamp": "2026-11-11T10:32:17+05:30",
+    "timeDisplay": "10:32 AM, Nov 11",
+    "spot": "82271.08",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 11, 2026 | Spot: 82271.08 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range between 82156.81 (1H Consolidation Shelf Low / Equal Lows SSL) and 82338.44 (50% Micro-EQ Chop Anchor): High risk of two-sided rotational chop, erratic wicks, and option premium decay as spot hovers near the Macro 50% Daily Equilibrium (82245.15) inside the morning opening range.\n- Strict No-Trade inside 82180.00 - 82340.00 for intraday option buyers: Wait for a confirmed structural breakout or an edge liquidity sweep; avoid initiating directional option buys in the equilibrium core of the 1H shelf.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Expansion (Decisive 5m candle close above 82520.07): Acceptance above Day High and the Equal Highs (BSL) liquidity pool forces rapid covering from trapped Call writers, unleashing high-speed momentum expansion toward 82750.00 and 82950.00.\n- Liquidity Sweep SFP Flush (Failed probe above 82520.07 with rapid reclaim below 82480.00): A stop-hunt wick into the Equal Highs BSL cluster that immediately rejects and closes back below 82480.00 traps breakout buyers, triggering an aggressive mean-reversion slide toward 50% Micro-EQ (82338.44) and 82156.81.\n- Judas Sweep Spring Reversal (False breakdown below 82156.81 with rapid reclaim above 82180.00): A liquidity sweep of the Equal Lows (SSL) cluster into the Bullish Parabolic Ignition Order Block (81979.13 - 82122.18) that immediately reclaims 82180.00 traps aggressive breakdown sellers, initiating a sharp mean-reversion squeeze toward 82338.44 and 82427.19.\n- Long-Unwinding Breakdown (Decisive 5m candle close below 81969.91): Breaking below the morning Day Low and the Parabolic Ignition Order Block invalidates the morning bullish expansion, accelerating panic long liquidation down toward the 2H Swing-EQ at 81673.61.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (1H Micro-EQ Reclaim / SSL Spring Long): 5m candle reclaims and closes firmly above 82340.00 (or strong bullish hammer reclaim above 82180.00 after SSL Judas Sweep). | TP: 82427.19 / 82520.07 | SL: 82220.00 | 💡 Buy 82300 CE + Sell 82500 CE (Next Wk) | R:R: ~2.65 | Risk: ~7.9% | TP1: +19.8% | TP2: +35.5%.\n- [B2] BUY Setup 2 (Day High / Equal Highs BSL Breakout Long): 5m/15m candle closes decisively above Day High / 1H Shelf High at 82520.00 with expanding volume. | TP: 82750.00 / 82950.00 | SL: 82400.00 | 💡 Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Equal Highs SFP Rejection Short): 5m candle probes above Day High (82520.07) to sweep BSL liquidity, fails to accept, and prints an SFP rejection close back below 82480.00. | TP: 82338.44 / 82156.81 | SL: 82560.00 | 💡 Buy 82500 PE + Sell 82300 PE (Next Wk) | R:R: ~2.58 | Risk: ~8.8% | TP1: +18.8% | TP2: +33.6%.\n- [S2] SELL Setup 2 (1H Shelf Low / Parabolic Ignition Breakdown Short): 5m/15m candle closes decisively below 81969.91 (Day Low), confirming structural failure of the Parabolic Ignition Base. | TP: 81673.61 / 81450.00 | SL: 82120.00 | 💡 Buy 82000 PE + Sell 81800 PE (Next Wk) | R:R: ~2.72 | Risk: ~8.1% | TP1: +19.3% | TP2: +34.8%."
+  },
+  {
     "id": "SENSEX_20261111_101745",
     "timestamp": "2026-11-11T10:17:45+05:30",
     "timeDisplay": "10:17 AM, Nov 11",
