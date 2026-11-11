@@ -1,4 +1,4 @@
-const CACHE_NAME = "trade-journal-c96b0bcff4";
+const CACHE_NAME = "trade-journal-33d14af33d";
 // Separate, persistent cache for image/video bytes (Drive, TradingView, etc.).
 // Unlike CACHE_NAME above, this is intentionally NOT wiped on every service
 // worker update (see activate handler) — an image cached last month should
@@ -35,6 +35,8 @@ const ASSETS = [
   "./js/services/sequenceRules.js",
   "./js/services/stocks.js",
   "./js/services/webPush.js",
+  "./js/services/niftyAiDecisions.js",
+  "./js/config.js",
   "./js/ui/common.js",
   "./js/ui/auth.js",
   "./js/ui/settings.js",

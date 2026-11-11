@@ -2889,3 +2889,16 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 - **Default-Collapsed Review Section in Levels Tab (`index.html`, `js/ui/levels.js`)**:
   - Added `#ai-trade-decisions-panel` (`🤖 AI 5M Level-Close Trade Decisions`, collapsed by default) inside the **Levels** tab with columns: `Time / Level`, `Trade Decision (YES/NO)`, `Type (BUY/SELL)`, `Outcome (TP1 / SL)`, `Points Captured / Lost`, and `Logic Behind Decision` (with interactive `🖼️ Chart` snapshot modal and `⚡ Scan 5M Session` button).
 - **Files Modified / Added**: `api/evaluateNiftyTrade.js` (NEW), `js/services/niftyAiDecisions.js` (NEW), `nifty_interactive_chart.html`, `index.html`, `js/ui/levels.js`, `js/data/rr_config.js`, `js/config.js`, `README.md`.
+
+
+### v2.4.06 — 11 Nov 2026 — Fix NIFTY 5M AI Trade Decisions Scanner, Time-Aligned Briefings & Auto-Scan
+
+- **Root Cause Fixes in AI Decisions Pipeline (`js/services/niftyAiDecisions.js`, `js/ui/levels.js`, `api/evaluateNiftyTrade.js`)**:
+  - Fixed `scanSessionCandlesForLevels` signature handling to support both `{ candles5m, levels }` object and positional `(candles, levelsList)` calls.
+  - Added time-aware briefing matching in `scanSessionCandlesForLevels` so each 5M candle is evaluated against the exact intraday briefing active at that bar's close timestamp.
+  - Fixed `levels.js` live 5M candle fetching via `window.NiftyAiDecisions.fetchSession5mCandles()` pointing to `/api/marketCandles?symbol=NIFTY&date=YYYY-MM-DD` (replacing the dead `/api/fetch5mCandles` URL) and enabled background auto-scanning when loading/polling the Levels tab.
+  - Aligned record property names (`tradeType`/`type`, `tag`/`levelTag`, `timeDisplay`/`candleTimeIst`, `entryPrice`/`closePrice`, `outcomeTime`/`resolvedTimeIst`, `livePoints`/`floatingPoints`) and added live spot-price resolution in `evaluatePendingOutcomes({ currentPrice })`.
+  - Fixed IST timestamp formatting for `14:30–15:29 IST` candles (`09:00–09:59 UTC`) by converting unshifted UTC Unix epochs strictly with `timeZone: 'Asia/Kolkata'`.
+- **NIFTY Data Sync (`Utilities/sync_briefing_to_daily_plan.py`, `js/data/nifty_candles.js`)**:
+  - Updated `sync_briefing_to_daily_plan.py` to execute `sync_nifty_candles()` before `export_nifty_candles_js()`, backfilling 1,570 missing 1M bars and updating `nifty_candles.js` through `2026-11-11`.
+- **Files Modified**: `js/services/niftyAiDecisions.js`, `js/ui/levels.js`, `api/evaluateNiftyTrade.js`, `js/data/nifty_candles.js`, `sw.js`, `README.md`, `version`.

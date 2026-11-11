@@ -3122,6 +3122,9 @@ window.toggleMaximizePanel = function(btn, event) {
         if (!isSensex && !isGold && !isBtc && !isSp500 && !isEurUsd && window.NiftyAiDecisions) {
             window.NiftyAiDecisions.evaluatePendingOutcomes({ currentPrice });
             renderAiTradeDecisionsLog();
+            if (typeof maybeAutoScanNifty5mDecisions === 'function') {
+                maybeAutoScanNifty5mDecisions();
+            }
         }
 
         let insideLevels = [];
@@ -3502,26 +3505,29 @@ window.toggleMaximizePanel = function(btn, event) {
                 ? `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(16,185,129,0.18); color:#34d399; border:1px solid rgba(16,185,129,0.4);">✅ YES</span>`
                 : `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(239,68,68,0.18); color:#f87171; border:1px solid rgba(239,68,68,0.4);">⛔ NO</span>`;
 
-            const isBuy = entry.type === 'BUY';
+            const resolvedType = (entry.tradeType || entry.type || 'BUY').toUpperCase();
+            const isBuy = resolvedType === 'BUY';
             const typeBadge = isBuy
                 ? `<span style="display:inline-block; padding:3px 8px; border-radius:6px; font-weight:700; font-size:0.73rem; background:rgba(59,130,246,0.16); color:#60a5fa; border:1px solid rgba(59,130,246,0.35);">▲ BUY</span>`
                 : `<span style="display:inline-block; padding:3px 8px; border-radius:6px; font-weight:700; font-size:0.73rem; background:rgba(249,115,22,0.16); color:#fb923c; border:1px solid rgba(249,115,22,0.35);">▼ SELL</span>`;
 
+            const resolvedAt = entry.outcomeTime || entry.resolvedTimeIst;
             let outcomeHtml = '';
             if (entry.outcome === 'TP') {
                 outcomeHtml = `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(16,185,129,0.2); color:#10b981; border:1px solid rgba(16,185,129,0.45);">🎯 TP (TP1 Hit)</span>`;
-                if (entry.resolvedTimeIst) {
-                    outcomeHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">at ${entry.resolvedTimeIst}</div>`;
+                if (resolvedAt) {
+                    outcomeHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">at ${resolvedAt}</div>`;
                 }
             } else if (entry.outcome === 'SL') {
                 outcomeHtml = `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(239,68,68,0.2); color:#ef4444; border:1px solid rgba(239,68,68,0.45);">🛑 SL Hit</span>`;
-                if (entry.resolvedTimeIst) {
-                    outcomeHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">at ${entry.resolvedTimeIst}</div>`;
+                if (resolvedAt) {
+                    outcomeHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">at ${resolvedAt}</div>`;
                 }
             } else {
                 outcomeHtml = `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:600; font-size:0.72rem; background:rgba(234,179,8,0.15); color:#facc15; border:1px solid rgba(234,179,8,0.35);">⏳ PENDING</span>`;
             }
 
+            const livePts = typeof entry.livePoints === 'number' ? entry.livePoints : entry.floatingPoints;
             let pointsHtml = '<span style="color:#64748b;">—</span>';
             if (typeof entry.points === 'number' && (entry.outcome === 'TP' || entry.outcome === 'SL')) {
                 const sign = entry.points > 0 ? '+' : '';
@@ -3530,10 +3536,10 @@ window.toggleMaximizePanel = function(btn, event) {
                 if (entry.tp1Price && entry.slPrice) {
                     pointsHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">TP1: ${Math.round(entry.tp1Price)} | SL: ${Math.round(entry.slPrice)}</div>`;
                 }
-            } else if (typeof entry.floatingPoints === 'number') {
-                const sign = entry.floatingPoints > 0 ? '+' : '';
-                const color = entry.floatingPoints >= 0 ? '#34d399' : '#f87171';
-                pointsHtml = `<span style="font-weight:600; font-size:0.78rem; color:${color}; opacity:0.85;">${sign}${entry.floatingPoints.toFixed(1)} pts (live)</span>`;
+            } else if (typeof livePts === 'number') {
+                const sign = livePts > 0 ? '+' : '';
+                const color = livePts >= 0 ? '#34d399' : '#f87171';
+                pointsHtml = `<span style="font-weight:600; font-size:0.78rem; color:${color}; opacity:0.85;">${sign}${livePts.toFixed(1)} pts (live)</span>`;
                 if (entry.tp1Price && entry.slPrice) {
                     pointsHtml += `<div style="font-size:0.68rem; color:#64748b; margin-top:2px;">TP1: ${Math.round(entry.tp1Price)} | SL: ${Math.round(entry.slPrice)}</div>`;
                 }
@@ -3544,15 +3550,21 @@ window.toggleMaximizePanel = function(btn, event) {
                 : '';
 
             const safeLogic = String(entry.logic || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-            const triggerLabel = entry.triggerReason === 'COOLDOWN_30M_CLOSE' ? '⏱️ 30m Cooldown Close' : '⚡ First 5M Close';
+            const isCooldownTrig = entry.triggerType === 'RETOUCH_30M' || entry.triggerReason === 'COOLDOWN_30M_CLOSE';
+            const triggerLabel = isCooldownTrig ? '⏱️ 30m Cooldown Close' : '⚡ First 5M Close';
+            const timeTxt = entry.timeDisplay || entry.candleTimeIst || '--:--';
+            const dateTxt = entry.sessionDate || entry.candleDateIst || '';
+            const tagTxt = String(entry.tag || entry.levelTag || 'LVL').replace(/[\[\]]/g, '');
+            const closeVal = Number(entry.entryPrice ?? entry.closePrice ?? 0);
+            const modelTxt = entry.model || entry.modelUsed || 'gemini-flash';
 
             return `
                 <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.12);">
                     <td style="padding: 9px 10px; vertical-align: top;">
-                        <div style="font-weight: 700; color: #f8fafc;">${entry.candleTimeIst || '--:--'} <span style="font-size:0.7rem; color:#64748b;">(${entry.candleDateIst || ''})</span></div>
+                        <div style="font-weight: 700; color: #f8fafc;">${timeTxt} ${dateTxt ? `<span style="font-size:0.7rem; color:#64748b;">(${dateTxt})</span>` : ''}</div>
                         <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 2px;">
-                            <strong style="color:#818cf8;">[${entry.levelTag || 'LVL'}]</strong> @ ${Number(entry.levelPrice || 0).toFixed(0)}
-                            <span style="color:#94a3b8;">(Close: ${Number(entry.closePrice || 0).toFixed(1)})</span>
+                            <strong style="color:#818cf8;">[${tagTxt}]</strong> @ ${Number(entry.levelPrice || 0).toFixed(0)}
+                            <span style="color:#94a3b8;">(Close: ${closeVal.toFixed(1)})</span>
                         </div>
                         <div style="font-size: 0.67rem; color: #64748b; margin-top: 2px;">${triggerLabel}</div>
                     </td>
@@ -3572,7 +3584,7 @@ window.toggleMaximizePanel = function(btn, event) {
                     <td style="padding: 9px 10px; vertical-align: top; color: #e2e8f0; line-height: 1.4;">
                         <div>${safeLogic}</div>
                         <div style="font-size:0.68rem; color:#64748b; margin-top:4px; display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
-                            <span>Model: ${entry.modelUsed || 'gemini-flash'}</span>
+                            <span>Model: ${modelTxt}</span>
                             ${chartBtn}
                         </div>
                     </td>
@@ -3594,11 +3606,15 @@ window.toggleMaximizePanel = function(btn, event) {
             modal.style.cssText = 'position:fixed; inset:0; z-index:99999; background:rgba(2,6,23,0.85); display:flex; align-items:center; justify-content:center; padding:16px;';
             document.body.appendChild(modal);
         }
+        const tagTxt = String(item.tag || item.levelTag || 'LVL').replace(/[\[\]]/g, '');
+        const typeTxt = (item.tradeType || item.type || 'BUY').toUpperCase();
+        const closeVal = Number(item.entryPrice ?? item.closePrice ?? 0).toFixed(1);
+        const timeTxt = item.timeDisplay || item.candleTimeIst || '--:--';
         modal.innerHTML = `
             <div style="background:#0f172a; border:1px solid rgba(148,163,184,0.25); border-radius:12px; max-width:780px; width:100%; padding:14px; box-shadow:0 20px 50px rgba(0,0,0,0.6);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                     <div style="font-weight:700; color:#f8fafc; font-size:0.9rem;">
-                        🤖 [${item.levelTag}] ${item.type} @ ${item.closePrice} (${item.candleTimeIst}) — Decision: ${item.decision} (${item.outcome})
+                        🤖 [${tagTxt}] ${typeTxt} @ ${closeVal} (${timeTxt}) — Decision: ${item.decision} (${item.outcome})
                     </div>
                     <button type="button" onclick="document.getElementById('ai-decision-chart-modal').style.display='none'" style="background:transparent; border:none; color:#94a3b8; font-size:1.2rem; cursor:pointer;">✕</button>
                 </div>
@@ -3614,6 +3630,59 @@ window.toggleMaximizePanel = function(btn, event) {
     const filterAiDecisionEl = document.getElementById('filter-ai-decision');
     if (filterAiDecisionEl) {
         filterAiDecisionEl.addEventListener('change', () => renderAiTradeDecisionsLog());
+    }
+
+    let lastAiAutoScanAtMs = 0;
+    let isAiSessionScanRunning = false;
+
+    async function runNifty5mDecisionsSessionScan({ manual = false } = {}) {
+        if (!window.NiftyAiDecisions || isAiSessionScanRunning) return [];
+        const todayIst = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+
+        if (!manual) {
+            try {
+                if (localStorage.getItem('niftyAiUserClearedDate') === todayIst) return [];
+            } catch (e) {}
+            if (Date.now() - lastAiAutoScanAtMs < 60000) return [];
+        } else {
+            try { localStorage.removeItem('niftyAiUserClearedDate'); } catch (e) {}
+        }
+
+        isAiSessionScanRunning = true;
+        lastAiAutoScanAtMs = Date.now();
+        try {
+            let candles5m = typeof window.NiftyAiDecisions.fetchSession5mCandles === 'function'
+                ? await window.NiftyAiDecisions.fetchSession5mCandles()
+                : ((window.niftyCandlesData && Array.isArray(window.niftyCandlesData.timeframe5m))
+                    ? window.niftyCandlesData.timeframe5m
+                    : (Array.isArray(window.allCandles) ? window.allCandles : []));
+
+            if (!candles5m || candles5m.length < 2) return [];
+
+            // Prefer full timestamped intraday briefings from dailyPlanData; include any manual levels too
+            const planLevels = Array.isArray(window.dailyPlanData) ? window.dailyPlanData : [];
+            const manualLevels = Array.isArray(allLevels) ? allLevels.filter(l => !l.timestamp) : [];
+            const levelsToScan = planLevels.length > 0 ? [...planLevels, ...manualLevels] : (Array.isArray(allLevels) ? allLevels : []);
+            if (levelsToScan.length === 0) return [];
+
+            const created = await window.NiftyAiDecisions.scanSessionCandlesForLevels({
+                candles5m,
+                levels: levelsToScan
+            });
+            renderAiTradeDecisionsLog();
+            return created || [];
+        } catch (err) {
+            console.warn('AI 5M Session Scan note:', err);
+            return [];
+        } finally {
+            isAiSessionScanRunning = false;
+        }
+    }
+
+    function maybeAutoScanNifty5mDecisions() {
+        const activeAsset = (window.currentActiveAsset || 'NIFTY').toUpperCase();
+        if (activeAsset !== 'NIFTY') return;
+        runNifty5mDecisionsSessionScan({ manual: false });
     }
 
     const btnAiDecisionsClear = document.getElementById('btn-ai-decisions-clear');
@@ -3638,7 +3707,7 @@ window.toggleMaximizePanel = function(btn, event) {
             // Ensure collapsible body is open so user sees progress
             const body = document.getElementById('ai-decisions-body');
             const header = document.getElementById('ai-decisions-header');
-            if (body && body.classList.contains('collapsed')) {
+            if (body && body.style.display === 'none' && header) {
                 togglePanel('ai-decisions-body', header);
             }
 
@@ -3647,30 +3716,7 @@ window.toggleMaximizePanel = function(btn, event) {
             btnAiDecisionsScan.innerHTML = '⏳ Scanning 5M...';
 
             try {
-                let candles5m = (window.niftyCandlesData && Array.isArray(window.niftyCandlesData.timeframe5m))
-                    ? window.niftyCandlesData.timeframe5m
-                    : (Array.isArray(window.allCandles) ? window.allCandles : []);
-
-                if (!candles5m || candles5m.length === 0) {
-                    try {
-                        const r = await fetch('/api/fetch5mCandles?symbol=%5ENSEI');
-                        if (r.ok) {
-                            const d = await r.json();
-                            if (Array.isArray(d.candles)) candles5m = d.candles;
-                        }
-                    } catch (err) {}
-                }
-
-                const levelsToScan = (Array.isArray(allLevels) && allLevels.length > 0)
-                    ? allLevels
-                    : (Array.isArray(window.dailyPlanData) ? window.dailyPlanData : []);
-
-                const created = await window.NiftyAiDecisions.scanSessionCandlesForLevels({
-                    candles5m,
-                    levels: levelsToScan
-                });
-
-                renderAiTradeDecisionsLog();
+                const created = await runNifty5mDecisionsSessionScan({ manual: true });
                 import('../utils/toast.js').then(m => m.showToast(`🤖 Scanned 5M session: ${created.length} new AI trade evaluation(s) logged.`));
             } catch (scanErr) {
                 console.error('AI 5M Session Scan Error:', scanErr);
@@ -3712,6 +3758,7 @@ window.toggleMaximizePanel = function(btn, event) {
     startLevelsPolling();
     autoSyncDailyPlan(false, false).finally(() => {
         isInitialLevelsLoad = false;
+        maybeAutoScanNifty5mDecisions();
     });
     setTimeout(() => {
         isInitialLevelsLoad = false;

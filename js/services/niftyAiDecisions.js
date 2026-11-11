@@ -88,6 +88,10 @@
   function clearDecisionsLog() {
     localStorage.removeItem(STORAGE_KEY_DECISIONS);
     localStorage.removeItem(STORAGE_KEY_COOLDOWNS);
+    try {
+      const todayIst = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+      localStorage.setItem('niftyAiUserClearedDate', todayIst);
+    } catch (e) {}
     notifyListeners();
   }
 
@@ -102,37 +106,9 @@
     } catch (e) {}
   }
 
-  // Normalize candle timestamp to UTC Unix epoch seconds
-  function normalizeCandleEpochSec(cTime) {
-    if (typeof cTime === 'number') {
-      // Note: nifty_candles.js stores timestamps shifted by +19800s for LightweightCharts IST display
-      // Detect if shifted by checking hour in UTC vs IST
-      return cTime;
-    }
-    if (typeof cTime === 'string') {
-      const ms = new Date(cTime).getTime();
-      if (!isNaN(ms)) return Math.floor(ms / 1000);
-    }
-    return 0;
-  }
-
-  function formatCandleTimeIST(epochSec, isShiftedIst = true) {
+  function formatCandleTimeIST(epochSec) {
     if (!epochSec) return '--:--';
-    // In nifty_interactive_chart.html, candle.time is already shifted so UTC methods give IST wall-clock time,
-    // or if unshifted UTC epoch, toLocaleString with Asia/Kolkata gives IST.
-    const d = new Date(epochSec * 1000);
-    // Heuristic: Indian market hours in UTC are 03:45–10:00, whereas in shifted IST they are 09:15–15:30.
-    const utcHr = d.getUTCHours();
-    if (isShiftedIst && utcHr >= 9 && utcHr <= 16) {
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const day = String(d.getUTCDate()).padStart(2, '0');
-      const mon = months[d.getUTCMonth()];
-      let h = d.getUTCHours();
-      const m = String(d.getUTCMinutes()).padStart(2, '0');
-      const ampm = h >= 12 ? 'PM' : 'AM';
-      h = h % 12 || 12;
-      return `${day} ${mon}, ${String(h).padStart(2, '0')}:${m} ${ampm}`;
-    }
+    const d = new Date(Number(epochSec) * 1000);
     return d.toLocaleString('en-IN', {
       timeZone: 'Asia/Kolkata',
       day: '2-digit',
@@ -143,12 +119,20 @@
     });
   }
 
+  function formatCandleClockOnlyIST(epochSec) {
+    if (!epochSec) return '--:--';
+    const d = new Date(Number(epochSec) * 1000);
+    return d.toLocaleTimeString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  }
+
   function getCandleSessionDateKey(epochSec) {
-    const d = new Date(epochSec * 1000);
-    const utcHr = d.getUTCHours();
-    if (utcHr >= 9 && utcHr <= 16) {
-      return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-${String(d.getUTCDate()).padStart(2, '0')}`;
-    }
+    if (!epochSec) return '';
+    const d = new Date(Number(epochSec) * 1000);
     return d.toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
   }
 
@@ -315,6 +299,7 @@
       canvas.width = W;
       canvas.height = H;
       const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
 
       // Background
       ctx.fillStyle = '#0f172a';
@@ -434,16 +419,34 @@
     }
   }
 
+  async function resolveOptionalApiKey() {
+    try {
+      const lsKey = localStorage.getItem('geminiApiKey');
+      if (lsKey && lsKey.trim()) return lsKey.trim();
+    } catch (e) {}
+    try {
+      if (typeof root.loadGoogleApiKey === 'function') {
+        const gKey = await root.loadGoogleApiKey();
+        if (gKey && gKey.trim()) return gKey.trim();
+      }
+    } catch (e) {}
+    return FALLBACK_GEMINI_KEY || '';
+  }
+
   /**
    * Calls /api/evaluateNiftyTrade (with direct Gemini Flash Vision browser fallback if local server is static).
    */
   async function requestAiTradeDecision(screenshotBase64, telemetry) {
+    const optionalKey = await resolveOptionalApiKey();
+
     // 1. Try serverless API route first
     try {
-      const resp = await fetch('/api/evaluateNiftyTrade', {
+      const isLocalFile = typeof window !== 'undefined' && (window.location.protocol === 'file:');
+      const apiBase = isLocalFile ? 'https://trading-journal-sandy-three.vercel.app' : '';
+      const resp = await fetch(`${apiBase}/api/evaluateNiftyTrade`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ screenshotBase64, telemetry })
+        body: JSON.stringify({ screenshotBase64, telemetry, apiKey: optionalKey || undefined })
       });
       if (resp.ok) {
         const data = await resp.json();
@@ -455,7 +458,7 @@
       // Proceed to direct Gemini Vision / Vercel fallback
     }
 
-    // 2. If running on local static server (Port 8080), try Vercel endpoint or direct Gemini Vision API
+    // 2. If running on local static server (Port 8080), try direct Gemini Vision API when a key is present
     const lvl = telemetry.level || {};
     const c = telemetry.candle || {};
     const ctx = telemetry.marketContext || {};
@@ -479,41 +482,43 @@ Return strict JSON:
   "logic": "2-3 concise sentences explaining WHY the trade should or should not be taken based on 5M close quality, wicks, 9 EMA, and R:R to TP1."
 }`;
 
-    try {
-      let cleanB64 = '';
-      if (screenshotBase64 && screenshotBase64.includes(',')) {
-        cleanB64 = screenshotBase64.split(',')[1];
-      }
-      const parts = [{ text: prompt }];
-      if (cleanB64) {
-        parts.push({ inline_data: { mime_type: 'image/jpeg', data: cleanB64 } });
-      }
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${FALLBACK_GEMINI_KEY}`;
-      const gResp = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts }],
-          generationConfig: { temperature: 0.15, response_mime_type: 'application/json' }
-        })
-      });
-      if (gResp.ok) {
-        const gData = await gResp.json();
-        const rawTxt = gData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-        if (rawTxt) {
-          const parsed = JSON.parse(rawTxt.replace(/^```json\s*|\s*```$/gm, '').trim());
-          return {
-            success: true,
-            decision: String(parsed.decision || '').toUpperCase().includes('YES') ? 'YES' : 'NO',
-            tradeType: String(parsed.tradeType || tradeType).toUpperCase().includes('SELL') ? 'SELL' : 'BUY',
-            confidence: Number(parsed.confidence || 78),
-            logic: String(parsed.logic || 'Evaluated 5M close and SMC structure.'),
-            model: 'gemini-3-flash-preview'
-          };
+    if (optionalKey) {
+      try {
+        let cleanB64 = '';
+        if (screenshotBase64 && screenshotBase64.includes(',')) {
+          cleanB64 = screenshotBase64.split(',')[1];
         }
+        const parts = [{ text: prompt }];
+        if (cleanB64) {
+          parts.push({ inline_data: { mime_type: 'image/jpeg', data: cleanB64 } });
+        }
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${encodeURIComponent(optionalKey)}`;
+        const gResp = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts }],
+            generationConfig: { temperature: 0.15, response_mime_type: 'application/json' }
+          })
+        });
+        if (gResp.ok) {
+          const gData = await gResp.json();
+          const rawTxt = gData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          if (rawTxt) {
+            const parsed = JSON.parse(rawTxt.replace(/^```json\s*|\s*```$/gm, '').trim());
+            return {
+              success: true,
+              decision: String(parsed.decision || '').toUpperCase().includes('YES') ? 'YES' : 'NO',
+              tradeType: String(parsed.tradeType || tradeType).toUpperCase().includes('SELL') ? 'SELL' : 'BUY',
+              confidence: Number(parsed.confidence || 78),
+              logic: String(parsed.logic || 'Evaluated 5M close and SMC structure.'),
+              model: 'gemini-3-flash-preview'
+            };
+          }
+        }
+      } catch (e) {
+        console.warn('[NiftyAiDecisions] Direct Gemini Vision call fallback:', e);
       }
-    } catch (e) {
-      console.warn('[NiftyAiDecisions] Direct Gemini Vision call fallback:', e);
     }
 
     // 3. Deterministic SMC Telemetry Fallback (if offline)
@@ -537,29 +542,93 @@ Return strict JSON:
   }
 
   /**
-   * Resolves PENDING outcomes against subsequent 5M candles.
+   * Resolves PENDING outcomes against subsequent 5M candles OR live spot price.
    * Marks Outcome = "TP" as soon as TP1 is hit, or "SL" if Stop Loss is hit.
    * Computes Points Captured (+) or Points Lost (-).
    */
-  function evaluatePendingOutcomes(candles) {
-    if (!candles || !Array.isArray(candles) || candles.length === 0) return false;
+  function evaluatePendingOutcomes(candlesOrPrice) {
     const decisions = loadDecisionsLog();
     if (decisions.length === 0) return false;
 
     let changed = false;
+
+    // Live spot price tick mode: { currentPrice, timeSec }
+    if (candlesOrPrice && !Array.isArray(candlesOrPrice) && typeof candlesOrPrice === 'object' && candlesOrPrice.currentPrice) {
+      const livePrice = Number(candlesOrPrice.currentPrice);
+      if (isNaN(livePrice) || livePrice <= 0) return false;
+      const nowDisplay = formatCandleTimeIST(Math.floor(Date.now() / 1000));
+
+      decisions.forEach(dec => {
+        if (dec.outcome !== 'PENDING') return;
+        const tradeType = (dec.tradeType || dec.type || 'BUY').toUpperCase();
+        const isBuy = tradeType === 'BUY';
+        const tp1 = Number(dec.tp1Price);
+        const sl = Number(dec.slPrice);
+        const entry = Number(dec.entryPrice ?? dec.closePrice);
+        if (isNaN(entry) || entry <= 0) return;
+
+        if (isBuy) {
+          if (!isNaN(tp1) && tp1 > 0 && livePrice >= tp1) {
+            dec.outcome = 'TP';
+            dec.points = Number((tp1 - entry).toFixed(1));
+            dec.outcomeTime = nowDisplay;
+            dec.resolvedTimeIst = nowDisplay;
+            dec.outcomePrice = tp1;
+            changed = true;
+          } else if (!isNaN(sl) && sl > 0 && livePrice <= sl) {
+            dec.outcome = 'SL';
+            dec.points = Number((-Math.abs(entry - sl)).toFixed(1));
+            dec.outcomeTime = nowDisplay;
+            dec.resolvedTimeIst = nowDisplay;
+            dec.outcomePrice = sl;
+            changed = true;
+          } else {
+            dec.livePoints = Number((livePrice - entry).toFixed(1));
+            dec.floatingPoints = dec.livePoints;
+          }
+        } else {
+          if (!isNaN(tp1) && tp1 > 0 && livePrice <= tp1) {
+            dec.outcome = 'TP';
+            dec.points = Number((entry - tp1).toFixed(1));
+            dec.outcomeTime = nowDisplay;
+            dec.resolvedTimeIst = nowDisplay;
+            dec.outcomePrice = tp1;
+            changed = true;
+          } else if (!isNaN(sl) && sl > 0 && livePrice >= sl) {
+            dec.outcome = 'SL';
+            dec.points = Number((-Math.abs(sl - entry)).toFixed(1));
+            dec.outcomeTime = nowDisplay;
+            dec.resolvedTimeIst = nowDisplay;
+            dec.outcomePrice = sl;
+            changed = true;
+          } else {
+            dec.livePoints = Number((entry - livePrice).toFixed(1));
+            dec.floatingPoints = dec.livePoints;
+          }
+        }
+      });
+
+      if (changed) saveDecisionsLog(decisions);
+      return changed;
+    }
+
+    const candles = candlesOrPrice;
+    if (!candles || !Array.isArray(candles) || candles.length === 0) return false;
+
     const latestCandle = candles[candles.length - 1];
 
     decisions.forEach(dec => {
-      const decSession = getCandleSessionDateKey(dec.candleTime);
+      const decSession = dec.sessionDate || getCandleSessionDateKey(dec.candleTime);
       const subsequentBars = candles.filter(c =>
         c.time > dec.candleTime && getCandleSessionDateKey(c.time) === decSession
       );
 
       if (dec.outcome === 'PENDING') {
-        const isBuy = dec.tradeType === 'BUY';
+        const tradeType = (dec.tradeType || dec.type || 'BUY').toUpperCase();
+        const isBuy = tradeType === 'BUY';
         const tp1 = Number(dec.tp1Price);
         const sl = Number(dec.slPrice);
-        const entry = Number(dec.entryPrice);
+        const entry = Number(dec.entryPrice ?? dec.closePrice);
 
         for (const bar of subsequentBars) {
           if (isBuy) {
@@ -567,6 +636,7 @@ Return strict JSON:
               dec.outcome = 'TP';
               dec.points = Number((tp1 - entry).toFixed(1));
               dec.outcomeTime = formatCandleTimeIST(bar.time);
+              dec.resolvedTimeIst = dec.outcomeTime;
               dec.outcomePrice = tp1;
               changed = true;
               break;
@@ -574,6 +644,7 @@ Return strict JSON:
               dec.outcome = 'SL';
               dec.points = Number((-Math.abs(entry - sl)).toFixed(1));
               dec.outcomeTime = formatCandleTimeIST(bar.time);
+              dec.resolvedTimeIst = dec.outcomeTime;
               dec.outcomePrice = sl;
               changed = true;
               break;
@@ -583,6 +654,7 @@ Return strict JSON:
               dec.outcome = 'TP';
               dec.points = Number((entry - tp1).toFixed(1));
               dec.outcomeTime = formatCandleTimeIST(bar.time);
+              dec.resolvedTimeIst = dec.outcomeTime;
               dec.outcomePrice = tp1;
               changed = true;
               break;
@@ -590,6 +662,7 @@ Return strict JSON:
               dec.outcome = 'SL';
               dec.points = Number((-Math.abs(sl - entry)).toFixed(1));
               dec.outcomeTime = formatCandleTimeIST(bar.time);
+              dec.resolvedTimeIst = dec.outcomeTime;
               dec.outcomePrice = sl;
               changed = true;
               break;
@@ -600,7 +673,12 @@ Return strict JSON:
         // Update floating live points if still PENDING
         if (dec.outcome === 'PENDING' && latestCandle && getCandleSessionDateKey(latestCandle.time) === decSession) {
           const rawDiff = isBuy ? (latestCandle.close - entry) : (entry - latestCandle.close);
-          dec.livePoints = Number(rawDiff.toFixed(1));
+          const nextLive = Number(rawDiff.toFixed(1));
+          if (dec.livePoints !== nextLive) {
+            dec.livePoints = nextLive;
+            dec.floatingPoints = nextLive;
+            changed = true;
+          }
         }
       }
     });
@@ -653,16 +731,16 @@ Return strict JSON:
       const tradeType = isBuyLevel ? 'BUY' : 'SELL';
 
       // Directional Cross & Close Condition:
-      // - BUY level: closedCandle.close >= lvlPrice AND candle crossed/touched from below (prevCandle.close < lvlPrice OR closedCandle.low <= lvlPrice OR closedCandle.open <= lvlPrice)
-      // - SELL level: closedCandle.close <= lvlPrice AND candle crossed/touched from above (prevCandle.close > lvlPrice OR closedCandle.high >= lvlPrice OR closedCandle.open >= lvlPrice)
+      // - BUY level: closedCandle.close >= lvlPrice AND candle crossed/touched from below
+      // - SELL level: closedCandle.close <= lvlPrice AND candle crossed/touched from above
       let directionalCrossClose = false;
       if (isBuyLevel) {
         const closedAbove = closedCandle.close >= lvlPrice;
-        const touchedOrCrossedUp = (prevCandle.close < lvlPrice) || (closedCandle.open < lvlPrice) || (closedCandle.low <= lvlPrice && closedCandle.close >= lvlPrice && Math.abs(closedCandle.open - lvlPrice) <= 25);
+        const touchedOrCrossedUp = (prevCandle.close < lvlPrice) || (closedCandle.open < lvlPrice) || (closedCandle.low <= lvlPrice);
         directionalCrossClose = closedAbove && touchedOrCrossedUp;
       } else {
         const closedBelow = closedCandle.close <= lvlPrice;
-        const touchedOrCrossedDown = (prevCandle.close > lvlPrice) || (closedCandle.open > lvlPrice) || (closedCandle.high >= lvlPrice && closedCandle.close <= lvlPrice && Math.abs(closedCandle.open - lvlPrice) <= 25);
+        const touchedOrCrossedDown = (prevCandle.close > lvlPrice) || (closedCandle.open > lvlPrice) || (closedCandle.high >= lvlPrice);
         directionalCrossClose = closedBelow && touchedOrCrossedDown;
       }
 
@@ -726,29 +804,39 @@ Return strict JSON:
         const screenshotDataUrl = captureOrRenderChartScreenshot(candlesUpToClose, levelTelemetry, chartInstance);
         const aiResult = await requestAiTradeDecision(screenshotDataUrl, telemetry);
 
+        const clockOnlyIST = formatCandleClockOnlyIST(closedCandle.time);
         const record = {
           id: uniqueEventId,
           createdAt: new Date().toISOString(),
           sessionDate: sessionKey,
           candleTime: closedCandle.time,
           timeDisplay: timeIST,
+          candleTimeIst: clockOnlyIST,
+          candleDateIst: sessionKey,
           tag,
+          levelTag: tag.replace(/[\[\]]/g, ''),
           levelPrice: lvlPrice,
           triggerType,
+          triggerReason: triggerType === 'RETOUCH_30M' ? 'COOLDOWN_30M_CLOSE' : 'FIRST_5M_CLOSE',
           decision: aiResult.decision || 'NO',
           tradeType: aiResult.tradeType || tradeType,
+          type: aiResult.tradeType || tradeType,
           confidence: aiResult.confidence || 75,
           entryPrice: Number(closedCandle.close.toFixed(2)),
+          closePrice: Number(closedCandle.close.toFixed(2)),
           tp1Price: tp1,
           slPrice: sl,
           rrRatio,
           outcome: 'PENDING',
           points: 0,
           livePoints: 0,
+          floatingPoints: 0,
           outcomeTime: null,
+          resolvedTimeIst: null,
           logic: aiResult.logic || '',
           wickObservation: aiResult.wickObservation || `${anatomy.archetype} (Body ${anatomy.bodyPct}%)`,
           model: aiResult.model || 'gemini-vision',
+          modelUsed: aiResult.model || 'gemini-vision',
           behaviorThesis: levelTelemetry.behavior,
           screenshotDataUrl
         };
@@ -778,16 +866,45 @@ Return strict JSON:
   }
 
   /**
-   * Scans an entire day's 5M candle array chronologically from first briefing/market open,
-   * triggering AI evaluations on First Close and 30m+ Cooldown re-touches, and resolving TP1/SL outcomes.
+   * Scans an entire day's 5M candle array chronologically, matching each bar to the active briefing
+   * (time-aware when timestamps exist), triggering AI evaluations on First Close and 30m+ Cooldown
+   * re-touches, and resolving TP1/SL outcomes.
+   * Supports both positional args (candles, levelsList, chartInstance, onProgress)
+   * and options object ({ candles5m, levels, chartInstance, onProgress, targetSession }).
    */
-  async function scanSessionCandlesForLevels(candles, levelsList, chartInstance, onProgress) {
-    if (!candles || candles.length < 3 || !levelsList || levelsList.length === 0) {
+  async function scanSessionCandlesForLevels(candlesOrOpts, levelsListArg, chartInstanceArg, onProgressArg) {
+    let candles = candlesOrOpts;
+    let levelsList = levelsListArg;
+    let chartInstance = chartInstanceArg;
+    let onProgress = onProgressArg;
+    let explicitSession = null;
+
+    if (candlesOrOpts && !Array.isArray(candlesOrOpts) && typeof candlesOrOpts === 'object') {
+      candles = candlesOrOpts.candles5m || candlesOrOpts.candles;
+      levelsList = candlesOrOpts.levels || candlesOrOpts.levelsList || levelsListArg;
+      chartInstance = candlesOrOpts.chartInstance || chartInstanceArg;
+      onProgress = candlesOrOpts.onProgress || onProgressArg;
+      explicitSession = candlesOrOpts.targetSession || null;
+    }
+
+    if (!candles || !Array.isArray(candles) || candles.length < 2 || !levelsList || !Array.isArray(levelsList) || levelsList.length === 0) {
       return [];
     }
 
-    // Normalize levelsList to match activePriceLines structure
-    const normalizedLines = levelsList.map((l, idx) => {
+    const sortedCandles = [...candles].sort((a, b) => a.time - b.time);
+    const lastBarTime = sortedCandles[sortedCandles.length - 1].time;
+    const targetSession = explicitSession || getCandleSessionDateKey(lastBarTime);
+
+    // Filter levels to target session if timestamped; keep untimestamped manual levels too
+    const sessionTimedLevels = levelsList.filter(l => {
+      if (!l.timestamp) return false;
+      const ms = new Date(l.timestamp).getTime();
+      if (isNaN(ms)) return false;
+      return getCandleSessionDateKey(Math.floor(ms / 1000)) === targetSession;
+    });
+    const manualUntimedLevels = levelsList.filter(l => !l.timestamp);
+
+    const normalizeList = (rawList) => rawList.map((l, idx) => {
       const pVal = parseFloat(String(l.price || l.rawPrice || l.pHigh || '').split('-')[0].replace(/[^0-9.]/g, ''));
       const beh = l.behavior || '';
       const tagMatch = (String(l.tag || l.source || '') + ' ' + beh).match(/\[(K?[BS]\d+)\]/i);
@@ -805,12 +922,23 @@ Return strict JSON:
       };
     }).filter(item => !isNaN(item.price) && item.price > 10000);
 
-    // Filter to latest session's candles (or last 75 bars = 1 full NSE day)
-    const lastBarTime = candles[candles.length - 1].time;
-    const targetSession = getCandleSessionDateKey(lastBarTime);
+    // Group session-timed levels by briefing timestamp so each candle sees only the briefing active at bar close
+    const briefingGroupsMap = new Map();
+    sessionTimedLevels.forEach(l => {
+      const tsMs = new Date(l.timestamp).getTime();
+      if (!briefingGroupsMap.has(l.timestamp)) {
+        briefingGroupsMap.set(l.timestamp, { tsMs, raw: [] });
+      }
+      briefingGroupsMap.get(l.timestamp).raw.push(l);
+    });
+    const sortedBriefingGroups = Array.from(briefingGroupsMap.values())
+      .sort((a, b) => a.tsMs - b.tsMs)
+      .map(g => ({ tsMs: g.tsMs, lines: normalizeList(g.raw) }));
+    const manualLines = normalizeList(manualUntimedLevels);
+
     const sessionIndices = [];
-    for (let i = 1; i < candles.length; i++) {
-      if (getCandleSessionDateKey(candles[i].time) === targetSession) {
+    for (let i = 1; i < sortedCandles.length; i++) {
+      if (getCandleSessionDateKey(sortedCandles[i].time) === targetSession) {
         sessionIndices.push(i);
       }
     }
@@ -818,8 +946,28 @@ Return strict JSON:
     const allNewRecords = [];
     for (let s = 0; s < sessionIndices.length; s++) {
       const cIdx = sessionIndices[s];
+      const bar = sortedCandles[cIdx];
+      const barCloseMs = (bar.time + 300) * 1000;
       if (onProgress) onProgress(s + 1, sessionIndices.length);
-      const recs = await checkAndTriggerLevelCloseAi(candles, normalizedLines, null, {
+
+      let activeLines = manualLines;
+      if (sortedBriefingGroups.length > 0) {
+        let latestGroup = null;
+        for (const grp of sortedBriefingGroups) {
+          if (grp.tsMs <= barCloseMs) {
+            latestGroup = grp;
+          }
+        }
+        if (latestGroup) {
+          activeLines = [...latestGroup.lines, ...manualLines];
+        } else if (manualLines.length === 0) {
+          continue;
+        }
+      }
+
+      if (!activeLines || activeLines.length === 0) continue;
+
+      const recs = await checkAndTriggerLevelCloseAi(sortedCandles, activeLines, chartInstance || null, {
         closedCandleIndex: cIdx
       });
       if (recs && recs.length > 0) {
@@ -827,9 +975,50 @@ Return strict JSON:
       }
     }
 
-    evaluatePendingOutcomes(candles);
+    evaluatePendingOutcomes(sortedCandles);
     notifyListeners();
     return allNewRecords;
+  }
+
+  /**
+   * Fetches clean 5M NIFTY candles for today's active trading session (or latest available trading day)
+   * from /api/marketCandles, falling back to window.niftyCandlesData if offline.
+   */
+  async function fetchSession5mCandles() {
+    const isLocalFile = typeof window !== 'undefined' && (window.location.protocol === 'file:');
+    const apiBase = isLocalFile ? 'https://trading-journal-sandy-three.vercel.app' : '';
+    const todayIst = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+
+    try {
+      const r = await fetch(`${apiBase}/api/marketCandles?symbol=NIFTY&date=${encodeURIComponent(todayIst)}&_t=${Date.now()}`, { cache: 'no-store' });
+      if (r.ok) {
+        const d = await r.json();
+        if (d && Array.isArray(d.candles) && d.candles.length >= 2) {
+          return d.candles;
+        }
+      }
+    } catch (e) {}
+
+    // Fallback to latest 5M series from marketCandles (e.g., if today is a holiday / pre-market)
+    try {
+      const r = await fetch(`${apiBase}/api/marketCandles?symbol=NIFTY&range=1mo&_t=${Date.now()}`, { cache: 'no-store' });
+      if (r.ok) {
+        const d = await r.json();
+        if (d && Array.isArray(d.candles) && d.candles.length >= 2) {
+          // Filter to 5M spacing if Upstox 1M bars were appended
+          const out = [];
+          for (const c of d.candles) {
+            if (c.time % 300 === 0) out.push(c);
+          }
+          return out.length >= 2 ? out : d.candles;
+        }
+      }
+    } catch (e) {}
+
+    if (root.niftyCandlesData && Array.isArray(root.niftyCandlesData.timeframe5m) && root.niftyCandlesData.timeframe5m.length >= 2) {
+      return root.niftyCandlesData.timeframe5m;
+    }
+    return [];
   }
 
   root.NiftyAiDecisions = {
@@ -840,6 +1029,7 @@ Return strict JSON:
     evaluatePendingOutcomes,
     checkAndTriggerLevelCloseAi,
     scanSessionCandlesForLevels,
+    fetchSession5mCandles,
     formatCandleTimeIST
   };
 

@@ -235,32 +235,36 @@ Inspect the attached live 5-minute NIFTY chart screenshot and the telemetry belo
     };
 
     let lastError = null;
-    for (const model of CANDIDATE_MODELS) {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(geminiKey)}`;
-      try {
-        const respData = await httpsPostJson(url, payload, 15000);
-        const text = respData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-        if (text) {
-          const cleaned = text.replace(/^```json\s*|\s*```$/gm, "").trim();
-          const parsed = JSON.parse(cleaned);
-          const normDecision = String(parsed.decision || "").toUpperCase().includes("YES") ? "YES" : "NO";
-          const normType = String(parsed.tradeType || tradeType).toUpperCase().includes("SELL") ? "SELL" : "BUY";
-          return res.status(200).json({
-            success: true,
-            decision: normDecision,
-            tradeType: normType,
-            confidence: Number(parsed.confidence || 75),
-            logic: String(parsed.logic || parsed.visual_rationale || "Evaluated 5M close & chart structure."),
-            wickObservation: String(parsed.wickObservation || ""),
-            momentumState: String(parsed.momentumState || "CONFIRMATION"),
-            entryQuality: String(parsed.entryQuality || "VALID"),
-            model,
-            latencyMs: Date.now() - t0
-          });
+    if (geminiKey) {
+      for (const model of CANDIDATE_MODELS) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(geminiKey)}`;
+        try {
+          const respData = await httpsPostJson(url, payload, 15000);
+          const text = respData?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+          if (text) {
+            const cleaned = text.replace(/^```json\s*|\s*```$/gm, "").trim();
+            const parsed = JSON.parse(cleaned);
+            const normDecision = String(parsed.decision || "").toUpperCase().includes("YES") ? "YES" : "NO";
+            const normType = String(parsed.tradeType || tradeType).toUpperCase().includes("SELL") ? "SELL" : "BUY";
+            return res.status(200).json({
+              success: true,
+              decision: normDecision,
+              tradeType: normType,
+              confidence: Number(parsed.confidence || 75),
+              logic: String(parsed.logic || parsed.visual_rationale || "Evaluated 5M close & chart structure."),
+              wickObservation: String(parsed.wickObservation || ""),
+              momentumState: String(parsed.momentumState || "CONFIRMATION"),
+              entryQuality: String(parsed.entryQuality || "VALID"),
+              model,
+              latencyMs: Date.now() - t0
+            });
+          }
+        } catch (err) {
+          lastError = err.message;
         }
-      } catch (err) {
-        lastError = err.message;
       }
+    } else {
+      lastError = "No GEMINI_API_KEY configured";
     }
 
     // Fallback to deterministic SMC evaluation if Gemini API is unreachable
