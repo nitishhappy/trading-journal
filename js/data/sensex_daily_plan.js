@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-11T13:31:07+05:30",
+    "timeDisplay": "01:31 PM, Nov 11",
+    "price": "81970",
+    "bias": "bullish",
+    "behavior": "[WED 13:31] [B1]: Liquidity probe below 81955.16 with quick 5M absorption close back above 81970 confirms spring reclaim",
+    "tp": "82095 / 82200",
+    "sl": "81920",
+    "status": "na",
+    "spread": "Buy 82000 CE + Sell 82200 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T13:31:07+05:30",
+    "timeDisplay": "01:31 PM, Nov 11",
+    "price": "82095",
+    "bias": "bullish",
+    "behavior": "[WED 13:31] [B2]: Sustained 5M close above 82095 Micro-EQ clearing 1H consolidation shelf towards Swing-EQ and supply",
+    "tp": "82200 / 82320",
+    "sl": "82040",
+    "status": "na",
+    "spread": "Buy 82100 CE + Sell 82300 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T13:31:07+05:30",
+    "timeDisplay": "01:31 PM, Nov 11",
+    "price": "81955",
+    "bias": "bearish",
+    "behavior": "[WED 13:31] [S1]: Sustained 5M close below 81955 Day Low flushing quad-tapped Equal Lows into pre-closing session",
+    "tp": "81820 / 81680",
+    "sl": "82010",
+    "status": "na",
+    "spread": "Buy 82000 PE + Sell 81800 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T13:31:07+05:30",
+    "timeDisplay": "01:31 PM, Nov 11",
+    "price": "82320",
+    "bias": "bearish",
+    "behavior": "[WED 13:31] [S2]: Rejection and bearish engulfing inside 82316 - 82324 supply block targeting swing equilibrium",
+    "tp": "82200 / 82095",
+    "sl": "82360",
+    "status": "na",
+    "spread": "Buy 82300 PE + Sell 82100 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-11T10:32:14+05:30",
     "timeDisplay": "10:32 AM, Nov 11",
     "price": "82340.0",
@@ -981,50 +1029,6 @@ window.sensexDailyPlanData = [
   },
   {
     "source": "AI",
-    "timestamp": "2026-11-04T13:31:56+05:30",
-    "timeDisplay": "01:31 PM, Nov 04",
-    "price": "76815",
-    "bias": "bullish",
-    "behavior": "[WED 13:31] [B1]: Bullish pullback into Parabolic Ignition Base (76,793 - 76,830) with 5m reversal confirmation",
-    "tp": "76,980.00 / 77,050.00",
-    "sl": "76,750.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T13:31:56+05:30",
-    "timeDisplay": "01:31 PM, Nov 04",
-    "price": "77150",
-    "bias": "bullish",
-    "behavior": "[WED 13:31] [B2]: Sustained 5m close ABOVE 77,150 with volume expansion confirming absorption of BSL shelf",
-    "tp": "77,280.00 / 77,390.00",
-    "sl": "77,050.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T13:31:56+05:30",
-    "timeDisplay": "01:31 PM, Nov 04",
-    "price": "77090",
-    "bias": "bearish",
-    "behavior": "[WED 13:31] [S1]: Stop-hunt sweep of 77,033-77,052 equal highs failing to sustain and closing back under 77,050",
-    "tp": "76,950.00 / 76,870.00",
-    "sl": "77,160.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T13:31:56+05:30",
-    "timeDisplay": "01:31 PM, Nov 04",
-    "price": "76860",
-    "bias": "bearish",
-    "behavior": "[WED 13:31] [S2]: 15m candle close BELOW 76,860 swing equilibrium triggering institutional long unwinding",
-    "tp": "76,740.00 / 76,620.00",
-    "sl": "76,950.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
     "timestamp": "2026-11-04T10:31:35+05:30",
     "timeDisplay": "10:31 AM, Nov 04",
     "price": "77170",
@@ -1687,6 +1691,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261111_133109",
+    "timestamp": "2026-11-11T13:31:09+05:30",
+    "timeDisplay": "01:31 PM, Nov 11",
+    "spot": "81962.47",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (01:30 PM IST - Nov 11, 2026 | Spot: 81962.47 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict Intraday No-Trade Corridor: 81970.00 – 82095.00 (Anchor: 50% 1H Micro-EQ at 82094.89 down to the Equal Lows consolidation shelf floor).\n- High-decay sideways compression inside the 1H range; directional option buying is prohibited inside this zone due to aggressive theta burn and lack of displacement.\n- Upper Chop Boundary: 82095.00 (Resistance from 1H Micro-EQ).\n- Lower Chop Boundary: 81970.00 (15M ORB Low & Quad-tapped Sell-Side Liquidity shelf).\n\n4. High Momentum / Explosive Zones:\n- [Bearish Breakdown] (Sustained 5M close below 81955.16): Displacement below the 4-tap Equal Lows (SSL at 81956.95 / Day Low at 81955.16) triggers aggressive long unwinding towards 81820 and 81680.\n- [Bullish Judas Sweep Reclaim] (Liquidity probe below 81955.00 followed by an immediate 5M close back above 81970.00): Absorption of sell-side stops resulting in a sharp spring rebound targeting 82095 and 82200.\n- [Bullish Momentum Expansion] (Sustained 5M close above 82095.00): Clean breakout above the 1H Micro-EQ clears trapped shorts and fuels expansion towards Swing-EQ 82196.47 and 82320.00.\n- [Bearish Supply Base Rejection] (Test and bearish rejection candle inside 82316.19 – 82323.71): Retest of the Parabolic Ignition Order Block (origin of the -171.58 flush) offering high-probability continuation shorts back to 82200 and 82095.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Liquidity Sweep & Spring Reclaim): Price dips below 81955.16 to sweep clustered Equal Lows (81956.95) but forms an immediate absorption wick and closes back firmly above 81970.00 on the 5M chart. | TP: 82095 / 82200 | SL: 81920 | 💡 Buy 82000 CE + Sell 82200 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Micro-EQ Breakout & Shelf Clearance): Sustained 5M candle close firmly above 82095.00 with expanding institutional buy volume confirming 1H range breakout. | TP: 82200 / 82320 | SL: 82040 | 💡 Buy 82100 CE + Sell 82300 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (SSL Breakdown & Trend Continuation): Sustained 5M candle close firmly below 81955.16 (Day Low / Equal Lows breakdown) with expanding bearish volume into the closing auction. | TP: 81820 / 81680 | SL: 82010 | 💡 Buy 82000 PE + Sell 81800 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Parabolic Ignition Order Block Rejection): Pullback rally into the Bearish Supply Base (82316.19 – 82323.71) printing an immediate 5M bearish engulfing or rejection structure. | TP: 82200 / 82095 | SL: 82360 | 💡 Buy 82300 PE + Sell 82100 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261111_103217",
     "timestamp": "2026-11-11T10:32:17+05:30",
     "timeDisplay": "10:32 AM, Nov 11",
