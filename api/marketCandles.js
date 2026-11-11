@@ -501,26 +501,11 @@ export default async function handler(req, res) {
         }
       }
 
-      // Check if Firestore candles are empty or stale (> 45 minutes old)
+      // Check if Firestore TradingView candles are empty or stale (> 45 minutes old)
+      // Strict TradingView-only source of truth: never fall back to Yahoo ^GSPC
       const nowSec = Math.floor(Date.now() / 1000);
-      const isStale = candles.length === 0 || (nowSec - candles[candles.length - 1].time) > 2700;
-
-      if (isStale) {
-        try {
-          const yahooInterval = (normTf === "15m") ? "15m" : (normTf === "1h") ? "60m" : (normTf === "1d") ? "1d" : "5m";
-          const yahooRange = req.query.range || "1mo";
-          const yahooJson = await fetchUrl(`https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${yahooInterval}&range=${yahooRange}`);
-          if (yahooJson) {
-            const yCandles = parseYahooCandles(yahooJson);
-            if (yCandles && yCandles.length > 0) {
-              candles = yCandles;
-              source = "YAHOO_FINANCE";
-            }
-          }
-        } catch (e) {
-          console.error("api/marketCandles SP500 Yahoo fallback error:", e);
-        }
-      }
+      const latestTimestamp = candles.length > 0 ? candles[candles.length - 1].time : 0;
+      const isStale = latestTimestamp === 0 || (nowSec - latestTimestamp) > 2700;
 
       if (candles.length === 0) {
         return res.status(200).json({
@@ -528,7 +513,9 @@ export default async function handler(req, res) {
           status: "DATA_UNAVAILABLE",
           symbol: "SP500",
           source: "TRADINGVIEW",
-          message: "S&P 500 candle data is currently unavailable.",
+          stale: true,
+          latestTimestamp: 0,
+          message: "S&P 500 TradingView candle data is currently unavailable in Firestore.",
           candles: []
         });
       }
@@ -537,6 +524,8 @@ export default async function handler(req, res) {
         success: true,
         symbol: "SP500",
         source,
+        stale: isStale,
+        latestTimestamp,
         candles
       });
     }

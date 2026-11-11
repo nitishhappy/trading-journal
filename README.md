@@ -178,6 +178,16 @@ The app is static (HTML/CSS/JS) — no build step. Can be hosted on:
 
 ## Changelog
 
+### v2.3.99 - 11 Nov 2026 - S&P 500 Strict TradingView Feed & Timestamp Alignment Fix
+- **Enforced TradingView Single Source of Truth (`/api/marketCandles?symbol=SP500`)**:
+  - Removed the Yahoo Finance `^GSPC` fallback from `api/marketCandles.js` for `SP500` when Firestore `sp500_candles` is stale (`> 45 min`), preventing RTH-only Yahoo candles from being stitched onto TradingView bars and causing price/EMA spikes.
+  - Endpoint now returns stored TradingView candles with `stale: isStale` and `latestTimestamp`, or `DATA_UNAVAILABLE` when empty.
+- **Fixed `+5h 30m` Timestamp Double-Shift in S&P 500 Local Vault**:
+  - Fixed `sync_sp500_candles()` in `Utilities/common_ai_ticker_utilities/market_data_store.py` where `.timestamp()` on a timezone-naive Pandas `Timestamp` treated local IST timestamps as UTC, shifting all synced TradingView epochs forward by `+19,800s` (+5h 30m).
+  - Repaired historical shifted rows in `sp500_market_data.db`, rebuilt `15m`/`1h`/`1d` tables, and re-exported `js/data/sp500_candles.js` with true UTC epochs.
+- **Hardened S&P 500 Interactive Chart Live Merge (`sp500_interactive_chart.html`)**:
+  - Updated `loadRealSp500Candles()` to request `timeframe=5m&limit=500` (instead of `limit=5` / `timeframe=15m`) and strictly merge only responses where `source === 'TRADINGVIEW'`.
+
 ### v2.3.98 - 04 Nov 2026 - Interactive Chart Persistent Notification Preference & Mobile PWA Delivery Fix (All 6 Charts)
 - **Persistent Notification Preferences (`localStorage`)**:
   - Resolved root cause where `alertsEnabled` was only stored in an in-memory variable (`let alertsEnabled = false;`) without `localStorage` persistence, causing alert notifications to be reset to disabled every time the chart was reloaded, refreshed, or restored by the mobile browser.

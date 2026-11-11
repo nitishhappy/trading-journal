@@ -4997,8 +4997,8 @@
 
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
             const marketCandlesUrl = isLocal
-                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`
-                : `/api/marketCandles?symbol=SP500&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`;
+                ? `https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=5m&limit=500&_t=${Date.now()}`
+                : `/api/marketCandles?symbol=SP500&timeframe=5m&limit=500&_t=${Date.now()}`;
 
             // 0. Primary: Local Vault (SQLite sp500_market_data.db via sp500_candles.js)
             try {
@@ -5009,13 +5009,13 @@
                     updateFeedBadge('local', window.sp500CandlesData.timeframe5m.length);
                     console.log(`[SP500 Chart] Loaded ${window.sp500CandlesData.timeframe5m.length} candles from local SQLite vault`);
 
-                    // Merge latest forming bar
+                    // Merge latest TradingView bars from Firestore (never mix non-TradingView sources)
                     try {
                         const apiBase = isLocal ? 'https://trading-journal-sandy-three.vercel.app' : '';
-                        const liveRes = await fetch(`${apiBase}/api/marketCandles?symbol=SP500&limit=5&_t=${Date.now()}`, { cache: 'no-store' });
+                        const liveRes = await fetch(`${apiBase}/api/marketCandles?symbol=SP500&timeframe=5m&limit=500&_t=${Date.now()}`, { cache: 'no-store' });
                         if (liveRes.ok) {
                             const liveJson = await liveRes.json();
-                            if (liveJson && Array.isArray(liveJson.candles) && liveJson.candles.length > 0) {
+                            if (liveJson && liveJson.source === 'TRADINGVIEW' && Array.isArray(liveJson.candles) && liveJson.candles.length > 0) {
                                 const baseMap = new Map();
                                 window.sp500CandlesData.timeframe5m.forEach(c => baseMap.set(c.time, c));
                                 liveJson.candles.forEach(c => {
@@ -5056,7 +5056,7 @@
                 try {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 10000);
-                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=15m&range=1mo&limit=3000&_t=${Date.now()}`, {
+                    const cloudRes = await fetch(`https://trading-journal-sandy-three.vercel.app/api/marketCandles?symbol=SP500&timeframe=5m&limit=500&_t=${Date.now()}`, {
                         cache: 'no-store',
                         signal: controller.signal
                     });
