@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-11T15:16:51+05:30",
+    "timeDisplay": "03:16 PM, Nov 11",
+    "price": "25105.0",
+    "bias": "bullish",
+    "behavior": "[WED 15:16] [B1]: \u2605 PRIMARY (Equal Lows & Day Low): 5m sweep of 25095.35 with reclaim close above 25105.00",
+    "tp": "25169.75 / 25195.88",
+    "sl": "25078.00",
+    "status": "na",
+    "spread": "Buy 25100 CE (17-Nov) @ ~Rs 259 (Delta 0.53, IV 18.9%) | Prem SL ~Rs 244 (-6%) | TP1 ~Rs 294 (+13%) | TP2 ~Rs 309 (+19%) | Option R:R 1:2.4 / 1:3.4 | Theta ~-Rs 3.7/hr | Risk/lot ~Rs 953"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T15:16:51+05:30",
+    "timeDisplay": "03:16 PM, Nov 11",
+    "price": "25175.0",
+    "bias": "bullish",
+    "behavior": "[WED 15:16] [B2]: BACKUP (1H Micro-EQ): 5m candle close above 1H Micro-EQ 25169.75 and 5m 9-EMA",
+    "tp": "25244.15 / 25272.50",
+    "sl": "25148.00",
+    "status": "na",
+    "spread": "Buy 25150 CE (17-Nov) @ ~Rs 270 (Delta 0.54, IV 18.9%) | Prem SL ~Rs 255 (-6%) | TP1 ~Rs 308 (+14%) | TP2 ~Rs 325 (+20%) | Option R:R 1:2.5 / 1:3.7 | Theta ~-Rs 3.7/hr | Risk/lot ~Rs 976"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T15:16:51+05:30",
+    "timeDisplay": "03:16 PM, Nov 11",
+    "price": "25160.0",
+    "bias": "bearish",
+    "behavior": "[WED 15:16] [S1]: \u2605 PRIMARY (1H Micro-EQ & 5m 9-EMA): 5m rejection wick at 25169.75 closing below 25160.00",
+    "tp": "25095.35 / 25044.65",
+    "sl": "25188.00",
+    "status": "na",
+    "spread": "Buy 25200 PE (17-Nov) @ ~Rs 220 (Delta 0.51, IV 16.6%) | Prem SL ~Rs 206 (-7%) | TP1 ~Rs 254 (+15%) | TP2 ~Rs 283 (+29%) | Option R:R 1:2.4 / 1:4.4 | Theta ~-Rs 2.6/hr | Risk/lot ~Rs 933"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T15:16:51+05:30",
+    "timeDisplay": "03:16 PM, Nov 11",
+    "price": "25090.0",
+    "bias": "bearish",
+    "behavior": "[WED 15:16] [S2]: BACKUP (Equal Lows & Day Low): 5m candle close below Day Low 25095.35 and PDH 25084.05",
+    "tp": "25044.65 / 25000.00",
+    "sl": "25116.00",
+    "status": "na",
+    "spread": "Buy 25100 PE (17-Nov) @ ~Rs 204 (Delta 0.48, IV 16.5%) | Prem SL ~Rs 191 (-6%) | TP1 ~Rs 226 (+11%) | TP2 ~Rs 250 (+23%) | Option R:R 1:1.7 / 1:3.6 | Theta ~-Rs 2.6/hr | Risk/lot ~Rs 831"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-11T15:01:52+05:30",
     "timeDisplay": "03:01 PM, Nov 11",
     "price": "25152.0",
@@ -3347,6 +3395,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261111_151654",
+    "timestamp": "2026-11-11T15:16:54+05:30",
+    "timeDisplay": "03:16 PM, Nov 11",
+    "spot": "25118.75",
+    "trigger": "Level Exhaustion Breakdown (NIFTY Spot $25130.00 < Min Plan Target $25140.00 - Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:15 PM IST - Nov 11, 2026 | Spot: 25118.75 | Trigger: Level Exhaustion Breakdown (NIFTY Spot $25130.00 < Min Plan Target $25140.00 - Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Inside the 1H Consolidation Shelf corridor between 25110.00 and 25165.00 (centering on the descending Green 5m 9-EMA at 25158.79 and 1H Micro-EQ at 25169.75), where intraday price action is compressing in the final minutes of the session with heavy theta bleed. No fresh option buying positions inside this middle pocket; scalps are strictly restricted to extreme sweep-reclaims at Day Low (25095.35) or decisive directional candle breakouts with mandatory exits before 15:20 IST.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Liquidity Sweep Spring] ([Sweep Below 25095.35 & Quick Reclaim]): A Judas probe below the Equal Lows cluster (25095.35) down toward Previous Day High (25084.05) that traps late breakdown option sellers, triggering an explosive short-covering bounce back toward the 1H Micro-EQ (25169.75) fueled by oversold Stochastic RSI curling out of deep compression.\n- [Bearish Breakdown Expansion] ([Decisive 5m Close Below 25090.00]): A firm 5-minute candle-body close below the Equal Lows and PDH (25084.05), unleashing trapped long inventory straight into the liquidity void toward Previous Day Close (25044.65) and the 25000 PUT OI Floor.\n- [Bearish 9-EMA Rejection Roll] ([Failed Test at 25158.79 - 25169.75]): An upper wick rejection at the descending Green 5m 9-EMA and 1H Micro-EQ, inviting aggressive short-scalp continuation back down into the 25095.35 floor.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | Equal Lows & Day Low pullback/sweep long): 5m liquidity sweep wick below Day Low 25095.35 and PDH 25084.05, followed by a bullish candle-body reclaim close above 25105.00. | TP: 25169.75 / 25195.88 | SL: 25078.00 | 💡 Buy 25100 CE (17-Nov) @ ~Rs 259 (Delta 0.53, IV 18.9%) | Prem SL ~Rs 244 (-6%) | TP1 ~Rs 294 (+13%) | TP2 ~Rs 309 (+19%) | Option R:R 1:2.4 / 1:3.4 | Theta ~-Rs 3.7/hr | Risk/lot ~Rs 953\n- [B2] BUY Setup 2 (BACKUP | 1H Micro-EQ breakout long): Decisive 5m candle-body close firmly above 1H Micro-EQ 25169.75 and Green 5m 9-EMA (25158.79) at 25175.00. | TP: 25244.15 / 25272.50 | SL: 25148.00 | 💡 Buy 25150 CE (17-Nov) @ ~Rs 270 (Delta 0.54, IV 18.9%) | Prem SL ~Rs 255 (-6%) | TP1 ~Rs 308 (+14%) | TP2 ~Rs 325 (+20%) | Option R:R 1:2.5 / 1:3.7 | Theta ~-Rs 3.7/hr | Risk/lot ~Rs 976\n- [S1] SELL Setup 1 (★ PRIMARY | 1H Micro-EQ & 5m 9-EMA rejection/sweep short): Bearish upper wick rejection at descending 5m 9-EMA (25158.79) and 1H Micro-EQ 25169.75, confirming with a 5m close back below 25160.00. | TP: 25095.35 / 25044.65 | SL: 25188.00 | 💡 Buy 25200 PE (17-Nov) @ ~Rs 220 (Delta 0.51, IV 16.6%) | Prem SL ~Rs 206 (-7%) | TP1 ~Rs 254 (+15%) | TP2 ~Rs 283 (+29%) | Option R:R 1:2.4 / 1:4.4 | Theta ~-Rs 2.6/hr | Risk/lot ~Rs 933\n- [S2] SELL Setup 2 (BACKUP | Equal Lows & Day Low breakdown short): Decisive 5m candle-body close below Day Low 25095.35 and PDH 25084.05 at 25090.00. | TP: 25044.65 / 25000.00 | SL: 25116.00 | 💡 Buy 25100 PE (17-Nov) @ ~Rs 204 (Delta 0.48, IV 16.5%) | Prem SL ~Rs 191 (-6%) | TP1 ~Rs 226 (+11%) | TP2 ~Rs 250 (+23%) | Option R:R 1:1.7 / 1:3.6 | Theta ~-Rs 2.6/hr | Risk/lot ~Rs 831"
+  },
+  {
     "id": "NIFTY_20261111_150156",
     "timestamp": "2026-11-11T15:01:56+05:30",
     "timeDisplay": "03:01 PM, Nov 11",
