@@ -1,6 +1,72 @@
 window.sp500DailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-11T20:33:06+05:30",
+    "timeDisplay": "08:33 PM, Nov 11",
+    "price": "7603.52",
+    "bias": "bearish",
+    "behavior": "[WED 20:33] [SP_KS1]: Current Day High & major BSL ceiling; prime location for SFP sweep rejection",
+    "tp": "7582.00 / 7564.68",
+    "sl": "7612.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T20:33:06+05:30",
+    "timeDisplay": "08:33 PM, Nov 11",
+    "price": "7594.68",
+    "bias": "bullish",
+    "behavior": "[WED 20:33] [SP_B2]: High-momentum breakout pivot; clearance confirms continuation to test Day High",
+    "tp": "7603.52 / 7611.68 / 7634.68",
+    "sl": "7584.68",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T20:33:06+05:30",
+    "timeDisplay": "08:33 PM, Nov 11",
+    "price": "7564.68",
+    "bias": "bearish",
+    "behavior": "[WED 20:33] [SP_KS2]: Key intraday demand threshold; sustained break below triggers liquidation cascade",
+    "tp": "7536.98 / 7524.68",
+    "sl": "7574.68",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T20:33:06+05:30",
+    "timeDisplay": "08:33 PM, Nov 11",
+    "price": "7536.98",
+    "bias": "bullish",
+    "behavior": "[WED 20:33] [SP_KB2]: 50% multi-session swing equilibrium and major institutional discount retest zone",
+    "tp": "7565.00 / 7585.00",
+    "sl": "7525.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T20:33:06+05:30",
+    "timeDisplay": "08:33 PM, Nov 11",
+    "price": "7478.18",
+    "bias": "bullish",
+    "behavior": "[WED 20:33] [SP_KB3]: Intraday session low shelf and pre-market liquidity buffer",
+    "tp": "7510.00 / 7536.98",
+    "sl": "7468.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-11T20:33:06+05:30",
+    "timeDisplay": "08:33 PM, Nov 11",
+    "price": "7470.43",
+    "bias": "bullish",
+    "behavior": "[WED 20:33] [SP_B1]: Previous Day Low major sell-side liquidity pool and high-conviction institutional absorption floor",
+    "tp": "7536.98 / 7564.68",
+    "sl": "7460.43",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-11T20:05:21+05:30",
     "timeDisplay": "08:05 PM, Nov 11",
     "price": "7543.92",
@@ -30,28 +96,6 @@ window.sp500DailyPlanData = [
     "behavior": "[WED 20:05] [SP_S2]: Primary intraday structural demand shelf; breakdown trigger for liquidation",
     "tp": "7478.18 / 7470.43 / 7452.00",
     "sl": "7503.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-11T20:05:21+05:30",
-    "timeDisplay": "08:05 PM, Nov 11",
-    "price": "7478.18",
-    "bias": "bullish",
-    "behavior": "[WED 20:05] [SP_KB2]: Current Day Low; interim liquidity pool ahead of PDL",
-    "tp": "7500.00 / 7512.00",
-    "sl": "7468.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-11T20:05:21+05:30",
-    "timeDisplay": "08:05 PM, Nov 11",
-    "price": "7470.43",
-    "bias": "bullish",
-    "behavior": "[WED 20:05] [SP_B1]: Previous Day Low major sell-side liquidity (SSL) trap zone and primary reversal hunt",
-    "tp": "7495.00 / 7507.18 / 7522.00",
-    "sl": "7460.00",
     "status": "na"
   },
   {
@@ -218,66 +262,20 @@ window.sp500DailyPlanData = [
     "tp": "7510.00",
     "sl": "7445.00",
     "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-10T20:17:59+05:30",
-    "timeDisplay": "08:17 PM, Nov 10",
-    "price": "7536.4",
-    "bias": "bearish",
-    "behavior": "[TUE 20:17] [SP_KS2]: London Session Peak & breakdown origin supply pocket; overhead rejection ceiling",
-    "tp": "7510.00",
-    "sl": "7545.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-10T20:17:59+05:30",
-    "timeDisplay": "08:17 PM, Nov 10",
-    "price": "7526.4",
-    "bias": "bullish",
-    "behavior": "[TUE 20:17] [SP_B2]: Sustained 5m close above 7526.40 triggers short squeeze toward 7536.40 and 7556.26",
-    "tp": "7545.00 / 7556.26",
-    "sl": "7516.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-10T20:17:59+05:30",
-    "timeDisplay": "08:17 PM, Nov 10",
-    "price": "7506.62",
-    "bias": "bullish",
-    "behavior": "[TUE 20:17] [SP_KB1]: 48H Range Equilibrium (50% midpoint); immediate structural support anchor",
-    "tp": "7530.00",
-    "sl": "7496.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-10T20:17:59+05:30",
-    "timeDisplay": "08:17 PM, Nov 10",
-    "price": "7486.4",
-    "bias": "bullish",
-    "behavior": "[TUE 20:17] [SP_KB3]: London Session Low liquidity shelf; secondary institutional defense barrier",
-    "tp": "7510.00",
-    "sl": "7476.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-10T20:17:59+05:30",
-    "timeDisplay": "08:17 PM, Nov 10",
-    "price": "7486.0",
-    "bias": "bearish",
-    "behavior": "[TUE 20:17] [SP_S2]: 5m close below London Low unleashes cascade toward deep macro demand at 7456.98",
-    "tp": "7465.00 / 7456.98",
-    "sl": "7496.00",
-    "status": "na"
   }
 ];
 
 window.sp500DailyPlanSummary = [
 {
+    "id": "SP500_20261111_203310",
+    "timestamp": "2026-11-11T20:33:10+05:30",
+    "timeDisplay": "08:33 PM, Nov 11",
+    "spot": "7582.66",
+    "trigger": "Level Exhaustion Breakout (SP500 Spot $7582.66 > Max Plan Target $7543.92 + Buffer $5.00",
+    "source": "SP500-AI",
+    "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (08:30 PM IST - Nov 11, 2026 | Spot: $7582.66 | Trigger: Level Exhaustion Breakout (SP500 Spot $7582.66 > Max Plan Target $7543.92 + Buffer $5.00))\n\n### 1. Global Macro & US Intermarket Dynamics:\n* **Volatility Regime (VIX at 18.72):** VIX remains contained within a balanced, moderate volatility band (18.72). The explosive upside breakout through the prior plan target ($7543.92) reflects institutional short-covering and sustained buying volume without disorderly panic, providing clean trend continuation and liquidity expansion mechanics.\n* **Dollar Index (DXY at 102.94):** The US Dollar Index trades sideways at 102.94, functioning as a moderate macro friction point. However, direct equity momentum in mega-cap technology and semiconductors is currently decoupling from FX headwind pressure.\n* **US 10-Year Treasury Yield (TNX at 5.00%):** Benchmark 10Y yields hover near 5.00%. While elevated bond yields usually cap equity expansion multiples, current market breadth is fueled by corporate earnings catalysts and tech demand.\n* **Futures Alignment (ES: 7604.00 | NQ: 28259.00):** S&P 500 (ES) and Nasdaq 100 (NQ) futures trade in strong lockstep above their respective cash session open prices, confirming genuine institutional capital commitment across equity index derivatives.\n* **US Macro News Guard:** 🟢 **Clean Calendar**: No immediate scheduled Tier-1 economic releases (CPI/FOMC) for the active window. Upward trajectory is driven by semiconductor earnings tailwinds (CoreWeave / NVDA) and institutional buy-stop clearing above previous swing boundaries.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n* **Higher Timeframe Structure & Range:** The index has staged an impulsive Fair Value Gap (FVG) expansion, surging past the 48H Equilibrium ($7536.98) and clearing the prior swing resistance ceiling to notch a new session high at **$7603.52**. The multi-session swing range is now defined between **7470.43 (PDL)** and **7603.52 (Day High)**, positioning current spot ($7582.66) inside the Premium Zone.\n* **Session Liquidity Distribution:**\n  * **Buy-Side Liquidity (BSL):** Concentrated tightly above the Day High (**7603.52**) up toward the **7611.68 – 7634.68** institutional extension targets. A confirmed re-break of 7603.52 will trigger automated trailing buy-stops and systematic momentum algos.\n  * **Sell-Side Liquidity (SSL):** Resting beneath the immediate structural shelf at **7564.68**, with deeper pool reserves stacked at **7536.98 (48H Equilibrium)** and **7470.43 (PDL)**.\n* **Market Bias / Structural Posture:** Bullish displacement with an active intraday pullback. Following the 60-point expansion from the 7543 breakout level into the 7603.52 peak, price action is undergoing normal liquidity absorption. The structure remains bullish above 7564.68.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Chop Zone Bounds:** **7571.68 – 7587.68** (Immediate 16-point consolidation band around spot $7582.66).\n* **Operational Directive:** **STRICT STAND-DOWN ZONE**.\n  * Following an exhaustive momentum leg into 7603.52, algorithms are actively rebalancing inventory inside this corridor.\n  * Executing market orders within 7571.68 – 7587.68 risks rapid rotational two-way whipsaws and theta decay. Stand aside until price breaks out with displacement outside this zone.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Momentum Expansion (> 7594.68):** A decisive 5M candle close above 7594.68 reasserts institutional buyer control, triggering a secondary impulse wave toward **7603.52 (Day High)** and expanding rapidly toward **7611.68 / 7634.68**.\n* **Bearish Cascade Liquidation (< 7564.68):** A sustained 5M close below the 7564.68 demand shelf confirms a short-term liquidity exhaustion failure, unlocking an aggressive long-liquidation cascade targeting **7536.98 (48H Equilibrium)** and **7524.68**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | High-Probability Long / Liquidity Sweep Recovery | **7470.43** | Sell-side liquidity sweep of PDL with sharp lower-wick absorption and a 5M close back above 7480.00 | **7536.98 / 7564.68** | **7460.43** | 1:3.2 |\n| **[SP_B2]** | High-Momentum Breakout Long | **7594.68** | Decisive 5M candle close above 7594.68 with expanding green volume and bullish FVG hold | **7603.52 / 7611.68 / 7634.68** | **7584.68** | 1:2.8 |\n| **[SP_S1]** | High-Probability Short / Supply Rejection | **7603.52** | Swing Failure Pattern (SFP) upper-wick rejection at Day High with 5M close back below 7595.00 | **7582.00 / 7564.68** | **7612.00** | 1:2.4 |\n| **[SP_S2]** | High-Momentum Breakdown Short | **7564.68** | Sustained 5M candle close below the 7564.68 demand shelf with displacement and red volume surge | **7536.98 / 7524.68** | **7574.68** | 1:2.7 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **7603.52** | Resistance / Day High Supply OB | **[SP_KS1]** | [SP_KS1] Current Day High & major buy-side liquidity (BSL) ceiling; prime location for SFP sweep rejection | 7582.00 / 7564.68 | 7612.00 |\n| **7564.68** | Breakdown Floor / SSL Cascade | **[SP_KS2]** | [SP_KS2] Key intraday demand threshold; sustained break below triggers long-unwinding cascade | 7536.98 / 7524.68 | 7574.68 |\n| **7594.68** | Breakout Inflection / Pivot | **[SP_KB1]** | [SP_KB1] High-momentum breakout pivot; clearance confirms continuation to test Day High & 7611.68 | 7603.52 / 7611.68 / 7634.68 | 7584.68 |\n| **7536.98** | Major Support / 48H Equilibrium | **[SP_KB2]** | [SP_KB2] 50% multi-session swing equilibrium and major institutional discount retest zone | 7565.00 / 7585.00 | 7525.00 |\n| **7478.18** | Support / Session Low Demand | **[SP_KB3]** | [SP_KB3] Intraday session low shelf and pre-market liquidity buffer | 7510.00 / 7536.98 | 7468.00 |\n| **7470.43** | Deep Structural Support / PDL SSL | **[SP_KB4]** | [SP_KB4] Previous Day Low major sell-side liquidity pool and high-conviction institutional absorption floor | 7536.98 / 7564.68 | 7460.43 |"
+  },
+  {
     "id": "SP500_20261111_200524",
     "timestamp": "2026-11-11T20:05:24+05:30",
     "timeDisplay": "08:05 PM, Nov 11",
@@ -321,14 +319,5 @@ window.sp500DailyPlanSummary = [
     "trigger": "Scheduled 09:00 PM IST Update (London Close & Mid-Day Liquidity Shift",
     "source": "SP500-AI",
     "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (09:00 PM IST - Nov 10, 2026 | Spot: $7528.69 | Trigger: Scheduled 09:00 PM IST Update (London Close & Mid-Day Liquidity Shift))\n\n### 1. Global Macro & US Intermarket Dynamics:\n- **Structural Invalidation Rebound & Mid-Day Shift**: Following the sharp post-opening flush that drove the spot index (^GSPC) down to a session low of **$7490.65**, aggressive institutional dip-buying triggered an explosive 53-point V-reversal, pushing price to an intraday high of **$7543.92** before settling near **$7528.69** into the London Close window. The index has reclaimed its 48H Equilibrium ($7523.46), shifting short-term structure from panic liquidation into a balanced, rotational consolidation regime.\n- **Intermarket Confluence Drivers**:\n  - **VIX Volatility Regime**: Trading at **20.20** (*High Volatility / Panic Expansion Regime*). While cooling off from session peaks above 21.30, the 20+ print confirms that broad hedging pressure and premium expansion remain elevated. Volatility crush during mid-day consolidation will punish late breakout entries.\n  - **US Dollar Index (DXY)**: Steady at **102.08** (*Macro Tailwind*), reflecting benign FX headwinds and providing fundamental support for broad-market equity stabilization.\n  - **10-Year Treasury Yield (TNX)**: Anchored near **4.99%**, remaining a ceiling constraint on mega-cap growth and valuation multiples, preventing runaway upside extensions.\n  - **Futures Basis Tracking**: December ES Futures trade near **7550.50** and NQ Futures hover around **27,989.00**, indicating steady institutional bid depth as London books square for the day.\n- **US Macro News Calendar**: Clean economic calendar for the remainder of the New York session. Algorithmic participants are focused purely on SMC liquidity rotation and technical structural containment.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n- **Macro Structural Framing**:\n  - **48H Swing Range**: $7490.65 (Day Low) to $7556.26 (Day High / PDH).\n  - **48H Equilibrium**: **$7523.46**. Spot price at **$7528.69** is trading directly above equilibrium, testing the boundary between neutral rotational value and premium expansion.\n- **Session Liquidity Pools**:\n  - **Buy-Side Liquidity (BSL)**: Resting buy-stops sit above the recent rebound high (**$7543.92**), with the primary session liquidity ceiling clustered at Day High / PDH (**$7556.26**).\n  - **Sell-Side Liquidity (SSL)**: Fresh stop pools are resting below the post-rebound consolidation base (**$7515.00**), with major sell-stops pooled beneath Day Low (**$7490.65**) and deep macro demand at PDL (**$7456.98**).\n- **Order Blocks & Fair Value Gaps**:\n  - **Immediate 15M Demand Order Block**: $7490.65 – $7505.00, marking the aggressive lower-wick accumulation base that drove the V-reversal.\n  - **Overhead 15M Supply Order Block**: $7540.00 – $7548.00, representing the rejection wick zone and intermediate distribution shelf from the 20:50 IST peak.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Chop Corridor**: **$7520.00 – $7536.00**\n- **Tactical Directive**: **STAND DOWN / NO TRADE INSIDE THE BOX**.\n- **Institutional Mechanics**: This 16-point corridor spans the 48H Equilibrium ($7523.46) and represents the London Close order-squaring transition. Tight rotation, overlapping candle wicks, and rapid mean-reversion dominate this pocket. Wait for a confirmed 5-minute candle close outside this corridor with volume expansion before taking fresh directional exposure.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n- **Bullish Squeeze & BSL Expansion (> $7544.00)**: A decisive 5-minute candle body close above **$7544.00** clears the intermediate supply order block, unleashing a short-covering squeeze toward Day High (**$7556.26**) and macro extension targets at **$7575.00**.\n- **Bearish Liquidation Cascade (< $7515.00)**: A sustained 5-minute candle body close below **$7515.00** confirms the loss of equilibrium support, triggering accelerated long liquidation back toward the session Day Low at **$7490.65** and the macro demand floor at **$7456.98**.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | 🟢 High-Probability Long / Liquidity Sweep Recovery | $7490.00 – $7495.00 | Sweep below Day Low ($7490.65) with aggressive lower-wick absorption and a 5m close back above $7502.00 | $7525.00 / $7545.00 | $7482.00 | 1:2.8 |\n| **[SP_B2]** | 🟢 High-Momentum Breakout Long | $7544.00 | Sustained 5m candle body close above $7544.00 with expanding green volume, clearing intermediate supply | $7556.26 / $7575.00 | $7532.00 | 1:2.6 |\n| **[SP_S1]** | 🔴 High-Probability Short / Supply Rejection | $7552.00 – $7556.26 | Retest of Day High / PDH ($7556.26) with SFP wick rejection and a 5m close below $7548.00 | $7528.00 / $7510.00 | $7564.00 | 1:2.7 |\n| **[SP_S2]** | 🔴 High-Momentum Breakdown Short | $7515.00 | Decisive 5m candle body close below $7515.00 with expanding red volume, confirming loss of equilibrium | $7490.65 / $7470.00 | $7526.00 | 1:2.5 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$7556.26** | Resistance / BSL Cap | `[SP_KS1]` | Day High & Previous Day High (PDH) buy-side liquidity ceiling; major distribution cap | $7528.00 | $7566.00 |\n| **$7515.00** | Breakdown Floor / SSL | `[SP_KS2]` | 48H Equilibrium invalidation floor; breakdown trigger toward session lows | $7490.65 | $7526.00 |\n| **$7523.46** | 48H Equilibrium Pivot | `[SP_KB1]` | Macro 48H Range Equilibrium (50% midpoint); primary structural pivot anchor | $7544.00 | $7512.00 |\n| **$7505.00** | Intermediate Demand Shelf | `[SP_KB2]` | Pre-breakout consolidation base & discount support pocket | $7528.00 | $7495.00 |\n| **$7490.65** | Intraday Demand / SSL Floor | `[SP_KB3]` | Live Session Day Low; sharp V-reversal absorption floor & primary liquidity sweep pool | $7525.00 | $7480.00 |\n| **$7456.98** | Deep Structural Demand | `[SP_KB4]` | Previous Day Low (PDL) and macro swing low base; ultimate institutional floor | $7510.00 | $7445.00 |"
-  },
-  {
-    "id": "SP500_20261110_201801",
-    "timestamp": "2026-11-10T20:18:01+05:30",
-    "timeDisplay": "08:18 PM, Nov 10",
-    "spot": "7511.40",
-    "trigger": "Structural Invalidation (-37.9 pts incremental shift from previous trigger 7549.28",
-    "source": "SP500-AI",
-    "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (08:15 PM IST - Nov 10, 2026 | Spot: $7511.40 | Trigger: Structural Invalidation (-37.9 pts incremental shift from previous trigger 7549.28))\n\n### 1. Global Macro & US Intermarket Dynamics:\n- **Structural Invalidation & Market Regime**: Following the completion of the US Initial Balance, an aggressive -37.9 point downward impulse breached the initial support shelf at $7539.30. Price swept sell-side liquidity down to a new session Day Low of **$7490.65** before buyers stepped in with volume absorption, lifting the spot index (^GSPC) back to **$7511.40** right around the 48H equilibrium pivot ($7506.62).\n- **Intermarket Confluence Drivers**:\n  - **VIX Volatility Regime**: Elevated at **21.33** (*High Volatility / Panic Expansion Regime*). The sustained push above 21 reflects ongoing hedging demand and wide intraday swings. Sharp directional expansions and rapid mean-reversion wicks will continue to punish late retail chasing.\n  - **US Dollar Index (DXY)**: Steady at **102.06** (*Macro Tailwind*), keeping currency headwinds subdued and preventing unmitigated panic liquidation across large-cap US equities.\n  - **10-Year Treasury Yield (TNX)**: Trading at **4.97%**, maintaining valuation pressure on growth and mega-cap tech, reinforcing disciplined rotational order flow.\n  - **Futures Basis Tracking**: December ES Futures trade around **7533.75** and NQ Futures stand at **27,808.00**, indicating intraday stabilization after the initial liquidation leg.\n- **US Macro News Calendar**: Clean economic calendar for the remainder of the session. Macro headlines continue to parse the sustainability of the recent equity rebound, keeping algorithmic execution tightly tethered to SMC technical levels.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n- **Macro Structural Framing**:\n  - **48H Swing Range**: $7456.98 (PDL) to $7556.26 (PDH / Day High).\n  - **48H Equilibrium**: **$7506.62**. With spot at **$7511.40**, price is currently re-testing the 50% equilibrium boundary from above after sweeping sub-equilibrium discount liquidity.\n- **Session Liquidity Pools**:\n  - **Buy-Side Liquidity (BSL)**: Heavy resting buy-stops sit above London Session High (**$7536.40**) and the breakdown origin shelf (**$7549.00**), with the primary structural ceiling at Day High / PDH (**$7556.26**).\n  - **Sell-Side Liquidity (SSL)**: Fresh stop pools are anchored below the newly established Day Low (**$7490.65**), with intermediate liquidity resting at London Low (**$7486.40**) and the ultimate macro demand base at PDL (**$7456.98**).\n- **Order Blocks & Fair Value Gaps**:\n  - **Immediate 15M Demand Order Block**: $7490.00 – $7502.00, representing the absorption zone where institutional bids halted the recent cascade.\n  - **Overhead 15M Supply Order Block**: $7526.00 – $7536.40, marking the origin of the breakdown flush and previous London peak.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Chop Corridor**: **$7503.50 – $7519.50**\n- **Tactical Directive**: **STAND DOWN / NO TRADE INSIDE THE BOX**.\n- **Institutional Mechanics**: This 16-point corridor straddles the 48H Equilibrium ($7506.62) and represents the immediate post-cascade consolidation box. Trading within this pocket carries high risk of two-way whipsaws and theta decay. Wait for a definitive 5-minute candle close outside this corridor before initiating new positions.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n- **Bullish Reclaim & Short Squeeze (> $7526.40)**: A sustained 5-minute candle body close above **$7526.40** confirms an institutional reclamation of the breakdown structure, igniting a rapid short-covering squeeze toward London High **$7536.40** and the Day High ceiling at **$7556.26**.\n- **Bearish Liquidation Cascade (< $7486.00)**: A decisive 5-minute candle close below the session Day Low ($7490.65) and London Low (**$7486.40**) unlocks secondary stop-runs, accelerating downward momentum directly toward the deep macro demand floor at **$7456.98** (PDL).\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | 🟢 High-Probability Long / Liquidity Sweep Recovery | $7488.00 – $7492.00 | Sweep below Day Low ($7490.65) with aggressive lower-wick absorption and a 5m close back above $7496.00 | $7515.00 / $7535.00 | $7482.00 | 1:2.6 |\n| **[SP_B2]** | 🟢 High-Momentum Breakout Long | $7526.40 | Sustained 5m candle body close above $7526.00 with expanding volume, clearing intermediate supply | $7545.00 / $7556.26 | $7516.00 | 1:2.4 |\n| **[SP_S1]** | 🔴 High-Probability Short / Supply Rejection | $7532.00 – $7536.00 | Retest of London High / Supply OB ($7536.40) with SFP wick rejection and 5m close below $7528.00 | $7510.00 / $7495.00 | $7542.00 | 1:2.5 |\n| **[SP_S2]** | 🔴 High-Momentum Breakdown Short | $7486.00 | Decisive 5m candle body close below London Low ($7486.40) with expanding volume, confirming cascade continuation | $7465.00 / $7456.98 | $7496.00 | 1:2.8 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **$7556.26** | Resistance / BSL Cap | `[SP_KS1]` | Day High & Previous Day High (PDH) buy-side liquidity ceiling; major distribution cap | $7526.00 | $7566.00 |\n| **$7536.40** | Supply OB / London High | `[SP_KS2]` | London Session Peak & breakdown origin supply pocket; key overhead rejection ceiling | $7510.00 | $7545.00 |\n| **$7506.62** | 48H Equilibrium Pivot | `[SP_KB1]` | Macro 48H Range Equilibrium (50% midpoint); immediate structural support anchor | $7530.00 | $7496.00 |\n| **$7490.65** | Intraday Demand / SSL Floor | `[SP_KB2]` | Live Session Day Low; initial flush absorption floor and primary liquidity sweep zone | $7515.00 | $7480.00 |\n| **$7486.40** | Intermediate Support / London Low | `[SP_KB3]` | London Session Low liquidity shelf; secondary institutional defense barrier | $7510.00 | $7476.00 |\n| **$7456.98** | Deep Structural Demand | `[SP_KB4]` | Previous Day Low (PDL) and macro swing low base; ultimate institutional floor | $7500.00 | $7445.00 |"
   }
 ];
