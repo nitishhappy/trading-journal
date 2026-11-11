@@ -23,20 +23,44 @@
 
   const STORAGE_KEY_DECISIONS = 'niftyAiTradeDecisionsLog_v1';
   const STORAGE_KEY_COOLDOWNS = 'niftyAiLastCallTimestamps_v1';
+  const STORAGE_KEY_SCHEMA = 'niftyAiDecisionsSchemaVersion';
+  const CURRENT_SCHEMA_VERSION = 'v2_min_rr2';
   const IST_OFFSET_SEC = 19800; // +05:30
   const FALLBACK_GEMINI_KEY = (typeof localStorage !== 'undefined' && localStorage.getItem('geminiApiKey')) || '';
 
   let inFlightEvaluations = new Set();
 
-  function getCooldownMinutes() {
-    const cfg = (root.APP_CONFIG && root.APP_CONFIG.assetParamsConfig && root.APP_CONFIG.assetParamsConfig.nifty)
+  function getNiftyAssetParams() {
+    return (root.APP_CONFIG && root.APP_CONFIG.assetParamsConfig && root.APP_CONFIG.assetParamsConfig.nifty)
       || (root.assetParamsConfig && root.assetParamsConfig.nifty)
       || {};
+  }
+
+  function getCooldownMinutes() {
+    const cfg = getNiftyAssetParams();
     const val = Number(cfg.AI_EVAL_COOLDOWN_MINS);
     return (!isNaN(val) && val > 0) ? val : 30;
   }
 
+  function getMinRiskReward() {
+    const cfg = getNiftyAssetParams();
+    const val = Number(cfg.MIN_AI_TRADE_RR);
+    return (!isNaN(val) && val > 0) ? val : 2.0;
+  }
+
+  function ensureSchemaUpToDate() {
+    if (typeof localStorage === 'undefined') return;
+    try {
+      if (localStorage.getItem(STORAGE_KEY_SCHEMA) !== CURRENT_SCHEMA_VERSION) {
+        localStorage.removeItem(STORAGE_KEY_DECISIONS);
+        localStorage.removeItem(STORAGE_KEY_COOLDOWNS);
+        localStorage.setItem(STORAGE_KEY_SCHEMA, CURRENT_SCHEMA_VERSION);
+      }
+    } catch (e) {}
+  }
+
   function loadDecisionsLog() {
+    ensureSchemaUpToDate();
     try {
       const raw = localStorage.getItem(STORAGE_KEY_DECISIONS);
       if (!raw) return [];
@@ -71,6 +95,7 @@
   }
 
   function loadCooldownMap() {
+    ensureSchemaUpToDate();
     try {
       const raw = localStorage.getItem(STORAGE_KEY_COOLDOWNS);
       return raw ? JSON.parse(raw) : {};
@@ -177,9 +202,10 @@
       tp1 = tradeType === 'BUY' ? Math.round(entry + risk * 2) : Math.round(entry - risk * 2);
     }
 
-    const risk = Math.abs(entry - sl);
-    const reward = Math.abs(tp1 - entry);
-    const rrRatio = risk > 0 ? Number((reward / risk).toFixed(2)) : 2.0;
+    const isBuy = (tradeType || 'BUY').toUpperCase() === 'BUY';
+    const risk = isBuy ? (entry - sl) : (sl - entry);
+    const reward = isBuy ? (tp1 - entry) : (entry - tp1);
+    const rrRatio = (risk > 0 && reward > 0) ? Number((reward / risk).toFixed(2)) : 0;
 
     return { tp1, sl, rrRatio };
   }
@@ -433,11 +459,32 @@
     return FALLBACK_GEMINI_KEY || '';
   }
 
+  function applyMinRiskRewardGate(aiResult, lvl) {
+    const minRR = Number((lvl && lvl.minRR) || getMinRiskReward());
+    const rawRR = lvl && lvl.rrRatio !== undefined ? Number(lvl.rrRatio) : 0;
+    const effectiveRR = isFinite(rawRR) ? rawRR : 0;
+
+    if (aiResult && aiResult.decision === 'YES' && effectiveRR < minRR) {
+      return {
+        ...aiResult,
+        decision: 'NO',
+        confidence: Math.min(Number(aiResult.confidence || 45), 45),
+        logic: `[R:R Filter: 1:${effectiveRR.toFixed(2)} < min 1:${minRR.toFixed(1)}] Planned Reward to TP1 (₹${lvl.tp1 || 'N/A'}) vs Risk to SL (₹${lvl.sl || 'N/A'}) does not meet minimum 1:${minRR.toFixed(1)} Risk:Reward.`
+      };
+    }
+    return aiResult;
+  }
+
   /**
    * Calls /api/evaluateNiftyTrade (with direct Gemini Flash Vision browser fallback if local server is static).
    */
   async function requestAiTradeDecision(screenshotBase64, telemetry) {
     const optionalKey = await resolveOptionalApiKey();
+    const lvl = telemetry.level || {};
+    const c = telemetry.candle || {};
+    const ctx = telemetry.marketContext || {};
+    const tradeType = (lvl.tradeType || 'BUY').toUpperCase();
+    const minRR = Number(lvl.minRR || getMinRiskReward());
 
     // 1. Try serverless API route first
     try {
@@ -451,7 +498,7 @@
       if (resp.ok) {
         const data = await resp.json();
         if (data && data.success && data.decision) {
-          return data;
+          return applyMinRiskRewardGate(data, lvl);
         }
       }
     } catch (e) {
@@ -459,20 +506,17 @@
     }
 
     // 2. If running on local static server (Port 8080), try direct Gemini Vision API when a key is present
-    const lvl = telemetry.level || {};
-    const c = telemetry.candle || {};
-    const ctx = telemetry.marketContext || {};
-    const tradeType = (lvl.tradeType || 'BUY').toUpperCase();
-
     const prompt = `You are an elite Institutional NIFTY 50 Intraday SMC & Price Action Co-Pilot.
 A 5-minute NIFTY candle has just CLOSED ${tradeType === 'BUY' ? 'ABOVE a mapped BUY level' : 'BELOW a mapped SELL level'}.
 Inspect the attached 5-minute NIFTY chart and telemetry to decide if the trade should be taken ("YES" or "NO").
 
-Trigger Level: ${lvl.tag} (${tradeType}) @ ₹${lvl.price} | TP1: ₹${lvl.tp1} | SL: ₹${lvl.sl} | R:R 1:${lvl.rrRatio}
+Trigger Level: ${lvl.tag} (${tradeType}) @ ₹${lvl.price} | TP1: ₹${lvl.tp1} | SL: ₹${lvl.sl} | R:R 1:${lvl.rrRatio} (Min Required: 1:${minRR.toFixed(1)})
 Trigger Type: ${lvl.triggerType}
 Planned Behavior: "${lvl.behavior}"
 5M Trigger Candle (${c.timeIST}): O:${c.open} H:${c.high} L:${c.low} C:${c.close} (Range: ${c.rangePts} pts, Body: ${c.bodyPct}%, UpperWick: ${c.upperWickPct}%, LowerWick: ${c.lowerWickPct}%, Archetype: ${c.archetype})
 Market Structure: 9 EMA ₹${ctx.ema9} (${ctx.closeVsEma9}), 15M ORB ₹${ctx.orbLow}-₹${ctx.orbHigh}, Day Range ₹${ctx.dayLow}-₹${ctx.dayHigh}.
+
+IMPORTANT: Return "NO" if Planned R:R (1:${lvl.rrRatio}) is below 1:${minRR.toFixed(1)}.
 
 Return strict JSON:
 {
@@ -506,14 +550,14 @@ Return strict JSON:
           const rawTxt = gData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
           if (rawTxt) {
             const parsed = JSON.parse(rawTxt.replace(/^```json\s*|\s*```$/gm, '').trim());
-            return {
+            return applyMinRiskRewardGate({
               success: true,
               decision: String(parsed.decision || '').toUpperCase().includes('YES') ? 'YES' : 'NO',
               tradeType: String(parsed.tradeType || tradeType).toUpperCase().includes('SELL') ? 'SELL' : 'BUY',
               confidence: Number(parsed.confidence || 78),
               logic: String(parsed.logic || 'Evaluated 5M close and SMC structure.'),
               model: 'gemini-3-flash-preview'
-            };
+            }, lvl);
           }
         }
       } catch (e) {
@@ -527,18 +571,29 @@ Return strict JSON:
       ? (c.close >= c.open && c.bodyPct >= 40 && c.upperWickPct < 45)
       : (c.close <= c.open && c.bodyPct >= 40 && c.lowerWickPct < 45);
     const notChased = dist <= 35;
-    const isYes = goodBody && notChased;
+    const rrVal = Number(lvl.rrRatio || 0);
+    const hasMinRR = isFinite(rrVal) && rrVal >= minRR;
+    const isYes = goodBody && notChased && hasMinRR;
 
-    return {
+    let skipReason = '';
+    if (!hasMinRR) {
+      skipReason = `R:R 1:${rrVal.toFixed(2)} below min 1:${minRR.toFixed(1)} (TP1 ₹${lvl.tp1}, SL ₹${lvl.sl}).`;
+    } else if (!notChased) {
+      skipReason = `Close extended ${dist.toFixed(1)} pts beyond level (chased entry).`;
+    } else {
+      skipReason = `Weak candle close anatomy (${c.archetype}, UpperWick ${c.upperWickPct}%, LowerWick ${c.lowerWickPct}%).`;
+    }
+
+    return applyMinRiskRewardGate({
       success: true,
       decision: isYes ? 'YES' : 'NO',
       tradeType,
       confidence: isYes ? 76 : 42,
       logic: isYes
-        ? `${c.archetype} closed cleanly ${tradeType === 'BUY' ? 'above' : 'below'} ${lvl.tag} (₹${lvl.price}) with ${c.bodyPct}% body (${ctx.closeVsEma9}) and favorable 1:${lvl.rrRatio} R:R to TP1 (₹${lvl.tp1}).`
-        : `Skipped ${lvl.tag} @ ₹${lvl.price}: ${!notChased ? `Close extended ${dist.toFixed(1)} pts beyond level (chased R:R).` : `Weak candle close anatomy (${c.archetype}, UpperWick ${c.upperWickPct}%, LowerWick ${c.lowerWickPct}%).`}`,
+        ? `${c.archetype} closed cleanly ${tradeType === 'BUY' ? 'above' : 'below'} ${lvl.tag} (₹${lvl.price}) with ${c.bodyPct}% body (${ctx.closeVsEma9}) and 1:${rrVal.toFixed(2)} R:R (>= 1:${minRR.toFixed(1)}) to TP1 (₹${lvl.tp1}).`
+        : `Skipped ${lvl.tag} @ ₹${lvl.price}: ${skipReason}`,
       model: 'smc-telemetry-engine'
-    };
+    }, lvl);
   }
 
   /**
@@ -785,6 +840,7 @@ Return strict JSON:
           tpRaw: lvlObj.tp || String(tp1),
           sl,
           rrRatio,
+          minRR: getMinRiskReward(),
           behavior: beh || `${tag} ${tradeType} reaction level`,
           triggerType,
           cooldownMins
@@ -1023,6 +1079,7 @@ Return strict JSON:
 
   root.NiftyAiDecisions = {
     getCooldownMinutes,
+    getMinRiskReward,
     loadDecisionsLog,
     saveDecisionsLog,
     clearDecisionsLog,

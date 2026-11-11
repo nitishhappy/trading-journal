@@ -50,6 +50,25 @@ function httpsPostJson(urlStr, payloadObj, timeoutMs = 15000) {
   });
 }
 
+function enforceMinRiskReward(result, telemetry) {
+  const lvl = telemetry?.level || {};
+  const minRR = Number(lvl.minRR || 2.0);
+  const rrRatio = Number(lvl.rrRatio);
+  const effectiveRR = isFinite(rrRatio) ? rrRatio : 0;
+
+  if (result.decision === "YES" && effectiveRR < minRR) {
+    return {
+      ...result,
+      decision: "NO",
+      confidence: Math.min(Number(result.confidence || 45), 45),
+      momentumState: "POOR_RR",
+      entryQuality: "POOR_RR",
+      logic: `[R:R Filter: 1:${effectiveRR.toFixed(2)} < min 1:${minRR.toFixed(1)}] Planned Reward to TP1 (₹${lvl.tp1 || "N/A"}) vs Risk to SL (₹${lvl.sl || "N/A"}) fails minimum 1:${minRR.toFixed(1)} Risk:Reward gate.`
+    };
+  }
+  return result;
+}
+
 function evaluateDeterministicSmcFallback(telemetry) {
   const lvl = telemetry?.level || {};
   const c = telemetry?.candle || {};
@@ -60,7 +79,8 @@ function evaluateDeterministicSmcFallback(telemetry) {
   const upperWickPct = Number(c.upperWickPct || 0);
   const lowerWickPct = Number(c.lowerWickPct || 0);
   const distFromLevel = Math.abs(Number(c.close || 0) - Number(lvl.price || 0));
-  const rrRatio = Number(lvl.rrRatio || 1.5);
+  const minRR = Number(lvl.minRR || 2.0);
+  const rrRatio = Number(lvl.rrRatio !== undefined ? lvl.rrRatio : 1.5);
 
   let score = 60;
   const reasons = [];
@@ -114,21 +134,24 @@ function evaluateDeterministicSmcFallback(telemetry) {
     reasons.push(`Close is extended ${distFromLevel.toFixed(1)} pts beyond level (${lvl.price}); high chase risk.`);
   }
 
-  if (rrRatio >= 2.0) {
+  if (rrRatio >= minRR) {
     score += 5;
-    reasons.push(`Favorable planned R:R of 1:${rrRatio.toFixed(1)} to TP1 (${lvl.tp1 || lvl.tpRaw}).`);
+    reasons.push(`Favorable planned R:R of 1:${rrRatio.toFixed(2)} (meets min 1:${minRR.toFixed(1)}) to TP1 (${lvl.tp1 || lvl.tpRaw}).`);
+  } else {
+    score = Math.min(score - 30, 45);
+    reasons.push(`Skipped: Planned R:R 1:${rrRatio.toFixed(2)} is below minimum 1:${minRR.toFixed(1)} to TP1 (${lvl.tp1 || lvl.tpRaw}) vs SL (${lvl.sl}).`);
   }
 
-  const decision = score >= 65 ? "YES" : "NO";
-  return {
+  const decision = (score >= 65 && rrRatio >= minRR) ? "YES" : "NO";
+  return enforceMinRiskReward({
     decision,
     tradeType,
     confidence: Math.max(25, Math.min(95, score)),
     logic: reasons.join(" "),
     wickObservation: `Body: ${bodyPct.toFixed(1)}%, Upper Wick: ${upperWickPct.toFixed(1)}%, Lower Wick: ${lowerWickPct.toFixed(1)}%`,
-    momentumState: score >= 65 ? "CONFIRMATION" : "WEAK_REACTION",
-    entryQuality: distFromLevel > 35 ? "CHASED" : "VALID"
-  };
+    momentumState: decision === "YES" ? "CONFIRMATION" : (rrRatio < minRR ? "POOR_RR" : "WEAK_REACTION"),
+    entryQuality: distFromLevel > 35 ? "CHASED" : (rrRatio < minRR ? "POOR_RR" : "VALID")
+  }, telemetry);
 }
 
 export default async function handler(req, res) {
@@ -191,8 +214,8 @@ Inspect the attached live 5-minute NIFTY chart screenshot and the telemetry belo
 2. WICK & REJECTION CHECK:
    - For a BUY setup: If the candle has a massive upper rejection wick (>45%) or closed right into an overhead resistance / 9 EMA cap, return "NO". If it shows strong bullish body displacement or lower-wick demand absorption closing cleanly above the level, favor "YES".
    - For a SELL setup: If the candle has a massive lower absorption wick (>45%) or closed right into support, return "NO". If it shows strong bearish body displacement or upper-wick supply rejection closing cleanly below the level, favor "YES".
-3. ANTI-CHASE CHECK:
-   If the 5M candle exploded too far beyond the level (e.g. >35-40 pts away from ₹${lvl.price}, eating up most of the distance to TP1 ₹${lvl.tp1}), return "NO" due to poor effective R:R / chased entry.
+3. ANTI-CHASE & MINIMUM R:R CHECK:
+   If the 5M candle exploded too far beyond the level (e.g. >35-40 pts away from ₹${lvl.price}) OR planned R:R (1:${lvl.rrRatio || "N/A"}) is below the minimum 1:${Number(lvl.minRR || 2.0).toFixed(1)} Risk:Reward ratio to TP1 (₹${lvl.tp1}), you MUST return "NO".
 4. Respond in strict JSON with these exact keys:
 {
   "decision": "YES", // Strictly "YES" or "NO"
@@ -246,7 +269,7 @@ Inspect the attached live 5-minute NIFTY chart screenshot and the telemetry belo
             const parsed = JSON.parse(cleaned);
             const normDecision = String(parsed.decision || "").toUpperCase().includes("YES") ? "YES" : "NO";
             const normType = String(parsed.tradeType || tradeType).toUpperCase().includes("SELL") ? "SELL" : "BUY";
-            return res.status(200).json({
+            const gated = enforceMinRiskReward({
               success: true,
               decision: normDecision,
               tradeType: normType,
@@ -257,7 +280,8 @@ Inspect the attached live 5-minute NIFTY chart screenshot and the telemetry belo
               entryQuality: String(parsed.entryQuality || "VALID"),
               model,
               latencyMs: Date.now() - t0
-            });
+            }, telemetry);
+            return res.status(200).json(gated);
           }
         } catch (err) {
           lastError = err.message;

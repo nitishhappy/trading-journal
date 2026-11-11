@@ -3429,35 +3429,49 @@ window.toggleMaximizePanel = function(btn, event) {
     }
 
     // ===================== AI TRADE DECISIONS LOG (5M CLOSE ENGINE) =====================
+    const AI_DECISIONS_PAGE_SIZE = 8;
+    let aiDecisionsCurrentPage = 1;
+
     function renderAiTradeDecisionsLog() {
         const tbody = document.getElementById('ai-decisions-tbody');
         const countBadge = document.getElementById('ai-decisions-count-badge');
         const tpslRatioEl = document.getElementById('ai-decisions-tpsl-ratio');
         const netPtsEl = document.getElementById('ai-decisions-net-pts');
         const cooldownLabelEl = document.getElementById('ai-cooldown-label');
+        const minRrLabelEl = document.getElementById('ai-min-rr-label');
         const filterSelect = document.getElementById('filter-ai-decision');
+        const paginationWrap = document.getElementById('ai-decisions-pagination');
+        const pageInfoEl = document.getElementById('ai-decisions-page-info');
+        const pageNumEl = document.getElementById('ai-decisions-page-num');
+        const btnPrev = document.getElementById('btn-ai-page-prev');
+        const btnNext = document.getElementById('btn-ai-page-next');
 
         if (!tbody || !window.NiftyAiDecisions) return;
 
         if (cooldownLabelEl && typeof window.NiftyAiDecisions.getCooldownMinutes === 'function') {
             cooldownLabelEl.textContent = `${window.NiftyAiDecisions.getCooldownMinutes()}m`;
         }
+        if (minRrLabelEl && typeof window.NiftyAiDecisions.getMinRiskReward === 'function') {
+            minRrLabelEl.textContent = `1:${Number(window.NiftyAiDecisions.getMinRiskReward()).toFixed(1)}`;
+        }
 
         const allEntries = window.NiftyAiDecisions.loadDecisionsLog() || [];
         if (countBadge) countBadge.textContent = allEntries.length;
 
-        // Calculate summary stats across all resolved records (especially YES decisions)
-        const yesResolved = allEntries.filter(r => r.decision === 'YES' && (r.outcome === 'TP' || r.outcome === 'SL'));
-        const allResolved = allEntries.filter(r => r.outcome === 'TP' || r.outcome === 'SL');
-        const statPool = yesResolved.length > 0 ? yesResolved : allResolved;
-        const tpCount = statPool.filter(r => r.outcome === 'TP').length;
-        const slCount = statPool.filter(r => r.outcome === 'SL').length;
-        const netPoints = Number(statPool.reduce((acc, r) => acc + (Number(r.points) || 0), 0).toFixed(1));
+        // Calculate summary stats strictly across taken (YES) resolved trades
+        const yesEntries = allEntries.filter(r => r.decision === 'YES');
+        const yesResolved = yesEntries.filter(r => r.outcome === 'TP' || r.outcome === 'SL');
+        const tpCount = yesResolved.filter(r => r.outcome === 'TP').length;
+        const slCount = yesResolved.filter(r => r.outcome === 'SL').length;
+        const netPoints = Number(yesResolved.reduce((acc, r) => acc + (Number(r.points) || 0), 0).toFixed(1));
 
         if (tpslRatioEl) {
             if (tpCount + slCount > 0) {
                 const winPct = Math.round((tpCount / (tpCount + slCount)) * 100);
                 tpslRatioEl.textContent = `${tpCount} TP / ${slCount} SL (${winPct}%)`;
+                tpslRatioEl.style.display = 'inline-block';
+            } else if (allEntries.length > 0) {
+                tpslRatioEl.textContent = `0 TP / 0 SL (${yesEntries.length} YES)`;
                 tpslRatioEl.style.display = 'inline-block';
             } else {
                 tpslRatioEl.style.display = 'none';
@@ -3488,18 +3502,39 @@ window.toggleMaximizePanel = function(btn, event) {
         });
 
         if (filtered.length === 0) {
+            if (paginationWrap) paginationWrap.style.display = 'none';
             tbody.innerHTML = `
                 <tr>
                     <td colspan="6" style="padding: 20px; text-align: center; color: #64748b; font-style: italic;">
                         ${allEntries.length === 0
-                            ? 'No 5M level-close AI evaluations logged yet. Evaluations trigger automatically when a 5M candle closes across a level (or click <strong>⚡ Scan 5M Session</strong>).'
+                            ? 'No 5M level-close AI evaluations logged yet. Evaluations trigger automatically when a 5M candle closes across a level (or click <strong>⚡ Scan 5M Closes</strong>).'
                             : 'No AI trade decisions match the selected filter.'}
                     </td>
                 </tr>`;
             return;
         }
 
-        tbody.innerHTML = filtered.map(entry => {
+        const totalPages = Math.max(1, Math.ceil(filtered.length / AI_DECISIONS_PAGE_SIZE));
+        if (aiDecisionsCurrentPage > totalPages) aiDecisionsCurrentPage = totalPages;
+        if (aiDecisionsCurrentPage < 1) aiDecisionsCurrentPage = 1;
+        const startIdx = (aiDecisionsCurrentPage - 1) * AI_DECISIONS_PAGE_SIZE;
+        const pageItems = filtered.slice(startIdx, startIdx + AI_DECISIONS_PAGE_SIZE);
+
+        if (paginationWrap) {
+            paginationWrap.style.display = filtered.length > 0 ? 'flex' : 'none';
+            if (pageInfoEl) pageInfoEl.textContent = `Showing ${startIdx + 1}–${startIdx + pageItems.length} of ${filtered.length}`;
+            if (pageNumEl) pageNumEl.textContent = `Page ${aiDecisionsCurrentPage} / ${totalPages}`;
+            if (btnPrev) {
+                btnPrev.disabled = aiDecisionsCurrentPage <= 1;
+                btnPrev.style.opacity = btnPrev.disabled ? '0.45' : '1';
+            }
+            if (btnNext) {
+                btnNext.disabled = aiDecisionsCurrentPage >= totalPages;
+                btnNext.style.opacity = btnNext.disabled ? '0.45' : '1';
+            }
+        }
+
+        tbody.innerHTML = pageItems.map(entry => {
             const isYes = entry.decision === 'YES';
             const decisionBadge = isYes
                 ? `<span style="display:inline-block; padding:3px 9px; border-radius:999px; font-weight:700; font-size:0.74rem; background:rgba(16,185,129,0.18); color:#34d399; border:1px solid rgba(16,185,129,0.4);">✅ YES</span>`
@@ -3558,9 +3593,14 @@ window.toggleMaximizePanel = function(btn, event) {
             const closeVal = Number(entry.entryPrice ?? entry.closePrice ?? 0);
             const modelTxt = entry.model || entry.modelUsed || 'gemini-flash';
 
+            const rrVal = Number(entry.rrRatio);
+            const rrBadge = (!isNaN(rrVal) && rrVal > 0)
+                ? `<div style="font-size:0.67rem; color:${rrVal >= 2 ? '#34d399' : '#f87171'}; margin-top:2px;">R:R 1:${rrVal.toFixed(2)}</div>`
+                : '';
+
             return `
                 <tr style="border-bottom: 1px solid rgba(148, 163, 184, 0.12);">
-                    <td style="padding: 9px 10px; vertical-align: top;">
+                    <td style="padding: 9px 10px; vertical-align: top; white-space: nowrap;">
                         <div style="font-weight: 700; color: #f8fafc;">${timeTxt} ${dateTxt ? `<span style="font-size:0.7rem; color:#64748b;">(${dateTxt})</span>` : ''}</div>
                         <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 2px;">
                             <strong style="color:#818cf8;">[${tagTxt}]</strong> @ ${Number(entry.levelPrice || 0).toFixed(0)}
@@ -3568,20 +3608,21 @@ window.toggleMaximizePanel = function(btn, event) {
                         </div>
                         <div style="font-size: 0.67rem; color: #64748b; margin-top: 2px;">${triggerLabel}</div>
                     </td>
-                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top; white-space: nowrap;">
                         ${decisionBadge}
-                        ${entry.confidence ? `<div style="font-size:0.67rem; color:#94a3b8; margin-top:3px;">Conf: ${entry.confidence}</div>` : ''}
+                        ${rrBadge}
+                        ${entry.confidence ? `<div style="font-size:0.67rem; color:#94a3b8; margin-top:2px;">Conf: ${entry.confidence}</div>` : ''}
                     </td>
-                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top; white-space: nowrap;">
                         ${typeBadge}
                     </td>
-                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top; white-space: nowrap;">
                         ${outcomeHtml}
                     </td>
-                    <td style="padding: 9px 10px; text-align: center; vertical-align: top;">
+                    <td style="padding: 9px 10px; text-align: center; vertical-align: top; white-space: nowrap;">
                         ${pointsHtml}
                     </td>
-                    <td style="padding: 9px 10px; vertical-align: top; color: #e2e8f0; line-height: 1.4;">
+                    <td style="padding: 9px 10px; vertical-align: top; color: #e2e8f0; line-height: 1.4; min-width: 240px;">
                         <div>${safeLogic}</div>
                         <div style="font-size:0.68rem; color:#64748b; margin-top:4px; display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
                             <span>Model: ${modelTxt}</span>
@@ -3629,7 +3670,30 @@ window.toggleMaximizePanel = function(btn, event) {
 
     const filterAiDecisionEl = document.getElementById('filter-ai-decision');
     if (filterAiDecisionEl) {
-        filterAiDecisionEl.addEventListener('change', () => renderAiTradeDecisionsLog());
+        filterAiDecisionEl.addEventListener('change', () => {
+            aiDecisionsCurrentPage = 1;
+            renderAiTradeDecisionsLog();
+        });
+    }
+
+    const btnAiPagePrev = document.getElementById('btn-ai-page-prev');
+    if (btnAiPagePrev) {
+        btnAiPagePrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (aiDecisionsCurrentPage > 1) {
+                aiDecisionsCurrentPage -= 1;
+                renderAiTradeDecisionsLog();
+            }
+        });
+    }
+
+    const btnAiPageNext = document.getElementById('btn-ai-page-next');
+    if (btnAiPageNext) {
+        btnAiPageNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            aiDecisionsCurrentPage += 1;
+            renderAiTradeDecisionsLog();
+        });
     }
 
     let lastAiAutoScanAtMs = 0;
@@ -3659,9 +3723,21 @@ window.toggleMaximizePanel = function(btn, event) {
 
             if (!candles5m || candles5m.length < 2) return [];
 
-            // Prefer full timestamped intraday briefings from dailyPlanData; include any manual levels too
+            // Prefer timestamped intraday briefings from dailyPlanData; include strictly non-plan manual levels only
             const planLevels = Array.isArray(window.dailyPlanData) ? window.dailyPlanData : [];
-            const manualLevels = Array.isArray(allLevels) ? allLevels.filter(l => !l.timestamp) : [];
+            const planBehaviorSet = new Set(planLevels.map(p => String(p.behavior || '').trim()).filter(Boolean));
+            const manualLevels = Array.isArray(allLevels)
+                ? allLevels.filter(l => {
+                    if (l.timestamp) return false;
+                    const idStr = String(l.id || '');
+                    const srcStr = String(l.source || '');
+                    const behStr = String(l.behavior || '').trim();
+                    if (idStr.startsWith('lvl-plan-')) return false;
+                    if (/\bAI Briefing\b|\bDaily Plan\b/i.test(srcStr)) return false;
+                    if (behStr && planBehaviorSet.has(behStr)) return false;
+                    return true;
+                })
+                : [];
             const levelsToScan = planLevels.length > 0 ? [...planLevels, ...manualLevels] : (Array.isArray(allLevels) ? allLevels : []);
             if (levelsToScan.length === 0) return [];
 

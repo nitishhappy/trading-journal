@@ -1314,18 +1314,21 @@
                     <div id="ai-decisions-body" class="collapsible-body" style="display:none;">
                         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--border);">
                             <div style="font-size:0.76rem; color:var(--text-dim);">
-                                Triggers on <b>1st 5M close</b> (above Buy / below Sell) or after <b id="ai-cooldown-label">30m</b> cooldown from last AI call • Marks <b>TP</b> as soon as <b>TP1</b> is hit.
+                                Triggers on <b>1st 5M close</b> (above Buy / below Sell) or after <b id="ai-cooldown-label">30m</b> cooldown • Min <b id="ai-min-rr-label">1:2.0</b> R:R filter • Marks <b>TP</b> as soon as <b>TP1</b> is hit.
                             </div>
-                            <div style="display:flex; align-items:center; gap:6px;">
+                            <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
                                 <select id="filter-ai-decision" style="background:var(--surface-2); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:4px; font-size:0.75rem; cursor:pointer;">
                                     <option value="ALL">All Decisions (YES &amp; NO)</option>
                                     <option value="YES">✅ YES (Taken Trades)</option>
                                     <option value="NO">⛔ NO (Filtered / Skipped)</option>
+                                    <option value="TP">🎯 Outcome: TP</option>
+                                    <option value="SL">🛑 Outcome: SL</option>
+                                    <option value="PENDING">⏳ Outcome: PENDING</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="scorecard-table-wrap" style="max-height:420px; overflow-y:auto;">
+                        <div class="scorecard-table-wrap" style="overflow-x:auto;">
                             <table class="scorecard-table" id="ai-decisions-table">
                                 <thead>
                                     <tr>
@@ -1334,7 +1337,7 @@
                                         <th>Type</th>
                                         <th>Outcome (TP1 / SL)</th>
                                         <th>Points Captured / Lost</th>
-                                        <th style="text-align:left; min-width:220px;">Logic Behind Decision</th>
+                                        <th style="text-align:left; min-width:240px;">Logic Behind Decision</th>
                                     </tr>
                                 </thead>
                                 <tbody id="ai-decisions-tbody">
@@ -1345,6 +1348,14 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div id="ai-decisions-pagination" style="display:none; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:10px; padding-top:8px; border-top:1px solid var(--border); font-size:0.75rem; color:var(--text-dim);">
+                            <span id="ai-decisions-page-info">Showing 1–8 of 0</span>
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <button type="button" id="btn-ai-page-prev" class="btn-secondary" style="padding:3px 10px; font-size:0.74rem; cursor:pointer;">◀ Prev</button>
+                                <span id="ai-decisions-page-num" style="font-weight:600; color:var(--text);">Page 1 / 1</span>
+                                <button type="button" id="btn-ai-page-next" class="btn-secondary" style="padding:3px 10px; font-size:0.74rem; cursor:pointer;">Next ▶</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2902,3 +2902,17 @@ Re-architected the Levels visual chart to be fully interactive and implemented a
 - **NIFTY Data Sync (`Utilities/sync_briefing_to_daily_plan.py`, `js/data/nifty_candles.js`)**:
   - Updated `sync_briefing_to_daily_plan.py` to execute `sync_nifty_candles()` before `export_nifty_candles_js()`, backfilling 1,570 missing 1M bars and updating `nifty_candles.js` through `2026-11-11`.
 - **Files Modified**: `js/services/niftyAiDecisions.js`, `js/ui/levels.js`, `api/evaluateNiftyTrade.js`, `js/data/nifty_candles.js`, `sw.js`, `README.md`, `version`.
+
+
+### v2.4.07 — 11 Nov 2026 — Minimum 1:2 R:R Filter, Future-Level Leak Fix & Paginated AI Decisions Table
+
+- **Configurable Minimum `1:2` Risk:Reward Entry Filter (`config_nifty.txt` → `rr_config.js`, `niftyAiDecisions.js`, `api/evaluateNiftyTrade.js`)**:
+  - Added `MIN_AI_TRADE_RR=2.0` to `C:\Nitish\ClaudeApps\Utilities\Nifty\config_nifty.txt` and `Nifty Predictions\config_nifty.txt` and synced via `sync_briefing_to_daily_plan.py` into `js/data/rr_config.js` and `js/config.js`.
+  - Updated `parseTp1AndSl()` to compute **directional** risk/reward relative to `BUY` / `SELL` orientation (returning `rrRatio = 0` if close has already blown past TP1 or SL is inverted).
+  - Enforced `applyMinRiskRewardGate()` / `enforceMinRiskReward()` uniformly across Gemini Vision API, serverless `/api/evaluateNiftyTrade`, and deterministic SMC fallback so setups below `1:2.0` R:R are automatically rejected (`NO`), while `YES TP:SL` & `Net Pts` header badges track taken (`YES`) trades cleanly.
+  - Added one-time `niftyAiDecisionsSchemaVersion` (`v2_min_rr2`) cache reset so stale legacy pre-filter rows clear automatically on reload.
+- **Fix 68-Entry Future-Level Leak (`js/ui/levels.js`)**:
+  - Excluded synced `lvl-plan-*` / `AI Briefing` cards (which lack `.timestamp` in `allLevels`) from `manualLevels` in `runNifty5mDecisionsSessionScan()`, preventing future afternoon levels from leaking onto morning 5M bars and eliminating the 68-entry row explosion (`68 → 16` valid time-aligned evaluations on `11 Nov 2026`).
+- **Paginated & Responsive AI Decisions Log Table (`index.html`, `js/ui/levels.js`)**:
+  - Replaced the vertical `420px` infinite-scroll box with clean **8-rows-per-page pagination** (`◀ Prev`, `Page X / Y`, `Next ▶`), outcome filter options (`TP`, `SL`, `PENDING`), `R:R` badge display per row, and crisp `white-space: nowrap` alignment for mobile readability.
+- **Files Modified**: `api/evaluateNiftyTrade.js`, `js/services/niftyAiDecisions.js`, `js/ui/levels.js`, `index.html`, `js/data/rr_config.js`, `js/config.js`, `sw.js`, `README.md`, `version`.
