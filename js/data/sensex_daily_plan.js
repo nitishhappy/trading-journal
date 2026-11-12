@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-12T12:17:40+05:30",
+    "timeDisplay": "12:17 PM, Nov 12",
+    "price": "81880",
+    "bias": "bullish",
+    "behavior": "[THU 12:17] [B1]: Between 11:30-13:30 IST: Bullish 5m reclaim above 81,880 following sweep of 81,945 equal lows into 81,800 Put support",
+    "tp": "81,980 / 82,080",
+    "sl": "81,780",
+    "status": "na",
+    "spread": "Buy 81,800 CE + Sell 82,000 CE (0-DTE Today) | R:R: ~2.50 | Risk: ~12.0% | TP1: +22.0% | TP2: +38.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T12:17:40+05:30",
+    "timeDisplay": "12:17 PM, Nov 12",
+    "price": "82020",
+    "bias": "bullish",
+    "behavior": "[THU 12:17] [B2]: After 13:30 IST: Sustained 5m close ABOVE 82,020 clearing 82,000 Call Wall and 81,950 Macro Equilibrium",
+    "tp": "82,180 / 82,320",
+    "sl": "81,930",
+    "status": "na",
+    "spread": "Buy 82,000 CE + Sell 82,200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T12:17:40+05:30",
+    "timeDisplay": "12:17 PM, Nov 12",
+    "price": "81900",
+    "bias": "bearish",
+    "behavior": "[THU 12:17] [S1]: Between 11:30-13:30 IST: Pullback rejection at 81,945-81,980 broken shelf with 5m close below 81,900 Max Pain",
+    "tp": "81,800 / 81,720",
+    "sl": "81,960",
+    "status": "na",
+    "spread": "Buy 81,900 PE + Sell 81,700 PE (0-DTE Today) | R:R: ~2.55 | Risk: ~11.5% | TP1: +20.5% | TP2: +36.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T12:17:40+05:30",
+    "timeDisplay": "12:17 PM, Nov 12",
+    "price": "81750",
+    "bias": "bearish",
+    "behavior": "[THU 12:17] [S2]: After 13:30 IST: Sustained 5m close BELOW 81,750 breaking 81,800 Put support toward 81,500 Put Floor",
+    "tp": "81,580 / 81,500",
+    "sl": "81,850",
+    "status": "na",
+    "spread": "Buy 81,800 PE + Sell 81,600 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-12T10:31:05+05:30",
     "timeDisplay": "10:31 AM, Nov 12",
     "price": "82000",
@@ -1979,6 +2027,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261112_121742",
+    "timestamp": "2026-11-12T12:17:42+05:30",
+    "timeDisplay": "12:17 PM, Nov 12",
+    "spot": "81810",
+    "trigger": "Extreme Directional Flush (367 pts move >= 330 pts threshold",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (12:15 PM IST - Nov 12, 2026 | Spot: 81810 | Trigger: Extreme Directional Flush (367 pts move >= 330 pts threshold))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Pin Corridor: 81,800 to 82,000 Spot Index. This band marks the active gamma pinning channel anchored directly around Max Pain at 81,900 (PCR 0.96) between the 81,800 Put addition strike (+3.13M OI added today) and the heavy 82,000 Call Wall (4.81M OI, +3.30M added today), with the broken 1H consolidation shelf base (81,945.33) and Macro 50% Daily Equilibrium (81,950.88) acting as dense overhead resistance.\n- Structural Micro-Equilibrium Trap: 81,850 to 81,950 Spot Index. Directional option buying within this 100-point corridor carries negative statistical expectancy prior to 13:30 IST due to intense two-way friction between trapped Put writers defending 81,800 and aggressive Call writers capping pullbacks into 81,950.\n- 0-DTE Expiry Theta Crush: Non-linear intraday theta decay is accelerating rapidly across all OTM options during the European crossover. OTM Call strikes above 82,300 CE and Put strikes below 81,400 PE face aggressive premium erosion; avoid holding unhedged directional positions inside the pin band.\n- Gamma Pinning & Round Number Friction: Spot index is heavily constrained by multi-million OI open interest clusters at 81,800, 81,900, and 82,000. Price action inside this zone will be prone to violent mean-reversion pullbacks as institutional straddle sellers neutralize delta exposure.\n- Whipsaw & Stop-Hunt Hazards: Having just swept the 4-tap Equal Lows (SSL) at 81,945.33 via the -367 point directional flush down to 81,810, false breakout probes and choppy retests of the breakdown level are highly probable during the 11:30 - 13:30 IST session.\n- Post-1:30 PM Hero-or-Zero Squeeze Volatility: Decisive trend continuation or short-covering squeezes will only materialize after 13:30 IST if either the 82,000 Call Wall or the 81,500 Put Floor (6.24M OI) undergoes substantial unwinding. Traders should enforce strict risk controls, favor defined-risk spreads, and wait for confirmed 5-minute candle closes before executing.\n\n4. High Momentum / Explosive Zones:\n- [Long Unwinding Breakdown] (Downside Expansion below 81,750): A sustained 5-minute candle close below 81,750 confirms the breakdown of the 81,800 Put writing cluster (+3.13M OI). This triggers long unwinding and stop cascades, accelerating price toward the 81,576.15 Day Low / ORB Low and the 81,500 primary Put OI floor (6.24M OI).\n- [Gamma Squeeze Breakout] (Upside Reclaim above 82,020): A sustained 5-minute candle close above 82,020 clears the 82,000 Call Wall (4.81M OI) and reclaims the 81,950 Macro Daily Equilibrium. This forces intraday Call writers to cover, igniting an explosive short-covering rally toward the 82,106.78 - 82,107.63 Parabolic Ignition Supply Base and 82,200.\n- [Judas Sweep Spring Reclaim] (Bullish Liquidity Trap Reversal above 81,880): Following the aggressive flush through the 81,945 equal lows into 81,810/81,799, a decisive 5-minute close back above 81,880 confirms a classic Sell-Side Liquidity (SSL) Judas sweep / bear trap, setting up a fast mean-reversion bounce toward 81,980 and the 82,055 micro-equilibrium shelf.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (0-DTE SSL Judas Sweep Rebound Scalp - 11:30 to 13:30 IST Phase): Bullish 5-minute close reclaiming above 81,880 following the liquidity sweep of the 81,945 shelf low, confirming institutional absorption at the 81,800 Put support. | TP: 81,980 / 82,080 | SL: 81,780 | 💡 Buy 81,800 CE + Sell 82,000 CE (0-DTE Today) | R:R: ~2.50 | Risk: ~12.0% (Theta-Adjusted) | TP1: +22.0% | TP2: +38.0%.\n- [B2] BUY Setup 2 (Afternoon Gamma Squeeze Breakout - 13:30 to 15:15 IST Phase): Sustained 5-minute close ABOVE 82,020 decisively breaking above the 82,000 Call Wall and 81,950 Macro Equilibrium with expanding volume and Call unwinding. | TP: 82,180 / 82,320 | SL: 81,930 | 💡 Buy 82,000 CE + Sell 82,200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (0-DTE Broken Shelf Supply Fade Scalp - 11:30 to 13:30 IST Phase): Retest of the 81,945 - 81,980 broken shelf / Macro EQ that prints an exhaustion rejection wick and closes below 81,900 Max Pain as Call writers assert control. | TP: 81,800 / 81,720 | SL: 81,960 | 💡 Buy 81,900 PE + Sell 81,700 PE (0-DTE Today) | R:R: ~2.55 | Risk: ~11.5% (Theta-Adjusted) | TP1: +20.5% | TP2: +36.0%.\n- [S2] SELL Setup 2 (Post-13:30 Long-Unwinding Breakdown - 13:30 to 15:15 IST Phase): Sustained 5-minute close BELOW 81,750 shattering the 81,800 Put support and triggering heavy stop-loss liquidation targeting the 81,500 Put Floor. | TP: 81,580 / 81,500 | SL: 81,850 | 💡 Buy 81,800 PE + Sell 81,600 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261112_103108",
     "timestamp": "2026-11-12T10:31:08+05:30",
     "timeDisplay": "10:31 AM, Nov 12",
