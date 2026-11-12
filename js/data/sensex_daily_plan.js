@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-12T15:46:07+05:30",
+    "timeDisplay": "03:46 PM, Nov 12",
+    "price": "81900",
+    "bias": "bullish",
+    "behavior": "[THU 15:46] [B1]: Phase 2 (11:30-13:30 IST): Bullish absorption and bounce above 81,900 Max Pain support with heavy Put OI backing (+4.74M added)",
+    "tp": "81,990 / 82,050",
+    "sl": "81,840",
+    "status": "na",
+    "spread": "Buy 81900 CE + Sell 82100 CE (0-DTE Today) | R:R: ~2.10 | Est. Risk: ~18.0% | TP1: +22.0% | TP2: +40.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T15:46:07+05:30",
+    "timeDisplay": "03:46 PM, Nov 12",
+    "price": "82015",
+    "bias": "bullish",
+    "behavior": "[THU 15:46] [B2]: Phase 3 (Post 1:30 PM IST): Sustained 5m close ABOVE 82,014.41 BSL equal highs with short covering clearing 82,000 Call wall",
+    "tp": "82,200 / 82,325",
+    "sl": "81,940",
+    "status": "na",
+    "spread": "Buy 82000 CE + Sell 82200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T15:46:07+05:30",
+    "timeDisplay": "03:46 PM, Nov 12",
+    "price": "82000",
+    "bias": "bearish",
+    "behavior": "[THU 15:46] [S1]: Phase 2 (11:30-13:30 IST): Bearish rejection and SFP probe at 81,990.21 - 82,014.41 supply base directly into 82,000 Call wall",
+    "tp": "81,900 / 81,820",
+    "sl": "82,040",
+    "status": "na",
+    "spread": "Buy 81900 PE + Sell 81700 PE (0-DTE Today) | R:R: ~2.05 | Est. Risk: ~19.0% | TP1: +20.0% | TP2: +38.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T15:46:07+05:30",
+    "timeDisplay": "03:46 PM, Nov 12",
+    "price": "81800",
+    "bias": "bearish",
+    "behavior": "[THU 15:46] [S2]: Phase 3 (Post 1:30 PM IST): Sustained 5m close BELOW 81,800 Put floor confirming institutional long unwinding toward day lows",
+    "tp": "81,650 / 81,575",
+    "sl": "81,880",
+    "status": "na",
+    "spread": "Buy 81800 PE + Sell 81600 PE (Next Wk) | R:R: ~2.65 | Risk: ~8.5% | TP1: +18.8% | TP2: +34.0%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-12T13:31:14+05:30",
     "timeDisplay": "01:31 PM, Nov 12",
     "price": "82000",
@@ -2075,6 +2123,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261112_154610",
+    "timestamp": "2026-11-12T15:46:10+05:30",
+    "timeDisplay": "03:46 PM, Nov 12",
+    "spot": "81911.01",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (03:45 PM IST - Nov 12, 2026 | Spot: 81911.01 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Boundaries: 81,850.00 to 81,990.00 (Anchored between the 81,900 Max Pain strike / Put floor and the 81,990.21 - 82,000.00 massive Call OI supply wall).\n- Structural Context: Spot price settled at 81,911.01, mathematically trapped inside the 50% Daily Equilibrium zone (81,950.88) and the 81,900 Max Pain pin strike.\n- PCR Telemetry: Overall Put/Call Ratio stands at 0.86, reflecting balanced-to-mildly bearish institutional call accumulation that heavily capped afternoon rallies at 82,000.\n- Gamma Pinning & Whipsaw Zone: The zone between 81,880 and 81,960 serves as a high-density gamma trap where market makers absorb premium on both sides of the 81,900 strike.\n- 0-DTE Theta Crush Hazard: Rapid accelerated decay erodes extrinsic value on OTM strikes within 15–30 minutes inside this pin pocket; avoid purchasing naked OTM options.\n- Whipsaw & SFP Trap Risk: Clustered equal highs (BSL) at 82,014.41 present extreme stop-hunt risk, luring breakout buyers into the heavy +5.72M added 82,000 Call OI wall.\n- Post-1:30 PM Volatility Directive: Late-session spikes inside the pin zone carry erratic whipsaws; traders must wait for confirmed multi-candle 5-minute absorption or reduce position size by 50% on expiry sessions.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Momentum Squeeze] ([Trigger: Sustained 5m close ABOVE 82,014.41]): A confirmed close clearing the 82,000 Call wall (7.23M OI) and 82,014.41 equal highs sweeps institutional buy-side liquidity (BSL), forcing rapid short-covering toward 82,195.44 (15M ORB High) and 82,325.61 (Day High).\n- [Bearish Long-Unwinding Flush] ([Trigger: Sustained 5m close BELOW 81,800.00]): A breakdown under the secondary Put support floor of 81,800 (4.51M OI) triggers long-unwinding panic, targeting the 81,576.15 (15M ORB Low & Day Low) macro demand base.\n- [Parabolic Supply Rejection] ([Trigger: Bearish SFP Rejection at 81,990.21 - 82,014.41]): A sharp liquidity wick tapping 82,000 Call resistance followed by immediate failure beneath 81,980 initiates a swift mean-reversion drop back to 81,900.00 and 81,850.00.\n- [Demand Sweep Spring] ([Trigger: Liquidity wick probe into 81,800.00 - 81,820.00]): A rapid intraday flush sweeping sell-side liquidity (SSL) below 81,850 that reclaims 81,900 confirms institutional absorption for a push back toward 81,980.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (0-DTE Pin Support Bounce): Phase 2 (11:30-13:30 IST / Pinning Phase) Bullish reclaim of 81,900 Max Pain strike with Put OI holding firm at 81,900 (+4.74M addition). | TP: 81,990 / 82,050 | SL: 81,840 | 💡 Buy 81900 CE + Sell 82100 CE (0-DTE Today) | R:R: ~2.10 | Est. Risk: ~18.0% (Theta/Gamma Sensitive) | TP1: +22.0% | TP2: +40.0%.\n- [B2] BUY Setup 2 (Call Wall Gamma Squeeze): Phase 3 (Post 1:30 PM IST / Gamma Squeeze) Sustained 5m close ABOVE 82,014.41 BSL equal highs with active Call unwinding above 82,000 wall. | TP: 82,200 / 82,325 | SL: 81,940 | 💡 Buy 82000 CE + Sell 82200 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (0-DTE Call Wall SFP Fade): Phase 2 (11:30-13:30 IST / Pinning Phase) Bearish rejection wick / SFP at 81,990.21 - 82,014.41 supply base confronting the 82,000 Call wall (+5.72M added OI). | TP: 81,900 / 81,820 | SL: 82,040 | 💡 Buy 81900 PE + Sell 81700 PE (0-DTE Today) | R:R: ~2.05 | Est. Risk: ~19.0% (Theta/Gamma Sensitive) | TP1: +20.0% | TP2: +38.0%.\n- [S2] SELL Setup 2 (Put Floor Long-Unwinding Breakdown): Phase 3 (Post 1:30 PM IST / Gamma Breakdown) Sustained 5m close BELOW 81,800.00 Put floor with expanding institutional sell volume. | TP: 81,650 / 81,575 | SL: 81,880 | 💡 Buy 81800 PE + Sell 81600 PE (Next Wk) | R:R: ~2.65 | Risk: ~8.5% | TP1: +18.8% | TP2: +34.0%."
+  },
+  {
     "id": "SENSEX_20261112_133117",
     "timestamp": "2026-11-12T13:31:17+05:30",
     "timeDisplay": "01:31 PM, Nov 12",
