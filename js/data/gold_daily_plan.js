@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-12T19:01:25+05:30",
+    "timeDisplay": "07:01 PM, Nov 12",
+    "price": "3905.5",
+    "bias": "bullish",
+    "behavior": "[THU 19:01] [G_B1]: 1H Shelf & $3900 SSL Sweep reclaim with post-sweep absorption",
+    "tp": "$3919.50 / $3943.50",
+    "sl": "$3899.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T19:01:25+05:30",
+    "timeDisplay": "07:01 PM, Nov 12",
+    "price": "3925.5",
+    "bias": "bullish",
+    "behavior": "[THU 19:01] [G_B2]: 1H Micro-EQ & Bearish Supply Base breakout acceptance",
+    "tp": "$3943.50 / $3958.50",
+    "sl": "$3919.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T19:01:25+05:30",
+    "timeDisplay": "07:01 PM, Nov 12",
+    "price": "3921.5",
+    "bias": "bearish",
+    "behavior": "[THU 19:01] [G_S1]: Bearish Supply Base & 1H Micro-EQ SFP rejection with DXY headwind",
+    "tp": "$3906.50 / $3891.50",
+    "sl": "$3928.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T19:01:25+05:30",
+    "timeDisplay": "07:01 PM, Nov 12",
+    "price": "3903.5",
+    "bias": "bearish",
+    "behavior": "[THU 19:01] [G_S2]: 1H Shelf floor breakdown slicing toward $3890 round magnet",
+    "tp": "$3891.50 / $3881.50",
+    "sl": "$3910.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-12T18:46:46+05:30",
     "timeDisplay": "06:46 PM, Nov 12",
     "price": "3921.0",
@@ -839,6 +883,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261112_190127",
+    "timestamp": "2026-11-12T19:01:27+05:30",
+    "timeDisplay": "07:01 PM, Nov 12",
+    "spot": "3908.91",
+    "trigger": "Level Exhaustion Breakdown (GOLD Spot $3908.91 < Min Plan Target $3918.50 - Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (07:00 PM IST - Nov 12, 2026 | Spot: $3908.91 | Trigger: Level Exhaustion Breakdown (GOLD Spot $3908.91 < Min Plan Target $3918.50 - Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **Active Session Regime:** New York Killzone & COMEX Open (17:30 - 21:30 IST) trading in peak volatility with US data integration and session continuation/reversal dynamics.\n* **Dollar Index (DXY) Mechanics:** DXY trades at 102.952 in a sustained Bullish Trend above its 9 and 21 EMAs, providing a persistent macro headwind that keeps spot gold under structural distribution pressure.\n* **US 10-Year Treasury Yield (US10Y):** Holding stable at 5.0%, preventing institutional non-yielding asset accumulation and capping macro expansion attempts.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** No divergence detected between Gold and Silver; both precious metals are auctioning in synchronous downside discovery.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Asian Session Structure:** Asian Range spanned $38.09 (High $3997.87 / Low $3959.78) with a 34.5% bearish body, forming a tight compression coil. The Asian Low was swept and decisively accepted below, unlocking downside extension targets toward the Asian 1.414 expansion at $3944.01 and beyond.\n* **London Session Trajectory:** London traded lower from High $3969.14 down to Low $3924.21 (London 50% EQ: $3946.68). London Low was subsequently broken and flushed in New York down to $3905.29.\n* **4H Candle Range Theory (CRT) & Higher Timeframe Bias:** Strictly Bearish as Spot trades below the 4H 9-EMA ($3976.95) and 21-EMA ($4006.54). Tracking below Previous 4H Range Midpoint Equilibrium ($3949.28).\n* **Order Block & Liquidity Map:** Immediate supply is anchored by the Parabolic Ignition Order Block and Bearish Supply Base at $3922.10 - $3923.72 (origin of the -$10.88 impulse). Untouched resting Buy-Side Liquidity (BSL) sits above at London High ($3969.14) and Asian High ($3997.87). Downside Sell-Side Liquidity (SSL) targets the major $50 psychological magnet at $3900.00 followed by the $3890.00 institutional round number.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Chop Zone Anchor:** $3912.00 to $3922.00 (immediate micro-equilibrium compression shelf below the Bearish Supply Base).\n* **Execution Hazard:** Do not execute mid-range market orders within this corridor. Gold is vulnerable to erratic 15M ATR whipsaws ($7.33) around the $3920 round handle. Wait strictly for completed sweep reclaims or structural 15M boundary closes.\n\n### 4. High Momentum / Explosive Zones:\n* **Downside Acceleration Runway:** A sustained 15M close below $3903.50 (clearing the 1H shelf floor at $3904.07) triggers an institutional stop run directly into the $3900.00 round magnet and $3891.50 liquidity basin.\n* **Upside Short-Covering Squeeze:** A decisive 15M reclaim above $3925.50 (clearing the 1H Micro-EQ of $3924.07 and the $3923.72 Supply Base) forces trailing short stops to unwind rapidly toward $3943.50.\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3905.50** (Sweep $3900.00 - $3904.00) | **★ A+ PRIMARY [1H Shelf & $3900 SSL Sweep]:** Enter on 5M close > $3905.50 after sweeping $3904.07 SSL with lower-wick absorption. | **TP1:** $3919.50 / **TP2:** $3943.50 | **$3899.00** | 1:2.2 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3925.50** Breakout | **⚠️ BACKUP [1H Micro-EQ Reclaim]:** Enter only on a full 15M body close > $3925.50 with zero upper wick exhaustion and DXY weakness. | **TP1:** $3943.50 / **TP2:** $3958.50 | **$3919.00** | 1:2.8 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3921.50** (Sweep $3923.72 - $3925.00) | **★ A+ PRIMARY [Supply Base & Micro-EQ SFP]:** Enter on 5M CHoCH close < $3921.50 after sweeping $3923.72 Bearish Supply Base with upper wick rejection. | **TP1:** $3906.50 / **TP2:** $3891.50 | **$3928.00** | 1:2.3 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3903.50** Breakdown | **⚠️ BACKUP [1H Shelf Breakdown]:** Enter on a decisive 15M body close < $3903.50 slicing through support with expanding volume toward $3890. | **TP1:** $3891.50 / **TP2:** $3881.50 | **$3910.00** | 1:1.8 |"
+  },
+  {
     "id": "GOLD_20261112_184649",
     "timestamp": "2026-11-12T18:46:49+05:30",
     "timeDisplay": "06:46 PM, Nov 12",
