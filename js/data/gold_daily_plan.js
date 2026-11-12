@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-12T08:16:23+05:30",
+    "timeDisplay": "08:16 AM, Nov 12",
+    "price": "3973.5",
+    "bias": "bullish",
+    "behavior": "[THU 08:16] [G_B1]: Asian Low / Equal Lows Judas Sweep reclaim above 3973.50",
+    "tp": "$3982.50 / $3992.50",
+    "sl": "$3967.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T08:16:23+05:30",
+    "timeDisplay": "08:16 AM, Nov 12",
+    "price": "3987.5",
+    "bias": "bullish",
+    "behavior": "[THU 08:16] [G_B2]: 1H Shelf & 4H EQ Acceptance breakout above 3987.50",
+    "tp": "$3996.50 / $4006.50",
+    "sl": "$3981.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T08:16:23+05:30",
+    "timeDisplay": "08:16 AM, Nov 12",
+    "price": "3983.5",
+    "bias": "bearish",
+    "behavior": "[THU 08:16] [G_S1]: 1H Equal Highs & 4H Midpoint SFP rejection below 3983.50",
+    "tp": "$3975.50 / $3967.50",
+    "sl": "$3990.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-12T08:16:23+05:30",
+    "timeDisplay": "08:16 AM, Nov 12",
+    "price": "3967.5",
+    "bias": "bearish",
+    "behavior": "[THU 08:16] [G_S2]: Day Low / SSL Shelf Breakdown expansion below 3967.50",
+    "tp": "$3959.50 / $3953.50",
+    "sl": "$3973.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-12T07:32:27+05:30",
     "timeDisplay": "07:32 AM, Nov 12",
     "price": "3976.5",
@@ -751,6 +795,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261112_081625",
+    "timestamp": "2026-11-12T08:16:25+05:30",
+    "timeDisplay": "08:16 AM, Nov 12",
+    "spot": "3976.18",
+    "trigger": "Structural Invalidation (-16.7 pts incremental shift from previous trigger 3992.84",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (08:15 AM IST - Nov 12, 2026 | Spot: 3976.18 | Trigger: Structural Invalidation (-16.7 pts incremental shift from previous trigger 3992.84))\n\n### 1. Global Macro & Forex Mechanics:\n* **DXY Currency Vector:** US Dollar Index trades firmly at 102.948 in a bullish trend above its 9/21 EMAs, imposing persistent macro overhead pressure on bullion.\n* **Treasury Yield Baseline:** US 10-Year Treasury Yield holds flat at 5.0%, preserving an elevated opportunity cost backdrop and limiting unprovoked upside momentum.\n* **SMT Divergence State:** No SMT divergence detected between Gold (XAU/USD) and Silver (XAG/USD); both metals are moving in synchronized consolidation.\n* **Macro Session Tone:** DXY firmness keeps macro bias titled toward selling rallies at premium order blocks until London session liquidity sweeps unfold.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Asian Session Compression:** Asian session established a tight range of $29.96 (High: $4000.69 | Low: $3970.73) with a narrow 9.7% body, confirming a compression coil primed for a London Judas expansion.\n* **HTF Trend & 4H CRT Structure:** 4H structure remains bearish with Spot trading below the 4H 9-EMA ($4006.88) and 21-EMA ($4020.10); price tracks within the previous 4H range ($3970.73–$4000.69) with midpoint EQ at $3985.71.\n* **Higher Timeframe Boundaries:** Previous Day Low ($3988.61) has suffered a bearish breakdown, leaving Previous Day High ($4063.33) as an untouched macro liquidity magnet far above.\n* **Liquidity Pool Clusters:** Sell-Side Liquidity (SSL) pools are heavily concentrated at Equal Lows near $3970.21 and Day Low $3968.70; Buy-Side Liquidity (BSL) rests at Equal Highs near $3985.40 and Asian High $4000.69.\n* **Institutional Inducement & OTE Mapping:** Retail IDM traps sit between $3980.82 and $3984.57; Deep Discount OTE aligns at $3975.49–$3978.06, while Deep Premium OTE spans $3991.08–$3993.65 below the $4000.00 round barrier.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Strict Range Bounds:** $3974.50 to $3982.50 represents an institutional no-trade equilibrium chop zone.\n* **Consolidation Anchor:** Immediate 1H Consolidation Shelf midpoint (Micro-EQ $3977.81) acts as a high-friction rotational pivot where market orders suffer two-way churn.\n* **Execution Directive:** Strictly avoid market orders inside this $8.00 pocket; preserve execution capital until liquidity is swept beyond $3970.21 SSL or $3985.40 BSL.\n\n### 4. High Momentum / Explosive Zones:\n* **Bearish Acceleration Threshold:** A decisive 15M candle close below $3967.50 clears Day Low ($3968.70) and triggers rapid long-unwinding toward Asian 1.272 ($3962.58) and 1.414 ($3958.33) extension targets.\n* **Bullish Short-Covering Threshold:** A sustained 15M candle close above $3987.50 reclaims the 4H Midpoint EQ ($3985.71) and supply base origin, initiating an explosive short-covering squeeze toward $3996.00 and $4006.50.\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3973.50** (Sweep $3968.00–$3970.00) | **★ A+ PRIMARY [Asian Low / Equal Lows Judas Sweep]:** Enter on 5M close > $3973.50 after sweeping $3970.21 SSL with lower-wick absorption. | **TP1:** $3982.50 / **TP2:** $3992.50 | **$3967.00** | 1:2.9 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3987.50** Breakout | **⚠️ BACKUP [1H Shelf & 4H EQ Acceptance]:** Enter only on a full 15M body close > $3987.50 with zero upper wick exhaustion and DXY weakness. | **TP1:** $3996.50 / **TP2:** $4006.50 | **$3981.00** | 1:2.9 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3983.50** (Sweep $3985.40–$3987.00) | **★ A+ PRIMARY [1H Equal Highs & 4H Midpoint SFP]:** Enter on 5M CHoCH close < $3983.50 after sweeping $3985.40 BSL (DXY Headwind). | **TP1:** $3975.50 / **TP2:** $3967.50 | **$3990.00** | 1:2.5 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3967.50** Breakdown | **⚠️ BACKUP [Day Low / SSL Shelf Breakdown]:** Enter on a decisive 15M body close < $3967.50 slicing through support with expanding volume. | **TP1:** $3959.50 / **TP2:** $3953.50 | **$3973.50** | 1:2.3 |"
+  },
+  {
     "id": "GOLD_20261112_073308",
     "timestamp": "2026-11-12T07:33:08+05:30",
     "timeDisplay": "07:33 AM, Nov 12",
