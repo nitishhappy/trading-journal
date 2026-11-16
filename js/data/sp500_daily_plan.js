@@ -1,6 +1,83 @@
 window.sp500DailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-16T21:04:00+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "price": "7458.84",
+    "bias": "bullish",
+    "behavior": "[MON 21:04] [SP_KB1]: Session Day Low & SSL Pool; primary bounce zone for liquidity sweep long",
+    "tp": "7483.50",
+    "sl": "7452.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T21:04:00+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "price": "7448.5",
+    "bias": "bullish",
+    "behavior": "[MON 21:04] [SP_KB2]: Asian Session Low; intermediate liquidity absorption pocket",
+    "tp": "7476.50",
+    "sl": "7439.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T21:04:00+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "price": "7436.5",
+    "bias": "bullish",
+    "behavior": "[MON 21:04] [SP_KB3]: 15M Institutional Order Block and primary structural bounce floor",
+    "tp": "7465.00",
+    "sl": "7425.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T21:04:00+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "price": "7413.5",
+    "bias": "bullish",
+    "behavior": "[MON 21:04] [SP_KB4]: Daily macro demand base and session invalidation floor",
+    "tp": "7450.00",
+    "sl": "7398.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T21:04:00+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "price": "7515.6",
+    "bias": "bearish",
+    "behavior": "[MON 21:04] [SP_KS1]: Day High & Previous Day High (PDH) institutional supply ceiling",
+    "tp": "7483.50",
+    "sl": "7525.60",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T21:04:00+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "price": "7453.5",
+    "bias": "bearish",
+    "behavior": "[MON 21:04] [SP_KS2]: Liquidation cascade trigger below current session demand",
+    "tp": "7436.50",
+    "sl": "7463.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T21:04:00+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "price": "7483.5",
+    "bias": "bullish",
+    "behavior": "[MON 21:04] [SP_B2]: Clean 5M close above 7483.50 equilibrium ceiling targeting Day High",
+    "tp": "7515.60",
+    "sl": "7471.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-16T20:18:13+05:30",
     "timeDisplay": "08:18 PM, Nov 16",
     "price": "7501.44",
@@ -190,6 +267,15 @@ window.sp500DailyPlanData = [
 
 window.sp500DailyPlanSummary = [
 {
+    "id": "SP500_20261116_210402",
+    "timestamp": "2026-11-16T21:04:02+05:30",
+    "timeDisplay": "09:04 PM, Nov 16",
+    "spot": "7468.50",
+    "trigger": "Scheduled 09:00 PM IST Update (London Close & Mid-Day Liquidity Shift",
+    "source": "SP500-AI",
+    "text": "# 🇺🇸 S&P 500 (^GSPC) Tactical Update (09:00 PM IST - Nov 16, 2026 | Spot: $7468.50 | Trigger: Scheduled 09:00 PM IST Update (London Close & Mid-Day Liquidity Shift))\n\n### 1. Global Macro & US Intermarket Dynamics:\n- **VIX Regime (21.61 - High Volatility / Panic Expansion):** The CBOE Volatility Index remains elevated above the critical 20 threshold, indicating institutional hedging and wide intraday distribution. Expect accelerated rotational swings and rapid liquidity sweeps.\n- **US Dollar Index (DXY at 103.47):** The Dollar Index trades firm with an upward bias, acting as a direct macro headwind for multinational equity earnings and large-cap mega-tech leadership.\n- **US 10-Year Treasury Yield (TNX at 5.11%):** Yields remain stubbornly anchored above 5.10%, capping equity valuation multiples and discouraging aggressive trend-continuation buying outside of clear discount demand zones.\n- **Futures & Intermarket Alignment:** E-mini S&P 500 futures (`ES` at 7483.75) and Nasdaq 100 futures (`NQ` at 27407.50) are holding slight basis premiums above cash spot, stabilizing after an aggressive early New York sell-off from the session peak.\n\n---\n\n### 2. SMC & Session Liquidity Confluence:\n- **Session Range Confluence:**\n  - **Asian Session Range:** High 7488.50 | Low 7448.50\n  - **London Session Range:** High 7493.50 | Low 7443.50\n  - **New York Session Range:** High 7515.60 (PDH Test & BSL Sweep) | Low 7458.84 (Current Intraday Low)\n- **Market Structure & Order Flow:** Following the US RTH opening bell, price staged an aggressive Buy-Side Liquidity (BSL) sweep into Previous Day High (7515.60), forming an institutional Swing Failure Pattern (SFP). The resulting displacement drove the index into deep discount territory ($7468.50 vs 48H Equilibrium of 7487.22).\n- **Liquidity Pools:** Sell-Side Liquidity (SSL) rests immediately under the session floor at 7458.84 and the Asian low at 7448.50. Overhead buy-side liquidity sits stacked above the 7483.50 intraday equilibrium node.\n\n---\n\n### 3. Live Chop Zone / No-Trade Zone:\n- **Chop Range:** **7460.50 – 7476.50**\n- **Tactical Directive:** This 16-point consolidation corridor represents the 50% equilibrium box between the intraday low (7458.84) and the mid-session volume shelf (7476.50). \n- **London Fixing Risk:** With the London 4:00 PM fixing / 9:00–9:30 PM IST window actively executing portfolio rebalancing flows, market depth is prone to erratic, two-sided tick chop. Avoid entering directional market orders inside this corridor; wait for decisive expansion outside the boundary.\n\n---\n\n### 4. High Momentum / Explosive Zones:\n- **Bullish Expansion Zone (> 7483.50):** A decisive 5-minute candle body close above 7483.50 clears intraday supply, triggering short-covering momentum back toward the 7515.60 Day High and 7525.00 HTF liquidity ceiling.\n- **Bearish Liquidation Cascade (< 7453.50):** A sustained 5-minute close below 7453.50 breaches both the Day Low (7458.84) and trailing institutional stop clusters, triggering a long-liquidation cascade into structural demand at 7436.50 and 7413.50.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers (Direct Index Trading):\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[SP_B1]** | High-Probability Long / Liquidity Sweep Recovery | 7458.50 – 7462.00 | SSL sweep below 7458.84 with immediate 5M lower-wick rejection and displacement close back above 7465.00 | 7483.50 / 7515.60 | 7452.00 | 1:3.2 |\n| **[SP_B2]** | High-Momentum Breakout Long | 7483.50 | Clean 5M candle close above 7483.50 equilibrium ceiling accompanied by expanding institutional volume | 7515.60 / 7525.00 | 7471.50 | 1:2.7 |\n| **[SP_S1]** | High-Probability Short / Supply Rejection | 7510.00 – 7515.60 | Retest of Day High / PDH Supply OB with 5M bearish engulfing candle and rejection of 7515.60 ceiling | 7483.50 / 7468.50 | 7523.50 | 1:3.1 |\n| **[SP_S2]** | High-Momentum Breakdown Short | 7453.50 | Decisive 5M close below 7453.50 confirming structural SSL failure with expanding red volume | 7436.50 / 7413.50 | 7463.50 | 1:2.3 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level | Type | Setup | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **7458.84** | Primary Support / Day Low | [SP_KB1] | [SP_KB1] Session Day Low & SSL Pool; primary bounce zone for liquidity sweep long | 7483.50 | 7452.00 |\n| **7448.50** | Secondary Support | [SP_KB2] | [SP_KB2] Asian Session Low; intermediate liquidity absorption pocket | 7476.50 | 7439.00 |\n| **7436.50** | Key Demand OB | [SP_KB3] | [SP_KB3] 15M Institutional Order Block and primary structural bounce floor | 7465.00 | 7425.00 |\n| **7413.50** | Deep Structural Demand | [SP_KB4] | [SP_KB4] Daily macro demand base and session invalidation floor | 7450.00 | 7398.00 |\n| **7515.60** | Primary Resistance / PDH | [SP_KS1] | [SP_KS1] Day High & Previous Day High (PDH) institutional supply ceiling | 7483.50 | 7525.60 |\n| **7453.50** | Breakdown Trigger Floor | [SP_KS2] | [SP_KS2] Liquidation cascade trigger below current session demand | 7436.50 | 7463.50 |"
+  },
+  {
     "id": "SP500_20261116_201816",
     "timestamp": "2026-11-16T20:18:16+05:30",
     "timeDisplay": "08:18 PM, Nov 16",
