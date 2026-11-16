@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-16T18:02:57+05:30",
+    "timeDisplay": "06:02 PM, Nov 16",
+    "price": "3851.5",
+    "bias": "bullish",
+    "behavior": "[MON 18:02] [G_B1]: London Deep OTE Liquidity Sweep",
+    "tp": "$3860.50 / $3868.50",
+    "sl": "$3845.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T18:02:57+05:30",
+    "timeDisplay": "06:02 PM, Nov 16",
+    "price": "3877.5",
+    "bias": "bullish",
+    "behavior": "[MON 18:02] [G_B2]: London High Expansion Acceptance",
+    "tp": "$3886.50 / $3894.50",
+    "sl": "$3871.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T18:02:57+05:30",
+    "timeDisplay": "06:02 PM, Nov 16",
+    "price": "3875.5",
+    "bias": "bearish",
+    "behavior": "[MON 18:02] [G_S1]: London High Liquidity SFP",
+    "tp": "$3866.50 / $3858.50",
+    "sl": "$3882.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-16T18:02:57+05:30",
+    "timeDisplay": "06:02 PM, Nov 16",
+    "price": "3848.5",
+    "bias": "bearish",
+    "behavior": "[MON 18:02] [G_S2]: London Low Liquidity Flush",
+    "tp": "$3840.50 / $3833.50",
+    "sl": "$3855.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-16T16:31:53+05:30",
     "timeDisplay": "04:31 PM, Nov 16",
     "price": "3851.5",
@@ -179,6 +223,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261116_180259",
+    "timestamp": "2026-11-16T18:02:59+05:30",
+    "timeDisplay": "06:02 PM, Nov 16",
+    "spot": "3871.86",
+    "trigger": "Scheduled 06:00 PM Update (New York Pre-Market & US Data",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (06:00 PM IST - Nov 16, 2026 | Spot: $3871.86 | Trigger: Scheduled 06:00 PM Update (New York Pre-Market & US Data))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY) Trend:** DXY prints at 103.454 in a consolidating neutral state, alleviating aggressive macro headwinds while maintaining an orderly equilibrium across currency pairs.\n* **US 10-Year Treasury Yield (US10Y):** Holding steady at 5.15%, keeping benchmark financing yields stable and anchoring macro range boundaries.\n* **Intermarket Gold vs. Silver (XAU/XAG) SMT Divergence:** 🟢 BULLISH SMT DIVERGENCE ACTIVE: Silver swept its prior low while Gold defended a higher low structure, demonstrating underlying institutional accumulation and relative strength in Gold.\n* **Macro Session Context:** New York Killzone & COMEX Open (17:30 - 21:30 IST) is active with peak volatility, testing upper London liquidity boundaries with live spot at $3871.86 ahead of incoming US economic prints.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Asian Session Regime Classification:** Strong Bearish Trend Engine confirmed during Asia (Range: $62.94, Bearish Body: 74.2% >= 60%), indicating London and NY break with Asia 81.8% of the time prior to downside Fib exhaustion (Downside Fib 1.272 at $3818.89, 1.414 at $3809.95; Upside Fib 1.272 at $3916.07, 1.414 at $3925.01).\n* **Session Liquidity Extremes & Magnet Status:** Asian High ($3898.95) and Asian Low ($3836.01) remain untouched macro external liquidity targets; London High ($3876.36) and London Low ($3848.99) are both untouched in NY, serving as primary active buy-side and sell-side liquidity magnets.\n* **Higher Timeframe 4H Candle Range Theory (CRT):** Bullish 4H bias maintained with spot ($3871.86) trading above 4H 9-EMA ($3857.96) and 21-EMA ($3850.70), expanding above the previous 4H candle high ($3866.19 | 4H Midpoint EQ $3853.27).\n* **Higher Timeframe PDH/PDL Status:** Previous Day High ($3849.95) has been cleared into a bullish breakout structure, while Previous Day Low ($3825.56) remains deep untouched sell-side liquidity.\n* **Institutional Order Block & Microstructure Traps:** Parabolic Ignition Bearish Supply Base sits at $3860.08 - $3860.08 (origin of -$3.81 flush). Equal Lows (SSL) clustered near $3856.26 (2 taps) create Judas sweep risk; Equal Highs (BSL) clustered near $3865.00 (3 taps) were swept during the recent NY ignition impulse.\n* **Inducement (IDM) vs. Deep OTE Confluence:** Retail inducement traps sit at $3874.90 - $3866.78 (shallow bullish pullback trap) and $3858.66 - $3866.78 (bearish rebound trap); institutional execution demands patience for True Deep Discount OTE ($3847.10 - $3852.67) aligned with major $3850.00 round number, or True Deep Premium OTE ($3880.89 - $3886.46) aligned with $3880.00 / $3890.00 magnets.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Strict Range Bound Anchors:** $3860.63 to $3866.78 (50% Micro-EQ of 1H Shelf to Macro 50% Daily Equilibrium).\n* **Execution Prohibition:** Avoid initiating market orders between $3865.00 (1H Shelf Ceiling) and $3871.00 where shallow retail IDM generates recurring false breakouts and whipsaws.\n* **Capital Protection Filter:** Flat posture mandatory inside the $3866.78 to $3874.00 compression pocket until London High ($3876.36) is either cleanly swept and rejected on a 5M CHoCH or broken decisively on a 15M body close.\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Breakout Acceleration:** $3877.50 (acceptance above London High $3876.36 and Retail IDM $3874.90 unlocks fast short-covering expansion toward $3886.50 and True Deep Premium OTE $3880.89 - $3886.46).\n* **Bearish Breakdown Expansion:** $3848.50 (acceptance below London Low $3848.99 and Discount OTE $3847.10 triggers an aggressive liquidity cascade toward Asian Low $3836.01 and Day Low $3832.37).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3851.50** (Sweep $3847.10–$3850.00) | **★ A+ PRIMARY [London Deep OTE Liquidity Sweep]:** Enter on 5M close > $3851.50 after sweeping London Low $3848.99 into discount OTE. | **TP1:** $3860.50 / **TP2:** $3868.50 | **$3845.00** | 1:2.6 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3877.50** Breakout | **⚠️ BACKUP [London High Expansion Acceptance]:** Enter on 15M body close > $3877.50 clearing London High $3876.36 with expanding volume. | **TP1:** $3886.50 / **TP2:** $3894.50 | **$3871.00** | 1:2.6 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3875.50** (Sweep $3876.36–$3880.00) | **★ A+ PRIMARY [London High Liquidity SFP]:** Enter on 5M CHoCH close < $3875.50 after sweeping $3876.36 London High BSL. | **TP1:** $3866.50 / **TP2:** $3858.50 | **$3882.00** | 1:2.6 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3848.50** Breakdown | **⚠️ BACKUP [London Low Liquidity Flush]:** Enter on 15M body close < $3848.50 slicing London Low $3848.99 toward $3840.34 SSL. | **TP1:** $3840.50 / **TP2:** $3833.50 | **$3855.00** | 1:2.3 |"
+  },
+  {
     "id": "GOLD_20261116_163156",
     "timestamp": "2026-11-16T16:31:56+05:30",
     "timeDisplay": "04:31 PM, Nov 16",
