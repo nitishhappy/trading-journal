@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T10:30:47+05:30",
+    "timeDisplay": "10:30 AM, Nov 17",
+    "price": "82460",
+    "bias": "bullish",
+    "behavior": "[TUE 10:30] [B1]: Bullish retest and absorption at prior equal highs shelf (82,460) with hammer confirmation",
+    "tp": "82,580 / 82,700",
+    "sl": "82,390",
+    "status": "na",
+    "spread": "Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T10:30:47+05:30",
+    "timeDisplay": "10:30 AM, Nov 17",
+    "price": "82580",
+    "bias": "bullish",
+    "behavior": "[TUE 10:30] [B2]: Sustained 5m close ABOVE Day High 82,580 with expanding volume activating short-covering",
+    "tp": "82,720 / 82,850",
+    "sl": "82,490",
+    "status": "na",
+    "spread": "Buy 82600 CE + Sell 82800 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T10:30:47+05:30",
+    "timeDisplay": "10:30 AM, Nov 17",
+    "price": "82540",
+    "bias": "bearish",
+    "behavior": "[TUE 10:30] [S1]: Failed probe above 82,580 closing back below 82,540 confirming SFP buyer trap",
+    "tp": "82,460 / 82,350",
+    "sl": "82,610",
+    "status": "na",
+    "spread": "Buy 82500 PE + Sell 82300 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T10:30:47+05:30",
+    "timeDisplay": "10:30 AM, Nov 17",
+    "price": "82340",
+    "bias": "bearish",
+    "behavior": "[TUE 10:30] [S2]: 15m close BELOW 15M ORB High anchor (82,340) targeting micro equilibrium and ignition base",
+    "tp": "82,210 / 82,120",
+    "sl": "82,430",
+    "status": "na",
+    "spread": "Buy 82300 PE + Sell 82100 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T10:16:44+05:30",
     "timeDisplay": "10:16 AM, Nov 17",
     "price": "82350",
@@ -1783,6 +1831,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261117_103050",
+    "timestamp": "2026-11-17T10:30:50+05:30",
+    "timeDisplay": "10:30 AM, Nov 17",
+    "spot": "82543.08",
+    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 17, 2026 | Spot: 82543.08 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Compression Zone: 82,350.00 – 82,460.00. This zone sits between the 15M ORB High anchor (82,349.58) and the prior 1H equal highs shelf (82,457.54). Price inside this 110-point band lacks directional expansion and is vulnerable to premium decay and whipsaws.\n- Micro-Equilibrium Neutral Fulcrum: 82,334.43 (Macro 50% Daily Equilibrium) and 82,287.63 (1H Micro-EQ). Straddling near these levels without volume confirmation indicates balanced two-way auctioning; option buying inside this zone carries adverse theta risk.\n- Structural Invalidation Boundary: Sustained acceptance below 82,330 invalidates the morning bullish continuation bias and shifts structure into a rotational re-test of the morning ignition base (82,108.13 – 82,122.92).\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion Zone] (Breakout above Day High): Sustained 5M close above 82,580.00 with expanding futures volume activates aggressive short-covering toward 82,720.00 and 82,850.00 unmitigated HTF liquidity pools.\n- [Bearish Mean-Reversion SFP Zone] (Liquidity Sweep at Day High): Rejection wick probe above 82,580.00 that fails to sustain and closes back below 82,540.00 triggers a Swing Failure Pattern (SFP), accelerating liquidations down toward 82,460.00 and 82,350.00.\n- [Bearish Breakdown Momentum Zone] (Loss of 15M ORB Anchor): Decisive 5M close below 82,340.00 breaks the morning structural shelf, unleashing rapid long unwinding toward 82,210.00 and the 82,120.00 parabolic ignition base.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Bullish Pullback & Value Retest): 5-minute bullish rejection candle (hammer/pinbar) formed at 82,460 – 82,480 holding above equal highs support with rising volume. | TP: 82,580 / 82,700 | SL: 82,390 | 💡 Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Bullish Day High Breakout Continuation): Clean 5-minute candle close firmly ABOVE 82,580 with expanding volume confirming absorption of overhead supply. | TP: 82,720 / 82,850 | SL: 82,490 | 💡 Buy 82600 CE + Sell 82800 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Bearish SFP Reversal at Day High): 5-minute rejection wick sweeping above 82,580 followed immediately by a close back BELOW 82,540 trapping breakout buyers. | TP: 82,460 / 82,350 | SL: 82,610 | 💡 Buy 82500 PE + Sell 82300 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Bearish Breakdown below ORB Support): Clean 15-minute close BELOW 82,340 confirming structural failure of the morning opening range anchor. | TP: 82,210 / 82,120 | SL: 82,430 | 💡 Buy 82300 PE + Sell 82100 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261117_101647",
     "timestamp": "2026-11-17T10:16:47+05:30",
     "timeDisplay": "10:16 AM, Nov 17",
