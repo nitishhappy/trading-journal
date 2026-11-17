@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T12:02:28+05:30",
+    "timeDisplay": "12:02 PM, Nov 17",
+    "price": "82720",
+    "bias": "bullish",
+    "behavior": "[TUE 12:02] [B1]: Pullback into the 82,700 - 82,730 demand shelf with a 5m bullish rejection candle confirming support at prior equal highs",
+    "tp": "82,850 / 82,980",
+    "sl": "82,640",
+    "status": "na",
+    "spread": "Buy 82700 CE + Sell 82900 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T12:02:28+05:30",
+    "timeDisplay": "12:02 PM, Nov 17",
+    "price": "82850",
+    "bias": "bullish",
+    "behavior": "[TUE 12:02] [B2]: Sustained 5m close ABOVE 82,850.00 with expanding buyer volume confirming institutional absorption of the 82,846.78 supply",
+    "tp": "83,000 / 83,150",
+    "sl": "82,760",
+    "status": "na",
+    "spread": "Buy 82800 CE + Sell 83000 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T12:02:28+05:30",
+    "timeDisplay": "12:02 PM, Nov 17",
+    "price": "82780",
+    "bias": "bearish",
+    "behavior": "[TUE 12:02] [S1]: False breakout probe above 82,846.78 followed by an immediate 5m close back BELOW 82,780.00 confirming buyer exhaustion",
+    "tp": "82,680 / 82,625",
+    "sl": "82,870",
+    "status": "na",
+    "spread": "Buy 82800 PE + Sell 82600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T12:02:28+05:30",
+    "timeDisplay": "12:02 PM, Nov 17",
+    "price": "82620",
+    "bias": "bearish",
+    "behavior": "[TUE 12:02] [S2]: Decisive 15m close BELOW the 82,620.00 ignition base shelf with institutional sell displacement",
+    "tp": "82,510 / 82,470",
+    "sl": "82,710",
+    "status": "na",
+    "spread": "Buy 82600 PE + Sell 82400 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T10:30:47+05:30",
     "timeDisplay": "10:30 AM, Nov 17",
     "price": "82460",
@@ -1831,6 +1879,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261117_120230",
+    "timestamp": "2026-11-17T12:02:30+05:30",
+    "timeDisplay": "12:02 PM, Nov 17",
+    "spot": "82837.61",
+    "trigger": "Bullish Level Exhaustion (+257.6 pts above max plan level 82580",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (12:00 PM IST - Nov 17, 2026 | Spot: 82837.61 | Trigger: Bullish Level Exhaustion (+257.6 pts above max plan level 82580))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Boundaries: 82,720.00 (Prior 6-Tap Equal Highs / 1H Shelf Ceiling Polarity Flip) to 82,850.00 (Live Day High / Psychological Supply Cap).\n- Chop Behavior & Pin Risk: Spot price has surged into fresh intraday highs at 82,837.61, triggering bullish level exhaustion after taking out the morning plan boundary (82,580) and printing a Day High of 82,846.78. Price is currently oscillating just beneath the 83,000 round-number psychological milestone. With European crossover active (11:30–13:30 IST), institutional participation is compressing between the swept 82,726.88 liquidity shelf and current highs. Whipsaw and mean-reversion risk is elevated as late breakout buyers meet profit-taking bids.\n- Premium Decay Warning: Strict No-Trade Zone inside 82,730 – 82,840 for new naked directional positions. Mid-day theta decay inside this compressed band creates high pin-risk and false wick traps. Option buyers must wait for a decisive 5-minute candle close either sustained above 82,850 or an orderly discount pullback to structural demand before initiating entries.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Extension & Short-Covering Squeeze] (Sustained 5m Close Above 82,850.00): A decisive 5-minute candle close clearing Day High (82,846.78) with expanding buyer volume forces immediate gamma adjustments and call unwinding, driving rapid continuation toward 83,000.00 and 83,150.00.\n- [Bullish Retest & Polarity Absorption] (Pullback & 5m Reversal at 82,700.00 - 82,730.00): A shallow test into the swept 6-tap Equal Highs shelf (82,726.88) that prints a bullish absorption pin bar / hammer confirms resistance-turned-support polarity, initiating the next bullish rotational swing toward 82,850.00 and 82,980.00.\n- [Bearish SFP Rejection & Mean Reversion] (Failed Probe Above 82,850.00 & 5m Close Below 82,780.00): An aggressive stop-hunt spike piercing above 82,850 that fails to hold and closes back below 82,780 confirms a Swing Failure Pattern (SFP), precipitating swift long liquidation back toward 82,625.00 and 82,510.00.\n- [Bearish Ignition Base Breakdown] (Decisive 15m Close Below 82,620.00): Loss of the Parabolic Bullish Ignition Base (82,622.98 - 82,625.06) invalidates the morning expansion structure, triggering an accelerated slide toward 50% Daily Equilibrium (82,469.34) and the 15M ORB High (82,349.58).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Polarity Shelf Retest Long): Pullback into the 82,700 - 82,730 demand shelf with a 5m bullish rejection candle confirming support at prior equal highs. | TP: 82,850 / 82,980 | SL: 82,640 | 💡 Buy 82700 CE + Sell 82900 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Expansion Long): Sustained 5m close ABOVE 82,850.00 with expanding buyer volume confirming institutional absorption of the 82,846.78 supply. | TP: 83,000 / 83,150 | SL: 82,760 | 💡 Buy 82800 CE + Sell 83000 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High SFP & Liquidity Trap Short): False breakout probe above 82,846.78 followed by an immediate 5m close back BELOW 82,780.00 confirming buyer exhaustion. | TP: 82,680 / 82,625 | SL: 82,870 | 💡 Buy 82800 PE + Sell 82600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Ignition Base Breakdown Short): Decisive 15m close BELOW the 82,620.00 ignition base shelf with institutional sell displacement. | TP: 82,510 / 82,470 | SL: 82,710 | 💡 Buy 82600 PE + Sell 82400 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261117_103050",
     "timestamp": "2026-11-17T10:30:50+05:30",
     "timeDisplay": "10:30 AM, Nov 17",
@@ -2216,14 +2273,5 @@ window.sensexDailyPlanSummary = [
     "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
     "source": "AI Intraday Briefing",
     "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK (BSE SENSEX)\n================================================================================\n• Daily Market Bias: 🟢 BULLISH | Bias Score: +4.0 / +6.0 | Confidence: High (78%)\n• Bias Invalidation Floor: 75442.78 (A 15M close below 75442.78 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Buy-on-Dip Expansion. Institutional bias favors absorption at discount demand OBs followed by upside expansion.\n• Execution: Avoid counter-trend shorts during opening 15m. Wait for 15M ORB filter before entries.\n\n# ⚡ BSE SENSEX Intraday Tactical Update (01:30 PM IST - Nov 03, 2026 | Spot: 76699.67 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range Bound Corridor: 76,540.00 – 76,640.00 (Anchored between 1H Shelf Micro-EQ at 76,548.22 and the 5-tap Equal Highs / Bearish Supply Base cluster at 76,636.08).\n- Risk Characteristics: Inside this 100-point corridor, price action remains highly rotational with high theta decay and false intraday breakouts. Naked option buyers face severe chop risk until a structural break occurs.\n- Institutional Boundary Directive: Stand aside on fresh directional positions within 76,540 – 76,640. Trade strictly upon confirmed expansion outside Day High (76,726.10) or breakdown through the 1H Shelf Base (76,460.36).\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze (Clean 5M/15M Close ABOVE 76,726.10 Day High): Triggers institutional buy-stop runs and forced gamma unwinding among Call writers at the 76,700/76,800 strikes, clearing a swift runway toward 76,850 and 77,000 round-number resistance.\n- Mean Reversion SFP Trap (Liquidity Sweep Probe ABOVE 76,726.10 followed by immediate 5M Bearish Close back BELOW 76,690.00): Confirms a Buy-Side Liquidity (BSL) sweep trap; prompts an aggressive liquidation flush targeting the 1H Shelf EQ at 76,548.22 and the demand base at 76,460.36.\n- Long Liquidation Flush (Decisive 15M Close BELOW 76,460.36 Equal Lows): Triggers Sell-Side Liquidity (SSL) runs beneath the multi-tap floor, initiating a rapid downside slide toward Macro 50% Daily Equilibrium at 76,379.92 and the 15M ORB High at 76,421.48.\n- Judas Sweep & Spring Reclaim (Spike BELOW 76,460.36 swiftly reclaimed with an engulfing 5M green close ABOVE 76,500.00): Traps late breakout short-sellers and sets up a high-probability mean reversion rally back to 76,636.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Day High Expansion Breakout): Sustained 5M candle close firmly ABOVE Day High 76,726.10 with volume ignition. | TP: 76,850 / 77,000 | SL: 76,630 | 💡 Buy 76,700 CE + Sell 76,900 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Broken Resistance Shelf Retest): Pullback into 76,635 – 76,615 showing long lower-wick absorption and a bullish reversal 5M candle. | TP: 76,730 / 76,850 | SL: 76,570 | 💡 Buy 76,600 CE + Sell 76,800 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Liquidity Sweep / SFP): Price probes ABOVE 76,726.10 but immediately fails, printing a sharp 5M bearish close back BELOW 76,690.00. | TP: 76,550 / 76,460 | SL: 76,760 | 💡 Buy 76,700 PE + Sell 76,500 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Consolidation Floor Breakdown): Decisive 15M candle close BELOW the 76,460.36 equal lows shelf with expanding red volume. | TP: 76,380 / 76,250 | SL: 76,530 | 💡 Buy 76,500 PE + Sell 76,300 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
-  },
-  {
-    "id": "SENSEX_20261103_103210",
-    "timestamp": "2026-11-03T10:32:10+05:30",
-    "timeDisplay": "10:32 AM, Nov 03",
-    "spot": "76501.86",
-    "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
-    "source": "AI Intraday Briefing",
-    "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK (BSE SENSEX)\n================================================================================\n• Daily Market Bias: 🟢 BULLISH | Bias Score: +4.0 / +6.0 | Confidence: High (78%)\n• Bias Invalidation Floor: 75442.78 (A 15M close below 75442.78 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Buy-on-Dip Expansion. Institutional bias favors absorption at discount demand OBs followed by upside expansion.\n• Execution: Avoid counter-trend shorts during opening 15m. Wait for 15M ORB filter before entries.\n\n# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 03, 2026 | Spot: 76501.86 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Spot Corridor: 76425.00 - 76510.00 (Width: ~85 points).\n- Spot price (76501.86) is hovering directly at the 76500 psychological milestone, having just wicked through the 1H consolidation shelf high (76425.30) to print a live Day High of 76503.87.\n- Option Chain & Structure Dynamics: The 76425.30 level previously absorbed 9 consecutive taps, creating a dense pool of Buy-Side Liquidity (BSL) and equal highs. While spot has pierced above 76500, heavy Call Open Interest at the 76500 strike creates a critical friction threshold. Without sustained volume follow-through, this band presents severe Swing Failure Pattern (SFP) risk where choppy oscillations and premium decay will degrade unconfirmed naked positions.\n- Tactical Directive: STRICT NO-TRADE ZONE inside 76425 - 76510. Do not execute market orders or chase breakouts inside this liquidity vacuum. Require a decisive 5-minute candle close either sustained above 76510 with institutional volume or confirmed below 76425 before deploying capital.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Short-Covering Expansion] (Sustained 5m Close Above 76510.00): A decisive 5-minute close above 76510.00 clears Day High (76503.87) and forces rapid delta-hedging and short-covering from 76500 Call writers, unleashing an explosive directional run toward 76650.00 and 76780.00.\n- [Bullish Retest Absorption] (Pullback & Wick Rejection at 76380.00 - 76425.00): A controlled pullback into the previous 15M ORB High and 1H shelf ceiling (76421.48 - 76425.30) that prints a sharp lower rejection pin-bar confirms structural polarity flip (resistance turned support), triggering momentum back toward 76505.00 and 76620.00.\n- [Bearish Liquidity Trap / SFP] (Rejection at 76505.00 & 5m Close Below 76425.00): Rejection at the 76500 call wall followed by a 5-minute close back inside the 1H shelf under 76425.00 confirms a classic BSL stop-hunt / Swing Failure Pattern, precipitating swift long-unwinding toward 1H Micro-EQ (76332.73) and 76240.00.\n- [Bearish Shelf Breakdown] (Sustained 5m Close Below 76240.00): A sustained break below the 1H shelf floor at 76240.00 invalidates morning dip-buyer defense, triggering an accelerated slide through the 50% Daily Equilibrium (76268.80) toward 76120.00 and the Day Low / 15M ORB Low at 76033.74.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Shelf Retest & Polarity Flip Long): Pullback into 76380.00 - 76425.00 with a 5m bullish rejection wick confirming support at ORB High. | TP: 76505 / 76620 | SL: 76340 | 💡 Buy 76400 CE + Sell 76600 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Short-Covering Breakout Long): Sustained 5m close ABOVE 76510.00 with institutional volume expansion confirming 76500 absorption. | TP: 76650 / 76780 | SL: 76430 | 💡 Buy 76500 CE + Sell 76700 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (BSL Sweep & SFP Mean-Reversion Short): Rejection at 76503.87 followed by a 5m close BELOW 76425.00 re-entering the 1H consolidation shelf. | TP: 76330 / 76240 | SL: 76510 | 💡 Buy 76500 PE + Sell 76300 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (1H Shelf Breakdown Short): Sustained 5m close BELOW 76240.00 with expanding red volume breaking the consolidation floor. | TP: 76120 / 76035 | SL: 76325 | 💡 Buy 76200 PE + Sell 76000 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
   }
 ];
