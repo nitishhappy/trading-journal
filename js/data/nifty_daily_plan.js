@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T10:20:02+05:30",
+    "timeDisplay": "10:20 AM, Nov 17",
+    "price": "25365",
+    "bias": "bullish",
+    "behavior": "[TUE 10:20] [B1]: \u2605 PRIMARY (15M ORB High & 5m 9-EMA): Pullback test into 25350\u201325358 holding above 5m 9-EMA (25352.55) and confirmed 5m close back ABOVE 25365.00 [09:45\u201311:30 Trend / 11:30\u201313:30 Pinning Window]",
+    "tp": "25398 / 25430",
+    "sl": "25340",
+    "status": "na",
+    "spread": "Buy 25350 CE (23-Nov) @ ~Rs 210 (Delta 0.54, IV 14.2%) | Prem SL ~Rs 196 (-7%) | TP1 ~Rs 228 (+8%) | TP2 ~Rs 246 (+17%) | Option R:R 1:1.3 / 1:2.6 | Theta ~-Rs 2.9/hr | Risk/lot ~Rs 896"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T10:20:02+05:30",
+    "timeDisplay": "10:20 AM, Nov 17",
+    "price": "25405",
+    "bias": "bullish",
+    "behavior": "[TUE 10:20] [B2]: BACKUP (25400 Call OI Wall Breakout): Sustained 5m close ABOVE 25405.00 clearing 25400 Call Wall with short-covering [After 1:30 PM Gamma Squeeze Window]",
+    "tp": "25445 / 25495",
+    "sl": "25380",
+    "status": "na",
+    "spread": "Buy 25400 CE (23-Nov) @ ~Rs 205 (Delta 0.53, IV 14.2%) | Prem SL ~Rs 191 (-7%) | TP1 ~Rs 226 (+10%) | TP2 ~Rs 255 (+25%) | Option R:R 1:1.6 / 1:3.7 | Theta ~-Rs 2.9/hr | Risk/lot ~Rs 882"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T10:20:02+05:30",
+    "timeDisplay": "10:20 AM, Nov 17",
+    "price": "25375",
+    "bias": "bearish",
+    "behavior": "[TUE 10:20] [S1]: \u2605 PRIMARY (Equal Highs 25384.65): Liquidity sweep of Day High 25384.65 rejecting back with a 5m close BELOW 25375.00 [09:45\u201311:30 Trend / 11:30\u201313:30 Pinning Window]",
+    "tp": "25340 / 25315",
+    "sl": "25400",
+    "status": "na",
+    "spread": "Buy 25400 PE (23-Nov) @ ~Rs 183 (Delta 0.49, IV 13.9%) | Prem SL ~Rs 170 (-7%) | TP1 ~Rs 200 (+10%) | TP2 ~Rs 213 (+17%) | Option R:R 1:1.4 / 1:2.5 | Theta ~-Rs 2.1/hr | Risk/lot ~Rs 810"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T10:20:02+05:30",
+    "timeDisplay": "10:20 AM, Nov 17",
+    "price": "25320",
+    "bias": "bearish",
+    "behavior": "[TUE 10:20] [S2]: BACKUP (1H Micro-EQ 25325.97): Decisive 5m close BELOW 25320.00 cracking 1H Micro-EQ and 25300 Put Floor [After 1:30 PM Gamma Squeeze Window]",
+    "tp": "25285 / 25260",
+    "sl": "25345",
+    "status": "na",
+    "spread": "Buy 25350 PE (23-Nov) @ ~Rs 186 (Delta 0.50, IV 14.0%) | Prem SL ~Rs 173 (-7%) | TP1 ~Rs 203 (+9%) | TP2 ~Rs 217 (+17%) | Option R:R 1:1.4 / 1:2.5 | Theta ~-Rs 2.1/hr | Risk/lot ~Rs 818"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T10:04:16+05:30",
     "timeDisplay": "10:04 AM, Nov 17",
     "price": "25345.0",
@@ -2939,6 +2987,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261117_102005",
+    "timestamp": "2026-11-17T10:20:05+05:30",
+    "timeDisplay": "10:20 AM, Nov 17",
+    "spot": "25378.20",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 25277.30",
+    "source": "AI Intraday Briefing",
+    "text": "> ⚠️ **VIX WARNING — THETA CRUSH DAY:** India VIX is down -3.25%. Option premiums are melting. Cut your position sizing by 50% and do not hold trades longer than 15 minutes.\n\n# ⚡ NIFTY 50 Intraday Tactical Update (10:15 AM IST - Nov 17, 2026 | Spot: 25378.20 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 25277.30))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 25325.00 – 25355.00 (30-point 50% Micro-EQ & Max Pain 25350 Straddle Pinning Corridor).\n- Rationale: Spot index (25378.20) trades above the 1H Micro-EQ (25325.97) and 5m 9-EMA (25352.55) while compressing right beneath the session peak (Day High: 25384.65) and the major 25400 Call OI wall. With heavy straddle concentration at Max Pain 25350 (+26.2M Puts and +12.9M Calls written today), price action inside 25325.00–25355.00 is subject to vicious two-way mean-reverting pin chop.\n- Directive: Strict stand-down zone for option buying. Avoid taking directional trades inside 25325.00–25355.00 where market makers harvest option premiums via bid-ask decay and fake wicks. Wait for confirmed structural sweeps at range extremes or decisive expansion outside this corridor.\n- 0-DTE Expiry Theta Crush: India VIX is down -3.25% (15.17), indicating aggressive theta decay across all weekly option contracts. OTM option strikes suffer rapid extrinsic value bleed; holding trades longer than 15 minutes without immediate directional impulse guarantees premium decay. Cut position sizing by 50%.\n- Gamma Pinning & Whipsaw Risk: The 25300–25400 band is heavily bracketed by 41.1M Put OI at 25300 and 26.5M Call OI at 25400, centering the pin zone near Max Pain 25350. Intraday wicks inside this boundary will whipsaw option buyers who chase breakouts before candle closure.\n- Post-1:30 PM Squeeze Dynamics: After 1:30 PM IST, dealer delta hedging on expiry day creates explosive gamma squeeze or long-unwinding cascades only if a 5-minute candle body closes decisively beyond the 25400 Call wall or below the 25300 Put floor. Hero-or-zero lottery plays inside the pin zone are strictly prohibited. Prefer waiting for confirmed candle closes and trade with disciplined risk.\n\n4. High Momentum / Explosive Zones:\n- [Upside Call Squeeze Expansion] ([Sustained 5m close ABOVE 25405.00]): Decisively breaches Day High (25384.65) and the primary 25400 Call OI Wall (26,503,555 contracts), forcing aggressive short-covering from Call writers (+17.0M OI added today) and triggering an explosive gamma acceleration toward 25445.00 and 25495.00.\n- [Downside Value Area Breakdown] ([Sustained 5m close BELOW 25320.00]): Violates the 1H Micro-EQ (25325.97) and penetrates the heavy 25300 Put OI Floor (41,120,755 contracts), forcing long liquidation from intraday buyers and triggering a sharp momentum flush toward 25285.00 (2H Swing-EQ 25292.55) and 25260.00 (Day Low 25267.30).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | 15M ORB High & 5m 9-EMA Pullback Long | 0-DTE Today Scalp): Pullback test into 25350.00–25358.00 holding firmly above 5m 9-EMA (25352.55) and Max Pain (25350) with lower absorption wicks, followed by a confirmed 5m candle close back ABOVE 25365.00 during the 09:45–11:30 Morning Trend or 11:30–13:30 Pinning window. | TP: 25398.00 / 25430.00 | SL: 25340.00 | 💡 Buy 25350 CE (23-Nov) @ ~Rs 210 (Delta 0.54, IV 14.2%) | Prem SL ~Rs 196 (-7%) | TP1 ~Rs 228 (+8%) | TP2 ~Rs 246 (+17%) | Option R:R 1:1.3 / 1:2.6 | Theta ~-Rs 2.9/hr | Risk/lot ~Rs 896\n- [B2] BUY Setup 2 (BACKUP | 25400 Call OI Wall Breakout Long | Next Wk Trend): Sustained 5m candle body close firmly ABOVE 25405.00 decisively clearing the 25400 Call OI Wall (26.5M contracts) with Call unwinding during the Post-1:30 PM Gamma Squeeze window. | TP: 25445.00 / 25495.00 | SL: 25380.00 | 💡 Buy 25400 CE (23-Nov) @ ~Rs 205 (Delta 0.53, IV 14.2%) | Prem SL ~Rs 191 (-7%) | TP1 ~Rs 226 (+10%) | TP2 ~Rs 255 (+25%) | Option R:R 1:1.6 / 1:3.7 | Theta ~-Rs 2.9/hr | Risk/lot ~Rs 882\n- [S1] SELL Setup 1 (★ PRIMARY | Equal Highs & Day High SFP Sweep Rejection Short | 0-DTE Today Scalp): Liquidity probe sweeping Equal Highs (25384.65) and Day High up to 25385.00–25390.00 that rejects immediately, printing a completed 5m bearish reversal candle closing back BELOW 25375.00 during the 09:45–11:30 Morning Trend or 11:30–13:30 Pinning window. | TP: 25340.00 / 25315.00 | SL: 25400.00 | 💡 Buy 25400 PE (23-Nov) @ ~Rs 183 (Delta 0.49, IV 13.9%) | Prem SL ~Rs 170 (-7%) | TP1 ~Rs 200 (+10%) | TP2 ~Rs 213 (+17%) | Option R:R 1:1.4 / 1:2.5 | Theta ~-Rs 2.1/hr | Risk/lot ~Rs 810\n- [S2] SELL Setup 2 (BACKUP | 1H Micro-EQ & 25300 Put Floor Breakdown Short | Next Wk Trend): Sustained 5m candle body close firmly BELOW 25320.00 breaking 1H Micro-EQ (25325.97) and cracking the 25300 Put OI Floor during the Post-1:30 PM Gamma Squeeze window. | TP: 25285.00 / 25260.00 | SL: 25345.00 | 💡 Buy 25350 PE (23-Nov) @ ~Rs 186 (Delta 0.50, IV 14.0%) | Prem SL ~Rs 173 (-7%) | TP1 ~Rs 203 (+9%) | TP2 ~Rs 217 (+17%) | Option R:R 1:1.4 / 1:2.5 | Theta ~-Rs 2.1/hr | Risk/lot ~Rs 818"
+  },
+  {
     "id": "NIFTY_20261117_100418",
     "timestamp": "2026-11-17T10:04:18+05:30",
     "timeDisplay": "10:04 AM, Nov 17",
