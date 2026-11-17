@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T09:01:14+05:30",
+    "timeDisplay": "09:01 AM, Nov 17",
+    "price": "3852.5",
+    "bias": "bullish",
+    "behavior": "[TUE 09:01] [G_B1]: Deep Discount OTE Reclaim after sweeping $3851.00 SSL into Bullish Ignition base.",
+    "tp": "$3863.00 / $3879.00",
+    "sl": "$3845.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T09:01:14+05:30",
+    "timeDisplay": "09:01 AM, Nov 17",
+    "price": "3881.5",
+    "bias": "bullish",
+    "behavior": "[TUE 09:01] [G_B2]: High-Momentum Breakout above Day High ($3879.96) targeting Asian Fib 1.272/1.414.",
+    "tp": "$3891.00 / $3898.50",
+    "sl": "$3874.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T09:01:14+05:30",
+    "timeDisplay": "09:01 AM, Nov 17",
+    "price": "3878.5",
+    "bias": "bearish",
+    "behavior": "[TUE 09:01] [G_S1]: Asian High & Day High CRT SFP Reversal following BSL sweep above $3880.00.",
+    "tp": "$3860.50 / $3847.50",
+    "sl": "$3885.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T09:01:14+05:30",
+    "timeDisplay": "09:01 AM, Nov 17",
+    "price": "3849.5",
+    "bias": "bearish",
+    "behavior": "[TUE 09:01] [G_S2]: High-Momentum Breakdown below 1H shelf ($3851.00 SSL) targeting Asian Low ($3844.64).",
+    "tp": "$3840.50 / $3833.50",
+    "sl": "$3856.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T01:01:36+05:30",
     "timeDisplay": "01:01 AM, Nov 17",
     "price": "3841.0",
@@ -355,6 +399,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261117_090116",
+    "timestamp": "2026-11-17T09:01:16+05:30",
+    "timeDisplay": "09:01 AM, Nov 17",
+    "spot": "3875.59",
+    "trigger": "Level Exhaustion Breakout (GOLD Spot $3875.59 > Max Plan Target $3868.00 + Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (09:00 AM IST - Nov 17, 2026 | Spot: $3875.59 | Trigger: Level Exhaustion Breakout (GOLD Spot $3875.59 > Max Plan Target $3868.00 + Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY) Trend:** DXY prints at 103.526 in a confirmed intraday bearish trend trading below both the 9 and 21 EMAs, providing a persistent macro tailwind for bullion.\n* **US 10-Year Treasury Yields (US10Y):** Yields remain steady at 5.12%, neutralizing sovereign debt rate pressures and preventing aggressive liquidation in precious metals.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** No intermarket SMT divergence is detected between Gold and Silver, signaling symmetrical price discovery and synchronized institutional flows across the complex.\n* **Macro Environment Synthesis:** With DXY showing downside momentum and yields stagnant, directional intraday pressure leans constructive, but extended price relative to 4H equilibria necessitates tactical patience against structural liquidity traps.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Asian Session Structure (05:30–12:30 IST):** Asian High sits at $3879.34 and Low at $3844.64 spanning a $34.70 range with a 36.7% bullish body, classifying current conditions as a Moderate Bullish Session where both extremes remain untouched resting liquidity magnets.\n* **Previous Day Benchmarks (PDH/PDL):** PDH rests at $3899.34 and PDL at $3836.40, serving as HTF external draw-on-liquidity targets once the intraday range expands.\n* **4H Candle Range Theory (CRT) & Trend:** Spot trades at $3875.59 above the 4H 9-EMA ($3864.06) and 21-EMA ($3862.09), probing above the previous 4H range high ($3871.75) relative to the 4H Midpoint Equilibrium ($3858.19).\n* **Inducement vs. Deep OTE Mapping:** Bullish pullback inducement sits between $3861.74 and $3866.04 which retail typically buys prematurely; true deep discount OTE sits sheltered between $3851.32 and $3854.27 near the Bullish Ignition Base ($3846.68).\n* **Microstructure Traps & Liquidity Pools:** Equal Lows (SSL) are clustered at $3851.00 across 4 distinct taps, presenting an acute risk of a Judas liquidity sweep probe before any sustainable discount spring reclaim can materialize.\n* **Institutional Round-Number Magnets:** Nearest structural psychological hurdles are $3880.00 and $3890.00 overhead with the major macro magnet at $3900.00, while downside supports cluster at $3870.00 and $3860.00.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **1H Consolidation Shelf Boundaries:** The immediate chop boundaries span from the 1H consolidation shelf low at $3851.00 to the shelf high at $3867.59, anchored by the 50% Micro-Equilibrium at $3859.30.\n* **Macro Equilibrium Neutrality:** Daily 50% Equilibrium sits at $3861.74, converging with the shallow retail IDM trap between $3861.74 and $3866.04 where two-way whipsaws dominate.\n* **Tactical Execution Directive:** Avoid market orders inside the $3857.00 to $3868.00 zone where risk-to-reward degrades severely; trade exclusively at session sweep extremes or on high-volume expansion outside the shelf.\n\n### 4. High Momentum / Explosive Zones:\n* **Upside Expansion Corridor:** A decisive 15M candle close accepting above $3881.50 clears Asian High ($3879.34) and Day High ($3879.96), releasing buy-side stops toward Asian Fib 1.272 ($3888.78), Fib 1.414 ($3893.71), and the $3899.34 PDH.\n* **Downside Liquidity Cascade:** Slicing through the 4-tap SSL shelf at $3851.00 triggers stop-run cascading down through the Asian Low ($3844.64) toward the Asian downside Fib 1.272 at $3835.20 and PDL at $3836.40.\n* **Dynamic ATR & Stop Discipline:** Live 15M ATR stands at $8.65 with standard stop hunts overshooting levels by +$6.92 to +$12.11; entries must wait for the completed sweep wick and 5M reclaim close to maintain total stop risk strictly within the mandatory $6.00 to $8.65 corridor.\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3852.50** (Sweep $3848.00–$3851.00) | **★ A+ PRIMARY [Deep Discount OTE Reclaim]:** Enter on 5M close > $3852.50 after sweeping $3851.00 SSL with lower-wick absorption. Hold for 50% Daily-EQ retest. | **TP1:** $3863.00 / **TP2:** $3879.00 | **$3845.00** | 1:2.4 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3881.50** Breakout | **⚠️ BACKUP [Day High Expansion]:** Enter only on a full 15M body close > $3881.50 with zero upper-wick exhaustion and DXY weakness below 103.50. Trail SL to BE after TP1. | **TP1:** $3891.00 / **TP2:** $3898.50 | **$3874.50** | 1:2.3 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3878.50** (Sweep $3881.00–$3884.00) | **★ A+ PRIMARY [Asian High CRT SFP Reversal]:** Enter on 5M CHoCH close < $3878.50 after sweeping $3879.96 Day High into liquidity pool. Target mean-reversion. | **TP1:** $3860.50 / **TP2:** $3847.50 | **$3885.50** | 1:2.8 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3849.50** Breakdown | **⚠️ BACKUP [1H Shelf Breakdown]:** Enter on a decisive 15M body close < $3849.50 slicing through $3851.00 support with expanding volume. Target Asian Low and extensions. | **TP1:** $3840.50 / **TP2:** $3833.50 | **$3856.50** | 1:2.3 |"
+  },
+  {
     "id": "GOLD_20261117_010138",
     "timestamp": "2026-11-17T01:01:38+05:30",
     "timeDisplay": "01:01 AM, Nov 17",
