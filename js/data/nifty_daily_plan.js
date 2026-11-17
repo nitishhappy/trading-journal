@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T14:02:18+05:30",
+    "timeDisplay": "02:02 PM, Nov 17",
+    "price": "25430.0",
+    "bias": "bullish",
+    "behavior": "[TUE 14:02] [B1]: \u2605 PRIMARY (2H Swing-EQ & 5m 9-EMA | 0-DTE Today): [13:30-15:15 Gamma Phase] After 1:30 PM IST: 5m pullback into 25424.25-25426.00 with rejection wick and close ABOVE 25430.00.",
+    "tp": "25462.90 / 25501.35",
+    "sl": "25405.00",
+    "status": "na",
+    "spread": "Buy 25400 CE (23-Nov) @ ~Rs 210 (Delta 0.55, IV 13.8%) | Prem SL ~Rs 196 (-7%) | TP1 ~Rs 228 (+9%) | TP2 ~Rs 251 (+20%) | Option R:R 1:1.3 / 1:2.9 | Theta ~-Rs 2.9/hr | Risk/lot ~Rs 918"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T14:02:18+05:30",
+    "timeDisplay": "02:02 PM, Nov 17",
+    "price": "25465.0",
+    "bias": "bullish",
+    "behavior": "[TUE 14:02] [B2]: BACKUP (1H Shelf High Breakout | Next Wk): [13:30-15:15 Gamma Phase] After 1:30 PM IST: 5m candle body close ABOVE 25465.00.",
+    "tp": "25501.35 / 25550.00",
+    "sl": "25440.00",
+    "status": "na",
+    "spread": "Buy 25450 CE (23-Nov) @ ~Rs 201 (Delta 0.54, IV 13.7%) | Prem SL ~Rs 188 (-7%) | TP1 ~Rs 221 (+10%) | TP2 ~Rs 250 (+24%) | Option R:R 1:1.4 / 1:3.5 | Theta ~-Rs 2.8/hr | Risk/lot ~Rs 896"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T14:02:18+05:30",
+    "timeDisplay": "02:02 PM, Nov 17",
+    "price": "25495.0",
+    "bias": "bearish",
+    "behavior": "[TUE 14:02] [S1]: \u2605 PRIMARY (Day High & 25500 Call Wall | 0-DTE Today): [13:30-15:15 Gamma Phase] After 1:30 PM IST: Liquidity sweep of 25501.35 followed by 5m rejection close BELOW 25495.00.",
+    "tp": "25462.90 / 25424.25",
+    "sl": "25520.00",
+    "status": "na",
+    "spread": "Buy 25500 PE (23-Nov) @ ~Rs 172 (Delta 0.48, IV 14.0%) | Prem SL ~Rs 160 (-7%) | TP1 ~Rs 188 (+9%) | TP2 ~Rs 208 (+21%) | Option R:R 1:1.3 / 1:2.9 | Theta ~-Rs 2.2/hr | Risk/lot ~Rs 784"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T14:02:18+05:30",
+    "timeDisplay": "02:02 PM, Nov 17",
+    "price": "25395.0",
+    "bias": "bearish",
+    "behavior": "[TUE 14:02] [S2]: BACKUP (1H Micro-EQ & Max Pain | Next Wk): [13:30-15:15 Gamma Phase] After 1:30 PM IST: 5m candle body close BELOW 25395.00.",
+    "tp": "25347.15 / 25300.00",
+    "sl": "25421.00",
+    "status": "na",
+    "spread": "Buy 25400 PE (23-Nov) @ ~Rs 171 (Delta 0.48, IV 13.9%) | Prem SL ~Rs 158 (-7%) | TP1 ~Rs 194 (+14%) | TP2 ~Rs 220 (+29%) | Option R:R 1:1.9 / 1:3.9 | Theta ~-Rs 2.2/hr | Risk/lot ~Rs 813"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T13:32:08+05:30",
     "timeDisplay": "01:32 PM, Nov 17",
     "price": "25355.0",
@@ -3103,6 +3151,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261117_140224",
+    "timestamp": "2026-11-17T14:02:24+05:30",
+    "timeDisplay": "02:02 PM, Nov 17",
+    "spot": "25453.25",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $25456.60 > Max Plan Target $25435.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:00 PM IST - Nov 17, 2026 | Spot: 25453.25 | Trigger: Level Exhaustion Breakout (NIFTY Spot $25456.60 > Max Plan Target $25435.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Rotational Chop Corridor: The 58-point band between 25405.03 (1H Micro-EQ) and 25462.90 (1H Shelf High) is a strict no-trade zone for fresh breakout initiation due to aggressive two-way order flow.\n- 0-DTE Max Pain Pinning Risk: Spot is oscillating directly between the 25400 Max Pain strike (34.84M Put OI) and the massive 25450/25500 Call OI walls (27.26M and 41.48M OI), creating an active pinning vortex prone to sudden mean-reversion stalls.\n- Expiry Premium Decay Danger: Fast-decaying 0-DTE OTM premiums face aggressive theta burn inside this range; market makers will aggressively crush option buyers positioning inside the 25405-25460 band without structural displacement.\n- Post-1:30 PM Whipsaw Hazard: In the afternoon gamma window, fake-out wick expansions around round numbers (multiples of 50/100) are frequent; avoid executing market orders inside the pin zone.\n- Capital Preservation Rule: Strictly reduce position sizing on expiry day and insist on confirmed 5-minute candle closes outside structural extremes before committing risk.\n\n4. High Momentum / Explosive Zones:\n- [Short-Covering Gamma Squeeze] (Sustained 5m candle close ABOVE 25501.35 Day High): Unleashes forced short covering across 41.48M Call OI at the 25500 strike, sparking an explosive momentum expansion towards 25550.00 (Top Call OI Wall).\n- [Long-Unwinding Flush] (5m candle close BELOW 25400.00 Max Pain Strike & 1H Micro-EQ 25405.03): Traps intraday put writers (+33.36M added today), triggering a rapid long liquidation run down towards 25347.15 (1H Shelf Low) and 25300.00 (Major Put OI Floor).\n- [1H Shelf Breakout Acceleration] (5m candle body close ABOVE 25462.90 1H Shelf High): Clears the immediate consolidation shelf and 25450 Call resistance, accelerating spot into a high-speed retest of 25501.35 Day High.\n- [Bearish Supply Base Rejection] (5m rejection wick at 25462.90 followed by a break BELOW 25424.25 2H Swing-EQ / 5m 9-EMA): Confirms rotational supply absorption and triggers a swift drop back into 25384.32 (Macro 50% Daily Equilibrium).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | 2H Swing-EQ & 5m 9-EMA pullback long | 0-DTE Today): 13:30-15:15 Gamma Phase: After 1:30 PM IST, wait for a 5m pullback into 25424.25-25426.00 with a rejection wick and candle close ABOVE 25430.00. | TP: 25462.90 / 25501.35 | SL: 25405.00 | 💡 Buy 25400 CE (23-Nov) @ ~Rs 210 (Delta 0.55, IV 13.8%) | Prem SL ~Rs 196 (-7%) | TP1 ~Rs 228 (+9%) | TP2 ~Rs 251 (+20%) | Option R:R 1:1.3 / 1:2.9 | Theta ~-Rs 2.9/hr | Risk/lot ~Rs 918\n- [B2] BUY Setup 2 (BACKUP | 1H Shelf High breakout long | Next Wk): 13:30-15:15 Gamma Phase: After 1:30 PM IST, wait for a sustained 5m candle body close ABOVE 25465.00. | TP: 25501.35 / 25550.00 | SL: 25440.00 | 💡 Buy 25450 CE (23-Nov) @ ~Rs 201 (Delta 0.54, IV 13.7%) | Prem SL ~Rs 188 (-7%) | TP1 ~Rs 221 (+10%) | TP2 ~Rs 250 (+24%) | Option R:R 1:1.4 / 1:3.5 | Theta ~-Rs 2.8/hr | Risk/lot ~Rs 896\n- [S1] SELL Setup 1 (★ PRIMARY | Day High & 25500 Call Wall rejection short | 0-DTE Today): 13:30-15:15 Gamma Phase: After 1:30 PM IST, wait for a liquidity sweep of 25501.35 followed by a 5m bearish rejection close BELOW 25495.00. | TP: 25462.90 / 25424.25 | SL: 25520.00 | 💡 Buy 25500 PE (23-Nov) @ ~Rs 172 (Delta 0.48, IV 14.0%) | Prem SL ~Rs 160 (-7%) | TP1 ~Rs 188 (+9%) | TP2 ~Rs 208 (+21%) | Option R:R 1:1.3 / 1:2.9 | Theta ~-Rs 2.2/hr | Risk/lot ~Rs 784\n- [S2] SELL Setup 2 (BACKUP | 1H Micro-EQ & Max Pain breakdown short | Next Wk): 13:30-15:15 Gamma Phase: After 1:30 PM IST, wait for a confirmed 5m candle body close BELOW 25395.00. | TP: 25347.15 / 25300.00 | SL: 25421.00 | 💡 Buy 25400 PE (23-Nov) @ ~Rs 171 (Delta 0.48, IV 13.9%) | Prem SL ~Rs 158 (-7%) | TP1 ~Rs 194 (+14%) | TP2 ~Rs 220 (+29%) | Option R:R 1:1.9 / 1:3.9 | Theta ~-Rs 2.2/hr | Risk/lot ~Rs 813"
+  },
+  {
     "id": "NIFTY_20261117_133210",
     "timestamp": "2026-11-17T13:32:10+05:30",
     "timeDisplay": "01:32 PM, Nov 17",
