@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T11:01:49+05:30",
+    "timeDisplay": "11:01 AM, Nov 17",
+    "price": "3856.0",
+    "bias": "bullish",
+    "behavior": "[TUE 11:01] [G_B1]: Deep Discount OTE & 2H Swing Low Sweep Reclaim",
+    "tp": "$3865.00 / $3875.50",
+    "sl": "$3849.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T11:01:49+05:30",
+    "timeDisplay": "11:01 AM, Nov 17",
+    "price": "3886.5",
+    "bias": "bullish",
+    "behavior": "[TUE 11:01] [G_B2]: Asian High & Day High Momentum Breakout Acceptance",
+    "tp": "$3895.00 / $3901.50",
+    "sl": "$3880.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T11:01:49+05:30",
+    "timeDisplay": "11:01 AM, Nov 17",
+    "price": "3883.0",
+    "bias": "bearish",
+    "behavior": "[TUE 11:01] [G_S1]: Asian High & Day High Turtle Soup SFP Reversal",
+    "tp": "$3870.50 / $3865.00",
+    "sl": "$3889.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T11:01:49+05:30",
+    "timeDisplay": "11:01 AM, Nov 17",
+    "price": "3852.0",
+    "bias": "bearish",
+    "behavior": "[TUE 11:01] [G_S2]: 2H Swing Shelf Breakdown toward Asian Low & PDL",
+    "tp": "$3844.00 / $3834.00",
+    "sl": "$3858.20",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T09:16:18+05:30",
     "timeDisplay": "09:16 AM, Nov 17",
     "price": "3854.5",
@@ -443,6 +487,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261117_110151",
+    "timestamp": "2026-11-17T11:01:51+05:30",
+    "timeDisplay": "11:01 AM, Nov 17",
+    "spot": "3884.16",
+    "trigger": "Level Exhaustion Breakout (GOLD Spot $3884.16 > Max Plan Target $3880.50 + Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (11:00 AM IST - Nov 17, 2026 | Spot: $3884.16 | Trigger: Level Exhaustion Breakout (GOLD Spot $3884.16 > Max Plan Target $3880.50 + Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **Intermarket Currency & Yield Alignment:** DXY is trending bearishly at 103.493 below its 9-EMA and 21-EMA, providing a continuous macro tailwind for bullion, while the US 10-Year yield remains steady at 5.12% without exerting fresh discount pressure.\n* **Silver SMT Divergence Status:** Live telemetry confirms no SMT divergence between XAU/USD and XAG/USD, with both metals advancing in sync and reflecting broad-based physical accumulation rather than isolated synthetic runs.\n* **Institutional Liquidity Magnets:** Heavy institutional round-number concentrations sit overhead at $3890.00 and the major $50 psychological milestone of $3900.00, while downside magnets rest at $3880.00 and $3870.00.\n\n### 2. SMC & Session Liquidity Confluence:\n* **3-Session Liquidity Clock:** The Asian session printed a moderate bullish regime with a $43.11 range and a 53.3% body; spot reached $3884.16-$3885.44 to sweep the Asian High ($3884.36), while the Asian Low ($3841.25) remains an untouched sell-side liquidity magnet.\n* **HTF 4H Candle Range Theory & External Targets:** Gold has expanded above the previous 4H range high ($3868.36), with 4H EMAs trailing at $3867.37 (9-EMA) and $3872.57 (21-EMA); macro targets above feature the untouched Previous Day High at $3892.29 and the Asian 1.272 Fib extension at $3896.09.\n* **Order Block & Equilibrium Structure:** The bullish parabolic ignition base sits anchored at $3867.77, while the macro 50% daily equilibrium rests at $3864.48 and the 1H consolidation shelf 50% micro-equilibrium holds at $3866.39.\n* **Inducement Traps vs Deep OTE Confluence:** Shallow retail pullbacks into $3864.48-$3869.43 are prime inducement traps subject to sweeps; true institutional discount OTE aligns strictly down at $3852.49-$3855.89 at the 2H swing range low.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Core Chop Invalidation Anchor:** The immediate 1H consolidation shelf spanning $3856.79 to $3876.00 with micro-equilibrium at $3866.39 serves as the strict chop anchor.\n* **Capital Preservation Perimeter:** Prohibit mid-range market executions between $3864.48 and $3874.00, where algorithms actively rotate around equilibrium to trap retail breakout orders.\n* **Transition Phase Execution Warning:** Session Playbook 4 mandates fading range extremes rather than committing capital inside the interior shelf prior to London open expansion.\n\n### 4. High Momentum / Explosive Zones:\n* **Upside Acceleration Gateway:** A sustained 15-minute body close above $3886.50 unlocks rapid momentum targeting buy-side liquidity pools at the Previous Day High ($3892.29) and Asian Fib 1.272 ($3896.09).\n* **Downside Liquidity Vacuum:** A decisive loss of the 2H swing shelf low at $3852.00 triggers immediate long liquidation down to Day Low ($3843.52) and the untouched Asian Low ($3841.25).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3856.00** (Sweep $3852.49 - $3855.89) | **★ A+ PRIMARY [7-Module Deep Discount OTE Sweep]:** Enter on 5M close > $3856.00 after sweeping $3852.49 SSL with lower-wick absorption. | **TP1:** $3865.00 / **TP2:** $3875.50 | **$3849.50** | 1:2.5 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3886.50** Breakout | **⚠️ BACKUP [7-Module Day High Expansion Breakout]:** Enter only on 15M body close > $3886.50 with zero upper-wick exhaustion and DXY weakness. | **TP1:** $3895.00 / **TP2:** $3901.50 | **$3880.00** | 1:2.3 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3883.00** (Sweep $3885.44 - $3888.00) | **★ A+ PRIMARY [7-Module Asian High Turtle Soup SFP]:** Enter on 5M close < $3883.00 after sweeping $3885.44 BSL with upper-wick rejection. | **TP1:** $3870.50 / **TP2:** $3865.00 | **$3889.50** | 1:2.8 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3852.00** Breakdown | **⚠️ BACKUP [7-Module 2H Swing Shelf Breakdown]:** Enter on 15M body close < $3852.00 slicing support with expanding volume. | **TP1:** $3844.00 / **TP2:** $3834.00 | **$3858.20** | 1:2.9 |"
+  },
+  {
     "id": "GOLD_20261117_091620",
     "timestamp": "2026-11-17T09:16:20+05:30",
     "timeDisplay": "09:16 AM, Nov 17",
