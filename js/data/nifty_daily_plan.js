@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T15:46:56+05:30",
+    "timeDisplay": "03:46 PM, Nov 17",
+    "price": "25388.0",
+    "bias": "bullish",
+    "behavior": "[TUE 15:46] [B1]: \u2605 PRIMARY (Equal Lows 25387.40 / Macro EQ 25384.32 sweep long - 0-DTE Today): 13:30-15:15 IST sweep below 25387.40/25374.05 with confirmed 5m reclaim close above 25388.00",
+    "tp": "25425.50 / 25466.90",
+    "sl": "25363.00",
+    "status": "na",
+    "spread": "Buy 25350 CE (23-Nov) @ ~Rs 198 (Delta 0.57, IV 12.6%) | Prem SL ~Rs 184 (-7%) | TP1 ~Rs 220 (+11%) | TP2 ~Rs 245 (+24%) | Option R:R 1:1.5 / 1:3.3 | Theta ~-Rs 2.7/hr | Risk/lot ~Rs 933"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T15:46:56+05:30",
+    "timeDisplay": "03:46 PM, Nov 17",
+    "price": "25468.0",
+    "bias": "bullish",
+    "behavior": "[TUE 15:46] [B2]: BACKUP (1H Shelf High 25466.90 breakout long - Next Wk): 13:30-15:15 IST gamma-squeeze 5m close above 25466.90 with Call OI unwinding",
+    "tp": "25501.35 / 25535.00",
+    "sl": "25443.00",
+    "status": "na",
+    "spread": "Buy 25450 CE (23-Nov) @ ~Rs 190 (Delta 0.55, IV 12.8%) | Prem SL ~Rs 177 (-7%) | TP1 ~Rs 209 (+10%) | TP2 ~Rs 229 (+20%) | Option R:R 1:1.3 / 1:2.8 | Theta ~-Rs 2.7/hr | Risk/lot ~Rs 901 | \u26a0\ufe0f TP1 is 114 pts away > expected rest-of-day move 110"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T15:46:56+05:30",
+    "timeDisplay": "03:46 PM, Nov 17",
+    "price": "25424.0",
+    "bias": "bearish",
+    "behavior": "[TUE 15:46] [S1]: BACKUP (1H Micro-EQ 25427.15 / Ignition Base 25424.80 rejection short - Next Wk): 11:30-13:30 IST pullback into 25425.50-25427.15 with rejection 5m close below 25424.00",
+    "tp": "25387.40 / 25350.00",
+    "sl": "25449.00",
+    "status": "na",
+    "spread": "Buy 25450 PE (23-Nov) @ ~Rs 204 (Delta 0.50, IV 15.8%) | Prem SL ~Rs 192 (-6%) | TP1 ~Rs 222 (+9%) | TP2 ~Rs 243 (+19%) | Option R:R 1:1.4 / 1:3.0 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 819"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T15:46:56+05:30",
+    "timeDisplay": "03:46 PM, Nov 17",
+    "price": "25372.0",
+    "bias": "bearish",
+    "behavior": "[TUE 15:46] [S2]: \u2605 PRIMARY (2H Swing Range Envelope Low 25374.05 breakdown short - 0-DTE Today): 13:30-15:15 IST long-unwinding breakdown 5m close below 25374.05",
+    "tp": "25337.60 / 25300.00",
+    "sl": "25397.00",
+    "status": "na",
+    "spread": "Buy 25400 PE (23-Nov) @ ~Rs 202 (Delta 0.50, IV 15.6%) | Prem SL ~Rs 190 (-6%) | TP1 ~Rs 219 (+8%) | TP2 ~Rs 240 (+18%) | Option R:R 1:1.4 / 1:3.0 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 821"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T14:02:18+05:30",
     "timeDisplay": "02:02 PM, Nov 17",
     "price": "25430.0",
@@ -3102,55 +3150,20 @@ window.dailyPlanData = [
     "tp": "23,690 / 23,630",
     "sl": "23,785",
     "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T15:46:02+05:30",
-    "timeDisplay": "03:46 PM, Nov 03",
-    "price": "23750",
-    "bias": "bullish",
-    "behavior": "[TUE 15:46] [B1]: 5m bullish rejection off 23,750-23,760 demand base with expanding green futures volume",
-    "tp": "23,810 / 23,850",
-    "sl": "23,720",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T15:46:02+05:30",
-    "timeDisplay": "03:46 PM, Nov 03",
-    "price": "23825",
-    "bias": "bullish",
-    "behavior": "[TUE 15:46] [B2]: Sustained 5m close ABOVE 23,825 with active futures volume confirming absorption",
-    "tp": "23,880 / 23,940",
-    "sl": "23,780",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T15:46:02+05:30",
-    "timeDisplay": "03:46 PM, Nov 03",
-    "price": "23825",
-    "bias": "bearish",
-    "behavior": "[TUE 15:46] [S1]: 5m failure to sustain above 23,825 with sharp upper wick rejection and expanding red volume",
-    "tp": "23,760 / 23,710",
-    "sl": "23,845",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-03T15:46:02+05:30",
-    "timeDisplay": "03:46 PM, Nov 03",
-    "price": "23750",
-    "bias": "bearish",
-    "behavior": "[TUE 15:46] [S2]: Clean 5m breakdown and close BELOW 23,750 with expanding red volume confirming trendline failure",
-    "tp": "23,680 / 23,630",
-    "sl": "23,790",
-    "status": "na"
   }
 ];
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261117_154659",
+    "timestamp": "2026-11-17T15:46:59+05:30",
+    "timeDisplay": "03:46 PM, Nov 17",
+    "spot": "25387.40",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Nov 17, 2026 | Spot: 25387.40 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Active Session Status (Post-Close 15:45 IST): Cash and derivative market trading for the Tuesday weekly expiry session is officially closed. No new intraday option buying positions are permitted; all tactical boundaries serve as gap-open benchmarks for the next trading cycle.\n- Intraday Micro-Equilibrium Corridor (25384.32 - 25427.15): Strict No-Trade Chop Zone bounded by the Macro 50% Daily Equilibrium (25384.32), the 1H Shelf Low (25387.40), the 5m 9-EMA (25413.55), and the 1H Micro-EQ (25427.15). Random entries inside this 43-point band face severe chop.\n- Weekly Expiry Gamma-Pinning & Max Pain (25400 Strike): Spot settled at 25387.40, directly within the gravitational pull of the 25400 Max Pain strike (19.03M Call OI vs 14.28M Put OI). Straddle seller delta-hedging heavily pinned price between the 25350 Put floor (15.14M OI) and 25400/25450 Call walls.\n- 0-DTE Rapid Theta Crush: All out-of-the-money (OTM) strikes undergo terminal extrinsic decay towards zero on expiry day; buying naked OTM strikes inside consolidation results in near-instant capital destruction.\n- Hero-or-Zero & Whipsaw Trap Risk: Late-session gamma squeezes post-1:30 PM IST trigger severe two-way fakeouts around round-number strike clusters (25400/25450); trading without confirmed multi-timeframe candle reclaims or position sizing discipline is strictly prohibited.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Liquidity Sweep & Reclaim] ([Price sweeps Equal Lows at 25387.40 and prints a 5m close back above 25388.00]): A stop-run into the clustered sell-side liquidity (SSL) below 25387.40 followed by an immediate reclaim traps late breakdown sellers and ignites a short-covering pop toward the 25425.50 2H Swing-EQ and 25427.15 1H Micro-EQ.\n- [Bullish Call Wall Gamma Squeeze] ([Confirmed 5m close above 1H Shelf High 25466.90]): A structural breakout above 25466.90 forces rapid short-covering among 25450 Call writers (+12.31M added today), expanding price rapidly toward the Day High at 25501.35 and the major 25500 Call wall (18.47M OI).\n- [Bearish Mean-Reversion Rejection] ([5m rejection wick into 1H Micro-EQ 25427.15 / Bullish Ignition Base 25424.80]): Failure to cross the descending 5m 9-EMA (25413.55) and rejection at the 25424.55 - 25427.15 supply shelf offers a high-probability rollover back toward the 25387.40 shelf low.\n- [Bearish Long-Unwinding Breakdown] ([Confirmed 5m close below 2H Swing Range Envelope Low 25374.05]): Sustained breakdown beneath 25374.05 triggers cascading long unwinding below the 25350 Put floor (+13.44M added today), driving an accelerated slide toward the 25337.60 PDH and 25300 Put floor (10.63M OI).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | Equal Lows 25387.40 / Macro Daily EQ 25384.32 pullback/sweep long - 0-DTE Today | 13:30-15:15 Gamma Phase): Price sweeps below Equal Lows 25387.40 / 2H Swing Low 25374.05 into 25368 and prints a bullish 5m reclaim candle closing firmly above 25388.00. | TP: 25425.50 / 25466.90 | SL: 25363.00 | 💡 Buy 25350 CE (23-Nov) @ ~Rs 198 (Delta 0.57, IV 12.6%) | Prem SL ~Rs 184 (-7%) | TP1 ~Rs 220 (+11%) | TP2 ~Rs 245 (+24%) | Option R:R 1:1.5 / 1:3.3 | Theta ~-Rs 2.7/hr | Risk/lot ~Rs 933\n- [B2] BUY Setup 2 (BACKUP | 1H Shelf High 25466.90 breakout long - Next Wk | 13:30-15:15 Squeeze Phase): Price prints a decisive 5m candle-body close firmly above 1H Shelf High 25466.90 at 25468.00 with Call OI unwinding. | TP: 25501.35 / 25535.00 | SL: 25443.00 | 💡 Buy 25450 CE (23-Nov) @ ~Rs 190 (Delta 0.55, IV 12.8%) | Prem SL ~Rs 177 (-7%) | TP1 ~Rs 209 (+10%) | TP2 ~Rs 229 (+20%) | Option R:R 1:1.3 / 1:2.8 | Theta ~-Rs 2.7/hr | Risk/lot ~Rs 901 | ⚠️ TP1 is 114 pts away > expected rest-of-day move 110\n- [S1] SELL Setup 1 (BACKUP | 1H Micro-EQ 25427.15 / Bullish Ignition Base 25424.80 rejection/sweep short - Next Wk | 11:30-13:30 Pinning Phase): Counter-trend rally into 25425.50 - 25427.15 prints a clear upper rejection wick and a 5m close back below 25424.00. | TP: 25387.40 / 25350.00 | SL: 25449.00 | 💡 Buy 25450 PE (23-Nov) @ ~Rs 204 (Delta 0.50, IV 15.8%) | Prem SL ~Rs 192 (-6%) | TP1 ~Rs 222 (+9%) | TP2 ~Rs 243 (+19%) | Option R:R 1:1.4 / 1:3.0 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 819\n- [S2] SELL Setup 2 (★ PRIMARY | 2H Swing Range Envelope Low 25374.05 breakdown short - 0-DTE Today | 13:30-15:15 Gamma Phase): Decisive 5m candle-body close firmly below 2H Swing Envelope Low 25374.05 at 25372.00 confirming sell-side liquidity release. | TP: 25337.60 / 25300.00 | SL: 25397.00 | 💡 Buy 25400 PE (23-Nov) @ ~Rs 202 (Delta 0.50, IV 15.6%) | Prem SL ~Rs 190 (-6%) | TP1 ~Rs 219 (+8%) | TP2 ~Rs 240 (+18%) | Option R:R 1:1.4 / 1:3.0 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 821"
+  },
+  {
     "id": "NIFTY_20261117_140224",
     "timestamp": "2026-11-17T14:02:24+05:30",
     "timeDisplay": "02:02 PM, Nov 17",
@@ -3743,14 +3756,5 @@ window.dailyPlanSummary = [
     "trigger": "Intraday Tactical Refresh",
     "source": "AI Pre-Market Briefing",
     "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +1.0 / +6.0 | Confidence: Neutral (Chop)\n• Bias Invalidation Floor: 23810.85 (A 15M close above 23810.85 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n```\n\n1. Global Market Sentiment:\n- US Markets: Wall Street indices closed mixed to slightly subdued overnight as participants absorbed quarterly corporate earnings and monitored macroeconomic policy signals. The S&P 500 hovered near 7,568.92 (-1.99%), the Nasdaq settled near 25,372.01, and the Dow Jones Industrial Average held at 51,786.72, reflecting broad consolidation.\n- Asian Markets: Asian bourses opened with mixed cues. Japan's Nikkei 225 experienced mild profit-taking around 60,472.26 (-5.44%), while Hong Kong's Hang Seng index gained traction to trade near 23,496.75 (+1.74%), driven by selective technology and consumer discretionary buying.\n- European Markets: Major European benchmarks (DAX, CAC 40, FTSE 100) traded in narrow sideways ranges, responding to stable regional inflation data and steady monetary policy commentary from European Central Bank officials.\n- Overall Risk Sentiment: The global risk environment is balanced and defensive. Institutional asset allocators are prioritizing rotational equity plays and delta-neutral positioning over aggressive multi-day trend continuation.\n\n2. Overnight Market Moves:\n- NIFTY / GIFT NIFTY: Domestic spot opened at 23,742.25 following a slight overnight discount tick relative to yesterday's closing surge at 23,810.85, before absorbing initial selling pressure and rebounding into the 23,850 corridor.\n- GOLD (XAU/USD): Spot Gold trades steady at $3,946.00/oz (previous close: $4,031.40/oz), consolidating in an institutional mitigation shelf as market participants assess macro dollar positioning and real yields.\n- USD/INR: The Indian Rupee traded firm near 94.52 in interbank foreign exchange, supported by active Reserve Bank liquidity stabilization and consistent domestic commercial flow.\n- Crude Oil: Brent Crude futures stabilized around $95.60 per barrel (previous close: $102.00), easing short-term inflation concerns across energy-importing emerging economies.\n- Global Yields & Dollar Index: The US Dollar Index (DXY) held steady near 104.20, with the US 10-Year Treasury Yield hovering near 4.38%, anchoring broad emerging market currency stability.\n\n3. Major News & Macro Events:\n- Macro Policy & Interest Rates: Global central banks remain committed to data-dependent calibration, with market interest rate probabilities projecting steady monetary conditions heading into year-end policy gatherings.\n- Institutional Cash Flows: Domestic Institutional Investors (DIIs) continue to provide robust support with net cash purchases, counteracting selective Foreign Institutional Investor (FII) rebalancing across index heavyweights.\n- Geopolitical & Energy Dynamics: Muted escalations across global maritime routes and balanced petroleum inventory adjustments have contained volatility premiums across commodity complexes.\n- Domestic Economic Indicators: Market participants are tracking upcoming high-frequency domestic industrial production prints and services PMI surveys for macro directional guidance.\n\n4. NIFTY Analysis & Key Structural Levels:\n- Previous Day Structure: NIFTY spot closed Tuesday at 23,810.85 (Session Open: 23,582.25 | High: 23,810.85 | Low: 23,482.80). The session registered an aggressive trend day that closed at the absolute peak of the day with institutional futures volume expansion.\n- Current Market Structure: On the 15-minute and 1-Hour charts, the spot index continues to respect a higher-high / higher-low bullish sequence following the breakout above the prior swing ceiling at 23,440.80. The 9 EMA (23,780) and 21 EMA (23,710) provide dynamic trailing support on shallow pullbacks.\n- Higher Timeframe (1H / Daily) Extreme Extension Targets:\n  - Upside Macro Extension: 24,140.00 – 24,200.00 (Major multi-week supply zone, prior swing breakdown origin, and unmitigated Daily Fair Value Gap).\n  - Downside Macro Extension: 23,440.00 – 23,480.00 (Previous Day Low and Daily Breakout Breaker Block; primary institutional structural anchor).\n- Liquidity Zones: Sell-Side Liquidity (SSL) is resting beneath the morning session low and put-writer defense shelf at 23,695.00–23,710.00. Buy-Side Liquidity (BSL) is stacked above the morning session high at 23,858.25 and the psychological round number shelf at 23,900.00.\n- Structural Scenarios:\n  - Bullish Trend Continuation: Sustained absorption above 23,810.85 holding the previous close and a 5m close above 23,865.00 triggers a short-covering rally expanding toward 23,920.00 and 23,980.00.\n  - Bearish Mean-Reversion Exhaustion: Failure to sustain above 23,810.85 followed by a high-volume 5m breakdown below 23,740.00 invalidates intraday longs, initiating an orderly retracement toward 23,695.00 and 23,630.00.\n\n| Level | Type (Support/Resistance/Liquidity) | Logic & Significance |\n| :--- | :--- | :--- |\n| 🔴 24,140.00 | Resistance / Macro Supply Ceiling | Major multi-week supply zone and HTF breakdown origin; primary extreme extension target. |\n| 🔴 23,980.00 – 24,005.00 | Resistance / Major Call Wall | Key institutional call-writer fortress and psychological milestone; heavy overhead resistance. |\n| 🔴 23,920.00 | Resistance / 1H Fair Value Gap (FVG) | Unmitigated 1-Hour bearish imbalance zone and target for initial short-covering impulse. |\n| 🔴 23,865.00 | Resistance / Session High & Supply Shelf | Morning session high (23,858.25) and local supply liquidity pool; breakout trigger. |\n| ⚪ 23,810.00 – 23,855.00 | Neutral / Mid-Session Compression Corridor | Compression shelf between previous day close and session highs; choppy rotation. |\n| 🟢 23,810.00 | Support / Polarity Flip Pivot | Yesterday's high (23,810.85) and closing level; primary structural support shelf. |\n| 🟢 23,740.00 | Support / Opening Range Midpoint | Today's opening level (23,742.25) and intraday value support line. |\n| 🟢 23,695.00 | Support / Morning Dip Low & Put Floor | Today's low (23,696.15) and primary 23,700 Put writer defense base. |\n| 🟢 23,630.00 | Support / Prior Consolidation Base | Prior session value area consolidation shelf; secondary demand defense. |\n| 🟢 23,480.00 | Support / Macro Demand Base | Previous day low (23,482.80) and major HTF institutional order block anchor. |\n\n5. SMC & Session Liquidity Confluence:\n- Liquidity Mapping (BSL vs. SSL): Buy-Side Liquidity (BSL) is clustered above 23,860–23,880, representing early seller stop losses and breakout buy stops. Sell-Side Liquidity (SSL) is concentrated beneath 23,740 and 23,695 where weak intraday long stops are positioned.\n- Institutional Order Blocks (OB):\n  - Bullish Demand Block: 23,780.00 – 23,810.00 (15M Bullish Order Block formed around the previous day close polarity flip).\n  - Bearish Supply Block: 23,865.00 – 23,900.00 (15M Bearish Breaker / Supply Block created during morning high rejection wicks).\n- Fair Value Gaps (FVG) & Structural Imbalances:\n  - Downside Inefficiency: An unmitigated 15M Bullish FVG exists between 23,720.00 and 23,760.00, acting as an algorithmic buyer reclaim zone if tested.\n  - Overhead Imbalance: A clean 1-Hour Bearish FVG spans 23,910.00 to 23,940.00, which serves as a prime magnetic take-profit zone during breakout momentum.\n- Break of Structure (BOS) vs Change of Character (CHoCH):\n  - CHoCH Upside: Confirmed on the daily timeframe as price closed firmly above the D-2 swing peak of 23,440.80. Intraday upside continuation triggers on a 5m close above 23,865.00.\n  - CHoCH Downside: A 15-minute close below 23,740.00 signals an intraday Change of Character back toward short-term bearish retracement.\n- Premium / Discount Equilibrium: With the 5-day swing range anchored between 23,207.00 and 23,858.00, current price (23,851.00) auctions in the Premium zone (> 23,532.00). Long trades require tight execution confirmation at support rather than chasing extended green candles.\n\n6. 5-Min / 15-Min Action Plan & Index Triggers:\n- High Momentum / Explosive Zones:\n  - [Upside Short-Covering Squeeze] ([Sustained 5m close ABOVE 23,865.00]): Accelerates rapid short-covering panic among trapped intraday Call sellers toward 23,920.00 and 23,980.00.\n  - [Downside Long-Liquidation Cascade] ([Sustained 5m close BELOW 23,740.00]): Breaches intraday value support and opening low, sparking sharp long-unwinding back into 23,695.00 and 23,630.00.\n- 15-Minute Opening Range Filter Rule:\n  - On any gap or high-volatility opening, NEVER execute a reversal entry on the 3rd 5-minute candle (09:25 AM). Allow the complete 15-minute Opening Range (09:15–09:30 AM) to close. For Reversal Longs (CE), price must break and close firmly ABOVE the 15-minute ORB High with expanding futures volume. For Reversal Shorts (PE), price must break and close firmly BELOW the 15-minute ORB Low with expanding futures volume.\n- Extreme Gap Contingency Plan (>100–150 pts Gap Up / Down):\n  - [Massive Gap-Up Plan] ([Opening > 24,000.00]): Do NOT chase naked calls directly into the 24,000–24,050 institutional call wall. Wait for the 15-minute ORB. If price rejects below 24,000, trade mean-reversion exhaustion fades back toward 23,920. If price sustains above the 15m ORB High, wait for a shallow pullback test of the ORB High to join trend continuation toward 24,140.\n  - [Massive Gap-Down Plan] ([Opening < 23,600.00]): Do NOT panic short into the 23,550–23,600 macro demand cluster. Wait for an initial liquidity sweep followed by a confirmed 15m close reclaiming the ORB Low or 23,630 for a mean-reversion bounce toward 23,740.\n- Action Plan (BUY/SELL Setups):\n  - [B1] BUY Setup 1 (Pullback Dip Reclaim Long): Orderly pullback test into 23,790.00 – 23,810.00 holding firmly above the previous close/high polarity flip, confirmed by a 5m bullish rejection pin-bar/hammer closing back above 23,825.00 with expanding green futures volume. | TP: 23,865.00 / 23,920.00 | SL: 23,760.00 | 💡 Buy 23800 CE + Sell 23850 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n  - [B2] BUY Setup 2 (High-Momentum Breakout Long): Decisive 5m candle close firmly ABOVE 23,865.00 with active futures volume confirming absorption of overhead supply. | TP: 23,920.00 / 23,980.00 | SL: 23,815.00 | 💡 Buy 23850 CE + Sell 23900 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n  - [S1] SELL Setup 1 (Supply Wall SFP Fade Short): Liquidity sweep piercing morning highs at 23,860.00 – 23,875.00 that quickly rejects with an upper wick, confirmed by a 5m bearish reversal candle closing back below 23,840.00. | TP: 23,790.00 / 23,740.00 | SL: 23,890.00 | 💡 Buy 23850 PE + Sell 23800 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n  - [S2] SELL Setup 2 (Support Breakdown Continuation Short): Sustained 5m candle close firmly BELOW 23,740.00 with expanding red futures volume confirming opening range failure. | TP: 23,690.00 / 23,630.00 | SL: 23,785.00 | 💡 Buy 23750 PE + Sell 23700 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n- Live Chop Zone / No-Trade Zone:\n  - Range: 23,810.00 – 23,855.00 (Mid-session compression corridor between previous day close and session highs). Stand-down zone for naked option buyers until a confirmed breakout occurs.\n\n7. Risk Warning & Volatility Dynamics:\n- Expiry Dynamics: Today (Wednesday, Nov 04, 2026) is a non-expiry day for NIFTY 50 (Weekly expiry is Tuesday, next: Nov 10, 2026). Avoid 0-DTE assumptions; prioritize disciplined directional execution with next-week expiry option contracts.\n- India VIX Compression: India VIX hovers near 15.92, indicating moderate volatility where option premiums are neither heavily discounted nor excessively pumped. False breakouts remain a primary hazard during mid-day consolidation.\n- Straddle Decay & Whipsaws: Between 23,800 and 23,850, two-way straddle writing generates sharp chop and theta decay. Scalping inside this corridor risks whipsaws without volume confirmation.\n- Strict Stop Loss Discipline: Naked option buying requires tight stop-loss invalidation. Cut trades immediately if price closes back inside the breakout level or invalidates the structure."
-  },
-  {
-    "id": "NIFTY_20261103_154606",
-    "timestamp": "2026-11-03T15:46:06+05:30",
-    "timeDisplay": "03:46 PM, Nov 03",
-    "spot": "23810.85",
-    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
-    "source": "AI Intraday Briefing",
-    "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: 🟢 BULLISH | Bias Score: +4.0 / +6.0 | Confidence: High (78%)\n• Bias Invalidation Floor: 23365.80 (A 15M close below 23365.80 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Buy-on-Dip Expansion. Institutional bias favors absorption at discount demand OBs followed by upside expansion.\n• Execution: Avoid counter-trend shorts during opening 15m. Wait for 15M ORB filter before entries.\n\n# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Nov 03, 2026 | Spot: 23810.85 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Current Spot 23,810.85 sits pinned right at the Day High following a massive +328 pt trend expansion from Day Low (23,482.80) and a clean breakout above the 15M ORB High (23,628.30).\n- Strict No-Trade / Mean-Reversion Chop Zone is defined between 23,760.00 and 23,815.00.\n- FinNifty Expiry Impact: As today is Tuesday (FinNifty Expiry), heavy gamma positioning and late-session Open Interest (OI) concentration around the 23,800 strike creates a temporary pinning magnet. Until a decisive 5m candle closes outside this band, aggressive premium decay will penalize naked option buying within this 55-point pocket.\n\n4. High Momentum / Explosive Zones:\n- Bullish Expansion (Above 23,825.00): A decisive 5m close above 23,825.00 triggers immediate short-covering acceleration targeting 23,880.00 and 23,940.00 into unmitigated supply pockets.\n- Bearish Liquidation (Below 23,750.00): A sustained 5m close below 23,750.00 violates the steep ascending intraday channel, triggering fast long-unwinding toward 23,680.00 and retesting the 15M ORB breakout shelf at 23,628.30.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Pullback Value Reversal): 5m bullish rejection with long lower wick off the 23,750.00-23,760.00 demand base with expanding green futures volume. | TP: 23,810.00 / 23,850.00 | SL: 23,720.00 | 💡 Buy 23800 CE + Sell 23850 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Day High Breakout Continuation): Sustained 5m close ABOVE 23,825.00 with active futures volume confirming institutional absorption. | TP: 23,880.00 / 23,940.00 | SL: 23,780.00 | 💡 Buy 23850 CE + Sell 23900 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Day High Exhaustion Trap): 5m failure to sustain above 23,825.00 with sharp upper wick rejection and expanding red futures volume. | TP: 23,760.00 / 23,710.00 | SL: 23,845.00 | 💡 Buy 23800 PE + Sell 23750 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Breakdown Long Liquidation): Clean 5m breakdown and close BELOW 23,750.00 with expanding red volume confirming trendline failure. | TP: 23,680.00 / 23,630.00 | SL: 23,790.00 | 💡 Buy 23750 PE + Sell 23700 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
   }
 ];
