@@ -1,6 +1,50 @@
 window.btcDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-17T09:02:36+05:30",
+    "timeDisplay": "09:02 AM, Nov 17",
+    "price": "64882.88",
+    "bias": "bullish",
+    "behavior": "[TUE 09:02] [B1]: \u2605 A+ PRIMARY \u2014 5M Liquidity Sweep below $64,882.88 (00:00 UTC Open/Demand Shelf) followed by an immediate 5M candle body close back ABOVE $64,882.88 with positive Spot CVD absorption",
+    "tp": "65,420.84 / 65,743.62",
+    "sl": "64,613.90",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T09:02:36+05:30",
+    "timeDisplay": "09:02 AM, Nov 17",
+    "price": "65120.0",
+    "bias": "bullish",
+    "behavior": "[TUE 09:02] [B2]: \u2605 A+ PRIMARY \u2014 15M full-body candle close decisively ABOVE $65,120.00 (Asian High/BSL Ceiling) backed by >1.2x volume and expanding Open Interest (Short-Covering Squeeze)",
+    "tp": "65,680.38 / 66,016.61",
+    "sl": "64,839.81",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T09:02:36+05:30",
+    "timeDisplay": "09:02 AM, Nov 17",
+    "price": "65696.16",
+    "bias": "bearish",
+    "behavior": "[TUE 09:02] [S1]: \u26a0\ufe0f BACKUP \u2014 5M Liquidity Sweep above $65,696.16 (PDH/Supply Zone) followed by an immediate 5M shooting-star/rejection close back BELOW $65,696.16 with negative Taker Delta",
+    "tp": "65,158.20 / 64,835.42",
+    "sl": "65,965.14",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-17T09:02:36+05:30",
+    "timeDisplay": "09:02 AM, Nov 17",
+    "price": "64385.99",
+    "bias": "bearish",
+    "behavior": "[TUE 09:02] [S2]: \u26a0\ufe0f BACKUP \u2014 15M full-body candle close decisively BELOW $64,385.99 (Asian Low Structural Floor) confirming a long-liquidation cascade",
+    "tp": "63,825.61 / 63,489.38",
+    "sl": "64,666.18",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T02:46:45+05:30",
     "timeDisplay": "02:46 AM, Nov 17",
     "price": "64352.8",
@@ -19,17 +63,6 @@ window.btcDailyPlanData = [
     "behavior": "[TUE 02:46] [B2]: \u26a0\ufe0f BACKUP \u2014 15M full-body candle close decisively ABOVE $65,173.74 (BSL/Resistance) backed by >1.2x volume and expanding Open Interest (Short-Covering Squeeze).",
     "tp": "65,705.36 / 66,024.33",
     "sl": "64,907.93",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-17T02:46:45+05:30",
-    "timeDisplay": "02:46 AM, Nov 17",
-    "price": "65696.16",
-    "bias": "bearish",
-    "behavior": "[TUE 02:46] [S1]: \u2605 A+ PRIMARY \u2014 5M Liquidity Sweep above $65,696.16 (BSL/Supply Zone) followed by an immediate 5M shooting-star/rejection close back BELOW $65,696.16 with negative Taker Delta.",
-    "tp": "65,185.80 / 64,879.58",
-    "sl": "65,951.34",
     "status": "na"
   },
   {
@@ -223,6 +256,15 @@ window.btcDailyPlanData = [
 
 window.btcDailyPlanSummary = [
 {
+    "id": "BTC_20261117_090238",
+    "timestamp": "2026-11-17T09:02:38+05:30",
+    "timeDisplay": "09:02 AM, Nov 17",
+    "spot": "65004.7",
+    "trigger": "Stale Plan Refresh (6.2h elapsed >= 4.0h max gap",
+    "source": "BTC-AI",
+    "text": "# ₿ Bitcoin (BTC/USD) Tactical Update (09:00 AM IST - Nov 17, 2026 | Spot: $65004.7 | Trigger: Stale Plan Refresh (6.2h elapsed >= 4.0h max gap))\n\n================================================================================\n🎯 BITCOIN DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: 🔴 BEARISH | Bias Score: -1.8 / +6.0 | Confidence: Moderate (68%)\n• 00:00 UTC Daily Open: $64,882.88 | Prior Day Range: $63,905.01 (PDL) – $65,696.16 (PDH)\n• Current Live Spot: $65,004.70 | Day High: $65,467.29 | Day Low: $64,315.75\n• Bias Invalidation Reference: $65,696.16 (A 15M full-body close above $65,696.16 invalidates Bearish macro bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Tactical Intraday Long Expansion within HTF Sell-on-Rally Regime. While the 4H macro trend remains structurally bearish below the 4H 21 EMA ($66,061.26), live orderflow reveals Synchronized Bullish Aggression (1H Spot CVD +40.0 BTC, 1H Perp CVD +1,070.8 BTC) and Quadrant 1B Genuine Bullish Expansion above the 00:00 UTC Daily Open ($64,882.88).\n• Execution Strategy: Prioritize ★ A+ PRIMARY [B1] 5M liquidity sweep + positive Spot CVD absorption at the 00:00 UTC Daily Open / Demand Shelf ($64,882.88) or [B2] 15M breakout continuation above the Asian / 24H High ($65,120.00). Keep bearish setups ([S1] / [S2]) strictly as ⚠️ BACKUP contingencies at extreme supply or structural breakdown.\n\n---\n\n### 1. Market Structure, HTF CRT & Crypto-Native Orderflow Telemetry (v2)\n- **Live Spot & Session Structure:** BTC/USD Spot trades at **$65,004.70** (15M ATR: $224.15 | ADX: 41.5 indicating strong directional momentum | Intraday Range: Day Low $64,315.75 to Day High $65,467.29). Price is consolidating immediately above the 00:00 UTC Daily Open pivot.\n- **True Institutional Session Anchors:** \n  - `00:00 UTC Daily Open (05:30 AM IST)`: **$64,882.88** (Active Bullish Holding Shelf).\n  - `24H Range`: High **$65,120.00** | Low **$64,385.99** | Prior Day Close: **$64,882.87**.\n  - `Prior Day Structural Extremes`: Prior Day High (PDH) **$65,696.16** | Prior Day Low (PDL) **$63,905.01**.\n- **Active Session & US Spot BTC ETF Window:** Asian Session (00:00–08:00 UTC) Range: **$64,385.99 – $65,120.00** (Session liquidity building). US Spot BTC ETF Window (IBIT/FBTC): **$64,013.62 – $65,696.16** (Institutional Benchmark Close: $65,032.01). Spot is currently coiled right at the ETF closing benchmark.\n- **Multi-Timeframe Structure:**\n  - `4-Hour Macro Trend`: BEARISH (Trading below 4H 9 EMA $65,024.99 and 4H 21 EMA $66,061.26).\n  - `1-Hour Micro Trend`: BULLISH (Holding cleanly above 1H 9 EMA $64,854.85).\n- **Real-Time Taker CVD (Spot vs. Perp Orderflow):**\n  - `1H Spot CVD`: **+40.0 BTC** (4H Spot CVD: **+207.3 BTC**).\n  - `1H Perp CVD`: **+1,070.8 BTC** (4H Perp CVD: **+666.2 BTC**).\n  - `Active Orderflow Regime`: **🔥 SYNCHRONIZED BULLISH AGGRESSION** (Institutional Spot accumulation paired with active Perp taker buying momentum; wholesale buyers are lifting spot offers while derivatives traders add leverage).\n- **4-Quadrant Open Interest (OI Δ%) & Leverage Regime:**\n  - `Regime`: **QUADRANT 1B: GENUINE BULLISH EXPANSION** (Price ↑ + OI ↑ + Spot CVD Confirming — mathematically favors [B2] Breakout / [B1] Pullback Reclaims).\n  - `Aggregate OI`: Active **92,981 BTC** ($6.01B notional | 1H OI Δ: **+0.36%** [+333 BTC], 4H OI Δ: **+0.11%** [+98 BTC]).\n  - `Top Trader Sentiment`: Long/Short Ratio: **1.76** (63.7% Long posture among institutional tier accounts).\n- **Funding Rate & Spot-Perp Basis:**\n  - `Funding Rate`: **+0.0043%** (NEUTRAL / HEALTHY RESET — well within the sustainable 0.000% to 0.010% baseline, showing zero leverage overheating).\n  - `Spot-Perp Basis`: **SPOT PREMIUM** ($-24.9 / -0.038% — Direct indication of physical spot demand leading derivatives pricing).\n- **Intermarket & BTC/ETH Intraday SMT Divergence:**\n  - `SMT Status`: ⚪ **NO ACTIVE SMT DIVERGENCE** (ETH is slightly leading BTC: ETH at $1,829.84, +0.43% relative 4H strength vs BTC).\n  - `Nasdaq-100 Futures (NQ=F)`: **$27,440.75** (Bullish tech risk-on tailwind).\n  - `US Dollar Index (DXY)`: **$103.527** (Softening/Bearish DXY providing an immediate macro tailwind for BTC).\n  - `S&P 500 Futures (ES=F)`: **$7,443.75** (Consolidating equity environment).\n  - `Macro Crypto Telemetry`: Fear & Greed: 12/100 (Extreme Fear); USDT Dominance: 7.88%; BTC Dominance: 58.49%; CME Spot Spread: +$179.70 premium over CME close.\n  - `News Guard`: ⚠️ BTC NEWS: 390-year-old Ivy League university quietly hoards Bitcoin and gold (Institutional reserve narrative).\n\n---\n\n### 2. SMC, Volume Profile & Liquidation Pool Magnets\n- **Buy-Side Liquidity (BSL) & Short Liquidation Pools:**\n  - Resting buy stops clustered above Asian/24H High ceiling (**$65,120.00**) and Prior Day High (**$65,696.16**).\n  - `50x Synthetic Short Liquidation Magnet`: **$66,292.16** (Primary squeeze objective).\n  - `25x Synthetic Short Liquidation Pool`: **$68,738.46** (HTF expansion pool).\n- **Sell-Side Liquidity (SSL) & Long Liquidation Pools:**\n  - Resting sell stops nested below 00:00 UTC Daily Open (**$64,882.88**), Asian Low (**$64,385.99**), and Prior Day Low (**$63,905.01**).\n  - `50x Synthetic Long Liquidation Magnet`: **$63,227.04**.\n  - `25x Synthetic Long Liquidation Pool`: **$60,889.89**.\n- **Volume Profile & Institutional Anchors:**\n  - `24H Point of Control (POC)`: **$64,936.53** (High-volume fair value node).\n  - `Value Area High (VAH)`: **$65,343.45** | `Value Area Low (VAL)`: **$64,529.61**.\n  - `00:00 UTC Anchored VWAP`: **$64,662.08**.\n  - `Dynamic Moving Averages`: 15M EMA9: **$64,765.97** | 15M EMA21: **$64,801.31** | 15M 200 EMA: **$65,114.87** (acting as immediate resistance overhead).\n- **True Unmitigated Fair Value Gaps (FVG):**\n  - `Bearish Supply FVG`: **15M Bearish FVG ($65,120.00 – $65,180.00)** — Unmitigated overhead supply directly confluent with 24H High.\n  - `Bullish Demand FVG`: **15M Bullish FVG ($64,697.18 – $65,004.69)** — Active institutional demand absorbing current intraday dips.\n\n---\n\n### 3. Live Intraday Chop Zone / No-Trade Zone\n- **Equilibrium Chop Box:** **$64,617.08 – $64,981.53** (Bound by 00:00 UTC VWAP, 24H POC, and 00:00 UTC Daily Open).\n- **Tactical Rules:** Avoid initiating unconfirmed market orders inside this mid-range coil. The market is prone to ping-ponging between the POC ($64,936.53) and the 15M EMAs. Wait for price to probe the outer liquidity perimeters ($64,882.88 Demand Shelf or $65,120.00 Asian High) with verified CVD absorption or 15M candle confirmation before entering.\n\n---\n\n### 4. High Momentum / Explosive Zones\n- **Upside Short-Covering Squeeze (> $65,120.00 Spot):** A confirmed 15M full-body candle close above $65,120.00 backed by expanding Open Interest and positive Spot CVD forces trapped breakout shorts and 15M 200 EMA sellers to capitulate. This triggers an explosive impulse through the 15M FVG toward $65,680.38 and the 50x Short Liquidation Magnet at $66,016.61 / $66,292.16.\n- **Downside Long-Liquidation Cascade (< $64,385.99 Spot):** A 15M full-body candle close below the Asian session low ($64,385.99) breaches 24H VAL ($64,529.61), inducing forced liquidations across 63.7% leveraged longs and driving rapid cascade momentum toward $63,825.61 and $63,489.38.\n\n---\n\n### 5. 5-Min / 15-Min Action Plan & Triggers\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[B1]** | 🟢 **Long (★ A+ PRIMARY — Demand SSL Sweep)** | **$64,882.88** | ★ A+ PRIMARY — 5M Liquidity Sweep below $64,882.88 (00:00 UTC Open/Demand Shelf) followed by an immediate 5M candle body close back ABOVE $64,882.88 with positive Spot CVD absorption. | **TP1:** $65,420.84<br>**TP2:** $65,743.62 | **$64,613.90** | 1:2.0 / 1:3.2 |\n| **[B2]** | 🟢 **Long (★ A+ PRIMARY — 15M BSL Breakout)** | **$65,120.00** | ★ A+ PRIMARY — 15M full-body candle close decisively ABOVE $65,120.00 (Asian High/BSL Ceiling) backed by >1.2x volume and expanding Open Interest (Short-Covering Squeeze). | **TP1:** $65,680.38<br>**TP2:** $66,016.61 | **$64,839.81** | 1:2.0 / 1:3.2 |\n| **[S1]** | 🔴 **Short (⚠️ BACKUP — Supply BSL Sweep)** | **$65,696.16** | ⚠️ BACKUP — 5M Liquidity Sweep above $65,696.16 (PDH/Supply Zone) followed by an immediate 5M shooting-star/rejection close back BELOW $65,696.16 with negative Taker Delta. | **TP1:** $65,158.20<br>**TP2:** $64,835.42 | **$65,965.14** | 1:2.0 / 1:3.2 |\n| **[S2]** | 🔴 **Short (⚠️ BACKUP — 15M SSL Breakdown)** | **$64,385.99** | ⚠️ BACKUP — 15M full-body candle close decisively BELOW $64,385.99 (Asian Low Structural Floor) confirming a long-liquidation cascade. | **TP1:** $63,825.61<br>**TP2:** $63,489.38 | **$64,666.18** | 1:2.0 / 1:3.2 |\n\n---\n\n### Key Trading Levels Summary\n\n| Level / Zone | Type | Setup Tag | Logic / Significance | Take Profit (TP) | Stop Loss (SL) |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| **🟢 $64,882.88** | Demand SSL Sweep (★ A+ PRIMARY) | **[B1]** | ★ A+ PRIMARY — 5M Liquidity Sweep below $64,882.88 (00:00 UTC Open/Demand Shelf) followed by an immediate 5M candle body close back ABOVE $64,882.88 with positive Spot CVD absorption. | $65,420.84 / $65,743.62 | $64,613.90 |\n| **🟢 $65,120.00** | 15M BSL Breakout (★ A+ PRIMARY) | **[B2]** | ★ A+ PRIMARY — 15M full-body candle close decisively ABOVE $65,120.00 (Asian High/BSL Ceiling) backed by >1.2x volume and expanding Open Interest (Short-Covering Squeeze). | $65,680.38 / $66,016.61 | $64,839.81 |\n| **🔴 $65,696.16** | Supply BSL Sweep (⚠️ BACKUP) | **[S1]** | ⚠️ BACKUP — 5M Liquidity Sweep above $65,696.16 (PDH/Supply Zone) followed by an immediate 5M shooting-star/rejection close back BELOW $65,696.16 with negative Taker Delta. | $65,158.20 / $64,835.42 | $65,965.14 |\n| **🔴 $64,385.99** | 15M SSL Breakdown (⚠️ BACKUP) | **[S2]** | ⚠️ BACKUP — 15M full-body candle close decisively BELOW $64,385.99 (Asian Low Structural Floor) confirming a long-liquidation cascade. | $63,825.61 / $63,489.38 | $64,666.18 |\n\n``"
+  },
+  {
     "id": "BTC_20261117_024647",
     "timestamp": "2026-11-17T02:46:47+05:30",
     "timeDisplay": "02:46 AM, Nov 17",
