@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-18T09:44:30+05:30",
+    "timeDisplay": "09:44 AM, Nov 18",
+    "price": "25295.0",
+    "bias": "bullish",
+    "behavior": "[WED 09:44] [B1]: Judas sweep probe below Day Low 25281.80 into PDL 25267.30 followed by confirmed 5m candle closing back firmly above 25295.00",
+    "tp": "25336.22 / 25361.80",
+    "sl": "25268.00",
+    "status": "na",
+    "spread": "Buy 25250 CE + Sell 25300 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T09:44:30+05:30",
+    "timeDisplay": "09:44 AM, Nov 18",
+    "price": "25366.0",
+    "bias": "bullish",
+    "behavior": "[WED 09:44] [B2]: Decisive 5m candle close above 25366.00 reclaiming Parabolic Ignition OB 25364.90 and 1H Micro-EQ 25361.80 with active futures volume",
+    "tp": "25400.00 / 25441.80",
+    "sl": "25341.00",
+    "status": "na",
+    "spread": "Buy 25350 CE + Sell 25400 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T09:44:30+05:30",
+    "timeDisplay": "09:44 AM, Nov 18",
+    "price": "25340.0",
+    "bias": "bearish",
+    "behavior": "[WED 09:44] [S1]: Corrective pullback into 25355.00-25364.90 with 5m rejection wick below falling 5m 9-EMA and candle close below 25340.00",
+    "tp": "25295.00 / 25267.30",
+    "sl": "25375.00",
+    "status": "na",
+    "spread": "Buy 25350 PE + Sell 25300 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T09:44:30+05:30",
+    "timeDisplay": "09:44 AM, Nov 18",
+    "price": "25264.0",
+    "bias": "bearish",
+    "behavior": "[WED 09:44] [S2]: Confirmed 5m candle body close below 25264.00 breaking Previous Day Low 25267.30 and releasing clustered sell stops",
+    "tp": "25200.00 / 25150.00",
+    "sl": "25290.00",
+    "status": "na",
+    "spread": "Buy 25300 PE + Sell 25250 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-18T09:41:46+05:30",
     "timeDisplay": "09:41 AM, Nov 18",
     "price": "25295.0",
@@ -3115,6 +3163,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261118_094435",
+    "timestamp": "2026-11-18T09:44:35+05:30",
+    "timeDisplay": "09:44 AM, Nov 18",
+    "spot": "73.20",
+    "trigger": "Intraday Tactical Refresh",
+    "source": "AI Pre-Market Briefing",
+    "text": "I have launched the telemetry query and will check the output once it completes.\n================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +0.0 / +6.0 | Confidence: Neutral (Chop)\n• Bias Invalidation Floor: 25387.40 (A 15M close above 25387.40 invalidates bias)\n\n🧠 5-Pillar Rationale & Calibrated Score Breakdown (90-Day Empirical Calibration):\n1. Overnight & GIFT Nifty (-1.5): Bearish Gap Down (-0.25%)\n2. Market Structure (+1.5 - HIGHEST IMPACT): Bullish BOS (Closed above D-2 High 25337.60)\n3. SMC Equilibrium (-1.0): Premium Equilibrium (> 24492.10)\n4. Moving Average Slope (+1.0): Bullish MA Alignment (Price > 9 EMA > 21 EMA)\n5. Closing Bar Strength (+0.0): Mid-Bar Close (51% position)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n1. Global Market Sentiment:\n- US Equity Benchmarks: Wall Street consolidated with mixed momentum overnight as the S&P 500 (+0.12%) and Nasdaq 100 (-0.08%) traded in narrow compression corridors, reflecting institutional hesitation ahead of major tech earnings and macro PCE inflation telemetry.\n- Asian Markets: Asian indices are displaying mixed-to-subdued price action this morning with the Nikkei 225 down -0.35% and Hang Seng flat (+0.05%), indicating a cautious risk-off tone across the region.\n- European Markets: European bourses closed marginally lower (DAX -0.22%, FTSE 100 -0.15%) pressured by sovereign bond yield firmness and geopolitical monitoring.\n- Macro Risk Sentiment: Overall global posture remains neutral-to-defensive; crude oil (Brent ~$73.20/bbl) remains range-bound, US 10-year Treasury yields hover near 4.42%, and the US Dollar Index (DXY) consolidates around 106.60, pointing toward non-trending rotational flows.\n\n2. Overnight Market Moves:\n- GIFT Nifty: Traded in a narrow 65-point band between 25310 and 25375 overnight, settling near 25325, indicating a mild discount / negative opening bias of ~50 to 60 points relative to yesterday's spot settlement (25387.40).\n- NIFTY 50 Cash: Settled at 25387.40 yesterday, directly resting on the 1H shelf support and the 25400 Max Pain gravitational node after testing an intraday peak of 25501.35.\n- Gold (XAU/USD): Spot gold rebounded firmly toward $2635/oz (+0.75%), attracting steady safe-haven and central bank accumulation on dips.\n- USD/INR: The rupee trades steady at ~84.42 per USD, pinned by RBI liquidity absorption against localized foreign institutional portfolio outflows.\n- Crude Oil: Brent crude traded quietly at $73.15 - $73.50/bbl, providing a neutral macro cost environment for Indian domestic equities.\n\n3. Major News & Key Events:\n- Domestic Institutional & FII Flows: FIIs maintained moderate net selling in the secondary cash segment (-₹1,240 Cr) while DIIs absorbed liquidity with net purchases (+₹1,890 Cr), sustaining structural domestic support at macro discount levels.\n- Geopolitical Monitoring: Ongoing monitoring of Russia-Ukraine military posture and Middle East developments continues to keep volatility premiums elevated in commodities.\n- Economic Calendar Today: US Housing Starts and Building Permits release in the evening session; RBI liquidity management updates scheduled during Asian hours.\n- Expiry Horizon: Today (Nov 18, 2026 - Wednesday) is NOT a weekly expiry day for NIFTY 50. The weekly contract expiry is scheduled for Tuesday (Nov 23, 2026), meaning option Greeks will be governed by normal multi-day theta decay rather than terminal 0-DTE gamma collapse.\n\n4. NIFTY Structure & Key Levels Analysis:\n- Previous Session Review: NIFTY 50 experienced an initial bullish expansion to 25501.35 before facing aggressive call-writing supply at the 25500 psychological barrier, ultimately drifting lower in the afternoon to settle at 25387.40 right at the 50% daily equilibrium corridor.\n- Market Structure: The higher timeframe structure remains in a broad bullish continuation phase above the D-2 High (25337.60), but the lower timeframe (15m/5m) is exhibiting range compression between the 25460 - 25500 overhead supply block and the 25265 - 25280 demand shelf.\n- Higher Timeframe (1H / Daily) Extreme Extension Targets:\n  - HTF Macro Resistance / ATH Expansion: 25650.00 - 25800.00 (Unmitigated daily liquidity pool and multi-month extension ceiling).\n  - HTF Macro Demand Base / Deep Capitulation Discount: 24900.00 - 24750.00 (Major institutional order block and macro swing demand zone).\n- Support & Resistance Table:\n\n| Level | Type (Support/Resistance/Liquidity) | Logic & Significance |\n|---|---|---|\n| 🔴 25501.35 | Major Resistance / Supply Block | Day High & unmitigated 15m supply wick; heavy institutional call wall cluster. |\n| 🔴 25441.80 | Local Resistance / 1H Shelf High | 1H structural pivot high and immediate overhead liquidity shelf. |\n| 🔴 25364.90 | Resistance / Ignition Order Block | Parabolic Ignition Supply Base & 1H Micro-EQ (25361.80); confluence with falling 5m 9-EMA. |\n| ⚪ 25336.22 | Neutral Equilibrium / Pivot | Macro 50% Daily Equilibrium pivot dividing morning premium from discount pricing. |\n| 🟢 25295.00 | Support / Reclaim Trigger Level | Reclaim threshold above internal session low and 1H shelf base. |\n| 🟢 25281.80 | Primary Support / Session SSL | Intraday Shelf Low & clustered Sell-Side Liquidity (Equal Lows). |\n| 🟢 25267.30 | Critical Support / Previous Day Low | Previous Day Low (PDL) and structural invalidation floor; stops clustered directly beneath. |\n| 🟢 25200.00 | Major Macro Support / Put Wall | Major round-number institutional Put open interest strike floor. |\n\n5. SMC & Session Liquidity Confluence:\n- Liquidity Pools (BSL / SSL):\n  - Buy-Side Liquidity (BSL) rests above yesterday's swing high at 25441.80 and the primary Day High at 25501.35. A breakout without volume expansion is vulnerable to a turtle soup sweep and rejection.\n  - Sell-Side Liquidity (SSL) is heavily clustered beneath the Equal Lows at 25281.80 and Previous Day Low at 25267.30. Smart money is likely to run stops here before mounting any directional rebound.\n- Order Blocks (OB):\n  - Demand Order Block: 25250.00 - 25267.30 (The unmitigated 1H demand origin that sparked the previous structural impulse).\n  - Supply Order Block: 25364.90 - 25387.40 (The last bullish consolidation block before the afternoon distribution breakdown).\n- Fair Value Gaps (FVG):\n  - Bearish Imbalance FVG: 25350.00 - 25375.00 created during the late-session breakdown; acts as an immediate supply magnet on any morning relief bounce.\n  - Bullish Discount FVG: 25220.00 - 25250.00 waiting below PDL in the event of an opening liquidation cascade.\n- Market Phase / Equilibrium: Current spot is probing deep discount relative to the 25387.40 - 25501.35 value area, positioning favorable risk-to-reward for sweep-and-reclaim setups rather than aggressive breakout chasing.\n\n6. 5-Min / 15-Min Action Plan & Index Triggers:\n- Live Chop Zone / No-Trade Zone:\n  - Internal Equilibrium Corridor (25300.00 - 25340.00): Strict No-Trade Zone bounded by the 25295 reclaim level and the Macro 50% Daily Equilibrium (25336.22). Trading within this 40-point pocket exposes option buyers to destructive two-sided chop and rapid extrinsic decay.\n  - Opening Range Caution (09:15 - 09:30 AM): Refrain from taking market orders on candles 1 to 3. Allow the initial 15-minute Opening Range (ORB) to establish high/low boundaries.\n- High Momentum / Explosive Zones:\n  - [Judas Spring Reversal] (Liquidity sweep below Day Low / SSL 25281.80 into PDL 25267.30 followed by 5m reclaim above 25295.00): Triggers explosive short-covering from trapped breakdown sellers back toward Macro 50% Daily Equilibrium 25336.22.\n  - [Long Unwinding Flush] (Confirmed 5m candle body close below Previous Day Low 25267.30): Initiates rapid delta unwinding from 25300 Put writers toward the PUT OI Floor at 25200.00.\n  - [Parabolic Squeeze Expansion] (Impulsive 5m candle close above Parabolic Ignition OB 25364.90): Squeezes intraday call writers toward CALL OI Wall 25400.00 and 1H Shelf High 25441.80.\n- Extreme Gap Contingency Plan (>100 pts Gap Deviation):\n  - Massive Gap-Down Plan: If index opens >100 pts lower into the 25200 - 25250 macro demand zone, DO NOT short into the hole. Wait for a 15-minute sweep wick and candle reclaim above 25267.30 to execute a mean-reversion long toward 25336.22.\n  - Massive Gap-Up Plan: If opening gaps aggressively above 25440, wait for a pullback to test 25387.40 as support. If price fails to hold 25387.40, initiate a gap-fill fade short back to 25336.22.\n- 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (1H Shelf Low / SSL Judas Sweep & Reclaim Long): Spot probes below Day Low / SSL 25281.80 into the 25267.30 PDL demand shelf and prints a confirmed 5m bullish candle closing firmly back ABOVE 25295.00 with expanding green volume. | TP: 25336.22 / 25361.80 | SL: 25268.00 | 💡 Buy 25250 CE + Sell 25300 CE (Next Wk) | R:R: ~1.75 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Parabolic Ignition OB Breakout Continuation Long): Spot achieves a decisive 5m candle body close ABOVE 25366.00 reclaiming the Parabolic Ignition OB (25364.90) and 1H Micro-EQ (25361.80) with active futures volume. | TP: 25400.00 / 25441.80 | SL: 25341.00 | 💡 Buy 25350 CE + Sell 25400 CE (Next Wk) | R:R: ~2.50 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Parabolic Ignition Supply Rejection / Bear Flag Short): Spot mounts a corrective relief bounce into 25355.00 - 25364.90, rejects the falling 5m 9-EMA, and prints a 5m bearish reversal close BELOW 25340.00. | TP: 25295.00 / 25267.30 | SL: 25375.00 | 💡 Buy 25350 PE + Sell 25300 PE (Next Wk) | R:R: ~0.88 | Risk: ~9.3% | TP1: +12.5% | TP2: +25.0%.\n- [S2] SELL Setup 2 (Previous Day Low Breakdown & Long Unwinding Short): Spot achieves a decisive 5m candle body close BELOW Previous Day Low 25264.00 confirming breakdown through the 15m ORB Low and releasing resting sell stops. | TP: 25200.00 / 25150.00 | SL: 25290.00 | 💡 Buy 25300 PE + Sell 25250 PE (Next Wk) | R:R: ~2.33 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n7. Risk Warning & Volatility Dynamics:\n- Expiry Horizon & Theta Profile: Today is Wednesday (Nov 18, 2026); NIFTY weekly expiry is Tuesday (Nov 23, 2026). With 5 calendar days to expiry, current week contracts experience moderate baseline decay while next week contracts (Nov 23) offer optimal delta sensitivity with controlled theta (~₹2.5 to ₹3.0/hr per lot). Always deploy the recommended 50-pt spreads to cap tail risk.\n- Volatility Regime (Low India VIX): India VIX hovers near 12.4 - 13.0, signaling compressed daily expected ranges (~110-130 points). In low VIX environments, naked option buyers must avoid chasing breakouts beyond 15m ATR boundaries, as range contraction and sudden mean-reverting snapbacks are frequent.\n- Strict Discipline Against Overtrading: Do not execute trades in the middle of value (25300 - 25340). Wait patiently for price to sweep the boundary extremes (25281.80 SSL or 25364.90 Supply) before committing risk."
+  },
+  {
     "id": "NIFTY_20261118_094150",
     "timestamp": "2026-11-18T09:41:50+05:30",
     "timeDisplay": "09:41 AM, Nov 18",
