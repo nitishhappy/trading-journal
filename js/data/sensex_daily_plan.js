@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-18T09:46:49+05:30",
+    "timeDisplay": "09:46 AM, Nov 18",
+    "price": "82580",
+    "bias": "bullish",
+    "behavior": "[WED 09:46] [B1]: Sustained 5m close ABOVE 82,580 clearing 15M ORB High (82,571.81) with volume expansion",
+    "tp": "82,750 / 82,890",
+    "sl": "82,470",
+    "status": "na",
+    "spread": "Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T09:46:49+05:30",
+    "timeDisplay": "09:46 AM, Nov 18",
+    "price": "82270",
+    "bias": "bullish",
+    "behavior": "[WED 09:46] [B2]: Stop hunt sweep below 15M ORB Low 82,212.63 followed by confirmed 5m reclaim ABOVE 82,270",
+    "tp": "82,450 / 82,570",
+    "sl": "82,160",
+    "status": "na",
+    "spread": "Buy 82300 CE + Sell 82500 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T09:46:49+05:30",
+    "timeDisplay": "09:46 AM, Nov 18",
+    "price": "82490",
+    "bias": "bearish",
+    "behavior": "[WED 09:46] [S1]: SFP probe into 82,550 - 82,580 supply zone followed by 5m close back BELOW 82,490 confirming rejection",
+    "tp": "82,320 / 82,220",
+    "sl": "82,590",
+    "status": "na",
+    "spread": "Buy 82500 PE + Sell 82300 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T09:46:49+05:30",
+    "timeDisplay": "09:46 AM, Nov 18",
+    "price": "82210",
+    "bias": "bearish",
+    "behavior": "[WED 09:46] [S2]: Decisive 5m close BELOW 82,210 breaking 15M ORB Low toward previous day demand shelf",
+    "tp": "82,050 / 81,900",
+    "sl": "82,310",
+    "status": "na",
+    "spread": "Buy 82200 PE + Sell 82000 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-17T15:47:20+05:30",
     "timeDisplay": "03:47 PM, Nov 17",
     "price": "82760",
@@ -1838,99 +1886,20 @@ window.sensexDailyPlanData = [
     "tp": "77,000 / 76,850",
     "sl": "77,250",
     "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:31:22+05:30",
-    "timeDisplay": "09:31 AM, Nov 04",
-    "price": "77365",
-    "bias": "bullish",
-    "behavior": "[WED 09:31] [B1]: Sustained 5m close firmly ABOVE Day High 77365 with expanding volume",
-    "tp": "77500 / 77650",
-    "sl": "77260",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:31:22+05:30",
-    "timeDisplay": "09:31 AM, Nov 04",
-    "price": "77150",
-    "bias": "bullish",
-    "behavior": "[WED 09:31] [B2]: Retest and bullish rejection at flipped resistance shelf 77114-77180",
-    "tp": "77360 / 77500",
-    "sl": "77030",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:31:22+05:30",
-    "timeDisplay": "09:31 AM, Nov 04",
-    "price": "77300",
-    "bias": "bearish",
-    "behavior": "[WED 09:31] [S1]: False breakout above 77361 closing back below 77300 confirming liquidity grab",
-    "tp": "77150 / 77000",
-    "sl": "77390",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:31:22+05:30",
-    "timeDisplay": "09:31 AM, Nov 04",
-    "price": "76980",
-    "bias": "bearish",
-    "behavior": "[WED 09:31] [S2]: Sustained 15m close BELOW Macro 50% EQ 76983 triggering long liquidation",
-    "tp": "76820 / 76610",
-    "sl": "77080",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:20:56+05:30",
-    "timeDisplay": "09:20 AM, Nov 04",
-    "price": "77114",
-    "bias": "bullish",
-    "behavior": "[WED 09:20] [B1]: Confirmed 5M close ABOVE 77,114 clearing the 1H/2H Swing High and unlocking expansion towards 77,350/77,500",
-    "tp": "77,350 / 77,500",
-    "sl": "76,980",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:20:56+05:30",
-    "timeDisplay": "09:20 AM, Nov 04",
-    "price": "76615",
-    "bias": "bullish",
-    "behavior": "[WED 09:20] [B2]: Liquidity sweep of 76,559 Equal Lows followed by a 5M bullish reclaim above 76,615 (Bullish Ignition Base)",
-    "tp": "76,835 / 77,000",
-    "sl": "76,510",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:20:56+05:30",
-    "timeDisplay": "09:20 AM, Nov 04",
-    "price": "76820",
-    "bias": "bearish",
-    "behavior": "[WED 09:20] [S1]: Confirmed 5M close BELOW 76,820 breaking the 2H Swing Equilibrium anchor towards 76,615/76,530",
-    "tp": "76,615 / 76,530",
-    "sl": "76,930",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-04T09:20:56+05:30",
-    "timeDisplay": "09:20 AM, Nov 04",
-    "price": "77100",
-    "bias": "bearish",
-    "behavior": "[WED 09:20] [S2]: Swing High SFP rejection wick into 77,100 - 77,114 followed by 5M close back below 77,020",
-    "tp": "76,835 / 76,650",
-    "sl": "77,160",
-    "status": "na"
   }
 ];
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261118_094653",
+    "timestamp": "2026-11-18T09:46:53+05:30",
+    "timeDisplay": "09:46 AM, Nov 18",
+    "spot": "3788.60",
+    "trigger": "Intraday Tactical Refresh",
+    "source": "AI Pre-Market Briefing",
+    "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK (BSE SENSEX)\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +1.5 / +6.0 | Confidence: Neutral (Chop)\n• Bias Invalidation Floor: 82532.19 (A 15M close above 82532.19 invalidates bias)\n\n🧠 5-Pillar Rationale & Calibrated Score Breakdown (90-Day Empirical Calibration):\n1. Overnight & Pre-Open Gap (+0.0): Neutral Flat Open (-0.19%)\n2. Market Structure (+1.5 - HIGHEST IMPACT): Bullish BOS (Closed above D-2 High 82311.65)\n3. SMC Equilibrium (-1.0): Premium Equilibrium (> 79465.6)\n4. Moving Average Slope (+1.0): Bullish MA Alignment (Price > 9 EMA > 21 EMA)\n5. Closing Bar Strength (+0.0): Mid-Bar Close (55% position)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n1. Global Market Sentiment:\n- US Indices: Wall Street exhibited consolidative pressure during the previous session. The Dow Jones Industrial Average finished near 50,759.40, the S&P 500 hovered near 7,340.50, and the Nasdaq Composite held around 24,328.40. Mega-cap tech witnessed two-sided rotational flows ahead of key macro data points.\n- Asian Markets: Regional sentiment across the Asia-Pacific basin is cautiously mixed. Japan's Nikkei 225 is trading near 58,958 (+0.16%), while Hong Kong's Hang Seng is experiencing mild profit booking around 23,242 (-1.13%).\n- European Markets: European bourses settled mixed to flat, with the DAX, FTSE 100, and CAC 40 oscillating in tight ranges amid persistent ECB rate path assessments.\n- Overall Risk Sentiment: Broad global risk appetite remains neutral-to-cautious. High sovereign yields and range-bound dollar dynamics continue to suppress runaway directional momentum in global risk assets.\n\n2. Overnight Market Moves:\n- GIFT NIFTY & Domestic Sentiment: GIFT Nifty signaled a mildly subdued-to-flat opening for Indian equities, oscillating around 25,260–25,290, pointing to muted initial index breadth.\n- Spot Gold (XAU/USD): Precious metals consolidated overnight after recent corrective pullbacks, with spot gold stabilizing near $3,788.60/oz.\n- USD/INR: The Indian Rupee traded steady in early interbank sessions near 93.28–93.30 per US Dollar, reflecting contained currency volatility.\n- Crude Oil: Global benchmarks softened slightly; Brent crude traded near $92.57/bbl while US WTI crude hovered around $84.93/bbl, providing minor relief to domestic fiscal sentiment.\n- US Dollar Index (DXY) & Treasury Yields: The US Dollar Index remained firm at 103.63, while the US 10-Year Treasury Yield hovered near 5.10%, anchoring emerging market capital flows in check.\n\n3. Major News & Economic Events:\n- Macro & Geopolitical Backdrop: Market participants continue to digest global central bank commentary alongside ongoing geopolitical tensions in Eastern Europe and the Middle East, keeping supply-chain sensitive sectors volatile.\n- Domestic Institutional Flows: FIIs maintained selective trimming in cash market heavyweight financials, whereas domestic institutional investors (DIIs) provided commensurate counter-balancing liquidity, cementing range-bound compression across benchmark indices.\n- Scheduled Economic Calendar: Domestic markets eye weekly bank lending updates, foreign exchange reserve reports, and global manufacturing PMI flash readings scheduled later in the week.\n\n4. BSE SENSEX Analysis & Structural Context:\n- Previous Session Review: BSE SENSEX settled at 82,532.19, maintaining an intraday consolidation range between a session low of 82,035.29 and a session high of 82,897.49. The index closed directly above its 50% daily equilibrium (82,494.70), demonstrating balanced buyer-seller interaction.\n- Market Structure: Higher-timeframe market structure remains in a broader rotational regime. Price action is caught within an immediate 1H consolidation shelf bound between 82,035.29 support and the 82,757.29–82,851.06 supply ceiling.\n- Higher Timeframe (1H / Daily) Extreme Extension Targets: Major HTF supply expansion target rests at 83,200.00–83,500.00 (All-time structural expansion zone), while HTF deep macro demand rests at 81,500.00–81,600.00 (Multi-week institutional accumulation shelf).\n- Liquidity Zones: Buy-Side Liquidity (BSL) rests above the clustered equal highs at 82,757.29 and yesterday's peak at 82,897.49. Sell-Side Liquidity (SSL) is pooled beneath today's 15-minute Opening Range Low at 82,212.63 and yesterday's swing shelf at 82,035.29.\n\n| Level | Type (Support/Resistance/Liquidity) | Logic & Significance |\n| :--- | :--- | :--- |\n| 🟢 **82,035.00** | Major Swing Support / Demand Base | Previous Day Low & 1H institutional demand shelf; extreme discount defense zone. |\n| 🟢 **82,210.00** | Intraday Floor / 15M ORB Low | Today's 15-minute Opening Range Low; resting sell-side liquidity pool and Judas trap zone. |\n| ⚪ **82,495.00** | Equilibrium / Mid-Range Pivot | Macro 50% daily equilibrium; high-friction neutral zone separating buyers and sellers. |\n| 🔴 **82,580.00** | Breakout Pivot / 15M ORB High | Today's 15-minute Opening Range High; ceiling that must be absorbed for bullish continuation. |\n| 🔴 **82,760.00** | Key Supply Wall / Clustered Highs | Clustered 1H equal highs and bearish order block; primary short-covering breakout trigger. |\n| 🔴 **82,900.00** | Major Resistance / Day High Ceiling | Previous Day High (82,897.49) and psychological barrier; major premium take-profit target. |\n\n5. SMC & Session Liquidity Confluence:\n- Liquidity Pools: Concentrated resting buy stops are positioned above 82,580.00 and 82,760.00. Deep sell stops reside beneath 82,212.00 and 82,035.00. Smart money will likely hunt these exterior edges before establishing true directional displacement.\n- Order Blocks (OB): Bearish Order Block sits between 82,705.00–82,760.00, which initiated the late-session supply flush yesterday. Bullish Order Block is anchored between 82,090.00–82,160.00, representing strong institutional absorption.\n- Fair Value Gaps (FVG): An unmitigated 15m bullish FVG spans 82,320.00–82,380.00, offering intraday support on shallow pullbacks. Overhead 15m bearish FVG sits between 82,640.00–82,700.00.\n- BOS / CHoCH Dynamics: A 5m/15m close above 82,580.00 confirms an internal bullish Change of Character (CHoCH), shifting intraday order flow toward 82,760. Conversely, a sustained 5m close below 82,210.00 marks a bearish Break of Structure (BOS), opening the path toward 82,035.\n- Premium vs. Discount: The intraday equilibrium sits at 82,495.00. Any level above 82,550.00 represents expensive premium pricing suitable for seller traps/fades, while levels below 82,300.00 represent discount pricing primed for buyer absorption.\n\n6. 5-Min / 15-Min Action Plan & Index Triggers:\n- 15-Minute Opening Range Filter Rule: Today's 15-minute Opening Range is established between 82,212.63 (Low) and 82,571.81 (High). Reversal or continuation trades must respect 15m candle closes; never front-run breakouts inside this 360-point opening box.\n- Extreme Gap Contingency Plan (>300–500 pts Gap Expansion): If price expands impulsively beyond 82,900 without pullback, wait for a 15-minute opening range high retest before taking continuation longs. If price collapses below 82,000, avoid panic selling and watch for an SFP liquidity reclaim wick above 82,050 to initiate mean-reversion longs.\n- Live Chop Zone / No-Trade Zone: The corridor between 82,350.00 and 82,500.00 is a strict no-trade compression zone where 9-EMA and 21-EMA converge with heavy straddle open interest. Option buyers must avoid entering positions inside this pocket.\n- High Momentum / Explosive Zones:\n- [Bullish Expansion Breakout] (Decisive 5m Close Above 82,580.00): A confirmed 5-minute candle close clearing 15M ORB High (82,571.81) triggers aggressive short-covering toward 82,760.00 and 82,850.00.\n- [Bearish Supply Base Rejection] (SFP Rejection Probe Into 82,550.00 - 82,580.00): A liquidity sweep above 82,550 followed by an immediate 5m rejection wick closing back below 82,490.00 triggers rapid long-unwinding toward 82,320.00.\n- [Judas Spring Sweep & Reclaim] (Liquidity Sweep Below 82,212.00 Reclaimed Above 82,270.00): A stop-run below 15M ORB Low that traps breakdown sellers and prints a strong 5m bullish hammer/engulfing candle back above 82,270.00 sparks an impulsive squeeze back toward 82,450.00.\n- [Bearish Long Unwinding Flush] (Decisive 5m Close Below 82,210.00): Sustained acceptance below the session low breaks the intraday floor, forcing delta liquidation toward 82,050.00 and 82,000.00.\n- 5-Min / 15-Min Action Setups:\n- [B1] BUY Setup 1 (Bullish 15M ORB High Breakout & Liquidity Absorption): Sustained 5-minute candle close ABOVE 82,580.00 clearing the 15M Opening Range High with expanding volume. | TP: 82,750.00 / 82,890.00 | SL: 82,470.00 | 💡 Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Discount Demand Sweep & Judas Spring Reclaim): Liquidity sweep below 15M ORB Low 82,212.63 probing toward 82,180.00 followed by a confirmed 5m close back firmly ABOVE 82,270.00 with RSI divergence. | TP: 82,450.00 / 82,570.00 | SL: 82,160.00 | 💡 Buy 82300 CE + Sell 82500 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Macro Supply Rejection & SFP Fade Short): SFP probe into the 82,550.00–82,580.00 supply zone printing an upper rejection wick, followed by a confirmed 5m close back BELOW 82,490.00. | TP: 82,320.00 / 82,220.00 | SL: 82,590.00 | 💡 Buy 82500 PE + Sell 82300 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Session Floor Breakdown & Liquidity Flush): Decisive 5-minute candle body close BELOW 82,210.00 breaking 15M ORB Low with expanding institutional sell volume. | TP: 82,050.00 / 81,900.00 | SL: 82,310.00 | 💡 Buy 82200 PE + Sell 82000 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n7. Risk Warning & Expiry Considerations:\n- Expiry Dynamic Context: Today is Wednesday (2026-11-18) — NOT an expiry day for BSE SENSEX. Weekly BSE Sensex contracts expire tomorrow on Thursday (2026-11-19).\n- Low Volatility & Sideways Chop Risk: Midweek sessions preceding Thursday expiry often witness synthetic gamma pinning and heavy straddle/strangle writing around round strikes (82,300, 82,400, and 82,500). Holding naked intraday options through mid-day consolidation will result in rapid premium erosion.\n- Option Execution Discipline: To insulate against intraday chop and pre-expiry theta bleed, strictly deploy 200-point Next Week Option Spreads (100-pt strike intervals) as specified in mapped setups [B1], [B2], [S1], and [S2]. Stand aside when price oscillates inside the 82,350–82,500 no-trade zone."
+  },
+  {
     "id": "SENSEX_20261117_154722",
     "timestamp": "2026-11-17T15:47:22+05:30",
     "timeDisplay": "03:47 PM, Nov 17",
@@ -2307,23 +2276,5 @@ window.sensexDailyPlanSummary = [
     "trigger": "Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping",
     "source": "AI Intraday Briefing",
     "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK (BSE SENSEX)\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +2.5 / +6.0 | Confidence: Moderate (65%)\n• Bias Invalidation Floor: 76917.85 (A 15M close above 76917.85 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n# ⚡ BSE SENSEX Intraday Tactical Update (10:30 AM IST - Nov 04, 2026 | Spot: 77015.39 | Trigger: Scheduled 10:30 AM Update (True Intraday Option Chain & Structure Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict Intraday No-Trade Anchor: 77,170.00 – 77,394.00 (Immediate 1H Consolidation Shelf anchored by 50% Micro-Equilibrium at 77,282.24).\n- Price action oscillating within this 224-point balance zone carries severe option decay risks and false expansion whipsaws due to dual-sided liquidity accumulation.\n- Strict discipline dictates waiting for a verified liquidity sweep probe or a confirmed 5-minute directional breakout outside 77,170.00 or 77,394.00 before deploying option buying capital.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion Breakout] (Upside BSL Clearance): Sustained 5-minute candle close ABOVE 77,395.00 (Day High 77,396.04 / Triple Equal Highs pool) triggers aggressive call short-covering towards 77,550.00 and 77,700.00 unmitigated liquidity.\n- [Bearish Impulse Breakdown] (Downside Shelf Breach): Sustained 5-minute candle close BELOW 77,170.00 (Double Equal Lows SSL) triggers rapid long unwinding down into Macro 50% Equilibrium (77,000.45) and the 76,976.84 swing discount zone.\n- [Bullish Spring Sweep] (Judas Low Reclaim): A rapid liquidity sweep probe below 77,170.00 that swiftly prints an absorption wick and reclaims back above 77,170.00 sparks a violent short-squeeze back toward Micro-EQ 77,282.00.\n- [Bearish SFP Exhaustion] (Buy-Side Liquidity Trap): A stop-hunt spike through 77,395.00 followed by an immediate close back below 77,350.00 traps breakout buyers and unleashes sharp mean-reversion selling toward 77,170.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Liquidity Sweep & Spring Reclaim): Bullish rejection candle closing back ABOVE 77,170.00 following a liquidity sweep of Equal Lows (SSL: 77,170.12). | TP: 77,280 / 77,390 | SL: 77,090 | 💡 Buy 77100 CE + Sell 77300 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Bullish Expansion Breakout): Sustained 5-minute close ABOVE Buy-Side Liquidity pool (BSL: 77,395.00 / Day High 77,396.04) with volume expansion. | TP: 77,550 / 77,700 | SL: 77,290 | 💡 Buy 77400 CE + Sell 77600 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Liquidity Sweep & SFP at Equal Highs): Bearish Swing Failure Pattern (SFP) rejection failing to hold ABOVE 77,395.00 and closing back BELOW 77,350.00. | TP: 77,280 / 77,170 | SL: 77,430 | 💡 Buy 77400 PE + Sell 77200 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Shelf Breakdown & Trend Continuation): Sustained 5-minute close BELOW 77,170.00 shelf support, targeting Macro 50% Equilibrium and Demand base. | TP: 77,000 / 76,850 | SL: 77,250 | 💡 Buy 77100 PE + Sell 76900 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
-  },
-  {
-    "id": "SENSEX_20261104_093128",
-    "timestamp": "2026-11-04T09:31:28+05:30",
-    "timeDisplay": "09:31 AM, Nov 04",
-    "spot": "77345.39",
-    "trigger": "Bullish Level Exhaustion (+231.4 pts above max plan level 77114",
-    "source": "AI Intraday Briefing",
-    "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK (BSE SENSEX)\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +2.5 / +6.0 | Confidence: Moderate (65%)\n• Bias Invalidation Floor: 76917.85 (A 15M close above 76917.85 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n# ⚡ BSE SENSEX Intraday Tactical Update (09:30 AM IST - Nov 04, 2026 | Spot: 77345.39 | Trigger: Bullish Level Exhaustion (+231.4 pts above max plan level 77114))\n\n3. Live Chop Zone / No-Trade Zone:\n- [Macro Chop Zone Anchor]: 76822.08 - 77113.91 (Macro 50% Daily Equilibrium at 76983.09 and prior 1H consolidation shelf high at 77113.91). Rotational movement within this pocket carries high chop risk following the initial parabolic expansion.\n- [Intraday No-Trade Buffer]: 77113.91 - 77250.00. Unconfirmed pullbacks into the broken resistance zone without clear price rejection or structural confirmation represent a dangerous low-momentum trap.\n- [Bullish Structure Invalidation Point]: Acceptance and sustained 15-min close back below 76983.09 invalidates morning trend structure and re-opens the range toward 76822.08.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Expansion Breakout] (Above 77361.33): Sustained 5-min candle close above Day High / 15M ORB High (77361.33) triggers short-covering momentum into unmapped psychological levels at 77500 and 77650.\n- [Pullback Demand Absorption] (77114 - 77180): Retest of the broken 1H shelf high (77113.91) holding with buyer absorption and bullish pin-bar/FVG reclamation targeting new session highs.\n- [Liquidity Sweep SFP Reversal] (Rejection at 77361.33): Wick above 77361.33 followed by an immediate 5-min close back below 77300 signaling an institutional trap and initiating mean reversion to 77114.\n- [Bearish Breakdown Expansion] (Below 76983.09): Sustained 15-min close below Macro 50% Equilibrium (76983.09) triggers long unwinding toward 76822.08 and the ignition origin at 76604.85.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (ORB High Breakout Continuation): Sustained 5-min candle close firmly ABOVE Day High 77365 with expanding volume confirming continuation. | TP: 77500 / 77650 | SL: 77260 | 💡 Buy 77300 CE + Sell 77500 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (Broken Shelf Pullback & Spring): Retest of the flipped resistance shelf at 77114 - 77180 showing clear bullish rejection / green hammer candle. | TP: 77360 / 77500 | SL: 77030 | 💡 Buy 77200 CE + Sell 77400 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (High Liquidity Sweep SFP): Sharp sweep of Day High 77361 followed by a 5-min bearish engulfing close back below 77300 confirming a buyer trap. | TP: 77150 / 77000 | SL: 77390 | 💡 Buy 77300 PE + Sell 77100 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Macro Equilibrium Breakdown): Sustained 15-min candle close BELOW Macro 50% Equilibrium 76983 confirming failure of the morning impulse. | TP: 76820 / 76610 | SL: 77080 | 💡 Buy 77000 PE + Sell 76800 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
-  },
-  {
-    "id": "SENSEX_20261104_092104",
-    "timestamp": "2026-11-04T09:21:04+05:30",
-    "timeDisplay": "09:21 AM, Nov 04",
-    "spot": "3946.00",
-    "trigger": "Intraday Tactical Refresh",
-    "source": "AI Pre-Market Briefing",
-    "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK (BSE SENSEX)\n================================================================================\n• Daily Market Bias: 🟢 BULLISH | Bias Score: +4.0 / +6.0 | Confidence: High (78%)\n• Bias Invalidation Floor: 75442.78 (A 15M close below 75442.78 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Buy-on-Dip Expansion. Institutional bias favors absorption at discount demand OBs followed by upside expansion.\n• Execution: Avoid counter-trend shorts during opening 15m. Wait for 15M ORB filter before entries.\n\n1. Global Market Sentiment:\n- US Equity Markets: Wall Street closed mixed to mildly flat overnight (S&P 500: 7,568.92, -0.15%; Nasdaq: 25,372.01, -0.26%; Dow Jones: 51,786.72, +0.03%), reflecting cautious pre-election positioning and mild profit-taking near record highs.\n- Asian Markets: Asian indices trade mixed-to-subdued in early morning trade, tracking choppy US futures and awaiting clarity on global policy triggers.\n- Domestic Indication: GIFT Nifty and domestic indicators suggest a steady, flat-to-mildly positive opening drift (Nifty spot indicative around 23,850 - 23,880), setting up a balanced opening for BSE SENSEX near the 76,900 - 76,950 zone.\n- Broad Risk Environment: Neutral-to-mildly constructive undertone; large-cap participation remains firm, but index sits compressed beneath key higher-timeframe resistance shelves, favoring level-to-level execution over aggressive momentum chasing.\n\n2. Overnight Market Moves:\n- S&P 500 (`^GSPC`): 7,568.92 (-11.15 pts / -0.15%), consolidating quietly below all-time peaks.\n- Nasdaq Composite (`^IXIC`): 25,372.01 (-64.99 pts / -0.26%), digesting recent mega-cap tech expansion.\n- Dow Jones Industrial Average (`^DJI`): 51,786.72 (+16.41 pts / +0.03%), demonstrating defensive resilience.\n- Nifty 50 (`^NSEI`): Previous close at 23,846.30 (+0.15%), Bank Nifty at 55,636.30 (+0.17%).\n- BSE SENSEX (`^BSESN`): Closed previous session at 76,917.85 (+884 pts recovery from intraday low 76,033.74, settling right at the day's high).\n- Gold (Physical Spot / XAUUSD): Hovering at $3,946.00/oz (-0.59%), consolidating after recent multi-week gains.\n- WTI Crude Oil: $95.62/bbl (-0.87%), easing slightly to stabilize domestic macro energy sentiment.\n- Currency (USD/INR): Trading near 94.52 (-0.22%), exhibiting stability against the US Dollar.\n\n3. Major News & Economic Events:\n- Global Political & Macro Backdrop: Global markets remain hyper-vigilant around US election voting developments, driving range-bound defensive rotation across international liquidity pools.\n- Domestic Institutional Accumulation: Sustained domestic institutional investor (DII) inflows continue to absorb selective foreign portfolio investor (FPI) selling, offering a solid floor to key index bellwethers (HDFC Bank, Reliance, ICICI Bank, Infosys).\n- Q2 Earnings Season Flow: Quarterly earnings releases remain rotational; banking and financial majors retain strong balance sheet quality, keeping benchmark indices buoyant.\n- Systemic Liquidity: Domestic money market liquidity remains stable, keeping interbank call rates and short-term yields tightly anchored.\n\n4. SENSEX Analysis & Key Levels:\n- Structural Context: SENSEX closed at 76,917.85, terminating right at the session peak following a violent 884-point V-shape recovery from the 76,033.74 floor. Price action is currently testing the upper ceiling of the active 1H/2H consolidation shelf (76,559.33 - 77,113.91) and holding above the Daily 50% Equilibrium (76,475.80).\n- Higher Timeframe Extreme Extension Targets: A decisive daily close above 77,114 unlocks multi-session institutional expansion toward 77,350, 77,500, and HTF macro resistance at 78,000. Conversely, a failure below the 76,034 swing floor exposes secondary macro demand at 75,500 and the 75,000 deep liquidity shelf.\n- Liquidity Mapping: Dense Buy-Side Liquidity (BSL) rests directly above 77,114 (1H/2H double-top swing highs). Deep Sell-Side Liquidity (SSL) is concentrated beneath 76,559 (4-tap Equal Lows) and the previous day's panic low at 76,034.\n\n| Level | Type (Support/Resistance/Liquidity) | Logic & Significance |\n| :--- | :--- | :--- |\n| 🔴 77,500 | HTF Extreme Target | Major psychological supply barrier and multi-day structural expansion target. |\n| 🔴 77,114 | Major Resistance / BSL Pool | 1H/2H Swing High ceiling; breakout trigger point for short-covering acceleration. |\n| ⚪ 76,920 | Immediate Pivot / PDH | Previous session closing peak; demarcation between immediate continuation and pullback. |\n| ⚪ 76,820 | Micro-Equilibrium / Pivot | 1H consolidation anchor; primary boundary dividing bullish and bearish intraday bias. |\n| 🟢 76,615 | Demand Zone / Ignition Base | Bullish Order Block; base of previous session's late-afternoon institutional impulse. |\n| 🟢 76,559 | Critical Support / SSL Pool | 4-tap Equal Lows; major retail stop-hunt pool and institutional liquidity springboard. |\n| 🟢 76,034 | HTF Macro Support / PDL | Previous Day Low; ultimate structural invalidation floor for the multi-week bullish trend. |\n\n5. SMC & Session Liquidity Confluence:\n- Liquidity Pool Distribution: Equal Lows resting at 76,559.33 represent a primary retail liquidity trap. Overhead, trapped short positions hold protective buy stops clustered above 77,113.91 (BSL pool).\n- Institutional Order Blocks (OB): A high-conviction 15M Bullish Order Block is established at 76,560 – 76,615 (origin of the previous day's vertical surge). A 15M Bearish Supply Block sits overhead between 77,100 and 77,150.\n- Fair Value Gaps (FVG): An unfilled 15M Bullish Imbalance / FVG spans 76,710 – 76,780, offering immediate discount support on any rotational morning dip.\n- BOS / CHoCH Dynamics: Intraday market structure printed a bullish Change of Character (CHoCH) on the 15M timeframe upon reclaiming 76,836. Sustained trade above 77,114 confirms a full bullish Break of Structure (BOS).\n- Premium vs. Discount Equilibrium: Across the current 1H swing range (76,034 – 77,114), 50% Equilibrium is located at 76,574. With spot at 76,918, price sits at the 81% Premium tier, demanding patience: buy only confirmed breakouts or discount pullbacks toward 76,700.\n\n6. 5-Min / 15-Min Action Plan & Index Triggers:\n- Live Chop Zone / No-Trade Zone:\n  - Range Bound Compression: 76,820.00 – 76,920.00 (Encompassing the 1H Equilibrium anchor at 76,822 and session close resistance at 76,918).\n  - Execution Rule: Zero fresh option buying inside 76,820 – 76,920; wait for clean 5-minute candle closures outside this corridor to avoid two-sided premium bleed.\n- High Momentum / Explosive Zones:\n  - [Bullish Parabolic Breakout] (Above 77,114): A sustained 5M candle close above the 1H/2H swing range ceiling (77,113.91) sweeps Buy-Side Liquidity (BSL), triggering rapid short-covering momentum towards 77,350 and 77,500.\n  - [Bearish Liquidity Flush] (Below 76,820): A confirmed 5M breakdown below the 1H Swing Equilibrium anchor (76,822) confirms distribution, cascading into the 76,710 FVG and the Parabolic Ignition Base at 76,615.\n  - [Judas Sweep & Spring Reclaim] (Probe of 76,530 – 76,560): A stop-run piercing below the 4-tap Equal Lows (SSL at 76,559) that swiftly rejects and reclaims 76,615 offers an explosive institutional spring long targeting 76,835 and 77,000.\n  - [Swing High SFP Rejection] (At 77,100 – 77,114): A liquidity sweep above 77,100 that prints a sharp rejection wick and closes back inside the shelf triggers an aggressive mean-reversion sell-off back towards 76,835.\n- Extreme Gap Contingency Plan:\n  - Massive Gap-Up (>250-350 pts above 77,150): Do NOT chase long on the open. Enforce the 15-Minute Opening Range rule (09:15 - 09:30 AM). If the 15M High is decisively cleared with expanding volume, trail longs into 77,350 / 77,500. If price fails to hold 77,114 and slips back inside the range, execute a gap-fill short back to 76,920.\n  - Massive Gap-Down (>250-350 pts below 76,650): Do NOT panic short into the 76,560 - 76,615 institutional demand block. Watch for a liquidity sweep of 76,559 Equal Lows followed by a 15M bullish reclaim candle to initiate a mean-reversion long back toward 76,820.\n- Intraday Action Setups:\n  - [B1] BUY Setup 1 (High-Momentum Breakout): Confirmed 5M close ABOVE 77,114 with expanding institutional volume clearing the 1H/2H Swing High. | TP: 77,350 / 77,500 | SL: 76,980 | 💡 Buy 77,100 CE + Sell 77,300 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n  - [B2] BUY Setup 2 (Ignition OB & SSL Sweep Reclaim): Liquidity sweep of 76,559 Equal Lows followed by a 5M bullish reclaim above 76,615 (Bullish Ignition Base). | TP: 76,835 / 77,000 | SL: 76,510 | 💡 Buy 76,600 CE + Sell 76,800 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n  - [S1] SELL Setup 1 (Breakdown Continuation): Confirmed 5M close BELOW 76,820 (Micro-EQ / Chop Anchor violation) with bearish momentum. | TP: 76,615 / 76,530 | SL: 76,930 | 💡 Buy 76,800 PE + Sell 76,600 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n  - [S2] SELL Setup 2 (HTF Swing High Supply Exhaustion): Exhaustion wick / SFP rejection at 77,100 - 77,114 followed by a 5M close back below 77,020. | TP: 76,835 / 76,650 | SL: 77,160 | 💡 Buy 77,100 PE + Sell 76,900 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%.\n\n7. Risk Warning & Expiry Dynamics:\n- Expiry Day Status: Not an expiry day today (Wednesday, 2026-11-04). Weekly BSE Sensex expiry is tomorrow, Thursday (2026-11-05).\n- Theta Decay & Premium Preservation: Because today is D-1 (pre-expiry Wednesday), current-week near-the-money options suffer elevated theta burn during mid-day consolidation spells. Utilizing Next-Week 200-pt debit spreads (100-pt strike intervals) protects against chop and preserves capital while capturing intraday directional expansions.\n- 15-Minute Opening Range Filter Discipline: Never execute a counter-trend reversal on the 3rd 5-minute candle (09:25 AM). Respect the full 15-minute Opening Range (09:15 – 09:30 AM) to verify whether institutional participants are driving genuine expansion or setting up an opening range trap."
   }
 ];
