@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-18T15:47:18+05:30",
+    "timeDisplay": "03:47 PM, Nov 18",
+    "price": "82020",
+    "bias": "bullish",
+    "behavior": "[WED 15:47] [B1]: Liquidity probe beneath Equal Lows 81,944.36 followed by a decisive 5m close reclaiming above 82,020",
+    "tp": "82,180 / 82,300",
+    "sl": "81,920",
+    "status": "na",
+    "spread": "Buy 82000 CE + Sell 82200 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T15:47:18+05:30",
+    "timeDisplay": "03:47 PM, Nov 18",
+    "price": "82220",
+    "bias": "bullish",
+    "behavior": "[WED 15:47] [B2]: Sustained 15m candle close ABOVE 15M ORB Low 82,220 confirming institutional absorption",
+    "tp": "82,380 / 82,500",
+    "sl": "82,120",
+    "status": "na",
+    "spread": "Buy 82200 CE + Sell 82400 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T15:47:18+05:30",
+    "timeDisplay": "03:47 PM, Nov 18",
+    "price": "82120",
+    "bias": "bearish",
+    "behavior": "[WED 15:47] [S1]: Rejection probe near Macro Daily EQ 82,179.67 followed by 5m close below 82,120",
+    "tp": "82,000 / 81,940",
+    "sl": "82,220",
+    "status": "na",
+    "spread": "Buy 82100 PE + Sell 81900 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-18T15:47:18+05:30",
+    "timeDisplay": "03:47 PM, Nov 18",
+    "price": "81780",
+    "bias": "bearish",
+    "behavior": "[WED 15:47] [S2]: High-velocity 5m candle close BELOW Day Low 81,780.47 triggering long-unwinding cascade",
+    "tp": "81,650 / 81,500",
+    "sl": "81,890",
+    "status": "na",
+    "spread": "Buy 81800 PE + Sell 81600 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-18T13:33:06+05:30",
     "timeDisplay": "01:33 PM, Nov 18",
     "price": "81850",
@@ -1991,6 +2039,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261118_154720",
+    "timestamp": "2026-11-18T15:47:20+05:30",
+    "timeDisplay": "03:47 PM, Nov 18",
+    "spot": "82031.81",
+    "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (03:45 PM IST - Nov 18, 2026 | Spot: 82031.81 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Live Chop Anchor (82,180.00 – 82,380.00 | Micro-EQ & Daily Equilibrium): SENSEX Spot settled at 82,031.81, directly below the Macro 50% Daily Equilibrium (82,179.67) and the 1H Consolidation Shelf Micro-EQ (82,380.96). The internal corridor between 82,100.00 and 82,300.00 represents high-density institutional equilibrium where two-way chop, 15M ORB Low overlap (82,212.29), and straddle compression dominate, resulting in rapid theta bleed for naked option buyers.\n- Strict No-Trade Compression Pocket (82,000.00 to 82,180.00): Mid-range compression directly around the 82,000 psychological milestone and the Bullish Ignition Order Block ceiling (82,017.39). Initiating breakout positions inside this compression pocket before a clean test of structural liquidity carries poor asymmetric risk; stand aside until boundaries resolve.\n\n4. High Momentum / Explosive Zones:\n- Bullish Judas Sweep & Spring Reclaim (Liquidity probe below Equal Lows 81,944.36 followed by 5m close back above 82,020.00): Sweeps sell-side liquidity resting beneath the double-tap low shelf (81,944.36) into the Parabolic Bullish Ignition Base (81,944.36 - 82,017.39). Trapping breakout bears and triggering a swift mean-reversion short squeeze back toward 82,180.00 and 82,300.00.\n- Bullish ORB Reclaim & Gap Expansion (Sustained 5m/15m close ABOVE 82,220.00 clearing 15M ORB Low 82,212.29): Unlocks aggressive short-covering from intraday call writers, accelerating spot momentum toward 2H Swing-EQ (82,301.80) and the 1H Micro-EQ ceiling at 82,380.00 / 82,500.00.\n- Bearish Supply Rejection & Range Fade (Failure to hold above 82,200.00 with 5m bearish rejection candle below 82,120.00): Rejection from the Macro 50% Daily Equilibrium (82,179.67) and lower ORB boundary confirms seller absorption, facilitating an orderly rotation back down toward 82,020.00 and 81,950.00.\n- Bearish Liquidity Cascade & Day-Low Breakdown (Decisive 5m close BELOW Day Low 81,780.47 & 2H Swing Low 81,786.04): Breaches the entire session's demand base and trips institutional trailing stops, opening an explosive downside air pocket toward 81,650.00 and 81,500.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Equal Lows Judas Sweep & Demand Absorption Long): Liquidity sweep beneath Equal Lows 81,944.36 into Bullish Ignition Order Block followed by a 5m candle close firmly reclaiming ABOVE 82,020.00. | TP: 82,180.00 / 82,300.00 | SL: 81,920.00 | 💡 Buy 82000 CE + Sell 82200 CE (Next Wk) | R:R: ~2.60 | Risk: ~8.0% | TP1: +19.6% | TP2: +35.2%.\n- [B2] BUY Setup 2 (15M ORB Low Reclaim & Squeeze Expansion Long): Decisive 15m candle-body close ABOVE 15M ORB Low 82,220.00 with expanding institutional buying volume. | TP: 82,380.00 / 82,500.00 | SL: 82,120.00 | 💡 Buy 82200 CE + Sell 82400 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Macro Daily EQ Rejection & Supply Fade Short): Failed pullback test into Macro Daily EQ 82,179.67 followed by a 5m rejection close BELOW 82,120.00. | TP: 82,000.00 / 81,940.00 | SL: 82,220.00 | 💡 Buy 82100 PE + Sell 81900 PE (Next Wk) | R:R: ~2.55 | Risk: ~9.0% | TP1: +18.5% | TP2: +33.0%.\n- [S2] SELL Setup 2 (Day Low Breakdown & Trend Continuation Short): High-velocity 5m candle close BELOW Day Low 81,780.47 and 2H Swing Low 81,786.04 confirming trend breakdown. | TP: 81,650.00 / 81,500.00 | SL: 81,890.00 | 💡 Buy 81800 PE + Sell 81600 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261118_133308",
     "timestamp": "2026-11-18T13:33:08+05:30",
     "timeDisplay": "01:33 PM, Nov 18",
