@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-19T13:47:16+05:30",
+    "timeDisplay": "01:47 PM, Nov 19",
+    "price": "25347.0",
+    "bias": "bullish",
+    "behavior": "[THU 13:47] [B1]: BACKUP (Equal Lows SSL): Sweep below 25344.55 and 5m reclaim close above 25347.00",
+    "tp": "25378.00 / 25400.00",
+    "sl": "25323.00",
+    "status": "na",
+    "spread": "Buy 25300 CE (23-Nov) @ ~Rs 174 (Delta 0.58, IV 13.1%) | Prem SL ~Rs 160 (-8%) | TP1 ~Rs 192 (+10%) | TP2 ~Rs 206 (+18%) | Option R:R 1:1.3 / 1:2.2 | Theta ~-Rs 3.3/hr | Risk/lot ~Rs 918"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:47:16+05:30",
+    "timeDisplay": "01:47 PM, Nov 19",
+    "price": "25402.0",
+    "bias": "bullish",
+    "behavior": "[THU 13:47] [B2]: \u2605 PRIMARY (1H Shelf High): 5m candle body close above 25402.00",
+    "tp": "25435.00 / 25465.00",
+    "sl": "25377.00",
+    "status": "na",
+    "spread": "Buy 25400 CE (23-Nov) @ ~Rs 147 (Delta 0.53, IV 12.7%) | Prem SL ~Rs 133 (-9%) | TP1 ~Rs 164 (+12%) | TP2 ~Rs 182 (+24%) | Option R:R 1:1.3 / 1:2.6 | Theta ~-Rs 3.2/hr | Risk/lot ~Rs 870"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:47:16+05:30",
+    "timeDisplay": "01:47 PM, Nov 19",
+    "price": "25394.0",
+    "bias": "bearish",
+    "behavior": "[THU 13:47] [S1]: \u2605 PRIMARY (1H Shelf High): Sweep above 25397.70 and 5m rejection close below 25394.00",
+    "tp": "25363.00 / 25344.00",
+    "sl": "25418.00",
+    "status": "na",
+    "spread": "Buy 25400 PE (23-Nov) @ ~Rs 122 (Delta 0.48, IV 12.0%) | Prem SL ~Rs 110 (-10%) | TP1 ~Rs 137 (+12%) | TP2 ~Rs 147 (+21%) | Option R:R 1:1.3 / 1:2.2 | Theta ~-Rs 2.3/hr | Risk/lot ~Rs 756"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:47:16+05:30",
+    "timeDisplay": "01:47 PM, Nov 19",
+    "price": "25342.0",
+    "bias": "bearish",
+    "behavior": "[THU 13:47] [S2]: BACKUP (1H Shelf Low): 5m candle body close below 25342.00",
+    "tp": "25310.00 / 25280.00",
+    "sl": "25366.00",
+    "status": "na",
+    "spread": "Buy 25350 PE (23-Nov) @ ~Rs 124 (Delta 0.48, IV 12.1%) | Prem SL ~Rs 112 (-9%) | TP1 ~Rs 140 (+13%) | TP2 ~Rs 156 (+26%) | Option R:R 1:1.3 / 1:2.7 | Theta ~-Rs 2.4/hr | Risk/lot ~Rs 761"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-19T13:32:22+05:30",
     "timeDisplay": "01:32 PM, Nov 19",
     "price": "25348.0",
@@ -3243,6 +3291,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261119_134719",
+    "timestamp": "2026-11-19T13:47:19+05:30",
+    "timeDisplay": "01:47 PM, Nov 19",
+    "spot": "25386.70",
+    "trigger": "Structural Invalidation (+80.6 pts incremental shift from previous trigger 25306.40",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:45 PM IST - Nov 19, 2026 | Spot: 25386.70 | Trigger: Structural Invalidation (+80.6 pts incremental shift from previous trigger 25306.40))\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict Chop Zone: 25344.55 (1H Shelf Low / Equal Lows SSL) to 25397.70 (1H Shelf High / Day High), anchored by 1H Micro-EQ 25371.12. Option buyers must avoid initiating breakout or momentum entries inside this 53-point consolidation corridor while price compresses along the 5m 9-EMA.\n- Session Note: European Open / Afternoon Trend window (13:15-14:45 IST). While directional momentum accelerates during this window, taking market orders inside the 25363.43 (2H Swing-EQ) to 25379.10 (Parabolic Ignition OB) band invites severe theta burn (~3.1 Rs/hr) and wick traps. Wait strictly for shelf boundary breakout or post-sweep reclaim confirmation.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze (Upside Breakout): 5m candle body close firmly above Day High 25397.70 and the 25400 Call OI wall triggers cascading short-covering towards 25435.00 and 25465.00.\n- Liquidity Sweep Rejection (Fade Extremes): False-breakout wick probe above Day High 25397.70 that quickly rejects back below the 25400 Call OI wall triggers a rapid mean-reversion flush toward 2H Swing-EQ 25363.43 and 1H Shelf Low 25344.55.\n- Long-Unwinding Flush (Downside Breakdown): 5m candle body close below 1H Shelf Low 25344.55 triggers stop-loss runs across the 6-tap Equal Lows SSL pool directly down to 25310.00.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (BACKUP | Equal Lows SSL sweep long): Sweep probe below 1H Shelf Low (25344.55) into 2H Swing Low (25329.15) with immediate 5m reclaim close back above 25347.00. | TP: 25378.00 / 25400.00 | SL: 25323.00 | 💡 Buy 25300 CE (23-Nov) @ ~Rs 174 (Delta 0.58, IV 13.1%) | Prem SL ~Rs 160 (-8%) | TP1 ~Rs 192 (+10%) | TP2 ~Rs 206 (+18%) | Option R:R 1:1.3 / 1:2.2 | Theta ~-Rs 3.3/hr | Risk/lot ~Rs 918\n- [B2] BUY Setup 2 (★ PRIMARY | 1H Shelf High breakout long): 5m candle body close firmly above 25402.00 clearing 1H Shelf High (25397.70) and 25400 Call OI wall. | TP: 25435.00 / 25465.00 | SL: 25377.00 | 💡 Buy 25400 CE (23-Nov) @ ~Rs 147 (Delta 0.53, IV 12.7%) | Prem SL ~Rs 133 (-9%) | TP1 ~Rs 164 (+12%) | TP2 ~Rs 182 (+24%) | Option R:R 1:1.3 / 1:2.6 | Theta ~-Rs 3.2/hr | Risk/lot ~Rs 870\n- [S1] SELL Setup 1 (★ PRIMARY | 1H Shelf High rejection/sweep short): Liquidity sweep wick above Day High (25397.70) / 25400 Call OI wall followed by a 5m rejection close back below 25394.00. | TP: 25363.00 / 25344.00 | SL: 25418.00 | 💡 Buy 25400 PE (23-Nov) @ ~Rs 122 (Delta 0.48, IV 12.0%) | Prem SL ~Rs 110 (-10%) | TP1 ~Rs 137 (+12%) | TP2 ~Rs 147 (+21%) | Option R:R 1:1.3 / 1:2.2 | Theta ~-Rs 2.3/hr | Risk/lot ~Rs 756\n- [S2] SELL Setup 2 (BACKUP | 1H Shelf Low breakdown short): 5m candle body close firmly below 25342.00 breaking 1H Shelf Low (25344.55) and Equal Lows SSL cluster. | TP: 25310.00 / 25280.00 | SL: 25366.00 | 💡 Buy 25350 PE (23-Nov) @ ~Rs 124 (Delta 0.48, IV 12.1%) | Prem SL ~Rs 112 (-9%) | TP1 ~Rs 140 (+13%) | TP2 ~Rs 156 (+26%) | Option R:R 1:1.3 / 1:2.7 | Theta ~-Rs 2.4/hr | Risk/lot ~Rs 761"
+  },
+  {
     "id": "NIFTY_20261119_133224",
     "timestamp": "2026-11-19T13:32:24+05:30",
     "timeDisplay": "01:32 PM, Nov 19",
