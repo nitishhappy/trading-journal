@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-19T13:04:01+05:30",
+    "timeDisplay": "01:04 PM, Nov 19",
+    "price": "25334.0",
+    "bias": "bullish",
+    "behavior": "[THU 13:04] [B1]: \u2605 PRIMARY (1H Shelf Low / Equal Lows SSL): 5m sweep below 25334.00 and bullish reclaim close",
+    "tp": "25360.50 / 25387.00",
+    "sl": "25312.00",
+    "status": "na",
+    "spread": "Buy 25300 CE (23-Nov) @ ~Rs 174 (Delta 0.56, IV 13.6%) | Prem SL ~Rs 161 (-7%) | TP1 ~Rs 188 (+8%) | TP2 ~Rs 204 (+18%) | Option R:R 1:1.1 / 1:2.4 | Theta ~-Rs 3.4/hr | Risk/lot ~Rs 825"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:04:01+05:30",
+    "timeDisplay": "01:04 PM, Nov 19",
+    "price": "25387.0",
+    "bias": "bullish",
+    "behavior": "[THU 13:04] [B2]: BACKUP (1H Shelf High / Day High): 5m candle close above 25387.00 clearing PDH 25390.80 and Call OI wall",
+    "tp": "25500.00 / 25700.00",
+    "sl": "25360.50",
+    "status": "na",
+    "spread": "Buy 25350 CE (23-Nov) @ ~Rs 176 (Delta 0.56, IV 13.6%) | Prem SL ~Rs 161 (-9%) | TP1 ~Rs 245 (+40%) | TP2 ~Rs 399 (+127%) | Option R:R 1:4.6 / 1:14.7 | Theta ~-Rs 3.4/hr | Risk/lot ~Rs 986"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:04:01+05:30",
+    "timeDisplay": "01:04 PM, Nov 19",
+    "price": "25387.0",
+    "bias": "bearish",
+    "behavior": "[THU 13:04] [S1]: \u2605 PRIMARY (Equal Highs BSL / 1H Shelf High): 5m sweep above 25387.00/25390.80 and bearish rejection close back below",
+    "tp": "25360.50 / 25334.00",
+    "sl": "25409.00",
+    "status": "na",
+    "spread": "Buy 25400 PE (23-Nov) @ ~Rs 132 (Delta 0.49, IV 12.6%) | Prem SL ~Rs 121 (-8%) | TP1 ~Rs 145 (+10%) | TP2 ~Rs 159 (+21%) | Option R:R 1:1.2 / 1:2.5 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 712"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:04:01+05:30",
+    "timeDisplay": "01:04 PM, Nov 19",
+    "price": "25334.0",
+    "bias": "bearish",
+    "behavior": "[THU 13:04] [S2]: BACKUP (1H Shelf Low / 2H Swing-EQ): 5m candle close below 25334.00 confirming breakdown",
+    "tp": "25300.00 / 25245.90",
+    "sl": "25360.50",
+    "status": "na",
+    "spread": "Buy 25350 PE (23-Nov) @ ~Rs 135 (Delta 0.49, IV 12.7%) | Prem SL ~Rs 121 (-10%) | TP1 ~Rs 152 (+13%) | TP2 ~Rs 182 (+35%) | Option R:R 1:1.3 / 1:3.6 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 854"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-19T12:02:12+05:30",
     "timeDisplay": "12:02 PM, Nov 19",
     "price": "25295.0",
@@ -3195,6 +3243,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261119_130404",
+    "timestamp": "2026-11-19T13:04:04+05:30",
+    "timeDisplay": "01:04 PM, Nov 19",
+    "spot": "25374.70",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $25374.95 > Max Plan Target $25368.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (01:00 PM IST - Nov 19, 2026 | Spot: 25374.70 | Trigger: Level Exhaustion Breakout (NIFTY Spot $25374.95 > Max Plan Target $25368.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Immediate Range Envelope: 25334.00 (1H Shelf Low / Equal Lows SSL) to 25387.00 (1H Shelf High / Equal Highs BSL / Day High), centered on the 1H Micro-EQ at 25360.50 and the Green 5m 9-EMA (25363.58).\n- Session Hazard: Active Mid-Day Lunch Chop (11:30-13:15 IST) is an aggressive theta burn zone where ATM option premiums decay rapidly while spot rotates tightly inside the consolidation shelf.\n- Tactical Directive: Stand aside from directional initiations between 25350.00 and 25375.00; option buyers must demand liquidity sweeps and candle-close reclaims at outer shelf extremes (25334.00 / 25387.00) or wait for post-13:15 session expansion.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze Expansion (Decisive 5m close above Day High 25387.00 and PDH 25390.80): Structural acceptance above 25390.80 directly threatens the 8.58M Call OI wall at 25400.00, triggering rapid short-covering panic toward the 11.05M Call OI wall at 25500.00.\n- Long-Unwinding Liquidity Flush (Decisive 5m close below 1H Shelf Low 25334.00 and 2H Swing-EQ 25339.00): A clean breakdown below the triple-tap Equal Lows at 25334.00 triggers stop-loss cascades from trapped shelf buyers, flushing spot rapidly toward Put OI Floor 25300.00 and Macro 50% Daily Equilibrium at 25245.90.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | 1H Shelf Low / Equal Lows SSL pullback/sweep long): 5m candle sweep wick below 25334.00 followed by a decisive bullish reclaim close at 25334.00. | TP: 25360.50 / 25387.00 | SL: 25312.00 | 💡 Buy 25300 CE (23-Nov) @ ~Rs 174 (Delta 0.56, IV 13.6%) | Prem SL ~Rs 161 (-7%) | TP1 ~Rs 188 (+8%) | TP2 ~Rs 204 (+18%) | Option R:R 1:1.1 / 1:2.4 | Theta ~-Rs 3.4/hr | Risk/lot ~Rs 825\n- [B2] BUY Setup 2 (BACKUP | 1H Shelf High / Day High breakout long): decisive 5m candle close above 25387.00 clearing PDH 25390.80 and confirming Call OI wall-break. | TP: 25500.00 / 25700.00 | SL: 25360.50 | 💡 Buy 25350 CE (23-Nov) @ ~Rs 176 (Delta 0.56, IV 13.6%) | Prem SL ~Rs 161 (-9%) | TP1 ~Rs 245 (+40%) | TP2 ~Rs 399 (+127%) | Option R:R 1:4.6 / 1:14.7 | Theta ~-Rs 3.4/hr | Risk/lot ~Rs 986\n- [S1] SELL Setup 1 (★ PRIMARY | Equal Highs BSL / 1H Shelf High rejection/sweep short): 5m stop-hunt sweep above 25387.00/25390.80 followed by a bearish rejection close back below 25387.00. | TP: 25360.50 / 25334.00 | SL: 25409.00 | 💡 Buy 25400 PE (23-Nov) @ ~Rs 132 (Delta 0.49, IV 12.6%) | Prem SL ~Rs 121 (-8%) | TP1 ~Rs 145 (+10%) | TP2 ~Rs 159 (+21%) | Option R:R 1:1.2 / 1:2.5 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 712\n- [S2] SELL Setup 2 (BACKUP | 1H Shelf Low / 2H Swing-EQ breakdown short): decisive 5m candle close below 25334.00 confirming structural breakdown of 1H shelf. | TP: 25300.00 / 25245.90 | SL: 25360.50 | 💡 Buy 25350 PE (23-Nov) @ ~Rs 135 (Delta 0.49, IV 12.7%) | Prem SL ~Rs 121 (-10%) | TP1 ~Rs 152 (+13%) | TP2 ~Rs 182 (+35%) | Option R:R 1:1.3 / 1:3.6 | Theta ~-Rs 2.5/hr | Risk/lot ~Rs 854"
+  },
+  {
     "id": "NIFTY_20261119_120215",
     "timestamp": "2026-11-19T12:02:15+05:30",
     "timeDisplay": "12:02 PM, Nov 19",
