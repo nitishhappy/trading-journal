@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-20T02:30:10+05:30",
+    "timeDisplay": "02:30 AM, Nov 20",
+    "price": "3654.5",
+    "bias": "bullish",
+    "behavior": "[FRI 02:30] [G_B1]: Asian Fib 1.272 & $3650 Round Sweep with 5M reclaim close",
+    "tp": "$3663.00 / $3670.00",
+    "sl": "$3648.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T02:30:10+05:30",
+    "timeDisplay": "02:30 AM, Nov 20",
+    "price": "3668.0",
+    "bias": "bullish",
+    "behavior": "[FRI 02:30] [G_B2]: 1H Shelf High & Equal Highs BSL 15M breakout acceptance",
+    "tp": "$3679.00 / $3685.50",
+    "sl": "$3661.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T02:30:10+05:30",
+    "timeDisplay": "02:30 AM, Nov 20",
+    "price": "3666.0",
+    "bias": "bearish",
+    "behavior": "[FRI 02:30] [G_S1]: Equal Highs BSL SFP sweep of $3667.00 with 5M CHoCH rejection",
+    "tp": "$3651.00 / $3647.50",
+    "sl": "$3672.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T02:30:10+05:30",
+    "timeDisplay": "02:30 AM, Nov 20",
+    "price": "3649.0",
+    "bias": "bearish",
+    "behavior": "[FRI 02:30] [G_S2]: $3650 Institutional Floor & Asian Fib 1.272 15M breakdown expansion",
+    "tp": "$3641.00 / $3633.00",
+    "sl": "$3655.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-19T18:47:33+05:30",
     "timeDisplay": "06:47 PM, Nov 19",
     "price": "3710.5",
@@ -174,55 +218,20 @@ window.goldDailyPlanData = [
     "tp": "$3680.50 / $3674.50",
     "sl": "$3700.50",
     "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-18T20:09:51+05:30",
-    "timeDisplay": "08:09 PM, Nov 18",
-    "price": "3762.0",
-    "bias": "bullish",
-    "behavior": "[WED 20:09] [G_B1]: Asian Fib 1.272 ($3758.21) and London Low ($3759.03) sweep reclaim targeting Micro-EQ and BSL",
-    "tp": "$3772.50 / $3784.00",
-    "sl": "$3754.50",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-18T20:09:51+05:30",
-    "timeDisplay": "08:09 PM, Nov 18",
-    "price": "3791.5",
-    "bias": "bullish",
-    "behavior": "[WED 20:09] [G_B2]: Breakout above 1H Shelf High and NY Peak ($3789.71) targeting Daily EQ $3806.81",
-    "tp": "$3805.50 / $3820.00",
-    "sl": "$3784.00",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-18T20:09:51+05:30",
-    "timeDisplay": "08:09 PM, Nov 18",
-    "price": "3783.5",
-    "bias": "bearish",
-    "behavior": "[WED 20:09] [G_S1]: Equal Highs ($3784.94) and London High SFP sweep rejection with Bearish Silver SMT Divergence",
-    "tp": "$3770.50 / $3761.50",
-    "sl": "$3791.50",
-    "status": "na"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-18T20:09:51+05:30",
-    "timeDisplay": "08:09 PM, Nov 18",
-    "price": "3760.5",
-    "bias": "bearish",
-    "behavior": "[WED 20:09] [G_S2]: Breakdown below 1H Consolidation Shelf Low ($3761.26) targeting Ignition Base $3750.00",
-    "tp": "$3750.50 / $3742.50",
-    "sl": "$3768.00",
-    "status": "na"
   }
 ];
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261120_023013",
+    "timestamp": "2026-11-20T02:30:13+05:30",
+    "timeDisplay": "02:30 AM, Nov 20",
+    "spot": "3661.01",
+    "trigger": "Level Exhaustion Breakdown (GOLD Spot $3661.01 < Min Plan Target $3710.50 - Buffer $3.00",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (02:28 AM IST - Nov 20, 2026 | Spot: $3661.01 | Trigger: Level Exhaustion Breakdown (GOLD Spot $3661.01 < Min Plan Target $3710.50 - Buffer $3.00))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY) Trajectory:** DXY is holding at 103.889 in an established bullish trend above its 9/21 EMAs, exerting continuous macro headwind and capping upward momentum on XAU/USD.\n* **US 10-Year Treasury Yields:** US10Y yields remain elevated and stable at 5.05%, maintaining higher real carry costs and restricting aggressive dip-buying across non-yielding precious metals.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** No divergence detected between XAU and XAG; both metals are trading lower in full lockstep with no smart money accumulation footprint yet visible.\n* **Session Liquidity Regime:** Late NY / London Close Transition session (21:30–05:30 IST) characterized by liquidity unwind, structural mean reversion, and consolidation within local shelf boundaries.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Asian Session Liquidity Footprint:** Asian range printed $27.89 (High $3686.97 / Low $3659.08) with a 93.7% bearish body. This qualifies as a Strong Bearish Trend Engine (Body >= 60%), indicating London and NY follow-through without premature fading prior to reaching downside Asian Fib extensions.\n* **Higher Timeframe 4H CRT Structure:** 4H CRT remains decisively bearish with spot trading well below the 4H 9-EMA ($3709.60) and 21-EMA ($3724.59), tracking within the previous 4H range ($3666.76–$3717.60 | 4H EQ: $3692.18).\n* **Previous Day Benchmarks:** Previous Day Low (PDL) at $3666.76 has suffered a confirmed bearish breakdown, turning into overhead institutional supply. Previous Day High (PDH) at $3758.28 remains an untouched remote magnet.\n* **Order Blocks & Inducement Architecture:** Parabolic ignition supply base sits anchored at $3658.77 (origin of the -$5.43 flush). Retail inducement traps cluster at $3670.54–$3673.68, while true deep premium OTE sits at $3679.13–$3681.28.\n* **Microstructure Traps:** Equal Highs (BSL) clustered tightly at $3667.00 across 4 distinct taps, forming primed buy-side liquidity vulnerable to a stop-hunt sweep before rotation.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Strict Range Boundaries:** The no-trade chop zone spans from the 1H consolidation shelf low at $3653.34 to the shelf high at $3667.00.\n* **Micro-Equilibrium Anchor:** 50% Micro-EQ is pinned at $3660.17, with spot currently oscillating right at this anchor ($3661.01).\n* **Execution Directive:** Strictly avoid initiating market orders within $3655.00–$3665.00. Executions are only permitted at verified shelf liquidity edges following sweep wicks or decisive expansion closes.\n\n### 4. High Momentum / Explosive Zones:\n* **Downside Acceleration Channel:** A sustained 15M body close below the $3650.00 major psychological floor and Asian Fib 1.272 ($3651.49) opens high-velocity expansion into Asian Fib 1.414 ($3647.53) and the $3640.00 institutional round magnet.\n* **Upside Short-Covering Squeeze:** A clean sweep and reclaim above the 4-tap Equal Highs ($3667.00) or a confirmed 15M close above $3668.00 triggers short covering toward the 50% Daily Equilibrium ($3673.68) and Deep Premium OTE ($3679.13–$3681.28).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3654.50** (Sweep $3650.00–$3653.00) | **★ A+ PRIMARY [Asian Fib 1.272 & $3650 Round Sweep]:** Enter on 5M close > $3654.50 after sweeping $3651.49 / $3653.34 SSL with lower-wick absorption. | **TP1:** $3663.00 / **TP2:** $3670.00 | **$3648.00** | 1:2.4 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3668.00** Breakout | **⚠️ BACKUP [1H Shelf High & Equal Highs BSL Acceptance]:** Enter only on a full 15M body close > $3668.00 with zero upper wick exhaustion and DXY weakness. | **TP1:** $3679.00 / **TP2:** $3685.50 | **$3661.50** | 1:2.7 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3666.00** (Sweep $3667.00–$3671.00) | **★ A+ PRIMARY [Equal Highs BSL SFP & 1H Shelf Rejection]:** Enter on 5M CHoCH close < $3666.00 after sweeping $3667.00 BSL cluster with upper-wick rejection. | **TP1:** $3651.00 / **TP2:** $3647.50 | **$3672.50** | 1:2.8 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3649.00** Breakdown | **⚠️ BACKUP [$3650 Institutional Floor Breakdown]:** Enter on a decisive 15M body close < $3649.00 slicing through support with expanding volume. | **TP1:** $3641.00 / **TP2:** $3633.00 | **$3655.50** | 1:2.5 |"
+  },
+  {
     "id": "GOLD_20261119_184735",
     "timestamp": "2026-11-19T18:47:35+05:30",
     "timeDisplay": "06:47 PM, Nov 19",
@@ -257,14 +266,5 @@ window.goldDailyPlanSummary = [
     "trigger": "Level Exhaustion Breakdown (GOLD Spot $3699.57 < Min Plan Target $3760.50 - Buffer $3.00",
     "source": "AI-Gold",
     "text": "# 🪙 Gold (XAU/USD) Tactical Update (08:45 AM IST - Nov 19, 2026 | Spot: $3699.57 | Trigger: Level Exhaustion Breakdown (GOLD Spot $3699.57 < Min Plan Target $3760.50 - Buffer $3.00))\n\n1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY):** DXY 103.934 trades in a sustained bullish trend above its 9 and 21 EMAs, delivering sustained macro pressure against bullion valuations.\n* **US 10-Year Treasury Yield (US10Y):** The benchmark yield stands elevated at 5.07% in an active rising trend, raising the opportunity cost of holding physical spot gold.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** An active Bearish SMT Divergence is confirmed with Gold registering a Higher High while Silver failed to clear its prior swing high, exposing institutional distribution and a high-probability bull trap.\n* **Forex Liquidity Dynamics:** Persistent dollar strength and firm yields create strong macro headwinds, favoring sell-side liquidity sweeps and bearish trend continuation during session transition.\n\n2. SMC & Session Liquidity Confluence:\n* **Module 1 (Asian Session Liquidity Clock):** Asian range spans $62.94 between High $3757.12 and Low $3694.18 with a 64.7% bearish body. This classifies Asia as a Strong Bearish Trend Engine (body >= 60%), indicating London breaks with Asia 81.8% of the time toward downside Fibonacci extension targets (1.272 at $3677.06, 1.414 at $3668.12). Both Asian High and Low remain untouched magnets.\n* **Module 2 (HTF 4H Candle Range Theory & PDH/PDL):** Bias remains bearish with Spot ($3699.57) tracking beneath the 4H 9-EMA ($3759.72) and 21-EMA ($3796.23). While PDH at $3854.54 remains an untouched macro magnet, PDL at $3728.98 suffered an institutional breakdown. The preceding 4H candle spans $3723.97 to $3757.12 with 4H Midpoint Equilibrium anchored at $3740.55.\n* **Module 3 (Inducement vs. Deep OTE & Round Numbers):** Bullish retail inducement sits at $3733.66 to $3725.98, while true deep discount OTE sits at $3707.39 to $3712.65. Bearish rebound inducement rests at $3718.31 to $3725.98, with true deep premium OTE located at $3739.32 to $3744.58. Round-number magnets cluster at $3690.00 and $3700.00 below, and $3710.00 and $3720.00 above.\n* **Module 4 (ATR & Post-Sweep Corridor):** Live 15M ATR stands at $10.93 with typical stop-hunt overshoot wicks extending +$8.74 to +$15.30 beyond session extremes. A post-sweep stop-loss corridor of $7.10 to $9.50 (0.65x to 1.0x ATR) is strictly enforced after confirmation wicks close.\n\n3. Live Chop Zone / No-Trade Zone:\n* **Chop Zone Range:** $3700.00 to $3718.26 (Immediate 1H Consolidation Shelf Anchor).\n* **Structural Anchor:** The 1H consolidation shelf midpoint sits at Micro-EQ $3718.26 and overlaps with the major $3700.00 round number and 2H Swing-EQ at $3720.64.\n* **Chop Mechanics & Invalidation:** Initiating blind market orders between $3700.00 and $3718.26 exposes accounts to low-volume rotational churn and wick extraction. Execution is restricted to confirmed sweeps of shelf boundaries.\n\n4. High Momentum / Explosive Zones:\n* **Downside Expansion Zone:** Below $3692.50 (Slicing Asian Low $3694.18 and Day Low $3693.47). A sustained 15M close below this trigger unlocks institutional long liquidation toward the 1H shelf floor ($3689.60) and the Asian 1.272 downside extension ($3677.06).\n* **Upside Short-Covering Ignition Zone:** Above $3720.00 to $3722.50 (Clearing Parabolic Ignition Order Block and 1H Micro-EQ $3718.26). Reclaiming this zone with volume forces short covering toward the 4H Midpoint Equilibrium ($3740.55).\n\n5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3695.50** (Sweep $3689.60 - $3693.47) | **★ A+ PRIMARY [Asian Low & Shelf SSL SFP]:** Enter on 5M close > $3695.50 after sweeping $3693.47 SSL with lower-wick absorption. | **TP1:** $3707.50 / **TP2:** $3717.50 | **$3687.50** | 1:2.8 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3722.50** Breakout | **⚠️ BACKUP [Bearish Supply Base Breakout]:** Enter on full 15M body close > $3722.50 with zero upper wick exhaustion and DXY pullback. | **TP1:** $3739.50 / **TP2:** $3756.50 | **$3714.50** | 1:2.2 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3718.50** (Sweep $3720.00 - $3722.50) | **★ A+ PRIMARY [Supply Base & 1H Micro-EQ SFP]:** Enter on 5M CHoCH close < $3718.50 after sweeping $3720.00 BSL with DXY headwind. | **TP1:** $3700.50 / **TP2:** $3680.50 | **$3726.50** | 1:2.3 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3692.50** Breakdown | **⚠️ BACKUP [Asian Low & Day Low Breakdown]:** Enter on decisive 15M close < $3692.50 slicing support with volume toward Fib 1.272. | **TP1:** $3680.50 / **TP2:** $3674.50 | **$3700.50** | 1:2.3 |"
-  },
-  {
-    "id": "GOLD_20261118_200953",
-    "timestamp": "2026-11-18T20:09:53+05:30",
-    "timeDisplay": "08:09 PM, Nov 18",
-    "spot": "3766.03",
-    "trigger": "Structural Invalidation (-23.0 pts incremental shift from previous trigger 3789.04",
-    "source": "AI-Gold",
-    "text": "# 🪙 Gold (XAU/USD) Tactical Update (08:07 PM IST - Nov 18, 2026 | Spot: $3766.03 | Trigger: Structural Invalidation (-23.0 pts incremental shift from previous trigger 3789.04))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY):** 103.818 trading in a bullish structural trend above its 9-EMA and 21-EMA, maintaining a persistent macro headwind against XAU/USD upside expansion.\n* **US 10-Year Treasury Yield (US10Y):** 5.08% softening on intraday prints, providing an offsetting macro tailwind that relieves aggressive selling pressure on non-yielding bullion.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** 🔴 BEARISH SMT DIVERGENCE ACTIVE: Gold printed a Higher High while Silver (XAG) failed to break its prior high, signaling an institutional bull trap and high-probability reversal short signature.\n* **Macro Session Bias:** New York Killzone & COMEX Open active in a macro decompression regime below broken Previous Day Low ($3834.78), tracking within Day High ($3870.86) and Day Low ($3742.76) with macro 50% Daily Equilibrium anchored at $3806.81.\n\n### 2. SMC & Session Liquidity Confluence:\n* **3-Session Liquidity Clock:** Asian session established a Strong Bearish Trend Engine (Range $69.64, Body 97.3%) dropping from Asian High $3846.79 to Asian Low $3777.15. Asian High remains an untouched resting buy-side liquidity magnet. Asian Low was swept and accepted below down to $3744.39, fulfilling Asian Downside Fib 1.272 ($3758.21) and nearing Fib 1.414 ($3748.32). London session established High at $3786.80 and Low at $3759.03 (50% EQ: $3772.91). In New York, London High was swept to $3789.71 and rejected below $3786.80 (Bearish NY Reversal), while London Low was swept to $3744.39 and reclaimed above $3759.03 (Bullish NY Reversal).\n* **HTF 4H Candle Range Theory (CRT) & PDH/PDL:** PDH ($3885.77) remains an untouched magnet, while PDL ($3834.78) is cleanly broken in a bearish breakdown. 4H CRT bias is strictly Bearish with spot trading below the 4H 9-EMA ($3801.92) and 21-EMA ($3825.13). Spot is consolidating inside the previous 4H candle range envelope ($3744.39 to $3789.71) centered on the 4H Midpoint Equilibrium at $3767.05.\n* **Inducement (IDM) vs. Deep OTE Architecture:** Retail buyers face a shallow IDM trap between $3806.81 and $3821.93. True Deep Discount OTE aligns at $3770.17 to $3780.55. On rebounds, retail sellers face an IDM trap between $3791.69 and $3806.81, while institutional Deep Premium OTE sits elevated between $3833.07 and $3843.45.\n* **Institutional Round-Number Magnets:** Critical round numbers below spot cluster at $3760.00 and $3750.00 (major institutional anchor and Bullish Ignition Base $3750.01 origin of +$9.92 expansion); overhead resistance clusters sit at $3770.00 and $3780.00.\n* **Microstructure Traps:** Equal Highs (BSL) clustered tightly near $3784.94 across 2 distinct taps present severe stop-hunt SFP risk before potential mean reversion.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Strict Range Boundaries:** $3761.26 to $3784.94 (Immediate 1H Consolidation Shelf).\n* **Chop Anchor Equilibrium:** 50% Micro-EQ sits at $3773.10, closely aligned with London 50% EQ ($3772.91) and the 4H Midpoint Equilibrium ($3767.05).\n* **Execution Hazard:** Do NOT execute market orders inside the $3762.00 to $3784.00 shelf corridor. Entering inside this boundary incurs heavy churn risk from algorithmic rotational scalping between the $3784.94 2-tap Equal Highs cluster and the $3761.26 shelf floor. Await liquidity sweeps at the perimeter or confirmed candle expansion outside the shelf.\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Expansion Corridor (> $3791.50):** A decisive 15M body close clearing the London High ($3786.80) and NY Peak ($3789.71) invalidates local supply and triggers rapid short-covering acceleration toward the Macro 50% Daily Equilibrium ($3806.81) and retail IDM trap ($3821.93).\n* **Bearish Liquidity Cascade (< $3760.50):** Slicing cleanly below the 1H Consolidation Shelf Low ($3761.26) and London Low ($3759.03) unlocks rapid liquidation through Asian Downside Fib 1.272 ($3758.21) toward the Parabolic Ignition Base ($3750.01), Asian Fib 1.414 ($3748.32), and Day Low ($3742.76).\n* **Mean-Reversion SFP Snapback (< $3783.50 Rejection):** A rapid liquidity sweep of the $3784.94 Equal Highs into the London High followed by a 5M CHoCH close back below $3783.50 ignites high-velocity algorithmic selling confirmed by the active Bearish Silver SMT Divergence.\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3762.00** (Sweep $3758.00–$3760.00) | **★ A+ PRIMARY [Asian Fib 1.272 Sweep Reclaim]:** Enter on 5M close > $3762.00 after sweeping $3759.03 London Low with lower-wick absorption. | **TP1:** $3772.50 / **TP2:** $3784.00 | **$3754.50** | 1:2.9 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3791.50** Breakout | **⚠️ BACKUP [1H Shelf & NY Peak Breakout]:** Enter on 15M close > $3791.50 clearing London High $3786.80 with zero upper-wick exhaustion. | **TP1:** $3805.50 / **TP2:** $3820.00 | **$3784.00** | 1:3.8 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3783.50** (Sweep $3785.00–$3789.71) | **★ A+ PRIMARY [Equal Highs BSL & Bearish SMT SFP]:** Enter on 5M CHoCH close < $3783.50 after sweeping $3784.94 Equal Highs into DXY strength. | **TP1:** $3770.50 / **TP2:** $3761.50 | **$3791.50** | 1:2.8 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3760.50** Breakdown | **⚠️ BACKUP [1H Shelf Low Breakdown]:** Enter on decisive 15M close < $3760.50 slicing support with expanding volume toward $3750. | **TP1:** $3750.50 / **TP2:** $3742.50 | **$3768.00** | 1:2.4 |"
   }
 ];
