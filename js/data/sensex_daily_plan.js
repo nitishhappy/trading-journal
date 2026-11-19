@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-19T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Nov 19",
+    "price": "82425",
+    "bias": "bullish",
+    "behavior": "[THU 13:31] [B1]: After 1:30 PM IST (Phase 3 Gamma Zone): Sweep below Equal Lows (82,419.46) into 82,380-82,400 followed by 5m bullish close back ABOVE 82,425",
+    "tp": "82,500 / 82,560",
+    "sl": "82,370",
+    "status": "na",
+    "spread": "Buy 82400 CE + Sell 82600 CE (0-DTE Today) | R:R: ~2.50 | Risk: ~12.0% | TP1: +22.0% | TP2: +38.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Nov 19",
+    "price": "82575",
+    "bias": "bullish",
+    "behavior": "[THU 13:31] [B2]: After 1:30 PM IST (Phase 3 Gamma Zone): Sustained 5m close ABOVE 82,575 clearing Day High (82,573.09) with Call unwinding confirming breakout",
+    "tp": "82,750 / 82,900",
+    "sl": "82,480",
+    "status": "na",
+    "spread": "Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Nov 19",
+    "price": "82520",
+    "bias": "bearish",
+    "behavior": "[THU 13:31] [S1]: After 1:30 PM IST (Phase 3 Gamma Zone): Failed test above Day High (82,573.09) with 5m bearish close below 82,520 inside Supply Base",
+    "tp": "82,450 / 82,400",
+    "sl": "82,585",
+    "status": "na",
+    "spread": "Buy 82500 PE + Sell 82300 PE (0-DTE Today) | R:R: ~2.40 | Risk: ~11.5% | TP1: +20.5% | TP2: +36.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T13:31:10+05:30",
+    "timeDisplay": "01:31 PM, Nov 19",
+    "price": "82390",
+    "bias": "bearish",
+    "behavior": "[THU 13:31] [S2]: After 1:30 PM IST (Phase 3 Gamma Zone): Decisive 5m close BELOW 82,390 breaking 1H shelf with Put unwinding confirming flush",
+    "tp": "82,250 / 82,100",
+    "sl": "82,480",
+    "status": "na",
+    "spread": "Buy 82400 PE + Sell 82200 PE (Next Wk) | R:R: ~2.65 | Risk: ~8.2% | TP1: +18.8% | TP2: +34.0%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-19T12:02:03+05:30",
     "timeDisplay": "12:02 PM, Nov 19",
     "price": "82250",
@@ -814,54 +862,6 @@ window.sensexDailyPlanData = [
     "sl": "81,880",
     "status": "na",
     "spread": "Buy 81800 PE + Sell 81600 PE (Next Wk) | R:R: ~2.65 | Risk: ~8.5% | TP1: +18.8% | TP2: +34.0%"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-12T13:31:14+05:30",
-    "timeDisplay": "01:31 PM, Nov 12",
-    "price": "82000",
-    "bias": "bullish",
-    "behavior": "[THU 13:31] [B1]: [Phase: 13:30-15:15 IST Gamma / Squeeze Zone] Sustained 5m close ABOVE 82,000 Call Wall with active short covering",
-    "tp": "82,107 / 82,200 / 82,325",
-    "sl": "81,920",
-    "status": "na",
-    "spread": "Buy 81,900 CE + Sell 82,100 CE (0-DTE Today) | R:R: ~2.60 | Risk: ~14.0% | TP1: +25.0% | TP2: +46.0%"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-12T13:31:14+05:30",
-    "timeDisplay": "01:31 PM, Nov 12",
-    "price": "81825",
-    "bias": "bullish",
-    "behavior": "[THU 13:31] [B2]: [Phase: 13:30-15:15 IST Mean Reversion] Liquidity sweep probe below 81,772 SSL followed by 5m reclaim above 81,825",
-    "tp": "81,900 / 81,950 / 82,000",
-    "sl": "81,745",
-    "status": "na",
-    "spread": "Buy 81,800 CE + Sell 82,000 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-12T13:31:14+05:30",
-    "timeDisplay": "01:31 PM, Nov 12",
-    "price": "81750",
-    "bias": "bearish",
-    "behavior": "[THU 13:31] [S1]: [Phase: 13:30-15:15 IST Gamma / Squeeze Zone] Sustained 5m close BELOW 81,750 breaking Equal Lows shelf into long unwinding",
-    "tp": "81,650 / 81,576 / 81,500",
-    "sl": "81,830",
-    "status": "na",
-    "spread": "Buy 81,800 PE + Sell 81,600 PE (0-DTE Today) | R:R: ~2.55 | Risk: ~15.0% | TP1: +24.0% | TP2: +44.0%"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-12T13:31:14+05:30",
-    "timeDisplay": "01:31 PM, Nov 12",
-    "price": "81970",
-    "bias": "bearish",
-    "behavior": "[THU 13:31] [S2]: [Phase: 13:30-15:15 IST Range Defense] Stop-hunt into 81,970 BSL failing at 82,000 wall with 5m close back below 81,940",
-    "tp": "81,870 / 81,825 / 81,775",
-    "sl": "82,020",
-    "status": "na",
-    "spread": "Buy 82,000 PE + Sell 81,800 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
   },
   {
     "source": "AI",
@@ -2003,6 +2003,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261119_133113",
+    "timestamp": "2026-11-19T13:31:13+05:30",
+    "timeDisplay": "01:31 PM, Nov 19",
+    "spot": "82501.12",
+    "trigger": "Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (01:30 PM IST - Nov 19, 2026 | Spot: 82501.12 | Trigger: Scheduled 01:30 PM Update (Pre-Closing Breakout Mapping))\n\n3. Live Chop Zone / No-Trade Zone:\n- Microstructure Pin Zone (82,420.00 – 82,570.00): The index is trapped inside the 1H consolidation shelf defined by equal lows at 82,419.46 and swing highs at 82,572.57, anchored directly at the 50% Micro-Equilibrium of 82,496.02 and the 82,500 Max Pain strike.\n- Gamma Pinning Friction at 82,500: With 5,991,480 Call OI (largest Call wall, +4.15M added today) sitting directly on top of 82,500, option writers are aggressively anchoring spot near 82,500 Max Pain. Scalping inside this 150-point corridor carries high whipsaw probability with no directional edge.\n- 0-DTE Expiry Theta Crush: At 01:30 PM IST, rapid theta decay will decimate out-of-the-money (OTM) options within 15–30 minutes of sideways consolidation. Buying strikes beyond 82,600 CE or below 82,400 PE inside the chop shelf is guaranteed premium erosion.\n- Post-1:30 PM Hero-or-Zero Squeeze Trap: Breakout attempts between 82,450 and 82,550 before 02:00 PM are vulnerable to sudden stop hunts and multi-tap fakeouts. Prefer waiting for decisive confirmation outside the 82,420–82,575 boundaries, and strictly reduce position size on expiry day.\n\n4. High Momentum / Explosive Zones:\n- [Short-Covering Gamma Squeeze] (5m close ABOVE 82,575.00): Triggered if buyers break the triple-tapped Buy-Side Liquidity (BSL) ceiling at 82,572.57 and breach the 82,600 Call wall (+3.67M OI). Panic unwinding from 82,500 and 82,600 Call writers can ignite a fast 250–350 point squeeze toward 82,750 and 82,900.\n- [Long-Unwinding Flush] (5m close BELOW 82,415.00): Triggered if the 5-tap Sell-Side Liquidity (SSL) shelf at 82,419.46 gives way alongside breakdown of the active 82,400 Put writing cushion (+5.84M OI). A break below 82,415 unlocks a rapid cascade toward the 2H Swing-EQ at 82,257.11 and the 82,200/82,000 major Put base.\n- [Judas Sweep Liquidity Spring] (Fakeout Below 82,419.46 with Immediate Reclaim): A rapid 5m spike into 82,380–82,400 that sweeps stop orders and instantly closes back above 82,425 traps aggressive late breakout shorts, triggering a sharp short-term spring back to 82,500–82,560.\n- [Stop-Hunt SFP Reversal] (Fakeout Above 82,573.09 with Immediate Rejection): A spike clearing Day High (82,573.09) that fails to hold and prints a bearish 5m close back below 82,520 traps breakout longs inside the Parabolic Ignition Order Block (82,518.82–82,558.29), initiating a fast mean reversion back toward 82,420.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Judas Sweep Reclaim of Equal Lows): [Phase 3: 13:30-15:15 Gamma/Squeeze Zone] Wait for a liquidity sweep below equal lows (82,419.46) into the 82,380-82,400 demand pocket, followed by a confirmed 5m bullish close back ABOVE 82,425. | TP: 82,500 / 82,560 | SL: 82,370 | 💡 Buy 82400 CE + Sell 82600 CE (0-DTE Today) | R:R: ~2.50 | Risk: ~12.0% | TP1: +22.0% | TP2: +38.0%.\n- [B2] BUY Setup 2 (Upper Call Wall Gamma Squeeze Breakout): [Phase 3: 13:30-15:15 Gamma/Squeeze Zone] Sustained 5m close ABOVE 82,575 clearing the Day High (82,573.09) with Call unwinding confirming institutional short covering. | TP: 82,750 / 82,900 | SL: 82,480 | 💡 Buy 82500 CE + Sell 82700 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (SFP Rejection off Day High / Bearish Supply Base): [Phase 3: 13:30-15:15 Gamma/Squeeze Zone] Liquidity poke above 82,573.09 that fails to accept and rejects with a 5m bearish engulfing close below 82,520 inside the Parabolic Ignition Supply Base. | TP: 82,450 / 82,400 | SL: 82,585 | 💡 Buy 82500 PE + Sell 82300 PE (0-DTE Today) | R:R: ~2.40 | Risk: ~11.5% | TP1: +20.5% | TP2: +36.0%.\n- [S2] SELL Setup 2 (Long-Unwinding Shelf Breakdown): [Phase 3: 13:30-15:15 Gamma/Squeeze Zone] Decisive 5m close BELOW 82,390 breaking the 1H consolidation shelf and confirming unwinding across 82,400/82,300 Put strikes. | TP: 82,250 / 82,100 | SL: 82,480 | 💡 Buy 82400 PE + Sell 82200 PE (Next Wk) | R:R: ~2.65 | Risk: ~8.2% | TP1: +18.8% | TP2: +34.0%."
+  },
+  {
     "id": "SENSEX_20261119_120207",
     "timestamp": "2026-11-19T12:02:07+05:30",
     "timeDisplay": "12:02 PM, Nov 19",
