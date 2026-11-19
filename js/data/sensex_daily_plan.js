@@ -1,6 +1,54 @@
 window.sensexDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-19T14:32:39+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "82900",
+    "bias": "bullish",
+    "behavior": "[THU 14:32] [B1]: After 1:30 PM IST (Gamma Squeeze Phase): 5m close ABOVE 82,900 clearing Day High 82,886.83 to trigger short-covering toward 83,000 Call Wall",
+    "tp": "83,050 / 83,200",
+    "sl": "82,820",
+    "status": "na",
+    "spread": "Buy 82,800 CE + Sell 83,000 CE (0-DTE Today) | R:R: ~2.60 | Risk: ~12.0% | TP1: +22.5% | TP2: +39.0%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T14:32:39+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "82700",
+    "bias": "bullish",
+    "behavior": "[THU 14:32] [B2]: After 1:30 PM IST (Dip-Reclaim Phase): Bullish rejection off 82,700 major Put Floor (+6.25M OI added) targeting 82,900 / 83,050",
+    "tp": "82,900 / 83,050",
+    "sl": "82,630",
+    "status": "na",
+    "spread": "Buy 82,700 CE + Sell 82,900 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T14:32:39+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "82700",
+    "bias": "bearish",
+    "behavior": "[THU 14:32] [S1]: After 1:30 PM IST (Gamma Breakdown Phase): 5m close BELOW 82,700 Put Floor initiating long-unwinding toward 82,560 Ignition Base",
+    "tp": "82,560 / 82,450",
+    "sl": "82,770",
+    "status": "na",
+    "spread": "Buy 82,800 PE + Sell 82,600 PE (0-DTE Today) | R:R: ~2.55 | Risk: ~12.5% | TP1: +21.5% | TP2: +37.5%"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T14:32:39+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "83000",
+    "bias": "bearish",
+    "behavior": "[THU 14:32] [S2]: After 1:30 PM IST (Supply Wall Rejection Phase): Bearish rejection at 83,000 Call Wall (6.95M OI) with heavy writing defense targeting mean reversion to 82,800 Max Pain",
+    "tp": "82,800 / 82,650",
+    "sl": "83,080",
+    "status": "na",
+    "spread": "Buy 82,900 PE + Sell 82,700 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-19T13:31:10+05:30",
     "timeDisplay": "01:31 PM, Nov 19",
     "price": "82425",
@@ -2003,6 +2051,15 @@ window.sensexDailyPlanData = [
 
 window.sensexDailyPlanSummary = [
 {
+    "id": "SENSEX_20261119_143242",
+    "timestamp": "2026-11-19T14:32:42+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "spot": "82856.02",
+    "trigger": "Extreme Directional Surge (355 pts move >= 330 pts threshold",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ BSE SENSEX Intraday Tactical Update (02:30 PM IST - Nov 19, 2026 | Spot: 82856.02 | Trigger: Extreme Directional Surge (355 pts move >= 330 pts threshold))\n\n3. Live Chop Zone / No-Trade Zone:\n- Range: 82,750 – 82,880 (Spot Pin Buffer anchored by 82,800 Max Pain Strike & 1H Shelf High 82,775.41).\n- Inside this 130-pt band, price is caught between heavy intraday Call writing defense at 82,900 / 83,000 and the 82,700 Put floor, creating intense two-way compression around the 82,800 Max Pain anchor.\n- 0-DTE Theta Decay Warning: Severe, non-linear theta crush is active across all near-the-money options (82,800 / 82,900 strikes); directional buying inside this band carries extreme risk of rapid premium depletion.\n- Gamma-Pinning Mechanics: Institutional straddle/strangle sellers are actively pinning the index near 82,800 Max Pain to expire maximum contracts worthless; expect sharp mean-reverting whipsaws on any unconfirmed micro-probes.\n- Post-1:30 PM Hero-or-Zero Risk: Late-session gamma spikes can wipe out unhedged option buyers within minutes; strictly avoid chasing breakouts without a confirmed 5-minute candle close.\n- Capital Preservation Rule: Reduce position sizing by 50% on this expiry session and strictly wait for boundary wall breaches before deploying capital.\n\n4. High Momentum / Explosive Zones:\n- [Bullish Gamma Squeeze Expansion] (5m Close Above 82,900 / Day High 82,886.83): A decisive 5-minute candle close above 82,900 breaches Day High (82,886.83) and forces aggressive short-covering among the 4.93M fresh 83,000 Call writers. Acceleration past 83,000 unlocks an explosive 200–300 pt gamma expansion toward 83,100 and 83,200.\n- [Bearish Long Unwinding Breakdown] (5m Close Below 82,700 Put Floor): A sustained 5-minute close below 82,700 breaches the primary intraday support (+6.25M Put OI added today), triggering rapid long-unwinding toward 82,600 and the 82,564.65 Parabolic Ignition Order Block base.\n- [Judas Liquidity Sweep & Spring Reclaim] (Liquidity Sweep Below 82,445.80 Equal Lows): A sharp downward probe taking out the 82,445.80 SSL cluster (2-tap shelf) that immediately prints a 5-minute hammer or bullish reclaim back above 82,500 traps breakout bears and primes an institutional mean-reversion spring back to 82,750–82,850.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (Phase: 13:30-15:15 Power Hour Gamma Squeeze): 5-minute candle close ABOVE 82,900 with volume expansion confirming Day High breakout. | TP: 83,050 / 83,200 | SL: 82,820 | 💡 Buy 82,800 CE + Sell 83,000 CE (0-DTE Today) | R:R: ~2.60 | Risk: ~12.0% | TP1: +22.5% | TP2: +39.0%.\n- [B2] BUY Setup 2 (Phase: 13:30-15:15 Dip-to-Support Institutional Reclaim): Bullish rejection / hammer off 82,700 Put Floor with Put OI defense. | TP: 82,900 / 83,050 | SL: 82,630 | 💡 Buy 82,700 CE + Sell 82,900 CE (Next Wk) | R:R: ~2.80 | Risk: ~7.8% | TP1: +19.6% | TP2: +35.2%.\n- [S1] SELL Setup 1 (Phase: 13:30-15:15 Power Hour Long-Unwinding Scalp): 5-minute candle close BELOW 82,700 Put floor confirming shelf breakdown. | TP: 82,560 / 82,450 | SL: 82,770 | 💡 Buy 82,800 PE + Sell 82,600 PE (0-DTE Today) | R:R: ~2.55 | Risk: ~12.5% | TP1: +21.5% | TP2: +37.5%.\n- [S2] SELL Setup 2 (Phase: 13:30-15:15 Supply Exhaustion & 83,000 Wall Rejection): Bearish rejection candle at 83,000 Major Call Wall with heavy writing defense. | TP: 82,800 / 82,650 | SL: 83,080 | 💡 Buy 82,900 PE + Sell 82,700 PE (Next Wk) | R:R: ~2.70 | Risk: ~8.2% | TP1: +19.1% | TP2: +34.5%."
+  },
+  {
     "id": "SENSEX_20261119_133113",
     "timestamp": "2026-11-19T13:31:13+05:30",
     "timeDisplay": "01:31 PM, Nov 19",

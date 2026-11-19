@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-19T14:32:41+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "25424.0",
+    "bias": "bullish",
+    "behavior": "[THU 14:32] [B1]: \u2605 PRIMARY (1H Micro-EQ): 5m wick test of 2H Swing-EQ (25412.95) and reclaim close above 1H Micro-EQ (25423.42)",
+    "tp": "25481.35 / 25500.00",
+    "sl": "25400.00",
+    "status": "na",
+    "spread": "Buy 25400 CE (23-Nov) @ ~Rs 172 (Delta 0.55, IV 14.1%) | Prem SL ~Rs 159 (-8%) | TP1 ~Rs 205 (+19%) | TP2 ~Rs 216 (+25%) | Option R:R 1:2.4 / 1:3.3 | Theta ~-Rs 3.6/hr | Risk/lot ~Rs 877"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T14:32:41+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "25484.0",
+    "bias": "bullish",
+    "behavior": "[THU 14:32] [B2]: BACKUP (Day High / 1H Shelf High): 5m candle body close firmly above Day High (25481.35)",
+    "tp": "25500.00 / 25700.00",
+    "sl": "25458.00",
+    "status": "na",
+    "spread": "Buy 25450 CE (23-Nov) @ ~Rs 176 (Delta 0.56, IV 13.9%) | Prem SL ~Rs 162 (-8%) | TP1 ~Rs 185 (+5%) | TP2 ~Rs 320 (+81%) | Option R:R 1:0.6 / 1:9.7 | Theta ~-Rs 3.5/hr | Risk/lot ~Rs 963 | \u26a0\ufe0f Spot TP1 R:R 0.62 < 1; Option TP1 R:R only 1:0.6 after theta/delta"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T14:32:41+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "25478.0",
+    "bias": "bearish",
+    "behavior": "[THU 14:32] [S1]: \u2605 PRIMARY (Day High / 25500 Call Wall): 5m rejection wick sweep of 25500 Call Wall and close back below Day High (25481.35)",
+    "tp": "25423.42 / 25365.50",
+    "sl": "25503.00",
+    "status": "na",
+    "spread": "Buy 25500 PE (23-Nov) @ ~Rs 127 (Delta 0.50, IV 11.7%) | Prem SL ~Rs 114 (-10%) | TP1 ~Rs 155 (+23%) | TP2 ~Rs 191 (+51%) | Option R:R 1:2.3 / 1:5.1 | Theta ~-Rs 2.3/hr | Risk/lot ~Rs 817"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-19T14:32:41+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "price": "25410.0",
+    "bias": "bearish",
+    "behavior": "[THU 14:32] [S2]: BACKUP (2H Swing-EQ): 5m candle body close firmly below 2H Swing-EQ (25412.95)",
+    "tp": "25365.50 / 25344.55",
+    "sl": "25435.00",
+    "status": "na",
+    "spread": "Buy 25450 PE (23-Nov) @ ~Rs 137 (Delta 0.52, IV 11.8%) | Prem SL ~Rs 124 (-10%) | TP1 ~Rs 162 (+18%) | TP2 ~Rs 174 (+27%) | Option R:R 1:1.8 / 1:2.8 | Theta ~-Rs 2.3/hr | Risk/lot ~Rs 854 | \u26a0\ufe0f TP1 is 103 pts away > expected rest-of-day move 101"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-19T14:17:26+05:30",
     "timeDisplay": "02:17 PM, Nov 19",
     "price": "25398.0",
@@ -3387,6 +3435,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261119_143243",
+    "timestamp": "2026-11-19T14:32:43+05:30",
+    "timeDisplay": "02:32 PM, Nov 19",
+    "spot": "25468.60",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $25468.85 > Max Plan Target $25445.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:30 PM IST - Nov 19, 2026 | Spot: 25468.60 | Trigger: Level Exhaustion Breakout (NIFTY Spot $25468.85 > Max Plan Target $25445.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Micro-Chop Compression Band (25412.95 to 25435.00): Bracketed between the 2H Swing-EQ (25412.95), 1H Micro-EQ (25423.42), and the rising 5m 9-EMA (25430.86). Inside this narrow corridor, candle overlap is frequent and rapid premium decay (ATM CE theta ~3.3 Rs/hr) severely penalizes option buyers lacking directional momentum.\n- Premature Breakout Trap Zone (25468.60 to 25481.35): Entering aggressive market longs directly beneath the Day High / 1H Shelf High (25481.35) and the major 25500 Call OI wall carries adverse risk-to-reward. Stand aside until a clean pullback or structural reclaim confirms.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze Expansion (Above 25481.35 Day High / 25500 Call Wall): A decisive 5m candle close above 25481.35 triggers stop-runs on Call writers, accelerated by heavy intraday Call unwinding (-2,855,450 contracts at 25500) and propelling an expansion toward 25700.\n- Long Liquidation Breakdown Flush (Below 25412.95 2H Swing-EQ / 25400 Put Floor): A sustained 5m close below 25412.95 breaks the 2H swing equilibrium, forcing intraday longs to unwind and precipitating a rapid drop toward the 25377.30 - 25379.10 Parabolic Ignition Order Block and 25365.50 Equal Lows (SSL) pool.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | 1H Micro-EQ pullback/sweep long): 5m candle wick tests 2H Swing-EQ (25412.95) and closes back above 1H Micro-EQ at 25424.00. | TP: 25481.35 / 25500.00 | SL: 25400.00 | 💡 Buy 25400 CE (23-Nov) @ ~Rs 172 (Delta 0.55, IV 14.1%) | Prem SL ~Rs 159 (-8%) | TP1 ~Rs 205 (+19%) | TP2 ~Rs 216 (+25%) | Option R:R 1:2.4 / 1:3.3 | Theta ~-Rs 3.6/hr | Risk/lot ~Rs 877\n- [B2] BUY Setup 2 (BACKUP | Day High / 1H Shelf High breakout long): 5m candle body closes firmly above Day High / 1H Shelf High at 25484.00 (low quality sub-1.2x R:R to 25500 Call wall; TP2 25700 stretch beyond 1-sigma move). | TP: 25500.00 / 25700.00 | SL: 25458.00 | 💡 Buy 25450 CE (23-Nov) @ ~Rs 176 (Delta 0.56, IV 13.9%) | Prem SL ~Rs 162 (-8%) | TP1 ~Rs 185 (+5%) | TP2 ~Rs 320 (+81%) | Option R:R 1:0.6 / 1:9.7 | Theta ~-Rs 3.5/hr | Risk/lot ~Rs 963 | ⚠️ Spot TP1 R:R 0.62 < 1; Option TP1 R:R only 1:0.6 after theta/delta\n- [S1] SELL Setup 1 (★ PRIMARY | Day High / 25500 Call Wall rejection/sweep short): 5m rejection wick sweeps 25500 Call Wall and closes back below Day High at 25478.00. | TP: 25423.42 / 25365.50 | SL: 25503.00 | 💡 Buy 25500 PE (23-Nov) @ ~Rs 127 (Delta 0.50, IV 11.7%) | Prem SL ~Rs 114 (-10%) | TP1 ~Rs 155 (+23%) | TP2 ~Rs 191 (+51%) | Option R:R 1:2.3 / 1:5.1 | Theta ~-Rs 2.3/hr | Risk/lot ~Rs 817\n- [S2] SELL Setup 2 (BACKUP | 2H Swing-EQ breakdown short): 5m candle body closes firmly below 2H Swing-EQ at 25410.00. | TP: 25365.50 / 25344.55 | SL: 25435.00 | 💡 Buy 25450 PE (23-Nov) @ ~Rs 137 (Delta 0.52, IV 11.8%) | Prem SL ~Rs 124 (-10%) | TP1 ~Rs 162 (+18%) | TP2 ~Rs 174 (+27%) | Option R:R 1:1.8 / 1:2.8 | Theta ~-Rs 2.3/hr | Risk/lot ~Rs 854 | ⚠️ TP1 is 103 pts away > expected rest-of-day move 101"
+  },
+  {
     "id": "NIFTY_20261119_141729",
     "timestamp": "2026-11-19T14:17:29+05:30",
     "timeDisplay": "02:17 PM, Nov 19",
