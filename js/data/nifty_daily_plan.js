@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-20T14:16:48+05:30",
+    "timeDisplay": "02:16 PM, Nov 20",
+    "price": "25695.0",
+    "bias": "bullish",
+    "behavior": "[FRI 14:16] [B1]: BACKUP (1H Shelf Low / Equal Lows): 5m sweep of 25691.30 Equal Lows followed by a 5m candle reclaim close back above 25695.00",
+    "tp": "25728.00 / 25764.50",
+    "sl": "25670.00",
+    "status": "na",
+    "spread": "Buy 25650 CE (23-Nov) @ ~Rs 151 (Delta 0.58, IV 12.7%) | Prem SL ~Rs 136 (-10%) | TP1 ~Rs 170 (+13%) | TP2 ~Rs 193 (+28%) | Option R:R 1:1.3 / 1:2.9 | Theta ~-Rs 3.8/hr | Risk/lot ~Rs 961"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T14:16:48+05:30",
+    "timeDisplay": "02:16 PM, Nov 20",
+    "price": "25768.0",
+    "bias": "bullish",
+    "behavior": "[FRI 14:16] [B2]: \u2605 PRIMARY (1H Shelf High / Day High): Confirmed 5m candle close above 25764.50 at 25768.00",
+    "tp": "25800.00 / 25835.00",
+    "sl": "25743.00",
+    "status": "na",
+    "spread": "Buy 25750 CE (23-Nov) @ ~Rs 138 (Delta 0.54, IV 12.9%) | Prem SL ~Rs 124 (-10%) | TP1 ~Rs 155 (+13%) | TP2 ~Rs 177 (+28%) | Option R:R 1:1.3 / 1:2.8 | Theta ~-Rs 3.9/hr | Risk/lot ~Rs 903"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T14:16:48+05:30",
+    "timeDisplay": "02:16 PM, Nov 20",
+    "price": "25758.0",
+    "bias": "bearish",
+    "behavior": "[FRI 14:16] [S1]: \u2605 PRIMARY (Equal Highs / Day High): Stop-Hunt SFP probe above 25764.50 with an upper rejection wick and 5m close back below 25758.00",
+    "tp": "25728.00 / 25691.30",
+    "sl": "25783.00",
+    "status": "na",
+    "spread": "Buy 25800 PE (23-Nov) @ ~Rs 126 (Delta 0.54, IV 11.9%) | Prem SL ~Rs 113 (-11%) | TP1 ~Rs 142 (+13%) | TP2 ~Rs 165 (+31%) | Option R:R 1:1.2 / 1:2.9 | Theta ~-Rs 2.8/hr | Risk/lot ~Rs 877"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T14:16:48+05:30",
+    "timeDisplay": "02:16 PM, Nov 20",
+    "price": "25688.0",
+    "bias": "bearish",
+    "behavior": "[FRI 14:16] [S2]: BACKUP (1H Shelf Low): Confirmed 5m candle-body close below 25691.30 at 25688.00",
+    "tp": "25644.10 / 25600.00",
+    "sl": "25713.00",
+    "status": "na",
+    "spread": "Buy 25700 PE (23-Nov) @ ~Rs 109 (Delta 0.50, IV 11.8%) | Prem SL ~Rs 97 (-11%) | TP1 ~Rs 132 (+21%) | TP2 ~Rs 158 (+45%) | Option R:R 1:1.8 / 1:3.9 | Theta ~-Rs 2.8/hr | Risk/lot ~Rs 807 | \u26a0\ufe0f TP1 is 112 pts away > expected rest-of-day move 98"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-20T14:04:12+05:30",
     "timeDisplay": "02:04 PM, Nov 20",
     "price": "25695.0",
@@ -3598,59 +3646,20 @@ window.dailyPlanData = [
     "sl": "24845.00",
     "status": "na",
     "spread": "Buy 24850 PE (09-Nov) @ ~Rs 164 (Delta 0.52, IV 17.1%) | Prem SL ~Rs 149 (-9%) | TP1 ~Rs 186 (+14%) | TP2 ~Rs 209 (+28%) | Option R:R 1:1.6 / 1:3.2 | Theta ~-Rs 4.1/hr | Risk/lot ~Rs 929"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-06T14:16:06+05:30",
-    "timeDisplay": "02:16 PM, Nov 06",
-    "price": "24782.0",
-    "bias": "bullish",
-    "behavior": "[FRI 14:16] [B1]: \u2605 PRIMARY (1H Micro-EQ): 5m bullish reclaim close after sweep of 24776.58",
-    "tp": "24839.90 / 24900.00",
-    "sl": "24755.00",
-    "status": "na",
-    "spread": "Buy 24750 CE (09-Nov) @ ~Rs 189 (Delta 0.55, IV 18.3%) | Prem SL ~Rs 174 (-8%) | TP1 ~Rs 221 (+17%) | TP2 ~Rs 259 (+37%) | Option R:R 1:2.1 / 1:4.6 | Theta ~-Rs 5.1/hr | Risk/lot ~Rs 997"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-06T14:16:06+05:30",
-    "timeDisplay": "02:16 PM, Nov 06",
-    "price": "24845.0",
-    "bias": "bullish",
-    "behavior": "[FRI 14:16] [B2]: BACKUP (1H Shelf High): 5m impulsive close above Day High 24839.90",
-    "tp": "24885.00 / 24920.00",
-    "sl": "24818.00",
-    "status": "na",
-    "spread": "Buy 24800 CE (09-Nov) @ ~Rs 195 (Delta 0.56, IV 18.1%) | Prem SL ~Rs 179 (-8%) | TP1 ~Rs 217 (+11%) | TP2 ~Rs 238 (+23%) | Option R:R 1:1.4 / 1:2.8 | Theta ~-Rs 5.1/hr | Risk/lot ~Rs 1,019"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-06T14:16:06+05:30",
-    "timeDisplay": "02:16 PM, Nov 06",
-    "price": "24832.0",
-    "bias": "bearish",
-    "behavior": "[FRI 14:16] [S1]: \u2605 PRIMARY (Day High / 1H Shelf High): 5m bearish rejection close below 24839.90 post-sweep",
-    "tp": "24776.58 / 24713.25",
-    "sl": "24858.00",
-    "status": "na",
-    "spread": "Buy 24850 PE (09-Nov) @ ~Rs 162 (Delta 0.50, IV 17.6%) | Prem SL ~Rs 149 (-8%) | TP1 ~Rs 191 (+18%) | TP2 ~Rs 228 (+41%) | Option R:R 1:2.1 / 1:4.9 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 874"
-  },
-  {
-    "source": "AI",
-    "timestamp": "2026-11-06T14:16:06+05:30",
-    "timeDisplay": "02:16 PM, Nov 06",
-    "price": "24708.0",
-    "bias": "bearish",
-    "behavior": "[FRI 14:16] [S2]: BACKUP (1H Shelf Low): 5m impulsive close below 24713.25",
-    "tp": "24674.20 / 24647.05",
-    "sl": "24736.00",
-    "status": "na",
-    "spread": "Buy 24750 PE (09-Nov) @ ~Rs 176 (Delta 0.52, IV 17.9%) | Prem SL ~Rs 161 (-9%) | TP1 ~Rs 194 (+10%) | TP2 ~Rs 209 (+19%) | Option R:R 1:1.2 / 1:2.2 | Theta ~-Rs 4.3/hr | Risk/lot ~Rs 980"
   }
 ];
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261120_141650",
+    "timestamp": "2026-11-20T14:16:50+05:30",
+    "timeDisplay": "02:16 PM, Nov 20",
+    "spot": "25756.15",
+    "trigger": "Level Exhaustion Breakout (NIFTY Spot $25766.70 > Max Plan Target $25752.00 + Buffer $5.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (02:15 PM IST - Nov 20, 2026 | Spot: 25756.15 | Trigger: Level Exhaustion Breakout (NIFTY Spot $25766.70 > Max Plan Target $25752.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Strict Micro-Chop Range (25715.00 - 25745.00): Price action oscillating directly between the 1H Micro-EQ (25727.90) and the 5m 9-EMA (25737.14) represents rotational equilibrium with severe two-way wick traps.\n- Option Buyer Risk Zone: Do not initiate fresh market orders inside 25715.00 - 25745.00 due to rapid intraday theta decay (ATM CE theta ~3.7 Rs per hour) and high chop probability until range boundaries are breached.\n\n4. High Momentum / Explosive Zones:\n- Bullish Squeeze Expansion (Breakout above 25764.50): A confirmed 5m close above Day High and the 2-tap Equal Highs (25764.50) forces short covering from 25750/25800 Call writers, unleashing momentum toward the 25800.00 Call OI wall.\n- Bearish Liquidity Flush (Breakdown below 25691.30): A decisive 5m close below the 3-tap Equal Lows shelf (25691.30) activates trapped stop orders and triggers an accelerated flush toward the Parabolic Ignition Base at 25644.10.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (BACKUP | 1H Shelf Low / Equal Lows pullback/sweep long): 5m liquidity sweep of Equal Lows at 25691.30 followed by a 5m candle reclaim close back above 25695.00. | TP: 25728.00 / 25764.50 | SL: 25670.00 | 💡 Buy 25650 CE (23-Nov) @ ~Rs 151 (Delta 0.58, IV 12.7%) | Prem SL ~Rs 136 (-10%) | TP1 ~Rs 170 (+13%) | TP2 ~Rs 193 (+28%) | Option R:R 1:1.3 / 1:2.9 | Theta ~-Rs 3.8/hr | Risk/lot ~Rs 961\n- [B2] BUY Setup 2 (★ PRIMARY | 1H Shelf High / Day High breakout long): Confirmed 5m candle close above 25764.50 at 25768.00. | TP: 25800.00 / 25835.00 | SL: 25743.00 | 💡 Buy 25750 CE (23-Nov) @ ~Rs 138 (Delta 0.54, IV 12.9%) | Prem SL ~Rs 124 (-10%) | TP1 ~Rs 155 (+13%) | TP2 ~Rs 177 (+28%) | Option R:R 1:1.3 / 1:2.8 | Theta ~-Rs 3.9/hr | Risk/lot ~Rs 903\n- [S1] SELL Setup 1 (★ PRIMARY | Equal Highs / Day High rejection/sweep short): Stop-Hunt SFP probe above 25764.50 with an upper rejection wick and 5m close back below 25758.00. | TP: 25728.00 / 25691.30 | SL: 25783.00 | 💡 Buy 25800 PE (23-Nov) @ ~Rs 126 (Delta 0.54, IV 11.9%) | Prem SL ~Rs 113 (-11%) | TP1 ~Rs 142 (+13%) | TP2 ~Rs 165 (+31%) | Option R:R 1:1.2 / 1:2.9 | Theta ~-Rs 2.8/hr | Risk/lot ~Rs 877\n- [S2] SELL Setup 2 (BACKUP | 1H Shelf Low breakdown short): Confirmed 5m candle-body close below 25691.30 at 25688.00. | TP: 25644.10 / 25600.00 | SL: 25713.00 | 💡 Buy 25700 PE (23-Nov) @ ~Rs 109 (Delta 0.50, IV 11.8%) | Prem SL ~Rs 97 (-11%) | TP1 ~Rs 132 (+21%) | TP2 ~Rs 158 (+45%) | Option R:R 1:1.8 / 1:3.9 | Theta ~-Rs 2.8/hr | Risk/lot ~Rs 807 | ⚠️ TP1 is 112 pts away > expected rest-of-day move 98"
+  },
+  {
     "id": "NIFTY_20261120_140413",
     "timestamp": "2026-11-20T14:04:13+05:30",
     "timeDisplay": "02:04 PM, Nov 20",
@@ -4360,14 +4369,5 @@ window.dailyPlanSummary = [
     "trigger": "Scheduled 03:45 PM Update (End of Day Close & Gap Analysis",
     "source": "AI Intraday Briefing",
     "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +2.5 / +6.0 | Confidence: Moderate (65%)\n• Bias Invalidation Floor: 24536.60 (A 15M close above 24536.60 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n# ⚡ NIFTY 50 Intraday Tactical Update (03:45 PM IST - Nov 06, 2026 | Spot: 25030.35 | Trigger: Scheduled 03:45 PM Update (End of Day Close & Gap Analysis))\n\n3. Live Chop Zone / No-Trade Zone:\n- Post-Close Execution Lock: Active session is Post-Close (15:45 IST); strictly zero new intraday option buying positions permitted as market is shut.\n- Microstructure Equilibrium Trap (24924.78 to 24980.00): Range bound between the 1H 50% Micro-EQ (24924.78) and the 25000 Call OI wall; avoid rotational entries inside this noise corridor.\n- Mid-Range Swing Buffer (24877.88 to 24924.78): No-trade consolidation band between the 2H 50% Swing-EQ (24877.88) and 1H Micro-EQ where directional edge degrades into chop.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze Expansion (Sustained 15M Candle Close Above Day High 25030.35): Decisive clearance of Day High and the massive 25000 Call OI wall (11.21M contracts) unleashes fast forced short-covering toward 25080.00 and 25150.00.\n- Long Liquidation Breakdown (Impulsive 15M Candle Close Below 1H Micro-EQ 24924.78): Loss of the 1H Micro-EQ and Bullish Ignition Base (24938.90) triggers swift stop-loss unwinding toward 2H Swing-EQ 24877.88 and 1H Shelf Low 24819.20.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | Bullish Ignition Base 24938.90 pullback/sweep long): Wait for a sweep of 24938.90 toward 24920 followed by a crisp 5m candle reclaim closing above 24942.00. | TP: 24985.00 / 25030.35 | SL: 24914.00 | 💡 Buy 24900 CE (09-Nov) @ ~Rs 153 (Delta 0.57, IV 13.7%) | Prem SL ~Rs 136 (-11%) | TP1 ~Rs 178 (+16%) | TP2 ~Rs 207 (+36%) | Option R:R 1:1.5 / 1:3.4 | Theta ~-Rs 4.0/hr | Risk/lot ~Rs 1,058\n- [B2] BUY Setup 2 (BACKUP | Day High 25030.35 breakout long): Wait for a decisive 15m candle-body close firmly above Day High 25030.35 at 25035.00 with acceptance above 25000 Call Wall. | TP: 25080.00 / 25150.00 | SL: 25008.00 | 💡 Buy 25000 CE (09-Nov) @ ~Rs 162 (Delta 0.56, IV 15.1%) | Prem SL ~Rs 146 (-10%) | TP1 ~Rs 187 (+16%) | TP2 ~Rs 233 (+44%) | Option R:R 1:1.7 / 1:4.6 | Theta ~-Rs 4.4/hr | Risk/lot ~Rs 1,004\n- [S1] SELL Setup 1 (★ PRIMARY | Day High 25030.35 rejection/sweep short): Wait for an intraday liquidity sweep above Day High 25030.35 followed by a sharp 5m rejection candle closing back below 25025.00 under the 25000 Call Wall. | TP: 24950.00 / 24877.88 | SL: 25055.00 | 💡 Buy 25050 PE (09-Nov) @ ~Rs 225 (Delta 0.50, IV 24.2%) | Prem SL ~Rs 209 (-7%) | TP1 ~Rs 264 (+17%) | TP2 ~Rs 306 (+36%) | Option R:R 1:2.4 / 1:5.1 | Theta ~-Rs 6.1/hr | Risk/lot ~Rs 1,032\n- [S2] SELL Setup 2 (BACKUP | 1H Micro-EQ 24924.78 breakdown short): Wait for an impulsive 15m candle-body breakdown closing below the 1H Micro-EQ and Bullish Ignition Base at 24920.00. | TP: 24877.88 / 24819.20 | SL: 24948.00 | 💡 Buy 24950 PE (09-Nov) @ ~Rs 218 (Delta 0.51, IV 23.3%) | Prem SL ~Rs 203 (-7%) | TP1 ~Rs 239 (+10%) | TP2 ~Rs 272 (+25%) | Option R:R 1:1.4 / 1:3.6 | Theta ~-Rs 5.8/hr | Risk/lot ~Rs 973"
-  },
-  {
-    "id": "NIFTY_20261106_151633",
-    "timestamp": "2026-11-06T15:16:33+05:30",
-    "timeDisplay": "03:16 PM, Nov 06",
-    "spot": "24941.10",
-    "trigger": "Level Exhaustion Breakout (NIFTY Spot $24938.90 > Max Plan Target $24872.00 + Buffer $5.00",
-    "source": "AI Intraday Briefing",
-    "text": "================================================================================\n🎯 DAILY MARKET BIAS & OUTLOOK\n================================================================================\n• Daily Market Bias: ⚪ NEUTRAL | Bias Score: +2.5 / +6.0 | Confidence: Moderate (65%)\n• Bias Invalidation Floor: 24536.60 (A 15M close above 24536.60 invalidates bias)\n\n📍 Tactical Directives:\n• Primary Outlook: Rotational Range Chop. Market is consolidating within 50% equilibrium.\n• Execution: Avoid breakout chasing inside opening range box. Play mean-reversion edge fades.\n\n# ⚡ NIFTY 50 Intraday Tactical Update (03:15 PM IST - Nov 06, 2026 | Spot: 24941.10 | Trigger: Level Exhaustion Breakout (NIFTY Spot $24938.90 > Max Plan Target $24872.00 + Buffer $5.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Inside the 1H Consolidation Shelf compression corridor between the 50% Micro-EQ (24868.88) and the Parabolic Ignition Base (24893.75), where directional follow-through is muted.\n- Rotational churn between 24910.00 and 24940.00 directly under the Equal Highs pool prior to explicit candle confirmation.\n- Any unconfirmed chop after 15:20 IST; closing-hour scalp window mandates hard flat exits ahead of 15:25 IST.\n\n4. High Momentum / Explosive Zones:\n- [Bearish SFP Sweep Reversal] ([Liquidity sweep above Equal Highs 24949.85]): A stop-run poke through the 2-tap Buy-Side Liquidity cluster at 24949.85 followed by an immediate close back below 24945.00 can trigger swift late-session mean reversion toward 24905.00.\n- [Bullish Extension Scalp] ([5M candle close above Equal Highs 24949.85]): Acceptance above 24949.85 initiates an aggressive squeeze of intraday Call writers toward the primary 25000 Call OI Wall (12.8M OI).\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (★ PRIMARY | Parabolic Ignition Base pullback/sweep long): 5m bullish rejection wick off 24893.75 with close back above 24898.00. | TP: 24935.00 / 24955.00 | SL: 24872.00 | 💡 Buy 24850 CE (09-Nov) @ ~Rs 228 (Delta 0.55, IV 21.7%) | Prem SL ~Rs 213 (-7%) | TP1 ~Rs 248 (+9%) | TP2 ~Rs 260 (+14%) | Option R:R 1:1.3 / 1:2.1 | Theta ~-Rs 6.1/hr | Risk/lot ~Rs 989\n- [B2] BUY Setup 2 (BACKUP | Equal Highs breakout long): 5m candle close firmly above Equal Highs 24949.85 at 24953.00 targeting 25000 Call Wall. | TP: 24988.00 / 25010.00 | SL: 24927.00 | 💡 Buy 24950 CE (09-Nov) @ ~Rs 198 (Delta 0.52, IV 21.0%) | Prem SL ~Rs 184 (-7%) | TP1 ~Rs 216 (+9%) | TP2 ~Rs 228 (+15%) | Option R:R 1:1.2 / 1:2.1 | Theta ~-Rs 5.9/hr | Risk/lot ~Rs 925\n- [S1] SELL Setup 1 (★ PRIMARY | Equal Highs rejection/sweep short): Sweep above Day High 24949.85 followed by 5m candle close back below 24945.00. | TP: 24905.00 / 24870.00 | SL: 24975.00 | 💡 Buy 24950 PE (09-Nov) @ ~Rs 151 (Delta 0.49, IV 17.2%) | Prem SL ~Rs 136 (-10%) | TP1 ~Rs 171 (+13%) | TP2 ~Rs 190 (+26%) | Option R:R 1:1.3 / 1:2.6 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 970\n- [S2] SELL Setup 2 (BACKUP | Parabolic Ignition Base breakdown short): 5m candle close decisively below Parabolic Ignition Base 24893.75 at 24890.00. | TP: 24855.00 / 24832.00 | SL: 24916.00 | 💡 Buy 24900 PE (09-Nov) @ ~Rs 155 (Delta 0.49, IV 17.4%) | Prem SL ~Rs 142 (-9%) | TP1 ~Rs 172 (+11%) | TP2 ~Rs 185 (+19%) | Option R:R 1:1.3 / 1:2.2 | Theta ~-Rs 4.2/hr | Risk/lot ~Rs 860"
   }
 ];
