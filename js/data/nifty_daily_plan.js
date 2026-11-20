@@ -1,6 +1,54 @@
 window.dailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-20T09:48:45+05:30",
+    "timeDisplay": "09:48 AM, Nov 20",
+    "price": "25435.0",
+    "bias": "bullish",
+    "behavior": "[FRI 09:48] [B1]: BACKUP (1H Micro-EQ): 5m liquidity sweep and reclaim close above 25435.00",
+    "tp": "25475.00 / 25495.00",
+    "sl": "25405.00",
+    "status": "na",
+    "spread": "Buy 25400 CE (23-Nov) @ ~Rs 124 (Delta 0.58, IV 10.1%) | Prem SL ~Rs 106 (-14%) | TP1 ~Rs 148 (+19%) | TP2 ~Rs 161 (+30%) | Option R:R 1:1.4 / 1:2.2 | Theta ~-Rs 3.0/hr | Risk/lot ~Rs 1,125"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T09:48:45+05:30",
+    "timeDisplay": "09:48 AM, Nov 20",
+    "price": "25518.0",
+    "bias": "bullish",
+    "behavior": "[FRI 09:48] [B2]: \u2605 PRIMARY (Equal Highs): 15m candle close firmly above Equal Highs/PDH 25514.30",
+    "tp": "25560.00 / 25600.00",
+    "sl": "25488.00",
+    "status": "na",
+    "spread": "Buy 25500 CE (23-Nov) @ ~Rs 126 (Delta 0.55, IV 11.4%) | Prem SL ~Rs 109 (-13%) | TP1 ~Rs 150 (+19%) | TP2 ~Rs 175 (+39%) | Option R:R 1:1.4 / 1:3.0 | Theta ~-Rs 3.3/hr | Risk/lot ~Rs 1,068"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T09:48:45+05:30",
+    "timeDisplay": "09:48 AM, Nov 20",
+    "price": "25490.0",
+    "bias": "bearish",
+    "behavior": "[FRI 09:48] [S1]: \u2605 PRIMARY (Equal Highs): 5m SFP sweep of 25514.30 rejecting back below Day High at 25490.00",
+    "tp": "25429.75 / 25368.00",
+    "sl": "25520.00",
+    "status": "na",
+    "spread": "Buy 25500 PE (23-Nov) @ ~Rs 161 (Delta 0.49, IV 17.0%) | Prem SL ~Rs 145 (-9%) | TP1 ~Rs 191 (+19%) | TP2 ~Rs 227 (+42%) | Option R:R 1:2.0 / 1:4.4 | Theta ~-Rs 4.0/hr | Risk/lot ~Rs 978"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T09:48:45+05:30",
+    "timeDisplay": "09:48 AM, Nov 20",
+    "price": "25395.0",
+    "bias": "bearish",
+    "behavior": "[FRI 09:48] [S2]: BACKUP (1H Micro-EQ): 15m breakdown close below 25400 Put Floor / 1H Micro-EQ",
+    "tp": "25345.20 / 25300.00",
+    "sl": "25425.00",
+    "status": "na",
+    "spread": "Buy 25400 PE (23-Nov) @ ~Rs 154 (Delta 0.49, IV 16.6%) | Prem SL ~Rs 139 (-10%) | TP1 ~Rs 178 (+16%) | TP2 ~Rs 204 (+33%) | Option R:R 1:1.7 / 1:3.4 | Theta ~-Rs 3.9/hr | Risk/lot ~Rs 966"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-20T09:32:17+05:30",
     "timeDisplay": "09:32 AM, Nov 20",
     "price": "25368.0",
@@ -3531,6 +3579,15 @@ window.dailyPlanData = [
 
 window.dailyPlanSummary = [
 {
+    "id": "NIFTY_20261120_094848",
+    "timestamp": "2026-11-20T09:48:48+05:30",
+    "timeDisplay": "09:48 AM, Nov 20",
+    "spot": "25489.40",
+    "trigger": "Structural Invalidation (>80.0 pts shift from Day Open 25368.00",
+    "source": "AI Intraday Briefing",
+    "text": "# ⚡ NIFTY 50 Intraday Tactical Update (09:45 AM IST - Nov 20, 2026 | Spot: 25489.40 | Trigger: Structural Invalidation (>80.0 pts shift from Day Open 25368.00))\n\n3. Live Chop Zone / No-Trade Zone:\n- Micro-Equilibrium Chop Box (25430.00 - 25470.00): Rotational dead zone centered on 1H Micro-EQ (25429.75) and Macro 50% Daily Equilibrium (25419.22), bounded by the Green 5m 9-EMA dynamic shelf above. Premium decay accelerates here due to conflicting call additions (25450 CE: +5.58M) and put additions (25450 PE: +5.78M). Option buyers must avoid initiating mid-range market orders inside this 40-point corridor.\n- 25500 Strike Straddle Pinch (25490.00 - 25514.30): Tight friction pocket directly underneath Equal Highs (25514.30) and the primary CALL OI Wall (25500: 17.76M contracts). Entering long before a confirmed structural breakout or short before an SFP rejection wick invites rapid theta bleed against the 271.60 straddle price.\n\n4. High Momentum / Explosive Zones:\n- Short-Covering Squeeze (Upside Expansion): A sustained 15m candle close above Equal Highs / PDH (25514.30) triggers forced short covering among the 17.76M contracts anchored at the 25500 Call wall, opening an explosive expansion toward 25560.00 and the 25600.00 resistance corridor.\n- Stop-Hunt SFP Liquidity Flush (Downside Mean Reversion): An aggressive 5m wick probe above Equal Highs (25514.30) that fails to hold and prints a swift rejection close back below Day High (25493.25) traps late breakout buyers, igniting a fast liquidation move down to 1H Micro-EQ (25429.75).\n- Long-Unwinding Breakdown (Panic Floor Expansion): A decisive 15m candle close below 25400 Put OI Floor and 1H Micro-EQ (25429.75) forces capitulation across 16.98M put contracts, fueling an unhindered momentum slide into the Bullish Ignition Base and Day Low at 25345.20.\n\n5. 5-Min / 15-Min Action Plan:\n- [B1] BUY Setup 1 (BACKUP | 1H Micro-EQ pullback/sweep long): 5m candle dips into 1H Micro-EQ 25429.75 / Macro 50% Daily Equilibrium 25419.22, sweeps liquidity, and prints a strong bullish reclaim close at 25435.00. | TP: 25475.00 / 25495.00 | SL: 25405.00 | 💡 Buy 25400 CE (23-Nov) @ ~Rs 124 (Delta 0.58, IV 10.1%) | Prem SL ~Rs 106 (-14%) | TP1 ~Rs 148 (+19%) | TP2 ~Rs 161 (+30%) | Option R:R 1:1.4 / 1:2.2 | Theta ~-Rs 3.0/hr | Risk/lot ~Rs 1,125\n- [B2] BUY Setup 2 (★ PRIMARY | Equal Highs breakout long): 15m candle close firmly above Equal Highs / PDH 25514.30 with body settling above 25518.00, confirming short-covering expansion through 25500 Call OI wall. | TP: 25560.00 / 25600.00 | SL: 25488.00 | 💡 Buy 25500 CE (23-Nov) @ ~Rs 126 (Delta 0.55, IV 11.4%) | Prem SL ~Rs 109 (-13%) | TP1 ~Rs 150 (+19%) | TP2 ~Rs 175 (+39%) | Option R:R 1:1.4 / 1:3.0 | Theta ~-Rs 3.3/hr | Risk/lot ~Rs 1,068\n- [S1] SELL Setup 1 (★ PRIMARY | Equal Highs rejection/sweep short): 5m candle sweeps above Equal Highs 25514.30 into 25500 Call OI wall, rejects with an upper wick, and closes back below Day High 25493.25 at 25490.00. | TP: 25429.75 / 25368.00 | SL: 25520.00 | 💡 Buy 25500 PE (23-Nov) @ ~Rs 161 (Delta 0.49, IV 17.0%) | Prem SL ~Rs 145 (-9%) | TP1 ~Rs 191 (+19%) | TP2 ~Rs 227 (+42%) | Option R:R 1:2.0 / 1:4.4 | Theta ~-Rs 4.0/hr | Risk/lot ~Rs 978\n- [S2] SELL Setup 2 (BACKUP | 1H Micro-EQ breakdown short): 15m candle breaks down and closes firmly below 25400 Put OI Floor and 1H Micro-EQ 25429.75 shelf at 25395.00. | TP: 25345.20 / 25300.00 | SL: 25425.00 | 💡 Buy 25400 PE (23-Nov) @ ~Rs 154 (Delta 0.49, IV 16.6%) | Prem SL ~Rs 139 (-10%) | TP1 ~Rs 178 (+16%) | TP2 ~Rs 204 (+33%) | Option R:R 1:1.7 / 1:3.4 | Theta ~-Rs 3.9/hr | Risk/lot ~Rs 966"
+  },
+  {
     "id": "NIFTY_20261120_093222",
     "timestamp": "2026-11-20T09:32:22+05:30",
     "timeDisplay": "09:32 AM, Nov 20",
