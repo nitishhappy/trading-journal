@@ -1,6 +1,50 @@
 window.goldDailyPlanData = [
 {
     "source": "AI",
+    "timestamp": "2026-11-20T10:46:15+05:30",
+    "timeDisplay": "10:46 AM, Nov 20",
+    "price": "3519.0",
+    "bias": "bullish",
+    "behavior": "[FRI 10:46] [G_B1]: Equal Lows Judas Sweep and 5M reclaim above $3519.00 after sweeping $3516.96 SSL",
+    "tp": "$3529.50 / $3538.00",
+    "sl": "$3511.00",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T10:46:15+05:30",
+    "timeDisplay": "10:46 AM, Nov 20",
+    "price": "3539.5",
+    "bias": "bullish",
+    "behavior": "[FRI 10:46] [G_B2]: Decisive 15M breakout close above 1H Consolidation Shelf High $3538.18 targeting OTE",
+    "tp": "$3549.50 / $3562.00",
+    "sl": "$3531.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T10:46:15+05:30",
+    "timeDisplay": "10:46 AM, Nov 20",
+    "price": "3531.5",
+    "bias": "bearish",
+    "behavior": "[FRI 10:46] [G_S1]: Bearish Supply Base SFP rejection below $3531.50 following liquidity tap of $3534.39",
+    "tp": "$3521.00 / $3513.50",
+    "sl": "$3539.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
+    "timestamp": "2026-11-20T10:46:15+05:30",
+    "timeDisplay": "10:46 AM, Nov 20",
+    "price": "3514.5",
+    "bias": "bearish",
+    "behavior": "[FRI 10:46] [G_S2]: Momentum breakdown short on 15M body close below Equal Lows $3516.96 targeting Fib extension",
+    "tp": "$3504.00 / $3490.50",
+    "sl": "$3522.50",
+    "status": "na"
+  },
+  {
+    "source": "AI",
     "timestamp": "2026-11-20T10:02:56+05:30",
     "timeDisplay": "10:02 AM, Nov 20",
     "price": "3528.5",
@@ -223,6 +267,15 @@ window.goldDailyPlanData = [
 
 window.goldDailyPlanSummary = [
 {
+    "id": "GOLD_20261120_104617",
+    "timestamp": "2026-11-20T10:46:17+05:30",
+    "timeDisplay": "10:46 AM, Nov 20",
+    "spot": "3520.93",
+    "trigger": "Structural Invalidation (-22.3 pts incremental shift from previous trigger 3543.26",
+    "source": "AI-Gold",
+    "text": "# 🪙 Gold (XAU/USD) Tactical Update (10:45 AM IST - Nov 20, 2026 | Spot: 3520.93 | Trigger: Structural Invalidation (-22.3 pts incremental shift from previous trigger 3543.26))\n\n### 1. Global Macro & Forex Mechanics:\n* **US Dollar Index (DXY) Trajectory:** DXY trades at 103.776 in a sustained bearish structure below its 9 and 21 EMAs, providing a steady macro tailwind for Gold that discourages aggressive blind shorting into major support floors.\n* **US 10-Year Treasury Yield (US10Y):** The US 10-Year yield holds flat at 5.05%, demonstrating neutral sovereign debt pressure and allowing intraday technical liquidity mechanics to dictate immediate order flow.\n* **Gold vs. Silver (XAU/XAG) SMT Divergence:** No structural SMT divergence is detected between Gold and Silver; both precious metals are tracking in tight downward sync, confirming genuine market-wide liquidation rather than an isolated stop run.\n* **Intermarket Liquidity Alignment:** While the weak dollar provides baseline support, broken Previous Day Low (PDL $3662.69) keeps high-timeframe institutions in de-risking mode, capping aggressive macro bids below overhead 4H EMAs.\n\n### 2. SMC & Session Liquidity Confluence:\n* **Asian Session Liquidity Clock:** Asian session established a high of $3621.22 and a low of $3517.87, carving a massive $103.35 expansion range with a 79.6% bearish body.\n* **Exhaustion Regime Classification:** Asian range of $103.35 significantly exceeds the $75.00 threshold, activating Playbook 3 (Extreme Volatility Exhaustion & Mean Reversion). Chasing trend continuation breakouts is strictly forbidden; market edge lies entirely in liquidity sweeps (SFP) and deep discount retracements.\n* **Untouched Liquidity Magnets:** Asian High ($3621.22) and Previous Day High ($3754.21) remain pristine buy-side liquidity (BSL) targets above, while Asian Low ($3517.87) sits directly under immediate price action as critical sell-side liquidity (SSL).\n* **4H Candle Range Theory (CRT) & Trend Context:** Spot trades well below the falling 4H 9-EMA ($3638.44) and 21-EMA ($3688.54), confirming HTF bearish dominance while operating inside the previous 4H range ($3529.46 - $3631.26 | 4H EQ: $3580.36).\n* **Microstructure Traps & Equal Lows:** Clean Equal Lows (SSL) are clustered at $3516.96 (tested twice). This cluster creates an institutional liquidity pool vulnerable to a Judas Sweep probe before any meaningful structural spring reclaim can emerge.\n* **Supply Base & Ignition Block:** The bearish supply base from $3531.98 to $3534.39 served as the parabolic ignition point for the recent -$14.64 selloff and acts as overhead dynamic resistance against intraday pullbacks.\n* **Inducement vs. Deep OTE Architecture:** Retail buyers are trapped in the shallow Inducement (IDM) zone between $3580.32 and $3599.91; true institutional premium OTE sits much higher at $3633.94 - $3647.38, while deep discount OTE rests at $3552.44 - $3565.88.\n\n### 3. Live Chop Zone / No-Trade Zone:\n* **Strict Range Boundaries:** The immediate 1H consolidation shelf between $3516.96 (Shelf Support) and $3538.18 (Shelf Resistance) constitutes an active high-risk chop zone.\n* **Micro-Equilibrium Anchor:** The 50% Micro-EQ at $3527.57 acts as a strict rotational axis where directional trades have zero statistical expectancy and elevated risk of two-way stop hunting.\n* **Tactical Execution Filter:** Stand completely flat between $3520.00 and $3531.00. Do not execute market orders inside this corridor; wait patiently for terminal shelf sweeps at the edges ($3516.96 SSL or $3534.39 Order Block) followed by clear reclaim candle closes.\n\n### 4. High Momentum / Explosive Zones:\n* **Bullish Ignition Zone ($3538.18 - $3540.00):** A decisive 15-minute body close above the 1H shelf high ($3538.18) triggers immediate institutional short covering, unlocking rapid upside momentum toward the 2H Swing High ($3554.44) and deep discount OTE ($3562.00).\n* **Bearish Flush Invalidation Corridor ($3516.92 - $3514.00):** A sustained 15-minute breakdown below Equal Lows ($3516.96) without rapid absorption triggers cascading stop-loss liquidations, opening an accelerated path toward the $3500.00 major psychological milestone and Downside 1.272 Fib Extension ($3489.76).\n\n### 5. 5-Min / 15-Min Action Plan & Triggers:\n\n| Setup ID | Strategy / Bias | Trigger Level | Confirmation Price Action | Take Profit (TP) | Stop Loss (SL) | Risk:Reward |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **[G_B1]** | 🟢 **High-Probability Long / Deep OTE Sweep** | **$3519.00** (Sweep $3512.00–$3516.00) | **★ A+ PRIMARY [Equal Lows Judas Sweep & Reclaim]:** Enter on 5M close > $3519.00 after sweeping $3516.96 SSL with lower-wick absorption. | **TP1:** $3529.50 / **TP2:** $3538.00 | **$3511.00** | 1:2.38 |\n| **[G_B2]** | 🟢 **High-Momentum Breakout Long** | **$3539.50** Breakout | **⚠️ BACKUP [1H Shelf Breakout Acceptance]:** Enter only on a full 15M body close > $3539.50 with zero upper wick exhaustion and DXY weakness. | **TP1:** $3549.50 / **TP2:** $3562.00 | **$3531.50** | 1:2.81 |\n| **[G_S1]** | 🔴 **High-Probability Short / 4H CRT SFP** | **$3531.50** (Sweep $3533.00–$3536.00) | **★ A+ PRIMARY [Supply Base Liquidity SFP]:** Enter on 5M CHoCH close < $3531.50 after sweeping $3534.39 Order Block and 2H Swing EQ. | **TP1:** $3521.00 / **TP2:** $3513.50 | **$3539.50** | 1:2.25 |\n| **[G_S2]** | 🔴 **High-Momentum Breakdown Short** | **$3514.50** Breakdown | **⚠️ BACKUP [Equal Lows Cascade Breakdown]:** Enter on a decisive 15M body close < $3514.50 slicing through support with expanding volume. | **TP1:** $3504.00 / **TP2:** $3490.50 | **$3522.50** | 1:3.00 |"
+  },
+  {
     "id": "GOLD_20261120_100258",
     "timestamp": "2026-11-20T10:02:58+05:30",
     "timeDisplay": "10:02 AM, Nov 20",
